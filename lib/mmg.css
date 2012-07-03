@@ -1,0 +1,42 @@
+.wax-movetip {
+  z-index:999999;
+  position:absolute;
+  }
+
+.wax-intip {
+  position:relative;
+  left:-50%;
+  max-width:400px;
+  -webkit-user-select:auto;
+  background:#fff;
+  color:#000;
+  padding:20px;
+  border-radius:5px;
+  box-shadow:2px 2px 5px -2px #ccc;
+  border:2px solid #ccc;
+  }
+
+.wax-intip:after,
+.wax-intip:before {
+	top:100%;
+	border:solid transparent;
+	content:" ";
+	height:0;
+	width:0;
+	position:absolute;
+	pointer-events:none;
+    }
+
+.wax-intip:after {
+	border-top-color:#fff;
+	border-width:15px;
+	left:50%;
+	margin-left:-15px;
+    }
+
+.wax-intip:before {
+	border-top-color:#ccc;
+	border-width:18px;
+	left:50%;
+	margin-left:-18px;
+    }
