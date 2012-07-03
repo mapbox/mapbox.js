@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mapbox.js</title>
+        <script src='lib/modestmaps.min.js'></script>
+        <script src='lib/wax.mm.min.js'></script>
+        <script src='lib/mmg.js'></script>
+        <script src='lib/simplestyle_factory.js'></script>
+        <script src='lib/easey.js'></script>
+        <script src='lib/easey.handlers.js'></script>
+        <script src='mapbox.js'></script>
+        <style>
+            #map {
+                width:500px;
+                height:500px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='map'></div>
+
+        <script>
+mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp', function(options) {
+    mapbox.map('map', [options.layer, options.markers])
+        .zoom(options.zoom)
+        .center(options.center);
+});
+        </script>
+
+    </body>
+</html>
