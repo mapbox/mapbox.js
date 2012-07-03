@@ -8,7 +8,9 @@ mapbox.load = function(url, callback) {
         options.zoom = tj.center[2];
         options.layer = new wax.mm.connector(tj);
         if (tj.data) {
-            options.markers = mmg().factory(simplestyle_factory).url(tj.data, function() {
+            options.markers = mmg().factory(simplestyle_factory);
+            options.markers.url(tj.data, function() {
+                mmg_interaction(options.markers);
                 callback(options);
             });
         } else {

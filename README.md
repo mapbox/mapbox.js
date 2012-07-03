@@ -1,8 +1,4 @@
 # mapbox.js
 
-This is a smart bundle.
-
-* Modest Maps
-* Wax
-* Easey
-* MMG
+This is a delicious salad of [mmg](https://github.com/mapbox/mmg), [modest maps](http://modestmaps.com/),
+[easey](http://mapbox.com/easey/), and more.
