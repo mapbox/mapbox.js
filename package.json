@@ -1,0 +1,17 @@
+{
+  "author": "",
+  "name": "mapbox.js",
+  "description": "mapbox javascript api",
+  "version": "0.0.0",
+  "homepage": "http://mapbox.com/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mapbox/mapbox.js.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
