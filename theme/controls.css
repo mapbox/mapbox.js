@@ -111,16 +111,6 @@ a.wax-fullscreen {
   -moz-transition:opacity 150ms;
   }
 
-.wax-movetip {
-  position:absolute;
-  z-index:999999;
-  background:#333;
-  color:#fff;
-  padding:10px;
-  max-width:300px;
-}
-
-
 .wax-fade { opacity:0; }
 
 .wax-tooltip .close {
@@ -181,12 +171,6 @@ div.wax-attribution {
   padding:0 5px;
   bottom:0;
   left:0;
-  }
-
-.wax-attribution.wax-g {
-  left:65px;
-  bottom:4px;
-  background:transparent;
   }
 
 .wax-latlngtooltip {

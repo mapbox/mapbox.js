@@ -3,33 +3,40 @@
     <head>
         <title>mapbox.js</title>
         <script src='lib/modestmaps.min.js'></script>
-        <script src='lib/wax.mm.min.js'></script>
+        <script src='lib/wax.mm.js'></script>
         <script src='lib/mmg.js'></script>
         <script src='lib/mmg_interaction.js'></script>
         <script src='lib/simplestyle_factory.js'></script>
         <script src='lib/easey.js'></script>
         <script src='lib/easey.handlers.js'></script>
+        <script src='ext/jquery.js'></script>
         <script src='mapbox.js'></script>
         <link href='lib/mmg.css' type='text/css' rel='stylesheet' />
         <link href='theme/controls.css' type='text/css' rel='stylesheet' />
         <style>
             .map {
+                margin:10px;
+                border:1px solid #000;
                 width:500px;
                 height:500px;
             }
         </style>
     </head>
     <body>
-        <div class='map' id='map'></div>
         <div class='map' id='map-auto'></div>
+        <button id='smooth'>smooth</button>
         <script>
-mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp', function(options) {
-    mapbox.map('map', [options.layer, options.markers])
-        .zoom(options.zoom)
-        .center(options.center);
-});
-
-mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp', mapbox.auto('map-auto'));
+            mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp', mapbox.auto('map-auto', function(map) {
+                $('#smooth').toggle(function() {
+                    map.smooth(false);
+                    $(this).text('rocky');
+                    return false;
+                }, function() {
+                    $(this).text('smooth');
+                    map.smooth(true);
+                    return false;
+                });
+            }));
         </script>
     </body>
 </html>
