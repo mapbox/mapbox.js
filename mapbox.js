@@ -52,7 +52,9 @@
     };
 
     mapbox.markers = function() {
-        return mmg().factory(simplestyle_factory);
+        var m = mmg().factory(simplestyle_factory);
+        mmg_interaction(m);
+        return m;
     }
 
     var smooth_handlers = [
