@@ -46,13 +46,15 @@
                 .map(map)
                 .tilejson(options)
                 .on(wax.tooltip().parent(map.parent).events());
+            map.tileSize = { x: 128, y: 128 };
             if (callback) callback(map);
         };
     };
 
     mapbox.markers = mmg;
 
-    var smooth_handlers = [easey.TouchHandler,
+    var smooth_handlers = [
+        easey.TouchHandler,
         easey.DragHandler,
         easey.DoubleClickHandler,
         easey.MouseWheelHandler];
@@ -89,7 +91,8 @@
     };
 
     mapbox.map = function(el, layer) {
-        return new MM.Map(el, layer, null, [easey.TouchHandler(),
+        return new MM.Map(el, layer, null, [
+            easey.TouchHandler(),
             easey.DragHandler(),
             easey.DoubleClickHandler(),
             easey.MouseWheelHandler()]);

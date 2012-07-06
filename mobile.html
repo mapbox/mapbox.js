@@ -11,25 +11,19 @@
             body {
                 font:13px/20px 'Helvetica Neue';
                 width:600px;
-                margin:10px auto;
+                margin:0px auto;
             }
             #map-auto {
                 height:400px;
+                width:320px;
             }
         </style>
     </head>
     <body>
-        <h1>mapbox.js</h1>
-        <p>... this is pre-release code and is liable to change significantly. don't count on it yet.</p>
-        <p>mapbox.js is a distribution that includes Modest Maps, Wax, MMG, and Easey.</p>
         <div class='map' id='map-auto'></div>
-        <button onclick="eval(document.getElementById('map-auto-run').textContent)">run</button>
-        <pre class='prettyprint'>&lt;script src='mapbox.min.js'&gt;&lt;/script&gt;
-&lt;link href='mapbox.min.css' type='text/css' rel='stylesheet' /&gt;
-        </pre>
-        <pre id='map-auto-run' class='prettyprint'>mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp', mapbox.auto('map-auto'));</pre>
         <script src='mapbox.min.js'></script>
-        <script type='text/javascript' src='site/prettify.js'></script>
-        <script type='text/javascript'>prettyPrint();</script>
+        <script>mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp', mapbox.auto('map-auto', function(map) {
+            map.smooth(false);
+            }));</script>
     </body>
 </html>
