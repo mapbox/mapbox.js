@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mapbox.js</title>
+        <script src='lib/modestmaps.min.js'></script>
+        <script src='lib/wax.mm.js'></script>
+        <script src='lib/mmg.js'></script>
+        <script src='lib/mmg_interaction.js'></script>
+        <script src='lib/simplestyle_factory.js'></script>
+        <script src='lib/easey.js'></script>
+        <script src='lib/easey.handlers.js'></script>
+        <script src='ext/jquery.js'></script>
+        <script src='mapbox.js'></script>
+        <script src='mapbox.jquery.js'></script>
+        <link href='lib/mmg.css' type='text/css' rel='stylesheet' />
+        <link href='theme/controls.css' type='text/css' rel='stylesheet' />
+        <style>
+            .map {
+                margin:10px;
+                border:1px solid #000;
+                width:500px;
+                height:500px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='map'></div>
+        <script>
+            console.log($('.map').mapbox().center({ lat: 0, lon: 0 }));
+        </script>
+    </body>
+</html>
