@@ -46,7 +46,6 @@
                 .map(map)
                 .tilejson(options)
                 .on(wax.tooltip().parent(map.parent).events());
-            map.tileSize = { x: 128, y: 128 };
             if (callback) callback(map);
         };
     };
