@@ -51,7 +51,9 @@
         };
     };
 
-    mapbox.markers = mmg;
+    mapbox.markers = function() {
+        return mmg().factory(simplestyle_factory);
+    }
 
     var smooth_handlers = [
         easey.TouchHandler,
@@ -76,9 +78,9 @@
             }
         } else {
             for (var k = 0; k < default_handlers.length; k++) {
-                var h = default_handlers[k]();
-                this.eventHandlers.push(h);
-                h.init(this);
+                var def = default_handlers[k]();
+                this.eventHandlers.push(def);
+                def.init(this);
             }
         }
         return this;
