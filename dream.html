@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <title>mapbox.js</title>
+        <link href='site/prettify.css' type='text/css' rel='stylesheet' />
+        <link href='mapbox.min.css' type='text/css' rel='stylesheet' />
+        <style>
+            body {
+                font:13px/20px 'Helvetica Neue';
+                width:600px;
+                margin:10px auto;
+            }
+            #map-auto {
+                height:400px;
+            }
+        </style>
+        <script src='mapbox.min.js'></script>
+        <script src='src/layer.js'></script>
+    </head>
+    <body>
+        <h1>mapbox.js</h1>
+        <div class='map' id='map-auto'></div>
+        <script>
+            mapbox.map('map-auto')
+                .addLayer(layer)
+                .addLayer(mapbox.layer().id('tmcw.map-hehqnmda'));
+
+            wax.tilejson('blah', function(tj) {
+                wax.tilejson('blah2', function(tj) {
+                    mapbox.map('blah').addLayer(new wax.mm.connector(tj)).addLayer(new wax.mm.connector(tj));
+                });
+            });
+        </script>
+        <script type='text/javascript' src='site/prettify.js'></script>
+        <script type='text/javascript'>prettyPrint();</script>
+    </body>
+</html>

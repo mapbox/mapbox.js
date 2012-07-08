@@ -11,7 +11,10 @@
             tj.zoom = tj.center[2];
 
             // Instantiate center as a Modest Maps-compatible object
-            tj.center = { lat: tj.center[1], lon: tj.center[0] };
+            tj.center = {
+                lat: tj.center[1],
+                lon: tj.center[0]
+            };
 
             // Instantiate tile layer
             if (tj.tiles) tj.layer = new wax.mm.connector(tj);
@@ -93,6 +96,8 @@
         }
     };
 
+    // a `mapbox.map` is a modestmaps object with the
+    // easey handlers as defaults
     mapbox.map = function(el, layer) {
         return new MM.Map(el, layer, null, [
             easey.TouchHandler(),
@@ -100,6 +105,36 @@
             easey.DoubleClickHandler(),
             easey.MouseWheelHandler()]);
     };
+
+    // mapbox.layer is a permissive layer type
+    //
+    // it tolerates x being
+    //
+    // * the 'id' of a mapbox tileset
+    // * the url of a tilejson blob
+    // * a tilejson object
+    /*
+    mapbox.layer = function(x) {
+        // we have a tilejson object, just create a layer
+        if (typeof x === 'object') {
+            return wax.mm.connector(x);
+        }
+
+        // If this is not a string, we can't do anything useful
+        // and can't give good errors.
+        if (typeof x !== string) {
+            throw 'mapbox.layer accepts a layer id, tilejson blob, or tilejson url';
+        }
+
+        // We have just an id, expand it into a full URL
+        if (x.indexOf('http://') === -1) {
+            return mapbox.layer().id(x);
+        }
+
+        // Okay, so now we have a URL. We return an eventual layer.
+        return mapbox.layer().url(x);
+    };
+    */
 
     this.mapbox = mapbox;
 })(this);
