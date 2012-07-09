@@ -1,0 +1,4 @@
+### v0.1.0
+
+* Adds `.center()` `.zoom()` and `.centerzoom()` with easing parameters
+* Supports bare ids for the `mapbox.load()` function.

@@ -20,8 +20,7 @@ mapbox.provider.prototype = {
         new MM.Coordinate(1,1,0).zoomTo(18)   // bottom right inner
     ],
 
-    releaseTile: function(c) {
-    },
+    releaseTile: function(c) { },
 
     getTile: function(c) {
         if (!(coord = this.sourceCoordinate(c))) return null;

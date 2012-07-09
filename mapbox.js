@@ -6,6 +6,10 @@
     // object from a server and uses it to configure a map and various map-related
     // objects
     mapbox.load = function(url, callback) {
+        // Support bare IDs as well as fully-formed URLs
+        if (url.indexOf('http') !== 0) {
+            url = 'http://a.tiles.mapbox.com/v3/' + url + '.jsonp';
+        }
         wax.tilejson(url, function(tj) {
             // Pull zoom level out of center
             tj.zoom = tj.center[2];
@@ -57,7 +61,7 @@
         var m = mmg().factory(simplestyle_factory);
         mmg_interaction(m);
         return m;
-    }
+    };
 
     var smooth_handlers = [
         easey.TouchHandler,
@@ -99,42 +103,51 @@
     // a `mapbox.map` is a modestmaps object with the
     // easey handlers as defaults
     mapbox.map = function(el, layer) {
-        return new MM.Map(el, layer, null, [
+        var m = new MM.Map(el, layer, null, [
             easey.TouchHandler(),
             easey.DragHandler(),
             easey.DoubleClickHandler(),
             easey.MouseWheelHandler()]);
+
+        m.center = function(location, animate) {
+            if (location && animate) {
+                easey()
+                    .map(this)
+                    .to(this.locationCoordinate(location))
+                    .optimal(null, null, animate.callback || function() {});
+            } else if (location) {
+                return this.setCenter(location);
+            } else {
+                return this.getCenter();
+            }
+        };
+
+        m.zoom = function(zoom, animate) {
+            if (zoom !== undefined && animate) {
+                easey()
+                    .map(this)
+                    .to(this.locationCoordinate(this.getCenter()).copy().zoomTo(zoom))
+                    .run(600);
+            } else if (zoom !== undefined) {
+                return this.setZoom(zoom);
+            } else {
+                return this.getZoom();
+            }
+        };
+
+        m.centerzoom = function(location, zoom, animate) {
+            if (location && zoom !== undefined && animate) {
+                easey()
+                    .map(this)
+                    .to(this.locationCoordinate(location).zoomTo(zoom))
+                    .run(animate.duration || 1000, animate.callback || function() {});
+            } else if (location && zoom !== undefined) {
+                return this.setCenterZoom(location, zoom);
+            }
+        };
+
+        return m;
     };
-
-    // mapbox.layer is a permissive layer type
-    //
-    // it tolerates x being
-    //
-    // * the 'id' of a mapbox tileset
-    // * the url of a tilejson blob
-    // * a tilejson object
-    /*
-    mapbox.layer = function(x) {
-        // we have a tilejson object, just create a layer
-        if (typeof x === 'object') {
-            return wax.mm.connector(x);
-        }
-
-        // If this is not a string, we can't do anything useful
-        // and can't give good errors.
-        if (typeof x !== string) {
-            throw 'mapbox.layer accepts a layer id, tilejson blob, or tilejson url';
-        }
-
-        // We have just an id, expand it into a full URL
-        if (x.indexOf('http://') === -1) {
-            return mapbox.layer().id(x);
-        }
-
-        // Okay, so now we have a URL. We return an eventual layer.
-        return mapbox.layer().url(x);
-    };
-    */
 
     this.mapbox = mapbox;
 })(this);

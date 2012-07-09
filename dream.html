@@ -17,22 +17,22 @@
                 height:400px;
             }
         </style>
-        <script src='mapbox.min.js'></script>
-        <script src='src/layer.js'></script>
+        <script src='mapbox.0.1.0.min.js'></script>
     </head>
     <body>
         <h1>mapbox.js</h1>
         <div class='map' id='map-auto'></div>
+        <button onclick='gothere();'>go there</button>
+        <button onclick='gothereslowly();'>go there slowly</button>
         <script>
-            mapbox.map('map-auto')
-                .addLayer(layer)
+            var m = mapbox.map('map-auto')
                 .addLayer(mapbox.layer().id('tmcw.map-hehqnmda'));
-
-            wax.tilejson('blah', function(tj) {
-                wax.tilejson('blah2', function(tj) {
-                    mapbox.map('blah').addLayer(new wax.mm.connector(tj)).addLayer(new wax.mm.connector(tj));
-                });
-            });
+            function gothere() {
+                m.centerzoom({lat: 50, lon: 40 }, 10);
+            }
+            function gothereslowly() {
+                m.centerzoom({lat: 50, lon: 40 }, 10, true);
+            }
         </script>
         <script type='text/javascript' src='site/prettify.js'></script>
         <script type='text/javascript'>prettyPrint();</script>
