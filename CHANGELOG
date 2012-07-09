@@ -1,3 +1,8 @@
+### v0.1.1
+
+* Calls the callback to `mapbox.auto()` with map, options instead of
+  just map.
+
 ### v0.1.0
 
 * Adds `.center()` `.zoom()` and `.centerzoom()` with easing parameters

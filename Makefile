@@ -7,5 +7,5 @@ build:
 		lib/wax.mm.js mapbox.js src/*.js | uglifyjs > mapbox.min.js
 	cat theme/mmg.css theme/controls.css > mapbox.min.css
 	# bake a release
-	cp mapbox.min.js mapbox.0.1.0.min.js
-	cp mapbox.min.css mapbox.0.1.0.min.css
+	cp mapbox.min.js mapbox.0.1.1.min.js
+	cp mapbox.min.css mapbox.0.1.1.min.css
