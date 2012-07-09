@@ -11,4 +11,4 @@ mapbox.js is a library for creating web maps that makes things simple and straig
 * [Modest Maps](http://modestmaps.com/)
 * [Easey](http://mapbox.com/easey/)
 * [MapBox Wax](http://mapbox.com/wax/)
-* [MapBox MMG](http://mapbox.com/mmg/)
+* [MapBox Markers.js](http://mapbox.com/markers.js/)
