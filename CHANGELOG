@@ -1,3 +1,7 @@
+### v0.2.0
+
+* mapbox.load now adds `.thumbnail` to its result
+
 ### v0.1.1
 
 * Calls the callback to `mapbox.auto()` with map, options instead of
