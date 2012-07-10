@@ -4,8 +4,8 @@ build:
 	cp ~/Code/js/markers.js/src/*.js lib/
 	cat lib/modestmaps.js lib/easey.js lib/easey.handlers.js \
 		lib/mmg.js lib/mmg_interaction.js lib/simplestyle_factory.js \
-		lib/wax.mm.js mapbox.js src/*.js | uglifyjs > mapbox.min.js
+		lib/wax.mm.js src/mapbox.js src/layer.js | uglifyjs > mapbox.min.js
 	cat theme/mmg.css theme/controls.css > mapbox.min.css
 	# bake a release
-	cp mapbox.min.js mapbox.0.1.1.min.js
-	cp mapbox.min.css mapbox.0.1.1.min.css
+	cp mapbox.min.js mapbox.0.2.0.min.js
+	cp mapbox.min.css mapbox.0.2.0.min.css

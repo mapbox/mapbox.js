@@ -20,6 +20,8 @@
                 lon: tj.center[0]
             };
 
+            tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + '.png';
+
             // Instantiate tile layer
             if (tj.tiles) tj.layer = new wax.mm.connector(tj);
 
@@ -53,6 +55,8 @@
                 .map(map)
                 .tilejson(options)
                 .on(wax.tooltip().parent(map.parent).events());
+
+            map.setZoomRange(options.minzoom, options.maxzoom);
             if (callback) callback(map, options);
         };
     };
