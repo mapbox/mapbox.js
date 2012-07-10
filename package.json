@@ -1,5 +1,5 @@
 {
-  "author": "",
+  "author": "MapBox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
   "version": "0.1.0",
@@ -8,7 +8,15 @@
     "type": "git",
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
-  "dependencies": {},
+  "dependencies": {
+      "reqwest": "0.4.5",
+      "modestmaps": "3.1.3",
+      "wax": "7.0.0dev0",
+      "bean": "0.4.11-1",
+      "mustache": "https://github.com/janl/mustache.js/tarball/master",
+      "markers": "0.5.2",
+      "easey": "1.0.2"
+  },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {

@@ -98,12 +98,6 @@
         return this;
     };
 
-    MM.Map.prototype.on = function(evt, callback) {
-        if (evt in this.callbackManager.callbacks) {
-            this.addCallback(evt, callback);
-        }
-    };
-
     // a `mapbox.map` is a modestmaps object with the
     // easey handlers as defaults
     mapbox.map = function(el, layer) {
