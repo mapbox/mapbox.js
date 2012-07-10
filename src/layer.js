@@ -26,13 +26,11 @@ mapbox.provider.prototype = {
         if (!(coord = this.sourceCoordinate(c))) return null;
         if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
 
-        var u = this.options.tiles[parseInt(Math.pow(2, coord.zoom) * coord.row + coord.column, 10) %
+        return this.options.tiles[parseInt(Math.pow(2, coord.zoom) * coord.row + coord.column, 10) %
             this.options.tiles.length]
             .replace('{z}', coord.zoom.toFixed(0))
             .replace('{x}', coord.column.toFixed(0))
             .replace('{y}', coord.row.toFixed(0));
-
-        return u;
     },
 
     // use this to tell MapProvider that tiles only exist between certain zoom levels.
@@ -89,6 +87,8 @@ mapbox.layer = function() {
 
 mapbox.layer.prototype.refresh = function() {
     var that = this;
+    // When the async request for a TileJSON blob comes back,
+    // this resets its own tilejson and calls setProvider on itself.
     wax.tilejson(this._url, function(o) {
         that.tilejson(o);
     });

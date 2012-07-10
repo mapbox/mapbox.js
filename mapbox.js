@@ -53,7 +53,7 @@
                 .map(map)
                 .tilejson(options)
                 .on(wax.tooltip().parent(map.parent).events());
-            if (callback) callback(map);
+            if (callback) callback(map, options);
         };
     };
 
