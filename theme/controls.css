@@ -1,4 +1,4 @@
-.wax-fullscreen {
+.map-fullscreen {
   /* TODO: sprite-based fullscreen button */
   position:absolute;
   top:5px;
@@ -7,8 +7,8 @@
   }
 
 .zoomer,
-.wax-legend,
-.wax-tooltip {
+.map-legend,
+.map-tooltip {
   display:block;
   position:absolute;
   border:1px solid #ccc;
@@ -69,7 +69,7 @@
   -webkit-border-radius:3px 0 0 3px;
   }
 
-.wax-fullscreen-map {
+.map-fullscreen-map {
   position:fixed!important;
   width:auto!important;
   height:auto!important;
@@ -80,20 +80,20 @@
   z-index:999999999999;
   }
 
-.wax-legends {
+.map-legends {
   position:absolute;
   left:10px;
   bottom:10px;
   z-index:999999;
   }
 
-.wax-legends .wax-legend {
+.map-legends .map-legend {
   padding:10px;
   background:#333;
   color:#fff;
   }
 
-.wax-tooltip {
+.map-tooltip {
   z-index:999999;
   background:#333;
   color:#fff;
@@ -107,7 +107,7 @@
   -moz-transition:opacity 150ms;
   }
 
-.wax-movetip {
+.map-movetip {
   position:absolute;
   z-index:999999;
   background:#333;
@@ -116,16 +116,16 @@
   max-width:300px;
   }
 
-.wax-fade { opacity:0; }
+.map-fade { opacity:0; }
 
-.wax-tooltip .close {
+.map-tooltip .close {
   display:block;
   position:absolute;
   top:0;
   right:0;
   }
 
-.wax-mobile-body .wax-tooltip {
+.map-mobile-body .map-tooltip {
   position:absolute;
   top:50px;
   }
@@ -155,7 +155,7 @@
   left:0;
   }
 
-.wax-point-div {
+.map-point-div {
   width:10px;
   height:10px;
   margin-left:-5px;
@@ -165,7 +165,7 @@
   -webkit-border-radius:5px;
   }
 
-.wax-attribution {
+.map-attribution {
   position:absolute;
   background-color:rgba(255, 255, 255, 0.7);
   color:#333;
@@ -178,13 +178,13 @@
   left:0;
   }
 
-.wax-attribution.wax-g {
+.map-attribution.map-g {
   left:65px;
   bottom:4px;
   background:transparent;
   }
 
-.wax-latlngtooltip {
+.map-latlngtooltip {
   position:absolute;
   background:#caedf4;
   padding:3px;
