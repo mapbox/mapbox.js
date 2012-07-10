@@ -56,8 +56,10 @@
   border:1px solid #ccc;
   background:#fff;
   border-radius:3px;
+  -moz-border-radius:3px;
   -webkit-border-radius:3px;
   box-shadow:rgba(0,0,0,0.1) 0 1px 3px;
+  -moz-box-shadow:rgba(0,0,0,0.1) 0 1px 3px;
   -webkit-box-shadow:rgba(0,0,0,0.1) 0 1px 3px;
   }
 
@@ -137,6 +139,7 @@
 
 .map-tooltip {
   z-index:999999;
+  position:absolute;
   background:#333;
   color:#fff;
   padding:10px;
@@ -225,11 +228,17 @@
   bottom:4px;
   background:transparent;
   }
-
-.map-latlngtooltip {
-  position:absolute;
-  background:#caedf4;
-  padding:3px;
-  border:1px solid #75c1d0;
-  border-radius:3px;
+.vertical .zoomout {
+  top:39px;
+  left: 0;
+  }
+.vertical .zoomin {
+  -webkit-border-radius:3px 3px 0 0;
+          border-radius:3px 3px 0 0;
+  }
+.vertical .map-fullscreen {
+  top:68px;
+  left:10px;
+  -webkit-border-radius:0 0 3px 3px;
+          border-radius:0 0 3px 3px;
   }
