@@ -8,12 +8,16 @@ describe("mapbox", function() {
         });
     });
 
-    waits(1000);
+    waits(500);
 
     runs(function() {
         expect(l.id).toEqual('tmcw.map-hehqnmda');
         expect(l.thumbnail).toEqual('http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.png');
         expect(l.tiles).toBeTruthy();
     });
+  });
+
+  it("mapbox is present", function() {
+      expect(mapbox).toBeTruthy();
   });
 });
