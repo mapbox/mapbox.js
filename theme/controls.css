@@ -1,47 +1,44 @@
-a.wax-fullscreen {
+.wax-fullscreen {
   /* TODO: sprite-based fullscreen button */
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  z-index: 99999;
+  position:absolute;
+  top:5px;
+  left:5px;
+  z-index:99999;
   }
 
 .zoomer,
-  .wax-legend,
-  .wax-tooltip {
+.wax-legend,
+.wax-tooltip {
   display:block;
   position:absolute;
   border:1px solid #ccc;
   background:#fff;
   border-radius:3px;
-  -moz-border-radius:3px;
   -webkit-border-radius:3px;
-  box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
-  -moz-box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
-  -webkit-box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
+  box-shadow:rgba(0,0,0,0.1) 0 1px 3px;
+  -webkit-box-shadow:rgba(0,0,0,0.1) 0 1px 3px;
   }
 
-  
 /* ### Zoomer, close buttons, share ### */
- .close,
- .zoomer {
-  text-indent:-9999px;
-  background-image:url(theme/map-controls.png);
+.close,
+.zoomer {
+  text-indent:-999em;
+  background-image:url(map-controls.png);
   background-position:60px 60px;
   background-repeat:no-repeat;
   overflow:hidden;
   }
 
- .close:active,
- .zoomer:active {
+.close:active,
+.zoomer:active {
   border-color:#bbb;
   background-color:#ddd;
-  box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
-  -moz-box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
-  -webkit-box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
+  box-shadow:inset rgba(0,0,0,0.1) 0 1px 3px;
+  -moz-box-shadow:inset rgba(0,0,0,0.1) 0 1px 3px;
+  -webkit-box-shadow:inset rgba(0,0,0,0.1) 0 1px 3px;
   }
 
- .close {
+.close {
   top:4px;
   right:4px;
   width:18px;
@@ -49,33 +46,33 @@ a.wax-fullscreen {
   background-position:-6px -6px;
   }
 
- .zoomer {
+.zoomer {
   width:28px;
   height:28px;
   top:10px;
   left:10px;
-  z-index: 2;
+  z-index:2;
   }
 
- .zoomin {
+.zoomin {
   background-position:-31px -1px;
   left:39px;
-  border-radius:0px 3px 3px 0px;
-  -moz-border-radius:0px 3px 3px 0px;
-  -webkit-border-radius:0px 3px 3px 0px;
+  border-radius:0 3px 3px 0;
+  -moz-border-radius:0 3px 3px 0;
+  -webkit-border-radius:0 3px 3px 0;
   }
 
- .zoomout {
+.zoomout {
   background-position:-61px -1px;
-  border-radius:3px 0px 0px 3px;
-  -moz-border-radius:3px 0px 0px 3px;
-  -webkit-border-radius:3px 0px 0px 3px;
+  border-radius:3px 0 0 3px;
+  -moz-border-radius:3px 0 0 3px;
+  -webkit-border-radius:3px 0 0 3px;
   }
 
 .wax-fullscreen-map {
-  position:fixed !important;
-  width:auto !important;
-  height:auto !important;
+  position:fixed!important;
+  width:auto!important;
+  height:auto!important;
   top:0;
   left:0;
   right:0;
@@ -98,7 +95,6 @@ a.wax-fullscreen {
 
 .wax-tooltip {
   z-index:999999;
-  position:absolute;
   background:#333;
   color:#fff;
   padding:10px;
@@ -111,13 +107,22 @@ a.wax-fullscreen {
   -moz-transition:opacity 150ms;
   }
 
+.wax-movetip {
+  position:absolute;
+  z-index:999999;
+  background:#333;
+  color:#fff;
+  padding:10px;
+  max-width:300px;
+  }
+
 .wax-fade { opacity:0; }
 
 .wax-tooltip .close {
   display:block;
   position:absolute;
-  top:0px;
-  right:0px;
+  top:0;
+  right:0;
   }
 
 .wax-mobile-body .wax-tooltip {
@@ -132,11 +137,11 @@ a.wax-fullscreen {
   border:1px dashed #888;
   background: rgba(255,255,255,0.25);
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  display: none;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  display:none;
   }
 
 .zoombox-box-container,
@@ -160,7 +165,7 @@ a.wax-fullscreen {
   -webkit-border-radius:5px;
   }
 
-div.wax-attribution {
+.wax-attribution {
   position:absolute;
   background-color:rgba(255, 255, 255, 0.7);
   color:#333;
@@ -173,10 +178,16 @@ div.wax-attribution {
   left:0;
   }
 
+.wax-attribution.wax-g {
+  left:65px;
+  bottom:4px;
+  background:transparent;
+  }
+
 .wax-latlngtooltip {
   position:absolute;
   background:#caedf4;
   padding:3px;
   border:1px solid #75c1d0;
   border-radius:3px;
-}
+  }
