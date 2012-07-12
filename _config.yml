@@ -1,0 +1,7 @@
+auto: true
+server: true
+exclude: README.md, .gitignore, node_modules
+baseurl:
+permalink: /:categories/:title
+url:
+pygments: true
