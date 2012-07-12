@@ -1,7 +1,7 @@
 auto: true
 server: true
 exclude: README.md, .gitignore, node_modules
-baseurl:
+baseurl: /mapbox.js/
 permalink: /:categories/:title
 url:
 pygments: true
