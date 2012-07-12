@@ -1418,12 +1418,6 @@ typeof mapbox=="undefined"&&(mapbox={}),mapbox.markers={},mapbox.markers.layer=f
         };
     };
 
-    mapbox.markers = function() {
-        var m = mmg().factory(simplestyle_factory);
-        mmg_interaction(m);
-        return m;
-    };
-
     var smooth_handlers = [
         easey.TouchHandler,
         easey.DragHandler,
