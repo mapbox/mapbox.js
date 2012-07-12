@@ -22,7 +22,7 @@
 .zoomer,
 .map-fullscreen {
   background-color:#fff;
-  background-image:url(map-controls.png);
+  background-image:url(theme/map-controls.png);
   background-repeat:no-repeat;
   border:1px solid #bbb;
   display: block;
@@ -157,7 +157,7 @@
   margin:0;
   padding:0;
   position:absolute;
-  background:url(blank.gif);
+  background:url(theme/blank.gif);
   top:0;
   left:0;
   }
