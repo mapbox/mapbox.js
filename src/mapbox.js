@@ -1,4 +1,22 @@
 ;(function() {
+
+    // Utils
+    function getStyle(elem, name) {
+        if (elem.style[name]) {
+            return elem.style[name];
+        } else if (elem.currentStyle) {
+            return elem.currentStyle[name];
+        }
+        else if (document.defaultView && document.defaultView.getComputedStyle) {
+            name = name.replace(/([A-Z])/g, '-$1');
+            name = name.toLowerCase();
+            s = document.defaultView.getComputedStyle(elem, '');
+            return s && s.getPropertyValue(name);
+        } else {
+            return null;
+        }
+    }
+
     // mapbox.js
     var mapbox = {};
 
@@ -47,6 +65,16 @@
                 map.controls.style.cssText = 'position: absolute; z-index: 1000';
                 map.controls.id = 'controls';
                 map.parent.appendChild(map.controls);
+
+            // Check the map parent for default properties.
+            // if they aren't set then create some off the bat.
+            var i, defaultProperties = ['height', 'width'];
+            for (i in defaultProperties) {
+                var prop = defaultProperties[i];
+                if (getStyle(map.parent, prop) === '0px' || getStyle(map.parent, prop) === 'auto') {
+                    map.parent.style[prop] = '400px';
+                }
+            }
 
             if (options.layer) map.addLayer(options.layer);
             if (options.markers) map.addLayer(options.markers);
