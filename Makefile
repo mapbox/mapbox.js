@@ -15,5 +15,5 @@ build:
 	cat node_modules/markers/dist/markers.css \
 		node_modules/wax/theme/controls.css > mapbox.min.css
 	# bake a release
-	cp mapbox.min.js mapbox.0.3.0.min.js
-	cp mapbox.min.css mapbox.0.3.0.min.css
+	cp mapbox.min.js mapbox.0.4.0.min.js
+	cp mapbox.min.css mapbox.0.4.0.min.css
