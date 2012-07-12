@@ -3,5 +3,6 @@ server: true
 exclude: README.md, .gitignore, node_modules
 baseurl: /mapbox.js/
 permalink: /:categories/:title
+markdown: rdiscount
 url:
 pygments: true
