@@ -8,12 +8,12 @@ build:
 		node_modules/wax/dist/wax.mm.min.js \
 		node_modules/easey/src/easey.js \
 		node_modules/easey/src/easey.handlers.js \
-		node_modules/markers/dist/markers.0.5.2.min.js \
+		node_modules/markers/dist/markers.min.js \
 		src/mapbox.js src/layer.js > mapbox.js
 	uglifyjs mapbox.js > mapbox.min.js
 	# css
-	cat node_modules/markers/dist/markers.0.5.3.css \
+	cat node_modules/markers/dist/markers.css \
 		theme/mapbox.css > mapbox.min.css
 	# bake a release
-	cp mapbox.min.js mapbox.dev.min.js
-	cp mapbox.min.css mapbox.dev.min.css
+	cp mapbox.min.js mapbox.0.4.3.min.js
+	cp mapbox.min.css mapbox.0.4.3.min.css

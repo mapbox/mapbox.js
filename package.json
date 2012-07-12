@@ -2,7 +2,7 @@
   "author": "MapBox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "0.1.0",
+  "version": "0.4.1",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
       "wax": "7.0.0dev0",
       "bean": "0.4.11-1",
       "mustache": "https://github.com/janl/mustache.js/tarball/master",
-      "markers": "0.5.4",
+      "markers": "0.7.1",
       "easey": "1.0.2"
   },
   "devDependencies": {},
