@@ -1,44 +1,45 @@
-.wax-movetip {
+.marker-tooltip {
   z-index:999999;
   position:absolute;
   }
-
-.wax-intip {
+.marker-popup {
   position:relative;
   left:-50%;
   max-width:400px;
-  -webkit-user-select:auto;
   background:#fff;
+  border:2px solid #ccc;
   color:#000;
   padding:20px;
-  border-radius:5px;
-  box-shadow:2px 2px 5px -2px #ccc;
-  border:2px solid #ccc;
+  -webkit-user-select:auto;
+     -moz-user-select:auto;
+          user-select:auto;
+  -webkit-box-shadow: 2px 2px 5px -2px #ccc;
+          box-shadow: 2px 2px 5px -2px #ccc;
+  -webkit-border-radius:3px;
+          border-radius:3px;
   }
-
-.wax-intip:after,
-.wax-intip:before {
-	top:100%;
-	border:solid transparent;
-	content:" ";
-	height:0;
-	width:0;
-	position:absolute;
-	pointer-events:none;
+  .marker-popup:after,
+  .marker-popup:before {
+    top:100%;
+    border:solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    left:50%;
+    position:absolute;
+    pointer-events:none;
     }
 
-.wax-intip:after {
-	border-top-color:#fff;
-	border-width:15px;
-	left:50%;
-	margin-left:-15px;
+  .marker-popup:after {
+    border-top-color:#fff;
+    border-width:15px;
+    margin-left:-15px;
     }
 
-.wax-intip:before {
-	border-top-color:#ccc;
-	border-width:18px;
-	left:50%;
-	margin-left:-18px;
+  .marker-popup:before {
+    border-top-color:#ccc;
+    border-width:18px;
+    margin-left:-18px;
     }
 .map-fullscreen {
   /* TODO: sprite-based fullscreen button */
@@ -227,18 +228,4 @@
   left:65px;
   bottom:4px;
   background:transparent;
-  }
-.vertical .zoomout {
-  top:39px;
-  left: 0;
-  }
-.vertical .zoomin {
-  -webkit-border-radius:3px 3px 0 0;
-          border-radius:3px 3px 0 0;
-  }
-.vertical .map-fullscreen {
-  top:68px;
-  left:10px;
-  -webkit-border-radius:0 0 3px 3px;
-          border-radius:0 0 3px 3px;
   }
