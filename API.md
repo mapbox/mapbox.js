@@ -106,10 +106,3 @@ The previous call to `.id()` is equal to this usage of `.url()`:
 If you're using another [TileJSON](https://github.com/mapbox/tilejson-spec) layer and have the TileJSON in your Javascript scope instead of at a URL, you can call `.tilejson()` to specify the tilejson blob directly.
 
 The argument to this function must be a TileJSON object as a Javascript object.
-The previous call to `.id()` is equivalent to this usage of `.tilejson()`:
-
-    var layer = mapbox.layer().tilejson({"attribution":"<a href='http://mapbox.com/about/maps' target='_blank'>Terms & Feedback</a>",
-        "bounds":[-180,-85,180,85],"center":[0,0,3],"description":"","id":"tmcw.map-hehqnmda","maxzoom":17,"minzoom":0,
-        "name":"BW","private":false,"scheme":"xyz","tilejson":"2.0.0","tiles":["http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda/{z}/{x}/{y}.png",
-        "http://b.tiles.mapbox.com/v3/tmcw.map-hehqnmda/{z}/{x}/{y}.png","http://c.tiles.mapbox.com/v3/tmcw.map-hehqnmda/{z}/{x}/{y}.png",
-        "http://d.tiles.mapbox.com/v3/tmcw.map-hehqnmda/{z}/{x}/{y}.png"],"webpage":"http://tiles.mapbox.com/tmcw/map/map-hehqnmda"});
