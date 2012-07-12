@@ -13,7 +13,7 @@ build:
 	uglifyjs mapbox.js > mapbox.min.js
 	# css
 	cat node_modules/markers/dist/markers.0.5.3.css \
-		node_modules/wax/theme/controls.css > mapbox.min.css
+		theme/mapbox.css > mapbox.min.css
 	# bake a release
 	cp mapbox.min.js mapbox.dev.min.js
 	cp mapbox.min.css mapbox.dev.min.css

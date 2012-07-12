@@ -1400,11 +1400,18 @@ function mmg(){function l(b){b.coord||(b.coord=a.map.locationCoordinate(b.locati
     mapbox.auto = function(el, callback) {
         return function(options) {
             var map = mapbox.map(el);
+                map.controls = document.createElement('div');
+                map.controls.style.cssText = 'position: absolute; z-index: 1000';
+                map.controls.id = 'controls';
+                map.parent.appendChild(map.controls);
+
             if (options.layer) map.addLayer(options.layer);
             if (options.markers) map.addLayer(options.markers);
             if (options.attribution) wax.mm.attribution(map, options).appendTo(map.parent);
             if (options.legend) wax.mm.legend(map, options).appendTo(map.parent);
-            wax.mm.zoomer(map).appendTo(map.parent);
+            if (options.fullscreen) wax.mm.fullscreen(map, options).appendTo(map.controls);
+
+            wax.mm.zoomer(map).appendTo(map.controls);
             wax.mm.zoombox(map);
             map.zoom(options.zoom)
                 .center(options.center);
@@ -1428,12 +1435,15 @@ function mmg(){function l(b){b.coord||(b.coord=a.map.locationCoordinate(b.locati
         easey.TouchHandler,
         easey.DragHandler,
         easey.DoubleClickHandler,
-        easey.MouseWheelHandler];
+        easey.MouseWheelHandler
+    ];
 
-    var default_handlers = [MM.TouchHandler,
+    var default_handlers = [
+        MM.TouchHandler,
         MM.DragHandler,
         MM.DoubleClickHandler,
-        MM.MouseWheelHandler];
+        MM.MouseWheelHandler
+    ];
 
     MM.Map.prototype.smooth = function(_) {
         while (this.eventHandlers.length) {
