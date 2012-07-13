@@ -2,7 +2,7 @@
 TAG=$1
 
 if [ -z $TAG ]; then
-    echo "Usage: build.sh <tag>"
+    echo "Usage: build-site.sh <tag>"
     exit;
 fi
 

@@ -14,10 +14,14 @@ fi
 echo "--- BUILDING mapbox.js $TAG ---"
 
 echo "Checking out tag..."
+echo ""
+echo ""
 git checkout $TAG package.json
 git checkout $TAG src/*
 
 echo "Installing dependencies..."
+echo ""
+echo ""
 npm install
 
 echo "Concatenating mapbox.js..."
