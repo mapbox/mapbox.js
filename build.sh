@@ -1,0 +1,55 @@
+#!/bin/bash
+TAG=$1
+
+if [ -z $TAG ]; then
+    echo "Usage: build.sh <tag>"
+    exit;
+fi
+
+if [ -e dist/$TAG ]; then
+    echo "rm -r dist/$TAG if you want to re-build"
+    exit;
+fi
+
+echo "--- BUILDING mapbox.js $TAG ---"
+
+echo "Checking out tag..."
+git checkout $TAG package.json
+git checkout $TAG src/*
+
+echo "Installing dependencies..."
+npm install
+
+echo "Concatenating mapbox.js..."
+cat node_modules/bean/bean.js \
+	node_modules/mustache/mustache.js \
+	node_modules/reqwest/reqwest.js \
+	node_modules/modestmaps/modestmaps.js \
+	node_modules/wax/lib/html-sanitizer-bundle.js \
+	node_modules/wax/lib/html-sanitizer-loosen.js \
+	node_modules/wax/control/lib/*.js \
+	node_modules/wax/control/mm/*.js \
+	node_modules/wax/connectors/mm/*.js \
+	node_modules/easey/src/easey.js \
+	node_modules/easey/src/easey.handlers.js \
+	node_modules/markers/dist/markers.js \
+	src/mapbox.js src/layer.js > mapbox.js
+
+echo "Minifying mapbox.min.js"
+./node_modules/.bin/uglifyjs mapbox.js > mapbox.min.js
+
+# css
+echo "Concatenating mapbox.css..."
+cat node_modules/markers/dist/markers.css \
+	theme/mapbox.css > mapbox.min.css
+
+mkdir "dist/$TAG"
+
+# bake a release
+cp mapbox.min.js "dist/$TAG/mapbox.js"
+cp mapbox.js "dist/$TAG/mapbox.uncompressed.js"
+cp mapbox.min.css "dist/$TAG/mapbox.css"
+
+set -- `wc -c mapbox.min.js`
+echo "mapbox.min.js size:"
+units "$1 bytes" "kilobytes"
