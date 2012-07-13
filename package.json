@@ -14,7 +14,7 @@
       "wax": "7.0.0dev0",
       "bean": "0.4.11-1",
       "mustache": "https://github.com/janl/mustache.js/tarball/master",
-      "markers": "0.7.1",
+      "markers": "0.7.2",
       "easey": "1.0.2"
   },
   "devDependencies": {
