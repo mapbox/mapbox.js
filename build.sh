@@ -45,6 +45,7 @@ echo "Minifying mapbox.min.js"
 # css
 echo "Concatenating mapbox.css..."
 cat node_modules/markers/dist/markers.css \
+    node_modules/wax/theme/controls.css \
 	theme/mapbox.css > mapbox.min.css
 
 mkdir "dist/$TAG"
@@ -53,6 +54,7 @@ mkdir "dist/$TAG"
 cp mapbox.min.js "dist/$TAG/mapbox.js"
 cp mapbox.js "dist/$TAG/mapbox.uncompressed.js"
 cp mapbox.min.css "dist/$TAG/mapbox.css"
+cp node_modules/wax/theme/map-controls.png dist/$TAG/map-controls.png"
 
 set -- `wc -c mapbox.min.js`
 echo "mapbox.min.js size:"
