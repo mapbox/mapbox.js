@@ -7,7 +7,570 @@
   * dperini: https://github.com/dperini/nwevents
   * the entire mootools team: github.com/mootools/mootools-core
   */
-!function(a,b,c){typeof module!="undefined"?module.exports=c(a,b):typeof define=="function"&&typeof define.amd=="object"?define(c):b[a]=c(a,b)}("bean",this,function(a,b){var c=window,d=b[a],e=/over|out/,f=/[^\.]*(?=\..*)\.|.*/,g=/\..*/,h="addEventListener",i="attachEvent",j="removeEventListener",k="detachEvent",l="ownerDocument",m="target",n="querySelectorAll",o=document||{},p=o.documentElement||{},q=p[h],r=q?h:i,s=Array.prototype.slice,t=/click|mouse(?!(.*wheel|scroll))|menu|drag|drop/i,u=/mouse.*(wheel|scroll)/i,v=/^text/i,w=/^touch|^gesture/i,x={},y=function(a,b,c){for(c=0;c<b.length;c++)a[b[c]]=1;return a}({},("click dblclick mouseup mousedown contextmenu mousewheel mousemultiwheel DOMMouseScroll mouseover mouseout mousemove selectstart selectend keydown keypress keyup orientationchange focus blur change reset select submit load unload beforeunload resize move DOMContentLoaded readystatechange message error abort scroll "+(q?"show input invalid touchstart touchmove touchend touchcancel gesturestart gesturechange gestureend readystatechange pageshow pagehide popstate hashchange offline online afterprint beforeprint dragstart dragenter dragover dragleave drag drop dragend loadstart progress suspend emptied stalled loadmetadata loadeddata canplay canplaythrough playing waiting seeking seeked ended durationchange timeupdate play pause ratechange volumechange cuechange checking noupdate downloading cached updateready obsolete ":"")).split(" ")),z=function(){function c(a){var c=a.relatedTarget;return c?c!==this&&c.prefix!=="xul"&&!/document/.test(this.toString())&&!b(c,this):c===null}var a="compareDocumentPosition",b=a in p?function(b,c){return c[a]&&(c[a](b)&16)===16}:"contains"in p?function(a,b){return b=b.nodeType===9||b===window?p:b,b!==a&&b.contains(a)}:function(a,b){while(a=a.parentNode)if(a===b)return 1;return 0};return{mouseenter:{base:"mouseover",condition:c},mouseleave:{base:"mouseout",condition:c},mousewheel:{base:/Firefox/.test(navigator.userAgent)?"DOMMouseScroll":"mousewheel"}}}(),A=function(){var a="altKey attrChange attrName bubbles cancelable ctrlKey currentTarget detail eventPhase getModifierState isTrusted metaKey relatedNode relatedTarget shiftKey srcElement target timeStamp type view which".split(" "),b=a.concat("button buttons clientX clientY dataTransfer fromElement offsetX offsetY pageX pageY screenX screenY toElement".split(" ")),c=b.concat("wheelDelta wheelDeltaX wheelDeltaY wheelDeltaZ axis".split(" ")),d=a.concat("char charCode key keyCode keyIdentifier keyLocation".split(" ")),f=a.concat(["data"]),g=a.concat("touches targetTouches changedTouches scale rotation".split(" ")),h=a.concat(["data","origin","source"]),i="preventDefault",j=function(a){return function(){a[i]?a[i]():a.returnValue=!1}},k="stopPropagation",l=function(a){return function(){a[k]?a[k]():a.cancelBubble=!0}},n=function(a){return function(){a[i](),a[k](),a.stopped=!0}},q=function(a,b,c){var d,e;for(d=c.length;d--;)e=c[d],!(e in b)&&e in a&&(b[e]=a[e])};return function(r,s){var x={originalEvent:r,isNative:s};if(!r)return x;var y,z=r.type,A=r[m]||r.srcElement;x[i]=j(r),x[k]=l(r),x.stop=n(x),x[m]=A&&A.nodeType===3?A.parentNode:A;if(s){if(z.indexOf("key")!==-1)y=d,x.keyCode=r.keyCode||r.which;else if(t.test(z)){y=b,x.rightClick=r.which===3||r.button===2,x.pos={x:0,y:0};if(r.pageX||r.pageY)x.clientX=r.pageX,x.clientY=r.pageY;else if(r.clientX||r.clientY)x.clientX=r.clientX+o.body.scrollLeft+p.scrollLeft,x.clientY=r.clientY+o.body.scrollTop+p.scrollTop;e.test(z)&&(x.relatedTarget=r.relatedTarget||r[(z==="mouseover"?"from":"to")+"Element"])}else w.test(z)?y=g:u.test(z)?y=c:v.test(z)?y=f:z==="message"&&(y=h);q(r,x,y||a)}return x}}(),B=function(a,b){return!q&&!b&&(a===o||a===c)?p:a},C=function(){function a(a,b,c,d,e){var f=this.isNative=y[b]&&a[r];this.element=a,this.type=b,this.handler=c,this.original=d,this.namespaces=e,this.custom=z[b],this.eventType=q||f?b:"propertychange",this.customType=!q&&!f&&b,this[m]=B(a,f),this[r]=this[m][r]}return a.prototype={inNamespaces:function(a){var b,c;if(!a)return!0;if(!this.namespaces)return!1;for(b=a.length;b--;)for(c=this.namespaces.length;c--;)if(a[b]===this.namespaces[c])return!0;return!1},matches:function(a,b,c){return this.element===a&&(!b||this.original===b)&&(!c||this.handler===c)}},a}(),D=function(){var a={},b=function(c,d,e,f,g){if(!d||d==="*")for(var h in a)h.charAt(0)==="$"&&b(c,h.substr(1),e,f,g);else{var i=0,j,k=a["$"+d],l=c==="*";if(!k)return;for(j=k.length;i<j;i++)if(l||k[i].matches(c,e,f))if(!g(k[i],k,i,d))return}},c=function(b,c,d){var e,f=a["$"+c];if(f)for(e=f.length;e--;)if(f[e].matches(b,d,null))return!0;return!1},d=function(a,c,d){var e=[];return b(a,c,d,null,function(a){return e.push(a)}),e},e=function(b){return(a["$"+b.type]||(a["$"+b.type]=[])).push(b),b},f=function(c){b(c.element,c.type,null,c.handler,function(b,c,d){return c.splice(d,1),c.length===0&&delete a["$"+b.type],!1})},g=function(){var b,c=[];for(b in a)b.charAt(0)==="$"&&(c=c.concat(a[b]));return c};return{has:c,get:d,put:e,del:f,entries:g}}(),E=o[n]?function(a,b){return b[n](a)}:function(){throw new Error("Bean: No selector engine installed")},F=function(a){E=a},G=q?function(a,b,c,d){a[d?h:j](b,c,!1)}:function(a,b,c,d,e){e&&d&&a["_on"+e]===null&&(a["_on"+e]=0),a[d?i:k]("on"+b,c)},H=function(a,b,d){var e=b.__beanDel,f=function(f){return f=A(f||((this[l]||this.document||this).parentWindow||c).event,!0),e&&(f.currentTarget=e.ft(f[m],a)),b.apply(a,[f].concat(d))};return f.__beanDel=e,f},I=function(a,b,d,e,f,g){var h=b.__beanDel,i=function(i){var j=h?h.ft(i[m],a):this;if(e?e.apply(j,arguments):q?!0:i&&i.propertyName==="_on"+d||!i)i&&(i=A(i||((this[l]||this.document||this).parentWindow||c).event,g),i.currentTarget=j),b.apply(a,i&&(!f||f.length===0)?arguments:s.call(arguments,i?0:1).concat(f))};return i.__beanDel=h,i},J=function(a,b,c,d,e){return function(){a(b,c,e),d.apply(this,arguments)}},K=function(a,b,c,d){var e,f,h,i=b&&b.replace(g,""),j=D.get(a,i,c);for(e=0,f=j.length;e<f;e++)j[e].inNamespaces(d)&&((h=j[e])[r]&&G(h[m],h.eventType,h.handler,!1,h.type),D.del(h))},L=function(a,b,c,d,e){var h,i=b.replace(g,""),j=b.replace(f,"").split(".");if(D.has(a,i,c))return a;i==="unload"&&(c=J(K,a,i,c,d)),z[i]&&(z[i].condition&&(c=I(a,c,i,z[i].condition,e,!0)),i=z[i].base||i),h=D.put(new C(a,i,c,d,j[0]&&j)),h.handler=h.isNative?H(a,h.handler,e):I(a,h.handler,i,!1,e,!1),h[r]&&G(h[m],h.eventType,h.handler,!0,h.customType)},M=function(a,b,c){var d=function(b,d){var e,f=typeof a=="string"?c(a,d):a;for(;b&&b!==d;b=b.parentNode)for(e=f.length;e--;)if(f[e]===b)return b},e=function(a){var c=d(a[m],this);c&&b.apply(c,arguments)};return e.__beanDel={ft:d,selector:a,$:c},e},N=function(a,b,c){var d,e,h,i,j=K,k=b&&typeof b=="string";if(k&&b.indexOf(" ")>0){b=b.split(" ");for(i=b.length;i--;)N(a,b[i],c);return a}e=k&&b.replace(g,""),e&&z[e]&&(e=z[e].type);if(!b||k){if(h=k&&b.replace(f,""))h=h.split(".");j(a,e,c,h)}else if(typeof b=="function")j(a,null,b);else for(d in b)b.hasOwnProperty(d)&&N(a,d,b[d]);return a},O=function(a,b,c,d,e){var f,g,h,i,j=c,k=c&&typeof c=="string";if(b&&!c&&typeof b=="object")for(f in b)b.hasOwnProperty(f)&&O.apply(this,[a,f,b[f]]);else{i=arguments.length>3?s.call(arguments,3):[],g=(k?c:b).split(" "),k&&(c=M(b,j=d,e||E))&&(i=s.call(i,1)),this===x&&(c=J(N,a,b,c,j));for(h=g.length;h--;)L(a,g[h],c,j,i)}return a},P=function(){return O.apply(x,arguments)},Q=q?function(a,b,d){var e=o.createEvent(a?"HTMLEvents":"UIEvents");e[a?"initEvent":"initUIEvent"](b,!0,!0,c,1),d.dispatchEvent(e)}:function(a,b,c){c=B(c,a),a?c.fireEvent("on"+b,o.createEventObject()):c["_on"+b]++},R=function(a,b,c){var d,e,h,i,j,k=b.split(" ");for(d=k.length;d--;){b=k[d].replace(g,"");if(i=k[d].replace(f,""))i=i.split(".");if(!i&&!c&&a[r])Q(y[b],b,a);else{j=D.get(a,b),c=[!1].concat(c);for(e=0,h=j.length;e<h;e++)j[e].inNamespaces(i)&&j[e].handler.apply(a,c)}}return a},S=function(a,b,c){var d=0,e=D.get(b,c),f=e.length,g,h;for(;d<f;d++)e[d].original&&(h=e[d].handler.__beanDel,h?g=[a,h.selector,e[d].type,e[d].original,h.$]:g=[a,e[d].type,e[d].original],O.apply(null,g));return a},T={add:O,one:P,remove:N,clone:S,fire:R,setSelectorEngine:F,noConflict:function(){return b[a]=d,this}};if(c[i]){var U=function(){var a,b=D.entries();for(a in b)b[a].type&&b[a].type!=="unload"&&N(b[a].element,b[a].type);c[k]("onunload",U),c.CollectGarbage&&c.CollectGarbage()};c[i]("onunload",U)}return T})/*!
+!function (name, context, definition) {
+  if (typeof module !== 'undefined') module.exports = definition(name, context);
+  else if (typeof define === 'function' && typeof define.amd  === 'object') define(definition);
+  else context[name] = definition(name, context);
+}('bean', this, function (name, context) {
+  var win = window
+    , old = context[name]
+    , overOut = /over|out/
+    , namespaceRegex = /[^\.]*(?=\..*)\.|.*/
+    , nameRegex = /\..*/
+    , addEvent = 'addEventListener'
+    , attachEvent = 'attachEvent'
+    , removeEvent = 'removeEventListener'
+    , detachEvent = 'detachEvent'
+    , ownerDocument = 'ownerDocument'
+    , targetS = 'target'
+    , qSA = 'querySelectorAll'
+    , doc = document || {}
+    , root = doc.documentElement || {}
+    , W3C_MODEL = root[addEvent]
+    , eventSupport = W3C_MODEL ? addEvent : attachEvent
+    , slice = Array.prototype.slice
+    , mouseTypeRegex = /click|mouse(?!(.*wheel|scroll))|menu|drag|drop/i
+    , mouseWheelTypeRegex = /mouse.*(wheel|scroll)/i
+    , textTypeRegex = /^text/i
+    , touchTypeRegex = /^touch|^gesture/i
+    , ONE = {} // singleton for quick matching making add() do one()
+
+    , nativeEvents = (function (hash, events, i) {
+        for (i = 0; i < events.length; i++)
+          hash[events[i]] = 1
+        return hash
+      }({}, (
+          'click dblclick mouseup mousedown contextmenu ' +                  // mouse buttons
+          'mousewheel mousemultiwheel DOMMouseScroll ' +                     // mouse wheel
+          'mouseover mouseout mousemove selectstart selectend ' +            // mouse movement
+          'keydown keypress keyup ' +                                        // keyboard
+          'orientationchange ' +                                             // mobile
+          'focus blur change reset select submit ' +                         // form elements
+          'load unload beforeunload resize move DOMContentLoaded '+          // window
+          'readystatechange message ' +                                      // window
+          'error abort scroll ' +                                            // misc
+          (W3C_MODEL ? // element.fireEvent('onXYZ'... is not forgiving if we try to fire an event
+                       // that doesn't actually exist, so make sure we only do these on newer browsers
+            'show ' +                                                          // mouse buttons
+            'input invalid ' +                                                 // form elements
+            'touchstart touchmove touchend touchcancel ' +                     // touch
+            'gesturestart gesturechange gestureend ' +                         // gesture
+            'readystatechange pageshow pagehide popstate ' +                   // window
+            'hashchange offline online ' +                                     // window
+            'afterprint beforeprint ' +                                        // printing
+            'dragstart dragenter dragover dragleave drag drop dragend ' +      // dnd
+            'loadstart progress suspend emptied stalled loadmetadata ' +       // media
+            'loadeddata canplay canplaythrough playing waiting seeking ' +     // media
+            'seeked ended durationchange timeupdate play pause ratechange ' +  // media
+            'volumechange cuechange ' +                                        // media
+            'checking noupdate downloading cached updateready obsolete ' +     // appcache
+            '' : '')
+        ).split(' ')
+      ))
+
+    , customEvents = (function () {
+        var cdp = 'compareDocumentPosition'
+          , isAncestor = cdp in root
+              ? function (element, container) {
+                  return container[cdp] && (container[cdp](element) & 16) === 16
+                }
+              : 'contains' in root
+                ? function (element, container) {
+                    container = container.nodeType === 9 || container === window ? root : container
+                    return container !== element && container.contains(element)
+                  }
+                : function (element, container) {
+                    while (element = element.parentNode) if (element === container) return 1
+                    return 0
+                  }
+
+        function check(event) {
+          var related = event.relatedTarget
+          return !related
+            ? related === null
+            : (related !== this && related.prefix !== 'xul' && !/document/.test(this.toString()) && !isAncestor(related, this))
+        }
+
+        return {
+            mouseenter: { base: 'mouseover', condition: check }
+          , mouseleave: { base: 'mouseout', condition: check }
+          , mousewheel: { base: /Firefox/.test(navigator.userAgent) ? 'DOMMouseScroll' : 'mousewheel' }
+        }
+      }())
+
+    , fixEvent = (function () {
+        var commonProps = 'altKey attrChange attrName bubbles cancelable ctrlKey currentTarget detail eventPhase getModifierState isTrusted metaKey relatedNode relatedTarget shiftKey srcElement target timeStamp type view which'.split(' ')
+          , mouseProps = commonProps.concat('button buttons clientX clientY dataTransfer fromElement offsetX offsetY pageX pageY screenX screenY toElement'.split(' '))
+          , mouseWheelProps = mouseProps.concat('wheelDelta wheelDeltaX wheelDeltaY wheelDeltaZ axis'.split(' ')) // 'axis' is FF specific
+          , keyProps = commonProps.concat('char charCode key keyCode keyIdentifier keyLocation'.split(' '))
+          , textProps = commonProps.concat(['data'])
+          , touchProps = commonProps.concat('touches targetTouches changedTouches scale rotation'.split(' '))
+          , messageProps = commonProps.concat(['data', 'origin', 'source'])
+          , preventDefault = 'preventDefault'
+          , createPreventDefault = function (event) {
+              return function () {
+                if (event[preventDefault])
+                  event[preventDefault]()
+                else
+                  event.returnValue = false
+              }
+            }
+          , stopPropagation = 'stopPropagation'
+          , createStopPropagation = function (event) {
+              return function () {
+                if (event[stopPropagation])
+                  event[stopPropagation]()
+                else
+                  event.cancelBubble = true
+              }
+            }
+          , createStop = function (synEvent) {
+              return function () {
+                synEvent[preventDefault]()
+                synEvent[stopPropagation]()
+                synEvent.stopped = true
+              }
+            }
+          , copyProps = function (event, result, props) {
+              var i, p
+              for (i = props.length; i--;) {
+                p = props[i]
+                if (!(p in result) && p in event) result[p] = event[p]
+              }
+            }
+
+        return function (event, isNative) {
+          var result = { originalEvent: event, isNative: isNative }
+          if (!event)
+            return result
+
+          var props
+            , type = event.type
+            , target = event[targetS] || event.srcElement
+
+          result[preventDefault] = createPreventDefault(event)
+          result[stopPropagation] = createStopPropagation(event)
+          result.stop = createStop(result)
+          result[targetS] = target && target.nodeType === 3 ? target.parentNode : target
+
+          if (isNative) { // we only need basic augmentation on custom events, the rest is too expensive
+            if (type.indexOf('key') !== -1) {
+              props = keyProps
+              result.keyCode = event.keyCode || event.which
+            } else if (mouseTypeRegex.test(type)) {
+              props = mouseProps
+              result.rightClick = event.which === 3 || event.button === 2
+              result.pos = { x: 0, y: 0 }
+              if (event.pageX || event.pageY) {
+                result.clientX = event.pageX
+                result.clientY = event.pageY
+              } else if (event.clientX || event.clientY) {
+                result.clientX = event.clientX + doc.body.scrollLeft + root.scrollLeft
+                result.clientY = event.clientY + doc.body.scrollTop + root.scrollTop
+              }
+              if (overOut.test(type))
+                result.relatedTarget = event.relatedTarget || event[(type === 'mouseover' ? 'from' : 'to') + 'Element']
+            } else if (touchTypeRegex.test(type)) {
+              props = touchProps
+            } else if (mouseWheelTypeRegex.test(type)) {
+              props = mouseWheelProps
+            } else if (textTypeRegex.test(type)) {
+              props = textProps
+            } else if (type === 'message') {
+              props = messageProps
+            }
+            copyProps(event, result, props || commonProps)
+          }
+          return result
+        }
+      }())
+
+      // if we're in old IE we can't do onpropertychange on doc or win so we use doc.documentElement for both
+    , targetElement = function (element, isNative) {
+        return !W3C_MODEL && !isNative && (element === doc || element === win) ? root : element
+      }
+
+      // we use one of these per listener, of any type
+    , RegEntry = (function () {
+        function entry(element, type, handler, original, namespaces) {
+          var isNative = this.isNative = nativeEvents[type] && element[eventSupport]
+          this.element = element
+          this.type = type
+          this.handler = handler
+          this.original = original
+          this.namespaces = namespaces
+          this.custom = customEvents[type]
+          this.eventType = W3C_MODEL || isNative ? type : 'propertychange'
+          this.customType = !W3C_MODEL && !isNative && type
+          this[targetS] = targetElement(element, isNative)
+          this[eventSupport] = this[targetS][eventSupport]
+        }
+
+        entry.prototype = {
+            // given a list of namespaces, is our entry in any of them?
+            inNamespaces: function (checkNamespaces) {
+              var i, j
+              if (!checkNamespaces)
+                return true
+              if (!this.namespaces)
+                return false
+              for (i = checkNamespaces.length; i--;) {
+                for (j = this.namespaces.length; j--;) {
+                  if (checkNamespaces[i] === this.namespaces[j])
+                    return true
+                }
+              }
+              return false
+            }
+
+            // match by element, original fn (opt), handler fn (opt)
+          , matches: function (checkElement, checkOriginal, checkHandler) {
+              return this.element === checkElement &&
+                (!checkOriginal || this.original === checkOriginal) &&
+                (!checkHandler || this.handler === checkHandler)
+            }
+        }
+
+        return entry
+      }())
+
+    , registry = (function () {
+        // our map stores arrays by event type, just because it's better than storing
+        // everything in a single array. uses '$' as a prefix for the keys for safety
+        var map = {}
+
+          // generic functional search of our registry for matching listeners,
+          // `fn` returns false to break out of the loop
+          , forAll = function (element, type, original, handler, fn) {
+              if (!type || type === '*') {
+                // search the whole registry
+                for (var t in map) {
+                  if (t.charAt(0) === '$')
+                    forAll(element, t.substr(1), original, handler, fn)
+                }
+              } else {
+                var i = 0, l, list = map['$' + type], all = element === '*'
+                if (!list)
+                  return
+                for (l = list.length; i < l; i++) {
+                  if (all || list[i].matches(element, original, handler))
+                    if (!fn(list[i], list, i, type))
+                      return
+                }
+              }
+            }
+
+          , has = function (element, type, original) {
+              // we're not using forAll here simply because it's a bit slower and this
+              // needs to be fast
+              var i, list = map['$' + type]
+              if (list) {
+                for (i = list.length; i--;) {
+                  if (list[i].matches(element, original, null))
+                    return true
+                }
+              }
+              return false
+            }
+
+          , get = function (element, type, original) {
+              var entries = []
+              forAll(element, type, original, null, function (entry) { return entries.push(entry) })
+              return entries
+            }
+
+          , put = function (entry) {
+              (map['$' + entry.type] || (map['$' + entry.type] = [])).push(entry)
+              return entry
+            }
+
+          , del = function (entry) {
+              forAll(entry.element, entry.type, null, entry.handler, function (entry, list, i) {
+                list.splice(i, 1)
+                if (list.length === 0)
+                  delete map['$' + entry.type]
+                return false
+              })
+            }
+
+            // dump all entries, used for onunload
+          , entries = function () {
+              var t, entries = []
+              for (t in map) {
+                if (t.charAt(0) === '$')
+                  entries = entries.concat(map[t])
+              }
+              return entries
+            }
+
+        return { has: has, get: get, put: put, del: del, entries: entries }
+      }())
+
+    , selectorEngine = doc[qSA]
+        ? function (s, r) {
+            return r[qSA](s)
+          }
+        : function () {
+            throw new Error('Bean: No selector engine installed') // eeek
+          }
+
+    , setSelectorEngine = function (e) {
+        selectorEngine = e
+      }
+
+      // add and remove listeners to DOM elements
+    , listener = W3C_MODEL ? function (element, type, fn, add) {
+        element[add ? addEvent : removeEvent](type, fn, false)
+      } : function (element, type, fn, add, custom) {
+        if (custom && add && element['_on' + custom] === null)
+          element['_on' + custom] = 0
+        element[add ? attachEvent : detachEvent]('on' + type, fn)
+      }
+
+    , nativeHandler = function (element, fn, args) {
+        var beanDel = fn.__beanDel
+          , handler = function (event) {
+          event = fixEvent(event || ((this[ownerDocument] || this.document || this).parentWindow || win).event, true)
+          if (beanDel) // delegated event, fix the fix
+            event.currentTarget = beanDel.ft(event[targetS], element)
+          return fn.apply(element, [event].concat(args))
+        }
+        handler.__beanDel = beanDel
+        return handler
+      }
+
+    , customHandler = function (element, fn, type, condition, args, isNative) {
+        var beanDel = fn.__beanDel
+          , handler = function (event) {
+          var target = beanDel ? beanDel.ft(event[targetS], element) : this // deleated event
+          if (condition ? condition.apply(target, arguments) : W3C_MODEL ? true : event && event.propertyName === '_on' + type || !event) {
+            if (event) {
+              event = fixEvent(event || ((this[ownerDocument] || this.document || this).parentWindow || win).event, isNative)
+              event.currentTarget = target
+            }
+            fn.apply(element, event && (!args || args.length === 0) ? arguments : slice.call(arguments, event ? 0 : 1).concat(args))
+          }
+        }
+        handler.__beanDel = beanDel
+        return handler
+      }
+
+    , once = function (rm, element, type, fn, originalFn) {
+        // wrap the handler in a handler that does a remove as well
+        return function () {
+          rm(element, type, originalFn)
+          fn.apply(this, arguments)
+        }
+      }
+
+    , removeListener = function (element, orgType, handler, namespaces) {
+        var i, l, entry
+          , type = (orgType && orgType.replace(nameRegex, ''))
+          , handlers = registry.get(element, type, handler)
+
+        for (i = 0, l = handlers.length; i < l; i++) {
+          if (handlers[i].inNamespaces(namespaces)) {
+            if ((entry = handlers[i])[eventSupport])
+              listener(entry[targetS], entry.eventType, entry.handler, false, entry.type)
+            // TODO: this is problematic, we have a registry.get() and registry.del() that
+            // both do registry searches so we waste cycles doing this. Needs to be rolled into
+            // a single registry.forAll(fn) that removes while finding, but the catch is that
+            // we'll be splicing the arrays that we're iterating over. Needs extra tests to
+            // make sure we don't screw it up. @rvagg
+            registry.del(entry)
+          }
+        }
+      }
+
+    , addListener = function (element, orgType, fn, originalFn, args) {
+        var entry
+          , type = orgType.replace(nameRegex, '')
+          , namespaces = orgType.replace(namespaceRegex, '').split('.')
+
+        if (registry.has(element, type, fn))
+          return element // no dupe
+        if (type === 'unload')
+          fn = once(removeListener, element, type, fn, originalFn) // self clean-up
+        if (customEvents[type]) {
+          if (customEvents[type].condition)
+            fn = customHandler(element, fn, type, customEvents[type].condition, args, true)
+          type = customEvents[type].base || type
+        }
+        entry = registry.put(new RegEntry(element, type, fn, originalFn, namespaces[0] && namespaces))
+        entry.handler = entry.isNative ?
+          nativeHandler(element, entry.handler, args) :
+          customHandler(element, entry.handler, type, false, args, false)
+        if (entry[eventSupport])
+          listener(entry[targetS], entry.eventType, entry.handler, true, entry.customType)
+      }
+
+    , del = function (selector, fn, $) {
+            //TODO: findTarget (therefore $) is called twice, once for match and once for
+            // setting e.currentTarget, fix this so it's only needed once
+        var findTarget = function (target, root) {
+              var i, array = typeof selector === 'string' ? $(selector, root) : selector
+              for (; target && target !== root; target = target.parentNode) {
+                for (i = array.length; i--;) {
+                  if (array[i] === target)
+                    return target
+                }
+              }
+            }
+          , handler = function (e) {
+              var match = findTarget(e[targetS], this)
+              match && fn.apply(match, arguments)
+            }
+
+        handler.__beanDel = {
+            ft: findTarget // attach it here for customEvents to use too
+          , selector: selector
+          , $: $
+        }
+        return handler
+      }
+
+    , remove = function (element, typeSpec, fn) {
+        var k, type, namespaces, i
+          , rm = removeListener
+          , isString = typeSpec && typeof typeSpec === 'string'
+
+        if (isString && typeSpec.indexOf(' ') > 0) {
+          // remove(el, 't1 t2 t3', fn) or remove(el, 't1 t2 t3')
+          typeSpec = typeSpec.split(' ')
+          for (i = typeSpec.length; i--;)
+            remove(element, typeSpec[i], fn)
+          return element
+        }
+        type = isString && typeSpec.replace(nameRegex, '')
+        if (type && customEvents[type])
+          type = customEvents[type].type
+        if (!typeSpec || isString) {
+          // remove(el) or remove(el, t1.ns) or remove(el, .ns) or remove(el, .ns1.ns2.ns3)
+          if (namespaces = isString && typeSpec.replace(namespaceRegex, ''))
+            namespaces = namespaces.split('.')
+          rm(element, type, fn, namespaces)
+        } else if (typeof typeSpec === 'function') {
+          // remove(el, fn)
+          rm(element, null, typeSpec)
+        } else {
+          // remove(el, { t1: fn1, t2, fn2 })
+          for (k in typeSpec) {
+            if (typeSpec.hasOwnProperty(k))
+              remove(element, k, typeSpec[k])
+          }
+        }
+        return element
+      }
+
+      // 5th argument, $=selector engine, is deprecated and will be removed
+    , add = function (element, events, fn, delfn, $) {
+        var type, types, i, args
+          , originalFn = fn
+          , isDel = fn && typeof fn === 'string'
+
+        if (events && !fn && typeof events === 'object') {
+          for (type in events) {
+            if (events.hasOwnProperty(type))
+              add.apply(this, [ element, type, events[type] ])
+          }
+        } else {
+          args = arguments.length > 3 ? slice.call(arguments, 3) : []
+          types = (isDel ? fn : events).split(' ')
+          isDel && (fn = del(events, (originalFn = delfn), $ || selectorEngine)) && (args = slice.call(args, 1))
+          // special case for one()
+          this === ONE && (fn = once(remove, element, events, fn, originalFn))
+          for (i = types.length; i--;) addListener(element, types[i], fn, originalFn, args)
+        }
+        return element
+      }
+
+    , one = function () {
+        return add.apply(ONE, arguments)
+      }
+
+    , fireListener = W3C_MODEL ? function (isNative, type, element) {
+        var evt = doc.createEvent(isNative ? 'HTMLEvents' : 'UIEvents')
+        evt[isNative ? 'initEvent' : 'initUIEvent'](type, true, true, win, 1)
+        element.dispatchEvent(evt)
+      } : function (isNative, type, element) {
+        element = targetElement(element, isNative)
+        // if not-native then we're using onpropertychange so we just increment a custom property
+        isNative ? element.fireEvent('on' + type, doc.createEventObject()) : element['_on' + type]++
+      }
+
+    , fire = function (element, type, args) {
+        var i, j, l, names, handlers
+          , types = type.split(' ')
+
+        for (i = types.length; i--;) {
+          type = types[i].replace(nameRegex, '')
+          if (names = types[i].replace(namespaceRegex, ''))
+            names = names.split('.')
+          if (!names && !args && element[eventSupport]) {
+            fireListener(nativeEvents[type], type, element)
+          } else {
+            // non-native event, either because of a namespace, arguments or a non DOM element
+            // iterate over all listeners and manually 'fire'
+            handlers = registry.get(element, type)
+            args = [false].concat(args)
+            for (j = 0, l = handlers.length; j < l; j++) {
+              if (handlers[j].inNamespaces(names))
+                handlers[j].handler.apply(element, args)
+            }
+          }
+        }
+        return element
+      }
+
+    , clone = function (element, from, type) {
+        var i = 0
+          , handlers = registry.get(from, type)
+          , l = handlers.length
+          , args, beanDel
+
+        for (;i < l; i++) {
+          if (handlers[i].original) {
+            beanDel = handlers[i].handler.__beanDel
+            if (beanDel) {
+              args = [ element, beanDel.selector, handlers[i].type, handlers[i].original, beanDel.$]
+            } else
+              args = [ element, handlers[i].type, handlers[i].original ]
+            add.apply(null, args)
+          }
+        }
+        return element
+      }
+
+    , bean = {
+          add: add
+        , one: one
+        , remove: remove
+        , clone: clone
+        , fire: fire
+        , setSelectorEngine: setSelectorEngine
+        , noConflict: function () {
+            context[name] = old
+            return this
+          }
+      }
+
+  if (win[attachEvent]) {
+    // for IE, clean up on unload to avoid leaks
+    var cleanup = function () {
+      var i, entries = registry.entries()
+      for (i in entries) {
+        if (entries[i].type && entries[i].type !== 'unload')
+          remove(entries[i].element, entries[i].type)
+      }
+      win[detachEvent]('onunload', cleanup)
+      win.CollectGarbage && win.CollectGarbage()
+    }
+    win[attachEvent]('onunload', cleanup)
+  }
+
+  return bean
+})
+/*!
  * mustache.js - Logic-less {{mustache}} templates with JavaScript
  * http://github.com/janl/mustache.js
  */
@@ -610,8 +1173,375 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
   * https://github.com/ded/reqwest
   * license MIT
   */
-!function(a,b){typeof module!="undefined"?module.exports=b():typeof define=="function"&&define.amd?define(a,b):this[a]=b()}("reqwest",function(){function handleReadyState(a,b,c){return function(){a&&a[readyState]==4&&(twoHundo.test(a.status)?b(a):c(a))}}function setHeaders(a,b){var c=b.headers||{},d;c.Accept=c.Accept||defaultHeaders.accept[b.type]||defaultHeaders.accept["*"],!b.crossOrigin&&!c[requestedWith]&&(c[requestedWith]=defaultHeaders.requestedWith),c[contentType]||(c[contentType]=b.contentType||defaultHeaders.contentType);for(d in c)c.hasOwnProperty(d)&&a.setRequestHeader(d,c[d])}function generalCallback(a){lastValue=a}function urlappend(a,b){return a+(/\?/.test(a)?"&":"?")+b}function handleJsonp(a,b,c,d){var e=uniqid++,f=a.jsonpCallback||"callback",g=a.jsonpCallbackName||"reqwest_"+e,h=new RegExp("((^|\\?|&)"+f+")=([^&]+)"),i=d.match(h),j=doc.createElement("script"),k=0;i?i[3]==="?"?d=d.replace(h,"$1="+g):g=i[3]:d=urlappend(d,f+"="+g),win[g]=generalCallback,j.type="text/javascript",j.src=d,j.async=!0,typeof j.onreadystatechange!="undefined"&&(j.event="onclick",j.htmlFor=j.id="_reqwest_"+e),j.onload=j.onreadystatechange=function(){if(j[readyState]&&j[readyState]!=="complete"&&j[readyState]!=="loaded"||k)return!1;j.onload=j.onreadystatechange=null,j.onclick&&j.onclick(),a.success&&a.success(lastValue),lastValue=undefined,head.removeChild(j),k=1},head.appendChild(j)}function getRequest(a,b,c){var d=(a.method||"GET").toUpperCase(),e=typeof a=="string"?a:a.url,f=a.processData!==!1&&a.data&&typeof a.data!="string"?reqwest.toQueryString(a.data):a.data||null,g;return(a.type=="jsonp"||d=="GET")&&f&&(e=urlappend(e,f),f=null),a.type=="jsonp"?handleJsonp(a,b,c,e):(g=xhr(),g.open(d,e,!0),setHeaders(g,a),g.onreadystatechange=handleReadyState(g,b,c),a.before&&a.before(g),g.send(f),g)}function Reqwest(a,b){this.o=a,this.fn=b,init.apply(this,arguments)}function setType(a){var b=a.match(/\.(json|jsonp|html|xml)(\?|$)/);return b?b[1]:"js"}function init(o,fn){function complete(a){o.timeout&&clearTimeout(self.timeout),self.timeout=null,o.complete&&o.complete(a)}function success(resp){var r=resp.responseText;if(r)switch(type){case"json":try{resp=win.JSON?win.JSON.parse(r):eval("("+r+")")}catch(err){return error(resp,"Could not parse JSON in response",err)}break;case"js":resp=eval(r);break;case"html":resp=r}fn(resp),o.success&&o.success(resp),complete(resp)}function error(a,b,c){o.error&&o.error(a,b,c),complete(a)}this.url=typeof o=="string"?o:o.url,this.timeout=null;var type=o.type||setType(this.url),self=this;fn=fn||function(){},o.timeout&&(this.timeout=setTimeout(function(){self.abort()},o.timeout)),this.request=getRequest(o,success,error)}function reqwest(a,b){return new Reqwest(a,b)}function normalize(a){return a?a.replace(/\r?\n/g,"\r\n"):""}function serial(a,b){var c=a.name,d=a.tagName.toLowerCase(),e=function(a){a&&!a.disabled&&b(c,normalize(a.attributes.value&&a.attributes.value.specified?a.value:a.text))};if(a.disabled||!c)return;switch(d){case"input":if(!/reset|button|image|file/i.test(a.type)){var f=/checkbox/i.test(a.type),g=/radio/i.test(a.type),h=a.value;(!f&&!g||a.checked)&&b(c,normalize(f&&h===""?"on":h))}break;case"textarea":b(c,normalize(a.value));break;case"select":if(a.type.toLowerCase()==="select-one")e(a.selectedIndex>=0?a.options[a.selectedIndex]:null);else for(var i=0;a.length&&i<a.length;i++)a.options[i].selected&&e(a.options[i])}}function eachFormElement(){var a=this,b,c,d,e=function(b,c){for(var e=0;e<c.length;e++){var f=b[byTag](c[e]);for(d=0;d<f.length;d++)serial(f[d],a)}};for(c=0;c<arguments.length;c++)b=arguments[c],/input|select|textarea/i.test(b.tagName)&&serial(b,a),e(b,["input","select","textarea"])}function serializeQueryString(){return reqwest.toQueryString(reqwest.serializeArray.apply(null,arguments))}function serializeHash(){var a={};return eachFormElement.apply(function(b,c){b in a?(a[b]&&!isArray(a[b])&&(a[b]=[a[b]]),a[b].push(c)):a[b]=c},arguments),a}var win=window,doc=document,twoHundo=/^20\d$/,byTag="getElementsByTagName",readyState="readyState",contentType="Content-Type",requestedWith="X-Requested-With",head=doc[byTag]("head")[0],uniqid=0,lastValue,xmlHttpRequest="XMLHttpRequest",isArray=typeof Array.isArray=="function"?Array.isArray:function(a){return a instanceof Array},defaultHeaders={contentType:"application/x-www-form-urlencoded",accept:{"*":"text/javascript, text/html, application/xml, text/xml, */*",xml:"application/xml, text/xml",html:"text/html",text:"text/plain",json:"application/json, text/javascript",js:"application/javascript, text/javascript"},requestedWith:xmlHttpRequest},xhr=win[xmlHttpRequest]?function(){return new XMLHttpRequest}:function(){return new ActiveXObject("Microsoft.XMLHTTP")};return Reqwest.prototype={abort:function(){this.request.abort()},retry:function(){init.call(this,this.o,this.fn)}},reqwest.serializeArray=function(){var a=[];return eachFormElement.apply(function(b,c){a.push({name:b,value:c})},arguments),a},reqwest.serialize=function(){if(arguments.length===0)return"";var a,b,c=Array.prototype.slice.call(arguments,0);return a=c.pop(),a&&a.nodeType&&c.push(a)&&(a=null),a&&(a=a.type),a=="map"?b=serializeHash:a=="array"?b=reqwest.serializeArray:b=serializeQueryString,b.apply(null,c)},reqwest.toQueryString=function(a){var b="",c,d=encodeURIComponent,e=function(a,c){b+=d(a)+"="+d(c)+"&"};if(isArray(a))for(c=0;a&&c<a.length;c++)e(a[c].name,a[c].value);else for(var f in a){if(!Object.hasOwnProperty.call(a,f))continue;var g=a[f];if(isArray(g))for(c=0;c<g.length;c++)e(f,g[c]);else e(f,a[f])}return b.replace(/&$/,"").replace(/%20/g,"+")},reqwest.compat=function(a,b){return a&&(a.type&&(a.method=a.type)&&delete a.type,a.dataType&&(a.type=a.dataType),a.jsonpCallback&&(a.jsonpCallbackName=a.jsonpCallback)&&delete a.jsonpCallback,a.jsonp&&(a.jsonpCallback=a.jsonp)),new Reqwest(a,b)},reqwest})/*
- * Modest Maps JS v3.2.0
+!function (name, definition) {
+  if (typeof module != 'undefined') module.exports = definition()
+  else if (typeof define == 'function' && define.amd) define(name, definition)
+  else this[name] = definition()
+}('reqwest', function () {
+
+  var win = window
+    , doc = document
+    , twoHundo = /^20\d$/
+    , byTag = 'getElementsByTagName'
+    , readyState = 'readyState'
+    , contentType = 'Content-Type'
+    , requestedWith = 'X-Requested-With'
+    , head = doc[byTag]('head')[0]
+    , uniqid = 0
+    , lastValue // data stored by the most recent JSONP callback
+    , xmlHttpRequest = 'XMLHttpRequest'
+    , isArray = typeof Array.isArray == 'function' ? Array.isArray : function (a) {
+        return a instanceof Array
+      }
+    , defaultHeaders = {
+          contentType: 'application/x-www-form-urlencoded'
+        , accept: {
+              '*':  'text/javascript, text/html, application/xml, text/xml, */*'
+            , xml:  'application/xml, text/xml'
+            , html: 'text/html'
+            , text: 'text/plain'
+            , json: 'application/json, text/javascript'
+            , js:   'application/javascript, text/javascript'
+          }
+        , requestedWith: xmlHttpRequest
+      }
+    , xhr = win[xmlHttpRequest] ?
+        function () {
+          return new XMLHttpRequest()
+        } :
+        function () {
+          return new ActiveXObject('Microsoft.XMLHTTP')
+        }
+
+  function handleReadyState(o, success, error) {
+    return function () {
+      if (o && o[readyState] == 4) {
+        if (twoHundo.test(o.status)) {
+          success(o)
+        } else {
+          error(o)
+        }
+      }
+    }
+  }
+
+  function setHeaders(http, o) {
+    var headers = o.headers || {}, h
+    headers.Accept = headers.Accept || defaultHeaders.accept[o.type] || defaultHeaders.accept['*']
+    // breaks cross-origin requests with legacy browsers
+    if (!o.crossOrigin && !headers[requestedWith]) headers[requestedWith] = defaultHeaders.requestedWith
+    if (!headers[contentType]) headers[contentType] = o.contentType || defaultHeaders.contentType
+    for (h in headers) {
+      headers.hasOwnProperty(h) && http.setRequestHeader(h, headers[h])
+    }
+  }
+
+  function generalCallback(data) {
+    lastValue = data
+  }
+
+  function urlappend(url, s) {
+    return url + (/\?/.test(url) ? '&' : '?') + s
+  }
+
+  function handleJsonp(o, fn, err, url) {
+    var reqId = uniqid++
+      , cbkey = o.jsonpCallback || 'callback' // the 'callback' key
+      , cbval = o.jsonpCallbackName || ('reqwest_' + reqId) // the 'callback' value
+      , cbreg = new RegExp('((^|\\?|&)' + cbkey + ')=([^&]+)')
+      , match = url.match(cbreg)
+      , script = doc.createElement('script')
+      , loaded = 0
+
+    if (match) {
+      if (match[3] === '?') {
+        url = url.replace(cbreg, '$1=' + cbval) // wildcard callback func name
+      } else {
+        cbval = match[3] // provided callback func name
+      }
+    } else {
+      url = urlappend(url, cbkey + '=' + cbval) // no callback details, add 'em
+    }
+
+    win[cbval] = generalCallback
+
+    script.type = 'text/javascript'
+    script.src = url
+    script.async = true
+    if (typeof script.onreadystatechange !== 'undefined') {
+        // need this for IE due to out-of-order onreadystatechange(), binding script
+        // execution to an event listener gives us control over when the script
+        // is executed. See http://jaubourg.net/2010/07/loading-script-as-onclick-handler-of.html
+        script.event = 'onclick'
+        script.htmlFor = script.id = '_reqwest_' + reqId
+    }
+
+    script.onload = script.onreadystatechange = function () {
+      if ((script[readyState] && script[readyState] !== 'complete' && script[readyState] !== 'loaded') || loaded) {
+        return false
+      }
+      script.onload = script.onreadystatechange = null
+      script.onclick && script.onclick()
+      // Call the user callback with the last value stored and clean up values and scripts.
+      o.success && o.success(lastValue)
+      lastValue = undefined
+      head.removeChild(script)
+      loaded = 1
+    }
+
+    // Add the script to the DOM head
+    head.appendChild(script)
+  }
+
+  function getRequest(o, fn, err) {
+    var method = (o.method || 'GET').toUpperCase()
+      , url = typeof o === 'string' ? o : o.url
+      // convert non-string objects to query-string form unless o.processData is false
+      , data = (o.processData !== false && o.data && typeof o.data !== 'string')
+        ? reqwest.toQueryString(o.data)
+        : (o.data || null)
+      , http
+
+    // if we're working on a GET request and we have data then we should append
+    // query string to end of URL and not post data
+    if ((o.type == 'jsonp' || method == 'GET') && data) {
+      url = urlappend(url, data)
+      data = null
+    }
+
+    if (o.type == 'jsonp') return handleJsonp(o, fn, err, url)
+
+    http = xhr()
+    http.open(method, url, true)
+    setHeaders(http, o)
+    http.onreadystatechange = handleReadyState(http, fn, err)
+    o.before && o.before(http)
+    http.send(data)
+    return http
+  }
+
+  function Reqwest(o, fn) {
+    this.o = o
+    this.fn = fn
+    init.apply(this, arguments)
+  }
+
+  function setType(url) {
+    var m = url.match(/\.(json|jsonp|html|xml)(\?|$)/)
+    return m ? m[1] : 'js'
+  }
+
+  function init(o, fn) {
+    this.url = typeof o == 'string' ? o : o.url
+    this.timeout = null
+    var type = o.type || setType(this.url)
+      , self = this
+    fn = fn || function () {}
+
+    if (o.timeout) {
+      this.timeout = setTimeout(function () {
+        self.abort()
+      }, o.timeout)
+    }
+
+    function complete(resp) {
+      o.timeout && clearTimeout(self.timeout)
+      self.timeout = null
+      o.complete && o.complete(resp)
+    }
+
+    function success(resp) {
+      var r = resp.responseText
+      if (r) {
+        switch (type) {
+        case 'json':
+          try {
+            resp = win.JSON ? win.JSON.parse(r) : eval('(' + r + ')')
+          } catch (err) {
+            return error(resp, 'Could not parse JSON in response', err)
+          }
+          break;
+        case 'js':
+          resp = eval(r)
+          break;
+        case 'html':
+          resp = r
+          break;
+        }
+      }
+
+      fn(resp)
+      o.success && o.success(resp)
+
+      complete(resp)
+    }
+
+    function error(resp, msg, t) {
+      o.error && o.error(resp, msg, t)
+      complete(resp)
+    }
+
+    this.request = getRequest(o, success, error)
+  }
+
+  Reqwest.prototype = {
+    abort: function () {
+      this.request.abort()
+    }
+
+  , retry: function () {
+      init.call(this, this.o, this.fn)
+    }
+  }
+
+  function reqwest(o, fn) {
+    return new Reqwest(o, fn)
+  }
+
+  // normalize newline variants according to spec -> CRLF
+  function normalize(s) {
+    return s ? s.replace(/\r?\n/g, '\r\n') : ''
+  }
+
+  function serial(el, cb) {
+    var n = el.name
+      , t = el.tagName.toLowerCase()
+      , optCb = function(o) {
+          // IE gives value="" even where there is no value attribute
+          // 'specified' ref: http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-862529273
+          if (o && !o.disabled)
+            cb(n, normalize(o.attributes.value && o.attributes.value.specified ? o.value : o.text))
+        }
+
+    // don't serialize elements that are disabled or without a name
+    if (el.disabled || !n) return;
+
+    switch (t) {
+    case 'input':
+      if (!/reset|button|image|file/i.test(el.type)) {
+        var ch = /checkbox/i.test(el.type)
+          , ra = /radio/i.test(el.type)
+          , val = el.value;
+        // WebKit gives us "" instead of "on" if a checkbox has no value, so correct it here
+        (!(ch || ra) || el.checked) && cb(n, normalize(ch && val === '' ? 'on' : val))
+      }
+      break;
+    case 'textarea':
+      cb(n, normalize(el.value))
+      break;
+    case 'select':
+      if (el.type.toLowerCase() === 'select-one') {
+        optCb(el.selectedIndex >= 0 ? el.options[el.selectedIndex] : null)
+      } else {
+        for (var i = 0; el.length && i < el.length; i++) {
+          el.options[i].selected && optCb(el.options[i])
+        }
+      }
+      break;
+    }
+  }
+
+  // collect up all form elements found from the passed argument elements all
+  // the way down to child elements; pass a '<form>' or form fields.
+  // called with 'this'=callback to use for serial() on each element
+  function eachFormElement() {
+    var cb = this
+      , e, i, j
+      , serializeSubtags = function(e, tags) {
+        for (var i = 0; i < tags.length; i++) {
+          var fa = e[byTag](tags[i])
+          for (j = 0; j < fa.length; j++) serial(fa[j], cb)
+        }
+      }
+
+    for (i = 0; i < arguments.length; i++) {
+      e = arguments[i]
+      if (/input|select|textarea/i.test(e.tagName)) serial(e, cb)
+      serializeSubtags(e, [ 'input', 'select', 'textarea' ])
+    }
+  }
+
+  // standard query string style serialization
+  function serializeQueryString() {
+    return reqwest.toQueryString(reqwest.serializeArray.apply(null, arguments))
+  }
+
+  // { 'name': 'value', ... } style serialization
+  function serializeHash() {
+    var hash = {}
+    eachFormElement.apply(function (name, value) {
+      if (name in hash) {
+        hash[name] && !isArray(hash[name]) && (hash[name] = [hash[name]])
+        hash[name].push(value)
+      } else hash[name] = value
+    }, arguments)
+    return hash
+  }
+
+  // [ { name: 'name', value: 'value' }, ... ] style serialization
+  reqwest.serializeArray = function () {
+    var arr = []
+    eachFormElement.apply(function(name, value) {
+      arr.push({name: name, value: value})
+    }, arguments)
+    return arr
+  }
+
+  reqwest.serialize = function () {
+    if (arguments.length === 0) return ''
+    var opt, fn
+      , args = Array.prototype.slice.call(arguments, 0)
+
+    opt = args.pop()
+    opt && opt.nodeType && args.push(opt) && (opt = null)
+    opt && (opt = opt.type)
+
+    if (opt == 'map') fn = serializeHash
+    else if (opt == 'array') fn = reqwest.serializeArray
+    else fn = serializeQueryString
+
+    return fn.apply(null, args)
+  }
+
+  reqwest.toQueryString = function (o) {
+    var qs = '', i
+      , enc = encodeURIComponent
+      , push = function (k, v) {
+          qs += enc(k) + '=' + enc(v) + '&'
+        }
+
+    if (isArray(o)) {
+      for (i = 0; o && i < o.length; i++) push(o[i].name, o[i].value)
+    } else {
+      for (var k in o) {
+        if (!Object.hasOwnProperty.call(o, k)) continue;
+        var v = o[k]
+        if (isArray(v)) {
+          for (i = 0; i < v.length; i++) push(k, v[i])
+        } else push(k, o[k])
+      }
+    }
+
+    // spaces should be + according to spec
+    return qs.replace(/&$/, '').replace(/%20/g,'+')
+  }
+
+  // jQuery and Zepto compatibility, differences can be remapped here so you can call
+  // .ajax.compat(options, callback)
+  reqwest.compat = function (o, fn) {
+    if (o) {
+      o.type && (o.method = o.type) && delete o.type
+      o.dataType && (o.type = o.dataType)
+      o.jsonpCallback && (o.jsonpCallbackName = o.jsonpCallback) && delete o.jsonpCallback
+      o.jsonp && (o.jsonpCallback = o.jsonp)
+    }
+    return new Reqwest(o, fn)
+  }
+
+  return reqwest
+})
+/*!
+ * Modest Maps JS v3.2.1
  * http://modestmaps.com/
  *
  * Copyright (c) 2011 Stamen Design, All Rights Reserved.
@@ -623,510 +1553,2694 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
  * See CHANGELOG and http://semver.org/ for more details.
  *
  */
-var previousMM=MM;if(!com){var com={};if(!com.modestmaps){com.modestmaps={}}}var MM=com.modestmaps={noConflict:function(){MM=previousMM;return this}};(function(a){a.extend=function(d,b){for(var c in b.prototype){if(typeof d.prototype[c]=="undefined"){d.prototype[c]=b.prototype[c]}}return d};a.getFrame=function(){return function(b){(window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(c){window.setTimeout(function(){c(+new Date())},10)})(b)}}();a.transformProperty=(function(d){if(!this.document){return}var c=document.documentElement.style;for(var b=0;b<d.length;b++){if(d[b] in c){return d[b]}}return false})(["transformProperty","WebkitTransform","OTransform","MozTransform","msTransform"]);a.matrixString=function(b){if(b.scale*b.width%1){b.scale+=(1-b.scale*b.width%1)/b.width}var c=b.scale||1;if(a._browser.webkit3d){return"translate3d("+b.x.toFixed(0)+"px,"+b.y.toFixed(0)+"px, 0px)scale3d("+c+","+c+", 1)"}else{return"translate("+b.x.toFixed(6)+"px,"+b.y.toFixed(6)+"px)scale("+c+","+c+")"}};a._browser=(function(b){return{webkit:("WebKitCSSMatrix" in b),webkit3d:("WebKitCSSMatrix" in b)&&("m11" in new WebKitCSSMatrix())}})(this);a.moveElement=function(d,b){if(a.transformProperty){if(!b.scale){b.scale=1}if(!b.width){b.width=0}if(!b.height){b.height=0}var c=a.matrixString(b);if(d[a.transformProperty]!==c){d.style[a.transformProperty]=d[a.transformProperty]=c}}else{d.style.left=b.x+"px";d.style.top=b.y+"px";if(b.width&&b.height&&b.scale){d.style.width=Math.ceil(b.width*b.scale)+"px";d.style.height=Math.ceil(b.height*b.scale)+"px"}}};a.cancelEvent=function(b){b.cancelBubble=true;b.cancel=true;b.returnValue=false;if(b.stopPropagation){b.stopPropagation()}if(b.preventDefault){b.preventDefault()}return false};a.coerceLayer=function(b){if(typeof b=="string"){return new a.Layer(new a.TemplatedLayer(b))}else{if("draw" in b&&typeof b.draw=="function"){return b}else{return new a.Layer(b)}}};a.addEvent=function(d,c,b){if(d.addEventListener){d.addEventListener(c,b,false);if(c=="mousewheel"){d.addEventListener("DOMMouseScroll",b,false)}}else{if(d.attachEvent){d["e"+c+b]=b;d[c+b]=function(){d["e"+c+b](window.event)};d.attachEvent("on"+c,d[c+b])}}};a.removeEvent=function(d,c,b){if(d.removeEventListener){d.removeEventListener(c,b,false);if(c=="mousewheel"){d.removeEventListener("DOMMouseScroll",b,false)}}else{if(d.detachEvent){d.detachEvent("on"+c,d[c+b]);d[c+b]=null}}};a.getStyle=function(c,b){if(c.currentStyle){return c.currentStyle[b]}else{if(window.getComputedStyle){return document.defaultView.getComputedStyle(c,null).getPropertyValue(b)}}};a.Point=function(b,c){this.x=parseFloat(b);this.y=parseFloat(c)};a.Point.prototype={x:0,y:0,toString:function(){return"("+this.x.toFixed(3)+", "+this.y.toFixed(3)+")"},copy:function(){return new a.Point(this.x,this.y)}};a.Point.distance=function(c,b){return Math.sqrt(Math.pow(b.x-c.x,2)+Math.pow(b.y-c.y,2))};a.Point.interpolate=function(d,c,b){return new a.Point(d.x+(c.x-d.x)*b,d.y+(c.y-d.y)*b)};a.Coordinate=function(d,b,c){this.row=d;this.column=b;this.zoom=c};a.Coordinate.prototype={row:0,column:0,zoom:0,toString:function(){return"("+this.row.toFixed(3)+", "+this.column.toFixed(3)+" @"+this.zoom.toFixed(3)+")"},toKey:function(){return this.zoom+","+this.row+","+this.column},copy:function(){return new a.Coordinate(this.row,this.column,this.zoom)},container:function(){return new a.Coordinate(Math.floor(this.row),Math.floor(this.column),Math.floor(this.zoom))},zoomTo:function(b){var c=Math.pow(2,b-this.zoom);return new a.Coordinate(this.row*c,this.column*c,b)},zoomBy:function(c){var b=Math.pow(2,c);return new a.Coordinate(this.row*b,this.column*b,this.zoom+c)},up:function(b){if(b===undefined){b=1}return new a.Coordinate(this.row-b,this.column,this.zoom)},right:function(b){if(b===undefined){b=1}return new a.Coordinate(this.row,this.column+b,this.zoom)},down:function(b){if(b===undefined){b=1}return new a.Coordinate(this.row+b,this.column,this.zoom)},left:function(b){if(b===undefined){b=1}return new a.Coordinate(this.row,this.column-b,this.zoom)}};a.Location=function(b,c){this.lat=parseFloat(b);this.lon=parseFloat(c)};a.Location.prototype={lat:0,lon:0,toString:function(){return"("+this.lat.toFixed(3)+", "+this.lon.toFixed(3)+")"},copy:function(){return new a.Location(this.lat,this.lon)}};a.Location.distance=function(i,h,b){if(!b){b=6378000}var o=Math.PI/180,g=i.lat*o,n=i.lon*o,f=h.lat*o,m=h.lon*o,l=Math.cos(g)*Math.cos(n)*Math.cos(f)*Math.cos(m),k=Math.cos(g)*Math.sin(n)*Math.cos(f)*Math.sin(m),j=Math.sin(g)*Math.sin(f);return Math.acos(l+k+j)*b};a.Location.interpolate=function(i,g,m){if(i.lat===g.lat&&i.lon===g.lon){return new a.Location(i.lat,i.lon)}var s=Math.PI/180,k=i.lat*s,n=i.lon*s,j=g.lat*s,l=g.lon*s;var o=2*Math.asin(Math.sqrt(Math.pow(Math.sin((k-j)/2),2)+Math.cos(k)*Math.cos(j)*Math.pow(Math.sin((n-l)/2),2)));var e=Math.sin((1-m)*o)/Math.sin(o);var b=Math.sin(m*o)/Math.sin(o);var r=e*Math.cos(k)*Math.cos(n)+b*Math.cos(j)*Math.cos(l);var q=e*Math.cos(k)*Math.sin(n)+b*Math.cos(j)*Math.sin(l);var p=e*Math.sin(k)+b*Math.sin(j);var c=Math.atan2(p,Math.sqrt(Math.pow(r,2)+Math.pow(q,2)));var h=Math.atan2(q,r);return new a.Location(c/s,h/s)};a.Location.bearing=function(d,c){var e=Math.PI/180,i=d.lat*e,g=d.lon*e,h=c.lat*e,f=c.lon*e;var b=Math.atan2(Math.sin(g-f)*Math.cos(h),Math.cos(i)*Math.sin(h)-Math.sin(i)*Math.cos(h)*Math.cos(g-f))/-(Math.PI/180);return(b<0)?b+360:b};a.Extent=function(g,c,f,e){if(g instanceof a.Location&&c instanceof a.Location){var d=g,b=c;g=d.lat;c=d.lon;f=b.lat;e=b.lon}if(isNaN(f)){f=g}if(isNaN(e)){e=c}this.north=Math.max(g,f);this.south=Math.min(g,f);this.east=Math.max(e,c);this.west=Math.min(e,c)};a.Extent.prototype={north:0,south:0,east:0,west:0,copy:function(){return new a.Extent(this.north,this.west,this.south,this.east)},toString:function(b){if(isNaN(b)){b=3}return[this.north.toFixed(b),this.west.toFixed(b),this.south.toFixed(b),this.east.toFixed(b)].join(", ")},northWest:function(){return new a.Location(this.north,this.west)},southEast:function(){return new a.Location(this.south,this.east)},northEast:function(){return new a.Location(this.north,this.east)},southWest:function(){return new a.Location(this.south,this.west)},center:function(){return new a.Location(this.south+(this.north-this.south)/2,this.east+(this.west-this.east)/2)},encloseLocation:function(b){if(b.lat>this.north){this.north=b.lat}if(b.lat<this.south){this.south=b.lat}if(b.lon>this.east){this.east=b.lon}if(b.lon<this.west){this.west=b.lon}},encloseLocations:function(c){var b=c.length;for(var d=0;d<b;d++){this.encloseLocation(c[d])}},setFromLocations:function(c){var b=c.length,e=c[0];this.north=this.south=e.lat;this.east=this.west=e.lon;for(var d=1;d<b;d++){this.encloseLocation(c[d])}},encloseExtent:function(b){if(b.north>this.north){this.north=b.north}if(b.south<this.south){this.south=b.south}if(b.east>this.east){this.east=b.east}if(b.west<this.west){this.west=b.west}},containsLocation:function(b){return b.lat>=this.south&&b.lat<=this.north&&b.lon>=this.west&&b.lon<=this.east},toArray:function(){return[this.northWest(),this.southEast()]}};a.Extent.fromString=function(c){var b=c.split(/\s*,\s*/);if(b.length!=4){throw"Invalid extent string (expecting 4 comma-separated numbers)"}return new a.Extent(parseFloat(b[0]),parseFloat(b[1]),parseFloat(b[2]),parseFloat(b[3]))};a.Extent.fromArray=function(b){var c=new a.Extent();c.setFromLocations(b);return c};a.Transformation=function(d,f,b,c,e,g){this.ax=d;this.bx=f;this.cx=b;this.ay=c;this.by=e;this.cy=g};a.Transformation.prototype={ax:0,bx:0,cx:0,ay:0,by:0,cy:0,transform:function(b){return new a.Point(this.ax*b.x+this.bx*b.y+this.cx,this.ay*b.x+this.by*b.y+this.cy)},untransform:function(b){return new a.Point((b.x*this.by-b.y*this.bx-this.cx*this.by+this.cy*this.bx)/(this.ax*this.by-this.ay*this.bx),(b.x*this.ay-b.y*this.ax-this.cx*this.ay+this.cy*this.ax)/(this.bx*this.ay-this.by*this.ax))}};a.deriveTransformation=function(l,k,f,e,b,o,h,g,d,c,n,m){var j=a.linearSolution(l,k,f,b,o,h,d,c,n);var i=a.linearSolution(l,k,e,b,o,g,d,c,m);return new a.Transformation(j[0],j[1],j[2],i[0],i[1],i[2])};a.linearSolution=function(f,o,i,e,n,h,d,m,g){f=parseFloat(f);o=parseFloat(o);i=parseFloat(i);e=parseFloat(e);n=parseFloat(n);h=parseFloat(h);d=parseFloat(d);m=parseFloat(m);g=parseFloat(g);var l=(((h-g)*(o-n))-((i-h)*(n-m)))/(((e-d)*(o-n))-((f-e)*(n-m)));var k=(((h-g)*(f-e))-((i-h)*(e-d)))/(((n-m)*(f-e))-((o-n)*(e-d)));var j=i-(f*l)-(o*k);return[l,k,j]};a.Projection=function(c,b){if(!b){b=new a.Transformation(1,0,0,0,1,0)}this.zoom=c;this.transformation=b};a.Projection.prototype={zoom:0,transformation:null,rawProject:function(b){throw"Abstract method not implemented by subclass."},rawUnproject:function(b){throw"Abstract method not implemented by subclass."},project:function(b){b=this.rawProject(b);if(this.transformation){b=this.transformation.transform(b)}return b},unproject:function(b){if(this.transformation){b=this.transformation.untransform(b)}b=this.rawUnproject(b);return b},locationCoordinate:function(c){var b=new a.Point(Math.PI*c.lon/180,Math.PI*c.lat/180);b=this.project(b);return new a.Coordinate(b.y,b.x,this.zoom)},coordinateLocation:function(c){c=c.zoomTo(this.zoom);var b=new a.Point(c.column,c.row);b=this.unproject(b);return new a.Location(180*b.y/Math.PI,180*b.x/Math.PI)}};a.LinearProjection=function(c,b){a.Projection.call(this,c,b)};a.LinearProjection.prototype={rawProject:function(b){return new a.Point(b.x,b.y)},rawUnproject:function(b){return new a.Point(b.x,b.y)}};a.extend(a.LinearProjection,a.Projection);a.MercatorProjection=function(c,b){a.Projection.call(this,c,b)};a.MercatorProjection.prototype={rawProject:function(b){return new a.Point(b.x,Math.log(Math.tan(0.25*Math.PI+0.5*b.y)))},rawUnproject:function(b){return new a.Point(b.x,2*Math.atan(Math.pow(Math.E,b.y))-0.5*Math.PI)}};a.extend(a.MercatorProjection,a.Projection);a.MapProvider=function(b){if(b){this.getTile=b}};a.MapProvider.prototype={tileLimits:[new a.Coordinate(0,0,0),new a.Coordinate(1,1,0).zoomTo(18)],getTileUrl:function(b){throw"Abstract method not implemented by subclass."},getTile:function(b){throw"Abstract method not implemented by subclass."},releaseTile:function(b){},setZoomRange:function(c,b){this.tileLimits[0]=this.tileLimits[0].zoomTo(c);this.tileLimits[1]=this.tileLimits[1].zoomTo(b)},sourceCoordinate:function(f){var c=this.tileLimits[0].zoomTo(f.zoom),d=this.tileLimits[1].zoomTo(f.zoom),b=Math.pow(2,f.zoom),e;if(f.column<0){e=((f.column%b)+b)%b}else{e=f.column%b}if(f.row<c.row||f.row>=d.row){return null}else{if(e<c.column||e>=d.column){return null}else{return new a.Coordinate(f.row,e,f.zoom)}}}};a.Template=function(e,b){var f=e.match(/{(Q|quadkey)}/);if(f){e=e.replace("{subdomains}","{S}").replace("{zoom}","{Z}").replace("{quadkey}","{Q}")}var d=(b&&b.length&&e.indexOf("{S}")>=0);function c(m,k,l){var j="";for(var h=1;h<=l;h++){j+=(((m>>l-h)&1)<<1)|((k>>l-h)&1)}return j||"0"}var g=function(k){var j=this.sourceCoordinate(k);if(!j){return null}var i=e;if(d){var h=parseInt(j.zoom+j.row+j.column,10)%b.length;i=i.replace("{S}",b[h])}if(f){return i.replace("{Z}",j.zoom.toFixed(0)).replace("{Q}",c(j.row,j.column,j.zoom))}else{return i.replace("{Z}",j.zoom.toFixed(0)).replace("{X}",j.column.toFixed(0)).replace("{Y}",j.row.toFixed(0))}};a.MapProvider.call(this,g)};a.Template.prototype={getTile:function(b){return this.getTileUrl(b)}};a.extend(a.Template,a.MapProvider);a.TemplatedLayer=function(d,b,c){return new a.Layer(new a.Template(d,b),null,c)};a.getMousePoint=function(f,d){var b=new a.Point(f.clientX,f.clientY);b.x+=document.body.scrollLeft+document.documentElement.scrollLeft;b.y+=document.body.scrollTop+document.documentElement.scrollTop;for(var c=d.parent;c;c=c.offsetParent){b.x-=c.offsetLeft;b.y-=c.offsetTop}return b};a.MouseWheelHandler=function(){var d={},g,f,c,b=false;function e(k){var l=0;c=c||new Date().getTime();try{f.scrollTop=1000;f.dispatchEvent(k);l=1000-f.scrollTop}catch(i){l=k.wheelDelta||(-k.detail*5)}var j=new Date().getTime()-c;var h=a.getMousePoint(k,g);if(Math.abs(l)>0&&(j>200)&&!b){g.zoomByAbout(l>0?1:-1,h);c=new Date().getTime()}else{if(b){g.zoomByAbout(l*0.001,h)}}return a.cancelEvent(k)}d.init=function(h){g=h;f=document.body.appendChild(document.createElement("div"));f.style.cssText="visibility:hidden;top:0;height:0;width:0;overflow-y:scroll";var i=f.appendChild(document.createElement("div"));i.style.height="2000px";a.addEvent(g.parent,"mousewheel",e);return d};d.precise=function(h){if(!arguments.length){return b}b=h;return d};d.remove=function(){a.removeEvent(g.parent,"mousewheel",e);f.parentNode.removeChild(f)};return d};a.DoubleClickHandler=function(){var b={},d;function c(g){var f=a.getMousePoint(g,d);d.zoomByAbout(g.shiftKey?-1:1,f);return a.cancelEvent(g)}b.init=function(e){d=e;a.addEvent(d.parent,"dblclick",c);return b};b.remove=function(){a.removeEvent(d.parent,"dblclick",c)};return b};a.DragHandler=function(){var f={},e,g;function c(h){if(h.shiftKey||h.button==2){return}a.addEvent(document,"mouseup",b);a.addEvent(document,"mousemove",d);e=new a.Point(h.clientX,h.clientY);g.parent.style.cursor="move";return a.cancelEvent(h)}function b(h){a.removeEvent(document,"mouseup",b);a.removeEvent(document,"mousemove",d);e=null;g.parent.style.cursor="";return a.cancelEvent(h)}function d(h){if(e){g.panBy(h.clientX-e.x,h.clientY-e.y);e.x=h.clientX;e.y=h.clientY;e.t=+new Date()}return a.cancelEvent(h)}f.init=function(h){g=h;a.addEvent(g.parent,"mousedown",c);return f};f.remove=function(){a.removeEvent(g.parent,"mousedown",c)};return f};a.MouseHandler=function(){var c={},d,b;c.init=function(e){d=e;b=[a.DragHandler().init(d),a.DoubleClickHandler().init(d),a.MouseWheelHandler().init(d)];return c};c.remove=function(){for(var e=0;e<b.length;e++){b[e].remove()}return c};return c};a.TouchHandler=function(){var c={},v,q=250,l=30,b=350,u={},o=[],n=true,s=false,i=null;function m(){var x=document.createElement("div");x.setAttribute("ongesturestart","return;");return(typeof x.ongesturestart==="function")}function h(A){for(var z=0;z<A.touches.length;z+=1){var y=A.touches[z];if(y.identifier in u){var x=u[y.identifier];x.x=y.clientX;x.y=y.clientY;x.scale=A.scale}else{u[y.identifier]={scale:A.scale,startPos:{x:y.clientX,y:y.clientY},x:y.clientX,y:y.clientY,time:new Date().getTime()}}}}function e(x,y){return(x&&x.touch)&&(y.identifier==x.touch.identifier)}function d(x){h(x)}function r(x){switch(x.touches.length){case 1:k(x.touches[0]);break;case 2:t(x);break}h(x);return a.cancelEvent(x)}function f(E){var y=new Date().getTime();if(E.touches.length===0&&s){j(i)}for(var C=0;C<E.changedTouches.length;C+=1){var H=E.changedTouches[C],D=u[H.identifier];if(!D||D.wasPinch){continue}var G={x:H.clientX,y:H.clientY},A=y-D.time,z=a.Point.distance(G,D.startPos);if(z>l){}else{if(A>q){G.end=y;G.duration=A;g(G)}else{G.time=y;w(G)}}}var F={};for(var B=0;B<E.touches.length;B++){F[E.touches[B].identifier]=true}for(var x in u){if(!(x in F)){delete F[x]}}return a.cancelEvent(E)}function g(x){}function w(x){if(o.length&&(x.time-o[0].time)<b){p(x);o=[];return}o=[x]}function p(y){var B=v.getZoom(),C=Math.round(B)+1,x=C-B;var A=new a.Point(y.x,y.y);v.zoomByAbout(x,A)}function k(z){var y={x:z.clientX,y:z.clientY},x=u[z.identifier];v.panBy(y.x-x.x,y.y-x.y)}function t(D){var C=D.touches[0],B=D.touches[1],F=new a.Point(C.clientX,C.clientY),E=new a.Point(B.clientX,B.clientY),z=u[C.identifier],y=u[B.identifier];z.wasPinch=true;y.wasPinch=true;var x=a.Point.interpolate(F,E,0.5);v.zoomByAbout(Math.log(D.scale)/Math.LN2-Math.log(z.scale)/Math.LN2,x);var A=a.Point.interpolate(z,y,0.5);v.panBy(x.x-A.x,x.y-A.y);s=true;i=x}function j(x){if(n){var y=v.getZoom(),A=Math.round(y);v.zoomByAbout(A-y,x)}s=false}c.init=function(y){v=y;if(!m()){return c}a.addEvent(v.parent,"touchstart",d);a.addEvent(v.parent,"touchmove",r);a.addEvent(v.parent,"touchend",f);return c};c.remove=function(){if(!m()){return c}a.removeEvent(v.parent,"touchstart",d);a.removeEvent(v.parent,"touchmove",r);a.removeEvent(v.parent,"touchend",f);return c};return c};a.CallbackManager=function(b,d){this.owner=b;this.callbacks={};for(var c=0;c<d.length;c++){this.callbacks[d[c]]=[]}};a.CallbackManager.prototype={owner:null,callbacks:null,addCallback:function(b,c){if(typeof(c)=="function"&&this.callbacks[b]){this.callbacks[b].push(c)}},removeCallback:function(e,f){if(typeof(f)=="function"&&this.callbacks[e]){var c=this.callbacks[e],b=c.length;for(var d=0;d<b;d++){if(c[d]===f){c.splice(d,1);break}}}},dispatchCallback:function(d,c){if(this.callbacks[d]){for(var b=0;b<this.callbacks[d].length;b+=1){try{this.callbacks[d][b](this.owner,c)}catch(f){}}}}};a.RequestManager=function(){this.loadingBay=document.createDocumentFragment();this.requestsById={};this.openRequestCount=0;this.maxOpenRequests=4;this.requestQueue=[];this.callbackManager=new a.CallbackManager(this,["requestcomplete","requesterror"])};a.RequestManager.prototype={loadingBay:null,requestsById:null,requestQueue:null,openRequestCount:null,maxOpenRequests:null,callbackManager:null,addCallback:function(b,c){this.callbackManager.addCallback(b,c)},removeCallback:function(b,c){this.callbackManager.removeCallback(b,c)},dispatchCallback:function(c,b){this.callbackManager.dispatchCallback(c,b)},clear:function(){this.clearExcept({})},clearRequest:function(d){if(d in this.requestsById){delete this.requestsById[d]}for(var b=0;b<this.requestQueue.length;b++){var c=this.requestQueue[b];if(c&&c.id==d){this.requestQueue[b]=null}}},clearExcept:function(f){for(var e=0;e<this.requestQueue.length;e++){var g=this.requestQueue[e];if(g&&!(g.id in f)){this.requestQueue[e]=null}}var b=this.loadingBay.childNodes;for(var d=b.length-1;d>=0;d--){var c=b[d];if(!(c.id in f)){this.loadingBay.removeChild(c);this.openRequestCount--;c.src=c.coord=c.onload=c.onerror=null}}for(var k in this.requestsById){if(!(k in f)){if(this.requestsById.hasOwnProperty(k)){var h=this.requestsById[k];delete this.requestsById[k];if(h!==null){h=h.id=h.coord=h.url=null}}}}},hasRequest:function(b){return(b in this.requestsById)},requestTile:function(e,d,b){if(!(e in this.requestsById)){var c={id:e,coord:d.copy(),url:b};this.requestsById[e]=c;if(b){this.requestQueue.push(c)}}},getProcessQueue:function(){if(!this._processQueue){var b=this;this._processQueue=function(){b.processQueue()}}return this._processQueue},processQueue:function(d){if(d&&this.requestQueue.length>8){this.requestQueue.sort(d)}while(this.openRequestCount<this.maxOpenRequests&&this.requestQueue.length>0){var c=this.requestQueue.pop();if(c){this.openRequestCount++;var b=document.createElement("img");b.id=c.id;b.style.position="absolute";b.coord=c.coord;this.loadingBay.appendChild(b);b.onload=b.onerror=this.getLoadComplete();b.src=c.url;c=c.id=c.coord=c.url=null}}},_loadComplete:null,getLoadComplete:function(){if(!this._loadComplete){var b=this;this._loadComplete=function(d){d=d||window.event;var c=d.srcElement||d.target;c.onload=c.onerror=null;b.loadingBay.removeChild(c);b.openRequestCount--;delete b.requestsById[c.id];if(d.type==="load"&&(c.complete||(c.readyState&&c.readyState=="complete"))){b.dispatchCallback("requestcomplete",c)}else{b.dispatchCallback("requesterror",{element:c,url:(""+c.src)});c.src=null}setTimeout(b.getProcessQueue(),0)}}return this._loadComplete}};a.Layer=function(d,c,b){this.parent=c||document.createElement("div");this.parent.style.cssText="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; margin: 0; padding: 0; z-index: 0";this.name=b;this.levels={};this.requestManager=new a.RequestManager();this.requestManager.addCallback("requestcomplete",this.getTileComplete());this.requestManager.addCallback("requesterror",this.getTileError());if(d){this.setProvider(d)}};a.Layer.prototype={map:null,parent:null,name:null,tiles:null,levels:null,requestManager:null,provider:null,emptyImage:"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",_tileComplete:null,getTileComplete:function(){if(!this._tileComplete){var b=this;this._tileComplete=function(c,d){b.tiles[d.id]=d;b.positionTile(d)}}return this._tileComplete},getTileError:function(){if(!this._tileError){var b=this;this._tileError=function(c,d){d.src=b.emptyImage;b.tiles[d.id]=d;b.positionTile(d)}}return this._tileError},draw:function(){var p=this.map.coordinate.zoomTo(Math.round(this.map.coordinate.zoom));function f(t,s){if(t&&s){var v=t.coord;var u=s.coord;if(v.zoom==u.zoom){var r=Math.abs(p.row-v.row-0.5)+Math.abs(p.column-v.column-0.5);var w=Math.abs(p.row-u.row-0.5)+Math.abs(p.column-u.column-0.5);return r<w?1:r>w?-1:0}else{return v.zoom<u.zoom?1:v.zoom>u.zoom?-1:0}}return t?1:s?-1:0}var o=Math.round(this.map.coordinate.zoom);var n=this.map.pointCoordinate(new a.Point(0,0)).zoomTo(o).container();var i=this.map.pointCoordinate(this.map.dimensions).zoomTo(o).container().right().down();var k={};var m=this.createOrGetLevel(n.zoom);var h=n.copy();for(h.column=n.column;h.column<=i.column;h.column++){for(h.row=n.row;h.row<=i.row;h.row++){var c=this.inventoryVisibleTile(m,h);while(c.length){k[c.pop()]=true}}}for(var e in this.levels){if(this.levels.hasOwnProperty(e)){var q=parseInt(e,10);if(q>=n.zoom-5&&q<n.zoom+2){continue}var d=this.levels[e];d.style.display="none";var g=this.tileElementsInLevel(d);while(g.length){this.provider.releaseTile(g[0].coord);this.requestManager.clearRequest(g[0].coord.toKey());d.removeChild(g[0]);g.shift()}}}var b=n.zoom-5;var l=n.zoom+2;for(var j=b;j<l;j++){this.adjustVisibleLevel(this.levels[j],j,k)}this.requestManager.clearExcept(k);this.requestManager.processQueue(f)},inventoryVisibleTile:function(m,c){var g=c.toKey(),d=[g];if(g in this.tiles){var f=this.tiles[g];if(f.parentNode!=m){m.appendChild(f);if("reAddTile" in this.provider){this.provider.reAddTile(g,c,f)}}return d}if(!this.requestManager.hasRequest(g)){var l=this.provider.getTile(c);if(typeof l=="string"){this.addTileImage(g,c,l)}else{if(l){this.addTileElement(g,c,l)}}}var e=false;var j=c.zoom;for(var h=1;h<=j;h++){var b=c.zoomBy(-h).container();var k=b.toKey();if(k in this.tiles){d.push(k);e=true;break}}if(!e){var i=c.zoomBy(1);d.push(i.toKey());i.column+=1;d.push(i.toKey());i.row+=1;d.push(i.toKey());i.column-=1;d.push(i.toKey())}return d},tileElementsInLevel:function(d){var b=[];for(var c=d.firstChild;c;c=c.nextSibling){if(c.nodeType==1){b.push(c)}}return b},adjustVisibleLevel:function(c,k,d){if(!c){return}var e=1;var j=this.map.coordinate.copy();if(c.childNodes.length>0){c.style.display="block";e=Math.pow(2,this.map.coordinate.zoom-k);j=j.zoomTo(k)}else{c.style.display="none";return false}var h=this.map.tileSize.x*e;var f=this.map.tileSize.y*e;var b=new a.Point(this.map.dimensions.x/2,this.map.dimensions.y/2);var i=this.tileElementsInLevel(c);while(i.length){var g=i.pop();if(!d[g.id]){this.provider.releaseTile(g.coord);this.requestManager.clearRequest(g.coord.toKey());c.removeChild(g)}else{a.moveElement(g,{x:Math.round(b.x+(g.coord.column-j.column)*h),y:Math.round(b.y+(g.coord.row-j.row)*f),scale:e,width:this.map.tileSize.x,height:this.map.tileSize.y})}}},createOrGetLevel:function(b){if(b in this.levels){return this.levels[b]}var c=document.createElement("div");c.id=this.parent.id+"-zoom-"+b;c.style.cssText=this.parent.style.cssText;c.style.zIndex=b;this.parent.appendChild(c);this.levels[b]=c;return c},addTileImage:function(c,d,b){this.requestManager.requestTile(c,d,b)},addTileElement:function(c,d,b){b.id=c;b.coord=d.copy();this.positionTile(b)},positionTile:function(d){var c=this.map.coordinate.zoomTo(d.coord.zoom);d.style.cssText="position:absolute;-webkit-user-select:none;-webkit-user-drag:none;-moz-user-drag:none;-webkit-transform-origin:0 0;-moz-transform-origin:0 0;-o-transform-origin:0 0;-ms-transform-origin:0 0;width:"+this.map.tileSize.x+"px; height: "+this.map.tileSize.y+"px;";d.ondragstart=function(){return false};var e=Math.pow(2,this.map.coordinate.zoom-d.coord.zoom);a.moveElement(d,{x:Math.round((this.map.dimensions.x/2)+(d.coord.column-c.column)*this.map.tileSize.x),y:Math.round((this.map.dimensions.y/2)+(d.coord.row-c.row)*this.map.tileSize.y),scale:e,width:this.map.tileSize.x,height:this.map.tileSize.y});var b=this.levels[d.coord.zoom];b.appendChild(d);d.className="map-tile-loaded";if(Math.round(this.map.coordinate.zoom)==d.coord.zoom){b.style.display="block"}this.requestRedraw()},_redrawTimer:undefined,requestRedraw:function(){if(!this._redrawTimer){this._redrawTimer=setTimeout(this.getRedraw(),1000)}},_redraw:null,getRedraw:function(){if(!this._redraw){var b=this;this._redraw=function(){b.draw();b._redrawTimer=0}}return this._redraw},setProvider:function(c){var d=(this.provider===null);if(!d){this.requestManager.clear();for(var b in this.levels){if(this.levels.hasOwnProperty(b)){var e=this.levels[b];while(e.firstChild){this.provider.releaseTile(e.firstChild.coord);e.removeChild(e.firstChild)}}}}this.tiles={};this.provider=c;if(!d){this.draw()}},destroy:function(){this.requestManager.clear();this.requestManager.removeCallback("requestcomplete",this.getTileComplete());this.provider=null;if(this.parent.parentNode){this.parent.parentNode.removeChild(this.parent)}this.map=null}};a.Map=function(f,e,g,h){if(typeof f=="string"){f=document.getElementById(f);if(!f){throw"The ID provided to modest maps could not be found."}}this.parent=f;this.parent.style.padding="0";this.parent.style.overflow="hidden";var b=a.getStyle(this.parent,"position");if(b!="relative"&&b!="absolute"){this.parent.style.position="relative"}this.layers=[];if(!e){e=[]}if(!(e instanceof Array)){e=[e]}for(var d=0;d<e.length;d++){this.addLayer(e[d])}this.projection=new a.MercatorProjection(0,a.deriveTransformation(-Math.PI,Math.PI,0,0,Math.PI,Math.PI,1,0,-Math.PI,-Math.PI,0,1));this.tileSize=new a.Point(256,256);this.coordLimits=[new a.Coordinate(0,-Infinity,0),new a.Coordinate(1,Infinity,0).zoomTo(18)];this.coordinate=new a.Coordinate(0.5,0.5,0);if(!g){g=new a.Point(this.parent.offsetWidth,this.parent.offsetHeight);this.autoSize=true;a.addEvent(window,"resize",this.windowResize())}else{this.autoSize=false;this.parent.style.width=Math.round(g.x)+"px";this.parent.style.height=Math.round(g.y)+"px"}this.dimensions=g;this.callbackManager=new a.CallbackManager(this,["zoomed","panned","centered","extentset","resized","drawn"]);if(h===undefined){this.eventHandlers=[a.MouseHandler().init(this),a.TouchHandler().init(this)]}else{this.eventHandlers=h;if(h instanceof Array){for(var c=0;c<h.length;c++){h[c].init(this)}}}};a.Map.prototype={parent:null,dimensions:null,projection:null,coordinate:null,tileSize:null,coordLimits:null,layers:null,callbackManager:null,eventHandlers:null,autoSize:null,toString:function(){return"Map(#"+this.parent.id+")"},addCallback:function(b,c){this.callbackManager.addCallback(b,c);return this},removeCallback:function(b,c){this.callbackManager.removeCallback(b,c);return this},dispatchCallback:function(c,b){this.callbackManager.dispatchCallback(c,b);return this},windowResize:function(){if(!this._windowResize){var b=this;this._windowResize=function(c){b.dimensions=new a.Point(b.parent.offsetWidth,b.parent.offsetHeight);b.draw();b.dispatchCallback("resized",[b.dimensions])}}return this._windowResize},setZoomRange:function(c,b){this.coordLimits[0]=this.coordLimits[0].zoomTo(c);this.coordLimits[1]=this.coordLimits[1].zoomTo(b);return this},zoomBy:function(b){this.coordinate=this.enforceLimits(this.coordinate.zoomBy(b));a.getFrame(this.getRedraw());this.dispatchCallback("zoomed",b);return this},zoomIn:function(){return this.zoomBy(1)},zoomOut:function(){return this.zoomBy(-1)},setZoom:function(b){return this.zoomBy(b-this.coordinate.zoom)},zoomByAbout:function(c,b){var e=this.pointLocation(b);this.coordinate=this.enforceLimits(this.coordinate.zoomBy(c));var d=this.locationPoint(e);this.dispatchCallback("zoomed",c);return this.panBy(b.x-d.x,b.y-d.y)},panBy:function(c,b){this.coordinate.column-=c/this.tileSize.x;this.coordinate.row-=b/this.tileSize.y;this.coordinate=this.enforceLimits(this.coordinate);a.getFrame(this.getRedraw());this.dispatchCallback("panned",[c,b]);return this},panLeft:function(){return this.panBy(100,0)},panRight:function(){return this.panBy(-100,0)},panDown:function(){return this.panBy(0,-100)},panUp:function(){return this.panBy(0,100)},setCenter:function(b){return this.setCenterZoom(b,this.coordinate.zoom)},setCenterZoom:function(b,c){this.coordinate=this.projection.locationCoordinate(b).zoomTo(parseFloat(c)||0);a.getFrame(this.getRedraw());this.dispatchCallback("centered",[b,c]);return this},extentCoordinate:function(p,q){if(p instanceof a.Extent){p=p.toArray()}var t,j;for(var k=0;k<p.length;k++){var l=this.projection.locationCoordinate(p[k]);if(t){t.row=Math.min(t.row,l.row);t.column=Math.min(t.column,l.column);t.zoom=Math.min(t.zoom,l.zoom);j.row=Math.max(j.row,l.row);j.column=Math.max(j.column,l.column);j.zoom=Math.max(j.zoom,l.zoom)}else{t=l.copy();j=l.copy()}}var h=this.dimensions.x+1;var g=this.dimensions.y+1;var m=(j.column-t.column)/(h/this.tileSize.x);var r=Math.log(m)/Math.log(2);var n=t.zoom-(q?r:Math.ceil(r));var o=(j.row-t.row)/(g/this.tileSize.y);var d=Math.log(o)/Math.log(2);var e=t.zoom-(q?d:Math.ceil(d));var b=Math.min(n,e);b=Math.min(b,this.coordLimits[1].zoom);b=Math.max(b,this.coordLimits[0].zoom);var c=(t.row+j.row)/2;var s=(t.column+j.column)/2;var f=t.zoom;return new a.Coordinate(c,s,f).zoomTo(b)},setExtent:function(b,c){this.coordinate=this.extentCoordinate(b,c);this.draw();this.dispatchCallback("extentset",b);return this},setSize:function(b){this.dimensions=new a.Point(b.x,b.y);this.parent.style.width=Math.round(this.dimensions.x)+"px";this.parent.style.height=Math.round(this.dimensions.y)+"px";if(this.autoSize){a.removeEvent(window,"resize",this.windowResize());this.autoSize=false}this.draw();this.dispatchCallback("resized",this.dimensions);return this},coordinatePoint:function(c){if(c.zoom!=this.coordinate.zoom){c=c.zoomTo(this.coordinate.zoom)}var b=new a.Point(this.dimensions.x/2,this.dimensions.y/2);b.x+=this.tileSize.x*(c.column-this.coordinate.column);b.y+=this.tileSize.y*(c.row-this.coordinate.row);return b},pointCoordinate:function(b){var c=this.coordinate.copy();c.column+=(b.x-this.dimensions.x/2)/this.tileSize.x;c.row+=(b.y-this.dimensions.y/2)/this.tileSize.y;return c},locationCoordinate:function(b){return this.projection.locationCoordinate(b)},coordinateLocation:function(b){return this.projection.coordinateLocation(b)},locationPoint:function(b){return this.coordinatePoint(this.locationCoordinate(b))},pointLocation:function(b){return this.coordinateLocation(this.pointCoordinate(b))},getExtent:function(){return new a.Extent(this.pointLocation(new a.Point(0,0)),this.pointLocation(this.dimensions))},extent:function(b,c){if(b){return this.setExtent(b,c)}else{return this.getExtent()}},getCenter:function(){return this.projection.coordinateLocation(this.coordinate)},center:function(b){if(b){return this.setCenter(b)}else{return this.getCenter()}},getZoom:function(){return this.coordinate.zoom},zoom:function(b){if(b!==undefined){return this.setZoom(b)}else{return this.getZoom()}},getLayers:function(){return this.layers.slice()},getLayer:function(b){for(var c=0;c<this.layers.length;c++){if(b==this.layers[c].name){return this.layers[c]}}},getLayerAt:function(b){return this.layers[b]},addLayer:function(b){this.layers.push(b);this.parent.appendChild(b.parent);b.map=this;if(this.coordinate){a.getFrame(this.getRedraw())}return this},removeLayer:function(c){for(var b=0;b<this.layers.length;b++){if(c==this.layers[b]||c==this.layers[b].name){this.removeLayerAt(b);break}}return this},setLayerAt:function(c,d){if(c<0||c>=this.layers.length){throw new Error("invalid index in setLayerAt(): "+c)}if(this.layers[c]!=d){if(c<this.layers.length){var b=this.layers[c];this.parent.insertBefore(d.parent,b.parent);b.destroy()}else{this.parent.appendChild(d.parent)}this.layers[c]=d;d.map=this;a.getFrame(this.getRedraw())}return this},insertLayerAt:function(c,d){if(c<0||c>this.layers.length){throw new Error("invalid index in insertLayerAt(): "+c)}if(c==this.layers.length){this.layers.push(d);this.parent.appendChild(d.parent)}else{var b=this.layers[c];this.parent.insertBefore(d.parent,b.parent);this.layers.splice(c,0,d)}d.map=this;a.getFrame(this.getRedraw());return this},removeLayerAt:function(c){if(c<0||c>=this.layers.length){throw new Error("invalid index in removeLayer(): "+c)}var b=this.layers[c];this.layers.splice(c,1);b.destroy();return this},swapLayersAt:function(c,b){if(c<0||c>=this.layers.length||b<0||b>=this.layers.length){throw new Error("invalid index in swapLayersAt(): "+index)}var f=this.layers[c],d=this.layers[b],e=document.createElement("div");this.parent.replaceChild(e,d.parent);this.parent.replaceChild(d.parent,f.parent);this.parent.replaceChild(f.parent,e);this.layers[c]=d;this.layers[b]=f;return this},enforceZoomLimits:function(e){var c=this.coordLimits;if(c){var d=c[0].zoom;var b=c[1].zoom;if(e.zoom<d){e=e.zoomTo(d)}else{if(e.zoom>b){e=e.zoomTo(b)}}}return e},enforcePanLimits:function(f){if(this.coordLimits){f=f.copy();var d=this.coordLimits[0].zoomTo(f.zoom);var b=this.coordLimits[1].zoomTo(f.zoom);var c=this.pointCoordinate(new a.Point(0,0)).zoomTo(f.zoom);var e=this.pointCoordinate(this.dimensions).zoomTo(f.zoom);if(b.row-d.row<e.row-c.row){f.row=(b.row+d.row)/2}else{if(c.row<d.row){f.row+=d.row-c.row}else{if(e.row>b.row){f.row-=e.row-b.row}}}if(b.column-d.column<e.column-c.column){f.column=(b.column+d.column)/2}else{if(c.column<d.column){f.column+=d.column-c.column}else{if(e.column>b.column){f.column-=e.column-b.column}}}}return f},enforceLimits:function(b){return this.enforcePanLimits(this.enforceZoomLimits(b))},draw:function(){this.coordinate=this.enforceLimits(this.coordinate);if(this.dimensions.x<=0||this.dimensions.y<=0){if(this.autoSize){var b=this.parent.offsetWidth,d=this.parent.offsetHeight;this.dimensions=new a.Point(b,d);if(b<=0||d<=0){return}}else{return}}for(var c=0;c<this.layers.length;c++){this.layers[c].draw()}this.dispatchCallback("drawn")},_redrawTimer:undefined,requestRedraw:function(){if(!this._redrawTimer){this._redrawTimer=setTimeout(this.getRedraw(),1000)}},_redraw:null,getRedraw:function(){if(!this._redraw){var b=this;this._redraw=function(){b.draw();b._redrawTimer=0}}return this._redraw},destroy:function(){for(var b=0;b<this.layers.length;b++){this.layers[b].destroy()}this.layers=[];this.projection=null;for(var c=0;c<this.eventHandlers.length;c++){this.eventHandlers[c].remove()}if(this.autoSize){a.removeEvent(window,"resize",this.windowResize())}}};a.mapByCenterZoom=function(d,f,b,e){var c=a.coerceLayer(f),g=new a.Map(d,c,false);g.setCenterZoom(b,e).draw();return g};a.mapByExtent=function(d,f,e,c){var b=a.coerceLayer(f),g=new a.Map(d,b,false);g.setExtent([e,c]).draw();return g};if(typeof module!=="undefined"&&module.exports){module.exports={Point:a.Point,Projection:a.Projection,MercatorProjection:a.MercatorProjection,LinearProjection:a.LinearProjection,Transformation:a.Transformation,Location:a.Location,MapProvider:a.MapProvider,Template:a.Template,Coordinate:a.Coordinate,deriveTransformation:a.deriveTransformation}}})(MM);/* wax - 7.0.0dev - v6.0.4-41-ga031612 */
 
+var previousMM = MM;
 
-!function (name, context, definition) {
-  if (typeof module !== 'undefined') module.exports = definition(name, context);
-  else if (typeof define === 'function' && typeof define.amd  === 'object') define(definition);
-  else context[name] = definition(name, context);
-}('bean', this, function (name, context) {
-  var win = window
-    , old = context[name]
-    , overOut = /over|out/
-    , namespaceRegex = /[^\.]*(?=\..*)\.|.*/
-    , nameRegex = /\..*/
-    , addEvent = 'addEventListener'
-    , attachEvent = 'attachEvent'
-    , removeEvent = 'removeEventListener'
-    , detachEvent = 'detachEvent'
-    , doc = document || {}
-    , root = doc.documentElement || {}
-    , W3C_MODEL = root[addEvent]
-    , eventSupport = W3C_MODEL ? addEvent : attachEvent
-    , slice = Array.prototype.slice
-    , mouseTypeRegex = /click|mouse(?!(.*wheel|scroll))|menu|drag|drop/i
-    , mouseWheelTypeRegex = /mouse.*(wheel|scroll)/i
-    , textTypeRegex = /^text/i
-    , touchTypeRegex = /^touch|^gesture/i
-    , ONE = { one: 1 } // singleton for quick matching making add() do one()
+// namespacing for backwards-compatibility
+if (!com) {
+    var com = {};
+    if (!com.modestmaps) com.modestmaps = {};
+}
 
-    , nativeEvents = (function (hash, events, i) {
-        for (i = 0; i < events.length; i++)
-          hash[events[i]] = 1
-        return hash
-      })({}, (
-          'click dblclick mouseup mousedown contextmenu ' +                  // mouse buttons
-          'mousewheel mousemultiwheel DOMMouseScroll ' +                     // mouse wheel
-          'mouseover mouseout mousemove selectstart selectend ' +            // mouse movement
-          'keydown keypress keyup ' +                                        // keyboard
-          'orientationchange ' +                                             // mobile
-          'focus blur change reset select submit ' +                         // form elements
-          'load unload beforeunload resize move DOMContentLoaded readystatechange ' + // window
-          'error abort scroll ' +                                            // misc
-          (W3C_MODEL ? // element.fireEvent('onXYZ'... is not forgiving if we try to fire an event
-                       // that doesn't actually exist, so make sure we only do these on newer browsers
-            'show ' +                                                          // mouse buttons
-            'input invalid ' +                                                 // form elements
-            'touchstart touchmove touchend touchcancel ' +                     // touch
-            'gesturestart gesturechange gestureend ' +                         // gesture
-            'message readystatechange pageshow pagehide popstate ' +           // window
-            'hashchange offline online ' +                                     // window
-            'afterprint beforeprint ' +                                        // printing
-            'dragstart dragenter dragover dragleave drag drop dragend ' +      // dnd
-            'loadstart progress suspend emptied stalled loadmetadata ' +       // media
-            'loadeddata canplay canplaythrough playing waiting seeking ' +     // media
-            'seeked ended durationchange timeupdate play pause ratechange ' +  // media
-            'volumechange cuechange ' +                                        // media
-            'checking noupdate downloading cached updateready obsolete ' +     // appcache
-            '' : '')
-        ).split(' ')
-      )
-
-    , customEvents = (function () {
-        function isDescendant(parent, node) {
-          while ((node = node.parentNode) !== null) {
-            if (node === parent) return true
-          }
-          return false
-        }
-
-        function check(event) {
-          var related = event.relatedTarget
-          if (!related) return related === null
-          return (related !== this && related.prefix !== 'xul' && !/document/.test(this.toString()) && !isDescendant(this, related))
-        }
-
-        return {
-            mouseenter: { base: 'mouseover', condition: check }
-          , mouseleave: { base: 'mouseout', condition: check }
-          , mousewheel: { base: /Firefox/.test(navigator.userAgent) ? 'DOMMouseScroll' : 'mousewheel' }
-        }
-      })()
-
-    , fixEvent = (function () {
-        var commonProps = 'altKey attrChange attrName bubbles cancelable ctrlKey currentTarget detail eventPhase getModifierState isTrusted metaKey relatedNode relatedTarget shiftKey srcElement target timeStamp type view which'.split(' ')
-          , mouseProps = commonProps.concat('button buttons clientX clientY dataTransfer fromElement offsetX offsetY pageX pageY screenX screenY toElement'.split(' '))
-          , mouseWheelProps = mouseProps.concat('wheelDelta wheelDeltaX wheelDeltaY wheelDeltaZ axis'.split(' ')) // 'axis' is FF specific
-          , keyProps = commonProps.concat('char charCode key keyCode keyIdentifier keyLocation'.split(' '))
-          , textProps = commonProps.concat(['data'])
-          , touchProps = commonProps.concat('touches targetTouches changedTouches scale rotation'.split(' '))
-          , preventDefault = 'preventDefault'
-          , createPreventDefault = function (event) {
-              return function () {
-                if (event[preventDefault])
-                  event[preventDefault]()
-                else
-                  event.returnValue = false
-              }
-            }
-          , stopPropagation = 'stopPropagation'
-          , createStopPropagation = function (event) {
-              return function () {
-                if (event[stopPropagation])
-                  event[stopPropagation]()
-                else
-                  event.cancelBubble = true
-              }
-            }
-          , createStop = function (synEvent) {
-              return function () {
-                synEvent[preventDefault]()
-                synEvent[stopPropagation]()
-                synEvent.stopped = true
-              }
-            }
-          , copyProps = function (event, result, props) {
-              var i, p
-              for (i = props.length; i--;) {
-                p = props[i]
-                if (!(p in result) && p in event) result[p] = event[p]
-              }
-            }
-
-        return function (event, isNative) {
-          var result = { originalEvent: event, isNative: isNative }
-          if (!event)
-            return result
-
-          var props
-            , type = event.type
-            , target = event.target || event.srcElement
-
-          result[preventDefault] = createPreventDefault(event)
-          result[stopPropagation] = createStopPropagation(event)
-          result.stop = createStop(result)
-          result.target = target && target.nodeType === 3 ? target.parentNode : target
-
-          if (isNative) { // we only need basic augmentation on custom events, the rest is too expensive
-            if (type.indexOf('key') !== -1) {
-              props = keyProps
-              result.keyCode = event.which || event.keyCode
-            } else if (mouseTypeRegex.test(type)) {
-              props = mouseProps
-              result.rightClick = event.which === 3 || event.button === 2
-              result.pos = { x: 0, y: 0 }
-              if (event.pageX || event.pageY) {
-                result.clientX = event.pageX
-                result.clientY = event.pageY
-              } else if (event.clientX || event.clientY) {
-                result.clientX = event.clientX + doc.body.scrollLeft + root.scrollLeft
-                result.clientY = event.clientY + doc.body.scrollTop + root.scrollTop
-              }
-              if (overOut.test(type))
-                result.relatedTarget = event.relatedTarget || event[(type === 'mouseover' ? 'from' : 'to') + 'Element']
-            } else if (touchTypeRegex.test(type)) {
-              props = touchProps
-            } else if (mouseWheelTypeRegex.test(type)) {
-              props = mouseWheelProps
-            } else if (textTypeRegex.test(type)) {
-              props = textProps
-            }
-            copyProps(event, result, props || commonProps)
-          }
-          return result
-        }
-      })()
-
-      // if we're in old IE we can't do onpropertychange on doc or win so we use doc.documentElement for both
-    , targetElement = function (element, isNative) {
-        return !W3C_MODEL && !isNative && (element === doc || element === win) ? root : element
-      }
-
-      // we use one of these per listener, of any type
-    , RegEntry = (function () {
-        function entry(element, type, handler, original, namespaces) {
-          this.element = element
-          this.type = type
-          this.handler = handler
-          this.original = original
-          this.namespaces = namespaces
-          this.custom = customEvents[type]
-          this.isNative = nativeEvents[type] && element[eventSupport]
-          this.eventType = W3C_MODEL || this.isNative ? type : 'propertychange'
-          this.customType = !W3C_MODEL && !this.isNative && type
-          this.target = targetElement(element, this.isNative)
-          this.eventSupport = this.target[eventSupport]
-        }
-
-        entry.prototype = {
-            // given a list of namespaces, is our entry in any of them?
-            inNamespaces: function (checkNamespaces) {
-              var i, j
-              if (!checkNamespaces)
-                return true
-              if (!this.namespaces)
-                return false
-              for (i = checkNamespaces.length; i--;) {
-                for (j = this.namespaces.length; j--;) {
-                  if (checkNamespaces[i] === this.namespaces[j])
-                    return true
-                }
-              }
-              return false
-            }
-
-            // match by element, original fn (opt), handler fn (opt)
-          , matches: function (checkElement, checkOriginal, checkHandler) {
-              return this.element === checkElement &&
-                (!checkOriginal || this.original === checkOriginal) &&
-                (!checkHandler || this.handler === checkHandler)
-            }
-        }
-
-        return entry
-      })()
-
-    , registry = (function () {
-        // our map stores arrays by event type, just because it's better than storing
-        // everything in a single array. uses '$' as a prefix for the keys for safety
-        var map = {}
-
-          // generic functional search of our registry for matching listeners,
-          // `fn` returns false to break out of the loop
-          , forAll = function (element, type, original, handler, fn) {
-              if (!type || type === '*') {
-                // search the whole registry
-                for (var t in map) {
-                  if (t.charAt(0) === '$')
-                    forAll(element, t.substr(1), original, handler, fn)
-                }
-              } else {
-                var i = 0, l, list = map['$' + type], all = element === '*'
-                if (!list)
-                  return
-                for (l = list.length; i < l; i++) {
-                  if (all || list[i].matches(element, original, handler))
-                    if (!fn(list[i], list, i, type))
-                      return
-                }
-              }
-            }
-
-          , has = function (element, type, original) {
-              // we're not using forAll here simply because it's a bit slower and this
-              // needs to be fast
-              var i, list = map['$' + type]
-              if (list) {
-                for (i = list.length; i--;) {
-                  if (list[i].matches(element, original, null))
-                    return true
-                }
-              }
-              return false
-            }
-
-          , get = function (element, type, original) {
-              var entries = []
-              forAll(element, type, original, null, function (entry) { return entries.push(entry) })
-              return entries
-            }
-
-          , put = function (entry) {
-              (map['$' + entry.type] || (map['$' + entry.type] = [])).push(entry)
-              return entry
-            }
-
-          , del = function (entry) {
-              forAll(entry.element, entry.type, null, entry.handler, function (entry, list, i) {
-                list.splice(i, 1)
-                if (list.length === 0)
-                  delete map['$' + entry.type]
-                return false
-              })
-            }
-
-            // dump all entries, used for onunload
-          , entries = function () {
-              var t, entries = []
-              for (t in map) {
-                if (t.charAt(0) === '$')
-                  entries = entries.concat(map[t])
-              }
-              return entries
-            }
-
-        return { has: has, get: get, put: put, del: del, entries: entries }
-      })()
-
-      // add and remove listeners to DOM elements
-    , listener = W3C_MODEL ? function (element, type, fn, add) {
-        element[add ? addEvent : removeEvent](type, fn, false)
-      } : function (element, type, fn, add, custom) {
-        if (custom && add && element['_on' + custom] === null)
-          element['_on' + custom] = 0
-        element[add ? attachEvent : detachEvent]('on' + type, fn)
-      }
-
-    , nativeHandler = function (element, fn, args) {
-        return function (event) {
-          event = fixEvent(event || ((this.ownerDocument || this.document || this).parentWindow || win).event, true)
-          return fn.apply(element, [event].concat(args))
-        }
-      }
-
-    , customHandler = function (element, fn, type, condition, args, isNative) {
-        return function (event) {
-          if (condition ? condition.apply(this, arguments) : W3C_MODEL ? true : event && event.propertyName === '_on' + type || !event) {
-            if (event)
-              event = fixEvent(event || ((this.ownerDocument || this.document || this).parentWindow || win).event, isNative)
-            fn.apply(element, event && (!args || args.length === 0) ? arguments : slice.call(arguments, event ? 0 : 1).concat(args))
-          }
-        }
-      }
-
-    , once = function (rm, element, type, fn, originalFn) {
-        // wrap the handler in a handler that does a remove as well
-        return function () {
-          rm(element, type, originalFn)
-          fn.apply(this, arguments)
-        }
-      }
-
-    , removeListener = function (element, orgType, handler, namespaces) {
-        var i, l, entry
-          , type = (orgType && orgType.replace(nameRegex, ''))
-          , handlers = registry.get(element, type, handler)
-
-        for (i = 0, l = handlers.length; i < l; i++) {
-          if (handlers[i].inNamespaces(namespaces)) {
-            if ((entry = handlers[i]).eventSupport)
-              listener(entry.target, entry.eventType, entry.handler, false, entry.type)
-            // TODO: this is problematic, we have a registry.get() and registry.del() that
-            // both do registry searches so we waste cycles doing this. Needs to be rolled into
-            // a single registry.forAll(fn) that removes while finding, but the catch is that
-            // we'll be splicing the arrays that we're iterating over. Needs extra tests to
-            // make sure we don't screw it up. @rvagg
-            registry.del(entry)
-          }
-        }
-      }
-
-    , addListener = function (element, orgType, fn, originalFn, args) {
-        var entry
-          , type = orgType.replace(nameRegex, '')
-          , namespaces = orgType.replace(namespaceRegex, '').split('.')
-
-        if (registry.has(element, type, fn))
-          return element // no dupe
-        if (type === 'unload')
-          fn = once(removeListener, element, type, fn, originalFn) // self clean-up
-        if (customEvents[type]) {
-          if (customEvents[type].condition)
-            fn = customHandler(element, fn, type, customEvents[type].condition, true)
-          type = customEvents[type].base || type
-        }
-        entry = registry.put(new RegEntry(element, type, fn, originalFn, namespaces[0] && namespaces))
-        entry.handler = entry.isNative ?
-          nativeHandler(element, entry.handler, args) :
-          customHandler(element, entry.handler, type, false, args, false)
-        if (entry.eventSupport)
-          listener(entry.target, entry.eventType, entry.handler, true, entry.customType)
-      }
-
-    , del = function (selector, fn, $) {
-        return function (e) {
-          var target, i, array = typeof selector === 'string' ? $(selector, this) : selector
-          for (target = e.target; target && target !== this; target = target.parentNode) {
-            for (i = array.length; i--;) {
-              if (array[i] === target) {
-                return fn.apply(target, arguments)
-              }
-            }
-          }
-        }
-      }
-
-    , remove = function (element, typeSpec, fn) {
-        var k, m, type, namespaces, i
-          , rm = removeListener
-          , isString = typeSpec && typeof typeSpec === 'string'
-
-        if (isString && typeSpec.indexOf(' ') > 0) {
-          // remove(el, 't1 t2 t3', fn) or remove(el, 't1 t2 t3')
-          typeSpec = typeSpec.split(' ')
-          for (i = typeSpec.length; i--;)
-            remove(element, typeSpec[i], fn)
-          return element
-        }
-        type = isString && typeSpec.replace(nameRegex, '')
-        if (type && customEvents[type])
-          type = customEvents[type].type
-        if (!typeSpec || isString) {
-          // remove(el) or remove(el, t1.ns) or remove(el, .ns) or remove(el, .ns1.ns2.ns3)
-          if (namespaces = isString && typeSpec.replace(namespaceRegex, ''))
-            namespaces = namespaces.split('.')
-          rm(element, type, fn, namespaces)
-        } else if (typeof typeSpec === 'function') {
-          // remove(el, fn)
-          rm(element, null, typeSpec)
-        } else {
-          // remove(el, { t1: fn1, t2, fn2 })
-          for (k in typeSpec) {
-            if (typeSpec.hasOwnProperty(k))
-              remove(element, k, typeSpec[k])
-          }
-        }
-        return element
-      }
-
-    , add = function (element, events, fn, delfn, $) {
-        var type, types, i, args
-          , originalFn = fn
-          , isDel = fn && typeof fn === 'string'
-
-        if (events && !fn && typeof events === 'object') {
-          for (type in events) {
-            if (events.hasOwnProperty(type))
-              add.apply(this, [ element, type, events[type] ])
-          }
-        } else {
-          args = arguments.length > 3 ? slice.call(arguments, 3) : []
-          types = (isDel ? fn : events).split(' ')
-          isDel && (fn = del(events, (originalFn = delfn), $)) && (args = slice.call(args, 1))
-          // special case for one()
-          this === ONE && (fn = once(remove, element, events, fn, originalFn))
-          for (i = types.length; i--;) addListener(element, types[i], fn, originalFn, args)
-        }
-        return element
-      }
-
-    , one = function () {
-        return add.apply(ONE, arguments)
-      }
-
-    , fireListener = W3C_MODEL ? function (isNative, type, element) {
-        var evt = doc.createEvent(isNative ? 'HTMLEvents' : 'UIEvents')
-        evt[isNative ? 'initEvent' : 'initUIEvent'](type, true, true, win, 1)
-        element.dispatchEvent(evt)
-      } : function (isNative, type, element) {
-        element = targetElement(element, isNative)
-        // if not-native then we're using onpropertychange so we just increment a custom property
-        isNative ? element.fireEvent('on' + type, doc.createEventObject()) : element['_on' + type]++
-      }
-
-    , fire = function (element, type, args) {
-        var i, j, l, names, handlers
-          , types = type.split(' ')
-
-        for (i = types.length; i--;) {
-          type = types[i].replace(nameRegex, '')
-          if (names = types[i].replace(namespaceRegex, ''))
-            names = names.split('.')
-          if (!names && !args && element[eventSupport]) {
-            fireListener(nativeEvents[type], type, element)
-          } else {
-            // non-native event, either because of a namespace, arguments or a non DOM element
-            // iterate over all listeners and manually 'fire'
-            handlers = registry.get(element, type)
-            args = [false].concat(args)
-            for (j = 0, l = handlers.length; j < l; j++) {
-              if (handlers[j].inNamespaces(names))
-                handlers[j].handler.apply(element, args)
-            }
-          }
-        }
-        return element
-      }
-
-    , clone = function (element, from, type) {
-        var i = 0
-          , handlers = registry.get(from, type)
-          , l = handlers.length
-
-        for (;i < l; i++)
-          handlers[i].original && add(element, handlers[i].type, handlers[i].original)
-        return element
-      }
-
-    , bean = {
-          add: add
-        , one: one
-        , remove: remove
-        , clone: clone
-        , fire: fire
-        , noConflict: function () {
-            context[name] = old
-            return this
-          }
-      }
-
-  if (win[attachEvent]) {
-    // for IE, clean up on unload to avoid leaks
-    var cleanup = function () {
-      var i, entries = registry.entries()
-      for (i in entries) {
-        if (entries[i].type && entries[i].type !== 'unload')
-          remove(entries[i].element, entries[i].type)
-      }
-      win[detachEvent]('onunload', cleanup)
-      win.CollectGarbage && win.CollectGarbage()
-    }
-    win[attachEvent]('onunload', cleanup)
+var MM = com.modestmaps = {
+  noConflict: function() {
+    MM = previousMM;
+    return this;
   }
+};
 
-  return bean
-})
+(function(MM) {
+    // Make inheritance bearable: clone one level of properties
+    MM.extend = function(child, parent) {
+        for (var property in parent.prototype) {
+            if (typeof child.prototype[property] == "undefined") {
+                child.prototype[property] = parent.prototype[property];
+            }
+        }
+        return child;
+    };
+
+    MM.getFrame = function () {
+        // native animation frames
+        // http://webstuff.nfshost.com/anim-timing/Overview.html
+        // http://dev.chromium.org/developers/design-documents/requestanimationframe-implementation
+        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+        // can't apply these directly to MM because Chrome needs window
+        // to own webkitRequestAnimationFrame (for example)
+        // perhaps we should namespace an alias onto window instead? 
+        // e.g. window.mmRequestAnimationFrame?
+        return function(callback) {
+            (window.requestAnimationFrame  ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            window.oRequestAnimationFrame      ||
+            window.msRequestAnimationFrame     ||
+            function (callback) {
+                window.setTimeout(function () {
+                    callback(+new Date());
+                }, 10);
+            })(callback);
+        };
+    }();
+
+    // Inspired by LeafletJS
+    MM.transformProperty = (function(props) {
+        if (!this.document) return; // node.js safety
+        var style = document.documentElement.style;
+        for (var i = 0; i < props.length; i++) {
+            if (props[i] in style) {
+                return props[i];
+            }
+        }
+        return false;
+    })(['transformProperty', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
+
+    MM.matrixString = function(point) {
+        // Make the result of point.scale * point.width a whole number.
+        if (point.scale * point.width % 1) {
+            point.scale += (1 - point.scale * point.width % 1) / point.width;
+        }
+
+        var scale = point.scale || 1;
+        if (MM._browser.webkit3d) {
+            return  'translate3d(' +
+                point.x.toFixed(0) + 'px,' + point.y.toFixed(0) + 'px, 0px)' +
+                'scale3d(' + scale + ',' + scale + ', 1)';
+        } else {
+            return  'translate(' +
+                point.x.toFixed(6) + 'px,' + point.y.toFixed(6) + 'px)' +
+                'scale(' + scale + ',' + scale + ')';
+        }
+    };
+
+    MM._browser = (function(window) {
+        return {
+            webkit: ('WebKitCSSMatrix' in window),
+            webkit3d: ('WebKitCSSMatrix' in window) && ('m11' in new WebKitCSSMatrix())
+        };
+    })(this); // use this for node.js global
+
+    MM.moveElement = function(el, point) {
+        if (MM.transformProperty) {
+            // Optimize for identity transforms, where you don't actually
+            // need to change this element's string. Browsers can optimize for
+            // the .style.left case but not for this CSS case.
+            if (!point.scale) point.scale = 1;
+            if (!point.width) point.width = 0;
+            if (!point.height) point.height = 0;
+            var ms = MM.matrixString(point);
+            if (el[MM.transformProperty] !== ms) {
+                el.style[MM.transformProperty] =
+                    el[MM.transformProperty] = ms;
+            }
+        } else {
+            el.style.left = point.x + 'px';
+            el.style.top = point.y + 'px';
+            // Don't set width unless asked to: this is performance-intensive
+            // and not always necessary
+            if (point.width && point.height && point.scale) {
+                el.style.width =  Math.ceil(point.width  * point.scale) + 'px';
+                el.style.height = Math.ceil(point.height * point.scale) + 'px';
+            }
+        }
+    };
+
+    // Events
+    // Cancel an event: prevent it from bubbling
+    MM.cancelEvent = function(e) {
+        // there's more than one way to skin this cat
+        e.cancelBubble = true;
+        e.cancel = true;
+        e.returnValue = false;
+        if (e.stopPropagation) { e.stopPropagation(); }
+        if (e.preventDefault) { e.preventDefault(); }
+        return false;
+    };
+
+    MM.coerceLayer = function(layerish) {
+        if (typeof layerish == 'string') {
+            // Probably a template string
+            return new MM.Layer(new MM.TemplatedLayer(layerish));
+        } else if ('draw' in layerish && typeof layerish.draw == 'function') {
+            // good enough, though we should probably enforce .parent and .destroy() too
+            return layerish;
+        } else {
+            // probably a MapProvider
+            return new MM.Layer(layerish);
+        }
+    };
+
+    // see http://ejohn.org/apps/jselect/event.html for the originals
+    MM.addEvent = function(obj, type, fn) {
+        if (obj.addEventListener) {
+            obj.addEventListener(type, fn, false);
+            if (type == 'mousewheel') {
+                obj.addEventListener('DOMMouseScroll', fn, false);
+            }
+        } else if (obj.attachEvent) {
+            obj['e'+type+fn] = fn;
+            obj[type+fn] = function(){ obj['e'+type+fn](window.event); };
+            obj.attachEvent('on'+type, obj[type+fn]);
+        }
+    };
+
+    MM.removeEvent = function( obj, type, fn ) {
+        if (obj.removeEventListener) {
+            obj.removeEventListener(type, fn, false);
+            if (type == 'mousewheel') {
+                obj.removeEventListener('DOMMouseScroll', fn, false);
+            }
+        } else if (obj.detachEvent) {
+            obj.detachEvent('on'+type, obj[type+fn]);
+            obj[type+fn] = null;
+        }
+    };
+
+    // Cross-browser function to get current element style property
+    MM.getStyle = function(el,styleProp) {
+        if (el.currentStyle)
+            return el.currentStyle[styleProp];
+        else if (window.getComputedStyle)
+            return document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+    };
+    // Point
+    MM.Point = function(x, y) {
+        this.x = parseFloat(x);
+        this.y = parseFloat(y);
+    };
+
+    MM.Point.prototype = {
+        x: 0,
+        y: 0,
+        toString: function() {
+            return "(" + this.x.toFixed(3) + ", " + this.y.toFixed(3) + ")";
+        },
+        copy: function() {
+            return new MM.Point(this.x, this.y);
+        }
+    };
+
+    // Get the euclidean distance between two points
+    MM.Point.distance = function(p1, p2) {
+        return Math.sqrt(
+            Math.pow(p2.x - p1.x, 2) +
+            Math.pow(p2.y - p1.y, 2));
+    };
+
+    // Get a point between two other points, biased by `t`.
+    MM.Point.interpolate = function(p1, p2, t) {
+        return new MM.Point(
+            p1.x + (p2.x - p1.x) * t,
+            p1.y + (p2.y - p1.y) * t);
+    };
+    // Coordinate
+    // ----------
+    // An object representing a tile position, at as specified zoom level.
+    // This is not necessarily a precise tile - `row`, `column`, and
+    // `zoom` can be floating-point numbers, and the `container()` function
+    // can be used to find the actual tile that contains the point.
+    MM.Coordinate = function(row, column, zoom) {
+        this.row = row;
+        this.column = column;
+        this.zoom = zoom;
+    };
+
+    MM.Coordinate.prototype = {
+
+        row: 0,
+        column: 0,
+        zoom: 0,
+
+        toString: function() {
+            return "("  + this.row.toFixed(3) +
+                   ", " + this.column.toFixed(3) +
+                   " @" + this.zoom.toFixed(3) + ")";
+        },
+        // Quickly generate a string representation of this coordinate to
+        // index it in hashes. 
+        toKey: function() {
+            // We've tried to use efficient hash functions here before but we took
+            // them out. Contributions welcome but watch out for collisions when the
+            // row or column are negative and check thoroughly (exhaustively) before
+            // committing.
+            return this.zoom + ',' + this.row + ',' + this.column;
+        },
+        // Clone this object.
+        copy: function() {
+            return new MM.Coordinate(this.row, this.column, this.zoom);
+        },
+        // Get the actual, rounded-number tile that contains this point.
+        container: function() {
+            // using floor here (not parseInt, ~~) because we want -0.56 --> -1
+            return new MM.Coordinate(Math.floor(this.row),
+                                     Math.floor(this.column),
+                                     Math.floor(this.zoom));
+        },
+        // Recalculate this Coordinate at a different zoom level and return the
+        // new object.
+        zoomTo: function(destination) {
+            var power = Math.pow(2, destination - this.zoom);
+            return new MM.Coordinate(this.row * power,
+                                     this.column * power,
+                                     destination);
+        },
+        // Recalculate this Coordinate at a different relative zoom level and return the
+        // new object.
+        zoomBy: function(distance) {
+            var power = Math.pow(2, distance);
+            return new MM.Coordinate(this.row * power,
+                                     this.column * power,
+                                     this.zoom + distance);
+        },
+        // Move this coordinate up by `dist` coordinates
+        up: function(dist) {
+            if (dist === undefined) dist = 1;
+            return new MM.Coordinate(this.row - dist, this.column, this.zoom);
+        },
+        // Move this coordinate right by `dist` coordinates
+        right: function(dist) {
+            if (dist === undefined) dist = 1;
+            return new MM.Coordinate(this.row, this.column + dist, this.zoom);
+        },
+        // Move this coordinate down by `dist` coordinates
+        down: function(dist) {
+            if (dist === undefined) dist = 1;
+            return new MM.Coordinate(this.row + dist, this.column, this.zoom);
+        },
+        // Move this coordinate left by `dist` coordinates
+        left: function(dist) {
+            if (dist === undefined) dist = 1;
+            return new MM.Coordinate(this.row, this.column - dist, this.zoom);
+        }
+    };
+    // Location
+    // --------
+    MM.Location = function(lat, lon) {
+        this.lat = parseFloat(lat);
+        this.lon = parseFloat(lon);
+    };
+
+    MM.Location.prototype = {
+        lat: 0,
+        lon: 0,
+        toString: function() {
+            return "(" + this.lat.toFixed(3) + ", " + this.lon.toFixed(3) + ")";
+        },
+        copy: function() {
+            return new MM.Location(this.lat, this.lon);
+        }
+    };
+
+    // returns approximate distance between start and end locations
+    //
+    // default unit is meters
+    //
+    // you can specify different units by optionally providing the
+    // earth's radius in the units you desire
+    //
+    // Default is 6,378,000 metres, suggested values are:
+    //
+    // * 3963.1 statute miles
+    // * 3443.9 nautical miles
+    // * 6378 km
+    //
+    // see [Formula and code for calculating distance based on two lat/lon locations](http://jan.ucc.nau.edu/~cvm/latlon_formula.html)
+    MM.Location.distance = function(l1, l2, r) {
+        if (!r) {
+            // default to meters
+            r = 6378000;
+        }
+        var deg2rad = Math.PI / 180.0,
+            a1 = l1.lat * deg2rad,
+            b1 = l1.lon * deg2rad,
+            a2 = l2.lat * deg2rad,
+            b2 = l2.lon * deg2rad,
+            c = Math.cos(a1) * Math.cos(b1) * Math.cos(a2) * Math.cos(b2),
+            d = Math.cos(a1) * Math.sin(b1) * Math.cos(a2) * Math.sin(b2),
+            e = Math.sin(a1) * Math.sin(a2);
+        return Math.acos(c + d + e) * r;
+    };
+
+    // Interpolates along a great circle, f between 0 and 1
+    //
+    // * FIXME: could be heavily optimized (lots of trig calls to cache)
+    // * FIXME: could be inmproved for calculating a full path
+    MM.Location.interpolate = function(l1, l2, f) {
+        if (l1.lat === l2.lat && l1.lon === l2.lon) {
+            return new MM.Location(l1.lat, l1.lon);
+        }
+        var deg2rad = Math.PI / 180.0,
+            lat1 = l1.lat * deg2rad,
+            lon1 = l1.lon * deg2rad,
+            lat2 = l2.lat * deg2rad,
+            lon2 = l2.lon * deg2rad;
+
+        var d = 2 * Math.asin(
+            Math.sqrt(
+              Math.pow(Math.sin((lat1 - lat2) / 2), 2) +
+              Math.cos(lat1) * Math.cos(lat2) *
+              Math.pow(Math.sin((lon1 - lon2) / 2), 2)));
+
+        var A = Math.sin((1-f)*d)/Math.sin(d);
+        var B = Math.sin(f*d)/Math.sin(d);
+        var x = A * Math.cos(lat1) * Math.cos(lon1) +
+          B * Math.cos(lat2) * Math.cos(lon2);
+        var y = A * Math.cos(lat1) * Math.sin(lon1) +
+          B * Math.cos(lat2) * Math.sin(lon2);
+        var z = A * Math.sin(lat1) + B * Math.sin(lat2);
+
+        var latN = Math.atan2(z, Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
+        var lonN = Math.atan2(y,x);
+
+        return new MM.Location(latN / deg2rad, lonN / deg2rad);
+    };
+    
+    // Returns bearing from one point to another
+    //
+    // * FIXME: bearing is not constant along significant great circle arcs.
+    MM.Location.bearing = function(l1, l2) {
+        var deg2rad = Math.PI / 180.0,
+            lat1 = l1.lat * deg2rad,
+            lon1 = l1.lon * deg2rad,
+            lat2 = l2.lat * deg2rad,
+            lon2 = l2.lon * deg2rad;
+        var result = Math.atan2(
+            Math.sin(lon1 - lon2) *
+            Math.cos(lat2),
+            Math.cos(lat1) *
+            Math.sin(lat2) -
+            Math.sin(lat1) *
+            Math.cos(lat2) *
+            Math.cos(lon1 - lon2)
+        )  / -(Math.PI / 180);
+
+        // map it into 0-360 range
+        return (result < 0) ? result + 360 : result;
+    };
+    // Extent
+    // ----------
+    // An object representing a map's rectangular extent, defined by its north,
+    // south, east and west bounds.
+
+    MM.Extent = function(north, west, south, east) {
+        if (north instanceof MM.Location &&
+            west instanceof MM.Location) {
+            var northwest = north,
+                southeast = west;
+
+            north = northwest.lat;
+            west = northwest.lon;
+            south = southeast.lat;
+            east = southeast.lon;
+        }
+        if (isNaN(south)) south = north;
+        if (isNaN(east)) east = west;
+        this.north = Math.max(north, south);
+        this.south = Math.min(north, south);
+        this.east = Math.max(east, west);
+        this.west = Math.min(east, west);
+    };
+
+    MM.Extent.prototype = {
+        // boundary attributes
+        north: 0,
+        south: 0,
+        east: 0,
+        west: 0,
+
+        copy: function() {
+            return new MM.Extent(this.north, this.west, this.south, this.east);
+        },
+
+        toString: function(precision) {
+            if (isNaN(precision)) precision = 3;
+            return [
+                this.north.toFixed(precision),
+                this.west.toFixed(precision),
+                this.south.toFixed(precision),
+                this.east.toFixed(precision)
+            ].join(", ");
+        },
+
+        // getters for the corner locations
+        northWest: function() {
+            return new MM.Location(this.north, this.west);
+        },
+        southEast: function() {
+            return new MM.Location(this.south, this.east);
+        },
+        northEast: function() {
+            return new MM.Location(this.north, this.east);
+        },
+        southWest: function() {
+            return new MM.Location(this.south, this.west);
+        },
+        // getter for the center location
+        center: function() {
+            return new MM.Location(
+                this.south + (this.north - this.south) / 2,
+                this.east + (this.west - this.east) / 2
+            );
+        },
+
+        // extend the bounds to include a location's latitude and longitude
+        encloseLocation: function(loc) {
+            if (loc.lat > this.north) this.north = loc.lat;
+            if (loc.lat < this.south) this.south = loc.lat;
+            if (loc.lon > this.east) this.east = loc.lon;
+            if (loc.lon < this.west) this.west = loc.lon;
+        },
+
+        // extend the bounds to include multiple locations
+        encloseLocations: function(locations) {
+            var len = locations.length;
+            for (var i = 0; i < len; i++) {
+                this.encloseLocation(locations[i]);
+            }
+        },
+
+        // reset bounds from a list of locations
+        setFromLocations: function(locations) {
+            var len = locations.length,
+                first = locations[0];
+            this.north = this.south = first.lat;
+            this.east = this.west = first.lon;
+            for (var i = 1; i < len; i++) {
+                this.encloseLocation(locations[i]);
+            }
+        },
+
+        // extend the bounds to include another extent
+        encloseExtent: function(extent) {
+            if (extent.north > this.north) this.north = extent.north;
+            if (extent.south < this.south) this.south = extent.south;
+            if (extent.east > this.east) this.east = extent.east;
+            if (extent.west < this.west) this.west = extent.west;
+        },
+
+        // determine if a location is within this extent
+        containsLocation: function(loc) {
+            return loc.lat >= this.south &&
+                loc.lat <= this.north &&
+                loc.lon >= this.west &&
+                loc.lon <= this.east;
+        },
+
+        // turn an extent into an array of locations containing its northwest
+        // and southeast corners (used in MM.Map.setExtent())
+        toArray: function() {
+            return [this.northWest(), this.southEast()];
+        }
+    };
+
+    MM.Extent.fromString = function(str) {
+        var parts = str.split(/\s*,\s*/);
+        if (parts.length != 4) {
+            throw "Invalid extent string (expecting 4 comma-separated numbers)";
+        }
+        return new MM.Extent(
+            parseFloat(parts[0]),
+            parseFloat(parts[1]),
+            parseFloat(parts[2]),
+            parseFloat(parts[3])
+        );
+    };
+
+    MM.Extent.fromArray = function(locations) {
+        var extent = new MM.Extent();
+        extent.setFromLocations(locations);
+        return extent;
+    };
+
+    // Transformation
+    // --------------
+    MM.Transformation = function(ax, bx, cx, ay, by, cy) {
+        this.ax = ax;
+        this.bx = bx;
+        this.cx = cx;
+        this.ay = ay;
+        this.by = by;
+        this.cy = cy;
+    };
+
+    MM.Transformation.prototype = {
+
+        ax: 0,
+        bx: 0,
+        cx: 0,
+        ay: 0,
+        by: 0,
+        cy: 0,
+
+        transform: function(point) {
+            return new MM.Point(this.ax * point.x + this.bx * point.y + this.cx,
+                                this.ay * point.x + this.by * point.y + this.cy);
+        },
+
+        untransform: function(point) {
+            return new MM.Point((point.x * this.by - point.y * this.bx -
+                               this.cx * this.by + this.cy * this.bx) /
+                              (this.ax * this.by - this.ay * this.bx),
+                              (point.x * this.ay - point.y * this.ax -
+                               this.cx * this.ay + this.cy * this.ax) /
+                              (this.bx * this.ay - this.by * this.ax));
+        }
+
+    };
+
+
+    // Generates a transform based on three pairs of points,
+    // a1 -> a2, b1 -> b2, c1 -> c2.
+    MM.deriveTransformation = function(a1x, a1y, a2x, a2y,
+                                       b1x, b1y, b2x, b2y,
+                                       c1x, c1y, c2x, c2y) {
+        var x = MM.linearSolution(a1x, a1y, a2x,
+                                  b1x, b1y, b2x,
+                                  c1x, c1y, c2x);
+        var y = MM.linearSolution(a1x, a1y, a2y,
+                                  b1x, b1y, b2y,
+                                  c1x, c1y, c2y);
+        return new MM.Transformation(x[0], x[1], x[2], y[0], y[1], y[2]);
+    };
+
+    // Solves a system of linear equations.
+    //
+    //     t1 = (a * r1) + (b + s1) + c
+    //     t2 = (a * r2) + (b + s2) + c
+    //     t3 = (a * r3) + (b + s3) + c
+    //
+    // r1 - t3 are the known values.
+    // a, b, c are the unknowns to be solved.
+    // returns the a, b, c coefficients.
+    MM.linearSolution = function(r1, s1, t1, r2, s2, t2, r3, s3, t3) {
+        // make them all floats
+        r1 = parseFloat(r1);
+        s1 = parseFloat(s1);
+        t1 = parseFloat(t1);
+        r2 = parseFloat(r2);
+        s2 = parseFloat(s2);
+        t2 = parseFloat(t2);
+        r3 = parseFloat(r3);
+        s3 = parseFloat(s3);
+        t3 = parseFloat(t3);
+
+        var a = (((t2 - t3) * (s1 - s2)) - ((t1 - t2) * (s2 - s3))) /
+              (((r2 - r3) * (s1 - s2)) - ((r1 - r2) * (s2 - s3)));
+
+        var b = (((t2 - t3) * (r1 - r2)) - ((t1 - t2) * (r2 - r3))) /
+              (((s2 - s3) * (r1 - r2)) - ((s1 - s2) * (r2 - r3)));
+
+        var c = t1 - (r1 * a) - (s1 * b);
+        return [ a, b, c ];
+    };
+    // Projection
+    // ----------
+
+    // An abstract class / interface for projections
+    MM.Projection = function(zoom, transformation) {
+        if (!transformation) {
+            transformation = new MM.Transformation(1, 0, 0, 0, 1, 0);
+        }
+        this.zoom = zoom;
+        this.transformation = transformation;
+    };
+
+    MM.Projection.prototype = {
+
+        zoom: 0,
+        transformation: null,
+
+        rawProject: function(point) {
+            throw "Abstract method not implemented by subclass.";
+        },
+
+        rawUnproject: function(point) {
+            throw "Abstract method not implemented by subclass.";
+        },
+
+        project: function(point) {
+            point = this.rawProject(point);
+            if(this.transformation) {
+                point = this.transformation.transform(point);
+            }
+            return point;
+        },
+
+        unproject: function(point) {
+            if(this.transformation) {
+                point = this.transformation.untransform(point);
+            }
+            point = this.rawUnproject(point);
+            return point;
+        },
+
+        locationCoordinate: function(location) {
+            var point = new MM.Point(Math.PI * location.lon / 180.0,
+                                     Math.PI * location.lat / 180.0);
+            point = this.project(point);
+            return new MM.Coordinate(point.y, point.x, this.zoom);
+        },
+
+        coordinateLocation: function(coordinate) {
+            coordinate = coordinate.zoomTo(this.zoom);
+            var point = new MM.Point(coordinate.column, coordinate.row);
+            point = this.unproject(point);
+            return new MM.Location(180.0 * point.y / Math.PI,
+                                   180.0 * point.x / Math.PI);
+        }
+    };
+
+    // A projection for equilateral maps, based on longitude and latitude
+    MM.LinearProjection = function(zoom, transformation) {
+        MM.Projection.call(this, zoom, transformation);
+    };
+
+    // The Linear projection doesn't reproject points
+    MM.LinearProjection.prototype = {
+        rawProject: function(point) {
+            return new MM.Point(point.x, point.y);
+        },
+        rawUnproject: function(point) {
+            return new MM.Point(point.x, point.y);
+        }
+    };
+
+    MM.extend(MM.LinearProjection, MM.Projection);
+
+    MM.MercatorProjection = function(zoom, transformation) {
+        // super!
+        MM.Projection.call(this, zoom, transformation);
+    };
+
+    // Project lon/lat points into meters required for Mercator
+    MM.MercatorProjection.prototype = {
+        rawProject: function(point) {
+            return new MM.Point(point.x,
+                         Math.log(Math.tan(0.25 * Math.PI + 0.5 * point.y)));
+        },
+
+        rawUnproject: function(point) {
+            return new MM.Point(point.x,
+                    2 * Math.atan(Math.pow(Math.E, point.y)) - 0.5 * Math.PI);
+        }
+    };
+
+    MM.extend(MM.MercatorProjection, MM.Projection);
+    // Providers
+    // ---------
+    // Providers provide tile URLs and possibly elements for layers.
+    //
+    // MapProvider ->
+    //   Template
+    //
+    MM.MapProvider = function(getTile) {
+        if (getTile) {
+            this.getTile = getTile;
+        }
+    };
+
+    MM.MapProvider.prototype = {
+
+        // these are limits for available *tiles*
+        // panning limits will be different (since you can wrap around columns)
+        // but if you put Infinity in here it will screw up sourceCoordinate
+        tileLimits: [
+            new MM.Coordinate(0,0,0),             // top left outer
+            new MM.Coordinate(1,1,0).zoomTo(18)   // bottom right inner
+        ],
+
+        getTileUrl: function(coordinate) {
+            throw "Abstract method not implemented by subclass.";
+        },
+
+        getTile: function(coordinate) {
+            throw "Abstract method not implemented by subclass.";
+        },
+
+        // releaseTile is not required
+        releaseTile: function(element) { },
+
+        // use this to tell MapProvider that tiles only exist between certain zoom levels.
+        // should be set separately on Map to restrict interactive zoom/pan ranges
+        setZoomRange: function(minZoom, maxZoom) {
+            this.tileLimits[0] = this.tileLimits[0].zoomTo(minZoom);
+            this.tileLimits[1] = this.tileLimits[1].zoomTo(maxZoom);
+        },
+
+        // wrap column around the world if necessary
+        // return null if wrapped coordinate is outside of the tile limits
+        sourceCoordinate: function(coord) {
+            var TL = this.tileLimits[0].zoomTo(coord.zoom).container(),
+                BR = this.tileLimits[1].zoomTo(coord.zoom).container().right().down(),
+                columnSize = Math.pow(2, coord.zoom),
+                wrappedColumn;
+
+            if (coord.column < 0) {
+                wrappedColumn = ((coord.column % columnSize) + columnSize) % columnSize;
+            } else {
+                wrappedColumn = coord.column % columnSize;
+            }
+
+            if (coord.row < TL.row || coord.row >= BR.row) {
+                return null;
+            } else if (wrappedColumn < TL.column || wrappedColumn >= BR.column) {
+                return null;
+            } else {
+                return new MM.Coordinate(coord.row, wrappedColumn, coord.zoom);
+            }
+        }
+    };
+
+    /**
+     * FIXME: need a better explanation here! This is a pretty crucial part of
+     * understanding how to use ModestMaps.
+     *
+     * TemplatedMapProvider is a tile provider that generates tile URLs from a
+     * template string by replacing the following bits for each tile
+     * coordinate:
+     *
+     * {Z}: the tile's zoom level (from 1 to ~20)
+     * {X}: the tile's X, or column (from 0 to a very large number at higher
+     * zooms)
+     * {Y}: the tile's Y, or row (from 0 to a very large number at higher
+     * zooms)
+     *
+     * E.g.:
+     *
+     * var osm = new MM.TemplatedMapProvider("http://tile.openstreetmap.org/{Z}/{X}/{Y}.png");
+     *
+     * Or:
+     *
+     * var placeholder = new MM.TemplatedMapProvider("http://placehold.it/256/f0f/fff.png&text={Z}/{X}/{Y}");
+     *
+     */
+    MM.Template = function(template, subdomains) {
+        var isQuadKey = template.match(/{(Q|quadkey)}/);
+        // replace Microsoft style substitution strings
+        if (isQuadKey) template = template
+            .replace('{subdomains}', '{S}')
+            .replace('{zoom}', '{Z}')
+            .replace('{quadkey}', '{Q}');
+
+        var hasSubdomains = (subdomains &&
+            subdomains.length && template.indexOf("{S}") >= 0);
+
+        function quadKey (row, column, zoom) {
+            var key = '';
+            for (var i = 1; i <= zoom; i++) {
+                key += (((row >> zoom - i) & 1) << 1) | ((column >> zoom - i) & 1);
+            }
+            return key || '0';
+        }
+
+        var getTileUrl = function(coordinate) {
+            var coord = this.sourceCoordinate(coordinate);
+            if (!coord) {
+                return null;
+            }
+            var base = template;
+            if (hasSubdomains) {
+                var index = parseInt(coord.zoom + coord.row + coord.column, 10) %
+                    subdomains.length;
+                base = base.replace('{S}', subdomains[index]);
+            }
+            if (isQuadKey) {
+                return base
+                    .replace('{Z}', coord.zoom.toFixed(0))
+                    .replace('{Q}', quadKey(coord.row,
+                        coord.column,
+                        coord.zoom));
+            } else {
+                return base
+                    .replace('{Z}', coord.zoom.toFixed(0))
+                    .replace('{X}', coord.column.toFixed(0))
+                    .replace('{Y}', coord.row.toFixed(0));
+            }
+        };
+
+        MM.MapProvider.call(this, getTileUrl);
+    };
+
+    MM.Template.prototype = {
+        // quadKey generator
+        getTile: function(coord) {
+          return this.getTileUrl(coord);
+        }
+    };
+
+    MM.extend(MM.Template, MM.MapProvider);
+
+    MM.TemplatedLayer = function(template, subdomains, name) {
+      return new MM.Layer(new MM.Template(template, subdomains), null, name);
+    };
+    // Event Handlers
+    // --------------
+
+    // A utility function for finding the offset of the
+    // mouse from the top-left of the page
+    MM.getMousePoint = function(e, map) {
+        // start with just the mouse (x, y)
+        var point = new MM.Point(e.clientX, e.clientY);
+
+        // correct for scrolled document
+        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
+        point.y += document.body.scrollTop + document.documentElement.scrollTop;
+
+        // correct for nested offsets in DOM
+        for (var node = map.parent; node; node = node.offsetParent) {
+            point.x -= node.offsetLeft;
+            point.y -= node.offsetTop;
+        }
+        return point;
+    };
+
+    MM.MouseWheelHandler = function() {
+        var handler = {},
+            map,
+            _zoomDiv,
+            prevTime,
+            precise = false;
+
+        function mouseWheel(e) {
+            var delta = 0;
+            prevTime = prevTime || new Date().getTime();
+
+            try {
+                _zoomDiv.scrollTop = 1000;
+                _zoomDiv.dispatchEvent(e);
+                delta = 1000 - _zoomDiv.scrollTop;
+            } catch (error) {
+                delta = e.wheelDelta || (-e.detail * 5);
+            }
+
+            // limit mousewheeling to once every 200ms
+            var timeSince = new Date().getTime() - prevTime;
+            var point = MM.getMousePoint(e, map);
+
+            if (Math.abs(delta) > 0 && (timeSince > 200) && !precise) {
+                map.zoomByAbout(delta > 0 ? 1 : -1, point);
+                prevTime = new Date().getTime();
+            } else if (precise) {
+                map.zoomByAbout(delta * 0.001, point);
+            }
+
+            // Cancel the event so that the page doesn't scroll
+            return MM.cancelEvent(e);
+        }
+
+        handler.init = function(x) {
+            map = x;
+            _zoomDiv = document.body.appendChild(document.createElement('div'));
+            _zoomDiv.style.cssText = 'visibility:hidden;top:0;height:0;width:0;overflow-y:scroll';
+            var innerDiv = _zoomDiv.appendChild(document.createElement('div'));
+            innerDiv.style.height = '2000px';
+            MM.addEvent(map.parent, 'mousewheel', mouseWheel);
+            return handler;
+        };
+
+        handler.precise = function(x) {
+            if (!arguments.length) return precise;
+            precise = x;
+            return handler;
+        };
+
+        handler.remove = function() {
+            MM.removeEvent(map.parent, 'mousewheel', mouseWheel);
+            _zoomDiv.parentNode.removeChild(_zoomDiv);
+        };
+
+        return handler;
+    };
+
+    MM.DoubleClickHandler = function() {
+        var handler = {},
+            map;
+
+        function doubleClick(e) {
+            // Ensure that this handler is attached once.
+            // Get the point on the map that was double-clicked
+            var point = MM.getMousePoint(e, map);
+            // use shift-double-click to zoom out
+            map.zoomByAbout(e.shiftKey ? -1 : 1, point);
+            return MM.cancelEvent(e);
+        }
+
+        handler.init = function(x) {
+            map = x;
+            MM.addEvent(map.parent, 'dblclick', doubleClick);
+            return handler;
+        };
+
+        handler.remove = function() {
+            MM.removeEvent(map.parent, 'dblclick', doubleClick);
+        };
+
+        return handler;
+    };
+
+    // Handle the use of mouse dragging to pan the map.
+    MM.DragHandler = function() {
+        var handler = {},
+            prevMouse,
+            map;
+
+        function mouseDown(e) {
+            if (e.shiftKey || e.button == 2) return;
+            MM.addEvent(document, 'mouseup', mouseUp);
+            MM.addEvent(document, 'mousemove', mouseMove);
+
+            prevMouse = new MM.Point(e.clientX, e.clientY);
+            map.parent.style.cursor = 'move';
+
+            return MM.cancelEvent(e);
+        }
+
+        function mouseUp(e) {
+            MM.removeEvent(document, 'mouseup', mouseUp);
+            MM.removeEvent(document, 'mousemove', mouseMove);
+
+            prevMouse = null;
+            map.parent.style.cursor = '';
+
+            return MM.cancelEvent(e);
+        }
+
+        function mouseMove(e) {
+            if (prevMouse) {
+                map.panBy(
+                    e.clientX - prevMouse.x,
+                    e.clientY - prevMouse.y);
+                prevMouse.x = e.clientX;
+                prevMouse.y = e.clientY;
+                prevMouse.t = +new Date();
+            }
+
+            return MM.cancelEvent(e);
+        }
+
+        handler.init = function(x) {
+            map = x;
+            MM.addEvent(map.parent, 'mousedown', mouseDown);
+            return handler;
+        };
+
+        handler.remove = function() {
+            MM.removeEvent(map.parent, 'mousedown', mouseDown);
+        };
+
+        return handler;
+    };
+
+    MM.MouseHandler = function() {
+        var handler = {},
+            map,
+            handlers;
+
+        handler.init = function(x) {
+            map = x;
+            handlers = [
+                MM.DragHandler().init(map),
+                MM.DoubleClickHandler().init(map),
+                MM.MouseWheelHandler().init(map)
+            ];
+            return handler;
+        };
+
+        handler.remove = function() {
+            for (var i = 0; i < handlers.length; i++) {
+                handlers[i].remove();
+            }
+            return handler;
+        };
+
+        return handler;
+    };
+    MM.TouchHandler = function() {
+        var handler = {},
+            map,
+            maxTapTime = 250,
+            maxTapDistance = 30,
+            maxDoubleTapDelay = 350,
+            locations = {},
+            taps = [],
+            snapToZoom = true,
+            wasPinching = false,
+            lastPinchCenter = null;
+
+        function isTouchable () {
+             var el = document.createElement('div');
+             el.setAttribute('ongesturestart', 'return;');
+             return (typeof el.ongesturestart === 'function');
+        }
+
+        function updateTouches(e) {
+            for (var i = 0; i < e.touches.length; i += 1) {
+                var t = e.touches[i];
+                if (t.identifier in locations) {
+                    var l = locations[t.identifier];
+                    l.x = t.clientX;
+                    l.y = t.clientY;
+                    l.scale = e.scale;
+                }
+                else {
+                    locations[t.identifier] = {
+                        scale: e.scale,
+                        startPos: { x: t.clientX, y: t.clientY },
+                        x: t.clientX,
+                        y: t.clientY,
+                        time: new Date().getTime()
+                    };
+                }
+            }
+        }
+
+        // Test whether touches are from the same source -
+        // whether this is the same touchmove event.
+        function sameTouch (event, touch) {
+            return (event && event.touch) &&
+                (touch.identifier == event.touch.identifier);
+        }
+
+        function touchStart(e) {
+            updateTouches(e);
+        }
+
+        function touchMove(e) {
+            switch (e.touches.length) {
+                case 1:
+                    onPanning(e.touches[0]);
+                    break;
+                case 2:
+                    onPinching(e);
+                    break;
+            }
+            updateTouches(e);
+            return MM.cancelEvent(e);
+        }
+
+        function touchEnd(e) {
+            var now = new Date().getTime();
+            // round zoom if we're done pinching
+            if (e.touches.length === 0 && wasPinching) {
+                onPinched(lastPinchCenter);
+            }
+
+            // Look at each changed touch in turn.
+            for (var i = 0; i < e.changedTouches.length; i += 1) {
+                var t = e.changedTouches[i],
+                    loc = locations[t.identifier];
+                // if we didn't see this one (bug?)
+                // or if it was consumed by pinching already
+                // just skip to the next one
+                if (!loc || loc.wasPinch) {
+                    continue;
+                }
+
+                // we now know we have an event object and a
+                // matching touch that's just ended. Let's see
+                // what kind of event it is based on how long it
+                // lasted and how far it moved.
+                var pos = { x: t.clientX, y: t.clientY },
+                    time = now - loc.time,
+                    travel = MM.Point.distance(pos, loc.startPos);
+                if (travel > maxTapDistance) {
+                    // we will to assume that the drag has been handled separately
+                } else if (time > maxTapTime) {
+                    // close in space, but not in time: a hold
+                    pos.end = now;
+                    pos.duration = time;
+                    onHold(pos);
+                } else {
+                    // close in both time and space: a tap
+                    pos.time = now;
+                    onTap(pos);
+                }
+            }
+
+            // Weird, sometimes an end event doesn't get thrown
+            // for a touch that nevertheless has disappeared.
+            // Still, this will eventually catch those ids:
+
+            var validTouchIds = {};
+            for (var j = 0; j < e.touches.length; j++) {
+                validTouchIds[e.touches[j].identifier] = true;
+            }
+            for (var id in locations) {
+                if (!(id in validTouchIds)) {
+                    delete validTouchIds[id];
+                }
+            }
+
+            return MM.cancelEvent(e);
+        }
+
+        function onHold (hold) {
+            // TODO
+        }
+
+        // Handle a tap event - mainly watch for a doubleTap
+        function onTap(tap) {
+            if (taps.length &&
+                (tap.time - taps[0].time) < maxDoubleTapDelay) {
+                onDoubleTap(tap);
+                taps = [];
+                return;
+            }
+            taps = [tap];
+        }
+
+        // Handle a double tap by zooming in a single zoom level to a
+        // round zoom.
+        function onDoubleTap(tap) {
+            var z = map.getZoom(), // current zoom
+                tz = Math.round(z) + 1, // target zoom
+                dz = tz - z;            // desired delate
+
+            // zoom in to a round number
+            var p = new MM.Point(tap.x, tap.y);
+            map.zoomByAbout(dz, p);
+        }
+
+        // Re-transform the actual map parent's CSS transformation
+        function onPanning (touch) {
+            var pos = { x: touch.clientX, y: touch.clientY },
+                prev = locations[touch.identifier];
+            map.panBy(pos.x - prev.x, pos.y - prev.y);
+        }
+
+        function onPinching(e) {
+            // use the first two touches and their previous positions
+            var t0 = e.touches[0],
+                t1 = e.touches[1],
+                p0 = new MM.Point(t0.clientX, t0.clientY),
+                p1 = new MM.Point(t1.clientX, t1.clientY),
+                l0 = locations[t0.identifier],
+                l1 = locations[t1.identifier];
+
+            // mark these touches so they aren't used as taps/holds
+            l0.wasPinch = true;
+            l1.wasPinch = true;
+
+            // scale about the center of these touches
+            var center = MM.Point.interpolate(p0, p1, 0.5);
+
+            map.zoomByAbout(
+                Math.log(e.scale) / Math.LN2 -
+                Math.log(l0.scale) / Math.LN2,
+                center );
+
+            // pan from the previous center of these touches
+            var prevCenter = MM.Point.interpolate(l0, l1, 0.5);
+
+            map.panBy(center.x - prevCenter.x,
+                           center.y - prevCenter.y);
+            wasPinching = true;
+            lastPinchCenter = center;
+        }
+
+        // When a pinch event ends, round the zoom of the map.
+        function onPinched(p) {
+            // TODO: easing
+            if (snapToZoom) {
+                var z = map.getZoom(), // current zoom
+                    tz =Math.round(z);     // target zoom
+                map.zoomByAbout(tz - z, p);
+            }
+            wasPinching = false;
+        }
+
+        handler.init = function(x) {
+            map = x;
+
+            // Fail early if this isn't a touch device.
+            if (!isTouchable()) return handler;
+
+            MM.addEvent(map.parent, 'touchstart', touchStart);
+            MM.addEvent(map.parent, 'touchmove', touchMove);
+            MM.addEvent(map.parent, 'touchend', touchEnd);
+            return handler;
+        };
+
+        handler.remove = function() {
+            // Fail early if this isn't a touch device.
+            if (!isTouchable()) return handler;
+
+            MM.removeEvent(map.parent, 'touchstart', touchStart);
+            MM.removeEvent(map.parent, 'touchmove', touchMove);
+            MM.removeEvent(map.parent, 'touchend', touchEnd);
+            return handler;
+        };
+
+        return handler;
+    };
+    // CallbackManager
+    // ---------------
+    // A general-purpose event binding manager used by `Map`
+    // and `RequestManager`
+
+    // Construct a new CallbackManager, with an list of
+    // supported events.
+    MM.CallbackManager = function(owner, events) {
+        this.owner = owner;
+        this.callbacks = {};
+        for (var i = 0; i < events.length; i++) {
+            this.callbacks[events[i]] = [];
+        }
+    };
+
+    // CallbackManager does simple event management for modestmaps
+    MM.CallbackManager.prototype = {
+        // The element on which callbacks will be triggered.
+        owner: null,
+
+        // An object of callbacks in the form
+        //
+        //     { event: function }
+        callbacks: null,
+
+        // Add a callback to this object - where the `event` is a string of
+        // the event name and `callback` is a function.
+        addCallback: function(event, callback) {
+            if (typeof(callback) == 'function' && this.callbacks[event]) {
+                this.callbacks[event].push(callback);
+            }
+        },
+
+        // Remove a callback. The given function needs to be equal (`===`) to
+        // the callback added in `addCallback`, so named functions should be
+        // used as callbacks.
+        removeCallback: function(event, callback) {
+            if (typeof(callback) == 'function' && this.callbacks[event]) {
+                var cbs = this.callbacks[event],
+                    len = cbs.length;
+                for (var i = 0; i < len; i++) {
+                  if (cbs[i] === callback) {
+                    cbs.splice(i,1);
+                    break;
+                  }
+                }
+            }
+        },
+
+        // Trigger a callback, passing it an object or string from the second
+        // argument.
+        dispatchCallback: function(event, message) {
+            if(this.callbacks[event]) {
+                for (var i = 0; i < this.callbacks[event].length; i += 1) {
+                    try {
+                        this.callbacks[event][i](this.owner, message);
+                    } catch(e) {
+                        //console.log(e);
+                        // meh
+                    }
+                }
+            }
+        }
+    };
+    // RequestManager
+    // --------------
+    // an image loading queue
+    MM.RequestManager = function() {
+
+        // The loading bay is a document fragment to optimize appending, since
+        // the elements within are invisible. See
+        //  [this blog post](http://ejohn.org/blog/dom-documentfragments/).
+        this.loadingBay = document.createDocumentFragment();
+
+        this.requestsById = {};
+        this.openRequestCount = 0;
+
+        this.maxOpenRequests = 4;
+        this.requestQueue = [];
+
+        this.callbackManager = new MM.CallbackManager(this, [
+            'requestcomplete', 'requesterror']);
+    };
+
+    MM.RequestManager.prototype = {
+
+        // DOM element, hidden, for making sure images dispatch complete events
+        loadingBay: null,
+
+        // all known requests, by ID
+        requestsById: null,
+
+        // current pending requests
+        requestQueue: null,
+
+        // current open requests (children of loadingBay)
+        openRequestCount: null,
+
+        // the number of open requests permitted at one time, clamped down
+        // because of domain-connection limits.
+        maxOpenRequests: null,
+
+        // for dispatching 'requestcomplete'
+        callbackManager: null,
+
+        addCallback: function(event, callback) {
+            this.callbackManager.addCallback(event,callback);
+        },
+
+        removeCallback: function(event, callback) {
+            this.callbackManager.removeCallback(event,callback);
+        },
+
+        dispatchCallback: function(event, message) {
+            this.callbackManager.dispatchCallback(event,message);
+        },
+
+        // Clear everything in the queue by excluding nothing
+        clear: function() {
+            this.clearExcept({});
+        },
+
+        clearRequest: function(id) {
+            if(id in this.requestsById) {
+                delete this.requestsById[id];
+            }
+
+            for(var i = 0; i < this.requestQueue.length; i++) {
+                var request = this.requestQueue[i];
+                if(request && request.id == id) {
+                    this.requestQueue[i] = null;
+                }
+            }
+        },
+
+        // Clear everything in the queue except for certain keys, specified
+        // by an object of the form
+        //
+        //     { key: throwawayvalue }
+        clearExcept: function(validIds) {
+
+            // clear things from the queue first...
+            for (var i = 0; i < this.requestQueue.length; i++) {
+                var request = this.requestQueue[i];
+                if (request && !(request.id in validIds)) {
+                    this.requestQueue[i] = null;
+                }
+            }
+
+            // then check the loadingBay...
+            var openRequests = this.loadingBay.childNodes;
+            for (var j = openRequests.length-1; j >= 0; j--) {
+                var img = openRequests[j];
+                if (!(img.id in validIds)) {
+                    this.loadingBay.removeChild(img);
+                    this.openRequestCount--;
+                    /* console.log(this.openRequestCount + " open requests"); */
+                    img.src = img.coord = img.onload = img.onerror = null;
+                }
+            }
+
+            // hasOwnProperty protects against prototype additions
+            // > "The standard describes an augmentable Object.prototype.
+            //  Ignore standards at your own peril."
+            // -- http://www.yuiblog.com/blog/2006/09/26/for-in-intrigue/
+            for (var id in this.requestsById) {
+                if (!(id in validIds)) {
+                    if (this.requestsById.hasOwnProperty(id)) {
+                        var requestToRemove = this.requestsById[id];
+                        // whether we've done the request or not...
+                        delete this.requestsById[id];
+                        if (requestToRemove !== null) {
+                            requestToRemove =
+                                requestToRemove.id =
+                                requestToRemove.coord =
+                                requestToRemove.url = null;
+                        }
+                    }
+                }
+            }
+        },
+
+        // Given a tile id, check whether the RequestManager is currently
+        // requesting it and waiting for the result.
+        hasRequest: function(id) {
+            return (id in this.requestsById);
+        },
+
+        // * TODO: remove dependency on coord (it's for sorting, maybe call it data?)
+        // * TODO: rename to requestImage once it's not tile specific
+        requestTile: function(id, coord, url) {
+            if (!(id in this.requestsById)) {
+                var request = { id: id, coord: coord.copy(), url: url };
+                // if there's no url just make sure we don't request this image again
+                this.requestsById[id] = request;
+                if (url) {
+                    this.requestQueue.push(request);
+                    /* console.log(this.requestQueue.length + ' pending requests'); */
+                }
+            }
+        },
+
+        getProcessQueue: function() {
+            // let's only create this closure once...
+            if (!this._processQueue) {
+                var theManager = this;
+                this._processQueue = function() {
+                    theManager.processQueue();
+                };
+            }
+            return this._processQueue;
+        },
+
+        // Select images from the `requestQueue` and create image elements for
+        // them, attaching their load events to the function returned by
+        // `this.getLoadComplete()` so that they can be added to the map.
+        processQueue: function(sortFunc) {
+            // When the request queue fills up beyond 8, start sorting the
+            // requests so that spiral-loading or another pattern can be used.
+            if (sortFunc && this.requestQueue.length > 8) {
+                this.requestQueue.sort(sortFunc);
+            }
+            while (this.openRequestCount < this.maxOpenRequests && this.requestQueue.length > 0) {
+                var request = this.requestQueue.pop();
+                if (request) {
+                    this.openRequestCount++;
+                    /* console.log(this.openRequestCount + ' open requests'); */
+
+                    // JSLitmus benchmark shows createElement is a little faster than
+                    // new Image() in Firefox and roughly the same in Safari:
+                    // http://tinyurl.com/y9wz2jj http://tinyurl.com/yes6rrt
+                    var img = document.createElement('img');
+
+                    // FIXME: id is technically not unique in document if there
+                    // are two Maps but toKey is supposed to be fast so we're trying
+                    // to avoid a prefix ... hence we can't use any calls to
+                    // `document.getElementById()` to retrieve images
+                    img.id = request.id;
+                    img.style.position = 'absolute';
+                    // * FIXME: store this elsewhere to avoid scary memory leaks?
+                    // * FIXME: call this 'data' not 'coord' so that RequestManager is less Tile-centric?
+                    img.coord = request.coord;
+                    // add it to the DOM in a hidden layer, this is a bit of a hack, but it's
+                    // so that the event we get in image.onload has srcElement assigned in IE6
+                    this.loadingBay.appendChild(img);
+                    // set these before img.src to avoid missing an img that's already cached
+                    img.onload = img.onerror = this.getLoadComplete();
+                    img.src = request.url;
+
+                    // keep things tidy
+                    request = request.id = request.coord = request.url = null;
+                }
+            }
+        },
+
+        _loadComplete: null,
+
+        // Get the singleton `_loadComplete` function that is called on image
+        // load events, either removing them from the queue and dispatching an
+        // event to add them to the map, or deleting them if the image failed
+        // to load.
+        getLoadComplete: function() {
+            // let's only create this closure once...
+            if (!this._loadComplete) {
+                var theManager = this;
+                this._loadComplete = function(e) {
+                    // this is needed because we don't use MM.addEvent for images
+                    e = e || window.event;
+
+                    // srcElement for IE, target for FF, Safari etc.
+                    var img = e.srcElement || e.target;
+
+                    // unset these straight away so we don't call this twice
+                    img.onload = img.onerror = null;
+
+                    // pull it back out of the (hidden) DOM
+                    // so that draw will add it correctly later
+                    theManager.loadingBay.removeChild(img);
+                    theManager.openRequestCount--;
+                    delete theManager.requestsById[img.id];
+
+                    /* console.log(theManager.openRequestCount + ' open requests'); */
+
+                    // NB:- complete is also true onerror if we got a 404
+                    if (e.type === 'load' && (img.complete ||
+                        (img.readyState && img.readyState == 'complete'))) {
+                        theManager.dispatchCallback('requestcomplete', img);
+                    } else {
+                        // if it didn't finish clear its src to make sure it
+                        // really stops loading
+                        // FIXME: we'll never retry because this id is still
+                        // in requestsById - is that right?
+                        theManager.dispatchCallback('requesterror', {
+                            element: img,
+                            url: ('' + img.src)
+                        });
+                        img.src = null;
+                    }
+
+                    // keep going in the same order
+                    // use `setTimeout()` to avoid the IE recursion limit, see
+                    // http://cappuccino.org/discuss/2010/03/01/internet-explorer-global-variables-and-stack-overflows/
+                    // and https://github.com/stamen/modestmaps-js/issues/12
+                    setTimeout(theManager.getProcessQueue(), 0);
+
+                };
+            }
+            return this._loadComplete;
+        }
+
+    };
+
+    // Layer
+    MM.Layer = function(provider, parent, name) {
+        this.parent = parent || document.createElement('div');
+        this.parent.style.cssText = 'position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; margin: 0; padding: 0; z-index: 0';
+        this.name = name;
+        this.levels = {};
+        this.requestManager = new MM.RequestManager();
+        this.requestManager.addCallback('requestcomplete', this.getTileComplete());
+        this.requestManager.addCallback('requesterror', this.getTileError());
+        if (provider) this.setProvider(provider);
+    };
+
+    MM.Layer.prototype = {
+
+        map: null, // TODO: remove
+        parent: null,
+        name: null,
+        tiles: null,
+        levels: null,
+        requestManager: null,
+        provider: null,
+        emptyImage: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+        _tileComplete: null,
+
+        getTileComplete: function() {
+            if (!this._tileComplete) {
+                var theLayer = this;
+                this._tileComplete = function(manager, tile) {
+                    theLayer.tiles[tile.id] = tile;
+                    theLayer.positionTile(tile);
+                };
+            }
+            return this._tileComplete;
+        },
+
+        getTileError: function() {
+            if (!this._tileError) {
+                var theLayer = this;
+                this._tileError = function(manager, tile) {
+                    tile.src = theLayer.emptyImage;
+                    theLayer.tiles[tile.id] = tile;
+                    theLayer.positionTile(tile);
+                };
+            }
+            return this._tileError;
+        },
+
+        draw: function() {
+            // compares manhattan distance from center of
+            // requested tiles to current map center
+            // NB:- requested tiles are *popped* from queue, so we do a descending sort
+            var theCoord = this.map.coordinate.zoomTo(Math.round(this.map.coordinate.zoom));
+
+            function centerDistanceCompare(r1, r2) {
+                if (r1 && r2) {
+                    var c1 = r1.coord;
+                    var c2 = r2.coord;
+                    if (c1.zoom == c2.zoom) {
+                        var ds1 = Math.abs(theCoord.row - c1.row - 0.5) +
+                                  Math.abs(theCoord.column - c1.column - 0.5);
+                        var ds2 = Math.abs(theCoord.row - c2.row - 0.5) +
+                                  Math.abs(theCoord.column - c2.column - 0.5);
+                        return ds1 < ds2 ? 1 : ds1 > ds2 ? -1 : 0;
+                    } else {
+                        return c1.zoom < c2.zoom ? 1 : c1.zoom > c2.zoom ? -1 : 0;
+                    }
+                }
+                return r1 ? 1 : r2 ? -1 : 0;
+            }
+
+            // if we're in between zoom levels, we need to choose the nearest:
+            var baseZoom = Math.round(this.map.coordinate.zoom);
+
+            // these are the top left and bottom right tile coordinates
+            // we'll be loading everything in between:
+            var startCoord = this.map.pointCoordinate(new MM.Point(0,0))
+                .zoomTo(baseZoom).container();
+            var endCoord = this.map.pointCoordinate(this.map.dimensions)
+                .zoomTo(baseZoom).container().right().down();
+
+            // tiles with invalid keys will be removed from visible levels
+            // requests for tiles with invalid keys will be canceled
+            // (this object maps from a tile key to a boolean)
+            var validTileKeys = { };
+
+            // make sure we have a container for tiles in the current level
+            var levelElement = this.createOrGetLevel(startCoord.zoom);
+
+            // use this coordinate for generating keys, parents and children:
+            var tileCoord = startCoord.copy();
+
+            for (tileCoord.column = startCoord.column;
+                 tileCoord.column <= endCoord.column; tileCoord.column++) {
+                for (tileCoord.row = startCoord.row;
+                     tileCoord.row <= endCoord.row; tileCoord.row++) {
+                    var validKeys = this.inventoryVisibleTile(levelElement, tileCoord);
+
+                    while (validKeys.length) {
+                        validTileKeys[validKeys.pop()] = true;
+                    }
+                }
+            }
+
+            // i from i to zoom-5 are levels that would be scaled too big,
+            // i from zoom + 2 to levels. length are levels that would be
+            // scaled too small (and tiles would be too numerous)
+            for (var name in this.levels) {
+                if (this.levels.hasOwnProperty(name)) {
+                    var zoom = parseInt(name,10);
+
+                    if (zoom >= startCoord.zoom - 5 && zoom < startCoord.zoom + 2) {
+                        continue;
+                    }
+
+                    var level = this.levels[name];
+                    level.style.display = 'none';
+                    var visibleTiles = this.tileElementsInLevel(level);
+
+                    while (visibleTiles.length) {
+                        this.provider.releaseTile(visibleTiles[0].coord);
+                        this.requestManager.clearRequest(visibleTiles[0].coord.toKey());
+                        level.removeChild(visibleTiles[0]);
+                        visibleTiles.shift();
+                    }
+                }
+            }
+
+            // levels we want to see, if they have tiles in validTileKeys
+            var minLevel = startCoord.zoom - 5;
+            var maxLevel = startCoord.zoom + 2;
+
+            for (var z = minLevel; z < maxLevel; z++) {
+                this.adjustVisibleLevel(this.levels[z], z, validTileKeys);
+            }
+
+            // cancel requests that aren't visible:
+            this.requestManager.clearExcept(validTileKeys);
+
+            // get newly requested tiles, sort according to current view:
+            this.requestManager.processQueue(centerDistanceCompare);
+        },
+
+        // For a given tile coordinate in a given level element, ensure that it's
+        // correctly represented in the DOM including potentially-overlapping
+        // parent and child tiles for pyramid loading.
+        //
+        // Return a list of valid (i.e. loadable?) tile keys.
+        inventoryVisibleTile: function(layer_element, tile_coord) {
+            var tile_key = tile_coord.toKey(),
+                valid_tile_keys = [tile_key];
+
+            // Check that the needed tile already exists someplace - add it to the DOM if it does.
+            if (tile_key in this.tiles) {
+                var tile = this.tiles[tile_key];
+
+                // ensure it's in the DOM:
+                if (tile.parentNode != layer_element) {
+                    layer_element.appendChild(tile);
+                    // if the provider implements reAddTile(), call it
+                    if ("reAddTile" in this.provider) {
+                        this.provider.reAddTile(tile_key, tile_coord, tile);
+                    }
+                }
+
+                return valid_tile_keys;
+            }
+
+            // Check that the needed tile has even been requested at all.
+            if (!this.requestManager.hasRequest(tile_key)) {
+                var tileToRequest = this.provider.getTile(tile_coord);
+                if (typeof tileToRequest == 'string') {
+                    this.addTileImage(tile_key, tile_coord, tileToRequest);
+                // tile must be truish
+                } else if (tileToRequest) {
+                    this.addTileElement(tile_key, tile_coord, tileToRequest);
+                }
+            }
+
+            // look for a parent tile in our image cache
+            var tileCovered = false;
+            var maxStepsOut = tile_coord.zoom;
+
+            for (var pz = 1; pz <= maxStepsOut; pz++) {
+                var parent_coord = tile_coord.zoomBy(-pz).container();
+                var parent_key = parent_coord.toKey();
+
+                // only mark it valid if we have it already
+                if (parent_key in this.tiles) {
+                    valid_tile_keys.push(parent_key);
+                    tileCovered = true;
+                    break;
+                }
+            }
+
+            // if we didn't find a parent, look at the children:
+            if (!tileCovered) {
+                var child_coord = tile_coord.zoomBy(1);
+
+                // mark everything valid whether or not we have it:
+                valid_tile_keys.push(child_coord.toKey());
+                child_coord.column += 1;
+                valid_tile_keys.push(child_coord.toKey());
+                child_coord.row += 1;
+                valid_tile_keys.push(child_coord.toKey());
+                child_coord.column -= 1;
+                valid_tile_keys.push(child_coord.toKey());
+            }
+
+            return valid_tile_keys;
+        },
+
+        tileElementsInLevel: function(level) {
+            // this is somewhat future proof, we're looking for DOM elements
+            // not necessarily <img> elements
+            var tiles = [];
+            for (var tile = level.firstChild; tile; tile = tile.nextSibling) {
+                if (tile.nodeType == 1) {
+                    tiles.push(tile);
+                }
+            }
+            return tiles;
+        },
+
+        /**
+         * For a given level, adjust visibility as a whole and discard individual
+         * tiles based on values in valid_tile_keys from inventoryVisibleTile().
+         */
+        adjustVisibleLevel: function(level, zoom, valid_tile_keys) {
+            // no tiles for this level yet
+            if (!level) return;
+
+            var scale = 1;
+            var theCoord = this.map.coordinate.copy();
+
+            if (level.childNodes.length > 0) {
+                level.style.display = 'block';
+                scale = Math.pow(2, this.map.coordinate.zoom - zoom);
+                theCoord = theCoord.zoomTo(zoom);
+            } else {
+                level.style.display = 'none';
+                return false;
+            }
+
+            var tileWidth = this.map.tileSize.x * scale;
+            var tileHeight = this.map.tileSize.y * scale;
+            var center = new MM.Point(this.map.dimensions.x/2, this.map.dimensions.y/2);
+            var tiles = this.tileElementsInLevel(level);
+
+            while (tiles.length) {
+                var tile = tiles.pop();
+
+                if (!valid_tile_keys[tile.id]) {
+                    this.provider.releaseTile(tile.coord);
+                    this.requestManager.clearRequest(tile.coord.toKey());
+                    level.removeChild(tile);
+                } else {
+                    // position tiles
+                    MM.moveElement(tile, {
+                        x: Math.round(center.x +
+                            (tile.coord.column - theCoord.column) * tileWidth),
+                        y: Math.round(center.y +
+                            (tile.coord.row - theCoord.row) * tileHeight),
+                        scale: scale,
+                        // TODO: pass only scale or only w/h
+                        width: this.map.tileSize.x,
+                        height: this.map.tileSize.y
+                    });
+                }
+            }
+        },
+
+        createOrGetLevel: function(zoom) {
+            if (zoom in this.levels) {
+                return this.levels[zoom];
+            }
+
+            var level = document.createElement('div');
+            level.id = this.parent.id + '-zoom-' + zoom;
+            level.style.cssText = this.parent.style.cssText;
+            level.style.zIndex = zoom;
+
+            this.parent.appendChild(level);
+            this.levels[zoom] = level;
+
+            return level;
+        },
+
+        addTileImage: function(key, coord, url) {
+            this.requestManager.requestTile(key, coord, url);
+        },
+
+        addTileElement: function(key, coordinate, element) {
+            // Expected in draw()
+            element.id = key;
+            element.coord = coordinate.copy();
+            this.positionTile(element);
+        },
+
+        positionTile: function(tile) {
+            // position this tile (avoids a full draw() call):
+            var theCoord = this.map.coordinate.zoomTo(tile.coord.zoom);
+
+            // Start tile positioning and prevent drag for modern browsers
+            tile.style.cssText = 'position:absolute;-webkit-user-select:none;' +
+                '-webkit-user-drag:none;-moz-user-drag:none;-webkit-transform-origin:0 0;' +
+                '-moz-transform-origin:0 0;-o-transform-origin:0 0;-ms-transform-origin:0 0;' +
+                'width:' + this.map.tileSize.x + 'px; height: ' + this.map.tileSize.y + 'px;';
+
+            // Prevent drag for IE
+            tile.ondragstart = function() { return false; };
+
+            var scale = Math.pow(2, this.map.coordinate.zoom - tile.coord.zoom);
+
+            MM.moveElement(tile, {
+                x: Math.round((this.map.dimensions.x/2) +
+                    (tile.coord.column - theCoord.column) * this.map.tileSize.x),
+                y: Math.round((this.map.dimensions.y/2) +
+                    (tile.coord.row - theCoord.row) * this.map.tileSize.y),
+                scale: scale,
+                // TODO: pass only scale or only w/h
+                width: this.map.tileSize.x,
+                height: this.map.tileSize.y
+            });
+
+            // add tile to its level
+            var theLevel = this.levels[tile.coord.zoom];
+            theLevel.appendChild(tile);
+
+            // Support style transition if available.
+            tile.className = 'map-tile-loaded';
+
+            // ensure the level is visible if it's still the current level
+            if (Math.round(this.map.coordinate.zoom) == tile.coord.zoom) {
+                theLevel.style.display = 'block';
+            }
+
+            // request a lazy redraw of all levels
+            // this will remove tiles that were only visible
+            // to cover this tile while it loaded:
+            this.requestRedraw();
+        },
+
+        _redrawTimer: undefined,
+
+        requestRedraw: function() {
+            // we'll always draw within 1 second of this request,
+            // sometimes faster if there's already a pending redraw
+            // this is used when a new tile arrives so that we clear
+            // any parent/child tiles that were only being displayed
+            // until the tile loads at the right zoom level
+            if (!this._redrawTimer) {
+                this._redrawTimer = setTimeout(this.getRedraw(), 1000);
+            }
+        },
+
+        _redraw: null,
+
+        getRedraw: function() {
+            // let's only create this closure once...
+            if (!this._redraw) {
+                var theLayer = this;
+                this._redraw = function() {
+                    theLayer.draw();
+                    theLayer._redrawTimer = 0;
+                };
+            }
+            return this._redraw;
+        },
+
+        setProvider: function(newProvider) {
+            var firstProvider = (this.provider === null);
+
+            // if we already have a provider the we'll need to
+            // clear the DOM, cancel requests and redraw
+            if (!firstProvider) {
+                this.requestManager.clear();
+
+                for (var name in this.levels) {
+                    if (this.levels.hasOwnProperty(name)) {
+                        var level = this.levels[name];
+
+                        while (level.firstChild) {
+                            this.provider.releaseTile(level.firstChild.coord);
+                            level.removeChild(level.firstChild);
+                        }
+                    }
+                }
+            }
+
+            // first provider or not we'll init/reset some values...
+            this.tiles = {};
+
+            // for later: check geometry of old provider and set a new coordinate center
+            // if needed (now? or when?)
+            this.provider = newProvider;
+
+            if (!firstProvider) {
+                this.draw();
+            }
+        },
+
+
+        // Remove this layer from the DOM, cancel all of its requests
+        // and unbind any callbacks that are bound to it.
+        destroy: function() {
+            this.requestManager.clear();
+            this.requestManager.removeCallback('requestcomplete', this.getTileComplete());
+            // TODO: does requestManager need a destroy function too?
+            this.provider = null;
+            // If this layer was ever attached to the DOM, detach it.
+            if (this.parent.parentNode) {
+              this.parent.parentNode.removeChild(this.parent);
+            }
+            this.map = null;
+        }
+    };
+
+    // Map
+
+    // Instance of a map intended for drawing to a div.
+    //
+    //  * `parent` (required DOM element)
+    //      Can also be an ID of a DOM element
+    //  * `layerOrLayers` (required MM.Layer or Array of MM.Layers)
+    //      each one must implement draw(), destroy(), have a .parent DOM element and a .map property
+    //      (an array of URL templates or MM.MapProviders is also acceptable)
+    //  * `dimensions` (optional Point)
+    //      Size of map to create
+    //  * `eventHandlers` (optional Array)
+    //      If empty or null MouseHandler will be used
+    //      Otherwise, each handler will be called with init(map)
+    MM.Map = function(parent, layerOrLayers, dimensions, eventHandlers) {
+
+        if (typeof parent == 'string') {
+            parent = document.getElementById(parent);
+            if (!parent) {
+                throw 'The ID provided to modest maps could not be found.';
+            }
+        }
+        this.parent = parent;
+
+        // we're no longer adding width and height to parent.style but we still
+        // need to enforce padding, overflow and position otherwise everything screws up
+        // TODO: maybe console.warn if the current values are bad?
+        this.parent.style.padding = '0';
+        this.parent.style.overflow = 'hidden';
+
+        var position = MM.getStyle(this.parent, 'position');
+        if (position != 'relative' && position != 'absolute') {
+            this.parent.style.position = 'relative';
+        }
+
+        this.layers = [];
+
+        if (!layerOrLayers) {
+            layerOrLayers = [];
+        }
+
+        if (!(layerOrLayers instanceof Array)) {
+            layerOrLayers = [ layerOrLayers ];
+        }
+
+        for (var i = 0; i < layerOrLayers.length; i++) {
+            this.addLayer(layerOrLayers[i]);
+        }
+
+        // default to Google-y Mercator style maps
+        this.projection = new MM.MercatorProjection(0,
+            MM.deriveTransformation(-Math.PI,  Math.PI, 0, 0,
+                                     Math.PI,  Math.PI, 1, 0,
+                                    -Math.PI, -Math.PI, 0, 1));
+        this.tileSize = new MM.Point(256, 256);
+
+        // default 0-18 zoom level
+        // with infinite horizontal pan and clamped vertical pan
+        this.coordLimits = [
+            new MM.Coordinate(0,-Infinity,0),           // top left outer
+            new MM.Coordinate(1,Infinity,0).zoomTo(18) // bottom right inner
+        ];
+
+        // eyes towards null island
+        this.coordinate = new MM.Coordinate(0.5, 0.5, 0);
+
+        // if you don't specify dimensions we assume you want to fill the parent
+        // unless the parent has no w/h, in which case we'll still use a default
+        if (!dimensions) {
+            dimensions = new MM.Point(this.parent.offsetWidth,
+                                      this.parent.offsetHeight);
+            this.autoSize = true;
+            // use destroy to get rid of this handler from the DOM
+            MM.addEvent(window, 'resize', this.windowResize());
+        } else {
+            this.autoSize = false;
+            // don't call setSize here because it calls draw()
+            this.parent.style.width = Math.round(dimensions.x) + 'px';
+            this.parent.style.height = Math.round(dimensions.y) + 'px';
+        }
+        this.dimensions = dimensions;
+
+        this.callbackManager = new MM.CallbackManager(this, [
+            'zoomed',
+            'panned',
+            'centered',
+            'extentset',
+            'resized',
+            'drawn'
+        ]);
+
+        // set up handlers last so that all required attributes/functions are in place if needed
+        if (eventHandlers === undefined) {
+            this.eventHandlers = [
+                MM.MouseHandler().init(this),
+                MM.TouchHandler().init(this)
+            ];
+        } else {
+            this.eventHandlers = eventHandlers;
+            if (eventHandlers instanceof Array) {
+                for (var j = 0; j < eventHandlers.length; j++) {
+                    eventHandlers[j].init(this);
+                }
+            }
+        }
+
+    };
+
+    MM.Map.prototype = {
+
+        parent: null,          // DOM Element
+        dimensions: null,      // MM.Point with x/y size of parent element
+
+        projection: null,      // MM.Projection of first known layer
+        coordinate: null,      // Center of map MM.Coordinate with row/column/zoom
+        tileSize: null,        // MM.Point with x/y size of tiles
+
+        coordLimits: null,     // Array of [ topLeftOuter, bottomLeftInner ] MM.Coordinates
+
+        layers: null,          // Array of MM.Layer (interface = .draw(), .destroy(), .parent and .map)
+
+        callbackManager: null, // MM.CallbackManager, handles map events
+
+        eventHandlers: null,   // Array of interaction handlers, just a MM.MouseHandler by default
+
+        autoSize: null,        // Boolean, true if we have a window resize listener
+
+        toString: function() {
+            return 'Map(#' + this.parent.id + ')';
+        },
+
+        // callbacks...
+
+        addCallback: function(event, callback) {
+            this.callbackManager.addCallback(event, callback);
+            return this;
+        },
+
+        removeCallback: function(event, callback) {
+            this.callbackManager.removeCallback(event, callback);
+            return this;
+        },
+
+        dispatchCallback: function(event, message) {
+            this.callbackManager.dispatchCallback(event, message);
+            return this;
+        },
+
+        windowResize: function() {
+            if (!this._windowResize) {
+                var theMap = this;
+                this._windowResize = function(event) {
+                    // don't call setSize here because it sets parent.style.width/height
+                    // and setting the height breaks percentages and default styles
+                    theMap.dimensions = new MM.Point(theMap.parent.offsetWidth, theMap.parent.offsetHeight);
+                    theMap.draw();
+                    theMap.dispatchCallback('resized', [theMap.dimensions]);
+                };
+            }
+            return this._windowResize;
+        },
+
+        // A convenience function to restrict interactive zoom ranges.
+        // (you should also adjust map provider to restrict which tiles get loaded,
+        // or modify map.coordLimits and provider.tileLimits for finer control)
+        setZoomRange: function(minZoom, maxZoom) {
+            this.coordLimits[0] = this.coordLimits[0].zoomTo(minZoom);
+            this.coordLimits[1] = this.coordLimits[1].zoomTo(maxZoom);
+            return this;
+        },
+
+        // zooming
+        zoomBy: function(zoomOffset) {
+            this.coordinate = this.enforceLimits(this.coordinate.zoomBy(zoomOffset));
+            MM.getFrame(this.getRedraw());
+            this.dispatchCallback('zoomed', zoomOffset);
+            return this;
+        },
+
+        zoomIn: function()  { return this.zoomBy(1); },
+        zoomOut: function()  { return this.zoomBy(-1); },
+        setZoom: function(z) { return this.zoomBy(z - this.coordinate.zoom); },
+
+        zoomByAbout: function(zoomOffset, point) {
+            var location = this.pointLocation(point);
+
+            this.coordinate = this.enforceLimits(this.coordinate.zoomBy(zoomOffset));
+            var newPoint = this.locationPoint(location);
+
+            this.dispatchCallback('zoomed', zoomOffset);
+            return this.panBy(point.x - newPoint.x, point.y - newPoint.y);
+        },
+
+        // panning
+        panBy: function(dx, dy) {
+            this.coordinate.column -= dx / this.tileSize.x;
+            this.coordinate.row -= dy / this.tileSize.y;
+
+            this.coordinate = this.enforceLimits(this.coordinate);
+
+            // Defer until the browser is ready to draw.
+            MM.getFrame(this.getRedraw());
+            this.dispatchCallback('panned', [dx, dy]);
+            return this;
+        },
+
+        panLeft: function() { return this.panBy(100, 0); },
+        panRight: function() { return this.panBy(-100, 0); },
+        panDown: function() { return this.panBy(0, -100); },
+        panUp: function() { return this.panBy(0, 100); },
+
+        // positioning
+        setCenter: function(location) {
+            return this.setCenterZoom(location, this.coordinate.zoom);
+        },
+
+        setCenterZoom: function(location, zoom) {
+            this.coordinate = this.projection.locationCoordinate(location).zoomTo(parseFloat(zoom) || 0);
+            MM.getFrame(this.getRedraw());
+            this.dispatchCallback('centered', [location, zoom]);
+            return this;
+        },
+
+        extentCoordinate: function(locations, precise) {
+            // coerce locations to an array if it's a Extent instance
+            if (locations instanceof MM.Extent) {
+                locations = locations.toArray();
+            }
+
+            var TL, BR;
+            for (var i = 0; i < locations.length; i++) {
+                var coordinate = this.projection.locationCoordinate(locations[i]);
+                if (TL) {
+                    TL.row = Math.min(TL.row, coordinate.row);
+                    TL.column = Math.min(TL.column, coordinate.column);
+                    TL.zoom = Math.min(TL.zoom, coordinate.zoom);
+                    BR.row = Math.max(BR.row, coordinate.row);
+                    BR.column = Math.max(BR.column, coordinate.column);
+                    BR.zoom = Math.max(BR.zoom, coordinate.zoom);
+                }
+                else {
+                    TL = coordinate.copy();
+                    BR = coordinate.copy();
+                }
+            }
+
+            var width = this.dimensions.x + 1;
+            var height = this.dimensions.y + 1;
+
+            // multiplication factor between horizontal span and map width
+            var hFactor = (BR.column - TL.column) / (width / this.tileSize.x);
+
+            // multiplication factor expressed as base-2 logarithm, for zoom difference
+            var hZoomDiff = Math.log(hFactor) / Math.log(2);
+
+            // possible horizontal zoom to fit geographical extent in map width
+            var hPossibleZoom = TL.zoom - (precise ? hZoomDiff : Math.ceil(hZoomDiff));
+
+            // multiplication factor between vertical span and map height
+            var vFactor = (BR.row - TL.row) / (height / this.tileSize.y);
+
+            // multiplication factor expressed as base-2 logarithm, for zoom difference
+            var vZoomDiff = Math.log(vFactor) / Math.log(2);
+
+            // possible vertical zoom to fit geographical extent in map height
+            var vPossibleZoom = TL.zoom - (precise ? vZoomDiff : Math.ceil(vZoomDiff));
+
+            // initial zoom to fit extent vertically and horizontally
+            var initZoom = Math.min(hPossibleZoom, vPossibleZoom);
+
+            // additionally, make sure it's not outside the boundaries set by map limits
+            initZoom = Math.min(initZoom, this.coordLimits[1].zoom);
+            initZoom = Math.max(initZoom, this.coordLimits[0].zoom);
+
+            // coordinate of extent center
+            var centerRow = (TL.row + BR.row) / 2;
+            var centerColumn = (TL.column + BR.column) / 2;
+            var centerZoom = TL.zoom;
+            return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom);
+        },
+
+        setExtent: function(locations, precise) {
+            this.coordinate = this.extentCoordinate(locations, precise);
+            this.draw(); // draw calls enforceLimits
+            // (if you switch to getFrame, call enforceLimits first)
+
+            this.dispatchCallback('extentset', locations);
+            return this;
+        },
+
+        // Resize the map's container `<div>`, redrawing the map and triggering
+        // `resized` to make sure that the map's presentation is still correct.
+        setSize: function(dimensions) {
+            // Ensure that, whether a raw object or a Point object is passed,
+            // this.dimensions will be a Point.
+            this.dimensions = new MM.Point(dimensions.x, dimensions.y);
+            this.parent.style.width = Math.round(this.dimensions.x) + 'px';
+            this.parent.style.height = Math.round(this.dimensions.y) + 'px';
+            if (this.autoSize) {
+                MM.removeEvent(window, 'resize', this.windowResize());
+                this.autoSize = false;
+            }
+            this.draw(); // draw calls enforceLimits
+            // (if you switch to getFrame, call enforceLimits first)
+            this.dispatchCallback('resized', this.dimensions);
+            return this;
+        },
+
+        // projecting points on and off screen
+        coordinatePoint: function(coord) {
+            // Return an x, y point on the map image for a given coordinate.
+            if (coord.zoom != this.coordinate.zoom) {
+                coord = coord.zoomTo(this.coordinate.zoom);
+            }
+
+            // distance from the center of the map
+            var point = new MM.Point(this.dimensions.x / 2, this.dimensions.y / 2);
+            point.x += this.tileSize.x * (coord.column - this.coordinate.column);
+            point.y += this.tileSize.y * (coord.row - this.coordinate.row);
+
+            return point;
+        },
+
+        // Get a `MM.Coordinate` from an `MM.Point` - returns a new tile-like object
+        // from a screen point.
+        pointCoordinate: function(point) {
+            // new point coordinate reflecting distance from map center, in tile widths
+            var coord = this.coordinate.copy();
+            coord.column += (point.x - this.dimensions.x / 2) / this.tileSize.x;
+            coord.row += (point.y - this.dimensions.y / 2) / this.tileSize.y;
+
+            return coord;
+        },
+
+        // Return an MM.Coordinate (row,col,zoom) for an MM.Location (lat,lon).
+        locationCoordinate: function(location) {
+            return this.projection.locationCoordinate(location);
+        },
+
+        // Return an MM.Location (lat,lon) for an MM.Coordinate (row,col,zoom).
+        coordinateLocation: function(coordinate) {
+            return this.projection.coordinateLocation(coordinate);
+        },
+
+        // Return an x, y point on the map image for a given geographical location.
+        locationPoint: function(location) {
+            return this.coordinatePoint(this.locationCoordinate(location));
+        },
+
+        // Return a geographical location on the map image for a given x, y point.
+        pointLocation: function(point) {
+            return this.coordinateLocation(this.pointCoordinate(point));
+        },
+
+        // inspecting
+        getExtent: function() {
+            return new MM.Extent(
+                this.pointLocation(new MM.Point(0, 0)),
+                this.pointLocation(this.dimensions)
+            );
+        },
+
+        extent: function(locations, precise) {
+            if (locations) {
+                return this.setExtent(locations, precise);
+            } else {
+                return this.getExtent();
+            }
+        },
+
+        // Get the current centerpoint of the map, returning a `Location`
+        getCenter: function() {
+            return this.projection.coordinateLocation(this.coordinate);
+        },
+
+        center: function(location) {
+            if (location) {
+                return this.setCenter(location);
+            } else {
+                return this.getCenter();
+            }
+        },
+
+        // Get the current zoom level of the map, returning a number
+        getZoom: function() {
+            return this.coordinate.zoom;
+        },
+
+        zoom: function(zoom) {
+            if (zoom !== undefined) {
+                return this.setZoom(zoom);
+            } else {
+                return this.getZoom();
+            }
+        },
+
+        // return a copy of the layers array
+        getLayers: function() {
+            return this.layers.slice();
+        },
+
+        // return the first layer with given name
+        getLayer: function(name) {
+            for (var i = 0; i < this.layers.length; i++) {
+                if (name == this.layers[i].name)
+                    return this.layers[i];
+            }
+        },
+
+        // return the layer at the given index
+        getLayerAt: function(index) {
+            return this.layers[index];
+        },
+
+        // put the given layer on top of all the others
+        // Since this is called for the first layer, which is by definition
+        // added before the map has a valid `coordinate`, we request
+        // a redraw only if the map has a center coordinate.
+        addLayer: function(layer) {
+            this.layers.push(layer);
+            this.parent.appendChild(layer.parent);
+            layer.map = this; // TODO: remove map property from MM.Layer?
+            if (this.coordinate) {
+              MM.getFrame(this.getRedraw());
+            }
+            return this;
+        },
+
+        // find the given layer and remove it
+        removeLayer: function(layer) {
+            for (var i = 0; i < this.layers.length; i++) {
+                if (layer == this.layers[i] || layer == this.layers[i].name) {
+                    this.removeLayerAt(i);
+                    break;
+                }
+            }
+            return this;
+        },
+
+        // replace the current layer at the given index with the given layer
+        setLayerAt: function(index, layer) {
+
+            if (index < 0 || index >= this.layers.length) {
+                throw new Error('invalid index in setLayerAt(): ' + index);
+            }
+
+            if (this.layers[index] != layer) {
+
+                // clear existing layer at this index
+                if (index < this.layers.length) {
+                    var other = this.layers[index];
+                    this.parent.insertBefore(layer.parent, other.parent);
+                    other.destroy();
+                } else {
+                // Or if this will be the last layer, it can be simply appended
+                    this.parent.appendChild(layer.parent);
+                }
+
+                this.layers[index] = layer;
+                layer.map = this; // TODO: remove map property from MM.Layer
+
+                MM.getFrame(this.getRedraw());
+            }
+
+            return this;
+        },
+
+        // put the given layer at the given index, moving others if necessary
+        insertLayerAt: function(index, layer) {
+
+            if (index < 0 || index > this.layers.length) {
+                throw new Error('invalid index in insertLayerAt(): ' + index);
+            }
+
+            if (index == this.layers.length) {
+                // it just gets tacked on to the end
+                this.layers.push(layer);
+                this.parent.appendChild(layer.parent);
+            } else {
+                // it needs to get slipped in amongst the others
+                var other = this.layers[index];
+                this.parent.insertBefore(layer.parent, other.parent);
+                this.layers.splice(index, 0, layer);
+            }
+
+            layer.map = this; // TODO: remove map property from MM.Layer
+
+            MM.getFrame(this.getRedraw());
+
+            return this;
+        },
+
+        // remove the layer at the given index, call .destroy() on the layer
+        removeLayerAt: function(index) {
+            if (index < 0 || index >= this.layers.length) {
+                throw new Error('invalid index in removeLayer(): ' + index);
+            }
+
+            // gone baby gone.
+            var old = this.layers[index];
+            this.layers.splice(index, 1);
+            old.destroy();
+
+            return this;
+        },
+
+        // switch the stacking order of two layers, by index
+        swapLayersAt: function(i, j) {
+
+            if (i < 0 || i >= this.layers.length || j < 0 || j >= this.layers.length) {
+                throw new Error('invalid index in swapLayersAt(): ' + index);
+            }
+
+            var layer1 = this.layers[i],
+                layer2 = this.layers[j],
+                dummy = document.createElement('div');
+
+            // kick layer2 out, replace it with the dummy.
+            this.parent.replaceChild(dummy, layer2.parent);
+
+            // put layer2 back in and kick layer1 out
+            this.parent.replaceChild(layer2.parent, layer1.parent);
+
+            // put layer1 back in and ditch the dummy
+            this.parent.replaceChild(layer1.parent, dummy);
+
+            // now do it to the layers array
+            this.layers[i] = layer2;
+            this.layers[j] = layer1;
+
+            return this;
+        },
+
+        // limits
+
+        enforceZoomLimits: function(coord) {
+            var limits = this.coordLimits;
+            if (limits) {
+                // clamp zoom level:
+                var minZoom = limits[0].zoom;
+                var maxZoom = limits[1].zoom;
+                if (coord.zoom < minZoom) {
+                    coord = coord.zoomTo(minZoom);
+                }
+                else if (coord.zoom > maxZoom) {
+                    coord = coord.zoomTo(maxZoom);
+                }
+            }
+            return coord;
+        },
+
+        enforcePanLimits: function(coord) {
+
+            if (this.coordLimits) {
+
+                coord = coord.copy();
+
+                // clamp pan:
+                var topLeftLimit = this.coordLimits[0].zoomTo(coord.zoom);
+                var bottomRightLimit = this.coordLimits[1].zoomTo(coord.zoom);
+                var currentTopLeft = this.pointCoordinate(new MM.Point(0, 0))
+                    .zoomTo(coord.zoom);
+                var currentBottomRight = this.pointCoordinate(this.dimensions)
+                    .zoomTo(coord.zoom);
+
+                // this handles infinite limits:
+                // (Infinity - Infinity) is Nan
+                // NaN is never less than anything
+                if (bottomRightLimit.row - topLeftLimit.row <
+                    currentBottomRight.row - currentTopLeft.row) {
+                    // if the limit is smaller than the current view center it
+                    coord.row = (bottomRightLimit.row + topLeftLimit.row) / 2;
+                } else {
+                    if (currentTopLeft.row < topLeftLimit.row) {
+                        coord.row += topLeftLimit.row - currentTopLeft.row;
+                    } else if (currentBottomRight.row > bottomRightLimit.row) {
+                        coord.row -= currentBottomRight.row - bottomRightLimit.row;
+                    }
+                }
+                if (bottomRightLimit.column - topLeftLimit.column <
+                    currentBottomRight.column - currentTopLeft.column) {
+                    // if the limit is smaller than the current view, center it
+                    coord.column = (bottomRightLimit.column + topLeftLimit.column) / 2;
+                } else {
+                    if (currentTopLeft.column < topLeftLimit.column) {
+                        coord.column += topLeftLimit.column - currentTopLeft.column;
+                    } else if (currentBottomRight.column > bottomRightLimit.column) {
+                        coord.column -= currentBottomRight.column - bottomRightLimit.column;
+                    }
+                }
+            }
+
+            return coord;
+        },
+
+        // Prevent accidentally navigating outside the `coordLimits` of the map.
+        enforceLimits: function(coord) {
+            return this.enforcePanLimits(this.enforceZoomLimits(coord));
+        },
+
+        // rendering
+
+        // Redraw the tiles on the map, reusing existing tiles.
+        draw: function() {
+            // make sure we're not too far in or out:
+            this.coordinate = this.enforceLimits(this.coordinate);
+
+            // if we don't have dimensions, check the parent size
+            if (this.dimensions.x <= 0 || this.dimensions.y <= 0) {
+                if (this.autoSize) {
+                    // maybe the parent size has changed?
+                    var w = this.parent.offsetWidth,
+                        h = this.parent.offsetHeight;
+                    this.dimensions = new MM.Point(w,h);
+                    if (w <= 0 || h <= 0) {
+                        return;
+                    }
+                } else {
+                    // the issue can only be corrected with setSize
+                    return;
+                }
+            }
+
+            // draw layers one by one
+            for(var i = 0; i < this.layers.length; i++) {
+                this.layers[i].draw();
+            }
+
+            this.dispatchCallback('drawn');
+        },
+
+        _redrawTimer: undefined,
+
+        requestRedraw: function() {
+            // we'll always draw within 1 second of this request,
+            // sometimes faster if there's already a pending redraw
+            // this is used when a new tile arrives so that we clear
+            // any parent/child tiles that were only being displayed
+            // until the tile loads at the right zoom level
+            if (!this._redrawTimer) {
+                this._redrawTimer = setTimeout(this.getRedraw(), 1000);
+            }
+        },
+
+        _redraw: null,
+
+        getRedraw: function() {
+            // let's only create this closure once...
+            if (!this._redraw) {
+                var theMap = this;
+                this._redraw = function() {
+                    theMap.draw();
+                    theMap._redrawTimer = 0;
+                };
+            }
+            return this._redraw;
+        },
+
+        // Attempts to destroy all attachment a map has to a page
+        // and clear its memory usage.
+        destroy: function() {
+            for (var j = 0; j < this.layers.length; j++) {
+                this.layers[j].destroy();
+            }
+            this.layers = [];
+            this.projection = null;
+            for (var i = 0; i < this.eventHandlers.length; i++) {
+                this.eventHandlers[i].remove();
+            }
+            if (this.autoSize) {
+                MM.removeEvent(window, 'resize', this.windowResize());
+            }
+        }
+    };
+    // Instance of a map intended for drawing to a div.
+    //
+    //  * `parent` (required DOM element)
+    //      Can also be an ID of a DOM element
+    //  * `provider` (required MM.MapProvider or URL template)
+    //  * `location` (required MM.Location)
+    //      Location for map to show
+    //  * `zoom` (required number)
+    MM.mapByCenterZoom = function(parent, layerish, location, zoom) {
+        var layer = MM.coerceLayer(layerish),
+            map = new MM.Map(parent, layer, false);
+        map.setCenterZoom(location, zoom).draw();
+        return map;
+    };
+
+    // Instance of a map intended for drawing to a div.
+    //
+    //  * `parent` (required DOM element)
+    //      Can also be an ID of a DOM element
+    //  * `provider` (required MM.MapProvider or URL template)
+    //  * `locationA` (required MM.Location)
+    //      Location of one map corner
+    //  * `locationB` (required MM.Location)
+    //      Location of other map corner
+    MM.mapByExtent = function(parent, layerish, locationA, locationB) {
+        var layer = MM.coerceLayer(layerish),
+            map = new MM.Map(parent, layer, false);
+        map.setExtent([locationA, locationB]).draw();
+        return map;
+    };
+    if (typeof module !== 'undefined' && module.exports) {
+      module.exports = {
+          Point: MM.Point,
+          Projection: MM.Projection,
+          MercatorProjection: MM.MercatorProjection,
+          LinearProjection: MM.LinearProjection,
+          Transformation: MM.Transformation,
+          Location: MM.Location,
+          MapProvider: MM.MapProvider,
+          Template: MM.Template,
+          Coordinate: MM.Coordinate,
+          deriveTransformation: MM.deriveTransformation
+      };
+    }
+})(MM);
 // Copyright Google Inc.
 // Licensed under the Apache Licence Version 2.0
 // Autogenerated at Tue Oct 11 13:36:46 EDT 2011
@@ -2107,550 +5221,7 @@ html4.ELEMENTS['audio'] = 0;
 html4.ATTRIBS['audio::src'] = 0;
 html4.ATTRIBS['video::autoplay'] = 0;
 html4.ATTRIBS['video::controls'] = 0;
-/*!
- * mustache.js - Logic-less {{mustache}} templates with JavaScript
- * http://github.com/janl/mustache.js
- */
-var Mustache = (typeof module !== "undefined" && module.exports) || {};
-
-(function (exports) {
-
-  exports.name = "mustache.js";
-  exports.version = "0.5.0-dev";
-  exports.tags = ["{{", "}}"];
-  exports.parse = parse;
-  exports.compile = compile;
-  exports.render = render;
-  exports.clearCache = clearCache;
-
-  // This is here for backwards compatibility with 0.4.x.
-  exports.to_html = function (template, view, partials, send) {
-    var result = render(template, view, partials);
-
-    if (typeof send === "function") {
-      send(result);
-    } else {
-      return result;
-    }
-  };
-
-  var _toString = Object.prototype.toString;
-  var _isArray = Array.isArray;
-  var _forEach = Array.prototype.forEach;
-  var _trim = String.prototype.trim;
-
-  var isArray;
-  if (_isArray) {
-    isArray = _isArray;
-  } else {
-    isArray = function (obj) {
-      return _toString.call(obj) === "[object Array]";
-    };
-  }
-
-  var forEach;
-  if (_forEach) {
-    forEach = function (obj, callback, scope) {
-      return _forEach.call(obj, callback, scope);
-    };
-  } else {
-    forEach = function (obj, callback, scope) {
-      for (var i = 0, len = obj.length; i < len; ++i) {
-        callback.call(scope, obj[i], i, obj);
-      }
-    };
-  }
-
-  var spaceRe = /^\s*$/;
-
-  function isWhitespace(string) {
-    return spaceRe.test(string);
-  }
-
-  var trim;
-  if (_trim) {
-    trim = function (string) {
-      return string == null ? "" : _trim.call(string);
-    };
-  } else {
-    var trimLeft, trimRight;
-
-    if (isWhitespace("\xA0")) {
-      trimLeft = /^\s+/;
-      trimRight = /\s+$/;
-    } else {
-      // IE doesn't match non-breaking spaces with \s, thanks jQuery.
-      trimLeft = /^[\s\xA0]+/;
-      trimRight = /[\s\xA0]+$/;
-    }
-
-    trim = function (string) {
-      return string == null ? "" :
-        String(string).replace(trimLeft, "").replace(trimRight, "");
-    };
-  }
-
-  var escapeMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': '&quot;',
-    "'": '&#39;',
-    "/": '&#x2F;'
-  };
-
-  function escapeHTML(string) {
-    return String(string).replace(/[&<>"'\/]/g, function (s) {
-      return escapeMap[s] || s;
-    });
-  }
-
-  /**
-   * Adds the `template`, `line`, and `file` properties to the given error
-   * object and alters the message to provide more useful debugging information.
-   */
-  function debug(e, template, line, file) {
-    file = file || "<template>";
-
-    var lines = template.split("\n"),
-        start = Math.max(line - 3, 0),
-        end = Math.min(lines.length, line + 3),
-        context = lines.slice(start, end);
-
-    var c;
-    for (var i = 0, len = context.length; i < len; ++i) {
-      c = i + start + 1;
-      context[i] = (c === line ? " >> " : "    ") + context[i];
-    }
-
-    e.template = template;
-    e.line = line;
-    e.file = file;
-    e.message = [file + ":" + line, context.join("\n"), "", e.message].join("\n");
-
-    return e;
-  }
-
-  /**
-   * Looks up the value of the given `name` in the given context `stack`.
-   */
-  function lookup(name, stack, defaultValue) {
-    if (name === ".") {
-      return stack[stack.length - 1];
-    }
-
-    var names = name.split(".");
-    var lastIndex = names.length - 1;
-    var target = names[lastIndex];
-
-    var value, context, i = stack.length, j, localStack;
-    while (i) {
-      localStack = stack.slice(0);
-      context = stack[--i];
-
-      j = 0;
-      while (j < lastIndex) {
-        context = context[names[j++]];
-
-        if (context == null) {
-          break;
-        }
-
-        localStack.push(context);
-      }
-
-      if (context && typeof context === "object" && target in context) {
-        value = context[target];
-        break;
-      }
-    }
-
-    // If the value is a function, call it in the current context.
-    if (typeof value === "function") {
-      value = value.call(localStack[localStack.length - 1]);
-    }
-
-    if (value == null)  {
-      return defaultValue;
-    }
-
-    return value;
-  }
-
-  function renderSection(name, stack, callback, inverted) {
-    var buffer = "";
-    var value =  lookup(name, stack);
-
-    if (inverted) {
-      // From the spec: inverted sections may render text once based on the
-      // inverse value of the key. That is, they will be rendered if the key
-      // doesn't exist, is false, or is an empty list.
-      if (value == null || value === false || (isArray(value) && value.length === 0)) {
-        buffer += callback();
-      }
-    } else if (isArray(value)) {
-      forEach(value, function (value) {
-        stack.push(value);
-        buffer += callback();
-        stack.pop();
-      });
-    } else if (typeof value === "object") {
-      stack.push(value);
-      buffer += callback();
-      stack.pop();
-    } else if (typeof value === "function") {
-      var scope = stack[stack.length - 1];
-      var scopedRender = function (template) {
-        return render(template, scope);
-      };
-      buffer += value.call(scope, callback(), scopedRender) || "";
-    } else if (value) {
-      buffer += callback();
-    }
-
-    return buffer;
-  }
-
-  /**
-   * Parses the given `template` and returns the source of a function that,
-   * with the proper arguments, will render the template. Recognized options
-   * include the following:
-   *
-   *   - file     The name of the file the template comes from (displayed in
-   *              error messages)
-   *   - tags     An array of open and close tags the `template` uses. Defaults
-   *              to the value of Mustache.tags
-   *   - debug    Set `true` to log the body of the generated function to the
-   *              console
-   *   - space    Set `true` to preserve whitespace from lines that otherwise
-   *              contain only a {{tag}}. Defaults to `false`
-   */
-  function parse(template, options) {
-    options = options || {};
-
-    var tags = options.tags || exports.tags,
-        openTag = tags[0],
-        closeTag = tags[tags.length - 1];
-
-    var code = [
-      'var buffer = "";', // output buffer
-      "\nvar line = 1;", // keep track of source line number
-      "\ntry {",
-      '\nbuffer += "'
-    ];
-
-    var spaces = [],      // indices of whitespace in code on the current line
-        hasTag = false,   // is there a {{tag}} on the current line?
-        nonSpace = false; // is there a non-space char on the current line?
-
-    // Strips all space characters from the code array for the current line
-    // if there was a {{tag}} on it and otherwise only spaces.
-    var stripSpace = function () {
-      if (hasTag && !nonSpace && !options.space) {
-        while (spaces.length) {
-          code.splice(spaces.pop(), 1);
-        }
-      } else {
-        spaces = [];
-      }
-
-      hasTag = false;
-      nonSpace = false;
-    };
-
-    var sectionStack = [], updateLine, nextOpenTag, nextCloseTag;
-
-    var setTags = function (source) {
-      tags = trim(source).split(/\s+/);
-      nextOpenTag = tags[0];
-      nextCloseTag = tags[tags.length - 1];
-    };
-
-    var includePartial = function (source) {
-      code.push(
-        '";',
-        updateLine,
-        '\nvar partial = partials["' + trim(source) + '"];',
-        '\nif (partial) {',
-        '\n  buffer += render(partial,stack[stack.length - 1],partials);',
-        '\n}',
-        '\nbuffer += "'
-      );
-    };
-
-    var openSection = function (source, inverted) {
-      var name = trim(source);
-
-      if (name === "") {
-        throw debug(new Error("Section name may not be empty"), template, line, options.file);
-      }
-
-      sectionStack.push({name: name, inverted: inverted});
-
-      code.push(
-        '";',
-        updateLine,
-        '\nvar name = "' + name + '";',
-        '\nvar callback = (function () {',
-        '\n  return function () {',
-        '\n    var buffer = "";',
-        '\nbuffer += "'
-      );
-    };
-
-    var openInvertedSection = function (source) {
-      openSection(source, true);
-    };
-
-    var closeSection = function (source) {
-      var name = trim(source);
-      var openName = sectionStack.length != 0 && sectionStack[sectionStack.length - 1].name;
-
-      if (!openName || name != openName) {
-        throw debug(new Error('Section named "' + name + '" was never opened'), template, line, options.file);
-      }
-
-      var section = sectionStack.pop();
-
-      code.push(
-        '";',
-        '\n    return buffer;',
-        '\n  };',
-        '\n})();'
-      );
-
-      if (section.inverted) {
-        code.push("\nbuffer += renderSection(name,stack,callback,true);");
-      } else {
-        code.push("\nbuffer += renderSection(name,stack,callback);");
-      }
-
-      code.push('\nbuffer += "');
-    };
-
-    var sendPlain = function (source) {
-      code.push(
-        '";',
-        updateLine,
-        '\nbuffer += lookup("' + trim(source) + '",stack,"");',
-        '\nbuffer += "'
-      );
-    };
-
-    var sendEscaped = function (source) {
-      code.push(
-        '";',
-        updateLine,
-        '\nbuffer += escapeHTML(lookup("' + trim(source) + '",stack,""));',
-        '\nbuffer += "'
-      );
-    };
-
-    var line = 1, c, callback;
-    for (var i = 0, len = template.length; i < len; ++i) {
-      if (template.slice(i, i + openTag.length) === openTag) {
-        i += openTag.length;
-        c = template.substr(i, 1);
-        updateLine = '\nline = ' + line + ';';
-        nextOpenTag = openTag;
-        nextCloseTag = closeTag;
-        hasTag = true;
-
-        switch (c) {
-        case "!": // comment
-          i++;
-          callback = null;
-          break;
-        case "=": // change open/close tags, e.g. {{=<% %>=}}
-          i++;
-          closeTag = "=" + closeTag;
-          callback = setTags;
-          break;
-        case ">": // include partial
-          i++;
-          callback = includePartial;
-          break;
-        case "#": // start section
-          i++;
-          callback = openSection;
-          break;
-        case "^": // start inverted section
-          i++;
-          callback = openInvertedSection;
-          break;
-        case "/": // end section
-          i++;
-          callback = closeSection;
-          break;
-        case "{": // plain variable
-          closeTag = "}" + closeTag;
-          // fall through
-        case "&": // plain variable
-          i++;
-          nonSpace = true;
-          callback = sendPlain;
-          break;
-        default: // escaped variable
-          nonSpace = true;
-          callback = sendEscaped;
-        }
-
-        var end = template.indexOf(closeTag, i);
-
-        if (end === -1) {
-          throw debug(new Error('Tag "' + openTag + '" was not closed properly'), template, line, options.file);
-        }
-
-        var source = template.substring(i, end);
-
-        if (callback) {
-          callback(source);
-        }
-
-        // Maintain line count for \n in source.
-        var n = 0;
-        while (~(n = source.indexOf("\n", n))) {
-          line++;
-          n++;
-        }
-
-        i = end + closeTag.length - 1;
-        openTag = nextOpenTag;
-        closeTag = nextCloseTag;
-      } else {
-        c = template.substr(i, 1);
-
-        switch (c) {
-        case '"':
-        case "\\":
-          nonSpace = true;
-          code.push("\\" + c);
-          break;
-        case "\r":
-          // Ignore carriage returns.
-          break;
-        case "\n":
-          spaces.push(code.length);
-          code.push("\\n");
-          stripSpace(); // Check for whitespace on the current line.
-          line++;
-          break;
-        default:
-          if (isWhitespace(c)) {
-            spaces.push(code.length);
-          } else {
-            nonSpace = true;
-          }
-
-          code.push(c);
-        }
-      }
-    }
-
-    if (sectionStack.length != 0) {
-      throw debug(new Error('Section "' + sectionStack[sectionStack.length - 1].name + '" was not closed properly'), template, line, options.file);
-    }
-
-    // Clean up any whitespace from a closing {{tag}} that was at the end
-    // of the template without a trailing \n.
-    stripSpace();
-
-    code.push(
-      '";',
-      "\nreturn buffer;",
-      "\n} catch (e) { throw {error: e, line: line}; }"
-    );
-
-    // Ignore `buffer += "";` statements.
-    var body = code.join("").replace(/buffer \+= "";\n/g, "");
-
-    if (options.debug) {
-      if (typeof console != "undefined" && console.log) {
-        console.log(body);
-      } else if (typeof print === "function") {
-        print(body);
-      }
-    }
-
-    return body;
-  }
-
-  /**
-   * Used by `compile` to generate a reusable function for the given `template`.
-   */
-  function _compile(template, options) {
-    var args = "view,partials,stack,lookup,escapeHTML,renderSection,render";
-    var body = parse(template, options);
-    var fn = new Function(args, body);
-
-    // This anonymous function wraps the generated function so we can do
-    // argument coercion, setup some variables, and handle any errors
-    // encountered while executing it.
-    return function (view, partials) {
-      partials = partials || {};
-
-      var stack = [view]; // context stack
-
-      try {
-        return fn(view, partials, stack, lookup, escapeHTML, renderSection, render);
-      } catch (e) {
-        throw debug(e.error, template, e.line, options.file);
-      }
-    };
-  }
-
-  // Cache of pre-compiled templates.
-  var _cache = {};
-
-  /**
-   * Clear the cache of compiled templates.
-   */
-  function clearCache() {
-    _cache = {};
-  }
-
-  /**
-   * Compiles the given `template` into a reusable function using the given
-   * `options`. In addition to the options accepted by Mustache.parse,
-   * recognized options include the following:
-   *
-   *   - cache    Set `false` to bypass any pre-compiled version of the given
-   *              template. Otherwise, a given `template` string will be cached
-   *              the first time it is parsed
-   */
-  function compile(template, options) {
-    options = options || {};
-
-    // Use a pre-compiled version from the cache if we have one.
-    if (options.cache !== false) {
-      if (!_cache[template]) {
-        _cache[template] = _compile(template, options);
-      }
-
-      return _cache[template];
-    }
-
-    return _compile(template, options);
-  }
-
-  /**
-   * High-level function that renders the given `template` using the given
-   * `view` and `partials`. If you need to use any of the template options (see
-   * `compile` above), you must compile in a separate step, and then call that
-   * compiled function.
-   */
-  function render(template, view, partials) {
-    return compile(template)(view, partials);
-  }
-
-})(Mustache);
-/*!
-  * Reqwest! A general purpose XHR connection manager
-  * (c) Dustin Diaz 2011
-  * https://github.com/ded/reqwest
-  * license MIT
-  */
-!function(a,b){typeof module!="undefined"?module.exports=b():typeof define=="function"&&define.amd?define(a,b):this[a]=b()}("reqwest",function(){function handleReadyState(a,b,c){return function(){a&&a[readyState]==4&&(twoHundo.test(a.status)?b(a):c(a))}}function setHeaders(a,b){var c=b.headers||{},d;c.Accept=c.Accept||defaultHeaders.accept[b.type]||defaultHeaders.accept["*"],!b.crossOrigin&&!c[requestedWith]&&(c[requestedWith]=defaultHeaders.requestedWith),c[contentType]||(c[contentType]=b.contentType||defaultHeaders.contentType);for(d in c)c.hasOwnProperty(d)&&a.setRequestHeader(d,c[d])}function generalCallback(a){lastValue=a}function urlappend(a,b){return a+(/\?/.test(a)?"&":"?")+b}function handleJsonp(a,b,c,d){var e=uniqid++,f=a.jsonpCallback||"callback",g=a.jsonpCallbackName||"reqwest_"+e,h=new RegExp("((^|\\?|&)"+f+")=([^&]+)"),i=d.match(h),j=doc.createElement("script"),k=0;i?i[3]==="?"?d=d.replace(h,"$1="+g):g=i[3]:d=urlappend(d,f+"="+g),win[g]=generalCallback,j.type="text/javascript",j.src=d,j.async=!0,typeof j.onreadystatechange!="undefined"&&(j.event="onclick",j.htmlFor=j.id="_reqwest_"+e),j.onload=j.onreadystatechange=function(){if(j[readyState]&&j[readyState]!=="complete"&&j[readyState]!=="loaded"||k)return!1;j.onload=j.onreadystatechange=null,j.onclick&&j.onclick(),a.success&&a.success(lastValue),lastValue=undefined,head.removeChild(j),k=1},head.appendChild(j)}function getRequest(a,b,c){var d=(a.method||"GET").toUpperCase(),e=typeof a=="string"?a:a.url,f=a.processData!==!1&&a.data&&typeof a.data!="string"?reqwest.toQueryString(a.data):a.data||null,g;return(a.type=="jsonp"||d=="GET")&&f&&(e=urlappend(e,f),f=null),a.type=="jsonp"?handleJsonp(a,b,c,e):(g=xhr(),g.open(d,e,!0),setHeaders(g,a),g.onreadystatechange=handleReadyState(g,b,c),a.before&&a.before(g),g.send(f),g)}function Reqwest(a,b){this.o=a,this.fn=b,init.apply(this,arguments)}function setType(a){var b=a.match(/\.(json|jsonp|html|xml)(\?|$)/);return b?b[1]:"js"}function init(o,fn){function complete(a){o.timeout&&clearTimeout(self.timeout),self.timeout=null,o.complete&&o.complete(a)}function success(resp){var r=resp.responseText;if(r)switch(type){case"json":try{resp=win.JSON?win.JSON.parse(r):eval("("+r+")")}catch(err){return error(resp,"Could not parse JSON in response",err)}break;case"js":resp=eval(r);break;case"html":resp=r}fn(resp),o.success&&o.success(resp),complete(resp)}function error(a,b,c){o.error&&o.error(a,b,c),complete(a)}this.url=typeof o=="string"?o:o.url,this.timeout=null;var type=o.type||setType(this.url),self=this;fn=fn||function(){},o.timeout&&(this.timeout=setTimeout(function(){self.abort()},o.timeout)),this.request=getRequest(o,success,error)}function reqwest(a,b){return new Reqwest(a,b)}function normalize(a){return a?a.replace(/\r?\n/g,"\r\n"):""}function serial(a,b){var c=a.name,d=a.tagName.toLowerCase(),e=function(a){a&&!a.disabled&&b(c,normalize(a.attributes.value&&a.attributes.value.specified?a.value:a.text))};if(a.disabled||!c)return;switch(d){case"input":if(!/reset|button|image|file/i.test(a.type)){var f=/checkbox/i.test(a.type),g=/radio/i.test(a.type),h=a.value;(!f&&!g||a.checked)&&b(c,normalize(f&&h===""?"on":h))}break;case"textarea":b(c,normalize(a.value));break;case"select":if(a.type.toLowerCase()==="select-one")e(a.selectedIndex>=0?a.options[a.selectedIndex]:null);else for(var i=0;a.length&&i<a.length;i++)a.options[i].selected&&e(a.options[i])}}function eachFormElement(){var a=this,b,c,d,e=function(b,c){for(var e=0;e<c.length;e++){var f=b[byTag](c[e]);for(d=0;d<f.length;d++)serial(f[d],a)}};for(c=0;c<arguments.length;c++)b=arguments[c],/input|select|textarea/i.test(b.tagName)&&serial(b,a),e(b,["input","select","textarea"])}function serializeQueryString(){return reqwest.toQueryString(reqwest.serializeArray.apply(null,arguments))}function serializeHash(){var a={};return eachFormElement.apply(function(b,c){b in a?(a[b]&&!isArray(a[b])&&(a[b]=[a[b]]),a[b].push(c)):a[b]=c},arguments),a}var win=window,doc=document,twoHundo=/^20\d$/,byTag="getElementsByTagName",readyState="readyState",contentType="Content-Type",requestedWith="X-Requested-With",head=doc[byTag]("head")[0],uniqid=0,lastValue,xmlHttpRequest="XMLHttpRequest",isArray=typeof Array.isArray=="function"?Array.isArray:function(a){return a instanceof Array},defaultHeaders={contentType:"application/x-www-form-urlencoded",accept:{"*":"text/javascript, text/html, application/xml, text/xml, */*",xml:"application/xml, text/xml",html:"text/html",text:"text/plain",json:"application/json, text/javascript",js:"application/javascript, text/javascript"},requestedWith:xmlHttpRequest},xhr=win[xmlHttpRequest]?function(){return new XMLHttpRequest}:function(){return new ActiveXObject("Microsoft.XMLHTTP")};return Reqwest.prototype={abort:function(){this.request.abort()},retry:function(){init.call(this,this.o,this.fn)}},reqwest.serializeArray=function(){var a=[];return eachFormElement.apply(function(b,c){a.push({name:b,value:c})},arguments),a},reqwest.serialize=function(){if(arguments.length===0)return"";var a,b,c=Array.prototype.slice.call(arguments,0);return a=c.pop(),a&&a.nodeType&&c.push(a)&&(a=null),a&&(a=a.type),a=="map"?b=serializeHash:a=="array"?b=reqwest.serializeArray:b=serializeQueryString,b.apply(null,c)},reqwest.toQueryString=function(a){var b="",c,d=encodeURIComponent,e=function(a,c){b+=d(a)+"="+d(c)+"&"};if(isArray(a))for(c=0;a&&c<a.length;c++)e(a[c].name,a[c].value);else for(var f in a){if(!Object.hasOwnProperty.call(a,f))continue;var g=a[f];if(isArray(g))for(c=0;c<g.length;c++)e(f,g[c]);else e(f,a[f])}return b.replace(/&$/,"").replace(/%20/g,"+")},reqwest.compat=function(a,b){return a&&(a.type&&(a.method=a.type)&&delete a.type,a.dataType&&(a.type=a.dataType),a.jsonpCallback&&(a.jsonpCallbackName=a.jsonpCallback)&&delete a.jsonpCallback,a.jsonp&&(a.jsonpCallback=a.jsonp)),new Reqwest(a,b)},reqwest});wax = wax || {};
+;wax = wax || {};
 
 // Attribution
 // -----------
@@ -3315,94 +5886,6 @@ wax.location = function() {
     return t;
 
 };
-// Override movetips positioning
-
-var wax = wax || {};
-wax.movetip = wax.movetip  || {};
-
-wax.movetip = function() {
-    var popped = false,
-        t = {},
-        _tooltipOffset,
-        _contextOffset,
-        tooltip,
-        parent;
-
-    function moveTooltip(e) {
-       var eo = wax.u.eventoffset(e);
-       // faux-positioning
-       if ((eo.y - _contextOffset.top) <
-           (_tooltipOffset.height + 5) &&
-           (_contextOffset.height > _tooltipOffset.height)) {
-           eo.y += _tooltipOffset.height;
-           tooltip.className += ' flip-y';
-       }
-
-       tooltip.style.left = eo.x + 'px';
-       tooltip.style.top = eo.y - _tooltipOffset.height - 5 + 'px';
-    }
-
-    // Get the active tooltip for a layer or create a new one if no tooltip exists.
-    // Hide any tooltips on layers underneath this one.
-    function getTooltip(feature) {
-        var tooltip = document.createElement('div'),
-            inner = document.createElement('div'),
-            tip = document.createElement('div');
-        inner.innerHTML = feature;
-        inner.className = 'inner';
-        tip.className = 'tip';
-        tooltip.className = 'wax-tooltip wax-tooltip-0';
-        tooltip.appendChild(inner);
-        tooltip.appendChild(tip);
-        return tooltip;
-    }
-
-    // Hide a given tooltip.
-    function hide() {
-        if (tooltip) {
-          tooltip.parentNode.removeChild(tooltip);
-          tooltip = null;
-        }
-    }
-
-    function on(o) {
-        var content;
-        if (popped) return;
-        if ((o.e.type === 'mousemove' || o.e.type === 'touchend' || !o.e.type)) {
-            content = o.formatter({ format: 'teaser' }, o.data);
-            if (!content) return;
-            hide();
-            parent.style.cursor = 'pointer';
-            tooltip = document.body.appendChild(getTooltip(content));
-        }
-        if (tooltip) {
-          _tooltipOffset = wax.u.offset(tooltip);
-          _contextOffset = wax.u.offset(parent);
-          moveTooltip(o.e);
-        }
-    }
-
-    function off() {
-        parent.style.cursor = 'default';
-        if (!popped) hide();
-    }
-
-    t.parent = function(x) {
-        if (!arguments.length) return parent;
-        parent = x;
-        return t;
-    };
-
-    t.events = function() {
-        return {
-            on: on,
-            off: off
-        };
-    };
-
-    return t;
-};
-
 var wax = wax || {};
 wax.movetip = {};
 
@@ -5403,7 +7886,568 @@ wax.mm.connector = function(options) {
     };
 
 })(this, MM);
-typeof mapbox=="undefined"&&(mapbox={}),typeof mapbox.markers=="undefined"&&(mapbox.markers={}),mapbox.markers.layer=function(){function l(b){b.coord||(b.coord=a.map.locationCoordinate(b.location));var c=a.map.coordinatePoint(b.coord),d;c.x<0?(d=new MM.Location(b.location.lat,b.location.lon),d.lon+=Math.ceil((i.lon-b.location.lon)/360)*360,c=a.map.locationPoint(d),b.coord=a.map.locationCoordinate(d)):c.x>a.map.dimensions.x&&(d=new MM.Location(b.location.lat,b.location.lon),d.lon-=Math.ceil((b.location.lon-j.lon)/360)*360,c=a.map.locationPoint(d),b.coord=a.map.locationCoordinate(d)),c.scale=1,c.width=c.height=0,MM.moveElement(b.element,c)}var a={},b=[],c=[],d=new MM.CallbackManager(a,["drawn","markeradded"]),e=null,f=mapbox.markers.simplestyle_factory,g=function(a,b){return b.geometry.coordinates[1]-a.geometry.coordinates[1]},h,i=null,j=null,k=function(){return!0};return a.parent=document.createElement("div"),a.parent.style.cssText="position: absolute; top: 0px;left:0px; width:100%; height:100%; margin:0; padding:0; z-index:0;pointer-events:none;",a.addCallback=function(b,c){return d.addCallback(b,c),a},a.removeCallback=function(b,c){return d.removeCallback(b,c),a},a.draw=function(){if(!a.map)return;i=a.map.pointLocation(new MM.Point(0,0)),j=a.map.pointLocation(new MM.Point(a.map.dimensions.x,0)),d.dispatchCallback("drawn",a);for(var b=0;b<c.length;b++)l(c[b])},a.add=function(b){return!b||!b.element?null:(a.parent.appendChild(b.element),c.push(b),d.dispatchCallback("markeradded",b),b)},a.remove=function(b){if(!b)return null;a.parent.removeChild(b.element);for(var d=0;d<c.length;d++)if(c[d]===b)return c.splice(d,1),b;return b},a.markers=function(a){if(!arguments.length)return c},a.add_feature=function(b){return a.features(a.features().concat([b]))},a.sort=function(b){return arguments.length?(g=b,a):g},a.features=function(d){if(!arguments.length)return b;while(a.parent.hasChildNodes())a.parent.removeChild(a.parent.lastChild);c=[],d||(d=[]),b=d.slice(),b.sort(g);for(var e=0;e<b.length;e++)k(b[e])&&a.add({element:f(b[e]),location:new MM.Location(b[e].geometry.coordinates[1],b[e].geometry.coordinates[0]),data:b[e]});return a.map&&a.map.coordinate&&a.map.draw(),a},a.url=function(b,c){function d(b){b&&b.features&&a.features(b.features),c&&c(b.features,a)}if(!arguments.length)return h;if(typeof reqwest=="undefined")throw"reqwest is required for url loading";return typeof b=="string"&&(b=[b]),h=b,reqwest(h[0].match(/geojsonp$/)?{url:h[0]+(~h[0].indexOf("?")?"&":"?")+"callback=grid",type:"jsonp",jsonpCallback:"callback",success:d,error:d}:{url:h[0],type:"json",success:d,error:d}),a},a.extent=function(){var b=[{lat:Infinity,lon:Infinity},{lat:-Infinity,lon:-Infinity}],c=a.features();for(var d=0;d<c.length;d++){var e=c[d].geometry.coordinates;e[0]<b[0].lon&&(b[0].lon=e[0]),e[1]<b[0].lat&&(b[0].lat=e[1]),e[0]>b[1].lon&&(b[1].lon=e[0]),e[1]>b[1].lat&&(b[1].lat=e[1])}return b},a.factory=function(b){return arguments.length?(f=b,a.features(a.features()),a):f},a.filter=function(b){return arguments.length?(k=b,a.features(a.features()),a):k},a.destroy=function(){a.parent.parentNode&&a.parent.parentNode.removeChild(a.parent)},a},mmg=mapbox.markers.layer,mapbox.markers.interaction=function(a){function i(){a.map.addCallback("panned",function(){if(e)while(c.length)a.remove(c.pop())})}var b={},c=[],d=!0,e=!0,f=!0,g=null,h;b.formatter=function(a){return arguments.length?(h=a,b):h},b.formatter(function(a){var b="",c=a.properties;return c?(c.title&&(b+='<div class="marker-title">'+c.title+"</div>"),c.description&&(b+='<div class="marker-description">'+c.description+"</div>"),typeof html_sanitize!==undefined&&(b=html_sanitize(b,function(a){if(/^(https?:\/\/|data:image)/.test(a))return a},function(a){return a})),b):null}),b.hide_on_move=function(a){return arguments.length?(e=a,b):e},b.exclusive=function(a){return arguments.length?(d=a,b):d},b.show_on_hover=function(a){return arguments.length?(f=a,b):f},b.hide_tooltips=function(){while(c.length)a.remove(c.pop());for(var b=0;b<j.length;b++)delete j[b].clicked},b.bind_marker=function(e){var i=function(){e.clicked||(g=window.setTimeout(function(){b.hide_tooltips()},200))},j=function(j){var k=h(e.data);if(!k)return;d&&c.length>0&&(b.hide_tooltips(),g&&window.clearTimeout(g));var l=document.createElement("div");l.className="marker-tooltip",l.style.width="100%";var m=l.appendChild(document.createElement("div"));m.style.cssText="position: absolute; pointer-events: none;";var n=m.appendChild(document.createElement("div"));n.className="marker-popup",n.style.cssText="pointer-events: auto;",typeof k=="string"?n.innerHTML=k:n.appendChild(k),m.style.bottom=e.element.offsetHeight/2+20+"px",f&&(l.onmouseover=function(){g&&window.clearTimeout(g)},l.onmouseout=i);var o={element:l,data:{},interactive:!1,location:e.location.copy()};c.push(o),a.add(o),a.draw()};e.element.onclick=e.element.ontouchstart=function(){j(),e.clicked=!0},f&&(e.element.onmouseover=j,e.element.onmouseout=i)};if(a){a.addCallback("drawn",i),a.removeCallback("drawn",i);var j=a.markers();for(var k=0;k<j.length;k++)b.bind_marker(j[k]);a.addCallback("markeradded",function(a,c){c.interactive!==!1&&b.bind_marker(c)})}return b},mmg_interaction=mapbox.markers.interaction,mapbox.markers.csv_to_geojson=function(a){function b(a){var b;return c(a,function(a,c){if(c){var d={},e=-1,f=b.length;while(++e<f)d[b[e]]=a[e];return d}return b=a,null})}function c(a,b){function j(){if(f.lastIndex>=a.length)return d;if(i)return i=!1,c;var b=f.lastIndex;if(a.charCodeAt(b)===34){var e=b;while(e++<a.length)if(a.charCodeAt(e)===34){if(a.charCodeAt(e+1)!==34)break;e++}f.lastIndex=e+2;var g=a.charCodeAt(e+1);return g===13?(i=!0,a.charCodeAt(e+2)===10&&f.lastIndex++):g===10&&(i=!0),a.substring(b+1,e).replace(/""/g,'"')}var h=f.exec(a);return h?(i=h[0].charCodeAt(0)!==44,a.substring(b,h.index)):(f.lastIndex=a.length,a.substring(b))}var c={},d={},e=[],f=/\r\n|[,\r\n]/g,g=0,h,i;f.lastIndex=0;while((h=j())!==d){var k=[];while(h!==c&&h!==d)k.push(h),h=j();if(b&&!(k=b(k,g++)))continue;e.push(k)}return e}var d=[],e=b(a);if(!e.length)return callback(d);var f="",g="";for(var h in e[0])h.match(/^Lat/i)&&(f=h),h.match(/^Lon/i)&&(g=h);if(!f||!g)throw"CSV: Could not find latitude or longitude field";for(var i=0;i<e.length;i++)e[i][g]!==undefined&&e[i][g]!==undefined&&d.push({type:"Feature",properties:e[i],geometry:{type:"Point",coordinates:[parseFloat(e[i][g]),parseFloat(e[i][f])]}});return d},mapbox.markers.csv_url_to_geojson=function(a,b){function c(a){return b(mapbox.markers.csv_to_geojson(a.responseText))}if(typeof reqwest=="undefined")throw"CSV: reqwest required for mapbox.markers.csv_url_to_geojson";reqwest({url:a,type:"string",success:c,error:c})},mapbox.markers.simplestyle_factory=function(a){var b={small:[20,50],medium:[30,70],large:[35,90]},c=a.properties||{},d=c["marker-size"]||"medium",e=c["marker-symbol"]?"-"+c["marker-symbol"]:"",f=c["marker-color"]||"7e7e7e";f=f.replace("#","");var g=document.createElement("img");g.width=b[d][0],g.height=b[d][1],g.className="simplestyle-marker",g.alt=c.title||"",g.src=(mapbox.markers.marker_baseurl||"http://a.tiles.mapbox.com/v3/marker/")+"pin-"+d.charAt(0)+e+"+"+f+".png"+(window.devicePixelRatio===2?"@2x":"");var h=g.style;return h.position="absolute",h.clip="rect(auto auto "+b[d][1]*.75+"px auto)",h.marginTop=-(b[d][1]/2)+"px",h.marginLeft=-(b[d][0]/2)+"px",h.cursor="pointer",h.pointerEvents="all",g}
+if (typeof mapbox == 'undefined') mapbox = {};
+if (typeof mapbox.markers == 'undefined') mapbox.markers = {};
+mapbox.markers.layer = function() {
+
+    var m = {},
+        // external list of geojson features
+        features = [],
+        // internal list of markers
+        markers = [],
+        // internal list of callbacks
+        callbackManager = new MM.CallbackManager(m, ['drawn', 'markeradded']),
+        // the absolute position of the parent element
+        position = null,
+        // a factory function for creating DOM elements out of
+        // GeoJSON objects
+        factory = mapbox.markers.simplestyle_factory,
+        // a sorter function for sorting GeoJSON objects
+        // in the DOM
+        sorter = function(a, b) {
+            return b.geometry.coordinates[1] -
+              a.geometry.coordinates[1];
+        },
+        // a list of urls from which features can be loaded.
+        // these can be templated with {z}, {x}, and {y}
+        urls,
+        // map bounds
+        left = null,
+        right = null,
+        // a function that filters points
+        filter = function() {
+            return true;
+        };
+
+    // The parent DOM element
+    m.parent = document.createElement('div');
+    m.parent.style.cssText = 'position: absolute; top: 0px;' +
+        'left:0px; width:100%; height:100%; margin:0; padding:0; z-index:0;pointer-events:none;';
+
+    // reposition a single marker element
+    function reposition(marker) {
+        // remember the tile coordinate so we don't have to reproject every time
+        if (!marker.coord) marker.coord = m.map.locationCoordinate(marker.location);
+        var pos = m.map.coordinatePoint(marker.coord);
+        var pos_loc;
+
+        // If this point has wound around the world, adjust its position
+        // to the new, onscreen location
+        if (pos.x < 0) {
+            pos_loc = new MM.Location(marker.location.lat, marker.location.lon);
+            pos_loc.lon += Math.ceil((left.lon - marker.location.lon) / 360) * 360;
+            pos = m.map.locationPoint(pos_loc);
+            marker.coord = m.map.locationCoordinate(pos_loc);
+        } else if (pos.x > m.map.dimensions.x) {
+            pos_loc = new MM.Location(marker.location.lat, marker.location.lon);
+            pos_loc.lon -= Math.ceil((marker.location.lon - right.lon) / 360) * 360;
+            pos = m.map.locationPoint(pos_loc);
+            marker.coord = m.map.locationCoordinate(pos_loc);
+        }
+
+        pos.scale = 1;
+        pos.width = pos.height = 0;
+        MM.moveElement(marker.element, pos);
+    }
+
+    // Adding and removing callbacks is mainly a way to enable mmg_interaction to operate.
+    // I think there are better ways to do this, by, for instance, having mmg be able to
+    // register 'binders' to markers, but this is backwards-compatible and equivalent
+    // externally.
+    m.addCallback = function(event, callback) {
+        callbackManager.addCallback(event, callback);
+        return m;
+    };
+
+    m.removeCallback = function(event, callback) {
+        callbackManager.removeCallback(event, callback);
+        return m;
+    };
+
+    // Draw this layer - reposition all markers on the div. This requires
+    // the markers library to be attached to a map, and will noop otherwise.
+    m.draw = function() {
+        if (!m.map) return;
+        left = m.map.pointLocation(new MM.Point(0, 0));
+        right = m.map.pointLocation(new MM.Point(m.map.dimensions.x, 0));
+        callbackManager.dispatchCallback('drawn', m);
+        for (var i = 0; i < markers.length; i++) {
+            reposition(markers[i]);
+        }
+    };
+
+    // Add a fully-formed marker to the layer. This fires a `markeradded` event.
+    // This does not require the map element t be attached.
+    m.add = function(marker) {
+        if (!marker || !marker.element) return null;
+        m.parent.appendChild(marker.element);
+        markers.push(marker);
+        callbackManager.dispatchCallback('markeradded', marker);
+        return marker;
+    };
+
+    // Remove a fully-formed marker - which must be the same exact marker
+    // object as in the markers array - from the layer.
+    m.remove = function(marker) {
+        if (!marker) return null;
+        m.parent.removeChild(marker.element);
+        for (var i = 0; i < markers.length; i++) {
+            if (markers[i] === marker) {
+                markers.splice(i, 1);
+                return marker;
+            }
+        }
+        return marker;
+    };
+
+    m.markers = function(x) {
+        if (!arguments.length) return markers;
+    };
+
+    // Add a GeoJSON feature to the markers layer.
+    m.add_feature = function(x) {
+        return m.features(m.features().concat([x]));
+    };
+
+    m.sort = function(x) {
+        if (!arguments.length) return sorter;
+        sorter = x;
+        return m;
+    };
+
+    // Public data interface
+    m.features = function(x) {
+        // Return features
+        if (!arguments.length) return features;
+
+        // Clear features
+        while (m.parent.hasChildNodes()) {
+            // removing lastChild iteratively is faster than
+            // innerHTML = ''
+            // http://jsperf.com/innerhtml-vs-removechild-yo/2
+            m.parent.removeChild(m.parent.lastChild);
+        }
+
+        // clear markers representation
+        markers = [];
+        // Set features
+        if (!x) x = [];
+        features = x.slice();
+
+        features.sort(sorter);
+
+        for (var i = 0; i < features.length; i++) {
+            if (filter(features[i])) {
+                m.add({
+                    element: factory(features[i]),
+                    location: new MM.Location(
+                        features[i].geometry.coordinates[1],
+                        features[i].geometry.coordinates[0]),
+                    data: features[i]
+                });
+            }
+        }
+
+        if (m.map && m.map.coordinate) m.map.draw();
+
+        return m;
+    };
+
+    // Request features from a URL - either a local URL or a JSONP call.
+    // Expects GeoJSON-formatted features.
+    m.url = function(x, callback) {
+        if (!arguments.length) return urls;
+        if (typeof reqwest === 'undefined') throw 'reqwest is required for url loading';
+        if (typeof x === 'string') x = [x];
+
+        urls = x;
+        function add_features(x) {
+            if (x && x.features) m.features(x.features);
+            if (callback) callback(x.features, m);
+        }
+
+        reqwest((urls[0].match(/geojsonp$/)) ? {
+            url: urls[0] + (~urls[0].indexOf('?') ? '&' : '?') + 'callback=grid',
+            type: 'jsonp',
+            jsonpCallback: 'callback',
+            success: add_features,
+            error: add_features
+        } : {
+            url: urls[0],
+            type: 'json',
+            success: add_features,
+            error: add_features
+        });
+        return m;
+    };
+
+    m.csv = function(x) {
+        return m.features(mapbox.markers.csv_to_geojson(x));
+    };
+
+    m.extent = function() {
+        var ext = [{
+            lat: Infinity,
+            lon: Infinity
+        }, {
+            lat: -Infinity,
+            lon: -Infinity
+        }];
+        var ft = m.features();
+        for (var i = 0; i < ft.length; i++) {
+            var coords = ft[i].geometry.coordinates;
+            if (coords[0] < ext[0].lon) ext[0].lon = coords[0];
+            if (coords[1] < ext[0].lat) ext[0].lat = coords[1];
+            if (coords[0] > ext[1].lon) ext[1].lon = coords[0];
+            if (coords[1] > ext[1].lat) ext[1].lat = coords[1];
+        }
+        return ext;
+    };
+
+    // Factory interface
+    m.factory = function(x) {
+        if (!arguments.length) return factory;
+        factory = x;
+        // re-render all features
+        m.features(m.features());
+        return m;
+    };
+
+    m.filter = function(x) {
+        if (!arguments.length) return filter;
+        filter = x;
+        // Setting a filter re-sets the features into a new array.
+        // This does _not_ change the actual output of .features()
+        m.features(m.features());
+        return m;
+    };
+
+    m.destroy = function() {
+        if (m.parent.parentNode) {
+            m.parent.parentNode.removeChild(m.parent);
+        }
+    };
+
+    return m;
+};
+
+mmg = mapbox.markers.layer; // Backwards compatibility
+mapbox.markers.interaction = function(mmg) {
+
+    var mi = {},
+        tooltips = [],
+        exclusive = true,
+        hide_on_move = true,
+        show_on_hover = true,
+        close_timer = null,
+        formatter;
+
+    mi.formatter = function(x) {
+        if (!arguments.length) return formatter;
+        formatter = x;
+        return mi;
+    };
+    mi.formatter(function(feature) {
+        var o = '',
+            props = feature.properties;
+
+        // Tolerate markers without properties at all.
+        if (!props) return null;
+
+        if (props.title) {
+            o += '<div class="marker-title">' + props.title + '</div>';
+        }
+        if (props.description) {
+            o += '<div class="marker-description">' + props.description + '</div>';
+        }
+
+        if (typeof html_sanitize !== undefined) {
+            o = html_sanitize(o,
+                function(url) {
+                    if (/^(https?:\/\/|data:image)/.test(url)) return url;
+                },
+                function(x) { return x; });
+        }
+
+        return o;
+    });
+
+    mi.hide_on_move = function(x) {
+        if (!arguments.length) return hide_on_move;
+        hide_on_move = x;
+        return mi;
+    };
+
+    mi.exclusive = function(x) {
+        if (!arguments.length) return exclusive;
+        exclusive = x;
+        return mi;
+    };
+
+    mi.show_on_hover = function(x) {
+        if (!arguments.length) return show_on_hover;
+        show_on_hover = x;
+        return mi;
+    };
+
+    mi.hide_tooltips = function() {
+        while (tooltips.length) mmg.remove(tooltips.pop());
+        for (var i = 0; i < markers.length; i++) {
+            delete markers[i].clicked;
+        }
+    };
+
+    mi.bind_marker = function(marker) {
+        var delayed_close = function() {
+            if (!marker.clicked) close_timer = window.setTimeout(function() {
+                mi.hide_tooltips();
+            }, 200);
+        };
+
+        var show = function(e) {
+            var content = formatter(marker.data);
+            // Don't show a popup if the formatter returns an
+            // empty string. This does not do any magic around DOM elements.
+            if (!content) return;
+
+            if (exclusive && tooltips.length > 0) {
+                mi.hide_tooltips();
+                // We've hidden all of the tooltips, so let's not close
+                // the one that we're creating as soon as it is created.
+                if (close_timer) window.clearTimeout(close_timer);
+            }
+
+            var tooltip = document.createElement('div');
+            tooltip.className = 'marker-tooltip';
+            tooltip.style.width = '100%';
+
+            var wrapper = tooltip.appendChild(document.createElement('div'));
+            wrapper.style.cssText = 'position: absolute; pointer-events: none;';
+
+            var popup = wrapper.appendChild(document.createElement('div'));
+            popup.className = 'marker-popup';
+            popup.style.cssText = 'pointer-events: auto;';
+
+            if (typeof content == 'string') {
+                popup.innerHTML = content;
+            } else {
+                popup.appendChild(content);
+            }
+
+            // Align the bottom of the tooltip with the top of its marker
+            wrapper.style.bottom = marker.element.offsetHeight / 2 + 20 + 'px';
+
+            if (show_on_hover) {
+                tooltip.onmouseover = function() {
+                    if (close_timer) window.clearTimeout(close_timer);
+                };
+                tooltip.onmouseout = delayed_close;
+            }
+
+            var t = {
+                element: tooltip,
+                data: {},
+                interactive: false,
+                location: marker.location.copy()
+            };
+            tooltips.push(t);
+            mmg.add(t);
+            mmg.draw();
+        };
+
+        marker.element.onclick = marker.element.ontouchstart = function() {
+            show();
+            marker.clicked = true;
+        };
+
+        if (show_on_hover) {
+            marker.element.onmouseover = show;
+            marker.element.onmouseout = delayed_close;
+        }
+    };
+
+    function bindPanned() {
+        mmg.map.addCallback('panned', function() {
+            if (hide_on_move) {
+                while (tooltips.length) {
+                    mmg.remove(tooltips.pop());
+                }
+            }
+        });
+    }
+
+    if (mmg) {
+        // Remove tooltips on panning
+        mmg.addCallback('drawn', bindPanned);
+        mmg.removeCallback('drawn', bindPanned);
+
+        // Bind present markers
+        var markers = mmg.markers();
+        for (var i = 0; i < markers.length; i++) {
+            mi.bind_marker(markers[i]);
+        }
+
+        // Bind future markers
+        mmg.addCallback('markeradded', function(_, marker) {
+            // Markers can choose to be not-interactive. The main example
+            // of this currently is marker bubbles, which should not recursively
+            // give marker bubbles.
+            if (marker.interactive !== false) mi.bind_marker(marker);
+        });
+    }
+
+    return mi;
+};
+
+mmg_interaction = mapbox.markers.interaction;
+mapbox.markers.csv_to_geojson = function(x) {
+    // Extracted from d3
+    function csv_parse(text) {
+        var header;
+        return csv_parseRows(text, function(row, i) {
+            if (i) {
+                var o = {}, j = -1, m = header.length;
+                while (++j < m) o[header[j]] = row[j];
+                return o;
+            } else {
+                header = row;
+                return null;
+            }
+        });
+    }
+
+    function csv_parseRows (text, f) {
+        var EOL = {}, // sentinel value for end-of-line
+        EOF = {}, // sentinel value for end-of-file
+        rows = [], // output rows
+        re = /\r\n|[,\r\n]/g, // field separator regex
+        n = 0, // the current line number
+        t, // the current token
+        eol; // is the current token followed by EOL?
+
+        re.lastIndex = 0; // work-around bug in FF 3.6
+
+        /** @private Returns the next token. */
+        function token() {
+            if (re.lastIndex >= text.length) return EOF; // special case: end of file
+            if (eol) { eol = false; return EOL; } // special case: end of line
+
+            // special case: quotes
+            var j = re.lastIndex;
+            if (text.charCodeAt(j) === 34) {
+                var i = j;
+                while (i++ < text.length) {
+                    if (text.charCodeAt(i) === 34) {
+                        if (text.charCodeAt(i + 1) !== 34) break;
+                        i++;
+                    }
+                }
+                re.lastIndex = i + 2;
+                var c = text.charCodeAt(i + 1);
+                if (c === 13) {
+                    eol = true;
+                    if (text.charCodeAt(i + 2) === 10) re.lastIndex++;
+                } else if (c === 10) {
+                    eol = true;
+                }
+                return text.substring(j + 1, i).replace(/""/g, "\"");
+            }
+
+            // common case
+            var m = re.exec(text);
+            if (m) {
+                eol = m[0].charCodeAt(0) !== 44;
+                return text.substring(j, m.index);
+            }
+            re.lastIndex = text.length;
+            return text.substring(j);
+        }
+
+        while ((t = token()) !== EOF) {
+            var a = [];
+            while ((t !== EOL) && (t !== EOF)) {
+                a.push(t);
+                t = token();
+            }
+            if (f && !(a = f(a, n++))) continue;
+            rows.push(a);
+        }
+
+        return rows;
+    }
+
+    var features = [];
+    var parsed = csv_parse(x);
+    if (!parsed.length) return callback(features);
+
+    var latfield = '',
+        lonfield = '';
+
+    for (var f in parsed[0]) {
+        if (f.match(/^Lat/i)) latfield = f;
+        if (f.match(/^Lon/i)) lonfield = f;
+    }
+
+    if (!latfield || !lonfield) {
+        throw 'CSV: Could not find latitude or longitude field';
+    }
+
+    for (var i = 0; i < parsed.length; i++) {
+        if (parsed[i][lonfield] !== undefined &&
+            parsed[i][lonfield] !== undefined) {
+            features.push({
+                type: 'Feature',
+                properties: parsed[i],
+                geometry: {
+                    type: 'Point',
+                    coordinates: [
+                        parseFloat(parsed[i][lonfield]),
+                        parseFloat(parsed[i][latfield])]
+                }
+            });
+        }
+    }
+    return features;
+};
+mapbox.markers.simplestyle_factory = function(feature) {
+
+    var sizes = {
+      small: [20, 50],
+      medium: [30, 70],
+      large: [35, 90]
+    };
+
+    var fp = feature.properties || {};
+
+    var size = fp['marker-size'] || 'medium';
+    var symbol = (fp['marker-symbol']) ? '-' + fp['marker-symbol'] : '';
+    var color = fp['marker-color'] || '7e7e7e';
+    color = color.replace('#', '');
+
+    var d = document.createElement('img');
+    d.width = sizes[size][0];
+    d.height = sizes[size][1];
+    d.className = 'simplestyle-marker';
+    d.alt = fp.title || '';
+    d.src = (mapbox.markers.marker_baseurl || 'http://a.tiles.mapbox.com/v3/marker/') +
+      'pin-' +
+      // Internet Explorer does not support the `size[0]` syntax.
+      size.charAt(0) + symbol + '+' + color +
+      ((window.devicePixelRatio === 2) ? '@2x' : '') +
+      '.png';
+      // Support retina markers for 2x devices
+
+    var ds = d.style;
+    ds.position = 'absolute';
+    ds.clip = 'rect(auto auto ' + (sizes[size][1] * 0.75) + 'px auto)';
+    ds.marginTop = -((sizes[size][1]) / 2) + 'px';
+    ds.marginLeft = -(sizes[size][0] / 2) + 'px';
+    ds.cursor = 'pointer';
+    ds.pointerEvents = 'all';
+
+    return d;
+};
+
 if (typeof mapbox === 'undefined') mapbox = {};
 
 // Utils
