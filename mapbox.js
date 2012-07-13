@@ -5449,7 +5449,7 @@ mapbox.load = function(url, callback) {
 
     // Instantiate markers layer
     if (tj.data) {
-      tj.markers = mmg().factory(simplestyle_factory);
+      tj.markers = mmg().factory(mapbox.markers.simplestyle_factory);
       tj.markers.url(tj.data, function() {
         mmg_interaction(tj.markers);
         callback(tj);
