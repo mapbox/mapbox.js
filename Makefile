@@ -8,6 +8,7 @@ build:
 		node_modules/reqwest/reqwest.min.js \
 		node_modules/modestmaps/modestmaps.min.js \
 		node_modules/wax/build/header.js \
+		node_modules/wax/lib/*.js \
 		node_modules/wax/control/lib/*.js \
 		node_modules/wax/control/mm/*.js \
 		node_modules/wax/connectors/mm/*.js \
