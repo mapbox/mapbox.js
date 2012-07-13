@@ -143,20 +143,16 @@ mapbox.map = function(el, layer) {
         if (location && animate) {
             this.ease.location(location).zoom(this.zoom())
                 .optimal(null, null, animate.callback);
-        } else if (location) {
-            return this.setCenter(location);
         } else {
-            return this.getCenter();
+            return MM.Map.prototype.center.call(this, location);
         }
     };
 
     m.zoom = function(zoom, animate) {
         if (zoom !== undefined && animate) {
             this.ease.to(this.coordinate).zoom(zoom).run(600);
-        } else if (zoom !== undefined) {
-            return this.setZoom(zoom);
         } else {
-            return this.getZoom();
+            return MM.Map.prototype.zoom.call(this, zoom);
         }
     };
 
