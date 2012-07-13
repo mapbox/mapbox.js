@@ -73,7 +73,9 @@ mapbox.layer = function() {
     // instance variables
     this._tilejson = {};
     this._url = '';
+    this._id = '';
 
+    this.name = '';
     this.parent = document.createElement('div');
     this.parent.style.cssText = 'position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; margin: 0; padding: 0; z-index: 0';
     this.levels = {};
@@ -102,7 +104,10 @@ mapbox.layer.prototype.url = function(x) {
 };
 
 mapbox.layer.prototype.id = function(x) {
+    if (!arguments.length) return this._id;
     this.url('http://a.tiles.mapbox.com/v3/' + x + '.jsonp');
+    this.name = x;
+    this._id = x;
     return this.refresh();
 };
 
@@ -110,12 +115,6 @@ mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
     this.setProvider(new mapbox.provider(x));
     this._tilejson = x;
-    return this;
-};
-
-mapbox.layer.prototype.name = function(x) {
-    if (!arguments.length) return this.name;
-    this.name = name;
     return this;
 };
 

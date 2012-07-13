@@ -1,23 +1,31 @@
 describe("mapbox", function() {
-  it("mapbox.load should load and initialize objects", function() {
+  var globalsBefore = {};
 
-    var l;
-    runs(function() {
-        mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp', function(o) {
-            l = o;
-        });
-    });
-
-    waits(500);
-
-    runs(function() {
-        expect(l.id).toEqual('tmcw.map-hehqnmda');
-        expect(l.thumbnail).toEqual('http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.png');
-        expect(l.tiles).toBeTruthy();
-    });
+  beforeEach(function(){
+      for (var key in window)
+          globalsBefore[key] = true;
   });
 
-  it("mapbox is present", function() {
-      expect(mapbox).toBeTruthy();
+  afterEach(function(){
+      var leaked = [];
+      for (var key in window) {
+          if (!(key in globalsBefore)) {
+              if (key !== 'grid')leaked.push(key);
+          }
+      }
+      if (leaked.length > 0) {
+          throw new Error('Leaked global variables: [' + leaked.join(', ') + ']');
+      }
   });
+
+  it("has mapbox and its members in the global scope", function() {
+      var l = [mapbox, mapbox.map,
+          mapbox.load, mapbox.auto,
+          mapbox.layer, mapbox.markers];
+
+      for (var i = 0; i < l.length; i++) {
+          expect(l[i]).toBeTruthy();
+      }
+  });
+
 });
