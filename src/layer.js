@@ -106,9 +106,15 @@ mapbox.layer.prototype.url = function(x) {
 mapbox.layer.prototype.id = function(x) {
     if (!arguments.length) return this._id;
     this.url('http://a.tiles.mapbox.com/v3/' + x + '.jsonp');
-    this.name = x;
+    this.named(x);
     this._id = x;
     return this.refresh();
+};
+
+mapbox.layer.prototype.named = function(x) {
+    if (!arguments.length) return this.name;
+    this.name = x;
+    return this;
 };
 
 mapbox.layer.prototype.tilejson = function(x) {

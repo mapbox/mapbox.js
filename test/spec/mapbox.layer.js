@@ -27,7 +27,7 @@ describe("mapbox.layer", function() {
       expect(l).toBeTruthy();
       expect(l.tilejson()).toEqual({});
   });
-  
+
   it("an id can be set on layers", function() {
       var l = mapbox.layer();
       expect(l).toBeTruthy();
@@ -46,5 +46,12 @@ describe("mapbox.layer", function() {
       expect(mapbox.layer().tilejson()).toEqual({});
       expect(mapbox.layer().provider.options.tiles[0])
         .toEqual('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
+  });
+
+  it("mapbox.layer has named and name", function() {
+      var l = mapbox.layer().named('test');
+      expect(l.named()).toEqual('test');
+      expect(l.name).toEqual('test');
+      expect(l.name == 'test').toBeTruthy();
   });
 });
