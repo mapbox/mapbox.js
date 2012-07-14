@@ -139,6 +139,9 @@ mapbox.map = function(el, layer) {
     // Attach easey
     m.ease = easey().map(m);
 
+    // Attach UI
+    m.ui = mapbox.ui().map(m);
+
     m.center = function(location, animate) {
         if (location && animate) {
             this.ease.location(location).zoom(this.zoom())
