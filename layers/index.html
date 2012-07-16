@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mapbox.js examples</title>
+        <script src='http://js.mapbox.com/mapbox.js/v0.5.4/mapbox.js'></script>
+        <link href='http://js.mapbox.com/mapbox.js/v0.5.4/mapbox.css' rel='stylesheet' type='text/css' />
+        <style>
+            body {
+                margin:0;
+                padding:0;
+            }
+            #layers {
+                top:0px;
+                left:0px;
+                width:200px;
+                bottom:0;
+                position:absolute;
+            }
+            #map {
+                position:absolute;
+                top:0;
+                left:200px;
+                right:0;
+                bottom:0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='layers'></div>
+        <div id='map'></div>
+        <script>
+            var m = mapbox.map('map');
+            var layers = document.getElementById('layers');
+
+            m.addLayer(mapbox.layer().id('tmcw.map-j5a868tu'));
+            m.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
+            m.zoom(7);
+
+            for (var i = 0; i < m.getLayers().length; i++) {
+                var n = m.getLayerAt(i).name;
+                var container = document.createElement('div');
+                var input = document.createElement('input');
+                var label = document.createElement('label');
+                input.type = 'checkbox';
+                input.id = n;
+                input.value = n;
+                input.checked = 'checked';
+                label.innerHTML = n;
+                label.setAttribute('for', n);
+                container.appendChild(input);
+                container.appendChild(label);
+                layers.appendChild(container);
+            }
+        </script>
+    </body>
+</html>
