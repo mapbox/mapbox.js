@@ -31,7 +31,7 @@ describe("mapbox.load", function() {
 
     runs(function() {
         expect(l.id).toEqual('tmcw.map-j5a868tu');
-        expect(l.thumbnail).toEqual('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.png');
+        expect(l.thumbnail).toEqual('http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu/thumb.png');
         expect(l.tiles).toBeTruthy();
         expect(l.markers).toBeTruthy();
         expect(l.markers.features().length).toEqual(2);
