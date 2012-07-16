@@ -5,10 +5,10 @@ if (typeof mapbox === 'undefined') mapbox = {};
 // easey handlers as defaults
 mapbox.map = function(el, layer) {
     var m = new MM.Map(el, layer, null, [
-            easey.TouchHandler(),
-            easey.DragHandler(),
-            easey.DoubleClickHandler(),
-            easey.MouseWheelHandler()
+            easey_handlers.TouchHandler(),
+            easey_handlers.DragHandler(),
+            easey_handlers.DoubleClickHandler(),
+            easey_handlers.MouseWheelHandler()
         ]);
 
     // Attach easey, ui, and interaction
@@ -41,10 +41,10 @@ mapbox.map = function(el, layer) {
     };
 
     var smooth_handlers = [
-        easey.TouchHandler,
-        easey.DragHandler,
-        easey.DoubleClickHandler,
-        easey.MouseWheelHandler
+        easey_handlers.TouchHandler,
+        easey_handlers.DragHandler,
+        easey_handlers.DoubleClickHandler,
+        easey_handlers.MouseWheelHandler
     ];
 
     var default_handlers = [

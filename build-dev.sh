@@ -1,23 +1,11 @@
 #!/bin/bash
-TAG=$1
+TAG="dev"
 
-if [ -z $TAG ]; then
-    echo "Usage: build.sh <tag>"
-    exit;
+if [ ! -e dist/$TAG ]; then
+    mkdir "dist/$TAG"
 fi
 
-if [ -e dist/$TAG ]; then
-    echo "rm -r dist/$TAG if you want to re-build"
-    exit;
-fi
-
-echo "--- BUILDING mapbox.js $TAG ---"
-
-echo "Checking out tag..."
-echo ""
-echo ""
-git checkout $TAG package.json
-git checkout $TAG src/*
+echo "--- BUILDING DEV mapbox.js $TAG ---"
 
 echo "Installing dependencies..."
 echo ""
@@ -37,8 +25,7 @@ cat node_modules/bean/bean.js \
 	node_modules/easey/src/easey.js \
 	node_modules/easey/src/easey.handlers.js \
 	node_modules/markers/dist/markers.js \
-	src/map.js src/load.js src/layer.js \
-	src/ui.js src/interaction.js src/util.js > mapbox.js
+	src/map.js src/load.js src/ui.js src/layer.js > mapbox.js
 
 echo "Minifying mapbox.min.js"
 ./node_modules/.bin/uglifyjs mapbox.js > mapbox.min.js
@@ -49,7 +36,6 @@ cat node_modules/markers/dist/markers.css \
     node_modules/wax/theme/controls.css \
 	theme/mapbox.css > mapbox.min.css
 
-mkdir "dist/$TAG"
 
 # bake a release
 cp mapbox.min.js "dist/$TAG/mapbox.js"

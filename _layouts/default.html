@@ -32,7 +32,17 @@
     <h3>API v0.5.2</h3>
     <ul>
       {% for post in site.posts %}
-      <li><a href='{{site.baseurl}}{{post.url}}'>{{post.title}}</a></li>
+      <li>
+        <h4 class='clearfix'>
+          <a href='{{site.baseurl}}{{post.url}}'>{{post.title}}</a>
+          <a class='expand' href='#'>Expand</a>
+        </h4>
+        <ul>
+          {% for link in post.toc %}
+          <li><a href='{{site.baseurl}}{{post.url}}#{{link | downcase | replace: '/\s+/g', '-' | }}'>{{link}}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
       {% endfor %}
     </ul>
   </nav>
