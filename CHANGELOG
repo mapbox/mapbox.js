@@ -1,3 +1,9 @@
+### v0.5.5
+
+* `mapbox.auto` now takes an optional callback and calls it with
+  `map, augmented tilejson`
+* Fixes various map issues in the Modest Maps wrapping of `mapbox.map`
+
 ### v0.4.1
 
 * Do not proxy `mapbox.markers` call anymore
