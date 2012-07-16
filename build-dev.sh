@@ -2,7 +2,7 @@
 TAG="dev"
 
 if [ ! -e dist/$TAG ]; then
-    mkdir "dist/$TAG"
+    mkdir -p "dist/$TAG"
 fi
 
 echo "--- BUILDING DEV mapbox.js $TAG ---"
