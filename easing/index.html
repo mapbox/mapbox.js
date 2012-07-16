@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mapbox.js examples</title>
+        <script src='http://js.mapbox.com/mapbox.js/v0.5.4/mapbox.js'></script>
+        <link href='http://js.mapbox.com/mapbox.js/v0.5.4/mapbox.css' rel='stylesheet' type='text/css' />
+        <style>
+            body {
+                margin:0;
+                padding:0;
+            }
+            #zoom {
+                z-index:999;
+                top:20px;
+                left:20px;
+                position:absolute;
+            }
+            #map {
+                position:absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='map'></div>
+        <button id='zoom'>ease to zoom 2</button>
+        <script>
+            mapbox.auto('map', 'tmcw.map-j5a868tu', function(map) {
+                document.getElementById('zoom').onclick = function() {
+                    map.zoom(2, true);
+                };
+            });
+        </script>
+    </body>
+</html>
