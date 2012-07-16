@@ -63,6 +63,18 @@ mapbox.map = function(el, layer) {
     };
 
 
+    m.setPanLimits = function(locations) {
+        if (locations instanceof MM.Extent) {
+            locations = locations.toArray();
+        }
+        this.coordLimits = [
+            this.locationCoordinate(locations[0]).zoomTo(this.coordLimits[0].zoom),
+            this.locationCoordinate(locations[1]).zoomTo(this.coordLimits[1].zoom)
+        ];
+        return this;
+    };
+
+
     m.center = function(location, animate) {
         if (location && animate) {
             this.ease.location(location).zoom(this.zoom())
