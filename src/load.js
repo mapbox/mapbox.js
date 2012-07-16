@@ -16,7 +16,7 @@ mapbox.auto = function(elem, url, callback) {
         }
 
         var map = mapbox.map(elem, tileLayers.concat(markerLayers)).auto();
-        callback(map);
+        callback(map, opts);
     });
 };
 
