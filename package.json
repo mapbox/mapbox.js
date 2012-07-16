@@ -10,7 +10,7 @@
   },
   "dependencies": {
       "reqwest": "0.4.5",
-      "modestmaps": "3.3.0",
+      "modestmaps": "3.3.1",
       "wax": "7.0.0dev3",
       "bean": "0.4.11-1",
       "mustache": "https://github.com/janl/mustache.js/tarball/master",
