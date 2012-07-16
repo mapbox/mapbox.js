@@ -106,6 +106,23 @@ mapbox.map = function(el, layer) {
         }
     };
 
+    // Override default addLayer behaviour in order to keep
+    // maker layers on top of tile layers by default
+    // TODO: better layer type detection?
+    m.addLayer = function(layer) {
+        if (layer.features) MM.Map.prototype.addLayer.call(this, layer);
+        else this.addTileLayer(layer);
+    };
+
+    m.addTileLayer = function(layer) {
+        for (var i = m.layers.length; i > 0; i--) {
+            if (!m.layers[i - 1].features) {
+                return this.insertLayerAt(i, layer);
+            }
+        }
+        return this.insertLayerAt(0, layer);
+    };
+
     return m;
 };
 
