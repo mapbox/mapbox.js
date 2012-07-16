@@ -1,9 +1,9 @@
 ---
 date: 0200-01-01
 section: help
-category: Javascript
 tag: Developers
-layout: help-page
+layout: docs-page
 title: map.ease
+description: 'Add animation to your map'
 ---
 

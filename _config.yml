@@ -1,8 +1,6 @@
 auto: true
 server: true
-exclude: README.md, .gitignore, node_modules, site, dist, test
+exclude: README.md, .gitignore, node_modules, dist, test
 baseurl: /mapbox.js/
 permalink: /:categories/:title
 markdown: rdiscount
-url:
-pygments: true

@@ -1,9 +1,9 @@
 ---
 date: 0200-01-03
 section: help
-category: Javascript
 tag: Developers
-layout: help-page
+layout: docs-page
 title: mapbox.map
+description: 'Core API for building a map'
 ---
 

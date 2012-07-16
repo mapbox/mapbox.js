@@ -1,0 +1,316 @@
+/*
+================================================
+Contents:
+  00 @fontface
+  01 Typography
+  02 UI Elements
+  03 Basic layout
+  04 Global Styling
+  05 Front page
+  06 Helpers
+================================================
+*/
+
+
+/* 00 @fontface
+--------------------------------------------- */
+@font-face {
+  font-family: 'Merriweather Bold';
+  src: url('fonts/merriweather-bold.eot?#') format('eot'),
+       url('fonts/merriweather-bold.woff') format('woff'),
+       url('fonts/merriweather-bold.ttf') format('truetype');
+  }
+
+@font-face {
+  font-family: 'Merriweather Light';
+  src: url('fonts/merriweather-light.eot?#') format('eot'),
+       url('fonts/merriweather-light.woff') format('woff'),
+       url('fonts/merriweather-light.ttf') format('truetype');
+  }
+
+@font-face {
+  font-family: 'Opensans Bold';
+  src: url('fonts/opensans-bold.eot?#') format('eot'),
+       url('fonts/opensans-bold.woff') format('woff'),
+       url('fonts/opensans-bold.ttf') format('truetype');
+  }
+
+@font-face {
+  font-family: 'Opensans Light';
+  src: url('fonts/opensans-light.eot?#') format('eot'),
+       url('fonts/opensans-light.woff') format('woff'),
+       url('fonts/opensans-light.ttf') format('truetype');
+  }
+
+@font-face {
+  font-family: 'Opensans Condensed Bold';
+  src: url('fonts/opensans-condbold.eot?#') format('eot'),
+       url('fonts/opensans-condbold.woff') format('woff'),
+       url('fonts/opensans-condbold.ttf') format('truetype');
+  }
+
+
+/* 01 Typography
+--------------------------------------------- */
+input,
+textarea,
+html {
+  font: 100%/1.625em Arial,Helvetica,sans-serif;
+  color: #28353d;
+  }
+body {
+  background: #f7f7f7;
+  font: 15px/26px 'Merriweather Light','Georgia','Times New Roman',serif;
+  }
+a,
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Opensans Bold','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  margin: 0;
+  }
+h1 {
+  font-size: 30px;
+  line-height: 36px;
+  margin: 0 0 20px;
+  }
+  .hero h1 {
+    font-family: 'Opensans Light';
+    font-size: 40px;
+    line-height: 50px;
+    max-width: 800px;
+    padding-right: 40px;
+    }
+    .hero h1 span {
+      font-size: 30px;
+      display: block;
+      }
+
+h2 { font-size: 20px; line-height: 28px; margin: 0 0 10px; }
+h3 { font-size: 15px; line-height: 22px; margin: 0 0 10px; }
+
+a {
+  color: #3887be;
+  text-decoration: none;
+  }
+
+p {
+  margin: 0 0 20px;
+  }
+
+small {
+  font-size: 11px;
+  line-height: 16px;
+  }
+
+sup {
+  vertical-align: super;
+  font-size: 11px;
+  font-weight: bold;
+  }
+
+blockquote {
+  margin: 20px;
+  padding-left: 20px;
+  }
+  blockquote p {
+    font-size: 12px;
+    line-height: 22px;
+    font-style: italic;
+    margin-bottom: 0;
+    }
+
+.content h1 {
+  border-top: 1px solid #d8e6f0;
+  padding-top: 20px;
+  margin-top: 40px;
+  }
+  .content > h1:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    }
+
+.content ul,
+.content ol {
+  margin: 0 0 20px 30px;
+  }
+.content ul ul,
+.content ul ol,
+.content ol ol,
+.content ol ul {
+  margin-bottom: 0;
+  }
+.content ul {
+  list-style: disc;
+  }
+.content ol {
+  list-style: decimal;
+  }
+.content a {
+  font-family: 'Merriweather Bold','Georgia','Times New Roman',serif;
+  }
+
+/* 02 UI Elements
+--------------------------------------------- */
+input,
+textarea,
+select {
+  display: inline-block;
+  width: 220px;
+  height: 25px;
+  padding: 4px 10px;
+  font-size: 13px;
+  line-height: 25px;
+  color: gray;
+  }
+  input[type='text'] {
+    border: 1px solid #ccc;
+    }
+textarea {
+  height: auto;
+  }
+input[type=button],
+input[type=reset],
+input[type=submit] {
+  width: auto;
+  height: auto;
+  }
+input[type='text'], textarea {
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  input[type='text']:focus, textarea:focus {
+    outline: 0;
+    border-color: #8C8C8C;
+    }
+.button {
+  background: #f7f7f7;
+  display: inline-block;
+  margin: 0 0 5px;
+  padding: 6px 8px;
+  color: #3c4e5a;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  text-shadow: 0 1px 1px #fff;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1),
+                      inset 0 1px 1px #fff;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, .1),
+                      inset 0 1px 1px #fff;
+  }
+  .button.big-button {
+    padding: 4px 10px;
+    font-size: 14px;
+    }
+
+
+/* 03 Basic Layout
+--------------------------------------------- */
+.masthead {
+  height: 80px;
+  position: relative;
+  z-index: 1000;
+  }
+.sidebar {
+  position: fixed;
+  width: 200px;
+  padding: 0 20px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  }
+
+.navigation {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  padding-top: 60px;
+  color: #fff;
+  }
+  .navigation.fixed {
+    position: fixed;
+    top: 0;
+    }
+.limiter {
+  padding: 0 20px;
+  }
+.content {
+  margin: 40px 0;
+  word-wrap: break-word;
+  }
+
+/* 04 Global Styling
+--------------------------------------------- */
+.masthead {
+  background: #3c4e5a;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+          box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  }
+  .home-link {
+    background: url(images/sprite.png) no-repeat 0 0;
+    width: 135px;
+    height: 50px;
+    display: block;
+    text-indent: -999em;
+    float: left;
+    margin-top: 13px;
+    }
+  .masthead nav {
+    float: right;
+    }
+    .masthead ul {
+      margin-top: 20px;
+      }
+      .masthead ul li {
+        float: left
+        }
+        .masthead ul li a {
+          display: inline-block;
+          font-size: 12px;
+          color: white;
+          padding: 8px 18px;
+          border: 1px solid #171F23;
+          margin-left: -1px;
+          text-align: center;
+          width: 102px;
+          }
+          .masthead ul li a.active,
+          .masthead ul li a:active {
+            background-color: #28353d;
+            }
+
+.sidebar {
+  background: #171f23;
+  }
+
+.hero {
+  background: #fff;
+  padding: 60px 0 5px 280px;
+  margin-bottom: 40px;
+  }
+
+.content {
+  background: #fff;
+  border: 1px solid #d8e6f0;
+  padding: 38px;
+  margin-left: 260px;
+  margin-right: 20px;
+  }
+
+/* 05 Front page
+--------------------------------------------- */
+.books {
+  margin-left: 260px;
+  }
+
+/* 06 Helpers
+--------------------------------------------- */
+.clearfix:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+  }
+
+* html .clearfix { height: 1%; } /* IE6 */
+*:first-child + html .clearfix { min-height: 1%; } /* IE7 */

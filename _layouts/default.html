@@ -1,58 +1,48 @@
+---
+---
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv='content-type' content='text/html; charset=utf-8' />
-    <title>{% if page.title %}{{ page.title }} - {% endif %} MapBox Javascript API</title>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    <style>
-        body {
-            font: 12px/20px 'Helvetica Neue', 'Helvetica', sans-serif;
-            width:960px;
-            margin:0 auto;
-            color:#222;
-        }
-        a {
-            color:#489;
-            text-decoration:none;
-        }
-        .content {
-            width:600px;
-            float:left;
-        }
-        #toc {
-            width:350px;
-            float:right;
-        }
-        #toc a {
-            display:block;
-        }
-        .cH1 {
-            font:bold 20px/40px 'Helvetica Neue', sans-serif;
-        }
-        .cH2 {
-            font:bold 12px/25px monospace;
-        }
-        .cH3 {
-            font:normal 10px/20px monospace;
-        }
-    </style>
+  <head>
+    <meta charset=utf-8 />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='black' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <link rel='shortcut icon' href='{{site.baseurl}}site/images/favicon.ico' type='image/gif' />
+    <link rel='stylesheet' href='{{site.baseurl}}site/reset.css'>
+    <link rel='stylesheet' href='{{site.baseurl}}site/site.css'>
+    <link rel='stylesheet' href='{{site.baseurl}}site/fallsemo.css'>
+    <title>{% if page.title %}{{ page.title }} | {% endif %} MapBox Javascript API</title>
 </head>
 <body>
-  <div class='wrapper'>
-    <div id='toc'>
+  <header class='masthead'>
+    <div class='limiter clearfix'>
+      <a href='http://mapbox.com' class='home-link'>http://mapbox.com</a>
+      <nav>
+        <ul>
+          <li><a href='#'>How Maps Work</a></li>
+          <li><a href='{{site.baseurl}}' class='active'>Javascript API</a></li>
+          <li><a href='#'>iOS API</a></li>
+          <li><a href='#'>REST API</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class='content'>
-      {{ content }}
-    </div>
-  </div>
-  <script>
-      var toc = document.getElementById('toc');
-      $('h1, h2, h3').each(function(i, h2) {
-          var toclink = toc.appendChild(document.createElement('a'));
-          toclink.className = 'c' + h2.tagName;
-          toclink.innerHTML = h2.innerHTML;
-          toclink.href = '#h' + i;
-      });
-  </script>
+  </header>
+  <section class='sidebar'></section>
+  <nav class='navigation'>
+    <h3>API v0.5.0</h3>
+    <ul>
+      {% for post in site.posts %}
+      <li><a href='{{site.baseurl}}{{post.url}}'>{{post.title}}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {{content}}
+<script src='{{site.baseurl}}site/js/vendor/jquery.1.6.4.min.js'></script>
+<script src='{{site.baseurl}}site/js/vendor/rainbow.1.1.8.min.js'></script>
+<script src='{{site.baseurl}}site/js/vendor/rainbow/generic.js'></script>
+<script src='{{site.baseurl}}site/js/vendor/rainbow/javascript.js'></script>
+<script src='{{site.baseurl}}site/js/vendor/rainbow/html.js'></script>
+<script src='{{site.baseurl}}site/js/vendor/rainbow/css.js'></script>
+<script src='{{site.baseurl}}site/site.js'></script>
 </body>
 </html>
