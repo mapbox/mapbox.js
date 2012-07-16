@@ -46,7 +46,7 @@ mapbox.load = function(url, callback) {
             lon: tj.center[0]
         };
 
-        tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + 'thumb.png';
+        tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + '/thumb.png';
 
         // Instantiate tile layer
         tj.layer = mapbox.layer().tilejson(tj);
