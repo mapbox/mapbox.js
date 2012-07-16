@@ -13,11 +13,11 @@ mapbox.util = {
                 results[index] = result;
                 remaining--;
                 if (!remaining) callback(results);
-            }
+            };
         }
 
         for (var i = 0; i < values.length; i++) {
             func(values[i], next(i));
         }
     }
-}
+};

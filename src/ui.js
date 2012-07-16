@@ -3,12 +3,22 @@ if (typeof mapbox === 'undefined') mapbox = {};
 mapbox.ui = function() {
 
     var ui = {},
-        map;
+        map,
+        container = document.createElement('div');
+
+    container.id = 'controls';
 
     ui.map = function(x) {
         if (!x) return map;
         map = x;
-        return this
+        map.parent.appendChild(container);
+        return this;
+    };
+
+    ui.auto = function() {
+        ui.zoomer();
+        ui.zoombox();
+        return this;
     };
 
     ui.pointselector = function() {
@@ -31,14 +41,14 @@ mapbox.ui = function() {
     };
 
     ui.fullscreen = function() {
-        ui._fullscreen = wax.mm.fullscreen(map).appendTo(map.parent);
+        ui._fullscreen = wax.mm.fullscreen(map).appendTo(container);
         return this;
     };
 
     ui.zoomer = function() {
-        ui._zoomer = wax.mm.zoomer(map).appendTo(map.parent);
+        ui._zoomer = wax.mm.zoomer(map).appendTo(container);
         return this;
     };
 
     return ui;
-}
+};

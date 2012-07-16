@@ -17,6 +17,22 @@ mapbox.map = function(el, layer) {
     // Attach UI
     m.ui = mapbox.ui().map(m);
 
+    // Autoconfigure map with sensible defaults
+    m.auto = function() {
+        this.ui.auto();
+
+        for (var i = 0; i < this.layers.length; i++) {
+            if (this.layers[i].tilejson) {
+                var tj = this.layers[i].tilejson(),
+                    center = tj.center || new MM.Location(0, 0),
+                    zoom = tj.zoom || 0;
+                this.setCenterZoom(center, zoom);
+                break;
+            }
+        }
+        return this;
+    }
+
     var smooth_handlers = [
         easey.TouchHandler,
         easey.DragHandler,

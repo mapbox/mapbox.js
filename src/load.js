@@ -1,21 +1,24 @@
 if (typeof mapbox === 'undefined') mapbox = {};
 
-// Utils
-function getStyle(elem, name) {
-    if (elem.style[name]) {
-        return elem.style[name];
-    } else if (elem.currentStyle) {
-        return elem.currentStyle[name];
-    }
-    else if (document.defaultView && document.defaultView.getComputedStyle) {
-        name = name.replace(/([A-Z])/g, '-$1');
-        name = name.toLowerCase();
-        s = document.defaultView.getComputedStyle(elem, '');
-        return s && s.getPropertyValue(name);
-    } else {
-        return null;
-    }
-}
+// Simplest way to create a map. Just provide an element id and
+// a tilejson url (or an array of many) and an optional callback
+// that takes one argument, the map.
+mapbox.auto = function(elem, url, callback) {
+    mapbox.load(url, function(opts) {
+
+        if (!(opts instanceof Array)) opts = [opts];
+
+        var tileLayers = [],
+            markerLayers = [];
+        for (var i = 0; i < opts.length; i++) {
+            if (opts[i].layer) tileLayers.push(opts[i].layer);
+            if (opts[i].markers) markerLayers.push(opts[i].markers);
+        }
+
+        var map = mapbox.map(elem, tileLayers.concat(markerLayers)).auto();
+        callback(map);
+    });
+};
 
 
 // mapbox.load pulls a [TileJSON](http://mapbox.com/wax/tilejson.html)
@@ -46,9 +49,9 @@ mapbox.load = function(url, callback) {
         tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + 'thumb.png';
 
         // Instantiate tile layer
-        tj.layer = new wax.mm.connector(tj);
+        tj.layer = mapbox.layer().tilejson(tj);
 
-        // Calculate tile limits
+        // Set tile limits
         if (tj.bounds) {
             var proj = new MM.MercatorProjection(0,
                 MM.deriveTransformation(
@@ -56,7 +59,7 @@ mapbox.load = function(url, callback) {
                     Math.PI,  Math.PI, 1, 0,
                     -Math.PI, -Math.PI, 0, 1));
 
-            tj.tileLimits = [
+            tj.layer.provider.tileLimits = [
                 proj.locationCoordinate(new MM.Location(tj.bounds[3], tj.bounds[0]))
                     .zoomTo(tj.minzoom ? tj.minzoom : 0),
                 proj.locationCoordinate(new MM.Location(tj.bounds[1], tj.bounds[2]))
@@ -75,37 +78,4 @@ mapbox.load = function(url, callback) {
             callback(tj);
         }
     });
-};
-
-// Full auto mode. This can be supplied as the argument to mapbox.load
-// in order to construct a map from a tilejson snippet.
-mapbox.auto = function(el, callback) {
-    return function(options) {
-        var map = mapbox.map(el);
-        map.controls = document.createElement('div');
-        map.controls.style.cssText = 'position: absolute; z-index: 1000';
-        map.controls.id = 'controls';
-        map.parent.appendChild(map.controls);
-
-        // Check the map parent for default properties.
-        // if they aren't set then create some off the bat.
-        var i, defaultProperties = ['height', 'width'];
-        for (i in defaultProperties) {
-            var prop = defaultProperties[i];
-            if (getStyle(map.parent, prop) === '0px' || getStyle(map.parent, prop) === 'auto') {
-                map.parent.style[prop] = '400px';
-            }
-        }
-        if (options.layer) map.addLayer(options.layer);
-        if (options.markers) map.addLayer(options.markers);
-        if (options.attribution) wax.mm.attribution(map, options).appendTo(map.parent);
-        if (options.legend) wax.mm.legend(map, options).appendTo(map.parent);
-        wax.mm.zoomer(map).appendTo(map.controls);
-        wax.mm.zoombox(map);
-        map.zoom(options.zoom).center(options.center);
-        wax.mm.interaction().map(map).tilejson(options).on(wax.tooltip().parent(map.parent).events());
-
-        map.setZoomRange(options.minzoom, options.maxzoom);
-        if (callback) callback(map, options);
-    };
 };
