@@ -1,29 +1,5 @@
 if (typeof mapbox === 'undefined') mapbox = {};
 
-var smooth_handlers = [
-easey.TouchHandler, easey.DragHandler, easey.DoubleClickHandler, easey.MouseWheelHandler];
-
-var default_handlers = [MM.TouchHandler, MM.DragHandler, MM.DoubleClickHandler, MM.MouseWheelHandler];
-
-MM.Map.prototype.smooth = function(_) {
-    while (this.eventHandlers.length) {
-        this.eventHandlers.pop().remove();
-    }
-    if (_) {
-        for (var j = 0; j < smooth_handlers.length; j++) {
-            var h = smooth_handlers[j]();
-            this.eventHandlers.push(h);
-            h.init(this);
-        }
-    } else {
-        for (var k = 0; k < default_handlers.length; k++) {
-            var def = default_handlers[k]();
-            this.eventHandlers.push(def);
-            def.init(this);
-        }
-    }
-    return this;
-};
 
 // a `mapbox.map` is a modestmaps object with the
 // easey handlers as defaults
@@ -40,6 +16,35 @@ mapbox.map = function(el, layer) {
 
     // Attach UI
     m.ui = mapbox.ui().map(m);
+
+    var smooth_handlers = [
+        easey.TouchHandler,
+        easey.DragHandler,
+        easey.DoubleClickHandler,
+        easey.MouseWheelHandler
+    ];
+
+    var default_handlers = [
+        MM.TouchHandler,
+        MM.DragHandler,
+        MM.DoubleClickHandler,
+        MM.MouseWheelHandler
+    ];
+
+    MM.Map.prototype.smooth = function(_) {
+        while (this.eventHandlers.length) {
+            this.eventHandlers.pop().remove();
+        }
+
+        var handlers = _ ? smooth_handlers : default_handlers;
+        for (var j = 0; j < handlers.length; j++) {
+            var h = handlers[j]();
+            this.eventHandlers.push(h);
+            h.init(this);
+        }
+        return this;
+    };
+
 
     m.center = function(location, animate) {
         if (location && animate) {
