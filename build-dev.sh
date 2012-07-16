@@ -25,7 +25,7 @@ cat node_modules/bean/bean.js \
 	node_modules/easey/src/easey.js \
 	node_modules/easey/src/easey.handlers.js \
 	node_modules/markers/dist/markers.js \
-	src/mapbox.js src/layer.js > mapbox.js
+	src/map.js src/load.js src/ui.js src/layer.js > mapbox.js
 
 echo "Minifying mapbox.min.js"
 ./node_modules/.bin/uglifyjs mapbox.js > mapbox.min.js
@@ -42,7 +42,6 @@ cp mapbox.min.js "dist/$TAG/mapbox.js"
 cp mapbox.js "dist/$TAG/mapbox.uncompressed.js"
 cp mapbox.min.css "dist/$TAG/mapbox.css"
 cp node_modules/wax/theme/map-controls.png "dist/$TAG/map-controls.png"
-cp node_modules/wax/theme/blank.gif "dist/$TAG/blank.gif"
 
 set -- `wc -c mapbox.min.js`
 echo "mapbox.min.js size:"
