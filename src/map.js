@@ -123,7 +123,7 @@ mapbox.map = function(el, layer) {
         return this.insertLayerAt(0, layer);
     };
 
-    return this;
+    return m;
 };
 
 this.mapbox = mapbox;

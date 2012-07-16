@@ -25,7 +25,8 @@ cat node_modules/bean/bean.js \
 	node_modules/easey/src/easey.js \
 	node_modules/easey/src/easey.handlers.js \
 	node_modules/markers/dist/markers.js \
-	src/map.js src/load.js src/ui.js src/layer.js > mapbox.js
+	src/map.js src/load.js src/ui.js \
+	src/interaction.js src/layer.js > mapbox.js
 
 echo "Minifying mapbox.min.js"
 ./node_modules/.bin/uglifyjs mapbox.js > mapbox.min.js
