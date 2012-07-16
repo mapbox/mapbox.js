@@ -221,11 +221,11 @@ input[type='text'], textarea {
   }
 
 .navigation {
+  width: 240px;
+  padding-top: 60px;
   position: absolute;
   top: 60px;
-  left: 20px;
-  padding-top: 60px;
-  color: #fff;
+  left: 0;
   }
   .navigation.fixed {
     position: fixed;
@@ -282,6 +282,44 @@ input[type='text'], textarea {
 .sidebar {
   background: #171f23;
   }
+.navigation {
+  color: #fff;
+  }
+  .navigation ul li a {
+    background: #28353d;
+    font-size: 12px;
+    color: #fff;
+    padding: 0 20px;
+    }
+    .navigation ul li h4 {
+      display: block;
+      margin-bottom: 1px;
+      }
+    .navigation ul li h4 a {
+      width: 160px;
+      height: 40px;
+      line-height: 40px;
+      float: left;
+      }
+    .navigation ul li h4 a.expand {
+      width: 39px;
+      margin-left: 1px;
+      padding: 0;
+      display: block;
+      text-indent: -999em;
+      }
+    .navigation ul li a:hover {
+      background-color: #3c4e5a; 
+      }
+    .navigation ul li ul {
+      display: none;
+      }
+      .navigation ul li ul.expanded {
+        display: block;
+        }
+      .navigation ul li ul li a {
+        display: block;
+        }
 
 .hero {
   background: #fff;

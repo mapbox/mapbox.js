@@ -20,4 +20,13 @@ $(function () {
             }
         }
     });
+
+    $('a.expand').click(function(e) {
+        if (!$(this).hasClass('expanded')) {
+            $('.expanded').removeClass('expanded');
+            var expandedMenu = $(this).parent().next('ul');
+            $(this, expandedMenu).addClass('expanded');
+        }
+        return false;
+    });
 });
