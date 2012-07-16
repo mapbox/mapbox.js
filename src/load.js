@@ -22,10 +22,17 @@ function getStyle(elem, name) {
 // object from a server and uses it to configure a map and various map-related
 // objects
 mapbox.load = function(url, callback) {
+
+    // Support multiple urls
+    if (url instanceof Array) {
+        return mapbox.util.asyncMap(url, mapbox.load, callback);
+    }
+
     // Support bare IDs as well as fully-formed URLs
     if (url.indexOf('http') !== 0) {
         url = 'http://a.tiles.mapbox.com/v3/' + url + '.jsonp';
     }
+
     wax.tilejson(url, function(tj) {
         // Pull zoom level out of center
         tj.zoom = tj.center[2];
@@ -36,17 +43,19 @@ mapbox.load = function(url, callback) {
             lon: tj.center[0]
         };
 
-        tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + '.png';
+        tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + 'thumb.png';
 
         // Instantiate tile layer
-        if (tj.tiles) tj.layer = new wax.mm.connector(tj);
+        tj.layer = new wax.mm.connector(tj);
 
         // Calculate tile limits
-        if (tj.tiles && tj.bounds) {
+        if (tj.bounds) {
             var proj = new MM.MercatorProjection(0,
-                MM.deriveTransformation(-Math.PI,  Math.PI, 0, 0,
+                MM.deriveTransformation(
+                    -Math.PI,  Math.PI, 0, 0,
                     Math.PI,  Math.PI, 1, 0,
                     -Math.PI, -Math.PI, 0, 1));
+
             tj.tileLimits = [
                 proj.locationCoordinate(new MM.Location(tj.bounds[3], tj.bounds[0]))
                     .zoomTo(tj.minzoom ? tj.minzoom : 0),
