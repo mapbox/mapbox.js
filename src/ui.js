@@ -21,6 +21,10 @@ mapbox.ui = function() {
         return this;
     };
 
+    ui.refresh = function() {
+        return this;
+    };
+
     ui.pointselector = function() {
         ui._pointselector = wax.mm.pointselector(map);
         return this;

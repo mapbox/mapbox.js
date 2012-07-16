@@ -7,7 +7,6 @@ mapbox.interaction = function() {
     interaction.refresh = function() {
         var map = this.map();
         for (var i = map.layers.length - 1; i >= 0; i --) {
-            console.log(map.layers[i]);
             var tj = map.layers[i].tilejson && map.layers[i].tilejson();
             if (tj && tj.template) return this.tilejson(tj);
         }

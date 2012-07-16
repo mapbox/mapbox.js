@@ -32,7 +32,13 @@ mapbox.map = function(el, layer) {
             }
         }
         return this;
-    }
+    };
+
+    m.refresh = function() {
+        this.ui.refresh();
+        this.interaction.refresh();
+        return this;
+    };
 
     var smooth_handlers = [
         easey.TouchHandler,
