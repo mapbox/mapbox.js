@@ -110,8 +110,8 @@ mapbox.map = function(el, layer) {
     // maker layers on top of tile layers by default
     // TODO: better layer type detection?
     m.addLayer = function(layer) {
-        if (layer.features) MM.Map.prototype.addLayer.call(this, layer);
-        else this.addTileLayer(layer);
+        if (layer.features) return MM.Map.prototype.addLayer.call(this, layer);
+        else return this.addTileLayer(layer);
     };
 
     m.addTileLayer = function(layer) {
@@ -123,7 +123,7 @@ mapbox.map = function(el, layer) {
         return this.insertLayerAt(0, layer);
     };
 
-    return m;
+    return this;
 };
 
 this.mapbox = mapbox;
