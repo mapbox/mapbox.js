@@ -2,7 +2,7 @@
 TAG=$1
 
 if [ -z $TAG ]; then
-    echo "Usage: build.sh <tag>"
+    echo "Usage: build-site.sh <tag>"
     exit;
 fi
 
@@ -17,7 +17,7 @@ echo "Checking out tag..."
 git checkout $TAG package.json
 
 echo "Installing dependencies..."
-#npm install
+npm install
 
 echo "Creating _posts/$TAG"
 
@@ -31,3 +31,9 @@ cat site/frontmatter/easey.yaml node_modules/easey/API.md \
 
 cat site/frontmatter/markers.yaml node_modules/markers/API.md \
     > _posts/$TAG/0200-01-03-markers.md
+
+cat site/markers_style.yaml node_modules/markers/STYLE.md \
+    > _posts/$TAG/0200-01-03-markers-style.md
+
+cat site/mapbox_style.yaml STYLE.md \
+    > _posts/$TAG/0200-01-02-mapbox-style.md
