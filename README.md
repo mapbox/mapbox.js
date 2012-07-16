@@ -2,7 +2,7 @@
 
 mapbox.js is a library for creating web maps that makes things simple and straightforward.
 
-# [Documentation](https://github.com/mapbox/mapbox.js/wiki/Documentation)
+# [Documentation](https://github.com/mapbox/mapbox.js/blob/master/API.md)
 
 # [Tests](http://mapbox.com/mapbox.js/test/)
 
