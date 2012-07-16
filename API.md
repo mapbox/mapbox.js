@@ -63,9 +63,11 @@ After pulling the information from MapBox, it calls the function specified at th
       markers: MARKERS_LAYER 
     }
 
-## mapbox.auto(element, callback)
+## mapbox.auto(element, url [, callback])
 
 This is a function you can provide as the second argument to `mapbox.load` that automatically builds a map with default settings.
+The callback, if specified, receives the map as its first argument, and the same object as `mapbox.load`
+as the second argument.
 
 For instance, to create a simple map, you can call
 
