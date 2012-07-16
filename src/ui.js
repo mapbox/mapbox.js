@@ -54,5 +54,15 @@ mapbox.ui = function() {
         return this;
     };
 
+    ui.legend = function(tj) {
+        ui._legend = wax.mm.legend(map, tj).appendTo(container);
+        return this;
+    };
+
+    ui.attribution = function(tj) {
+        ui._attribution = wax.mm.attribution(map, tj).appendTo(container);
+        return this;
+    };
+
     return ui;
 };
