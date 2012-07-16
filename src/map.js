@@ -11,15 +11,16 @@ mapbox.map = function(el, layer) {
             easey.MouseWheelHandler()
         ]);
 
-    // Attach easey
+    // Attach easey, ui, and interaction
     m.ease = easey().map(m);
-
-    // Attach UI
     m.ui = mapbox.ui().map(m);
+    m.interaction = mapbox.interaction().map(m);
+
 
     // Autoconfigure map with sensible defaults
     m.auto = function() {
         this.ui.auto();
+        this.interaction.auto();
 
         for (var i = 0; i < this.layers.length; i++) {
             if (this.layers[i].tilejson) {
