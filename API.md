@@ -38,6 +38,38 @@ Set the map's zoom level and centerpoint simultaneously.
 
 The third parameter, `animates`, animates the transition: set it to `true` to animate, omit or set it to `false` to not animate. This will animate center and zoom changes at the same time.
 
+### map.setPanLimits(locations)
+
+Set the map's panning limits. The parameter, `locations` can be either an instance of MM.Extent or an array of locations in the order north, west, south, east.
+
+### map.auto()
+
+Enables defaults settings for UI and interaction. Also sets map's center and zoom to that of the baselayer.
+
+### map.refresh()
+Refreshes map.ui and map.interaction to reflect any layer changes.
+
+### map.addTileLayer(layer)
+Adds a tile layer to the map, below any marker layers to prevent them from being covered up.
+
+### map.ease
+
+An instance of easey initialized with the map.
+
+    map.ease.location({ lat: 10, lon: -88 }).zoom(5).optimal();
+
+See [Easey documentation](https://github.com/mapbox/easey/wiki) for a full reference.
+
+### map.ui
+
+An instance of mapbox.ui attached to the map for convenience.
+
+### map.interaction
+
+An instance of mapbox.interaction attached to map for convenience.
+
+
+
 See [Modest Maps parent documentation](https://github.com/modestmaps/modestmaps-js/wiki) for a full reference.
 
 # Loading Utilities
@@ -65,15 +97,14 @@ After pulling the information from MapBox, it calls the function specified at th
 
 ## mapbox.auto(element, url [, callback])
 
-This is a function you can provide as the second argument to `mapbox.load` that automatically builds a map with default settings.
-The callback, if specified, receives the map as its first argument, and the same object as `mapbox.load`
+Automatically load and create a map with sensible defaults. The callback, if specified, receives the map as its first argument, and the same object as `mapbox.load`
 as the second argument.
 
 For instance, to create a simple map, you can call
 
     <div id='map' style='width:500px;height:400px;'></div>
     <script>
-    mapbox.load('http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp', mapbox.auto('map'));
+    mapbox.auto('map', 'http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp');
     </script>
 
 # MapBox Layer
@@ -118,3 +149,59 @@ TileJSON in your Javascript scope instead of at a URL, you can call `.tilejson()
 The argument to this function must be a TileJSON object as a Javascript object.
 If the value is omitted, the current TileJSON object that corresponds to this layer
 is returned.
+
+
+# Map UI
+
+Common UI components for maps.
+
+## var ui = mapbox.ui()
+
+### ui.map(map)
+
+Set the map to add UI components for.
+
+### ui.auto()
+
+Automatically add default UI components: a zoomer and the zoombox control.
+
+The following are Wax UI components
+
+### ui.hash()
+
+Adds map position to URL, making map locations linkable.
+
+### ui.zoombox()
+
+Adds zoombox control, which lets users zoom by shift-clicking and drawing a box.
+
+### ui.zoomer()
+
+Adds a zoom in and zoom out buttons to map.
+
+### ui.attribution(tilejson)
+
+Adds attribution to map using the provided tilejson.
+
+### ui.legend(tilejson)
+
+Adds a legend to map using provided legend.
+
+
+# Interaction
+
+## var interaction = mapbox.interaction()
+
+Creates a Wax interaction control with several extra features. See [Wax documentation](http://mapbox.com/wax/interaction-mm.html) for full reference.
+
+### interaction.map(map)
+
+Set the map to add interaction for.
+
+### interaction.auto()
+
+Enable interactivity for topmost layer with interactive features.
+
+### interaction.refresh()
+
+Refresh interactivity control to reflect any layer changes.
