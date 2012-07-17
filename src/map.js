@@ -3,8 +3,9 @@ if (typeof mapbox === 'undefined') mapbox = {};
 
 // a `mapbox.map` is a modestmaps object with the
 // easey handlers as defaults
-mapbox.map = function(el, layer) {
-    var m = new MM.Map(el, layer, null, [
+mapbox.map = function(el, layer, dimensions, eventhandlers) {
+    var m = new MM.Map(el, layer, dimensions,
+            eventhandlers || [
             easey_handlers.TouchHandler(),
             easey_handlers.DragHandler(),
             easey_handlers.DoubleClickHandler(),
