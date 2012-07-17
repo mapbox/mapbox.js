@@ -11,85 +11,47 @@ Contents:
 ================================================
 */
 
+
 /* 00 @fontface
 --------------------------------------------- */
 @font-face {
-  font-family: 'Merriweather Bold';
-  src: url('fonts/merriweather-bold.eot?#') format('eot'),
-       url('fonts/merriweather-bold.woff') format('woff'),
-       url('fonts/merriweather-bold.ttf') format('truetype');
-  }
-
-@font-face {
-  font-family: 'Merriweather Light';
-  src: url('fonts/merriweather-light.eot?#') format('eot'),
-       url('fonts/merriweather-light.woff') format('woff'),
-       url('fonts/merriweather-light.ttf') format('truetype');
-  }
-
-@font-face {
   font-family: 'Opensans Bold';
-  src: url('fonts/opensans-bold.eot?#') format('eot'),
-       url('fonts/opensans-bold.woff') format('woff'),
-       url('fonts/opensans-bold.ttf') format('truetype');
+  src: url('../fonts/opensans-bold.eot?#') format('eot'),
+       url('../fonts/opensans-bold.woff') format('woff'),
+       url('../fonts/opensans-bold.ttf') format('truetype');
   }
 
 @font-face {
   font-family: 'Opensans Light';
-  src: url('fonts/opensans-light.eot?#') format('eot'),
-       url('fonts/opensans-light.woff') format('woff'),
-       url('fonts/opensans-light.ttf') format('truetype');
+  src: url('../fonts/opensans-light.eot?#') format('eot'),
+       url('../fonts/opensans-light.woff') format('woff'),
+       url('../fonts/opensans-light.ttf') format('truetype');
   }
-
-@font-face {
-  font-family: 'Opensans Condensed Bold';
-  src: url('fonts/opensans-condbold.eot?#') format('eot'),
-       url('fonts/opensans-condbold.woff') format('woff'),
-       url('fonts/opensans-condbold.ttf') format('truetype');
-  }
-
 
 /* 01 Typography
 --------------------------------------------- */
 input,
 textarea,
-html {
-  font: 100%/1.625em Arial,Helvetica,sans-serif;
-  color: #28353d;
-  }
 body {
   background: #f7f7f7;
-  font: 15px/26px 'Merriweather Light','Georgia','Times New Roman',serif;
+  font: 13px/20px 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #404040;
   }
-a,
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Opensans Bold','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-weight: normal;
+  font-weight: bold;
   margin: 0;
   }
 h1 {
-  font-size: 30px;
-  line-height: 36px;
-  margin: 0 0 20px;
+  font-size: 18px;
+  line-height: 26px;
+  margin: 0;
   }
-  .hero h1 {
-    font-family: 'Opensans Light';
-    font-size: 40px;
-    line-height: 50px;
-    max-width: 800px;
-    padding-right: 40px;
-    }
-    .hero h1 span {
-      font-size: 30px;
-      display: block;
-      }
-
 h2 { font-size: 20px; line-height: 28px; margin: 0 0 10px; }
 h3 { font-size: 15px; line-height: 22px; margin: 0 0 10px; }
 
 a {
   color: #3887be;
-  text-decoration: none;
+  text-decoration: underline;
   }
 
 p {
@@ -100,6 +62,10 @@ small {
   font-size: 11px;
   line-height: 16px;
   }
+  small.tags {
+    display: block;
+    color: #808080;
+    }
 
 sup {
   vertical-align: super;
@@ -118,17 +84,6 @@ blockquote {
     margin-bottom: 0;
     }
 
-.content h1 {
-  border-top: 1px solid #d8e6f0;
-  padding-top: 20px;
-  margin-top: 40px;
-  }
-  .content > h1:first-of-type {
-    border-top: none;
-    padding-top: 0;
-    margin-top: 0;
-    }
-
 .content ul,
 .content ol {
   margin: 0 0 20px 30px;
@@ -145,9 +100,6 @@ blockquote {
 .content ol {
   list-style: decimal;
   }
-.content a {
-  font-family: 'Merriweather Bold','Georgia','Times New Roman',serif;
-  }
 
 /* 02 UI Elements
 --------------------------------------------- */
@@ -158,11 +110,10 @@ select {
   width: 220px;
   height: 25px;
   padding: 4px 10px;
-  font-size: 13px;
-  line-height: 25px;
-  color: gray;
   }
+  input[type='search'], 
   input[type='text'] {
+    background: #fff;
     border: 1px solid #ccc;
     }
 textarea {
@@ -174,14 +125,29 @@ input[type=submit] {
   width: auto;
   height: auto;
   }
-input[type='text'], textarea {
+input[type='search'], 
+input[type='text'],
+textarea {
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   }
-  input[type='text']:focus, textarea:focus {
+  input[type='search']:focus, 
+  input[type='text']:focus,
+  textarea:focus {
     outline: 0;
     border-color: #8C8C8C;
+    }
+input[type='search'] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+  margin-bottom: 0;
+  }
+  input::-webkit-search-decoration,
+  input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
     }
 .button {
   background: #f7f7f7;
@@ -189,7 +155,6 @@ input[type='text'], textarea {
   margin: 0 0 5px;
   padding: 6px 8px;
   color: #3c4e5a;
-  font-size: 12px;
   border: 1px solid #ccc;
   text-shadow: 0 1px 1px #fff;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1),
@@ -199,149 +164,107 @@ input[type='text'], textarea {
   }
   .button.big-button {
     padding: 4px 10px;
-    font-size: 14px;
     }
 
 
 /* 03 Basic Layout
 --------------------------------------------- */
-.masthead {
-  height: 80px;
-  position: relative;
-  z-index: 1000;
+section {
+  margin: 20px 0;
   }
-.sidebar {
-  position: fixed;
-  width: 200px;
-  padding: 0 20px;
-  height: 100%;
-  top: 0;
-  left: 0;
-  }
-
-.navigation {
-  width: 240px;
-  padding-top: 60px;
-  position: absolute;
-  top: 60px;
-  left: 0;
-  }
-  .navigation.fixed {
-    position: fixed;
-    top: 0;
-    }
 .limiter {
-  padding: 0 20px;
+  width: 800px;
+  margin: 0 auto;
   }
-.content {
-  margin: 40px 0;
-  word-wrap: break-word;
+.masthead {
+  background: #fff;
+  height: 80px;
   }
 
 /* 04 Global Styling
 --------------------------------------------- */
-.masthead {
-  background: #3c4e5a;
-  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.25);
-          box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+.masthead ul, 
+.masthead h1 {
+  margin-top: 25px;
   }
-  .home-link {
-    background: url(images/sprite.png) no-repeat 0 0;
-    width: 135px;
-    height: 50px;
-    display: block;
-    text-indent: -999em;
+.masthead h1 {
+  float: left;
+  }
+.masthead ul {
+  float: right;
+  }
+  .masthead ul li {
     float: left;
-    margin-top: 13px;
+    margin-left: 10px;
     }
-  .masthead nav {
-    float: right;
-    }
-    .masthead ul {
-      margin-top: 20px;
+    .masthead ul li a {
+      display: inline-block;
       }
-      .masthead ul li {
-        float: left
-        }
-        .masthead ul li a {
-          display: inline-block;
-          font-size: 12px;
-          color: white;
-          padding: 8px 18px;
-          border: 1px solid #171F23;
-          margin-left: -1px;
-          text-align: center;
-          width: 102px;
-          }
-          .masthead ul li a.active,
-          .masthead ul li a:active {
-            background-color: #28353d;
-            }
 
-.sidebar {
-  background: #171f23;
-  }
-.navigation {
-  color: #fff;
-  }
-  .navigation ul li a {
-    background: #28353d;
-    font-size: 12px;
-    color: #fff;
-    padding: 0 20px;
-    }
-    .navigation ul li h4 {
-      display: block;
-      margin-bottom: 1px;
-      }
-    .navigation ul li h4 a {
-      width: 160px;
-      height: 40px;
-      line-height: 40px;
-      float: left;
-      }
-    .navigation ul li h4 a.expand {
-      width: 39px;
-      margin-left: 1px;
-      padding: 0;
-      display: block;
-      text-indent: -999em;
-      }
-    .navigation ul li a:hover {
-      background-color: #3c4e5a; 
-      }
-    .navigation ul li ul {
-      display: none;
-      }
-      .navigation ul li ul.expanded {
-        display: block;
-        }
-      .navigation ul li ul li a {
-        display: block;
-        }
-
-.hero {
-  background: #fff;
-  padding: 60px 0 5px 280px;
-  margin-bottom: 40px;
-  }
-
-.content {
-  background: #fff;
-  border: 1px solid #d8e6f0;
-  padding: 38px;
-  margin-left: 260px;
-  margin-right: 20px;
-  }
 
 /* 05 Front page
 --------------------------------------------- */
-.books {
-  margin-left: 260px;
+.browse {
+  padding: 30px 0 9px;
   }
+
+ul.topics li a {
+  background-color: #303030;
+  color: #fff;
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  opacity: 1;
+  text-decoration: none;
+  font-weight: normal;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
+  -webkit-transition: all 0.05s linear;
+     -moz-transition: all 0.05s linear;
+       -o-transition: all 0.05s linear;
+          transition: all 0.05s linear;
+  }
+  ul.topics li a:hover {
+    background-color: #101010;
+    }
+
+#tag-list {
+  display: block;
+  margin: 20px 0 10px;
+  }
+  #tag-list li {
+    float: left;
+    margin: 0 3px 3px 0;
+    }
+    #tag-list li a {
+      color: #fff;
+      background: #b0b0b0;
+      background: rgba(0,0,0,0.25);
+      display: inline-block;
+      padding: 4px 10px;
+      text-decoration: none;
+      -webkit-border-radius: 2px;
+              border-radius: 2px;
+      -webkit-transition: background-color 0.1s linear;
+         -moz-transition: background-color 0.1s linear;
+           -o-transition: background-color 0.1s linear;
+              transition: background-color 0.1s linear;
+      }
+      #tag-list li a:hover {
+        background: rgba(0,0,0,0.35);
+        }
+      #tag-list li a.active {
+        background: #404040;
+        }
 
 /* 06 Helpers
 --------------------------------------------- */
+.icon {
+  background: transparent url(images/sprite.png) no-repeat 0 0;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  }
 .clearfix:after {
   content: '';
   display: block;
