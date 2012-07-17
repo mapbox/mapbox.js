@@ -187,6 +187,14 @@ Adds attribution to map using the provided tilejson.
 
 Adds a legend to map using provided legend.
 
+### ui.pointselector(callback)
+
+Add the pointselector to the map. The callback gets called with a single argument, an array of coordinates of the points you have selected. To get the pointselector object, provide no callback.
+
+### ui.boxselector(callback)
+
+Add the boxselector to the map. The callback gets called with a single argument, an array of two instances of MM.Location, representing the extent of the selection. To get the boxselector object, provide no callback.
+
 
 # Interaction
 

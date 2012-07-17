@@ -4,7 +4,8 @@ mapbox.ui = function() {
 
     var ui = {},
         map,
-        container = document.createElement('div');
+        container = document.createElement('div'),
+        auto = false;
 
     container.id = 'controls';
 
@@ -16,6 +17,7 @@ mapbox.ui = function() {
     };
 
     ui.auto = function() {
+        auto = true;
         ui.zoomer();
         ui.zoombox();
         return this;
@@ -25,13 +27,15 @@ mapbox.ui = function() {
         return this;
     };
 
-    ui.pointselector = function() {
-        ui._pointselector = wax.mm.pointselector(map);
+    ui.pointselector = function(callback) {
+        if (!callback) return ui._pointselector;
+        ui._pointselector = wax.mm.pointselector(map, null, callback);
         return this;
     };
 
-    ui.boxselector = function() {
-        ui._boxselector = wax.mm.boxselector(map);
+    ui.boxselector = function(callback) {
+        if (!callback) return ui._boxselector;
+        ui._boxselector = wax.mm.boxselector(map, null, callback);
         return this;
     };
 
