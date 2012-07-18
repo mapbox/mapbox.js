@@ -20,9 +20,9 @@ The default css looks like this:
 
 UI elements by default also share some of the same css:
 
-    .close,
     .zoomer,
-    .map-fullscreen {
+    .map-fullscreen,
+    .map-tooltip .close {
     text-indent:-999em;
       background: #fff url(data:image/png;base64,ENCODED-PNG-DATA-GOES-HERE) no-repeat 0 0;
       overflow:hidden;
@@ -131,7 +131,7 @@ __Markup__
 
 __Default css__
 
-    .close {
+    .map-tooltip .close {
       top:4px;
       right:4px;
       width:18px;
@@ -139,7 +139,7 @@ __Default css__
       background-position:-6px -6px;
       }
 
-    .close:active {
+    .map-tooltip .close:active {
       border-color:#b0b0b0;
       background-color:#f0f0f0;
       -webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.15);
@@ -239,9 +239,9 @@ To support screens a media query is provided with an alternate scaled up version
     @media
       only screen and (-webkit-min-device-pixel-ratio : 2),
       only screen and (min-device-pixel-ratio : 2) {
-        .close,
         .zoomer,
-        .map-fullscreen {
+        .map-fullscreen,
+        .map-tooltip .close {
           background-image: url(data:image/png;base64,ENCODED-PNG-DATA-GOES-HERE);
           background-size: 150px 30px;
           }
