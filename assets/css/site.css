@@ -205,15 +205,14 @@ section {
 /* 05 Front page
 --------------------------------------------- */
 .browse {
-  padding: 30px 0 9px;
+  padding: 20px 0 60px;
   }
 
 ul.topics li a {
-  background-color: #303030;
-  color: #fff;
   display: block;
   padding: 10px;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
   opacity: 1;
   text-decoration: none;
   font-weight: normal;
@@ -225,7 +224,14 @@ ul.topics li a {
           transition: all 0.05s linear;
   }
   ul.topics li a:hover {
-    background-color: #101010;
+    background-color: #fff;
+    }
+    ul.topics li a:hover h4 {
+      text-decoration: underline;
+      }
+
+  ul.topics li a .description {
+    color: #404040;
     }
 
 #tag-list {
