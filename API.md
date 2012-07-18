@@ -97,8 +97,11 @@ After pulling the information from MapBox, it calls the function specified at th
 
 ## mapbox.auto(element, url [, callback])
 
-Automatically load and create a map with sensible defaults. The callback, if specified, receives the map as its first argument, and the same object as `mapbox.load`
-as the second argument.
+Automatically load and create a map with sensible defaults.
+
+- `element` is the id of the element within which to create the map
+- `url` can be a TileJSON URL, a MapBox map id, or an array of multiple.
+- `callback` if specified, receives the map as its first argument, and the same object as `mapbox.load` as the second argument.
 
 For instance, to create a simple map, you can call
 
