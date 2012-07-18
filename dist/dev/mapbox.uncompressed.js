@@ -7181,6 +7181,7 @@ wax.mm._provider.prototype = {
         ];
     },
     getTile: function(c) {
+        var coord;
         if (!(coord = this.sourceCoordinate(c))) return null;
         if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
 
@@ -8531,8 +8532,9 @@ if (typeof mapbox === 'undefined') mapbox = {};
 
 // a `mapbox.map` is a modestmaps object with the
 // easey handlers as defaults
-mapbox.map = function(el, layer) {
-    var m = new MM.Map(el, layer, null, [
+mapbox.map = function(el, layer, dimensions, eventhandlers) {
+    var m = new MM.Map(el, layer, dimensions,
+            eventhandlers || [
             easey_handlers.TouchHandler(),
             easey_handlers.DragHandler(),
             easey_handlers.DoubleClickHandler(),
@@ -8742,7 +8744,8 @@ mapbox.ui = function() {
 
     var ui = {},
         map,
-        container = document.createElement('div');
+        container = document.createElement('div'),
+        auto = false;
 
     container.id = 'controls';
 
@@ -8754,6 +8757,7 @@ mapbox.ui = function() {
     };
 
     ui.auto = function() {
+        auto = true;
         ui.zoomer();
         ui.zoombox();
         return this;
@@ -8763,13 +8767,15 @@ mapbox.ui = function() {
         return this;
     };
 
-    ui.pointselector = function() {
-        ui._pointselector = wax.mm.pointselector(map);
+    ui.pointselector = function(callback) {
+        if (!callback) return ui._pointselector;
+        ui._pointselector = wax.mm.pointselector(map, null, callback);
         return this;
     };
 
-    ui.boxselector = function() {
-        ui._boxselector = wax.mm.boxselector(map);
+    ui.boxselector = function(callback) {
+        if (!callback) return ui._boxselector;
+        ui._boxselector = wax.mm.boxselector(map, null, callback);
         return this;
     };
 
@@ -8806,22 +8812,51 @@ mapbox.ui = function() {
 };
 if (typeof mapbox === 'undefined') mapbox = {};
 
+
+mapbox.util = {
+
+    // Asynchronous map that groups results maintaining order
+    asyncMap: function(values, func, callback) {
+        var remaining = values.length,
+            results = [];
+
+        function next(index) {
+            return function(result) {
+                results[index] = result;
+                remaining--;
+                if (!remaining) callback(results);
+            };
+        }
+
+        for (var i = 0; i < values.length; i++) {
+            func(values[i], next(i));
+        }
+    }
+};
+if (typeof mapbox === 'undefined') mapbox = {};
+
 mapbox.interaction = function() {
 
-    var interaction = wax.mm.interaction();
+    var interaction = wax.mm.interaction(),
+        auto = false;
 
     interaction.refresh = function() {
-        var map = this.map();
+        var map = interaction.map();
+        if (!auto || !map) return interaction;
         for (var i = map.layers.length - 1; i >= 0; i --) {
             var tj = map.layers[i].tilejson && map.layers[i].tilejson();
-            if (tj && tj.template) return this.tilejson(tj);
+            if (tj && tj.template) return interaction.tilejson(tj);
         }
-        this.tilejson({});
+        return interaction.tilejson({});
     };
 
     interaction.auto = function() {
-        this.on(wax.tooltip().animate(true).parent(this.map().parent).events());
-        this.refresh();
+        auto = true;
+        interaction.on(wax.tooltip()
+            .animate(true)
+            .parent(interaction.map().parent)
+            .events());
+        return interaction.refresh();
     };
 
     return interaction;
@@ -8851,6 +8886,7 @@ mapbox.provider.prototype = {
     releaseTile: function(c) { },
 
     getTile: function(c) {
+        var coord;
         if (!(coord = this.sourceCoordinate(c))) return null;
         if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
 

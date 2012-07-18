@@ -6,19 +6,22 @@ mapbox.interaction = function() {
         auto = false;
 
     interaction.refresh = function() {
-        if (!auto) return;
-        var map = this.map();
+        var map = interaction.map();
+        if (!auto || !map) return interaction;
         for (var i = map.layers.length - 1; i >= 0; i --) {
             var tj = map.layers[i].tilejson && map.layers[i].tilejson();
-            if (tj && tj.template) return this.tilejson(tj);
+            if (tj && tj.template) return interaction.tilejson(tj);
         }
-        this.tilejson({});
+        return interaction.tilejson({});
     };
 
     interaction.auto = function() {
         auto = true;
-        this.on(wax.tooltip().animate(true).parent(this.map().parent).events());
-        this.refresh();
+        interaction.on(wax.tooltip()
+            .animate(true)
+            .parent(interaction.map().parent)
+            .events());
+        return interaction.refresh();
     };
 
     return interaction;
