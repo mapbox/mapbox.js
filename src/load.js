@@ -51,22 +51,6 @@ mapbox.load = function(url, callback) {
         // Instantiate tile layer
         tj.layer = mapbox.layer().tilejson(tj);
 
-        // Set tile limits
-        if (tj.bounds) {
-            var proj = new MM.MercatorProjection(0,
-                MM.deriveTransformation(
-                    -Math.PI,  Math.PI, 0, 0,
-                    Math.PI,  Math.PI, 1, 0,
-                    -Math.PI, -Math.PI, 0, 1));
-
-            tj.layer.provider.tileLimits = [
-                proj.locationCoordinate(new MM.Location(tj.bounds[3], tj.bounds[0]))
-                    .zoomTo(tj.minzoom ? tj.minzoom : 0),
-                proj.locationCoordinate(new MM.Location(tj.bounds[1], tj.bounds[2]))
-                    .zoomTo(tj.maxzoom ? tj.maxzoom : 18),
-            ];
-        }
-
         // Instantiate markers layer
         if (tj.data) {
             tj.markers = mmg().factory(mapbox.markers.simplestyle_factory);

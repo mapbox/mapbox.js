@@ -122,6 +122,24 @@ mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
     this.setProvider(new mapbox.provider(x));
     this._tilejson = x;
+
+    if (x.name) this.name = x.name;
+    if (x.id) this._id = x.id;
+    if (x.bounds) {
+        var proj = new MM.MercatorProjection(0,
+            MM.deriveTransformation(
+                -Math.PI,  Math.PI, 0, 0,
+                Math.PI,  Math.PI, 1, 0,
+                -Math.PI, -Math.PI, 0, 1));
+
+        this.provider.tileLimits = [
+            proj.locationCoordinate(new MM.Location(x.bounds[3], x.bounds[0]))
+                .zoomTo(x.minzoom ? x.minzoom : 0),
+            proj.locationCoordinate(new MM.Location(x.bounds[1], x.bounds[2]))
+                .zoomTo(x.maxzoom ? x.maxzoom : 18),
+        ];
+    }
+
     return this;
 };
 
