@@ -18,6 +18,7 @@ echo ""
 echo ""
 
 s3cmd put --acl-public --mime-type "application/javascript" dist/$TAG/mapbox.js s3://mapbox-js/mapbox.js/$TAG/mapbox.js
+s3cmd put --acl-public --mime-type "application/javascript" dist/$TAG/mapbox.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.uncompressed.js
 s3cmd put --acl-public --mime-type "text/css" dist/$TAG/mapbox.css s3://mapbox-js/mapbox.js/$TAG/mapbox.css
 s3cmd put --acl-public --mime-type "image/png" dist/$TAG/map-controls.png s3://mapbox-js/mapbox.js/$TAG/map-controls.png
 
