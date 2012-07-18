@@ -23,6 +23,7 @@ mapbox.provider.prototype = {
     releaseTile: function(c) { },
 
     getTile: function(c) {
+        var coord;
         if (!(coord = this.sourceCoordinate(c))) return null;
         if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
 
