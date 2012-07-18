@@ -9,8 +9,10 @@ mapbox.interaction = function() {
         var map = interaction.map();
         if (!auto || !map) return interaction;
         for (var i = map.layers.length - 1; i >= 0; i --) {
-            var tj = map.layers[i].tilejson && map.layers[i].tilejson();
-            if (tj && tj.template) return interaction.tilejson(tj);
+            if (map.layers[i].enabled) {
+                var tj = map.layers[i].tilejson && map.layers[i].tilejson();
+                if (tj && tj.template) return interaction.tilejson(tj);
+            }
         }
         return interaction.tilejson({});
     };
