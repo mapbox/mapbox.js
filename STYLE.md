@@ -29,6 +29,8 @@ UI elements by default also share some of the same css:
       display:block;
     }
 
+__Note for IE7 users:__ `mapbox.css` uses a [Data URI](http://en.wikipedia.org/wiki/Data_URI_scheme) as its source for images which is not supported in versions less than IE8. To support these users you can link directly to a [cdn hosted version of the image](http://api.tiles.mapbox.com/mapbox.js/v0.5.5/map-controls.png) in your css.
+
 Other elments like legends, tooltips along with ui controls share the same css:
 
     .zoomer,
@@ -41,8 +43,6 @@ Other elments like legends, tooltips along with ui controls share the same css:
       -webkit-border-radius:3px;
               border-radius:3px;
       }
-
-__Note for IE7 users:__ `mapbox.css` uses a [Data URI](http://en.wikipedia.org/wiki/Data_URI_scheme) as its source for images which is not supported in versions less than IE8. To support these users you can link directly to a [cdn hosted version of the image](http://api.tiles.mapbox.com/mapbox.js/v0.5.5/map-controls.png) in your css.
 
 ## Zoom Controls
 
