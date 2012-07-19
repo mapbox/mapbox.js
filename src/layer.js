@@ -88,28 +88,29 @@ mapbox.layer = function() {
     }));
 };
 
-mapbox.layer.prototype.refresh = function() {
+mapbox.layer.prototype.refresh = function(callback) {
     var that = this;
     // When the async request for a TileJSON blob comes back,
     // this resets its own tilejson and calls setProvider on itself.
     wax.tilejson(this._url, function(o) {
         that.tilejson(o);
     });
+    if (callback) callback(this);
     return this;
 };
 
-mapbox.layer.prototype.url = function(x) {
+mapbox.layer.prototype.url = function(x, callback) {
     if (!arguments.length) return this.url;
     this._url = x;
-    return this.refresh();
+    return this.refresh(callback);
 };
 
-mapbox.layer.prototype.id = function(x) {
+mapbox.layer.prototype.id = function(x, callback) {
     if (!arguments.length) return this._id;
     this.url('http://a.tiles.mapbox.com/v3/' + x + '.jsonp');
     this.named(x);
     this._id = x;
-    return this.refresh();
+    return this.refresh(callback);
 };
 
 mapbox.layer.prototype.named = function(x) {
