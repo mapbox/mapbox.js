@@ -6,7 +6,7 @@ mapbox.js is a library for creating web maps that makes things simple and straig
 
 For documentation please refer to the [wiki page](https://github.com/mapbox/mapbox.js/wiki).
 
-### Dependencies
+### Internal Dependencies
 
 * [Modest Maps](http://modestmaps.com/)
 * [Easey](http://mapbox.com/easey/)
