@@ -9,56 +9,19 @@ mapbox.ui = function(map) {
 
     container.id = 'controls';
 
+    ui.zoomer = wax.mm.zoomer().map(map);
+    ui.pointselector = wax.mm.pointselector().map(map);
+    ui.hash = wax.mm.hash().map(map);
+    ui.zoombox = wax.mm.zoombox().map(map);
+    ui.fullscreen = wax.mm.fullscreen().map(map);
+    ui.legend = wax.mm.legend();
+    ui.attribution = wax.mm.attribution();
+
     ui.auto = function() {
         auto = true;
         ui.zoomer();
         ui.zoombox();
-        return this;
-    };
-
-    ui.refresh = function() {
-        return this;
-    };
-
-    ui.pointselector = function(callback) {
-        if (!arguments.length) return ui._pointselector;
-        ui._pointselector = wax.mm.pointselector(map, null, callback);
-        return this;
-    };
-
-    ui.boxselector = function(callback) {
-        if (!arguments.length) return ui._boxselector;
-        ui._boxselector = wax.mm.boxselector(map, null, callback);
-        return this;
-    };
-
-    ui.hash = function() {
-        ui._hash = wax.mm.hash(map);
-        return this;
-    };
-
-    ui.zoombox = function() {
-        ui._zoombox = wax.mm.zoombox(map);
-    };
-
-    ui.fullscreen = function() {
-        ui._fullscreen = wax.mm.fullscreen(map).appendTo(container);
-        return this;
-    };
-
-    ui.zoomer = function() {
-        ui._zoomer = wax.mm.zoomer(map).appendTo(container);
-        return this;
-    };
-
-    ui.legend = function(tj) {
-        ui._legend = wax.mm.legend(map, tj).appendTo(container);
-        return this;
-    };
-
-    ui.attribution = function(tj) {
-        ui._attribution = wax.mm.attribution(map, tj).appendTo(container);
-        return this;
+        return ui;
     };
 
     return ui;
