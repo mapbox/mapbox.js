@@ -14,7 +14,7 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
 
     // Attach easey, ui, and interaction
     m.ease = easey().map(m);
-    m.ui = mapbox.ui().map(m);
+    m.ui = mapbox.ui(map);
     m.interaction = mapbox.interaction().map(m);
 
 

@@ -1,20 +1,13 @@
 if (typeof mapbox === 'undefined') mapbox = {};
 
-mapbox.ui = function() {
+mapbox.ui = function(map) {
 
     var ui = {},
         map,
-        container = document.createElement('div'),
+        container = map.parent.appendChild(document.createElement('div')),
         auto = false;
 
     container.id = 'controls';
-
-    ui.map = function(x) {
-        if (!x) return map;
-        map = x;
-        map.parent.appendChild(container);
-        return this;
-    };
 
     ui.auto = function() {
         auto = true;
@@ -28,13 +21,13 @@ mapbox.ui = function() {
     };
 
     ui.pointselector = function(callback) {
-        if (!callback) return ui._pointselector;
+        if (!arguments.length) return ui._pointselector;
         ui._pointselector = wax.mm.pointselector(map, null, callback);
         return this;
     };
 
     ui.boxselector = function(callback) {
-        if (!callback) return ui._boxselector;
+        if (!arguments.length) return ui._boxselector;
         ui._boxselector = wax.mm.boxselector(map, null, callback);
         return this;
     };
