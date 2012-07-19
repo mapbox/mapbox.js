@@ -160,7 +160,7 @@ mapbox.layer.prototype.draw = function() {
             if (this.map.getLayerAt(j).enabled) {
                 if (this.map.getLayerAt(j)._composite) {
                     this.parent.innerHTML = '';
-                    this.composited = false;
+                    this.compositeLayer = false;
                     return this;
                 }
                 else break;
@@ -178,8 +178,8 @@ mapbox.layer.prototype.draw = function() {
         }
         ids = ids.join(',');
 
-        if (this.composited !== ids) {
-            this.composited = ids;
+        if (this.compositeLayer !== ids) {
+            this.compositeLayer = ids;
             var that = this;
             mapbox.load(ids, function(tiledata) {
                 that.setProvider(new mapbox.provider(tiledata));
@@ -190,8 +190,8 @@ mapbox.layer.prototype.draw = function() {
 
     } else {
         // Set back to regular provider
-        if (this.composited) {
-            this.composited = false;
+        if (this.compositeLayer) {
+            this.compositeLayer = false;
             this.tilejson(this.tilejson());
             // .draw() called by .tilejson()
         }

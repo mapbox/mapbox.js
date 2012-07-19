@@ -91,11 +91,11 @@ describe("mapbox.layer", function() {
       });
       waits(600);
       runs(function() {
-          expect(m.getLayerAt(0).composited).toBeTruthy();
-          expect(m.getLayerAt(1).composited).toBeFalsy();
-          expect(m.getLayerAt(2).composited).toBeFalsy();
-          expect(m.getLayerAt(3).composited).toBeTruthy();
-          expect(m.getLayerAt(4).composited).toBeFalsy();
+          expect(m.getLayerAt(0).compositeLayer).toBeTruthy();
+          expect(m.getLayerAt(1).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(2).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(3).compositeLayer).toBeTruthy();
+          expect(m.getLayerAt(4).compositeLayer).toBeFalsy();
           expect(m.getLayerAt(0).parent.innerHTML).not.toEqual('');
           expect(m.getLayerAt(1).parent.innerHTML).toEqual('');
           expect(m.getLayerAt(2).parent.innerHTML).not.toEqual('');
@@ -118,11 +118,11 @@ describe("mapbox.layer", function() {
       });
       waits(600);
       runs(function() {
-          expect(m.getLayerAt(0).composited).toBeTruthy();
-          expect(m.getLayerAt(1).composited).toBeFalsy();
-          expect(m.getLayerAt(2).composited).toBeFalsy();
-          expect(m.getLayerAt(3).composited).toBeFalsy();
-          expect(m.getLayerAt(4).composited).toBeFalsy();
+          expect(m.getLayerAt(0).compositeLayer).toBeTruthy();
+          expect(m.getLayerAt(1).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(2).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(3).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(4).compositeLayer).toBeFalsy();
           expect(m.getLayerAt(0).parent.innerHTML).not.toEqual('');
           expect(m.getLayerAt(1).parent.innerHTML).toEqual('');
           expect(m.getLayerAt(4).parent.innerHTML).toEqual('');
@@ -143,11 +143,11 @@ describe("mapbox.layer", function() {
           for (var i = 0; i < 5; i++) {
               t[i].layer.draw();
           }
-          expect(m.getLayerAt(0).composited).toBeTruthy();
-          expect(m.getLayerAt(1).composited).toBeFalsy();
-          expect(m.getLayerAt(2).composited).toBeFalsy();
-          expect(m.getLayerAt(3).composited).toBeTruthy();
-          expect(m.getLayerAt(4).composited).toBeFalsy();
+          expect(m.getLayerAt(0).compositeLayer).toBeTruthy();
+          expect(m.getLayerAt(1).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(2).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(3).compositeLayer).toBeTruthy();
+          expect(m.getLayerAt(4).compositeLayer).toBeFalsy();
           m.getLayerAt(2).composite(true);
           for (var i = 0; i < 5; i++) {
               t[i].layer.draw();
@@ -155,11 +155,11 @@ describe("mapbox.layer", function() {
       });
       waits(50);
       runs(function() {
-          expect(m.getLayerAt(0).composited).toBeTruthy();
-          expect(m.getLayerAt(1).composited).toBeFalsy();
-          expect(m.getLayerAt(2).composited).toBeFalsy();
-          expect(m.getLayerAt(3).composited).toBeFalsy();
-          expect(m.getLayerAt(4).composited).toBeFalsy();
+          expect(m.getLayerAt(0).compositeLayer).toBeTruthy();
+          expect(m.getLayerAt(1).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(2).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(3).compositeLayer).toBeFalsy();
+          expect(m.getLayerAt(4).compositeLayer).toBeFalsy();
           expect(m.getLayerAt(0).parent.innerHTML).not.toEqual('');
           expect(m.getLayerAt(1).parent.innerHTML).toEqual('');
           expect(m.getLayerAt(2).parent.innerHTML).toEqual('');
