@@ -54,4 +54,117 @@ describe("mapbox.layer", function() {
       expect(l.name).toEqual('test');
       expect(l.name == 'test').toBeTruthy();
   });
+
+  // Compositing
+  it("mapbox.layer has compositing enabled by default", function() {
+      var l = mapbox.layer();
+      expect(l.composite()).toEqual(true);
+  });
+
+  it("mapbox.layer can disable compositing", function() {
+      var l = mapbox.layer().composite(false);
+      expect(l.composite()).toEqual(false);
+  });
+
+  it("mapbox.layer can enable compositing", function() {
+      var l = mapbox.layer().composite(false).composite(true);
+      expect(l.composite()).toEqual(true);
+  });
+
+  var tjs = [
+      'http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp',
+      'http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp',
+      'http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp',
+      'http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp',
+      'http://a.tiles.mapbox.com/v3/tmcw.map-j5a868tu.jsonp'];
+
+  it('mapbox.layer.draw groups composited layers together correctly', function() {
+      var m;
+      runs(function() {
+          mapbox.auto(document.createElement('div'), tjs, function(o, t) {
+              m = o;
+              m.getLayerAt(2).composite(false);
+              for (var i = 0; i < 5; i++) {
+                  t[i].layer.draw();
+              }
+          });
+      });
+      waits(600);
+      runs(function() {
+          expect(m.getLayerAt(0).composited).toBeTruthy();
+          expect(m.getLayerAt(1).composited).toBeFalsy();
+          expect(m.getLayerAt(2).composited).toBeFalsy();
+          expect(m.getLayerAt(3).composited).toBeTruthy();
+          expect(m.getLayerAt(4).composited).toBeFalsy();
+          expect(m.getLayerAt(0).parent.innerHTML).not.toEqual('');
+          expect(m.getLayerAt(1).parent.innerHTML).toEqual('');
+          expect(m.getLayerAt(2).parent.innerHTML).not.toEqual('');
+          expect(m.getLayerAt(3).parent.innerHTML).not.toEqual('');
+          expect(m.getLayerAt(4).parent.innerHTML).toEqual('');
+      });
+  });
+
+  it('mapbox.layer.draw skips disabled layers without interrupting compositing groupings.', function() {
+      var m;
+      runs(function() {
+          mapbox.auto(document.createElement('div'), tjs, function(o, t) {
+              m = o;
+              m.getLayerAt(2).disable(false);
+              m.getLayerAt(3).disable(false);
+              for (var i = 0; i < 5; i++) {
+                  t[i].layer.draw();
+              }
+          });
+      });
+      waits(600);
+      runs(function() {
+          expect(m.getLayerAt(0).composited).toBeTruthy();
+          expect(m.getLayerAt(1).composited).toBeFalsy();
+          expect(m.getLayerAt(2).composited).toBeFalsy();
+          expect(m.getLayerAt(3).composited).toBeFalsy();
+          expect(m.getLayerAt(4).composited).toBeFalsy();
+          expect(m.getLayerAt(0).parent.innerHTML).not.toEqual('');
+          expect(m.getLayerAt(1).parent.innerHTML).toEqual('');
+          expect(m.getLayerAt(4).parent.innerHTML).toEqual('');
+      });
+  });
+
+  it('mapbox.layer.draw clears tiles if the layer is now composited in a different layer', function() {
+      var m, t;
+      runs(function() {
+          mapbox.auto(document.createElement('div'), tjs, function(o, d) {
+              m = o;
+              t = d;
+          });
+      });
+      waits(600);
+      runs(function() {
+          m.getLayerAt(2).composite(false);
+          for (var i = 0; i < 5; i++) {
+              t[i].layer.draw();
+          }
+          expect(m.getLayerAt(0).composited).toBeTruthy();
+          expect(m.getLayerAt(1).composited).toBeFalsy();
+          expect(m.getLayerAt(2).composited).toBeFalsy();
+          expect(m.getLayerAt(3).composited).toBeTruthy();
+          expect(m.getLayerAt(4).composited).toBeFalsy();
+          m.getLayerAt(2).composite(true);
+          for (var i = 0; i < 5; i++) {
+              t[i].layer.draw();
+          }
+      });
+      waits(50);
+      runs(function() {
+          expect(m.getLayerAt(0).composited).toBeTruthy();
+          expect(m.getLayerAt(1).composited).toBeFalsy();
+          expect(m.getLayerAt(2).composited).toBeFalsy();
+          expect(m.getLayerAt(3).composited).toBeFalsy();
+          expect(m.getLayerAt(4).composited).toBeFalsy();
+          expect(m.getLayerAt(0).parent.innerHTML).not.toEqual('');
+          expect(m.getLayerAt(1).parent.innerHTML).toEqual('');
+          expect(m.getLayerAt(2).parent.innerHTML).toEqual('');
+          expect(m.getLayerAt(3).parent.innerHTML).toEqual('');
+          expect(m.getLayerAt(4).parent.innerHTML).toEqual('');
+      });
+  });
 });
