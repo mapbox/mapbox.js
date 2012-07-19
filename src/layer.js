@@ -198,9 +198,9 @@ mapbox.layer.prototype.draw = function() {
 };
 
 mapbox.layer.prototype.composite = function(x) {
-    if (!arguments.length) return this.composite;
-    if (x) this.composite = true;
-    else this.composite = false;
+    if (!arguments.length) return this._composite;
+    if (x) this._composite = true;
+    else this._composite = false;
     return this;
 }
 
