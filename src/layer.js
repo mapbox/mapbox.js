@@ -75,6 +75,7 @@ mapbox.layer = function() {
     this._tilejson = {};
     this._url = '';
     this._id = '';
+    this._composite = true;
 
     this.name = '';
     this.parent = document.createElement('div');
@@ -136,11 +137,71 @@ mapbox.layer.prototype.tilejson = function(x) {
             proj.locationCoordinate(new MM.Location(x.bounds[3], x.bounds[0]))
                 .zoomTo(x.minzoom ? x.minzoom : 0),
             proj.locationCoordinate(new MM.Location(x.bounds[1], x.bounds[2]))
-                .zoomTo(x.maxzoom ? x.maxzoom : 18),
+                .zoomTo(x.maxzoom ? x.maxzoom : 18)
         ];
     }
 
     return this;
 };
+
+mapbox.layer.prototype.draw = function() {
+    if (!this.enabled || !this.map) return;
+
+    if (this._composite) {
+
+        // Get index of current layer
+        var i = 0;
+        for (i; i < this.map.layers.length; i++) {
+            if (this.map.layers[i] == this) break;
+        }
+
+        // If layer is composited by layer below it, don't draw
+        for (var j = i - 1; j >= 0; i--) {
+            if (this.map.getLayerAt(j).enabled) {
+                if (this.map.getLayerAt(j)._composite) return;
+                else break;
+            }
+        }
+
+        // Get map IDs for all consecutive composited layers
+        var ids = [this.id()];
+        for (var k = i + 1; k < this.map.layers.length; k++) {
+            var l = this.map.getLayerAt(k);
+            if (l.enabled) {
+                if (l._composite) ids.push(l.id());
+                else break;
+            }
+        }
+        ids = ids.join(',');
+
+        if (this.composited !== ids) {
+            this.composited = ids;
+            var that = this;
+            mapbox.load(ids, function(tiledata) {
+                that.setProvider(new mapbox.provider(tiledata));
+                // setProvider calls .draw()
+            });
+            return this;
+        }
+
+    } else {
+        // Set back to regular provider
+        if (this.composited) {
+            this.composited = false;
+            this.tilejson(this.tilejson());
+            // .draw() called by .tilejson()
+        }
+    }
+
+    MM.Layer.prototype.draw.call(this);
+    return this;
+};
+
+mapbox.layer.prototype.composite = function(x) {
+    if (!arguments.length) return this.composite;
+    if (x) this.composite = true;
+    else this.composite = false;
+    return this;
+}
 
 MM.extend(mapbox.layer, MM.Layer);
