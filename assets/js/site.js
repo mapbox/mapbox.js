@@ -94,6 +94,21 @@
 
         return false;
       }).debounce(100));
+    },
+
+    page: function() {
+        $('#toggle-sections').find('a').click(function() {
+            if ($('#demo').hasClass('active')) {
+                $(this).text('Back to demo');
+                $('#demo').removeClass('active');
+                $('#snippet').addClass('active');
+            } else {
+                $(this).text('View the code');
+                $('#snippet').removeClass('active');
+                $('#demo').addClass('active');
+            }
+            return false;
+        });
     }
   };
 

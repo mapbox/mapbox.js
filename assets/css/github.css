@@ -3,6 +3,8 @@
  *
  * @author Craig Campbell
  * @version 1.0.3
+ *
+ * Modified by tristen <@fallsemo>
  */
 pre,
 pre code {
@@ -17,9 +19,8 @@ pre, code {
   border-radius: 3px;
   }
 pre {
-  border: 1px solid #ccc;
   word-wrap: break-word;
-  padding: 6px 10px;
+  padding: 10px;
   line-height: 19px;
   margin-bottom: 20px;
   }

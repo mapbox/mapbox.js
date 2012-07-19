@@ -1,0 +1,45 @@
+---
+layout: example
+categories: example
+title: Layers
+description: Switch between different maps
+tags:
+  - layers
+---
+
+<style>
+  #layers {
+    background: #fff;
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index: 1000;
+    padding: 10px;
+  }
+</style>
+<div id='layers'></div>
+<div id='map'></div>
+<script>
+  var m = mapbox.map('map');
+  var layers = document.getElementById('layers');
+
+  m.addLayer(mapbox.layer().id('tmcw.map-j5a868tu'));
+  m.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
+  m.zoom(3);
+
+  for (var i = 0; i < m.getLayers().length; i++) {
+      var n = m.getLayerAt(i).name;
+      var container = document.createElement('div');
+      var input = document.createElement('input');
+      var label = document.createElement('label');
+      input.type = 'checkbox';
+      input.id = n;
+      input.value = n;
+      input.checked = 'checked';
+      label.innerHTML = n;
+      label.setAttribute('for', n);
+      container.appendChild(input);
+      container.appendChild(label);
+      layers.appendChild(container);
+  }
+</script>

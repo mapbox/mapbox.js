@@ -1,36 +1,12 @@
-[
-  {
-    "title":"Easing",
-    "url":"/easing/index.html",
-    "description":"Add animation to a map.",
-    "tags": [
-      "Animation"
-    ]
-  },
-  {
-    "title":"Simple Map",
-    "url":"/auto/index.html",
-    "description":"Create a simple bare bones map using the auto method.",
-    "tags": [
-      "Implementation"
-    ]
-  },
-  {
-    "title":"Layers",
-    "url":"/layers/index.html",
-    "description":"Switch between different maps.",
-    "tags": [
-      "Layers",
-      "Switching"
-    ]
-  },
-  {
-    "title":"UI",
-    "url":"/ui/index.html",
-    "description":"Add zoom controls to a map.",
-    "tags": [
-      "ui",
-      "Zoom Controls"
-    ]
-  }
+---
+---
+[{% for item in site.posts %} {
+  "category": "{{item.category}}",
+  "title": "{{item.title|replace:'"','\"'}}",
+  "url": "{{item.url}}",
+  "description": "{{item.description}}",
+  "tags": [{% for tag in item.tags %}
+  "{{tag}}" {% unless forloop.last %},{% endunless %}{% endfor %}]
+}, {% endfor %}
+false
 ]

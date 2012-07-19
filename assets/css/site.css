@@ -3,11 +3,12 @@
 Contents:
   00 @fontface
   01 Typography
-  02 UI Elements
+  02 UI elements
   03 Basic layout
-  04 Global Styling
+  04 Global styling
   05 Front page
-  06 Helpers
+  06 Examples page
+  07 Helpers
 ================================================
 */
 
@@ -19,13 +20,6 @@ Contents:
   src: url('../fonts/opensans-bold.eot?#') format('eot'),
        url('../fonts/opensans-bold.woff') format('woff'),
        url('../fonts/opensans-bold.ttf') format('truetype');
-  }
-
-@font-face {
-  font-family: 'Opensans Light';
-  src: url('../fonts/opensans-light.eot?#') format('eot'),
-       url('../fonts/opensans-light.woff') format('woff'),
-       url('../fonts/opensans-light.ttf') format('truetype');
   }
 
 /* 01 Typography
@@ -42,12 +36,13 @@ h1,h2,h3,h4,h5,h6 {
   margin: 0;
   }
 h1 {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 26px;
   margin: 0;
   }
 h2 { font-size: 20px; line-height: 28px; margin: 0 0 10px; }
 h3 { font-size: 15px; line-height: 22px; margin: 0 0 10px; }
+h4 { font-size: 17px; line-height: 22px; margin: 0 0 1px; }
 
 a {
   color: #3887be;
@@ -101,17 +96,18 @@ blockquote {
   list-style: decimal;
   }
 
-/* 02 UI Elements
+/* 02 UI elements
 --------------------------------------------- */
-input,
+input[type='search'],
+input[type='text'],
 textarea,
 select {
   display: inline-block;
-  width: 220px;
-  height: 25px;
+  width: 338px;
+  height: 30px;
   padding: 4px 10px;
   }
-  input[type='search'], 
+  input[type='search'],
   input[type='text'] {
     background: #fff;
     border: 1px solid #ccc;
@@ -125,14 +121,14 @@ input[type=submit] {
   width: auto;
   height: auto;
   }
-input[type='search'], 
+input[type='search'],
 input[type='text'],
 textarea {
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   }
-  input[type='search']:focus, 
+  input[type='search']:focus,
   input[type='text']:focus,
   textarea:focus {
     outline: 0;
@@ -150,42 +146,87 @@ input[type='search'] {
     -webkit-appearance: none;
     }
 .button {
-  background: #f7f7f7;
+  background-color: #ebebeb;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#ebebeb));
+  background-image: -webkit-linear-gradient(top, #f5f5f5, #ebebeb);
+  background-image:    -moz-linear-gradient(top, #f5f5f5, #ebebeb);
+  background-image:     -ms-linear-gradient(top, #f5f5f5, #ebebeb);
+  background-image:      -o-linear-gradient(top, #f5f5f5, #ebebeb);
+  background-image:         linear-gradient(to bottom, #f5f5f5, #ebebeb);
+  text-align: center;
   display: inline-block;
-  margin: 0 0 5px;
-  padding: 6px 8px;
-  color: #3c4e5a;
-  border: 1px solid #ccc;
-  text-shadow: 0 1px 1px #fff;
+  text-decoration: none;
+  color: #444;
+  border: 1px solid #b0b0b0;
+  text-shadow: 0 1px 0 #fff;
+  padding: 4px 10px;
+  font-weight: 600;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1),
                       inset 0 1px 1px #fff;
           box-shadow: 0 1px 2px rgba(0, 0, 0, .1),
                       inset 0 1px 1px #fff;
   }
   .button.big-button {
-    padding: 4px 10px;
+    padding: 8px 18px;
+    }
+  .button.active,
+  .button:active {
+    background: #fff;
+    border-color: #aaa;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.35);
+    -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.35);
     }
 
+nav.tags {
+  margin: 0 0 20px;
+  }
+  .label {
+    color: #808080;
+    font-size: 11px;
+    line-height: 18px;
+    }
 
-/* 03 Basic Layout
+/* 03 Basic layout
 --------------------------------------------- */
+html {
+  overflow-y: scroll;
+  }
 section {
-  margin: 20px 0;
+  position: relative;
+  margin: 20px 0 40px;
   }
 .limiter {
   width: 800px;
   margin: 0 auto;
   }
 .masthead {
-  background: #fff;
-  height: 80px;
+  height: 60px;
+  }
+.heading {
+  margin: 0 0 20px;
+  padding: 40px 0 10px;
   }
 
-/* 04 Global Styling
+/* 04 Global styling
 --------------------------------------------- */
-.masthead ul, 
+.masthead {
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  }
+.masthead h1 a {
+  text-decoration: none;
+  }
+  .masthead h1 a span {
+    font-weight: 300;
+    }
+
+.masthead ul,
 .masthead h1 {
-  margin-top: 25px;
+  margin-top: 15px;
   }
 .masthead h1 {
   float: left;
@@ -201,69 +242,112 @@ section {
       display: inline-block;
       }
 
+.heading {
+  border-bottom: 1px solid #ccc;
+  }
+  .heading h2 {
+    margin: 0;
+    }
+  .heading h4 {
+    color: #808080;
+    font-weight: 300;
+    display: block;
+    margin: 0 0 20px;
+    }
 
 /* 05 Front page
 --------------------------------------------- */
 .browse {
-  padding: 20px 0 60px;
+  padding: 0 0 60px;
   }
-
-ul.topics li a {
-  display: block;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-  opacity: 1;
-  text-decoration: none;
-  font-weight: normal;
-  -webkit-border-radius: 2px;
-          border-radius: 2px;
-  -webkit-transition: all 0.05s linear;
-     -moz-transition: all 0.05s linear;
-       -o-transition: all 0.05s linear;
-          transition: all 0.05s linear;
+form#search {
+  width: 360px;
+  margin: 0 auto;
   }
-  ul.topics li a:hover {
-    background-color: #fff;
+  form#search input {
+    background: white url(../images/sprite.png) no-repeat 327px -20px;
+    padding-right: 40px;
+    width: 308px;
     }
-    ul.topics li a:hover h4 {
-      text-decoration: underline;
+
+ul.topics {
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.10);
+          box-shadow: 0 0 8px rgba(0,0,0,0.10);
+  }
+  ul.topics li a {
+    display: block;
+    padding: 10px;
+    background: #fff;
+    border-bottom: 1px solid #dedede;
+    padding: 10px 10px 12px;
+    opacity: 1;
+    text-decoration: none;
+    font-weight: normal;
+    -webkit-border-radius: 2px;
+            border-radius: 2px;
+    -webkit-transition: all 0.05s linear;
+       -moz-transition: all 0.05s linear;
+         -o-transition: all 0.05s linear;
+            transition: all 0.05s linear;
+    }
+    ul.topics li a:hover {
+      border-color: #b0b0b0;
       }
+      ul.topics li a:hover h4 {
+        text-decoration: underline;
+        }
 
   ul.topics li a .description {
     color: #404040;
     }
 
-#tag-list {
-  display: block;
-  margin: 20px 0 10px;
-  }
   #tag-list li {
     float: left;
     margin: 0 3px 3px 0;
     }
-    #tag-list li a {
-      color: #fff;
-      background: #b0b0b0;
-      background: rgba(0,0,0,0.25);
-      display: inline-block;
-      padding: 4px 10px;
-      text-decoration: none;
-      -webkit-border-radius: 2px;
-              border-radius: 2px;
-      -webkit-transition: background-color 0.1s linear;
-         -moz-transition: background-color 0.1s linear;
-           -o-transition: background-color 0.1s linear;
-              transition: background-color 0.1s linear;
-      }
-      #tag-list li a:hover {
-        background: rgba(0,0,0,0.35);
-        }
-      #tag-list li a.active {
-        background: #404040;
-        }
 
-/* 06 Helpers
+/* 06 Examples page
+--------------------------------------------- */
+#toggle-sections {
+  float: right;
+  }
+.close {
+  display:inline!important;
+  background:none!important;
+  text-indent:0!important;
+  overflow:default!important;
+  }
+  .close:active {
+    border-color:none!important;
+    background:none!important;
+    -webkit-box-shadow:none!important;
+            box-shadow:none!important;
+    }
+
+#map {
+  background: #fff;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  }
+
+#demo,
+#snippet {
+  display: none;
+  }
+  #demo.active,
+  #snippet.active {
+    display: block;
+    }
+
+#demo {
+  height: 400px;
+  }
+
+/* 07 Helpers
 --------------------------------------------- */
 .icon {
   background: transparent url(images/sprite.png) no-repeat 0 0;

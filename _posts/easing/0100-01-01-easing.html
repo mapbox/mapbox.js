@@ -1,0 +1,26 @@
+---
+layout: example
+categories: example
+title: Easing
+description: Add animation to a map
+tags:
+    - animation
+---
+
+<style>
+  #zoom {
+    z-index:1000;
+    top:55px;
+    left:20px;
+    position:absolute;
+    }
+</style>
+  <div id='map'></div>
+  <button id='zoom'>ease to zoom 2</button>
+<script>
+    mapbox.auto('map', 'tmcw.map-j5a868tu', function(map) {
+        document.getElementById('zoom').onclick = function() {
+            map.zoom(2, true);
+        };
+    });
+</script>

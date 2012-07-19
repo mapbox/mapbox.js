@@ -1,72 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset=utf-8 />
-    <link rel='shortcut icon' href='assets/images/favicon.ico' type='image/x-icon' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-    <meta name='apple-mobile-web-app-status-bar-style' content='black' />
-    <meta name='apple-mobile-web-app-capable' content='yes' />
-    <title>mapbox.js | MapBox</title>
-    <link rel='stylesheet' href='assets/css/reset.css'>
-    <link rel='stylesheet' href='assets/css/site.css'>
-    <link rel='stylesheet' href='assets/css/github.css'>
-  </head>
-  <body>
-    <header class='masthead'>
-      <div class='limiter'>
-        <h1>mapbox.js <span>examples</span></h1>
-        <ul>
-          <li><a href='https://github.com/mapbox/mapbox.js'>Mapbox.js on GitHub</a></li>
-        </ul>
-      </div>
-    </header>
+---
+layout: default
+---
 
-    <div class='limiter'>
-      <section class='intro'>
-      <h3>Get Started</h3>
-      <p>To use any of the examples below copy this code and add it to an html file.</p>
-  <pre><code data-language='html'>&lt;script src='http://js.mapbox.com/mapbox.js/v0.5.4/mapbox.js'&gt;&lt;/script&gt;
+<header class='heading clearfix'>
+  <h2>Getting Started</h2>
+  <h4>To use any of the examples you'll need to grab a copy of the lastest code.</h4>
+<pre><code data-language='html'>&lt;script src='http://js.mapbox.com/mapbox.js/v0.5.4/mapbox.js'&gt;&lt;/script&gt;
 &lt;link href='http://js.mapbox.com/mapbox.js/v0.5.4/mapbox.css' rel='stylesheet' /&gt;</code></pre>
-      </section>
-  
-      <section class='browse'>
+</header>
+<section class='browse'>
+  <form id='search'>
+    <input type='search' placeholder='Filter examples'>
+  </form>
+  <script type='text/template' id='tags'>
+    <li><a data-tag='<%= tag %>' href='#' class='button'><%= tag %></a></li>
+  </script>
 
-        <form id='search'>
-          <input type='search' placeholder='Filter examples'>
-        </form>
-        <script type='text/template' id='tags'>
-          <li><a data-tag='<%= tag %>' href='#'><%= tag %></a></li>
-        </script>
-        <ul id='tag-list' class='clearfix'></ul>
+  <nav class='tags'>
+    <span class='label'>Filter by tag</span>
+    <ul id='tag-list' class='clearfix'></ul>
+  </nav>
 
-        <script type='text/template' id='examples'>
-          <li>
-          <a href='<%= url %>' class='post'>
-              <h4 class='code title'><%= title %></h4>
-              <em class='description'><%= description %></em>
-              <small class='tags'><%= tags %></small>
-              </a>
-          </li>
-        </script>
+  <script type='text/template' id='examples'>
+    <li>
+    <a href='{{site.baseurl}}<%= url %>' class='post'>
+        <h4 class='code title'><%= title %></h4>
+        <em class='description'><%= description %></em>
+        <small class='tags'><%= tags %></small>
+        </a>
+    </li>
+  </script>
 
-        <nav class='results'>
-          <ul id='results' class='topics'></ul>
-        </nav>
-      </section>
-    </div>
-    <script src='assets/js/vendor/jquery.1.7.2.min.js'></script>
-    <script src='assets/js/vendor/underscore.1.3.3.min.js'></script>
-    <script src='assets/js/vendor/rainbow.1.1.8.min.js'></script>
-    <script src='assets/js/vendor/rainbow/generic.js'></script>
-    <script src='assets/js/vendor/rainbow/javascript.js'></script>
-    <script src='assets/js/vendor/rainbow/html.js'></script>
-    <script src='assets/js/vendor/rainbow/css.js'></script>
-    <script src='assets/js/site.js'></script>
-    <script>
-      $(function() {
-        var front = new Docs();
-        $(front.queryExamples);
-      });
-    </script>
-  </body>
-</html>
+  <nav class='results'>
+    <ul id='results' class='topics'></ul>
+  </nav>
+</section>
+
+<script>
+  $(document).ready(function () {
+    var front = new Docs();
+    $(front.queryExamples);
+  });
+</script>

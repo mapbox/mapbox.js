@@ -1,2 +1,6 @@
 auto: true
 server: true
+permalink: /:categories/:title
+baseurl: 
+rdiscount:
+  extensions: [smart]

@@ -1,0 +1,54 @@
+---
+layout: default
+version: v0.5.5
+---
+
+<script src='http://js.mapbox.com/mapbox.js/{{page.version}}/mapbox.js'></script>
+<link href='http://js.mapbox.com/mapbox.js/{{page.version}}/mapbox.css' rel='stylesheet' />
+
+<header class='heading clearfix'>
+  <nav id='toggle-sections'>
+    <a href='#' class='button big-button'>View the code</a>
+  </nav>  
+  <h2>{{page.title}}</h2>  
+  <h4>{{page.description}}</h4>
+</header>
+
+<section id='demo' class='active clearfix'>
+  {{content}}
+</section>
+
+<section id='snippet' class='clearfix'>
+  <pre><code data-language='html'>
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=utf-8 /&gt;
+    &lt;title&gt;Example&lt;/title&gt;
+    &lt;script src='http://js.mapbox.com/mapbox.js/{{page.version}}/mapbox.js'&gt;&lt;/script&gt;
+    &lt;link href='http://js.mapbox.com/mapbox.js/{{page.version}}/mapbox.css' rel='stylesheet' /&gt;
+    &lt;style&gt;
+      body { margin:0; padding:0; }
+      #map {
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+  {{content | escape}}
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre></code>
+</section>
+
+<script>
+  $(document).ready(function () {
+    var example = new Docs();
+    $(example.page);
+  });
+</script>
