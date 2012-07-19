@@ -122,7 +122,7 @@ You can add a tiled layer to your map with `mapbox.layer()`, a simple interface 
 
 Create a mapbox layer. This layer will be blank until you call `.id()` or `.url()` to give it an identity.
 
-### layer.id(value)
+### layer.id(value, callback)
 
 This sets the layer ID, which corresponds to a MapBox map. The value must be the id of
 a MapBox Hosting map. This also calls `.named()` setting the name to be the same as the id -
@@ -131,12 +131,14 @@ to add the map at `https://tiles.mapbox.com/tmcw/map/map-hehqnmda`, you could cr
 
     var layer = mapbox.layer().id('map-hehqnmda');
 
+The callback is called with on argument, the layer.
+
 ### layer.named([value])
 
 Set the name of the layer, as referred to by the map. The value must be a string. If the
 value is omitted, the current name is returned.
 
-### layer.url(value)
+### layer.url(value, callback)
 
 If you're using another server that supports [TileJSON](https://github.com/mapbox/tilejson-spec), like a self-hosted [TileStream](https://github.com/mapbox/tilestream), you can use `.url()` to specify the full URL of a layer's TileJSON file.
 
@@ -144,6 +146,8 @@ The argument to this function must be a String value that is a fully-formed URL.
 The previous call to `.id()` is equal to this usage of `.url()`:
 
     var layer = mapbox.layer().url('http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp');
+
+The callback is called with on argument, the layer.
 
 ### layer.tilejson([{ tilejson object }])
 
