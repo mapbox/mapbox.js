@@ -20,16 +20,19 @@ pre, code {
   }
 pre {
   word-wrap: break-word;
-  padding: 10px;
+  padding: 20px;
   line-height: 19px;
   margin-bottom: 20px;
+  border: 1px solid #CCC;
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
+  -webkit-border-radius: 2px;
+          border-radius: 2px
   }
   pre code {
     border: 0px;
     padding: 0px;
     margin: 0px;
-    -webkit-border-radius: 2px;
-            border-radius: 2px
     }
 
 code {
