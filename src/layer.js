@@ -156,9 +156,12 @@ mapbox.layer.prototype.draw = function() {
         }
 
         // If layer is composited by layer below it, don't draw
-        for (var j = i - 1; j >= 0; i--) {
+        for (var j = i - 1; j >= 0; j--) {
             if (this.map.getLayerAt(j).enabled) {
-                if (this.map.getLayerAt(j)._composite) return;
+                if (this.map.getLayerAt(j)._composite) {
+                    this.parent.innerHTML = '';
+                    return this;
+                }
                 else break;
             }
         }
@@ -193,8 +196,7 @@ mapbox.layer.prototype.draw = function() {
         }
     }
 
-    MM.Layer.prototype.draw.call(this);
-    return this;
+    return MM.Layer.prototype.draw.call(this);
 };
 
 mapbox.layer.prototype.composite = function(x) {
