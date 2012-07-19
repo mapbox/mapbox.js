@@ -160,6 +160,7 @@ mapbox.layer.prototype.draw = function() {
             if (this.map.getLayerAt(j).enabled) {
                 if (this.map.getLayerAt(j)._composite) {
                     this.parent.innerHTML = '';
+                    this.composited = false;
                     return this;
                 }
                 else break;
@@ -167,8 +168,8 @@ mapbox.layer.prototype.draw = function() {
         }
 
         // Get map IDs for all consecutive composited layers
-        var ids = [this.id()];
-        for (var k = i + 1; k < this.map.layers.length; k++) {
+        var ids = [];
+        for (var k = i; k < this.map.layers.length; k++) {
             var l = this.map.getLayerAt(k);
             if (l.enabled) {
                 if (l._composite) ids.push(l.id());
