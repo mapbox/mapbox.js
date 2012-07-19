@@ -205,6 +205,18 @@ mapbox.layer.prototype.composite = function(x) {
     if (x) this._composite = true;
     else this._composite = false;
     return this;
-}
+};
+
+// we need to redraw map due to compositing
+mapbox.layer.prototype.enable = function(x) {
+    MM.Layer.prototype.enable.call(this, x);
+    this.map.draw();
+};
+
+// we need to redraw map due to compositing
+mapbox.layer.prototype.disable = function(x) {
+    MM.Layer.prototype.disable.call(this, x);
+    this.map.draw();
+};
 
 MM.extend(mapbox.layer, MM.Layer);
