@@ -8,21 +8,26 @@
             #map {
                 position:absolute;
                 top:0;
-                left:100px;
+                left:150px;
                 right:0;
                 bottom:0;
             }
-            #controls {
+            #boxes {
                 position:absolute;
                 top:0;
-                width:100px;
+                width:130px;
+                padding:10px;
                 bottom:0;
             }
         </style>
     </head>
     <body>
-        <div id='controls'>
-            <input type='checkbox' id='zoomer' /> <label for='zoomer'>zoom</label>
+        <div id='boxes'>
+            <div><input type='checkbox' id='zoomer' /> <label for='zoomer'>zoom</label></div>
+            <div><input type='checkbox' id='zoombox' /> <label for='zoombox'>zoombox</label></div>
+            <div><input type='checkbox' id='fullscreen' /> <label for='fullscreen'>fullscreen</label></div>
+            <div><input type='checkbox' id='attribution' /> <label for='attribution'>attribution</label></div>
+            <div><input type='checkbox' id='pointselector' /> <label for='pointselector'>pointselector</label></div>
         </div>
         <div id='map'></div>
         <script>
