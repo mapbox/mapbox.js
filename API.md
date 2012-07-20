@@ -1,64 +1,110 @@
 # The Map
 
-The map is, of course, the central element of most mapping sites.
+The map is, of course, the central element of most mapping sites. In the MapBox JavaScript API,
+the map object manages a set of layers, stores and displays zoom levels and centerpoints,
+and accepts a set of UI controls to which you can add your own finishing touches.
 
-## var map = mapbox.map(element [, layers])
+Technically speaking, maps are based on [Modest Maps](http://modestmaps.com/),
+so [the full Modest Maps API](https://github.com/modestmaps/modestmaps-js/wiki)
+is available to power-users.
 
-Create a map on the page
+## mapbox.map(element [, layers])
 
-* `element` can be either the `id` of an element on the page, or an element itself. Typically maps are created within `<div>` elements.
-* `layers` can be a layer created with `mapbox.layer()`, an array of layers. You can also _omit_ this entirely and add a layer later on if you'd like.
+Create a map on the current page.
+
+**Arguments:**
+
+* `element` must be the `id` of an element on the page, or an element itself. Typically maps are created within `<div>` elements
+* `layers` can be a layer created with `mapbox.layer()`, an array of such layers, or omitted
+
+**Returns** a map object, which has the following methods:
 
 ### map.smooth(value)
 
-By default, maps smoothly pan and zoom with inertia. You can turn off this behavior by calling `map.smooth(false)`.
-The argument to this function must be `true` or `false`.
+Enable or disable inertial panning on maps. By default, maps smoothly pan and
+zoom with inertia.
+
+**Arguments:**
+
+* `value` must be `true` or `false` to set whether the map uses inertia.
+
+**Returns** the map object.
+
+**Example:**
+
+    map.smooth(false); // disable inertial panning
 
 ### map.center(centerpoint [, animate])
 
-Center the map on a geographical location. The argument to centerpoint is an object like
+Center the map on a geographical location, or get its current center.
 
-    map.center({ lat: 10, lon: -88 });
+**Arguments:**
 
-The second parameter, `animates`, animates the transition: set it to `true` to animate, omit or set it to `false` to not animate.
+* `centerpoint` can be an object with `lat` and `lon` values, like `{ lat: 10, lon: -88 }`, or
+  ommitted to get the map's current location
+* `animate` can be `true` to animate the map's movement, or omitted to move immediately
+
+**Returns** the map object if arguments are given, the map's center location (in the same form as
+specified in `centerpoint`) otherwise.
 
 ### map.zoom(zoom [, animate])
 
-Set the map's zoom level.
+Set the map's zoom level, or get its current zoom level.
 
-    map.zoom(5)
+**Arguments:**
 
-The second parameter, `animates`, animates the transition: set it to `true` to animate, omit or set it to `false` to not animate.
+* `zoom` can be zoom level in the range supported by the map's layers (an integer from 0-20, typically),
+  or omitted to get the current zoom level..
+* `animate` can be `true` to animate the map's movement, or omitted to move immediately.
+
+**Returns** the map object if arguments are given, the map's current zoom level otherwise.
+
+**Example:**
+
+    map.zoom(10, true);
 
 ### map.centerzoom(center, zoom [, animate])
 
-Set the map's zoom level and centerpoint simultaneously.
+Set the map's zoom level and centerpoint simultaneously. Especially with the third argument, `animate`,
+set to `true`, this allows for a better animation effect.
 
-    map.centerzoom({ lat: 10, lon: -88 }, 5)
+**Arguments:**
 
-The third parameter, `animates`, animates the transition: set it to `true` to animate, omit or set it to `false` to not animate. This will animate center and zoom changes at the same time.
+* `centerpoint` can be an object with `lat` and `lon` values, like `{ lat: 10, lon: -88 }`
+* `zoom` must be zoom level in the range supported by the map's layers (an integer from 0-20, typically)
+* `animate` can be `true` to animate the map's movement, or omitted to move immediately.
+
+**Returns** the map object.
+
+**Example:**
+
+    map.centerzoom({ lat: 10, lon: -88 }, 5);
 
 ### map.setPanLimits(locations)
 
-Set the map's panning limits. The parameter, `locations` can be either an instance of MM.Extent or an array of locations in the order north, west, south, east.
+Set the map's panning limits.
 
-### map.auto()
+**Arguments:**
 
-Enables defaults settings for UI and interaction. Also sets map's center and zoom to that of the baselayer.
+* `locations` must be either an instance of MM.Extent or an array of locations in the order north, west, south, east.
+
+**Returns** the map object.
 
 ### map.refresh()
+
 Refreshes map.ui and map.interaction to reflect any layer changes.
 
 ### map.addTileLayer(layer)
+
 Adds a tile layer to the map, below any marker layers to prevent them from being covered up.
 
 ### map.ease
 
 An instance of easey initialized with the map.
 
-    map.ease.location({ lat: 10, lon: -88 }).zoom(5).optimal();
+**Example:**
 
-See [Easey documentation](https://github.com/mapbox/easey/wiki) for a full reference.
+    map.ease.location({ lat: 10, lon: -88 }).zoom(5).optimal();
 
 ### map.ui
 
@@ -67,10 +113,6 @@ An instance of mapbox.ui attached to the map for convenience.
 ### map.interaction
 
 An instance of mapbox.interaction attached to map for convenience.
-
-
-
-See [Modest Maps parent documentation](https://github.com/modestmaps/modestmaps-js/wiki) for a full reference.
 
 # Loading Utilities
 
@@ -99,11 +141,15 @@ After pulling the information from MapBox, it calls the function specified at th
 
 Automatically load and create a map with sensible defaults.
 
-- `element` is the id of the element within which to create the map
-- `url` can be a TileJSON URL, a MapBox map id, or an array of multiple.
-- `callback` if specified, receives the map as its first argument, and the same object as `mapbox.load` as the second argument.
+**Arguments:**
 
-For instance, to create a simple map, you can call
+* `element` must be the `id` of an element on the page, or an element itself. Typically maps are created within `<div>` elements
+* `url` must be a TileJSON URL, the id of a MapBox map, multiple IDs and URLs in an array.
+* `callback` if specified, receives the map as its first argument, and the same object as `mapbox.load` as the second argument. It is called after all resources have been loaded and the map is complete.
+
+**Returns** `undefined`: this is an asynchronous function without a useful return value.
+
+**Example:**
 
     <div id='map' style='width:500px;height:400px;'></div>
     <script>
@@ -116,47 +162,66 @@ For instance, to create a simple map, you can call
 
 ## mapbox.layer()
 
-You can add a tiled layer to your map with `mapbox.layer()`, a simple interface to layers from [MapBox Hosting](http://mapbox.com/tour/) and elsewhere.
+You can add a tiled layer to your map with `mapbox.layer()`, a simple interface to
+layers from [MapBox Hosting](http://mapbox.com/tour/) and elsewhere.
 
-### var layer = mapbox.layer();
+**Returns** a layer object, which has the following methods:
 
-Create a mapbox layer. This layer will be blank until you call `.id()` or `.url()` to give it an identity.
+### layer.id(id, callback)
 
-### layer.id(value, callback)
+Get or set the layer ID, which corresponds to a MapBox map.
 
-This sets the layer ID, which corresponds to a MapBox map. The value must be the id of
-a MapBox Hosting map. This also calls `.named()` setting the name to be the same as the id -
-call `named()` to reset it. For instance, if you were trying
-to add the map at `https://tiles.mapbox.com/tmcw/map/map-hehqnmda`, you could create this layer like so:
+**Arguments:**
+
+* `id` can be the id of a MapBox Hosting map, or omitted to get the current `id` value.
+  This also calls `.named()` setting
+  the name to be the same as the id - call `named()` to reset it. For instance, if you were trying
+  to add the map at `https://tiles.mapbox.com/tmcw/map/map-hehqnmda`, you could create this layer like so:
+* `callback`, if provided, is called after the layer has been asynchronously loaded from MapBox.
+  It is called with on argument, the layer object.
+
+**Returns** the layer object if arguments are given, the layer's `id` otherwise.
+
+**Example:**
 
     var layer = mapbox.layer().id('map-hehqnmda');
 
-The callback is called with on argument, the layer.
+### layer.named([name])
 
-### layer.named([value])
+Get or set the name of the layer, as referred to by the map.
 
-Set the name of the layer, as referred to by the map. The value must be a string. If the
-value is omitted, the current name is returned.
+**Arguments:**
 
-### layer.url(value, callback)
+* `name` can be a new name to call this layer
 
-If you're using another server that supports [TileJSON](https://github.com/mapbox/tilejson-spec), like a self-hosted [TileStream](https://github.com/mapbox/tilestream), you can use `.url()` to specify the full URL of a layer's TileJSON file.
+**Returns** the layer object if arguments are given, the layer's `name` otherwise.
 
-The argument to this function must be a String value that is a fully-formed URL.
-The previous call to `.id()` is equal to this usage of `.url()`:
+### layer.url([url, callback])
+
+Pull a layer from a server besides MapBox Hosting that supports [TileJSON](https://github.com/mapbox/tilejson-spec), like a self-hosted [TileStream](https://github.com/mapbox/tilestream).
+
+**Arguments:**
+
+* `url` can be a string value that is a fully-formed URL, or omitted to get the URL from which
+  this layer was sourced.
+* `callback`, if provided, is called with one argument, the layer object, after the
+  TileJSON information has been asynchronously loaded.
+
+**Returns** the layer object if arguments are given, the pulled URL otherwise.
+
+**Example:**
 
     var layer = mapbox.layer().url('http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp');
 
-The callback is called with on argument, the layer.
+### layer.tilejson([tilejson])
 
-### layer.tilejson([{ tilejson object }])
+Set layer options directly from a TileJSON object.
 
-If you're using another [TileJSON](https://github.com/mapbox/tilejson-spec) layer and have the
-TileJSON in your Javascript scope instead of at a URL, you can call `.tilejson()` to specify the tilejson blob directly.
-The argument to this function must be a TileJSON object as a Javascript object.
-If the value is omitted, the current TileJSON object that corresponds to this layer
-is returned.
+**Arguments:**
 
+* `tilejson` must be a TileJSON object as a Javascript object.
+
+**Returns** the layer object if arguments are given, the layer's TileJSON settings otherwise.
 
 # Map UI
 
@@ -202,12 +267,11 @@ Add the pointselector to the map. The callback gets called with a single argumen
 
 Add the boxselector to the map. The callback gets called with a single argument, an array of two instances of MM.Location, representing the extent of the selection. To get the boxselector object, provide no callback.
 
-
 # Interaction
 
 ## var interaction = mapbox.interaction()
 
-Creates a Wax interaction control with several extra features. See [Wax documentation](http://mapbox.com/wax/interaction-mm.html) for full reference.
+Creates a interaction control with several extra features. See [Wax documentation](http://mapbox.com/wax/interaction-mm.html) for full reference.
 
 ### interaction.map(map)
 
