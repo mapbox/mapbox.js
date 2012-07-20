@@ -225,47 +225,119 @@ Set layer options directly from a TileJSON object.
 
 # Map UI
 
-Common UI components for maps.
+The API provides a set of UI elements that can be freely mixed & matched, as well as styled
+beyond the default (provided in the `mapbox.css` stylesheet).
+Maps created with `mapbox.map` have an array of pre-initialized UI elements at `.ui`.
+All UI elements support the simple operations `.add()` and `.remove()` to add &
+remove them from the map.
 
-## var ui = mapbox.ui()
+#### .add()
 
-### ui.map(map)
+Add the UI element to the map. Add the HTML elements that the UI element
+manages (if any) to the map element, and bind any events.
 
-Set the map to add UI components for.
+#### .remove()
 
-### ui.auto()
+Remove the UI element from the map. Removes the HTML elements from the
+map, if any, and removes listeners, if any.
 
-Automatically add default UI components: a zoomer and the zoombox control.
+### map.ui.hash
 
-The following are Wax UI components
+Add the map's changing position to the URL, making map locations linkable
 
-### ui.hash()
+### map.ui.zoombox
 
-Adds map position to URL, making map locations linkable.
+Add the ability to zoom into the map by shift-clicking and dragging a box,
+to which the map zooms
 
-### ui.zoombox()
+### map.ui.zoomer
 
-Adds zoombox control, which lets users zoom by shift-clicking and drawing a box.
+Add zoom in and zoom out buttons to map
 
-### ui.zoomer()
+### map.ui.attribution
 
-Adds a zoom in and zoom out buttons to map.
+Add an element with attribution information to the map
 
-### ui.attribution(tilejson)
+### map.ui.legend
 
-Adds attribution to map using the provided tilejson.
+Add an element with legend information to map
 
-### ui.legend(tilejson)
+### map.ui.pointselector
 
-Adds a legend to map using provided legend.
+Allow simple location selection on the map: clicking without dragging will select
+a point, and notify listeners with the new list of points.
 
-### ui.pointselector(callback)
+#### pointselector.addCallback(event, callback)
 
-Add the pointselector to the map. The callback gets called with a single argument, an array of coordinates of the points you have selected. To get the pointselector object, provide no callback.
+Adds a callback that is called on changes to the pointselector contents.
 
-### ui.boxselector(callback)
+**Arguments:**
 
-Add the boxselector to the map. The callback gets called with a single argument, an array of two instances of MM.Location, representing the extent of the selection. To get the boxselector object, provide no callback.
+* `event` is a string of the event you want to bind the callback to
+* `callback` is a funcion that is called on the event specified by `event`
+
+Event should be a String which is one of the following:
+
+* `change`: whenever points are added or removed
+
+Callback is a Function that is called with arguments depending on what `event` is bound:
+
+* `drawn`: the layer object
+* `locations`: a list of locations currently selected
+
+**Returns** the pointselector
+
+### pointselector.removeCallback(event, callback)
+
+Remove a callback bound by `.addCallback(event, callback)`.
+
+**Arguments:**
+
+* `event` is a string of the event you want to bind the callback to
+  This must be the same string that was given in `addCallback`
+
+* `callback` is a funcion that is called on the event specified by `event`.
+  This must be the same function as was given in `addCallback`. 
+
+**Returns** the pointselector
+
+### map.ui.boxselector
+
+Allow extents to be selected on the map.
+
+#### boxselector.addCallback(event, callback)
+
+Adds a callback that is called on changes to the boxselector contents.
+
+**Arguments:**
+
+* `event` is a string of the event you want to bind the callback to
+* `callback` is a funcion that is called on the event specified by `event`
+
+Event should be a String which is one of the following:
+
+* `change`: whenever an extent is selected
+
+Callback is a Function that is called with arguments depending on what `event` is bound:
+
+* `drawn`: the layer object
+* `extent`: the currently selected extent
+
+**Returns** the boxselector
+
+### boxselector.removeCallback(event, callback)
+
+Remove a callback bound by `.addCallback(event, callback)`.
+
+**Arguments:**
+
+* `event` is a string of the event you want to bind the callback to
+  This must be the same string that was given in `addCallback`
+
+* `callback` is a funcion that is called on the event specified by `event`.
+  This must be the same function as was given in `addCallback`. 
+
+**Returns** the boxselector
 
 # Interaction
 
