@@ -1,6 +1,6 @@
 // Takes a spreadsheet key, worksheet ID, and callback function with a
 // features argument. Use this to find the worksheet ID:
-// https://spreadsheets.google.com/feeds/worksheets/[ID]/public/basic?alt=json
+// https://spreadsheets.google.com/feeds/worksheets/[spreadsheet_key]/public/basic?alt=json
 
 if (typeof mapbox === 'undefined') mapbox = {};
 if (typeof mapbox.converters === 'undefined') mapbox.converters = {};
