@@ -159,7 +159,7 @@ mapbox.layer.prototype.draw = function() {
         for (var j = i - 1; j >= 0; j--) {
             if (this.map.getLayerAt(j).enabled) {
                 if (this.map.getLayerAt(j)._composite) {
-                    this.parent.innerHTML = '';
+                    this.parent.style.display = 'none';
                     this.compositeLayer = false;
                     return this;
                 }
@@ -185,10 +185,12 @@ mapbox.layer.prototype.draw = function() {
                 that.setProvider(new mapbox.provider(tiledata));
                 // setProvider calls .draw()
             });
+            this.parent.style.display = '';
             return this;
         }
 
     } else {
+        this.parent.style.display = '';
         // Set back to regular provider
         if (this.compositeLayer) {
             this.compositeLayer = false;
