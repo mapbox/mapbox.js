@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ui</title>
+        <script src='../mapbox.js'></script>
+        <link href='../mapbox.min.css' type='text/css' rel='stylesheet' />
+        <style>
+            #map {
+                position:absolute;
+                top:0;
+                left:100px;
+                right:0;
+                bottom:0;
+            }
+            #controls {
+                position:absolute;
+                top:0;
+                width:100px;
+                bottom:0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='controls'>
+            <input type='checkbox' id='zoomer' /> <label for='zoomer'>zoom</label>
+        </div>
+        <div id='map'></div>
+        <script>
+            var map = mapbox.map('map', mapbox.layer().id('tmcw.map-rep59d6x')).zoom(3);
+
+            var checkboxes = document.getElementsByTagName('input');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].onchange = function() {
+                    this.checked ? map.ui[this.id].add() : map.ui[this.id].remove();
+                }
+            }
+        </script>
+    </body>
+</html>
