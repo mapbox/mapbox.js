@@ -2,21 +2,20 @@ if (typeof mapbox === 'undefined') mapbox = {};
 
 mapbox.ui = function(map) {
 
-    var ui = {},
-        map,
-        container = map.parent.appendChild(document.createElement('div')),
+    var container = map.parent.appendChild(document.createElement('div')),
         auto = false;
 
+    var ui = {
+        zoomer: wax.mm.zoomer().map(map),
+        pointselector: wax.mm.pointselector().map(map),
+        hash: wax.mm.hash().map(map),
+        zoombox: wax.mm.zoombox().map(map),
+        fullscreen: wax.mm.fullscreen().map(map),
+        legend: wax.mm.legend().map(map),
+        attribution: wax.mm.attribution().map(map)
+    };
+
     container.id = 'controls';
-
-    ui.zoomer = wax.mm.zoomer().map(map);
-    ui.pointselector = wax.mm.pointselector().map(map);
-    ui.hash = wax.mm.hash().map(map);
-    ui.zoombox = wax.mm.zoombox().map(map);
-    ui.fullscreen = wax.mm.fullscreen().map(map);
-    ui.legend = wax.mm.legend();
-    ui.attribution = wax.mm.attribution();
-
     ui.auto = function() {
         auto = true;
         ui.zoomer();

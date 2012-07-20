@@ -100,7 +100,7 @@ mapbox.layer.prototype.refresh = function(callback) {
 };
 
 mapbox.layer.prototype.url = function(x, callback) {
-    if (!arguments.length) return this.url;
+    if (!arguments.length) return this._url;
     this._url = x;
     return this.refresh(callback);
 };

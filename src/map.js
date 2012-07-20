@@ -66,7 +66,7 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             this.eventHandlers.push(h);
             h.init(this);
         }
-        return this;
+        return m;
     };
 
 
@@ -78,7 +78,7 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             this.locationCoordinate(locations[0]).zoomTo(this.coordLimits[0].zoom),
             this.locationCoordinate(locations[1]).zoomTo(this.coordLimits[1].zoom)
         ];
-        return this;
+        return m;
     };
 
 
