@@ -1,5 +1,3 @@
-var url = 'http://a.tiles.mapbox.com/v3/aibram.tandlale1.jsonp';
-
 !function($) {
 
     // Either creates map or goes full auto
