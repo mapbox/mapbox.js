@@ -20,7 +20,8 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
 
     // Autoconfigure map with sensible defaults
     m.auto = function() {
-        this.ui.auto();
+        this.ui.zoomer.add();
+        this.ui.zoombox.add();
         this.interaction.auto();
 
         for (var i = 0; i < this.layers.length; i++) {
