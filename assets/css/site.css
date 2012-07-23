@@ -337,6 +337,7 @@ ul.topics {
   height: 100%;
   top: 0;
   left: 0;
+  box-sizing: border-box;
   border: 1px solid #CCC;
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
           box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);

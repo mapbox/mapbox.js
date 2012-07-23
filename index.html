@@ -2,45 +2,43 @@
 layout: default
 ---
 
-<div class='limiter clearfix'>
-  <header class='heading clearfix'>
-    <h2>Getting Started</h2>
-    <h4>To use any of the examples you'll need to grab a copy of the lastest code.</h4>
-  <pre><code data-language='html'>&lt;script src='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
+<header class='heading clearfix'>
+  <h2>Getting Started</h2>
+  <h4>To use any of the examples you'll need to grab a copy of the lastest code.</h4>
+<pre><code data-language='html'>&lt;script src='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
 &lt;link href='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;</code></pre>
-  </header>
-  <section class='browse'>
-    <form id='search'>
-      <input type='search' placeholder='Filter examples'>
-    </form>
-    <script type='text/template' id='tags'>
-      <li><a data-tag='<%= tag %>' href='#' class='button'><%= tag %></a></li>
-    </script>
-
-    <nav class='tags'>
-      <span class='label'>Filter by tag</span>
-      <ul id='tag-list' class='clearfix'></ul>
-    </nav>
-
-    <script type='text/template' id='examples'>
-      <li>
-      <a href='{{site.baseurl}}<%= url %>' class='post'>
-          <h4 class='code title'><%= title %></h4>
-          <em class='description'><%= description %></em>
-          <small class='tags'><%= tags %></small>
-          </a>
-      </li>
-    </script>
-
-    <nav class='results'>
-      <ul id='results' class='topics'></ul>
-    </nav>
-  </section>
-
-  <script>
-    $(document).ready(function () {
-      var front = new Docs();
-      $(front.queryExamples);
-    });
+</header>
+<section class='browse'>
+  <form id='search'>
+    <input type='search' placeholder='Filter examples'>
+  </form>
+  <script type='text/template' id='tags'>
+    <li><a data-tag='<%= tag %>' href='#' class='button'><%= tag %></a></li>
   </script>
-</div>
+
+  <nav class='tags'>
+    <span class='label'>Filter by tag</span>
+    <ul id='tag-list' class='clearfix'></ul>
+  </nav>
+
+  <script type='text/template' id='examples'>
+    <li>
+    <a href='{{site.baseurl}}<%= url %>' class='post'>
+        <h4 class='code title'><%= title %></h4>
+        <em class='description'><%= description %></em>
+        <small class='tags'><%= tags %></small>
+        </a>
+    </li>
+  </script>
+
+  <nav class='results'>
+    <ul id='results' class='topics'></ul>
+  </nav>
+</section>
+
+<script>
+  $(document).ready(function () {
+    var front = new Docs();
+    $(front.queryExamples);
+  });
+</script>
