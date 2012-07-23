@@ -6,17 +6,24 @@ tags:
   - markers
 ---
 
-<div id='timeline'></div>
+<div id='timeline'>
+  <h2>US Earthquakes</h2>
+  <p>U.S. Geological Survey</p>
+</div>
 <div id='map'></div>
 
 <style>
 #timeline {
   position:absolute;
-  top:5px;
-  left:5px;
-  width:350px;
+  top:0px;
+  left:0px;
+  width:400px;
+  padding:10px;
   background:#fff;
   z-index:999;
+  }
+#timeline p {
+  margin:0;
   }
 #timeline a {
   font-size:10px;
@@ -49,6 +56,7 @@ tags:
       yearlist.sort();
 
       var timeline = document.getElementById('timeline');
+      var year_links = [];
 
       for (var y = 0; y < yearlist.length; y++) {
           var a = timeline.appendChild(document.createElement('a'));
@@ -64,6 +72,7 @@ tags:
               this.id = 'active';
               return false;
           };
+          year_links.push(a);
       }
 
       var play = timeline.appendChild(document.createElement('a'));
@@ -73,13 +82,13 @@ tags:
       play.onclick = function() {
           var step = 0;
           playStep = window.setInterval(function() {
-              if (step < yearlist.length) {
-                  timeline.childNodes[step].click();
+              if (step < year_links.length) {
+                  year_links[step].click();
                   step++;
               } else {
                   window.clearInterval(playStep);
               }
-          }, 500);
+          }, 250);
       };
 
       var stop = timeline.appendChild(document.createElement('a'));
@@ -91,5 +100,5 @@ tags:
   });
 
   m.addLayer(markerLayer);
-  m.zoom(4).center({ lat: 40, lon: -100 });
+  m.zoom(3).center({ lat: 40, lon: -130 });
 </script>
