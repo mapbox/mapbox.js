@@ -14,9 +14,8 @@ pre, code {
   font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;
   color: #333;
   background: #fff;
-  -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  border-radius: 3px;
+          border-radius: 3px;
   }
 pre {
   word-wrap: break-word;
@@ -24,6 +23,7 @@ pre {
   line-height: 19px;
   margin-bottom: 20px;
   border: 1px solid #CCC;
+  overflow: auto;
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
           box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
   -webkit-border-radius: 2px;

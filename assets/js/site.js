@@ -109,6 +109,21 @@
             }
             return false;
         });
+    },
+
+    copyCode: function() {
+        $('#copy').click(function() {
+            if (document.selection) {
+                var rangeD = document.body.createTextRange();
+                rangeD.moveToElementText(document.getElementById('snippet'));
+                rangeD.select();
+            } else if (window.getSelection) {
+                var rangeW = document.createRange();
+                rangeW.selectNode(document.getElementById('snippet'));
+                window.getSelection().addRange(rangeW);
+            }
+            return false;
+        });
     }
   };
 
