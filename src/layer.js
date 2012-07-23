@@ -1,72 +1,5 @@
 if (typeof mapbox === 'undefined') mapbox = {};
 
-mapbox.provider = function(options) {
-    this.options = {
-        tiles: options.tiles,
-        scheme: options.scheme || 'xyz',
-        minzoom: options.minzoom || 0,
-        maxzoom: options.maxzoom || 22,
-        bounds: options.bounds || [-180, -90, 180, 90]
-    };
-};
-
-mapbox.provider.prototype = {
-
-    // these are limits for available *tiles*
-    // panning limits will be different (since you can wrap around columns)
-    // but if you put Infinity in here it will screw up sourceCoordinate
-    tileLimits: [
-        new MM.Coordinate(0,0,0),             // top left outer
-        new MM.Coordinate(1,1,0).zoomTo(18)   // bottom right inner
-    ],
-
-    releaseTile: function(c) { },
-
-    getTile: function(c) {
-        var coord;
-        if (!(coord = this.sourceCoordinate(c))) return null;
-        if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
-
-        return this.options.tiles[parseInt(Math.pow(2, coord.zoom) * coord.row + coord.column, 10) %
-            this.options.tiles.length]
-            .replace('{z}', coord.zoom.toFixed(0))
-            .replace('{x}', coord.column.toFixed(0))
-            .replace('{y}', coord.row.toFixed(0));
-    },
-
-    // use this to tell MapProvider that tiles only exist between certain zoom levels.
-    // should be set separately on Map to restrict interactive zoom/pan ranges
-    setZoomRange: function(minZoom, maxZoom) {
-        this.tileLimits[0] = this.tileLimits[0].zoomTo(minZoom);
-        this.tileLimits[1] = this.tileLimits[1].zoomTo(maxZoom);
-    },
-
-    // return null if coord is above/below row extents
-    // wrap column around the world if it's outside column extents
-    // ... you should override this function if you change the tile limits
-    // ... see enforce-limits in examples for details
-    sourceCoordinate: function(coord) {
-        var TL = this.tileLimits[0].zoomTo(coord.zoom).container(),
-            BR = this.tileLimits[1].zoomTo(coord.zoom).container().right().down(),
-            columnSize = Math.pow(2, coord.zoom),
-            wrappedColumn;
-
-        if (coord.column < 0) {
-            wrappedColumn = ((coord.column % columnSize) + columnSize) % columnSize;
-        } else {
-            wrappedColumn = coord.column % columnSize;
-        }
-
-        if (coord.row < TL.row || coord.row >= BR.row) {
-            return null;
-        } else if (wrappedColumn < TL.column || wrappedColumn >= BR.column) {
-            return null;
-        } else {
-            return new MM.Coordinate(coord.row, wrappedColumn, coord.zoom);
-        }
-    }
-};
-
 mapbox.layer = function() {
     if (!(this instanceof mapbox.layer)) {
         return new mapbox.layer();
@@ -84,7 +17,7 @@ mapbox.layer = function() {
     this.requestManager = new MM.RequestManager();
     this.requestManager.addCallback('requestcomplete', this.getTileComplete());
     this.requestManager.addCallback('requesterror', this.getTileError());
-    this.setProvider(new mapbox.provider({
+    this.setProvider(new wax.mm._provider({
         tiles: ['data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=']
     }));
 };
@@ -122,7 +55,7 @@ mapbox.layer.prototype.named = function(x) {
 
 mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
-    this.setProvider(new mapbox.provider(x));
+    this.setProvider(new wax.mm._provider(x));
     this._tilejson = x;
 
     if (x.name) this.name = x.name;
@@ -183,7 +116,7 @@ mapbox.layer.prototype.draw = function() {
             this.compositeLayer = ids;
             var that = this;
             mapbox.load(ids, function(tiledata) {
-                that.setProvider(new mapbox.provider(tiledata));
+                that.setProvider(new wax.mm._provider(tiledata));
                 // setProvider calls .draw()
             });
             this.parent.style.display = '';
