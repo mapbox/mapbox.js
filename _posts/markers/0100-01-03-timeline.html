@@ -1,0 +1,105 @@
+---
+layout: example
+categories: example
+title: A Simple Timeline
+description: Show chronological events, with play and stop buttons
+tags:
+  - markers
+---
+
+<div id='timeline'>
+  <h2>US Earthquakes</h2>
+  <p>U.S. Geological Survey</p>
+</div>
+<div id='map'></div>
+
+<style>
+#timeline {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:400px;
+  padding:10px;
+  background:#fff;
+  z-index:999;
+  }
+#timeline p {
+  margin:0;
+  }
+#timeline a {
+  font-size:10px;
+  text-decoration:none;
+  border:1px solid #fff;
+  }
+#timeline a#active {
+  border:1px solid #aaa;
+  }
+</style>
+
+<script>
+  var m = mapbox.map('map');
+  m.addLayer(mapbox.layer().id('examples.map-20v6611k'));
+
+  var year = 2001,
+      years = {};
+  var markerLayer = mapbox.markers.layer().filter(function(f) {
+      return f.properties.year == year;
+  }).url('../../data/historical_earthquakes.geojson', function(features) {
+      for (var i = 0; i < features.length; i++) {
+          years[features[i].properties.year] = true;
+      }
+
+      var yearlist = [];
+      for (var y in years) {
+          yearlist.push(y);
+      }
+
+      yearlist.sort();
+
+      var timeline = document.getElementById('timeline');
+      var year_links = [];
+
+      for (var y = 0; y < yearlist.length; y++) {
+          var a = timeline.appendChild(document.createElement('a'));
+          a.innerHTML = yearlist[y] + ' ';
+          a.href = "#" + yearlist[y];
+          a.onclick = function() {
+              var year = this.getAttribute('href').replace('#', '');
+              markerLayer.filter(function(f) {
+                  return f.properties.year == year;
+              });
+              var active = document.getElementById('active');
+              if (active) active.id = '';
+              this.id = 'active';
+              return false;
+          };
+          year_links.push(a);
+      }
+
+      var play = timeline.appendChild(document.createElement('a'));
+      var playStep;
+      play.innerHTML = 'PLAY';
+
+      play.onclick = function() {
+          var step = 0;
+          playStep = window.setInterval(function() {
+              if (step < year_links.length) {
+                  year_links[step].click();
+                  step++;
+              } else {
+                  window.clearInterval(playStep);
+              }
+          }, 250);
+      };
+
+      var stop = timeline.appendChild(document.createElement('a'));
+      stop.innerHTML = 'STOP';
+
+      stop.onclick = function() {
+          window.clearInterval(playStep);
+      };
+  });
+
+  m.addLayer(markerLayer);
+  m.zoom(3).center({ lat: 40, lon: -130 });
+</script>
