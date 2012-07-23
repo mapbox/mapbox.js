@@ -9,12 +9,30 @@ tags:
 
 <div id='map'>
     <div id='boxes'>
-        <div><input type='checkbox' id='zoomer' /> <label for='zoomer'>zoom</label></div>
-        <div><input type='checkbox' id='zoombox' /> <label for='zoombox'>zoombox</label></div>
-        <div><input type='checkbox' id='fullscreen' /> <label for='fullscreen'>fullscreen</label></div>
-        <div><input type='checkbox' id='attribution' /> <label for='attribution'>attribution</label></div>
-        <div><input type='checkbox' id='pointselector' /> <label for='pointselector'>pointselector</label></div>
-        <div><input type='checkbox' id='hash' /> <label for='hash'>hash</label></div>
+      <div>
+        <input type='checkbox' id='zoomer' />
+        <label for='zoomer'>zoom</label>
+      </div>
+      <div>
+        <input type='checkbox' id='zoombox' />
+        <label for='zoombox'>zoombox</label>
+      </div>
+      <div>
+        <input type='checkbox' id='fullscreen' />
+        <label for='fullscreen'>fullscreen</label>
+      </div>
+      <div>
+        <input type='checkbox' id='attribution' />
+        <label for='attribution'>attribution</label>
+      </div>
+      <div>
+        <input type='checkbox' id='pointselector' />
+        <label for='pointselector'>pointselector</label>
+      </div>
+      <div>
+        <input type='checkbox' id='hash' />
+        <label for='hash'>hash</label>
+      </div>
     </div>
 </div>
 
@@ -29,11 +47,15 @@ tags:
 </style>
 
 <script>
-var map = mapbox.map('map', mapbox.layer().id('tmcw.map-rep59d6x')).zoom(3);
-var checkboxes = document.getElementsByTagName('input');
-for (var i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].onchange = function() {
-        this.checked ? map.ui[this.id].add() : map.ui[this.id].remove();
-    }
-}
+
+  // Create map with layer and zoom to level 3
+  var map = mapbox.map('map', mapbox.layer().id('tmcw.map-rep59d6x')).zoom(3);
+
+  // Connect check boxes to ui functions
+  var checkboxes = document.getElementsByTagName('input');
+  for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].onchange = function() {
+          this.checked ? map.ui[this.id].add() : map.ui[this.id].remove();
+      }
+  }
 </script>
