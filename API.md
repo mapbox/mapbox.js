@@ -341,9 +341,16 @@ Remove a callback bound by `.addCallback(event, callback)`.
 
 # Interaction
 
-## var interaction = mapbox.interaction()
+Interaction is what we call interactive parts of maps that are created
+with the [powerful tooltips & regions system in TileMill](http://mapbox.com/tilemill/docs/crashcourse/tooltips/).
+Under the hood, it's powered by the open [UTFGrid](https://github.com/mapbox/utfgrid-spec)
+specification.
 
-Creates a interaction control with several extra features. See [Wax documentation](http://mapbox.com/wax/interaction-mm.html) for full reference.
+## mapbox.interaction()
+
+Create an interaction control which will find and present interactive regions of the map.
+
+**Returns** a new interaction control.
 
 ### interaction.map(map)
 
@@ -351,8 +358,20 @@ Set the map to add interaction for.
 
 ### interaction.auto()
 
-Enable interactivity for topmost layer with interactive features.
+Enable default settings - animated tooltips - for interaction with the map.
+This internally calls `.refresh()` to set the interactivity for the top layer.
+
+**Returns** the interaction control
+
+**Example:**
+
+    var interaction = mapbox.interaction()
+        .map(map)
+        .auto();
 
 ### interaction.refresh()
 
 Refresh interactivity control to reflect any layer changes.
+If `auto` has not been called, this function will not change anything.
+
+**Returns** the interaction control
