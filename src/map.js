@@ -124,6 +124,20 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
         return this.insertLayerAt(0, layer);
     };
 
+    // We need to redraw after removing due to compositing
+    m.removeLayerAt = function(index) {
+        MM.Map.prototype.removeLayerAt.call(this, index);
+        MM.getFrame(this.getRedraw());
+        return this;
+    };
+
+    // We need to redraw after removing due to compositing
+    m.swapLayersAt = function(a, b) {
+        MM.Map.prototype.swapLayersAt.call(this, a, b);
+        MM.getFrame(this.getRedraw());
+        return this;
+    };
+
     return m;
 };
 
