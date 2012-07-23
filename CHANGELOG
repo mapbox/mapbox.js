@@ -4,6 +4,14 @@
   `map, augmented tilejson`
 * Fixes various map issues in the Modest Maps wrapping of `mapbox.map`
 
+### v0.5.4
+
+* Update Modest Maps to 3.3.1
+
+### v0.5.2
+
+* Update Wax to dev2
+
 ### v0.4.1
 
 * Do not proxy `mapbox.markers` call anymore

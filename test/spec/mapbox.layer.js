@@ -31,15 +31,15 @@ describe("mapbox.layer", function() {
   it("an id can be set on layers", function() {
       var l = mapbox.layer();
       expect(l).toBeTruthy();
-      expect(l.id('map-hehqnmda')).toEqual(l);
-      expect(l.id()).toEqual('map-hehqnmda');
+      expect(l.id('tmcw.map-hehqnmda')).toEqual(l);
+      expect(l.id()).toEqual('tmcw.map-hehqnmda');
   });
 
   it("when an id is set, so is the name", function() {
       var l = mapbox.layer();
       expect(l).toBeTruthy();
-      expect(l.id('map-hehqnmda')).toEqual(l);
-      expect(l.name).toEqual('map-hehqnmda');
+      expect(l.id('tmcw.map-hehqnmda')).toEqual(l);
+      expect(l.name).toEqual('tmcw.map-hehqnmda');
   });
 
   it("mapbox.layer can create layers", function() {
