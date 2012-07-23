@@ -58,8 +58,6 @@ mapbox.layer.prototype.tilejson = function(x) {
     this.setProvider(new wax.mm._provider(x));
     this._tilejson = x;
 
-    if (x.name) this.name = x.name;
-    if (x.id) this._id = x.id;
     if (x.bounds) {
         var proj = new MM.MercatorProjection(0,
             MM.deriveTransformation(
