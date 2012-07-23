@@ -75,6 +75,7 @@ mapbox.layer = function() {
     this._tilejson = {};
     this._url = '';
     this._id = '';
+    this._composite = true;
 
     this.name = '';
     this.parent = document.createElement('div');
@@ -137,11 +138,88 @@ mapbox.layer.prototype.tilejson = function(x) {
             proj.locationCoordinate(new MM.Location(x.bounds[3], x.bounds[0]))
                 .zoomTo(x.minzoom ? x.minzoom : 0),
             proj.locationCoordinate(new MM.Location(x.bounds[1], x.bounds[2]))
-                .zoomTo(x.maxzoom ? x.maxzoom : 18),
+                .zoomTo(x.maxzoom ? x.maxzoom : 18)
         ];
     }
 
     return this;
+};
+
+mapbox.layer.prototype.draw = function() {
+    if (!this.enabled || !this.map) return;
+
+    if (this._composite) {
+
+        // Get index of current layer
+        var i = 0;
+        for (i; i < this.map.layers.length; i++) {
+            if (this.map.layers[i] == this) break;
+        }
+
+        // If layer is composited by layer below it, don't draw
+        for (var j = i - 1; j >= 0; j--) {
+            if (this.map.getLayerAt(j).enabled) {
+                if (this.map.getLayerAt(j)._composite) {
+                    this.parent.style.display = 'none';
+                    this.compositeLayer = false;
+                    return this;
+                }
+                else break;
+            }
+        }
+
+        // Get map IDs for all consecutive composited layers
+        var ids = [];
+        for (var k = i; k < this.map.layers.length; k++) {
+            var l = this.map.getLayerAt(k);
+            if (l.enabled) {
+                if (l._composite) ids.push(l.id());
+                else break;
+            }
+        }
+        ids = ids.join(',');
+
+        if (this.compositeLayer !== ids) {
+            this.compositeLayer = ids;
+            var that = this;
+            mapbox.load(ids, function(tiledata) {
+                that.setProvider(new mapbox.provider(tiledata));
+                // setProvider calls .draw()
+            });
+            this.parent.style.display = '';
+            return this;
+        }
+
+    } else {
+        this.parent.style.display = '';
+        // Set back to regular provider
+        if (this.compositeLayer) {
+            this.compositeLayer = false;
+            this.tilejson(this.tilejson());
+            // .draw() called by .tilejson()
+        }
+    }
+
+    return MM.Layer.prototype.draw.call(this);
+};
+
+mapbox.layer.prototype.composite = function(x) {
+    if (!arguments.length) return this._composite;
+    if (x) this._composite = true;
+    else this._composite = false;
+    return this;
+};
+
+// we need to redraw map due to compositing
+mapbox.layer.prototype.enable = function(x) {
+    MM.Layer.prototype.enable.call(this, x);
+    this.map.draw();
+};
+
+// we need to redraw map due to compositing
+mapbox.layer.prototype.disable = function(x) {
+    MM.Layer.prototype.disable.call(this, x);
+    this.map.draw();
 };
 
 MM.extend(mapbox.layer, MM.Layer);
