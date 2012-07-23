@@ -115,11 +115,11 @@
         $('#copy').click(function() {
             if (document.selection) {
                 var rangeD = document.body.createTextRange();
-                rangeD.moveToElementText(document.getElementById('snippet'));
+                rangeD.moveToElementText(document.getElementById('code'));
                 rangeD.select();
             } else if (window.getSelection) {
                 var rangeW = document.createRange();
-                rangeW.selectNode(document.getElementById('snippet'));
+                rangeW.selectNode(document.getElementById('code'));
                 window.getSelection().addRange(rangeW);
             }
             return false;
