@@ -8,6 +8,10 @@ mapbox.ui = function(map) {
         zoombox: wax.mm.zoombox().map(map),
         fullscreen: wax.mm.fullscreen().map(map),
         legend: wax.mm.legend().map(map),
-        attribution: wax.mm.attribution().map(map)
+        attribution: wax.mm.attribution().map(map),
+
+        auto: function() {
+            this.zoomer.add();
+        }
     };
 };
