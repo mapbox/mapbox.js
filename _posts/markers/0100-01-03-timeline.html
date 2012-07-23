@@ -7,21 +7,26 @@ tags:
   - markers
 ---
 
-<div id='timeline'>
-  <h2>US Earthquakes</h2>
-  <p>U.S. Geological Survey</p>
+<div id='sidebar'>
+  <div id='timeline'>
+    <h2>US Earthquakes</h2>
+    <p>U.S. Geological Survey</p>
+  </div>
 </div>
 <div id='map'></div>
 
 <style>
-#timeline {
+#sidebar {
   position:absolute;
   top:0px;
   left:0px;
-  width:400px;
-  padding:10px;
+  width:310px;
+  height:100%;
   background:#fff;
   z-index:999;
+  }
+#timeline {
+  padding:10px;
   }
 #timeline p {
   margin:0;
