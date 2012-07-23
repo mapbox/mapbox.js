@@ -274,7 +274,8 @@ form#search {
 
 ul.topics {
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
   -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.10);
           box-shadow: 0 0 8px rgba(0,0,0,0.10);
   }
@@ -284,11 +285,12 @@ ul.topics {
     background: #fff;
     border-bottom: 1px solid #dedede;
     padding: 10px;
-    box-sizing: border-box;
     min-height: 60px;
     opacity: 1;
     text-decoration: none;
     font-weight: normal;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
     -webkit-border-radius: 2px;
             border-radius: 2px;
     -webkit-transition: all 0.05s linear;
@@ -337,7 +339,8 @@ ul.topics {
   height: 100%;
   top: 0;
   left: 0;
-  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
   border: 1px solid #CCC;
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
           box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
