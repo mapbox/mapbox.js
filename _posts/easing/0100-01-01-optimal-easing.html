@@ -1,0 +1,59 @@
+---
+layout: example
+categories: example
+title: Easing links
+description: Add links to ease to various cities.
+tags:
+  - animation
+---
+
+<style>
+  #links {
+    background: #fff;
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index: 1000;
+    padding: 10px;
+  }
+</style>
+
+<div id='links'>
+  <ul>
+    <li><a href="#" id="toronto">Toronto</a></li>
+    <li><a href="#" id="chicago">Chicago</a></li>
+    <li><a href="#" id="dc">Washington, D.C.</a></li>
+  </ul>
+</div>
+<div id='map'></div>
+
+<script>
+
+  // Create a map
+  var map = mapbox.map('map');
+  // Create a layer
+  var layer = mapbox.layer().id('tmcw.map-2f4ad161');
+  // Add the layer
+  map.addLayer(layer);
+  // Zoom in to level 4
+  map.zoom(4);
+
+
+  // Run easings when links are clicked
+
+  document.getElementById('toronto').onclick = function() {
+    map.ease.location({ lat: 43.6, lon: -79.4 }).zoom(10).optimal();
+    return false
+  }
+
+  document.getElementById('chicago').onclick = function() {
+    map.ease.location({ lat: 41.9, lon: -87.6 }).zoom(10).optimal();
+    return false
+  }
+
+  document.getElementById('dc').onclick = function() {
+    map.ease.location({ lat: 38.9, lon: -77 }).zoom(10).optimal();
+    return false
+  }
+
+</script>
