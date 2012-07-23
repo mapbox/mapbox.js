@@ -341,6 +341,11 @@ ul.topics {
   height: 100%;
   top: 0;
   left: 0;
+  border: 1px solid #CCC;
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
   }
 
 #demo,
