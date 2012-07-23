@@ -193,19 +193,15 @@ nav.tags {
 html {
   overflow-y: scroll;
   }
-.containment {
+.limiter {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 40px;
   }
 section {
   position: relative;
   margin: 20px 0 40px;
-  }
-.limiter {
-  width: 800px;
-  margin: 0 auto;
-  padding: 0 40px;
   }
 .masthead {
   height: 60px;
