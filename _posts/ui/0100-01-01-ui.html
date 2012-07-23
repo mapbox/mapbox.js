@@ -12,6 +12,7 @@ tags:
 <script>
     var m = mapbox.map('map');
     m.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
-    mapbox.ui().map(m).auto();
+    m.ui.zoomer.add();
+    m.ui.zoombox.add();
     m.zoom(3);
 </script>

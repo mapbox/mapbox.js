@@ -33,9 +33,13 @@ tags:
       var input = document.createElement('input');
       var label = document.createElement('label');
       input.type = 'checkbox';
-      input.id = n;
-      input.value = n;
+      input.id = input.value = n;
       input.checked = 'checked';
+      input.onchange = function() {
+          m.getLayer(this.value).enabled ? 
+              m.getLayer(this.value).disable() :
+              m.getLayer(this.value).enable();
+      };
       label.innerHTML = n;
       label.setAttribute('for', n);
       container.appendChild(input);
