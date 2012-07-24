@@ -1627,9 +1627,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.1650872"
-     inkscape:cx="4.2080522"
-     inkscape:cy="78.995417"
+     inkscape:zoom="13.437964"
+     inkscape:cx="-9.0380025"
+     inkscape:cy="98.845708"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -1750,7 +1750,7 @@
        id="background"
        inkscape:connector-curvature="0" />
     <path
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:0.94117647;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#8c8c8c;fill-opacity:1;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        d="m 18,970.6521 c -4e-6,-3.4589 -2.831002,-6.2899 -6.289925,-6.2899 -3.458936,0 -6.289935,2.831 -6.289929,6.2899 -2e-6,1.26 0.49528,2.3547 1.140046,3.3415 L 2,978.5538 l 1.808353,1.8084 4.560193,-4.5602 c 0.986825,0.6448 2.081601,1.14 3.341526,1.14 3.458925,0 6.289924,-2.831 6.289928,-6.2899 z m -2.515976,0 c -2e-6,2.0992 -1.674755,3.774 -3.773955,3.774 -2.099201,0 -3.773957,-1.6748 -3.773955,-3.774 1e-6,-2.0992 1.674754,-3.774 3.773955,-3.774 2.099199,0 3.773957,1.6748 3.773953,3.774 z"
        id="path8261-7"
        inkscape:connector-curvature="0" />
@@ -1764,10 +1764,5 @@
        inkscape:export-filename="/Users/tristen/github/microsite-sandbox/images/dark-border.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <path
-       style="color:#000000;fill:#333333;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.40000001;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 12,935.3622 c 0,0 -1.628258,1.10254 -2,2 -0.3717418,0.89746 0,3 0,3 l -3,3 -2,0 -2,2 0,2 2,2 2,0 2,-2 0,-2 3,-3 c 0,0 2.102539,0.37174 3,0 0.897461,-0.37174 2,-2 2,-2 l 0,-2 -1,0 -2,2 -2,0 0,-2 2,-2 0,-1 -2,0 z m -7,10 2,0 0,2 -2,0 0,-2 z"
-       id="path6862"
-       inkscape:connector-curvature="0" />
   </g>
 </svg>

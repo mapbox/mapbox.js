@@ -1,12 +1,38 @@
 ---
 layout: default
 ---
-
+<link href='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
 <header class='heading clearfix'>
-  <h2>Getting Started</h2>
-  <h4>To use any of the examples you'll need to grab a copy of the lastest code.</h4>
-<pre><code data-language='html'>&lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
-&lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;</code></pre>
+  <h2>Demo gallery</h2>
+  <h4>Browse examples below or start with a simple example</h4>
+<section class='intro clearfix'>
+<div id='simple-map'></div>
+<div id='simple-code'>
+<pre class='prettyprint'>
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=utf-8 /&gt;
+  &lt;title&gt;Example&lt;/title&gt;
+  &lt;script
+    src='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
+  &lt;link
+    href='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.css'
+    rel='stylesheet' /&gt;
+  &lt;style&gt;
+    body { margin:0; padding:0; }
+    #map { position:absolute; width:100%; height:100%; top:0; left:0; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id='map'&gt;&lt;/div&gt;
+&lt;script&gt;
+    mapbox.auto('map', 'examples.map-vyofok3q');
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+</section>
 </header>
 <section class='browse'>
   <form id='search'>
@@ -36,9 +62,11 @@ layout: default
   </nav>
 </section>
 
+<script src='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
 <script>
   $(document).ready(function () {
     var front = new Docs();
     $(front.queryExamples);
+    mapbox.auto('simple-map', 'examples.map-vyofok3q');
   });
 </script>

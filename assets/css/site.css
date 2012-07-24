@@ -1,7 +1,6 @@
 /*
 ================================================
 Contents:
-  00 @fontface
   01 Typography
   02 UI elements
   03 Basic layout
@@ -11,16 +10,6 @@ Contents:
   07 Helpers
 ================================================
 */
-
-
-/* 00 @fontface
---------------------------------------------- */
-@font-face {
-  font-family: 'Opensans Bold';
-  src: url('../fonts/opensans-bold.eot?#') format('eot'),
-       url('../fonts/opensans-bold.woff') format('woff'),
-       url('../fonts/opensans-bold.ttf') format('truetype');
-  }
 
 /* 01 Typography
 --------------------------------------------- */
@@ -104,8 +93,8 @@ textarea,
 select {
   display: inline-block;
   width: 338px;
-  height: 30px;
-  padding: 4px 10px;
+  height: 38px;
+  padding: 5px 15px;
   }
   input[type='search'],
   input[type='text'] {
@@ -177,15 +166,6 @@ input[type='search'] {
     border-color: #aaa;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.35);
     -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.35);
-    }
-
-nav.tags {
-  margin: 0 0 20px;
-  }
-  .label {
-    color: #808080;
-    font-size: 11px;
-    line-height: 18px;
     }
 
 /* 03 Basic layout
@@ -262,19 +242,49 @@ section {
 
 /* 05 Front page
 --------------------------------------------- */
-.browse {
-  padding: 0 0 60px;
+.intro #simple-code,
+.intro #simple-map {
+  float: left;
+  height: 431px;
+  width: 50%
   }
-form#search {
-  width: 360px;
-  margin: 0 auto;
+nav.tags {
+  margin: 0 0 15px;
   }
-  form#search input {
-    background: white url(../images/sprite.png) no-repeat 327px -20px;
-    padding-right: 40px;
-    width: 308px;
+  .label {
+    color: #808080;
+    font-size: 11px;
+    line-height: 18px;
     }
 
+.browse {
+  padding: 20px 0 60px;
+  }
+form#search {
+  width: 480px;
+  margin: 0 auto 15px;
+  }
+  form#search input {
+    background: white url(../images/sprite.png) no-repeat 445px -15px;
+    padding-right: 40px;
+    width: 423px;
+    font-size: 16px;
+    }
+@media only screen and (max-width: 600px) {
+  form#search {
+    width: 100%;
+    }
+  form#search input {
+    background: white;
+    padding-right: 0;
+    width: 98%;
+    padding-left: 2%;
+    }
+  .intro #simple-code,
+  .intro #simple-map {
+    width: 100%;
+    }
+  }
 ul.topics {
   border: 1px solid #ccc;
   -moz-box-sizing: border-box;
@@ -287,7 +297,7 @@ ul.topics {
     padding: 10px;
     background: #fff;
     border-bottom: 1px solid #dedede;
-    padding: 10px;
+    padding: 15px;
     min-height: 60px;
     opacity: 1;
     text-decoration: none;
