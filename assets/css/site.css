@@ -204,6 +204,7 @@ section {
   margin: 20px 0 40px;
   }
 .masthead {
+  position: relative;
   height: 60px;
   }
 .heading {
@@ -234,7 +235,9 @@ section {
   float: left;
   }
 .masthead ul {
-  float: right;
+  position: absolute;
+  right: 40px;
+  top: 5px;
   }
   .masthead ul li {
     float: left;
