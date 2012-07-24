@@ -27,6 +27,8 @@ tags:
   m.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
   m.zoom(3);
 
+  // Create a simple layer switcher that toggles layers on
+  // and off.
   for (var i = 0; i < m.getLayers().length; i++) {
       var n = m.getLayerAt(i).name;
       var container = document.createElement('div');
