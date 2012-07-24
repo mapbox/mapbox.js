@@ -23,15 +23,14 @@
 
     };
 
-
     // Expose functionality as jQuery plugin
     $.fn.switchLayer = switchLayer;
 
     function switchLayer(e) {
         var $this = $(this),
-            $parent = $this.parents('[data-control="switcher"]');
+            $parent = $this.parents('[data-control="switcher"]'),
             group = $this.data('group') || 0,
-            map = $('#' + $parent.data('map')).data('map'),
+            map = $('#' + $this.parents('[data-map]').data('map')).data('map'),
             name = $this.attr('href').replace('#','');
 
         if (!map.getLayer(name).enabled) {
@@ -48,6 +47,10 @@
             map.enableLayer(name);
             $this.addClass('active');
 
+            if ($this.data('toggle')) {
+                easeMap.call(this, e, true);
+            };
+
         } else if ($this.data('toggle')) {
             // Toggle layer off
             map.disableLayer(name);
@@ -55,19 +58,21 @@
             map.draw();
         }
         return false;
-    };
-
+    }
 
     $(function() {
         $('body').on('click.switcher.data-api', '[data-control="switcher"] a', switchLayer);
     });
 
-
     $.fn.ease = easeMap;
 
-    function easeMap(e) {
-        var $this = $(this),
-            mapid = $this.data('map') || $this.parents('[data-map]').data('map');
+    function easeMap(e, force) {
+        var $this = $(this);
+
+        // Don't ease when toggling layer off
+        if (!force && $this.data('toggle')) return false;
+
+        var mapid = $this.data('map') || $this.parents('[data-map]').data('map'),
             map = $('#' + mapid).data('map');
 
         if (!map) return false;
