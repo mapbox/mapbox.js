@@ -1,0 +1,55 @@
+---
+layout: example
+categories: example
+title: Swipe Layers
+description: Swipe between layers
+tags:
+  - layers
+---
+
+<style type='text/css'>
+  #swipe {
+    background:#fff;
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    padding:10px;
+    height:30px;
+  }
+  #swipe #handle {
+    position:absolute;
+    height:20px;
+    padding:5px;
+    background:#aaa;
+    font-weight:bold;
+    border:1px solid #333;
+    cursor:pointer;
+    -webkit-user-select: none;
+  }
+</style>
+<div id='swipe'>
+    <div id='handle'>drag</div>
+</div>
+<div id='map'></div>
+<script>
+  var map = mapbox.map('map'),
+      layers = document.getElementById('layers');
+
+  map.addLayer(mapbox.layer().id('examples.map-a1dcgmtr').composite(false));
+  map.addLayer(mapbox.layer().id('examples.map-20v6611k').composite(false));
+  map.zoom(3);
+
+  var l_parent = map.getLayerAt(1).parent,
+      handle = document.getElementById('handle'),
+      dragging = false;
+
+  handle.onmousedown = function() { dragging = true; }
+  document.onmouseup = function() { dragging = false; }
+  document.onmousemove = function(e) {
+      if (!dragging) return;
+      handle.style.left = (e.clientX - 50) + 'px';
+      l_parent.style.clip = 'rect(0px ' + (e.clientX - 25) + 'px 9999999px 0px)';
+  }
+</script>
