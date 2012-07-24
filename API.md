@@ -241,6 +241,15 @@ manages (if any) to the map element, and bind any events.
 Remove the UI element from the map. Removes the HTML elements from the
 map, if any, and removes listeners, if any.
 
+#### .element()
+
+For applicable elements (zoomer, attribution, legend, fullscreen),
+returns the DOM element this control exposes.
+
+### map.ui.fullscreen
+
+Add a link that can maximize and minimize the map on the browser page
+
 ### map.ui.hash
 
 Add the map's changing position to the URL, making map locations linkable
@@ -335,7 +344,7 @@ Remove a callback bound by `.addCallback(event, callback)`.
   This must be the same string that was given in `addCallback`
 
 * `callback` is a funcion that is called on the event specified by `event`.
-  This must be the same function as was given in `addCallback`. 
+  This must be the same function as was given in `addCallback`.
 
 **Returns** the boxselector
 
@@ -354,7 +363,8 @@ Create an interaction control which will find and present interactive regions of
 
 ### interaction.map(map)
 
-Set the map to add interaction for.
+Set the map to add interaction for. The `interaction` that's automatically added to
+maps via loading methods already has `map` set, so it's not necessary to re-call this method.
 
 ### interaction.auto()
 
