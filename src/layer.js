@@ -18,7 +18,7 @@ mapbox.layer = function() {
     this.requestManager.addCallback('requestcomplete', this.getTileComplete());
     this.requestManager.addCallback('requesterror', this.getTileError());
     this.setProvider(new wax.mm._provider({
-        tiles: ['data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=']
+        tiles: ['data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7']
     }));
 };
 
