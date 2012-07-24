@@ -50,6 +50,6 @@ tags:
   document.onmousemove = function(e) {
       if (!dragging) return;
       handle.style.left = (e.clientX - 50) + 'px';
-      l_parent.style.clip = 'rect(0px, ' + (e.clientX - 25) + 'px, 9999999px, 0px)';
+      l_parent.style.clip = 'rect(0px ' + (e.clientX - 25) + 'px 9999999px 0px)';
   }
 </script>
