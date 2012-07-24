@@ -5,7 +5,7 @@ the map object manages a set of layers, stores and displays zoom levels and cent
 and accepts a set of UI controls to which you can add your own finishing touches.
 
 Technically speaking, maps are based on [Modest Maps](http://modestmaps.com/),
-so [the full Modest Maps API](https://github.com/modestmaps/modestmaps-js/wiki)
+so [the full Modest Maps API](https://github.com/shawnbot/modestmaps-js/blob/add-docs/doc/api.md)
 is available to power-users.
 
 ## mapbox.map(element [, layers])
