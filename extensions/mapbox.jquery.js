@@ -23,13 +23,12 @@
 
     };
 
-
     // Expose functionality as jQuery plugin
     $.fn.switchLayer = switchLayer;
 
     function switchLayer(e) {
         var $this = $(this),
-            $parent = $this.parents('[data-control="switcher"]');
+            $parent = $this.parents('[data-control="switcher"]'),
             group = $this.data('group') || 0,
             map = $('#' + $parent.data('map')).data('map'),
             name = $this.attr('href').replace('#','');
@@ -55,19 +54,17 @@
             map.draw();
         }
         return false;
-    };
-
+    }
 
     $(function() {
         $('body').on('click.switcher.data-api', '[data-control="switcher"] a', switchLayer);
     });
 
-
     $.fn.ease = easeMap;
 
     function easeMap(e) {
         var $this = $(this),
-            mapid = $this.data('map') || $this.parents('[data-map]').data('map');
+            mapid = $this.data('map') || $this.parents('[data-map]').data('map'),
             map = $('#' + mapid).data('map');
 
         if (!map) return false;
