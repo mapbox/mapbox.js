@@ -30,6 +30,28 @@ describe("mapbox.map", function() {
         expect(m.ui).toBeTruthy();
     });
 
+    it("proxied center method is a getter setter", function() {
+        var m = mapbox.map(document.createElement('div'));
+        expect(m.center({ lat: 10, lon: 10 })).toEqual(m);
+        expect(m.center().lat).toBeCloseTo(10);
+        expect(m.center().lon).toBeCloseTo(10);
+    });
+
+    it("proxied zoom method is a getter setter", function() {
+        var m = mapbox.map(document.createElement('div'));
+        expect(m.zoom(5)).toEqual(m);
+        expect(m.zoom()).toEqual(5);
+    });
+
+    it("center zoom method sets both", function() {
+        var m = mapbox.map(document.createElement('div'));
+        expect(m.centerzoom({ lat: 10, lon: 10 }, 5)).toEqual(m);
+        expect(m.zoom(5)).toEqual(m);
+        expect(m.zoom()).toEqual(5);
+        expect(m.center().lat).toBeCloseTo(10);
+        expect(m.center().lon).toBeCloseTo(10);
+    });
+
     it("has a refresh method that is callable", function() {
         var m = mapbox.map(document.createElement('div'));
         expect(m.addLayer(mapbox.markers.layer())).toEqual(m);
