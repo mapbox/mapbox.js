@@ -4,20 +4,6 @@ that follows after `mapbox.css`
 
 ## General
 
-Elements like the zoom controls and fullscreen link are added to a `#controls` div on the map.
-The default css looks like this:
-
-    #controls {
-      top: 10px;
-      left: 10px;
-      position: absolute;
-      z-index: 1000;
-      -webkit-border-radius:3px;
-              border-radius:3px;
-      -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.15);
-              box-shadow:0 1px 2px rgba(0,0,0,0.15);
-      }
-
 UI elements by default also share some of the same css:
 
     .zoomer,
@@ -39,6 +25,7 @@ Other elments like legends, tooltips along with ui controls share the same css:
     .map-fullscreen {
       position:absolute;
       border:1px solid #bbb;
+      box-sizing:border-box;
       background:#fff;
       -webkit-border-radius:3px;
               border-radius:3px;
@@ -54,8 +41,8 @@ __Markup__
 __Default css__
 
     .zoomer {
-      width:28px;
-      height:28px;
+      width:30px;
+      height:30px;
       top:10px;
       left:10px;
       z-index:2;
@@ -134,8 +121,8 @@ __Default css__
     .map-tooltip .close {
       top:4px;
       right:4px;
-      width:18px;
-      height:18px;
+      width:20px;
+      height:20px;
       background-position:-6px -6px;
       }
 
@@ -178,8 +165,8 @@ __Markup__
 __Deafult css__
 
     .map-fullscreen {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       background-position: -90px 0;
       position:absolute;
       top:10px;
