@@ -49,6 +49,8 @@
                 'geometry': { 'type': 'Point', 'coordinates': [resp.lon, resp.lat] },
                 'properties': {}
             });
+
+            map.ui.refresh(); // Update attribution
         }
     }
 

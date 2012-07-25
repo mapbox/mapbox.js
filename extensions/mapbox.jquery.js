@@ -38,18 +38,16 @@
             var layers = $parent.find('a');
             for (var i = 0; i < layers.length; i++) {
                 var l = map.getLayer($(layers[i]).attr('href').replace('#',''));
-                if (l && group == $(layers[i]).data('group') && l.enabled) {
+                if (l && group == ($(layers[i]).data('group') || 0) && l.enabled) {
                     $(layers[i]).removeClass('active');
+                    $(layers[i]).trigger('disabled');
                     l.disable();
                 }
             }
 
             map.enableLayer(name);
             $this.addClass('active');
-
-            if ($this.data('toggle')) {
-                easeMap.call(this, e, true);
-            };
+            $this.trigger('enabled');
 
         } else if ($this.data('toggle')) {
             // Toggle layer off
@@ -57,6 +55,7 @@
             $this.removeClass('active');
             map.draw();
         }
+        map.ui.refresh();
         return false;
     }
 
@@ -70,7 +69,7 @@
         var $this = $(this);
 
         // Don't ease when toggling layer off
-        if (!force && $this.data('toggle')) return false;
+        if ($this.data('toggle') && e.type !== 'enabled') return false;
 
         var mapid = $this.data('map') || $this.parents('[data-map]').data('map'),
             map = $('#' + mapid).data('map');
@@ -86,7 +85,7 @@
     }
 
     $(function() {
-        $('body').on('click.ease.data-api', '[data-lat],[data-lon],[data-zoom]', easeMap);
+        $('body').on('click.ease.data-api enabled.ease', '[data-lat],[data-lon],[data-zoom]', easeMap);
     });
 
 }(window.jQuery);
