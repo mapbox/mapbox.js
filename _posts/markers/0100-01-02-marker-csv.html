@@ -10,7 +10,7 @@ tags:
 <div id='map'></div>
 <script>
   var m = mapbox.map('map');
-  m.addLayer(mapbox.layer().id('examples.map-20v6611k'));
+  m.addLayer(mapbox.layer().id('examples.map-4l7djmvo'));
 
   // Create a markers layer with features from a CSV string.
   var markerLayer = mapbox.markers.layer().csv('lat,lon,title,marker-color\n40.5,14,Naples,#180392');
@@ -21,5 +21,5 @@ tags:
   mapbox.markers.interaction(markerLayer);
   m.addLayer(markerLayer);
 
-  m.zoom(5).center({ lat: 40, lon: 10 });
+  m.zoom(6).center({ lat: 41.673, lon: 12.656 });
 </script>

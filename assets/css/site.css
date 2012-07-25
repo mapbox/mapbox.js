@@ -93,8 +93,8 @@ textarea,
 select {
   display: inline-block;
   width: 338px;
-  height: 38px;
-  padding: 5px 15px;
+  height: 28px;
+  padding: 10px 15px;
   }
   input[type='search'],
   input[type='text'] {
@@ -179,7 +179,7 @@ html {
   margin: 0 auto;
   padding: 0 40px;
   }
-section {
+.section {
   position: relative;
   margin: 20px 0 40px;
   }
@@ -244,11 +244,12 @@ section {
 --------------------------------------------- */
 .intro #simple-code,
 .intro #simple-map {
+  background: #fff;
   float: left;
   height: 431px;
   width: 50%
   }
-nav.tags {
+div.tags {
   margin: 0 0 15px;
   }
   .label {
@@ -269,6 +270,7 @@ form#search {
     padding-right: 40px;
     width: 423px;
     font-size: 16px;
+    line-height: 26px;
     }
 @media only screen and (max-width: 600px) {
   form#search {
@@ -297,7 +299,9 @@ ul.topics {
     padding: 10px;
     background: #fff;
     border-bottom: 1px solid #dedede;
+    border-top: 1px solid #dedede;
     padding: 15px;
+    margin-top: -1px;
     min-height: 60px;
     opacity: 1;
     text-decoration: none;
@@ -313,6 +317,10 @@ ul.topics {
     }
     ul.topics li a:hover {
       border-color: #b0b0b0;
+      position: relative;
+      -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.15);
+         -moz-box-shadow: 0 0 8px rgba(0,0,0,0.15);
+              box-shadow: 0 0 8px 0 0 rgba(0,0,0,0.15);
       }
       ul.topics li a:hover h4 {
         text-decoration: underline;

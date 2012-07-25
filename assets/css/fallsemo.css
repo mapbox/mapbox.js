@@ -1,36 +1,35 @@
 pre,
 pre code {
-  font-size: 13px;
+  font-size:13px;
   }
 pre, code {
-  font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;
-  color: #333;
-  background: #fff;
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
+  font-family:Consolas, Menlo, 'Liberation Mono', Courier, monospace;
+  color:#333;
+  background:#fff;
+  -webkit-border-radius:3px;
+          border-radius:3px;
   }
 pre {
-  padding: 15px;
-  line-height: 19px;
-  margin-bottom: 20px;
-  border: 1px solid #CCC;
+  padding:15px;
+  line-height:19px;
+  margin-bottom:20px;
+  border:1px solid #CCC;
   overflow: auto;
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
-          box-shadow: 0 0 8px rgba(0, 0, 0, 0.10);
-  -webkit-border-radius: 2px;
-          border-radius: 2px
+  -webkit-box-shadow:0 0 8px rgba(0, 0, 0, 0.10);
+          box-shadow:0 0 8px rgba(0, 0, 0, 0.10);
+  -webkit-border-radius:2px;
+          border-radius:2px
   }
-  pre code {
-    border: 0px;
-    padding: 0px;
-    margin: 0px;
-    }
-
 code {
-  border: 1px solid #eaeaea;
-  margin: 0px 2px;
-  padding: 0px 5px;
-  font-size: 12px;
+  border:1px solid #eaeaea;
+  margin:0px 2px;
+  padding:0px 5px;
+  font-size:12px;
+  }
+pre code {
+  border:none;
+  padding:0;
+  margin:0;
   }
 
 /*  -------------------------------------------------------
@@ -56,39 +55,39 @@ code {
  *  ------------------------------------------------------- */
 
 /*greys*/
-.pln { color: #404040; }
-.com { color: #808080; }
+.pln { color:#404040; }
+.com { color:#808080; }
 .pun,
 .opn,
-.clo { color: #909090; }
+.clo { color:#909090; }
 
 /*rust*/
-.fun { color: #DF6637; font-weight: bold; }
+.fun { color:#DF6637; font-weight:bold; }
 
 /*green*/
 .str,
-.atv { color: #75A21C; }
+.atv { color:#75A21C; }
 
 /*dark blue*/
 .kwd,
 .linenums,
-.tag { color: #0B5A91; }
+.tag { color:#0B5A91; }
 
 /*light blue*/
 .lit,
 .typ,
 .atn,
 .dec,
-.var { color: #0C9DC2; }
+.var { color:#0C9DC2; }
 
 
 /* Specify class=linenums on a pre to get line numbering */
 ol.linenums {
-  margin: 0 0 0 40px;
-  list-style: decimal;
+  margin:0 0 0 40px;
+  list-style:decimal;
   } 
   ol.linenums li {
-    padding: 0;
-    color: #bebec5;
-    line-height: 18px;
+    padding:0;
+    color:#bebec5;
+    line-height:18px;
     }

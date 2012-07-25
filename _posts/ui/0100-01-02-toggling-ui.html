@@ -39,8 +39,9 @@ tags:
 <style>
 #boxes {
     position:absolute;
-    top:5px;
-    right:5px;
+    top:10px;
+    right:10px;
+    padding:10px;
     z-index:99999;
     background:#fff;
 }
@@ -49,7 +50,7 @@ tags:
 <script>
 
   // Create map with layer and zoom to level 3
-  var map = mapbox.map('map', mapbox.layer().id('tmcw.map-rep59d6x')).zoom(3);
+  var map = mapbox.map('map', mapbox.layer().id('examples.map-d40qac29')).zoom(3);
 
   // Connect check boxes to ui functions
   var checkboxes = document.getElementsByTagName('input');

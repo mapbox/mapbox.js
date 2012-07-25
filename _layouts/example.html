@@ -2,24 +2,21 @@
 layout: default
 ---
 
-<script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
-<link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
-
-<header class='heading clearfix'>
-  <nav id='toggle-sections'>
+<div class='heading clearfix'>
+  <div id='toggle-sections'>
     <a href='#' class='button big-button'>View the code</a>
-  </nav>
+  </div>
   <h2>{{page.title}}</h2>
   <h4>{{page.description}}</h4>
-</header>
+</div>
 
-<section id='demo' class='active clearfix'>
+<div id='demo' class='section active clearfix'>
   {{content}}
-</section>
+</div>
 
-<section id='snippet' class='clearfix'>
+<div id='snippet' class='section clearfix'>
 <a href='#' id='copy'>Select all</a>
-<pre class='prettyprint'><code id='code'>&lt;!DOCTYPE html&gt;
+<pre class='prettyprint' id='code'>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta charset=utf-8 /&gt;
@@ -42,8 +39,8 @@ layout: default
 {{content | escape}}
 &lt;/body&gt;
 &lt;/html&gt;
-</pre></code>
-</section>
+</pre>
+</div>
 
 <script>
   $(document).ready(function () {

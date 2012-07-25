@@ -1,11 +1,10 @@
 ---
 layout: default
 ---
-<link href='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
-<header class='heading clearfix'>
+<div class='heading clearfix'>
   <h2>Demo gallery</h2>
   <h4>Browse examples below or start with a simple example</h4>
-<section class='intro clearfix'>
+<div class='section intro clearfix'>
 <div id='simple-map'></div>
 <div id='simple-code'>
 <pre class='prettyprint'>
@@ -32,9 +31,9 @@ layout: default
 &lt;/html&gt;
 </pre>
 </div>
-</section>
-</header>
-<section class='browse'>
+</div>
+</div>
+<div class='section browse'>
   <form id='search'>
     <input type='search' placeholder='Filter examples'>
   </form>
@@ -42,10 +41,10 @@ layout: default
     <li><a data-tag='<%= tag %>' href='#' class='button'><%= tag %></a></li>
   </script>
 
-  <nav class='tags'>
+  <div class='tags'>
     <span class='label'>Filter by tag</span>
     <ul id='tag-list' class='clearfix'></ul>
-  </nav>
+  </div>
 
   <script type='text/template' id='examples'>
     <li>
@@ -57,16 +56,18 @@ layout: default
     </li>
   </script>
 
-  <nav class='results'>
+  <div class='results'>
     <ul id='results' class='topics'></ul>
-  </nav>
-</section>
+  </div>
+</div>
 
-<script src='http://js.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
 <script>
   $(document).ready(function () {
     var front = new Docs();
     $(front.queryExamples);
-    mapbox.auto('simple-map', 'examples.map-vyofok3q');
+    var m = mapbox.map('simple-map');
+        m.addLayer(mapbox.layer().id('examples.map-vyofok3q'));
+        m.ui.zoomer.add();
+        m.centerzoom({ lat: 46.92, lon: 5.48 }, 4);
   });
 </script>
