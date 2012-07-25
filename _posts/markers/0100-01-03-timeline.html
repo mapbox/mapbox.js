@@ -50,7 +50,7 @@ tags:
       years = {};
   var markerLayer = mapbox.markers.layer().filter(function(f) {
       return f.properties.year == year;
-  }).url('../../data/historical_earthquakes.geojson', function(features) {
+  }).url('../../data/historical_earthquakes.geojson', function(err, features) {
       for (var i = 0; i < features.length; i++) {
           years[features[i].properties.year] = true;
       }
