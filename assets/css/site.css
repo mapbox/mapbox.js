@@ -191,6 +191,13 @@ html {
   margin: 0 0 20px;
   padding: 40px 0 10px;
   }
+.footer {
+  text-align: center;
+  padding: 0 0 60px;
+  font-size: 11px;
+  color: #808080;
+  text-shadow: 0 1px 0 #fff;
+  }
 
 /* 04 Global styling
 --------------------------------------------- */
@@ -243,7 +250,7 @@ html {
 .intro #simple-map {
   background: #fff;
   float: left;
-  height: 431px;
+  height: 450px;
   width: 50%
   }
 div.tags {
@@ -256,7 +263,7 @@ div.tags {
     }
 
 .browse {
-  padding: 20px 0 60px;
+  padding: 20px 0;
   }
 form#search {
   width: 480px;
