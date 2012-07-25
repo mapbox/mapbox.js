@@ -23,7 +23,7 @@ mapbox.ui = function(map) {
 
         var attributions = [], legends = [];
         for (var i = 0; i < map.layers.length; i++) {
-            if (map.layers[i].tilejson) {
+            if (map.layers[i].enabled && map.layers[i].tilejson) {
                 var attribution = map.layers[i].tilejson().attribution;
                 if (attribution) attributions.push(attribution);
                 var legend = map.layers[i].tilejson().legend;
@@ -36,6 +36,9 @@ mapbox.ui = function(map) {
 
         ui.attribution.content(unique_attributions.length ? unique_attributions.join('<br />') : '');
         ui.legend.content(unique_legends.length ? unique_legends.join('<br />') : '');
+
+        ui.attribution.element().style.display = unique_attributions.length ? '' : 'none';
+        ui.legend.element().style.display = unique_legends.length ? '' : 'none';
     };
 
     return ui;
