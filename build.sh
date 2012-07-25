@@ -25,7 +25,8 @@ echo ""
 npm install
 
 echo "Concatenating mapbox.js..."
-cat node_modules/bean/bean.js \
+cat src/comment.js \
+    node_modules/bean/bean.js \
 	node_modules/mustache/mustache.js \
 	node_modules/reqwest/reqwest.js \
 	node_modules/modestmaps/modestmaps.js \
