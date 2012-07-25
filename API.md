@@ -223,6 +223,14 @@ Set layer options directly from a TileJSON object.
 
 **Returns** the layer object if arguments are given, the layer's TileJSON settings otherwise.
 
+### layer.composite(enabled)
+
+Enable or disable compositing layers together on MapBox hosting.
+
+* `enabled` is either true or false.
+
+**Returns** the layer object.
+
 # Map UI
 
 The API provides a set of UI elements that can be freely mixed & matched, as well as styled
