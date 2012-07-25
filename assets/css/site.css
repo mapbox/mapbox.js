@@ -185,7 +185,7 @@ html {
   }
 .masthead {
   position: relative;
-  height: 60px;
+  padding: 15px 0;
   }
 .heading {
   margin: 0 0 20px;
@@ -207,22 +207,19 @@ html {
     font-weight: 300;
     }
 
-.masthead ul,
-.masthead h1 {
-  margin-top: 15px;
-  }
 .masthead h1 {
   float: left;
   }
 .masthead ul {
-  position: absolute;
-  right: 40px;
-  top: 5px;
+  float: right;
   }
   .masthead ul li {
     float: left;
     margin-left: 10px;
     }
+    .masthead ul li:first-child {
+      margin-left: 0;
+      }
     .masthead ul li a {
       display: inline-block;
       }
@@ -285,6 +282,12 @@ form#search {
   .intro #simple-code,
   .intro #simple-map {
     width: 100%;
+    }
+  .masthead h1 {
+    width: 100%;
+    }
+  .masthead ul {
+    float: left;
     }
   }
 ul.topics {
