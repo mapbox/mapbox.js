@@ -7,90 +7,106 @@ tags:
   - markers
 ---
 
-<div id='sidebar'>
-  <div id='timeline'>
-    <h2>US Earthquakes</h2>
-    <p>U.S. Geological Survey</p>
-  </div>
-</div>
-<div id='map'></div>
-
 <style>
 #sidebar {
   position:absolute;
   top:0px;
   left:0px;
-  width:35%;
-  height:100%;
   background:#fff;
   z-index:999;
   overflow:auto;
+  opacity:0.6;
   }
+#sidebar:hover { opacity:1; }
 #timeline {
   padding:10px;
-  }
-#timeline p {
-  margin:0;
   }
 #timeline a {
   font-size:10px;
   text-decoration:none;
-  border:1px solid #fff;
   }
-#timeline a#active {
-  border:1px solid #aaa;
+#timeline #controls {
+  position:absolute;
+  top:15px;
+  right:15px;
+  }
+#timeline #controls a {
+  font-size:20px;
+  color:#DC1438;
+  margin-left:10px;
+  }
+a.year-active {
+  color:#DC1438;
   }
 </style>
+
+<div id='sidebar'>
+  <div id='timeline'>
+      <div id='controls'></div>
+    <h2>US Earthquakes <small>from the U.S. Geological Survey</small></h2>
+  </div>
+</div>
+<div id='map'></div>
 
 <script>
   var m = mapbox.map('map');
   m.addLayer(mapbox.layer().id('examples.map-20v6611k'));
 
-  var year = 2001,
-      years = {};
-  var markerLayer = mapbox.markers.layer().filter(function(f) {
-      return f.properties.year == year;
-  }).url('../../data/historical_earthquakes.geojson', function(err, features) {
+  var timeline = document.getElementById('timeline'),
+      controls = document.getElementById('controls');
+
+  var markerLayer = mapbox.markers.layer()
+      // this is a quick optimization - otherwise all markers are briefly displayed
+      // before filtering to 2001
+      .filter(function() { return false })
+      .url('../../data/historical_earthquakes.geojson', function(err, features) {
+
+      // A closure for clicking years. You give it a year, and it returns a function
+      // that, when run, clicks that year. It's this way in order to be used as both an
+      // event handler and run manually.
+      function click_year(y) {
+          return function() {
+              var active = document.getElementsByClassName('year-active');
+              if (active.length) active[0].className = '';
+              document.getElementById('y' + y).className = 'year-active';
+              markerLayer.filter(function(f) {
+                  return f.properties.year == y;
+              });
+              return false;
+          };
+      }
+
+      var years = {},
+          yearlist = [],
+          year_links = [];
+
       for (var i = 0; i < features.length; i++) {
           years[features[i].properties.year] = true;
       }
 
-      var yearlist = [];
-      for (var y in years) {
-          yearlist.push(y);
-      }
-
+      for (var y in years) yearlist.push(y);
       yearlist.sort();
 
-      var timeline = document.getElementById('timeline');
-      var year_links = [];
-
-      for (var y = 0; y < yearlist.length; y++) {
+      for (var i = 0; i < yearlist.length; i++) {
           var a = timeline.appendChild(document.createElement('a'));
-          a.innerHTML = yearlist[y] + ' ';
-          a.href = "#" + yearlist[y];
-          a.onclick = function() {
-              var year = this.getAttribute('href').replace('#', '');
-              markerLayer.filter(function(f) {
-                  return f.properties.year == year;
-              });
-              var active = document.getElementById('active');
-              if (active) active.id = '';
-              this.id = 'active';
-              return false;
-          };
-          year_links.push(a);
+          a.innerHTML = yearlist[i] + ' ';
+          a.id = 'y' + yearlist[i];
+          a.href = '#';
+          a.onclick = click_year(yearlist[i]);
       }
 
-      var play = timeline.appendChild(document.createElement('a'));
-      var playStep;
-      play.innerHTML = 'PLAY';
+      var stop = controls.appendChild(document.createElement('a')),
+            play = controls.appendChild(document.createElement('a')),
+            playStep;
+
+      stop.innerHTML = 'STOP ■';
+      play.innerHTML = 'PLAY ▶';
 
       play.onclick = function() {
           var step = 0;
           playStep = window.setInterval(function() {
-              if (step < year_links.length) {
-                  year_links[step].click();
+              if (step < yearlist.length) {
+                  click_year(yearlist[step])();
                   step++;
               } else {
                   window.clearInterval(playStep);
@@ -98,12 +114,11 @@ tags:
           }, 250);
       };
 
-      var stop = timeline.appendChild(document.createElement('a'));
-      stop.innerHTML = 'STOP';
-
       stop.onclick = function() {
           window.clearInterval(playStep);
       };
+
+      click_year(2001)();
   });
 
   m.addLayer(markerLayer);
