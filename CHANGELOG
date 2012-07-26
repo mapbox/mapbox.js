@@ -1,3 +1,20 @@
+### v0.6.3
+
+* `ui.refresh` only adds enabled layers to legend and attribution
+* `mapbox.auto` doesn't return opts in an array if there is only one
+
+### v0.6.2
+
+* Update easey to 2.0.2 with `easey.optimal()` bugfix
+
+### v0.6.1
+
+ * TODO
+
+### v0.6.0
+
+ * TODO
+
 ### v0.5.5
 
 * `mapbox.auto` now takes an optional callback and calls it with

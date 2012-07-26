@@ -4,9 +4,9 @@ if (typeof mapbox === 'undefined') mapbox = {};
 // a tilejson url (or an array of many) and an optional callback
 // that takes one argument, the map.
 mapbox.auto = function(elem, url, callback) {
-    mapbox.load(url, function(opts) {
+    mapbox.load(url, function(tj) {
 
-        if (!(opts instanceof Array)) opts = [opts];
+        var opts = tj instanceof Array ? tj : [tj];
 
         var tileLayers = [],
             markerLayers = [];
@@ -16,7 +16,7 @@ mapbox.auto = function(elem, url, callback) {
         }
 
         var map = mapbox.map(elem, tileLayers.concat(markerLayers)).auto();
-        if (callback) callback(map, opts);
+        if (callback) callback(map, tj);
     });
 };
 
