@@ -1,0 +1,65 @@
+---
+layout: example
+categories: example
+title: Geolocation
+description: Find and zoom into yourself with HTML5 geolocation
+tags:
+  - markers
+---
+
+<style>
+#geolocate {
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:100px;
+    margin-left:-50px;
+    font:normal 20px/30px 'Helvetica Neue', sans-serif;
+    background:#fff;
+    border:1px solid #58b6e3;
+    z-index:9999;
+}
+</style>
+<div id='map'>
+    <button id='geolocate'>find me</button>
+</div>
+<script>
+  var m = mapbox.map('map').zoom(2).center({ lat: 0, lon: 0 });
+  m.addLayer(mapbox.layer().id('examples.map-4l7djmvo'));
+
+  // Create an empty markers layer
+  var markerLayer = mapbox.markers.layer();
+  m.addLayer(markerLayer);
+
+  var geolocate = document.getElementById('geolocate');
+
+  // http://caniuse.com/#feat=geolocation
+  if (!navigator.geolocation) {
+      geolocate.innerHTML = 'geolocation is not available';
+  } else {
+      geolocate.onclick = function() {
+          navigator.geolocation.getCurrentPosition(
+          function(position) {
+              m.zoom(11).center({
+                  lat: position.coords.latitude,
+                  lon: position.coords.longitude
+              });
+              markerLayer.add_feature({
+                  geometry: {
+                      coordinates: [
+                          position.coords.longitude,
+                          position.coords.latitude]
+                  },
+                  properties: {
+                      'marker-color': '#000',
+                      'marker-symbol': 'star-stroked',
+                  }
+              });
+              geolocate.parentNode.removeChild(geolocate);
+          },
+          function(err) {
+              geolocate.innerHTML = 'position could not be found';
+          });
+      };
+  }
+</script>
