@@ -24,20 +24,25 @@ Examples:
     // Initialize a map with a layer
     var map = $('#map').mapbox(mapbox.layer().tilejson(tj));
 ```
+
+## Specifying the map element
+All the following controls need to know what map they are being applied to. This is specified by putting the `data-map` attribute in any parent element to the controls:
+
+- `data-map`: The id of the element the map is in (this attribute can be in a parent element)
     
 
 ## Layer Switcher
 
-A lightweight layer switcher that requires no initialization.
+A simple layer switcher that requires no initialization.
 
 #### Map data attributes
 - `data-control="switcher"`: Identify the control as a layer switcher.
-- `data-map`: The id of the element containing the map.
 
 #### Layer data attributes
 
 - `href`: Name of layer (by default its the same as on MapBox hosting)  
 - `data-group`: Group id. Only one layer per group is enabled at any time. (optional)
+- `data-toggle="true"`: Allow layer to be toggled off. (optional)
 
 Example:
 
@@ -55,7 +60,6 @@ The class `active` gets added to all selected switchers.
 ## Easing links
 Works well together with the layer switcher, but can also be used separately to link to locations.
 
-- `data-map`: The id of the element the map is in (this attribute can be in a parent element)
 - `data-lon`: Longitude to pan to.
 - `data-lat`: Latitude to pan to.
 - `data-zoom`: Zoom level to zoom to.
@@ -66,6 +70,18 @@ Example:
     <a data-lon="-79" data-lat="42" data-zoom="10" href="#">Awesome place</a>
 ```
 
-## TODO
-- Geocoder?
-- Hash control? Or more appropriate in Wax?
+## Geocoder
+Searches for a location, and then centers on it with a marker. Specify a geocoder by setting `data-control="geocode"`.
+
+```html
+<div data-control="geocode">
+    <form class="geocode">
+        <input placeholder="Search for an address" type="text">
+        <input type="submit" />
+        <div id="geocode-error"></div>
+    </form>
+</div>
+```
+
+#TODO
+- Hash control? What format should it use?
