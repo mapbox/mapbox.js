@@ -45,7 +45,7 @@ tags:
       handle = document.getElementById('handle'),
       dragging = false;
 
-  handle.onmousedown = function() { dragging = true; }
+  handle.onmousedown = function() { dragging = true; return false;}
   document.onmouseup = function() { dragging = false; }
   document.onmousemove = function(e) {
       if (!dragging) return;
