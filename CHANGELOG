@@ -3,6 +3,7 @@
 * `ui.refresh` only adds enabled layers to legend and attribution
 * `mapbox.auto` doesn't return opts in an array if there is only one
 * can now peacefully coexist with require.js
+* `map.addLayer` no longer users addTileLayer for tile layers
 
 ### v0.6.2
 
