@@ -5,6 +5,7 @@
 * can now peacefully coexist with require.js
 * `map.addLayer` no longer users addTileLayer for tile layers
 * Update ModestMaps to 3.3.4 fixing clipping issue in swipe example
+* Default zoom range is now 0 - 17
 
 ### v0.6.2
 

@@ -12,6 +12,9 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             easey_handlers.MouseWheelHandler()
         ]);
 
+    // Set maxzoom to 17, highest zoom level supported by MapBox streets
+    m.setZoomRange(0, 17);
+
     // Attach easey, ui, and interaction
     m.ease = easey().map(m);
     m.ui = mapbox.ui(m);
