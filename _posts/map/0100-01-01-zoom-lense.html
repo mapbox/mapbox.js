@@ -8,16 +8,52 @@ tags:
 ---
 
 <style>
-    body { margin:0; padding:0; }
-    #map { position:absolute; width:100%; height:100%; top:0; left:0; pointer-events: all; cursor: none}
-    #zoommap { width:200px; height:200px; background: beige;
-      transform: rotate(-60deg); -webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg);
-      -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); }
-    #zoomlense {overflow: visible; top: -9999px; left: -9999px }
-    #border{ margin: -5px; border: #888 solid 5px; border-radius: 50%; box-shadow: 0px 0px 10px #888;}
-    .overlay { position: absolute; pointer-events: none; overflow: hidden; width: 200px; height: 200px;}
-    .rotater { transform: rotate(30deg); -webkit-transform: rotate(30deg); -moz-transform: rotate(30deg);
-      -ms-transform: rotate(30deg); -o-transform: rotate(30deg); }
+    body {
+        margin:0;
+        padding:0;
+    }
+    #map {
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        pointer-events: all; cursor: none}
+    #zoommap {
+        width:200px;
+        height:200px;
+        background:beige;
+        transform: rotate(-60deg);
+        -webkit-transform: rotate(-60deg);
+        -moz-transform: rotate(-60deg);
+        -ms-transform: rotate(-60deg);
+        -o-transform: rotate(-60deg);
+    }
+    #zoomlense {
+        overflow: visible;
+        top: -9999px;
+        left: -9999px;
+    }
+    #border {
+        margin:-5px;
+        border:#888 solid 5px;
+        border-radius:50%;
+        box-shadow:0px 0px 10px #888;
+    }
+    .overlay {
+        position:absolute;
+        pointer-events:none;
+        overflow:hidden;
+        width:200px;
+        height:200px;
+    }
+    .rotater {
+        transform:rotate(30deg);
+        -webkit-transform:rotate(30deg);
+        -moz-transform:rotate(30deg);
+        -ms-transform:rotate(30deg);
+        -o-transform:rotate(30deg);
+    }
   </style>
 </head>
 <body>
@@ -35,7 +71,10 @@ tags:
     'http://a.tiles.mapbox.com/v3/aibram.map-xbi8lc5l.jsonp',
     'http://a.tiles.mapbox.com/v3/aibram.map-or4n7qof.jsonp'
     ], function(tj) {
+      // The main map with the first defined layer.
       var map = mapbox.map('map', tj[0].layer);
+      // Create a smaller map with the second defined layer (with color)
+      // and no handlers ([])
       var zoommap = mapbox.map('zoommap', tj[1].layer, null, []);
       var zl = document.getElementById('zoomlense');
 
@@ -43,19 +82,18 @@ tags:
       map.addCallback('zoomed', update);
       map.parent.onmousemove = update;
 
+      // On map or mouse movement, set the center of the loupe to
+      // be the position under the mouse
       function update(e) {
         var point = MM.getMousePoint(e, map);
         zl.style.top = point.y - 100 + 'px';
         zl.style.left = point.x - 100 + 'px';
+        // Using coordinates instead of the projected latitude / longitude
+        // avoids the cost of projecting and unprojecting
         zoommap.coordinate = map.pointCoordinate(point).zoomTo(map.zoom() +  1);
         MM.getFrame(zoommap.getRedraw());
       }
 
-      map.setCenterZoom({
-        lat: 44,
-        lon: -79
-      }, 10);
-
+      map.setCenterZoom({ lat: 44, lon: -79}, 10);
     });
-
 </script>
