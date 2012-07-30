@@ -2,6 +2,7 @@
 
 * `ui.refresh` only adds enabled layers to legend and attribution
 * `mapbox.auto` doesn't return opts in an array if there is only one
+* can now peacefully coexist with require.js
 
 ### v0.6.2
 
@@ -9,11 +10,17 @@
 
 ### v0.6.1
 
- * TODO
+* Updated ModestMaps to 3.3.3 fixing problem with empty gif
+  and hiding parent tiles
 
 ### v0.6.0
 
- * TODO
+* Add automatic support for MapBox hosting composting
+* Update Wax to 7.0.0dev7
+* New api for `mapbox.ui`
+* Name layers using IDs instead of names
+* Remove `mapbox.provider`
+* Add callbacks to async layer functions
 
 ### v0.5.5
 
