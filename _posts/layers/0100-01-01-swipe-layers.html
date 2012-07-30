@@ -49,7 +49,12 @@ tags:
   document.onmouseup = function() { dragging = false; }
   document.onmousemove = function(e) {
       if (!dragging) return;
-      handle.style.left = (e.clientX - 50) + 'px';
-      l_parent.style.clip = 'rect(0px ' + (e.clientX - 25) + 'px 9999999px 0px)';
+      setDivide(MM.getMousePoint(e, map).x);
+  }
+
+  function setDivide(x) {
+      x = Math.max(0, Math.min(x, map.dimensions.x));
+      handle.style.left = (x - 20) + 'px';
+      l_parent.style.clip = 'rect(0px ' + x + 'px 9999999px 0px)';
   }
 </script>
