@@ -4,6 +4,7 @@
 * `mapbox.auto` doesn't return opts in an array if there is only one
 * can now peacefully coexist with require.js
 * `map.addLayer` no longer users addTileLayer for tile layers
+* Update ModestMaps to 3.3.4 fixing clipping issue in swipe example
 
 ### v0.6.2
 
