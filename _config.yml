@@ -2,6 +2,6 @@ auto: true
 server: true
 permalink: /:categories/:title
 baseurl: /mapbox.js
-version: v0.6.2
+version: v0.6.3
 rdiscount:
   extensions: [smart]
