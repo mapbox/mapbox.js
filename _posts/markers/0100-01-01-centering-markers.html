@@ -12,7 +12,7 @@ tags:
   mapbox.auto('map', 'aibram.map-gi4an4qh', function(map, tiledata) {
 
     // Replace marker factory function with our version
-    tiledata[0].markers.factory(function(m) {
+    tiledata.markers.factory(function(m) {
 
         // Create a marker using the simplestyle factory
         var elem = mapbox.markers.simplestyle_factory(m);
