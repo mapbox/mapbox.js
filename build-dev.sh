@@ -16,8 +16,9 @@ echo "Concatenating mapbox.js..."
 cat src/comment.js \
     src/start.js \
     node_modules/bean/bean.js \
-	node_modules/mustache/mustache.js \
 	node_modules/reqwest/reqwest.js \
+    src/end.js \
+	node_modules/mustache/mustache.js \
 	node_modules/modestmaps/modestmaps.js \
 	node_modules/wax/lib/html-sanitizer-bundle.js \
 	node_modules/wax/lib/html-sanitizer-loosen.js \
@@ -28,8 +29,7 @@ cat src/comment.js \
 	node_modules/easey/src/easey.handlers.js \
 	node_modules/markers/dist/markers.js \
 	src/map.js src/load.js src/ui.js src/util.js \
-	src/interaction.js src/layer.js \
-    src/end.js > mapbox.js
+	src/interaction.js src/layer.js > mapbox.js
 
 echo "Minifying mapbox.min.js"
 ./node_modules/.bin/uglifyjs mapbox.js > mapbox.min.js
