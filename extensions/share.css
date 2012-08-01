@@ -1,0 +1,112 @@
+/* ### General control styles ### */
+ .wax-share div,
+ .wax-share .twitter,
+ .wax-share .facebook {
+  display:block;
+  position:absolute;
+  border:1px solid #ccc;
+  background:#fff;
+  border-radius:3px;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
+  -moz-box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
+  -webkit-box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
+  }
+
+/* ### Zoomer, close buttons, share ### */
+ .close {
+  text-indent:-9999px;
+  background-image:url(/assets/tilestream-pro/images/controls.png);
+  background-position:60px 60px;
+  background-repeat:no-repeat;
+  overflow:hidden;
+  }
+
+ .close:active {
+  border-color:#bbb;
+  background-color:#ddd;
+  box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
+  -moz-box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
+  -webkit-box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
+  }
+
+ .close {
+  top:4px;
+  right:4px;
+  width:18px;
+  height:18px;
+  background-position:-6px -6px;
+  }
+
+ .share {
+  clear:left;
+  left:10px;
+  top:10px;
+  width:57px;
+  height:18px;
+  font:bold 10px/18px Arial,sans-serif;
+  text-align:center;
+  text-transform:uppercase;
+  background:#333;
+  background:rgba(32,32,32,0.75);
+  border-color:#666;
+  border-color:rgba(128,128,128,0.75);
+  color:#fff;
+  }
+
+.share { top:45px; }
+
+/* ### Share ### */
+ .wax-share {
+  background:#666;
+  background:rgba(32,32,32,0.75);
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0px; left:0px; right:0px; bottom:0px;
+  z-index:999999;
+  }
+
+ .wax-share div {
+  right:50%;
+  top:50%;
+  margin:-120px -180px 0px 0px;
+  padding:19px;
+  width:320px;
+  height:200px;
+  overflow:hidden;
+  }
+
+ .wax-share small { color:#999; }
+
+ .wax-share textarea {
+  display:block;
+  font:normal 10px/15px Arial,sans-serif;
+  resize:none;
+  border:1px solid #ccc;
+  padding:4px;
+  width:310px;
+  }
+
+ .wax-share .twitter,
+ .wax-share .facebook {
+  display:inline-block;
+  position:relative;
+  padding:2px 18px;
+  margin-right:10px;
+  background:#fff;
+  color:#fff;
+  font-weight:bold;
+  border:2px solid #ccc;
+  }
+
+ .wax-share .twitter {
+  background:#0ac;
+  border-color:#4ce;
+  }
+
+ .wax-share .facebook {
+  background:#359;
+  border-color:#68c;
+  }
