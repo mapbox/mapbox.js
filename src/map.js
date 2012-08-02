@@ -25,6 +25,9 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
     m.auto = function() {
         this.ui.zoomer.add();
         this.ui.zoombox.add();
+        this.ui.legend.add();
+        this.ui.attribution.add();
+        this.ui.refresh();
         this.interaction.auto();
 
         for (var i = 0; i < this.layers.length; i++) {

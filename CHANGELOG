@@ -1,3 +1,7 @@
+### v0.6.4 (unreleased)
+
+* `map.auto` now adds legend and attribution, if available in tilejson
+
 ### v0.6.3
 
 * `ui.refresh` only adds enabled layers to legend and attribution
