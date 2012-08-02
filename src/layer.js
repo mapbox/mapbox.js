@@ -28,7 +28,7 @@ mapbox.layer.prototype.refresh = function(callback) {
     // this resets its own tilejson and calls setProvider on itself.
     wax.tilejson(this._url, function(o) {
         that.tilejson(o);
-        if (callback) callback(this);
+        if (callback) callback(that);
     });
     return this;
 };
