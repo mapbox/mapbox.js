@@ -1,0 +1,8 @@
+{
+    "browsers" : [
+        "chrome/15.0"
+    ],
+    "script" : [
+        "http://api.tiles.mapbox.com/mapbox.js/v0.6.3/mapbox.uncompressed.js"
+    ]
+}
