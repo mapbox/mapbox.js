@@ -1,63 +1,186 @@
-<!DOCTYPE html>
+---
+navigation:
+  - title: Design
+    path: /tour/design
+  - title: Publish
+    path: /tour/publish
+  - title: Scale
+    path: /tour/scale
+  - title: Pricing
+    category: plans
+    class: plans
+    path: /plans
+footer:
+  tour:
+    - title: Design
+      path: /tour/design
+    - title: Publish
+      path: /tour/publish
+    - title: Scale
+      path: /tour/scale
+  mapbox:
+    - title: About
+      path: /about
+    - title: Pricing
+      path: /plans
+    - title: Premium
+      path: /plans/premium
+    - title: Blog
+      path: /blog
+    - title: Status
+      path: http://mapbox.com/status
+  help:
+    - title: Creating
+      path: /creating
+    - title: Publishing
+      path: /publishing
+    - title: Mobile SDK
+      path: /mobile
+    - title: Developers
+      path: /developers
+  tools:
+    - title: TileMill
+      path: http://tilemill.com
+    - title: Maki
+      path: http://mapbox.com/maki
+---
+<!DOCTYPE html >
 <html>
-  <head>
-    <meta charset=utf-8 />
-    <link rel='shortcut icon' href='{{site.baseurl}}/assets/images/favicon.ico' type='image/x-icon' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-    <meta name='apple-mobile-web-app-status-bar-style' content='default' />
-    <meta name='apple-mobile-web-app-capable' content='yes' />
-    <title>Demo Gallery | mapbox.js</title>
-    <link rel='stylesheet' href='{{site.baseurl}}/assets/css/reset.css'>
-    <link rel='stylesheet' href='{{site.baseurl}}/assets/css/site.css'>
-    <link rel='stylesheet' href='{{site.baseurl}}/assets/css/fallsemo.css'>
-    <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
-    <script src='{{site.baseurl}}/assets/js/jquery.1.7.2.min.js'></script>
-    <script src='{{site.baseurl}}/assets/js/underscore.1.3.3.min.js'></script>
-    <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-    <script src='{{site.baseurl}}/assets/js/site.js'></script>
-    <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
-  </head>
-  <body>
-    <div class='masthead'>
-      <div class='limiter clearfix'>
-        <ul class='menu'>
-          <li><a href='http://mapbox.com/developers/mapbox.js/'>API reference</a></li>
-        </ul>
-        <h1><a href='{{site.baseurl}}/index.html'>mapbox.js <span>demo gallery</span></a></h1>
-      </div>
-    </div>
-    <div class='limiter'>
-      {{content}}
-      <div class='footer'>
-        This website is <a href='https://github.com/mapbox/mapbox.js/tree/gh-pages'>open source</a>. Help improve these examples with edits or additions.
-        To submit a change, <a href='https://help.github.com/articles/fork-a-repo'>fork this repo</a>, commit your changes, and <a href='https://help.github.com/articles/using-pull-requests'>send us a pull request</a>.
-      </div>
-    </div>
-    <script>
-      prettyPrint();
-    </script>
-    <script>
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-12158002-1']);
-      _gaq.push(['_setDomainName', '.mapbox.com']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+<head>
+  <meta charset='UTF-8'/>
+  <meta name='robots' content='{% if page.hidden %}noindex{% else %}index{% endif %}'/>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
+  <title>{% if page.url == '/' %}{{page.title}} | Fast and beautiful maps{% else %}{{page.title}} | MapBox{% endif %}</title>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.3/mapbox.css' rel='stylesheet' />
+  <link href='{{site.url}}/css/site.css' rel='stylesheet' />
+  <!--[if IE]><link rel='stylesheet' href='{{site.url}}/css/site-ie.css' type='text/css'/><![endif]-->
+  <link rel='shortcut icon' href='{{site.url}}/images/favicon.ico' type='image/x-icon' />
+  <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
+  <script src='{{site.url}}/js/site.js'></script>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.3/mapbox.js'></script>
+</head>
+<body class='{{page.class}}'>
 
-      var _gauges = _gauges || [];
-      (function() {
-        var t   = document.createElement('script');
-        t.type  = 'text/javascript';
-        t.async = true;
-        t.id    = 'gauges-tracker';
-        t.setAttribute('data-site-id', '4e970faef5a1f51def000002');
-        t.src = '//secure.gaug.es/track.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(t, s);
-      })();
-    </script>
-  </body>
+<div class='branding pad clearfix'>
+  <div class='cell6'>
+    <a class='logo' href='{{site.url}}/'>MapBox</a>
+    {% if page.section %}
+    <a class='section-title' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
+    {% endif %}
+  </div>
+  <ul class='menu cell6'>
+    {% for item in page.navigation %}
+    {% if item.path contains 'http' %}
+      {% capture url %}{{item.path}}{% endcapture %}
+    {% else %}
+      {% capture url %}{{site.url}}{{item.path}}/{% endcapture %}
+    {% endif %}
+    {% if item.category contains page.category or item.category contains page.section or item.path == page.url %}
+      {% capture class %}{{item.class}} active{% endcapture %}
+    {% else %}
+      {% capture class %}{{item.class}}{% endcapture %}
+    {% endif %}
+    <li class='{{class}}'>
+      <a href='{{url}}'>{{item.title}}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class='wrapper'>{{content}}</div>
+
+{% unless page.bleed %}
+<div class='footer clearfix'>
+  <div class='cell3 pad1 newsletter'>
+    <a class='button big follow' href='http://twitter.com/mapbox' target='_blank'><span class='icon reverse twitter'></span>Follow us</a>
+    <a class='button big contact' href='{{base}}/contact'><span class='icon reverse contact'></span>Contact us</a>
+    <small>Subscribe to our newsletter</small>
+    <!-- Begin MailChimp Signup Form -->
+    <div id='mc-signup'>
+      <form action='http://mapbox.us2.list-manage1.com/subscribe/post?u=1b29ad842d113cece02035883&amp;id=6cbe531fd0' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='validate' target='_blank'>
+        <div class='mc-field-group clearfix'>
+          <input type='hidden' value='1' name='group[7417][2]'>
+          <div class='field-wrapper'><input type='text' value='' placeholder='Email Address' name='EMAIL' class='required email' id='mce-EMAIL'></div>
+          <input type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button big icon reverse mail'>
+        </div>
+        <div id='mce-responses'>
+          <div class='response' id='mce-error-response' style='display:none'></div>
+          <div class='response' id='mce-success-response' style='display:none'></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class='cell2 pad1'>
+    <h3>MapBox</h3>
+    <div class='links'>
+      {% for item in page.footer.tour %}
+      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      {% endfor %}
+    </div>
+    <div class='links'>
+      {% for item in page.footer.mapbox %}
+      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class='cell2 pad1'>
+    <h3>Help</h3>
+    <div class='links'>
+      {% for item in page.footer.help %}
+      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      {% endfor %}
+    </div>
+    <h3>Tools</h3>
+    <div class='links'>
+      {% for item in page.footer.tools %}
+      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class='cell5 pad1 blogposts'>
+    <h3>Recent blog posts</h3>
+    <div class='links'>
+      <script src='http://mapbox.com/snippets/blog-list.js'></script>
+    </div>
+    <a href='{{base}}/blog/'>Read more <span class='icon next blue'></span></a>
+  </div>
+</div>
+
+<div class='footer-copyright'>
+  <a href='{{base}}/tos'>Terms of service</a> +
+  <a href='{{base}}/privacy'>Privacy policy</a>
+  &copy; MapBox
+</div>
+{% endunless %}
+
+<script src='https://tiles.mapbox.com/snippets/user.js'></script>
+<script>$(function() {$(mapbox.mailChimp);}); </script>
+
+<script type='text/javascript'>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-12158002-1']);
+_gaq.push(['_setDomainName', '.mapbox.com']);
+_gaq.push(['_trackPageview']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+var _gauges = _gauges || [];
+(function() {
+  var t   = document.createElement('script');
+  t.type  = 'text/javascript';
+  t.async = true;
+  t.id    = 'gauges-tracker';
+  t.setAttribute('data-site-id', '4e970faef5a1f51def000002');
+  t.src = '//secure.gaug.es/track.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(t, s);
+})();
+</script>
+
+</body>
 </html>
