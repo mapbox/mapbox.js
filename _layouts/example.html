@@ -1,7 +1,7 @@
 ---
 layout: default
+class: box
 ---
-<link rel='stylesheet' href='{{site.baseurl}}/assets/css/reset.css'>
 <link rel='stylesheet' href='{{site.baseurl}}/assets/css/site.css'>
 <link rel='stylesheet' href='{{site.baseurl}}/assets/css/fallsemo.css'>
 <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
@@ -11,44 +11,125 @@ layout: default
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
 
-<div class='heading clearfix'>
-  <div id='toggle-sections'>
-    <a href='#' class='button big-button'>View the code</a>
+<link rel='stylesheet' href='{{site.url}}/css/developers.css' />
+<style type='text/css'>
+.help-header p,
+.help-header h2 { margin:0px; }
+
+.help-support { text-align:right; }
+.help-support a { margin-top:10px; }
+
+.help-content {
+  padding-top:0px;
+  padding-bottom:0px;
+  }
+
+.doc { border-left:1px solid #ccc; }
+
+.search {
+  position:relative;
+  border-bottom:1px solid #ccc;
+  white-space:nowrap;
+  padding-right:50px;
+  }
+.search input[type='text'] {
+  width:100%;
+  height:30px;
+  padding:5px;
+  }
+.search input[type='submit'] {
+  position:absolute;
+  top:20px; right:20px;
+  text-indent:-9999px;
+  min-width:0px;
+  width:30px;
+  height:30px;
+  border:5px solid #3887be;
+  box-shadow:none;
+  border-radius:0px 3px 3px 0px;
+  }
+.search input[type='submit']:hover,
+.search input[type='submit']:active { border-color:#3bb2d0; }
+
+.doc-nav { padding:20px; }
+.doc-nav li a {
+  display:block;
+  padding:5px 20px;
+  margin:0px -20px;
+  }
+.doc-nav li a.active { background:#68b0d4; color:#fff; }
+
+@media (max-width:640px) {
+  .doc { border-left:0px; border-bottom:1px solid #ccc; }
+  .help-support { text-align:center; }
+  }
+</style>
+
+<div class='clearfix help-header pad1 fillL'>
+  <div class='cell9'>
+    <h2>mapbox.js</h2>
+    <p>mapbox.js combines several open source projects into a unified API.</p>
   </div>
-  <h2>{{page.title}}</h2>
-  <h4>{{page.description}}</h4>
+  <div class='cell3 buttons'>
+    <a class='button big' href='{{site.baseurl}}'>Guide</a
+    ><a class='button big' href='{{site.baseurl}}/api/'>API</a
+    ><a class='button big' href='{{site.baseurl}}/examples/'>Examples</a>
+  </div>
 </div>
 
-<div id='demo' class='section active clearfix'>
-  {{content}}
+<div class='help-content pad0 fillL clearfix'>
+<div class='fillW clearfix'>
+  <div class='cell9 doc prose pad2 float-right'>
+    <div id='toggle-sections'>
+      <a href='#' class='button big-button'>View the code</a>
+    </div>
+    <h2>{{page.title}}</h2>
+    <h4>{{page.description}}</h4>
+    <div id='demo' class='section active clearfix'>
+      {{content}}
+    </div>
+    <div id='snippet' class='section clearfix'>
+    <a href='#' id='copy'>Select all</a>
+    <pre class='prettyprint' id='code'>&lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+      &lt;meta charset=utf-8 /&gt;
+      &lt;title&gt;Example&lt;/title&gt;
+      &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
+      &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
+      &lt;style&gt;
+        body { margin:0; padding:0; }
+        #map {
+          position:absolute;
+          top:0;
+          left:0;
+          right:0;
+          bottom:0;
+        }
+      &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+
+    {{content | escape}}
+    &lt;/body&gt;
+    &lt;/html&gt;
+    </pre>
+    </div>
+  </div>
+  <div class='cell3 float-right'>
+    <form class='pad2 search'>
+      <input type='text' placeholder='Search...' />
+      <input type='submit' value='Search' class='icon reverse search' />
+    </form>
+    <div class='doc-nav'>
+    <ul>
+    {% for item in site.posts %}
+    <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+  </div>
 </div>
-
-<div id='snippet' class='section clearfix'>
-<a href='#' id='copy'>Select all</a>
-<pre class='prettyprint' id='code'>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta charset=utf-8 /&gt;
-  &lt;title&gt;Example&lt;/title&gt;
-  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
-  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
-  &lt;style&gt;
-    body { margin:0; padding:0; }
-    #map {
-      position:absolute;
-      top:0;
-      left:0;
-      right:0;
-      bottom:0;
-    }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-{{content | escape}}
-&lt;/body&gt;
-&lt;/html&gt;
-</pre>
 </div>
 
 <script>
