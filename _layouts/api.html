@@ -1,0 +1,40 @@
+---
+layout: default
+section: developers
+class: box
+---
+<link rel='stylesheet' href='{{site.url}}/css/developers.css' />
+<script src='{{site.baseurl}}/assets/js/jquery.1.7.2.min.js'></script>
+<script src='{{site.baseurl}}/assets/js/underscore.1.3.3.min.js'></script>
+<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
+
+<div class='clearfix doc-header pad1 fillL'>
+  <div class='cell9'>
+    <h2>mapbox.js</h2>
+    <p>mapbox.js combines several open source projects into a unified API.</p>
+  </div>
+  <div class='cell3 buttons'>
+    <a class='button big' href='{{site.baseurl}}'>Guide</a
+    ><a class='button big' href='{{site.baseurl}}/api/'>API</a
+    ><a class='button big' href='{{site.baseurl}}/examples/'>Examples</a>
+  </div>
+</div>
+
+<div class='doc-content pad0 fillL clearfix'>
+<div class='fillW clearfix'>
+  <div class='cell9 doc float-right pad2 prose'>
+    {{content}}
+  </div>
+  <div class='cell3 float-right'>
+    <form class='pad2 doc-search'>
+      <input type='text' placeholder='Search...' />
+      <input type='submit' value='Search' class='icon reverse search' />
+    </form>
+    <div class='doc-nav'>
+    <!-- @TODO populate nav using JS -->
+    </div>
+  </div>
+</div>
+</div>
+
