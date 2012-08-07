@@ -4,5 +4,7 @@ permalink: /:categories/:title
 baseurl: /mapbox.js
 version: v0.6.3
 url: http://mapbox.com
+title: mapbox.js
+description: MapBox JavaScript API
 rdiscount:
   extensions: [smart]

@@ -1,6 +1,6 @@
 ---
 ---
-[{% for item in site.posts %} {
+[{% for item in site.categories.example %} {
   "category": "{{item.category}}",
   "title": "{{item.title|replace:'"','\"'}}",
   "url": "{{item.url}}",

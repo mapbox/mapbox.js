@@ -15,7 +15,7 @@ class: box
 <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
 
 <style type='text/css'>
-.example-header * { display:inline; margin-right:10px; }
+.example-header h3 { display:inline; margin-right:10px; }
 #map {
   background:#fff;
   position:absolute;
@@ -33,17 +33,19 @@ class: box
   position: absolute;
   top:20px; right:20px;
   }
+
+pre { border-radius:0px; box-shadow:none; border:0px; }
 </style>
 
 <div class='clearfix doc-header pad1 fillL'>
-  <div class='cell9'>
-    <h2>mapbox.js</h2>
-    <p>mapbox.js combines several open source projects into a unified API.</p>
+  <div class='cell7'>
+    <h2>{{site.title}}</h2>
+    <p>{{site.description}}</p>
   </div>
-  <div class='cell3 buttons'>
-    <a class='button big' href='{{site.baseurl}}'>Guide</a
-    ><a class='button big' href='{{site.baseurl}}/api/'>API</a
-    ><a class='button big' href='{{site.baseurl}}/examples/'>Examples</a>
+  <div class='cell5 doc-subnav clearfix'>
+    <a href='{{site.baseurl}}/'>Guide</a>
+    <a href='{{site.baseurl}}/api/'>API</a>
+    <a href='{{site.baseurl}}/examples/' class='active'>Examples</a>
   </div>
 </div>
 
@@ -51,8 +53,8 @@ class: box
 <div class='fillW clearfix'>
   <div class='cell9 doc float-right'>
     <div class='pad2 example-header'>
-      <h2>{{page.title}}</h2>
-      <h4>{{page.description}}</h4>
+      <h3>{{page.title}}</h3>
+      <span class='description'>{{page.description}}</span>
     </div>
     <div id='demo'>{{content}}</div>
     <div id='snippet'>
@@ -90,7 +92,7 @@ class: box
     </form>
     <div class='doc-nav'>
     <ul>
-    {% for item in site.posts %}
+    {% for item in site.categories.example reversed %}
     <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
     {% endfor %}
     </ul>
