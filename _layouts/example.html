@@ -1,71 +1,41 @@
 ---
 layout: default
+section: developers
 class: box
 ---
-<link rel='stylesheet' href='{{site.baseurl}}/assets/css/site.css'>
-<link rel='stylesheet' href='{{site.baseurl}}/assets/css/fallsemo.css'>
-<link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
+<link rel='stylesheet' href='{{site.url}}/css/developers.css' />
 <script src='{{site.baseurl}}/assets/js/jquery.1.7.2.min.js'></script>
 <script src='{{site.baseurl}}/assets/js/underscore.1.3.3.min.js'></script>
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
+
+<!-- @TODO mapbox.js + css are already included via mapbox.com layout wrapper. -->
+<!-- determine if we can use that version or if there are reasons to use specific version. -->
+<link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
 <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
 
-<link rel='stylesheet' href='{{site.url}}/css/developers.css' />
 <style type='text/css'>
-.help-header p,
-.help-header h2 { margin:0px; }
-
-.help-support { text-align:right; }
-.help-support a { margin-top:10px; }
-
-.help-content {
-  padding-top:0px;
-  padding-bottom:0px;
-  }
-
-.doc { border-left:1px solid #ccc; }
-
-.search {
-  position:relative;
-  border-bottom:1px solid #ccc;
-  white-space:nowrap;
-  padding-right:50px;
-  }
-.search input[type='text'] {
-  width:100%;
-  height:30px;
-  padding:5px;
-  }
-.search input[type='submit'] {
+.example-header * { display:inline; margin-right:10px; }
+#map {
+  background:#fff;
   position:absolute;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  }
+
+#demo { position:relative; height:550px; }
+
+#snippet { position: relative; }
+
+#snippet #copy {
+  position: absolute;
   top:20px; right:20px;
-  text-indent:-9999px;
-  min-width:0px;
-  width:30px;
-  height:30px;
-  border:5px solid #3887be;
-  box-shadow:none;
-  border-radius:0px 3px 3px 0px;
-  }
-.search input[type='submit']:hover,
-.search input[type='submit']:active { border-color:#3bb2d0; }
-
-.doc-nav { padding:20px; }
-.doc-nav li a {
-  display:block;
-  padding:5px 20px;
-  margin:0px -20px;
-  }
-.doc-nav li a.active { background:#68b0d4; color:#fff; }
-
-@media (max-width:640px) {
-  .doc { border-left:0px; border-bottom:1px solid #ccc; }
-  .help-support { text-align:center; }
   }
 </style>
 
-<div class='clearfix help-header pad1 fillL'>
+<div class='clearfix doc-header pad1 fillL'>
   <div class='cell9'>
     <h2>mapbox.js</h2>
     <p>mapbox.js combines several open source projects into a unified API.</p>
@@ -77,18 +47,15 @@ class: box
   </div>
 </div>
 
-<div class='help-content pad0 fillL clearfix'>
+<div class='doc-content pad0 fillL clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 doc prose pad2 float-right'>
-    <div id='toggle-sections'>
-      <a href='#' class='button big-button'>View the code</a>
+  <div class='cell9 doc float-right'>
+    <div class='pad2 example-header'>
+      <h2>{{page.title}}</h2>
+      <h4>{{page.description}}</h4>
     </div>
-    <h2>{{page.title}}</h2>
-    <h4>{{page.description}}</h4>
-    <div id='demo' class='section active clearfix'>
-      {{content}}
-    </div>
-    <div id='snippet' class='section clearfix'>
+    <div id='demo'>{{content}}</div>
+    <div id='snippet'>
     <a href='#' id='copy'>Select all</a>
     <pre class='prettyprint' id='code'>&lt;!DOCTYPE html&gt;
     &lt;html&gt;
@@ -117,7 +84,7 @@ class: box
     </div>
   </div>
   <div class='cell3 float-right'>
-    <form class='pad2 search'>
+    <form class='pad2 doc-search'>
       <input type='text' placeholder='Search...' />
       <input type='submit' value='Search' class='icon reverse search' />
     </form>
