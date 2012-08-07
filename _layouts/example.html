@@ -1,0 +1,60 @@
+---
+layout: default
+---
+<link rel='stylesheet' href='{{site.baseurl}}/assets/css/reset.css'>
+<link rel='stylesheet' href='{{site.baseurl}}/assets/css/site.css'>
+<link rel='stylesheet' href='{{site.baseurl}}/assets/css/fallsemo.css'>
+<link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
+<script src='{{site.baseurl}}/assets/js/jquery.1.7.2.min.js'></script>
+<script src='{{site.baseurl}}/assets/js/underscore.1.3.3.min.js'></script>
+<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
+<script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
+
+<div class='heading clearfix'>
+  <div id='toggle-sections'>
+    <a href='#' class='button big-button'>View the code</a>
+  </div>
+  <h2>{{page.title}}</h2>
+  <h4>{{page.description}}</h4>
+</div>
+
+<div id='demo' class='section active clearfix'>
+  {{content}}
+</div>
+
+<div id='snippet' class='section clearfix'>
+<a href='#' id='copy'>Select all</a>
+<pre class='prettyprint' id='code'>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=utf-8 /&gt;
+  &lt;title&gt;Example&lt;/title&gt;
+  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
+  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
+  &lt;style&gt;
+    body { margin:0; padding:0; }
+    #map {
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+{{content | escape}}
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<script>
+  $(document).ready(function () {
+    var example = new Docs();
+    $(example.page);
+    $(example.copyCode);
+  });
+</script>
