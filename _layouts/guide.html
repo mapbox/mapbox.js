@@ -15,8 +15,8 @@ class: box
     <p>{{site.description}}</p>
   </div>
   <div class='cell5 doc-subnav clearfix'>
-    <a href='{{site.baseurl}}/'>Guide</a>
-    <a href='{{site.baseurl}}/api/' class='active'>API</a>
+    <a href='{{site.baseurl}}/' class='active'>Guide</a>
+    <a href='{{site.baseurl}}/api/'>API</a>
     <a href='{{site.baseurl}}/examples/'>Examples</a>
   </div>
 </div>
@@ -24,6 +24,7 @@ class: box
 <div class='doc-content pad0 fillL clearfix'>
 <div class='fillW clearfix'>
   <div class='cell9 doc float-right pad2 prose'>
+    <h1>{{page.title}}</h1>
     {{content}}
   </div>
   <div class='cell3 float-right'>
@@ -32,7 +33,11 @@ class: box
       <input type='submit' value='Search' class='icon reverse search' />
     </form>
     <div class='doc-nav'>
-    <!-- @TODO populate nav using JS -->
+    <ul>
+    {% for item in site.categories.guide reversed %}
+    <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
+    {% endfor %}
+    </ul>
     </div>
   </div>
 </div>
