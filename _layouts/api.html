@@ -32,7 +32,16 @@ class: box
       <input type='submit' value='Search' class='icon reverse search' />
     </form>
     <div class='doc-nav'>
-    <!-- @TODO populate nav using JS -->
+      {% if page.navigation %}
+      {% for heading in page.navigation %}
+        <h3><a href='#{{heading[0]|downcase|replace:' ','_'}}'>{{heading[0]}}</a></h3>
+        <ul class='anchors'>
+        {% for item in heading[1] %}
+          <li><a href='#{{item|downcase|replace:' ','_'}}'>{{item}}</a></li>
+        {% endfor %}
+        </ul>
+      {% endfor %}
+      {% endif %}
     </div>
   </div>
 </div>

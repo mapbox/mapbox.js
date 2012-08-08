@@ -5,9 +5,11 @@ var f = fs.readFileSync(process.argv[2], 'utf8'),
     lexed = marked.lexer(f);
 
 var start = 0,
+    anchor,
     matched,
     toParse,
-    out = '';
+    out = '',
+    nav = '';
 
 
 out += '<div>';
@@ -26,7 +28,8 @@ for (var i = 0; i < lexed.length; i++) {
         matched = lexed[i].text.match(/(.*)\.(.*)\((.*)\)/);
         out += '<h' + lexed[i].depth + '>';
         if (matched) {
-        out += '<a name="' + matched[1] + '.' + matched[2] + '" class="anchor" href="#' +  matched[1] + '.' + matched[2] + '"></a>';
+            anchor = matched[1] + '.' + matched[2];
+            out += '<a name="' + anchor + '" class="anchor" href="#' + anchor + '"></a>';
             out += '<span class="object">' + matched[1] + '</span>';
             out += '.';
             out += '<span class="name">' + matched[2] + '</span>';
@@ -34,10 +37,16 @@ for (var i = 0; i < lexed.length; i++) {
             out += '<span class="args">' + matched[3] + '</span>';
             out += '<span class="bracket">)</span>';
 
+            if (lexed[i].depth == 2) {
+                nav += '  ' + anchor + ':\n';
+            } else if (lexed[i].depth == 3) {
+                nav += '  - ' + anchor + '\n';
+            }
+
         } else {
             out += lexed[i].text;
         }
-        out += '</h' + lexed[i].depth + '>';
+        out += '</h' + lexed[i].depth + '>\n';
 
         start = i + 1;
 
@@ -52,3 +61,4 @@ for (var i = 0; i < lexed.length; i++) {
         out += '</div>';
 
 fs.writeFileSync(process.argv[3], out);
+fs.writeFileSync(process.argv[4], nav);
