@@ -129,6 +129,64 @@
         colorCode: function() {
             $('pre').addClass('prettyprint');
             prettyPrint();
+        },
+
+        searchIdx: function() {
+            if (this._searchIdx) return this._searchIdx;
+            this._searchIdx = [];
+            var list = $('#docs > *');
+            var title = '', content = '', anchor = '';
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].tagName.match(/H/)) {
+                    this._searchIdx.push({
+                        anchor: anchor,
+                        title: title,
+                        title_lc: title.toLowerCase(),
+                        content: content,
+                        content_lc: content.toLowerCase()
+                    });
+                    title = $(list[i]).text();
+                    anchor = '#' + $('a', list[i]).attr('name');
+                    content = '';
+                } else {
+                    content = (content || '') + $(list[i]).text();
+                }
+            }
+            return this._searchIdx;
+        },
+
+        search: function(q) {
+            var q_lc = q.toLowerCase();
+            var idx = this.searchIdx();
+            var results = [], limit = 10;
+            for (var i = 0; i < idx.length && results.length < limit; i++) {
+                if (idx[i].title_lc.indexOf(q_lc) !== -1) {
+                    results.push(idx[i]);
+                }
+            }
+            for (i = 0; i < idx.length && results.length < limit; i++) {
+                if (idx[i].content_lc.indexOf(q_lc) !== -1) {
+                    results.push(idx[i]);
+                }
+            }
+            return results;
+        },
+
+        bindSearch: function() {
+            var that = this;
+            var resDiv = $('<div class="search-results"></div>').appendTo('.doc-search');
+            $('.doc-search input[type=text]').bind('keyup', function() {
+                if (!this.value) return resDiv.hide();
+                resDiv.show();
+                var res = that.search(this.value);
+                resDiv.html('');
+                for (var i = 0; i < res.length; i++) {
+                    var rd = $('<div class="search-result"></div>').appendTo(resDiv);
+                    $('<a></a>').appendTo(rd)
+                        .text(res[i].title)
+                        .attr('href', res[i].anchor);
+                }
+            });
         }
     };
 
