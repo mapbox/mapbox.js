@@ -80,6 +80,37 @@ set to `true`, this allows for a better animation effect.
 
     map.centerzoom({ lat: 10, lon: -88 }, 5);
 
+### map.getExtent()
+
+Get the extent of the currently visible area.
+
+**Returns** an instance of `MM.Extent`.
+
+### map.setExtent(extent [, precise]_
+Modify the center and zoom of the map so that the provided extent is visible.
+
+**Arguments:**
+
+* `extent` can be an instance of `MM.Extent`
+* `precise` cab be `true` or `false`. If true, resulting zoom levels may be fractional. (By default, the map's zoom level is rounded down to keep tile images from blurring.)
+
+**Returns** the map object.
+
+### map.setZoomRange(minZoom, maxZoom)
+
+Set the map's minimum and maximum zoom levels.
+
+**Arguments:**
+
+* `minZoom` is the minimum zoom level
+* `maxZoom` is the maximum zoom level
+
+**Returns** the map object.
+
+**Example:**
+
+    map.setZoomRange(3, 17);
+
 ### map.setPanLimits(locations)
 
 Set the map's panning limits.
@@ -90,13 +121,186 @@ Set the map's panning limits.
 
 **Returns** the map object.
 
+### map.setSize(dimensions)
+Set the map's dimensions. This sets `map.autoSize` to false to prevent further automatic resizing.
+
+**Arguments:**
+
+* `dimensions` is an object with `x` and `y` properties representing the map's new dimensions in pixels.
+
+**Returns** the map object.
+
+### map.zoomBy(zoomOffset)
+Change zoom level by the provided offset.
+
+**Arguments:**
+
+* `zoomOffset` is the amount to zoom by. Positive offsets zoom in. Negative offsets zoom out.
+
+**Returns** the map object.
+
+### map.zoomByAbout(zoomOffset, point)
+Change the zoom level by the provided offset, while maintaining the same location at the provided point. This is used by `MM.DoubleClickHandler`.
+
+* `zoomOffset` is the amount to zoom by. Positive offsets zoom in. Negative offsets zoom out.
+* `point` is the point on the map that maintains its current location.
+
+**Returns** the map object.
+
+### map.panBy(x, y)
+Pan by the specified distances.
+
+**Arguments:**
+
+* `x` the distance to pan horizontally. Positive values pan right, negative values pan left.
+* `y` the distance to pan vertically. Positive values pan down, negative values pan up.
+
+**Returns** the map object.
+
+### map.draw()
+Redraw the map and its layers. First, the map enforces its coordLimits on its center and zoom. If autoSize is true, the map's dimensions are recalculated from its parent. Lastly, each of the map's layers is drawn.
+
+### map.requestRedraw()
+Request a "lazy" call to draw in 1 second. This is useful if you're responding to lots of user input and know that you'll need to redraw the map eventually, but not immediately.
+
+### map.pointLocation(point)
+Convert a screen point to a location (longitude and latitude).
+
+**Arguments:**
+
+* `point` is an instance of `MM.Point` or an object with `x` and `y` properties.
+
+**Returns** an instance of `MM.Location`.
+
+### map.pointCoordinate(point)
+Convert a screen point to a tile coordinate.
+
+**Arguments:**
+
+* `point` is an instance of `MM.Point` or an object with `x` and `y` properties.
+
+**Returns** an instance of `MM.Coordinate`.
+
+### map.locationPoint(location)
+Convert a location to a screen point.
+
+**Arguments:**
+
+* `location` is an instance of `MM.Location` or an object with `lat` and `lon` properties.
+
+**Returns** an instance of `MM.Point`.
+
+### map.locationCoordinate(location)
+Convert a location to a tile coordinate.
+
+**Arguments:**
+
+* `location` is an instance of `MM.Location` or an object with `lat` and `lon` properties.
+
+**Returns** an instance of `MM.Coordinate`.
+
+### map.coordinatePoint(coordinate)
+Convert a tile coordinate to a screen point.
+
+**Arguments:**
+
+* `coordinate` is an instance of `MM.Coordinate`.
+
+**Returns** an instance of `MM.Point`.
+
+### map.coordinateLocation(coordinate)
+Convert a tile coordinate to a location (longitude and latitude).
+
+**Arguments:**
+
+* `coordinate` is an instance of `MM.Coordinate`.
+
+**Returns** and instance of `MM.Location`.
+
+### map.addLayer(layer)
+Add a layer to the map, above other layers.
+
+**Arguments:**
+
+* `layer` is a layer object, such as an instance of `mapbox.layer()` or `mapbox.markers.layer()`.
+
+**Returns** the map object.
+
+### map.addTileLayer(layer)
+Add a tile layer to the map, below any marker layers to prevent them from being covered up.
+
+* `layer` is a layer object, such as an instance of `mapbox.layer()`.
+
+**Returns** the map object.
+
+### map.removeLayer(layer)
+Remove the provided layer from the map.
+
+**Arguments:**
+
+* `layer` is layer currently added to the map.
+
+**Returns** the map object.
+
+### map.removeLayerAt(index)
+Remove the layer at the provided index.
+
+* `index` is a non-negative integer.
+
+**Returns** the map object.
+
+### map.disableLayer(layer)
+Disable a layer. Disabled layers maintain their position, but do not get drawn.
+
+**Arguments:**
+
+* `layer` is layer currently added to the map.
+
+**Returns** the map object.
+
+### map.disableLayerAt(index)
+Disable a layer at the provided index. Disabled layers maintain their position, but do not get drawn.
+
+**Arguments:**
+
+* `index` is a non-negative integer representing the position of the layer.
+
+**Returns** the map object.
+
+### map.enableLayer(layer)
+Enable a previously disabled layer.
+
+**Arguments:**
+
+* `layer` is layer currently added to the map.
+
+**Returns** the map object.
+
+### map.enableLayerAt(index)
+Enable the layer at the provided index.
+
+**Arguments:**
+
+* `index` is a non-negative integer representing the position of the layer to be enabled.
+
+**Returns** the map object.
+
+### map.getLayers()
+
+**Returns** a list the map's layers.
+
+### map.getLayerAt(index)
+Get the layer at the provided index.
+
+**Arguments**
+
+* `index` can be a non-negative integer.
+
+**Returns** a layer.
+
 ### map.refresh()
 
 Refreshes map.ui and map.interaction to reflect any layer changes.
-
-### map.addTileLayer(layer)
-
-Adds a tile layer to the map, below any marker layers to prevent them from being covered up.
 
 ### map.ease
 
@@ -113,6 +317,85 @@ An instance of mapbox.ui attached to the map for convenience.
 ### map.interaction
 
 An instance of mapbox.interaction attached to map for convenience.
+
+### map.addCallback(event, callback)
+Add a callback for a specific event type. Event types are listed further down.
+
+**Arguments:**
+
+* `event` is a string such as "zoomed" or "drawn".
+* `callback` is function that gets called when the event is triggered.
+
+**Returns** the map object.
+
+### map.removeCallback(event, callback)
+Remove a previously added callback.
+
+**Arguments:**
+
+* `event` is the event type to remove the callback for.
+* `callback` is the callback to be removed.
+
+**Returns** the map object.
+
+### Event: zoomed
+Fires when the map's zoom level changes. Callbacks receive two arguments:
+
+* `map` is the map object.
+* `zoomOffset` is the difference between zoom levels. Get the current zoom with `map.zoom()`.
+
+**Example:**
+
+    map.addCallback("zoomed", function(map, zoomOffset) {
+        console.log("Map zoomed by", zoomOffset);
+    });
+
+### Event: panned
+Fires when the map has been panned. Callbacks receive two arguments:
+
+* `map` is the map object.
+* `panOffset` is a two-element array in the form of `[dx, dy]`.
+
+**Example:**
+    
+    map.addCallback("panned", function(map, panOffset) {
+        console.log("map panned by x:", panOffset[0], "y:", panOffset[1]);
+    });
+
+### Event: resized
+Fires when the map has been resized. Callbacks receive two arguments:
+
+* `map` is the map object.
+* `dimensions` is a new `MM.Point` with the map's new dimensions.
+
+**Example:** 
+
+    map.addCallback("resized", function(map, dimensions) {
+        console.log("map dimensions:", dimensions.x, "y:", dimensions.y);
+    });
+
+### Event: extentset
+Fires when the map's extent is set. Callbacks receive two arguments:
+
+* `map` is the map object.
+* `extent` is an instance of `MM.Extent`.
+
+**Example:**
+
+    map.addCallback("extentset", function(map, extent) {
+        console.log("Map's extent set to:", extent);
+    });
+
+### Event: drawn
+Fires when the map is redrawn. Callbacks receive one argument:
+
+* `map` is the map object.
+
+**Example:**
+
+    map.addCallback("drawn", function(map) {
+      console.log("map drawn!");
+    });
 
 # Loading Utilities
 
