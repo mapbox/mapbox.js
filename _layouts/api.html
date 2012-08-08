@@ -13,32 +13,36 @@ class: box
     .depth-1 {
         margin-bottom: 40px;
     }
-    .depth-2 {
-        margin-left: 35px;
+    .depth-2, .depth-3 {
         margin-bottom: 40px;
     }
-    .depth-3 {
-        margin-left: 70px;
-        margin-bottom: 50px;
-    }
-    .depth-4 {
-        margin-left: 105px;
-        margin-bottom: 15px;
+
+    #docs h2 {
+        font-weight:bold;
     }
 
     #docs h3 {
-        margin-left: 35px;
-        font-size: 18px;
+        font-size: 16px;
+        line-height:20px;
+        margin:5px 0;
     }
 
     #docs h4 {
-        margin-left: 60px;
         font-size: 16px;
         margin-bottom: 10px;
     }
 
+    #docs strong {
+        font-weight: normal;
+        font-style: italic;
+    }
+
     #docs p, #docs ul {
-        margin-bottom: 6px;
+        margin-bottom: 5px;
+    }
+
+    span.args, span.bracket {
+        color:#888;
     }
 
     #docs .args ,
@@ -88,3 +92,6 @@ class: box
 </div>
 </div>
 
+<script type='text/javascript'>
+    (new Docs).colorCode();
+</script>
