@@ -91,7 +91,7 @@ pre { border-radius:0px; box-shadow:none; border:0px; }
       <input type='submit' value='Search' class='icon reverse search' />
     </form>
     <div class='doc-nav'>
-    <ul>
+    <ul class='pages'>
     {% for item in site.categories.example reversed %}
     <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
     {% endfor %}
