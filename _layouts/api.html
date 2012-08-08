@@ -9,6 +9,62 @@ class: box
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
+<style>
+    .depth-2 {
+        margin-left: 35px;
+    }
+    .depth-3 {
+        margin-left: 70px;
+    }
+    .depth-4 {
+        margin-left: 105px;
+    }
+
+    #docs h1 {
+        margin-top: 60px;
+    }
+
+    #docs h2 {
+        margin-top: 40px;
+    }
+
+    #docs h3 {
+        margin-left: 35px;
+        margin-top: 50px;
+        font-size: 18px;
+    }
+
+    #docs h4 {
+        margin-left: 60px;
+        font-size: 16px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    #docs li :first-child {
+        font-weight: bold;
+        background: none;
+        border: none;
+    }
+
+    #docs ul {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    #docs p {
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    #docs .bracket, #docs .args {
+        font-weight: normal;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+</style>
+
 <div class='clearfix doc-header pad1 fillL'>
   <div class='cell7'>
     <h2>{{site.title}}</h2>
@@ -23,7 +79,7 @@ class: box
 
 <div class='doc-content pad0 fillL clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 doc float-right pad2 prose'>
+  <div id='docs' class='cell9 doc float-right pad2 prose'>
     {{content}}
   </div>
   <div class='cell3 float-right'>
