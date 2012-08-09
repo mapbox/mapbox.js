@@ -80,13 +80,13 @@ class: box
 
 <div class='doc-page pad0 fillL clearfix'>
 <div class='fillW clearfix'>
-    <div class='cell9 float-right'>
-        {% if site.version != page.version %}
-        <div class='float-right pad2 warn'>
-            You are currently viewing an older version of the library. Check out <a href="{{site.baseurl}}/api/{{site.version}}">{{site.version}}</a> for the latest.
-        </div>
-    {% endif %}
-  <div id='docs' class='doc-content doc float-right pad2 prose'>
+  <div class='cell9 float-right'>
+  {% if site.version != page.version %}
+  <div class='pad2 warn'>
+    You are currently viewing an older version of the library. Check out <a href="{{site.baseurl}}/api/{{site.version}}">{{site.version}}</a> for the latest.
+  </div>
+  {% endif %}
+  <div id='docs' class='doc-content doc pad2 prose'>
     {{content}}
   </div>
   </div>
