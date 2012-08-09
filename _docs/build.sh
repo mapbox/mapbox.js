@@ -29,6 +29,6 @@ node generate.js node_modules/mapbox.js/node_modules/easey/API.md build/easey.ht
 echo "Creating _posts/api/...$TAG"
 sed "s/__TAG__/$TAG/" header > ../_posts/api/0200-01-01-$TAG.html
 cat build/nav-mapboxjs build/nav-markersjs build/nav-easey >> ../_posts/api/0200-01-01-$TAG.html
-echo -e "---\n" >> ../_posts/api/0200-01-01-$TAG.html
+echo -e "version: $TAG\n---\n" >> ../_posts/api/0200-01-01-$TAG.html
 cat build/mapboxjs.html build/markersjs.html build/easey.html >> ../_posts/api/0200-01-01-$TAG.html
 

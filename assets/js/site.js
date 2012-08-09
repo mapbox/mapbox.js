@@ -187,6 +187,12 @@
                         .attr('href', res[i].anchor);
                 }
             });
+        },
+
+        bindHeadings: function() {
+            $('h1[id],h2[id],h3[id],h4[id]').click(function(ev) {
+                window.location.hash = $(ev.currentTarget).attr('id');
+            });
         }
     };
 

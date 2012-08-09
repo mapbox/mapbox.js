@@ -55,6 +55,15 @@ class: box
         margin-right: 1px;
     }
 
+    .warn {
+        background: #ee8a65;
+        height: 70px;
+        width: 100%;
+        color: white;
+        padding-left: 40px;
+        padding-top: 25px;
+    }
+
 </style>
 
 <div class='clearfix doc-header pad1 fillL'>
@@ -69,10 +78,17 @@ class: box
   </div>
 </div>
 
-<div class='doc-content pad0 fillL clearfix'>
+<div class='doc-page pad0 fillL clearfix'>
 <div class='fillW clearfix'>
-  <div id='docs' class='cell9 doc float-right pad2 prose'>
+    <div class='cell9 float-right'>
+        {% if site.version != page.version %}
+        <div class='float-right pad2 warn'>
+            You are currently viewing an older version of the library. Check out <a href="{{site.baseurl}}/api/{{site.version}}">{{site.version}}</a> for the latest.
+        </div>
+    {% endif %}
+  <div id='docs' class='doc-content doc float-right pad2 prose'>
     {{content}}
+  </div>
   </div>
   <div class='cell3 float-right'>
     <form class='pad2 doc-search'>
@@ -81,13 +97,15 @@ class: box
     </form>
     <div class='doc-nav'>
       {% if page.navigation %}
-      {% for heading in page.navigation %}
+      {% for headings in page.navigation %}
+      {% for heading in headings %}
         <h3><a href='#{{heading[0]|downcase|replace:' ','_'}}'>{{heading[0]}}</a></h3>
         <ul class='anchors'>
         {% for item in heading[1] %}
           <li><a href='#{{item|downcase|replace:' ','_'}}'>{{item}}</a></li>
         {% endfor %}
         </ul>
+      {% endfor %}
       {% endfor %}
       {% endif %}
     </div>
@@ -99,4 +117,5 @@ class: box
     var docs = new Docs();
     docs.colorCode();
     docs.bindSearch();
+    docs.bindHeadings();
 </script>

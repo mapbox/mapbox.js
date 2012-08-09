@@ -27,10 +27,9 @@ for (var i = 0; i < lexed.length; i++) {
         // Write header
         matched = lexed[i].text.match(/(.*)\.([^\(]*)(\((.*)\))?/);
         matchedEvent = lexed[i].text.match(/Event:\s(.*)/);
-        out += '<h' + lexed[i].depth + '>';
         if (matched) {
             anchor = matched[1] + '.' + matched[2];
-            out += '<a name="' + anchor + '" class="anchor" href="#' + anchor + '"></a>';
+            out += '<h' + lexed[i].depth + ' id="' + anchor + '">';
             out += '<span class="object">' + matched[1] + '</span>';
             out += '.';
             out += '<span class="name">' + matched[2] + '</span>';
@@ -43,17 +42,18 @@ for (var i = 0; i < lexed.length; i++) {
             out += '<span class="bracket">)</span>';
 
             if (lexed[i].depth == 2) {
-                nav += '  ' + anchor + ':\n';
+                nav += '- ' + anchor + ':\n';
             } else if (lexed[i].depth == 3) {
                 nav += '  - ' + anchor + '\n';
             }
 
         } else if (matchedEvent) {
             anchor = 'event_"' + matchedEvent[1] + '"';
-            out += "<a name='" + anchor + "' class='anchor' href='#" + anchor + "'></a>";
+            out += '<h' + lexed[i].depth + ' id="' + anchor + '">';
             out += lexed[i].text;
             nav += '  - Event "' + matchedEvent[1] + '"\n';
         } else {
+            out += '<h' + lexed[i].depth + '>';
             out += lexed[i].text;
         }
         out += '</h' + lexed[i].depth + '>\n';
