@@ -173,6 +173,12 @@ Request a "lazy" call to draw in 1 second. This is useful if you're responding
 to lots of user input and know that you'll need to redraw the map
 eventually, but not immediately.
 
+### map.refresh()
+
+Refreshes map.ui and map.interaction to reflect any layer changes.
+
+<div class="separator">Conversions</div>
+
 ### map.pointLocation(point)
 
 Convert a screen point to a location (longitude and latitude).
@@ -232,6 +238,8 @@ _Arguments:_
 * `coordinate` is an instance of `MM.Coordinate`.
 
 _Returns_ and instance of `MM.Location`.
+
+<div class="separator">Layer Management</div>
 
 ### map.addLayer(layer)
 
@@ -332,25 +340,163 @@ _Arguments_
 
 _Returns_ a layer.
 
-### map.refresh()
-
-Refreshes map.ui and map.interaction to reflect any layer changes.
-
-### map.ease
-
-An instance of easey initialized with the map.
-
-**Example:**
-
-    map.ease.location({ lat: 10, lon: -88 }).zoom(5).optimal();
+<div class="separator">UI Controls</div>
 
 ### map.ui
 
-An instance of mapbox.ui attached to the map for convenience.
+The API provides a set of UI elements that can be freely mixed & matched, as well as styled
+beyond the default (provided in the `mapbox.css` stylesheet).
+Maps created with [`mapbox.map`](#mapbox.map) have an array of pre-initialized UI elements at `.ui`.
+All UI elements support the simple operations `.add()` and `.remove()` to add &
+remove them from the map.
+
+#### .add()
+
+Add the UI element to the map. Add the HTML elements that the UI element
+manages (if any) to the map element, and bind any events.
+
+#### .remove()
+
+Remove the UI element from the map. Removes the HTML elements from the
+map, if any, and removes listeners, if any.
+
+#### .element()
+
+For applicable elements (zoomer, attribution, legend, fullscreen),
+returns the DOM element this control exposes.
+
+### map.ui.fullscreen
+
+Add a link that can maximize and minimize the map on the browser page
+
+### map.ui.hash
+
+Add the map's changing position to the URL, making map locations linkable
+
+### map.ui.zoombox
+
+Add the ability to zoom into the map by shift-clicking and dragging a box,
+to which the map zooms
+
+### map.ui.zoomer
+
+Add zoom in and zoom out buttons to map
+
+### map.ui.attribution
+
+Add an element with attribution information to the map
+
+### map.ui.legend
+
+Add an element with legend information to map
+
+### map.ui.pointselector
+
+Allow simple location selection on the map: clicking without dragging will select
+a point, and notify listeners with the new list of points.
+
+#### pointselector.addCallback(event, callback)
+
+Adds a callback that is called on changes to the pointselector contents.
+
+_Arguments:_
+
+* `event` is a string of the event you want to bind the callback to
+* `callback` is a funcion that is called on the event specified by `event`
+
+Event should be a String which is one of the following:
+
+* `change`: whenever points are added or removed
+
+Callback is a Function that is called with arguments depending on what `event` is bound:
+
+* `drawn`: the layer object
+* `locations`: a list of locations currently selected
+
+_Returns_ the pointselector
+
+#### pointselector.removeCallback(event, callback)
+
+Remove a callback bound by `.addCallback(event, callback)`.
+
+_Arguments:_
+
+* `event` is a string of the event you want to bind the callback to
+  This must be the same string that was given in `addCallback`
+
+* `callback` is a funcion that is called on the event specified by `event`.
+  This must be the same function as was given in `addCallback`. 
+
+_Returns_ the pointselector
+
+### map.ui.boxselector
+
+Allow extents to be selected on the map.
+
+#### boxselector.addCallback(event, callback)
+
+Adds a callback that is called on changes to the boxselector contents.
+
+_Arguments:_
+
+* `event` is a string of the event you want to bind the callback to
+* `callback` is a funcion that is called on the event specified by `event`
+
+Event should be a String which is one of the following:
+
+* `change`: whenever an extent is selected
+
+Callback is a Function that is called with arguments depending on what `event` is bound:
+
+* `drawn`: the layer object
+* `extent`: the currently selected extent
+
+_Returns_ the boxselector
+
+#### boxselector.removeCallback(event, callback)
+
+Remove a callback bound by `.addCallback(event, callback)`.
+
+_Arguments:_
+
+* `event` is a string of the event you want to bind the callback to
+  This must be the same string that was given in `addCallback`
+
+* `callback` is a funcion that is called on the event specified by `event`.
+  This must be the same function as was given in `addCallback`.
+
+_Returns_ the boxselector
+
+<div class="separator">Interaction</div>
 
 ### map.interaction
 
-An instance of mapbox.interaction attached to map for convenience.
+Interaction is what we call interactive parts of maps that are created
+with the [powerful tooltips & regions system in TileMill](http://mapbox.com/tilemill/docs/crashcourse/tooltips/).
+Under the hood, it's powered by the open [UTFGrid](https://github.com/mapbox/utfgrid-spec)
+specification.
+
+### map.interaction.auto()
+
+Enable default settings - animated tooltips - for interaction with the map.
+This internally calls [`interaction.refresh()`](#interaction.refresh) to set the interactivity for the top layer.
+
+_Returns_ the interaction control
+
+**Example:**
+
+    var interaction = mapbox.interaction()
+        .map(map)
+        .auto();
+
+### map.interaction.refresh()
+
+Refresh interactivity control to reflect any layer changes.
+If `auto` has not been called, this function will not change anything.
+
+_Returns_ the interaction control
+
+<div class="separator">Events</div>
 
 ### map.addCallback(event, callback)
 
@@ -564,166 +710,3 @@ performance and reducing the number of requests the browser needs to make.
 * `enabled` must be either true or false.
 
 _Returns_ the layer object.
-
-# Map UI
-
-The API provides a set of UI elements that can be freely mixed & matched, as well as styled
-beyond the default (provided in the `mapbox.css` stylesheet).
-Maps created with [`mapbox.map`](#mapbox.map) have an array of pre-initialized UI elements at `.ui`.
-All UI elements support the simple operations `.add()` and `.remove()` to add &
-remove them from the map.
-
-#### .add()
-
-Add the UI element to the map. Add the HTML elements that the UI element
-manages (if any) to the map element, and bind any events.
-
-#### .remove()
-
-Remove the UI element from the map. Removes the HTML elements from the
-map, if any, and removes listeners, if any.
-
-#### .element()
-
-For applicable elements (zoomer, attribution, legend, fullscreen),
-returns the DOM element this control exposes.
-
-### map.ui.fullscreen
-
-Add a link that can maximize and minimize the map on the browser page
-
-### map.ui.hash
-
-Add the map's changing position to the URL, making map locations linkable
-
-### map.ui.zoombox
-
-Add the ability to zoom into the map by shift-clicking and dragging a box,
-to which the map zooms
-
-### map.ui.zoomer
-
-Add zoom in and zoom out buttons to map
-
-### map.ui.attribution
-
-Add an element with attribution information to the map
-
-### map.ui.legend
-
-Add an element with legend information to map
-
-### map.ui.pointselector
-
-Allow simple location selection on the map: clicking without dragging will select
-a point, and notify listeners with the new list of points.
-
-#### pointselector.addCallback(event, callback)
-
-Adds a callback that is called on changes to the pointselector contents.
-
-_Arguments:_
-
-* `event` is a string of the event you want to bind the callback to
-* `callback` is a funcion that is called on the event specified by `event`
-
-Event should be a String which is one of the following:
-
-* `change`: whenever points are added or removed
-
-Callback is a Function that is called with arguments depending on what `event` is bound:
-
-* `drawn`: the layer object
-* `locations`: a list of locations currently selected
-
-_Returns_ the pointselector
-
-### pointselector.removeCallback(event, callback)
-
-Remove a callback bound by `.addCallback(event, callback)`.
-
-_Arguments:_
-
-* `event` is a string of the event you want to bind the callback to
-  This must be the same string that was given in `addCallback`
-
-* `callback` is a funcion that is called on the event specified by `event`.
-  This must be the same function as was given in `addCallback`. 
-
-_Returns_ the pointselector
-
-### map.ui.boxselector
-
-Allow extents to be selected on the map.
-
-#### boxselector.addCallback(event, callback)
-
-Adds a callback that is called on changes to the boxselector contents.
-
-_Arguments:_
-
-* `event` is a string of the event you want to bind the callback to
-* `callback` is a funcion that is called on the event specified by `event`
-
-Event should be a String which is one of the following:
-
-* `change`: whenever an extent is selected
-
-Callback is a Function that is called with arguments depending on what `event` is bound:
-
-* `drawn`: the layer object
-* `extent`: the currently selected extent
-
-_Returns_ the boxselector
-
-### boxselector.removeCallback(event, callback)
-
-Remove a callback bound by `.addCallback(event, callback)`.
-
-_Arguments:_
-
-* `event` is a string of the event you want to bind the callback to
-  This must be the same string that was given in `addCallback`
-
-* `callback` is a funcion that is called on the event specified by `event`.
-  This must be the same function as was given in `addCallback`.
-
-_Returns_ the boxselector
-
-# Interaction
-
-Interaction is what we call interactive parts of maps that are created
-with the [powerful tooltips & regions system in TileMill](http://mapbox.com/tilemill/docs/crashcourse/tooltips/).
-Under the hood, it's powered by the open [UTFGrid](https://github.com/mapbox/utfgrid-spec)
-specification.
-
-## mapbox.interaction()
-
-Create an interaction control which will find and present interactive regions of the map.
-
-_Returns_ a new interaction control.
-
-### interaction.map(map)
-
-Set the map to add interaction for. The `interaction` that's automatically added to
-maps via loading methods already has `map` set, so it's not necessary to re-call this method.
-
-### interaction.auto()
-
-Enable default settings - animated tooltips - for interaction with the map.
-This internally calls [`interaction.refresh()`](#interaction.refresh) to set the interactivity for the top layer.
-
-_Returns_ the interaction control
-
-**Example:**
-
-    var interaction = mapbox.interaction()
-        .map(map)
-        .auto();
-
-### interaction.refresh()
-
-Refresh interactivity control to reflect any layer changes.
-If `auto` has not been called, this function will not change anything.
-
-_Returns_ the interaction control
