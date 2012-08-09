@@ -42,7 +42,7 @@ for (var i = 0; i < lexed.length; i++) {
             out += '<span class="bracket">)</span>';
 
             if (lexed[i].depth == 2) {
-                nav += '  ' + anchor + ':\n';
+                nav += '- ' + anchor + ':\n';
             } else if (lexed[i].depth == 3) {
                 nav += '  - ' + anchor + '\n';
             }

@@ -97,13 +97,15 @@ class: box
     </form>
     <div class='doc-nav'>
       {% if page.navigation %}
-      {% for heading in page.navigation %}
+      {% for headings in page.navigation %}
+      {% for heading in headings %}
         <h3><a href='#{{heading[0]|downcase|replace:' ','_'}}'>{{heading[0]}}</a></h3>
         <ul class='anchors'>
         {% for item in heading[1] %}
           <li><a href='#{{item|downcase|replace:' ','_'}}'>{{item}}</a></li>
         {% endfor %}
         </ul>
+      {% endfor %}
       {% endfor %}
       {% endif %}
     </div>
