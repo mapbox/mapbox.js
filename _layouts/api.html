@@ -64,6 +64,17 @@ class: box
         padding-top: 25px;
     }
 
+    .separator {
+        margin-top: 0px;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    .doc-nav li h4 {
+        margin-bottom: 0px;
+        padding-top: 2px;
+    }
+
 </style>
 
 <div class='clearfix doc-header pad1 fillL'>
@@ -102,7 +113,12 @@ class: box
         <h3><a href='#{{heading[0]|replace:' ','_'}}'>{{heading[0]}}</a></h3>
         <ul class='anchors'>
         {% for item in heading[1] %}
+          {% if item.Separator %}
+          <li><h4><a href='#{{item.Separator|replace:' ','_'}}'>{{item.Separator}}</a></h4></li>
+          {% else %}
           <li><a href='#{{item|replace:' ','_'}}'>{{item}}</a></li>
+          {% endif %}
+
         {% endfor %}
         </ul>
       {% endfor %}

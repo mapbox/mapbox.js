@@ -5,6 +5,7 @@ var f = fs.readFileSync(process.argv[2], 'utf8'),
     lexed = marked.lexer(f);
 
 var start = 0,
+    l,
     anchor,
     matched,
     toParse,
@@ -13,9 +14,16 @@ var start = 0,
 
 
 out += '<div>';
+
 for (var i = 0; i < lexed.length; i++) {
 
-    if (lexed[i].type === 'heading') {
+    l = lexed[i];;
+
+    matchedHeading = l.type === 'heading' && l.text.match(/(.*)\.([^\(]*)(\((.*)\))?/);
+    matchedEvent = l.type === 'heading' && l.text.match(/Event:\s(.*)/);
+    matchedSep = l.type === 'html' && l.text.match(/class=.separator.*>(.*)</);
+
+    if (l.type === 'heading' || matchedSep) {
 
         toParse = lexed.slice(start, i);
         toParse.links = lexed.links;
@@ -24,51 +32,59 @@ for (var i = 0; i < lexed.length; i++) {
         // End previous group
         out += '</div>';
 
-        // Write header
-        matched = lexed[i].text.match(/(.*)\.([^\(]*)(\((.*)\))?/);
-        matchedEvent = lexed[i].text.match(/Event:\s(.*)/);
-        if (matched) {
-            anchor = matched[1] + '.' + matched[2];
-            out += '<h' + lexed[i].depth + ' id="' + anchor + '">';
-            out += '<span class="object">' + matched[1] + '</span>';
-            out += '.';
-            out += '<span class="name">' + matched[2] + '</span>';
-            out += '<span class="bracket">(</span>';
+        // Header is a function or property
+        if (matchedHeading) {
+            anchor = matchedHeading[1] + '.' + matchedHeading[2];
+            out += '<h' + l.depth + ' id="' + anchor + '">';
+            out += anchor;
 
-            if (matched[3]) {
-                out += '<span class="args">' + matched[4] + '</span>';
+            if (matchedHeading[3]) {
+                out += '<span class="bracket">(</span>';
+                out += '<span class="args">' + matchedHeading[4] + '</span>';
+                out += '<span class="bracket">)</span>';
             }
 
-            out += '<span class="bracket">)</span>';
+            out += '</h' + l.depth + '>\n';
 
-            if (lexed[i].depth == 2) {
+            // Add to navigation tree
+            if (l.depth == 2) {
                 nav += '- ' + anchor + ':\n';
-            } else if (lexed[i].depth == 3) {
+            } else if (l.depth == 3) {
                 nav += '  - ' + anchor + '\n';
             }
 
+        // Header is for an event
         } else if (matchedEvent) {
-            anchor = 'event_"' + matchedEvent[1] + '"';
-            out += '<h' + lexed[i].depth + ' id="' + anchor + '">';
-            out += lexed[i].text;
+            anchor = 'Event_"' + matchedEvent[1] + '"';
+            out += '<h' + l.depth + " id='" + anchor + "'>";
+            out += l.text;
+            out += '</h' + l.depth + '>\n';
             nav += '  - Event "' + matchedEvent[1] + '"\n';
+
+        // Separator
+        } else if (matchedSep) {
+            anchor = matchedSep[1].replace(' ', '_');
+            out += '<div class="separator" id="' + anchor + '">' + matchedSep[1] + '</div>';
+            nav += '  - Separator: ' + matchedSep[1] + '\n';
+            l.depth = 0;
+
         } else {
-            out += '<h' + lexed[i].depth + '>';
-            out += lexed[i].text;
+            out += '<h' + l.depth + '>';
+            out += l.text;
+            out += '</h' + l.depth + '>\n';
         }
-        out += '</h' + lexed[i].depth + '>\n';
 
         start = i + 1;
 
-        // Start new group
-        out += '<div id="content-' + anchor + '"class="depth-' + lexed[i].depth + '">';
+        // End header and start next group
+        out += '<div id="content-' + anchor + '"class="depth-' + l.depth + '">';
     }
 }
 
-        toParse = lexed.slice(start, i);
-        toParse.links = lexed.links;
-        out += marked.parser(toParse);
-        out += '</div>';
+toParse = lexed.slice(start, i);
+toParse.links = lexed.links;
+out += marked.parser(toParse);
+out += '</div>';
 
 fs.writeFileSync(process.argv[3], out);
 fs.writeFileSync(process.argv[4], nav);
