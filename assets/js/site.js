@@ -153,6 +153,19 @@
                     }
                 }
             });
+
+            // Hide headers if no children matched
+            $('.doc-nav').find('h3').each(function() {
+                var $this = $(this),
+                    next = $this.next(),
+                    none = true;
+                if (next.prop('tagName') === 'UL') {
+                    next.children().each(function() {
+                        if ($(this).find('a').css('display') !== 'none') return none = false;
+                    });
+                }
+                $this.css('display', none ? 'none' : '');
+            });
         },
 
         bindSearch: function() {
