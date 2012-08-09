@@ -135,9 +135,10 @@
             var q = this.value ? this.value.toLowerCase() : null;
             $('.doc-nav').find('[href]').each(function() {
                 var $this = $(this),
-                    body = $(document.getElementById('content-' + $this.attr('href').replace('#', ''))).text();
+                    id = $this.attr('href').replace('#', ''),
+                    body = $(document.getElementById('content-' + id)).text();
 
-                if (!q || body.toLowerCase().indexOf(q) !== -1) {
+                if (!q || body.toLowerCase().indexOf(q) !== -1 || id.toLowerCase().indexOf(q) !== -1) {
                     if ($this.parent().prop('tagName') == 'H3') {
                         $this.css('color', '');
                     } else {
