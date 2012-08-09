@@ -2,8 +2,69 @@
 layout: api
 title: v0.6.0-dev
 categories: api
---- 
-<div></div><h1>The Map</h1><div class="depth-1"><p>The map is, of course, the central element of most mapping sites. In the MapBox JavaScript API,
+navigation:
+  mapbox.map:
+  - map.smooth
+  - map.center
+  - map.zoom
+  - map.centerzoom
+  - map.setPanLimits
+  - map.refresh
+  - map.addTileLayer
+  - map.ease
+  - map.ui
+  - map.interaction
+  mapbox.load:
+  mapbox.auto:
+  mapbox.layer:
+  - layer.id
+  - layer.named
+  - layer.url
+  - layer.tilejson
+  - map.ui.hash
+  - map.ui.zoombox
+  - map.ui.zoomer
+  - map.ui.attribution
+  - map.ui.legend
+  - map.ui.pointselector
+  - pointselector.removeCallback
+  - map.ui.boxselector
+  - boxselector.removeCallback
+  mapbox.interaction:
+  - interaction.map
+  - interaction.auto
+  - interaction.refresh
+  mapbox.markers:
+  - markers.named
+  - markers.factory
+  - markers.features
+  - markers.sort
+  - markers.filter
+  - markers.id
+  - markers.url
+  - markers.csv
+  - markers.extent
+  - markers.addCallback
+  - markers.removeCallback
+  mapbox.markers.interaction:
+  - interaction.hide_on_move
+  - interaction.exclusive
+  - interaction.formatter
+  var ease = mapbox.ease:
+  - ease.from
+  - ease.to
+  - ease.zoom
+  - ease.t
+  - ease.future
+  - ease.easing
+  - ease.path
+  - ease.run
+  - var isRunning = ease.running
+  - ease.stop
+---
+
+<div></div><h1>The Map</h1>
+<div class="depth-1"><p>The map is, of course, the central element of most mapping sites. In the MapBox JavaScript API,
 the map object manages a set of layers, stores and displays zoom levels and centerpoints,
 and accepts a set of UI controls to which you can add your own finishing touches.
 
@@ -13,7 +74,8 @@ so <a href="https://github.com/modestmaps/modestmaps-js/wiki">the full Modest Ma
 is available to power-users.
 
 </p>
-</div><h2><a name="mapbox.map" class="anchor" href="#mapbox.map"></a><span class="object">mapbox</span>.<span class="name">map</span><span class="bracket">(</span><span class="args">element [, layers]</span><span class="bracket">)</span></h2><div class="depth-2"><p>Create a map on the current page.
+</div><h2 id="mapbox.map"><span class="object">mapbox</span>.<span class="name">map</span><span class="bracket">(</span><span class="args">element [, layers]</span><span class="bracket">)</span></h2>
+<div class="depth-2"><p>Create a map on the current page.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -26,7 +88,8 @@ is available to power-users.
 <p><strong>Returns</strong> a map object, which has the following methods:
 
 </p>
-</div><h3><a name="map.smooth" class="anchor" href="#map.smooth"></a><span class="object">map</span>.<span class="name">smooth</span><span class="bracket">(</span><span class="args">value</span><span class="bracket">)</span></h3><div class="depth-3"><p>Enable or disable inertial panning on maps. By default, maps smoothly pan and
+</div><h3 id="map.smooth"><span class="object">map</span>.<span class="name">smooth</span><span class="bracket">(</span><span class="args">value</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Enable or disable inertial panning on maps. By default, maps smoothly pan and
 zoom with inertia.
 
 </p>
@@ -43,7 +106,8 @@ zoom with inertia.
 
 </p>
 <pre><code>map.smooth(false); // disable inertial panning</code></pre>
-</div><h3><a name="map.center" class="anchor" href="#map.center"></a><span class="object">map</span>.<span class="name">center</span><span class="bracket">(</span><span class="args">centerpoint [, animate]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Center the map on a geographical location, or get its current center.
+</div><h3 id="map.center"><span class="object">map</span>.<span class="name">center</span><span class="bracket">(</span><span class="args">centerpoint [, animate]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Center the map on a geographical location, or get its current center.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -58,7 +122,8 @@ ommitted to get the map&#39;s current location</li>
 specified in <code>centerpoint</code>) otherwise.
 
 </p>
-</div><h3><a name="map.zoom" class="anchor" href="#map.zoom"></a><span class="object">map</span>.<span class="name">zoom</span><span class="bracket">(</span><span class="args">zoom [, animate]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the map&#39;s zoom level, or get its current zoom level.
+</div><h3 id="map.zoom"><span class="object">map</span>.<span class="name">zoom</span><span class="bracket">(</span><span class="args">zoom [, animate]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the map&#39;s zoom level, or get its current zoom level.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -76,7 +141,8 @@ or omitted to get the current zoom level..</li>
 
 </p>
 <pre><code>map.zoom(10, true);</code></pre>
-</div><h3><a name="map.centerzoom" class="anchor" href="#map.centerzoom"></a><span class="object">map</span>.<span class="name">centerzoom</span><span class="bracket">(</span><span class="args">center, zoom [, animate]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the map&#39;s zoom level and centerpoint simultaneously. Especially with the third argument, <code>animate</code>,
+</div><h3 id="map.centerzoom"><span class="object">map</span>.<span class="name">centerzoom</span><span class="bracket">(</span><span class="args">center, zoom [, animate]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the map&#39;s zoom level and centerpoint simultaneously. Especially with the third argument, <code>animate</code>,
 set to <code>true</code>, this allows for a better animation effect.
 
 </p>
@@ -95,7 +161,8 @@ set to <code>true</code>, this allows for a better animation effect.
 
 </p>
 <pre><code>map.centerzoom({ lat: 10, lon: -88 }, 5);</code></pre>
-</div><h3><a name="map.setPanLimits" class="anchor" href="#map.setPanLimits"></a><span class="object">map</span>.<span class="name">setPanLimits</span><span class="bracket">(</span><span class="args">locations</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the map&#39;s panning limits.
+</div><h3 id="map.setPanLimits"><span class="object">map</span>.<span class="name">setPanLimits</span><span class="bracket">(</span><span class="args">locations</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the map&#39;s panning limits.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -107,31 +174,38 @@ set to <code>true</code>, this allows for a better animation effect.
 <p><strong>Returns</strong> the map object.
 
 </p>
-</div><h3><a name="map.refresh" class="anchor" href="#map.refresh"></a><span class="object">map</span>.<span class="name">refresh</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3><div class="depth-3"><p>Refreshes map.ui and map.interaction to reflect any layer changes.
+</div><h3 id="map.refresh"><span class="object">map</span>.<span class="name">refresh</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Refreshes map.ui and map.interaction to reflect any layer changes.
 
 </p>
-</div><h3><a name="map.addTileLayer" class="anchor" href="#map.addTileLayer"></a><span class="object">map</span>.<span class="name">addTileLayer</span><span class="bracket">(</span><span class="args">layer</span><span class="bracket">)</span></h3><div class="depth-3"><p>Adds a tile layer to the map, below any marker layers to prevent them from being covered up.
+</div><h3 id="map.addTileLayer"><span class="object">map</span>.<span class="name">addTileLayer</span><span class="bracket">(</span><span class="args">layer</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Adds a tile layer to the map, below any marker layers to prevent them from being covered up.
 
 </p>
-</div><h3>map.ease</h3><div class="depth-3"><p>An instance of easey initialized with the map.
+</div><h3 id="map.ease"><span class="object">map</span>.<span class="name">ease</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>An instance of easey initialized with the map.
 
 </p>
 <p><strong>Example:</strong>
 
 </p>
 <pre><code>map.ease.location({ lat: 10, lon: -88 }).zoom(5).optimal();</code></pre>
-</div><h3>map.ui</h3><div class="depth-3"><p>An instance of mapbox.ui attached to the map for convenience.
+</div><h3 id="map.ui"><span class="object">map</span>.<span class="name">ui</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>An instance of mapbox.ui attached to the map for convenience.
 
 </p>
-</div><h3>map.interaction</h3><div class="depth-3"><p>An instance of mapbox.interaction attached to map for convenience.
+</div><h3 id="map.interaction"><span class="object">map</span>.<span class="name">interaction</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>An instance of mapbox.interaction attached to map for convenience.
 
 </p>
-</div><h1>Loading Utilities</h1><div class="depth-1"><p>To load information about a certain map you&#39;ve created on MapBox, we provide <code>mapbox.load</code> and
+</div><h1>Loading Utilities</h1>
+<div class="depth-1"><p>To load information about a certain map you&#39;ve created on MapBox, we provide <code>mapbox.load</code> and
 <code>mapbox.auto</code>, which pull the <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> file from a server and
 auto-instantiate many of its features.
 
 </p>
-</div><h2><a name="mapbox.load" class="anchor" href="#mapbox.load"></a><span class="object">mapbox</span>.<span class="name">load</span><span class="bracket">(</span><span class="args">url, callback</span><span class="bracket">)</span></h2><div class="depth-2"><p>This loads the information about a map on <a href="http://mapbox.com/tour/">MapBox Hosting</a>. The first argument can either be a full URL to a TileJSON file, like <code>http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp</code>, or a bare id, like <code>tmcw.map-hehqnmda</code>, which will get expanded to the former.
+</div><h2 id="mapbox.load"><span class="object">mapbox</span>.<span class="name">load</span><span class="bracket">(</span><span class="args">url, callback</span><span class="bracket">)</span></h2>
+<div class="depth-2"><p>This loads the information about a map on <a href="http://mapbox.com/tour/">MapBox Hosting</a>. The first argument can either be a full URL to a TileJSON file, like <code>http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp</code>, or a bare id, like <code>tmcw.map-hehqnmda</code>, which will get expanded to the former.
 
 </p>
 <p>After pulling the information from MapBox, it calls the function specified at the second argument with an object with map parts you can combine for yourself:
@@ -147,7 +221,8 @@ auto-instantiate many of its features.
   // if present, like you would create with mapbox.markers()
   markers: MARKERS_LAYER 
 }</code></pre>
-</div><h2><a name="mapbox.auto" class="anchor" href="#mapbox.auto"></a><span class="object">mapbox</span>.<span class="name">auto</span><span class="bracket">(</span><span class="args">element, url [, callback]</span><span class="bracket">)</span></h2><div class="depth-2"><p>Automatically load and create a map with sensible defaults.
+</div><h2 id="mapbox.auto"><span class="object">mapbox</span>.<span class="name">auto</span><span class="bracket">(</span><span class="args">element, url [, callback]</span><span class="bracket">)</span></h2>
+<div class="depth-2"><p>Automatically load and create a map with sensible defaults.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -168,17 +243,20 @@ auto-instantiate many of its features.
 &lt;script&gt;
 mapbox.auto(&#39;map&#39;, &#39;http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp&#39;);
 &lt;/script&gt;</code></pre>
-</div><h1>MapBox Layer</h1><div class="depth-1"><p><code>mapbox.layer</code> is a fast way to add layers to your map without having to deal with complex configuration.
+</div><h1>MapBox Layer</h1>
+<div class="depth-1"><p><code>mapbox.layer</code> is a fast way to add layers to your map without having to deal with complex configuration.
 
 </p>
-</div><h2><a name="mapbox.layer" class="anchor" href="#mapbox.layer"></a><span class="object">mapbox</span>.<span class="name">layer</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2><div class="depth-2"><p>You can add a tiled layer to your map with <code>mapbox.layer()</code>, a simple interface to
+</div><h2 id="mapbox.layer"><span class="object">mapbox</span>.<span class="name">layer</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2>
+<div class="depth-2"><p>You can add a tiled layer to your map with <code>mapbox.layer()</code>, a simple interface to
 layers from <a href="http://mapbox.com/tour/">MapBox Hosting</a> and elsewhere.
 
 </p>
 <p><strong>Returns</strong> a layer object, which has the following methods:
 
 </p>
-</div><h3><a name="layer.id" class="anchor" href="#layer.id"></a><span class="object">layer</span>.<span class="name">id</span><span class="bracket">(</span><span class="args">id, callback</span><span class="bracket">)</span></h3><div class="depth-3"><p>Get or set the layer ID, which corresponds to a MapBox map.
+</div><h3 id="layer.id"><span class="object">layer</span>.<span class="name">id</span><span class="bracket">(</span><span class="args">id, callback</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Get or set the layer ID, which corresponds to a MapBox map.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -199,7 +277,8 @@ It is called with on argument, the layer object.</li>
 
 </p>
 <pre><code>var layer = mapbox.layer().id(&#39;map-hehqnmda&#39;);</code></pre>
-</div><h3><a name="layer.named" class="anchor" href="#layer.named"></a><span class="object">layer</span>.<span class="name">named</span><span class="bracket">(</span><span class="args">[name]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Get or set the name of the layer, as referred to by the map.
+</div><h3 id="layer.named"><span class="object">layer</span>.<span class="name">named</span><span class="bracket">(</span><span class="args">[name]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Get or set the name of the layer, as referred to by the map.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -211,7 +290,8 @@ It is called with on argument, the layer object.</li>
 <p><strong>Returns</strong> the layer object if arguments are given, the layer&#39;s <code>name</code> otherwise.
 
 </p>
-</div><h3><a name="layer.url" class="anchor" href="#layer.url"></a><span class="object">layer</span>.<span class="name">url</span><span class="bracket">(</span><span class="args">[url, callback]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Pull a layer from a server besides MapBox Hosting that supports <a href="https://github.com/mapbox/tilejson-spec">TileJSON</a>, like a self-hosted <a href="https://github.com/mapbox/tilestream">TileStream</a>.
+</div><h3 id="layer.url"><span class="object">layer</span>.<span class="name">url</span><span class="bracket">(</span><span class="args">[url, callback]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Pull a layer from a server besides MapBox Hosting that supports <a href="https://github.com/mapbox/tilejson-spec">TileJSON</a>, like a self-hosted <a href="https://github.com/mapbox/tilestream">TileStream</a>.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -230,7 +310,8 @@ TileJSON information has been asynchronously loaded.</li>
 
 </p>
 <pre><code>var layer = mapbox.layer().url(&#39;http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp&#39;);</code></pre>
-</div><h3><a name="layer.tilejson" class="anchor" href="#layer.tilejson"></a><span class="object">layer</span>.<span class="name">tilejson</span><span class="bracket">(</span><span class="args">[tilejson]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set layer options directly from a TileJSON object.
+</div><h3 id="layer.tilejson"><span class="object">layer</span>.<span class="name">tilejson</span><span class="bracket">(</span><span class="args">[tilejson]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set layer options directly from a TileJSON object.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -242,42 +323,52 @@ TileJSON information has been asynchronously loaded.</li>
 <p><strong>Returns</strong> the layer object if arguments are given, the layer&#39;s TileJSON settings otherwise.
 
 </p>
-</div><h1>Map UI</h1><div class="depth-1"><p>The API provides a set of UI elements that can be freely mixed &amp; matched, as well as styled
+</div><h1>Map UI</h1>
+<div class="depth-1"><p>The API provides a set of UI elements that can be freely mixed &amp; matched, as well as styled
 beyond the default (provided in the <code>mapbox.css</code> stylesheet).
 Maps created with <code>mapbox.map</code> have an array of pre-initialized UI elements at <code>.ui</code>.
 All UI elements support the simple operations <code>.add()</code> and <code>.remove()</code> to add &amp;
 remove them from the map.
 
 </p>
-</div><h4><a name=".add" class="anchor" href="#.add"></a><span class="object"></span>.<span class="name">add</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h4><div class="depth-4"><p>Add the UI element to the map. Add the HTML elements that the UI element
+</div><h4 id=".add"><span class="object"></span>.<span class="name">add</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h4>
+<div class="depth-4"><p>Add the UI element to the map. Add the HTML elements that the UI element
 manages (if any) to the map element, and bind any events.
 
 </p>
-</div><h4><a name=".remove" class="anchor" href="#.remove"></a><span class="object"></span>.<span class="name">remove</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h4><div class="depth-4"><p>Remove the UI element from the map. Removes the HTML elements from the
+</div><h4 id=".remove"><span class="object"></span>.<span class="name">remove</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h4>
+<div class="depth-4"><p>Remove the UI element from the map. Removes the HTML elements from the
 map, if any, and removes listeners, if any.
 
 </p>
-</div><h3>map.ui.hash</h3><div class="depth-3"><p>Add the map&#39;s changing position to the URL, making map locations linkable
+</div><h3 id="map.ui.hash"><span class="object">map.ui</span>.<span class="name">hash</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Add the map&#39;s changing position to the URL, making map locations linkable
 
 </p>
-</div><h3>map.ui.zoombox</h3><div class="depth-3"><p>Add the ability to zoom into the map by shift-clicking and dragging a box,
+</div><h3 id="map.ui.zoombox"><span class="object">map.ui</span>.<span class="name">zoombox</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Add the ability to zoom into the map by shift-clicking and dragging a box,
 to which the map zooms
 
 </p>
-</div><h3>map.ui.zoomer</h3><div class="depth-3"><p>Add zoom in and zoom out buttons to map
+</div><h3 id="map.ui.zoomer"><span class="object">map.ui</span>.<span class="name">zoomer</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Add zoom in and zoom out buttons to map
 
 </p>
-</div><h3>map.ui.attribution</h3><div class="depth-3"><p>Add an element with attribution information to the map
+</div><h3 id="map.ui.attribution"><span class="object">map.ui</span>.<span class="name">attribution</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Add an element with attribution information to the map
 
 </p>
-</div><h3>map.ui.legend</h3><div class="depth-3"><p>Add an element with legend information to map
+</div><h3 id="map.ui.legend"><span class="object">map.ui</span>.<span class="name">legend</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Add an element with legend information to map
 
 </p>
-</div><h3>map.ui.pointselector</h3><div class="depth-3"><p>Allow simple location selection on the map: clicking without dragging will select
+</div><h3 id="map.ui.pointselector"><span class="object">map.ui</span>.<span class="name">pointselector</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Allow simple location selection on the map: clicking without dragging will select
 a point, and notify listeners with the new list of points.
 
 </p>
-</div><h4><a name="pointselector.addCallback" class="anchor" href="#pointselector.addCallback"></a><span class="object">pointselector</span>.<span class="name">addCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h4><div class="depth-4"><p>Adds a callback that is called on changes to the pointselector contents.
+</div><h4 id="pointselector.addCallback"><span class="object">pointselector</span>.<span class="name">addCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h4>
+<div class="depth-4"><p>Adds a callback that is called on changes to the pointselector contents.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -303,7 +394,8 @@ a point, and notify listeners with the new list of points.
 <p><strong>Returns</strong> the pointselector
 
 </p>
-</div><h3><a name="pointselector.removeCallback" class="anchor" href="#pointselector.removeCallback"></a><span class="object">pointselector</span>.<span class="name">removeCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3><div class="depth-3"><p>Remove a callback bound by <code>.addCallback(event, callback)</code>.
+</div><h3 id="pointselector.removeCallback"><span class="object">pointselector</span>.<span class="name">removeCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Remove a callback bound by <code>.addCallback(event, callback)</code>.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -320,10 +412,12 @@ This must be the same function as was given in <code>addCallback</code>. </p>
 <p><strong>Returns</strong> the pointselector
 
 </p>
-</div><h3>map.ui.boxselector</h3><div class="depth-3"><p>Allow extents to be selected on the map.
+</div><h3 id="map.ui.boxselector"><span class="object">map.ui</span>.<span class="name">boxselector</span><span class="bracket">(</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Allow extents to be selected on the map.
 
 </p>
-</div><h4><a name="boxselector.addCallback" class="anchor" href="#boxselector.addCallback"></a><span class="object">boxselector</span>.<span class="name">addCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h4><div class="depth-4"><p>Adds a callback that is called on changes to the boxselector contents.
+</div><h4 id="boxselector.addCallback"><span class="object">boxselector</span>.<span class="name">addCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h4>
+<div class="depth-4"><p>Adds a callback that is called on changes to the boxselector contents.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -349,7 +443,8 @@ This must be the same function as was given in <code>addCallback</code>. </p>
 <p><strong>Returns</strong> the boxselector
 
 </p>
-</div><h3><a name="boxselector.removeCallback" class="anchor" href="#boxselector.removeCallback"></a><span class="object">boxselector</span>.<span class="name">removeCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3><div class="depth-3"><p>Remove a callback bound by <code>.addCallback(event, callback)</code>.
+</div><h3 id="boxselector.removeCallback"><span class="object">boxselector</span>.<span class="name">removeCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Remove a callback bound by <code>.addCallback(event, callback)</code>.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -366,22 +461,26 @@ This must be the same function as was given in <code>addCallback</code>. </p>
 <p><strong>Returns</strong> the boxselector
 
 </p>
-</div><h1>Interaction</h1><div class="depth-1"><p>Interaction is what we call interactive parts of maps that are created
+</div><h1>Interaction</h1>
+<div class="depth-1"><p>Interaction is what we call interactive parts of maps that are created
 with the <a href="http://mapbox.com/tilemill/docs/crashcourse/tooltips/">powerful tooltips &amp; regions system in TileMill</a>.
 Under the hood, it&#39;s powered by the open <a href="https://github.com/mapbox/utfgrid-spec">UTFGrid</a>
 specification.
 
 </p>
-</div><h2><a name="mapbox.interaction" class="anchor" href="#mapbox.interaction"></a><span class="object">mapbox</span>.<span class="name">interaction</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2><div class="depth-2"><p>Create an interaction control which will find and present interactive regions of the map.
+</div><h2 id="mapbox.interaction"><span class="object">mapbox</span>.<span class="name">interaction</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2>
+<div class="depth-2"><p>Create an interaction control which will find and present interactive regions of the map.
 
 </p>
 <p><strong>Returns</strong> a new interaction control.
 
 </p>
-</div><h3><a name="interaction.map" class="anchor" href="#interaction.map"></a><span class="object">interaction</span>.<span class="name">map</span><span class="bracket">(</span><span class="args">map</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the map to add interaction for.
+</div><h3 id="interaction.map"><span class="object">interaction</span>.<span class="name">map</span><span class="bracket">(</span><span class="args">map</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the map to add interaction for.
 
 </p>
-</div><h3><a name="interaction.auto" class="anchor" href="#interaction.auto"></a><span class="object">interaction</span>.<span class="name">auto</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3><div class="depth-3"><p>Enable default settings - animated tooltips - for interaction with the map.
+</div><h3 id="interaction.auto"><span class="object">interaction</span>.<span class="name">auto</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Enable default settings - animated tooltips - for interaction with the map.
 This internally calls <code>.refresh()</code> to set the interactivity for the top layer.
 
 </p>
@@ -394,24 +493,28 @@ This internally calls <code>.refresh()</code> to set the interactivity for the t
 <pre><code>var interaction = mapbox.interaction()
     .map(map)
     .auto();</code></pre>
-</div><h3><a name="interaction.refresh" class="anchor" href="#interaction.refresh"></a><span class="object">interaction</span>.<span class="name">refresh</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3><div class="depth-3"><p>Refresh interactivity control to reflect any layer changes.
+</div><h3 id="interaction.refresh"><span class="object">interaction</span>.<span class="name">refresh</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Refresh interactivity control to reflect any layer changes.
 If <code>auto</code> has not been called, this function will not change anything.
 
 </p>
 <p><strong>Returns</strong> the interaction control
 </p>
-</div><div></div><h1>The Markers Layer</h1><div class="depth-1"><p><code>mapbox.markers()</code> is a markers library that makes it easier to add HTML elements
+</div><div></div><h1>The Markers Layer</h1>
+<div class="depth-1"><p><code>mapbox.markers()</code> is a markers library that makes it easier to add HTML elements
 on top of maps in geographical locations and interact with them. Internally,
 markers are stored as <a href="http://www.geojson.org/">GeoJSON</a> objects, though
 interfaces through CSV and simple Javascript are provided.
 
 </p>
-</div><h2><a name="mapbox.markers" class="anchor" href="#mapbox.markers"></a><span class="object">mapbox</span>.<span class="name">markers</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2><div class="depth-2"><p><code>mapbox.markers()</code> is the singular entry point to this library - it creates a
+</div><h2 id="mapbox.markers"><span class="object">mapbox</span>.<span class="name">markers</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2>
+<div class="depth-2"><p><code>mapbox.markers()</code> is the singular entry point to this library - it creates a
 new layer into which markers can be placed and which can be added to
 a Modest Maps map with <code>.addLayer()</code>
 
 </p>
-</div><h3><a name="markers.named" class="anchor" href="#markers.named"></a><span class="object">markers</span>.<span class="name">named</span><span class="bracket">(</span><span class="args">[name]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the name of this markers layer. The default name for a <code>markers</code> layer
+</div><h3 id="markers.named"><span class="object">markers</span>.<span class="name">named</span><span class="bracket">(</span><span class="args">[name]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the name of this markers layer. The default name for a <code>markers</code> layer
 is <code>&#39;markers&#39;</code>
 
 </p>
@@ -425,7 +528,8 @@ is <code>&#39;markers&#39;</code>
 if it is omitted.
 
 </p>
-</div><h3><a name="markers.factory" class="anchor" href="#markers.factory"></a><span class="object">markers</span>.<span class="name">factory</span><span class="bracket">(</span><span class="args">[factoryfunction]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Define a new factory function, and if the layer already has points added to it,
+</div><h3 id="markers.factory"><span class="object">markers</span>.<span class="name">factory</span><span class="bracket">(</span><span class="args">[factoryfunction]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Define a new factory function, and if the layer already has points added to it,
 re-render them with the new factory. Factory functions are what turn GeoJSON feature
 objects into HTML elements on the map. Due to the way that <code>markers.js</code> allows multiple layers of interactivity, factories
 that want their elements to be interactive <strong>must</strong> either set <code>.style.pointerEvents = &#39;all&#39;</code> on
@@ -445,7 +549,8 @@ or omitted to get the current value.</li>
 <p><strong>Returns</strong> the layer object if a new factory function is provided, otherwise the layer&#39;s existing factory function
 
 </p>
-</div><h3><a name="markers.features" class="anchor" href="#markers.features"></a><span class="object">markers</span>.<span class="name">features</span><span class="bracket">(</span><span class="args">[features]</span><span class="bracket">)</span></h3><div class="depth-3"><p>This is the central function for setting the contents of a markers layer: it runs the provided
+</div><h3 id="markers.features"><span class="object">markers</span>.<span class="name">features</span><span class="bracket">(</span><span class="args">[features]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>This is the central function for setting the contents of a markers layer: it runs the provided
 features through the filter function and then through the factory function to create elements
 for the map. If the layer already has features, they are replaced with the new features.
 An empty array will clear the layer of all features.
@@ -461,7 +566,8 @@ or omitted to get the current value.</li>
 <p><strong>Returns</strong> the layer object if a new array of features is provided, otherwise the layer&#39;s features
 
 </p>
-</div><h3><a name="markers.sort" class="anchor" href="#markers.sort"></a><span class="object">markers</span>.<span class="name">sort</span><span class="bracket">(</span><span class="args">[sortfunction]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Markers are typically sorted in the DOM in order for them to correctly visually overlap. By default,
+</div><h3 id="markers.sort"><span class="object">markers</span>.<span class="name">sort</span><span class="bracket">(</span><span class="args">[sortfunction]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Markers are typically sorted in the DOM in order for them to correctly visually overlap. By default,
 this is a function that sorts markers by latitude value - <code>geometry.coordinates[1]</code>.
 
 </p>
@@ -484,7 +590,8 @@ interface, or omitted to get the current value.</li>
     });
 
 </p>
-</div><h3><a name="markers.filter" class="anchor" href="#markers.filter"></a><span class="object">markers</span>.<span class="name">filter</span><span class="bracket">(</span><span class="args">[filterfunction]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the layer&#39;s filter function and refilter features. Markers can also be filtered before appearing on
+</div><h3 id="markers.filter"><span class="object">markers</span>.<span class="name">filter</span><span class="bracket">(</span><span class="args">[filterfunction]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the layer&#39;s filter function and refilter features. Markers can also be filtered before appearing on
 the map. This is a purely presentational filter -
 the underlying features, which are accessed by <code>.features()</code>, are unaffected. Setting a new
 filter can therefore cause points to be displayed which were previously hidden.
@@ -505,7 +612,8 @@ to allow it to be displayed or <code>false</code> to hide it, or omitted to get 
 </p>
 <pre><code>// The default filter function is:
 layer.filter(function() { return true; });</code></pre>
-</div><h3><a name="markers.id" class="anchor" href="#markers.id"></a><span class="object">markers</span>.<span class="name">id</span><span class="bracket">(</span><span class="args">[idfunction]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the id getter for this layer. The id getter is a funcion that takes a GeoJSON feature
+</div><h3 id="markers.id"><span class="object">markers</span>.<span class="name">id</span><span class="bracket">(</span><span class="args">[idfunction]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the id getter for this layer. The id getter is a funcion that takes a GeoJSON feature
 and returns a <em>unique id</em> for that feature. If this is provided, the layer can optimize repeated
 calls to <code>.features()</code> for animation purposes, since updated markers will not be recreated,
 only modified.
@@ -530,7 +638,8 @@ layer.id(function() { return ++_seq; });
 // Thus this function always returns a new id for any feature. If you had
 // features that do have an id attribute, a function would look like
 layer.id(function(f) { return f.properties.id; });</code></pre>
-</div><h3><a name="markers.url" class="anchor" href="#markers.url"></a><span class="object">markers</span>.<span class="name">url</span><span class="bracket">(</span><span class="args">url [, callback]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Loading features from a remote GeoJSON file into the layer.
+</div><h3 id="markers.url"><span class="object">markers</span>.<span class="name">url</span><span class="bracket">(</span><span class="args">url [, callback]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Loading features from a remote GeoJSON file into the layer.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -544,7 +653,8 @@ with the error (if encountered), features array (if any) and the layer instance 
 If an error is encountered, <code>.url()</code> will not call <code>.features()</code>, since this would likely
 clear the features array.</li>
 </ul>
-</div><h3><a name="markers.csv" class="anchor" href="#markers.csv"></a><span class="object">markers</span>.<span class="name">csv</span><span class="bracket">(</span><span class="args">csvstring</span><span class="bracket">)</span></h3><div class="depth-3"><p>Convert a string of <a href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> data into GeoJSON
+</div><h3 id="markers.csv"><span class="object">markers</span>.<span class="name">csv</span><span class="bracket">(</span><span class="args">csvstring</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Convert a string of <a href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> data into GeoJSON
 and set layer to show it as features.
 If it can find features in the CSV file, the <code>.features()</code> of the layer are set to them - otherwise
 it will throw an error about not finding headers.
@@ -561,7 +671,8 @@ case (Latitude, latitude, lat are acceptable).</li>
 <p><strong>Returns</strong> the markers layer
 
 </p>
-</div><h3><a name="markers.extent" class="anchor" href="#markers.extent"></a><span class="object">markers</span>.<span class="name">extent</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3><div class="depth-3"><p>Get the extent of all of the features provided.
+</div><h3 id="markers.extent"><span class="object">markers</span>.<span class="name">extent</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Get the extent of all of the features provided.
 
 </p>
 <p><strong>Returns</strong> an array of two <code>{ lat: 23, lon: 32 }</code> objects compatible with
@@ -570,7 +681,8 @@ Modest Maps&#39;s <code>extent()</code> call. If there are no features, the exte
 to its point exactly.
 
 </p>
-</div><h3><a name="markers.addCallback" class="anchor" href="#markers.addCallback"></a><span class="object">markers</span>.<span class="name">addCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3><div class="depth-3"><p>Adds a callback that is called on certain events by this layer. These are primarily used by <code>mmg_interaction</code>, but otherwise useful to support more advanced bindings on mmg layers that are bound at times when the mmg object may not be added to a map - like binding to the map&#39;s <code>panned</code> event to clear tooltips.
+</div><h3 id="markers.addCallback"><span class="object">markers</span>.<span class="name">addCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Adds a callback that is called on certain events by this layer. These are primarily used by <code>mmg_interaction</code>, but otherwise useful to support more advanced bindings on mmg layers that are bound at times when the mmg object may not be added to a map - like binding to the map&#39;s <code>panned</code> event to clear tooltips.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -597,7 +709,8 @@ to its point exactly.
 <p><strong>Returns</strong> the markers layer
 
 </p>
-</div><h3><a name="markers.removeCallback" class="anchor" href="#markers.removeCallback"></a><span class="object">markers</span>.<span class="name">removeCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3><div class="depth-3"><p>Remove a callback bound by <code>.addCallback(event, callback)</code>.
+</div><h3 id="markers.removeCallback"><span class="object">markers</span>.<span class="name">removeCallback</span><span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Remove a callback bound by <code>.addCallback(event, callback)</code>.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -614,7 +727,8 @@ This must be the same function as was given in <code>addCallback</code>. </p>
 <p><strong>Returns</strong> the markers layer
 
 </p>
-</div><h2><a name="mapbox.markers.interaction" class="anchor" href="#mapbox.markers.interaction"></a><span class="object">mapbox.markers</span>.<span class="name">interaction</span><span class="bracket">(</span><span class="args">markerslayer</span><span class="bracket">)</span></h2><div class="depth-2"><p>Classic interaction, hovering and/or clicking markers and seeing their details,
+</div><h2 id="mapbox.markers.interaction"><span class="object">mapbox.markers</span>.<span class="name">interaction</span><span class="bracket">(</span><span class="args">markerslayer</span><span class="bracket">)</span></h2>
+<div class="depth-2"><p>Classic interaction, hovering and/or clicking markers and seeing their details,
 is supported by <code>marker_interaction</code> and customizable through its methods.
 This supports both mouse &amp; touch input.
 
@@ -631,7 +745,8 @@ This supports both mouse &amp; touch input.
 <p><strong>Returns</strong> an <code>interaction</code> instance which provides methods for customizing how the layer behaves.
 
 </p>
-</div><h3><a name="interaction.hide_on_move" class="anchor" href="#interaction.hide_on_move"></a><span class="object">interaction</span>.<span class="name">hide_on_move</span><span class="bracket">(</span><span class="args">[value]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Determines whether tooltips are hidden when the map is moved. The single argument should be <code>true</code> or <code>false</code> or not given in order to retrieve the current value.
+</div><h3 id="interaction.hide_on_move"><span class="object">interaction</span>.<span class="name">hide_on_move</span><span class="bracket">(</span><span class="args">[value]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Determines whether tooltips are hidden when the map is moved. The single argument should be <code>true</code> or <code>false</code> or not given in order to retrieve the current value.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -643,7 +758,8 @@ This supports both mouse &amp; touch input.
 <p><strong>Returns</strong> the interaction instance.
 
 </p>
-</div><h3><a name="interaction.exclusive" class="anchor" href="#interaction.exclusive"></a><span class="object">interaction</span>.<span class="name">exclusive</span><span class="bracket">(</span><span class="args">[value]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Determines whether a single popup should be open at a time, or unlimited. The single argument should be <code>true</code> or <code>false</code> or not given in order to retrieve the current value.
+</div><h3 id="interaction.exclusive"><span class="object">interaction</span>.<span class="name">exclusive</span><span class="bracket">(</span><span class="args">[value]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Determines whether a single popup should be open at a time, or unlimited. The single argument should be <code>true</code> or <code>false</code> or not given in order to retrieve the current value.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -655,7 +771,8 @@ This supports both mouse &amp; touch input.
 <p><strong>Returns</strong> the interaction instance.
 
 </p>
-</div><h3><a name="interaction.formatter" class="anchor" href="#interaction.formatter"></a><span class="object">interaction</span>.<span class="name">formatter</span><span class="bracket">(</span><span class="args">[formatterfunction]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set or get the formatter function, that decides how data goes from being in a feature&#39;s <code>properties</code> to the HTML inside of a tooltip. This is a getter setter that takes a Function as its argument.
+</div><h3 id="interaction.formatter"><span class="object">interaction</span>.<span class="name">formatter</span><span class="bracket">(</span><span class="args">[formatterfunction]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set or get the formatter function, that decides how data goes from being in a feature&#39;s <code>properties</code> to the HTML inside of a tooltip. This is a getter setter that takes a Function as its argument.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -690,15 +807,18 @@ interaction.formatter(function(feature) {
     }
     return o;
 });</code></pre>
-</div><div></div><h1>Easing</h1><div class="depth-1"><p>Easing is moving from one point or zoom to another in a fluid motion, instead of just &#39;popping&#39; from
+</div><div></div><h1>Easing</h1>
+<div class="depth-1"><p>Easing is moving from one point or zoom to another in a fluid motion, instead of just &#39;popping&#39; from
 place to place. It&#39;s useful for map-based storytelling, since users get a better idea of geographical
 distance.
 
 </p>
-</div><h2><a name="var ease = mapbox.ease" class="anchor" href="#var ease = mapbox.ease"></a><span class="object">var ease = mapbox</span>.<span class="name">ease</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2><div class="depth-2"><p><strong>Returns</strong> an easey object, which has the following methods:
+</div><h2 id="var ease = mapbox.ease"><span class="object">var ease = mapbox</span>.<span class="name">ease</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h2>
+<div class="depth-2"><p><strong>Returns</strong> an easey object, which has the following methods:
 
 </p>
-</div><h3><a name="ease.from" class="anchor" href="#ease.from"></a><span class="object">ease</span>.<span class="name">from</span><span class="bracket">(</span><span class="args">coord</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the starting coordinate for the easing. You don&#39;t usually need to call this, because easings default to the current coordinate.
+</div><h3 id="ease.from"><span class="object">ease</span>.<span class="name">from</span><span class="bracket">(</span><span class="args">coord</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the starting coordinate for the easing. You don&#39;t usually need to call this, because easings default to the current coordinate.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -710,7 +830,8 @@ distance.
 <p><strong>Returns</strong> the easey object.
 
 </p>
-</div><h3><a name="ease.to" class="anchor" href="#ease.to"></a><span class="object">ease</span>.<span class="name">to</span><span class="bracket">(</span><span class="args">coord</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the destination coordinate for the easing. 
+</div><h3 id="ease.to"><span class="object">ease</span>.<span class="name">to</span><span class="bracket">(</span><span class="args">coord</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the destination coordinate for the easing. 
 
 </p>
 <p><strong>Arguments:</strong>
@@ -725,7 +846,8 @@ distance.
 <p><strong>Returns</strong> the easey object.
 
 </p>
-</div><h3><a name="ease.zoom" class="anchor" href="#ease.zoom"></a><span class="object">ease</span>.<span class="name">zoom</span><span class="bracket">(</span><span class="args">level</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the zoom level of the <code>to</code> coordinate that easey is easing to.
+</div><h3 id="ease.zoom"><span class="object">ease</span>.<span class="name">zoom</span><span class="bracket">(</span><span class="args">level</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the zoom level of the <code>to</code> coordinate that easey is easing to.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -738,7 +860,8 @@ distance.
 
 
 </p>
-</div><h3><a name="ease.t" class="anchor" href="#ease.t"></a><span class="object">ease</span>.<span class="name">t</span><span class="bracket">(</span><span class="args">value</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the map to a specific point in the easing.
+</div><h3 id="ease.t"><span class="object">ease</span>.<span class="name">t</span><span class="bracket">(</span><span class="args">value</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the map to a specific point in the easing.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -750,7 +873,8 @@ distance.
 <p><strong>Returns</strong> the easey object.
 
 </p>
-</div><h3><a name="ease.future" class="anchor" href="#ease.future"></a><span class="object">ease</span>.<span class="name">future</span><span class="bracket">(</span><span class="args">parts</span><span class="bracket">)</span></h3><div class="depth-3"><p>Get the future of an easing transition, given a number of parts for it to be divided over. This is a convenience function for calling <code>easey.t()</code> a bunch of times.
+</div><h3 id="ease.future"><span class="object">ease</span>.<span class="name">future</span><span class="bracket">(</span><span class="args">parts</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Get the future of an easing transition, given a number of parts for it to be divided over. This is a convenience function for calling <code>easey.t()</code> a bunch of times.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -762,7 +886,8 @@ distance.
 <p><strong>Returns</strong> an array of <code>MM.Coordinate</code> objects representing each in-between location.
 
 </p>
-</div><h3><a name="ease.easing" class="anchor" href="#ease.easing"></a><span class="object">ease</span>.<span class="name">easing</span><span class="bracket">(</span><span class="args">name</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the easing curve - this defines how quickly the transition gets to its end and whether it speeds up or slows down near the beginning
+</div><h3 id="ease.easing"><span class="object">ease</span>.<span class="name">easing</span><span class="bracket">(</span><span class="args">name</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the easing curve - this defines how quickly the transition gets to its end and whether it speeds up or slows down near the beginning
 and end.
 
 </p>
@@ -781,7 +906,8 @@ and end.
 <p><strong>Returns</strong> the easey object.
 
 </p>
-</div><h3><a name="ease.path" class="anchor" href="#ease.path"></a><span class="object">ease</span>.<span class="name">path</span><span class="bracket">(</span><span class="args">pathname</span><span class="bracket">)</span></h3><div class="depth-3"><p>Set the type of path - the type of interpolation between points.
+</div><h3 id="ease.path"><span class="object">ease</span>.<span class="name">path</span><span class="bracket">(</span><span class="args">pathname</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Set the type of path - the type of interpolation between points.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -797,7 +923,8 @@ and end.
 <p><strong>Returns</strong> the easey object.
 
 </p>
-</div><h3><a name="ease.run" class="anchor" href="#ease.run"></a><span class="object">ease</span>.<span class="name">run</span><span class="bracket">(</span><span class="args">[time [, callback]</span><span class="bracket">)</span></h3><div class="depth-3"><p>Start an <em>animated ease</em>. Both parameters are optional.
+</div><h3 id="ease.run"><span class="object">ease</span>.<span class="name">run</span><span class="bracket">(</span><span class="args">[time [, callback]</span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Start an <em>animated ease</em>. Both parameters are optional.
 
 </p>
 <p><strong>Arguments:</strong>
@@ -810,10 +937,12 @@ and end.
 <p><strong>Returns</strong> the easey object.
 
 </p>
-</div><h3><a name="var isRunning = ease.running" class="anchor" href="#var isRunning = ease.running"></a><span class="object">var isRunning = ease</span>.<span class="name">running</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3><div class="depth-3"><p><strong>Returns</strong> <code>true</code> or <code>false</code> depending on whether easey is currently animating the map.
+</div><h3 id="var isRunning = ease.running"><span class="object">var isRunning = ease</span>.<span class="name">running</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<div class="depth-3"><p><strong>Returns</strong> <code>true</code> or <code>false</code> depending on whether easey is currently animating the map.
 
 </p>
-</div><h3><a name="ease.stop" class="anchor" href="#ease.stop"></a><span class="object">ease</span>.<span class="name">stop</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3><div class="depth-3"><p>Abort the currently running animation.
+</div><h3 id="ease.stop"><span class="object">ease</span>.<span class="name">stop</span><span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<div class="depth-3"><p>Abort the currently running animation.
 
 </p>
 <p><strong>Returns</strong> the easey object.
