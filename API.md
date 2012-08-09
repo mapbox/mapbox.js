@@ -12,23 +12,23 @@ is available to power-users.
 
 Create a map on the current page.
 
-**Arguments:**
+_Arguments:_
 
 * `element` must be the `id` of an element on the page, or an element itself. Typically maps are created within `<div>` elements
-* `layers` can be a layer created with `mapbox.layer()`, an array of such layers, or omitted
+* `layers` can be a layer created with [`mapbox.layer()`](#mapbox.layer), an array of such layers, or omitted
 
-**Returns** a map object, which has the following methods:
+_Returns_ a map object, which has the following methods:
 
 ### map.smooth(value)
 
 Enable or disable inertial panning on maps. By default, maps smoothly pan and
 zoom with inertia.
 
-**Arguments:**
+_Arguments:_
 
 * `value` must be `true` or `false` to set whether the map uses inertia.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 **Example:**
 
@@ -38,26 +38,26 @@ zoom with inertia.
 
 Center the map on a geographical location, or get its current center.
 
-**Arguments:**
+_Arguments:_
 
 * `centerpoint` can be an object with `lat` and `lon` values, like `{ lat: 10, lon: -88 }`, or
   ommitted to get the map's current location
 * `animate` can be `true` to animate the map's movement, or omitted to move immediately
 
-**Returns** the map object if arguments are given, the map's center location (in the same form as
+_Returns_ the map object if arguments are given, the map's center location (in the same form as
 specified in `centerpoint`) otherwise.
 
 ### map.zoom(zoom [, animate])
 
 Set the map's zoom level, or get its current zoom level.
 
-**Arguments:**
+_Arguments:_
 
 * `zoom` can be zoom level in the range supported by the map's layers (an integer from 0-20, typically),
   or omitted to get the current zoom level..
 * `animate` can be `true` to animate the map's movement, or omitted to move immediately.
 
-**Returns** the map object if arguments are given, the map's current zoom level otherwise.
+_Returns_ the map object if arguments are given, the map's current zoom level otherwise.
 
 **Example:**
 
@@ -68,13 +68,13 @@ Set the map's zoom level, or get its current zoom level.
 Set the map's zoom level and centerpoint simultaneously. Especially with the third argument, `animate`,
 set to `true`, this allows for a better animation effect.
 
-**Arguments:**
+_Arguments:_
 
 * `centerpoint` can be an object with `lat` and `lon` values, like `{ lat: 10, lon: -88 }`
 * `zoom` must be zoom level in the range supported by the map's layers (an integer from 0-20, typically)
 * `animate` can be `true` to animate the map's movement, or omitted to move immediately.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 **Example:**
 
@@ -84,28 +84,28 @@ set to `true`, this allows for a better animation effect.
 
 Get the extent of the currently visible area.
 
-**Returns** an instance of `MM.Extent`.
+_Returns_ an instance of `MM.Extent`.
 
 ### map.setExtent(extent [, precise]_
 Modify the center and zoom of the map so that the provided extent is visible.
 
-**Arguments:**
+_Arguments:_
 
 * `extent` can be an instance of `MM.Extent`
 * `precise` cab be `true` or `false`. If true, resulting zoom levels may be fractional. (By default, the map's zoom level is rounded down to keep tile images from blurring.)
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.setZoomRange(minZoom, maxZoom)
 
 Set the map's minimum and maximum zoom levels.
 
-**Arguments:**
+_Arguments:_
 
 * `minZoom` is the minimum zoom level
 * `maxZoom` is the maximum zoom level
 
-**Returns** the map object.
+_Returns_ the map object.
 
 **Example:**
 
@@ -115,188 +115,213 @@ Set the map's minimum and maximum zoom levels.
 
 Set the map's panning limits.
 
-**Arguments:**
+_Arguments:_
 
 * `locations` must be either an instance of MM.Extent or an array of locations in the order north, west, south, east.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.setSize(dimensions)
+
 Set the map's dimensions. This sets `map.autoSize` to false to prevent further automatic resizing.
 
-**Arguments:**
+_Arguments:_
 
 * `dimensions` is an object with `x` and `y` properties representing the map's new dimensions in pixels.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.zoomBy(zoomOffset)
+
 Change zoom level by the provided offset.
 
-**Arguments:**
+_Arguments:_
 
 * `zoomOffset` is the amount to zoom by. Positive offsets zoom in. Negative offsets zoom out.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.zoomByAbout(zoomOffset, point)
+
 Change the zoom level by the provided offset, while maintaining the same location at the provided point. This is used by `MM.DoubleClickHandler`.
 
 * `zoomOffset` is the amount to zoom by. Positive offsets zoom in. Negative offsets zoom out.
 * `point` is the point on the map that maintains its current location.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.panBy(x, y)
+
 Pan by the specified distances.
 
-**Arguments:**
+_Arguments:_
 
 * `x` the distance to pan horizontally. Positive values pan right, negative values pan left.
 * `y` the distance to pan vertically. Positive values pan down, negative values pan up.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.draw()
-Redraw the map and its layers. First, the map enforces its coordLimits on its center and zoom. If autoSize is true, the map's dimensions are recalculated from its parent. Lastly, each of the map's layers is drawn.
+
+Redraw the map and its layers. First, the map enforces its coordLimits on its
+center and zoom. If autoSize is true, the map's dimensions are recalculated from
+its parent. Lastly, each of the map's layers is drawn.
 
 ### map.requestRedraw()
-Request a "lazy" call to draw in 1 second. This is useful if you're responding to lots of user input and know that you'll need to redraw the map eventually, but not immediately.
+
+Request a "lazy" call to draw in 1 second. This is useful if you're responding
+to lots of user input and know that you'll need to redraw the map
+eventually, but not immediately.
 
 ### map.pointLocation(point)
+
 Convert a screen point to a location (longitude and latitude).
 
-**Arguments:**
+_Arguments:_
 
 * `point` is an instance of `MM.Point` or an object with `x` and `y` properties.
 
-**Returns** an instance of `MM.Location`.
+_Returns_ an instance of `MM.Location`.
 
 ### map.pointCoordinate(point)
+
 Convert a screen point to a tile coordinate.
 
-**Arguments:**
+_Arguments:_
 
 * `point` is an instance of `MM.Point` or an object with `x` and `y` properties.
 
-**Returns** an instance of `MM.Coordinate`.
+_Returns_ an instance of `MM.Coordinate`.
 
 ### map.locationPoint(location)
+
 Convert a location to a screen point.
 
-**Arguments:**
+_Arguments:_
 
 * `location` is an instance of `MM.Location` or an object with `lat` and `lon` properties.
 
-**Returns** an instance of `MM.Point`.
+_Returns_ an instance of `MM.Point`.
 
 ### map.locationCoordinate(location)
+
 Convert a location to a tile coordinate.
 
-**Arguments:**
+_Arguments:_
 
 * `location` is an instance of `MM.Location` or an object with `lat` and `lon` properties.
 
-**Returns** an instance of `MM.Coordinate`.
+_Returns_ an instance of `MM.Coordinate`.
 
 ### map.coordinatePoint(coordinate)
+
 Convert a tile coordinate to a screen point.
 
-**Arguments:**
+_Arguments:_
 
 * `coordinate` is an instance of `MM.Coordinate`.
 
-**Returns** an instance of `MM.Point`.
+_Returns_ an instance of `MM.Point`.
 
 ### map.coordinateLocation(coordinate)
+
 Convert a tile coordinate to a location (longitude and latitude).
 
-**Arguments:**
+_Arguments:_
 
 * `coordinate` is an instance of `MM.Coordinate`.
 
-**Returns** and instance of `MM.Location`.
+_Returns_ and instance of `MM.Location`.
 
 ### map.addLayer(layer)
+
 Add a layer to the map, above other layers.
 
-**Arguments:**
+_Arguments:_
 
 * `layer` is a layer object, such as an instance of `mapbox.layer()` or `mapbox.markers.layer()`.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.addTileLayer(layer)
+
 Add a tile layer to the map, below any marker layers to prevent them from being covered up.
 
 * `layer` is a layer object, such as an instance of `mapbox.layer()`.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.removeLayer(layer)
+
 Remove the provided layer from the map.
 
-**Arguments:**
+_Arguments:_
 
 * `layer` is layer currently added to the map.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.removeLayerAt(index)
+
 Remove the layer at the provided index.
 
 * `index` is a non-negative integer.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.disableLayer(layer)
+
 Disable a layer. Disabled layers maintain their position, but do not get drawn.
 
-**Arguments:**
+_Arguments:_
 
 * `layer` is layer currently added to the map.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.disableLayerAt(index)
+
 Disable a layer at the provided index. Disabled layers maintain their position, but do not get drawn.
 
-**Arguments:**
+_Arguments:_
 
 * `index` is a non-negative integer representing the position of the layer.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.enableLayer(layer)
+
 Enable a previously disabled layer.
 
-**Arguments:**
+_Arguments:_
 
 * `layer` is layer currently added to the map.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.enableLayerAt(index)
+
 Enable the layer at the provided index.
 
-**Arguments:**
+_Arguments:_
 
 * `index` is a non-negative integer representing the position of the layer to be enabled.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.getLayers()
 
-**Returns** a list the map's layers.
+_Returns_ a list the map's layers.
 
 ### map.getLayerAt(index)
+
 Get the layer at the provided index.
 
-**Arguments**
+_Arguments_
 
 * `index` can be a non-negative integer.
 
-**Returns** a layer.
+_Returns_ a layer.
 
 ### map.refresh()
 
@@ -319,26 +344,29 @@ An instance of mapbox.ui attached to the map for convenience.
 An instance of mapbox.interaction attached to map for convenience.
 
 ### map.addCallback(event, callback)
+
 Add a callback for a specific event type. Event types are listed further down.
 
-**Arguments:**
+_Arguments:_
 
 * `event` is a string such as "zoomed" or "drawn".
 * `callback` is function that gets called when the event is triggered.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### map.removeCallback(event, callback)
+
 Remove a previously added callback.
 
-**Arguments:**
+_Arguments:_
 
 * `event` is the event type to remove the callback for.
 * `callback` is the callback to be removed.
 
-**Returns** the map object.
+_Returns_ the map object.
 
 ### Event: zoomed
+
 Fires when the map's zoom level changes. Callbacks receive two arguments:
 
 * `map` is the map object.
@@ -351,18 +379,20 @@ Fires when the map's zoom level changes. Callbacks receive two arguments:
     });
 
 ### Event: panned
+
 Fires when the map has been panned. Callbacks receive two arguments:
 
 * `map` is the map object.
 * `panOffset` is a two-element array in the form of `[dx, dy]`.
 
 **Example:**
-    
+
     map.addCallback("panned", function(map, panOffset) {
         console.log("map panned by x:", panOffset[0], "y:", panOffset[1]);
     });
 
 ### Event: resized
+
 Fires when the map has been resized. Callbacks receive two arguments:
 
 * `map` is the map object.
@@ -375,6 +405,7 @@ Fires when the map has been resized. Callbacks receive two arguments:
     });
 
 ### Event: extentset
+
 Fires when the map's extent is set. Callbacks receive two arguments:
 
 * `map` is the map object.
@@ -387,6 +418,7 @@ Fires when the map's extent is set. Callbacks receive two arguments:
     });
 
 ### Event: drawn
+
 Fires when the map is redrawn. Callbacks receive one argument:
 
 * `map` is the map object.
@@ -405,9 +437,16 @@ auto-instantiate many of its features.
 
 ## mapbox.load(url, callback)
 
-This loads the information about a map on [MapBox Hosting](http://mapbox.com/tour/). The first argument can either be a full URL to a TileJSON file, like `http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp`, or a bare id, like `tmcw.map-hehqnmda`, which will get expanded to the former.
+Load layer definitions and other map information from [MapBox Hosting](http://mapbox.com/tour/).
 
-After pulling the information from MapBox, it calls the function specified at the second argument with an object with map parts you can combine for yourself:
+_Arguments:_
+
+* `url` can be either be a full URL to a TileJSON file, like
+  `http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp`, or a bare id, like
+  `tmcw.map-hehqnmda`, which will get expanded to the former. This can also
+  accept an array of urls in the same format.
+* `callback` must be a function that receives either a single object with details
+  or an array of objects if an array of map ids was given as the first argument.
 
     {
       zoom: ZOOM_LEVEL,
@@ -417,20 +456,20 @@ After pulling the information from MapBox, it calls the function specified at th
       layer: TILE_LAYER,
 
       // if present, like you would create with mapbox.markers()
-      markers: MARKERS_LAYER 
+      markers: MARKERS_LAYER
     }
 
 ## mapbox.auto(element, url [, callback])
 
-Automatically load and create a map with sensible defaults.
+Load and create a map with sensible defaults.
 
-**Arguments:**
+_Arguments:_
 
 * `element` must be the `id` of an element on the page, or an element itself. Typically maps are created within `<div>` elements
 * `url` must be a TileJSON URL, the id of a MapBox map, multiple IDs and URLs in an array.
 * `callback` if specified, receives the map as its first argument, and the same object as `mapbox.load` as the second argument. It is called after all resources have been loaded and the map is complete.
 
-**Returns** `undefined`: this is an asynchronous function without a useful return value.
+_Returns_ `undefined`: this is an asynchronous function without a useful return value.
 
 **Example:**
 
@@ -448,22 +487,22 @@ Automatically load and create a map with sensible defaults.
 You can add a tiled layer to your map with `mapbox.layer()`, a simple interface to
 layers from [MapBox Hosting](http://mapbox.com/tour/) and elsewhere.
 
-**Returns** a layer object, which has the following methods:
+_Returns_ a layer object, which has the following methods:
 
 ### layer.id(id, callback)
 
 Get or set the layer ID, which corresponds to a MapBox map.
 
-**Arguments:**
+_Arguments:_
 
-* `id` can be the id of a MapBox Hosting map, or omitted to get the current `id` value.
-  This also calls `.named()` setting
+* `id` can be the id of a [MapBox](http://mapbox.com/) map, or omitted to get the current `id` value.
+  This also calls [layer.named()](#layer.named) setting
   the name to be the same as the id - call `named()` to reset it. For instance, if you were trying
   to add the map at `https://tiles.mapbox.com/tmcw/map/map-hehqnmda`, you could create this layer like so:
 * `callback`, if provided, is called after the layer has been asynchronously loaded from MapBox.
   It is called with on argument, the layer object.
 
-**Returns** the layer object if arguments are given, the layer's `id` otherwise.
+_Returns_ the layer object if arguments are given, the layer's `id` otherwise.
 
 **Example:**
 
@@ -473,24 +512,25 @@ Get or set the layer ID, which corresponds to a MapBox map.
 
 Get or set the name of the layer, as referred to by the map.
 
-**Arguments:**
+_Arguments:_
 
 * `name` can be a new name to call this layer
 
-**Returns** the layer object if arguments are given, the layer's `name` otherwise.
+_Returns_ the layer object if arguments are given, the layer's `name` otherwise.
 
 ### layer.url([url, callback])
 
-Pull a layer from a server besides MapBox Hosting that supports [TileJSON](https://github.com/mapbox/tilejson-spec), like a self-hosted [TileStream](https://github.com/mapbox/tilestream).
+Pull a layer from a server besides MapBox Hosting that supports
+[TileJSON](https://github.com/mapbox/tilejson-spec), like a self-hosted [TileStream](https://github.com/mapbox/tilestream).
 
-**Arguments:**
+_Arguments:_
 
 * `url` can be a string value that is a fully-formed URL, or omitted to get the URL from which
   this layer was sourced.
 * `callback`, if provided, is called with one argument, the layer object, after the
   TileJSON information has been asynchronously loaded.
 
-**Returns** the layer object if arguments are given, the pulled URL otherwise.
+_Returns_ the layer object if arguments are given, the pulled URL otherwise.
 
 **Example:**
 
@@ -498,27 +538,29 @@ Pull a layer from a server besides MapBox Hosting that supports [TileJSON](https
 
 ### layer.tilejson([tilejson])
 
-Set layer options directly from a TileJSON object.
+Set layer options directly from a [TileJSON](https://github.com/mapbox/tilejson-spec) object.
 
-**Arguments:**
+_Arguments:_
 
 * `tilejson` must be a TileJSON object as a Javascript object.
 
-**Returns** the layer object if arguments are given, the layer's TileJSON settings otherwise.
+_Returns_ the layer object if arguments are given, the layer's TileJSON settings otherwise.
 
 ### layer.composite(enabled)
 
-Enable or disable compositing layers together on MapBox hosting.
+Enable or disable compositing layers together on MapBox hosting. Compositing
+combines multiple tile images into one layer of blended images, increasing map
+performance and reducing the number of requests the browser needs to make.
 
-* `enabled` is either true or false.
+* `enabled` must be either true or false.
 
-**Returns** the layer object.
+_Returns_ the layer object.
 
 # Map UI
 
 The API provides a set of UI elements that can be freely mixed & matched, as well as styled
 beyond the default (provided in the `mapbox.css` stylesheet).
-Maps created with `mapbox.map` have an array of pre-initialized UI elements at `.ui`.
+Maps created with [`mapbox.map`](#mapbox.map) have an array of pre-initialized UI elements at `.ui`.
 All UI elements support the simple operations `.add()` and `.remove()` to add &
 remove them from the map.
 
@@ -571,7 +613,7 @@ a point, and notify listeners with the new list of points.
 
 Adds a callback that is called on changes to the pointselector contents.
 
-**Arguments:**
+_Arguments:_
 
 * `event` is a string of the event you want to bind the callback to
 * `callback` is a funcion that is called on the event specified by `event`
@@ -585,13 +627,13 @@ Callback is a Function that is called with arguments depending on what `event` i
 * `drawn`: the layer object
 * `locations`: a list of locations currently selected
 
-**Returns** the pointselector
+_Returns_ the pointselector
 
 ### pointselector.removeCallback(event, callback)
 
 Remove a callback bound by `.addCallback(event, callback)`.
 
-**Arguments:**
+_Arguments:_
 
 * `event` is a string of the event you want to bind the callback to
   This must be the same string that was given in `addCallback`
@@ -599,7 +641,7 @@ Remove a callback bound by `.addCallback(event, callback)`.
 * `callback` is a funcion that is called on the event specified by `event`.
   This must be the same function as was given in `addCallback`. 
 
-**Returns** the pointselector
+_Returns_ the pointselector
 
 ### map.ui.boxselector
 
@@ -609,7 +651,7 @@ Allow extents to be selected on the map.
 
 Adds a callback that is called on changes to the boxselector contents.
 
-**Arguments:**
+_Arguments:_
 
 * `event` is a string of the event you want to bind the callback to
 * `callback` is a funcion that is called on the event specified by `event`
@@ -623,13 +665,13 @@ Callback is a Function that is called with arguments depending on what `event` i
 * `drawn`: the layer object
 * `extent`: the currently selected extent
 
-**Returns** the boxselector
+_Returns_ the boxselector
 
 ### boxselector.removeCallback(event, callback)
 
 Remove a callback bound by `.addCallback(event, callback)`.
 
-**Arguments:**
+_Arguments:_
 
 * `event` is a string of the event you want to bind the callback to
   This must be the same string that was given in `addCallback`
@@ -637,7 +679,7 @@ Remove a callback bound by `.addCallback(event, callback)`.
 * `callback` is a funcion that is called on the event specified by `event`.
   This must be the same function as was given in `addCallback`.
 
-**Returns** the boxselector
+_Returns_ the boxselector
 
 # Interaction
 
@@ -650,7 +692,7 @@ specification.
 
 Create an interaction control which will find and present interactive regions of the map.
 
-**Returns** a new interaction control.
+_Returns_ a new interaction control.
 
 ### interaction.map(map)
 
@@ -660,9 +702,9 @@ maps via loading methods already has `map` set, so it's not necessary to re-call
 ### interaction.auto()
 
 Enable default settings - animated tooltips - for interaction with the map.
-This internally calls `.refresh()` to set the interactivity for the top layer.
+This internally calls [`interaction.refresh()`](#interaction.refresh) to set the interactivity for the top layer.
 
-**Returns** the interaction control
+_Returns_ the interaction control
 
 **Example:**
 
@@ -675,4 +717,4 @@ This internally calls `.refresh()` to set the interactivity for the top layer.
 Refresh interactivity control to reflect any layer changes.
 If `auto` has not been called, this function will not change anything.
 
-**Returns** the interaction control
+_Returns_ the interaction control
