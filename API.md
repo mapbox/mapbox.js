@@ -257,7 +257,7 @@ Remove the provided layer from the map.
 
 _Arguments:_
 
-* `layer` is layer currently added to the map.
+* `layer` is a layer, or the name of a layer, currently added to the map.
 
 _Returns_ the map object.
 
@@ -275,7 +275,7 @@ Disable a layer. Disabled layers maintain their position, but do not get drawn.
 
 _Arguments:_
 
-* `layer` is layer currently added to the map.
+* `layer` is the name of a layer currently added to the map.
 
 _Returns_ the map object.
 
@@ -295,7 +295,7 @@ Enable a previously disabled layer.
 
 _Arguments:_
 
-* `layer` is layer currently added to the map.
+* `layer` is the name of a layer currently added to the map.
 
 _Returns_ the map object.
 
@@ -308,6 +308,15 @@ _Arguments:_
 * `index` is a non-negative integer representing the position of the layer to be enabled.
 
 _Returns_ the map object.
+
+### map.getLayer(name)
+Get a layer by name.
+
+_Arguments:_
+
+* `name` is the name of a layer.
+
+_Returns_ the layer object.
 
 ### map.getLayers()
 
