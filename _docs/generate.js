@@ -61,7 +61,7 @@ for (var i = 0; i < lexed.length; i++) {
         start = i + 1;
 
         // Start new group
-        out += '<div class="depth-' + lexed[i].depth + '">';
+        out += '<div id="content-' + anchor + '"class="depth-' + lexed[i].depth + '">';
     }
 }
 
