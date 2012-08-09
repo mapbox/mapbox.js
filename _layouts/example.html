@@ -16,6 +16,8 @@ class: box
 
 <style type='text/css'>
 .example-header h3 { display:inline; margin-right:10px; }
+.doc-example { border-left:1px solid #ccc; }
+
 #map {
   background:#fff;
   position:absolute;
@@ -34,7 +36,11 @@ class: box
   top:20px; right:20px;
   }
 
-pre { border-radius:0px; box-shadow:none; border:0px; }
+pre { margin:0px; background:#fff; }
+
+@media (max-width:640px) {
+  .doc-example { border-bottom:1px solid #ccc; border-left:0px; }
+  }
 </style>
 
 <div class='clearfix doc-header pad1 fillL'>
@@ -49,9 +55,9 @@ pre { border-radius:0px; box-shadow:none; border:0px; }
   </div>
 </div>
 
-<div class='doc-content pad0 fillL clearfix'>
+<div class='doc-page pad0 fillL clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 doc float-right'>
+  <div class='cell9 doc-example doc float-right'>
     <div class='pad2 example-header'>
       <h3>{{page.title}}</h3>
       <span class='description'>{{page.description}}</span>
