@@ -1,4 +1,4 @@
-# The Map
+# Map
 
 The map is, of course, the central element of most mapping sites. In the MapBox JavaScript API,
 the map object manages a set of layers, stores and displays zoom levels and centerpoints,
@@ -239,7 +239,7 @@ _Arguments:_
 
 _Returns_ and instance of `MM.Location`.
 
-<div class="separator">Layer Management</div>
+<div class="separator">Layer management</div>
 
 ### map.addLayer(layer)
 
@@ -340,7 +340,7 @@ _Arguments_
 
 _Returns_ a layer.
 
-<div class="separator">UI Controls</div>
+<div class="separator">User interface</div>
 
 ### map.ui
 
@@ -633,7 +633,7 @@ _Returns_ `undefined`: this is an asynchronous function without a useful return 
     mapbox.auto('map', 'http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp');
     </script>
 
-# MapBox Layer
+# Layer
 
 `mapbox.layer` is a fast way to add layers to your map without having to deal with complex configuration.
 

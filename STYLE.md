@@ -1,5 +1,5 @@
 By default, mapbox.js provides styled map controls. If you would like to override any of these
-elements this section covers the default markup and css. Alter any of these styles in your own css
+elements this section covers the default markup and CSS. Alter any of these styles in your own css
 that follows after `mapbox.css`
 
 ## General
@@ -15,9 +15,12 @@ UI elements by default also share some of the same css:
       display:block;
     }
 
-__Note for IE7 users:__ `mapbox.css` uses a [Data URI](http://en.wikipedia.org/wiki/Data_URI_scheme) as its source for images which is not supported in versions less than IE8. To support these users you can link directly to a [cdn hosted version of the image](http://api.tiles.mapbox.com/mapbox.js/v0.5.5/map-controls.png) in your css.
+__Note for Internet Explorer 7 users:__ `mapbox.css` uses a
+[Data URI](http://en.wikipedia.org/wiki/Data_URI_scheme) as its source
+for images which is not supported in versions less than Internet Explorer 8.
+To support these users you can link directly to a [CDN hosted version of the image](http://api.tiles.mapbox.com/mapbox.js/v0.5.5/map-controls.png) in your css.
 
-Other elments like legends, tooltips along with ui controls share the same css:
+Other elements like legends, tooltips along with ui controls share the same css:
 
     .zoomer,
     .map-legends,
@@ -31,7 +34,7 @@ Other elments like legends, tooltips along with ui controls share the same css:
               border-radius:3px;
       }
 
-## Zoom Controls
+## Zoom controls
 
 __Markup__
 
@@ -68,7 +71,7 @@ __Default css__
               box-shadow:inset 0 1px 3px rgba(0,0,0,0.15);
     }
 
-When a zoom control is out of range a class name of `.zoomdisabled` The following css applied:
+When a zoom control is out of range a class name of `.zoomdisabled` The following CSS applied:
 
     .zoomdisabled {
         background-color:#eee;
@@ -101,9 +104,9 @@ __Default css__
             user-select:auto;
     }
 
-An optional classname of `.map-fade` is added to `.map-tooltip` when you initially mouse over/out on an element.
+An optional className of `.map-fade` is added to `.map-tooltip` when you initially mouse over/out on an element.
 This is added when animation is set to true. This additional class provides an easy way to apply fading animation
-using css. The default styling look like this:
+using CSS. The default styling look like this:
 
     .map-tooltip {
       opacity:1;
@@ -112,7 +115,7 @@ using css. The default styling look like this:
     }
     .map-fade { opacity:0; }
 
-When a tooltip has the interaction of a full formatter a close elemtent is applied:
+When a tooltip has the interaction of a full formatter a close element is applied:
 
 __Markup__
 
@@ -221,7 +224,8 @@ __Default css__
 
 ## Retina screens
 
-To support screens a media query is provided with an alternate scaled up version of the image sprite for the controls:
+To support screens a [media query](http://www.w3.org/TR/css3-mediaqueries/) is provided
+with an alternate scaled-up version of the image sprite for the controls:
 
     @media
       only screen and (-webkit-min-device-pixel-ratio : 2),
