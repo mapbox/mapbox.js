@@ -22,16 +22,37 @@ class: box
   left:0px;
   }
 
-#demo { position:relative; height:550px; }
+#demo { position:relative; height:400px; }
+#demo label { display:inline; }
 
-#snippet { position: relative; }
-
-#snippet #copy {
-  position: absolute;
-  top:20px; right:20px;
+#snippet {
+  position:relative;
+  overflow:hidden;
+  background:#fff;
   }
 
-pre { margin:0px; background:#fff; }
+#snippet .buttons {
+  position:absolute;
+  top:0px; right:0px;
+  z-index:1;
+  box-shadow:rgba(0,0,0,0.2) -2px -10px 10px 0px;
+  }
+
+pre {
+  margin:0px;
+  background:transparent;
+  }
+pre:hover { background:transparent; }
+pre a { background:#ee7; padding:2px 0px; }
+
+.code-header,
+.code-footer {
+  font-size:10px;
+  line-height:12px;
+  overflow:hidden;
+  }
+.code-header *,
+.code-footer * { color:#888; }
 
 @media (max-width:640px) {
   .doc-example { border-bottom:1px solid #ccc; border-left:0px; }
@@ -59,31 +80,25 @@ pre { margin:0px; background:#fff; }
     </div>
     <div id='demo'>{{content}}</div>
     <div id='snippet'>
-    <a href='#' id='copy'>Select all</a>
-    <pre class='prettyprint' id='code'>&lt;!DOCTYPE html&gt;
-    &lt;html&gt;
-    &lt;head&gt;
-      &lt;meta charset=utf-8 /&gt;
-      &lt;title&gt;Example&lt;/title&gt;
-      &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
-      &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
-      &lt;style&gt;
-        body { margin:0; padding:0; }
-        #map {
-          position:absolute;
-          top:0;
-          left:0;
-          right:0;
-          bottom:0;
-        }
-      &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-
-    {{content | escape}}
-    &lt;/body&gt;
-    &lt;/html&gt;
-    </pre>
+    <div class='buttons pad2 fillW'>
+      <a class='button big' href='#' id='copy'><span class='icon embed reverse'></span> Select all</a>
+    </div>
+    <pre class='prettyprint code-header'>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
+  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
+  &lt;style&gt;
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;</pre>
+    <pre class='prettyprint code-body'>{{content | escape}}</pre>
+    <pre class='prettyprint code-footer'>
+&lt;/body&gt;
+&lt;/html&gt;</pre>
     </div>
   </div>
   <div class='cell3 float-right'>
