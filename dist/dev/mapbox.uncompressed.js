@@ -1,3 +1,6 @@
+/* mapbox.js 0.6.3 */
+!function() {
+    var define;  // Undefine define (require.js)
 /*!
   * bean.js - copyright Jacob Thornton 2011
   * https://github.com/fat/bean
@@ -571,619 +574,6 @@
   return bean
 })
 /*!
- * mustache.js - Logic-less {{mustache}} templates with JavaScript
- * http://github.com/janl/mustache.js
- */
-
-var Mustache;
-
-(function (exports) {
-  if (typeof module !== "undefined") {
-    module.exports = exports; // CommonJS
-  } else if (typeof define === "function") {
-    define(exports); // AMD
-  } else {
-    Mustache = exports; // <script>
-  }
-}(function () {
-  var exports = {};
-
-  exports.name = "mustache.js";
-  exports.version = "0.5.1-dev";
-  exports.tags = ["{{", "}}"];
-
-  exports.parse = parse;
-  exports.clearCache = clearCache;
-  exports.compile = compile;
-  exports.compilePartial = compilePartial;
-  exports.render = render;
-
-  exports.Scanner = Scanner;
-  exports.Context = Context;
-  exports.Renderer = Renderer;
-
-  // This is here for backwards compatibility with 0.4.x.
-  exports.to_html = function (template, view, partials, send) {
-    var result = render(template, view, partials);
-
-    if (typeof send === "function") {
-      send(result);
-    } else {
-      return result;
-    }
-  };
-
-  var whiteRe = /\s*/;
-  var spaceRe = /\s+/;
-  var nonSpaceRe = /\S/;
-  var eqRe = /\s*=/;
-  var curlyRe = /\s*\}/;
-  var tagRe = /#|\^|\/|>|\{|&|=|!/;
-
-  // Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
-  // See https://github.com/janl/mustache.js/issues/189
-  function testRe(re, string) {
-    return RegExp.prototype.test.call(re, string);
-  }
-
-  function isWhitespace(string) {
-    return !testRe(nonSpaceRe, string);
-  }
-
-  var isArray = Array.isArray || function (obj) {
-    return Object.prototype.toString.call(obj) === "[object Array]";
-  };
-
-  // OSWASP Guidelines: escape all non alphanumeric characters in ASCII space.
-  var jsCharsRe = /[\x00-\x2F\x3A-\x40\x5B-\x60\x7B-\xFF\u2028\u2029]/gm;
-
-  function quote(text) {
-    var escaped = text.replace(jsCharsRe, function (c) {
-      return "\\u" + ('0000' + c.charCodeAt(0).toString(16)).slice(-4);
-    });
-
-    return '"' + escaped + '"';
-  }
-
-  function escapeRe(string) {
-    return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
-  }
-
-  var entityMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': '&quot;',
-    "'": '&#39;',
-    "/": '&#x2F;'
-  };
-
-  function escapeHtml(string) {
-    return String(string).replace(/[&<>"'\/]/g, function (s) {
-      return entityMap[s];
-    });
-  }
-
-  // Export these utility functions.
-  exports.isWhitespace = isWhitespace;
-  exports.isArray = isArray;
-  exports.quote = quote;
-  exports.escapeRe = escapeRe;
-  exports.escapeHtml = escapeHtml;
-
-  function Scanner(string) {
-    this.string = string;
-    this.tail = string;
-    this.pos = 0;
-  }
-
-  /**
-   * Returns `true` if the tail is empty (end of string).
-   */
-  Scanner.prototype.eos = function () {
-    return this.tail === "";
-  };
-
-  /**
-   * Tries to match the given regular expression at the current position.
-   * Returns the matched text if it can match, `null` otherwise.
-   */
-  Scanner.prototype.scan = function (re) {
-    var match = this.tail.match(re);
-
-    if (match && match.index === 0) {
-      this.tail = this.tail.substring(match[0].length);
-      this.pos += match[0].length;
-      return match[0];
-    }
-
-    return null;
-  };
-
-  /**
-   * Skips all text until the given regular expression can be matched. Returns
-   * the skipped string, which is the entire tail of this scanner if no match
-   * can be made.
-   */
-  Scanner.prototype.scanUntil = function (re) {
-    var match, pos = this.tail.search(re);
-
-    switch (pos) {
-    case -1:
-      match = this.tail;
-      this.pos += this.tail.length;
-      this.tail = "";
-      break;
-    case 0:
-      match = null;
-      break;
-    default:
-      match = this.tail.substring(0, pos);
-      this.tail = this.tail.substring(pos);
-      this.pos += pos;
-    }
-
-    return match;
-  };
-
-  function Context(view, parent) {
-    this.view = view;
-    this.parent = parent;
-    this.clearCache();
-  }
-
-  Context.make = function (view) {
-    return (view instanceof Context) ? view : new Context(view);
-  };
-
-  Context.prototype.clearCache = function () {
-    this._cache = {};
-  };
-
-  Context.prototype.push = function (view) {
-    return new Context(view, this);
-  };
-
-  Context.prototype.lookup = function (name) {
-    var value = this._cache[name];
-
-    if (!value) {
-      if (name === ".") {
-        value = this.view;
-      } else {
-        var context = this;
-
-        while (context) {
-          if (name.indexOf(".") > 0) {
-            var names = name.split("."), i = 0;
-
-            value = context.view;
-
-            while (value && i < names.length) {
-              value = value[names[i++]];
-            }
-          } else {
-            value = context.view[name];
-          }
-
-          if (value != null) {
-            break;
-          }
-
-          context = context.parent;
-        }
-      }
-
-      this._cache[name] = value;
-    }
-
-    if (typeof value === "function") {
-      value = value.call(this.view);
-    }
-
-    return value;
-  };
-
-  function Renderer() {
-    this.clearCache();
-  }
-
-  Renderer.prototype.clearCache = function () {
-    this._cache = {};
-    this._partialCache = {};
-  };
-
-  Renderer.prototype.compile = function (tokens, tags) {
-    if (typeof tokens === "string") {
-      tokens = parse(tokens, tags);
-    }
-
-    var fn = compileTokens(tokens),
-        self = this;
-
-    return function (view) {
-      return fn(Context.make(view), self);
-    };
-  };
-
-  Renderer.prototype.compilePartial = function (name, tokens, tags) {
-    this._partialCache[name] = this.compile(tokens, tags);
-    return this._partialCache[name];
-  };
-
-  Renderer.prototype.render = function (template, view) {
-    var fn = this._cache[template];
-
-    if (!fn) {
-      fn = this.compile(template);
-      this._cache[template] = fn;
-    }
-
-    return fn(view);
-  };
-
-  Renderer.prototype._section = function (name, context, callback) {
-    var value = context.lookup(name);
-
-    switch (typeof value) {
-    case "object":
-      if (isArray(value)) {
-        var buffer = "";
-
-        for (var i = 0, len = value.length; i < len; ++i) {
-          buffer += callback(context.push(value[i]), this);
-        }
-
-        return buffer;
-      }
-
-      return value ? callback(context.push(value), this) : "";
-    case "function":
-      // TODO: The text should be passed to the callback plain, not rendered.
-      var sectionText = callback(context, this),
-          self = this;
-
-      var scopedRender = function (template) {
-        return self.render(template, context);
-      };
-
-      return value.call(context.view, sectionText, scopedRender) || "";
-    default:
-      if (value) {
-        return callback(context, this);
-      }
-    }
-
-    return "";
-  };
-
-  Renderer.prototype._inverted = function (name, context, callback) {
-    var value = context.lookup(name);
-
-    // From the spec: inverted sections may render text once based on the
-    // inverse value of the key. That is, they will be rendered if the key
-    // doesn't exist, is false, or is an empty list.
-    if (value == null || value === false || (isArray(value) && value.length === 0)) {
-      return callback(context, this);
-    }
-
-    return "";
-  };
-
-  Renderer.prototype._partial = function (name, context) {
-    var fn = this._partialCache[name];
-
-    if (fn) {
-      return fn(context, this);
-    }
-
-    return "";
-  };
-
-  Renderer.prototype._name = function (name, context, escape) {
-    var value = context.lookup(name);
-
-    if (typeof value === "function") {
-      value = value.call(context.view);
-    }
-
-    var string = (value == null) ? "" : String(value);
-
-    if (escape) {
-      return escapeHtml(string);
-    }
-
-    return string;
-  };
-
-  /**
-   * Low-level function that compiles the given `tokens` into a
-   * function that accepts two arguments: a Context and a
-   * Renderer. Returns the body of the function as a string if
-   * `returnBody` is true.
-   */
-  function compileTokens(tokens, returnBody) {
-    var body = ['""'];
-    var token, method, escape;
-
-    for (var i = 0, len = tokens.length; i < len; ++i) {
-      token = tokens[i];
-
-      switch (token.type) {
-      case "#":
-      case "^":
-        method = (token.type === "#") ? "_section" : "_inverted";
-        body.push("r." + method + "(" + quote(token.value) + ", c, function (c, r) {\n" +
-          "  " + compileTokens(token.tokens, true) + "\n" +
-          "})");
-        break;
-      case "{":
-      case "&":
-      case "name":
-        escape = token.type === "name" ? "true" : "false";
-        body.push("r._name(" + quote(token.value) + ", c, " + escape + ")");
-        break;
-      case ">":
-        body.push("r._partial(" + quote(token.value) + ", c)");
-        break;
-      case "text":
-        body.push(quote(token.value));
-        break;
-      }
-    }
-
-    // Convert to a string body.
-    body = "return " + body.join(" + ") + ";";
-
-    // Good for debugging.
-    // console.log(body);
-
-    if (returnBody) {
-      return body;
-    }
-
-    // For great evil!
-    return new Function("c, r", body);
-  }
-
-  function escapeTags(tags) {
-    if (tags.length === 2) {
-      return [
-        new RegExp(escapeRe(tags[0]) + "\\s*"),
-        new RegExp("\\s*" + escapeRe(tags[1]))
-      ];
-    }
-
-    throw new Error("Invalid tags: " + tags.join(" "));
-  }
-
-  /**
-   * Forms the given linear array of `tokens` into a nested tree structure
-   * where tokens that represent a section have a "tokens" array property
-   * that contains all tokens that are in that section.
-   */
-  function nestTokens(tokens) {
-    var tree = [];
-    var collector = tree;
-    var sections = [];
-    var token, section;
-
-    for (var i = 0; i < tokens.length; ++i) {
-      token = tokens[i];
-
-      switch (token.type) {
-      case "#":
-      case "^":
-        token.tokens = [];
-        sections.push(token);
-        collector.push(token);
-        collector = token.tokens;
-        break;
-      case "/":
-        if (sections.length === 0) {
-          throw new Error("Unopened section: " + token.value);
-        }
-
-        section = sections.pop();
-
-        if (section.value !== token.value) {
-          throw new Error("Unclosed section: " + section.value);
-        }
-
-        if (sections.length > 0) {
-          collector = sections[sections.length - 1].tokens;
-        } else {
-          collector = tree;
-        }
-        break;
-      default:
-        collector.push(token);
-      }
-    }
-
-    // Make sure there were no open sections when we're done.
-    section = sections.pop();
-
-    if (section) {
-      throw new Error("Unclosed section: " + section.value);
-    }
-
-    return tree;
-  }
-
-  /**
-   * Combines the values of consecutive text tokens in the given `tokens` array
-   * to a single token.
-   */
-  function squashTokens(tokens) {
-    var lastToken;
-
-    for (var i = 0; i < tokens.length; ++i) {
-      var token = tokens[i];
-
-      if (lastToken && lastToken.type === "text" && token.type === "text") {
-        lastToken.value += token.value;
-        tokens.splice(i--, 1); // Remove this token from the array.
-      } else {
-        lastToken = token;
-      }
-    }
-  }
-
-  /**
-   * Breaks up the given `template` string into a tree of token objects. If
-   * `tags` is given here it must be an array with two string values: the
-   * opening and closing tags used in the template (e.g. ["<%", "%>"]). Of
-   * course, the default is to use mustaches (i.e. Mustache.tags).
-   */
-  function parse(template, tags) {
-    tags = tags || exports.tags;
-
-    var tagRes = escapeTags(tags);
-    var scanner = new Scanner(template);
-
-    var tokens = [],      // Buffer to hold the tokens
-        spaces = [],      // Indices of whitespace tokens on the current line
-        hasTag = false,   // Is there a {{tag}} on the current line?
-        nonSpace = false; // Is there a non-space char on the current line?
-
-    // Strips all whitespace tokens array for the current line
-    // if there was a {{#tag}} on it and otherwise only space.
-    var stripSpace = function () {
-      if (hasTag && !nonSpace) {
-        while (spaces.length) {
-          tokens.splice(spaces.pop(), 1);
-        }
-      } else {
-        spaces = [];
-      }
-
-      hasTag = false;
-      nonSpace = false;
-    };
-
-    var type, value, chr;
-
-    while (!scanner.eos()) {
-      value = scanner.scanUntil(tagRes[0]);
-
-      if (value) {
-        for (var i = 0, len = value.length; i < len; ++i) {
-          chr = value.charAt(i);
-
-          if (isWhitespace(chr)) {
-            spaces.push(tokens.length);
-          } else {
-            nonSpace = true;
-          }
-
-          tokens.push({type: "text", value: chr});
-
-          if (chr === "\n") {
-            stripSpace(); // Check for whitespace on the current line.
-          }
-        }
-      }
-
-      // Match the opening tag.
-      if (!scanner.scan(tagRes[0])) {
-        break;
-      }
-
-      hasTag = true;
-      type = scanner.scan(tagRe) || "name";
-
-      // Skip any whitespace between tag and value.
-      scanner.scan(whiteRe);
-
-      // Extract the tag value.
-      if (type === "=") {
-        value = scanner.scanUntil(eqRe);
-        scanner.scan(eqRe);
-        scanner.scanUntil(tagRes[1]);
-      } else if (type === "{") {
-        var closeRe = new RegExp("\\s*" + escapeRe("}" + tags[1]));
-        value = scanner.scanUntil(closeRe);
-        scanner.scan(curlyRe);
-        scanner.scanUntil(tagRes[1]);
-      } else {
-        value = scanner.scanUntil(tagRes[1]);
-      }
-
-      // Match the closing tag.
-      if (!scanner.scan(tagRes[1])) {
-        throw new Error("Unclosed tag at " + scanner.pos);
-      }
-
-      tokens.push({type: type, value: value});
-
-      if (type === "name" || type === "{" || type === "&") {
-        nonSpace = true;
-      }
-
-      // Set the tags for the next time around.
-      if (type === "=") {
-        tags = value.split(spaceRe);
-        tagRes = escapeTags(tags);
-      }
-    }
-
-    squashTokens(tokens);
-
-    return nestTokens(tokens);
-  }
-
-  // The high-level clearCache, compile, compilePartial, and render functions
-  // use this default renderer.
-  var _renderer = new Renderer();
-
-  /**
-   * Clears all cached templates and partials.
-   */
-  function clearCache() {
-    _renderer.clearCache();
-  }
-
-  /**
-   * High-level API for compiling the given `tokens` down to a reusable
-   * function. If `tokens` is a string it will be parsed using the given `tags`
-   * before it is compiled.
-   */
-  function compile(tokens, tags) {
-    return _renderer.compile(tokens, tags);
-  }
-
-  /**
-   * High-level API for compiling the `tokens` for the partial with the given
-   * `name` down to a reusable function. If `tokens` is a string it will be
-   * parsed using the given `tags` before it is compiled.
-   */
-  function compilePartial(name, tokens, tags) {
-    return _renderer.compilePartial(name, tokens, tags);
-  }
-
-  /**
-   * High-level API for rendering the `template` using the given `view`. The
-   * optional `partials` object may be given here for convenience, but note that
-   * it will cause all partials to be re-compiled, thus hurting performance. Of
-   * course, this only matters if you're going to render the same template more
-   * than once. If so, it is best to call `compilePartial` before calling this
-   * function and to leave the `partials` argument blank.
-   */
-  function render(template, view, partials) {
-    if (partials) {
-      for (var name in partials) {
-        compilePartial(name, partials[name]);
-      }
-    }
-
-    return _renderer.render(template, view);
-  }
-
-  return exports;
-
-}()));
-/*!
   * Reqwest! A general purpose XHR connection manager
   * (c) Dustin Diaz 2011
   * https://github.com/ded/reqwest
@@ -1556,8 +946,459 @@ var Mustache;
 
   return reqwest
 })
+}()
+/*
+ * CommonJS-compatible mustache.js module
+ *
+ * See http://github.com/janl/mustache.js for more info.
+ */
+
+/*
+  mustache.js — Logic-less templates in JavaScript
+
+  See http://mustache.github.com/ for more info.
+*/
+
+var Mustache = function () {
+  var _toString = Object.prototype.toString;
+
+  Array.isArray = Array.isArray || function (obj) {
+    return _toString.call(obj) == "[object Array]";
+  }
+
+  var _trim = String.prototype.trim, trim;
+
+  if (_trim) {
+    trim = function (text) {
+      return text == null ? "" : _trim.call(text);
+    }
+  } else {
+    var trimLeft, trimRight;
+
+    // IE doesn't match non-breaking spaces with \s.
+    if ((/\S/).test("\xA0")) {
+      trimLeft = /^[\s\xA0]+/;
+      trimRight = /[\s\xA0]+$/;
+    } else {
+      trimLeft = /^\s+/;
+      trimRight = /\s+$/;
+    }
+
+    trim = function (text) {
+      return text == null ? "" :
+        text.toString().replace(trimLeft, "").replace(trimRight, "");
+    }
+  }
+
+  var escapeMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;'
+  };
+
+  function escapeHTML(string) {
+    return String(string).replace(/&(?!\w+;)|[<>"']/g, function (s) {
+      return escapeMap[s] || s;
+    });
+  }
+
+  var regexCache = {};
+  var Renderer = function () {};
+
+  Renderer.prototype = {
+    otag: "{{",
+    ctag: "}}",
+    pragmas: {},
+    buffer: [],
+    pragmas_implemented: {
+      "IMPLICIT-ITERATOR": true
+    },
+    context: {},
+
+    render: function (template, context, partials, in_recursion) {
+      // reset buffer & set context
+      if (!in_recursion) {
+        this.context = context;
+        this.buffer = []; // TODO: make this non-lazy
+      }
+
+      // fail fast
+      if (!this.includes("", template)) {
+        if (in_recursion) {
+          return template;
+        } else {
+          this.send(template);
+          return;
+        }
+      }
+
+      // get the pragmas together
+      template = this.render_pragmas(template);
+
+      // render the template
+      var html = this.render_section(template, context, partials);
+
+      // render_section did not find any sections, we still need to render the tags
+      if (html === false) {
+        html = this.render_tags(template, context, partials, in_recursion);
+      }
+
+      if (in_recursion) {
+        return html;
+      } else {
+        this.sendLines(html);
+      }
+    },
+
+    /*
+      Sends parsed lines
+    */
+    send: function (line) {
+      if (line !== "") {
+        this.buffer.push(line);
+      }
+    },
+
+    sendLines: function (text) {
+      if (text) {
+        var lines = text.split("\n");
+        for (var i = 0; i < lines.length; i++) {
+          this.send(lines[i]);
+        }
+      }
+    },
+
+    /*
+      Looks for %PRAGMAS
+    */
+    render_pragmas: function (template) {
+      // no pragmas
+      if (!this.includes("%", template)) {
+        return template;
+      }
+
+      var that = this;
+      var regex = this.getCachedRegex("render_pragmas", function (otag, ctag) {
+        return new RegExp(otag + "%([\\w-]+) ?([\\w]+=[\\w]+)?" + ctag, "g");
+      });
+
+      return template.replace(regex, function (match, pragma, options) {
+        if (!that.pragmas_implemented[pragma]) {
+          throw({message:
+            "This implementation of mustache doesn't understand the '" +
+            pragma + "' pragma"});
+        }
+        that.pragmas[pragma] = {};
+        if (options) {
+          var opts = options.split("=");
+          that.pragmas[pragma][opts[0]] = opts[1];
+        }
+        return "";
+        // ignore unknown pragmas silently
+      });
+    },
+
+    /*
+      Tries to find a partial in the curent scope and render it
+    */
+    render_partial: function (name, context, partials) {
+      name = trim(name);
+      if (!partials || partials[name] === undefined) {
+        throw({message: "unknown_partial '" + name + "'"});
+      }
+      if (!context || typeof context[name] != "object") {
+        return this.render(partials[name], context, partials, true);
+      }
+      return this.render(partials[name], context[name], partials, true);
+    },
+
+    /*
+      Renders inverted (^) and normal (#) sections
+    */
+    render_section: function (template, context, partials) {
+      if (!this.includes("#", template) && !this.includes("^", template)) {
+        // did not render anything, there were no sections
+        return false;
+      }
+
+      var that = this;
+
+      var regex = this.getCachedRegex("render_section", function (otag, ctag) {
+        // This regex matches _the first_ section ({{#foo}}{{/foo}}), and captures the remainder
+        return new RegExp(
+          "^([\\s\\S]*?)" +         // all the crap at the beginning that is not {{*}} ($1)
+
+          otag +                    // {{
+          "(\\^|\\#)\\s*(.+)\\s*" + //  #foo (# == $2, foo == $3)
+          ctag +                    // }}
+
+          "\n*([\\s\\S]*?)" +       // between the tag ($2). leading newlines are dropped
+
+          otag +                    // {{
+          "\\/\\s*\\3\\s*" +        //  /foo (backreference to the opening tag).
+          ctag +                    // }}
+
+          "\\s*([\\s\\S]*)$",       // everything else in the string ($4). leading whitespace is dropped.
+
+        "g");
+      });
+
+
+      // for each {{#foo}}{{/foo}} section do...
+      return template.replace(regex, function (match, before, type, name, content, after) {
+        // before contains only tags, no sections
+        var renderedBefore = before ? that.render_tags(before, context, partials, true) : "",
+
+        // after may contain both sections and tags, so use full rendering function
+            renderedAfter = after ? that.render(after, context, partials, true) : "",
+
+        // will be computed below
+            renderedContent,
+
+            value = that.find(name, context);
+
+        if (type === "^") { // inverted section
+          if (!value || Array.isArray(value) && value.length === 0) {
+            // false or empty list, render it
+            renderedContent = that.render(content, context, partials, true);
+          } else {
+            renderedContent = "";
+          }
+        } else if (type === "#") { // normal section
+          if (Array.isArray(value)) { // Enumerable, Let's loop!
+            renderedContent = that.map(value, function (row) {
+              return that.render(content, that.create_context(row), partials, true);
+            }).join("");
+          } else if (that.is_object(value)) { // Object, Use it as subcontext!
+            renderedContent = that.render(content, that.create_context(value),
+              partials, true);
+          } else if (typeof value == "function") {
+            // higher order section
+            renderedContent = value.call(context, content, function (text) {
+              return that.render(text, context, partials, true);
+            });
+          } else if (value) { // boolean section
+            renderedContent = that.render(content, context, partials, true);
+          } else {
+            renderedContent = "";
+          }
+        }
+
+        return renderedBefore + renderedContent + renderedAfter;
+      });
+    },
+
+    /*
+      Replace {{foo}} and friends with values from our view
+    */
+    render_tags: function (template, context, partials, in_recursion) {
+      // tit for tat
+      var that = this;
+
+      var new_regex = function () {
+        return that.getCachedRegex("render_tags", function (otag, ctag) {
+          return new RegExp(otag + "(=|!|>|&|\\{|%)?([^#\\^]+?)\\1?" + ctag + "+", "g");
+        });
+      };
+
+      var regex = new_regex();
+      var tag_replace_callback = function (match, operator, name) {
+        switch(operator) {
+        case "!": // ignore comments
+          return "";
+        case "=": // set new delimiters, rebuild the replace regexp
+          that.set_delimiters(name);
+          regex = new_regex();
+          return "";
+        case ">": // render partial
+          return that.render_partial(name, context, partials);
+        case "{": // the triple mustache is unescaped
+        case "&": // & operator is an alternative unescape method
+          return that.find(name, context);
+        default: // escape the value
+          return escapeHTML(that.find(name, context));
+        }
+      };
+      var lines = template.split("\n");
+      for(var i = 0; i < lines.length; i++) {
+        lines[i] = lines[i].replace(regex, tag_replace_callback, this);
+        if (!in_recursion) {
+          this.send(lines[i]);
+        }
+      }
+
+      if (in_recursion) {
+        return lines.join("\n");
+      }
+    },
+
+    set_delimiters: function (delimiters) {
+      var dels = delimiters.split(" ");
+      this.otag = this.escape_regex(dels[0]);
+      this.ctag = this.escape_regex(dels[1]);
+    },
+
+    escape_regex: function (text) {
+      // thank you Simon Willison
+      if (!arguments.callee.sRE) {
+        var specials = [
+          '/', '.', '*', '+', '?', '|',
+          '(', ')', '[', ']', '{', '}', '\\'
+        ];
+        arguments.callee.sRE = new RegExp(
+          '(\\' + specials.join('|\\') + ')', 'g'
+        );
+      }
+      return text.replace(arguments.callee.sRE, '\\$1');
+    },
+
+    /*
+      find `name` in current `context`. That is find me a value
+      from the view object
+    */
+    find: function (name, context) {
+      name = trim(name);
+
+      // Checks whether a value is thruthy or false or 0
+      function is_kinda_truthy(bool) {
+        return bool === false || bool === 0 || bool;
+      }
+
+      var value;
+
+      // check for dot notation eg. foo.bar
+      if (name.match(/([a-z_]+)\./ig)) {
+        var childValue = this.walk_context(name, context);
+        if (is_kinda_truthy(childValue)) {
+          value = childValue;
+        }
+      } else {
+        if (is_kinda_truthy(context[name])) {
+          value = context[name];
+        } else if (is_kinda_truthy(this.context[name])) {
+          value = this.context[name];
+        }
+      }
+
+      if (typeof value == "function") {
+        return value.apply(context);
+      }
+      if (value !== undefined) {
+        return value;
+      }
+      // silently ignore unkown variables
+      return "";
+    },
+
+    walk_context: function (name, context) {
+      var path = name.split('.');
+      // if the var doesn't exist in current context, check the top level context
+      var value_context = (context[path[0]] != undefined) ? context : this.context;
+      var value = value_context[path.shift()];
+      while (value != undefined && path.length > 0) {
+        value_context = value;
+        value = value[path.shift()];
+      }
+      // if the value is a function, call it, binding the correct context
+      if (typeof value == "function") {
+        return value.apply(value_context);
+      }
+      return value;
+    },
+
+    // Utility methods
+
+    /* includes tag */
+    includes: function (needle, haystack) {
+      return haystack.indexOf(this.otag + needle) != -1;
+    },
+
+    // by @langalex, support for arrays of strings
+    create_context: function (_context) {
+      if (this.is_object(_context)) {
+        return _context;
+      } else {
+        var iterator = ".";
+        if (this.pragmas["IMPLICIT-ITERATOR"]) {
+          iterator = this.pragmas["IMPLICIT-ITERATOR"].iterator;
+        }
+        var ctx = {};
+        ctx[iterator] = _context;
+        return ctx;
+      }
+    },
+
+    is_object: function (a) {
+      return a && typeof a == "object";
+    },
+
+    /*
+      Why, why, why? Because IE. Cry, cry cry.
+    */
+    map: function (array, fn) {
+      if (typeof array.map == "function") {
+        return array.map(fn);
+      } else {
+        var r = [];
+        var l = array.length;
+        for(var i = 0; i < l; i++) {
+          r.push(fn(array[i]));
+        }
+        return r;
+      }
+    },
+
+    getCachedRegex: function (name, generator) {
+      var byOtag = regexCache[this.otag];
+      if (!byOtag) {
+        byOtag = regexCache[this.otag] = {};
+      }
+
+      var byCtag = byOtag[this.ctag];
+      if (!byCtag) {
+        byCtag = byOtag[this.ctag] = {};
+      }
+
+      var regex = byCtag[name];
+      if (!regex) {
+        regex = byCtag[name] = generator(this.otag, this.ctag);
+      }
+
+      return regex;
+    }
+  };
+
+  return({
+    name: "mustache.js",
+    version: "0.4.0",
+
+    /*
+      Turns a template and view into HTML
+    */
+    to_html: function (template, view, partials, send_fun) {
+      var renderer = new Renderer();
+      if (send_fun) {
+        renderer.send = send_fun;
+      }
+      renderer.render(template, view || {}, partials);
+      if (!send_fun) {
+        return renderer.buffer.join("\n");
+      }
+    }
+  });
+}();
+if (typeof module !== 'undefined' && module.exports) {
+    exports.name = Mustache.name;
+    exports.version = Mustache.version;
+
+    exports.to_html = function() {
+      return Mustache.to_html.apply(this, arguments);
+    };
+}
 /*!
- * Modest Maps JS v3.3.1
+ * Modest Maps JS v3.3.4
  * http://modestmaps.com/
  *
  * Copyright (c) 2011 Stamen Design, All Rights Reserved.
@@ -1629,7 +1470,7 @@ var MM = com.modestmaps = {
             }
         }
         return false;
-    })(['transformProperty', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
+    })(['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
 
     MM.matrixString = function(point) {
         // Make the result of point.scale * point.width a whole number.
@@ -3143,7 +2984,6 @@ var MM = com.modestmaps = {
         levels: null,
         requestManager: null,
         provider: null,
-        emptyImage: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
         _tileComplete: null,
 
         getTileComplete: function() {
@@ -3161,9 +3001,9 @@ var MM = com.modestmaps = {
             if (!this._tileError) {
                 var theLayer = this;
                 this._tileError = function(manager, tile) {
-                    tile.src = theLayer.emptyImage;
-                    theLayer.tiles[tile.id] = tile;
-                    theLayer.positionTile(tile);
+                    tile.element.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                    theLayer.tiles[tile.element.id] = tile.element;
+                    theLayer.positionTile(tile.element);
                 };
             }
             return this._tileError;
@@ -3401,7 +3241,7 @@ var MM = com.modestmaps = {
 
             var level = document.createElement('div');
             level.id = this.parent.id + '-zoom-' + zoom;
-            level.style.cssText = this.parent.style.cssText;
+            level.style.cssText = 'position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; margin: 0; padding: 0;';
             level.style.zIndex = zoom;
 
             this.parent.appendChild(level);
@@ -3537,7 +3377,6 @@ var MM = com.modestmaps = {
             this.requestManager.clear();
             this.parent.style.display = 'none';
         },
-
 
         // Remove this layer from the DOM, cancel all of its requests
         // and unbind any callbacks that are bound to it.
@@ -5287,8 +5126,10 @@ html4.ATTRIBS['video::controls'] = 0;
 // Attribution
 // -----------
 wax.attribution = function() {
-    var container,
-        a = {};
+    var a = {};
+
+    var container = document.createElement('div');
+    container.className = 'map-attribution';
 
     a.content = function(x) {
         if (typeof x === 'undefined') return container.innerHTML;
@@ -5301,12 +5142,10 @@ wax.attribution = function() {
     };
 
     a.init = function() {
-        container = document.createElement('div');
-        container.className = 'map-attribution';
         return this;
     };
 
-    return a.init();
+    return a;
 };
 wax = wax || {};
 
@@ -5581,6 +5420,10 @@ wax = wax || {};
 wax.hash = function(options) {
     options = options || {};
 
+    var s0, // old hash
+        hash = {},
+        lat = 90 - 1e-8;  // allowable latitude range
+
     function getState() {
         return location.hash.substring(1);
     }
@@ -5589,10 +5432,6 @@ wax.hash = function(options) {
         var l = window.location;
         l.replace(l.toString().replace((l.hash || /$/), '#' + state));
     }
-
-    var s0, // old hash
-        hash = {},
-        lat = 90 - 1e-8;  // allowable latitude range
 
     function parseHash(s) {
         var args = s.split('/');
@@ -5631,15 +5470,15 @@ wax.hash = function(options) {
     hash.add = function() {
         stateChange(getState());
         options.bindChange(_move);
-        return this;
+        return hash;
     };
 
     hash.remove = function() {
         options.unbindChange(_move);
-        return this;
+        return hash;
     };
 
-    return hash.add();
+    return hash;
 };
 wax = wax || {};
 
@@ -5928,7 +5767,6 @@ wax.location = function() {
     var t = {};
 
     function on(o) {
-        console.log(o);
         if ((o.e.type === 'mousemove' || !o.e.type)) {
             return;
         } else {
@@ -6348,16 +6186,6 @@ wax.u = {
             x;
     },
 
-    // IE doesn't have indexOf
-    indexOf: function(array, item) {
-        var nativeIndexOf = Array.prototype.indexOf;
-        if (array === null) return -1;
-        var i, l;
-        if (nativeIndexOf && array.indexOf === nativeIndexOf) return array.indexOf(item);
-        for (i = 0, l = array.length; i < l; i++) if (array[i] === item) return i;
-        return -1;
-    },
-
     // From quirksmode: normalize the offset of an event from the top-left
     // of the page.
     eventoffset: function(e) {
@@ -6428,39 +6256,54 @@ wax.u = {
 wax = wax || {};
 wax.mm = wax.mm || {};
 
-wax.mm.attribution = function(map, tilejson) {
-    tilejson = tilejson || {};
+wax.mm.attribution = function() {
+    var map,
+        a = {},
+        container = document.createElement('div');
 
-    var a, // internal attribution control
-        attribution = {};
+    container.className = 'map-attribution map-mm';
 
-    attribution.element = function() {
-        return a.element();
+    a.content = function(x) {
+        if (typeof x === 'undefined') return container.innerHTML;
+        container.innerHTML = wax.u.sanitize(x);
+        return a;
     };
 
-    attribution.appendTo = function(elem) {
-        wax.u.$(elem).appendChild(a.element());
-        return attribution;
+    a.element = function() {
+        return container;
     };
 
-    attribution.init = function() {
-        a = wax.attribution();
-        a.content(tilejson.attribution);
-        a.element().className = 'map-attribution map-mm';
-        return attribution;
+    a.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return a;
     };
 
-    return attribution.init();
+    a.add = function() {
+        if (!map) return false;
+        map.parent.appendChild(container);
+        return a;
+    };
+
+    a.remove = function() {
+        if (!map) return false;
+        if (container.parentNode) container.parentNode.removeChild(container);
+        return a;
+    };
+
+    a.appendTo = function(elem) {
+        wax.u.$(elem).appendChild(container);
+        return a;
+    };
+
+    return a;
 };
 wax = wax || {};
 wax.mm = wax.mm || {};
 
-wax.mm.boxselector = function(map, tilejson, opts) {
-    var corner = null,
-        nearCorner = null,
-        callback = ((typeof opts === 'function') ?
-            opts :
-            opts.callback),
+wax.mm.boxselector = function() {
+    var corner,
+        nearCorner,
         boxDiv,
         style,
         borderWidth = 0,
@@ -6470,14 +6313,18 @@ wax.mm.boxselector = function(map, tilejson, opts) {
         addEvent = MM.addEvent,
         removeEvent = MM.removeEvent,
         box,
-        boxselector = {};
+        boxselector = {},
+        map,
+        callbackManger = new MM.CallbackManager(boxselector, ['change']);
 
     function getMousePoint(e) {
         // start with just the mouse (x, y)
         var point = new MM.Point(e.clientX, e.clientY);
         // correct for scrolled document
-        point.x += document.body.scrollLeft + document.documentElement.scrollLeft;
-        point.y += document.body.scrollTop + document.documentElement.scrollTop;
+        point.x += document.body.scrollLeft +
+            document.documentElement.scrollLeft;
+        point.y += document.body.scrollTop +
+            document.documentElement.scrollTop;
 
         // correct for nested offsets in DOM
         for (var node = map.parent; node; node = node.offsetParent) {
@@ -6613,6 +6460,16 @@ wax.mm.boxselector = function(map, tilejson, opts) {
         style.bottom = Math.max(0, map.dimensions.y - br.y) + 'px';
     }
 
+    boxselector.addCallback = function(event, callback) {
+        callbackManager.addCallback(event, callback);
+        return boxselector;
+    };
+
+    boxselector.removeCallback = function(event, callback) {
+        callbackManager.removeCallback(event, callback);
+        return boxselector;
+    };
+
     boxselector.extent = function(x, silent) {
         if (!x) return box;
 
@@ -6627,33 +6484,42 @@ wax.mm.boxselector = function(map, tilejson, opts) {
 
         drawbox(map);
 
-        if (!silent) callback(box);
+        if (!silent) callbackManager.dispatchCallback('change', box);
     };
+    boxDiv = document.createElement('div');
+    boxDiv.className = 'boxselector-box';
+    style = boxDiv.style;
 
-    boxselector.add = function(map) {
-        boxDiv = boxDiv || document.createElement('div');
+    boxselector.add = function() {
         boxDiv.id = map.parent.id + '-boxselector-box';
-        boxDiv.className = 'boxselector-box';
         map.parent.appendChild(boxDiv);
-        style = boxDiv.style;
         borderWidth = parseInt(window.getComputedStyle(boxDiv).borderWidth, 10);
 
         addEvent(map.parent, 'mousedown', mouseDown);
         addEvent(boxDiv, 'mousedown', mouseDownResize);
         addEvent(map.parent, 'mousemove', mouseMoveCursor);
         map.addCallback('drawn', drawbox);
-        return this;
+        return boxselector;
+    };
+
+    boxselector.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return boxselector;
     };
 
     boxselector.remove = function() {
         map.parent.removeChild(boxDiv);
+
         removeEvent(map.parent, 'mousedown', mouseDown);
         removeEvent(boxDiv, 'mousedown', mouseDownResize);
         removeEvent(map.parent, 'mousemove', mouseMoveCursor);
+
         map.removeCallback('drawn', drawbox);
+        return boxselector;
     };
 
-    return boxselector.add(map);
+    return boxselector;
 };
 wax = wax || {};
 wax.mm = wax.mm || {};
@@ -6683,14 +6549,19 @@ wax.mm = wax.mm || {};
 // Add zoom links, which can be styled as buttons, to a `modestmaps.Map`
 // control. This function can be used chaining-style with other
 // chaining-style controls.
-wax.mm.fullscreen = function(map) {
+wax.mm.fullscreen = function() {
     // true: fullscreen
     // false: minimized
     var fullscreened = false,
         fullscreen = {},
-        a,
+        a = document.createElement('a'),
+        map,
         body = document.body,
         smallSize;
+
+    a.className = 'map-fullscreen';
+    a.href = '#fullscreen';
+    // a.innerHTML = 'fullscreen';
 
     function click(e) {
         if (e) e.stop();
@@ -6701,49 +6572,68 @@ wax.mm.fullscreen = function(map) {
         }
     }
 
-    function ss(w, h) {
+    function setSize(w, h) {
         map.dimensions = new MM.Point(w, h);
         map.parent.style.width = Math.round(map.dimensions.x) + 'px';
         map.parent.style.height = Math.round(map.dimensions.y) + 'px';
         map.dispatchCallback('resized', map.dimensions);
     }
 
+    fullscreen.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return fullscreen;
+    };
+
     // Modest Maps demands an absolute height & width, and doesn't auto-correct
     // for changes, so here we save the original size of the element and
     // restore to that size on exit from fullscreen.
-    fullscreen.add = function(map) {
-        a = document.createElement('a');
-        a.className = 'map-fullscreen';
-        a.href = '#fullscreen';
-        a.innerHTML = 'fullscreen';
+    fullscreen.add = function() {
         bean.add(a, 'click', click);
-        return this;
+        map.parent.appendChild(a);
+        return fullscreen;
     };
+
+    fullscreen.remove = function() {
+        bean.remove(a, 'click', click);
+        if (a.parentNode) a.parentNode.removeChild(a);
+        return fullscreen;
+    };
+
     fullscreen.full = function() {
         if (fullscreened) { return; } else { fullscreened = true; }
         smallSize = [map.parent.offsetWidth, map.parent.offsetHeight];
         map.parent.className += ' map-fullscreen-map';
         body.className += ' map-fullscreen-view';
-        ss(map.parent.offsetWidth, map.parent.offsetHeight);
+        setSize(map.parent.offsetWidth, map.parent.offsetHeight);
+        return fullscreen;
     };
+
     fullscreen.original = function() {
         if (!fullscreened) { return; } else { fullscreened = false; }
         map.parent.className = map.parent.className.replace(' map-fullscreen-map', '');
         body.className = body.className.replace(' map-fullscreen-view', '');
-        ss(smallSize[0], smallSize[1]);
-    };
-    fullscreen.appendTo = function(elem) {
-        wax.u.$(elem).appendChild(a);
-        return this;
+        setSize(smallSize[0], smallSize[1]);
+        return fullscreen;
     };
 
-    return fullscreen.add(map);
+    fullscreen.element = function() {
+        return a;
+    };
+
+    fullscreen.appendTo = function(elem) {
+        wax.u.$(elem).appendChild(a);
+        return fullscreen;
+    };
+
+    return fullscreen;
 };
 wax = wax || {};
 wax.mm = wax.mm || {};
 
-wax.mm.hash = function(map) {
-    return wax.hash({
+wax.mm.hash = function() {
+    var map;
+    var hash = wax.hash({
         getCenterZoom: function() {
             var center = map.getCenter(),
                 zoom = map.getZoom(),
@@ -6768,6 +6658,14 @@ wax.mm.hash = function(map) {
             map.removeCallback('drawn', fn);
         }
     });
+
+    hash.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return hash;
+    };
+
+    return hash;
 };
 wax = wax || {};
 wax.mm = wax.mm || {};
@@ -6780,11 +6678,18 @@ wax.mm.interaction = function() {
             'extentset', 'resized', 'drawn'];
 
     function grid() {
-        var zoomLayer = map.getLayerAt(0)
-            .levels[Math.round(map.getZoom())];
         if (!dirty && _grid !== undefined && _grid.length) {
             return _grid;
         } else {
+            var tiles;
+            for (var i = 0; i < map.getLayers().length; i++) {
+                var levels = map.getLayerAt(i).levels;
+                var zoomLayer = levels && levels[Math.round(map.zoom())];
+                if (zoomLayer !== undefined) {
+                    tiles = map.getLayerAt(i).tileElementsInLevel(zoomLayer);
+                    if (tiles.length) break;
+                }
+            }
             _grid = (function(t) {
                 var o = [];
                 for (var key in t) {
@@ -6798,7 +6703,7 @@ wax.mm.interaction = function() {
                     }
                 }
                 return o;
-            })(map.getLayerAt(0).tiles);
+            })(tiles);
             return _grid;
         }
     }
@@ -6830,33 +6735,57 @@ wax.mm.interaction = function() {
 wax = wax || {};
 wax.mm = wax.mm || {};
 
-wax.mm.legend = function(map, tilejson) {
-    tilejson = tilejson || {};
-    var l, // parent legend
-        legend = {};
+wax.mm.legend = function() {
+    var map,
+        l = {};
 
-    legend.add = function() {
-        l = wax.legend()
-            .content(tilejson.legend);
-        return legend;
+    var container = document.createElement('div');
+    container.className = 'map-legends';
+
+    var element = container.appendChild(document.createElement('div'));
+    element.className = 'map-legend';
+    element.style.display = 'none';
+
+    l.content = function(x) {
+        if (!arguments.length) return element.innerHTML;
+
+        element.innerHTML = wax.u.sanitize(x);
+        element.style.display = 'block';
+        if (element.innerHTML === '') {
+            element.style.display = 'none';
+        }
+        return l;
     };
 
-    legend.content = function(x) {
-        if (!arguments.length) return l.content();
-        l.content(legend);
-        return legend;
+    l.element = function() {
+        return container;
     };
 
-    legend.element = function() {
-        return l.element();
+    l.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return l;
     };
 
-    legend.appendTo = function(elem) {
-        wax.u.$(elem).appendChild(l.element());
-        return legend;
+    l.add = function() {
+        if (!map) return false;
+        l.appendTo(map.parent);
+        return l;
     };
 
-    return legend.add();
+    l.remove = function() {
+        if (container.parentNode) {
+            container.parentNode.removeChild(container);
+        }
+        return l;
+    };
+
+    l.appendTo = function(elem) {
+        wax.u.$(elem).appendChild(container);
+        return l;
+    };
+
+    return l;
 };
 wax = wax || {};
 wax.mm = wax.mm || {};
@@ -6868,19 +6797,18 @@ wax.mm = wax.mm || {};
 //
 // It also exposes a public API function: `addLocation`, which adds a point
 // to the map as if added by the user.
-wax.mm.pointselector = function(map, tilejson, opts) {
-    var mouseDownPoint = null,
+wax.mm.pointselector = function() {
+    var map,
+        mouseDownPoint = null,
         mouseUpPoint = null,
+        callback = null,
         tolerance = 5,
         overlayDiv,
         pointselector = {},
+        callbackManager = new MM.CallbackManager(pointselector, ['change']),
         locations = [];
 
-    var callback = (typeof opts === 'function') ?
-        opts :
-        opts.callback;
-
-    // Create a `com.modestmaps.Point` from a screen event, like a click.
+    // Create a `MM.Point` from a screen event, like a click.
     function makePoint(e) {
         var coords = wax.u.eventoffset(e);
         var point = new MM.Point(coords.x, coords.y);
@@ -6959,7 +6887,7 @@ wax.mm.pointselector = function(map, tilejson, opts) {
         mouseUpPoint = makePoint(e);
         if (MM.Point.distance(mouseDownPoint, mouseUpPoint) < tolerance) {
             pointselector.addLocation(map.pointLocation(mouseDownPoint));
-            callback(cleanLocations(locations));
+            callbackManager.dispatchCallback('change', cleanLocations(locations));
         }
         mouseDownPoint = null;
     }
@@ -6970,46 +6898,70 @@ wax.mm.pointselector = function(map, tilejson, opts) {
     pointselector.addLocation = function(location) {
         locations.push(location);
         drawPoints();
-        callback(cleanLocations(locations));
+        callbackManager.dispatchCallback('change', cleanLocations(locations));
+        return pointselector;
     };
 
-    pointselector.locations = function(x) {
-        return locations;
+    // TODO set locations
+    pointselector.locations = function() {
+        if (!arguments.length) return locations;
     };
 
-    pointselector.add = function(map) {
+    pointselector.addCallback = function(event, callback) {
+        callbackManager.addCallback(event, callback);
+        return pointselector;
+    };
+
+    pointselector.removeCallback = function(event, callback) {
+        callbackManager.removeCallback(event, callback);
+        return pointselector;
+    };
+
+    pointselector.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return pointselector;
+    };
+
+    pointselector.add = function() {
         bean.add(map.parent, 'mousedown', mouseDown);
         map.addCallback('drawn', drawPoints);
-        return this;
+        return pointselector;
     };
 
-    pointselector.remove = function(map) {
+    pointselector.remove = function() {
         bean.remove(map.parent, 'mousedown', mouseDown);
         map.removeCallback('drawn', drawPoints);
         for (var i = locations.length - 1; i > -1; i--) {
             pointselector.deleteLocation(locations[i]);
         }
-        return this;
+        return pointselector;
     };
 
     pointselector.deleteLocation = function(location, e) {
         if (!e || confirm('Delete this point?')) {
             location.pointDiv.parentNode.removeChild(location.pointDiv);
-            locations.splice(wax.u.indexOf(locations, location), 1);
-            callback(cleanLocations(locations));
+            for (var i = 0; i < locations.length; i++) {
+                if (locations[i] === location) {
+                    locations.splice(i, 1);
+                    break;
+                }
+            }
+            callbackManager.dispatchCallback('change', cleanLocations(locations));
         }
     };
 
-    return pointselector.add(map);
+    return pointselector;
 };
 wax = wax || {};
 wax.mm = wax.mm || {};
 
-wax.mm.zoombox = function(map) {
+wax.mm.zoombox = function() {
     // TODO: respond to resize
     var zoombox = {},
+        map,
         drawing = false,
-        box,
+        box = document.createElement('div'),
         mouseDownPoint = null;
 
     function getMousePoint(e) {
@@ -7081,11 +7033,17 @@ wax.mm.zoombox = function(map) {
         return MM.cancelEvent(e);
     }
 
-    zoombox.add = function(map) {
+    zoombox.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return zoombox;
+    };
+
+    zoombox.add = function() {
+        if (!map) return false;
         // Use a flag to determine whether the zoombox is currently being
         // drawn. Necessary only for IE because `mousedown` is triggered
         // twice.
-        box = box || document.createElement('div');
         box.id = map.parent.id + '-zoombox-box';
         box.className = 'zoombox-box';
         map.parent.appendChild(box);
@@ -7094,53 +7052,91 @@ wax.mm.zoombox = function(map) {
     };
 
     zoombox.remove = function() {
-        map.parent.removeChild(box);
+        if (!map) return false;
+        if (box.parentNode) box.parentNode.removeChild(box);
         MM.removeEvent(map.parent, 'mousedown', mouseDown);
+        return zoombox;
     };
 
-    return zoombox.add(map);
+    return zoombox;
 };
 wax = wax || {};
 wax.mm = wax.mm || {};
 
-wax.mm.zoomer = function(map) {
+wax.mm.zoomer = function() {
     var zoomer = {},
-        zoomin = document.createElement('a');
+        smooth = true,
+        map;
+
+    var zoomin = document.createElement('a'),
+        zoomout = document.createElement('a');
+
+    function stopEvents(e) {
+        e.stop();
+    }
+
+    function zIn(e) {
+        e.stop();
+        if (smooth && map.ease) {
+            map.ease.zoom(map.zoom() + 1).run(50);
+        } else {
+            map.zoomIn();
+        }
+    }
+
+    function zOut(e) {
+        e.stop();
+        if (smooth && map.ease) {
+            map.ease.zoom(map.zoom() - 1).run(50);
+        } else {
+            map.zoomOut();
+        }
+    }
 
     zoomin.innerHTML = '+';
     zoomin.href = '#';
     zoomin.className = 'zoomer zoomin';
-    bean.add(zoomin, 'mousedown dblclick', function(e) {
-        e.stop();
-    });
-    bean.add(zoomin, 'touchstart click', function(e) {
-        e.stop();
-        map.zoomIn();
-    }, false);
-
-    var zoomout = document.createElement('a');
     zoomout.innerHTML = '-';
     zoomout.href = '#';
     zoomout.className = 'zoomer zoomout';
-    bean.add(zoomout, 'mousedown dblclick', function(e) {
-        e.stop();
-    });
-    bean.add(zoomout, 'touchstart click', function(e) {
-        e.stop();
-        map.zoomOut();
-    });
 
-    zoomer.add = function(map) {
-        map.addCallback('drawn', function(map, e) {
-            if (map.coordinate.zoom === map.coordLimits[0].zoom) {
-                zoomout.className = 'zoomer zoomout zoomdisabled';
-            } else if (map.coordinate.zoom === map.coordLimits[1].zoom) {
-                zoomin.className = 'zoomer zoomin zoomdisabled';
-            } else {
-                zoomin.className = 'zoomer zoomin';
-                zoomout.className = 'zoomer zoomout';
-            }
-        });
+    function updateButtons(map, e) {
+        if (map.coordinate.zoom === map.coordLimits[0].zoom) {
+            zoomout.className = 'zoomer zoomout zoomdisabled';
+        } else if (map.coordinate.zoom === map.coordLimits[1].zoom) {
+            zoomin.className = 'zoomer zoomin zoomdisabled';
+        } else {
+            zoomin.className = 'zoomer zoomin';
+            zoomout.className = 'zoomer zoomout';
+        }
+    }
+
+    zoomer.map = function(x) {
+        if (!arguments.length) return map;
+        map = x;
+        return zoomer;
+    };
+
+    zoomer.add = function() {
+        if (!map) return false;
+        map.addCallback('drawn', updateButtons);
+        zoomer.appendTo(map.parent);
+        bean.add(zoomin, 'mousedown dblclick', stopEvents);
+        bean.add(zoomout, 'mousedown dblclick', stopEvents);
+        bean.add(zoomout, 'touchstart click', zOut);
+        bean.add(zoomin, 'touchstart click', zIn);
+        return zoomer;
+    };
+
+    zoomer.remove = function() {
+        if (!map) return false;
+        map.removeCallback('drawn', updateButtons);
+        if (zoomin.parentNode) zoomin.parentNode.removeChild(zoomin);
+        if (zoomout.parentNode) zoomout.parentNode.removeChild(zoomout);
+        bean.remove(zoomin, 'mousedown dblclick', stopEvents);
+        bean.remove(zoomout, 'mousedown dblclick', stopEvents);
+        bean.remove(zoomout, 'touchstart click', zOut);
+        bean.remove(zoomin, 'touchstart click', zIn);
         return zoomer;
     };
 
@@ -7150,7 +7146,13 @@ wax.mm.zoomer = function(map) {
         return zoomer;
     };
 
-    return zoomer.add(map);
+    zoomer.smooth = function(x) {
+        if (!arguments.length) return smooth;
+        smooth = x;
+        return zoomer;
+    };
+
+    return zoomer;
 };
 var wax = wax || {};
 wax.mm = wax.mm || {};
@@ -7251,6 +7253,7 @@ wax.mm.connector = function(options) {
         };
 
         easey.zoom = function(x) {
+            if (!to) to = map.coordinate.copy();
             to = map.enforceZoomLimits(to.zoomTo(x));
             return easey;
         };
@@ -7285,7 +7288,6 @@ wax.mm.connector = function(options) {
         easey.map = function(x) {
             if (!arguments.length) return map;
             map = x;
-            to = map.coordinate.copy();
             return easey;
         };
 
@@ -7365,11 +7367,9 @@ wax.mm.connector = function(options) {
             });
 
             if (!from) from = map.coordinate.copy();
-
+            if (!to) to = map.coordinate.copy();
             time = time || 1000;
-
             start = (+new Date());
-
             running = true;
 
             function tick() {
@@ -7377,11 +7377,11 @@ wax.mm.connector = function(options) {
                 if (abort) {
                     abort = running = false;
                     abortCallback();
-                    return abortCallback = undefined;
+                    return (abortCallback = undefined);
                 } else if (delta > time) {
                     running = false;
                     map.coordinate = path(from, to, 1);
-                    from = undefined;
+                    to = from = undefined;
                     map.draw();
                     if (callback) return callback(map);
                 } else {
@@ -7466,7 +7466,8 @@ wax.mm.connector = function(options) {
                 };
             }
 
-            var path = function (a, b, t) {
+            var oldpath = path;
+            path = function (a, b, t) {
                 if (t == 1) return to;
                 var s = t * S,
                     us = u(s),
@@ -7476,7 +7477,10 @@ wax.mm.connector = function(options) {
                 return new MM.Coordinate(y, x, 0).zoomTo(z);
             };
 
-            easey.run(S / V * 1000, callback);
+            easey.run(S / V * 1000, function(m) {
+                path = oldpath;
+                if (callback) callback(m);
+            });
         };
 
         return easey;
@@ -7989,7 +7993,12 @@ mapbox.markers.layer = function() {
         // a function that filters points
         filter = function() {
             return true;
-        };
+        },
+        _seq = 0,
+        keyfn = function() {
+            return ++_seq;
+        },
+        index = {};
 
     // The parent DOM element
     m.parent = document.createElement('div');
@@ -8093,31 +8102,43 @@ mapbox.markers.layer = function() {
         // Return features
         if (!arguments.length) return features;
 
-        // Clear features
-        while (m.parent.hasChildNodes()) {
-            // removing lastChild iteratively is faster than
-            // innerHTML = ''
-            // http://jsperf.com/innerhtml-vs-removechild-yo/2
-            m.parent.removeChild(m.parent.lastChild);
-        }
-
-        // clear markers representation
-        markers = [];
         // Set features
         if (!x) x = [];
         features = x.slice();
 
         features.sort(sorter);
 
+        for (var j = 0; j < markers.length; j++) {
+            markers[j].touch = false;
+        }
+
         for (var i = 0; i < features.length; i++) {
             if (filter(features[i])) {
-                m.add({
-                    element: factory(features[i]),
-                    location: new MM.Location(
+                var id = keyfn(features[i]);
+                if (index[id]) {
+                    // marker is already on the map, needs to be moved or rebuilt
+                    index[id].location = new MM.Location(
                         features[i].geometry.coordinates[1],
-                        features[i].geometry.coordinates[0]),
-                    data: features[i]
-                });
+                        features[i].geometry.coordinates[0]);
+                    index[id].coord = null;
+                    reposition(index[id]);
+                } else {
+                    // marker needs to be added to the map
+                    index[id] = m.add({
+                        element: factory(features[i]),
+                        location: new MM.Location(
+                            features[i].geometry.coordinates[1],
+                            features[i].geometry.coordinates[0]),
+                        data: features[i]
+                    });
+                }
+                if (index[id]) index[id].touch = true;
+            }
+        }
+
+        for (var k = markers.length - 1; k >= 0; k--) {
+            if (markers[k].touch === false) {
+                m.remove(markers[k]);
             }
         }
 
@@ -8134,24 +8155,29 @@ mapbox.markers.layer = function() {
         if (typeof x === 'string') x = [x];
 
         urls = x;
-        function add_features(x) {
+        function add_features(err, x) {
+            if (err && callback) return callback(err);
             if (x && x.features) m.features(x.features);
-            if (callback) callback(x.features, m);
+            if (callback) callback(err, x.features, m);
         }
 
         reqwest((urls[0].match(/geojsonp$/)) ? {
             url: urls[0] + (~urls[0].indexOf('?') ? '&' : '?') + 'callback=grid',
             type: 'jsonp',
             jsonpCallback: 'callback',
-            success: add_features,
+            success: function(resp) { add_features(null, resp); },
             error: add_features
         } : {
             url: urls[0],
             type: 'json',
-            success: add_features,
+            success: function(resp) { add_features(null, resp); },
             error: add_features
         });
         return m;
+    };
+
+    m.id = function(x, callback) {
+        return m.url('http://a.tiles.mapbox.com/v3/' + x + '/markers.geojsonp', callback);
     };
 
     m.csv = function(x) {
@@ -8175,6 +8201,16 @@ mapbox.markers.layer = function() {
             if (coords[1] > ext[1].lat) ext[1].lat = coords[1];
         }
         return ext;
+    };
+
+    m.key = function(x) {
+        if (!arguments.length) return keyfn;
+        if (x === null) {
+            keyfn = function() { return ++_seq; };
+        } else {
+            keyfn = x;
+        }
+        return m;
     };
 
     // Factory interface
@@ -8208,6 +8244,20 @@ mapbox.markers.layer = function() {
         return m;
     };
 
+    m.enabled = true;
+
+    m.enable = function() {
+        this.enabled = true;
+        this.parent.style.display = '';
+        return m;
+    };
+
+    m.disable = function() {
+        this.enabled = false;
+        this.parent.style.display = 'none';
+        return m;
+    };
+
     return m;
 };
 
@@ -8217,8 +8267,8 @@ mapbox.markers.interaction = function(mmg) {
     var mi = {},
         tooltips = [],
         exclusive = true,
-        hide_on_move = true,
-        show_on_hover = true,
+        hideOnMove = true,
+        showOnHover = true,
         close_timer = null,
         formatter;
 
@@ -8252,9 +8302,9 @@ mapbox.markers.interaction = function(mmg) {
         return o;
     });
 
-    mi.hide_on_move = function(x) {
-        if (!arguments.length) return hide_on_move;
-        hide_on_move = x;
+    mi.hideOnMove = function(x) {
+        if (!arguments.length) return hideOnMove;
+        hideOnMove = x;
         return mi;
     };
 
@@ -8264,23 +8314,23 @@ mapbox.markers.interaction = function(mmg) {
         return mi;
     };
 
-    mi.show_on_hover = function(x) {
-        if (!arguments.length) return show_on_hover;
-        show_on_hover = x;
+    mi.showOnHover = function(x) {
+        if (!arguments.length) return showOnHover;
+        showOnHover = x;
         return mi;
     };
 
-    mi.hide_tooltips = function() {
+    mi.hideTooltips = function() {
         while (tooltips.length) mmg.remove(tooltips.pop());
         for (var i = 0; i < markers.length; i++) {
             delete markers[i].clicked;
         }
     };
 
-    mi.bind_marker = function(marker) {
+    mi.bindMarker = function(marker) {
         var delayed_close = function() {
             if (!marker.clicked) close_timer = window.setTimeout(function() {
-                mi.hide_tooltips();
+                mi.hideTooltips();
             }, 200);
         };
 
@@ -8291,7 +8341,7 @@ mapbox.markers.interaction = function(mmg) {
             if (!content) return;
 
             if (exclusive && tooltips.length > 0) {
-                mi.hide_tooltips();
+                mi.hideTooltips();
                 // We've hidden all of the tooltips, so let's not close
                 // the one that we're creating as soon as it is created.
                 if (close_timer) window.clearTimeout(close_timer);
@@ -8317,7 +8367,7 @@ mapbox.markers.interaction = function(mmg) {
             // Align the bottom of the tooltip with the top of its marker
             wrapper.style.bottom = marker.element.offsetHeight / 2 + 20 + 'px';
 
-            if (show_on_hover) {
+            if (showOnHover) {
                 tooltip.onmouseover = function() {
                     if (close_timer) window.clearTimeout(close_timer);
                 };
@@ -8340,7 +8390,7 @@ mapbox.markers.interaction = function(mmg) {
             marker.clicked = true;
         };
 
-        if (show_on_hover) {
+        if (showOnHover) {
             marker.element.onmouseover = show;
             marker.element.onmouseout = delayed_close;
         }
@@ -8348,7 +8398,7 @@ mapbox.markers.interaction = function(mmg) {
 
     function bindPanned() {
         mmg.map.addCallback('panned', function() {
-            if (hide_on_move) {
+            if (hideOnMove) {
                 while (tooltips.length) {
                     mmg.remove(tooltips.pop());
                 }
@@ -8364,7 +8414,7 @@ mapbox.markers.interaction = function(mmg) {
         // Bind present markers
         var markers = mmg.markers();
         for (var i = 0; i < markers.length; i++) {
-            mi.bind_marker(markers[i]);
+            mi.bindMarker(markers[i]);
         }
 
         // Bind future markers
@@ -8372,7 +8422,7 @@ mapbox.markers.interaction = function(mmg) {
             // Markers can choose to be not-interactive. The main example
             // of this currently is marker bubbles, which should not recursively
             // give marker bubbles.
-            if (marker.interactive !== false) mi.bind_marker(marker);
+            if (marker.interactive !== false) mi.bindMarker(marker);
         });
     }
 
@@ -8458,7 +8508,7 @@ mapbox.markers.csv_to_geojson = function(x) {
 
     var features = [];
     var parsed = csv_parse(x);
-    if (!parsed.length) return callback(features);
+    if (!parsed.length) return features;
 
     var latfield = '',
         lonfield = '';
@@ -8541,15 +8591,22 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             easey_handlers.MouseWheelHandler()
         ]);
 
+    // Set maxzoom to 17, highest zoom level supported by MapBox streets
+    m.setZoomRange(0, 17);
+
     // Attach easey, ui, and interaction
     m.ease = easey().map(m);
-    m.ui = mapbox.ui().map(m);
+    m.ui = mapbox.ui(m);
     m.interaction = mapbox.interaction().map(m);
 
 
     // Autoconfigure map with sensible defaults
     m.auto = function() {
-        this.ui.auto();
+        this.ui.zoomer.add();
+        this.ui.zoombox.add();
+        this.ui.legend.add();
+        this.ui.attribution.add();
+        this.ui.refresh();
         this.interaction.auto();
 
         for (var i = 0; i < this.layers.length; i++) {
@@ -8595,19 +8652,26 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             this.eventHandlers.push(h);
             h.init(this);
         }
-        return this;
+        return m;
     };
 
 
     m.setPanLimits = function(locations) {
-        if (locations instanceof MM.Extent) {
-            locations = locations.toArray();
+        if (!(locations instanceof MM.Extent)) {
+            locations = new MM.Extent(
+                new MM.Location(
+                    locations[0].lat,
+                    locations[0].lon),
+                new MM.Location(
+                    locations[1].lat,
+                    locations[1].lon));
         }
+        locations = locations.toArray();
         this.coordLimits = [
             this.locationCoordinate(locations[0]).zoomTo(this.coordLimits[0].zoom),
             this.locationCoordinate(locations[1]).zoomTo(this.coordLimits[1].zoom)
         ];
-        return this;
+        return m;
     };
 
 
@@ -8636,14 +8700,8 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
         }
     };
 
-    // Override default addLayer behaviour in order to keep
-    // maker layers on top of tile layers by default
-    // TODO: better layer type detection?
-    m.addLayer = function(layer) {
-        if (layer.features) return MM.Map.prototype.addLayer.call(this, layer);
-        else return this.addTileLayer(layer);
-    };
 
+    // Insert a tile layer below marker layers
     m.addTileLayer = function(layer) {
         for (var i = m.layers.length; i > 0; i--) {
             if (!m.layers[i - 1].features) {
@@ -8651,6 +8709,20 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             }
         }
         return this.insertLayerAt(0, layer);
+    };
+
+    // We need to redraw after removing due to compositing
+    m.removeLayerAt = function(index) {
+        MM.Map.prototype.removeLayerAt.call(this, index);
+        MM.getFrame(this.getRedraw());
+        return this;
+    };
+
+    // We need to redraw after removing due to compositing
+    m.swapLayersAt = function(a, b) {
+        MM.Map.prototype.swapLayersAt.call(this, a, b);
+        MM.getFrame(this.getRedraw());
+        return this;
     };
 
     return m;
@@ -8663,9 +8735,9 @@ if (typeof mapbox === 'undefined') mapbox = {};
 // a tilejson url (or an array of many) and an optional callback
 // that takes one argument, the map.
 mapbox.auto = function(elem, url, callback) {
-    mapbox.load(url, function(opts) {
+    mapbox.load(url, function(tj) {
 
-        if (!(opts instanceof Array)) opts = [opts];
+        var opts = tj instanceof Array ? tj : [tj];
 
         var tileLayers = [],
             markerLayers = [];
@@ -8675,7 +8747,7 @@ mapbox.auto = function(elem, url, callback) {
         }
 
         var map = mapbox.map(elem, tileLayers.concat(markerLayers)).auto();
-        if (callback) callback(map, opts);
+        if (callback) callback(map, tj);
     });
 };
 
@@ -8710,22 +8782,6 @@ mapbox.load = function(url, callback) {
         // Instantiate tile layer
         tj.layer = mapbox.layer().tilejson(tj);
 
-        // Set tile limits
-        if (tj.bounds) {
-            var proj = new MM.MercatorProjection(0,
-                MM.deriveTransformation(
-                    -Math.PI,  Math.PI, 0, 0,
-                    Math.PI,  Math.PI, 1, 0,
-                    -Math.PI, -Math.PI, 0, 1));
-
-            tj.layer.provider.tileLimits = [
-                proj.locationCoordinate(new MM.Location(tj.bounds[3], tj.bounds[0]))
-                    .zoomTo(tj.minzoom ? tj.minzoom : 0),
-                proj.locationCoordinate(new MM.Location(tj.bounds[1], tj.bounds[2]))
-                    .zoomTo(tj.maxzoom ? tj.maxzoom : 18),
-            ];
-        }
-
         // Instantiate markers layer
         if (tj.data) {
             tj.markers = mmg().factory(mapbox.markers.simplestyle_factory);
@@ -8740,72 +8796,45 @@ mapbox.load = function(url, callback) {
 };
 if (typeof mapbox === 'undefined') mapbox = {};
 
-mapbox.ui = function() {
-
-    var ui = {},
-        map,
-        container = document.createElement('div'),
-        auto = false;
-
-    container.id = 'controls';
-
-    ui.map = function(x) {
-        if (!x) return map;
-        map = x;
-        map.parent.appendChild(container);
-        return this;
+mapbox.ui = function(map) {
+    var ui = {
+        zoomer: wax.mm.zoomer().map(map).smooth(true),
+        pointselector: wax.mm.pointselector().map(map),
+        hash: wax.mm.hash().map(map),
+        zoombox: wax.mm.zoombox().map(map),
+        fullscreen: wax.mm.fullscreen().map(map),
+        legend: wax.mm.legend().map(map),
+        attribution: wax.mm.attribution().map(map)
     };
 
-    ui.auto = function() {
-        auto = true;
-        ui.zoomer();
-        ui.zoombox();
-        return this;
-    };
+    function unique(x) {
+        var u = {}, l = [];
+        for (var i = 0; i < x.length; i++) u[x[i]] = true;
+        for (var a in u) { if (a) l.push(a); }
+        return l;
+    }
 
     ui.refresh = function() {
-        return this;
-    };
+        if (!map) return console && console.error('ui not attached to map');
 
-    ui.pointselector = function(callback) {
-        if (!callback) return ui._pointselector;
-        ui._pointselector = wax.mm.pointselector(map, null, callback);
-        return this;
-    };
+        var attributions = [], legends = [];
+        for (var i = 0; i < map.layers.length; i++) {
+            if (map.layers[i].enabled && map.layers[i].tilejson) {
+                var attribution = map.layers[i].tilejson().attribution;
+                if (attribution) attributions.push(attribution);
+                var legend = map.layers[i].tilejson().legend;
+                if (legend) legends.push(legend);
+            }
+        }
 
-    ui.boxselector = function(callback) {
-        if (!callback) return ui._boxselector;
-        ui._boxselector = wax.mm.boxselector(map, null, callback);
-        return this;
-    };
+        var unique_attributions = unique(attributions);
+        var unique_legends = unique(legends);
 
-    ui.hash = function() {
-        ui._hash = wax.mm.hash(map);
-        return this;
-    };
+        ui.attribution.content(unique_attributions.length ? unique_attributions.join('<br />') : '');
+        ui.legend.content(unique_legends.length ? unique_legends.join('<br />') : '');
 
-    ui.zoombox = function() {
-        ui._zoombox = wax.mm.zoombox(map);
-    };
-
-    ui.fullscreen = function() {
-        ui._fullscreen = wax.mm.fullscreen(map).appendTo(container);
-        return this;
-    };
-
-    ui.zoomer = function() {
-        ui._zoomer = wax.mm.zoomer(map).appendTo(container);
-        return this;
-    };
-
-    ui.legend = function(tj) {
-        ui._legend = wax.mm.legend(map, tj).appendTo(container);
-        return this;
-    };
-
-    ui.attribution = function(tj) {
-        ui._attribution = wax.mm.attribution(map, tj).appendTo(container);
-        return this;
+        ui.attribution.element().style.display = unique_attributions.length ? '' : 'none';
+        ui.legend.element().style.display = unique_legends.length ? '' : 'none';
     };
 
     return ui;
@@ -8844,8 +8873,10 @@ mapbox.interaction = function() {
         var map = interaction.map();
         if (!auto || !map) return interaction;
         for (var i = map.layers.length - 1; i >= 0; i --) {
-            var tj = map.layers[i].tilejson && map.layers[i].tilejson();
-            if (tj && tj.template) return interaction.tilejson(tj);
+            if (map.layers[i].enabled) {
+                var tj = map.layers[i].tilejson && map.layers[i].tilejson();
+                if (tj && tj.template) return interaction.tilejson(tj);
+            }
         }
         return interaction.tilejson({});
     };
@@ -8863,73 +8894,6 @@ mapbox.interaction = function() {
 };
 if (typeof mapbox === 'undefined') mapbox = {};
 
-mapbox.provider = function(options) {
-    this.options = {
-        tiles: options.tiles,
-        scheme: options.scheme || 'xyz',
-        minzoom: options.minzoom || 0,
-        maxzoom: options.maxzoom || 22,
-        bounds: options.bounds || [-180, -90, 180, 90]
-    };
-};
-
-mapbox.provider.prototype = {
-
-    // these are limits for available *tiles*
-    // panning limits will be different (since you can wrap around columns)
-    // but if you put Infinity in here it will screw up sourceCoordinate
-    tileLimits: [
-        new MM.Coordinate(0,0,0),             // top left outer
-        new MM.Coordinate(1,1,0).zoomTo(18)   // bottom right inner
-    ],
-
-    releaseTile: function(c) { },
-
-    getTile: function(c) {
-        var coord;
-        if (!(coord = this.sourceCoordinate(c))) return null;
-        if (coord.zoom < this.options.minzoom || coord.zoom > this.options.maxzoom) return null;
-
-        return this.options.tiles[parseInt(Math.pow(2, coord.zoom) * coord.row + coord.column, 10) %
-            this.options.tiles.length]
-            .replace('{z}', coord.zoom.toFixed(0))
-            .replace('{x}', coord.column.toFixed(0))
-            .replace('{y}', coord.row.toFixed(0));
-    },
-
-    // use this to tell MapProvider that tiles only exist between certain zoom levels.
-    // should be set separately on Map to restrict interactive zoom/pan ranges
-    setZoomRange: function(minZoom, maxZoom) {
-        this.tileLimits[0] = this.tileLimits[0].zoomTo(minZoom);
-        this.tileLimits[1] = this.tileLimits[1].zoomTo(maxZoom);
-    },
-
-    // return null if coord is above/below row extents
-    // wrap column around the world if it's outside column extents
-    // ... you should override this function if you change the tile limits
-    // ... see enforce-limits in examples for details
-    sourceCoordinate: function(coord) {
-        var TL = this.tileLimits[0].zoomTo(coord.zoom).container(),
-            BR = this.tileLimits[1].zoomTo(coord.zoom).container().right().down(),
-            columnSize = Math.pow(2, coord.zoom),
-            wrappedColumn;
-
-        if (coord.column < 0) {
-            wrappedColumn = ((coord.column % columnSize) + columnSize) % columnSize;
-        } else {
-            wrappedColumn = coord.column % columnSize;
-        }
-
-        if (coord.row < TL.row || coord.row >= BR.row) {
-            return null;
-        } else if (wrappedColumn < TL.column || wrappedColumn >= BR.column) {
-            return null;
-        } else {
-            return new MM.Coordinate(coord.row, wrappedColumn, coord.zoom);
-        }
-    }
-};
-
 mapbox.layer = function() {
     if (!(this instanceof mapbox.layer)) {
         return new mapbox.layer();
@@ -8938,6 +8902,7 @@ mapbox.layer = function() {
     this._tilejson = {};
     this._url = '';
     this._id = '';
+    this._composite = true;
 
     this.name = '';
     this.parent = document.createElement('div');
@@ -8946,33 +8911,34 @@ mapbox.layer = function() {
     this.requestManager = new MM.RequestManager();
     this.requestManager.addCallback('requestcomplete', this.getTileComplete());
     this.requestManager.addCallback('requesterror', this.getTileError());
-    this.setProvider(new mapbox.provider({
-        tiles: ['data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=']
+    this.setProvider(new wax.mm._provider({
+        tiles: ['data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7']
     }));
 };
 
-mapbox.layer.prototype.refresh = function() {
+mapbox.layer.prototype.refresh = function(callback) {
     var that = this;
     // When the async request for a TileJSON blob comes back,
     // this resets its own tilejson and calls setProvider on itself.
     wax.tilejson(this._url, function(o) {
         that.tilejson(o);
+        if (callback) callback(that);
     });
     return this;
 };
 
-mapbox.layer.prototype.url = function(x) {
-    if (!arguments.length) return this.url;
+mapbox.layer.prototype.url = function(x, callback) {
+    if (!arguments.length) return this._url;
     this._url = x;
-    return this.refresh();
+    return this.refresh(callback);
 };
 
-mapbox.layer.prototype.id = function(x) {
+mapbox.layer.prototype.id = function(x, callback) {
     if (!arguments.length) return this._id;
     this.url('http://a.tiles.mapbox.com/v3/' + x + '.jsonp');
     this.named(x);
     this._id = x;
-    return this.refresh();
+    return this.refresh(callback);
 };
 
 mapbox.layer.prototype.named = function(x) {
@@ -8983,9 +8949,105 @@ mapbox.layer.prototype.named = function(x) {
 
 mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
-    this.setProvider(new mapbox.provider(x));
+    this.setProvider(new wax.mm._provider(x));
     this._tilejson = x;
+
+    this.name = this.name || x.id;
+    this._id = this._id || x.id;
+
+    if (x.bounds) {
+        var proj = new MM.MercatorProjection(0,
+            MM.deriveTransformation(
+                -Math.PI,  Math.PI, 0, 0,
+                Math.PI,  Math.PI, 1, 0,
+                -Math.PI, -Math.PI, 0, 1));
+
+        this.provider.tileLimits = [
+            proj.locationCoordinate(new MM.Location(x.bounds[3], x.bounds[0]))
+                .zoomTo(x.minzoom ? x.minzoom : 0),
+            proj.locationCoordinate(new MM.Location(x.bounds[1], x.bounds[2]))
+                .zoomTo(x.maxzoom ? x.maxzoom : 18)
+        ];
+    }
+
     return this;
+};
+
+mapbox.layer.prototype.draw = function() {
+    if (!this.enabled || !this.map) return;
+
+    if (this._composite) {
+
+        // Get index of current layer
+        var i = 0;
+        for (i; i < this.map.layers.length; i++) {
+            if (this.map.layers[i] == this) break;
+        }
+
+        // If layer is composited by layer below it, don't draw
+        for (var j = i - 1; j >= 0; j--) {
+            if (this.map.getLayerAt(j).enabled) {
+                if (this.map.getLayerAt(j)._composite) {
+                    this.parent.style.display = 'none';
+                    this.compositeLayer = false;
+                    return this;
+                }
+                else break;
+            }
+        }
+
+        // Get map IDs for all consecutive composited layers
+        var ids = [];
+        for (var k = i; k < this.map.layers.length; k++) {
+            var l = this.map.getLayerAt(k);
+            if (l.enabled) {
+                if (l._composite) ids.push(l.id());
+                else break;
+            }
+        }
+        ids = ids.join(',');
+
+        if (this.compositeLayer !== ids) {
+            this.compositeLayer = ids;
+            var that = this;
+            mapbox.load(ids, function(tiledata) {
+                that.setProvider(new wax.mm._provider(tiledata));
+                // setProvider calls .draw()
+            });
+            this.parent.style.display = '';
+            return this;
+        }
+
+    } else {
+        this.parent.style.display = '';
+        // Set back to regular provider
+        if (this.compositeLayer) {
+            this.compositeLayer = false;
+            this.tilejson(this.tilejson());
+            // .draw() called by .tilejson()
+        }
+    }
+
+    return MM.Layer.prototype.draw.call(this);
+};
+
+mapbox.layer.prototype.composite = function(x) {
+    if (!arguments.length) return this._composite;
+    if (x) this._composite = true;
+    else this._composite = false;
+    return this;
+};
+
+// we need to redraw map due to compositing
+mapbox.layer.prototype.enable = function(x) {
+    MM.Layer.prototype.enable.call(this, x);
+    this.map.draw();
+};
+
+// we need to redraw map due to compositing
+mapbox.layer.prototype.disable = function(x) {
+    MM.Layer.prototype.disable.call(this, x);
+    this.map.draw();
 };
 
 MM.extend(mapbox.layer, MM.Layer);
