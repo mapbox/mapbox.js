@@ -340,6 +340,17 @@ _Arguments_
 
 _Returns_ a layer.
 
+<div class="separator">Easing</div>
+ 
+### map.ease
+
+This is an instance of [mapbox.ease](#mapbox.ease) attached to the map for convenience. For full documentation take a look at [mapbox.ease](#mapbox.ease).
+
+_Example:_
+
+    map.ease.location({ lat: 10, lon: -88 }).zoom(5).optimal();
+
+
 <div class="separator">User interface</div>
 
 ### map.ui
