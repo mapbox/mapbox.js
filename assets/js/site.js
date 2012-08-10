@@ -126,9 +126,9 @@
             });
         },
 
-        colorCode: function() {
+        colorCode: function(cb) {
             $('pre').addClass('prettyprint');
-            prettyPrint();
+            prettyPrint(cb);
         },
 
         search: function() {
@@ -175,6 +175,80 @@
         bindHeadings: function() {
             $('h1[id],h2[id],h3[id],h4[id]').click(function(ev) {
                 window.location.hash = $(ev.currentTarget).attr('id');
+            });
+        },
+
+        bindHints: function() {
+
+            // Inventory mapbox.js
+            var things = {};
+            function addThings(name, obj) {
+                for (var p in obj) {
+                    if (!things[p]) things[p] = {only: name};
+                    else things[p].only = null;
+                    things[p][name] = typeof obj[p];
+                }
+            }
+
+            addThings('mapbox', mapbox);
+            addThings('map', mapbox.map(document.createElement('div')));
+            addThings('ease', easey());
+            addThings('layer', mapbox.layer());
+            addThings('mapbox.markers', mapbox.markers);
+            addThings('markers', mapbox.markers.layer());
+            addThings('interaction', mapbox.markers.interaction(mapbox.markers.layer()));
+
+            $('pre.prettyprint').each(function() {
+                $(this).find('span.pln, span.kwd').each(function() {
+                    var $this = $(this),
+                        name = $this.text(),
+                        object,
+                        isFunction = $this.next().text()[0] == '(',
+                        f = things[name];
+
+                    // We have something with that name in our inventory
+                    if (f) {
+                        var pt = $this.prev().text();
+
+                        // Only one function with that name
+                        if (f.only && (isFunction == (f[f.only] == 'function'))) {
+                            object = f.only;
+
+                        // No chaining
+                        } else if (pt === '.') {
+                            var t = $this.prev().prev().text().trim();
+                            if (f[t] && (isFunction == (f[t] == 'function'))) {
+                                object = t;
+                            }
+
+                        // Chaining
+                        } else if (pt.slice(pt.length - 2, pt.length) == ').') {
+                            // Keep track of open and close brackets
+                            var opened = 0,
+                                closed = 0;
+                            $this.prevUntil().each(function() {
+                                var t = $(this).text().trim(),
+                                    open = t[0] === '(',
+                                    close = t.slice(t.length - 2, t.length) == ').';
+
+                                if (open && close) null
+                                else if (open) opened ++;
+                                else if (close) closed ++;
+
+                                if (opened == closed) {
+                                    t = $(this).prev().text().trim();
+                                    if (things[t].only && (isFunction == (f[things[t].only]  == 'function'))) {
+                                        object = things[t].only;
+                                    }
+                                    return false;
+                                }
+                            });
+                        }
+                    }
+                    if (!object) return;
+                    $this.html($('<a target="_blank" href="/mapbox.js/api/v0.6.3/#' + object + '.' + name + '">' + name + '</a>'));
+                    $this.css('text-decoration', 'underline');
+                });
             });
         }
     };

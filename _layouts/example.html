@@ -9,11 +9,6 @@ class: box
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
-<!-- @TODO mapbox.js + css are already included via mapbox.com layout wrapper. -->
-<!-- determine if we can use that version or if there are reasons to use specific version. -->
-<link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
-<script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
-
 <style type='text/css'>
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
@@ -112,5 +107,7 @@ pre { margin:0px; background:#fff; }
     var example = new Docs();
     $(example.page);
     $(example.copyCode);
+    example.colorCode(example.bindHints);
+    example.bindSearch();
   });
 </script>
