@@ -60,8 +60,8 @@
                             $('#results').append(tExamples(result));
                         });
                     }
-                }
-            }
+                };
+            };
 
             var find = function(phrase) {
                 var matches = _(data).filter(function(p) {
@@ -114,15 +114,15 @@
         copyCode: function() {
             $('#copy').click(function() {
                 if (document.selection) {
-                                    var rangeD = document.body.createTextRange();
-                                    rangeD.moveToElementText(document.getElementById('code'));
-                                    rangeD.select();
-                                } else if (window.getSelection) {
-                                        var rangeW = document.createRange();
-                                        rangeW.selectNode(document.getElementById('code'));
-                                        window.getSelection().addRange(rangeW);
-                                    }
-                        return false;
+                    var rangeD = document.body.createTextRange();
+                    rangeD.moveToElementText(document.getElementById('code'));
+                    rangeD.select();
+                } else if (window.getSelection) {
+                    var rangeW = document.createRange();
+                    rangeW.selectNode(document.getElementById('code'));
+                    window.getSelection().addRange(rangeW);
+                }
+                return false;
             });
         },
 
@@ -246,8 +246,8 @@
                                     close = t.slice(t.length - 2, t.length) == ').';
 
                                 if (open && close) null
-                                else if (open) opened ++;
-                                else if (close) closed ++;
+                                else if (open) opened++;
+                                else if (close) closed++;
 
                                 if (opened == closed) {
                                     t = $(this).prev().text().trim();
@@ -269,4 +269,3 @@
 
     window.Docs = Docs;
 })(window);
-
