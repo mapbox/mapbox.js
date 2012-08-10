@@ -1,6 +1,8 @@
 ### v0.6.4 (unreleased)
 
 * `map.auto` now adds legend and attribution, if available in tilejson
+* `map.setPanLimits` now sorts locations internally, if given locations
+* Documentation improvements
 
 ### v0.6.3
 

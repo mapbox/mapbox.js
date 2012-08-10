@@ -117,9 +117,16 @@ Set the map's panning limits.
 
 _Arguments:_
 
-* `locations` must be either an instance of MM.Extent or an array of locations in the order north, west, south, east.
+* `locations` must be either an instance of MM.Extent or an array of two locations in
+  `{ lat: 0, lon: 0 }` form. The order of locations doesn't matter - they're sorted internally.
 
 _Returns_ the map object.
+
+_Example_:
+
+    map.setPanLimits([{ lat: -20, lon: 0 }, { lat: 0, lon: 20 }]);
+    // or with an Extent object
+    map.setPanLimits(new MM.Extent(0, -20, -20, 0));
 
 ### map.setSize(dimensions)
 

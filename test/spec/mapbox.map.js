@@ -59,12 +59,33 @@ describe("mapbox.map", function() {
     });
 
     it("has setPanLimits", function() {
-        var locations = [
-            { lat: -20, lon: 0 },
-        { lat: 0, lon: 20 }];
+        var locations = [{ lat: -20, lon: 0 }, { lat: 0, lon: 20 }];
         var m = mapbox.map(document.createElement('div'));
         expect(m.addLayer(mapbox.markers.layer())).toEqual(m);
         expect(m.setPanLimits(locations)).toEqual(m);
+    });
+
+    it("accepts an array in pan limits", function() {
+        var locations = [{ lat: -20, lon: 0 }, { lat: 0, lon: 20 }];
+        var m = mapbox.map(document.createElement('div'));
+        expect(m.setPanLimits(locations)).toEqual(m);
+        expect(m.coordLimits[0].row).toEqual(0.5);
+    });
+    
+    it("sorts lat lons given to it in setPanLimits", function() {
+        var locations = [
+            { lat: 0, lon: 20 },
+            { lat: -20, lon: 0 }];
+        var m = mapbox.map(document.createElement('div'));
+        expect(m.setPanLimits(locations)).toEqual(m);
+        expect(m.coordLimits[0].row).toEqual(0.5);
+    });
+
+    it("can take an extent in pan limits", function() {
+        var locations = new MM.Extent(0, -20, -20, 0);
+        var m = mapbox.map(document.createElement('div'));
+        expect(m.setPanLimits(locations)).toEqual(m);
+        expect(m.coordLimits[0].row).toEqual(0.5);
     });
 
     it("can set and reset smooth", function() {

@@ -78,9 +78,16 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
 
 
     m.setPanLimits = function(locations) {
-        if (locations instanceof MM.Extent) {
-            locations = locations.toArray();
+        if (!(locations instanceof MM.Extent)) {
+            locations = new MM.Extent(
+                new MM.Location(
+                    locations[0].lat,
+                    locations[0].lon),
+                new MM.Location(
+                    locations[1].lat,
+                    locations[1].lon));
         }
+        locations = locations.toArray();
         this.coordLimits = [
             this.locationCoordinate(locations[0]).zoomTo(this.coordLimits[0].zoom),
             this.locationCoordinate(locations[1]).zoomTo(this.coordLimits[1].zoom)
