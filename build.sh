@@ -11,6 +11,11 @@ if [ -e dist/$TAG ]; then
     exit;
 fi
 
+if ! [[ $TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-dev.*)?$ ]]; then
+    echo "Tag must be in the form of v0.6.4"
+    exit;
+fi
+
 echo "--- BUILDING mapbox.js $TAG ---"
 
 echo "Checking out tag..."
