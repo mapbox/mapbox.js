@@ -178,6 +178,7 @@
             });
         },
 
+        // Automatically links example code to API reference
         bindHints: function() {
 
             // Inventory mapbox.js
@@ -213,6 +214,9 @@
                     if (f) {
                         var pt = $this.prev().text();
 
+                        // If its not preceded by a '.', its not an object method
+                        if (pt[pt.length - 1] !== '.') return;
+
                         // Only one function with that name
                         if (f.only && (isFunction == (f[f.only] == 'function'))) {
                             object = f.only;
@@ -223,6 +227,8 @@
                             if (f[t] && (isFunction == (f[t] == 'function'))) {
                                 object = t;
                             }
+
+                            // Handle cases such as `mapbox.makers.interaction`
                             for (var d in f) {
                                 if (d.indexOf(t) == d.length - t.length) {
                                     object = d;
