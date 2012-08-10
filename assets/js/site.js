@@ -190,8 +190,11 @@
                 }
             }
 
+            var map =  mapbox.map(document.createElement('div'));
             addThings('mapbox', mapbox);
-            addThings('map', mapbox.map(document.createElement('div')));
+            addThings('map', map);
+            addThings('map.ui', map.ui);
+            addThings('map.interaction', map.interaction);
             addThings('ease', easey());
             addThings('layer', mapbox.layer());
             addThings('mapbox.markers', mapbox.markers);
@@ -219,6 +222,11 @@
                             var t = $this.prev().prev().text().trim();
                             if (f[t] && (isFunction == (f[t] == 'function'))) {
                                 object = t;
+                            }
+                            for (var d in f) {
+                                if (d.indexOf(t) == d.length - t.length) {
+                                    object = d;
+                                }
                             }
 
                         // Chaining
