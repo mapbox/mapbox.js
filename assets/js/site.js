@@ -261,7 +261,6 @@
                     }
                     if (!object) return;
                     $this.html($('<a target="_blank" href="/mapbox.js/api/v0.6.3/#' + object + '.' + name + '">' + name + '</a>'));
-                    $this.css('text-decoration', 'underline');
                 });
             });
         }
