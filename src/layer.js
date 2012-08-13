@@ -41,7 +41,7 @@ mapbox.layer.prototype.url = function(x, callback) {
 
 mapbox.layer.prototype.id = function(x, callback) {
     if (!arguments.length) return this._id;
-    this.url('http://a.tiles.mapbox.com/v3/' + x + '.jsonp');
+    this.url(mapbox.MAPBOX_URL + x + '.jsonp');
     this.named(x);
     this._id = x;
     return this.refresh(callback);

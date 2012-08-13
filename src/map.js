@@ -1,5 +1,6 @@
 if (typeof mapbox === 'undefined') mapbox = {};
 
+mapbox.MAPBOX_URL = 'http://a.tiles.mapbox.com/v3/';
 
 // a `mapbox.map` is a modestmaps object with the
 // easey handlers as defaults

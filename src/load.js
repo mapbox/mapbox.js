@@ -33,7 +33,7 @@ mapbox.load = function(url, callback) {
 
     // Support bare IDs as well as fully-formed URLs
     if (url.indexOf('http') !== 0) {
-        url = 'http://a.tiles.mapbox.com/v3/' + url + '.jsonp';
+        url = mapbox.MAPBOX_URL + url + '.jsonp';
     }
 
     wax.tilejson(url, function(tj) {
@@ -46,7 +46,7 @@ mapbox.load = function(url, callback) {
             lon: tj.center[0]
         };
 
-        tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + '/thumb.png';
+        tj.thumbnail = mapbox.MAPBOX_URL + tj.id + '/thumb.png';
 
         // Instantiate tile layer
         tj.layer = mapbox.layer().tilejson(tj);
