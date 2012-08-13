@@ -184,6 +184,21 @@ eventually, but not immediately.
 
 Refreshes map.ui and map.interaction to reflect any layer changes.
 
+<div class="separator">Properties</div>
+
+### map.coordinate
+
+The map's current center coordinate.
+
+### map.dimensions
+
+An object with `x` and `y` attributes expressing the dimensions of the map in pixels.
+
+### map.parent
+
+The DOM element containing the map.
+
+
 <div class="separator">Conversions</div>
 
 ### map.pointLocation(point)
