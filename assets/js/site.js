@@ -230,7 +230,7 @@
 
                             // Handle cases such as `mapbox.makers.interaction`
                             for (var d in f) {
-                                if (d.indexOf(t) == d.length - t.length) {
+                                if (d.length > t.length && d.indexOf(t) == d.length - t.length) {
                                     object = d;
                                 }
                             }
