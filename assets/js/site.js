@@ -202,6 +202,10 @@
             addThings('markers', mapbox.markers.layer());
             addThings('interaction', mapbox.markers.interaction(mapbox.markers.layer()));
 
+            // Cover a couple problematic cases
+            delete things.markers;
+            delete things.add;
+
             $('pre.prettyprint').each(function() {
                 $(this).find('span.pln, span.kwd').each(function() {
                     var $this = $(this),
