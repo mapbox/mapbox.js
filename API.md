@@ -485,6 +485,12 @@ _Arguments:_
 
 _Returns_ the boxselector
 
+### map.ui.refresh()
+
+Refresh legend and attribution to reflect layer changes, merging and displaying legends and attribution for all enabled layers.
+
+_Returns_ the ui object.
+
 <div class="separator">Interaction</div>
 
 ### map.interaction
