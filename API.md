@@ -1,12 +1,7 @@
 # Map
 
-The map is, of course, the central element of most mapping sites. In the MapBox JavaScript API,
-the map object manages a set of layers, stores and displays zoom levels and centerpoints,
-and accepts a set of UI controls to which you can add your own finishing touches.
-
-Technically speaking, maps are based on [Modest Maps](http://modestmaps.com/),
-so [the full Modest Maps API](https://github.com/shawnbot/modestmaps-js/blob/add-docs/doc/api.md)
-is available to power-users.
+Maps are the central element of the Javascript API - the map object manages
+tile layers, contains UI elements, and provides many types of interactivity.
 
 ## mapbox.map(element [, layers] [, dimensions] [, eventHandlers])
 
@@ -14,7 +9,10 @@ Create a map on the current page.
 
 _Arguments:_
 
-* `element` must be the `id` of an element on the page, or an element itself. Typically maps are created within `<div>` elements
+* `element` must be the `id` of an element on the page, or an element itself.
+  Typically maps are created within `<div>` elements. This element should have a
+  _size_: whether specified with external CSS or an inline style like
+  `style="width:600px;height:400px"`
 * `layers` can be a layer created with [`mapbox.layer()`](#mapbox.layer), an array of such layers, or omitted
 * `dimensions` can be an object with `x` and `y` attributes representing the width and height in pixels
 * `eventHandlers` can be an array of event handlers, including any of the following:
@@ -29,6 +27,12 @@ _Arguments:_
 
 _Returns_ a map object, which has the following methods:
 
+_Example:_
+
+    // for this to work, you'll need an element like
+    // <div id="map"></div> on your page
+    var map = mapbox.map('map');
+
 ### map.smooth(value)
 
 Enable or disable inertial panning on maps. By default, maps smoothly pan and
@@ -40,7 +44,7 @@ _Arguments:_
 
 _Returns_ the map object.
 
-**Example:**
+_Example:_
 
     map.smooth(false); // disable inertial panning
 
@@ -57,6 +61,11 @@ _Arguments:_
 _Returns_ the map object if arguments are given, the map's center location (in the same form as
 specified in `centerpoint`) otherwise.
 
+_Example:_
+
+    // center the map on Manhattan
+    map.center({ lat: 40.74, lon: -73.98);
+
 ### map.zoom(zoom [, animate])
 
 Set the map's zoom level, or get its current zoom level.
@@ -71,6 +80,7 @@ _Returns_ the map object if arguments are given, the map's current zoom level ot
 
 **Example:**
 
+    // zoom to z10 and animate the transition
     map.zoom(10, true);
 
 ### map.centerzoom(center, zoom [, animate])
@@ -86,9 +96,10 @@ _Arguments:_
 
 _Returns_ the map object.
 
-**Example:**
+_Example:_
 
-    map.centerzoom({ lat: 10, lon: -88 }, 5);
+    // Center the map on Washington, DC, at zoom level 5
+    map.centerzoom({ lat: 38.9, lon: -77.03 }, 5);
 
 ### map.getExtent()
 
@@ -97,14 +108,24 @@ Get the extent of the currently visible area.
 _Returns_ an instance of `MM.Extent`.
 
 ### map.setExtent(extent [, precise]_
+
 Modify the center and zoom of the map so that the provided extent is visible.
+This can be useful because extents - the corners of the map - can implicitly
+cause the map to 'show the whole world' regardless of screen size.
 
 _Arguments:_
 
-* `extent` can be an instance of `MM.Extent`
+* `extent` can be an instance of `MM.Extent`, or an array of two locations.
 * `precise` cab be `true` or `false`. If true, resulting zoom levels may be fractional. (By default, the map's zoom level is rounded down to keep tile images from blurring.)
 
 _Returns_ the map object.
+
+_Example:_
+
+    // using an extent object:
+    map.setExtent(new MM.Extent(80, -170, -70, 170));
+    // this call can also be expressed as:
+    map.setExtent([{ lat: 80, lon: -170 }, { lat: -70, lon: 170 }]);
 
 ### map.setZoomRange(minZoom, maxZoom)
 
@@ -158,6 +179,13 @@ _Arguments:_
 
 _Returns_ the map object.
 
+_Example:_
+
+    // zoom in by one zoom level
+    map.zoomBy(1);
+    // zoom out by two zoom levels
+    map.zoomBy(-2);
+
 ### map.zoomByAbout(zoomOffset, point)
 
 Change the zoom level by the provided offset, while maintaining the same location at the provided point. This is used by `MM.DoubleClickHandler`.
@@ -177,6 +205,11 @@ _Arguments:_
 * `y` the distance to pan vertically. Positive values pan down, negative values pan up.
 
 _Returns_ the map object.
+
+_Example:_
+
+    // pan right and down by one pixel
+    map.panBy(1, 1);
 
 ### map.draw()
 
@@ -219,7 +252,13 @@ _Arguments:_
 
 * `point` is an instance of `MM.Point` or an object with `x` and `y` properties.
 
-_Returns_ an instance of `MM.Location`.
+_Returns_ an object with `lat` and `lon` properties indicating the latitude
+and longitude of the point on the globe.
+
+_Example:_
+
+    // get the geographical location of the top-left corner of the map
+    var top_left = map.pointLocation({ x: 0, y: 0});
 
 ### map.pointCoordinate(point)
 
@@ -229,7 +268,14 @@ _Arguments:_
 
 * `point` is an instance of `MM.Point` or an object with `x` and `y` properties.
 
-_Returns_ an instance of `MM.Coordinate`.
+_Returns_ an instance of `MM.Coordinate` - an object with `column`, `row`,
+and `zoom` properties indicating the coordinate of the point. The `zoom` of
+the point will be same as the current zoom level of the map.
+
+_Example:_
+
+    // get the coordinate location of the top-left corner of the map
+    var top_left = map.coordinateLocation({ x: 0, y: 0});
 
 ### map.locationPoint(location)
 
@@ -283,6 +329,11 @@ _Arguments:_
 
 _Returns_ the map object.
 
+_Example:_
+
+    // add a layer to the map
+    map.addLayer(mapbox.layer().id('examples.map-dg7cqh4z'));
+
 ### map.addTileLayer(layer)
 
 Add a tile layer to the map, below any marker layers to prevent them from being covered up.
@@ -329,6 +380,11 @@ _Arguments:_
 
 _Returns_ the map object.
 
+_Example:_
+
+    // disable the topmost layer in the map
+    map.disableLayerAt(0);
+
 ### map.enableLayer(layer)
 
 Enable a previously disabled layer.
@@ -350,6 +406,7 @@ _Arguments:_
 _Returns_ the map object.
 
 ### map.getLayer(name)
+
 Get a layer by name.
 
 _Arguments:_
@@ -373,7 +430,7 @@ _Arguments_
 _Returns_ a layer.
 
 <div class="separator">Easing</div>
- 
+
 ### map.ease
 
 This is an instance of [mapbox.ease](#mapbox.ease) attached to the map for convenience. For full documentation take a look at [mapbox.ease](#mapbox.ease).
@@ -398,10 +455,18 @@ remove them from the map.
 Add the UI element to the map. Add the HTML elements that the UI element
 manages (if any) to the map element, and bind any events.
 
+_Example:_
+
+    // enable the zoomer control. adds + and - buttons to the map
+    map.ui.zoomer.add();
+
 #### .remove()
 
 Remove the UI element from the map. Removes the HTML elements from the
 map, if any, and removes listeners, if any.
+
+    // remove the fullscreen control from the map visually and functionally
+    map.ui.fullscreen.remove();
 
 #### .element()
 
@@ -602,7 +667,7 @@ Fires when the map has been resized. Callbacks receive two arguments:
 * `map` is the map object.
 * `dimensions` is a new `MM.Point` with the map's new dimensions.
 
-**Example:** 
+_Example:_
 
     map.addCallback("resized", function(map, dimensions) {
         console.log("map dimensions:", dimensions.x, "y:", dimensions.y);
@@ -615,7 +680,7 @@ Fires when the map's extent is set. Callbacks receive two arguments:
 * `map` is the map object.
 * `extent` is an instance of `MM.Extent`.
 
-**Example:**
+_Example:_
 
     map.addCallback("extentset", function(map, extent) {
         console.log("Map's extent set to:", extent);
@@ -627,7 +692,7 @@ Fires when the map is redrawn. Callbacks receive one argument:
 
 * `map` is the map object.
 
-**Example:**
+_Example:_
 
     map.addCallback("drawn", function(map) {
       console.log("map drawn!");
@@ -662,6 +727,16 @@ _Arguments:_
       // if present, like you would create with mapbox.markers()
       markers: MARKERS_LAYER
     }
+
+_Example:_
+
+    <div id='map' style='width:500px;height:400px;'></div>
+    <script>
+    mapbox.load('tmcw.map-hehqnmda', function(o) {
+        var map = mapbox.map('map');
+        map.addLayer(o.layer);
+    });
+    </script>
 
 ## mapbox.auto(element, url [, callback])
 
@@ -708,7 +783,7 @@ _Arguments:_
 
 _Returns_ the layer object if arguments are given, the layer's `id` otherwise.
 
-**Example:**
+_Example:_
 
     var layer = mapbox.layer().id('map-hehqnmda');
 
