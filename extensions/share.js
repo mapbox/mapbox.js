@@ -64,7 +64,7 @@ mapbox.share = function() {
     share.appendChild(embed);
     share.appendChild(close);
 
-    popup.className = 'wax-share';
+    popup.className = 'map-share';
     popup.style.display = 'none';
     popup.appendChild(share);
 
@@ -75,13 +75,13 @@ mapbox.share = function() {
     };
 
     share.add = function() {
-        this.appendTo(map.parent);
+        this.appendTo($('body')[0]);
         return this;
     };
 
     share.remove = function() {
-        link.parentNode.removeChild(link);
-        popup.parentNode.removeChild(parent);
+        $(link).remove();
+        $(popup).remove();
         return this;
     };
     

@@ -1,7 +1,7 @@
 /* ### General control styles ### */
- .wax-share div,
- .wax-share .twitter,
- .wax-share .facebook {
+ .map-share div,
+ .map-share .twitter,
+ .map-share .facebook {
   display:block;
   position:absolute;
   border:1px solid #ccc;
@@ -15,28 +15,25 @@
   }
 
 /* ### Zoomer, close buttons, share ### */
- .close {
+ .map-share .close {
+  position: absolute;
   text-indent:-9999px;
-  background-image:url(/assets/tilestream-pro/images/controls.png);
-  background-position:60px 60px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAeCAYAAADO4udXAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHFSURBVHic7dpBbsIwEAXQoZpbwKKz8Bm66EFyjUicI1KuwUF6Ci/cBbmFJbqoLbluJezgMSn8JyGhJMRAvmZiw+5yuRBAay/3fgPwmBAsUIFggQoEC1QgWKACwQIVCBaoQLCgiIiMIjKWHo9gbVy4oJ/po9e42fPiUBERcemBxpiD935i5qO19ly6rzUR+SAics69a46zFc65WUSIKi9sA2MYN449O+fm0hcXVyzv/UREb977kzHmELeHUJ3Cvqn0fDfYhwfoi5WqKlREFRWLmY8hQPsQroGIKG4jooWZjzWDw3VJG4oXtnflWqU4WNbaszFmSMMVdsVQDdpt8NmkoYoVI2lPPY0iQjVVa1f774ak9cV2pBqqcE91rfUtre+57jGuiIxJgFa3oS0orljQxU03zGv8NeNzzr3eet6qipVVqyVs7toK43S7xYffmmwpoVulysPV4rstnhXmoWLmgZkH+g7YPp8twnOrXW74UZ2stecsXD2WG55F1Ur3Wtmss1mFrF1u+LUImswWp07LDcv1Q/6n3u1dc9ZZPSuExxErosa9HIIFKvAjNKhAsEAFggUqECxQgWCBCgQLVCBYoALBAhVfpi7sxwlEhWYAAAAASUVORK5CYII=);
   background-repeat:no-repeat;
   overflow:hidden;
+  background-position:-6px -6px;
+  top:4px;
+  right:4px;
+  width:18px;
+  height:18px;
   }
 
- .close:active {
+ .map-share .close:active {
   border-color:#bbb;
   background-color:#ddd;
   box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
   -moz-box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
   -webkit-box-shadow:inset rgba(0,0,0,0.1) 0px 1px 3px;
-  }
-
- .close {
-  top:4px;
-  right:4px;
-  width:18px;
-  height:18px;
-  background-position:-6px -6px;
   }
 
  .share {
@@ -52,13 +49,16 @@
   background:rgba(32,32,32,0.75);
   border-color:#666;
   border-color:rgba(128,128,128,0.75);
+  border-radius: 3px;
   color:#fff;
+  position: absolute;
+  left: 11px;
+  top: 45px;
   }
 
-.share { top:45px; }
 
 /* ### Share ### */
- .wax-share {
+ .map-share {
   background:#666;
   background:rgba(32,32,32,0.75);
   position:absolute;
@@ -68,7 +68,7 @@
   z-index:999999;
   }
 
- .wax-share div {
+ .map-share div {
   right:50%;
   top:50%;
   margin:-120px -180px 0px 0px;
@@ -78,9 +78,9 @@
   overflow:hidden;
   }
 
- .wax-share small { color:#999; }
+ .map-share small { color:#999; }
 
- .wax-share textarea {
+ .map-share textarea {
   display:block;
   font:normal 10px/15px Arial,sans-serif;
   resize:none;
@@ -89,8 +89,8 @@
   width:310px;
   }
 
- .wax-share .twitter,
- .wax-share .facebook {
+ .map-share .twitter,
+ .map-share .facebook {
   display:inline-block;
   position:relative;
   padding:2px 18px;
@@ -101,12 +101,12 @@
   border:2px solid #ccc;
   }
 
- .wax-share .twitter {
+ .map-share .twitter {
   background:#0ac;
   border-color:#4ce;
   }
 
- .wax-share .facebook {
+ .map-share .facebook {
   background:#359;
   border-color:#68c;
   }
