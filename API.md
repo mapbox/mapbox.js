@@ -8,7 +8,7 @@ Technically speaking, maps are based on [Modest Maps](http://modestmaps.com/),
 so [the full Modest Maps API](https://github.com/shawnbot/modestmaps-js/blob/add-docs/doc/api.md)
 is available to power-users.
 
-## mapbox.map(element [, layers])
+## mapbox.map(element [, layers] [, dimensions] [, eventHandlers])
 
 Create a map on the current page.
 
@@ -16,6 +16,16 @@ _Arguments:_
 
 * `element` must be the `id` of an element on the page, or an element itself. Typically maps are created within `<div>` elements
 * `layers` can be a layer created with [`mapbox.layer()`](#mapbox.layer), an array of such layers, or omitted
+* `dimensions` can be an object with `x` and `y` attributes representing the width and height in pixels
+* `eventHandlers` can be an array of event handlers, including any of the following:
+    * `easey_handlers.DragHandler()`
+    * `easey_handlers.DoubleClickHandler()`
+    * `easey_handlers.MouseWheelHandler()`
+    * `easey_handlers.TouchHandler()`
+    * `MM.DragHandler()`
+    * `MM.DoubleClickHandler()`
+    * `MM.MouseWheelHandler()`
+    * `MM.TouchHandler()`
 
 _Returns_ a map object, which has the following methods:
 
