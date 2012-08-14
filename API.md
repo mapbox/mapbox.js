@@ -532,7 +532,7 @@ Adds a callback that is called on changes to the pointselector contents.
 _Arguments:_
 
 * `event` is a string of the event you want to bind the callback to
-* `callback` is a funcion that is called on the event specified by `event`
+* `callback` is a function that is called on the event specified by `event`
 
 Event should be a String which is one of the following:
 
@@ -554,7 +554,7 @@ _Arguments:_
 * `event` is a string of the event you want to bind the callback to
   This must be the same string that was given in `addCallback`
 
-* `callback` is a funcion that is called on the event specified by `event`.
+* `callback` is a function that is called on the event specified by `event`.
   This must be the same function as was given in `addCallback`. 
 
 _Returns_ the pointselector
@@ -570,7 +570,7 @@ Adds a callback that is called on changes to the boxselector contents.
 _Arguments:_
 
 * `event` is a string of the event you want to bind the callback to
-* `callback` is a funcion that is called on the event specified by `event`
+* `callback` is a function that is called on the event specified by `event`
 
 Event should be a String which is one of the following:
 
@@ -592,7 +592,7 @@ _Arguments:_
 * `event` is a string of the event you want to bind the callback to
   This must be the same string that was given in `addCallback`
 
-* `callback` is a funcion that is called on the event specified by `event`.
+* `callback` is a function that is called on the event specified by `event`.
   This must be the same function as was given in `addCallback`.
 
 _Returns_ the boxselector
