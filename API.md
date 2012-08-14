@@ -477,6 +477,10 @@ returns the DOM element this control exposes.
 
 Add a link that can maximize and minimize the map on the browser page
 
+_DOM Structure:_
+
+    <a class="map-fullscreen" href="#fullscreen">fullscreen</a>
+
 ### map.ui.hash
 
 Add the map's changing position to the URL, making map locations linkable
@@ -490,13 +494,31 @@ to which the map zooms
 
 Add zoom in and zoom out buttons to map
 
+_DOM Structure:_
+
+    <!-- when a zoom control is inactive, .zoomdisable is added to it -->
+    <a href="#" class="zoomer zoomin">+</a>
+    <a href="#" class="zoomer zoomout">-</a>
+
 ### map.ui.attribution
 
 Add an element with attribution information to the map
 
+_DOM Structure:_
+
+    <div class="map-attribution map-mm"></div>
+
 ### map.ui.legend
 
 Add an element with legend information to map
+
+_DOM Structure:_
+
+    <div class="map-legends">
+        <div class="map-legend">
+            <!-- Legend content -->
+        </div>
+    </div>
 
 ### map.ui.pointselector
 
@@ -597,11 +619,17 @@ This internally calls [`interaction.refresh()`](#interaction.refresh) to set the
 
 _Returns_ the interaction control
 
-**Example:**
+_Example:_
 
     var interaction = mapbox.interaction()
         .map(map)
         .auto();
+
+_DOM Structure (tooltips)_:
+
+    <div class="map-tooltip map-tooltip-0">
+        <!-- Tooltip content -->
+    </div>
 
 ### map.interaction.refresh()
 
