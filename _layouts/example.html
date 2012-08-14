@@ -68,7 +68,10 @@ pre a { background:#ee7; padding:2px 0px; }
 
 <div class='clearfix doc-header pad1 fillL'>
   <div class='cell7'>
-    <h2>{{site.title}}</h2>
+    <h2>
+      {{site.title}}
+      <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
+    </h2>
     <p>{{site.description}}</p>
   </div>
   <div class='cell5 doc-subnav clearfix'>
