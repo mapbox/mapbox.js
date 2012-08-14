@@ -30,8 +30,8 @@
             var tagList = function (tags) {
                 var tTags = _.template($('#tags').html());
 
-                var f = _.flatten(tags);
-                var u = _.uniq(f);
+                var f = _.flatten(tags),
+                    u = _.uniq(f);
 
                 _.each(u, function(tag) {
                     $('#tag-list').append(tTags({'tag': tag}));
@@ -161,7 +161,10 @@
                     none = true;
                 if (next.prop('tagName') === 'UL') {
                     next.children().each(function() {
-                        if ($(this).find('a').css('display') !== 'none') return none = false;
+                        if ($(this).find('a').css('display') !== 'none') {
+                            none = false;
+                            return;
+                        }
                     });
                 }
                 $this.css('display', none ? 'none' : '');
@@ -175,6 +178,25 @@
         bindHeadings: function() {
             $('h1[id],h2[id],h3[id],h4[id]').click(function(ev) {
                 window.location.hash = $(ev.currentTarget).attr('id');
+            });
+        },
+
+        bindInlineCode: function() {
+            var heading_index = {};
+            function noparams(x) {
+                return x.replace(/\(.*/g, '');
+            }
+            $('h1[id],h2[id],h3[id],h4[id]').each(function(i, h) {
+                var txt = noparams($(h).text());
+                heading_index[txt] = h;
+            });
+            $('code').each(function(i, c) {
+                var txt = noparams($(c).text());
+                if (heading_index[txt]) {
+                    var inner = $('<a></a>').html($(c).html());
+                    inner.attr('href', '#' + $(heading_index[txt]).attr('id'));
+                    $(c).empty().append(inner);
+                }
             });
         },
 
