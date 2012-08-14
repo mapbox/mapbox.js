@@ -53,12 +53,16 @@ class: box
     }
 
     .warn {
-        background: #ee8a65;
-        height: 70px;
-        width: 100%;
-        color: white;
-        padding-left: 40px;
-        padding-top: 25px;
+        font-size:15px;
+        background:#ee8a65;
+        border-color:#c64;
+        min-height:60px;
+        color:white;
+    }
+
+    .warn a {
+        color:#842;
+        font-weight:bold;
     }
 
     .separator {
@@ -76,7 +80,10 @@ class: box
 
 <div class='clearfix doc-header pad1 fillL'>
   <div class='cell7'>
-    <h2>{{site.title}}</h2>
+    <h2>
+      {{site.title}}
+      <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
+    </h2>
     <p>{{site.description}}</p>
   </div>
   <div class='cell5 doc-subnav clearfix'>
@@ -90,8 +97,8 @@ class: box
 <div class='fillW clearfix'>
   <div class='cell9 float-right'>
   {% if site.version != page.version %}
-  <div class='pad2 warn'>
-    You are currently viewing an older version of the library. Check out <a href="{{site.baseurl}}/api/{{site.version}}">{{site.version}}</a> for the latest.
+  <div class='doc-content doc pad2 warn'>
+    Viewing an older version of {{site.title}}. Check out <a href="{{site.baseurl}}/api/{{site.version}}">{{site.version}} for the latest</a>.
   </div>
   {% endif %}
   <div id='docs' class='doc-content doc pad2 prose'>
