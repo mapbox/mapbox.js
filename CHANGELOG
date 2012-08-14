@@ -1,8 +1,10 @@
-### v0.6.4 (unreleased)
+### v0.6.4
 
 * `map.auto` now adds legend and attribution, if available in tilejson
 * `map.setPanLimits` now sorts locations internally, if given locations
 * Documentation improvements
+* Fix `layer.refresh` callback
+* Update ModestMaps, Wax, markers.js, easey
 
 ### v0.6.3
 

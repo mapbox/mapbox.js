@@ -2,7 +2,7 @@
   "author": "MapBox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "0.6.3",
+  "version": "0.6.4dev1",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -10,8 +10,8 @@
   },
   "dependencies": {
       "reqwest": "0.4.5",
-      "modestmaps": "3.3.4",
-      "wax": "7.0.0dev8",
+      "modestmaps": "3.3.5",
+      "wax": "7.0.0dev9",
       "bean": "0.4.11-1",
       "mustache": "0.4.0",
       "markers": "0.14.0",

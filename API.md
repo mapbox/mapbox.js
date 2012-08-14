@@ -759,3 +759,7 @@ performance and reducing the number of requests the browser needs to make.
 * `enabled` must be either true or false.
 
 _Returns_ the layer object.
+
+### layer.parent
+
+The layer's parent DOM element.
