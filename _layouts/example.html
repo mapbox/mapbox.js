@@ -130,7 +130,9 @@ pre a { background:#ee7; padding:2px 0px; }
     var example = new Docs();
     $(example.page);
     $(example.copyCode);
-    example.colorCode(example.bindHints);
+    example.colorCode(function(){
+        example.bindHints("{{ site.version }}");
+    });
     example.bindSearch();
   });
 </script>

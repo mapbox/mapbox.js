@@ -179,7 +179,7 @@
         },
 
         // Automatically links example code to API reference
-        bindHints: function() {
+        bindHints: function(version) {
 
             // Inventory mapbox.js
             var things = {};
@@ -264,7 +264,7 @@
                         }
                     }
                     if (!object) return;
-                    $this.html($('<a target="_blank" href="/mapbox.js/api/v0.6.3/#' + object + '.' + name + '">' + name + '</a>'));
+                    $this.html($('<a target="_blank" href="/mapbox.js/api/' + version + '/#' + object + '.' + name + '">' + name + '</a>'));
                 });
             });
         }
