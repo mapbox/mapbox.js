@@ -249,7 +249,7 @@
 
                         // No chaining
                         } else if (pt === '.') {
-                            var t = $this.prev().prev().text().trim();
+                            var t = $.trim($this.prev().prev().text());
                             if (f[t] && (isFunction == (f[t] == 'function'))) {
                                 object = t;
                             }
@@ -267,7 +267,7 @@
                             var opened = 0,
                                 closed = 0;
                             $this.prevUntil().each(function() {
-                                var t = $(this).text().trim(),
+                                var t = $.trim($(this).text()),
                                     open = t[0] === '(',
                                     close = t.slice(t.length - 2, t.length) == ').';
 
@@ -276,7 +276,7 @@
                                 else if (close) closed++;
 
                                 if (opened == closed) {
-                                    t = $(this).prev().text().trim();
+                                    t = $.trim($(this).prev().text());
                                     if (things[t].only && (isFunction == (f[things[t].only]  == 'function'))) {
                                         object = things[t].only;
                                     }
