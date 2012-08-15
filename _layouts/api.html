@@ -10,6 +10,7 @@ class: box
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
 <style>
+.doc-subnav a { width:50%; }
 .depth-1, .depth-2, .depth-3, .depth-4 { margin-bottom:40px; }
 
 #docs h2 { font-weight:bold; }
@@ -59,15 +60,14 @@ span.bracket { color:#888; }
 </style>
 
 <div class='clearfix doc-header pad3 fillL'>
-  <div class='cell7'>
+  <div class='cell8'>
     <h2>
       {{site.title}}
       <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
     </h2>
     <p>{{site.description}}</p>
   </div>
-  <div class='cell5 doc-subnav clearfix'>
-    <a href='{{site.baseurl}}/'>Guide</a>
+  <div class='cell4 doc-subnav clearfix'>
     <a href='{{site.baseurl}}/api/' class='active'>API</a>
     <a href='{{site.baseurl}}/examples/'>Examples</a>
   </div>
