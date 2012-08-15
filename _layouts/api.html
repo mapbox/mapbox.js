@@ -10,72 +10,52 @@ class: box
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
 <style>
-    .doc h1 {
-        border-bottom: 1px solid #ccc;
-    }
-    .depth-1, .depth-2, .depth-3, .depth-4 {
-        margin-bottom: 40px;
-    }
+.depth-1, .depth-2, .depth-3, .depth-4 { margin-bottom:40px; }
 
-    #docs h2 {
-        font-weight:bold;
-    }
+#docs h2 { font-weight:bold; }
 
-    #docs h3 {
-        font-size: 16px;
-        line-height:20px;
-        margin:5px 0;
-    }
+#docs h4 {
+  font-size:15px;
+  margin-bottom:10px;
+  }
 
-    #docs h4 {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
+#docs strong {
+  font-weight:normal;
+  font-style:italic;
+  }
 
-    #docs strong {
-        font-weight: normal;
-        font-style: italic;
-    }
+#docs p,
+#docs ul { margin-bottom:5px; }
 
-    #docs p, #docs ul {
-        margin-bottom: 5px;
-    }
+span.args,
+span.bracket { color:#888; }
 
-    span.args, span.bracket {
-        color:#888;
-    }
+#docs .args,
+#docs .bracket {
+  font-weight:normal;
+  margin:0px 2px;
+  }
 
-    #docs .args ,
-    #docs .bracket {
-        font-weight: normal;
-        margin-left: 1px;
-        margin-right: 1px;
-    }
+.warn {
+  font-size:15px;
+  background:#ee8a65;
+  border-color:#c64;
+  min-height:60px;
+  color:white;
+  }
 
-    .warn {
-        font-size:15px;
-        background:#ee8a65;
-        border-color:#c64;
-        min-height:60px;
-        color:white;
-    }
+.warn a {
+  color:#842;
+  font-weight:bold;
+  }
 
-    .warn a {
-        color:#842;
-        font-weight:bold;
-    }
+.separator {
+  margin:0px 0px 20px;
+  font-size:24px;
+  line-height:1.2500em;
+  }
 
-    .separator {
-        margin-top: 0px;
-        margin-bottom: 30px;
-        font-size: 24px;
-    }
-
-    .doc-nav li h4 {
-        margin-bottom: 0px;
-        padding-top: 2px;
-    }
-
+.doc-nav li h4 { margin:10px 0px 0px; }
 </style>
 
 <div class='clearfix doc-header pad3 fillL'>
