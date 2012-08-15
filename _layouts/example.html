@@ -66,7 +66,7 @@ pre a { background:#ee7; padding:2px 0px; }
   }
 </style>
 
-<div class='clearfix doc-header pad1 fillL'>
+<div class='clearfix doc-header pad3 fillL'>
   <div class='cell7'>
     <h2>
       {{site.title}}
@@ -81,7 +81,7 @@ pre a { background:#ee7; padding:2px 0px; }
   </div>
 </div>
 
-<div class='doc-page pad0 fillM clearfix'>
+<div class='doc-page pad3c fillM clearfix'>
 <div class='fillW clearfix'>
   <div class='cell9 doc-example doc float-right'>
     <div class='pad2 example-header'>
@@ -130,7 +130,9 @@ pre a { background:#ee7; padding:2px 0px; }
     var example = new Docs();
     $(example.page);
     $(example.copyCode);
-    example.colorCode(example.bindHints);
+    example.colorCode(function(){
+        example.bindHints("{{ site.version }}");
+    });
     example.bindSearch();
   });
 </script>
