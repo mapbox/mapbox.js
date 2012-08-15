@@ -62,7 +62,7 @@ footer:
 </head>
 <body class='{{page.class}}'>
 
-<div class='branding pad clearfix'>
+<div class='branding pad3h clearfix'>
   <div class='cell6'>
     <a class='logo' href='{{site.url}}/'>MapBox</a>
     {% if page.section %}
@@ -92,7 +92,7 @@ footer:
 
 {% unless page.bleed %}
 <div class='footer clearfix'>
-  <div class='cell3 pad1 newsletter'>
+  <div class='cell3 pad3 newsletter'>
     <a class='button big follow' href='http://twitter.com/mapbox' target='_blank'><span class='icon reverse twitter'></span>Follow us</a>
     <a class='button big contact' href='{{base}}/contact'><span class='icon reverse contact'></span>Contact us</a>
     <small>Subscribe to our newsletter</small>
@@ -112,7 +112,7 @@ footer:
     </div>
   </div>
 
-  <div class='cell2 pad1'>
+  <div class='cell2 pad3'>
     <h3>MapBox</h3>
     <div class='links'>
       {% for item in page.footer.tour %}
@@ -125,7 +125,7 @@ footer:
       {% endfor %}
     </div>
   </div>
-  <div class='cell2 pad1'>
+  <div class='cell2 pad3'>
     <h3>Help</h3>
     <div class='links'>
       {% for item in page.footer.help %}
@@ -139,7 +139,7 @@ footer:
       {% endfor %}
     </div>
   </div>
-  <div class='cell5 pad1 blogposts'>
+  <div class='cell5 pad3 blogposts'>
     <h3>Recent blog posts</h3>
     <div class='links'>
       <script src='http://mapbox.com/snippets/blog-list.js'></script>
