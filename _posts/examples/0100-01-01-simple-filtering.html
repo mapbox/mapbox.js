@@ -1,0 +1,58 @@
+---
+layout: example
+categories: example
+title: Simple filtering
+description: Show all markers or just those matching a filter function
+tags:
+  - layers
+---
+
+<style>
+  #filter {
+    background: #fff;
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index: 1000;
+    padding: 10px;
+  }
+</style>
+<div id='filter'>
+    <button id='filter-food'>show only food events</button>
+    <button id='filter-all'>show all events</button>
+</div>
+<div id='map'></div>
+<script>
+  var m = mapbox.map('map');
+
+  m.addLayer(mapbox.layer().id('examples.map-sjm2w6i9'));
+
+  var markersLayer = mapbox.markers.layer().id('examples.map-sjm2w6i9', function() {
+
+      // This code is in the second callback to id because it depends
+      // on the features being loaded asynchronously. If it were put right
+      // after the call to .id(), the markers layer wouldn't contain any
+      // data - it would still be on its way from MapBox to the browser.
+
+      // Cinch the map display to show all markers
+      m.extent(markersLayer.extent());
+
+      document.getElementById('filter-food').onclick = function() {
+          // The filter function takes a GeoJSON feature object
+          // and returns true to show it or false to hide it.
+          markersLayer.filter(function(f) {
+              return f.properties['marker-symbol'] === 'fast-food';
+          });
+      };
+
+      document.getElementById('filter-all').onclick = function() {
+          markersLayer.filter(function(f) {
+              // Returning true for all markers shows everything.
+              return true;
+          });
+      };
+
+  });
+
+  m.addLayer(markersLayer);
+</script>

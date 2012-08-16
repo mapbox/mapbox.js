@@ -1,0 +1,81 @@
+---
+layout: example
+categories: example
+title: Opacity control
+description: Adjust the opacity of an overlay
+tags:
+---
+
+<style>
+    #control {
+        position: absolute;
+        left: 35px;
+        top: 100px;
+        height: 200px;
+        width: 10px;
+        background: white;
+        box-shadow: 0 0 2px black;
+    }
+
+    #handle {
+        position: absolute;
+        left: -15px;
+        top: 20px;
+        width: 40px;
+        height: 10px;
+        background: black;
+        box-shadow: 0 0 2px white;
+        border-radius: 5px;
+    }
+
+    #handle:hover {
+        cursor: pointer;
+        background: #444;
+    }
+</style>
+
+<div id='map'></div>
+<div id='control'>
+    <div id='handle'></div>
+</div>
+
+<script>
+    var layerIDs = [
+        'aibram.map-or4n7qof',
+        'aibram.Aerial'
+    ];
+
+    mapbox.auto('map', layerIDs, function(map) {
+
+        // Disable compositing so we can adjust opacity of individual layers
+        map.getLayerAt(0).composite(false);
+
+        // Set initial center and zoom level
+        map.centerzoom({ 
+            lat:43.665, lon: -79.478
+        }, 15);
+
+        var handle = document.getElementById('handle'),
+            start,
+            startTop;
+
+        document.onmousemove = function(e) {
+            if (!start) return;
+            // Adjust control
+            handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
+            // Adjust opacity
+            map.getLayerAt(1).parent.style.opacity = 1 - (handle.offsetTop / 200);
+        }
+
+        handle.onmousedown = function(e) {
+            // Record initial positions
+            start = parseInt(e.clientY, 10);
+            startTop = handle.offsetTop - 5;
+            return false;
+        }
+
+        document.onmouseup = function(e) {
+            start = null;
+        }
+    });
+</script>

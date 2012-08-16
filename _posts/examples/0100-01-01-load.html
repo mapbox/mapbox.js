@@ -1,0 +1,25 @@
+---
+layout: example
+categories: example
+title: Creating a map with multiple layers with mapbox load
+description: Simple loader
+tags:
+  - auto
+---
+
+<div id='map'></div>
+<script>
+    mapbox.load(['examples.map-sjm2w6i9', 'examples.map-4l7djmvo'], function(data) {
+        var map = mapbox.map('map');
+
+        map.ui.zoomer.add();
+
+        // After specifying multiple ids to mapbox.load, you'll get an array
+        // of data objects back, with pre-initialized layer and markers members
+        map.addLayer(data[1].layer);
+        map.addLayer(data[0].markers);
+
+        // Zoom and center the map.
+        map.zoom(11).center(data[0].center);
+    });
+</script>
