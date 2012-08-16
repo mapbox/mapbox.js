@@ -1,0 +1,40 @@
+---
+layout: example
+categories: example
+title: Custom marker
+tags:
+  - markers
+---
+<style>
+.marker-image {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+    margin-left:-51px;
+    margin-top:-51px;
+    pointer-events:all;
+}
+</style>
+<div id='map'></div>
+<script>
+    // Create map
+    var map = mapbox.map('map');
+    map.addLayer(mapbox.layer().id('examples.map-vyofok3q'));
+
+    // Create and add marker layer
+    var markerLayer = mapbox.markers.layer().features([{
+        "geometry": { "type": "Point", "coordinates": [-74.00, 40]},
+        "properties": { "image": "http://placekitten.com/100/100" }
+    }, {
+        "geometry": { "type": "Point", "coordinates": [-75.00, 40]},
+        "properties": { "image": "http://www.dummyimage.com/100x100/bd00bd/fff" }
+    }]).factory(function(f) {
+        var img = document.createElement('img');
+        img.className = 'marker-image';
+        img.setAttribute('src', f.properties.image);
+        return img;
+    });
+
+    map.addLayer(markerLayer)
+        .setExtent(markerLayer.extent());
+</script>

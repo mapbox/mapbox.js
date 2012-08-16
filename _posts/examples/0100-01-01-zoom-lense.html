@@ -8,10 +8,6 @@ tags:
 ---
 
 <style>
-    body {
-        margin:0;
-        padding:0;
-    }
     #map {
         position:absolute;
         width:100%;
@@ -94,6 +90,6 @@ tags:
         MM.getFrame(zoommap.getRedraw());
       }
 
-      map.setCenterZoom({ lat: 44, lon: -79}, 10);
+      map.centerzoom({ lat: 44, lon: -79}, 10);
     });
 </script>

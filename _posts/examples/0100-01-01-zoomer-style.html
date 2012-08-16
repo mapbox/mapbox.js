@@ -1,0 +1,29 @@
+---
+layout: example
+categories: example
+title: Styled Zoom Controls
+description: Customizing the look of UI with CSS
+tags:
+    - zooming
+    - ui
+---
+
+<style>
+.zoomer {
+    border-radius:15px;
+    opacity:0.6;
+}
+.zoomer:hover {
+    opacity:1;
+}
+.zoomin {
+    left:50px;
+}
+</style>
+<div id='map'></div>
+<script>
+    var m = mapbox.map('map');
+    m.addLayer(mapbox.layer().id('examples.hyg-stars'));
+    m.ui.zoomer.add();
+    m.zoom(3);
+</script>
