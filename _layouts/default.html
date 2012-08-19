@@ -6,7 +6,7 @@ navigation:
     path: /tour/publish
   - title: Scale
     path: /tour/scale
-  - title: Pricing
+  - title: Signup
     category: plans
     class: plans
     path: /plans
@@ -28,21 +28,21 @@ footer:
     - title: Blog
       path: /blog
     - title: Status
-      path: http://mapbox.com/status
-  help:
-    - title: Creating
-      path: /creating
-    - title: Publishing
-      path: /publishing
-    - title: Mobile SDK
-      path: /mobile
+      path: /status
+  resources:
+    - title: Help
+      path: /help
     - title: Developers
       path: /developers
+    - title: Mobile
+      path: /mobile
+    - title: Showcase
+      path: /showcase
   tools:
     - title: TileMill
-      path: http://tilemill.com
+      path: /tilemill
     - title: Maki
-      path: http://mapbox.com/maki
+      path: /maki
 ---
 <!DOCTYPE html >
 <html>
@@ -52,19 +52,19 @@ footer:
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
   <title>{% if page.url == '/' %}{{page.title}} | Fast and beautiful maps{% else %}{{page.title}} | MapBox{% endif %}</title>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.4/mapbox.css' rel='stylesheet' />
   <link href='{{site.url}}/css/site.css' rel='stylesheet' />
   <!--[if IE]><link rel='stylesheet' href='{{site.url}}/css/site-ie.css' type='text/css'/><![endif]-->
   <link rel='shortcut icon' href='{{site.url}}/images/favicon.ico' type='image/x-icon' />
   <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
   <script src='{{site.url}}/js/site.js'></script>
-  <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.4/mapbox.js'></script>
 </head>
 <body class='{{page.class}}'>
 
 <div class='branding pad3h clearfix'>
   <div class='cell6'>
-    <a class='logo' href='{{site.url}}/'>MapBox</a>
+    <a id='mapbox-logo' class='logo' href='{{site.url}}/'>MapBox</a>
     {% if page.section %}
     <a class='section-title' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
     {% endif %}
@@ -82,7 +82,7 @@ footer:
       {% capture class %}{{item.class}}{% endcapture %}
     {% endif %}
     <li class='{{class}}'>
-      <a href='{{url}}'>{{item.title}}</a>
+      <a id='nav-{{item.title | downcase | replace:' ','-'}}' href='{{url}}'>{{item.title}}</a>
     </li>
     {% endfor %}
   </ul>
@@ -90,7 +90,7 @@ footer:
 
 <div class='wrapper'>{{content}}</div>
 
-{% unless page.bleed %}
+{% unless page.class contains 'fullscreen' %}
 <div class='footer clearfix'>
   <div class='cell3 pad3 newsletter'>
     <a class='button big follow' href='http://twitter.com/mapbox' target='_blank'><span class='icon reverse twitter'></span>Follow us</a>
@@ -116,26 +116,26 @@ footer:
     <h3>MapBox</h3>
     <div class='links'>
       {% for item in page.footer.tour %}
-      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
       {% endfor %}
     </div>
     <div class='links'>
       {% for item in page.footer.mapbox %}
-      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
       {% endfor %}
     </div>
   </div>
   <div class='cell2 pad3'>
-    <h3>Help</h3>
+    <h3>Resources</h3>
     <div class='links'>
-      {% for item in page.footer.help %}
-      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      {% for item in page.footer.resources %}
+      <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
       {% endfor %}
     </div>
     <h3>Tools</h3>
     <div class='links'>
       {% for item in page.footer.tools %}
-      <a href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
+      <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
       {% endfor %}
     </div>
   </div>
@@ -156,10 +156,13 @@ footer:
 {% endunless %}
 
 <script src='https://tiles.mapbox.com/snippets/user.js'></script>
-<script>$(function() {$(mapbox.mailChimp);}); </script>
 
 <script type='text/javascript'>
 var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ?
+   'https://ssl.' : 'http://www.') +
+   'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
 _gaq.push(['_setAccount', 'UA-12158002-1']);
 _gaq.push(['_setDomainName', '.mapbox.com']);
 _gaq.push(['_trackPageview']);
