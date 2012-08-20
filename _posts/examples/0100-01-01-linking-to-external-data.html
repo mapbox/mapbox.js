@@ -1,0 +1,68 @@
+---
+layout: example
+categories: example
+title: Linking to external data
+description: Using data in interactivity along with external data
+tags:
+  - animation
+---
+
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+#currency {
+  z-index:9999;
+  padding:5px;
+  position:absolute;
+  bottom: 10px;
+  font-size:30px;
+  left: 10px;
+  background:#fff;
+}
+</style>
+<div id='currency'></div>
+<div id='map'></div>
+<script>
+// This is example 'external data'. It's obviously very much an example,
+// and in practice you'll want to use jQuery's .ajax to pull in data or
+// you already have it in some other form. The important part is that
+// this data has a key, like 'Canada', which exactly matches part of the
+// data in the tileset - here it's that the key is the same as o.data.admin
+var currencies = {
+    'United States of America': 'USD',
+    'Canada': 'CAD',
+    'Mexico': 'MXN'
+};
+var currency = document.getElementById('currency');
+mapbox.load('mapbox.geography-class', function(o) {
+    var map = mapbox.map('map');
+    wax.u.sanitize = function(x) { return x; };
+    map.addLayer(o.layer).zoom(3).center({ lat: 48, lon: -100 });
+    map.interaction.auto();
+    // This is the interactivity API. It is documented in full
+    // over at Wax: http://mapbox.com/wax/tooltips.html
+    // But basically we need to pay attention to the object coming in,
+    // which has `o.data` - the non-formatted data of the hovered-over feature
+    // and `o.e`, the event object
+    map.interaction.on({
+        on: function(o) {
+            // This will only listen to mousemoves. You can also look
+            // for clicks or any other event or combination of events.
+            if (o.e.type === 'mousemove') {
+                // If the external datasource matches the interacted-with
+                // feature, use it.
+                if (currencies[o.data.admin]) {
+                    currency.innerHTML = currencies[o.data.admin];
+                } else {
+                    currency.innerHTML = '?';
+                }
+            }
+        },
+        // When the mouse leaves the feature, clear this bit of
+        // interactivity
+        off: function() {
+            currency.innerHTML = '';
+        }
+    });
+});
+</script>
