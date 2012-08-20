@@ -1,0 +1,24 @@
+---
+layout: example
+categories: example
+title: YouTube Embeds
+description: Turn off HTML sanitization for tooltip content
+tags:
+  - interaction
+---
+
+<div id='map'></div>
+<style>
+.map-tooltip {
+    width:440px !important;
+    max-width:440px !important;
+}
+</style>
+<script>
+    mapbox.load('examples.youtube-embed', function(o) {
+        var map = mapbox.map('map');
+        wax.u.sanitize = function(x) { return x; };
+        map.addLayer(o.layer).zoom(3).center({ lat: 48, lon: -100 });
+        map.interaction.auto();
+    });
+</script>
