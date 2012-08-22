@@ -1,3 +1,8 @@
+### v0.6.5 (unreleased)
+
+* Fix bug where `layer.tilejson` could overwrite a composited provider
+* Fix bug where layer compositing would make unecessary tilejson requests
+
 ### v0.6.4
 
 * `map.auto` now adds legend and attribution, if available in tilejson

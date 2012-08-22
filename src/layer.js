@@ -55,7 +55,8 @@ mapbox.layer.prototype.named = function(x) {
 
 mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
-    this.setProvider(new wax.mm._provider(x));
+    if (this._tilejson !== x) this.setProvider(new wax.mm._provider(x));
+
     this._tilejson = x;
 
     this.name = this.name || x.id;
@@ -113,7 +114,7 @@ mapbox.layer.prototype.draw = function() {
         }
         ids = ids.join(',');
 
-        if (this.compositeLayer !== ids) {
+        if (this.compositeLayer !== ids && (this.compositeLayer ? true : ids !== this._id)) {
             this.compositeLayer = ids;
             var that = this;
             mapbox.load(ids, function(tiledata) {
