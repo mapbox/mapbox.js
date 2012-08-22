@@ -20,6 +20,9 @@ tags:
 <script>
     mapbox.auto('map', 'tmcw.map-j5a868tu', function(map) {
         document.getElementById('zoom').onclick = function() {
+            // The second argument, if true, tells the map to
+            // animate the transition to zoom level 12. The
+            // same can be done with map.center and map.centerzoom
             map.zoom(12, true);
         };
     });

@@ -104,6 +104,10 @@ a.year-active {
 
       play.onclick = function() {
           var step = 0;
+          // Every quarter-second (250 ms) increment the year
+          // we're looking at and show a new year. When
+          // the end is reached, call clearInterval to stop
+          // the animation.
           playStep = window.setInterval(function() {
               if (step < yearlist.length) {
                   click_year(yearlist[step])();

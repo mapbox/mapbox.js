@@ -11,13 +11,17 @@ tags:
 <div id='map'>
 </div>
 <script>
-    var m = mapbox.map('map');
-    m.addLayer(new MM.TemplatedLayer('http://b.tile.stamen.com/toner/{Z}/{X}/{Y}.png'));
-    m.ui.attribution.add()
-        .content('Map tiles by <a href="http://stamen.com">Stamen Design</a>, under' +
-        ' <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.' +
-        ' Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.');
-    m.ui.zoomer.add();
-    m.ui.zoombox.add();
-    m.zoom(3);
+var m = mapbox.map('map');
+// It's simple to add non-MapBox Layers by using the
+// full Modest Maps API. Stamen also has a JavaScript
+// snippet you can add to add their layers quickly:
+// http://maps.stamen.com/
+m.addLayer(new MM.TemplatedLayer('http://b.tile.stamen.com/toner/{Z}/{X}/{Y}.png'));
+m.ui.attribution.add()
+    .content('Map tiles by <a href="http://stamen.com">Stamen Design</a>, under' +
+    ' <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.' +
+    ' Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.');
+m.ui.zoomer.add();
+m.ui.zoombox.add();
+m.zoom(3);
 </script>

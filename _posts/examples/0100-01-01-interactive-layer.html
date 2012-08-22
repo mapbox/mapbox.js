@@ -11,6 +11,8 @@ tags:
 
 <div id='map'></div>
 <script>
+    // If you're creating a new interactive layer, follow the tooltips docs:
+    // http://mapbox.com/tilemill/docs/crashcourse/tooltips/
     mapbox.load('examples.map-8ced9urs', function(o) {
         var map = mapbox.map('map');
         map.addLayer(o.layer).zoom(3).center({ lat: 48, lon: -100 });

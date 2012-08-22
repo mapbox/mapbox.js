@@ -13,6 +13,11 @@ tags:
   m.addLayer(mapbox.layer().id('examples.map-4l7djmvo'));
 
   // Create a markers layer with features from a CSV string.
+  // If you have a remote CSV file (on the same server, though,
+  // due to the same origin policy
+  // http://en.wikipedia.org/wiki/Same_origin_policy
+  // Then you can use jQuery.ajax or reqwest to do an AJAX request
+  // for its content.
   var markerLayer = mapbox.markers.layer().csv('lat,lon,title,marker-color\n40.5,14,Naples,#180392');
 
   // Add interaction to this marker layer. This

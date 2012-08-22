@@ -24,11 +24,14 @@ tags:
     // Create and add marker layer
     var markerLayer = mapbox.markers.layer().features([{
         "geometry": { "type": "Point", "coordinates": [-74.00, 40]},
-        "properties": { "image": "http://placekitten.com/100/100" }
+        "properties": { "image": "http://placehold.it/100x100" }
     }, {
         "geometry": { "type": "Point", "coordinates": [-75.00, 40]},
         "properties": { "image": "http://www.dummyimage.com/100x100/bd00bd/fff" }
     }]).factory(function(f) {
+    // Define a new factory function. This takes a GeoJSON object
+    // as its input and returns an element - in this case an image -
+    // that represents the point.
         var img = document.createElement('img');
         img.className = 'marker-image';
         img.setAttribute('src', f.properties.image);

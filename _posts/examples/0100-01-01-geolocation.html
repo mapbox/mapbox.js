@@ -33,6 +33,10 @@ tags:
 
   var geolocate = document.getElementById('geolocate');
 
+  // This uses the HTML5 geolocation API, which is available on
+  // most mobile browsers and modern browsers, but not in Internet Explorer
+  //
+  // See this chart of compatibility for details:
   // http://caniuse.com/#feat=geolocation
   if (!navigator.geolocation) {
       geolocate.innerHTML = 'geolocation is not available';
@@ -40,6 +44,8 @@ tags:
       geolocate.onclick = function() {
           navigator.geolocation.getCurrentPosition(
           function(position) {
+              // Once we've got a position, zoom and center the map
+              // on it, add ad a single feature
               m.zoom(11).center({
                   lat: position.coords.latitude,
                   lon: position.coords.longitude
@@ -55,9 +61,12 @@ tags:
                       'marker-symbol': 'star-stroked',
                   }
               });
+              // And hide the geolocation button
               geolocate.parentNode.removeChild(geolocate);
           },
           function(err) {
+              // If the user chooses not to allow their location
+              // to be shared, display an error message.
               geolocate.innerHTML = 'position could not be found';
           });
       };

@@ -34,6 +34,17 @@ var currencies = {
     'Mexico': 'MXN'
 };
 var currency = document.getElementById('currency');
+// This tileset, Geography Class, has interactivity defined in TileMill
+// and displayed in its tooltips. If you're creating a new tileset to use
+// with this technique, see the documentation on defining tooltips:
+// > http://mapbox.com/tilemill/docs/crashcourse/tooltips/
+// and you'll need to use fields for them to be available here -
+// to hide them in tooltips but use them here, you can use something like
+//
+//   <span style='display:none'>{{{admin}}}</span>
+//
+// in the tooltip content to get TileMill to detect that the field {{{admin}}}
+// should be available in interaction.
 mapbox.load('mapbox.geography-class', function(o) {
     var map = mapbox.map('map');
     wax.u.sanitize = function(x) { return x; };
