@@ -1,0 +1,89 @@
+---
+layout: changelog
+categories: changelog
+title: mapbox.js Changelog
+releases:
+
+- version: v0.6.4
+  date: 2012-08-14
+
+  notes:
+  - `map.auto` now adds legend and attribution, if available in tilejson
+  - `map.setPanLimits` now sorts locations internally, if given locations
+  - Documentation improvements
+  - Fix `layer.refresh` callback
+  - Update ModestMaps, Wax, markers.js, easey
+
+- version: v0.6.3
+  date: 2012-08-01
+
+  notes:
+  - `ui.refresh` only adds enabled layers to legend and attribution
+  - `mapbox.auto` doesn't return opts in an array if there is only one
+  - can now peacefully coexist with require.js
+  - `map.addLayer` no longer uses addTileLayer for tile layers
+  - Update ModestMaps to 3.3.4 fixing clipping issue in swipe example
+  - Default zoom range is now 0 - 17
+
+- version: v0.6.2
+
+  notes:
+  - Update ModestMaps to 3.3.4 fixing clipping issue in swipe example
+
+- version: v0.6.1
+
+  notes:
+  - Updated ModestMaps to 3.3.3 fixing problem with empty gif and hiding parent tiles
+
+- version: v0.6.0
+
+  notes:
+  - Add automatic support for MapBox hosting composting
+  - Update Wax to 7.0.0dev7
+  - New api for `mapbox.ui`
+  - Name layers using IDs instead of names
+  - Remove `mapbox.provider`
+  - Add callbacks to async layer functions
+
+- version: v0.5.5
+
+  notes:
+  - `mapbox.auto` now takes an optional callback and calls it with `map, augmented tilejson`
+  - Fixes various map issues in the Modest Maps wrapping of `mapbox.map`
+
+- version: v0.5.4
+
+  notes:
+  - Update Modest Maps to 3.3.1
+
+- version: v0.5.2
+
+  notes:
+  - Update Wax to dev2
+
+- version: v0.4.1
+
+  notes:
+  - Do not proxy `mapbox.markers` call anymore
+
+- version: v0.4.0 and v0.3.0
+
+  notes:
+  - Update markers.js to bleeding-edge versions.
+
+- version: v0.2.0
+
+  notes:
+  - mapbox.load now adds `.thumbnail` to its result
+
+- version: v0.1.1
+
+  notes:
+  - Calls the callback to `mapbox.auto()` with map, options instead of just map.
+
+- version: v0.1.0
+
+  notes:
+  - Adds `.center()` `.zoom()` and `.centerzoom()` with easing parameters
+  - Supports bare ids for the `mapbox.load()` function.
+---

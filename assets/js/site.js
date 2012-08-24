@@ -172,7 +172,7 @@
         },
 
         bindSearch: function() {
-            $('.doc-search input[type=text]').bind('keyup', this.search);
+            $('.doc-search input').bind('keyup', this.search);
         },
 
         bindHeadings: function() {
