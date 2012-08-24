@@ -3,12 +3,6 @@ layout: default
 section: developers
 class: box
 ---
-<link rel='stylesheet' href='{{site.url}}/css/developers.css' />
-<script src='{{site.baseurl}}/assets/js/jquery.1.7.2.min.js'></script>
-<script src='{{site.baseurl}}/assets/js/underscore.1.3.3.min.js'></script>
-<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-<script src='{{site.baseurl}}/assets/js/site.js'></script>
-
 <style>
 .doc-subnav a { width:50%; }
 .depth-1, .depth-2, .depth-3, .depth-4 { margin-bottom:40px; }
@@ -67,10 +61,10 @@ span.bracket { color:#888; }
     </h2>
     <p>{{site.description}}</p>
   </div>
-  <div class='cell4 doc-subnav clearfix'>
-    <a href='{{site.baseurl}}/api/' class='active'>API</a>
-    <a href='{{site.baseurl}}/examples/'>Examples</a>
-  </div>
+  <ul class='cell4 doc-subnav clearfix'>
+    <li><a href='{{site.baseurl}}/api/' class='active'>API</a></li>
+    <li><a href='{{site.baseurl}}/examples/'>Examples</a></li>
+  </ul>
 </div>
 
 <div class='doc-page pad3c fillM clearfix'>
@@ -113,10 +107,11 @@ span.bracket { color:#888; }
 </div>
 </div>
 
-<script type='text/javascript'>
+<script>
     var docs = new Docs();
     docs.colorCode();
     docs.bindSearch();
     docs.bindHeadings();
     docs.bindInlineCode();
+    $(mapbox.docs);
 </script>
