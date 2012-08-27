@@ -22,25 +22,28 @@ class: box
 
 <div class='doc-page pad3c fillM clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 float-right'>
-  <div id='docs' class='doc-content doc pad2 prose'>
-    {% for item in page.releases %}
-      <h2 id='{{item.version}}'>{{item.version}} {% if item.date %}<small>{{item.date|date:'%B %d %Y'}}</small>{% endif %}</h2>
-      <ul class='checklist'>
-        {% for item in item.notes %}
-        <li class='check'>{{item | markdownify}}</li>
-        {% endfor %}
-      </ul>
-    {% endfor %}
-  </div>
-  </div>
-  <div class='cell3 float-right'>
-    <div class='doc-nav'>
-      <ul class='nav anchors'>
+  <div class='cell3'>
+    <div class='clearfix'>&nbsp;</div>
+    <div class='nav doc-nav'>
+      <ul class='anchors'>
       {% for item in page.releases %}
         <li class='parent'><a href='#{{item.version|replace:' ','_'}}'>{{item.version}}</a></li>
       {% endfor %}
       </ul>
+    </div>
+  </div>
+  <div class='cell9'>
+    <div id='docs' class='doc-content prose'>
+      <div class='doc pad2'>
+        {% for item in page.releases %}
+          <h2 id='{{item.version}}'>{{item.version}} {% if item.date %}<small>{{item.date|date:'%B %d %Y'}}</small>{% endif %}</h2>
+          <ul class='checklist'>
+            {% for item in item.notes %}
+            <li class='check'>{{item | markdownify}}</li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>

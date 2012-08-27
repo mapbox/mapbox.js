@@ -20,17 +20,20 @@ class: box
 
 <div class='doc-page pad3c fillM clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 doc-content doc float-right pad2 prose'>
-    <h1>{{page.title}}</h1>
-    {{content}}
+  <div class='cell3'>
+    <div class='clearfix'>&nbsp;</div>
+    <div class='nav doc-nav'>
+      <ul class='pages'>
+      {% for item in site.categories.guide reversed %}
+      <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
+      {% endfor %}
+      </ul>
+    </div>
   </div>
-  <div class='cell3 float-right'>
-    <div class='doc-nav'>
-    <ul class='pages'>
-    {% for item in site.categories.guide reversed %}
-    <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
-    {% endfor %}
-    </ul>
+  <div class='cell9 doc-content prose'>
+    <div class='doc pad2'>
+      <h1>{{page.title}}</h1>
+      {{content}}
     </div>
   </div>
 </div>

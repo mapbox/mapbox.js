@@ -77,17 +77,27 @@ pre a { background:#ee7; padding:2px 0px; }
 
 <div class='doc-page pad3c fillM clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 doc-example doc float-right'>
-    <div class='pad2 example-header'>
+  <div class='cell3'>
+    <div class='clearfix'>&nbsp;</div>
+    <div class='nav doc-nav'>
+    <ul class='pages'>
+    {% for item in site.categories.example reversed %}
+    <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+  </div>
+  <div class='cell9 doc-example'>
+    <div class='pad2 doc example-header'>
       <h3>{{page.title}}</h3>
       <span class='description'>{{page.description}}</span>
     </div>
-    <div id='demo'>{{content}}</div>
-    <div id='snippet'>
+    <div id='demo' class='doc'>{{content}}</div>
+    <div id='snippet' class='doc'>
     <div class='buttons pad2 fillW'>
       <a class='button big' href='#' id='copy'><span class='icon embed reverse'></span> Select all</a>
     </div>
-    <div id='code'>
+    <div id='code' class='doc'>
     <pre class='prettyprint code-header'>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -105,15 +115,6 @@ pre a { background:#ee7; padding:2px 0px; }
 &lt;/body&gt;
 &lt;/html&gt;</pre>
     </div>
-    </div>
-  </div>
-  <div class='cell3 float-right'>
-    <div class='doc-nav'>
-    <ul class='pages'>
-    {% for item in site.categories.example reversed %}
-    <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
-    {% endfor %}
-    </ul>
     </div>
   </div>
 </div>
