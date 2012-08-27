@@ -88,6 +88,7 @@ pre a { background:#ee7; padding:2px 0px; }
     <div class='clearfix'>&nbsp;</div>
     <div class='nav doc-nav'>
     <ul class='pages'>
+    <li><a {% if page.url == '/examples/index.html' %}class='active'{% endif %} href='{{site.baseurl}}/examples'>A simple map</a></li>
     {% for item in site.categories.example reversed %}
     <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
     {% endfor %}
