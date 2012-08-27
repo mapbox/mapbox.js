@@ -3,12 +3,6 @@ layout: default
 section: developers
 class: box
 ---
-<link rel='stylesheet' href='{{site.url}}/css/developers.css' />
-<script src='{{site.baseurl}}/assets/js/jquery.1.7.2.min.js'></script>
-<script src='{{site.baseurl}}/assets/js/underscore.1.3.3.min.js'></script>
-<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-<script src='{{site.baseurl}}/assets/js/site.js'></script>
-
 <div class='clearfix doc-header pad3 fillL'>
   <div class='cell7'>
     <h2>
@@ -17,32 +11,37 @@ class: box
     </h2>
     <p>{{site.description}}</p>
   </div>
-  <div class='cell4 doc-subnav clearfix'>
-    <a href='{{site.baseurl}}/api/'>API</a>
-    <a href='{{site.baseurl}}/examples/'>Examples</a>
-  </div>
+  <ul class='cell4 doc-subnav clearfix'>
+    <li><a href='{{site.baseurl}}/api/'>API</a></li>
+    <li><a href='{{site.baseurl}}/examples/'>Examples</a></li>
+    <li><a href='{{site.baseurl}}/changelog/'>Changelog</a></li>
+  </ul>
 </div>
 
 <div class='doc-page pad3c fillM clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 doc-content doc float-right pad2 prose'>
-    <h1>{{page.title}}</h1>
-    {{content}}
+  <div class='cell3'>
+    <div class='clearfix'>&nbsp;</div>
+    <div class='nav doc-nav'>
+      <ul class='pages'>
+      {% for item in site.categories.guide reversed %}
+      <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
+      {% endfor %}
+      </ul>
+    </div>
   </div>
-  <div class='cell3 float-right'>
-    <div class='doc-nav'>
-    <ul class='pages'>
-    {% for item in site.categories.guide reversed %}
-    <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
-    {% endfor %}
-    </ul>
+  <div class='cell9 doc-content prose'>
+    <div class='doc pad2'>
+      <h1>{{page.title}}</h1>
+      {{content}}
     </div>
   </div>
 </div>
 </div>
 
-<script type='text/javascript'>
+<script>
     var docs = new Docs();
     docs.colorCode();
     docs.bindHeadings();
+    $(mapbox.docs);
 </script>
