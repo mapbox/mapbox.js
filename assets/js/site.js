@@ -139,14 +139,14 @@
                     body = $(document.getElementById('content-' + id)).text();
 
                 if (!q || body.toLowerCase().indexOf(q) !== -1 || id.toLowerCase().indexOf(q) !== -1) {
-                    if ($this.parent().prop('tagName') == 'H3') {
+                    if ($this.parent().hasClass('heading')) {
                         $this.css('color', '');
                     } else {
                         $this.css('display', '');
                     }
 
                 } else {
-                    if ($this.parent().prop('tagName') == 'H3') {
+                    if ($this.parent().hasClass('heading')) {
                         $this.css('color', '#BDBDBD');
                     } else {
                         $this.css('display', 'none');
@@ -155,24 +155,16 @@
             });
 
             // Hide headers if no children matched
-            $('.doc-nav').find('h3').each(function() {
+            $('.doc-nav').find('li.heading').each(function() {
                 var $this = $(this),
-                    next = $this.next(),
-                    none = true;
-                if (next.prop('tagName') === 'UL') {
-                    next.children().each(function() {
-                        if ($(this).find('a').css('display') !== 'none') {
-                            none = false;
-                            return;
-                        }
-                    });
-                }
-                $this.css('display', none ? 'none' : '');
+                    next = $this.next();
+
+                if (next.hasClass('heading')) $this.css('display', 'none');
             });
         },
 
         bindSearch: function() {
-            $('.doc-search input[type=text]').bind('keyup', this.search);
+            $('.doc-search input').bind('keyup', this.search);
         },
 
         bindHeadings: function() {

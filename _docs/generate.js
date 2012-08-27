@@ -8,8 +8,6 @@ try {
     process.exit(1);
 }
 
-
-
 var start, l, anchor, matched, toParse,
     out = '',
     nav = '';
@@ -55,7 +53,8 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
 
                 // Add to navigation tree
                 if (l.depth == 2) {
-                    nav += '- ' + anchor + ':\n';
+                    nav += '- title: ' + anchor + '\n';
+                    nav += '  items:\n'
                 } else if (l.depth == 3) {
                     nav += '  - ' + anchor + '\n';
                 }

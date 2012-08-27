@@ -3,23 +3,14 @@ layout: default
 section: developers
 class: box
 ---
-<link rel='stylesheet' href='{{site.url}}/css/developers.css' />
-<script src='{{site.baseurl}}/assets/js/jquery.1.7.2.min.js'></script>
-<script src='{{site.baseurl}}/assets/js/underscore.1.3.3.min.js'></script>
-<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-<script src='{{site.baseurl}}/assets/js/site.js'></script>
-
 <style>
-.doc-subnav a { width:50%; }
 .depth-1, .depth-2, .depth-3, .depth-4 { margin-bottom:40px; }
 
 #docs h2 { font-weight:bold; }
-
 #docs h4 {
   font-size:15px;
   margin-bottom:10px;
   }
-
 #docs strong {
   font-weight:normal;
   font-style:italic;
@@ -34,7 +25,7 @@ span.bracket { color:#888; }
 #docs .args,
 #docs .bracket {
   font-weight:normal;
-  margin:0px 2px;
+  margin:0 2px;
   }
 
 .warn {
@@ -44,19 +35,18 @@ span.bracket { color:#888; }
   min-height:60px;
   color:white;
   }
-
-.warn a {
-  color:#842;
-  font-weight:bold;
-  }
+  .warn a {
+    color:#842;
+    font-weight:bold;
+    }
 
 .separator {
-  margin:0px 0px 20px;
+  margin:0 0 20px;
   font-size:24px;
   line-height:1.2500em;
   }
 
-.doc-nav li h4 { margin:10px 0px 0px; }
+.doc-nav li h4 { margin:10px 0 0; }
 </style>
 
 <div class='clearfix doc-header pad3 fillL'>
@@ -67,56 +57,57 @@ span.bracket { color:#888; }
     </h2>
     <p>{{site.description}}</p>
   </div>
-  <div class='cell4 doc-subnav clearfix'>
-    <a href='{{site.baseurl}}/api/' class='active'>API</a>
-    <a href='{{site.baseurl}}/examples/'>Examples</a>
-  </div>
+  <ul class='cell4 doc-subnav clearfix'>
+    <li><a href='{{site.baseurl}}/api/' class='active'>API</a></li>
+    <li><a href='{{site.baseurl}}/examples/'>Examples</a></li>
+    <li><a href='{{site.baseurl}}/changelog/'>Changelog</a></li>
+  </ul>
 </div>
 
 <div class='doc-page pad3c fillM clearfix'>
 <div class='fillW clearfix'>
-  <div class='cell9 float-right'>
+  <div class='cell3'>
+    <div class='clearfix'>&nbsp;</div>
+    <div class='doc-nav'>
+      <form class='doc-search'>
+        <input type='search' placeholder='Filter examples'>
+      </form>
+      {% if page.navigation %}
+      {% for section in page.navigation %}
+        <ul class='nav anchors'>
+          <li class='heading'><a href='#{{section.title|downcase|replace:' ','_'}}'>{{section.title}}</a></li>
+        {% for item in section.items %}
+          {% if item.Separator %}
+          <li class='parent'><a href='#{{item.Separator|replace:' ','_'}}'>{{item.Separator}}</a></li>
+          {% else %}
+          <li><a href='#{{item|replace:' ','_'}}'>{{item}}</a></li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <div class='cell9'>
   {% if site.version != page.version %}
   <div class='doc-content doc pad2 warn'>
     Viewing an older version of {{site.title}}. Check out <a href="{{site.baseurl}}/api/{{site.version}}">{{site.version}} for the latest</a>.
   </div>
   {% endif %}
-  <div id='docs' class='doc-content doc pad2 prose'>
-    {{content}}
-  </div>
-  </div>
-  <div class='cell3 float-right'>
-    <form class='doc-search'>
-      <input type='text' placeholder='Filter' />
-      <span class='icon search'></span>
-    </form>
-    <div class='doc-nav'>
-      {% if page.navigation %}
-      {% for headings in page.navigation %}
-      {% for heading in headings %}
-        <h3><a href='#{{heading[0]|replace:' ','_'}}'>{{heading[0]}}</a></h3>
-        <ul class='anchors'>
-        {% for item in heading[1] %}
-          {% if item.Separator %}
-          <li><h4><a href='#{{item.Separator|replace:' ','_'}}'>{{item.Separator}}</a></h4></li>
-          {% else %}
-          <li><a href='#{{item|replace:' ','_'}}'>{{item}}</a></li>
-          {% endif %}
-
-        {% endfor %}
-        </ul>
-      {% endfor %}
-      {% endfor %}
-      {% endif %}
+  <div id='docs' class='doc-content prose'>
+    <div class='doc pad2'>
+      {{content}}
     </div>
   </div>
+  </div>
 </div>
 </div>
 
-<script type='text/javascript'>
+<script>
     var docs = new Docs();
     docs.colorCode();
     docs.bindSearch();
     docs.bindHeadings();
     docs.bindInlineCode();
+    $(mapbox.docs);
 </script>
