@@ -5,7 +5,8 @@ categories: api
 navigation:
 version: v0.6.4
 navigation:
-- mapbox.map:
+- title: mapbox.map
+  items:
   - map.smooth
   - map.center
   - map.zoom
@@ -69,16 +70,20 @@ navigation:
   - Event "resized"
   - Event "extentset"
   - Event "drawn"
-- mapbox.load:
-- mapbox.auto:
-- mapbox.layer:
+- title: mapbox.load
+  items:
+- title: mapbox.auto
+  items:
+- title: mapbox.layer
+  items:
   - layer.id
   - layer.named
   - layer.url
   - layer.tilejson
   - layer.composite
   - layer.parent
-- mapbox.markers.layer:
+- title: mapbox.markers.layer
+  items:
   - markers.named
   - markers.factory
   - markers.features
@@ -92,12 +97,14 @@ navigation:
   - markers.extent
   - markers.addCallback
   - markers.removeCallback
-- mapbox.markers.interaction:
+- title: mapbox.markers.interaction
+  items:
   - interaction.hideOnMove
   - interaction.showOnHover
   - interaction.exclusive
   - interaction.formatter
-- mapbox.ease:
+- title: mapbox.ease
+  items:
   - ease.map
   - ease.from
   - ease.to

@@ -73,20 +73,17 @@ span.bracket { color:#888; }
         <input type='search' placeholder='Filter examples'>
       </form>
       {% if page.navigation %}
-      {% for headings in page.navigation %}
-      {% for heading in headings %}
+      {% for section in page.navigation %}
         <ul class='nav anchors'>
-          <li class='heading'><a href='#{{heading[0]|replace:' ','_'}}'>{{heading[0]}}</a></li>
-        {% for item in heading[1] %}
+          <li class='heading'><a href='#{{section.title|downcase|replace:' ','_'}}'>{{section.title}}</a></li>
+        {% for item in section.items %}
           {% if item.Separator %}
           <li class='parent'><a href='#{{item.Separator|replace:' ','_'}}'>{{item.Separator}}</a></li>
           {% else %}
           <li><a href='#{{item|replace:' ','_'}}'>{{item}}</a></li>
           {% endif %}
-
         {% endfor %}
         </ul>
-      {% endfor %}
       {% endfor %}
       {% endif %}
     </div>
