@@ -27,7 +27,7 @@ class: box
     <div class='doc-nav'>
       <ul class='nav anchors'>
       {% for item in page.releases %}
-        <li class='parent'><a href='#{{item.version|replace:' ','_'}}'>{{item.version}}</a></li>
+        <li class='parent'><a href='#{{item.version|replace:' ', '_'}}'>{{item.version}}</a></li>
       {% endfor %}
       </ul>
     </div>
@@ -36,7 +36,7 @@ class: box
     <div id='docs' class='doc-content prose'>
       <div class='doc pad2'>
         {% for item in page.releases %}
-          <h2 id='{{item.version}}'>{{item.version}} {% if item.date %}<small>{{item.date|date:'%B %d %Y'}}</small>{% endif %}</h2>
+          <h2 id='{{item.version|replace:' ', '_'}}'>{{item.version}} {% if item.date %}<small>{{item.date|date:'%B %d %Y'}}</small>{% endif %}</h2>
           <ul class='checklist'>
             {% for item in item.notes %}
             <li class='check'>{{item | markdownify}}</li>
