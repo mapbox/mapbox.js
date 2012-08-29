@@ -4,6 +4,16 @@ categories: changelog
 title: mapbox.js Changelog
 releases:
 
+- version: v0.6.5
+  date: 2012-08-29
+
+  - Fix bug where `layer.tilejson` could overwrite a composited provider
+  - Fix bug where layer compositing would make unecessary tilejson requests
+  - Adds backwards-compatibility for Wax CSS classes for existing maps.
+  - Expands markers API with 0.14.3, adding `.add()`, `.remove()`, programmatic
+    access to tooltips, and documentation for `.markers()`.
+  - `mapbox.interaction()` now automatically includes location handling as well.
+
 - version: v0.6.4
   date: 2012-08-14
 

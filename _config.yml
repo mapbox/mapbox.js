@@ -2,7 +2,7 @@ auto: true
 server: true
 permalink: /:categories/:title
 baseurl: /mapbox.js
-version: v0.6.4
+version: v0.6.5
 url: http://mapbox.com
 title: mapbox.js
 description: MapBox JavaScript API
