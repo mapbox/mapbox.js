@@ -11,7 +11,7 @@
   "dependencies": {
       "reqwest": "0.4.5",
       "modestmaps": "3.3.5",
-      "wax": "7.0.0dev9",
+      "wax": "7.0.0dev10",
       "bean": "0.4.11-1",
       "mustache": "0.4.0",
       "markers": "0.14.3",
