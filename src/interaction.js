@@ -22,7 +22,7 @@ mapbox.interaction = function() {
         interaction.on(wax.tooltip()
             .animate(true)
             .parent(interaction.map().parent)
-            .events());
+            .events()).on(wax.location().events());
         return interaction.refresh();
     };
 

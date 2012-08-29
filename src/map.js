@@ -21,7 +21,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
     m.ui = mapbox.ui(m);
     m.interaction = mapbox.interaction().map(m);
 
-
     // Autoconfigure map with sensible defaults
     m.auto = function() {
         this.ui.zoomer.add();
@@ -77,7 +76,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
         return m;
     };
 
-
     m.setPanLimits = function(locations) {
         if (!(locations instanceof MM.Extent)) {
             locations = new MM.Extent(
@@ -95,7 +93,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
         ];
         return m;
     };
-
 
     m.center = function(location, animate) {
         if (location && animate) {
@@ -121,7 +118,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             return this.setCenterZoom(location, zoom);
         }
     };
-
 
     // Insert a tile layer below marker layers
     m.addTileLayer = function(layer) {
