@@ -4,7 +4,17 @@ section: developers
 class: box
 ---
 <style>
-  a.external { font: normal 12px/1.6667em Opensans,Arial,sans-serif; }
+.doc-footer {
+  border-top:1px solid #ccc;
+  border-left:1px solid #ccc;
+  text-align:center;
+  }
+
+@media only screen and (max-width: 640px) {
+  .doc-footer {
+    border-left:none;
+  }
+}
 </style>
 <div class='clearfix doc-header pad3 fillL'>
   <div class='cell7'>
@@ -37,6 +47,11 @@ class: box
     <div class='doc pad2'>
       <h1>{{page.title}}</h1>
       {{content}}
+    </div>
+    <div class='doc-footer'>
+      <div class='pad2'>
+        The code and documentation to mapboxjs is <a href='http://github.com/mapbox/mapbox.js'>hosted on GitHub</a> where you can contribute changes and improvements.
+      </div>
     </div>
   </div>
 </div>
