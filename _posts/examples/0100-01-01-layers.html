@@ -20,17 +20,17 @@ tags:
 <div id='layers'></div>
 <div id='map'></div>
 <script>
-  var m = mapbox.map('map');
+  var map = mapbox.map('map');
   var layers = document.getElementById('layers');
 
-  m.addLayer(mapbox.layer().id('tmcw.map-j5a868tu'));
-  m.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
-  m.zoom(3);
+  map.addLayer(mapbox.layer().id('tmcw.map-j5a868tu'));
+  map.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
+  map.zoom(3);
 
   // Create a simple layer switcher that toggles layers on
   // and off.
-  for (var i = 0; i < m.getLayers().length; i++) {
-      var n = m.getLayerAt(i).name;
+  for (var i = 0; i < map.getLayers().length; i++) {
+      var n = map.getLayerAt(i).name;
       var container = document.createElement('div');
       var input = document.createElement('input');
       var label = document.createElement('label');
@@ -38,9 +38,9 @@ tags:
       input.id = input.value = n;
       input.checked = 'checked';
       input.onchange = function() {
-          m.getLayer(this.value).enabled ? 
-              m.getLayer(this.value).disable() :
-              m.getLayer(this.value).enable();
+          map.getLayer(this.value).enabled ?
+              map.getLayer(this.value).disable() :
+              map.getLayer(this.value).enable();
       };
       label.innerHTML = n;
       label.setAttribute('for', n);

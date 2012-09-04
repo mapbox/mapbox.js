@@ -8,8 +8,8 @@ tags:
 
 <div id='map'></div>
 <script>
-  var m = mapbox.map('map');
-  m.addLayer(mapbox.layer().id('examples.map-20v6611k'));
+  var map = mapbox.map('map');
+  map.addLayer(mapbox.layer().id('examples.map-20v6611k'));
 
   // Create an empty markers layer
   var markerLayer = mapbox.markers.layer();
@@ -18,9 +18,9 @@ tags:
   // binds tooltips to each marker that has title
   // and description defined.
   mapbox.markers.interaction(markerLayer);
-  m.addLayer(markerLayer);
+  map.addLayer(markerLayer);
 
-  m.zoom(5).center({ lat: 37, lon: -77 });
+  map.zoom(5).center({ lat: 37, lon: -77 });
 
   // Add a single feature to the markers layer.
   // You can use .features() to add multiple features.

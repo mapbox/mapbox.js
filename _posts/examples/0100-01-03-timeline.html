@@ -49,8 +49,8 @@ a.year-active {
 <div id='map'></div>
 
 <script>
-  var m = mapbox.map('map');
-  m.addLayer(mapbox.layer().id('examples.map-20v6611k'));
+  var map = mapbox.map('map');
+  map.addLayer(mapbox.layer().id('examples.map-20v6611k'));
 
   var timeline = document.getElementById('timeline'),
       controls = document.getElementById('controls');
@@ -125,6 +125,6 @@ a.year-active {
       click_year(2001)();
   });
 
-  m.addLayer(markerLayer);
-  m.zoom(3).center({ lat: 40, lon: -130 });
+  map.addLayer(markerLayer);
+  map.zoom(3).center({ lat: 40, lon: -130 });
 </script>
