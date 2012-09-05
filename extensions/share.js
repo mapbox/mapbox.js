@@ -1,7 +1,8 @@
 if (typeof mapbox === 'undefined') mapbox = {};
 
 mapbox.share = function() {
-    var share = {};
+    var share = {},
+        map;
 
     tj = {};
     var l = window.location;
