@@ -30,13 +30,13 @@ class: box
 #demo label { display:inline; }
 
 #snippet {
+  background:#fff;
   position:relative;
   overflow:hidden;
-  background:#fff;
   }
-  #snippet .buttons {
+  .button {
     position:absolute;
-    top:0px; right:0px;
+    bottom:20px; right:20px;
     z-index:1;
     }
 
@@ -46,10 +46,11 @@ pre {
   }
 pre:hover { background:transparent; }
 pre a {
+  background:#EAF4F8;
   border:0;
   padding:0;
-  background:#EAF4F8;
-  box-shadow:#EAF4F8 0 0 0 2px;
+  -webkit-box-shadow: 0 0 2px #EAF4F8;
+          box-shadow: 0 0 2px #EAF4F8;
   }
 
 .code-header *,
@@ -87,7 +88,6 @@ pre a {
 <div class='doc-page pad3c fillM clearfix'>
 <div class='fillW clearfix'>
   <div class='cell3'>
-    <div class='clearfix'>&nbsp;</div>
     <div class='doc-nav'>
       <ul class='nav pages'>
       <li><a {% if page.url == '/examples/index.html' %}class='active'{% endif %} href='{{site.baseurl}}/examples'>A simple map</a></li>
@@ -104,9 +104,7 @@ pre a {
     </div>
     <div id='demo' class='doc'>{{content}}</div>
     <div id='snippet' class='doc'>
-    <div class='buttons pad2 fillW'>
-      <a class='button big' href='#' id='copy'><span class='icon embed reverse'></span> Select all</a>
-    </div>
+    <a class='button big' href='#' id='copy'><span class='icon embed reverse'></span> Select all</a>
     <div id='code' class='doc'>
     <pre class='prettyprint code-header'>
 &lt;!DOCTYPE html&gt;
