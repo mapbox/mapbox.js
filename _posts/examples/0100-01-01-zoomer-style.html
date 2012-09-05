@@ -27,8 +27,8 @@ scratch */
 </style>
 <div id='map'></div>
 <script>
-    var m = mapbox.map('map');
-    m.addLayer(mapbox.layer().id('examples.hyg-stars'));
-    m.ui.zoomer.add();
-    m.zoom(3);
+    var map = mapbox.map('map');
+    map.addLayer(mapbox.layer().id('examples.hyg-stars'));
+    map.ui.zoomer.add();
+    map.zoom(3);
 </script>
