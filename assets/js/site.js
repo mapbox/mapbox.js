@@ -167,12 +167,6 @@
             $('.doc-search input').bind('keyup', this.search);
         },
 
-        bindHeadings: function() {
-            $('h1[id],h2[id],h3[id],h4[id]').click(function(ev) {
-                window.location.hash = $(ev.currentTarget).attr('id');
-            });
-        },
-
         bindInlineCode: function() {
             var heading_index = {};
             function noparams(x) {

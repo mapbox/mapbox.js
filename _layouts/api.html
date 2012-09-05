@@ -16,6 +16,14 @@ class: box
   font-style:italic;
   }
 
+.doc-search input {
+  width: 95%;
+  height: 40px;
+  padding: 10px 4px 10px 8px;
+  }
+.doc-nav li.active a {
+  background-color:#ecf5fa;
+  }
 #docs p,
 #docs ul { margin-bottom:5px; }
 
@@ -80,7 +88,7 @@ span.bracket { color:#888; }
   <div class='cell3'>
     <div class='doc-nav'>
       <form class='doc-search'>
-        <input type='search' placeholder='Filter examples'>
+        <input type='text' placeholder='Filter examples'>
       </form>
       {% if page.navigation %}
       {% for section in page.navigation %}
@@ -122,7 +130,6 @@ span.bracket { color:#888; }
     var docs = new Docs();
     docs.colorCode();
     docs.bindSearch();
-    docs.bindHeadings();
     docs.bindInlineCode();
     $(mapbox.docs);
 </script>
