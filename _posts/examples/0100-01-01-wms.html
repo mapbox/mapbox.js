@@ -1,0 +1,86 @@
+---
+layout: example
+categories: example
+title: WMS Layers
+description: Include OGC WMS Layers in your Map
+tags:
+  - wms
+---
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #layers {
+      position:absolute;
+      top:10px;
+      left:80px;
+      z-index:999;
+  }
+  button {
+      opacity:0.7;
+      border:0;
+      border-radius:3px;
+      padding:7px;
+      cursor:pointer;
+      background:#ccc;
+  }
+  button.enabled { opacity:1; background:#eee; }
+</style>
+<div id='map'>
+    <div id='layers'>
+        <button class='enabled' id='temp'>Temperature</button>
+        <button class='enabled' id='precip'>Precipitation</button>
+    </div>
+</div>
+<script>
+mapbox.wms = function(template, name) {
+    function _wms_provider(template) {
+        MM.MapProvider.call(this, function(coordinate) {
+            var coord = this.sourceCoordinate(coordinate);
+            if (!coord) return null;
+            var center = Math.pow(2, coord.zoom - 1),
+                incr = Math.pow(2, -coord.zoom) * 20037508.34 * 2,
+                w = (coord.column - center) * incr,
+                s = (center - coord.row - 1) * incr;
+            return template.replace('{BBOX}', [w,
+                s,
+                w + incr,
+                s + incr].join(','));
+        });
+    };
+    _wms_provider.prototype = {
+        getTile: function(coord) {
+            return this.getTileUrl(coord);
+        }
+    };
+    MM.extend(_wms_provider, MM.MapProvider);
+    return new MM.Layer(new _wms_provider(template), null, name);
+};
+
+// This WMS layer type only supports layers that provide the Spherical
+// Mercator projection, referred to by EPSG:900913 and EPSG:3857
+// Add a WMS layer by adding the {BBOX} token to a GetTile request URL
+mapbox.auto('map', 'examples.map-y7l23tes', function(map) {
+    map.zoom(5).center({ lat: 37, lon: -99 });
+
+    var temp = mapbox.wms('http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer?' +
+        'BBOX={BBOX}&BUFFER=0&FORMAT=image%2Fpng&HEIGHT=256&LAYERS=16&REQUEST=GetMap&' +
+        'SERVICE=WMS&SRS=EPSG%3A102113&STYLES=&TRANSPARENT=true&VERSION=1.1.1&WIDTH=256&etag=5', 'Temperature');
+    map.addLayer(temp);
+
+    var precip = mapbox.wms('http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs?' +
+        'service=wms&version=1.1.1&request=GetMap&width=512&height=512&srs=EPSG:3857&' +
+        'bbox={BBOX}&layers=RAS_RIDGE_NEXRAD&format=image/png&transparent=true', 'Precipitation');
+    map.addLayer(precip);
+
+    // Layer switcher
+    document.getElementById('temp').onclick = function() {
+        (!temp.enabled) ? temp.enable() : temp.disable();
+        this.className = temp.enabled ? 'enabled' : '';
+    }
+    document.getElementById('precip').onclick = function() {
+        (!precip.enabled) ? precip.enable() : precip.disable();
+        this.className = precip.enabled ? 'enabled' : '';
+    }
+});
+</script>
