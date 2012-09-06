@@ -17,13 +17,14 @@ class: box
   }
 
 .doc-search input {
-  width: 95%;
-  height: 40px;
-  padding: 10px 4px 10px 8px;
+  width:95%;
+  height:40px;
+  padding:10px 4px 10px 8px;
   }
 .doc-nav li.active a {
   background-color:#ecf5fa;
   }
+
 #docs p,
 #docs ul { margin-bottom:5px; }
 
@@ -91,9 +92,9 @@ span.bracket { color:#888; }
         <input type='text' placeholder='Filter examples'>
       </form>
       {% if page.navigation %}
+      <ul class='nav anchors'>
       {% for section in page.navigation %}
-        <ul class='nav anchors'>
-          <li class='heading'><a href='#{{section.title|downcase|replace:' ','_'}}'>{{section.title}}</a></li>
+        <li class='heading'><a href='#{{section.title|downcase|replace:' ','_'}}'>{{section.title}}</a></li>
         {% for item in section.items %}
           {% if item.Separator %}
           <li class='parent'><a href='#{{item.Separator|replace:' ','_'}}'>{{item.Separator}}</a></li>
@@ -101,8 +102,8 @@ span.bracket { color:#888; }
           <li><a href='#{{item|replace:' ','_'}}'>{{item}}</a></li>
           {% endif %}
         {% endfor %}
-        </ul>
       {% endfor %}
+      </ul>
       {% endif %}
     </div>
   </div>
@@ -129,7 +130,7 @@ span.bracket { color:#888; }
 <script>
     var docs = new Docs();
     docs.colorCode();
-    docs.bindSearch();
+    docs.bindSearch($('.doc-search input'), $('.doc-nav ul'));
     docs.bindInlineCode();
     $(mapbox.docs);
 </script>

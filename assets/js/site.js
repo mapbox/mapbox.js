@@ -3,99 +3,6 @@
 
     Docs.prototype = {
 
-        queryExamples: function () {
-            var search = $('#search');
-            var tExamples = _.template($('#examples').html());
-            var tags = [], data;
-
-            var fullResult = $.ajax({
-                url: 'examples.json',
-                dataType: 'json',
-                success: function(r) {
-                    data = _(r).chain()
-                    .compact()
-                    .map(function(r) {
-                        r.words = (r.title.toLowerCase() + ' ' + (r.tags.toString()).toLowerCase()).match(/(\w+)/g);
-                        return r;
-                    })
-                    .value();
-                    _.delay(function () {tagList(tags);}, 10);
-                    _.each(data, function(result){
-                        $('#results').append(tExamples(result));
-                        tags.push(result.tags);
-                    });
-                }
-            });
-
-            var tagList = function (tags) {
-                var tTags = _.template($('#tags').html());
-
-                var f = _.flatten(tags),
-                    u = _.uniq(f);
-
-                _.each(u, function(tag) {
-                    $('#tag-list').append(tTags({'tag': tag}));
-                });
-
-                _.delay(function () {
-                    $('#tag-list').find('a').on('click', tagFilter);
-                }, 1);
-
-                var tagFilter = function(e) {
-                    e.preventDefault();
-                    $('#results').empty();
-                    var tag = $(this).attr('data-tag');
-
-                    if (!$(this).hasClass('active')) {
-                        $('#tag-list').find('a').removeClass('active');
-                        $(this).addClass('active');
-
-                        var filtered = find(tag.toLowerCase().match(/(\w+)/g));
-                        _(filtered).each(function(p) {
-                            $('#results').append(tExamples(p));
-                        });
-                    } else {
-                        $(this).removeClass('active');
-                        _.each(data, function(result){
-                            $('#results').append(tExamples(result));
-                        });
-                    }
-                };
-            };
-
-            var find = function(phrase) {
-                var matches = _(data).filter(function(p) {
-                    return _(phrase).filter(function(a) {
-                        return _(p.words).any(function(b) {
-                            return a === b || b.indexOf(a) === 0;
-                        });
-                    }).length === phrase.length;
-                });
-
-                return matches;
-            };
-
-            $('input', search).keyup(_(function() {
-                $('#results').empty();
-                var phrase = $('input', search).val();
-
-                if (phrase.length >= 2) {
-                    var matches = find(phrase.toLowerCase().match(/(\w+)/g));
-                    $('#tag-list').find('a').removeClass('active');
-                    _(matches).each(function(p) {
-                        $('#results').append(tExamples(p));
-                    });
-                    if (matches.length) return;
-                } else {
-                    _.each(data, function(result){
-                        $('#results').append(tExamples(result));
-                    });
-                }
-
-                return false;
-            }).debounce(100));
-        },
-
         page: function() {
             $('#toggle-sections').find('a').click(function() {
                 if ($('#demo').hasClass('active')) {
@@ -131,40 +38,120 @@
             prettyPrint(cb);
         },
 
-        search: function() {
-            var q = this.value ? this.value.toLowerCase() : null;
-            $('.doc-nav').find('[href]').each(function() {
+        bindSearch: function(input, menu) {
+            this.$el = input;
+            this.$menu = menu;
+            this.$el
+                .on('keypress', $.proxy(this._keypress, this))
+                .on('keyup', $.proxy(this._keyup, this));
+
+              if ($.browser.webkit || $.browser.msie) {
+                this.$el.on('keydown', $.proxy(this._keydown, this));
+              }
+
+              this.$menu.on('mouseenter', 'li', $.proxy(this._mouseenter, this));
+        },
+
+        _keydown: function(e) {
+            this.keyRepeat = !~$.inArray(e.keyCode, [40,38,13]);
+            this._move(e);
+        },
+
+        _keypress: function(e) {
+            // Surpress keys from being fired off twice.
+            if (this.keyRepeat) return;
+            this._move(e);
+        },
+
+        _move: function(e, doc) {
+            switch(e.keyCode) {
+                case 13: // enter
+                e.preventDefault();
+                break
+
+                case 38: // up arrow
+                e.preventDefault();
+                this._prev();
+                break
+
+                case 40: // down arrow
+                e.preventDefault();
+                this._next();
+                break
+            }
+          e.stopPropagation();
+        },
+
+        _keyup: function(e) {
+          switch(e.keyCode) {
+            case 40: // down arrow
+            case 38: // up arrow
+              break;
+
+            case 13: // enter
+              this._select(e);
+              break
+
+            default:
+              this._search(e);
+          }
+          return false;
+        },
+
+        _next: function() {
+            var active = this.$menu.find('.active').removeClass('active'),
+                next = active.nextAll('li.filtered').first();
+            if (!next.length) { next = $(this.$menu.find('li')[0]); }
+            next.addClass('active');
+        },
+
+        _prev: function() {
+            var active = this.$menu.find('.active').removeClass('active'),
+                prev = active.prevAll('li.filtered').first();
+            if (!prev.length) { prev = this.$menu.find('li').last(); }
+            prev.addClass('active');
+        },
+
+        _select: function(e) {
+            window.location.hash = this.$menu.find('.active a').attr('href');
+        },
+
+        _mouseenter: function(e) {
+            this.$menu.find('.active').removeClass('active');
+            $(e.currentTarget).addClass('active');
+        },
+
+        _search: function() {
+            var q = this.$el.val() ? this.$el.val().toLowerCase() : null;
+            this.$menu.find('[href]').each(function() {
                 var $this = $(this),
                     id = $this.attr('href').replace('#', ''),
                     body = $(document.getElementById('content-' + id)).text();
 
                 if (!q || body.toLowerCase().indexOf(q) !== -1 || id.toLowerCase().indexOf(q) !== -1) {
+                    $this.parent().addClass('filtered');
                     if ($this.parent().hasClass('heading')) {
-                        $this.css('color', '');
+                        $this.css('color', '#3C4E5A');
                     } else {
-                        $this.css('display', '');
+                        $this.show();
                     }
-
                 } else {
+                    $this.parent().removeClass('filtered');
                     if ($this.parent().hasClass('heading')) {
                         $this.css('color', '#BDBDBD');
                     } else {
-                        $this.css('display', 'none');
+                        $this.hide();
                     }
                 }
             });
 
             // Hide headers if no children matched
-            $('.doc-nav').find('li.heading').each(function() {
+            this.$menu.find('li.heading').each(function() {
                 var $this = $(this),
                     next = $this.next();
 
                 if (next.hasClass('heading')) $this.css('display', 'none');
             });
-        },
-
-        bindSearch: function() {
-            $('.doc-search input').bind('keyup', this.search);
         },
 
         bindInlineCode: function() {
