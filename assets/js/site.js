@@ -101,15 +101,53 @@
         _next: function() {
             var active = this.$menu.find('.active').removeClass('active'),
                 next = active.nextAll('li.filtered').first();
-            if (!next.length) { next = $(this.$menu.find('li')[0]); }
-            next.addClass('active');
+
+            if (!next.length) {
+                next = $(this.$menu.find('li')[0]);
+                next.addClass('active');
+                $('html, body').animate({
+                    scrollTop: 0
+                }, {
+                    duration: 300
+                });
+            } else {
+                next.addClass('active');
+                var windowOffset = $(window).scrollTop() + $(window).height(),
+                    offset = next.offset();
+
+                if ((offset.top + 28) > windowOffset) {
+                    $('html, body').animate({
+                        scrollTop: offset.top
+                    }, 300);
+                }
+            }
         },
 
         _prev: function() {
             var active = this.$menu.find('.active').removeClass('active'),
                 prev = active.prevAll('li.filtered').first();
-            if (!prev.length) { prev = this.$menu.find('li').last(); }
-            prev.addClass('active');
+
+            if (!prev.length) {
+                prev = this.$menu.find('li').last();
+                prev.addClass('active');
+                $('html, body').animate({
+                    scrollTop: this.$menu.height()
+                }, {
+                    duration: 300
+                });
+
+            } else {
+                prev.addClass('active');
+
+                var windowOffset = $(window).scrollTop();
+                var offset = prev.offset();
+
+                if ((offset.top) < windowOffset) {
+                    $('html, body').animate({
+                        scrollTop: (offset.top + 28) - $(window).height()
+                    }, 300);
+                }
+            }
         },
 
         _select: function(e) {
@@ -131,7 +169,7 @@
                 if (!q || body.toLowerCase().indexOf(q) !== -1 || id.toLowerCase().indexOf(q) !== -1) {
                     $this.parent().addClass('filtered');
                     if ($this.parent().hasClass('heading')) {
-                        $this.css('color', '#3C4E5A');
+                        $this.css('color', '');
                     } else {
                         $this.show();
                     }
