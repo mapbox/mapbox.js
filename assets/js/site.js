@@ -19,7 +19,8 @@
         },
 
         copyCode: function() {
-            $('#copy').click(function() {
+            $('#copy').click(function(e) {
+                e.preventDefault();
                 if (document.selection) {
                     var rangeD = document.body.createTextRange();
                     rangeD.moveToElementText(document.getElementById('code'));
@@ -29,7 +30,6 @@
                     rangeW.selectNode(document.getElementById('code'));
                     window.getSelection().addRange(rangeW);
                 }
-                return false;
             });
         },
 
@@ -38,9 +38,10 @@
             prettyPrint(cb);
         },
 
-        bindSearch: function(input, menu) {
+        bindSearch: function(input, menu, anchor) {
             this.$el = input;
             this.$menu = menu;
+            this.anchor = anchor;
             this.$el
                 .on('keypress', $.proxy(this._keypress, this))
                 .on('keyup', $.proxy(this._keyup, this));
@@ -151,7 +152,10 @@
         },
 
         _select: function(e) {
-            window.location.hash = this.$menu.find('.active a').attr('href');
+            var v = this.$menu.find('.active a').attr('href');
+            this.anchor ?
+                window.location.hash = v :
+                window.location = v
         },
 
         _mouseenter: function(e) {

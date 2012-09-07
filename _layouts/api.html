@@ -137,9 +137,11 @@ span.bracket { color:#888; }
 </div>
 
 <script>
+  $(function() {
     var docs = new Docs();
     docs.colorCode();
-    docs.bindSearch($('.doc-search input'), $('.doc-nav ul'));
+    docs.bindSearch($('.doc-search input'), $('.doc-nav ul'), true);
     docs.bindInlineCode();
     $(mapbox.docs);
+  });
 </script>

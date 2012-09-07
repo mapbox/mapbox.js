@@ -89,6 +89,10 @@ pre a {
 <div class='fillW clearfix'>
   <div class='cell3'>
     <div class='doc-nav'>
+      <form class='doc-search'>
+        <input type='text' placeholder='Filter examples'>
+        <span class='icon search'></span>
+      </form>
       <ul class='nav pages'>
       <li><a {% if page.url == '/examples/index.html' %}class='active'{% endif %} href='{{site.baseurl}}/examples'>A simple map</a></li>
       {% for item in site.categories.example reversed %}
@@ -141,7 +145,7 @@ pre a {
     example.colorCode(function(){
         example.bindHints("{{ site.version }}");
     });
-    example.bindSearch();
+    example.bindSearch($('.doc-search input'), $('.doc-nav ul'), false);
   });
   $(mapbox.docs);
 </script>
