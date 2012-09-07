@@ -19,8 +19,15 @@ class: box
 .doc-search input {
   width:95%;
   height:40px;
-  padding:10px 4px 10px 8px;
-}
+  padding:10px 40px 10px 8px;
+  }
+  .doc-search span {
+    position:absolute;
+    top:10px;
+    right:10%;
+    margin-right:10px;
+    }
+
 .doc-nav .nav li.active a {
   background-color:#ecf5fa;
   color:#3C4E5A;
@@ -91,6 +98,7 @@ span.bracket { color:#888; }
     <div class='doc-nav'>
       <form class='doc-search'>
         <input type='text' placeholder='Filter examples'>
+        <span class='icon search'></span>
       </form>
       {% if page.navigation %}
       <ul class='nav anchors'>
