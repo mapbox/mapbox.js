@@ -1,0 +1,79 @@
+---
+layout: example
+categories: example
+title: Zoom bar
+description: Add a draggable bar for setting map zoom
+tags:
+  - zoom
+---
+
+<div id='z'>
+<div id='zoom-bar' class='dragdealer'>
+    <div id='handle' class="handle">0</div>
+</div>
+</div>
+<div id='map'>
+</div>
+<script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.5/mapbox.js'></script>
+<link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.5/mapbox.css' rel='stylesheet' />
+
+<!-- if you plan to use this example, download drag dealer from
+https://code.google.com/p/dragdealer/ instead of hotlinking it like this -->
+<script src='http://dragdealer.googlecode.com/svn/tags/0.9.5/dragdealer.js'></script>
+<style>
+body { margin:0; padding:0; font-family:sans-serif; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+#z {
+    top:10px;
+    left:80px;
+    position:absolute;
+    z-index:999;
+}
+#zoom-bar {
+    width:200px;
+    position:relative;
+    border-radius:3px;
+    height:30px;
+    background:#eee;
+    border:1px solid #aaa;
+}
+.dragdealer .handle {
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius:3px;
+    line-height:30px;
+    text-align:center;
+}
+</style>
+<script>
+mapbox.auto('map', 'examples.map-vyofok3q', function(map) {
+    var zooms = 17;
+    var handle = document.getElementById('handle');
+
+    // Configure Dragdealer to update the map zoom
+    var zoom_bar = new Dragdealer('zoom-bar', {
+        steps: zooms,
+        snap: true,
+        callback: function(x, y) {
+            var z = x * (zooms - 1);
+            map.zoom(z, true);
+            handle.innerHTML = z;
+        }
+    });
+
+    // Round zoom so that numbers in the bar look presentable.
+    map.addCallback('zoomed', function() {
+        var z = Math.round(map.zoom());
+        zoom_bar.setValue(z / 16);
+        handle.innerHTML = z;
+    });
+
+    // Set the initial map position
+    map.zoom(9).center({ lat: 34.660322, lon: 132.506103 });
+});
+</script>
+</body>
+</html>
