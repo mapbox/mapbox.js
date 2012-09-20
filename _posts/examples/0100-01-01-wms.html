@@ -8,29 +8,54 @@ tags:
 ---
 
 <style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
-  #layers {
-      position:absolute;
-      top:10px;
-      left:80px;
-      z-index:999;
-  }
-  button {
-      opacity:0.7;
-      border:0;
-      border-radius:3px;
-      padding:7px;
-      cursor:pointer;
-      background:#ccc;
-  }
-  button.enabled { opacity:1; background:#eee; }
+  #map-ui {
+    position:absolute;
+    top:50px;left:10px;
+    z-index:100;
+    }
+    #map-ui ul {
+      list-style:none;
+      margin:0;padding:0;
+      }
+      #map-ui a {
+        font-size:13px;
+        background:#FFF;
+        color:#3C4E5A;
+        display:block;
+        margin:0;padding:0;
+        border:1px solid #BBB;
+        border-bottom-width:0;
+        min-width:138px;
+        padding:10px;
+        text-decoration:none;
+        }
+      #map-ui a:hover { background:#ECF5FA; }
+      #map-ui li:last-child a {
+        border-bottom-width:1px;
+        -webkit-border-radius:0 0 3px 3px;
+                border-radius:0 0 3px 3px;
+        }
+      #map-ui li:first-child a {
+        -webkit-border-radius:3px 3px 0 0;
+                border-radius:3px 3px 0 0;
+              }
+      #map-ui a.active {
+        background:#3887BE;
+        border-color:#3887BE;
+        color:#FFF;
+        }
+        #map-ui li:last-child a.active {
+          border-top-color:#FFF;
+          }
+
 </style>
 <div id='map'>
-    <div id='layers'>
-        <button class='enabled' id='temp'>Temperature</button>
-        <button class='enabled' id='precip'>Precipitation</button>
-    </div>
+  <div id='map-ui'>
+    <ul>
+      <li><a href='#' class='active' id='temp'>Temperature</a></li>
+      <li><a href='#' class='active' id='precip'>Precipitation</a></li>
+    </ul>
+  </div>
 </div>
 <script>
 mapbox.wms = function(template, name) {
@@ -76,11 +101,13 @@ mapbox.auto('map', 'examples.map-y7l23tes', function(map) {
     // Layer switcher
     document.getElementById('temp').onclick = function() {
         (!temp.enabled) ? temp.enable() : temp.disable();
-        this.className = temp.enabled ? 'enabled' : '';
+        this.className = temp.enabled ? 'active' : '';
+        return false;
     }
     document.getElementById('precip').onclick = function() {
         (!precip.enabled) ? precip.enable() : precip.disable();
-        this.className = precip.enabled ? 'enabled' : '';
+        this.className = precip.enabled ? 'active' : '';
+        return false;
     }
 });
 </script>

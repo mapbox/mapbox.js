@@ -8,25 +8,47 @@ tags:
 ---
 
 <style>
-  #links {
-    background: #fff;
+ #map-ui {
     position:absolute;
-    top:20px;
-    left:20px;
-    z-index: 1000;
-    padding: 10px;
-  }
+    top:10px;left:10px;
+    z-index:100;
+    }
+    #map-ui ul {
+      list-style:none;
+      margin:0;padding:0;
+      }
+      #map-ui a {
+        font-size:13px;
+        background:#FFF;
+        color:#3C4E5A;
+        display:block;
+        margin:0;padding:0;
+        border:1px solid #BBB;
+        border-bottom-width:0;
+        min-width:138px;
+        padding:10px;
+        text-decoration:none;
+        }
+      #map-ui a:hover { background:#ECF5FA; }
+      #map-ui li:last-child a {
+        border-bottom-width:1px;
+        -webkit-border-radius:0 0 3px 3px;
+                border-radius:0 0 3px 3px;
+        }
+      #map-ui li:first-child a {
+        -webkit-border-radius:3px 3px 0 0;
+                border-radius:3px 3px 0 0;
+        }
 </style>
 
-<div id='links'>
+<div id='map-ui'>
   <ul>
-    <li><a href="#" id="toronto">Toronto</a></li>
-    <li><a href="#" id="chicago">Chicago</a></li>
-    <li><a href="#" id="dc">Washington, D.C.</a></li>
+    <li><a href='#' id='toronto'>Toronto</a></li>
+    <li><a href='#' id='chicago'>Chicago</a></li>
+    <li><a href='#' id='dc'>Washington, D.C.</a></li>
   </ul>
 </div>
 <div id='map'></div>
-
 <script>
 
   // Create a map
@@ -43,17 +65,17 @@ tags:
 
   document.getElementById('toronto').onclick = function() {
     map.ease.location({ lat: 43.6, lon: -79.4 }).zoom(10).optimal();
-    return false
+    return false;
   }
 
   document.getElementById('chicago').onclick = function() {
     map.ease.location({ lat: 41.9, lon: -87.6 }).zoom(10).optimal();
-    return false
+    return false;
   }
 
   document.getElementById('dc').onclick = function() {
     map.ease.location({ lat: 38.9, lon: -77 }).zoom(10).optimal();
-    return false
+    return false;
   }
 
 </script>

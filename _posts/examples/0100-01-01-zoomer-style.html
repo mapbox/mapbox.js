@@ -15,15 +15,20 @@ defined in mapbox.css.
 You can also omit mapbox.css if you want to style everything from
 scratch */
 .zoomer {
-    border-radius:15px;
-    opacity:0.6;
-}
-.zoomer:hover {
-    opacity:1;
-}
+  background-color:#888;
+  border-color:#202020;
+  -webkit-border-radius:50%;
+          border-radius:50%;
+  }
+  .zoomer:hover {
+    background-color:#666;
+    }
 .zoomin {
-    left:50px;
-}
+  left:10px;
+  }
+.zoomout {
+  top:45px;
+  }
 </style>
 <div id='map'></div>
 <script>

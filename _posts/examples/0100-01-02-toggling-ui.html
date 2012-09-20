@@ -7,57 +7,83 @@ tags:
  - ui
 ---
 
+<style>
+  #map-ui {
+    position:absolute;
+    top:50px;left:10px;
+    z-index:100;
+    }
+    #map-ui ul {
+      list-style:none;
+      margin:0;padding:0;
+      }
+      #map-ui a {
+        font-size:13px;
+        background:#FFF;
+        color:#3C4E5A;
+        display:block;
+        margin:0;padding:0;
+        border:1px solid #BBB;
+        border-bottom-width:0;
+        min-width:138px;
+        padding:10px;
+        text-decoration:none;
+        }
+      #map-ui a:hover { background:#ECF5FA; }
+      #map-ui li:last-child a {
+        border-bottom-width:1px;
+        -webkit-border-radius:0 0 3px 3px;
+                border-radius:0 0 3px 3px;
+        }
+      #map-ui li:first-child a {
+        -webkit-border-radius:3px 3px 0 0;
+                border-radius:3px 3px 0 0;
+              }
+      #map-ui a.active {
+        background:#3887BE;
+        border-color:#3887BE;
+        border-top-color:#FFF;
+        color:#FFF;
+        }
+        #map-ui li:first-child a.active {
+          border-top-color:#3887BE;
+          }
+        #map .map-fullscreen {
+          background-color:#28353D;
+          }
+
+</style>
 <div id='map'>
-    <div id='boxes'>
-      <div>
-        <input type='checkbox' id='zoomer' />
-        <label for='zoomer'>zoom</label>
-      </div>
-      <div>
-        <input type='checkbox' id='zoombox' />
-        <label for='zoombox'>zoombox</label>
-      </div>
-      <div>
-        <input type='checkbox' id='fullscreen' />
-        <label for='fullscreen'>fullscreen</label>
-      </div>
-      <div>
-        <input type='checkbox' id='attribution' />
-        <label for='attribution'>attribution</label>
-      </div>
-      <div>
-        <input type='checkbox' id='pointselector' />
-        <label for='pointselector'>pointselector</label>
-      </div>
-      <div>
-        <input type='checkbox' id='hash' />
-        <label for='hash'>hash</label>
-      </div>
+    <div id='map-ui'>
+      <ul>
+        <li><a href='#' id='zoomer'>Zoomer</a></li>
+        <li><a href='#' id='zoombox'>Zoombox</a></li>
+        <li><a href='#' id='fullscreen'>Fullscreen</a></li>
+        <li><a href='#' id='attribution'>Attribution</a></li>
+        <li><a href='#' id='pointselector'>Pointselector</a></li>
+        <li><a href='#' id='hash'>Hash</a></li>
+      </ul>
     </div>
 </div>
 
-<style>
-#boxes {
-    position:absolute;
-    top:10px;
-    right:10px;
-    padding:10px;
-    z-index:99999;
-    background:#fff;
-}
-</style>
 
 <script>
-
   // Create map with layer and zoom to level 3
   var map = mapbox.map('map', mapbox.layer().id('examples.map-d40qac29')).zoom(3);
 
   // Connect check boxes to ui functions
-  var checkboxes = document.getElementsByTagName('input');
-  for (var i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].onchange = function() {
+  var options = document.getElementsByTagName('a');
+  for (var i = 0; i < options.length; i++) {
+      options[i].onclick = function() {
           map.ui.refresh();
-          this.checked ? map.ui[this.id].add() : map.ui[this.id].remove();
+          if (this.className === 'active') {
+            map.ui[this.id].remove();
+            this.className = '';
+          } else {
+            map.ui[this.id].add();
+            this.className = 'active';
+          }
+          return false;
       }
   }
 </script>

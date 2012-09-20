@@ -8,20 +8,46 @@ tags:
 ---
 
 <style>
-  #layers {
-    background: #fff;
+  #map-ui {
     position:absolute;
-    top:20px;
-    left:20px;
-    z-index: 1000;
-    padding: 10px;
-  }
+    top:10px;left:10px;
+    list-style:none;
+    margin:0;padding:0;
+    z-index:100;
+    }
+    #map-ui a {
+      font:normal 13px/18px 'Helvetica Neue',Helvetica,sans-serif;
+      background:#FFF;
+      color:#3C4E5A;
+      display:block;
+      margin:0;padding:0;
+      border:1px solid #BBB;
+      border-bottom-width:0;
+      min-width:138px;
+      padding:10px;
+      text-decoration:none;
+      }
+    #map-ui a:hover { background:#ECF5FA; }
+    #map-ui li:last-child a {
+      border-bottom-width:1px;
+      -webkit-border-radius:0 0 3px 3px;
+              border-radius:0 0 3px 3px;
+      }
+    #map-ui li:first-child a {
+      -webkit-border-radius:3px 3px 0 0;
+              border-radius:3px 3px 0 0;
+            }
+    #map-ui a.active {
+      background:#3887BE;
+      border-top-color:#FFF;
+      color:#FFF;
+      }
 </style>
-<div id='layers'></div>
+<ul id='map-ui'></ul>
 <div id='map'></div>
 <script>
   var map = mapbox.map('map');
-  var layers = document.getElementById('layers');
+  var layers = document.getElementById('map-ui');
 
   map.addLayer(mapbox.layer().id('tmcw.map-j5a868tu'));
   map.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
@@ -31,21 +57,20 @@ tags:
   // and off.
   for (var i = 0; i < map.getLayers().length; i++) {
       var n = map.getLayerAt(i).name;
-      var container = document.createElement('div');
-      var input = document.createElement('input');
-      var label = document.createElement('label');
-      input.type = 'checkbox';
-      input.id = input.value = n;
-      input.checked = 'checked';
-      input.onchange = function() {
-          map.getLayer(this.value).enabled ?
-              map.getLayer(this.value).disable() :
-              map.getLayer(this.value).enable();
+      var item = document.createElement('li');
+      var layer = document.createElement('a');
+          layer.href = '#';
+          layer.id = n; 
+          layer.className = 'active'; 
+          layer.innerHTML = 'Layer ' + (i + 1);
+
+      layer.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          map.getLayer(this.id).enabled ? map.getLayer(this.id).disable() : map.getLayer(this.id).enable();
+          this.className = map.getLayer(this.id).enabled ? 'active' : '';
       };
-      label.innerHTML = n;
-      label.setAttribute('for', n);
-      container.appendChild(input);
-      container.appendChild(label);
-      layers.appendChild(container);
+      item.appendChild(layer);
+      layers.appendChild(item);
   }
 </script>

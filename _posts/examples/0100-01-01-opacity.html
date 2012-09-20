@@ -2,36 +2,35 @@
 layout: example
 categories: example
 title: Opacity control
-description: Adjust the opacity of an overlay
+description: Click and drag a slider to adjust the opacity of an overlay.
 tags:
 ---
 
 <style>
-    #control {
-        position: absolute;
-        left: 35px;
-        top: 100px;
-        height: 200px;
-        width: 10px;
-        background: white;
-        box-shadow: 0 0 2px black;
+  #control {
+    background:#FFF;
+    position:absolute;
+    left:10px;
+    top:50px;
+    height:200px;
+    width:28px;
+    border:1px solid #BBB;
+    -webkit-border-radius:3px;
+            border-radius:3px;
     }
-
     #handle {
-        position: absolute;
-        left: -15px;
-        top: 20px;
-        width: 40px;
-        height: 10px;
-        background: black;
-        box-shadow: 0 0 2px white;
-        border-radius: 5px;
-    }
-
+      background:#000;
+      position: absolute;
+      left:0;
+      top:20px;
+      width:28px;
+      height:10px;
+      }
     #handle:hover {
-        cursor: pointer;
-        background: #444;
-    }
+      cursor:pointer;
+      background:#444;
+      cursor:ns-resize;
+      }
 </style>
 
 <div id='map'></div>
@@ -65,6 +64,7 @@ tags:
             handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
             // Adjust opacity
             map.getLayerAt(1).parent.style.opacity = 1 - (handle.offsetTop / 200);
+            map.parent.style.cursor = 'ns-resize';
         }
 
         handle.onmousedown = function(e) {
@@ -76,6 +76,7 @@ tags:
 
         document.onmouseup = function(e) {
             start = null;
+            map.parent.style.cursor = 'default';
         }
     });
 </script>

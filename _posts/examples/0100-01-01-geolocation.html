@@ -9,19 +9,28 @@ tags:
 
 <style>
 #geolocate {
-    position:absolute;
-    top:50%;
-    left:50%;
-    width:100px;
-    margin-left:-50px;
-    font:normal 20px/30px 'Helvetica Neue', sans-serif;
-    background:#fff;
-    border:1px solid #58b6e3;
-    z-index:9999;
-}
+  background:#fff;
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:158px;
+  margin-left:-80px;
+  z-index:1000;
+  font:13px/18px;
+  text-align:center;
+  padding:10px 0;
+  background:#FFF;
+  color:#3C4E5A;
+  display:block;
+  border:1px solid #BBB;
+  -webkit-border-radius:3px;
+          border-radius:3px;
+  }
+  #geolocate:hover { background:#ECF5FA; }
+
 </style>
 <div id='map'>
-    <button id='geolocate'>find me</button>
+    <a href='#' id='geolocate'>Find me</a>
 </div>
 <script>
   var m = mapbox.map('map').zoom(2).center({ lat: 0, lon: 0 });
@@ -41,7 +50,9 @@ tags:
   if (!navigator.geolocation) {
       geolocate.innerHTML = 'geolocation is not available';
   } else {
-      geolocate.onclick = function() {
+      geolocate.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
           navigator.geolocation.getCurrentPosition(
           function(position) {
               // Once we've got a position, zoom and center the map
