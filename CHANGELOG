@@ -1,3 +1,11 @@
+### v0.6.6
+
+* Fix dragging and zooming on Android
+* Fix touch interaction in Wax
+* Re-add max-width to legend
+* Marker tooltips now stop mousedown/touchstart events
+* Add API for checking if map is fullscreen
+
 ### v0.6.5
 
 * Fix bug where `layer.tilejson` could overwrite a composited provider
