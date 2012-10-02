@@ -1,1 +1,1 @@
-/* mapbox.js 0.6.5 */
+/* mapbox.js 0.6.6 */
