@@ -148,13 +148,15 @@ mapbox.layer.prototype.composite = function(x) {
 // we need to redraw map due to compositing
 mapbox.layer.prototype.enable = function(x) {
     MM.Layer.prototype.enable.call(this, x);
-    this.map.draw();
+    if (this.map) this.map.draw();
+    return this;
 };
 
 // we need to redraw map due to compositing
 mapbox.layer.prototype.disable = function(x) {
     MM.Layer.prototype.disable.call(this, x);
-    this.map.draw();
+    if (this.map) this.map.draw();
+    return this;
 };
 
 MM.extend(mapbox.layer, MM.Layer);
