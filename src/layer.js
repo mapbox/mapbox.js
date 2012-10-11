@@ -35,6 +35,7 @@ mapbox.layer.prototype.refresh = function(callback) {
 
 mapbox.layer.prototype.url = function(x, callback) {
     if (!arguments.length) return this._url;
+    this._mapboxhosting = x.indexOf(mapbox.MAPBOX_URL) == 0;
     this._url = x;
     return this.refresh(callback);
 };
@@ -55,7 +56,7 @@ mapbox.layer.prototype.named = function(x) {
 mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
 
-    if (!this._composite) this.setProvider(new wax.mm._provider(x));
+    if (!this._composite || !this._mapboxhosting) this.setProvider(new wax.mm._provider(x));
 
     this._tilejson = x;
 
@@ -83,7 +84,7 @@ mapbox.layer.prototype.tilejson = function(x) {
 mapbox.layer.prototype.draw = function() {
     if (!this.enabled || !this.map) return;
 
-    if (this._composite) {
+    if (this._composite && this._mapboxhosting) {
 
         // Get index of current layer
         var i = 0;
@@ -108,7 +109,7 @@ mapbox.layer.prototype.draw = function() {
         for (var k = i; k < this.map.layers.length; k++) {
             var l = this.map.getLayerAt(k);
             if (l.enabled) {
-                if (l._composite) ids.push(l.id());
+                if (l._composite && l._mapboxhosting) ids.push(l.id());
                 else break;
             }
         }
