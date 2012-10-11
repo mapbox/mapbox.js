@@ -41,10 +41,9 @@ mapbox.layer.prototype.url = function(x, callback) {
 
 mapbox.layer.prototype.id = function(x, callback) {
     if (!arguments.length) return this._id;
-    this.url(mapbox.MAPBOX_URL + x + '.jsonp');
     this.named(x);
     this._id = x;
-    return this.refresh(callback);
+    return this.url(mapbox.MAPBOX_URL + x + '.jsonp', callback);
 };
 
 mapbox.layer.prototype.named = function(x) {
@@ -55,7 +54,8 @@ mapbox.layer.prototype.named = function(x) {
 
 mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
-    if (this._tilejson !== x) this.setProvider(new wax.mm._provider(x));
+
+    if (!this._composite) this.setProvider(new wax.mm._provider(x));
 
     this._tilejson = x;
 
@@ -114,10 +114,10 @@ mapbox.layer.prototype.draw = function() {
         }
         ids = ids.join(',');
 
-        if (this.compositeLayer !== ids && (this.compositeLayer ? true : ids !== this._id)) {
+        if (this.compositeLayer !== ids) {
             this.compositeLayer = ids;
             var that = this;
-            mapbox.load(ids, function(tiledata) {
+            wax.tilejson(mapbox.MAPBOX_URL + ids + '.jsonp', function(tiledata) {
                 that.setProvider(new wax.mm._provider(tiledata));
                 // setProvider calls .draw()
             });
@@ -130,7 +130,7 @@ mapbox.layer.prototype.draw = function() {
         // Set back to regular provider
         if (this.compositeLayer) {
             this.compositeLayer = false;
-            this.tilejson(this.tilejson());
+            this.setProvider(new wax.mm._provider(this.tilejson()));
             // .draw() called by .tilejson()
         }
     }
