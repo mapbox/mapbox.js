@@ -64,7 +64,7 @@ specified in `centerpoint`) otherwise.
 _Example:_
 
     // center the map on Manhattan
-    map.center({ lat: 40.74, lon: -73.98);
+    map.center({ lat: 40.74, lon: -73.98 });
 
 ### map.zoom(zoom [, animate])
 
