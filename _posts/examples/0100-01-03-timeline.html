@@ -127,4 +127,8 @@ a.year-active {
 
   map.addLayer(markerLayer);
   map.zoom(3).center({ lat: 40, lon: -130 });
+
+  // Attribute map
+  map.ui.attribution.add()
+      .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
 </script>

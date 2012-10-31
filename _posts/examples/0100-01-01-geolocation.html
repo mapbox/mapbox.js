@@ -35,6 +35,8 @@ tags:
 <script>
   var m = mapbox.map('map').zoom(2).center({ lat: 0, lon: 0 });
   m.addLayer(mapbox.layer().id('examples.map-4l7djmvo'));
+  m.ui.attribution.add()
+      .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
 
   // Create an empty markers layer
   var markerLayer = mapbox.markers.layer();

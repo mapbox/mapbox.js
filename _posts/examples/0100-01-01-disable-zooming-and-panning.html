@@ -20,4 +20,8 @@ tags:
   var map = mapbox.map('map', layer, null, []);
 
   map.centerzoom({lat: 43.6, lon: -79.4 }, 10);
+
+  // Attribute map
+  map.ui.attribution.add()
+      .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
 </script>
