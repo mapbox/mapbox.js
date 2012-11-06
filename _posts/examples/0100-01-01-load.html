@@ -19,7 +19,11 @@ tags:
         map.addLayer(data[1].layer);
         map.addLayer(data[0].markers);
 
-        // Zoom and center the map.
+        // Zoom and center the map
         map.zoom(11).center(data[0].center);
+
+        // Attribute map
+        map.ui.attribution.add()
+            .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
     });
 </script>

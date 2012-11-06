@@ -70,6 +70,8 @@ tags:
 <script>
   // Create map with layer and zoom to level 3
   var map = mapbox.map('map', mapbox.layer().id('examples.map-d40qac29')).zoom(3);
+  map.ui.attribution.add()
+      .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
 
   // Connect check boxes to ui functions
   var options = document.getElementsByTagName('a');
