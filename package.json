@@ -11,10 +11,10 @@
   "dependencies": {
       "reqwest": "0.4.5",
       "modestmaps": "3.3.5",
-      "wax": "7.0.0dev12",
+      "wax": "https://github.com/mapbox/wax/tarball/jsonpcallback",
       "bean": "0.4.11-1",
       "mustache": "0.4.0",
-      "markers": "0.14.4",
+      "markers": "https://github.com/mapbox/markers.js/tarball/jsonpcallback",
       "easey": "2.0.6"
   },
   "devDependencies": {
