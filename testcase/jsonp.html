@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jsonp</title>
+        <script src='../mapbox.js'></script>
+        <link href='../mapbox.min.css' type='text/css' rel='stylesheet' />
+        <style>
+            .map { width:600px; height:400px; }
+        </style>
+    </head>
+    <body>
+        <div class='map' id='map1'></div>
+        <div class='map' id='map2'></div>
+        <div class='map' id='map3'></div>
+        <script>
+            var map1 = mapbox.auto('map1','tmcw.map-rep59d6x');
+            var map2 = mapbox.auto('map2','examples.map-yr0njcqy');
+            var map3 = mapbox.auto('map3','examples.map-q98k0ygx');
+        </script>
+    </body>
+</html>
