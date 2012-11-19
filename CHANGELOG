@@ -1,5 +1,6 @@
 ### v0.6.7 (unreleased)
 
+* Fix for JSONP issues in IE9 and IE10 in upstream libraries
 * Fix bug in `layer.disable` and `layer.enable` when layer not attached to a map
 * Fix bug where disabling a layer didn't update compositing
 * Automatic compositing now checks that a layer is hosted by MapBox hosting

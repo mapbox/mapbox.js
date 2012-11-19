@@ -10,7 +10,7 @@ describe("mapbox.markers", function() {
       var leaked = [];
       for (var key in window) {
           if (!(key in globalsBefore)) {
-              if (key !== 'grid') leaked.push(key);
+              if (key.indexOf('reqwest') !== 0)leaked.push(key);
           }
       }
       if (leaked.length > 0) {
