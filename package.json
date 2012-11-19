@@ -9,12 +9,12 @@
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
   "dependencies": {
-      "reqwest": "0.4.5",
+      "reqwest": "https://github.com/willwhite/reqwest/tarball/callback-prefix",
       "modestmaps": "3.3.5",
-      "wax": "https://github.com/mapbox/wax/tarball/v7.0.0dev11a",
+      "wax": "7.0.0dev11a",
       "bean": "0.4.11-1",
       "mustache": "0.4.0",
-      "markers": "https://github.com/mapbox/markers.js/tarball/v0.14.5",
+      "markers": "0.14.5",
       "easey": "2.0.6"
   },
   "devDependencies": {
