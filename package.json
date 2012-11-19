@@ -2,7 +2,7 @@
   "author": "MapBox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "0.6.6",
+  "version": "0.6.7-dev",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -11,10 +11,10 @@
   "dependencies": {
       "reqwest": "0.4.5",
       "modestmaps": "3.3.5",
-      "wax": "https://github.com/mapbox/wax/tarball/jsonpcallback",
+      "wax": "https://github.com/mapbox/wax/tarball/v7.0.0dev11a",
       "bean": "0.4.11-1",
       "mustache": "0.4.0",
-      "markers": "https://github.com/mapbox/markers.js/tarball/jsonpcallback",
+      "markers": "https://github.com/mapbox/markers.js/tarball/v0.14.5",
       "easey": "2.0.6"
   },
   "devDependencies": {

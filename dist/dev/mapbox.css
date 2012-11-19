@@ -159,6 +159,14 @@
           user-select:auto;
   }
 
+.map-legends,
+.map-tooltip {
+  min-width:180px;
+  max-width:280px;
+  max-height:400px;
+  width:220px\8; /*< IE 9*/
+  }
+
 .map-movetip {
   position:absolute;
   z-index:999999;
