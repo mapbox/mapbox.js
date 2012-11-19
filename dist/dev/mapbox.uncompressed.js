@@ -1,4 +1,4 @@
-/* mapbox.js 0.6.3 */
+/* mapbox.js 0.6.7-dev */
 !function() {
     var define;  // Undefine define (require.js)
 /*!
@@ -594,30 +594,32 @@
     , requestedWith = 'X-Requested-With'
     , head = doc[byTag]('head')[0]
     , uniqid = 0
+    , callbackPrefix = 'reqwest_' + (+new Date)
     , lastValue // data stored by the most recent JSONP callback
     , xmlHttpRequest = 'XMLHttpRequest'
-    , isArray = typeof Array.isArray == 'function' ? Array.isArray : function (a) {
-        return a instanceof Array
+
+  var isArray = typeof Array.isArray == 'function' ? Array.isArray : function (a) {
+    return a instanceof Array
+  }
+  var defaultHeaders = {
+      contentType: 'application/x-www-form-urlencoded'
+    , requestedWith: xmlHttpRequest
+    , accept: {
+          '*':  'text/javascript, text/html, application/xml, text/xml, */*'
+        , xml:  'application/xml, text/xml'
+        , html: 'text/html'
+        , text: 'text/plain'
+        , json: 'application/json, text/javascript'
+        , js:   'application/javascript, text/javascript'
       }
-    , defaultHeaders = {
-          contentType: 'application/x-www-form-urlencoded'
-        , accept: {
-              '*':  'text/javascript, text/html, application/xml, text/xml, */*'
-            , xml:  'application/xml, text/xml'
-            , html: 'text/html'
-            , text: 'text/plain'
-            , json: 'application/json, text/javascript'
-            , js:   'application/javascript, text/javascript'
-          }
-        , requestedWith: xmlHttpRequest
-      }
-    , xhr = win[xmlHttpRequest] ?
-        function () {
-          return new XMLHttpRequest()
-        } :
-        function () {
-          return new ActiveXObject('Microsoft.XMLHTTP')
-        }
+  }
+  var xhr = win[xmlHttpRequest] ?
+    function () {
+      return new XMLHttpRequest()
+    } :
+    function () {
+      return new ActiveXObject('Microsoft.XMLHTTP')
+    }
 
   function handleReadyState(o, success, error) {
     return function () {
@@ -642,6 +644,12 @@
     }
   }
 
+  function setCredentials(http, o) {
+    if (typeof o.withCredentials !== "undefined" && typeof http.withCredentials !== "undefined") {
+      http.withCredentials = !!o.withCredentials
+    }
+  }
+
   function generalCallback(data) {
     lastValue = data
   }
@@ -653,7 +661,7 @@
   function handleJsonp(o, fn, err, url) {
     var reqId = uniqid++
       , cbkey = o.jsonpCallback || 'callback' // the 'callback' key
-      , cbval = o.jsonpCallbackName || ('reqwest_' + reqId) // the 'callback' value
+      , cbval = o.jsonpCallbackName || (callbackPrefix + '_' + reqId) // the 'callback' value
       , cbreg = new RegExp('((^|\\?|&)' + cbkey + ')=([^&]+)')
       , match = url.match(cbreg)
       , script = doc.createElement('script')
@@ -675,11 +683,11 @@
     script.src = url
     script.async = true
     if (typeof script.onreadystatechange !== 'undefined') {
-        // need this for IE due to out-of-order onreadystatechange(), binding script
-        // execution to an event listener gives us control over when the script
-        // is executed. See http://jaubourg.net/2010/07/loading-script-as-onclick-handler-of.html
-        script.event = 'onclick'
-        script.htmlFor = script.id = '_reqwest_' + reqId
+      // need this for IE due to out-of-order onreadystatechange(), binding script
+      // execution to an event listener gives us control over when the script
+      // is executed. See http://jaubourg.net/2010/07/loading-script-as-onclick-handler-of.html
+      script.event = 'onclick'
+      script.htmlFor = script.id = '_reqwest_' + reqId
     }
 
     script.onload = script.onreadystatechange = function () {
@@ -720,6 +728,7 @@
     http = xhr()
     http.open(method, url, true)
     setHeaders(http, o)
+    setCredentials(http, o)
     http.onreadystatechange = handleReadyState(http, fn, err)
     o.before && o.before(http)
     http.send(data)
@@ -773,6 +782,9 @@
         case 'html':
           resp = r
           break;
+        case 'xml':
+          resp = resp.responseXML;
+          break;
         }
       }
 
@@ -812,7 +824,7 @@
   function serial(el, cb) {
     var n = el.name
       , t = el.tagName.toLowerCase()
-      , optCb = function(o) {
+      , optCb = function (o) {
           // IE gives value="" even where there is no value attribute
           // 'specified' ref: http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-862529273
           if (o && !o.disabled)
@@ -853,7 +865,7 @@
   function eachFormElement() {
     var cb = this
       , e, i, j
-      , serializeSubtags = function(e, tags) {
+      , serializeSubtags = function (e, tags) {
         for (var i = 0; i < tags.length; i++) {
           var fa = e[byTag](tags[i])
           for (j = 0; j < fa.length; j++) serial(fa[j], cb)
@@ -887,7 +899,7 @@
   // [ { name: 'name', value: 'value' }, ... ] style serialization
   reqwest.serializeArray = function () {
     var arr = []
-    eachFormElement.apply(function(name, value) {
+    eachFormElement.apply(function (name, value) {
       arr.push({name: name, value: value})
     }, arguments)
     return arr
@@ -929,7 +941,7 @@
     }
 
     // spaces should be + according to spec
-    return qs.replace(/&$/, '').replace(/%20/g,'+')
+    return qs.replace(/&$/, '').replace(/%20/g, '+')
   }
 
   // jQuery and Zepto compatibility, differences can be remapped here so you can call
@@ -1398,7 +1410,7 @@ if (typeof module !== 'undefined' && module.exports) {
     };
 }
 /*!
- * Modest Maps JS v3.3.4
+ * Modest Maps JS v3.3.5
  * http://modestmaps.com/
  *
  * Copyright (c) 2011 Stamen Design, All Rights Reserved.
@@ -2148,9 +2160,11 @@ var MM = com.modestmaps = {
         // return null if wrapped coordinate is outside of the tile limits
         sourceCoordinate: function(coord) {
             var TL = this.tileLimits[0].zoomTo(coord.zoom).container(),
-                BR = this.tileLimits[1].zoomTo(coord.zoom).container().right().down(),
+                BR = this.tileLimits[1].zoomTo(coord.zoom),
                 columnSize = Math.pow(2, coord.zoom),
                 wrappedColumn;
+
+            BR = new MM.Coordinate(Math.ceil(BR.row), Math.ceil(BR.column), Math.floor(BR.zoom));
 
             if (coord.column < 0) {
                 wrappedColumn = ((coord.column % columnSize) + columnSize) % columnSize;
@@ -5580,12 +5594,12 @@ wax.interaction = function() {
             // Don't make the user click close if they hit another tooltip
             bean.fire(interaction, 'off');
             // Touch moves invalidate touches
-            bean.add(parent(), touchEnds);
+            bean.add(e.srcElement, touchEnds);
         }
     }
 
-    function touchCancel() {
-        bean.remove(parent(), touchEnds);
+    function touchCancel(e) {
+        bean.remove(e.srcElement, touchEnds);
         _downLock = false;
     }
 
@@ -5600,7 +5614,7 @@ wax.interaction = function() {
         }
 
         bean.remove(document.body, 'mouseup', onUp);
-        bean.remove(parent(), touchEnds);
+        bean.remove(e.srcElement, touchEnds);
 
         if (e.type === 'touchend') {
             // If this was a touch and it survived, there's no need to avoid a double-tap
@@ -5750,10 +5764,10 @@ wax.legend = function() {
 
     legend.add = function() {
         container = document.createElement('div');
-        container.className = 'map-legends';
+        container.className = 'map-legends wax-legends';
 
         element = container.appendChild(document.createElement('div'));
-        element.className = 'map-legend';
+        element.className = 'map-legend wax-legend';
         element.style.display = 'none';
         return legend;
     };
@@ -5772,7 +5786,7 @@ wax.location = function() {
         } else {
             var loc = o.formatter({ format: 'location' }, o.data);
             if (loc) {
-                window.location.href = loc;
+                window.top.location.href = loc;
             }
         }
     }
@@ -5926,9 +5940,8 @@ wax.request = {
             var that = this;
             this.locks[url] = true;
             reqwest({
-                url: url + (~url.indexOf('?') ? '&' : '?') + 'callback=grid',
+                url: url + (~url.indexOf('?') ? '&' : '?') + 'callback=?',
                 type: 'jsonp',
-                jsonpCallback: 'callback',
                 success: function(data) {
                     that.locks[url] = false;
                     that.cache[url] = [null, data];
@@ -5972,9 +5985,8 @@ if (!wax) var wax = {};
 // A wrapper for reqwest jsonp to easily load TileJSON from a URL.
 wax.tilejson = function(url, callback) {
     reqwest({
-        url: url + (~url.indexOf('?') ? '&' : '?') + 'callback=grid',
+        url: url + (~url.indexOf('?') ? '&' : '?') + 'callback=?',
         type: 'jsonp',
-        jsonpCallback: 'callback',
         success: callback,
         error: callback
     });
@@ -6001,7 +6013,7 @@ wax.tooltip = function() {
     // Hide any tooltips on layers underneath this one.
     function getTooltip(feature) {
         var tooltip = document.createElement('div');
-        tooltip.className = 'map-tooltip map-tooltip-0';
+        tooltip.className = 'map-tooltip map-tooltip-0 wax-tooltip';
         tooltip.innerHTML = feature;
         return tooltip;
     }
@@ -6049,7 +6061,7 @@ wax.tooltip = function() {
             hide();
             parent.style.cursor = 'pointer';
             var tt = parent.appendChild(getTooltip(content));
-            tt.className += ' map-popup';
+            tt.className += ' map-popup wax-popup';
 
             var close = tt.appendChild(document.createElement('a'));
             close.href = '#close';
@@ -6557,7 +6569,7 @@ wax.mm.fullscreen = function() {
         a = document.createElement('a'),
         map,
         body = document.body,
-        smallSize;
+        dimensions;
 
     a.className = 'map-fullscreen';
     a.href = '#fullscreen';
@@ -6570,13 +6582,6 @@ wax.mm.fullscreen = function() {
         } else {
             fullscreen.full();
         }
-    }
-
-    function setSize(w, h) {
-        map.dimensions = new MM.Point(w, h);
-        map.parent.style.width = Math.round(map.dimensions.x) + 'px';
-        map.parent.style.height = Math.round(map.dimensions.y) + 'px';
-        map.dispatchCallback('resized', map.dimensions);
     }
 
     fullscreen.map = function(x) {
@@ -6602,10 +6607,11 @@ wax.mm.fullscreen = function() {
 
     fullscreen.full = function() {
         if (fullscreened) { return; } else { fullscreened = true; }
-        smallSize = [map.parent.offsetWidth, map.parent.offsetHeight];
+        dimensions = map.dimensions;
         map.parent.className += ' map-fullscreen-map';
         body.className += ' map-fullscreen-view';
-        setSize(map.parent.offsetWidth, map.parent.offsetHeight);
+        map.dimensions = { x: map.parent.offsetWidth, y: map.parent.offsetHeight };
+        map.draw();
         return fullscreen;
     };
 
@@ -6613,8 +6619,22 @@ wax.mm.fullscreen = function() {
         if (!fullscreened) { return; } else { fullscreened = false; }
         map.parent.className = map.parent.className.replace(' map-fullscreen-map', '');
         body.className = body.className.replace(' map-fullscreen-view', '');
-        setSize(smallSize[0], smallSize[1]);
+        map.dimensions = dimensions;
+        map.draw();
         return fullscreen;
+    };
+
+    fullscreen.fullscreen = function(x) {
+        if (!arguments.length) {
+            return fullscreened;
+        } else {
+            if (x && !fullscreened) {
+                fullscreen.full();
+            } else if (!x && fullscreened) {
+                fullscreen.original();
+            }
+            return fullscreen;
+        }
     };
 
     fullscreen.element = function() {
@@ -6740,10 +6760,10 @@ wax.mm.legend = function() {
         l = {};
 
     var container = document.createElement('div');
-    container.className = 'map-legends';
+    container.className = 'wax-legends map-legends';
 
     var element = container.appendChild(document.createElement('div'));
-    element.className = 'map-legend';
+    element.className = 'wax-legend map-legend';
     element.style.display = 'none';
 
     l.content = function(x) {
@@ -7297,51 +7317,74 @@ wax.mm.connector = function(options) {
             return a + ((b - a) * p);
         }
 
-        var paths = {};
+        var paths = {},
+            static_coord = new MM.Coordinate(0, 0, 0);
 
         // The screen path simply moves between
         // coordinates in a non-geographical way
-        paths.screen = function(a, b, t) {
+        paths.screen = function(a, b, t, static_coord) {
             var zoom_lerp = interp(a.zoom, b.zoom, t);
-            var az = a.copy();
-            var bz = b.copy().zoomTo(a.zoom);
-            return (new MM.Coordinate(
-                interp(az.row, bz.row, t),
-                interp(az.column, bz.column, t),
-                az.zoom)).zoomTo(zoom_lerp);
+            if (static_coord) {
+                static_coord.row = interp(
+                    a.row,
+                    b.row * Math.pow(2, a.zoom - b.zoom),
+                    t) * Math.pow(2, zoom_lerp - a.zoom);
+                static_coord.column = interp(
+                    a.column,
+                    b.column * Math.pow(2, a.zoom - b.zoom),
+                    t) * Math.pow(2, zoom_lerp - a.zoom);
+                static_coord.zoom = zoom_lerp;
+            } else {
+                return new MM.Coordinate(
+                    interp(a.row,
+                        b.row * Math.pow(2, a.zoom - b.zoom),
+                        t) * Math.pow(2, zoom_lerp - a.zoom),
+                    interp(a.column,
+                        b.column * Math.pow(2, a.zoom - b.zoom),
+                        t) * Math.pow(2, zoom_lerp - a.zoom),
+                    zoom_lerp);
+            }
         };
-
-        function ptWithCoords(a, b) {
-            // distance from the center of the map
-            var point = new MM.Point(map.dimensions.x / 2, map.dimensions.y / 2);
-            point.x += map.tileSize.x * (b.column - a.column);
-            point.y += map.tileSize.y * (b.row - a.row);
-            return point;
-        }
 
         // The screen path means that the b
         // coordinate should maintain its point on screen
         // throughout the transition, but the map
         // should move to its zoom level
-        paths.about = function(a, b, t) {
+        paths.about = function(a, b, t, static_coord) {
             var zoom_lerp = interp(a.zoom, b.zoom, t);
 
-            var bs = b.copy().zoomTo(a.zoom);
-            var az = a.copy().zoomTo(zoom_lerp);
-            var bz = b.copy().zoomTo(zoom_lerp);
-            var start = ptWithCoords(a, bs);
-            var end = ptWithCoords(az, bz);
+            // center x, center y
+            var cx = map.dimensions.x / 2,
+                cy = map.dimensions.y / 2,
+                // tilesize
+                tx = map.tileSize.x,
+                ty = map.tileSize.y;
 
-            az.column -= (start.x - end.x) / map.tileSize.x;
-            az.row -= (start.y - end.y) / map.tileSize.y;
+            var startx = cx + tx * ((b.column * Math.pow(2, a.zoom - b.zoom)) - a.column);
+            var starty = cy + ty * ((b.row  * Math.pow(2, a.zoom - b.zoom)) - a.row);
 
-            return az;
+            var endx = cx + tx * ((b.column * Math.pow(2, zoom_lerp - b.zoom)) -
+                (a.column * Math.pow(2, zoom_lerp - a.zoom)));
+            var endy = cy + ty * ((b.row * Math.pow(2, zoom_lerp - b.zoom)) - (a.row *
+                Math.pow(2, zoom_lerp - a.zoom)));
+
+            if (static_coord) {
+                static_coord.column = (a.column * Math.pow(2, zoom_lerp - a.zoom)) - ((startx - endx) / tx);
+                static_coord.row = (a.row * Math.pow(2, zoom_lerp - a.zoom)) - ((starty - endy) / ty);
+                static_coord.zoom = zoom_lerp;
+            } else {
+                return new MM.Coordinate(
+                    (a.column * Math.pow(2, zoom_lerp - a.zoom)) - ((startx - endx) / tx),
+                    (a.row * Math.pow(2, zoom_lerp - a.zoom)) - ((starty - endy) / ty),
+                    zoom_lerp);
+            }
         };
 
         var path = paths.screen;
 
         easey.t = function(t) {
-            map.coordinate = path(from, to, easing(t));
+            path(from, to, easing(t), static_coord);
+            map.coordinate = static_coord;
             map.draw();
             return easey;
         };
@@ -7379,13 +7422,16 @@ wax.mm.connector = function(options) {
                     abortCallback();
                     return (abortCallback = undefined);
                 } else if (delta > time) {
+                    if (to.zoom != from.zoom) map.dispatchCallback('zoomed', to.zoom - from.zoom);
                     running = false;
-                    map.coordinate = path(from, to, 1);
+                    path(from, to, 1, static_coord);
+                    map.coordinate = static_coord;
                     to = from = undefined;
                     map.draw();
                     if (callback) return callback(map);
                 } else {
-                    map.coordinate = path(from, to, easing(delta / time));
+                    path(from, to, easing(delta / time), static_coord);
+                    map.coordinate = static_coord;
                     map.draw();
                     MM.getFrame(tick);
                 }
@@ -7403,6 +7449,11 @@ wax.mm.connector = function(options) {
         // Model described in section 3, equations 1 through 5
         // Derived equation (9) of optimal path implemented below
         easey.optimal = function(V, rho, callback) {
+
+            if (running) return easey.stop(function() {
+                easey.optimal(V, rho, callback);
+            });
+
             // Section 6 describes user testing of these tunable values
             V = V || 0.9;
             rho = rho || 1.42;
@@ -7467,14 +7518,29 @@ wax.mm.connector = function(options) {
             }
 
             var oldpath = path;
-            path = function (a, b, t) {
-                if (t == 1) return to;
+            path = function (a, b, t, static_coord) {
+                if (t == 1) {
+                    if (static_coord) {
+                        static_coord.row = to.row;
+                        static_coord.column = to.column;
+                        static_coord.zoom = to.zoom;
+                    }
+                    return to;
+                }
                 var s = t * S,
                     us = u(s),
                     z = a.zoom + (Math.log(w0/w(s)) / Math.LN2),
                     x = interp(c0.x, c1.x, us/u1 || 1),
                     y = interp(c0.y, c1.y, us/u1 || 1);
-                return new MM.Coordinate(y, x, 0).zoomTo(z);
+
+                var power = Math.pow(2, z);
+                if (static_coord) {
+                    static_coord.row = y * power;
+                    static_coord.column = x * power;
+                    static_coord.zoom = z;
+                } else {
+                    return new MM.Coordinate(y * power, x * power, z);
+                }
             };
 
             easey.run(S / V * 1000, function(m) {
@@ -7487,6 +7553,8 @@ wax.mm.connector = function(options) {
     };
 
     this.easey = easey;
+    if (typeof this.mapbox == 'undefined') this.mapbox = {};
+    this.mapbox.ease = easey;
 })(this, MM);
 ;(function(context, MM) {
 
@@ -7495,53 +7563,27 @@ wax.mm.connector = function(options) {
     easey_handlers.TouchHandler = function() {
         var handler = {},
             map,
-            prevT = 0,
-            acceleration = 25.0,
-            speed = null,
+            panner,
             maxTapTime = 250,
             maxTapDistance = 30,
             maxDoubleTapDelay = 350,
-            drag = 0.10,
             locations = {},
             taps = [],
             wasPinching = false,
-            nowPoint = null,
-            oldPoint = null,
-            lastMove = null,
-            lastPinchCenter = null;
+            lastPinchCenter = null,
+            p0 = new MM.Point(0, 0),
+            p1 = new MM.Point(0, 0);
 
-        function animate(t) {
-            var dir = { x: 0, y: 0 };
-            var dt = Math.max(0.001, (t - prevT) / 1000.0);
-            if (nowPoint && oldPoint &&
-                (lastMove > (+new Date() - 50))) {
-                dir.x = nowPoint.x - oldPoint.x;
-                dir.y = nowPoint.y - oldPoint.y;
-                speed.x = dir.x;
-                speed.y = dir.y;
-            } else {
-                speed.x -= speed.x * drag;
-                speed.y -= speed.y * drag;
-                if (Math.abs(speed.x) < 0.001) {
-                    speed.x = 0;
-                }
-                if (Math.abs(speed.y) < 0.001) {
-                    speed.y = 0;
-                }
-            }
-            if (speed.x || speed.y) {
-                map.panBy(speed.x, speed.y);
-            }
-            prevT = t;
-            // tick every frame for time-based anim accuracy
-            MM.getFrame(animate);
+        function focusMap(e) {
+            map.parent.focus();
         }
 
-        // Test whether touches are from the same source -
-        // whether this is the same touchmove event.
-        function sameTouch (event, touch) {
-            return (event && event.touch) &&
-                (touch.identifier == event.touch.identifier);
+        function clearLocations() {
+            for (var loc in locations) {
+                if (locations.hasOwnProperty(loc)) {
+                    delete locations[loc];
+                }
+            }
         }
 
         function updateTouches (e) {
@@ -7556,6 +7598,7 @@ wax.mm.connector = function(options) {
                     locations[t.identifier] = {
                         scale: e.scale,
                         startPos: { x: t.clientX, y: t.screenY },
+                        startZoom: map.zoom(),
                         x: t.clientX,
                         y: t.clientY,
                         time: new Date().getTime()
@@ -7565,18 +7608,30 @@ wax.mm.connector = function(options) {
         }
 
         function touchStartMachine(e) {
+            if (!panner) panner = panning(map, 0.10);
+            MM.addEvent(e.touches[0].target, 'touchmove',
+                touchMoveMachine);
+            MM.addEvent(e.touches[0].target, 'touchend',
+                touchEndMachine);
+            if (e.touches[1]) {
+                MM.addEvent(e.touches[1].target, 'touchmove',
+                    touchMoveMachine);
+                MM.addEvent(e.touches[1].target, 'touchend',
+                    touchEndMachine);
+            }
             updateTouches(e);
+            panner.down(e.touches[0]);
             return MM.cancelEvent(e);
         }
 
         function touchMoveMachine(e) {
             switch (e.touches.length) {
                 case 1:
-                    onPanning(e.touches[0]);
-                break;
+                    panner.move(e.touches[0]);
+                    break;
                 case 2:
                     onPinching(e);
-                break;
+                    break;
             }
             updateTouches(e);
             return MM.cancelEvent(e);
@@ -7587,8 +7642,8 @@ wax.mm.connector = function(options) {
             if (taps.length &&
                 (tap.time - taps[0].time) < maxDoubleTapDelay) {
                 onDoubleTap(tap);
-            taps = [];
-            return;
+                taps = [];
+                return;
             }
             taps = [tap];
         }
@@ -7601,29 +7656,18 @@ wax.mm.connector = function(options) {
             .to(map.pointCoordinate(tap).zoomTo(map.getZoom() + 1))
             .path('about').run(200, function() {
                 map.dispatchCallback('zoomed');
+                clearLocations();
             });
-        }
-
-        function isTouchable () {
-            var el = document.createElement('div');
-            el.setAttribute('ongesturestart', 'return;');
-            return (typeof el.ongesturestart === 'function');
-        }
-
-
-        // Re-transform the actual map parent's CSS transformation
-        function onPanning(touch) {
-            lastMove = +new Date();
-            oldPoint = nowPoint;
-            nowPoint = { x: touch.clientX, y: touch.clientY };
         }
 
         function onPinching(e) {
             // use the first two touches and their previous positions
             var t0 = e.touches[0],
-            t1 = e.touches[1],
-            p0 = new MM.Point(t0.clientX, t0.clientY),
-            p1 = new MM.Point(t1.clientX, t1.clientY),
+                t1 = e.touches[1];
+            p0.x = t0.clientX;
+            p0.y = t0.clientY;
+            p1.x = t1.clientX;
+            p1.y = t1.clientY;
             l0 = locations[t0.identifier],
             l1 = locations[t1.identifier];
 
@@ -7635,38 +7679,41 @@ wax.mm.connector = function(options) {
             var center = MM.Point.interpolate(p0, p1, 0.5);
 
             map.zoomByAbout(
-                Math.log(e.scale) / Math.LN2 -
-                Math.log(l0.scale) / Math.LN2,
+                Math.log(e.scale) / Math.LN2 - Math.log(l0.scale) / Math.LN2,
                 center);
 
-                // pan from the previous center of these touches
-                var prevCenter = MM.Point.interpolate(l0, l1, 0.5);
-
-                map.panBy(center.x - prevCenter.x,
-                          center.y - prevCenter.y);
-                          wasPinching = true;
-                          lastPinchCenter = center;
+            // pan from the previous center of these touches
+            prevX = l0.x + (l1.x - l0.x) * 0.5;
+            prevY = l0.y + (l1.y - l0.y) * 0.5;
+            map.panBy(center.x - prevX,
+                      center.y - prevY);
+            wasPinching = true;
+            lastPinchCenter = center;
         }
 
         // When a pinch event ends, round the zoom of the map.
-        function onPinched(p) {
-            // TODO: easing
-            if (true) {
-                var z = map.getZoom(), // current zoom
-                tz = Math.round(z);     // target zoom
-                map.zoomByAbout(tz - z, p);
-            }
+        function onPinched(touch) {
+            var z = map.getZoom(), // current zoom
+                tz = locations[touch.identifier].startZoom > z ? Math.floor(z) : Math.ceil(z);
+            easey().map(map).point(lastPinchCenter).zoom(tz)
+                .path('about').run(300);
+            clearLocations();
             wasPinching = false;
         }
 
         function touchEndMachine(e) {
+            MM.removeEvent(e.target, 'touchmove',
+                touchMoveMachine);
+            MM.removeEvent(e.target, 'touchend',
+                touchEndMachine);
             var now = new Date().getTime();
+
             // round zoom if we're done pinching
             if (e.touches.length === 0 && wasPinching) {
-                onPinched(lastPinchCenter);
+                onPinched(e.changedTouches[0]);
             }
 
-            oldPoint = nowPoint = null;
+            panner.up();
 
             // Look at each changed touch in turn.
             for (var i = 0; i < e.changedTouches.length; i += 1) {
@@ -7692,7 +7739,6 @@ wax.mm.connector = function(options) {
                     // close in space, but not in time: a hold
                     pos.end = now;
                     pos.duration = time;
-                    onHold(pos);
                 } else {
                     // close in both time and space: a tap
                     pos.time = now;
@@ -7719,32 +7765,16 @@ wax.mm.connector = function(options) {
 
         handler.init = function(x) {
             map = x;
-            // Fail early if this isn't a touch device.
-            // TODO: move to add fn
-            if (!isTouchable()) return false;
 
             MM.addEvent(map.parent, 'touchstart',
                 touchStartMachine);
-            MM.addEvent(map.parent, 'touchmove',
-                touchMoveMachine);
-            MM.addEvent(map.parent, 'touchend',
-                touchEndMachine);
-
-            prevT = new Date().getTime();
-            speed = { x: 0, y: 0 };
-            MM.getFrame(animate);
         };
 
         handler.remove = function() {
-            // Fail early if this isn't a touch device.
-            if (!isTouchable()) return false;
-
+            if (!panner) return;
             MM.removeEvent(map.parent, 'touchstart',
                 touchStartMachine);
-            MM.removeEvent(map.parent, 'touchmove',
-                touchMoveMachine);
-            MM.removeEvent(map.parent, 'touchend',
-                touchEndMachine);
+            panner.remove();
         };
 
         return handler;
@@ -7852,17 +7882,7 @@ wax.mm.connector = function(options) {
     easey_handlers.DragHandler = function() {
         var handler = {},
             map,
-            prevT = 0,
-            speed = null,
-            drag = 0.15,
-            removed = false,
-            mouseDownPoint = null,
-            mouseDownTime = 0,
-            mousePoint = null,
-            prevMousePoint = null,
-            moveTime = null,
-            prevMoveTime = null,
-            animatedLastPoint = true;
+            panner;
 
         function focusMap(e) {
             map.parent.focus();
@@ -7872,52 +7892,100 @@ wax.mm.connector = function(options) {
             if (e.shiftKey || e.button == 2) return;
             MM.addEvent(document, 'mousemove', mouseMove);
             MM.addEvent(document, 'mouseup', mouseUp);
-            mousePoint = prevMousePoint = MM.getMousePoint(e, map);
-            moveTime = prevMoveTime = +new Date();
+            panner.down(e);
             map.parent.style.cursor = 'move';
             return MM.cancelEvent(e);
         }
 
         function mouseMove(e) {
-            if (mousePoint) {
-                if (animatedLastPoint) {
-                    prevMousePoint = mousePoint;
-                    prevMoveTime = moveTime;
-                    animatedLastPoint = false;
-                }
-                mousePoint = MM.getMousePoint(e, map);
-                moveTime = +new Date();
-                return MM.cancelEvent(e);
-            }
+            panner.move(e);
+            return MM.cancelEvent(e);
         }
 
         function mouseUp(e) {
             MM.removeEvent(document, 'mousemove', mouseMove);
             MM.removeEvent(document, 'mouseup', mouseUp);
+            panner.up();
+            map.parent.style.cursor = '';
+            return MM.cancelEvent(e);
+        }
+
+        handler.init = function(x) {
+            map = x;
+            MM.addEvent(map.parent, 'click', focusMap);
+            MM.addEvent(map.parent, 'mousedown', mouseDown);
+            panner = panning(map);
+        };
+
+        handler.remove = function() {
+            MM.removeEvent(map.parent, 'click', focusMap);
+            MM.removeEvent(map.parent, 'mousedown', mouseDown);
+            panner.up();
+            panner.remove();
+        };
+
+        return handler;
+    };
+
+
+    function panning(map, drag) {
+
+        var p = {};
+        drag = drag || 0.15;
+
+        var speed = { x: 0, y: 0 },
+            dir = { x: 0, y: 0 },
+            removed = false,
+            nowPoint = null,
+            oldPoint = null,
+            moveTime = null,
+            prevMoveTime = null,
+            animatedLastPoint = true,
+            t,
+            prevT = new Date().getTime();
+
+        p.down = function(e) {
+            nowPoint = oldPoint = MM.getMousePoint(e, map);
+            moveTime = prevMoveTime = +new Date();
+        };
+
+        p.move = function(e) {
+            if (nowPoint) {
+                if (animatedLastPoint) {
+                    oldPoint = nowPoint;
+                    prevMoveTime = moveTime;
+                    animatedLastPoint = false;
+                }
+                nowPoint = MM.getMousePoint(e, map);
+                moveTime = +new Date();
+            }
+        };
+
+        p.up = function() {
             if (+new Date() - prevMoveTime < 50) {
                 dt = Math.max(1, moveTime - prevMoveTime);
-                var dir = { x: 0, y: 0 };
-                dir.x = mousePoint.x - prevMousePoint.x;
-                dir.y = mousePoint.y - prevMousePoint.y;
+                dir.x = nowPoint.x - oldPoint.x;
+                dir.y = nowPoint.y - oldPoint.y;
                 speed.x = dir.x / dt;
                 speed.y = dir.y / dt;
             } else {
                 speed.x = 0;
                 speed.y = 0;
             }
-            mousePoint = prevMousePoint = null;
-            moveTime = lastMoveTime = null;
-            map.parent.style.cursor = '';
-            return MM.cancelEvent(e);
-        }
+            nowPoint = oldPoint = null;
+            moveTime = null;
+        };
+
+        p.remove = function() {
+            removed = true;
+        };
 
         function animate(t) {
-            var dir = { x: 0, y: 0 };
             var dt = Math.max(1, t - prevT);
-            if (mousePoint && prevMousePoint) {
+            if (nowPoint && oldPoint) {
                 if (!animatedLastPoint) {
-                    dir.x = mousePoint.x - prevMousePoint.x;
-                    dir.y = mousePoint.y - prevMousePoint.y;
+                    dir.x = nowPoint.x - oldPoint.x;
+                    dir.y = nowPoint.y - oldPoint.y;
                     map.panBy(dir.x, dir.y);
                     animatedLastPoint = true;
                 }
@@ -7940,24 +8008,10 @@ wax.mm.connector = function(options) {
             if (!removed) MM.getFrame(animate);
         }
 
-        handler.init = function(x) {
-            map = x;
-            MM.addEvent(map.parent, 'click', focusMap);
-            MM.addEvent(map.parent, 'mousedown', mouseDown);
-            prevT = new Date().getTime();
-            speed = { x: 0, y: 0 };
-            removed = false;
-            MM.getFrame(animate);
-        };
+        MM.getFrame(animate);
+        return p;
+    }
 
-        handler.remove = function() {
-            MM.removeEvent(map.parent, 'click', focusMap);
-            MM.removeEvent(map.parent, 'mousedown', mouseDown);
-            removed = true;
-        };
-
-        return handler;
-    };
 
     this.easey_handlers = easey_handlers;
 
@@ -8011,20 +8065,26 @@ mapbox.markers.layer = function() {
         // remember the tile coordinate so we don't have to reproject every time
         if (!marker.coord) marker.coord = m.map.locationCoordinate(marker.location);
         var pos = m.map.coordinatePoint(marker.coord);
-        var pos_loc;
+        var pos_loc, new_pos;
 
         // If this point has wound around the world, adjust its position
         // to the new, onscreen location
         if (pos.x < 0) {
             pos_loc = new MM.Location(marker.location.lat, marker.location.lon);
             pos_loc.lon += Math.ceil((left.lon - marker.location.lon) / 360) * 360;
-            pos = m.map.locationPoint(pos_loc);
-            marker.coord = m.map.locationCoordinate(pos_loc);
+            new_pos = m.map.locationPoint(pos_loc);
+            if (new_pos.x < m.map.dimensions.x) {
+                pos = new_pos;
+                marker.coord = m.map.locationCoordinate(pos_loc);
+            }
         } else if (pos.x > m.map.dimensions.x) {
             pos_loc = new MM.Location(marker.location.lat, marker.location.lon);
             pos_loc.lon -= Math.ceil((marker.location.lon - right.lon) / 360) * 360;
-            pos = m.map.locationPoint(pos_loc);
-            marker.coord = m.map.locationCoordinate(pos_loc);
+            new_pos = m.map.locationPoint(pos_loc);
+            if (new_pos.x > 0) {
+                pos = new_pos;
+                marker.coord = m.map.locationCoordinate(pos_loc);
+            }
         }
 
         pos.scale = 1;
@@ -8157,14 +8217,14 @@ mapbox.markers.layer = function() {
         urls = x;
         function add_features(err, x) {
             if (err && callback) return callback(err);
-            if (x && x.features) m.features(x.features);
-            if (callback) callback(err, x.features, m);
+            var features = typeof x !== 'undefined' && x.features ? x.features : null;
+            if (features) m.features(features);
+            if (callback) callback(err, features, m);
         }
 
         reqwest((urls[0].match(/geojsonp$/)) ? {
-            url: urls[0] + (~urls[0].indexOf('?') ? '&' : '?') + 'callback=grid',
+            url: urls[0] + (~urls[0].indexOf('?') ? '&' : '?') + 'callback=?',
             type: 'jsonp',
-            jsonpCallback: 'callback',
             success: function(resp) { add_features(null, resp); },
             error: add_features
         } : {
@@ -8263,6 +8323,8 @@ mapbox.markers.layer = function() {
 
 mmg = mapbox.markers.layer; // Backwards compatibility
 mapbox.markers.interaction = function(mmg) {
+    // Make markersLayer.interaction a singleton and this an accessor.
+    if (mmg && mmg.interaction) return mmg.interaction;
 
     var mi = {},
         tooltips = [],
@@ -8270,6 +8332,7 @@ mapbox.markers.interaction = function(mmg) {
         hideOnMove = true,
         showOnHover = true,
         close_timer = null,
+        on = true,
         formatter;
 
     mi.formatter = function(x) {
@@ -8327,14 +8390,27 @@ mapbox.markers.interaction = function(mmg) {
         }
     };
 
+    mi.add = function() {
+        on = true;
+        return mi;
+    };
+
+    mi.remove = function() {
+        on = false;
+        return mi;
+    };
+
     mi.bindMarker = function(marker) {
         var delayed_close = function() {
+            if (showOnHover === false) return;
             if (!marker.clicked) close_timer = window.setTimeout(function() {
                 mi.hideTooltips();
             }, 200);
         };
 
         var show = function(e) {
+            if (e && e.type == 'mouseover' && showOnHover === false) return;
+            if (!on) return;
             var content = formatter(marker.data);
             // Don't show a popup if the formatter returns an
             // empty string. This does not do any magic around DOM elements.
@@ -8367,6 +8443,15 @@ mapbox.markers.interaction = function(mmg) {
             // Align the bottom of the tooltip with the top of its marker
             wrapper.style.bottom = marker.element.offsetHeight / 2 + 20 + 'px';
 
+            // Block mouse and touch events
+            function stopPropagation(e) {
+                e.cancelBubble = true;
+                if (e.stopPropagation) { e.stopPropagation(); }
+                return false;
+            }
+            MM.addEvent(popup, 'mousedown', stopPropagation);
+            MM.addEvent(popup, 'touchstart', stopPropagation);
+
             if (showOnHover) {
                 tooltip.onmouseover = function() {
                     if (close_timer) window.clearTimeout(close_timer);
@@ -8381,19 +8466,20 @@ mapbox.markers.interaction = function(mmg) {
                 location: marker.location.copy()
             };
             tooltips.push(t);
+            marker.tooltip = t;
             mmg.add(t);
             mmg.draw();
         };
+
+        marker.showTooltip = show;
 
         marker.element.onclick = marker.element.ontouchstart = function() {
             show();
             marker.clicked = true;
         };
 
-        if (showOnHover) {
-            marker.element.onmouseover = show;
-            marker.element.onmouseout = delayed_close;
-        }
+        marker.element.onmouseover = show;
+        marker.element.onmouseout = delayed_close;
     };
 
     function bindPanned() {
@@ -8409,7 +8495,6 @@ mapbox.markers.interaction = function(mmg) {
     if (mmg) {
         // Remove tooltips on panning
         mmg.addCallback('drawn', bindPanned);
-        mmg.removeCallback('drawn', bindPanned);
 
         // Bind present markers
         var markers = mmg.markers();
@@ -8424,6 +8509,9 @@ mapbox.markers.interaction = function(mmg) {
             // give marker bubbles.
             if (marker.interactive !== false) mi.bindMarker(marker);
         });
+
+        // Save reference to self on the markers instance.
+        mmg.interaction = mi;
     }
 
     return mi;
@@ -8579,6 +8667,7 @@ mapbox.markers.simplestyle_factory = function(feature) {
 };
 if (typeof mapbox === 'undefined') mapbox = {};
 
+mapbox.MAPBOX_URL = 'http://a.tiles.mapbox.com/v3/';
 
 // a `mapbox.map` is a modestmaps object with the
 // easey handlers as defaults
@@ -8598,7 +8687,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
     m.ease = easey().map(m);
     m.ui = mapbox.ui(m);
     m.interaction = mapbox.interaction().map(m);
-
 
     // Autoconfigure map with sensible defaults
     m.auto = function() {
@@ -8655,7 +8743,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
         return m;
     };
 
-
     m.setPanLimits = function(locations) {
         if (!(locations instanceof MM.Extent)) {
             locations = new MM.Extent(
@@ -8673,7 +8760,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
         ];
         return m;
     };
-
 
     m.center = function(location, animate) {
         if (location && animate) {
@@ -8699,7 +8785,6 @@ mapbox.map = function(el, layer, dimensions, eventhandlers) {
             return this.setCenterZoom(location, zoom);
         }
     };
-
 
     // Insert a tile layer below marker layers
     m.addTileLayer = function(layer) {
@@ -8764,7 +8849,7 @@ mapbox.load = function(url, callback) {
 
     // Support bare IDs as well as fully-formed URLs
     if (url.indexOf('http') !== 0) {
-        url = 'http://a.tiles.mapbox.com/v3/' + url + '.jsonp';
+        url = mapbox.MAPBOX_URL + url + '.jsonp';
     }
 
     wax.tilejson(url, function(tj) {
@@ -8777,16 +8862,16 @@ mapbox.load = function(url, callback) {
             lon: tj.center[0]
         };
 
-        tj.thumbnail = 'http://a.tiles.mapbox.com/v3/' + tj.id + '/thumb.png';
+        tj.thumbnail = mapbox.MAPBOX_URL + tj.id + '/thumb.png';
 
         // Instantiate tile layer
         tj.layer = mapbox.layer().tilejson(tj);
 
         // Instantiate markers layer
         if (tj.data) {
-            tj.markers = mmg().factory(mapbox.markers.simplestyle_factory);
+            tj.markers = mapbox.markers.layer();
             tj.markers.url(tj.data, function() {
-                mmg_interaction(tj.markers);
+                mapbox.markers.interaction(tj.markers);
                 callback(tj);
             });
         } else {
@@ -8886,7 +8971,7 @@ mapbox.interaction = function() {
         interaction.on(wax.tooltip()
             .animate(true)
             .parent(interaction.map().parent)
-            .events());
+            .events()).on(wax.location().events());
         return interaction.refresh();
     };
 
@@ -8929,16 +9014,16 @@ mapbox.layer.prototype.refresh = function(callback) {
 
 mapbox.layer.prototype.url = function(x, callback) {
     if (!arguments.length) return this._url;
+    this._mapboxhosting = x.indexOf(mapbox.MAPBOX_URL) == 0;
     this._url = x;
     return this.refresh(callback);
 };
 
 mapbox.layer.prototype.id = function(x, callback) {
     if (!arguments.length) return this._id;
-    this.url('http://a.tiles.mapbox.com/v3/' + x + '.jsonp');
     this.named(x);
     this._id = x;
-    return this.refresh(callback);
+    return this.url(mapbox.MAPBOX_URL + x + '.jsonp', callback);
 };
 
 mapbox.layer.prototype.named = function(x) {
@@ -8949,7 +9034,9 @@ mapbox.layer.prototype.named = function(x) {
 
 mapbox.layer.prototype.tilejson = function(x) {
     if (!arguments.length) return this._tilejson;
-    this.setProvider(new wax.mm._provider(x));
+
+    if (!this._composite || !this._mapboxhosting) this.setProvider(new wax.mm._provider(x));
+
     this._tilejson = x;
 
     this.name = this.name || x.id;
@@ -8976,7 +9063,7 @@ mapbox.layer.prototype.tilejson = function(x) {
 mapbox.layer.prototype.draw = function() {
     if (!this.enabled || !this.map) return;
 
-    if (this._composite) {
+    if (this._composite && this._mapboxhosting) {
 
         // Get index of current layer
         var i = 0;
@@ -9001,7 +9088,7 @@ mapbox.layer.prototype.draw = function() {
         for (var k = i; k < this.map.layers.length; k++) {
             var l = this.map.getLayerAt(k);
             if (l.enabled) {
-                if (l._composite) ids.push(l.id());
+                if (l._composite && l._mapboxhosting) ids.push(l.id());
                 else break;
             }
         }
@@ -9010,7 +9097,7 @@ mapbox.layer.prototype.draw = function() {
         if (this.compositeLayer !== ids) {
             this.compositeLayer = ids;
             var that = this;
-            mapbox.load(ids, function(tiledata) {
+            wax.tilejson(mapbox.MAPBOX_URL + ids + '.jsonp', function(tiledata) {
                 that.setProvider(new wax.mm._provider(tiledata));
                 // setProvider calls .draw()
             });
@@ -9023,7 +9110,7 @@ mapbox.layer.prototype.draw = function() {
         // Set back to regular provider
         if (this.compositeLayer) {
             this.compositeLayer = false;
-            this.tilejson(this.tilejson());
+            this.setProvider(new wax.mm._provider(this.tilejson()));
             // .draw() called by .tilejson()
         }
     }
@@ -9041,13 +9128,15 @@ mapbox.layer.prototype.composite = function(x) {
 // we need to redraw map due to compositing
 mapbox.layer.prototype.enable = function(x) {
     MM.Layer.prototype.enable.call(this, x);
-    this.map.draw();
+    if (this.map) this.map.draw();
+    return this;
 };
 
 // we need to redraw map due to compositing
 mapbox.layer.prototype.disable = function(x) {
     MM.Layer.prototype.disable.call(this, x);
-    this.map.draw();
+    if (this.map) this.map.draw();
+    return this;
 };
 
 MM.extend(mapbox.layer, MM.Layer);
