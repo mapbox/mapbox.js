@@ -734,7 +734,7 @@ auto-instantiate many of its features.
 
 ## mapbox.load(url, callback)
 
-Load layer definitions and other map information from [MapBox Hosting](http://mapbox.com/tour/).
+Load layer definitions and other map information from MapBox.
 
 _Arguments:_
 
@@ -792,7 +792,7 @@ _Returns_ `undefined`: this is an asynchronous function without a useful return 
 ## mapbox.layer()
 
 You can add a tiled layer to your map with `mapbox.layer()`, a simple interface to
-layers from [MapBox Hosting](http://mapbox.com/tour/) and elsewhere.
+layers from MapBox and elsewhere.
 
 _Returns_ a layer object, which has the following methods:
 
@@ -827,7 +827,7 @@ _Returns_ the layer object if arguments are given, the layer's `name` otherwise.
 
 ### layer.url([url, callback])
 
-Pull a layer from a server besides MapBox Hosting that supports
+Pull a layer from a server besides MapBox that supports
 [TileJSON](https://github.com/mapbox/tilejson-spec), like a self-hosted [TileStream](https://github.com/mapbox/tilestream).
 
 _Arguments:_
@@ -855,7 +855,7 @@ _Returns_ the layer object if arguments are given, the layer's TileJSON settings
 
 ### layer.composite(enabled)
 
-Enable or disable compositing layers together on MapBox hosting. Compositing
+Enable or disable compositing layers together on MapBox. Compositing
 combines multiple tile images into one layer of blended images, increasing map
 performance and reducing the number of requests the browser needs to make.
 
