@@ -1,4 +1,4 @@
-/* mapbox.js 0.6.7-dev */
+/* mapbox.js 0.6.7 */
 !function() {
     var define;  // Undefine define (require.js)
 /*!
