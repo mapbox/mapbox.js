@@ -1,4 +1,4 @@
-### v0.6.7 (unreleased)
+### v0.6.7
 
 * Fix for JSONP issues in IE9 and IE10 in upstream libraries
 * Fix bug in `layer.disable` and `layer.enable` when layer not attached to a map
