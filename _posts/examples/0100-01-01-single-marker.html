@@ -26,9 +26,15 @@ tags:
   // You can use .features() to add multiple features.
   markerLayer.add_feature({
       geometry: {
+          // The order of coordinates here is lon, lat. This is because
+          // we use the GeoJSON specification for all marker features.
+          // (lon, lat is also the internal order of KML and other geographic formats)
           coordinates: [-77, 37.9]
       },
       properties: {
+          // these properties customize the look of the marker
+          // see the simplestyle-spec for a full reference:
+          // https://github.com/mapbox/simplestyle-spec
           'marker-color': '#000',
           'marker-symbol': 'star-stroked',
           title: 'Example Marker',
