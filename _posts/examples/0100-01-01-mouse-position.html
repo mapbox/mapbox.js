@@ -1,0 +1,40 @@
+---
+layout: example
+categories: example
+title: Mouse Position
+tags:
+ - ui
+---
+
+<style>
+#output {
+    position:absolute;
+    top:10px;
+    right:10px;
+    padding:10px;
+    background:#fff;
+    z-index:100;
+}
+</style>
+
+<div id='output'>
+    click: <code id='click'></code><br />
+    mousemove: <code id='mousemove'></code><br />
+</div>
+<div id='map'></div>
+<script>
+var click = document.getElementById('click'),
+    mousemove = document.getElementById('mousemove');
+mapbox.auto('map', 'examples.map-vyofok3q', function(map) {
+    MM.addEvent(map.parent, 'mousemove', function(e) {
+        var px = MM.getMousePoint(e, map);
+        mousemove.innerHTML = 'px: ' + px.toString() + ', lat/lon ' +
+            map.pointLocation(px).toString();
+    });
+    MM.addEvent(map.parent, 'click', function(e) {
+        var px = MM.getMousePoint(e, map);
+        click.innerHTML = 'px: ' + px.toString() + ', lat/lon ' +
+            map.pointLocation(px).toString();
+    });
+});
+</script>
