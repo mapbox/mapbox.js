@@ -1,0 +1,24 @@
+---
+layout: example
+categories: example
+title: Retina
+description: Detecting Retina and using Retina Tiles
+tags:
+  - retina
+---
+
+<div id='map'></div>
+<script>
+var map = mapbox.map('map').zoom(5);
+var retina = window.devicePixelRatio >= 2;
+if (retina) {
+    // Retina tiles are sized 1/2 of normal tiles for twice the pixel
+    // density
+    map.tileSize = { x: 128, y: 128 };
+    // use a retina tileset
+    map.addLayer(mapbox.layer().id('examples.map-zq0f1vuc'));
+} else {
+    // use a standard tileset
+    map.addLayer(mapbox.layer().id('examples.map-vyofok3q'));
+}
+</script>
