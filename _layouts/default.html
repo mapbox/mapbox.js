@@ -6,7 +6,7 @@ navigation:
     path: /tour/publish
   - title: Scale
     path: /tour/scale
-  - title: Signup
+  - title: Plans
     category: plans
     class: plans
     path: /plans
@@ -28,7 +28,7 @@ footer:
     - title: Blog
       path: /blog
     - title: Status
-      path: /status
+      path: http://mapbox.com/status
   resources:
     - title: Help
       path: /help
@@ -40,23 +40,24 @@ footer:
       path: /showcase
   tools:
     - title: TileMill
-      path: /tilemill
+      path: http://tilemill.com
     - title: Maki
-      path: /maki
+      path: http://mapbox.com/maki
 ---
 <!DOCTYPE html >
 <html>
 <head>
+  <script src="//cdn.optimizely.com/js/161469907.js"></script>
   <meta charset='UTF-8'/>
   <meta name='robots' content='{% if page.hidden %}noindex{% else %}index{% endif %}'/>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
   <title>{% if page.url == '/' %}{{page.title}} | Fast and beautiful maps{% else %}{{page.title}} | MapBox{% endif %}</title>
-  <link rel='shortcut icon' href='{{site.url}}/img/favicon.ico' type='image/x-icon' />
-  <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
+  <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
   <link href='{{site.url}}/css/site.css' rel='stylesheet' />
   <!--[if IE]><link rel='stylesheet' href='{{site.url}}/css/site-ie.css' type='text/css'/><![endif]-->
-  <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
+  <link rel='shortcut icon' href='{{site.url}}/img/favicon.ico' type='image/x-icon' />
+  <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
   <link rel='stylesheet' href='{{site.url}}/css/developers.css' />
   <script src='{{site.url}}/js/site.js'></script>
   <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
@@ -64,15 +65,14 @@ footer:
   <script src='{{site.baseurl}}/assets/js/site.js'></script>
 </head>
 <body class='{{page.class}}'>
-
 <div class='branding pad3h clearfix'>
-  <div class='cell6'>
-    <a id='mapbox-logo' class='logo' href='{{site.url}}/'>MapBox</a>
+  <div class='cell5'>
+    <a id='mapbox-logo' class='logo' href='{{site.url}}/' onclick='window.location=(window.mapboxHome||"{{site.url}}/"); return false;'>MapBox</a>
     {% if page.section %}
     <a class='section-title' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
     {% endif %}
   </div>
-  <ul class='menu cell6'>
+  <ul class='menu cell7'>
     {% for item in page.navigation %}
     {% if item.path contains 'http' %}
       {% capture url %}{{item.path}}{% endcapture %}
@@ -147,7 +147,7 @@ footer:
     <div class='links'>
       <script src='http://mapbox.com/snippets/blog-list.js'></script>
     </div>
-    <a href='{{base}}/blog/'>Read more <span class='icon next blue'></span></a>
+    <a id='read-more' href='{{site.url}}/blog/'>Read more <span class='icon next blue'></span></a>
   </div>
 </div>
 
@@ -160,11 +160,9 @@ footer:
 
 <script src='https://tiles.mapbox.com/snippets/user.js'></script>
 
-<script>
+<script type='text/javascript'>
 var _gaq = _gaq || [];
-var pluginUrl = (('https:' == document.location.protocol) ?
-   'https://ssl.' : 'http://www.') +
-   'google-analytics.com/plugins/ga/inpage_linkid.js';
+var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
 _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
 _gaq.push(['_setAccount', 'UA-12158002-1']);
 _gaq.push(['_setDomainName', '.mapbox.com']);
@@ -186,6 +184,13 @@ var _gauges = _gauges || [];
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(t, s);
 })();
+</script>
+
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </script>
 
 </body>
