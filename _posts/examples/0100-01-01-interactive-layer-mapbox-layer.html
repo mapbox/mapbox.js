@@ -1,0 +1,31 @@
+---
+layout: example
+categories: example
+title: Interactive Layer with mapbox.layer
+description: Showing a layer with interactivity from MapBox
+tags:
+- layers
+- interaction
+- utfgrid
+---
+
+<div id='map'></div>
+<script>
+// here we use an interactive layer with the mapbox.layer shortcut, which
+// requires us to use a callback for when the layer is loaded, and then
+// to refresh the map's interactivity
+
+// If you're creating a new interactive layer, follow the tooltips docs:
+// http://mapbox.com/tilemill/docs/crashcourse/tooltips/
+var map = mapbox.map('map');
+map.zoom(3).center({ lat: 48, lon: -100 });
+map.addLayer(mapbox.layer().id('examples.map-8ced9urs', function() {
+    // this function runs after the layer examples.map-8ced9urs is loaded
+    // from MapBox and we know what interactive features are supported.
+    map.interaction.auto();
+}));
+
+// Attribute map
+map.ui.attribution.add()
+    .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
+</script>
