@@ -18,7 +18,7 @@ var markerLayer = mapbox.markers.layer().features([{
     "properties": { "url": "http://google.com/" }
 }, {
     "geometry": { "type": "Point", "coordinates": [-75.00, 40]},
-    "properties": { "image": "http://yahoo.com/" }
+    "properties": { "url": "http://yahoo.com/" }
 }]).factory(function(f) {
     var elem = mapbox.markers.simplestyle_factory(f);
     MM.addEvent(elem, 'click', function() {
