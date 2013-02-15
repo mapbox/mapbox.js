@@ -24,7 +24,7 @@ mapbox.markers.style = function(f, latlon) {
                 ((L.Browser.retina) ? '@2x' : '') + '.png',
             iconSize: sizes[size],
             iconAnchor: [sizes[size][0] / 2, sizes[size][1] / 2],
-            popupAnchor: [sizes[size][0] / 2, 0]
+            popupAnchor: [0, -sizes[size][1] / 2]
         })
     });
 };
