@@ -9,6 +9,7 @@
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
   "dependencies": {
+      "reqwest": "~0.6.4"
   },
   "devDependencies": {
       "mocha": "~1.8",

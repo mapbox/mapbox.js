@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel="stylesheet" href="../lib/leaflet/dist/leaflet.css"/>
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="../lib/leaflet/dist/leaflet.ie.css"/>
+  <![endif]-->
+  <link rel="stylesheet" href="embed.css"/>
+  <script src="../lib/leaflet/dist/leaflet-src.js"></script>
+  <script src="../node_modules/reqwest/reqwest.js"></script>
+  <script src="../src/tilejson.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+  var map = L.map('map')
+      .setView([0, 0], 3)
+      .addLayer(L.TileJSON.layer('http://api.tiles.mapbox.com/v3/examples.map-zr0njcqy.json'));
+</script>
+</body>
+</html>
