@@ -16,8 +16,8 @@ mapbox.markers.style = function(f, latlon) {
         symbol = (fp['marker-symbol']) ? '-' + fp['marker-symbol'] : '',
         color = (fp['marker-color'] || '7e7e7e').replace('#', '');
 
-    return new L.Marker(latlon, {
-        icon: new L.Icon({
+    return L.marker(latlon, {
+        icon: L.icon({
             iconUrl: mapbox.base() + 'marker/' +
                 'pin-' + size.charAt(0) + symbol + '+' + color +
                 // detect and use retina markers, which are x2 resolution
