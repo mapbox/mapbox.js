@@ -1,0 +1,3 @@
+[submodule "lib/leaflet"]
+	path = lib/leaflet
+	url = https://github.com/Leaflet/Leaflet.git
