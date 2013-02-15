@@ -1,0 +1,40 @@
+{
+  "attribution": "<a href='http:\/\/mapbox.com\/about\/maps' target='_blank'>Terms & Feedback<\/a>",
+  "bounds": [
+    -180,
+    -85.0511,
+    180,
+    85.0511
+  ],
+  "center": [
+    -77.046,
+    38.907,
+    12
+  ],
+  "data": [
+    "http:\/\/a.tiles.mapbox.com\/v3\/examples.map-zr0njcqy\/markers.geojsonp"
+  ],
+  "description": "There's a lot going on in Washington DC. Every weekend, the DCist has new suggestions for places to go and things to do. Explore this weekend's picks and see what's going on near you.\n\nPicks from DCist.com.",
+  "geocoder": "http:\/\/a.tiles.mapbox.com\/v3\/examples.map-zr0njcqy\/geocode\/{query}.jsonp",
+  "id": "examples.map-zr0njcqy",
+  "maxzoom": 17,
+  "minzoom": 0,
+  "name": "DC Weekend Picks",
+  "private": true,
+  "scheme": "xyz",
+  "tilejson": "2.0.0",
+  "tiles": [
+    "http:\/\/a.tiles.mapbox.com\/v3\/examples.map-zr0njcqy\/{z}\/{x}\/{y}.png",
+    "http:\/\/b.tiles.mapbox.com\/v3\/examples.map-zr0njcqy\/{z}\/{x}\/{y}.png",
+    "http:\/\/c.tiles.mapbox.com\/v3\/examples.map-zr0njcqy\/{z}\/{x}\/{y}.png",
+    "http:\/\/d.tiles.mapbox.com\/v3\/examples.map-zr0njcqy\/{z}\/{x}\/{y}.png"
+  ],
+  "webpage": "http:\/\/tiles.mapbox.com\/examples\/map\/map-zr0njcqy",
+  "options": [
+    "zoompan",
+    "share",
+    "zoomwheel",
+    "zoombox",
+    "attribution"
+  ]
+}

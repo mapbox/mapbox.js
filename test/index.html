@@ -9,11 +9,19 @@
   <script src="../node_modules/expect.js/expect.js"></script>
   <script src="../node_modules/mocha/mocha.js"></script>
 
-  <script src="../src/mapbox.js"></script>
+  <script src="../node_modules/reqwest/reqwest.js"></script>
+  <script src="../lib/leaflet/dist/leaflet-src.js"></script>
 
-  <script>mocha.setup('bdd')</script>
+  <script src="../src/mapbox.js"></script>
+  <script src="../src/tilejson.js"></script>
+
+  <script>
+    mocha.setup('bdd');
+    mocha.ignoreLeaks();
+  </script>
 
   <script src="spec/mapbox.js"></script>
+  <script src="spec/tilejson.js"></script>
 
   <script>
     mocha.run();
