@@ -56,17 +56,14 @@ describe("L.TileJSON", function() {
         });
 
         it("customizes the TileLayer's getTileUrl method", function() {
-            var map = L.map(document.createElement('div')).setView([0, 0], 3),
-                group = new L.TileJSON.Layer(tileJSON),
+            var group = new L.TileJSON.Layer(tileJSON),
                 layer = layersOf(group)[0];
 
-            map.addLayer(layer);
-
-            expect(layer.getTileUrl({x: 0, y: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/3/0/0.png');
-            expect(layer.getTileUrl({x: 1, y: 0})).to.equal('http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/3/1/0.png');
-            expect(layer.getTileUrl({x: 2, y: 0})).to.equal('http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/3/2/0.png');
-            expect(layer.getTileUrl({x: 3, y: 0})).to.equal('http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/3/3/0.png');
-            expect(layer.getTileUrl({x: 4, y: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/3/4/0.png');
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/0/0.png');
+            expect(layer.getTileUrl({x: 1, y: 0, z: 0})).to.equal('http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/1/0.png');
+            expect(layer.getTileUrl({x: 2, y: 0, z: 0})).to.equal('http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/2/0.png');
+            expect(layer.getTileUrl({x: 3, y: 0, z: 0})).to.equal('http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/3/0.png');
+            expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/4/0.png');
         });
     });
 });

@@ -41,16 +41,10 @@ L.TileJSON.Layer = L.LayerGroup.extend({
         });
 
         tileLayer.getTileUrl = function (tilePoint) {
-            this._adjustTilePoint(tilePoint);
-
             var index = (tilePoint.x + tilePoint.y) % json.tiles.length,
                 url = json.tiles[index];
 
-            return L.Util.template(url, L.extend({
-                z: this._getZoomForUrl(),
-                x: tilePoint.x,
-                y: tilePoint.y
-            }, this.options));
+            return L.Util.template(url, tilePoint);
         };
 
         this.addLayer(tileLayer);
