@@ -2,26 +2,51 @@ L.TileJSON = {
     load: function(url, callback) {
         reqwest({
             url: url,
-            type: 'json',
-            crossOrigin: true,
+            type: mapbox.browser.cors ? 'json' : 'jsonp',
+            crossOrigin: mapbox.browser.cors,
             success: callback,
             error: callback
         });
     }
 };
 
+// A layer that loads its metadata from an endpoint that distributes TileJSON.
+// From that endpoint it gets a center, zoom level, attribution, zoom
+// extent, and more.
 L.TileJSON.Layer = L.LayerGroup.extend({
-    initialize: function(urlOrJson) {
+
+    initialize: function(_) {
         L.LayerGroup.prototype.initialize.call(this);
 
-        if (urlOrJson && urlOrJson.tilejson) {
-            this._initialize(urlOrJson);
-        } else if (urlOrJson) {
-            var that = this;
-            L.TileJSON.load(urlOrJson, function(json) {
-                that._initialize(json);
-            });
+        if (typeof _ === 'string') {
+            // map id 'tmcw.foo'
+            if (_.indexOf('/') == -1) this.id(_);
+            // url 'http://foo.com/foo.bar'
+            else this.url(_);
+        // javascript object of TileJSON data
+        } else if (typeof _ === 'object') {
+            this.tilejson(_);
         }
+    },
+
+    // use a javascript object of tilejson data to configure this layer
+    tilejson: function(_) {
+        this._initialize(_);
+        return this;
+    },
+
+    // pull tilejson data from an endpoint
+    url: function(url) {
+        var that = this;
+        L.TileJSON.load(url, function(json) {
+            that._initialize(json);
+        });
+        return this;
+    },
+
+    // pull tilejson data from an endpoint, given just by an id
+    id: function(id) {
+        return this.url(mapbox.base() + id + '.json');
     },
 
     _initialize: function(json) {
@@ -40,7 +65,7 @@ L.TileJSON.Layer = L.LayerGroup.extend({
             tms: json.scheme === 'tms'
         });
 
-        tileLayer.getTileUrl = function (tilePoint) {
+        tileLayer.getTileUrl = function(tilePoint) {
             var index = (tilePoint.x + tilePoint.y) % json.tiles.length,
                 url = json.tiles[index];
 

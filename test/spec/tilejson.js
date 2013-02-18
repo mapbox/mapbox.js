@@ -7,7 +7,12 @@ describe("L.TileJSON", function() {
             });
         });
 
-        it("loads TileJSON from the given URL using XHR+JSONP");
+        it("loads TileJSON from the given URL using XHR+JSONP", function(done) {
+            L.TileJSON.load('data/tilejson.json', function(data) {
+                expect(data.id).to.equal('examples.map-zr0njcqy');
+                done();
+            });
+        });
     });
 
     describe("Layer", function() {
