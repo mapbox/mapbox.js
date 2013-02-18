@@ -28,3 +28,9 @@ mapbox.base = function(hash) {
         return urls[hash % urls.length];
     }
 };
+
+mapbox.browser = (function() {
+    var browser = {};
+    browser.cors = ("withCredentials" in new XMLHttpRequest());
+    return browser;
+})();
