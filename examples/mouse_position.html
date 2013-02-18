@@ -37,18 +37,9 @@ var map = L.map('map')
     .setView([37, -77], 5)
     .addLayer(L.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-20v6611k/{z}/{x}/{y}.png'));
 
-L.DomEvent.addListener(map.getContainer(), 'mousemove', function(e) {
-    var px = L.DomEvent.getMousePosition(e, map.getContainer());
-    var ll = map.mouseEventToLatLng(e);
-    mousemove.innerHTML = px.toString() + ', ' + ll.toString();
+map.on('mousemove click', function(e) {
+    window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();
 });
-
-L.DomEvent.addListener(map.getContainer(), 'click', function(e) {
-    var px = L.DomEvent.getMousePosition(e, map.getContainer());
-    var ll = map.mouseEventToLatLng(e);
-    click.innerHTML = px.toString() + ', ' + ll.toString();
-});
-
 </script>
 </body>
 </html>
