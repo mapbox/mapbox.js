@@ -34,3 +34,6 @@ mapbox.browser = (function() {
     browser.cors = ("withCredentials" in new XMLHttpRequest());
     return browser;
 })();
+
+// Turn off Leaflet's advertisement.
+L.Control.Attribution.prototype.options.prefix = '';
