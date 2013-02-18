@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
+  <![endif]-->
+  <link rel="stylesheet" href="embed.css"/>
+  <link rel="stylesheet" href="../theme/style.css"/>
+  <script src="../ext/leaflet/leaflet-src.js"></script>
+  <script src="../node_modules/reqwest/reqwest.js"></script>
+  <script src="../src/mapbox.js"></script>
+  <script src="../src/markers.js"></script>
+  <script src="../src/layer.js"></script>
+  <script src="../src/legend.js"></script>
+  <script src="../src/tilejson.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+var map = L.map('map')
+    .setView([0, 0], 3)
+    .addLayer(L.TileJSON.layer('examples.map-zmy97flj'));
+
+mapbox.legend().addTo(map);
+</script>
+</body>
+</html>

@@ -66,10 +66,15 @@ L.TileJSON.Layer = L.LayerGroup.extend({
 
         var tileLayer = new L.TileLayer(undefined, {
             attribution: json.attribution,
+            legend: json.legend,
             minZoom: json.minzoom,
             maxZoom: json.maxzoom,
             tms: json.scheme === 'tms'
         });
+
+        tileLayer.getLegend = function() {
+			return this.options.legend;
+		};
 
         tileLayer.getTileUrl = function(tilePoint) {
             var index = (tilePoint.x + tilePoint.y) % json.tiles.length,
