@@ -1,35 +1,83 @@
 describe("L.TileJSON", function() {
+    var tileJSON = {
+        'tilejson': '2.0.0',
+        'attribution': 'Terms & Feedback',
+        'center': [-77.046, 38.907, 12],
+        'minzoom': 1,
+        'maxzoom': 11,
+        'tiles': [
+            'http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
+            'http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
+            'http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
+            'http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png'
+        ]
+    };
+
     describe("#load", function() {
-        it("loads TileJSON from the given URL using XHR+CORS", function(done) {
-            L.TileJSON.load('data/tilejson.json', function(data) {
-                expect(data.id).to.equal('examples.map-zr0njcqy');
-                done();
+        var server;
+
+        beforeEach(function() {
+            server = sinon.fakeServer.create();
+            server.autoRespond = true;
+        });
+
+        afterEach(function() {
+            server.restore();
+        });
+
+        describe("in browsers which support CORS", function() {
+            var cors = mapbox.browser.cors;
+
+            beforeEach(function() {
+                mapbox.browser.cors = true;
+            });
+
+            afterEach(function() {
+                mapbox.browser.cors = cors;
+            });
+
+            it("loads TileJSON from the given URL using XHR", function(done) {
+                server.respondWith("GET", "data/tilejson.json",
+                    [200, { "Content-Type": "application/json" },
+                        JSON.stringify(tileJSON)]);
+
+                L.TileJSON.load('data/tilejson.json', function(err, data) {
+                    expect(err).to.be(undefined);
+                    expect(data).to.eql(tileJSON);
+                    done();
+                });
+            });
+
+            it("calls the callback with an error if the request fails", function(done) {
+                server.respondWith("GET", "data/tilejson.json",
+                    [500, { "Content-Type": "application/json" }, "{error: 'error'}"]);
+
+                L.TileJSON.load('data/tilejson.json', function(err, data) {
+                    expect(err).to.be.ok();
+                    expect(data).to.be(undefined);
+                    done();
+                });
             });
         });
 
-        it("loads TileJSON from the given URL using XHR+JSONP", function(done) {
-            L.TileJSON.load('data/tilejson.json', function(data) {
-                expect(data.id).to.equal('examples.map-zr0njcqy');
-                done();
+        describe("in browsers which do not support CORS", function() {
+            var cors = mapbox.browser.cors;
+
+            beforeEach(function() {
+                mapbox.browser.cors = false;
+            });
+
+            afterEach(function() {
+                mapbox.browser.cors = cors;
+            });
+
+            it("loads TileJSON from the given URL using JSONP", function() {
+                // There's really no good way to test this without a server-side component.
             });
         });
     });
 
     describe("Layer", function() {
-        var tileJSON = {
-            'tilejson': '2.0.0',
-            'attribution': 'Terms & Feedback',
-            'center': [-77.046, 38.907, 12],
-            'minzoom': 1,
-            'maxzoom': 11,
-            'tiles': [
-                'http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-                'http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-                'http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-                'http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png'
-            ]
-        };
-
         function layersOf(layerGroup) {
             var result = [];
             layerGroup.eachLayer(function(layer) {
