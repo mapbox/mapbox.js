@@ -4,8 +4,8 @@ L.TileJSON = {
             url: url,
             type: mapbox.browser.cors ? 'json' : 'jsonp',
             crossOrigin: mapbox.browser.cors,
-            success: callback,
-            error: callback
+            success: function(result) { callback(undefined, result); },
+            error: function(error) { callback(error); }
         });
     }
 };
