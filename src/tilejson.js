@@ -40,10 +40,10 @@ L.TileJSON.Layer = L.LayerGroup.extend({
 
     // pull tilejson data from an endpoint
     url: function(url) {
-        var that = this;
-        L.TileJSON.load(url, function(json) {
-            that._initialize(json);
-        });
+        L.TileJSON.load(url, L.bind(function(err, json) {
+			if (err) return mapbox.log('could not load TileJSON at ' + url);
+            this._initialize(json);
+        }, this));
         return this;
     },
 
@@ -54,11 +54,10 @@ L.TileJSON.Layer = L.LayerGroup.extend({
 
     _initialize: function(json) {
 
-        this._tilejson = json;
-
-        var that = this,
-            zoom = json.center[2],
+        var zoom = json.center[2],
             center = L.latLng(json.center[1], json.center[0]);
+
+        this._tilejson = json;
 
         if (this._map) {
             this._map.setView(center, zoom);
@@ -86,16 +85,19 @@ L.TileJSON.Layer = L.LayerGroup.extend({
         this.addLayer(tileLayer);
 
         if (json.data) {
+			var addMarkers = L.bind(function(err, data) {
+				if (err) return mapbox.log('could not load TileJSON at ' + url);
+                this.addLayer(L.geoJson(data, {
+                    pointToLayer: mapbox.marker.style,
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup(feature.properties.title);
+                    }
+                }));
+            }, this);
+
             for (var i = 0; i < json.data.length; i++) {
                 var url = json.data[i].replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
-                L.TileJSON.load(url, function(data) {
-                    that.addLayer(L.geoJson(data, {
-                        pointToLayer: mapbox.markers.style,
-                        onEachFeature: function(feature, layer) {
-                            layer.bindPopup(feature.properties.title);
-                        }
-                    }));
-                });
+                L.TileJSON.load(url, addMarkers);
             }
         }
     }
