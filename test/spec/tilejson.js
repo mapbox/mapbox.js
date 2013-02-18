@@ -46,6 +46,11 @@ describe("L.TileJSON", function() {
             expect(layers[0].options.maxZoom).to.equal(11);
         });
 
+        it("allows access to the tilejson object after assignment", function() {
+            var layer = new L.TileJSON.Layer(tileJSON);
+            expect(layer.tilejson()).to.equal(tileJSON);
+        });
+
         it("creates a TileLayer with the appropriate attribution", function() {
             var group = new L.TileJSON.Layer(tileJSON),
                 layers = layersOf(group);

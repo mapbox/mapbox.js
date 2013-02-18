@@ -15,6 +15,8 @@ L.TileJSON = {
 // extent, and more.
 L.TileJSON.Layer = L.LayerGroup.extend({
 
+    _tilejson: {},
+
     initialize: function(_) {
         L.LayerGroup.prototype.initialize.call(this);
 
@@ -31,6 +33,7 @@ L.TileJSON.Layer = L.LayerGroup.extend({
 
     // use a javascript object of tilejson data to configure this layer
     tilejson: function(_) {
+        if (!arguments.length) return this._tilejson;
         this._initialize(_);
         return this;
     },
@@ -50,6 +53,9 @@ L.TileJSON.Layer = L.LayerGroup.extend({
     },
 
     _initialize: function(json) {
+
+        this._tilejson = json;
+
         var that = this,
             zoom = json.center[2],
             center = L.latLng(json.center[1], json.center[0]);
