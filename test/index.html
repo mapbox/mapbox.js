@@ -8,6 +8,7 @@
   <div id="mocha"></div>
   <script src="../node_modules/expect.js/expect.js"></script>
   <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/happen/src/happen.js"></script>
 
   <script src="lib/sinon-server-1.5.2.js"></script>
 
@@ -22,16 +23,23 @@
   <script src="../src/marker.js"></script>
   <script src="../src/tilejson.js"></script>
   <script src="../src/legend.js"></script>
+  <script src="../src/geocoder.js"></script>
 
   <script>
     mocha.setup('bdd');
     mocha.ignoreLeaks();
+
+    expect.Assertion.prototype.near = function(expected, delta) {
+        expect(this.obj.lat).to.be.within(expected.lat - delta, expected.lat + delta);
+        expect(this.obj.lng).to.be.within(expected.lng - delta, expected.lng + delta);
+    };
   </script>
 
   <script src="spec/mapbox.js"></script>
   <script src="spec/marker.js"></script>
   <script src="spec/tilejson.js"></script>
   <script src="spec/legend.js"></script>
+  <script src="spec/geocoder.js"></script>
 
   <script>
     mocha.run();

@@ -12,42 +12,15 @@
   <script src="../src/mapbox.js"></script>
   <script src="../src/marker.js"></script>
   <script src="../src/tilejson.js"></script>
+  <script src="../src/geocoder.js"></script>
 </head>
 <body>
-<style>
-#form {
-    position:absolute;
-    top:10px;
-    right:10px;
-    padding:10px;
-    background:#fff;
-    z-index:100;
-}
-#form input {
-    padding:5px;
-    height:20px;
-}
-</style>
-
-<form id='form'>
-    <input type='text' id='geolocate' />
-    <input type='submit' value='go' />
-</form>
 <div id='map'></div>
 <script type='text/javascript'>
 var map = L.map('map')
     .setView([37, -77], 5)
-    .addLayer(L.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/{z}/{x}/{y}.png'));
-
-document.getElementById('form').onsubmit = function() {
-    L.TileJSON.load('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/' +
-        encodeURIComponent(document.getElementById('geolocate').value) + '.json', function(err, center) {
-        if (center && center.results && center.results.length) {
-            map.setView([center.results[0][0].lat, center.results[0][0].lon], 6);
-        }
-    });
-    return false;
-};
+    .addLayer(new L.TileLayer('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/{z}/{x}/{y}.png'))
+    .addControl(new L.Control.MapBoxGeocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json'));
 </script>
 </body>
 </html>
