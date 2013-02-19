@@ -20,6 +20,18 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
     initialize: function(_) {
         L.LayerGroup.prototype.initialize.call(this);
 
+        this._tileLayer = new L.TileLayer();
+
+        // Add the layer to the map now, so it gets the desired z-index,
+        // but do not update until the TileJSON has been loaded.
+        this._tileLayer._update = function() {
+            if (this._loaded) {
+                L.TileLayer.prototype._update.call(this);
+            }
+        };
+
+        this.addLayer(this._tileLayer);
+
         if (typeof _ === 'string') {
             // map id 'tmcw.foo'
             if (_.indexOf('/') == -1) this.id(_);
@@ -63,7 +75,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
             this._map.setView(center, zoom);
         }
 
-        var tileLayer = new L.TileLayer(undefined, {
+        L.extend(this._tileLayer.options, {
             attribution: json.attribution,
             legend: json.legend,
             minZoom: json.minzoom,
@@ -71,11 +83,13 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
             tms: json.scheme === 'tms'
         });
 
-        tileLayer.getLegend = function() {
+        this._tileLayer._loaded = true;
+
+        this._tileLayer.getLegend = function() {
             return this.options.legend;
         };
 
-        tileLayer.getTileUrl = function(tilePoint) {
+        this._tileLayer.getTileUrl = function(tilePoint) {
             var index = (tilePoint.x + tilePoint.y) % json.tiles.length,
                 url = json.tiles[index];
 

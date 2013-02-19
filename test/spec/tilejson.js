@@ -123,5 +123,37 @@ describe("L.TileJSON", function() {
             expect(layer.getTileUrl({x: 3, y: 0, z: 0})).to.equal('http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/3/0.png');
             expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/4/0.png');
         });
+
+        describe("asynchronously", function() {
+            var server;
+
+            beforeEach(function() {
+                server = sinon.fakeServer.create();
+            });
+
+            afterEach(function() {
+                server.restore();
+            });
+
+            it("adds a TileLayer immediately", function() {
+                var group = new L.TileJSON.LayerGroup('data/tilejson.json'),
+                    layer = layersOf(group)[0];
+
+                expect(layer).to.be.ok();
+            });
+
+            it("adds multiple TileLayers in the order that the LayerGroups were added", function() {
+                var map = new L.Map(document.createElement('div')),
+                    a = new L.TileJSON.LayerGroup('a'),
+                    b = new L.TileJSON.LayerGroup('b');
+
+                map.addLayer(b);
+                map.addLayer(a);
+                map.setView([0, 0], 1);
+
+                expect(map.getPanes().tilePane.children[0]).to.equal(b._tileLayer._container);
+                expect(map.getPanes().tilePane.children[1]).to.equal(a._tileLayer._container);
+            });
+        })
     });
 });
