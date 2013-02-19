@@ -18,7 +18,6 @@ describe("L.TileJSON", function() {
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
-            server.autoRespond = true;
         });
 
         afterEach(function() {
@@ -46,6 +45,8 @@ describe("L.TileJSON", function() {
                     expect(data).to.eql(tileJSON);
                     done();
                 });
+
+                server.respond();
             });
 
             it("calls the callback with an error if the request fails", function(done) {
@@ -57,6 +58,8 @@ describe("L.TileJSON", function() {
                     expect(data).to.be(undefined);
                     done();
                 });
+
+                server.respond();
             });
         });
 
