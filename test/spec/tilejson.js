@@ -77,7 +77,7 @@ describe("L.TileJSON", function() {
         });
     });
 
-    describe("Layer", function() {
+    describe("LayerGroup", function() {
         function layersOf(layerGroup) {
             var result = [];
             layerGroup.eachLayer(function(layer) {
@@ -87,7 +87,7 @@ describe("L.TileJSON", function() {
         }
 
         it("creates a TileLayer with the appropriate min and max zoom", function() {
-            var group = new L.TileJSON.Layer(tileJSON),
+            var group = new L.TileJSON.LayerGroup(tileJSON),
                 layers = layersOf(group);
 
             expect(layers[0].options.minZoom).to.equal(1);
@@ -95,26 +95,26 @@ describe("L.TileJSON", function() {
         });
 
         it("allows access to the tilejson object after assignment", function() {
-            var layer = new L.TileJSON.Layer(tileJSON);
+            var layer = new L.TileJSON.LayerGroup(tileJSON);
             expect(layer.tilejson()).to.equal(tileJSON);
         });
 
         it("creates a TileLayer with the appropriate attribution", function() {
-            var group = new L.TileJSON.Layer(tileJSON),
+            var group = new L.TileJSON.LayerGroup(tileJSON),
                 layers = layersOf(group);
 
             expect(layers[0].options.attribution).to.equal('Terms & Feedback');
         });
 
         it("creates a TileLayer with the appropriate tms option", function() {
-            var group = new L.TileJSON.Layer(L.extend({}, tileJSON, {scheme: 'tms'})),
+            var group = new L.TileJSON.LayerGroup(L.extend({}, tileJSON, {scheme: 'tms'})),
                 layers = layersOf(group);
 
             expect(layers[0].options.tms).to.equal(true);
         });
 
         it("customizes the TileLayer's getTileUrl method", function() {
-            var group = new L.TileJSON.Layer(tileJSON),
+            var group = new L.TileJSON.LayerGroup(tileJSON),
                 layer = layersOf(group)[0];
 
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/0/0.png');

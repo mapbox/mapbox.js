@@ -13,7 +13,7 @@ L.TileJSON = {
 // A layer that loads its metadata from an endpoint that distributes TileJSON.
 // From that endpoint it gets a center, zoom level, attribution, zoom
 // extent, and more.
-L.TileJSON.Layer = L.LayerGroup.extend({
+L.TileJSON.LayerGroup = L.LayerGroup.extend({
 
     _tilejson: {},
 
@@ -103,6 +103,6 @@ L.TileJSON.Layer = L.LayerGroup.extend({
     }
 });
 
-L.TileJSON.layer = function(url) {
-    return new L.TileJSON.Layer(url);
+L.TileJSON.layerGroup = function(url) {
+    return new L.TileJSON.LayerGroup(url);
 };

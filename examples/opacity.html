@@ -50,10 +50,10 @@
 // has a race condition currently
 // and we need to refactor this when leaflet gets named and indexed layers
 
-var overlay = L.TileJSON.layer('aibram.Aerial');
+var overlay = L.TileJSON.layerGroup('aibram.Aerial');
 var map = L.map('map')
 	.setView([0, 0], 3)
-	.addLayer(L.TileJSON.layer('examples.map-vyofok3q'))
+	.addLayer(L.TileJSON.layerGroup('examples.map-vyofok3q'))
 	.addLayer(overlay);
 
 var handle = document.getElementById('handle'),
