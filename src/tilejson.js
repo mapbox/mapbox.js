@@ -20,8 +20,6 @@ L.TileJSON.TileLayer = L.TileLayer.extend({
             maxZoom: json.maxzoom,
             tms: json.scheme === 'tms'
         });
-
-        this._loaded = true;
     },
 
     getLegend: function() {
@@ -39,7 +37,7 @@ L.TileJSON.TileLayer = L.TileLayer.extend({
     // TileJSON.TileLayers are added to the map immediately, so that they get
     // the desired z-index, but do not update until the TileJSON has been loaded.
     _update: function() {
-        if (this._loaded) {
+        if (this.options.tiles) {
             L.TileLayer.prototype._update.call(this);
         }
     }
