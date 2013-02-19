@@ -10,6 +10,41 @@ L.TileJSON = {
     }
 };
 
+L.TileJSON.TileLayer = L.TileLayer.extend({
+    tilejson: function(json) {
+        L.extend(this.options, {
+            tiles: json.tiles,
+            attribution: json.attribution,
+            legend: json.legend,
+            minZoom: json.minzoom,
+            maxZoom: json.maxzoom,
+            tms: json.scheme === 'tms'
+        });
+
+        this._loaded = true;
+    },
+
+    getLegend: function() {
+        return this.options.legend;
+    },
+
+    getTileUrl: function(tilePoint) {
+        var tiles = this.options.tiles,
+            index = (tilePoint.x + tilePoint.y) % tiles.length,
+            url = tiles[index];
+
+        return L.Util.template(url, tilePoint);
+    },
+
+    // TileJSON.TileLayers are added to the map immediately, so that they get
+    // the desired z-index, but do not update until the TileJSON has been loaded.
+    _update: function() {
+        if (this._loaded) {
+            L.TileLayer.prototype._update.call(this);
+        }
+    }
+});
+
 // A layer that loads its metadata from an endpoint that distributes TileJSON.
 // From that endpoint it gets a center, zoom level, attribution, zoom
 // extent, and more.
@@ -20,16 +55,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
     initialize: function(_) {
         L.LayerGroup.prototype.initialize.call(this);
 
-        this._tileLayer = new L.TileLayer();
-
-        // Add the layer to the map now, so it gets the desired z-index,
-        // but do not update until the TileJSON has been loaded.
-        this._tileLayer._update = function() {
-            if (this._loaded) {
-                L.TileLayer.prototype._update.call(this);
-            }
-        };
-
+        this._tileLayer = new L.TileJSON.TileLayer();
         this.addLayer(this._tileLayer);
 
         if (typeof _ === 'string') {
@@ -75,26 +101,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
             this._map.setView(center, zoom);
         }
 
-        L.extend(this._tileLayer.options, {
-            attribution: json.attribution,
-            legend: json.legend,
-            minZoom: json.minzoom,
-            maxZoom: json.maxzoom,
-            tms: json.scheme === 'tms'
-        });
-
-        this._tileLayer._loaded = true;
-
-        this._tileLayer.getLegend = function() {
-            return this.options.legend;
-        };
-
-        this._tileLayer.getTileUrl = function(tilePoint) {
-            var index = (tilePoint.x + tilePoint.y) % json.tiles.length,
-                url = json.tiles[index];
-
-            return L.Util.template(url, tilePoint);
-        };
+        this._tileLayer.tilejson(json);
 
         if (json.data) {
             var addMarkers = L.bind(function(err, data) {
