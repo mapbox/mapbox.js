@@ -96,8 +96,6 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
             return L.Util.template(url, tilePoint);
         };
 
-        this.addLayer(tileLayer);
-
         if (json.data) {
             var addMarkers = L.bind(function(err, data) {
                 if (err) return mapbox.log('could not load TileJSON at ' + url);
