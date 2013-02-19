@@ -36,7 +36,7 @@ describe('L.Control.MapBoxGeocoder', function() {
         expect(map.getCenter()).to.be.near({lat: 30.3, lng: -97.7}, 1e-1);
     });
 
-    xit('sets url based on an id', function() {
+    it('sets url based on an id', function() {
         var control = new L.Control.MapBoxGeocoder('examples.map-vyofok3q');
         expect(control.url).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
     });
