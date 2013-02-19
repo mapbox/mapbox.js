@@ -41,7 +41,7 @@ L.TileJSON.Layer = L.LayerGroup.extend({
     // pull tilejson data from an endpoint
     url: function(url) {
         L.TileJSON.load(url, L.bind(function(err, json) {
-			if (err) return mapbox.log('could not load TileJSON at ' + url);
+            if (err) return mapbox.log('could not load TileJSON at ' + url);
             this._initialize(json);
         }, this));
         return this;
@@ -72,8 +72,8 @@ L.TileJSON.Layer = L.LayerGroup.extend({
         });
 
         tileLayer.getLegend = function() {
-			return this.options.legend;
-		};
+            return this.options.legend;
+        };
 
         tileLayer.getTileUrl = function(tilePoint) {
             var index = (tilePoint.x + tilePoint.y) % json.tiles.length,
@@ -85,8 +85,8 @@ L.TileJSON.Layer = L.LayerGroup.extend({
         this.addLayer(tileLayer);
 
         if (json.data) {
-			var addMarkers = L.bind(function(err, data) {
-				if (err) return mapbox.log('could not load TileJSON at ' + url);
+            var addMarkers = L.bind(function(err, data) {
+                if (err) return mapbox.log('could not load TileJSON at ' + url);
                 this.addLayer(L.geoJson(data, {
                     pointToLayer: mapbox.marker.style,
                     onEachFeature: function(feature, layer) {

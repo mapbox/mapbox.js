@@ -36,9 +36,9 @@ mapbox.browser = (function() {
 })();
 
 mapbox.log = function(_) {
-	if (console && typeof console.error === 'function') {
-		console.error(_);
-	}
+    if (console && typeof console.error === 'function') {
+        console.error(_);
+    }
 };
 
 // Turn off Leaflet's advertisement.
