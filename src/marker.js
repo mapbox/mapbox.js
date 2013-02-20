@@ -31,7 +31,8 @@ mapbox.marker.icon = function(fp) {
 // and [Markers API](http://mapbox.com/developers/api/#markers).
 mapbox.marker.style = function(f, latlon) {
     return L.marker(latlon, {
-        icon: mapbox.marker.icon(f.properties)
+        icon: mapbox.marker.icon(f.properties),
+        title: f.properties.title
     });
 };
 

@@ -33,7 +33,7 @@ describe('mapbox.marker', function() {
         });
 
         it("produces a medium marker", function() {
-                var marker = mapbox.marker.style({
+            var marker = mapbox.marker.style({
                 properties: {
                     'marker-size': 'medium'
                 }
@@ -42,12 +42,21 @@ describe('mapbox.marker', function() {
         });
 
         it("produces a red marker", function() {
-                var marker = mapbox.marker.style({
+            var marker = mapbox.marker.style({
                 properties: {
                     'marker-color': 'f00'
                 }
             });
             expect(marker.options.icon.options.iconUrl).to.contain('f00');
+        });
+
+        it("sets a marker's title", function() {
+            var marker = mapbox.marker.style({
+                properties: {
+                    title: 'test'
+                }
+            });
+            expect(marker.options.title).to.equal('test');
         });
 
         it('integrates with leaflet', function() {
