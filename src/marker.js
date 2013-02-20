@@ -34,3 +34,39 @@ mapbox.marker.style = function(f, latlon) {
         icon: mapbox.marker.icon(f.properties)
     });
 };
+
+mapbox.marker.layer = L.GeoJSON.extend({
+    options: {
+        pointToLayer: mapbox.marker.style,
+        onEachFeature: function(feature, layer) {
+            layer.bindPopup(feature.properties.title);
+        }
+    },
+
+    initialize: function(_) {
+        L.GeoJSON.prototype.initialize.call(this);
+
+        if (typeof _ === 'string') {
+            // map id 'tmcw.foo'
+            if (_.indexOf('/') == -1) this.id(_);
+            // url 'http://foo.com/foo.bar'
+            else this.url(_);
+        // javascript object of TileJSON data
+        } else if (typeof _ === 'object') {
+            this.addData(_);
+        }
+    },
+
+    url: function(url) {
+        var url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
+        L.TileJSON.load(url, L.bind(function(err, json) {
+            if (err) return mapbox.log('could not load markers at ' + url);
+            this.addData(json);
+        }, this));
+        return this;
+    },
+
+    id: function(id) {
+        return this.url(mapbox.base() + id + '/markers.geojson');
+    }
+});

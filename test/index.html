@@ -33,6 +33,14 @@
         expect(this.obj.lat).to.be.within(expected.lat - delta, expected.lat + delta);
         expect(this.obj.lng).to.be.within(expected.lng - delta, expected.lng + delta);
     };
+
+    function layersOf(layerGroup) {
+        var result = [];
+        layerGroup.eachLayer(function(layer) {
+            result.push(layer);
+        });
+        return result;
+    }
   </script>
 
   <script src="spec/mapbox.js"></script>

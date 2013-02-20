@@ -102,19 +102,8 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
         this._tileLayer.tilejson(json);
 
         if (json.data) {
-            var addMarkers = L.bind(function(err, data) {
-                if (err) return mapbox.log('could not load TileJSON at ' + url);
-                this.addLayer(L.geoJson(data, {
-                    pointToLayer: mapbox.marker.style,
-                    onEachFeature: function(feature, layer) {
-                        layer.bindPopup(feature.properties.title);
-                    }
-                }));
-            }, this);
-
             for (var i = 0; i < json.data.length; i++) {
-                var url = json.data[i].replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
-                L.TileJSON.load(url, addMarkers);
+                this.addLayer(new mapbox.marker.layer(json.data[i]))
             }
         }
     }

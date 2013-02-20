@@ -81,14 +81,6 @@ describe("L.TileJSON", function() {
     });
 
     describe("LayerGroup", function() {
-        function layersOf(layerGroup) {
-            var result = [];
-            layerGroup.eachLayer(function(layer) {
-                result.push(layer);
-            });
-            return result;
-        }
-
         it("creates a TileLayer with the appropriate min and max zoom", function() {
             var group = new L.TileJSON.LayerGroup(tileJSON),
                 layers = layersOf(group);
