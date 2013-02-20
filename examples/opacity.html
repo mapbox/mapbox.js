@@ -18,13 +18,13 @@
     background:#FFF;
     position:absolute;
     left:10px;
-    top:50px;
+    top:80px;
     height:200px;
     width:28px;
     border:1px solid #BBB;
     -webkit-border-radius:3px;
     border-radius:3px;
-	z-index:999;
+    z-index:999;
 }
 #handle {
     background:#000;
@@ -47,38 +47,37 @@
     <div id='handle'></div>
 </div>
 <script type='text/javascript'>
-// has a race condition currently
-// and we need to refactor this when leaflet gets named and indexed layers
+// we need to refactor this when leaflet gets named and indexed layers
 
 var overlay = L.TileJSON.layerGroup('aibram.Aerial');
 var map = L.map('map')
-	.setView([0, 0], 3)
-	.addLayer(L.TileJSON.layerGroup('examples.map-vyofok3q'))
-	.addLayer(overlay);
+    .setView([0, 0], 3)
+    .addLayer(L.TileJSON.layerGroup('examples.map-vyofok3q'))
+    .addLayer(overlay);
 
 var handle = document.getElementById('handle'),
-	start = false,
-	startTop;
+    start = false,
+    startTop;
 
 document.onmousemove = function(e) {
-	if (!start) return;
-	// Adjust control
-	handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
-	// Adjust opacity
-	overlay.setOpacity(1 - (handle.offsetTop / 200));
-	map.parent.style.cursor = 'ns-resize';
+    if (!start) return;
+    // Adjust control
+    handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
+    // Adjust opacity
+    overlay.eachLayer(function(layer) {
+        layer.setOpacity(1 - (handle.offsetTop / 200));
+    })
 };
 
 handle.onmousedown = function(e) {
-	// Record initial positions
-	start = parseInt(e.clientY, 10);
-	startTop = handle.offsetTop - 5;
-	return false;
+    // Record initial positions
+    start = parseInt(e.clientY, 10);
+    startTop = handle.offsetTop - 5;
+    return false;
 };
 
 document.onmouseup = function(e) {
-	start = null;
-	map.parent.style.cursor = 'default';
+    start = null;
 };
 </script>
 </body>
