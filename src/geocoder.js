@@ -47,7 +47,7 @@ mapbox.geocoder = L.Control.extend({
 
         var query = encodeURIComponent(this._input.value);
 
-        L.TileJSON.load(L.Util.template(this.url(), {query: query}), L.bind(function(err, json) {
+        mapbox.request(L.Util.template(this.url(), {query: query}), L.bind(function(err, json) {
             if (json && json.results && json.results.length) {
                 this._map.setView([json.results[0][0].lat, json.results[0][0].lon], 6);
             }

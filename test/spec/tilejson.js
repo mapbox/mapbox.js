@@ -1,4 +1,4 @@
-describe("L.TileJSON", function() {
+describe("mapbox.layerGroup", function() {
     var tileJSON = {
         'tilejson': '2.0.0',
         'attribution': 'Terms & Feedback',
@@ -13,7 +13,7 @@ describe("L.TileJSON", function() {
         ]
     };
 
-    describe("#load", function() {
+    describe("#request", function() {
         var server;
 
         beforeEach(function() {
@@ -40,7 +40,7 @@ describe("L.TileJSON", function() {
                     [200, { "Content-Type": "application/json" },
                         JSON.stringify(tileJSON)]);
 
-                L.TileJSON.load('data/tilejson.json', function(err, data) {
+                mapbox.request('data/tilejson.json', function(err, data) {
                     expect(err).to.be(undefined);
                     expect(data).to.eql(tileJSON);
                     done();
@@ -53,7 +53,7 @@ describe("L.TileJSON", function() {
                 server.respondWith("GET", "data/tilejson.json",
                     [500, { "Content-Type": "application/json" }, "{error: 'error'}"]);
 
-                L.TileJSON.load('data/tilejson.json', function(err, data) {
+                mapbox.request('data/tilejson.json', function(err, data) {
                     expect(err).to.be.ok();
                     expect(data).to.be(undefined);
                     done();
@@ -82,7 +82,7 @@ describe("L.TileJSON", function() {
 
     describe("LayerGroup", function() {
         it("creates a TileLayer with the appropriate min and max zoom", function() {
-            var group = new L.TileJSON.LayerGroup(tileJSON),
+            var group = new mapbox.layerGroup(tileJSON),
                 layer = group.tileLayer;
 
             expect(layer.options.minZoom).to.equal(1);
@@ -90,26 +90,26 @@ describe("L.TileJSON", function() {
         });
 
         it("allows access to the tilejson object after assignment", function() {
-            var layer = new L.TileJSON.LayerGroup(tileJSON);
+            var layer = new mapbox.layerGroup(tileJSON);
             expect(layer.tilejson()).to.equal(tileJSON);
         });
 
         it("creates a TileLayer with the appropriate attribution", function() {
-            var group = new L.TileJSON.LayerGroup(tileJSON),
+            var group = new mapbox.layerGroup(tileJSON),
                 layer = group.tileLayer;
 
             expect(layer.options.attribution).to.equal('Terms & Feedback');
         });
 
         it("creates a TileLayer with the appropriate tms option", function() {
-            var group = new L.TileJSON.LayerGroup(L.extend({}, tileJSON, {scheme: 'tms'})),
+            var group = new mapbox.layerGroup(L.extend({}, tileJSON, {scheme: 'tms'})),
                 layer = group.tileLayer;
 
             expect(layer.options.tms).to.equal(true);
         });
 
         it("customizes the TileLayer's getTileUrl method", function() {
-            var group = new L.TileJSON.LayerGroup(tileJSON),
+            var group = new mapbox.layerGroup(tileJSON),
                 layer = group.tileLayer;
 
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/0/0.png');
@@ -131,20 +131,20 @@ describe("L.TileJSON", function() {
             });
 
             it("adds a tile layer immediately", function() {
-                var group = new L.TileJSON.LayerGroup('data/tilejson.json');
+                var group = new mapbox.layerGroup('data/tilejson.json');
                 expect(group.tileLayer).to.be.ok();
             });
 
 
             it("adds a data layer immediately", function() {
-                var group = new L.TileJSON.LayerGroup('data/tilejson.json');
+                var group = new mapbox.layerGroup('data/tilejson.json');
                 expect(group.dataLayer).to.be.ok();
             });
 
             it("adds multiple TileLayers in the order that the LayerGroups were added", function() {
                 var map = new L.Map(document.createElement('div')),
-                    a = new L.TileJSON.LayerGroup('a'),
-                    b = new L.TileJSON.LayerGroup('b');
+                    a = new mapbox.layerGroup('a'),
+                    b = new mapbox.layerGroup('b');
 
                 map.addLayer(b);
                 map.addLayer(a);
@@ -153,6 +153,6 @@ describe("L.TileJSON", function() {
                 expect(map.getPanes().tilePane.children[0]).to.equal(b.tileLayer.getContainer());
                 expect(map.getPanes().tilePane.children[1]).to.equal(a.tileLayer.getContainer());
             });
-        })
+        });
     });
 });
