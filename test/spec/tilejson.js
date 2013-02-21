@@ -83,10 +83,10 @@ describe("L.TileJSON", function() {
     describe("LayerGroup", function() {
         it("creates a TileLayer with the appropriate min and max zoom", function() {
             var group = new L.TileJSON.LayerGroup(tileJSON),
-                layers = layersOf(group);
+                layer = group.tileLayer;
 
-            expect(layers[0].options.minZoom).to.equal(1);
-            expect(layers[0].options.maxZoom).to.equal(11);
+            expect(layer.options.minZoom).to.equal(1);
+            expect(layer.options.maxZoom).to.equal(11);
         });
 
         it("allows access to the tilejson object after assignment", function() {
@@ -96,21 +96,21 @@ describe("L.TileJSON", function() {
 
         it("creates a TileLayer with the appropriate attribution", function() {
             var group = new L.TileJSON.LayerGroup(tileJSON),
-                layers = layersOf(group);
+                layer = group.tileLayer;
 
-            expect(layers[0].options.attribution).to.equal('Terms & Feedback');
+            expect(layer.options.attribution).to.equal('Terms & Feedback');
         });
 
         it("creates a TileLayer with the appropriate tms option", function() {
             var group = new L.TileJSON.LayerGroup(L.extend({}, tileJSON, {scheme: 'tms'})),
-                layers = layersOf(group);
+                layer = group.tileLayer;
 
-            expect(layers[0].options.tms).to.equal(true);
+            expect(layer.options.tms).to.equal(true);
         });
 
         it("customizes the TileLayer's getTileUrl method", function() {
             var group = new L.TileJSON.LayerGroup(tileJSON),
-                layer = layersOf(group)[0];
+                layer = group.tileLayer;
 
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/0/0.png');
             expect(layer.getTileUrl({x: 1, y: 0, z: 0})).to.equal('http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/0/1/0.png');
@@ -130,11 +130,15 @@ describe("L.TileJSON", function() {
                 server.restore();
             });
 
-            it("adds a TileLayer immediately", function() {
-                var group = new L.TileJSON.LayerGroup('data/tilejson.json'),
-                    layer = layersOf(group)[0];
+            it("adds a tile layer immediately", function() {
+                var group = new L.TileJSON.LayerGroup('data/tilejson.json');
+                expect(group.tileLayer).to.be.ok();
+            });
 
-                expect(layer).to.be.ok();
+
+            it("adds a data layer immediately", function() {
+                var group = new L.TileJSON.LayerGroup('data/tilejson.json');
+                expect(group.dataLayer).to.be.ok();
             });
 
             it("adds multiple TileLayers in the order that the LayerGroups were added", function() {
@@ -146,8 +150,8 @@ describe("L.TileJSON", function() {
                 map.addLayer(a);
                 map.setView([0, 0], 1);
 
-                expect(map.getPanes().tilePane.children[0]).to.equal(b._tileLayer._container);
-                expect(map.getPanes().tilePane.children[1]).to.equal(a._tileLayer._container);
+                expect(map.getPanes().tilePane.children[0]).to.equal(b.tileLayer.getContainer());
+                expect(map.getPanes().tilePane.children[1]).to.equal(a.tileLayer.getContainer());
             });
         })
     });

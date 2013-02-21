@@ -53,11 +53,11 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
     initialize: function(_) {
         L.LayerGroup.prototype.initialize.call(this);
 
-        this._tileLayer = new L.TileJSON.TileLayer();
-        this.addLayer(this._tileLayer);
+        this.tileLayer = new L.TileJSON.TileLayer();
+        this.addLayer(this.tileLayer);
 
-        this._dataLayer = new mapbox.marker.layer();
-        this.addLayer(this._dataLayer);
+        this.dataLayer = new mapbox.marker.layer();
+        this.addLayer(this.dataLayer);
 
         if (typeof _ === 'string') {
             // map id 'tmcw.foo'
@@ -102,10 +102,10 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
             this._map.setView(center, zoom);
         }
 
-        this._tileLayer.tilejson(json);
+        this.tileLayer.tilejson(json);
 
         if (json.data && json.data[0]) {
-            this._dataLayer.url(json.data[0]);
+            this.dataLayer.url(json.data[0]);
         }
     }
 });
