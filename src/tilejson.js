@@ -65,7 +65,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
             // url 'http://foo.com/foo.bar'
             else this.url(_);
         // javascript object of TileJSON data
-        } else if (typeof _ === 'object') {
+        } else if (_ && typeof _ === 'object') {
             this.tilejson(_);
         }
     },
