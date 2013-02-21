@@ -56,6 +56,9 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
         this._tileLayer = new L.TileJSON.TileLayer();
         this.addLayer(this._tileLayer);
 
+        this._dataLayer = new mapbox.marker.layer();
+        this.addLayer(this._dataLayer);
+
         if (typeof _ === 'string') {
             // map id 'tmcw.foo'
             if (_.indexOf('/') == -1) this.id(_);
@@ -101,10 +104,8 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
 
         this._tileLayer.tilejson(json);
 
-        if (json.data) {
-            for (var i = 0; i < json.data.length; i++) {
-                this.addLayer(new mapbox.marker.layer(json.data[i]))
-            }
+        if (json.data && json.data[0]) {
+            this._dataLayer.url(json.data[0]);
         }
     }
 });
