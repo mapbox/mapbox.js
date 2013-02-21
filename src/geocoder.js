@@ -1,5 +1,6 @@
-L.Control.MapBoxGeocoder = L.Control.extend({
-    initialize: function (_) {
+mapbox.geocoder = L.Control.extend({
+
+    initialize: function(_) {
         // map id 'tmcw.foo'
         if (_.indexOf('/') == -1) this.id(_);
         // url 'http://foo.com/foo.bar'
@@ -7,7 +8,8 @@ L.Control.MapBoxGeocoder = L.Control.extend({
     },
 
     url: function(url) {
-        this.url = url;
+        if (!arguments.length) return this._url;
+        this._url = url;
         return this;
     },
 
@@ -15,7 +17,7 @@ L.Control.MapBoxGeocoder = L.Control.extend({
         return this.url(mapbox.base() + id + '/geocode/{query}.json');
     },
 
-    onAdd: function (map) {
+    onAdd: function(map) {
         this._map = map;
 
         var className = 'leaflet-control-mapbox-geocoder',
@@ -40,15 +42,16 @@ L.Control.MapBoxGeocoder = L.Control.extend({
         return container;
     },
 
-    _geocode: function (event) {
+    _geocode: function(event) {
         L.DomEvent.preventDefault(event);
 
         var query = encodeURIComponent(this._input.value);
 
-        L.TileJSON.load(L.Util.template(this.url, {query: query}), L.bind(function(err, json) {
+        L.TileJSON.load(L.Util.template(this.url(), {query: query}), L.bind(function(err, json) {
             if (json && json.results && json.results.length) {
                 this._map.setView([json.results[0][0].lat, json.results[0][0].lon], 6);
             }
         }, this));
     }
+
 });
