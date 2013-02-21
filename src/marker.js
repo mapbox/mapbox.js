@@ -36,16 +36,9 @@ mapbox.marker.style = function(f, latlon) {
     });
 };
 
-mapbox.marker.layer = L.GeoJSON.extend({
-    options: {
-        pointToLayer: mapbox.marker.style,
-        onEachFeature: function(feature, layer) {
-            layer.bindPopup(feature.properties.title);
-        }
-    },
-
+mapbox.marker.layer = L.FeatureGroup.extend({
     initialize: function(_) {
-        L.GeoJSON.prototype.initialize.call(this);
+        L.FeatureGroup.prototype.initialize.call(this);
 
         if (typeof _ === 'string') {
             // map id 'tmcw.foo'
@@ -54,20 +47,49 @@ mapbox.marker.layer = L.GeoJSON.extend({
             else this.url(_);
         // javascript object of TileJSON data
         } else if (typeof _ === 'object') {
-            this.addData(_);
+            this.geojson(_);
         }
+    },
+
+    geojson: function(_) {
+        if (!arguments.length) return this._geojson;
+        this._geojson = _;
+        this._initialize(_);
+        return this;
     },
 
     url: function(url) {
         var url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
         L.TileJSON.load(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load markers at ' + url);
-            this.addData(json);
+            this.geojson(json);
         }, this));
         return this;
     },
 
     id: function(id) {
         return this.url(mapbox.base() + id + '/markers.geojson');
+    },
+
+    _initialize: function(json) {
+        var features = L.Util.isArray(json) ? json : json.features,
+            i, len;
+
+        if (features) {
+            for (i = 0, len = features.length; i < len; i++) {
+                // Only add this if geometry or geometries are set and not null
+                if (features[i].geometries || features[i].geometry || features[i].features) {
+                    this._initialize(features[i]);
+                }
+            }
+            return this;
+        }
+
+        var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style);
+
+        layer.feature = json;
+        layer.bindPopup(json.properties.title);
+
+        return this.addLayer(layer);
     }
 });

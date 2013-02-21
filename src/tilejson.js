@@ -73,6 +73,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
     // use a javascript object of tilejson data to configure this layer
     tilejson: function(_) {
         if (!arguments.length) return this._tilejson;
+        this._tilejson = _;
         this._initialize(_);
         return this;
     },
@@ -81,7 +82,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
     url: function(url) {
         L.TileJSON.load(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load TileJSON at ' + url);
-            this._initialize(json);
+            this.tilejson(json);
         }, this));
         return this;
     },
@@ -92,11 +93,8 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
     },
 
     _initialize: function(json) {
-
         var zoom = json.center[2],
             center = L.latLng(json.center[1], json.center[0]);
-
-        this._tilejson = json;
 
         if (this._map) {
             this._map.setView(center, zoom);
