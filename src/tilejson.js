@@ -1,16 +1,4 @@
-L.TileJSON = {
-    load: function(url, callback) {
-        reqwest({
-            url: url,
-            type: mapbox.browser.cors ? 'json' : 'jsonp',
-            crossOrigin: mapbox.browser.cors,
-            success: function(result) { callback(undefined, result); },
-            error: function(error) { callback(error); }
-        });
-    }
-};
-
-L.TileJSON.TileLayer = L.TileLayer.extend({
+mapbox.tileLayer = L.TileLayer.extend({
     tilejson: function(json) {
         L.extend(this.options, {
             tiles: json.tiles,
@@ -46,14 +34,14 @@ L.TileJSON.TileLayer = L.TileLayer.extend({
 // A layer that loads its metadata from an endpoint that distributes TileJSON.
 // From that endpoint it gets a center, zoom level, attribution, zoom
 // extent, and more.
-L.TileJSON.LayerGroup = L.LayerGroup.extend({
+mapbox.layerGroup = L.LayerGroup.extend({
 
     _tilejson: {},
 
     initialize: function(_) {
         L.LayerGroup.prototype.initialize.call(this);
 
-        this.tileLayer = new L.TileJSON.TileLayer();
+        this.tileLayer = new mapbox.tileLayer();
         this.addLayer(this.tileLayer);
 
         this.dataLayer = new mapbox.marker.layer();
@@ -80,7 +68,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
 
     // pull tilejson data from an endpoint
     url: function(url) {
-        L.TileJSON.load(url, L.bind(function(err, json) {
+        mapbox.request(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load TileJSON at ' + url);
             this.tilejson(json);
         }, this));
@@ -108,6 +96,7 @@ L.TileJSON.LayerGroup = L.LayerGroup.extend({
     }
 });
 
-L.TileJSON.layerGroup = function(url) {
-    return new L.TileJSON.LayerGroup(url);
+// alias this to a standard Leaflet namespace
+L.TileJSON = {
+    layerGroup: mapbox.layerGroup
 };

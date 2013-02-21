@@ -66,7 +66,7 @@ mapbox.marker.layer = L.FeatureGroup.extend({
 
     url: function(url) {
         url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
-        L.TileJSON.load(url, L.bind(function(err, json) {
+        mapbox.request(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load markers at ' + url);
             this.geojson(json);
         }, this));

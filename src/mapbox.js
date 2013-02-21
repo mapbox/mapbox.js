@@ -41,5 +41,27 @@ mapbox.log = function(_) {
     }
 };
 
+// http://stackoverflow.com/questions/9404793/check-if-same-origin-policy-applies
+mapbox.isSameOrigin = function(url) {
+    var loc = window.location,
+        a = document.createElement('a');
+
+    a.href = url;
+
+    return a.hostname === loc.hostname &&
+        a.port === loc.port &&
+        a.protocol === loc.protocol;
+};
+
+mapbox.request = function(url, callback) {
+    reqwest({
+        url: url,
+        type: (mapbox.browser.cors || mapbox.isSameOrigin(url)) ? 'json' : 'jsonp',
+        crossOrigin: mapbox.browser.cors,
+        success: function(result) { callback(undefined, result); },
+        error: function(error) { callback(error); }
+    });
+};
+
 // Turn off Leaflet's advertisement.
 L.Control.Attribution.prototype.options.prefix = '';
