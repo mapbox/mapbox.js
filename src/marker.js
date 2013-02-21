@@ -37,8 +37,14 @@ mapbox.marker.style = function(f, latlon) {
 };
 
 mapbox.marker.layer = L.FeatureGroup.extend({
-    initialize: function(_) {
-        L.FeatureGroup.prototype.initialize.call(this);
+    options: {
+        filter: function() { return true; }
+    },
+
+    initialize: function(_, options) {
+        L.setOptions(this, options);
+
+        this._layers = {};
 
         if (typeof _ === 'string') {
             // map id 'tmcw.foo'
@@ -71,6 +77,16 @@ mapbox.marker.layer = L.FeatureGroup.extend({
         return this.url(mapbox.base() + id + '/markers.geojson');
     },
 
+    filter: function(_) {
+        if (!arguments.length) return this.options.filter;
+        this.options.filter = _;
+        if (this._geojson) {
+            this.clearLayers();
+            this._initialize(this._geojson);
+        }
+        return this;
+    },
+
     _initialize: function(json) {
         var features = L.Util.isArray(json) ? json : json.features,
             i, len;
@@ -82,14 +98,13 @@ mapbox.marker.layer = L.FeatureGroup.extend({
                     this._initialize(features[i]);
                 }
             }
-            return this;
+        } else if (this.options.filter(json)) {
+            var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style);
+
+            layer.feature = json;
+            layer.bindPopup(json.properties.title);
+
+            this.addLayer(layer);
         }
-
-        var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style);
-
-        layer.feature = json;
-        layer.bindPopup(json.properties.title);
-
-        return this.addLayer(layer);
     }
 });

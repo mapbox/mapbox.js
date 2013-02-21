@@ -125,5 +125,23 @@ describe('mapbox.marker', function() {
             expect(marker instanceof L.Marker).to.equal(true);
             expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
         });
+
+        describe("#filter", function() {
+            it("returns the filter option when not given an argument", function() {
+                var filter = function () {},
+                    layer = new mapbox.marker.layer(null, {filter: filter});
+                expect(layer.filter()).to.equal(filter);
+            });
+
+            it("filters features to those for which the function returns true", function() {
+                var layer = new mapbox.marker.layer(geoJson);
+
+                layer.filter(function (f) { return f.properties.title === 'foo'; });
+                expect(layersOf(layer).length).to.equal(1);
+
+                layer.filter(function (f) { return f.properties.title !== 'foo'; });
+                expect(layersOf(layer).length).to.equal(0);
+            });
+        })
     });
 });
