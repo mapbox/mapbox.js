@@ -37,9 +37,10 @@ var map = L.map('map')
 var markerLayer = new mapbox.marker.layer()
     .addTo(map);
 
+var features = [];
 for (var x = -120; x < 120; x += 20) {
     for (var y = -80; y < 80; y += 10) {
-        markerLayer.addData({
+        features.push({
             type: 'Feature',
             geometry: {
                 type: 'Point',
@@ -53,6 +54,11 @@ for (var x = -120; x < 120; x += 20) {
         });
     }
 }
+
+markerLayer.geojson({
+    type: 'FeatureCollection',
+    features: features
+});
 
 map.on('move', function() {
     // construct an empty list to fill with onscreen markers
