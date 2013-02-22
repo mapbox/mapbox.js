@@ -10,7 +10,8 @@
     <script src="../ext/leaflet/leaflet-src.js"></script>
     <script src="../src/mapbox.js"></script>
     <script src="../src/marker.js"></script>
-    <script src="../src/layer.js"></script>
+    <script src="../src/layer_group.js"></script>
+    <script src="../src/tile_layer.js"></script>
 </head>
 <body>
 <style>
@@ -29,8 +30,7 @@
 <pre id='onscreen'></pre>
 <script type='text/javascript'>
     var map = L.map('map')
-        .addLayer(new L.TileLayer.MapBox({
-            id: 'examples.map-20v6611k',
+        .addLayer(new mapbox.tileLayer('examples.map-20v6611k', {
             attribution: '<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>'
         }));
 

@@ -1,36 +1,3 @@
-mapbox.tileLayer = L.TileLayer.extend({
-    tilejson: function(json) {
-        L.extend(this.options, {
-            tiles: json.tiles,
-            attribution: json.attribution,
-            legend: json.legend,
-            minZoom: json.minzoom,
-            maxZoom: json.maxzoom,
-            tms: json.scheme === 'tms'
-        });
-    },
-
-    getLegend: function() {
-        return this.options.legend;
-    },
-
-    getTileUrl: function(tilePoint) {
-        var tiles = this.options.tiles,
-            index = (tilePoint.x + tilePoint.y) % tiles.length,
-            url = tiles[index];
-
-        return L.Util.template(url, tilePoint);
-    },
-
-    // TileJSON.TileLayers are added to the map immediately, so that they get
-    // the desired z-index, but do not update until the TileJSON has been loaded.
-    _update: function() {
-        if (this.options.tiles) {
-            L.TileLayer.prototype._update.call(this);
-        }
-    }
-});
-
 // A layer that loads its metadata from an endpoint that distributes TileJSON.
 // From that endpoint it gets a center, zoom level, attribution, zoom
 // extent, and more.
@@ -95,8 +62,3 @@ mapbox.layerGroup = L.LayerGroup.extend({
         }
     }
 });
-
-// alias this to a standard Leaflet namespace
-L.TileJSON = {
-    layerGroup: mapbox.layerGroup
-};

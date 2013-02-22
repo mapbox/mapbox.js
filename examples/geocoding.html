@@ -11,7 +11,8 @@
     <script src="../node_modules/reqwest/reqwest.js"></script>
     <script src="../src/mapbox.js"></script>
     <script src="../src/marker.js"></script>
-    <script src="../src/tilejson.js"></script>
+    <script src="../src/layer_group.js"></script>
+    <script src="../src/tile_layer.js"></script>
     <script src="../src/geocoder.js"></script>
 </head>
 <body>
@@ -19,8 +20,8 @@
 <script type='text/javascript'>
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addLayer(new L.TileLayer('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/{z}/{x}/{y}.png'))
-        .addControl(new mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json'));
+        .addLayer(new mapbox.tileLayer('examples.map-vyofok3q'))
+        .addControl(new mapbox.geocoder('examples.map-vyofok3q'));
 </script>
 </body>
 </html>

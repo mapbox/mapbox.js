@@ -11,7 +11,8 @@
     <script src="../node_modules/reqwest/reqwest.js"></script>
     <script src="../src/mapbox.js"></script>
     <script src="../src/marker.js"></script>
-    <script src="../src/tilejson.js"></script>
+    <script src="../src/layer_group.js"></script>
+    <script src="../src/tile_layer.js"></script>
     <style>
         #output {
             position: absolute;
@@ -35,7 +36,7 @@
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addLayer(L.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-20v6611k/{z}/{x}/{y}.png'));
+        .addLayer(new mapbox.tileLayer('examples.map-20v6611k'));
 
     map.on('mousemove click', function(e) {
         window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();
