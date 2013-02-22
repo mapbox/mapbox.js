@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
-  <![endif]-->
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../ext/leaflet/leaflet-src.js"></script>
-  <script src="../node_modules/reqwest/reqwest.js"></script>
-  <script src="../src/mapbox.js"></script>
-  <script src="../src/marker.js"></script>
-  <script src="../src/layer.js"></script>
-  <script src="../src/tilejson.js"></script>
-  <style>
-#control {
-    background:#FFF;
-    position:absolute;
-    left:10px;
-    top:80px;
-    height:200px;
-    width:28px;
-    border:1px solid #BBB;
-    -webkit-border-radius:3px;
-    border-radius:3px;
-    z-index:999;
-}
-#handle {
-    background:#000;
-    position: absolute;
-    left:0;
-    top:20px;
-    width:28px;
-    height:10px;
-}
-#handle:hover {
-    cursor:pointer;
-    background:#444;
-    cursor:ns-resize;
-}
-  </style>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="embed.css"/>
+    <script src="../ext/leaflet/leaflet-src.js"></script>
+    <script src="../node_modules/reqwest/reqwest.js"></script>
+    <script src="../src/mapbox.js"></script>
+    <script src="../src/marker.js"></script>
+    <script src="../src/layer.js"></script>
+    <script src="../src/tilejson.js"></script>
+    <style>
+        #control {
+            background: #FFF;
+            position: absolute;
+            left: 10px;
+            top: 80px;
+            height: 200px;
+            width: 28px;
+            border: 1px solid #BBB;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            z-index: 999;
+        }
+
+        #handle {
+            background: #000;
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 28px;
+            height: 10px;
+        }
+
+        #handle:hover {
+            cursor: pointer;
+            background: #444;
+            cursor: ns-resize;
+        }
+    </style>
 </head>
 <body>
 <div id='map'></div>
@@ -47,38 +49,38 @@
     <div id='handle'></div>
 </div>
 <script type='text/javascript'>
-// we need to refactor this when leaflet gets named and indexed layers
+    // we need to refactor this when leaflet gets named and indexed layers
 
-var overlay = L.TileJSON.layerGroup('aibram.Aerial');
-var map = L.map('map')
-    .setView([0, 0], 3)
-    .addLayer(L.TileJSON.layerGroup('examples.map-vyofok3q'))
-    .addLayer(overlay);
+    var overlay = L.TileJSON.layerGroup('aibram.Aerial');
+    var map = L.map('map')
+        .setView([0, 0], 3)
+        .addLayer(L.TileJSON.layerGroup('examples.map-vyofok3q'))
+        .addLayer(overlay);
 
-var handle = document.getElementById('handle'),
-    start = false,
-    startTop;
+    var handle = document.getElementById('handle'),
+        start = false,
+        startTop;
 
-document.onmousemove = function(e) {
-    if (!start) return;
-    // Adjust control
-    handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
-    // Adjust opacity
-    overlay.eachLayer(function(layer) {
-        layer.setOpacity(1 - (handle.offsetTop / 200));
-    })
-};
+    document.onmousemove = function(e) {
+        if (!start) return;
+        // Adjust control
+        handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
+        // Adjust opacity
+        overlay.eachLayer(function(layer) {
+            layer.setOpacity(1 - (handle.offsetTop / 200));
+        })
+    };
 
-handle.onmousedown = function(e) {
-    // Record initial positions
-    start = parseInt(e.clientY, 10);
-    startTop = handle.offsetTop - 5;
-    return false;
-};
+    handle.onmousedown = function(e) {
+        // Record initial positions
+        start = parseInt(e.clientY, 10);
+        startTop = handle.offsetTop - 5;
+        return false;
+    };
 
-document.onmouseup = function(e) {
-    start = null;
-};
+    document.onmouseup = function(e) {
+        start = null;
+    };
 </script>
 </body>
 </html>

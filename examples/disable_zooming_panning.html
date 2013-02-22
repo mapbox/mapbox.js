@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../lib/leaflet/dist/leaflet.css"/>
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="../lib/leaflet/dist/leaflet.ie.css"/>
-  <![endif]-->
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../lib/leaflet/dist/leaflet-src.js"></script>
-  <script src="../node_modules/reqwest/reqwest.js"></script>
-  <script src="../src/mapbox.js"></script>
-  <script src="../src/marker.js"></script>
-  <script src="../src/tilejson.js"></script>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../lib/leaflet/dist/leaflet.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../lib/leaflet/dist/leaflet.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="embed.css"/>
+    <script src="../lib/leaflet/dist/leaflet-src.js"></script>
+    <script src="../node_modules/reqwest/reqwest.js"></script>
+    <script src="../src/mapbox.js"></script>
+    <script src="../src/marker.js"></script>
+    <script src="../src/tilejson.js"></script>
 </head>
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
-var map = L.map('map')
-    .setView([38.8995, -77.0203], 12)
-    .addLayer(L.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-20v6611k/{z}/{x}/{y}.png'));
+    var map = L.map('map')
+        .setView([38.8995, -77.0203], 12)
+        .addLayer(L.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-20v6611k/{z}/{x}/{y}.png'));
 
-// disable drag and zoom handlers
-map.dragging.disable();
-map.touchZoom.disable();
-map.doubleClickZoom.disable();
-map.scrollWheelZoom.disable();
+    // disable drag and zoom handlers
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
 </script>
 </body>
 </html>

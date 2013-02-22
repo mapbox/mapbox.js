@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
-  <![endif]-->
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../ext/leaflet/leaflet-src.js"></script>
-  <script src="../src/mapbox.js"></script>
-  <script src="../src/marker.js"></script>
-  <script src="../src/layer.js"></script>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="embed.css"/>
+    <script src="../ext/leaflet/leaflet-src.js"></script>
+    <script src="../src/mapbox.js"></script>
+    <script src="../src/marker.js"></script>
+    <script src="../src/layer.js"></script>
 </head>
 <body>
 <style>
-#onscreen {
-    position:absolute;
-    top:10px;
-    left:10px;
-    width:300px;
-    height: 100px;
-    background:#fff;
-    z-index:100;
-    overflow-y:scroll;
-}
+    #onscreen {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 300px;
+        height: 100px;
+        background: #fff;
+        z-index: 100;
+        overflow-y: scroll;
+    }
 </style>
 <div id='map'></div>
 <pre id='onscreen'></pre>
 <script type='text/javascript'>
-var map = L.map('map')
-    .addLayer(new L.TileLayer.MapBox({
-        id: 'examples.map-20v6611k',
-        attribution: '<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>'
-    }));
+    var map = L.map('map')
+        .addLayer(new L.TileLayer.MapBox({
+            id: 'examples.map-20v6611k',
+            attribution: '<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>'
+        }));
 
-var markerLayer = new mapbox.marker.layer()
-    .addTo(map);
+    var markerLayer = new mapbox.marker.layer()
+        .addTo(map);
 
-var features = [];
-for (var x = -120; x < 120; x += 20) {
-    for (var y = -80; y < 80; y += 10) {
-        features.push({
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [x, y]
-            },
-            properties: {
-                'marker-color': '#000',
-                'marker-symbol': 'star-stroked',
-                title: [x, y].join(',')
-            }
-        });
-    }
-}
-
-markerLayer.geojson({
-    type: 'FeatureCollection',
-    features: features
-});
-
-map.on('move', function() {
-    // construct an empty list to fill with onscreen markers
-    var inBounds = [],
-        // get the map bounds - the top-left and bottom-right locations
-        bounds = map.getBounds();
-
-    // for each marker, consider whether it is currently visible by comparing
-    // with the current map bounds
-    markerLayer.eachLayer(function (marker) {
-        if (bounds.contains(marker.getLatLng())) {
-            inBounds.push(marker.options.title);
+    var features = [];
+    for (var x = -120; x < 120; x += 20) {
+        for (var y = -80; y < 80; y += 10) {
+            features.push({
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [x, y]
+                },
+                properties: {
+                    'marker-color': '#000',
+                    'marker-symbol': 'star-stroked',
+                    title: [x, y].join(',')
+                }
+            });
         }
+    }
+
+    markerLayer.geojson({
+        type: 'FeatureCollection',
+        features: features
     });
 
-    // display a list of markers.
-    document.getElementById('onscreen').innerHTML = inBounds.join('\n');
-});
+    map.on('move', function() {
+        // construct an empty list to fill with onscreen markers
+        var inBounds = [],
+        // get the map bounds - the top-left and bottom-right locations
+            bounds = map.getBounds();
 
-map.setView([37, -77], 5);
+        // for each marker, consider whether it is currently visible by comparing
+        // with the current map bounds
+        markerLayer.eachLayer(function(marker) {
+            if (bounds.contains(marker.getLatLng())) {
+                inBounds.push(marker.options.title);
+            }
+        });
+
+        // display a list of markers.
+        document.getElementById('onscreen').innerHTML = inBounds.join('\n');
+    });
+
+    map.setView([37, -77], 5);
 </script>
 </body>
 </html>

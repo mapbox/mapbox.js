@@ -1,63 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
-  <![endif]-->
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../ext/leaflet/leaflet-src.js"></script>
-  <script src="../node_modules/reqwest/reqwest.js"></script>
-  <script src="../src/mapbox.js"></script>
-  <script src="../src/marker.js"></script>
-  <script src="../src/layer.js"></script>
-  <script src="../src/tilejson.js"></script>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="embed.css"/>
+    <script src="../ext/leaflet/leaflet-src.js"></script>
+    <script src="../node_modules/reqwest/reqwest.js"></script>
+    <script src="../src/mapbox.js"></script>
+    <script src="../src/marker.js"></script>
+    <script src="../src/layer.js"></script>
+    <script src="../src/tilejson.js"></script>
 </head>
 <body>
 <style>
- #map-ui {
-    position:absolute;
-    top:10px;left:10px;
-    z-index:100;
+    #map-ui {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
     }
+
     #map-ui ul {
-      list-style:none;
-      margin:0;padding:0;
-      }
-      #map-ui a {
-        font-size:13px;
-        background:#FFF;
-        color:#3C4E5A;
-        display:block;
-        margin:0;padding:0;
-        border:1px solid #BBB;
-        border-bottom-width:0;
-        min-width:138px;
-        padding:10px;
-        text-decoration:none;
-        }
-      #map-ui a:hover { background:#ECF5FA; }
-      #map-ui li:last-child a {
-        border-bottom-width:1px;
-        -webkit-border-radius:0 0 3px 3px;
-                border-radius:0 0 3px 3px;
-        }
-      #map-ui li:first-child a {
-        -webkit-border-radius:3px 3px 0 0;
-                border-radius:3px 3px 0 0;
-        }
-      #map-ui a.active {
-        background:#3887BE;
-        border-color:#3887BE;
-        color:#FFF;
-        }
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #map-ui a {
+        font-size: 13px;
+        background: #FFF;
+        color: #3C4E5A;
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #BBB;
+        border-bottom-width: 0;
+        min-width: 138px;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    #map-ui a:hover {
+        background: #ECF5FA;
+    }
+
+    #map-ui li:last-child a {
+        border-bottom-width: 1px;
+        -webkit-border-radius: 0 0 3px 3px;
+        border-radius: 0 0 3px 3px;
+    }
+
+    #map-ui li:first-child a {
+        -webkit-border-radius: 3px 3px 0 0;
+        border-radius: 3px 3px 0 0;
+    }
+
+    #map-ui a.active {
+        background: #3887BE;
+        border-color: #3887BE;
+        color: #FFF;
+    }
 </style>
 <div id='map-ui'>
-  <ul>
-    <li><a href='#' id='filter-food'>show only food events</a></li>
-    <li><a href='#' class='active' id='filter-all'>show all events</a></li>
-  </ul>
+    <ul>
+        <li><a href='#' id='filter-food'>show only food events</a></li>
+        <li><a href='#' class='active' id='filter-all'>show all events</a></li>
+    </ul>
 </div>
 <div id='map'></div>
 <script type='text/javascript'>
@@ -72,21 +83,21 @@
     var food = document.getElementById('filter-food');
     var all = document.getElementById('filter-all');
 
-    food.onclick = function (e) {
+    food.onclick = function(e) {
         all.className = '';
         this.className = 'active';
         // The filter function takes a GeoJSON feature object
         // and returns true to show it or false to hide it.
-        markerLayer.filter(function (f) {
+        markerLayer.filter(function(f) {
             return f.properties['marker-symbol'] === 'fast-food';
         });
         return false;
     };
 
-    all.onclick = function () {
+    all.onclick = function() {
         food.className = '';
         this.className = 'active';
-        markerLayer.filter(function (f) {
+        markerLayer.filter(function(f) {
             // Returning true for all markers shows everything.
             return true;
         });
