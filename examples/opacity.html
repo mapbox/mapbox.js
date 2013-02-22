@@ -51,10 +51,10 @@
 <script type='text/javascript'>
     // we need to refactor this when leaflet gets named and indexed layers
 
-    var overlay = L.TileJSON.layerGroup('aibram.Aerial');
+    var overlay = new mapbox.layerGroup('aibram.Aerial');
     var map = L.map('map')
         .setView([0, 0], 3)
-        .addLayer(L.TileJSON.layerGroup('examples.map-vyofok3q'))
+        .addLayer(new mapbox.layerGroup('examples.map-vyofok3q'))
         .addLayer(overlay);
 
     var handle = document.getElementById('handle'),
@@ -66,9 +66,7 @@
         // Adjust control
         handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
         // Adjust opacity
-        overlay.eachLayer(function(layer) {
-            layer.setOpacity(1 - (handle.offsetTop / 200));
-        })
+        overlay.tileLayer.setOpacity(1 - (handle.offsetTop / 200));
     };
 
     handle.onmousedown = function(e) {

@@ -20,7 +20,7 @@
     var map = L.map('map')
         .setView([37, -77], 5)
         .addLayer(new L.TileLayer('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/{z}/{x}/{y}.png'))
-        .addControl(new L.Control.MapBoxGeocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json'));
+        .addControl(new mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json'));
 </script>
 </body>
 </html>

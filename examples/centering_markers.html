@@ -20,7 +20,7 @@
     var map = L.map('map')
         .setView([38.8995, -77.0203], 12);
 
-    var layerGroup = new L.TileJSON.LayerGroup('examples.map-zr0njcqy')
+    var layerGroup = new mapbox.layerGroup('examples.map-zr0njcqy')
         .addTo(map);
 
     layerGroup.dataLayer.on('click', function(e) {

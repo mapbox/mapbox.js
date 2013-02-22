@@ -75,7 +75,7 @@
     var map = L.map('map')
         .setView([0, 0], 3);
 
-    var layerGroup = L.TileJSON.layerGroup('examples.map-zr0njcqy')
+    var layerGroup = new mapbox.layerGroup('examples.map-zr0njcqy')
         .addTo(map);
 
     var markerLayer = layerGroup.dataLayer;

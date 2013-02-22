@@ -21,7 +21,7 @@
 <script type='text/javascript'>
     var map = L.map('map')
         .setView([0, 0], 3)
-        .addLayer(L.TileJSON.layerGroup('examples.map-zmy97flj'));
+        .addLayer(new mapbox.layerGroup('examples.map-zmy97flj'));
 
     mapbox.legend().addTo(map);
 </script>
