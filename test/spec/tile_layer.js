@@ -10,27 +10,34 @@ describe("mapbox.tileLayer", function() {
             'http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
             'http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
             'http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png'
-        ]
+        ],
+        "bounds": [-79.4972, 43.6487, -79.4558, 43.6788]
     };
 
     describe("#tilejson", function() {
-        it("sets the appropriate min and max zoom", function() {
+        it("sets min and max zoom", function() {
             var layer = new mapbox.tileLayer();
             layer.tilejson(tileJSON);
             expect(layer.options.minZoom).to.equal(1);
             expect(layer.options.maxZoom).to.equal(11);
         });
 
-        it("sets the appropriate attribution", function() {
+        it("sets attribution", function() {
             var layer = new mapbox.tileLayer();
             layer.tilejson(tileJSON);
             expect(layer.options.attribution).to.equal('Terms & Feedback');
         });
 
-        it("sets the appropriate tms option", function() {
+        it("sets tms option", function() {
             var layer = new mapbox.tileLayer();
             layer.tilejson(L.extend({}, tileJSON, {scheme: 'tms'}));
             expect(layer.options.tms).to.equal(true);
+        });
+
+        it("sets bounds", function() {
+            var layer = new mapbox.tileLayer();
+            layer.tilejson(tileJSON);
+            expect(layer.options.bounds).to.eql(new L.LatLngBounds([[43.6487, -79.4972], [43.6788, -79.4558]]));
         });
     });
 

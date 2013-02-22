@@ -22,6 +22,15 @@ mapbox.tileLayer = L.TileLayer.extend({
             maxZoom: json.maxzoom,
             tms: json.scheme === 'tms'
         });
+
+        var bounds = json.bounds;
+        if (bounds && bounds.length) {
+            this.options.bounds = new L.LatLngBounds([
+                [bounds[1], bounds[0]],
+                [bounds[3], bounds[2]]
+            ]);
+        }
+
         return this;
     },
 
