@@ -1,6 +1,11 @@
 mapbox.tileLayer = L.TileLayer.extend({
+
     initialize: function(_, options) {
         L.TileLayer.prototype.initialize.call(this, undefined, options);
+
+        if (options.detectRetina && L.Browser.retina && options.retinaVersion) {
+            _ = options.retinaVersion;
+        }
 
         if (typeof _ === 'string') {
             // map id 'tmcw.foo'
@@ -11,9 +16,13 @@ mapbox.tileLayer = L.TileLayer.extend({
         } else if (_ && typeof _ === 'object') {
             this.tilejson(_);
         }
+
     },
 
     tilejson: function(json) {
+
+        if (!arguments.length) return this._tilejson;
+
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: json.attribution,
@@ -23,7 +32,10 @@ mapbox.tileLayer = L.TileLayer.extend({
             tms: json.scheme === 'tms'
         });
 
+        this._tilejson = json;
+
         var bounds = json.bounds;
+
         if (bounds && bounds.length) {
             this.options.bounds = new L.LatLngBounds([
                 [bounds[1], bounds[0]],
@@ -45,6 +57,7 @@ mapbox.tileLayer = L.TileLayer.extend({
 
     id: function(id) {
         return this.tilejson({
+            id: id,
             tiles: [
                 'http://a.tiles.mapbox.com/v3/' + id + '/{z}/{x}/{y}.png',
                 'http://b.tiles.mapbox.com/v3/' + id + '/{z}/{x}/{y}.png',
