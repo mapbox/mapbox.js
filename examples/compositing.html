@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="embed.css"/>
+    <script src="../ext/leaflet/leaflet-src.js"></script>
+    <script src="../src/mapbox.js"></script>
+    <script src="../src/tile_layer.js"></script>
+    <script src="../src/composite_layer.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+var map = L.map('map')
+    .setView([38.8995, -77.0203], 12)
+    .addLayer(new mapbox.tileLayer('examples.map-4l7djmvo,tmcw.map-5hafkxww'));
+</script>
+</body>
+</html>
