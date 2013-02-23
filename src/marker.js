@@ -47,10 +47,7 @@ mapbox.marker.layer = L.FeatureGroup.extend({
         this._layers = {};
 
         if (typeof _ === 'string') {
-            // map id 'tmcw.foo'
-            if (_.indexOf('/') == -1) this.id(_);
-            // url 'http://foo.com/foo.bar'
-            else this.url(_);
+            mapbox.idUrl(_, this);
         // javascript object of TileJSON data
         } else if (_ && typeof _ === 'object') {
             this.geojson(_);

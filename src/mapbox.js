@@ -8,6 +8,11 @@ mapbox.HTTP_URLS = [
 
 mapbox.HTTPS_URLS = [];
 
+mapbox.idUrl = function(_, t) {
+    if (_.indexOf('/') == -1) t.id(_);
+    else t.url(_);
+};
+
 // Return the base url of a specific version of MapBox's API.
 //
 // `hash`, if provided must be a number and is used to distribute requests

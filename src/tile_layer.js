@@ -3,16 +3,13 @@ mapbox.tileLayer = L.TileLayer.extend({
     initialize: function(_, options) {
         L.TileLayer.prototype.initialize.call(this, undefined, options);
 
-        if (options.detectRetina && L.Browser.retina && options.retinaVersion) {
+        if (options && options.detectRetina &&
+            L.Browser.retina && options.retinaVersion) {
             _ = options.retinaVersion;
         }
 
         if (typeof _ === 'string') {
-            // map id 'tmcw.foo'
-            if (_.indexOf('/') == -1) this.id(_);
-            // url 'http://foo.com/foo.bar'
-            else this.url(_);
-        // javascript object of TileJSON data
+            mapbox.idUrl(_, this);
         } else if (_ && typeof _ === 'object') {
             this.tilejson(_);
         }
