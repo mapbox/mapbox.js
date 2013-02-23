@@ -47,7 +47,7 @@ mapbox.Legend = L.Control.extend({
     removeLegend: function(text) {
         if (!text) { return; }
 
-        this._legends[text]--;
+        if (this._legends[text]) this._legends[text]--;
         this._update();
 
         return this;
