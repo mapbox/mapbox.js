@@ -10,6 +10,8 @@ all: \
 # components, so they're included first
 build/lib.js:
 	cat \
+		ext/sanitizer/html-sanitizer-bundle.js \
+		ext/sanitizer/html-sanitizer-loosen.js \
 		ext/leaflet/leaflet.js \
 		node_modules/leaflet-fullscreen/src/Leaflet.fullscreen.js \
 		node_modules/reqwest/reqwest.js > build/lib.js
@@ -17,6 +19,7 @@ build/lib.js:
 # mapbox.js-specific code
 build/mapbox.core.js:
 	cat src/mapbox.js \
+		src/auto.js \
 		src/geocoder.js \
 		src/geocoder_control.js \
 		src/hash.js \

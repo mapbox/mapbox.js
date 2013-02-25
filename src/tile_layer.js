@@ -31,13 +31,8 @@ mapbox.tileLayer = L.TileLayer.extend({
 
         this._tilejson = json;
 
-        var bounds = json.bounds;
-
-        if (bounds && bounds.length) {
-            this.options.bounds = new L.LatLngBounds([
-                [bounds[1], bounds[0]],
-                [bounds[3], bounds[2]]
-            ]);
+        if (json.bounds && json.bounds.length) {
+            this.options.bounds = mapbox.lbounds(json.bounds);
         }
 
         return this;

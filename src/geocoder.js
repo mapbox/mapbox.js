@@ -1,11 +1,6 @@
 mapbox.geocoder = function(_) {
     var geocoder = {}, tilejson = {};
 
-    // leaflet-compatible bounds, since leaflet does not do geojson
-    function lbounds(_) {
-        return [[_[1], _[0]], [_[3], _[2]]];
-    }
-
     geocoder.url = function(_) {
         if (!arguments.length) return url;
         url = _;
@@ -33,7 +28,7 @@ mapbox.geocoder = function(_) {
                 };
                 if (json.results[0][0].bounds !== undefined) {
                     res.bounds = json.results[0][0].bounds;
-                    res.lbounds = lbounds(res.bounds);
+                    res.lbounds = mapbox.lbounds(res.bounds);
                 }
                 callback(null, res);
             } else callback(err);
