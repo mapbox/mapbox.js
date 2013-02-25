@@ -1,18 +1,4 @@
 describe("mapbox.layerGroup", function() {
-    var tileJSON = {
-        'tilejson': '2.0.0',
-        'attribution': 'Terms & Feedback',
-        'center': [-77.046, 38.907, 12],
-        'minzoom': 1,
-        'maxzoom': 11,
-        'tiles': [
-            'http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png'
-        ]
-    };
-
     var server;
 
     beforeEach(function() {

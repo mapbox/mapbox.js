@@ -45,13 +45,6 @@ mapbox.layerGroup = L.LayerGroup.extend({
     },
 
     _initialize: function(json) {
-        var zoom = json.center[2],
-            center = L.latLng(json.center[1], json.center[0]);
-
-        if (this._map) {
-            this._map.setView(center, zoom);
-        }
-
         this.tileLayer.tilejson(json);
 
         if (json.data && json.data[0]) {

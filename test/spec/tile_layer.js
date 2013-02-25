@@ -1,19 +1,4 @@
 describe("mapbox.tileLayer", function() {
-    var tileJSON = {
-        'tilejson': '2.0.0',
-        'attribution': 'Terms & Feedback',
-        'center': [-77.046, 38.907, 12],
-        'minzoom': 1,
-        'maxzoom': 11,
-        'tiles': [
-            'http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png'
-        ],
-        "bounds": [-79.4972, 43.6487, -79.4558, 43.6788]
-    };
-
     describe("#tilejson", function() {
         it("sets min and max zoom", function() {
             var layer = new mapbox.tileLayer();

@@ -13,6 +13,29 @@ mapbox.idUrl = function(_, t) {
     else t.url(_);
 };
 
+mapbox.auto = function(element, url, callback) {
+    // Support bare IDs as well as fully-formed URLs
+    if (url.indexOf('http') !== 0) {
+        url = mapbox.base() + url + '.json';
+    }
+
+    mapbox.request(url, function(err, json) {
+        if (err) {
+            if (callback) callback(err);
+            return mapbox.log('could not load TileJSON at ' + url);
+        }
+
+        var zoom = json.center[2],
+            center = L.latLng(json.center[1], json.center[0]);
+
+        var map = new L.Map(element)
+            .setView(center, zoom)
+            .addLayer(new mapbox.layerGroup(json));
+
+        if (callback) callback(undefined, map);
+    });
+};
+
 // Return the base url of a specific version of MapBox's API.
 //
 // `hash`, if provided must be a number and is used to distribute requests
