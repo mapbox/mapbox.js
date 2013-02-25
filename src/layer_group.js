@@ -11,7 +11,7 @@ mapbox.layerGroup = L.LayerGroup.extend({
         this.tileLayer = new mapbox.tileLayer();
         this.addLayer(this.tileLayer);
 
-        this.dataLayer = new mapbox.marker.layer();
+        this.dataLayer = new mapbox.dataLayer();
         this.addLayer(this.dataLayer);
 
         if (typeof _ === 'string') {

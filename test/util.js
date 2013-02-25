@@ -39,3 +39,19 @@ helpers.tileJSON = {
     ],
     "bounds": [-79.4972, 43.6487, -79.4558, 43.6788]
 };
+
+helpers.geoJson = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        properties: {
+            title: 'foo',
+            'marker-color': '#f00',
+            'marker-size': 'large'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.0203, 38.8995]
+        }
+    }]
+};
