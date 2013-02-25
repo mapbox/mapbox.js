@@ -8,7 +8,8 @@ mapbox.auto = function(element, url, callback) {
     mapbox.request(url, function(err, json) {
         if (err) {
             if (callback) callback(err);
-            return mapbox.log('could not load TileJSON at ' + url);
+            else mapbox.log('could not load TileJSON at ' + url);
+            return;
         }
 
         var zoom = json.center[2],
