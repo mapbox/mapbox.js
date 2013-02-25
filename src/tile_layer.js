@@ -13,11 +13,9 @@ mapbox.tileLayer = L.TileLayer.extend({
         } else if (_ && typeof _ === 'object') {
             this.tilejson(_);
         }
-
     },
 
     tilejson: function(json) {
-
         if (!arguments.length) return this._tilejson;
 
         L.extend(this.options, {
@@ -34,6 +32,8 @@ mapbox.tileLayer = L.TileLayer.extend({
         if (json.bounds && json.bounds.length) {
             this.options.bounds = mapbox.lbounds(json.bounds);
         }
+
+        this.redraw();
 
         return this;
     },
