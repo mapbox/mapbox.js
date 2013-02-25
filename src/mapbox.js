@@ -69,8 +69,8 @@ mapbox.request = function(url, callback) {
     if (!callback) return mapbox.log('mapbox.request requires a callback function');
     reqwest({
         url: url,
-        type: (!force && (mapbox.browser.cors || mapbox.isSameOrigin(url))) ? 'json' : 'jsonp',
-        crossOrigin: (!force && mapbox.browser.cors),
+        type: (mapbox.browser.cors || mapbox.isSameOrigin(url)) ? 'json' : 'jsonp',
+        crossOrigin: mapbox.browser.cors,
         success: function(result) { callback(undefined, result); },
         error: function(error) { callback(error, null); }
     });
