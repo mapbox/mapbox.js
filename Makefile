@@ -18,7 +18,7 @@ build/lib.js:
 
 # mapbox.js-specific code
 build/mapbox.core.js:
-	mkdir build
+	mkdir -p build
 	cat src/mapbox.js \
 		src/auto.js \
 		src/geocoder.js \
@@ -31,7 +31,7 @@ build/mapbox.core.js:
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.js: build/mapbox.core.js build/lib.js
-	mkdir dist
+	mkdir -p dist
 	cat src/comment.js \
 		src/start.js \
 		build/lib.js \
