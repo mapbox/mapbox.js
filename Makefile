@@ -16,6 +16,7 @@ build/lib.js:
 build/mapbox.core.js:
 	cat src/mapbox.js \
 		src/geocoder.js \
+		src/geocoder_control.js \
 		src/hash.js \
 		src/layer_group.js \
 		src/legend.js \
