@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="../theme/style.css" />
+    <script src="../dist/mapbox.js"></script>
+    <script src="../src/interaction.js"></script>
+    <script src="../src/interaction_control.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+var interaction = new mapbox.interaction('examples.map-8ced9urs');
+var map = L.map('map')
+    .setView([37, -77], 5)
+    .addLayer(new mapbox.tileLayer('examples.map-20v6611k', {
+        detectRetina: true,
+        retinaVersion: 'examples.map-zswgei2n'
+    }))
+    .addLayer(interaction)
+    .addControl(new mapbox.interactionControl(interaction));
+</script>
+</body>
+</html>

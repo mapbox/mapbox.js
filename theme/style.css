@@ -13,3 +13,10 @@
 .map-legends .map-legend {
   padding:10px;
   }
+
+.leaflet-control-interaction {
+    position:absolute;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+}
