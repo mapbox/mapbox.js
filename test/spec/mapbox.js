@@ -1,4 +1,6 @@
 describe("mapbox", function() {
+    var tileJSON = helpers.tileJSON;
+
     describe('.auto', function() {
         var server, cors = mapbox.browser.cors;
 

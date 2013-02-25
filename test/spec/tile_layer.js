@@ -1,4 +1,6 @@
 describe("mapbox.tileLayer", function() {
+    var tileJSON = helpers.tileJSON;
+
     describe("#tilejson", function() {
         it("sets min and max zoom", function() {
             var layer = new mapbox.tileLayer();

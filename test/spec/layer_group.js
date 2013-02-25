@@ -1,5 +1,5 @@
 describe("mapbox.layerGroup", function() {
-    var server;
+    var server, tileJSON = helpers.tileJSON;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();

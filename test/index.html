@@ -17,12 +17,17 @@
   <![endif]-->
 
   <script src="../ext/leaflet/leaflet-src.js"></script>
-  <script src="../components/reqwest/reqwest.js"></script>
-  <script src="../components/Leaflet-hash/leaflet-hash.js"></script>
+  <script src="../node_modules/reqwest/reqwest.js"></script>
+
+  <!--
+  Test hash once it's in npm
+  <script src="../component/Leaflet-hash/leaflet-hash.js"></script>
+  <script src="../src/hash.js"></script>
+  <script src="spec/hash.js"></script>
+  -->
 
   <script src="../src/mapbox.js"></script>
   <script src="../src/marker.js"></script>
-  <script src="../src/hash.js"></script>
   <script src="../src/layer_group.js"></script>
   <script src="../src/tile_layer.js"></script>
   <script src="../src/legend.js"></script>
@@ -32,34 +37,8 @@
     mocha.setup('bdd');
     mocha.ignoreLeaks();
 
-    expect.Assertion.prototype.near = function(expected, delta) {
-        expect(this.obj.lat).to.be.within(expected.lat - delta, expected.lat + delta);
-        expect(this.obj.lng).to.be.within(expected.lng - delta, expected.lng + delta);
-    };
-
-    function layersOf(layerGroup) {
-        var result = [];
-        layerGroup.eachLayer(function(layer) {
-            result.push(layer);
-        });
-        return result;
-    }
-
-    var tileJSON = {
-        'tilejson': '2.0.0',
-        'attribution': 'Terms & Feedback',
-        'center': [-77.046, 38.907, 12],
-        'minzoom': 1,
-        'maxzoom': 11,
-        'tiles': [
-            'http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-            'http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png'
-        ],
-        "bounds": [-79.4972, 43.6487, -79.4558, 43.6788]
-    };
   </script>
+  <script src="util.js"></script>
 
   <script src="spec/mapbox.js"></script>
   <script src="spec/marker.js"></script>
@@ -67,7 +46,6 @@
   <script src="spec/tile_layer.js"></script>
   <script src="spec/legend.js"></script>
   <script src="spec/geocoder.js"></script>
-  <script src="spec/hash.js"></script>
 
   <script>
     mocha.run();

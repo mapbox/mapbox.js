@@ -69,7 +69,7 @@ describe('mapbox.marker', function() {
     });
 
     describe('.layer', function() {
-        var server;
+        var server, layersOf = helpers.layersOf;
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
