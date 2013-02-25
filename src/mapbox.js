@@ -15,7 +15,7 @@ mapbox.idUrl = function(_, t) {
 
 mapbox.lbounds = function(_) {
     // leaflet-compatible bounds, since leaflet does not do geojson
-    return [[_[1], _[0]], [_[3], _[2]]];
+    return new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]);
 };
 
 
