@@ -27,7 +27,9 @@ build/mapbox.core.js:
 		src/layer_group.js \
 		src/legend.js \
 		src/marker.js \
-		src/tile_layer.js > build/mapbox.core.js
+		src/tile_layer.js \
+		src/data_layer.js \
+		> build/mapbox.core.js
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.js: build/mapbox.core.js build/lib.js

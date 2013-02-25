@@ -7,11 +7,7 @@
     <link rel="stylesheet" href="../ext/leaflet/leaflet.ie.css"/>
     <![endif]-->
     <link rel="stylesheet" href="embed.css"/>
-    <script src="../ext/leaflet/leaflet-src.js"></script>
-    <script src="../src/mapbox.js"></script>
-    <script src="../src/marker.js"></script>
-    <script src="../src/layer_group.js"></script>
-    <script src="../src/tile_layer.js"></script>
+    <script src="../dist/mapbox.js"></script>
 </head>
 <body>
 <style>
@@ -34,7 +30,7 @@
             attribution: '<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>'
         }));
 
-    var markerLayer = new mapbox.marker.layer()
+    var markerLayer = new mapbox.dataLayer()
         .addTo(map);
 
     var features = [];
