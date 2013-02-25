@@ -26,6 +26,17 @@ describe("mapbox.tileLayer", function() {
             layer.tilejson(tileJSON);
             expect(layer.options.bounds).to.eql(new L.LatLngBounds([[43.6487, -79.4972], [43.6788, -79.4558]]));
         });
+
+        it("can be reinitialized", function() {
+            var layer = new mapbox.tileLayer();
+
+            layer.tilejson(tileJSON);
+            layer.tilejson(L.extend({}, tileJSON, {attribution: 'Terms', bounds: undefined, scheme: 'tms'}));
+
+            expect(layer.options.attribution).to.equal('Terms');
+            expect(layer.options.tms).to.equal(true);
+            expect(layer.options.bounds).to.equal(undefined);
+        });
     });
 
     describe("#getTileUrl", function() {

@@ -24,14 +24,11 @@ mapbox.tileLayer = L.TileLayer.extend({
             legend: json.legend,
             minZoom: json.minzoom,
             maxZoom: json.maxzoom,
-            tms: json.scheme === 'tms'
+            tms: json.scheme === 'tms',
+            bounds: json.bounds && mapbox.lbounds(json.bounds)
         });
 
         this._tilejson = json;
-
-        if (json.bounds && json.bounds.length) {
-            this.options.bounds = mapbox.lbounds(json.bounds);
-        }
 
         this.redraw();
 
