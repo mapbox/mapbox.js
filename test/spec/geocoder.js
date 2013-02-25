@@ -41,10 +41,10 @@ describe('mapbox.geocoder', function() {
         expect(g.tilejson(helpers.tileJSON)).to.eql(g);
 
         expect(g.tilejson(helpers.tileJSON).url()).to
-            .eql('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/geocode/{query}.json');
+            .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
 
         expect(g.url()).to
-            .eql('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/geocode/{query}.json');
+            .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
     });
 
     it('accepts id input and constructs urls', function() {

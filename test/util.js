@@ -25,19 +25,29 @@ helpers.layersOf = function(layerGroup) {
 };
 
 helpers.tileJSON = {
-    'tilejson': '2.0.0',
-    'attribution': 'Terms & Feedback',
-    'center': [-77.046, 38.907, 12],
-    'minzoom': 1,
-    'maxzoom': 11,
-    'id': 'examples.map-zr0njcqy',
-    'tiles': [
-        'http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-        'http://b.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-        'http://c.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png',
-        'http://d.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png'
-    ],
-    "bounds": [-79.4972, 43.6487, -79.4558, 43.6788]
+    "attribution":"Data provided by NatureServe in collaboration with Robert Ridgely",
+    "bounds":[-180,-85.0511,180,85.0511],
+    "center":[-98.976,39.386,4],
+    "data":["http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/markers.geojsonp"],
+    "description":"Bird species of North America, gridded by species count.",
+    "geocoder":"http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp",
+    "grids":["http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.grid.json",
+        "http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.grid.json",
+        "http://c.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.grid.json",
+        "http://d.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.grid.json"],
+    "id":"examples.map-8ced9urs",
+    "maxzoom":17,
+    "minzoom":0,
+    "name":"Bird species",
+    "private":true,
+    "scheme":"xyz",
+    "template":"{{#__l0__}}{{#__location__}}{{/__location__}}{{#__teaser__}}<div class='birds-tooltip'>\n  <strong>{{name}}</strong>\n  <strong>{{count}} species</strong>\n  <small>{{species}}</small>\n  <div class='carmen-fields' style='display:none'>\n  {{search}} {{lon}} {{lat}} {{bounds}}\n  </div>\n</div>\n<style type='text/css'>\n.birds-tooltip strong { display:block; font-size:16px; }\n.birds-tooltip small { font-size:10px; display:block; overflow:hidden; max-height:90px; line-height:15px; }\n</style>{{/__teaser__}}{{#__full__}}{{/__full__}}{{/__l0__}}",
+    "tilejson":"2.0.0",
+    "tiles":["http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "http://c.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "http://d.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png"],
+    "webpage":"http://tiles.mapbox.com/examples/map/map-8ced9urs"
 };
 
 helpers.geoJson = {
