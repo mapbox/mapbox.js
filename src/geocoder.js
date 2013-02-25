@@ -1,20 +1,61 @@
-mapbox.geocoder = L.Control.extend({
+mapbox.geocoder = function(_) {
+    var geocoder = {}, tilejson = {};
+
+    geocoder.url = function(_) {
+        if (!arguments.length) return url;
+        url = _;
+        return geocoder;
+    };
+
+    geocoder.id = function(_) {
+        return geocoder.url(mapbox.base() + _ + '/geocode/{query}.json');
+    };
+
+    geocoder.tilejson = function(_) {
+        return geocoder.id(_.id || '');
+    };
+
+    geocoder.queryUrl = function(_) {
+        return L.Util.template(this.url(), {query: _});
+    };
+
+    geocoder.query = function(_, callback) {
+        mapbox.request(this.queryUrl(_), function(err, json) {
+            if (json && json.results && json.results.length) {
+                callback(null, {
+                    results: json.results,
+                    latlng: [json.results[0][0].lat, json.results[0][0].lon]
+                });
+            } else callback(err);
+        });
+    };
+
+    if (typeof _ === 'string') mapbox.idUrl(_, geocoder);
+    else if (typeof _ === 'object') geocoder.tilejson(_);
+
+    return geocoder;
+};
+
+mapbox.geocoderControl = L.Control.extend({
 
     initialize: function(_) {
-        // map id 'tmcw.foo'
-        if (_.indexOf('/') == -1) this.id(_);
-        // url 'http://foo.com/foo.bar'
-        else this.url(_);
+        this.geocoder = mapbox.geocoder(_);
     },
 
-    url: function(url) {
-        if (!arguments.length) return this._url;
-        this._url = url;
+    url: function(_) {
+        if (!arguments.length) return this.geocoder.url();
+        this.geocoder.url(_);
         return this;
     },
 
-    id: function(id) {
-        return this.url(mapbox.base() + id + '/geocode/{query}.json');
+    id: function(_) {
+        this.geocoder.id(_);
+        return this;
+    },
+
+    tilejson: function(_) {
+        this.geocoder.tilejson(_);
+        return this;
     },
 
     onAdd: function(map) {
@@ -44,13 +85,8 @@ mapbox.geocoder = L.Control.extend({
 
     _geocode: function(event) {
         L.DomEvent.preventDefault(event);
-
-        var query = encodeURIComponent(this._input.value);
-
-        mapbox.request(L.Util.template(this.url(), {query: query}), L.bind(function(err, json) {
-            if (json && json.results && json.results.length) {
-                this._map.setView([json.results[0][0].lat, json.results[0][0].lon], 6);
-            }
+        this.geocoder.query(encodeURIComponent(this._input.value), L.bind(function(err, res) {
+            if (!err) this._map.setView(res.latlng, 6);
         }, this));
     }
 

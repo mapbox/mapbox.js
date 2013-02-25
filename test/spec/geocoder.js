@@ -22,34 +22,35 @@ describe('mapbox.geocoder', function() {
         }]]};
 
     it('performs forward geolocation, centering the map on the first result', function() {
-        var map = new L.Map(document.createElement('div')),
-            control = new mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json').addTo(map);
+        var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
 
         server.respondWith('GET',
             'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
             [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
 
-        control._input.value = 'austin';
-        happen.click(control._submit);
+        g.query('austin', function(err, res) {
+            expect(res.latlng).to.be.near({lat: 30.3, lng: -97.7}, 1e-1);
+        });
+
         server.respond();
-
-        expect(map.getCenter()).to.be.near({lat: 30.3, lng: -97.7}, 1e-1);
     });
 
-    it('sets url based on an id', function() {
-        var control = new mapbox.geocoder('examples.map-vyofok3q');
-        expect(control.url()).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+    it('accepts tilejson input and constructs urls', function() {
+        var g = mapbox.geocoder();
+
+        expect(g.tilejson(helpers.tileJSON)).to.eql(g);
+
+        expect(g.tilejson(helpers.tileJSON).url()).to
+            .eql('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/geocode/{query}.json');
+
+        expect(g.url()).to
+            .eql('http://a.tiles.mapbox.com/v3/examples.map-zr0njcqy/geocode/{query}.json');
     });
 
-    it('can re-set url', function() {
-        var control = new mapbox.geocoder('examples.map-vyofok3q');
-        control.url('foo/{query}.json');
-        expect(control.url()).to.equal('foo/{query}.json');
-    });
+    it('accepts id input and constructs urls', function() {
+        var g = mapbox.geocoder();
 
-    it('can re-set id', function() {
-        var control = new mapbox.geocoder('examples.map-vyofok3q');
-        control.id('foobar');
-        expect(control.url()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
+        expect(g.id('foo.bar').url()).to
+            .eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
     });
 });
