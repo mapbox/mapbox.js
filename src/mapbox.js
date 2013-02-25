@@ -18,8 +18,6 @@ mapbox.lbounds = function(_) {
     return [[_[1], _[0]], [_[3], _[2]]];
 };
 
-
-
 // Return the base url of a specific version of MapBox's API.
 //
 // `hash`, if provided must be a number and is used to distribute requests
@@ -74,6 +72,31 @@ mapbox.request = function(url, callback) {
         error: function(error) { callback(error); }
     });
 };
+
+mapbox.sanitize = (function() {
+    var enabled = true;
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=255107
+    function cleanUrl(url) {
+        if (/^(https?:\/\/|data:image)/.test(url)) return url;
+    }
+    function cleanId(id) { return id; }
+
+    function sanitize(_) {
+        if (!enabled) return _;
+        if (!_) return '';
+        return html_sanitize(_, cleanUrl, cleanId);
+    }
+
+    sanitize.enable = function(_) {
+        enabled = _;
+        return sanitize;
+    };
+
+    sanitize.off = function() { sanitize.enabled(false); };
+    sanitize.on = function() { sanitize.enabled(true); };
+
+    return sanitize;
+})();
 
 // Turn off Leaflet's advertisement.
 L.Control.Attribution.prototype.options.prefix = '';
