@@ -1,5 +1,5 @@
 mapbox.geocoder = function(_) {
-    var geocoder = {}, tilejson = {};
+    var geocoder = {};
 
     geocoder.url = function(_) {
         if (!arguments.length) return url;
