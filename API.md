@@ -43,7 +43,11 @@ _Returns_ a `mapbox.tileLayer` object.
 
 ## mapbox.geocoder(id | url)
 
-Adds geocoder functionality as well as a UI element to a map.
+Adds geocoder functionality as well as a UI element to a map. This uses
+the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
+
+This function is currently in private beta: [contact MapBox](http://mapbox.com/about/contact/) before
+using this functionality.
 
 _Arguments_:
 
@@ -64,7 +68,7 @@ _Returns_ a `mapbox.geocoder` object.
 ## mapbox.hash()
 
 Adds hash functionality to the map, so that pan and zoom state are copied
-when the URL of the page is copied
+when the URL of the page is copied.
 
 _Arguments_: none
 
@@ -75,3 +79,6 @@ _Example_
         .addControl(new mapbox.hash());
 
 _Returns_ a `mapbox.hash` object.
+
+_Ref_: this code uses [Leaflet.hash](https://github.com/mlevans/leaflet-hash)
+internally.
