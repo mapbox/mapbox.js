@@ -13,6 +13,7 @@ build/lib.js:
 		ext/sanitizer/html-sanitizer-bundle.js \
 		ext/sanitizer/html-sanitizer-loosen.js \
 		ext/leaflet/leaflet.js \
+		node_modules/leaflet-hash/leaflet-hash.js \
 		node_modules/leaflet-fullscreen/src/Leaflet.fullscreen.js \
 		node_modules/reqwest/reqwest.js > build/lib.js
 
