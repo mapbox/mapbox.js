@@ -92,8 +92,8 @@ mapbox.sanitize = (function() {
         return sanitize;
     };
 
-    sanitize.off = function() { sanitize.enabled(false); };
-    sanitize.on = function() { sanitize.enabled(true); };
+    sanitize.off = function() { sanitize.enable(false); };
+    sanitize.on = function() { sanitize.enable(true); };
 
     return sanitize;
 })();
