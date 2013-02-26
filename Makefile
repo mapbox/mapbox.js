@@ -6,41 +6,44 @@ JS_UGLIFY = $(NODE_PATH)/uglify-js/bin/uglifyjs
 all: \
 	dist/mapbox.min.js
 
+.INTERMEDIATE dist/mapbox.min.js: \
+	mapbox.lib.js \
+	mapbox.core.js
+
 # external libraries. it is assumed that these are needed by all
 # components, so they're included first
-build/lib.js:
-	cat \
-		ext/sanitizer/html-sanitizer-bundle.js \
-		ext/sanitizer/html-sanitizer-loosen.js \
-		ext/leaflet/leaflet.js \
-		node_modules/mustache/mustache.js \
-		node_modules/leaflet-hash/leaflet-hash.js \
-		node_modules/leaflet-fullscreen/src/Leaflet.fullscreen.js \
-		node_modules/reqwest/reqwest.js > build/lib.js
+mapbox.lib.js: \
+	ext/sanitizer/html-sanitizer-bundle.js \
+	ext/sanitizer/html-sanitizer-loosen.js \
+	ext/leaflet/leaflet.js \
+	node_modules/mustache/mustache.js \
+	node_modules/leaflet-hash/leaflet-hash.js \
+	node_modules/leaflet-fullscreen/src/Leaflet.fullscreen.js \
+	node_modules/reqwest/reqwest.js
 
 # mapbox.js-specific code
-build/mapbox.core.js:
-	mkdir -p build
-	cat src/mapbox.js \
-		src/auto.js \
-		src/geocoder.js \
-		src/geocoder_control.js \
-		src/hash.js \
-		src/sanitize.js \
-		src/layer_group.js \
-		src/legend.js \
-		src/marker.js \
-		src/tile_layer.js \
-		src/data_layer.js \
-		> build/mapbox.core.js
+mapbox.core.js: \
+	src/mapbox.js \
+	src/auto.js \
+	src/geocoder.js \
+	src/geocoder_control.js \
+	src/hash.js \
+	src/sanitize.js \
+	src/layer_group.js \
+	src/legend.js \
+	src/marker.js \
+	src/tile_layer.js \
+	src/data_layer.js \
+
+mapbox%js:
+	@cat $(filter %.js,$^) > $@
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.js: build/mapbox.core.js build/lib.js
-	mkdir -p dist
+dist/mapbox.js: mapbox.core.js mapbox.lib.js
 	cat src/comment.js \
 		src/start.js \
-		build/lib.js \
-		build/mapbox.core.js \
+		mapbox.lib.js \
+		mapbox.core.js \
 		src/end.js > dist/mapbox.js
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
@@ -49,4 +52,4 @@ dist/mapbox.min.js: dist/mapbox.js
 	$(JS_UGLIFY) dist/mapbox.js -c -m -o dist/mapbox.min.js
 
 clean:
-	rm -f build/*
+	rm -f dist/*
