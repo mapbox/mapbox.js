@@ -40,6 +40,7 @@ _Example_:
 
 _Returns_ a `mapbox.tileLayer` object.
 
+# Geocoding
 
 ## mapbox.geocoderControl(id | url)
 
@@ -51,7 +52,7 @@ using this functionality.
 
 _Arguments_:
 
-The first argument is required and must be:
+1. (required) either:
 
 * An `id` string `examples.map-foo`
 * A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
@@ -85,13 +86,12 @@ _Arguments_:
 
 _Returns_: the existing tilejson value if no argument is given, or the geocoder object if a new value is given.
 
-
 ## mapbox.geocoder(id | url)
 
 A lower-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
 
-The first argument is required and must be:
+1. (required) must be:
 
 * An `id` string `examples.map-foo`
 * A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
@@ -144,6 +144,8 @@ The callback is called with arguments
 
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
+# Hash
+
 ## mapbox.hash()
 
 Adds hash functionality to the map, so that pan and zoom state are copied
@@ -161,6 +163,8 @@ _Returns_ a `mapbox.hash` object.
 
 _Ref_: this code uses [Leaflet.hash](https://github.com/mlevans/leaflet-hash)
 internally.
+
+# Interactivity
 
 ## mapbox.interactionControl()
 
@@ -184,6 +188,7 @@ Each mapping is from an event type, like `mousemove`, to an array of options to 
 
 _Returns_: a `mapbox.interactionControl` object.
 
+# Legend
 
 ## mapbox.Legend()
 
@@ -191,8 +196,43 @@ A map control that shows legends added to maps in MapBox. Legends are auto-detec
 
 _Arguments_:
 
-* The first argument can be an options object. Beyond the default options for map controls, this object has one special parameter:
+1. (optional) an options object. Beyond the default options for map controls, this object has one special parameter:
 
 * `sanitize`: enable or disable HTML sanitization of legend data before display. The default, `true`, is recommended.
 
 _Returns_: a `mapbox.Legend` object.
+
+# Markers
+
+## mapbox.marker.icon
+
+A core icon generator used in `mapbox.marker.style`
+
+_Arguments_:
+
+1. A GeoJSON feature object
+
+_Returns_:
+
+A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
+and `popupAnchor`.
+
+## mapbox.marker.style
+
+An icon generator for use in conjunction with `pointToLayer` to generate
+markers from the [MapBox Markers API](http://mapbox.com/developers/api/#markers)
+and support the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) for
+features.
+
+_Arguments_:
+
+1. A GeoJSON feature object
+2. The latitude, longitude position of the marker
+
+_Examples_:
+
+    L.geoJson(geoJson, {
+        pointToLayer: mapbox.marker.style,
+    });
+
+_Returns_: a `L.Marker` object with the latitude, longitude position and a styled marker
