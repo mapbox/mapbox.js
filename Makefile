@@ -26,6 +26,7 @@ build/mapbox.core.js:
 		src/geocoder.js \
 		src/geocoder_control.js \
 		src/hash.js \
+		src/sanitize.js \
 		src/layer_group.js \
 		src/legend.js \
 		src/marker.js \

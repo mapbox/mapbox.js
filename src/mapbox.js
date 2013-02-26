@@ -88,30 +88,5 @@ mapbox.requestp = function(url, callback) {
     });
 };
 
-mapbox.sanitize = (function() {
-    var enabled = true;
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=255107
-    function cleanUrl(url) {
-        if (/^(https?:\/\/|data:image)/.test(url)) return url;
-    }
-    function cleanId(id) { return id; }
-
-    function sanitize(_) {
-        if (!enabled) return _;
-        if (!_) return '';
-        return html_sanitize(_, cleanUrl, cleanId);
-    }
-
-    sanitize.enable = function(_) {
-        enabled = _;
-        return sanitize;
-    };
-
-    sanitize.off = function() { sanitize.enable(false); };
-    sanitize.on = function() { sanitize.enable(true); };
-
-    return sanitize;
-})();
-
 // Turn off Leaflet's advertisement.
 L.Control.Attribution.prototype.options.prefix = '';

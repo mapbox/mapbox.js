@@ -5,11 +5,15 @@ mapbox.interactionControl = L.Control.extend({
             mousemove: ['teaser'],
             click: ['full'],
             mouseout: [function() { return ''; }]
-        }
+        },
+        sanitize: true
     },
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
+        if (options && typeof options.sanitize !== 'boolean') {
+            mapbox.sanitize(options.sanitize);
+        }
         this._layer = _;
     },
 
@@ -19,13 +23,13 @@ mapbox.interactionControl = L.Control.extend({
             if (typeof mapping[i] === 'function') {
                 var res = mapping[i](o);
                 if (typeof res === 'string') {
-                    this._container.innerHTML = res;
+                    this._container.innerHTML = mapbox.sanitize(res);
                 }
             } else if (o[mapping[i]]) {
                 if (mapping[i] === 'location') {
                     window.top.location.href = o[mapping[i]];
                 } else {
-                    this._container.innerHTML = o[mapping[i]];
+                    this._container.innerHTML = mapbox.sanitize(o[mapping[i]]);
                 }
             }
         }
