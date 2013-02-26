@@ -41,7 +41,7 @@ _Example_:
 _Returns_ a `mapbox.tileLayer` object.
 
 
-## mapbox.geocoder(id | url)
+## mapbox.geocoderControl(id | url)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
@@ -62,8 +62,87 @@ _Example_
         .setView([37, -77], 5)
         .addControl(new mapbox.geocoder('examples.map-vyofok3q'));
 
+_Returns_ a `mapbox.geocoderControl` object.
+
+## mapbox.geocoder.id([id])
+
+Set or get the map id used for geocoding.
+
+_Arguments_:
+
+1. (optional) a map id
+
+_Returns_: the existing id value if no argument is given, or the geocoder object if a new value is given.
+
+
+## mapbox.geocoder.tilejson([tilejson])
+
+Set or get the tilejson used for geocoding.
+
+_Arguments_:
+
+1. (optional) tilejson
+
+_Returns_: the existing tilejson value if no argument is given, or the geocoder object if a new value is given.
+
+
+## mapbox.geocoder(id | url)
+
+A lower-level interface to geocoding, useful for more complex uses and reverse-geocoding.
+
+
+The first argument is required and must be:
+
+* An `id` string `examples.map-foo`
+* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
+
 _Returns_ a `mapbox.geocoder` object.
 
+## mapbox.geocoder.query(queryString, callback)
+
+Queries the geocoder with a query string, and returns its result, if any.
+
+_Arguments_:
+
+1. (required) a query, expressed as a string, like 'Arkansas'
+2. (required) a callback
+
+The callback is called with arguments
+
+1. An error, if any
+2. The result. This is an object with the following members:
+
+        { results: // raw results
+        latlng: // a map-friendly latlng array
+        bounds: // geojson-style bounds of the first result
+        lbounds: // leaflet-style bounds of the first result    
+        }
+
+_Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
+
+## mapbox.geocoder.reverseQuery(location, callback)
+
+Queries the geocoder with a location, and returns its result, if any.
+
+_Arguments_:
+
+1. (required) a query, expressed as an object:
+
+         [lon, lat] // an array of lon, lat
+         { lat: 0, lon: 0 } // a lon, lat object
+         { lat: 0, lng: 0 } // a lng, lat object
+         
+The first argument can also be an array of objects in that
+form to geocode more than one item.
+       
+2. (required) a callback
+
+The callback is called with arguments
+
+1. An error, if any
+2. The result. This is an object of the raw result from MapBox.
+
+_Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
 ## mapbox.hash()
 
@@ -82,3 +161,38 @@ _Returns_ a `mapbox.hash` object.
 
 _Ref_: this code uses [Leaflet.hash](https://github.com/mlevans/leaflet-hash)
 internally.
+
+## mapbox.interactionControl()
+
+Interaction is what we call interactive parts of maps that are created with the powerful [tooltips & regions system](http://mapbox.com/tilemill/docs/crashcourse/tooltips/) in TileMill. Under the hood, it's powered by the [open UTFGrid specification.](https://github.com/mapbox/utfgrid-spec).
+
+_Arguments_:
+
+* The first argument must be a layer created with `mapbox.interaction()`
+* The second argument can be an options object. Valid options are:
+
+* `sanitize`: enable or disable HTML sanitization of interactivity data before display. The default, `true`, is recommended.
+* `mapping`: an object of the types of interaction showed on each interaction. The default is
+
+        mapping: {
+          mousemove: ['teaser'],
+          click: ['full'],
+          mouseout: [function() { return ''; }]
+        }
+
+Each mapping is from an event type, like `mousemove`, to an array of options to try. To fall-back the `teaser` formatter to `full`, one could write `['teaser', 'full']`. `location` can be specified to use the location formatter and change page location.
+
+_Returns_: a `mapbox.interactionControl` object.
+
+
+## mapbox.Legend()
+
+A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
+
+_Arguments_:
+
+* The first argument can be an options object. Beyond the default options for map controls, this object has one special parameter:
+
+* `sanitize`: enable or disable HTML sanitization of legend data before display. The default, `true`, is recommended.
+
+_Returns_: a `mapbox.Legend` object.
