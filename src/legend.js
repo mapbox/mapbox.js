@@ -6,7 +6,7 @@ mapbox.Legend = L.Control.extend({
 
     initialize: function(options) {
         L.setOptions(this, options);
-
+        mapbox.sanitize(options && options.sanitize);
         this._legends = {};
     },
 

@@ -13,7 +13,9 @@ mapbox.sanitize = (function() {
     }
 
     sanitize.enable = function(_) {
-        enabled = _;
+        if (typeof _ === 'boolean') {
+            enabled = _;
+        }
         return sanitize;
     };
 

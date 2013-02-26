@@ -11,9 +11,7 @@ mapbox.interactionControl = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-        if (options && typeof options.sanitize !== 'boolean') {
-            mapbox.sanitize(options.sanitize);
-        }
+        mapbox.sanitize(options && options.sanitize);
         this._layer = _;
     },
 
