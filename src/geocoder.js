@@ -35,6 +35,28 @@ mapbox.geocoder = function(_) {
         });
     };
 
+    // a reverse geocode:
+    //
+    //  geocoder.reverseQuery([80, 20])
+    geocoder.reverseQuery = function(_, callback) {
+        var q = '';
+
+        function norm(x) {
+            if (x.lat !== undefined && x.lng !== undefined) return x.lng + ',' + x.lat;
+            else if (x.lat !== undefined && x.lon !== undefined) return x.lon + ',' + x.lat;
+            else return x[0] + ',' + x[1];
+        }
+
+        if (_.length && _[0].length) {
+            for (var i = 0, pts = []; i < _.length; i++) pts.push(norm(_[i]));
+            q = pts.join(';');
+        } else q = norm(_);
+
+        mapbox.request(this.queryUrl(q), function(err, json) {
+            callback(err, json);
+        });
+    };
+
     if (typeof _ === 'string') mapbox.idUrl(_, geocoder);
     else if (typeof _ === 'object') geocoder.tilejson(_);
 

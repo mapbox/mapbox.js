@@ -21,7 +21,20 @@ describe('mapbox.geocoder', function() {
             "id": "mapbox-places.4201"
         }]]};
 
-    it('performs forward geolocation, centering the map on the first result', function() {
+    var revJson = {
+        "query":[-97.7,30.3],
+        "results":[[{
+            "bounds":[-97.9383829999999,30.098659,-97.5614889999999,30.516863],
+            "lat":30.3071816,
+            "lon":-97.7559964,
+            "name":"Austin",
+            "score":600000790107194.8,
+            "type":"city",
+            "id":"mapbox-places.4201"
+        }]],"attribution":{"mapbox-places":"<a href='http://mapbox.com/about/maps' target='_blank'>Terms & Feedback</a>"}};
+
+
+    it('performs forward geolocation', function() {
         var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
 
         server.respondWith('GET',
@@ -29,7 +42,21 @@ describe('mapbox.geocoder', function() {
             [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
 
         g.query('austin', function(err, res) {
-            expect(res.latlng).to.be.near({lat: 30.3, lng: -97.7}, 1e-1);
+            expect(res.latlng).to.be.near({ lat: 30.3, lng: -97.7 }, 1e-1);
+        });
+
+        server.respond();
+    });
+
+    it('performs reverse geolocation', function() {
+        var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+
+        server.respondWith('GET',
+            'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/-97.7,30.3.json',
+            [200, { "Content-Type": "application/json" }, JSON.stringify(revJson)]);
+
+        g.reverseQuery({ lat: 30.3, lng: -97.7 }, function(err, res) {
+            expect(res).to.eql(revJson);
         });
 
         server.respond();
