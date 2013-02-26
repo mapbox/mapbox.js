@@ -235,4 +235,65 @@ _Examples_:
         pointToLayer: mapbox.marker.style,
     });
 
-_Returns_: a `L.Marker` object with the latitude, longitude position and a styled marker
+_Returns_:
+
+A `L.Marker` object with the latitude, longitude position and a styled marker
+
+# Data Layers
+
+## mapbox.dataLayer(id | url | tilejson, [options])
+
+_Arguments_:
+
+1. required and must be:
+
+* An `id` string `examples.map-foo`
+* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
+* A GeoJSON object, from your own Javascript code
+
+The second argument is optional. If provided, it is the same options
+as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup)
+with one addition:
+
+_Example_:
+
+    var markerLayer = (new mapbox.dataLayer(geojson))
+        .addTo(map);
+
+_Returns_ a `mapbox.dataLayer` object.
+
+## mapbox.dataLayer.filter
+
+Set or get a filter function for this data layer.
+
+_Arguments_:
+
+1. (optional) and can be a filter function that takes GeoJSON features and
+  returns true to show and false to hide features.
+
+_Example_:
+
+    var markerLayer = (new mapbox.dataLayer(geojson))
+        // hide all markers
+        .filter(function() { return false; })
+        .addTo(map);
+
+    // get the filter function
+    var fn = markerLayer.filter()
+
+_Returns_ the filter if no argument is provided, the markerLayer
+object otherwise.
+
+## mapbox.dataLayer.geojson([features])
+
+Set the contents of a markers layer: run the provided
+features through the filter function and then through the factory function to create elements
+for the map. If the layer already has features, they are replaced with the new features.
+An empty array will clear the layer of all features.
+
+_Arguments:_
+
+* `features` can be a array of [GeoJSON feature objects](http://geojson.org/geojson-spec.html#feature-objects),
+  or omitted to get the current value.
+
+_Returns_ the layer object if a new array of features is provided, otherwise the layer's features
