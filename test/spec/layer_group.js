@@ -19,9 +19,24 @@ describe("mapbox.layerGroup", function() {
         expect(group.tileLayer).to.be.ok();
     });
 
+    it("initializes the tile layer", function() {
+        var group = new mapbox.layerGroup(tileJSON);
+        expect(group.tileLayer.tilejson()).to.equal(tileJSON);
+    });
+
     it("adds a data layer immediately", function() {
         var group = new mapbox.layerGroup('data/tilejson.json');
         expect(group.dataLayer).to.be.ok();
+    });
+
+    it("adds a grid layer immediately", function() {
+        var group = new mapbox.layerGroup('data/tilejson.json');
+        expect(group.gridLayer).to.be.ok();
+    });
+
+    it("initializes the grid layer", function() {
+        var group = new mapbox.layerGroup(tileJSON);
+        expect(group.gridLayer.tilejson()).to.equal(tileJSON);
     });
 
     it("adds multiple TileLayers in the order that the LayerGroups were added", function() {

@@ -14,6 +14,9 @@ mapbox.layerGroup = L.LayerGroup.extend({
         this.dataLayer = new mapbox.dataLayer();
         this.addLayer(this.dataLayer);
 
+        this.gridLayer = new mapbox.gridLayer();
+        this.addLayer(this.gridLayer);
+
         if (typeof _ === 'string') {
             mapbox.idUrl(_, this);
         // javascript object of TileJSON data
@@ -55,5 +58,7 @@ mapbox.layerGroup = L.LayerGroup.extend({
         if (json.data && json.data[0]) {
             this.dataLayer.url(json.data[0]);
         }
+
+        this.gridLayer.tilejson(json);
     }
 });
