@@ -1,7 +1,4 @@
-# Layer
-
-`mapbox.layer` is a fast way to add layers to your map without having to
-deal with complex configuration.
+# Layers
 
 ## mapbox.tileLayer(id | url | tilejson, [options])
 
@@ -40,56 +37,93 @@ _Example_:
 
 _Returns_ a `mapbox.tileLayer` object.
 
-# Geocoding
+## mapbox.dataLayer(id | url | tilejson, [options])
 
-## mapbox.geocoderControl(id | url)
-
-Adds geocoder functionality as well as a UI element to a map. This uses
-the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
-
-This function is currently in private beta: [contact MapBox](http://mapbox.com/about/contact/) before
-using this functionality.
+`mapbox.dataLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
+from MapBox and elsewhere into your map.
 
 _Arguments_:
 
-1. (required) either:
+1. required and must be:
 
 * An `id` string `examples.map-foo`
 * A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
+* A GeoJSON object, from your own Javascript code
 
-_Example_
+The second argument is optional. If provided, it is the same options
+as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup)
+with one addition:
 
-    var map = L.map('map')
-        .setView([37, -77], 5)
-        .addControl(new mapbox.geocoder('examples.map-vyofok3q'));
+_Example_:
 
-_Returns_ a `mapbox.geocoderControl` object.
+    var markerLayer = (new mapbox.dataLayer(geojson))
+        .addTo(map);
 
-## mapbox.geocoder.id([id])
+_Returns_ a `mapbox.dataLayer` object.
 
-Set or get the map id used for geocoding.
+## mapbox.dataLayer.setFilter
 
-_Arguments_:
-
-1. (optional) a map id
-
-_Returns_: the existing id value if no argument is given, or the geocoder object if a new value is given.
-
-
-## mapbox.geocoder.tilejson([tilejson])
-
-Set or get the tilejson used for geocoding.
+Sets the filter function for this data layer.
 
 _Arguments_:
 
-1. (optional) tilejson
+1. a function that takes GeoJSON features and
+  returns true to show and false to hide features.
 
-_Returns_: the existing tilejson value if no argument is given, or the geocoder object if a new value is given.
+_Example_:
+
+    var markerLayer = (new mapbox.dataLayer(geojson))
+        // hide all markers
+        .setFilter(function() { return false; })
+        .addTo(map);
+
+_Returns_ the markerLayer object.
+
+## mapbox.dataLayer.getFilter
+
+Gets the filter function for this data layer.
+
+_Arguments_: none
+
+_Example_:
+
+    var markerLayer = (new mapbox.dataLayer(geojson))
+        // hide all markers
+        .setFilter(function() { return false; })
+        .addTo(map);
+
+    // get the filter function
+    var fn = markerLayer.getFilter()
+
+_Returns_ the filter function.
+
+## mapbox.dataLayer.setGeojson(features)
+
+Set the contents of a markers layer: run the provided
+features through the filter function and then through the factory function to create elements
+for the map. If the layer already has features, they are replaced with the new features.
+An empty array will clear the layer of all features.
+
+_Arguments:_
+
+* `features`, an array of [GeoJSON feature objects](http://geojson.org/geojson-spec.html#feature-objects),
+  or omitted to get the current value.
+
+_Returns_ the dataLayer object
+
+## mapbox.dataLayer.getGeojson(features)
+
+Get the contents of this layer as GeoJSON data.
+
+_Arguments:_ none
+
+_Returns_ the GeoJSON represented by this layer
+
+# Geocoding
 
 ## mapbox.geocoder(id | url)
 
-A lower-level interface to geocoding, useful for more complex uses and reverse-geocoding.
-
+A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
 1. (required) must be:
 
@@ -144,7 +178,7 @@ The callback is called with arguments
 
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
-# Hash
+# Controls
 
 ## mapbox.hash()
 
@@ -164,11 +198,26 @@ _Returns_ a `mapbox.hash` object.
 _Ref_: this code uses [Leaflet.hash](https://github.com/mlevans/leaflet-hash)
 internally.
 
-# Interactivity
+## mapbox.legendControl()
+
+A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
+
+_Arguments_:
+
+1. (optional) an options object. Beyond the default options for map controls,
+   this object has one special parameter:
+
+* `sanitize`: enable or disable HTML sanitization of legend data before
+  display. The default, `true`, is recommended.
+
+_Returns_: a `mapbox.Legend` object.
 
 ## mapbox.interactionControl()
 
-Interaction is what we call interactive parts of maps that are created with the powerful [tooltips & regions system](http://mapbox.com/tilemill/docs/crashcourse/tooltips/) in TileMill. Under the hood, it's powered by the [open UTFGrid specification.](https://github.com/mapbox/utfgrid-spec).
+Interaction is what we call interactive parts of maps that are created with
+the powerful [tooltips & regions system](http://mapbox.com/tilemill/docs/crashcourse/tooltips/)
+in TileMill. Under the hood, it's powered by
+the [open UTFGrid specification.](https://github.com/mapbox/utfgrid-spec).
 
 _Arguments_:
 
@@ -184,23 +233,56 @@ _Arguments_:
           mouseout: [function() { return ''; }]
         }
 
-Each mapping is from an event type, like `mousemove`, to an array of options to try. To fall-back the `teaser` formatter to `full`, one could write `['teaser', 'full']`. `location` can be specified to use the location formatter and change page location.
+Each mapping is from an event type, like `mousemove`, to an array of options
+to try. To fall-back the `teaser` formatter to `full`, one could write
+`['teaser', 'full']`. `location` can be specified to use the location
+formatter and change page location.
 
 _Returns_: a `mapbox.interactionControl` object.
 
-# Legend
+## mapbox.geocoderControl(id | url)
 
-## mapbox.Legend()
+Adds geocoder functionality as well as a UI element to a map. This uses
+the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
 
-A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
+This function is currently in private beta:
+[contact MapBox](http://mapbox.com/about/contact/) before using this functionality.
 
 _Arguments_:
 
-1. (optional) an options object. Beyond the default options for map controls, this object has one special parameter:
+1. (required) either:
 
-* `sanitize`: enable or disable HTML sanitization of legend data before display. The default, `true`, is recommended.
+* An `id` string `examples.map-foo`
+* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
 
-_Returns_: a `mapbox.Legend` object.
+_Example_
+
+    var map = L.map('map')
+        .setView([37, -77], 5)
+        .addControl(new mapbox.geocoder('examples.map-vyofok3q'));
+
+_Returns_ a `mapbox.geocoderControl` object.
+
+## mapbox.geocoder.setId([id])
+
+Set or get the map id used for geocoding.
+
+_Arguments_:
+
+1. (optional) a map id
+
+_Returns_: the existing id value if no argument is given, or the geocoder
+object if a new value is given.
+
+## mapbox.geocoder.setTileJSON(tilejson)
+
+Set the TileJSON used for geocoding.
+
+_Arguments_:
+
+1. A TileJSON object
+
+_Returns_: the geocoder object
 
 # Markers
 
@@ -238,62 +320,3 @@ _Examples_:
 _Returns_:
 
 A `L.Marker` object with the latitude, longitude position and a styled marker
-
-# Data Layers
-
-## mapbox.dataLayer(id | url | tilejson, [options])
-
-_Arguments_:
-
-1. required and must be:
-
-* An `id` string `examples.map-foo`
-* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
-* A GeoJSON object, from your own Javascript code
-
-The second argument is optional. If provided, it is the same options
-as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup)
-with one addition:
-
-_Example_:
-
-    var markerLayer = (new mapbox.dataLayer(geojson))
-        .addTo(map);
-
-_Returns_ a `mapbox.dataLayer` object.
-
-## mapbox.dataLayer.filter
-
-Set or get a filter function for this data layer.
-
-_Arguments_:
-
-1. (optional) and can be a filter function that takes GeoJSON features and
-  returns true to show and false to hide features.
-
-_Example_:
-
-    var markerLayer = (new mapbox.dataLayer(geojson))
-        // hide all markers
-        .filter(function() { return false; })
-        .addTo(map);
-
-    // get the filter function
-    var fn = markerLayer.filter()
-
-_Returns_ the filter if no argument is provided, the markerLayer
-object otherwise.
-
-## mapbox.dataLayer.geojson([features])
-
-Set the contents of a markers layer: run the provided
-features through the filter function and then through the factory function to create elements
-for the map. If the layer already has features, they are replaced with the new features.
-An empty array will clear the layer of all features.
-
-_Arguments:_
-
-* `features` can be a array of [GeoJSON feature objects](http://geojson.org/geojson-spec.html#feature-objects),
-  or omitted to get the current value.
-
-_Returns_ the layer object if a new array of features is provided, otherwise the layer's features

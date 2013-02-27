@@ -26,7 +26,7 @@ mapbox.dataLayer = L.FeatureGroup.extend({
         this._initialize(_);
     },
 
-    getGeoJSON: function(_) {
+    getGeoJSON: function() {
         return this._geojson;
     },
 
@@ -58,7 +58,7 @@ mapbox.dataLayer = L.FeatureGroup.extend({
         return this;
     },
 
-    getFilter: function(_) {
+    getFilter: function() {
         return this.options.filter;
     },
 

@@ -1,5 +1,5 @@
 describe('mapbox.marker', function() {
-    describe('.style', function() {
+    describe('#style', function() {
         it("produces a small marker", function() {
             var marker = mapbox.marker.style({
                 properties: {
@@ -7,13 +7,6 @@ describe('mapbox.marker', function() {
                 }
             });
             expect(marker.options.icon.options.iconUrl).to.contain('pin-s');
-        });
-
-        it("produces an icon", function() {
-            var icon = mapbox.marker.icon({
-                'marker-size': 'large'
-            });
-            expect(icon.options.iconUrl).to.contain('pin-l');
         });
 
         it("produces a medium marker", function() {
@@ -49,6 +42,15 @@ describe('mapbox.marker', function() {
                     pointToLayer: mapbox.marker.style
                 });
             }).to.not.throwException();
+        });
+    });
+
+    describe('#icon', function() {
+        it("produces an icon", function() {
+            var icon = mapbox.marker.icon({
+                'marker-size': 'large'
+            });
+            expect(icon.options.iconUrl).to.contain('pin-l');
         });
     });
 });

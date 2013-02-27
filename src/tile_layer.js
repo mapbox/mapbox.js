@@ -46,14 +46,15 @@ mapbox.tileLayer = L.TileLayer.extend({
 
     // # URL
     setUrl: function(_) {
-        mapbox.request(url, L.bind(function(err, json) {
+        this._url = _;
+        mapbox.request(this._url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load TileJSON at ' + url);
             this.tilejson(json);
         }, this));
         return this;
     },
 
-    getUrl: function(_) {
+    getUrl: function() {
         return this._url;
     },
 
@@ -74,7 +75,7 @@ mapbox.tileLayer = L.TileLayer.extend({
         });
     },
 
-    getId: function(id) {
+    getId: function() {
         return this._tilejson && this._tilejson.id;
     },
 

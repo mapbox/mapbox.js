@@ -1,5 +1,5 @@
 describe("mapbox", function() {
-    describe('.base', function() {
+    describe('#base', function() {
         it("returns 'http://a.tiles.mapbox.com/v3/'", function() {
             expect(mapbox.base()).to.equal('http://a.tiles.mapbox.com/v3/');
         });
@@ -10,13 +10,13 @@ describe("mapbox", function() {
         });
     });
 
-    describe('.browser', function() {
+    describe('#browser', function() {
         it('detects cors support', function() {
             expect(mapbox.browser.cors).to.be.a('boolean');
         });
     });
 
-    describe(".request", function() {
+    describe("request", function() {
         var server;
 
         beforeEach(function() {
@@ -81,7 +81,7 @@ describe("mapbox", function() {
             });
         });
     });
-    describe('.sanitize', function() {
+    describe('sanitize', function() {
         var bad = '<a href="data:foo/bar">foo</a>';
         describe('default', function() {
             it('cleans a simple string', function() {
@@ -91,14 +91,14 @@ describe("mapbox", function() {
                 expect(mapbox.sanitize(bad)).to.eql('<a>foo</a>');
             });
         });
-        describe('.on', function() {
+        describe('#on', function() {
             it('turns the sanitization on and off', function() {
                 mapbox.sanitize.off();
                 expect(mapbox.sanitize(bad)).to.eql(bad);
                 mapbox.sanitize.on();
             });
         });
-        describe('.enable', function() {
+        describe('#enable', function() {
             it('turns the sanitization on and off', function() {
                 mapbox.sanitize.enable(false);
                 expect(mapbox.sanitize(bad)).to.eql(bad);

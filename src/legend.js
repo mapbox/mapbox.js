@@ -1,4 +1,5 @@
-mapbox.Legend = L.Control.extend({
+// # Legend
+mapbox.LegendControl = L.Control.extend({
 
     options: {
         position: 'bottomright'
@@ -80,6 +81,6 @@ mapbox.Legend = L.Control.extend({
     }
 });
 
-mapbox.legend = function(options) {
-    return new mapbox.Legend(options);
+mapbox.legendControl = function(options) {
+    return new mapbox.LegendControl(options);
 };

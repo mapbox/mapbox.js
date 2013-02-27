@@ -15,6 +15,11 @@ mapbox.geocoder = function(_) {
         return geocoder.id(_.id || '');
     };
 
+    geocoder.setTileJSON = function(_) {
+        if (!_) return geocoder;
+        return geocoder.tilejson(_);
+    };
+
     geocoder.queryUrl = function(_) {
         return L.Util.template(this.url(), { query: _ });
     };
