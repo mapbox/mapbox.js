@@ -15,7 +15,7 @@ mapbox.LegendControl = L.Control.extend({
         this._container = L.DomUtil.create('div', 'map-legends');
         L.DomEvent.disableClickPropagation(this._container);
 
-        map
+        map.eachLayer(function(layer) { this._onLayerAdd({layer: layer})}, this)
             .on('layeradd', this._onLayerAdd, this)
             .on('layerremove', this._onLayerRemove, this);
 
@@ -25,7 +25,7 @@ mapbox.LegendControl = L.Control.extend({
     },
 
     onRemove: function(map) {
-        map
+        map.eachLayer(function(layer) { this._onLayerRemove({layer: layer})}, this)
             .off('layeradd', this._onLayerAdd)
             .off('layerremove', this._onLayerRemove);
 

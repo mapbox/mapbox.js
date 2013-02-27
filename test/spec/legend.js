@@ -14,4 +14,15 @@ describe("mapbox.legendControl", function() {
         expect(legend.addLegend('foo')).to.eql(legend);
         expect(legend.removeLegend('foo')).to.eql(legend);
     });
+
+    it('adds legends of existing layers', function() {
+        var layer = new mapbox.tileLayer(null, {legend: 'Legend'}),
+            control = new mapbox.legendControl(),
+            map = new L.Map(document.createElement('div'));
+
+        map.addLayer(layer);
+        map.addControl(control);
+
+        expect(control._legends["Legend"]).to.be.ok();
+    });
 });
