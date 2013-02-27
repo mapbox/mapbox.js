@@ -10,12 +10,15 @@ all: \
 	mapbox.lib.js \
 	mapbox.core.js
 
+node_modules/Leaflet/dist/leaflet-src.js:
+	cd node_modules/Leaflet && npm install && jake
+
 # external libraries. it is assumed that these are needed by all
 # components, so they're included first
 mapbox.lib.js: \
 	ext/sanitizer/html-sanitizer-bundle.js \
 	ext/sanitizer/html-sanitizer-loosen.js \
-	ext/leaflet/leaflet.js \
+	node_modules/Leaflet/dist/leaflet-src.js \
 	node_modules/mustache/mustache.js \
 	node_modules/leaflet-hash/leaflet-hash.js \
 	node_modules/leaflet-fullscreen/src/Leaflet.fullscreen.js \
