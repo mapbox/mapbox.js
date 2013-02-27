@@ -61,7 +61,7 @@ _Example_:
 
 _Returns_ a `mapbox.dataLayer` object.
 
-## mapbox.dataLayer.setFilter
+## mapbox.dataLayer.setFilter(function)
 
 Sets the filter function for this data layer.
 
@@ -79,7 +79,7 @@ _Example_:
 
 _Returns_ the markerLayer object.
 
-## mapbox.dataLayer.getFilter
+## mapbox.dataLayer.getFilter()
 
 Gets the filter function for this data layer.
 

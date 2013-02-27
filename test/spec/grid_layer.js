@@ -1,4 +1,4 @@
-describe("mapbox.interaction", function() {
+describe("mapbox.gridLayer", function() {
     var server, tileJSON = helpers.tileJSON;
 
     beforeEach(function() {
@@ -10,24 +10,31 @@ describe("mapbox.interaction", function() {
     });
 
     it("is initialized", function() {
-        var layer = new mapbox.interaction();
+        var layer = new mapbox.gridLayer();
         expect(layer).to.be.ok();
     });
 
-    describe("#tilejson", function() {
+    describe("#getTileJSON", function() {
         it('is by default empty', function() {
-            var layer = new mapbox.interaction();
-            expect(layer.tilejson()).to.eql({});
+            var layer = new mapbox.gridLayer();
+            expect(layer.getTileJSON()).to.eql({});
         });
 
         it('can get and set tilejson', function() {
-            var layer = new mapbox.interaction();
-            expect(layer.tilejson()).to.eql({});
+            var layer = new mapbox.gridLayer();
+            expect(layer.getTileJSON()).to.eql({});
         });
     });
 
+    describe("#setTileJSON", function() {
+        it('is by default empty', function() {
+            var layer = new mapbox.gridLayer();
+            expect(layer.setTileJSON(tileJSON)).to.eql(layer);
+            expect(layer.getTileJSON()).to.eql(tileJSON);
+        });
+    });
     describe("#_utfDecode", function() {
-        var layer = new mapbox.interaction();
+        var layer = new mapbox.gridLayer();
         it('decrements not-out-of-range values', function() {
             expect(layer._utfDecode(33)).to.eql(1);
         });

@@ -31,6 +31,8 @@ mapbox.core.js: \
 	src/sanitize.js \
 	src/layer_group.js \
 	src/legend.js \
+	src/grid_layer.js \
+	src/grid_control.js \
 	src/marker.js \
 	src/tile_layer.js \
 	src/data_layer.js \

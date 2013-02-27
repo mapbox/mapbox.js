@@ -1,5 +1,4 @@
-mapbox.interactionControl = L.Control.extend({
-
+mapbox.gridControl = L.Control.extend({
     options: {
         mapping: {
             mousemove: ['teaser'],
@@ -11,7 +10,7 @@ mapbox.interactionControl = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-        mapbox.sanitize(options && options.sanitize);
+        mapbox.sanitize.enable(options && options.sanitize);
         this._layer = _;
     },
 
@@ -40,7 +39,7 @@ mapbox.interactionControl = L.Control.extend({
     onAdd: function(map) {
         this._map = map;
 
-        var className = 'leaflet-control-interaction',
+        var className = 'leaflet-control-grid',
             container = L.DomUtil.create('div', className);
 
         L.DomEvent.disableClickPropagation(container);
@@ -52,5 +51,4 @@ mapbox.interactionControl = L.Control.extend({
 
         return container;
     }
-
 });

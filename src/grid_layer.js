@@ -1,5 +1,5 @@
 // forked from danzel/L.UTFGrid
-mapbox.interaction = L.Class.extend({
+mapbox.gridLayer = L.Class.extend({
     includes: L.Mixin.Events,
 
     options: {
@@ -149,6 +149,8 @@ mapbox.interaction = L.Class.extend({
     // Load up all required json grid files
     // TODO: Load from center etc
     _update: function() {
+
+        if (!this._map) return;
 
         var bounds = this._map.getPixelBounds(),
             z = this._map.getZoom(),
