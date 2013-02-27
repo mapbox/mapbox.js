@@ -33,6 +33,8 @@ mapbox.geocoder = function(_) {
                 callback(null, res);
             } else callback(err);
         });
+
+        return geocoder;
     };
 
     // a reverse geocode:
@@ -55,6 +57,8 @@ mapbox.geocoder = function(_) {
         mapbox.request(this.queryUrl(q), function(err, json) {
             callback(err, json);
         });
+
+        return geocoder;
     };
 
     if (typeof _ === 'string') mapbox.idUrl(_, geocoder);

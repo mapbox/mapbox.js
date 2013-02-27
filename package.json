@@ -15,10 +15,14 @@
     "leaflet-fullscreen": "0.0.0",
     "mustache": "~0.7.2"
   },
+  "scripts": {
+    "test": "mocha-phantomjs test/index.html"
+  },
   "devDependencies": {
     "uglify-js": "~2.2.5",
     "mocha": "~1.8",
     "expect.js": "~0.2.0",
+    "mocha-phantomjs": "~1.1.1",
     "happen": "~0.1.2"
   },
   "optionalDependencies": {},

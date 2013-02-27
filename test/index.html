@@ -11,6 +11,7 @@
   <script src="../node_modules/happen/src/happen.js"></script>
 
   <script src="lib/sinon-server-1.5.2.js"></script>
+  <script src="lib/bind-shim.js"></script>
 
   <!--[if IE]>
   <script src="lib/sinon-ie-1.5.2.js"></script>
@@ -55,7 +56,7 @@
   <script src="spec/interaction.js"></script>
 
   <script>
-    mocha.run();
+    (window.mochaPhantomJS || window.mocha).run();
   </script>
 </body>
 </html>
