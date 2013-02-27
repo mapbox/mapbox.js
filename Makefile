@@ -38,8 +38,11 @@ mapbox.core.js: \
 mapbox%js:
 	@cat $(filter %.js,$^) > $@
 
+dist:
+	mkdir -p dist
+
 # assemble an uncompressed but complete library for development
-dist/mapbox.js: mapbox.core.js mapbox.lib.js
+dist/mapbox.js: dist mapbox.core.js mapbox.lib.js
 	cat src/comment.js \
 		src/start.js \
 		mapbox.lib.js \
@@ -48,7 +51,7 @@ dist/mapbox.js: mapbox.core.js mapbox.lib.js
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled
-dist/mapbox.min.js: dist/mapbox.js
+dist/mapbox.min.js: dist dist/mapbox.js
 	$(JS_UGLIFY) dist/mapbox.js -c -m -o dist/mapbox.min.js
 
 clean:
