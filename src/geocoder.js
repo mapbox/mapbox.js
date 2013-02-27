@@ -16,7 +16,7 @@ mapbox.geocoder = function(_) {
     };
 
     geocoder.queryUrl = function(_) {
-        return L.Util.template(this.url(), {query: _});
+        return L.Util.template(this.url(), { query: _ });
     };
 
     geocoder.query = function(_, callback) {
