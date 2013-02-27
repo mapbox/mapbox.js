@@ -30,8 +30,8 @@ mapbox.layerGroup = L.LayerGroup.extend({
         return this;
     },
 
-    getTilejson: function() { this.tilejson(); },
-    setTilejson: function(_) { this.tilejson(_); },
+    getTileJSON: function() { this.tilejson(); },
+    setTileJSON: function(_) { this.tilejson(_); },
 
     // pull tilejson data from an endpoint
     url: function(url) {
