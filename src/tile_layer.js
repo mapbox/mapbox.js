@@ -64,19 +64,7 @@ mapbox.tileLayer = L.TileLayer.extend({
     },
 
     setId: function(id) {
-        return this.tilejson({
-            id: id,
-            tiles: [
-                'http://a.tiles.mapbox.com/v3/' + id + '/{z}/{x}/{y}.png',
-                'http://b.tiles.mapbox.com/v3/' + id + '/{z}/{x}/{y}.png',
-                'http://c.tiles.mapbox.com/v3/' + id + '/{z}/{x}/{y}.png',
-                'http://d.tiles.mapbox.com/v3/' + id + '/{z}/{x}/{y}.png'
-            ]
-        });
-    },
-
-    getId: function() {
-        return this._tilejson && this._tilejson.id;
+        return this.url(mapbox.base() + id + '.json');
     },
 
     id: function(id) {
