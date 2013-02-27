@@ -56,21 +56,25 @@ describe('mapbox.dataLayer', function() {
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
 
-    describe("#filter", function() {
+    describe("#getFilter", function() {
         it("returns the filter option when not given an argument", function() {
             var filter = function () {},
                 layer = new mapbox.dataLayer(null, {filter: filter});
-            expect(layer.filter()).to.equal(filter);
+            expect(layer.getFilter()).to.equal(filter);
         });
+    });
 
+    describe("#setFilter", function() {
         it("filters features to those for which the function returns true", function() {
             var layer = new mapbox.dataLayer(helpers.geoJson);
 
-            layer.filter(function (f) { return f.properties.title === 'foo'; });
+            var fooFilter = function (f) { return f.properties.title === 'foo'; };
+            expect(layer.setFilter(fooFilter)).to.eql(layer);
+            expect(layer.getFilter()).to.eql(fooFilter);
             expect(layersOf(layer).length).to.equal(1);
 
-            layer.filter(function (f) { return f.properties.title !== 'foo'; });
+            layer.setFilter(function (f) { return f.properties.title !== 'foo'; });
             expect(layersOf(layer).length).to.equal(0);
         });
-    })
+    });
 });

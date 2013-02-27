@@ -1,3 +1,7 @@
+// # dataLayer
+// 
+// A layer of GeoJSON data, loaded from MapBox or else. Adds the ability
+// to reset data, filter it, and load remote data.
 mapbox.dataLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; }
@@ -16,11 +20,19 @@ mapbox.dataLayer = L.FeatureGroup.extend({
         }
     },
 
-    geojson: function(_) {
-        if (!arguments.length) return this._geojson;
+    // # GeoJSON
+    setGeoJSON: function(_) {
         this._geojson = _;
         this._initialize(_);
-        return this;
+    },
+
+    getGeoJSON: function(_) {
+        return this._geojson;
+    },
+
+    geojson: function(_) {
+        if (!arguments.length) return this.getGeoJSON();
+        return this.setGeoJSON(_);
     },
 
     url: function(url) {
@@ -36,14 +48,23 @@ mapbox.dataLayer = L.FeatureGroup.extend({
         return this.url(mapbox.base() + id + '/markers.geojson');
     },
 
-    filter: function(_) {
-        if (!arguments.length) return this.options.filter;
+    // # Filter
+    setFilter: function(_) {
         this.options.filter = _;
         if (this._geojson) {
             this.clearLayers();
             this._initialize(this._geojson);
         }
         return this;
+    },
+
+    getFilter: function(_) {
+        return this.options.filter;
+    },
+
+    filter: function(_) {
+        if (!arguments.length) return this.getFilter();
+        else return this.setFilter(_);
     },
 
     _initialize: function(json) {

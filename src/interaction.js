@@ -22,8 +22,7 @@ mapbox.interaction = L.Class.extend({
         else if (_ && typeof _ === 'object') this.tilejson(_);
     },
 
-    tilejson: function(_) {
-        if (!arguments.length) return this._tilejson;
+    setTileJSON: function(_) {
         this._tilejson = _;
         if (this._tilejson.grids) this._urls = this._tilejson.grids;
         if (this._tilejson.template) {
@@ -32,6 +31,15 @@ mapbox.interaction = L.Class.extend({
         this._cache = {};
         this._update();
         return this;
+    },
+
+    getTileJSON: function() {
+        return this._tilejson;
+    },
+
+    tilejson: function(_) {
+        if (!arguments.length) return this.getTileJSON();
+        return this.setTileJSON(_);
     },
 
     url: function(_) {
