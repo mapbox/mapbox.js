@@ -41,15 +41,17 @@ describe('mapbox.geocoderControl', function() {
         expect(control.url()).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
     });
 
-    it('can re-set url', function() {
-        var control = new mapbox.geocoderControl('examples.map-vyofok3q');
-        control.url('foo/{query}.json');
-        expect(control.url()).to.equal('foo/{query}.json');
+    describe('#setUrl', function() {
+        it('can re-set url', function() {
+            var control = new mapbox.geocoderControl('examples.map-vyofok3q');
+            control.setUrl('foo/{query}.json');
+            expect(control.getUrl()).to.equal('foo/{query}.json');
+        });
     });
 
     it('can re-set id', function() {
         var control = new mapbox.geocoderControl('examples.map-vyofok3q');
-        control.id('foobar');
+        expect(control.setId('foobar')).to.eql(control);
         expect(control.url()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
     });
 });

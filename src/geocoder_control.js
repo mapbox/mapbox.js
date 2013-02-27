@@ -11,14 +11,30 @@ mapbox.geocoderControl = L.Control.extend({
         return this;
     },
 
+    setUrl: function(_) {
+        return this.url(_);
+    },
+
+    getUrl: function() {
+        return this.url();
+    },
+
     id: function(_) {
         this.geocoder.id(_);
         return this;
     },
 
+    setId: function(_) {
+        return this.id(_);
+    },
+
     tilejson: function(_) {
         this.geocoder.tilejson(_);
         return this;
+    },
+
+    setTilejson: function(_) {
+        return this.tilejson(_);
     },
 
     errorHandler: function(_) {
