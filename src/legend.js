@@ -15,24 +15,9 @@ mapbox.LegendControl = L.Control.extend({
         this._container = L.DomUtil.create('div', 'map-legends');
         L.DomEvent.disableClickPropagation(this._container);
 
-        map.eachLayer(function(layer) {
-            this._onLayerAdd({layer: layer});
-            }, this)
-            .on('layeradd', this._onLayerAdd, this)
-            .on('layerremove', this._onLayerRemove, this);
-
         this._update();
 
         return this._container;
-    },
-
-    onRemove: function(map) {
-        map.eachLayer(function(layer) {
-            this._onLayerRemove({layer: layer});
-            }, this)
-            .off('layeradd', this._onLayerAdd)
-            .off('layerremove', this._onLayerRemove);
-
     },
 
     addLegend: function(text) {
@@ -69,18 +54,6 @@ mapbox.LegendControl = L.Control.extend({
                 div.className = 'map-legend';
                 div.innerHTML = i;
             }
-        }
-    },
-
-    _onLayerAdd: function(e) {
-        if (e.layer.getLegend) {
-            this.addLegend(e.layer.getLegend());
-        }
-    },
-
-    _onLayerRemove: function(e) {
-        if (e.layer.getLegend) {
-            this.removeLegend(e.layer.getLegend());
         }
     }
 });

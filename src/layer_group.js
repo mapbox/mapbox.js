@@ -3,6 +3,10 @@
 // extent, and more.
 mapbox.layerGroup = L.LayerGroup.extend({
 
+    options: {
+        legendControl: true
+    },
+
     _tilejson: {},
 
     initialize: function(_) {
@@ -16,6 +20,8 @@ mapbox.layerGroup = L.LayerGroup.extend({
 
         this.gridLayer = new mapbox.gridLayer();
         this.addLayer(this.gridLayer);
+
+        this.legendControl = new mapbox.legendControl();
 
         if (typeof _ === 'string') {
             mapbox.idUrl(_, this);
@@ -52,6 +58,20 @@ mapbox.layerGroup = L.LayerGroup.extend({
 
     setId: function(_) { this.id(_); },
 
+    onAdd: function(map) {
+        L.LayerGroup.prototype.onAdd.call(this, map);
+        if (this.options.legendControl) {
+            this.legendControl.addTo(map);
+        }
+    },
+
+    onRemove: function(map) {
+        L.LayerGroup.prototype.onRemove.call(this, map);
+        if (this.options.legendControl) {
+            this.legendControl.removeFrom(map);
+        }
+    },
+
     _initialize: function(json) {
         this.tileLayer.tilejson(json);
 
@@ -60,5 +80,9 @@ mapbox.layerGroup = L.LayerGroup.extend({
         }
 
         this.gridLayer.tilejson(json);
+
+        if (json.legend) {
+            this.legendControl.addLegend(json.legend);
+        }
     }
 });
