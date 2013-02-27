@@ -1,41 +1,64 @@
 describe("mapbox.tileLayer", function() {
     var tileJSON = helpers.tileJSON;
 
-    describe("#tilejson", function() {
+    describe("#setTileJSON", function() {
         it("sets min and max zoom", function() {
             var layer = new mapbox.tileLayer();
-            layer.tilejson(tileJSON);
+            expect(layer.setTileJSON(tileJSON)).to.eql(layer);
             expect(layer.options.minZoom).to.equal(0);
             expect(layer.options.maxZoom).to.equal(17);
         });
 
         it("sets attribution", function() {
             var layer = new mapbox.tileLayer();
-            layer.tilejson(tileJSON);
+            layer.setTileJSON(tileJSON);
             expect(layer.options.attribution).to.equal('Data provided by NatureServe in collaboration with Robert Ridgely');
         });
 
         it("sets tms option", function() {
             var layer = new mapbox.tileLayer();
-            layer.tilejson(L.extend({}, tileJSON, {scheme: 'tms'}));
+            layer.setTileJSON(L.extend({}, tileJSON, {scheme: 'tms'}));
             expect(layer.options.tms).to.equal(true);
         });
 
         it("sets bounds", function() {
             var layer = new mapbox.tileLayer();
-            layer.tilejson(tileJSON);
+            layer.setTileJSON(tileJSON);
             expect(layer.options.bounds).to.eql(new L.LatLngBounds([[-85.0511, -180], [85.0511, 180]]));
         });
 
         it("can be reinitialized", function() {
             var layer = new mapbox.tileLayer();
 
-            layer.tilejson(tileJSON);
-            layer.tilejson(L.extend({}, tileJSON, {attribution: 'Terms', bounds: undefined, scheme: 'tms'}));
+            layer.setTileJSON(tileJSON);
+            layer.setTileJSON(L.extend({}, tileJSON, {attribution: 'Terms', bounds: undefined, scheme: 'tms'}));
 
             expect(layer.options.attribution).to.equal('Terms');
             expect(layer.options.tms).to.equal(true);
             expect(layer.options.bounds).to.equal(undefined);
+        });
+    });
+
+    describe("#setId", function() {
+        it('sets the id', function() {
+            var layer = new mapbox.tileLayer();
+            expect(layer.setId('mapbox.map-0l53fhk2')).to.eql(layer);
+        });
+    });
+
+    describe("#getId", function() {
+        it('sets the id', function() {
+            var layer = new mapbox.tileLayer();
+            expect(layer.setId('mapbox.map-0l53fhk2')).to.eql(layer);
+            expect(layer.getId()).to.eql('mapbox.map-0l53fhk2');
+        });
+    });
+
+    describe("#getTileJSON", function() {
+        it('gets tilejson', function() {
+            var layer = new mapbox.tileLayer();
+            layer.setTileJSON(tileJSON);
+            expect(layer.getTileJSON()).to.eql(tileJSON);
         });
     });
 

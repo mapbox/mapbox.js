@@ -3,6 +3,9 @@ mapbox.tileLayer = L.TileLayer.extend({
     initialize: function(_, options) {
         L.TileLayer.prototype.initialize.call(this, undefined, options);
 
+        this._tilejson = {};
+        this._url = '';
+
         if (options && options.detectRetina &&
             L.Browser.retina && options.retinaVersion) {
             _ = options.retinaVersion;
@@ -15,9 +18,8 @@ mapbox.tileLayer = L.TileLayer.extend({
         }
     },
 
-    tilejson: function(json) {
-        if (!arguments.length) return this._tilejson;
-
+    // # TileJSON
+    setTileJSON: function(json) {
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: json.attribution,
@@ -29,14 +31,21 @@ mapbox.tileLayer = L.TileLayer.extend({
         });
 
         this._tilejson = json;
-
         this.redraw();
-
         return this;
     },
 
-    // pull tilejson data from an endpoint
-    url: function(url) {
+    getTileJSON: function() {
+        return this._tilejson;
+    },
+
+    tilejson: function(json) {
+        if (!arguments.length) return this.getTileJSON();
+        else return this.setTileJSON(json);
+    },
+
+    // # URL
+    setUrl: function(_) {
         mapbox.request(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load TileJSON at ' + url);
             this.tilejson(json);
@@ -44,7 +53,16 @@ mapbox.tileLayer = L.TileLayer.extend({
         return this;
     },
 
-    id: function(id) {
+    getUrl: function(_) {
+        return this._url;
+    },
+
+    url: function(url) {
+        if (!arguments.length) return this.getUrl();
+        else return this.setUrl(url);
+    },
+
+    setId: function(id) {
         return this.tilejson({
             id: id,
             tiles: [
@@ -54,6 +72,15 @@ mapbox.tileLayer = L.TileLayer.extend({
                 'http://d.tiles.mapbox.com/v3/' + id + '/{z}/{x}/{y}.png'
             ]
         });
+    },
+
+    getId: function(id) {
+        return this._tilejson && this._tilejson.id;
+    },
+
+    id: function(id) {
+        if (!arguments.length) return this.getId();
+        else return this.setId(id);
     },
 
     getLegend: function() {
