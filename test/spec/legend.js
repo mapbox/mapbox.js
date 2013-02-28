@@ -16,13 +16,22 @@ describe("mapbox.legendControl", function() {
     });
 
     it('adds legends of existing layers', function() {
-        var layer = new mapbox.tileLayer(null, {legend: 'Legend'}),
+        var layer = new mapbox.tileLayer(null, { legend: 'Legend' }),
             control = new mapbox.legendControl(),
             map = new L.Map(document.createElement('div'));
 
         map.addLayer(layer);
         map.addControl(control);
 
-        expect(control._legends["Legend"]).to.be.ok();
+        expect(control._legends.Legend).to.be.ok();
+    });
+
+    it("turns sanitization off", function() {
+        mapbox.sanitize.on();
+        var control = new mapbox.legendControl({
+            sanitize: false
+        });
+        expect(control).to.be.ok();
+        expect(mapbox.sanitize.enable()).to.eql(false);
     });
 });
