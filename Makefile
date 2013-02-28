@@ -33,7 +33,7 @@ mapbox.core.js: \
 	src/hash.js \
 	src/sanitize.js \
 	src/layer_group.js \
-	src/legend.js \
+	src/legend_control.js \
 	src/grid_layer.js \
 	src/grid_control.js \
 	src/marker.js \

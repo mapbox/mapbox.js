@@ -67,7 +67,7 @@ mapbox.LegendControl = L.Control.extend({
             if (this._legends.hasOwnProperty(i) && this._legends[i]) {
                 var div = this._container.appendChild(document.createElement('div'));
                 div.className = 'map-legend';
-                div.innerHTML = i;
+                div.innerHTML = mapbox.sanitize(i);
             }
         }
     },

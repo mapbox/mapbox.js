@@ -1,5 +1,5 @@
 // # dataLayer
-// 
+//
 // A layer of GeoJSON data, loaded from MapBox or else. Adds the ability
 // to reset data, filter it, and load remote data.
 mapbox.dataLayer = L.FeatureGroup.extend({

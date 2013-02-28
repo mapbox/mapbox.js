@@ -1,4 +1,4 @@
-describe("mapbox.legendControl", function() {
+describe('mapbox.legendControl', function() {
     it('mapbox.legend constructor', function() {
         var legend = mapbox.legendControl();
         expect(legend).to.be.ok();
@@ -26,7 +26,12 @@ describe("mapbox.legendControl", function() {
         expect(control._legends.Legend).to.be.ok();
     });
 
-    it("turns sanitization off", function() {
+    it('sanitizes its content', function() {
+        var map = L.Map(document.createElement('div'));
+        var control = new mapbox.legendControl();
+    });
+
+    it('turns sanitization off', function() {
         mapbox.sanitize.on();
         var control = new mapbox.legendControl({
             sanitize: false
