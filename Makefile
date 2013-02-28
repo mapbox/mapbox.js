@@ -27,18 +27,17 @@ mapbox.lib.js: \
 # mapbox.js-specific code
 mapbox.core.js: \
 	src/mapbox.js \
-	src/auto.js \
 	src/geocoder.js \
 	src/geocoder_control.js \
 	src/hash.js \
 	src/sanitize.js \
-	src/layer_group.js \
+	src/map.js \
 	src/legend.js \
 	src/grid_layer.js \
 	src/grid_control.js \
 	src/marker.js \
 	src/tile_layer.js \
-	src/data_layer.js \
+	src/marker_layer.js \
 
 mapbox%js:
 	@cat $(filter %.js,$^) > $@

@@ -37,9 +37,9 @@ _Example_:
 
 _Returns_ a `mapbox.tileLayer` object.
 
-## mapbox.dataLayer(id | url | tilejson, [options])
+## mapbox.markerLayer(id | url | tilejson, [options])
 
-`mapbox.dataLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
+`mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from MapBox and elsewhere into your map.
 
 _Arguments_:
@@ -56,12 +56,12 @@ with one addition:
 
 _Example_:
 
-    var markerLayer = (new mapbox.dataLayer(geojson))
+    var markerLayer = (new mapbox.markerLayer(geojson))
         .addTo(map);
 
-_Returns_ a `mapbox.dataLayer` object.
+_Returns_ a `mapbox.markerLayer` object.
 
-## mapbox.dataLayer.setFilter(function)
+## mapbox.markerLayer.setFilter(function)
 
 Sets the filter function for this data layer.
 
@@ -72,14 +72,14 @@ _Arguments_:
 
 _Example_:
 
-    var markerLayer = (new mapbox.dataLayer(geojson))
+    var markerLayer = (new mapbox.markerLayer(geojson))
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
 
 _Returns_ the markerLayer object.
 
-## mapbox.dataLayer.getFilter()
+## mapbox.markerLayer.getFilter()
 
 Gets the filter function for this data layer.
 
@@ -87,7 +87,7 @@ _Arguments_: none
 
 _Example_:
 
-    var markerLayer = (new mapbox.dataLayer(geojson))
+    var markerLayer = (new mapbox.markerLayer(geojson))
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
@@ -97,7 +97,7 @@ _Example_:
 
 _Returns_ the filter function.
 
-## mapbox.dataLayer.setGeojson(features)
+## mapbox.markerLayer.setGeojson(features)
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
@@ -109,9 +109,9 @@ _Arguments:_
 * `features`, an array of [GeoJSON feature objects](http://geojson.org/geojson-spec.html#feature-objects),
   or omitted to get the current value.
 
-_Returns_ the dataLayer object
+_Returns_ the markerLayer object
 
-## mapbox.dataLayer.getGeojson(features)
+## mapbox.markerLayer.getGeojson(features)
 
 Get the contents of this layer as GeoJSON data.
 

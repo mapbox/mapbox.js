@@ -59,17 +59,12 @@
 </div>
 <div id='map'></div>
 <script type='text/javascript'>
-    var map = L.map('map')
+    var map = mapbox.map('map', 'examples.map-0l53fhk2')
         .setView([40, -130], 3);
-
-    var layerGroup = (new mapbox.layerGroup('examples.map-0l53fhk2'))
-        .addTo(map);
-
-    var markerLayer = layerGroup.dataLayer;
 
     mapbox.request('earthquakes.geojson', function(err, geojson) {
 
-        var markerLayer = (new mapbox.dataLayer(geojson))
+        var markerLayer = (new mapbox.markerLayer(geojson))
             .filter(function() { return false; })
             .addTo(map);
 

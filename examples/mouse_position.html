@@ -29,9 +29,7 @@
     var click = document.getElementById('click'),
         mousemove = document.getElementById('mousemove');
 
-    var map = L.map('map')
-        .setView([37, -77], 5)
-        .addLayer(new mapbox.tileLayer('examples.map-20v6611k'));
+    var map = mapbox.map('map', 'examples.map-20v6611k');
 
     map.on('mousemove click', function(e) {
         window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();

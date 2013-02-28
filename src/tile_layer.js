@@ -23,7 +23,6 @@ mapbox.tileLayer = L.TileLayer.extend({
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: json.attribution,
-            legend: json.legend,
             minZoom: json.minzoom,
             maxZoom: json.maxzoom,
             tms: json.scheme === 'tms',
@@ -70,10 +69,6 @@ mapbox.tileLayer = L.TileLayer.extend({
     id: function(id) {
         if (!arguments.length) return this.getId();
         else return this.setId(id);
-    },
-
-    getLegend: function() {
-        return this.options.legend;
     },
 
     getTileUrl: function(tilePoint) {

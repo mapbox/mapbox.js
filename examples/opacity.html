@@ -44,13 +44,11 @@
     <div id='handle'></div>
 </div>
 <script type='text/javascript'>
-    // we need to refactor this when leaflet gets named and indexed layers
+    var map = mapbox.map('map', 'examples.map-vyofok3q')
+        .setView([43.6654, -79.4775], 15);
 
-    var overlay = new mapbox.layerGroup('aibram.Aerial');
-    var map = L.map('map')
-        .setView([0, 0], 3)
-        .addLayer(new mapbox.layerGroup('examples.map-vyofok3q'))
-        .addLayer(overlay);
+    var overlay = new mapbox.tileLayer('aibram.Aerial')
+        .addTo(map);
 
     var handle = document.getElementById('handle'),
         start = false,
@@ -61,7 +59,7 @@
         // Adjust control
         handle.style.top = Math.max(-5, Math.min(195, startTop + parseInt(e.clientY, 10) - start)) + 'px';
         // Adjust opacity
-        overlay.tileLayer.setOpacity(1 - (handle.offsetTop / 200));
+        overlay.setOpacity(1 - (handle.offsetTop / 200));
     };
 
     handle.onmousedown = function(e) {
