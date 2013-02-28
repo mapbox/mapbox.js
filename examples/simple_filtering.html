@@ -77,7 +77,7 @@
         this.className = 'active';
         // The filter function takes a GeoJSON feature object
         // and returns true to show it or false to hide it.
-        map.dataLayer.filter(function(f) {
+        map.markerLayer.filter(function(f) {
             return f.properties['marker-symbol'] === 'fast-food';
         });
         return false;
@@ -86,7 +86,7 @@
     all.onclick = function() {
         food.className = '';
         this.className = 'active';
-        map.dataLayer.filter(function(f) {
+        map.markerLayer.filter(function(f) {
             // Returning true for all markers shows everything.
             return true;
         });

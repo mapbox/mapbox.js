@@ -45,7 +45,7 @@
         }
     }
 
-    map.dataLayer.geojson({
+    map.markerLayer.geojson({
         type: 'FeatureCollection',
         features: features
     });
@@ -58,7 +58,7 @@
 
         // for each marker, consider whether it is currently visible by comparing
         // with the current map bounds
-        map.dataLayer.eachLayer(function(marker) {
+        map.markerLayer.eachLayer(function(marker) {
             if (bounds.contains(marker.getLatLng())) {
                 inBounds.push(marker.options.title);
             }

@@ -27,7 +27,7 @@ describe("mapbox.map", function() {
 
     it("adds a data layer immediately", function() {
         var group = new mapbox.map(element, 'data/tilejson.json');
-        expect(group.dataLayer).to.be.ok();
+        expect(group.markerLayer).to.be.ok();
     });
 
     it("adds a grid layer immediately", function() {

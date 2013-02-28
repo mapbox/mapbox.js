@@ -37,7 +37,7 @@ mapbox.core.js: \
 	src/grid_control.js \
 	src/marker.js \
 	src/tile_layer.js \
-	src/data_layer.js \
+	src/marker_layer.js \
 
 mapbox%js:
 	@cat $(filter %.js,$^) > $@

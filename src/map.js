@@ -1,7 +1,7 @@
 mapbox.Map = L.Map.extend({
     options: {
         tileLayer: true,
-        dataLayer: true,
+        markerLayer: true,
         gridLayer: true,
         legendControl: true
     },
@@ -16,9 +16,9 @@ mapbox.Map = L.Map.extend({
             this.addLayer(this.tileLayer);
         }
 
-        if (this.options.dataLayer) {
-            this.dataLayer = new mapbox.dataLayer();
-            this.addLayer(this.dataLayer);
+        if (this.options.markerLayer) {
+            this.markerLayer = new mapbox.markerLayer();
+            this.addLayer(this.markerLayer);
         }
 
         if (this.options.gridLayer) {
@@ -70,7 +70,7 @@ mapbox.Map = L.Map.extend({
         this.tileLayer.tilejson(json);
 
         if (json.data && json.data[0]) {
-            this.dataLayer.url(json.data[0]);
+            this.markerLayer.url(json.data[0]);
         }
 
         this.gridLayer.tilejson(json);
