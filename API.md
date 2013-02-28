@@ -1,3 +1,34 @@
+# Map
+
+## mapbox.map(element, id | url | tilejson, [options])
+
+Create and automatically configure a map with layers, markers, and
+interactivity.
+
+_Arguments_:
+
+The first argument is required and must be the id of an element, or a DOM element
+reference.
+
+The second argument is required and must be:
+
+* An `id` string `examples.map-foo`
+* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
+* A TileJSON object, from your own Javascript code
+
+The third argument is optional. If provided, it is the same options
+as provided to [L.Map](http://leafletjs.com/reference.html#map-options)
+with the following additions:
+
+* `tileLayer` (boolean). Whether or not to add a `mapbox.tileLayer` based on
+  the TileJSON. Default: `true`.
+* `markerLayer` (boolean). Whether or not to add a `mapbox.markerLayer` based on
+  the TileJSON. Default: `true`.
+* `gridLayer` (boolean). Whether or not to add a `mapbox.gridLayer` based on
+  the TileJSON. Default: `true`.
+* `legendControl` (boolean). Whether or not to add a `mapbox.legendControl`.
+  Default: `true`.
+
 # Layers
 
 ## mapbox.tileLayer(id | url | tilejson, [options])
