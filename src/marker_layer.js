@@ -1,8 +1,8 @@
-// # dataLayer
+// # markerLayer
 //
-// A layer of GeoJSON data, loaded from MapBox or else. Adds the ability
-// to reset data, filter it, and load remote data.
-mapbox.dataLayer = L.FeatureGroup.extend({
+// A layer of markers, loaded from MapBox or else. Adds the ability
+// to reset markers, filter them, and load them from a GeoJSON URL.
+mapbox.markerLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; }
     },

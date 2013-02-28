@@ -14,7 +14,7 @@
 <script type='text/javascript'>
     var map = mapbox.map('map', 'examples.map-zr0njcqy');
 
-    map.dataLayer.on('click', function(e) {
+    map.markerLayer.on('click', function(e) {
         map.panTo(e.layer.getLatLng());
     });
 </script>
