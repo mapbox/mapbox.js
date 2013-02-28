@@ -25,13 +25,7 @@
 <div id='map'></div>
 <pre id='onscreen'></pre>
 <script type='text/javascript'>
-    var map = L.map('map')
-        .addLayer(new mapbox.tileLayer('examples.map-20v6611k', {
-            attribution: '<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>'
-        }));
-
-    var markerLayer = new mapbox.dataLayer()
-        .addTo(map);
+    var map = mapbox.map('map', 'examples.map-20v6611k');
 
     var features = [];
     for (var x = -120; x < 120; x += 20) {
@@ -51,7 +45,7 @@
         }
     }
 
-    markerLayer.geojson({
+    map.dataLayer.geojson({
         type: 'FeatureCollection',
         features: features
     });
@@ -64,7 +58,7 @@
 
         // for each marker, consider whether it is currently visible by comparing
         // with the current map bounds
-        markerLayer.eachLayer(function(marker) {
+        map.dataLayer.eachLayer(function(marker) {
             if (bounds.contains(marker.getLatLng())) {
                 inBounds.push(marker.options.title);
             }

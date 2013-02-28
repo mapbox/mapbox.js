@@ -1,27 +1,35 @@
-// A layer that loads its metadata from an endpoint that distributes TileJSON.
-// From that endpoint it gets a center, zoom level, attribution, zoom
-// extent, and more.
-mapbox.layerGroup = L.LayerGroup.extend({
-
+mapbox.Map = L.Map.extend({
     options: {
+        tileLayer: true,
+        dataLayer: true,
+        gridLayer: true,
         legendControl: true
     },
 
     _tilejson: {},
 
-    initialize: function(_) {
-        L.LayerGroup.prototype.initialize.call(this);
+    initialize: function(element, _, options) {
+        L.Map.prototype.initialize.call(this, element, options);
 
-        this.tileLayer = new mapbox.tileLayer();
-        this.addLayer(this.tileLayer);
+        if (this.options.tileLayer) {
+            this.tileLayer = new mapbox.tileLayer();
+            this.addLayer(this.tileLayer);
+        }
 
-        this.dataLayer = new mapbox.dataLayer();
-        this.addLayer(this.dataLayer);
+        if (this.options.dataLayer) {
+            this.dataLayer = new mapbox.dataLayer();
+            this.addLayer(this.dataLayer);
+        }
 
-        this.gridLayer = new mapbox.gridLayer();
-        this.addLayer(this.gridLayer);
+        if (this.options.gridLayer) {
+            this.gridLayer = new mapbox.gridLayer();
+            this.addLayer(this.gridLayer);
+        }
 
-        this.legendControl = new mapbox.legendControl();
+        if (this.options.legendControl) {
+            this.legendControl = new mapbox.legendControl();
+            this.addControl(this.legendControl);
+        }
 
         if (typeof _ === 'string') {
             mapbox.idUrl(_, this);
@@ -58,20 +66,6 @@ mapbox.layerGroup = L.LayerGroup.extend({
 
     setId: function(_) { this.id(_); },
 
-    onAdd: function(map) {
-        L.LayerGroup.prototype.onAdd.call(this, map);
-        if (this.options.legendControl) {
-            this.legendControl.addTo(map);
-        }
-    },
-
-    onRemove: function(map) {
-        L.LayerGroup.prototype.onRemove.call(this, map);
-        if (this.options.legendControl) {
-            this.legendControl.removeFrom(map);
-        }
-    },
-
     _initialize: function(json) {
         this.tileLayer.tilejson(json);
 
@@ -84,5 +78,16 @@ mapbox.layerGroup = L.LayerGroup.extend({
         if (json.legend) {
             this.legendControl.addLegend(json.legend);
         }
+
+        if (!this._loaded) {
+            var zoom = json.center[2],
+                center = L.latLng(json.center[1], json.center[0]);
+
+            this.setView(center, zoom);
+        }
     }
 });
+
+mapbox.map = function(element, _) {
+    return new mapbox.Map(element, _);
+};

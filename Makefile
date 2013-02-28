@@ -27,12 +27,11 @@ mapbox.lib.js: \
 # mapbox.js-specific code
 mapbox.core.js: \
 	src/mapbox.js \
-	src/auto.js \
 	src/geocoder.js \
 	src/geocoder_control.js \
 	src/hash.js \
 	src/sanitize.js \
-	src/layer_group.js \
+	src/map.js \
 	src/legend_control.js \
 	src/grid_layer.js \
 	src/grid_control.js \
