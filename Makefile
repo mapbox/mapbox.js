@@ -4,7 +4,10 @@ JS_UGLIFY = $(NODE_PATH)/uglify-js/bin/uglifyjs
 
 # the default rule when someone runs simply `make`
 all: \
-	dist/mapbox.min.js
+	dist/mapbox.js \
+	dist/mapbox.css \
+	dist/mapbox.ie.css \
+	dist/images
 
 .INTERMEDIATE dist/mapbox.min.js: \
 	mapbox.lib.js \
@@ -45,18 +48,29 @@ mapbox%js:
 dist:
 	mkdir -p dist
 
+dist/mapbox.css: node_modules/Leaflet/dist/leaflet.css \
+	theme/style.css
+	cat node_modules/Leaflet/dist/leaflet.css \
+		theme/style.css > dist/mapbox.css
+
+dist/images:
+	cp -r node_modules/Leaflet/dist/images/ dist/images
+
+dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
+	cp node_modules/Leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
+
 # assemble an uncompressed but complete library for development
-dist/mapbox.js: dist mapbox.core.js mapbox.lib.js
+dist/mapbox.uncompressed.js: dist mapbox.core.js mapbox.lib.js
 	cat src/comment.js \
 		src/start.js \
 		mapbox.lib.js \
 		mapbox.core.js \
-		src/end.js > dist/mapbox.js
+		src/end.js > dist/mapbox.uncompressed.js
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled
-dist/mapbox.min.js: dist dist/mapbox.js
-	$(JS_UGLIFY) dist/mapbox.js -c -m -o dist/mapbox.min.js
+dist/mapbox.js: dist dist/mapbox.uncompressed.js
+	$(JS_UGLIFY) dist/mapbox.uncompressed.js -c -m -o dist/mapbox.js
 
 clean:
 	rm -f dist/*
