@@ -65,19 +65,27 @@ describe('mapbox.geocoder', function() {
     it('accepts tilejson input and constructs urls', function() {
         var g = mapbox.geocoder();
 
-        expect(g.tilejson(helpers.tileJSON)).to.eql(g);
+        expect(g.setTileJSON(helpers.tileJSON)).to.eql(g);
 
-        expect(g.tilejson(helpers.tileJSON).url()).to
+        expect(g.setTileJSON(helpers.tileJSON).getURL()).to
             .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
 
-        expect(g.url()).to
+        expect(g.getURL()).to
             .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
     });
 
     it('accepts id input and constructs urls', function() {
         var g = mapbox.geocoder();
 
-        expect(g.id('foo.bar').url()).to
+        expect(g.setID('foo.bar').getURL()).to
             .eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
+    });
+
+    describe('tileset settings', function() {
+        it('#id', function() {
+            var g = mapbox.geocoder();
+            expect(g.setID('foo.bar')).to.eql(g);
+            expect(g.getURL()).to.eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
+        });
     });
 });

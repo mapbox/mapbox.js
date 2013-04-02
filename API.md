@@ -128,7 +128,7 @@ _Example_:
 
 _Returns_ the filter function.
 
-## mapbox.markerLayer.setGeojson(features)
+## mapbox.markerLayer.setGeoJSON(features)
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
@@ -142,7 +142,7 @@ _Arguments:_
 
 _Returns_ the markerLayer object
 
-## mapbox.markerLayer.getGeojson(features)
+## mapbox.markerLayer.getGeoJSON(features)
 
 Get the contents of this layer as GeoJSON data.
 
@@ -180,7 +180,7 @@ The callback is called with arguments
         { results: // raw results
         latlng: // a map-friendly latlng array
         bounds: // geojson-style bounds of the first result
-        lbounds: // leaflet-style bounds of the first result    
+        lbounds: // leaflet-style bounds of the first result
         }
 
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
@@ -196,10 +196,10 @@ _Arguments_:
          [lon, lat] // an array of lon, lat
          { lat: 0, lon: 0 } // a lon, lat object
          { lat: 0, lng: 0 } // a lng, lat object
-         
+
 The first argument can also be an array of objects in that
 form to geocode more than one item.
-       
+
 2. (required) a callback
 
 The callback is called with arguments
@@ -294,7 +294,7 @@ _Example_
 
 _Returns_ a `mapbox.geocoderControl` object.
 
-## mapbox.geocoder.setId([id])
+## mapbox.geocoder.setID([id])
 
 Set or get the map id used for geocoding.
 

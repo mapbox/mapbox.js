@@ -16,11 +16,10 @@ mapbox.markerLayer = L.FeatureGroup.extend({
             mapbox.idUrl(_, this);
         // javascript object of TileJSON data
         } else if (_ && typeof _ === 'object') {
-            this.geojson(_);
+            this.setGeoJSON(_);
         }
     },
 
-    // # GeoJSON
     setGeoJSON: function(_) {
         this._geojson = _;
         this._initialize(_);
@@ -30,22 +29,17 @@ mapbox.markerLayer = L.FeatureGroup.extend({
         return this._geojson;
     },
 
-    geojson: function(_) {
-        if (!arguments.length) return this.getGeoJSON();
-        return this.setGeoJSON(_);
-    },
-
-    url: function(url) {
+    setURL: function(url) {
         url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
         mapbox.request(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load markers at ' + url);
-            this.geojson(json);
+            this.setGeoJSON(json);
         }, this));
         return this;
     },
 
-    id: function(id) {
-        return this.url(mapbox.base() + id + '/markers.geojson');
+    setID: function(id) {
+        return this.setURL(mapbox.base() + id + '/markers.geojson');
     },
 
     // # Filter
@@ -60,11 +54,6 @@ mapbox.markerLayer = L.FeatureGroup.extend({
 
     getFilter: function() {
         return this.options.filter;
-    },
-
-    filter: function(_) {
-        if (!arguments.length) return this.getFilter();
-        else return this.setFilter(_);
     },
 
     _initialize: function(json) {

@@ -1,27 +1,27 @@
+// Low-level geocoding interface - wraps specific API calls and their
+// return values.
 mapbox.geocoder = function(_) {
     var geocoder = {};
 
-    geocoder.url = function(_) {
-        if (!arguments.length) return url;
+    geocoder.getURL = function(_) {
+        return url;
+    };
+
+    geocoder.setURL = function(_) {
         url = _;
         return geocoder;
     };
 
-    geocoder.id = function(_) {
-        return geocoder.url(mapbox.base() + _ + '/geocode/{query}.json');
-    };
-
-    geocoder.tilejson = function(_) {
-        return geocoder.id(_.id || '');
+    geocoder.setID = function(_) {
+        return geocoder.setURL(mapbox.base() + _ + '/geocode/{query}.json');
     };
 
     geocoder.setTileJSON = function(_) {
-        if (!_) return geocoder;
-        return geocoder.tilejson(_);
+        return geocoder.setID(_.id || '');
     };
 
     geocoder.queryUrl = function(_) {
-        return L.Util.template(this.url(), { query: _ });
+        return L.Util.template(this.getURL(), { query: _ });
     };
 
     geocoder.query = function(_, callback) {
@@ -67,8 +67,7 @@ mapbox.geocoder = function(_) {
     };
 
     if (typeof _ === 'string') mapbox.idUrl(_, geocoder);
-    else if (typeof _ === 'object') geocoder.tilejson(_);
+    else if (typeof _ === 'object') geocoder.setTileJSON(_);
 
     return geocoder;
 };
-

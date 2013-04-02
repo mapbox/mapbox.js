@@ -1,4 +1,4 @@
-// # Legend
+// Legend control - a `L.Control` subclass.
 mapbox.LegendControl = L.Control.extend({
 
     options: {
@@ -21,30 +21,24 @@ mapbox.LegendControl = L.Control.extend({
     },
 
     addLegend: function(text) {
-        if (!text) { return; }
+        if (!text) { return this; }
 
         if (!this._legends[text]) {
             this._legends[text] = 0;
         }
 
         this._legends[text]++;
-
-        this._update();
-
-        return this;
+        return this._update();
     },
 
     removeLegend: function(text) {
-        if (!text) { return; }
-
+        if (!text) { return this; }
         if (this._legends[text]) this._legends[text]--;
-        this._update();
-
-        return this;
+        return this._update();
     },
 
     _update: function() {
-        if (!this._map) { return; }
+        if (!this._map) { return this; }
 
         this._container.innerHTML = '';
 
@@ -55,6 +49,8 @@ mapbox.LegendControl = L.Control.extend({
                 div.innerHTML = mapbox.sanitize(i);
             }
         }
+
+        return this;
     }
 });
 

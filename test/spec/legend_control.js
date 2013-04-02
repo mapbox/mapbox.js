@@ -13,6 +13,7 @@ describe('mapbox.legendControl', function() {
         var legend = mapbox.legendControl();
         expect(legend.addLegend('foo')).to.eql(legend);
         expect(legend.removeLegend('foo')).to.eql(legend);
+        expect(legend.removeLegend()).to.eql(legend);
     });
 
     it('sanitizes its content', function() {

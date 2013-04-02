@@ -37,19 +37,14 @@ mapbox.gridLayer = L.Class.extend({
         return this._tilejson;
     },
 
-    tilejson: function(_) {
-        if (!arguments.length) return this.getTileJSON();
-        return this.setTileJSON(_);
-    },
-
-    url: function(_) {
+    setURL: function(_) {
         mapbox.request(_, L.bind(function(err, json) {
-            if (!err) this.tilejson(json);
+            if (!err) this.setTileJSON(json);
         }, this));
         return this;
     },
 
-    id: function(_) {
+    setID: function(_) {
         return this.url(mapbox.base() + _ + '.json');
     },
 

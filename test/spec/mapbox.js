@@ -16,7 +16,13 @@ describe("mapbox", function() {
         });
     });
 
-    describe("request", function() {
+    describe('#lbounds', function() {
+        it('generates a L.LLatLngBounds object', function() {
+            expect(mapbox.lbounds([0, 1, 2, 3])).to.be.a(L.LatLngBounds);
+        });
+    });
+
+    describe('request', function() {
         var server;
 
         beforeEach(function() {
@@ -27,7 +33,7 @@ describe("mapbox", function() {
             server.restore();
         });
 
-        describe("in browsers which support CORS", function() {
+        describe('in browsers which support CORS', function() {
             var cors = mapbox.browser.cors;
 
             beforeEach(function() {
@@ -38,7 +44,7 @@ describe("mapbox", function() {
                 mapbox.browser.cors = cors;
             });
 
-            it("loads from the given URL using XHR", function(done) {
+            it('loads from the given URL using XHR', function(done) {
                 server.respondWith("GET", "data/tilejson.json",
                     [200, { "Content-Type": "application/json" }, '{"status": "success"}']);
 
@@ -51,7 +57,7 @@ describe("mapbox", function() {
                 server.respond();
             });
 
-            it("calls the callback with an error if the request fails", function(done) {
+            it('calls the callback with an error if the request fails', function(done) {
                 server.respondWith("GET", "data/tilejson.json",
                     [500, { "Content-Type": "application/json" }, '{"status": "error"}']);
 
@@ -78,31 +84,6 @@ describe("mapbox", function() {
 
             it("loads from the given URL using JSONP", function() {
                 // There's really no good way to test this without a server-side component.
-            });
-        });
-    });
-    describe('sanitize', function() {
-        var bad = '<a href="data:foo/bar">foo</a>';
-        describe('default', function() {
-            it('cleans a simple string', function() {
-                expect(mapbox.sanitize('foo bar')).to.eql('foo bar');
-            });
-            it('sanitizes data urls', function() {
-                expect(mapbox.sanitize(bad)).to.eql('<a>foo</a>');
-            });
-        });
-        describe('#on', function() {
-            it('turns the sanitization on and off', function() {
-                mapbox.sanitize.off();
-                expect(mapbox.sanitize(bad)).to.eql(bad);
-                mapbox.sanitize.on();
-            });
-        });
-        describe('#enable', function() {
-            it('turns the sanitization on and off', function() {
-                mapbox.sanitize.enable(false);
-                expect(mapbox.sanitize(bad)).to.eql(bad);
-                mapbox.sanitize.enable(true);
             });
         });
     });

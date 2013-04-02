@@ -12,7 +12,7 @@ describe("mapbox.map", function() {
 
     it("allows access to the tilejson object after assignment", function() {
         var layer = new mapbox.map(element, tileJSON);
-        expect(layer.tilejson()).to.equal(tileJSON);
+        expect(layer.getTileJSON()).to.equal(tileJSON);
     });
 
     it("adds a tile layer immediately", function() {
@@ -22,7 +22,7 @@ describe("mapbox.map", function() {
 
     it("initializes the tile layer", function() {
         var group = new mapbox.map(element, tileJSON);
-        expect(group.tileLayer.tilejson()).to.equal(tileJSON);
+        expect(group.tileLayer.getTileJSON()).to.equal(tileJSON);
     });
 
     it("adds a data layer immediately", function() {
@@ -37,6 +37,6 @@ describe("mapbox.map", function() {
 
     it("initializes the grid layer", function() {
         var group = new mapbox.map(element, tileJSON);
-        expect(group.gridLayer.tilejson()).to.equal(tileJSON);
+        expect(group.gridLayer.getTileJSON()).to.equal(tileJSON);
     });
 });

@@ -38,20 +38,31 @@ describe('mapbox.geocoderControl', function() {
 
     it('sets url based on an id', function() {
         var control = new mapbox.geocoderControl('examples.map-vyofok3q');
-        expect(control.url()).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
     });
 
-    describe('#setUrl', function() {
-        it('can re-set url', function() {
-            var control = new mapbox.geocoderControl('examples.map-vyofok3q');
-            control.setUrl('foo/{query}.json');
-            expect(control.getUrl()).to.equal('foo/{query}.json');
-        });
-    });
-
-    it('can re-set id', function() {
+    it('#setURL', function() {
         var control = new mapbox.geocoderControl('examples.map-vyofok3q');
-        expect(control.setId('foobar')).to.eql(control);
-        expect(control.url()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
+        control.setURL('foo/{query}.json');
+        expect(control.getURL()).to.equal('foo/{query}.json');
+    });
+
+    it('#setID', function() {
+        var control = new mapbox.geocoderControl('examples.map-vyofok3q');
+        expect(control.setID('foobar')).to.eql(control);
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
+    });
+
+    it('#getID', function() {
+        var control = new mapbox.geocoderControl('examples.map-vyofok3q');
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+        expect(control.setID('foobar')).to.eql(control);
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
+    });
+
+    it('#setErrorHandler', function() {
+        var control = new mapbox.geocoderControl('examples.map-vyofok3q');
+        expect(control.setErrorHandler(function() {
+        })).to.eql(control);
     });
 });

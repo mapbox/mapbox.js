@@ -5,39 +5,24 @@ mapbox.geocoderControl = L.Control.extend({
         this._errorHandler = function() {};
     },
 
-    url: function(_) {
-        if (!arguments.length) return this.geocoder.url();
-        this.geocoder.url(_);
+    setURL: function(_) {
+        return this.geocoder.setURL(_);
+    },
+
+    getURL: function() {
+        return this.geocoder.getURL();
+    },
+
+    setID: function(_) {
+        this.geocoder.setID(_);
         return this;
     },
 
-    setUrl: function(_) {
-        return this.url(_);
+    setTileJSON: function(_) {
+        return this.geocoder.setTileJSON(_);
     },
 
-    getUrl: function() {
-        return this.url();
-    },
-
-    id: function(_) {
-        this.geocoder.id(_);
-        return this;
-    },
-
-    setId: function(_) {
-        return this.id(_);
-    },
-
-    tilejson: function(_) {
-        this.geocoder.tilejson(_);
-        return this;
-    },
-
-    setTilejson: function(_) {
-        return this.tilejson(_);
-    },
-
-    errorHandler: function(_) {
+    setErrorHandler: function(_) {
         this._errorHandler = _;
         return this;
     },

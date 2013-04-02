@@ -44,7 +44,7 @@ mapbox.tileLayer = L.TileLayer.extend({
     },
 
     // # URL
-    setUrl: function(_) {
+    setURL: function(_) {
         this._url = _;
         mapbox.request(this._url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load TileJSON at ' + url);
@@ -59,7 +59,7 @@ mapbox.tileLayer = L.TileLayer.extend({
 
     url: function(url) {
         if (!arguments.length) return this.getUrl();
-        else return this.setUrl(url);
+        else return this.setURL(url);
     },
 
     setId: function(id) {
