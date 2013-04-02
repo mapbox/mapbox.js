@@ -87,6 +87,3 @@ mapbox.requestp = function(url, callback) {
         error: function(error) { callback(error, null); }
     });
 };
-
-// Turn off Leaflet's advertisement.
-L.Control.Attribution.prototype.options.prefix = '';

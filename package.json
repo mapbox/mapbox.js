@@ -2,12 +2,13 @@
   "author": "MapBox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "0.0.0",
+  "version": "1.0.0alpha0",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
+  "main": "dist/mapbox.js",
   "dependencies": {
     "reqwest": "~0.6.4",
     "leaflet": "git://github.com/Leaflet/Leaflet.git",

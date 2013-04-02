@@ -11,6 +11,9 @@ mapbox.Map = L.Map.extend({
     initialize: function(element, _, options) {
         L.Map.prototype.initialize.call(this, element, options);
 
+        // disable the default 'Powered by Leaflet' text
+        this.attributionControl.setPrefix('');
+
         if (this.options.tileLayer) {
             this.tileLayer = new mapbox.tileLayer();
             this.addLayer(this.tileLayer);
@@ -60,11 +63,9 @@ mapbox.Map = L.Map.extend({
     },
 
     // pull tilejson data from an endpoint, given just by an id
-    id: function(id) {
+    setID: function(id) {
         return this.setURL(mapbox.base() + id + '.json');
     },
-
-    setId: function(_) { this.id(_); },
 
     _initialize: function(json) {
         this.tileLayer.setTileJSON(json);
