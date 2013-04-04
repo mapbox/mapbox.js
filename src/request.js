@@ -1,3 +1,5 @@
+var reqwest = require('reqwest');
+
 // Request a resouce, with intelligent json/jsonp switching
 mapbox.request = function(url, callback) {
     if (!url) return;

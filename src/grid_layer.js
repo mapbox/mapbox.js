@@ -1,3 +1,5 @@
+var Mustache = require('mustache');
+
 // forked from danzel/L.UTFGrid
 mapbox.gridLayer = L.Class.extend({
     includes: L.Mixin.Events,

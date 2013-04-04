@@ -24,7 +24,8 @@
     "mocha": "~1.9",
     "expect.js": "~0.2.0",
     "mocha-phantomjs": "~1.1.1",
-    "happen": "~0.1.2"
+    "happen": "~0.1.2",
+    "browserify": "~2.11.0"
   },
   "optionalDependencies": {},
   "engines": {
