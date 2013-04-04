@@ -866,3 +866,15 @@ _Returns_ the layer object.
 ### layer.parent
 
 The layer's parent DOM element.
+
+### layer.enable()
+
+Turn this layer on if it is disabled, displaying it in the map.
+
+_Returns_ the layer object.
+
+### layer.enable()
+
+Turn this layer off if it is enabled, hiding it from the map.
+
+_Returns_ the layer object.
