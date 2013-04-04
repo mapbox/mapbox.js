@@ -63,7 +63,7 @@ describe("mapbox", function() {
 
                 mapbox.request('data/tilejson.json', function(err, data) {
                     expect(err).to.be.ok();
-                    expect(data).to.be(null);
+                    expect(data).to.be(undefined);
                     done();
                 });
 

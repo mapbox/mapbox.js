@@ -54,7 +54,7 @@ mapbox.Map = L.Map.extend({
     },
 
     // pull tilejson data from an endpoint
-    loadURL: function(url) {
+    loadURL: function(url, cb) {
         mapbox.request(url, L.bind(function(err, json) {
             if (err) mapbox.log('could not load TileJSON at ' + url);
             else if (json) this.setTileJSON(json);

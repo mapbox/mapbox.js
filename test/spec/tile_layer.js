@@ -55,12 +55,13 @@ describe("mapbox.tileLayer", function() {
 
         it('supports a callback', function(done) {
             var layer = new mapbox.tileLayer();
-            expect(layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
-                expect(this).to.eql(layer);
-                expect(err).to.eql(null);
+
+            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
+                expect(this).to.equal(layer);
+                expect(err).to.equal(undefined);
                 expect(json).to.eql(helpers.tileJSON);
                 done();
-            })).to.eql(layer);
+            });
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
@@ -74,17 +75,33 @@ describe("mapbox.tileLayer", function() {
             expect(layer.loadID('mapbox.map-0l53fhk2')).to.eql(layer);
         });
 
-        it('supports a callback', function(done) {
+        it('calls a callback on success', function(done) {
             var layer = new mapbox.tileLayer();
-            expect(layer.loadID('mapbox.map-0l53fhk2', function(err, json) {
-                expect(this).to.eql(layer);
-                expect(err).to.eql(null);
+
+            layer.loadID('mapbox.map-0l53fhk2', function(err, json) {
+                expect(this).to.equal(layer);
+                expect(err).to.equal(undefined);
                 expect(json).to.eql(helpers.tileJSON);
                 done();
-            })).to.eql(layer);
+            });
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+
+        it('calls a callback on error', function(done) {
+            var layer = new mapbox.tileLayer();
+
+            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
+                expect(this).to.equal(layer);
+                expect(err.status).to.equal(400);
+                expect(json).to.equal(undefined);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
             server.respond();
         });
 

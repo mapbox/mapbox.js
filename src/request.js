@@ -7,7 +7,7 @@ mapbox.request = function(url, callback) {
         type: (mapbox.browser.cors || mapbox.isSameOrigin(url)) ? 'json' : 'jsonp',
         crossOrigin: mapbox.browser.cors,
         success: function(result) { callback(undefined, result); },
-        error: function(error) { callback(error, null); }
+        error: function(error) { callback(error, undefined); }
     });
 };
 
@@ -19,6 +19,6 @@ mapbox.requestp = function(url, callback) {
         url: url,
         type: 'jsonp',
         success: function(result) { callback(undefined, result); },
-        error: function(error) { callback(error, null); }
+        error: function(error) { callback(error, undefined); }
     });
 };
