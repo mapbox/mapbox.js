@@ -4,6 +4,7 @@ mapbox.ui = function(map) {
     var ui = {
         zoomer: wax.mm.zoomer().map(map).smooth(true),
         pointselector: wax.mm.pointselector().map(map),
+        boxselector: wax.mm.boxselector().map(map),
         hash: wax.mm.hash().map(map),
         zoombox: wax.mm.zoombox().map(map),
         fullscreen: wax.mm.fullscreen().map(map),
