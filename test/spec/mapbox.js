@@ -87,4 +87,31 @@ describe("mapbox", function() {
             });
         });
     });
+
+    describe('#strict', function() {
+        it('throws an error on object/string', function() {
+            expect(function() {
+                mapbox.strict({}, 'string');
+            }).to.throwException(function(e) {
+                expect(e.message).to.eql('Invalid argument: string expected');
+            });
+            expect(function() {
+                mapbox.strict('foo', 'object');
+            }).to.throwException(function(e) {
+                expect(e.message).to.eql('Invalid argument: object expected');
+            });
+        });
+        it('throws an error on string/number', function() {
+            expect(function() {
+                mapbox.strict(5, 'string');
+            }).to.throwException(function(e) {
+                expect(e.message).to.eql('Invalid argument: string expected');
+            });
+            expect(function() {
+                mapbox.strict('5', 'number');
+            }).to.throwException(function(e) {
+                expect(e.message).to.eql('Invalid argument: number expected');
+            });
+        });
+    });
 });

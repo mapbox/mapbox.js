@@ -23,6 +23,7 @@ mapbox.gridLayer = L.Class.extend({
     },
 
     setTileJSON: function(_) {
+        mapbox.strict(_, 'object');
         this._tilejson = _;
         if (this._tilejson.grids) this._urls = this._tilejson.grids;
         if (this._tilejson.template) {

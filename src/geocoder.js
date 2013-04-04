@@ -17,6 +17,7 @@ mapbox.geocoder = function(_) {
     };
 
     geocoder.setTileJSON = function(_) {
+        mapbox.strict(_, 'object');
         return geocoder.setID(_.id || '');
     };
 

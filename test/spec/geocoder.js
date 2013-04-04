@@ -82,10 +82,20 @@ describe('mapbox.geocoder', function() {
     });
 
     describe('tileset settings', function() {
-        it('#id', function() {
+        it('#setID', function() {
             var g = mapbox.geocoder();
             expect(g.setID('foo.bar')).to.eql(g);
             expect(g.getURL()).to.eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
+        });
+        describe('#setTileJSON', function() {
+            it('validates argument', function() {
+                var g = mapbox.geocoder();
+                expect(function() {
+                    g.setTileJSON('foo');
+                }).to.throwException(function(e) {
+                    expect(e.message).to.eql('Invalid argument: object expected');
+                });
+            });
         });
     });
 });

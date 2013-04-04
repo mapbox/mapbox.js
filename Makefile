@@ -30,6 +30,7 @@ mapbox.lib.js: \
 # mapbox.js-specific code
 mapbox.core.js: \
 	src/mapbox.js \
+	src/request.js \
 	src/geocoder.js \
 	src/geocoder_control.js \
 	src/hash.js \
