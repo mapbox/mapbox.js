@@ -58,7 +58,7 @@ mapbox.Map = L.Map.extend({
         mapbox.request(url, L.bind(function(err, json) {
             if (err) mapbox.log('could not load TileJSON at ' + url);
             else if (json) this.setTileJSON(json);
-            if (cb) cb.apply(this, err, json);
+            if (cb) cb.call(this, err, json);
         }, this));
         return this;
     },

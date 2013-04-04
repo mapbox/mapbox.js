@@ -1,4 +1,3 @@
-// Legend control - a `L.Control` subclass.
 mapbox.LegendControl = L.Control.extend({
 
     options: {

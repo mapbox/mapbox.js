@@ -34,7 +34,7 @@ mapbox.markerLayer = L.FeatureGroup.extend({
         mapbox.request(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load markers at ' + url);
             else if (json) this.setGeoJSON(json);
-            if (cb) cb.apply(this, null, json);
+            if (cb) cb.call(this, null, json);
         }, this));
         return this;
     },
