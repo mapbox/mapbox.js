@@ -4,7 +4,6 @@ mapbox.tileLayer = L.TileLayer.extend({
         L.TileLayer.prototype.initialize.call(this, undefined, options);
 
         this._tilejson = {};
-        this._url = '';
 
         if (options && options.detectRetina &&
             L.Browser.retina && options.retinaVersion) {
@@ -14,11 +13,10 @@ mapbox.tileLayer = L.TileLayer.extend({
         if (typeof _ === 'string') {
             mapbox.idUrl(_, this);
         } else if (_ && typeof _ === 'object') {
-            this.tilejson(_);
+            this.setTileJSON(_);
         }
     },
 
-    // # TileJSON
     setTileJSON: function(json) {
         L.extend(this.options, {
             tiles: json.tiles,
@@ -38,37 +36,17 @@ mapbox.tileLayer = L.TileLayer.extend({
         return this._tilejson;
     },
 
-    tilejson: function(json) {
-        if (!arguments.length) return this.getTileJSON();
-        else return this.setTileJSON(json);
-    },
-
-    // # URL
-    setURL: function(_) {
-        this._url = _;
-        mapbox.request(this._url, L.bind(function(err, json) {
+    loadURL: function(url, cb) {
+        mapbox.request(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load TileJSON at ' + url);
-            this.tilejson(json);
+            else if (json) this.setTileJSON(json);
+            if (cb) cb.apply(this, null, json);
         }, this));
         return this;
     },
 
-    getUrl: function() {
-        return this._url;
-    },
-
-    url: function(url) {
-        if (!arguments.length) return this.getUrl();
-        else return this.setURL(url);
-    },
-
-    setId: function(id) {
-        return this.url(mapbox.base() + id + '.json');
-    },
-
-    id: function(id) {
-        if (!arguments.length) return this.getId();
-        else return this.setId(id);
+    loadID: function(id, cb) {
+        return this.loadURL(mapbox.base() + id + '.json', cb);
     },
 
     getTileUrl: function(tilePoint) {

@@ -19,7 +19,7 @@ mapbox.gridLayer = L.Class.extend({
         L.Util.setOptions(this, options);
 
         if (typeof _ === 'string') mapbox.idUrl(_, this);
-        else if (_ && typeof _ === 'object') this.tilejson(_);
+        else if (_ && typeof _ === 'object') this.setTileJSON(_);
     },
 
     setTileJSON: function(_) {
@@ -37,15 +37,17 @@ mapbox.gridLayer = L.Class.extend({
         return this._tilejson;
     },
 
-    setURL: function(_) {
-        mapbox.request(_, L.bind(function(err, json) {
-            if (!err) this.setTileJSON(json);
+    loadURL: function(url, cb) {
+        mapbox.request(url, L.bind(function(err, json) {
+            if (err) mapbox.log('could not load TileJSON at ' + url);
+            else if (json) this.setTileJSON(json);
+            if (cb) cb.apply(this, err, json);
         }, this));
         return this;
     },
 
-    setID: function(_) {
-        return this.url(mapbox.base() + _ + '.json');
+    loadID: function(id, cb) {
+        return this.url(mapbox.base() + id + '.json', cb);
     },
 
     onAdd: function(map) {

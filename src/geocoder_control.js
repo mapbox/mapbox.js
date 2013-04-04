@@ -27,6 +27,10 @@ mapbox.geocoderControl = L.Control.extend({
         return this;
     },
 
+    getErrorHandler: function(_) {
+        return this._errorHandler;
+    },
+
     onAdd: function(map) {
         this._map = map;
 

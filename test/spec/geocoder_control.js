@@ -62,7 +62,8 @@ describe('mapbox.geocoderControl', function() {
 
     it('#setErrorHandler', function() {
         var control = new mapbox.geocoderControl('examples.map-vyofok3q');
-        expect(control.setErrorHandler(function() {
-        })).to.eql(control);
+        var errHand = function() { };
+        expect(control.setErrorHandler(errHand)).to.eql(control);
+        expect(control.getErrorHandler()).to.eql(errHand);
     });
 });

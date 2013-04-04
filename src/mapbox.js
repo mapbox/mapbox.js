@@ -9,8 +9,8 @@ mapbox.HTTP_URLS = [
 mapbox.HTTPS_URLS = [];
 
 mapbox.idUrl = function(_, t) {
-    if (_.indexOf('/') == -1) t.setID(_);
-    else t.setURL(_);
+    if (_.indexOf('/') == -1) t.loadID(_);
+    else t.loadURL(_);
 };
 
 mapbox.lbounds = function(_) {

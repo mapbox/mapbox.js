@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "uglify-js": "~2.2.5",
-    "mocha": "~1.8",
+    "mocha": "~1.9",
     "expect.js": "~0.2.0",
     "mocha-phantomjs": "~1.1.1",
     "happen": "~0.1.2"

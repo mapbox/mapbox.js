@@ -1,4 +1,4 @@
-describe("mapbox.gridLayer", function() {
+describe('mapbox.gridLayer', function() {
     var server, tileJSON = helpers.tileJSON;
 
     beforeEach(function() {
@@ -9,12 +9,20 @@ describe("mapbox.gridLayer", function() {
         server.restore();
     });
 
-    it("is initialized", function() {
-        var layer = new mapbox.gridLayer();
-        expect(layer).to.be.ok();
+    describe('constructor', function() {
+        it('is initialized', function() {
+            var layer = new mapbox.gridLayer();
+            expect(layer).to.be.ok();
+        });
+
+        it('is initialized with tilejson', function() {
+            var layer = new mapbox.gridLayer(tileJSON);
+            expect(layer).to.be.ok();
+            expect(layer.getTileJSON()).to.be.eql(tileJSON);
+        });
     });
 
-    describe("#getTileJSON", function() {
+    describe('#getTileJSON', function() {
         it('is by default empty', function() {
             var layer = new mapbox.gridLayer();
             expect(layer.getTileJSON()).to.eql({});
@@ -26,14 +34,15 @@ describe("mapbox.gridLayer", function() {
         });
     });
 
-    describe("#setTileJSON", function() {
+    describe('#setTileJSON', function() {
         it('is by default empty', function() {
             var layer = new mapbox.gridLayer();
             expect(layer.setTileJSON(tileJSON)).to.eql(layer);
             expect(layer.getTileJSON()).to.eql(tileJSON);
         });
     });
-    describe("#_utfDecode", function() {
+
+    describe('#_utfDecode', function() {
         var layer = new mapbox.gridLayer();
         it('decrements not-out-of-range values', function() {
             expect(layer._utfDecode(33)).to.eql(1);

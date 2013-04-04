@@ -20,12 +20,12 @@ mapbox.geocoder = function(_) {
         return geocoder.setID(_.id || '');
     };
 
-    geocoder.queryUrl = function(_) {
+    geocoder.queryURL = function(_) {
         return L.Util.template(this.getURL(), { query: _ });
     };
 
     geocoder.query = function(_, callback) {
-        mapbox.request(this.queryUrl(_), function(err, json) {
+        mapbox.request(this.queryURL(_), function(err, json) {
             if (json && json.results && json.results.length) {
                 var res = {
                     results: json.results,
@@ -59,14 +59,17 @@ mapbox.geocoder = function(_) {
             q = pts.join(';');
         } else q = norm(_);
 
-        mapbox.request(this.queryUrl(q), function(err, json) {
+        mapbox.request(this.queryURL(q), function(err, json) {
             callback(err, json);
         });
 
         return geocoder;
     };
 
-    if (typeof _ === 'string') mapbox.idUrl(_, geocoder);
+    if (typeof _ === 'string') {
+        if (_.indexOf('/') == -1) geocoder.setID(_);
+        else geocoder.setURL(_);
+    }
     else if (typeof _ === 'object') geocoder.setTileJSON(_);
 
     return geocoder;

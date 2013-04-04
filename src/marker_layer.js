@@ -29,20 +29,20 @@ mapbox.markerLayer = L.FeatureGroup.extend({
         return this._geojson;
     },
 
-    setURL: function(url) {
+    loadURL: function(url, cb) {
         url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
         mapbox.request(url, L.bind(function(err, json) {
             if (err) return mapbox.log('could not load markers at ' + url);
-            this.setGeoJSON(json);
+            else if (json) this.setGeoJSON(json);
+            if (cb) cb.apply(this, null, json);
         }, this));
         return this;
     },
 
-    setID: function(id) {
-        return this.setURL(mapbox.base() + id + '/markers.geojson');
+    loadID: function(id, cb) {
+        return this.loadURL(mapbox.base() + id + '/markers.geojson', cb);
     },
 
-    // # Filter
     setFilter: function(_) {
         this.options.filter = _;
         if (this._geojson) {
