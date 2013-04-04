@@ -18,6 +18,9 @@ mapbox.interaction = function() {
     };
 
     interaction.auto = function() {
+        // if .auto() is called repeatedly, do not add tooltips
+        // multiple times - just call .refresh()
+        if (auto) return interaction.refresh();
         auto = true;
         interaction.on(wax.tooltip()
             .animate(true)
