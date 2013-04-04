@@ -1,5 +1,1 @@
-before_script:
-  - "npm install"
-  - "npm install -g uglify-js mocha-phantomjs"
-  - "make"
-script: mocha-phantomjs test/index.html
+language: node_js
