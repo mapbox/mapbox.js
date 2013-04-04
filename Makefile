@@ -9,10 +9,6 @@ all: \
 	dist/mapbox.ie.css \
 	dist/images
 
-.INTERMEDIATE dist/mapbox.min.js: \
-	mapbox.lib.js \
-	mapbox.core.js
-
 node_modules/Leaflet/dist/leaflet-src.js:
 	cd node_modules/Leaflet && npm install && jake
 
