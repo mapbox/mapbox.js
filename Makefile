@@ -31,8 +31,8 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 	cp node_modules/Leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.uncompressed.js: dist index.js node_modules/Leaflet/dist/leaflet-src.js
-	$(BROWSERIFY) --standalone mapbox index.js > $@
+dist/mapbox.uncompressed.js: Makefile src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
+	$(BROWSERIFY) --debug index.js > $@
 
 test/libs.js:
 	$(BROWSERIFY) -r mustache -r corslite -r json3 > $@
