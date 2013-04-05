@@ -32,7 +32,7 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.uncompressed.js: dist index.js node_modules/Leaflet/dist/leaflet-src.js
-	$(BROWSERIFY) index.js > $@
+	$(BROWSERIFY) --standalone mapbox index.js > $@
 
 test/libs.js:
 	$(BROWSERIFY) -r mustache -r reqwest > $@
