@@ -45,18 +45,6 @@ mapbox.browser = (function() {
     return browser;
 })();
 
-mapbox.log = function(_) {
-    if (console && typeof console.error === 'function') {
-        console.error(_);
-    }
-};
-
-mapbox.strict = function(_, type) {
-    if (typeof _ !== type) {
-        throw Error('Invalid argument: ' + type + ' expected');
-    }
-};
-
 // http://stackoverflow.com/questions/9404793/check-if-same-origin-policy-applies
 mapbox.isSameOrigin = function(url) {
     var loc = window.location,

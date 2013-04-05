@@ -8,7 +8,8 @@ require('leaflet-fullscreen/src/Leaflet.fullscreen');
 
 module.exports = window.mapbox = require('./src/mapbox');
 
-require('./src/request');
+module.exports.request = require('./src/request');
+
 require('./src/geocoder');
 require('./src/geocoder_control');
 require('./src/hash');

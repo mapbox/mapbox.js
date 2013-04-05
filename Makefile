@@ -31,11 +31,11 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 	cp node_modules/Leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.uncompressed.js: dist index.js node_modules/Leaflet/dist/leaflet-src.js
+dist/mapbox.uncompressed.js: src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
 	$(BROWSERIFY) index.js > $@
 
 test/libs.js:
-	$(BROWSERIFY) -r mustache -r reqwest > $@
+	$(BROWSERIFY) -r mustache -r corslite -r json3 > $@
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled

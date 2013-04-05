@@ -1,26 +1,16 @@
-var reqwest = require('reqwest');
+var corslite = require('corslite'),
+    JSON3 = require('json3');
 
-// Request a resouce, with intelligent json/jsonp switching
-mapbox.request = function(url, callback) {
-    if (!url) return;
-    if (!callback) return mapbox.log('mapbox.request requires a callback function');
-    reqwest({
-        url: url,
-        type: (mapbox.browser.cors || mapbox.isSameOrigin(url)) ? 'json' : 'jsonp',
-        crossOrigin: mapbox.browser.cors,
-        success: function(result) { callback(undefined, result); },
-        error: function(error) { callback(error, undefined); }
-    });
-};
-
-// Request a resouce via jsonp
-mapbox.requestp = function(url, callback) {
-    if (!url) return;
-    if (!callback) return mapbox.log('mapbox.requestp requires a callback function');
-    reqwest({
-        url: url,
-        type: 'jsonp',
-        success: function(result) { callback(undefined, result); },
-        error: function(error) { callback(error, undefined); }
-    });
+module.exports = function(url, callback) {
+    function strict(_, type) {
+        if (typeof _ !== type) {
+            throw Error('Invalid argument: ' + type + ' expected');
+        }
+    }
+    strict(url, 'string');
+    strict(callback, 'function');
+    corslite(url, function(err, resp) {
+        if (!err && resp) resp = JSON3.parse(resp.responseText);
+        callback(err, resp);
+    }, true);
 };
