@@ -152,7 +152,7 @@ module.exports = L.Class.extend({
     // TODO: Load from center etc
     _update: function() {
 
-        if (!this._map) return;
+        if (!this._map || !this._urls || !this._urls.length) return;
 
         var bounds = this._map.getPixelBounds(),
             z = this._map.getZoom(),
