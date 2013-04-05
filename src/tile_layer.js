@@ -1,6 +1,6 @@
 var util = require('./util');
 
-mapbox.tileLayer = L.TileLayer.extend({
+module.exports = L.TileLayer.extend({
 
     initialize: function(_, options) {
         L.TileLayer.prototype.initialize.call(this, undefined, options);

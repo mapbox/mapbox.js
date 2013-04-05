@@ -1,4 +1,4 @@
-mapbox.sanitize = (function() {
+module.exports = (function() {
     var enabled = true;
     // https://bugzilla.mozilla.org/show_bug.cgi?id=255107
     function cleanUrl(url) {

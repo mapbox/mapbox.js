@@ -1,7 +1,9 @@
-var util = require('./util');
+var util = require('./util'),
+    request = require('./request');
+
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
-mapbox.geocoder = function(_) {
+module.exports = function(_) {
     var geocoder = {}, url;
 
     geocoder.getURL = function(_) {
@@ -27,7 +29,7 @@ mapbox.geocoder = function(_) {
     };
 
     geocoder.query = function(_, callback) {
-        mapbox.request(this.queryURL(_), function(err, json) {
+        request(this.queryURL(_), function(err, json) {
             if (json && json.results && json.results.length) {
                 var res = {
                     results: json.results,

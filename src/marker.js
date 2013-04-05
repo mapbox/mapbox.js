@@ -1,9 +1,7 @@
 // mapbox-related markers functionality
-mapbox.marker = {};
-
 // provide an icon from mapbox's simple-style spec and hosted markers
 // service
-mapbox.marker.icon = function(fp) {
+function icon(fp) {
     fp = fp || {};
 
     var sizes = {
@@ -24,14 +22,19 @@ mapbox.marker.icon = function(fp) {
         iconAnchor: [sizes[size][0] / 2, sizes[size][1] / 2],
         popupAnchor: [0, -sizes[size][1] / 2]
     });
-};
+}
 
 // a factory that provides markers for Leaflet from MapBox's
 // [simple-style specification](https://github.com/mapbox/simplestyle-spec)
 // and [Markers API](http://mapbox.com/developers/api/#markers).
-mapbox.marker.style = function(f, latlon) {
+function style(f, latlon) {
     return L.marker(latlon, {
-        icon: mapbox.marker.icon(f.properties),
+        icon: icon(f.properties),
         title: f.properties.title
     });
+}
+
+module.exports = {
+    icon: icon,
+    style: style
 };

@@ -10,15 +10,15 @@ module.exports = window.mapbox = require('./src/mapbox');
 
 module.exports.request = require('./src/request');
 module.exports.util = require('./src/util');
+module.exports.geocoder = require('./src/geocoder');
+module.exports.sanitize = require('./src/sanitize');
+module.exports.marker = require('./src/marker');
+module.exports.tileLayer = require('./src/tile_layer');
 
-require('./src/geocoder');
 require('./src/geocoder_control');
 require('./src/hash');
-require('./src/sanitize');
 require('./src/map');
 require('./src/legend_control');
 require('./src/grid_layer');
 require('./src/grid_control');
-require('./src/marker');
-require('./src/tile_layer');
 require('./src/marker_layer');

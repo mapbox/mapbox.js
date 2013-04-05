@@ -1,4 +1,4 @@
-var mapbox = exports;
+var mapbox = module.exports;
 
 mapbox.HTTP_URLS = [
     'http://a.tiles.mapbox.com/v3/',
