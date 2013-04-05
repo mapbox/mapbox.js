@@ -6,7 +6,8 @@ mapbox.geocoderControl = L.Control.extend({
     },
 
     setURL: function(_) {
-        return this.geocoder.setURL(_);
+        this.geocoder.setURL(_);
+        return this;
     },
 
     getURL: function() {
@@ -19,7 +20,8 @@ mapbox.geocoderControl = L.Control.extend({
     },
 
     setTileJSON: function(_) {
-        return this.geocoder.setTileJSON(_);
+        this.geocoder.setTileJSON(_);
+        return this;
     },
 
     setErrorHandler: function(_) {
