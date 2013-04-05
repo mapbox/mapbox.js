@@ -1,7 +1,7 @@
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
 mapbox.geocoder = function(_) {
-    var geocoder = {};
+    var geocoder = {}, url;
 
     geocoder.getURL = function(_) {
         return url;
