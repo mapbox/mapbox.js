@@ -66,7 +66,7 @@ describe('mapbox.map', function() {
 
             map.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
                 expect(this).to.equal(map);
-                expect(err).to.equal(undefined);
+                expect(err).to.equal(null);
                 expect(json).to.eql(helpers.tileJSON);
                 done();
             });
@@ -82,7 +82,7 @@ describe('mapbox.map', function() {
             map.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
                 expect(this).to.equal(map);
                 expect(err.status).to.equal(400);
-                expect(json).to.equal(undefined);
+                expect(json).to.equal(null);
                 done();
             });
 

@@ -49,7 +49,7 @@ describe("mapbox", function() {
                     [200, { "Content-Type": "application/json" }, '{"status": "success"}']);
 
                 mapbox.request('data/tilejson.json', function(err, data) {
-                    expect(err).to.be(undefined);
+                    expect(err).to.be(null);
                     expect(data).to.eql({status: 'success'});
                     done();
                 });
@@ -63,7 +63,7 @@ describe("mapbox", function() {
 
                 mapbox.request('data/tilejson.json', function(err, data) {
                     expect(err).to.be.ok();
-                    expect(data).to.be(undefined);
+                    expect(data).to.be(null);
                     done();
                 });
 
@@ -91,24 +91,24 @@ describe("mapbox", function() {
     describe('#strict', function() {
         it('throws an error on object/string', function() {
             expect(function() {
-                mapbox.strict({}, 'string');
+                mapbox.util.strict({}, 'string');
             }).to.throwException(function(e) {
                 expect(e.message).to.eql('Invalid argument: string expected');
             });
             expect(function() {
-                mapbox.strict('foo', 'object');
+                mapbox.util.strict('foo', 'object');
             }).to.throwException(function(e) {
                 expect(e.message).to.eql('Invalid argument: object expected');
             });
         });
         it('throws an error on string/number', function() {
             expect(function() {
-                mapbox.strict(5, 'string');
+                mapbox.util.strict(5, 'string');
             }).to.throwException(function(e) {
                 expect(e.message).to.eql('Invalid argument: string expected');
             });
             expect(function() {
-                mapbox.strict('5', 'number');
+                mapbox.util.strict('5', 'number');
             }).to.throwException(function(e) {
                 expect(e.message).to.eql('Invalid argument: number expected');
             });

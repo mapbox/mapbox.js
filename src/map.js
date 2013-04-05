@@ -1,3 +1,5 @@
+var util = require('./util');
+
 mapbox.Map = L.Map.extend({
     options: {
         tileLayer: true,
@@ -56,7 +58,7 @@ mapbox.Map = L.Map.extend({
     // pull tilejson data from an endpoint
     loadURL: function(url, cb) {
         mapbox.request(url, L.bind(function(err, json) {
-            if (err) mapbox.log('could not load TileJSON at ' + url);
+            if (err) util.log('could not load TileJSON at ' + url);
             else if (json) this.setTileJSON(json);
             if (cb) cb.call(this, err, json);
         }, this));

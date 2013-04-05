@@ -1,3 +1,4 @@
+var util = require('./util');
 var Mustache = require('mustache');
 
 // forked from danzel/L.UTFGrid
@@ -25,7 +26,7 @@ mapbox.gridLayer = L.Class.extend({
     },
 
     setTileJSON: function(_) {
-        mapbox.strict(_, 'object');
+        util.strict(_, 'object');
         this._tilejson = _;
         if (this._tilejson.grids) this._urls = this._tilejson.grids;
         if (this._tilejson.template) {
@@ -42,7 +43,7 @@ mapbox.gridLayer = L.Class.extend({
 
     loadURL: function(url, cb) {
         mapbox.request(url, L.bind(function(err, json) {
-            if (err) mapbox.log('could not load TileJSON at ' + url);
+            if (err) util.log('could not load TileJSON at ' + url);
             else if (json) this.setTileJSON(json);
             if (cb) cb.call(this, err, json);
         }, this));
@@ -175,9 +176,9 @@ mapbox.gridLayer = L.Class.extend({
                 // avoid loading the same grid tile multiple times
                 if (!this._cache.hasOwnProperty(key)) {
                     this._cache[key] = null;
-                    mapbox.requestp(L.Util.template(this._url(x + y), {
+                    mapbox.request(L.Util.template(this._url(x + y), {
                         z: z, x: xw, y: yw
-                    }), this._load(key));
+                    }), this._load(key), true);
                 }
             }
         }

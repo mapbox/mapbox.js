@@ -1,3 +1,4 @@
+var util = require('./util');
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
 mapbox.geocoder = function(_) {
@@ -17,7 +18,7 @@ mapbox.geocoder = function(_) {
     };
 
     geocoder.setTileJSON = function(_) {
-        mapbox.strict(_, 'object');
+        util.strict(_, 'object');
         return geocoder.setID(_.id || '');
     };
 

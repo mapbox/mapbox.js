@@ -1,3 +1,4 @@
+var util = require('./util');
 // # markerLayer
 //
 // A layer of markers, loaded from MapBox or else. Adds the ability
@@ -32,7 +33,7 @@ mapbox.markerLayer = L.FeatureGroup.extend({
     loadURL: function(url, cb) {
         url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
         mapbox.request(url, L.bind(function(err, json) {
-            if (err) return mapbox.log('could not load markers at ' + url);
+            if (err) return util.log('could not load markers at ' + url);
             else if (json) this.setGeoJSON(json);
             if (cb) cb.call(this, null, json);
         }, this));

@@ -1,3 +1,5 @@
+var util = require('./util');
+
 mapbox.tileLayer = L.TileLayer.extend({
 
     initialize: function(_, options) {
@@ -38,7 +40,7 @@ mapbox.tileLayer = L.TileLayer.extend({
 
     loadURL: function(url, cb) {
         mapbox.request(url, L.bind(function(err, json) {
-            if (err) mapbox.log('could not load TileJSON at ' + url);
+            if (err) util.log('could not load TileJSON at ' + url);
             else if (json) this.setTileJSON(json);
             if (cb) cb.call(this, err, json);
         }, this));
