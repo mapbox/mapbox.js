@@ -14,7 +14,7 @@
     "leaflet-hash": "~0.1.0",
     "leaflet-fullscreen": "0.0.0",
     "mustache": "~0.7.2",
-    "corslite": "0.0.0",
+    "corslite": "0.0.1",
     "json3": "~3.2.4"
   },
   "scripts": {
