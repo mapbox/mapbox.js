@@ -1,7 +1,9 @@
-mapbox.geocoderControl = L.Control.extend({
+var geocoder = require('./geocoder');
+
+module.exports = L.Control.extend({
 
     initialize: function(_) {
-        this.geocoder = mapbox.geocoder(_);
+        this.geocoder = geocoder(_);
         this._errorHandler = function() {};
     },
 

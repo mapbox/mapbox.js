@@ -1,9 +1,11 @@
 var util = require('./util');
+var request = require('./request');
+
 // # markerLayer
 //
 // A layer of markers, loaded from MapBox or else. Adds the ability
 // to reset markers, filter them, and load them from a GeoJSON URL.
-mapbox.markerLayer = L.FeatureGroup.extend({
+module.exports = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; }
     },
@@ -32,7 +34,7 @@ mapbox.markerLayer = L.FeatureGroup.extend({
 
     loadURL: function(url, cb) {
         url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
-        mapbox.request(url, L.bind(function(err, json) {
+        request(url, L.bind(function(err, json) {
             if (err) return util.log('could not load markers at ' + url);
             else if (json) this.setGeoJSON(json);
             if (cb) cb.call(this, null, json);

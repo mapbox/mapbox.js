@@ -1,4 +1,6 @@
-mapbox.gridControl = L.Control.extend({
+var sanitize = require('./sanitize');
+
+module.exports = L.Control.extend({
     options: {
         mapping: {
             mousemove: ['teaser'],
@@ -20,13 +22,13 @@ mapbox.gridControl = L.Control.extend({
             if (typeof mapping[i] === 'function') {
                 var res = mapping[i](o);
                 if (typeof res === 'string') {
-                    this._container.innerHTML = mapbox.sanitize(res);
+                    this._container.innerHTML = sanitize(res);
                 }
             } else if (o[mapping[i]]) {
                 if (mapping[i] === 'location') {
                     window.top.location.href = o[mapping[i]];
                 } else {
-                    this._container.innerHTML = mapbox.sanitize(o[mapping[i]]);
+                    this._container.innerHTML = sanitize(o[mapping[i]]);
                 }
             }
         }

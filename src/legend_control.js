@@ -1,4 +1,6 @@
-mapbox.LegendControl = L.Control.extend({
+var sanitize = require('./sanitize');
+
+var LegendControl = L.Control.extend({
 
     options: {
         position: 'bottomright'
@@ -6,7 +8,7 @@ mapbox.LegendControl = L.Control.extend({
 
     initialize: function(options) {
         L.setOptions(this, options);
-        mapbox.sanitize.enable(options && options.sanitize);
+        sanitize.enable(options && options.sanitize);
         this._legends = {};
     },
 
@@ -53,6 +55,6 @@ mapbox.LegendControl = L.Control.extend({
     }
 });
 
-mapbox.legendControl = function(options) {
-    return new mapbox.LegendControl(options);
+module.exports = function(options) {
+    return new LegendControl(options);
 };

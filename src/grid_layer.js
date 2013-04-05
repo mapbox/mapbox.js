@@ -1,8 +1,9 @@
 var util = require('./util');
+var request = require('./request');
 var Mustache = require('mustache');
 
 // forked from danzel/L.UTFGrid
-mapbox.gridLayer = L.Class.extend({
+module.exports = L.Class.extend({
     includes: L.Mixin.Events,
 
     options: {
@@ -42,7 +43,7 @@ mapbox.gridLayer = L.Class.extend({
     },
 
     loadURL: function(url, cb) {
-        mapbox.request(url, L.bind(function(err, json) {
+        request(url, L.bind(function(err, json) {
             if (err) util.log('could not load TileJSON at ' + url);
             else if (json) this.setTileJSON(json);
             if (cb) cb.call(this, err, json);
@@ -176,7 +177,7 @@ mapbox.gridLayer = L.Class.extend({
                 // avoid loading the same grid tile multiple times
                 if (!this._cache.hasOwnProperty(key)) {
                     this._cache[key] = null;
-                    mapbox.request(L.Util.template(this._url(x + y), {
+                    request(L.Util.template(this._url(x + y), {
                         z: z, x: xw, y: yw
                     }), this._load(key), true);
                 }

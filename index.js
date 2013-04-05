@@ -14,11 +14,11 @@ module.exports.geocoder = require('./src/geocoder');
 module.exports.sanitize = require('./src/sanitize');
 module.exports.marker = require('./src/marker');
 module.exports.tileLayer = require('./src/tile_layer');
+module.exports.legendControl = require('./src/legend_control');
+module.exports.geocoderControl = require('./src/geocoder_control');
+module.exports.gridControl = require('./src/grid_control');
+module.exports.gridLayer = require('./src/grid_layer');
+module.exports.markerLayer = require('./src/marker_layer');
 
-require('./src/geocoder_control');
 require('./src/hash');
 require('./src/map');
-require('./src/legend_control');
-require('./src/grid_layer');
-require('./src/grid_control');
-require('./src/marker_layer');
