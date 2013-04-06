@@ -15,7 +15,7 @@ map.addLayer(mapbox.layer().id('examples.map-zr0njcqy'));
 map.ui.zoomer.add();
 
 // example.geojson is a well-formed GeoJSON document. For this
-// style, the file must be on the same domain name as the map,
+// example, the file must be on the same domain name as the map,
 // or loading will not work due to cross-domain request restrictions
 var markers = mapbox.markers.layer().url('../../assets/data/example.geojson');
 mapbox.markers.interaction(markers);
