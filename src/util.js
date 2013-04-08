@@ -9,6 +9,12 @@ module.exports = {
             throw Error('Invalid argument: ' + type + ' expected');
         }
     },
+    strict_oneof: function(_, values) {
+        if (values.indexOf(_) == -1) {
+            throw Error('Invalid argument: ' + _ + ' given, valid values are ' +
+                values.join(', '));
+        }
+    },
     lbounds: function(_) {
         // leaflet-compatible bounds, since leaflet does not do geojson
         return new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]);

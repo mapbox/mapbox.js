@@ -3,8 +3,13 @@ var util = require('./util'),
 
 module.exports = L.TileLayer.extend({
 
+    options: {
+        format: 'png'
+    },
+
     // http://mapbox.com/developers/api/#image_quality
     formats: [
+        'png',
         // PNG
         'png32', 'png64', 'png128', 'png256',
         // JPG
@@ -18,6 +23,10 @@ module.exports = L.TileLayer.extend({
         if (options && options.detectRetina &&
             L.Browser.retina && options.retinaVersion) {
             _ = options.retinaVersion;
+        }
+
+        if (options && options.format) {
+            util.strict_oneof(options.format, this.formats);
         }
 
         if (typeof _ === 'string') {
@@ -68,7 +77,8 @@ module.exports = L.TileLayer.extend({
             index = (tilePoint.x + tilePoint.y) % tiles.length,
             url = tiles[index];
 
-        return L.Util.template(url, tilePoint);
+        return L.Util.template(url, tilePoint)
+            .replace('.png', '.' + this.options.format);
     },
 
     // TileJSON.TileLayers are added to the map immediately, so that they get
