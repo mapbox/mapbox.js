@@ -18,9 +18,13 @@
 	map.markerLayer.on('mouseover', function(e) {
 		e.layer.openPopup();
 	});
-	// Hide popup when user's cursor leaves marker
+	// Hide popup when user's cursor leaves marker.
+	// We add a timeout to make it a little more visually graceful
+	// in case of rapid cursor movement.
 	map.markerLayer.on('mouseout', function(e) {
-		e.layer.closePopup();
+		window.setTimeout(function(){ 
+			e.layer.closePopup();
+		},300);
 	});
 
 </script>
