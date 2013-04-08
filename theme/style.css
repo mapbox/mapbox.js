@@ -20,6 +20,13 @@
     right: 10px;
     width: 300px;
 }
+.leaflet-bar {
+    border: 1px solid #bbb;
+    box-shadow: none;
+}
+.leaflet-bar a:active {
+    background: #e2e2e2;
+}
 .leaflet-popup-content-wrapper {
     border-radius: 2px;
     -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.15);
