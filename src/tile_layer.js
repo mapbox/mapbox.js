@@ -36,6 +36,9 @@ module.exports = L.TileLayer.extend({
         }
     },
 
+    // disable the setUrl function, which is not available on mapbox tilelayers
+    setUrl: null,
+
     setTileJSON: function(json) {
         util.strict(json, 'object');
 
