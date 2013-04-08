@@ -30,6 +30,40 @@ describe('mapbox.gridLayer', function() {
         });
     });
 
+    describe('#loadURL', function() {
+        it('loads a TileJSON object', function() {
+            var layer = new mapbox.gridLayer();
+
+            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
+                expect(this).to.equal(layer);
+                expect(err).to.equal(null);
+                expect(json).to.eql(helpers.tileJSON);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+    });
+
+    describe('#loadID', function() {
+        it('loads a TileJSON object', function() {
+            var layer = new mapbox.gridLayer();
+
+            layer.loadID('mapbox.map-0l53fhk2', function(err, json) {
+                expect(this).to.equal(layer);
+                expect(err).to.equal(null);
+                expect(json).to.eql(helpers.tileJSON);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+    });
+
     describe('#setTileJSON', function() {
         it('sets TileJSON', function() {
             var layer = new mapbox.gridLayer();

@@ -10,7 +10,6 @@ module.exports = L.Class.extend({
     options: {
         minZoom: 0,
         maxZoom: 18,
-        tileSize: 256,
         resolution: 4
     },
 
@@ -53,7 +52,7 @@ module.exports = L.Class.extend({
     },
 
     loadID: function(id, cb) {
-        return this.url(url.base() + id + '.json', cb);
+        return this.loadURL(url.base() + id + '.json', cb);
     },
 
     onAdd: function(map) {
@@ -63,17 +62,21 @@ module.exports = L.Class.extend({
         var zoom = this._map.getZoom();
         if (zoom > this.options.maxZoom || zoom < this.options.minZoom) return;
 
-        this._map.on('click', this._click, this)
+        this._map
+            .on('click', this._click, this)
             .on('mousemove', this._move, this)
             .on('moveend', this._update, this);
     },
 
     onRemove: function() {
-        this._map.off('click', this._click, this)
+        this._map
+            .off('click', this._click, this)
             .off('mousemove', this._move, this)
             .off('moveend', this._update, this);
     },
 
+    // given a template string x, return a template function that accepts
+    // (data, format)
     _getTemplate: function(x) {
         return function(data, format) {
             var clone = {};
@@ -94,7 +97,8 @@ module.exports = L.Class.extend({
         if (on.data !== this._mouseOn) {
             if (this._mouseOn) {
                 this.fire('mouseout', {
-                    latLng: e.latlng, data: this._mouseOn
+                    latLng: e.latlng,
+                    data: this._mouseOn
                 });
             }
             if (on.data) this.fire('mouseover', on);
@@ -108,7 +112,7 @@ module.exports = L.Class.extend({
 
         var map = this._map,
             point = map.project(e.latlng),
-            tileSize = this.options.tileSize,
+            tileSize = 256,
             resolution = this.options.resolution,
             x = Math.floor(point.x / tileSize),
             y = Math.floor(point.y / tileSize),
@@ -124,18 +128,25 @@ module.exports = L.Class.extend({
         if (!data) return { latlng: e.latlng, data: null };
 
         var idx = this._utfDecode(data.grid[gridY].charCodeAt(gridX)),
-        key = data.keys[idx],
-        result = data.data[key];
+            key = data.keys[idx];
 
-        if (!data.data.hasOwnProperty(key)) result = null;
-
-        return {
-            latLng: e.latlng,
-            data: result,
-            url: this._template(result, 'location'),
-            teaser: this._template(result, 'teaser'),
-            full: this._template(result, 'full')
-        };
+        if (!data.data.hasOwnProperty(key)) {
+            return {
+                latLng: e.latlng,
+                data: null,
+                url: null,
+                teaser: null,
+                full: null
+            };
+        } else {
+            return {
+                latLng: e.latlng,
+                data: data.data[key],
+                url: this._template(data.data[key], 'location'),
+                teaser: this._template(data.data[key], 'teaser'),
+                full: this._template(data.data[key], 'full')
+            };
+        }
     },
 
     // a successful grid load. returns a function that maintains the
@@ -147,17 +158,18 @@ module.exports = L.Class.extend({
         }, this);
     },
 
-    _url: function(h) { return this._urls[h % (this._urls.length - 1)] || ''; },
+    _url: function(h) {
+        return this._urls[h % (this._urls.length - 1)] || '';
+    },
 
     // Load up all required json grid files
-    // TODO: Load from center etc
     _update: function() {
 
         if (!this._map || !this._urls || !this._urls.length) return;
 
         var bounds = this._map.getPixelBounds(),
             z = this._map.getZoom(),
-            tileSize = this.options.tileSize;
+            tileSize = 256;
 
         if (z > this.options.maxZoom || z < this.options.minZoom) return;
 
