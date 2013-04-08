@@ -8,8 +8,6 @@ url.HTTP_URLS = [
 
 url.HTTPS_URLS = [];
 
-
-
 // Return the base url of a specific version of MapBox's API.
 //
 // `hash`, if provided must be a number and is used to distribute requests
