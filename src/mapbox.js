@@ -13,10 +13,6 @@ mapbox.idUrl = function(_, t) {
     else t.loadURL(_);
 };
 
-mapbox.lbounds = function(_) {
-    // leaflet-compatible bounds, since leaflet does not do geojson
-    return new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]);
-};
 
 // Return the base url of a specific version of MapBox's API.
 //

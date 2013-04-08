@@ -37,7 +37,7 @@ module.exports = function(_) {
                 };
                 if (json.results[0][0].bounds !== undefined) {
                     res.bounds = json.results[0][0].bounds;
-                    res.lbounds = mapbox.lbounds(res.bounds);
+                    res.lbounds = util.lbounds(res.bounds);
                 }
                 callback(null, res);
             } else callback(err);

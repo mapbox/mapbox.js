@@ -18,7 +18,7 @@ describe("mapbox", function() {
 
     describe('#lbounds', function() {
         it('generates a L.LLatLngBounds object', function() {
-            expect(mapbox.lbounds([0, 1, 2, 3])).to.be.a(L.LatLngBounds);
+            expect(mapbox.util.lbounds([0, 1, 2, 3])).to.be.a(L.LatLngBounds);
         });
     });
 

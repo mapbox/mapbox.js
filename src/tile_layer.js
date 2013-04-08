@@ -36,7 +36,7 @@ module.exports = L.TileLayer.extend({
             minZoom: json.minzoom,
             maxZoom: json.maxzoom,
             tms: json.scheme === 'tms',
-            bounds: json.bounds && mapbox.lbounds(json.bounds)
+            bounds: json.bounds && util.lbounds(json.bounds)
         });
 
         this._tilejson = json;
