@@ -5,7 +5,6 @@ require('leaflet-fullscreen/src/Leaflet.fullscreen');
 
 window.mapbox = module.exports = {};
 module.exports.geocoder = require('./src/geocoder');
-module.exports.sanitize = require('./src/sanitize');
 module.exports.marker = require('./src/marker');
 module.exports.tileLayer = require('./src/tile_layer');
 module.exports.legendControl = require('./src/legend_control');

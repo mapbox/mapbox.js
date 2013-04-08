@@ -308,8 +308,9 @@ _Arguments_:
 1. (optional) an options object. Beyond the default options for map controls,
    this object has one special parameter:
 
-* `sanitize`: enable or disable HTML sanitization of legend data before
-  display. The default, `true`, is recommended.
+* `sanitizer`: A function that accepts a string containing legend data, and returns a
+  sanitized result for HTML display. The default will remove dangerous script content,
+  and is recommended.
 
 _Returns_: a `mapbox.Legend` object.
 
@@ -325,7 +326,9 @@ _Arguments_:
 * The first argument must be a layer created with `mapbox.interaction()`
 * The second argument can be an options object. Valid options are:
 
-* `sanitize`: enable or disable HTML sanitization of interactivity data before display. The default, `true`, is recommended.
+* `sanitizer`: A function that accepts a string containing interactivity data, and returns a
+  sanitized result for HTML display. The default will remove dangerous script content,
+  and is recommended.
 * `mapping`: an object of the types of interaction showed on each interaction. The default is
 
         mapping: {

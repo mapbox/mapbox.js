@@ -5,7 +5,6 @@ describe('mapbox.legendControl', function() {
     });
 
     describe('#addLegend', function() {
-
         it('returns the legend object', function() {
             var legend = mapbox.legendControl();
             expect(legend.addLegend('foo')).to.eql(legend);
@@ -29,7 +28,6 @@ describe('mapbox.legendControl', function() {
             expect(legend.addLegend('bar')).to.eql(legend);
             expect(legend._container.innerHTML).to.eql('<div class="map-legend">foo</div><div class="map-legend">bar</div>');
         });
-
     });
 
     describe('#removeLegend', function() {
@@ -54,20 +52,22 @@ describe('mapbox.legendControl', function() {
     });
 
     it('sanitizes its content', function() {
-        var elem = document.createElement('div');
-        var map = L.map(elem);
-        var legend = new mapbox.legendControl();
-        legend.addTo(map);
-        expect(legend.addLegend('<script></script>')).to.eql(legend);
+        var map = L.map(document.createElement('div'));
+        var legend = new mapbox.legendControl().addTo(map);
+
+        legend.addLegend('<script></script>');
+
         expect(legend._container.innerHTML).to.eql('<div class="map-legend"></div>');
     });
 
-    it('turns sanitization off', function() {
-        mapbox.sanitize.on();
-        var control = new mapbox.legendControl({
-            sanitize: false
-        });
-        expect(control).to.be.ok();
-        expect(mapbox.sanitize.enable()).to.eql(false);
+    it('supports a custom sanitizer', function() {
+        var map = L.map(document.createElement('div'));
+        var legend = new mapbox.legendControl({
+            sanitizer: function(_) { return _; }
+        }).addTo(map);
+
+        legend.addLegend('<script></script>');
+
+        expect(legend._container.innerHTML).to.eql('<div class="map-legend"><script></script></div>');
     });
 });
