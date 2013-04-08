@@ -1,14 +1,12 @@
-var sanitize = require('./sanitize');
-
 var LegendControl = L.Control.extend({
 
     options: {
-        position: 'bottomright'
+        position: 'bottomright',
+        sanitizer: require('./sanitize')
     },
 
     initialize: function(options) {
         L.setOptions(this, options);
-        sanitize.enable(options && options.sanitize);
         this._legends = {};
     },
 
@@ -47,7 +45,7 @@ var LegendControl = L.Control.extend({
             if (this._legends.hasOwnProperty(i) && this._legends[i]) {
                 var div = this._container.appendChild(document.createElement('div'));
                 div.className = 'map-legend';
-                div.innerHTML = mapbox.sanitize(i);
+                div.innerHTML = this.options.sanitizer(i);
             }
         }
 

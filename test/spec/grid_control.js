@@ -1,5 +1,5 @@
 describe("mapbox.gridControl", function() {
-    var server, tileJSON = helpers.tileJSON;
+    var server;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
@@ -14,12 +14,6 @@ describe("mapbox.gridControl", function() {
         expect(control).to.be.ok();
     });
 
-    it("turns sanitization off", function() {
-        var layer = new mapbox.gridLayer();
-        var control = new mapbox.gridControl(layer, {
-            sanitize: false
-        });
-        expect(layer).to.be.ok();
-        expect(mapbox.sanitize.enable()).to.eql(false);
-    });
+    it('sanitizes its content');
+    it('supports a custom sanitizer');
 });
