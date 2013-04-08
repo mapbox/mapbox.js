@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
-  "main": "dist/mapbox.js",
+  "main": "index.js",
   "dependencies": {
     "leaflet": "git://github.com/Leaflet/Leaflet.git",
     "leaflet-hash": "~0.1.0",
