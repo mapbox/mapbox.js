@@ -31,7 +31,7 @@ describe('mapbox.gridLayer', function() {
     });
 
     describe('#loadURL', function() {
-        it('loads a TileJSON object', function() {
+        it('loads a TileJSON object', function(done) {
             var layer = new mapbox.gridLayer();
 
             layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
@@ -48,7 +48,7 @@ describe('mapbox.gridLayer', function() {
     });
 
     describe('#loadID', function() {
-        it('loads a TileJSON object', function() {
+        it('loads a TileJSON object', function(done) {
             var layer = new mapbox.gridLayer();
 
             layer.loadID('mapbox.map-0l53fhk2', function(err, json) {
