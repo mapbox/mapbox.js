@@ -60,10 +60,40 @@ describe('mapbox.geocoderControl', function() {
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
     });
 
-    it('#setErrorHandler', function() {
-        var control = new mapbox.geocoderControl('examples.map-vyofok3q');
-        var errHand = function() { };
-        expect(control.setErrorHandler(errHand)).to.eql(control);
-        expect(control.getErrorHandler()).to.eql(errHand);
+    describe('events', function() {
+        var map, control;
+
+        beforeEach(function() {
+            map = new L.Map(document.createElement('div'));
+            control = new mapbox.geocoderControl('http://example.com/{query}.json').addTo(map);
+        });
+
+        it('emits a "found" event when geocoding succeeds', function(done) {
+            control.on('found', function(result) {
+                expect(result.latlng).to.eql([30.3071816, -97.7559964]);
+                done();
+            });
+
+            control._input.value = 'austin';
+            happen.click(control._submit);
+
+            server.respondWith('GET', 'http://example.com/austin.json',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
+            server.respond();
+        });
+
+        it('emits an "error" event when geocoding fails', function(done) {
+            control.on('error', function(err) {
+                expect(err.status).to.eql(400);
+                done();
+            });
+
+            control._input.value = 'austin';
+            happen.click(control._submit);
+
+            server.respondWith('GET', 'http://example.com/austin.json',
+                [400, { "Content-Type": "application/json" }, JSON.stringify(json)]);
+            server.respond();
+        });
     });
 });

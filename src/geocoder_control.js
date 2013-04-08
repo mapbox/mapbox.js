@@ -1,10 +1,10 @@
 var geocoder = require('./geocoder');
 
 module.exports = L.Control.extend({
+    includes: L.Mixin.Events,
 
     initialize: function(_) {
         this.geocoder = geocoder(_);
-        this._errorHandler = function() {};
     },
 
     setURL: function(_) {
@@ -24,15 +24,6 @@ module.exports = L.Control.extend({
     setTileJSON: function(_) {
         this.geocoder.setTileJSON(_);
         return this;
-    },
-
-    setErrorHandler: function(_) {
-        this._errorHandler = _;
-        return this;
-    },
-
-    getErrorHandler: function(_) {
-        return this._errorHandler;
     },
 
     onAdd: function(map) {
@@ -63,10 +54,10 @@ module.exports = L.Control.extend({
     _geocode: function(event) {
         L.DomEvent.preventDefault(event);
         this.geocoder.query(encodeURIComponent(this._input.value), L.bind(function(err, res) {
-            if (err) return this._errorHandler(err);
+            if (err) return this.fire('error', err);
             if (res.lbounds) this._map.fitBounds(res.lbounds);
             else this._map.setView(res.latlng, 6);
+            this.fire('found', res);
         }, this));
     }
-
 });
