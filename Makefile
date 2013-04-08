@@ -10,7 +10,7 @@ all: \
 	dist/images
 
 node_modules/Leaflet/dist/leaflet-src.js:
-	cd node_modules/Leaflet && npm install && jake
+	cd node_modules/Leaflet && npm install && npm run-script prepublish
 
 mapbox%js:
 	@cat $(filter %.js,$^) > $@
