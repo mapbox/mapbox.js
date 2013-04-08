@@ -9,8 +9,7 @@ module.exports = L.Class.extend({
 
     options: {
         minZoom: 0,
-        maxZoom: 18,
-        resolution: 4
+        maxZoom: 18
     },
 
     _mouseOn: null,
@@ -108,12 +107,11 @@ module.exports = L.Class.extend({
         }
     },
 
-    _objectForEvent: function(e) {
-
+    featureAtScreenPoint: function(latlng, callback) {
         var map = this._map,
             point = map.project(e.latlng),
             tileSize = 256,
-            resolution = this.options.resolution,
+            resolution = 4,
             x = Math.floor(point.x / tileSize),
             y = Math.floor(point.y / tileSize),
             gridX = Math.floor((point.x - (x * tileSize)) / resolution),
@@ -123,30 +121,29 @@ module.exports = L.Class.extend({
         x = (x + max) % max;
         y = (y + max) % max;
 
-        var data = this._cache[map.getZoom() + '_' + x + '_' + y];
+        this.getGrid(map.getZoom(), x, y, function(data) {
+            if (!data) return { latlng: e.latlng, data: null };
+            var idx = this._utfDecode(data.grid[gridY].charCodeAt(gridX)),
+                key = data.keys[idx];
+            if (!data.data.hasOwnProperty(key)) callback(null);
+            else callback(data.data[key]);
+        });
+    },
 
-        if (!data) return { latlng: e.latlng, data: null };
-
-        var idx = this._utfDecode(data.grid[gridY].charCodeAt(gridX)),
-            key = data.keys[idx];
-
-        if (!data.data.hasOwnProperty(key)) {
-            return {
-                latLng: e.latlng,
-                data: null,
-                url: null,
-                teaser: null,
-                full: null
-            };
-        } else {
-            return {
-                latLng: e.latlng,
-                data: data.data[key],
-                url: this._template(data.data[key], 'location'),
-                teaser: this._template(data.data[key], 'teaser'),
-                full: this._template(data.data[key], 'full')
-            };
-        }
+    _objectForEvent: function(e, callback) {
+        this.featureAtScreenPoint(e.latlng, function(data) {
+            if (!data) {
+                return { latLng: e.latlng };
+            } else {
+                return {
+                    latLng: e.latlng,
+                    data: data,
+                    url: this._template(data, 'location'),
+                    teaser: this._template(data, 'teaser'),
+                    full: this._template(data, 'full')
+                };
+            }
+        });
     },
 
     // a successful grid load. returns a function that maintains the
@@ -183,18 +180,23 @@ module.exports = L.Class.extend({
 
         for (var x = nwTilePoint.x; x <= seTilePoint.x; x++) {
             for (var y = nwTilePoint.y; y <= seTilePoint.y; y++) {
-
-                var xw = (x + max) % max, yw = (y + max) % max,
-                    key = z + '_' + xw + '_' + yw;
-
-                // avoid loading the same grid tile multiple times
-                if (!this._cache.hasOwnProperty(key)) {
-                    this._cache[key] = null;
-                    request(L.Util.template(this._url(x + y), {
-                        z: z, x: xw, y: yw
-                    }), this._load(key), true);
-                }
+                // x wrapped
+                var xw = (x + max) % max, yw = (y + max) % max;
+                var key = z + '_' + xw + '_' + yw;
+                this.getGrid(z, xw, yw, this._load(key));
             }
+        }
+    },
+
+    getGrid: function(z, x, y, callback) {
+        var key = z + '_' + x + '_' + y;
+        if (this._cache.hasOwnProperty(key)) {
+            callback(this._cache[key]);
+        } else {
+            this._cache[key] = null;
+            request(L.Util.template(this._url(x + y), {
+                z: z, x: x, y: y
+            }), callback, true);
         }
     },
 
