@@ -1,6 +1,4 @@
-# build mapbox.js
-NODE_PATH ?= ./node_modules
-JS_UGLIFY = $(NODE_PATH)/uglify-js/bin/uglifyjs
+UGLIFY = node_modules/.bin/uglifyjs
 BROWSERIFY = node_modules/.bin/browserify
 
 # the default rule when someone runs simply `make`
@@ -40,7 +38,7 @@ test/libs.js:
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled
 dist/mapbox.js: dist dist/mapbox.uncompressed.js
-	$(JS_UGLIFY) dist/mapbox.uncompressed.js -c -m -o dist/mapbox.js
+	$(UGLIFY) dist/mapbox.uncompressed.js -c -m -o dist/mapbox.js
 
 clean:
 	rm -f dist/*
