@@ -33,69 +33,98 @@ describe('mapbox.geocoder', function() {
             "id":"mapbox-places.4201"
         }]],"attribution":{"mapbox-places":"<a href='http://mapbox.com/about/maps' target='_blank'>Terms & Feedback</a>"}};
 
-
-    it('performs forward geolocation', function() {
-        var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
-
-        server.respondWith('GET',
-            'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
-            [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
-
-        g.query('austin', function(err, res) {
-            expect(res.latlng).to.be.near({ lat: 30.3, lng: -97.7 }, 1e-1);
+    describe('#setURL', function() {
+        it('returns self', function() {
+            var g = mapbox.geocoder();
+            expect(g.setTileJSON(helpers.tileJSON)).to.eql(g);
         });
 
-        server.respond();
-    });
-
-    it('performs reverse geolocation', function() {
-        var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
-
-        server.respondWith('GET',
-            'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/-97.7,30.3.json',
-            [200, { "Content-Type": "application/json" }, JSON.stringify(revJson)]);
-
-        g.reverseQuery({ lat: 30.3, lng: -97.7 }, function(err, res) {
-            expect(res).to.eql(revJson);
+        it('sets URL', function() {
+            var g = mapbox.geocoder();
+            g.setURL('url');
+            expect(g.getURL()).to.eql('url');
         });
 
-        server.respond();
+        it('converts a jsonp URL', function() {
+            var g = mapbox.geocoder();
+            g.setURL('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp');
+            expect(g.getURL()).to
+                .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
+        });
     });
 
-    it('accepts tilejson input and constructs urls', function() {
-        var g = mapbox.geocoder();
+    describe('#setTileJSON', function() {
+        it('returns self', function() {
+            var g = mapbox.geocoder();
+            expect(g.setTileJSON(helpers.tileJSON)).to.eql(g);
+        });
 
-        expect(g.setTileJSON(helpers.tileJSON)).to.eql(g);
+        it('validates its argument', function() {
+            var g = mapbox.geocoder();
+            expect(function() {
+                g.setTileJSON('foo');
+            }).to.throwException(function(e) {
+                expect(e.message).to.eql('Invalid argument: object expected');
+            });
+        });
 
-        expect(g.setTileJSON(helpers.tileJSON).getURL()).to
-            .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
+        it('sets URL based on geocoder property', function() {
+            var g = mapbox.geocoder();
+            g.setTileJSON({geocoder: 'http://example.com/geocode/{query}.json'});
+            expect(g.getURL()).to.eql('http://example.com/geocode/{query}.json');
+        });
 
-        expect(g.getURL()).to
-            .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
+        it('converts a jsonp URL', function() {
+            var g = mapbox.geocoder();
+            g.setTileJSON({geocoder: 'http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp'});
+            expect(g.getURL()).to
+                .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
+        });
     });
 
-    it('accepts id input and constructs urls', function() {
-        var g = mapbox.geocoder();
-
-        expect(g.setID('foo.bar').getURL()).to
-            .eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
-    });
-
-    describe('tileset settings', function() {
-        it('#setID', function() {
+    describe('#setID', function() {
+        it('returns self', function() {
             var g = mapbox.geocoder();
             expect(g.setID('foo.bar')).to.eql(g);
-            expect(g.getURL()).to.eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
         });
-        describe('#setTileJSON', function() {
-            it('validates argument', function() {
-                var g = mapbox.geocoder();
-                expect(function() {
-                    g.setTileJSON('foo');
-                }).to.throwException(function(e) {
-                    expect(e.message).to.eql('Invalid argument: object expected');
-                });
+
+        it('sets URL', function() {
+            var g = mapbox.geocoder();
+            g.setID('foo.bar');
+            expect(g.getURL()).to
+                .eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
+        });
+    });
+
+    describe('#query', function() {
+        it('performs forward geolocation', function() {
+            var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+
+            server.respondWith('GET',
+                'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
+
+            g.query('austin', function(err, res) {
+                expect(res.latlng).to.be.near({ lat: 30.3, lng: -97.7 }, 1e-1);
             });
+
+            server.respond();
+        });
+    });
+
+    describe('#reverseQuery', function() {
+        it('performs reverse geolocation', function() {
+            var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+
+            server.respondWith('GET',
+                'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/-97.7,30.3.json',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(revJson)]);
+
+            g.reverseQuery({ lat: 30.3, lng: -97.7 }, function(err, res) {
+                expect(res).to.eql(revJson);
+            });
+
+            server.respond();
         });
     });
 });
