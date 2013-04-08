@@ -32,9 +32,6 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 dist/mapbox.uncompressed.js: Makefile src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
 	$(BROWSERIFY) --debug index.js > $@
 
-test/libs.js:
-	$(BROWSERIFY) -r mustache -r corslite -r json3 > $@
-
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled
 dist/mapbox.js: dist dist/mapbox.uncompressed.js
