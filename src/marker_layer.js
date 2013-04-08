@@ -34,7 +34,7 @@ module.exports = L.FeatureGroup.extend({
     },
 
     loadURL: function(url, cb) {
-        url = url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
+        url = urlhelper.jsonify(url);
         request(url, L.bind(function(err, json) {
             if (err) return util.log('could not load markers at ' + url);
             else if (json) this.setGeoJSON(json);
@@ -75,7 +75,9 @@ module.exports = L.FeatureGroup.extend({
             var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style);
 
             layer.feature = json;
-            layer.bindPopup(json.properties.title);
+            layer.bindPopup(json.properties.title,{
+                closeButton: false
+            });
 
             this.addLayer(layer);
         }

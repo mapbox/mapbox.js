@@ -12,7 +12,7 @@ module.exports = function(_) {
     };
 
     geocoder.setURL = function(_) {
-        url = _.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
+        url = urlhelper.jsonify(_);
         return geocoder;
     };
 

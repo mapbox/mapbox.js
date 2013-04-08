@@ -29,4 +29,9 @@ url.base = function(hash) {
     }
 };
 
+// Convert a JSONP url to a JSON URL. (MapBox TileJSON sometimes hardcodes JSONP.)
+url.jsonify = function(url) {
+    return url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
+};
+
 module.exports = url;
