@@ -12,25 +12,27 @@ module.exports = function(_) {
     };
 
     geocoder.setURL = function(_) {
-        url = _;
+        url = _.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
         return geocoder;
     };
 
     geocoder.setID = function(_) {
-        return geocoder.setURL(urlhelper.base() + _ + '/geocode/{query}.json');
+        geocoder.setURL(urlhelper.base() + _ + '/geocode/{query}.json');
+        return geocoder;
     };
 
     geocoder.setTileJSON = function(_) {
         util.strict(_, 'object');
-        return geocoder.setID(_.id || '');
+        geocoder.setURL(_.geocoder);
+        return geocoder;
     };
 
     geocoder.queryURL = function(_) {
-        return L.Util.template(this.getURL(), { query: _ });
+        return L.Util.template(geocoder.getURL(), { query: _ });
     };
 
     geocoder.query = function(_, callback) {
-        request(this.queryURL(_), function(err, json) {
+        request(geocoder.queryURL(_), function(err, json) {
             if (json && json.results && json.results.length) {
                 var res = {
                     results: json.results,
@@ -64,7 +66,7 @@ module.exports = function(_) {
             q = pts.join(';');
         } else q = norm(_);
 
-        mapbox.request(this.queryURL(q), function(err, json) {
+        request(geocoder.queryURL(q), function(err, json) {
             callback(err, json);
         });
 
