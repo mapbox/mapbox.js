@@ -68,6 +68,40 @@ _Example_:
 
 _Returns_ a `mapbox.tileLayer` object.
 
+
+### tileLayer.loadURL(`url`, [callback])
+
+Load tiles from a map with its tiles described by a TileJSON object at the
+given `url`. If a callback function are provided as the second argument, it's
+called after the request completes and the changes are applied to the layer.
+
+_Arguments_:
+
+1. `string` a map id
+
+_Returns_: the layer object
+
+### tileLayer.loadID(id, [callback])
+
+Load tiles from a map with the given `id` on MapBox. If a callback function
+are provided as the second argument, it's called after the request completes
+and the changes are applied to the layer.
+
+_Arguments_:
+
+1. `string` a map id
+
+_Returns_: the layer object
+
+### tileLayer.getTileJSON()
+
+Returns this layer's TileJSON object which determines its tile source,
+zoom bounds and other metadata.
+
+_Arguments_: none
+
+_Returns_: the TileJSON object
+
 ## mapbox.markerLayer(id | url | tilejson, [options])
 
 `mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
@@ -91,6 +125,30 @@ _Example_:
         .addTo(map);
 
 _Returns_ a `mapbox.markerLayer` object.
+
+### markerLayer.loadURL(`url`, [callback])
+
+Load tiles from a map with its tiles described by a TileJSON object at the
+given `url`. If a callback function are provided as the second argument, it's
+called after the request completes and the changes are applied to the layer.
+
+_Arguments_:
+
+1. `string` a map id
+
+_Returns_: the layer object
+
+### markerLayer.loadID(id, [callback])
+
+Load tiles from a map with the given `id` on MapBox. If a callback function
+are provided as the second argument, it's called after the request completes
+and the changes are applied to the layer.
+
+_Arguments_:
+
+1. `string` a map id
+
+_Returns_: the layer object
 
 ## mapbox.markerLayer.setFilter(function)
 
@@ -294,16 +352,25 @@ _Example_
 
 _Returns_ a `mapbox.geocoderControl` object.
 
-## mapbox.geocoder.setID([id])
+## mapbox.geocoder.setURL(id)
 
-Set or get the map id used for geocoding.
+Set the url used for geocoding.
 
 _Arguments_:
 
-1. (optional) a map id
+1. a geocoding url
 
-_Returns_: the existing id value if no argument is given, or the geocoder
-object if a new value is given.
+_Returns_: the geocoder control object
+
+## mapbox.geocoder.setID(id)
+
+Set the map id used for geocoding.
+
+_Arguments_:
+
+1. a map id to geocode from
+
+_Returns_: the geocoder control object
 
 ## mapbox.geocoder.setTileJSON(tilejson)
 
@@ -314,6 +381,25 @@ _Arguments_:
 1. A TileJSON object
 
 _Returns_: the geocoder object
+
+## mapbox.geocoder.setErrorHandler(id)
+
+Set the function called if a geocoding request returns an error.
+
+_Arguments_:
+
+1. a function that takes an error object - typically an XMLHttpRequest, and
+   handles it.
+
+_Returns_: the geocoder control object
+
+## mapbox.geocoder.getErrorHandler(id)
+
+Returns the current function used by this geocoderControl for error handling.
+
+_Arguments_: none
+
+_Returns_: the geocoder control's error handler
 
 # Markers
 
