@@ -36,6 +36,18 @@ module.exports = L.TileLayer.extend({
         }
     },
 
+    setOptions: function(key, value) {
+        // setOptions({foo:bar})
+        if (arguments.length == 1) L.setOptions(this, key);
+        // setOptions('foo', bar)
+        if (arguments.length == 2) {
+            var o = {};
+            o[key] = value;
+            L.setOptions(this, o);
+        }
+        return this;
+    },
+
     // disable the setUrl function, which is not available on mapbox tilelayers
     setUrl: null,
 

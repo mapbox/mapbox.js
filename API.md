@@ -102,6 +102,18 @@ _Arguments_: none
 
 _Returns_: the TileJSON object
 
+### tileLayer.setOptions(object)
+### tileLayer.setOptions(key, value)
+
+Set options on this tile layer after initialization - provided either with
+an object of options or a single key and value that should be set.
+
+_Arguments_:
+
+1. `object` an options argument _or_ a key and value
+
+_Returns_: the layer object
+
 ## mapbox.markerLayer(id | url | tilejson, [options])
 
 `mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)

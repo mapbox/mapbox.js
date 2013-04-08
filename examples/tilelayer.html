@@ -13,9 +13,10 @@
 <div id='map'></div>
 <script type='text/javascript'>
     var map = mapbox.map('map');
-    map.addLayer(new mapbox.tileLayer('examples.map-zr0njcqy', {
+    var layer = new mapbox.tileLayer('examples.map-zr0njcqy', {
         format: 'jpg70'
-    })).setView([0, 0], 2);
+    })
+    map.addLayer(layer).setView([0, 0], 2);
 </script>
 </body>
 </html>
