@@ -66,7 +66,7 @@ module.exports = function(_) {
             q = pts.join(';');
         } else q = norm(_);
 
-        mapbox.request(geocoder.queryURL(q), function(err, json) {
+        request(geocoder.queryURL(q), function(err, json) {
             callback(err, json);
         });
 
