@@ -3,6 +3,13 @@ var util = require('./util'),
 
 module.exports = L.TileLayer.extend({
 
+    // http://mapbox.com/developers/api/#image_quality
+    formats: [
+        // PNG
+        'png32', 'png64', 'png128', 'png256',
+        // JPG
+        'jpg70', 'jpg80', 'jpg90'],
+
     initialize: function(_, options) {
         L.TileLayer.prototype.initialize.call(this, undefined, options);
 
@@ -21,6 +28,8 @@ module.exports = L.TileLayer.extend({
     },
 
     setTileJSON: function(json) {
+        util.strict(json, 'object');
+
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: json.attribution,
@@ -52,6 +61,8 @@ module.exports = L.TileLayer.extend({
         return this.loadURL(mapbox.base() + id + '.json', cb);
     },
 
+    // this is an exception to mapbox.js naming rules because it's called
+    // by `L.map`
     getTileUrl: function(tilePoint) {
         var tiles = this.options.tiles,
             index = (tilePoint.x + tilePoint.y) % tiles.length,

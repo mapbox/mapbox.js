@@ -17,6 +17,13 @@ describe("mapbox.tileLayer", function() {
             expect(layer.options.maxZoom).to.equal(17);
         });
 
+        it("is strict", function() {
+            var layer = new mapbox.tileLayer();
+            expect(function() {
+                layer.setTileJSON('foo');
+            }).to.throwException();
+        });
+
         it("sets attribution", function() {
             var layer = new mapbox.tileLayer();
             layer.setTileJSON(helpers.tileJSON);
