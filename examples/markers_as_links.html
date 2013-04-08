@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../node_modules/Leaflet/dist/leaflet.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../node_modules/Leaflet/dist/leaflet.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="embed.css"/>
+    <script src="../dist/mapbox.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+    var map = mapbox.map('map', 'examples.map-20v6611k').setView([39.12367, -76.81229], 9);
+
+    // The GeoJSON representing the two point features
+    var geoJson = {
+        type: 'FeatureCollection',
+        features: [{
+            type: 'Feature',
+            properties: {
+                title: 'foo',
+                'marker-color': '#f00',
+                'marker-size': 'large',
+                url: 'http://en.wikipedia.org/wiki/Washington,_D.C.'
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [-77.03201, 38.90065]
+            }
+        },
+        {
+            type: 'Feature',
+            properties: {
+                title: 'foo',
+                'marker-color': '#f00',
+                'marker-size': 'large',
+                url: 'http://en.wikipedia.org/wiki/Baltimore'
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [-76.60767, 39.28755]
+            }
+        }]
+    };
+
+    L.geoJson(geoJson, {
+        pointToLayer: mapbox.marker.style,
+        onEachFeature: function(feature, layer) {
+            layer.on('click', function() {
+                window.open(feature.properties.url);
+            });
+        }
+    }).addTo(map);
+</script>
+</body>
+</html>
