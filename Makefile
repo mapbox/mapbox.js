@@ -4,6 +4,7 @@ BROWSERIFY = node_modules/.bin/browserify
 # the default rule when someone runs simply `make`
 all: \
 	dist/mapbox.js \
+	dist/mapbox.private.js \
 	dist/mapbox.css \
 	dist/mapbox.ie.css \
 	dist/images
@@ -31,6 +32,10 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 # assemble an uncompressed but complete library for development
 dist/mapbox.uncompressed.js: Makefile src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
 	$(BROWSERIFY) --debug index.js > $@
+
+# assemble an uncompressed but complete library for development
+dist/mapbox.private.js: Makefile src/*.js dist private.js
+	$(BROWSERIFY) --debug private.js > $@
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled

@@ -8,10 +8,7 @@ url.HTTP_URLS = [
 
 url.HTTPS_URLS = [];
 
-url.idUrl = function(_, t) {
-    if (_.indexOf('/') == -1) t.loadID(_);
-    else t.loadURL(_);
-};
+
 
 // Return the base url of a specific version of MapBox's API.
 //
@@ -26,8 +23,6 @@ url.base = function(hash) {
     if (window.location.protocol === 'https:' && url.HTTPS_URLS.length) {
         urls = url.HTTPS_URLS;
     }
-
-    console.log(urls);
 
     if (hash === undefined || typeof hash !== 'number') {
         return urls[0];

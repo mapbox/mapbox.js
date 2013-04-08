@@ -1,3 +1,4 @@
+var url = require('./url');
 // mapbox-related markers functionality
 // provide an icon from mapbox's simple-style spec and hosted markers
 // service
@@ -14,7 +15,7 @@ function icon(fp) {
         color = (fp['marker-color'] || '7e7e7e').replace('#', '');
 
     return L.icon({
-        iconUrl: mapbox.base() + 'marker/' +
+        iconUrl: url.base() + 'marker/' +
             'pin-' + size.charAt(0) + symbol + '+' + color +
             // detect and use retina markers, which are x2 resolution
             ((L.Browser.retina) ? '@2x' : '') + '.png',

@@ -1,6 +1,7 @@
-var util = require('./util');
+var util = require('./util'),
+    url = require('./url');
 
-mapbox.Map = L.Map.extend({
+var Map = L.Map.extend({
     options: {
         tileLayer: true,
         markerLayer: true,
@@ -37,7 +38,7 @@ mapbox.Map = L.Map.extend({
         }
 
         if (typeof _ === 'string') {
-            mapbox.idUrl(_, this);
+            util.idUrl(_, this);
         // javascript object of TileJSON data
         } else if (_ && typeof _ === 'object') {
             this.setTileJSON(_);
@@ -67,7 +68,7 @@ mapbox.Map = L.Map.extend({
 
     // pull tilejson data from an endpoint, given just by an id
     loadID: function(id, cb) {
-        return this.loadURL(mapbox.base() + id + '.json', cb);
+        return this.loadURL(url.base() + id + '.json', cb);
     },
 
     _initialize: function(json) {
@@ -92,6 +93,6 @@ mapbox.Map = L.Map.extend({
     }
 });
 
-mapbox.map = function(element, _) {
-    return new mapbox.Map(element, _);
+module.exports = function(element, _) {
+    return new Map(element, _);
 };

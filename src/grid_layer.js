@@ -1,6 +1,7 @@
-var util = require('./util');
-var request = require('./request');
-var Mustache = require('mustache');
+var util = require('./util'),
+    url = require('./url'),
+    request = require('./request'),
+    Mustache = require('mustache');
 
 // forked from danzel/L.UTFGrid
 module.exports = L.Class.extend({
@@ -22,7 +23,7 @@ module.exports = L.Class.extend({
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
 
-        if (typeof _ === 'string') mapbox.idUrl(_, this);
+        if (typeof _ === 'string') util.idUrl(_, this);
         else if (_ && typeof _ === 'object') this.setTileJSON(_);
     },
 
@@ -52,7 +53,7 @@ module.exports = L.Class.extend({
     },
 
     loadID: function(id, cb) {
-        return this.url(mapbox.base() + id + '.json', cb);
+        return this.url(url.base() + id + '.json', cb);
     },
 
     onAdd: function(map) {

@@ -1,4 +1,5 @@
 var util = require('./util');
+var urlhelper = require('./url');
 var request = require('./request');
 
 // # markerLayer
@@ -16,7 +17,7 @@ module.exports = L.FeatureGroup.extend({
         this._layers = {};
 
         if (typeof _ === 'string') {
-            mapbox.idUrl(_, this);
+            util.idUrl(_, this);
         // javascript object of TileJSON data
         } else if (_ && typeof _ === 'object') {
             this.setGeoJSON(_);
@@ -43,7 +44,7 @@ module.exports = L.FeatureGroup.extend({
     },
 
     loadID: function(id, cb) {
-        return this.loadURL(mapbox.base() + id + '/markers.geojson', cb);
+        return this.loadURL(urlhelper.base() + id + '/markers.geojson', cb);
     },
 
     setFilter: function(_) {

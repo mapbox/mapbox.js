@@ -1,4 +1,5 @@
 var util = require('./util'),
+    url = require('./url'),
     request = require('./request');
 
 module.exports = L.TileLayer.extend({
@@ -30,7 +31,7 @@ module.exports = L.TileLayer.extend({
         }
 
         if (typeof _ === 'string') {
-            mapbox.idUrl(_, this);
+            util.idUrl(_, this);
         } else if (_ && typeof _ === 'object') {
             this.setTileJSON(_);
         }
@@ -82,7 +83,7 @@ module.exports = L.TileLayer.extend({
     },
 
     loadID: function(id, cb) {
-        return this.loadURL(mapbox.base() + id + '.json', cb);
+        return this.loadURL(url.base() + id + '.json', cb);
     },
 
     // this is an exception to mapbox.js naming rules because it's called

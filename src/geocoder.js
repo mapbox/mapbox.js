@@ -1,4 +1,5 @@
 var util = require('./util'),
+    urlhelper = require('./url'),
     request = require('./request');
 
 // Low-level geocoding interface - wraps specific API calls and their
@@ -16,7 +17,7 @@ module.exports = function(_) {
     };
 
     geocoder.setID = function(_) {
-        return geocoder.setURL(mapbox.base() + _ + '/geocode/{query}.json');
+        return geocoder.setURL(urlhelper.base() + _ + '/geocode/{query}.json');
     };
 
     geocoder.setTileJSON = function(_) {

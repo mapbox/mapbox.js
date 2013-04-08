@@ -1,4 +1,8 @@
 module.exports = {
+    idUrl: function(_, t) {
+        if (_.indexOf('/') == -1) t.loadID(_);
+        else t.loadURL(_);
+    },
     log: function(_) {
         if (console && typeof console.error === 'function') {
             console.error(_);
