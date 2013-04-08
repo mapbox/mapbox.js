@@ -1,3 +1,5 @@
+var html_sanitize = require('../ext/sanitizer/html-sanitizer-bundle.js');
+
 module.exports = (function() {
     var enabled = true;
     // https://bugzilla.mozilla.org/show_bug.cgi?id=255107

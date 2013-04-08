@@ -1,6 +1,3 @@
-require('./ext/sanitizer/html-sanitizer-bundle');
-require('./ext/sanitizer/html-sanitizer-loosen');
-
 window.L = require('Leaflet/dist/leaflet-src');
 
 require('leaflet-hash/leaflet-hash');

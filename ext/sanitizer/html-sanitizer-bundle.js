@@ -2435,9 +2435,29 @@ var html = (function(html4) {
 
 var html_sanitize = html['sanitize'];
 
+// Loosen restrictions of Caja's
+// html-sanitizer to allow for styling
+html4.ATTRIBS['*::style'] = 0;
+html4.ELEMENTS['style'] = 0;
+
+html4.ATTRIBS['a::target'] = 0;
+
+html4.ELEMENTS['video'] = 0;
+html4.ATTRIBS['video::src'] = 0;
+html4.ATTRIBS['video::poster'] = 0;
+html4.ATTRIBS['video::controls'] = 0;
+
+html4.ELEMENTS['audio'] = 0;
+html4.ATTRIBS['audio::src'] = 0;
+html4.ATTRIBS['video::autoplay'] = 0;
+html4.ATTRIBS['video::controls'] = 0;
+
 // Exports for Closure compiler.  Note this file is also cajoled
 // for domado and run in an environment without 'window'
 if (typeof window !== 'undefined') {
   window['html'] = html;
   window['html_sanitize'] = html_sanitize;
+}
+if (typeof module !== 'undefined') {
+    module.exports = html_sanitize;
 }
