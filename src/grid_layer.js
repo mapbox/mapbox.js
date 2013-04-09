@@ -41,6 +41,10 @@ module.exports = L.Class.extend({
         return this._tilejson;
     },
 
+    active: function() {
+        return !!(this._map && this._urls && this._urls.length);
+    },
+
     loadURL: function(url, cb) {
         request(url, L.bind(function(err, json) {
             if (err) util.log('could not load TileJSON at ' + url);
@@ -86,12 +90,14 @@ module.exports = L.Class.extend({
     },
 
     _click: function(e) {
+        if (!this.active()) return;
         this._objectForEvent(e, function(on) {
             this.fire('click', on.content);
         });
     },
 
     _move: function(e) {
+        if (!this.active()) return;
         this._objectForEvent(e, function(on) {
             if (on.data !== this._mouseOn) {
                 if (this._mouseOn) {
@@ -156,14 +162,14 @@ module.exports = L.Class.extend({
         }, this);
     },
 
-    _url: function(h) {
+    _getURL: function(h) {
         return this._urls[h % (this._urls.length - 1)] || '';
     },
 
     // Load up all required json grid files
     _update: function() {
 
-        if (!this._map || !this._urls || !this._urls.length) return;
+        if (!this.active()) return;
 
         var bounds = this._map.getPixelBounds(),
             z = this._map.getZoom(),
@@ -195,7 +201,11 @@ module.exports = L.Class.extend({
             callback(this._cache[key]);
         } else {
             this._cache[key] = null;
-            request(L.Util.template(this._url(x + y), {
+            // console.log(this._url(x + y));
+            // console.log(L.Util.template(this._url(x + y), {
+            //     z: z, x: x, y: y
+            // }));
+            request(L.Util.template(this._getURL(x + y), {
                 z: z, x: x, y: y
             }), callback, true);
         }
