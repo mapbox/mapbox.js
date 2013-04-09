@@ -101,8 +101,14 @@
     background: #6B6B6B;
 }
 
+.leaflet-container.dark .leaflet-bar a.leaflet-disabled,
+.leaflet-container.dark .leaflet-control .mapbox-button.disabled {
+    background: #252525;
+    color: #474747;
+}
+
 .leaflet-container.dark .leaflet-control-mapbox-geocoder input[type=text] {
-    background: #565656; 
+    background: #565656;
     border-color: #000;
     color: #fff;
 }
