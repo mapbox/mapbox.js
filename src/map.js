@@ -94,6 +94,6 @@ var Map = L.Map.extend({
     }
 });
 
-module.exports = function(element, _) {
-    return new Map(element, _);
+module.exports = function(element, _, options) {
+    return new Map(element, _, options);
 };

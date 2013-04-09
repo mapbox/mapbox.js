@@ -15,6 +15,11 @@ describe('mapbox.map', function() {
         expect(map.getTileJSON()).to.equal(tileJSON);
     });
 
+    it('passes options to constructor when called without new', function() {
+        var map = new mapbox.map(element, tileJSON, {zoomControl: false});
+        expect(map.options.zoomControl).to.equal(false);
+    });
+
     describe('layers', function() {
         it('adds a tile layer immediately', function() {
             var map = new mapbox.map(element, 'data/tilejson.json');
