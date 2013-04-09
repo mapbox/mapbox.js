@@ -13,6 +13,11 @@ module.exports = {
             throw Error('Invalid argument: ' + type + ' expected');
         }
     },
+    strict_instance: function(_, klass, name) {
+        if (!(_ instanceof klass)) {
+            throw Error('Invalid argument: ' + name + ' expected');
+        }
+    },
     strict_oneof: function(_, values) {
         if (values.indexOf(_) == -1) {
             throw Error('Invalid argument: ' + _ + ' given, valid values are ' +

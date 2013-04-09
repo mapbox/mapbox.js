@@ -1,3 +1,5 @@
+var util = require('./util');
+
 module.exports = L.Control.extend({
     options: {
         mapping: {
@@ -10,6 +12,7 @@ module.exports = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
+        util.strict_instance(_, mapbox.gridLayer, 'mapbox.gridLayer');
         this._layer = _;
     },
 
