@@ -12,21 +12,20 @@
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
-	var map = mapbox.map('map','examples.map-zr0njcqy');
+    var map = mapbox.map('map', 'examples.map-zr0njcqy');
 
-	// Open popup when user mouses over a marker
-	map.markerLayer.on('mouseover', function(e) {
-		e.layer.openPopup();
-	});
-	// Hide popup when user's cursor leaves marker.
-	// We add a timeout to make it a little more visually graceful
-	// in case of rapid cursor movement.
-	map.markerLayer.on('mouseout', function(e) {
-		window.setTimeout(function(){ 
-			e.layer.closePopup();
-		},300);
-	});
-
+    // Open popup when user mouses over a marker
+    map.markerLayer.on('mouseover', function (e) {
+        e.layer.openPopup();
+    });
+    // Hide popup when user's cursor leaves marker.
+    // We add a timeout to make it a little more visually graceful
+    // in case of rapid cursor movement.
+    map.markerLayer.on('mouseout', function (e) {
+        window.setTimeout(function () {
+            e.layer.closePopup();
+        }, 300);
+    });
 </script>
 </body>
 </html>
