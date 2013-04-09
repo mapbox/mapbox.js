@@ -52,7 +52,7 @@
 /* Light Theme (default) */
 
 .leaflet-control .mapbox-button {
-    background: white;
+    background: #fff;
     border: 1px solid #bbb;
 }
 
@@ -88,7 +88,7 @@
 .leaflet-container.dark .leaflet-control .mapbox-button {
     background: #404040;
     color: #fff;
-    border-color: black;
+    border-color: #000;
 }
 
 .leaflet-container.dark .leaflet-bar a:hover,
