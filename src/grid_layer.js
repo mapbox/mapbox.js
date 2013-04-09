@@ -86,30 +86,31 @@ module.exports = L.Class.extend({
     },
 
     _click: function(e) {
-        var o = this._objectForEvent(e);
-        this.fire('click', o.content);
+        this._objectForEvent(e, function(on) {
+            this.fire('click', on.content);
+        });
     },
 
     _move: function(e) {
-        var on = this._objectForEvent(e);
-        // TODO: this fail.
-        if (on.data !== this._mouseOn) {
-            if (this._mouseOn) {
-                this.fire('mouseout', {
-                    latLng: e.latlng,
-                    data: this._mouseOn
-                });
+        this._objectForEvent(e, function(on) {
+            if (on.data !== this._mouseOn) {
+                if (this._mouseOn) {
+                    this.fire('mouseout', {
+                        latLng: e.latlng,
+                        data: this._mouseOn
+                    });
+                }
+                if (on.data) this.fire('mouseover', on);
+                this._mouseOn = on.data;
+            } else if (on.data) {
+                this.fire('mousemove', on);
             }
-            if (on.data) this.fire('mouseover', on);
-            this._mouseOn = on.data;
-        } else if (on.data) {
-            this.fire('mousemove', on);
-        }
+        });
     },
 
     featureAtScreenPoint: function(latlng, callback) {
         var map = this._map,
-            point = map.project(e.latlng),
+            point = map.project(latlng),
             tileSize = 256,
             resolution = 4,
             x = Math.floor(point.x / tileSize),
@@ -122,7 +123,7 @@ module.exports = L.Class.extend({
         y = (y + max) % max;
 
         this.getGrid(map.getZoom(), x, y, function(data) {
-            if (!data) return { latlng: e.latlng, data: null };
+            if (!data) return { latlng: latlng, data: null };
             var idx = this._utfDecode(data.grid[gridY].charCodeAt(gridX)),
                 key = data.keys[idx];
             if (!data.data.hasOwnProperty(key)) callback(null);
