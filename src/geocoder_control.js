@@ -42,6 +42,7 @@ module.exports = L.Control.extend({
 
         var submit = this._submit = document.createElement('input');
         submit.type = 'submit';
+        submit.className = 'mapbox-button';
         submit.value = 'Locate';
 
         form.appendChild(input);
