@@ -7,8 +7,6 @@ module.exports = function(url, callback) {
     strict(callback, 'function');
     corslite(url, function(err, resp) {
         if (!err && resp) {
-            // temporary
-            if (resp.status === 404) return;
             // hardcoded grid response
             if (resp.responseText[0] == 'g') {
                 resp = JSON3.parse(resp.responseText
