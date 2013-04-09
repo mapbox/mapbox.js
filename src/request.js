@@ -6,7 +6,17 @@ module.exports = function(url, callback) {
     strict(url, 'string');
     strict(callback, 'function');
     corslite(url, function(err, resp) {
-        if (!err && resp) resp = JSON3.parse(resp.responseText);
+        if (!err && resp) {
+            // temporary
+            if (resp.status === 404) return;
+            // hardcoded grid response
+            if (resp.responseText[0] == 'g') {
+                resp = JSON3.parse(resp.responseText
+                    .substring(5, resp.responseText.length - 2));
+            } else {
+                resp = JSON3.parse(resp.responseText);
+            }
+        }
         callback(err, resp);
     }, true);
 };

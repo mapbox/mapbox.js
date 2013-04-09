@@ -128,17 +128,17 @@ module.exports = L.Class.extend({
         x = (x + max) % max;
         y = (y + max) % max;
 
-        this.getGrid(map.getZoom(), x, y, function(data) {
+        this.getGrid(map.getZoom(), x, y, L.bind(function(data) {
             if (!data) return { latlng: latlng, data: null };
             var idx = this._utfDecode(data.grid[gridY].charCodeAt(gridX)),
                 key = data.keys[idx];
             if (!data.data.hasOwnProperty(key)) callback(null);
             else callback(data.data[key]);
-        });
+        }, this));
     },
 
     _objectForEvent: function(e, callback) {
-        this.featureAtScreenPoint(e.latlng, function(data) {
+        this.featureAtScreenPoint(e.latlng, L.bind(function(data) {
             if (!data) {
                 return { latLng: e.latlng };
             } else {
@@ -150,7 +150,7 @@ module.exports = L.Class.extend({
                     full: this._template(data, 'full')
                 };
             }
-        });
+        }, this));
     },
 
     // a successful grid load. returns a function that maintains the
