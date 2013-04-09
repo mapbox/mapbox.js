@@ -91,14 +91,14 @@ module.exports = L.Class.extend({
 
     _click: function(e) {
         if (!this.active()) return;
-        this._objectForEvent(e, function(on) {
+        this._objectForEvent(e, L.bind(function(on) {
             this.fire('click', on.content);
-        });
+        }, this));
     },
 
     _move: function(e) {
         if (!this.active()) return;
-        this._objectForEvent(e, function(on) {
+        this._objectForEvent(e, L.bind(function(on) {
             if (on.data !== this._mouseOn) {
                 if (this._mouseOn) {
                     this.fire('mouseout', {
@@ -111,7 +111,7 @@ module.exports = L.Class.extend({
             } else if (on.data) {
                 this.fire('mousemove', on);
             }
-        });
+        }, this));
     },
 
     featureAtScreenPoint: function(latlng, callback) {
@@ -138,19 +138,22 @@ module.exports = L.Class.extend({
     },
 
     _objectForEvent: function(e, callback) {
+        var o = null;
         this.featureAtScreenPoint(e.latlng, L.bind(function(data) {
             if (!data) {
                 return { latLng: e.latlng };
             } else {
-                return {
+                o = {
                     latLng: e.latlng,
                     data: data,
                     url: this._template(data, 'location'),
                     teaser: this._template(data, 'teaser'),
                     full: this._template(data, 'full')
                 };
+                return callback(o);
             }
         }, this));
+        return o;
     },
 
     // a successful grid load. returns a function that maintains the
@@ -201,10 +204,6 @@ module.exports = L.Class.extend({
             callback(this._cache[key]);
         } else {
             this._cache[key] = null;
-            // console.log(this._url(x + y));
-            // console.log(L.Util.template(this._url(x + y), {
-            //     z: z, x: x, y: y
-            // }));
             request(L.Util.template(this._getURL(x + y), {
                 z: z, x: x, y: y
             }), callback, true);

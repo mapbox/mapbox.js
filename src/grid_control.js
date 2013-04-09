@@ -49,7 +49,7 @@ module.exports = L.Control.extend({
         this._layer
             .on('mousemove', this._mousemove, this)
             .on('mouseout', this._mouseout, this)
-            .on('mousemove', this._click, this);
+            .on('click', this._click, this);
 
         return container;
     }
