@@ -12,6 +12,7 @@
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
+    
     var map = mapbox.map('map', 'tmcw.map-5hafkxww');
 
     var geoJson = {
@@ -30,12 +31,8 @@
         }]
     };
 
-    L.geoJson(geoJson, {
-        pointToLayer: mapbox.marker.style,
-        onEachFeature: function(feature, layer) {
-            layer.bindPopup(feature.properties.title);
-        }
-    }).addTo(map);
+    map.markerLayer.setGeoJSON(geoJson);
+
 </script>
 </body>
 </html>
