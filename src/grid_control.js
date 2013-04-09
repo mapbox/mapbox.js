@@ -41,7 +41,7 @@ module.exports = L.Control.extend({
     onAdd: function(map) {
         this._map = map;
 
-        var className = 'leaflet-control-grid',
+        var className = 'leaflet-control-grid map-tooltip',
             container = L.DomUtil.create('div', className);
 
         L.DomEvent.disableClickPropagation(container);
