@@ -10,7 +10,8 @@ describe("mapbox.gridControl", function() {
     });
 
     it("is initialized", function() {
-        var control = new mapbox.gridControl();
+        var layer = new mapbox.gridLayer('examples.foo');
+        var control = new mapbox.gridControl(layer);
         expect(control).to.be.ok();
     });
 
