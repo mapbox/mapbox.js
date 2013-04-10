@@ -49,6 +49,18 @@
     padding: 5px;
 }
 
+.leaflet-control-mapbox-geocoder.searching:before {
+    content:'';
+    background:#cccccc;
+    background:rgba(224,224,224,0.5);
+    position:absolute;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    z-index:100;
+}
+
 .leaflet-bar {
     box-shadow: none;
 }

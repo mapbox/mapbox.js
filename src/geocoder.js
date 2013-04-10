@@ -28,7 +28,7 @@ module.exports = function(_) {
     };
 
     geocoder.queryURL = function(_) {
-        return L.Util.template(geocoder.getURL(), { query: _ });
+        return L.Util.template(geocoder.getURL(), { query: encodeURIComponent(_) });
     };
 
     geocoder.query = function(_, callback) {
