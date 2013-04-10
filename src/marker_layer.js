@@ -39,6 +39,7 @@ module.exports = L.FeatureGroup.extend({
             if (err) return util.log('could not load markers at ' + url);
             else if (json) this.setGeoJSON(json);
             if (cb) cb.call(this, null, json);
+            this.fire('load', json);
         }, this));
         return this;
     },
