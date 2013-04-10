@@ -40,6 +40,22 @@ describe('mapbox.marker', function() {
             expect(marker.options.icon.options.iconUrl).to.contain('50x50');
         });
 
+        it("produces a custom marker div", function() {
+            var markerIcon = L.divIcon({
+                className: 'custom-marker',
+                html: 'Marker text'
+            });
+
+            var marker = mapbox.marker.style({
+                properties: {
+                    'icon': markerIcon
+                }
+            });
+
+            expect(marker.options.icon.options.className).to.equal('custom-marker');
+            expect(marker.options.icon.options.html).to.equal('Marker text');
+        });
+
         it("sets a marker's title", function() {
             var marker = mapbox.marker.style({
                 properties: {
