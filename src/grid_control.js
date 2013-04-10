@@ -11,7 +11,7 @@ module.exports = L.Control.extend({
     },
 
     _currentContent: '',
-    _hidden: false,
+    _hidden: true,
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
