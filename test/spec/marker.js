@@ -27,6 +27,19 @@ describe('mapbox.marker', function() {
             expect(marker.options.icon.options.iconUrl).to.contain('f00');
         });
 
+        it("produces a custom marker icon", function() {
+            var markerIcon = L.icon({
+                iconUrl: 'http://placehold.it/50x50'
+            });
+
+            var marker = mapbox.marker.style({
+                properties: {
+                    'icon': markerIcon
+                }
+            });
+            expect(marker.options.icon.options.iconUrl).to.contain('50x50');
+        });
+
         it("sets a marker's title", function() {
             var marker = mapbox.marker.style({
                 properties: {
