@@ -24,6 +24,7 @@
     "uglify-js": "~2.2.5",
     "mocha": "~1.9",
     "expect.js": "~0.2.0",
+    "sinon": "~1.6.0",
     "mocha-phantomjs": "~1.1.1",
     "happen": "~0.1.2",
     "browserify": "~2.12.0"
