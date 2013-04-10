@@ -1,5 +1,5 @@
 describe('mapbox.markerLayer', function() {
-    var server, layersOf = helpers.layersOf;
+    var server;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
@@ -11,7 +11,7 @@ describe('mapbox.markerLayer', function() {
 
     it('loads data from a GeoJSON source', function() {
         var layer = new mapbox.markerLayer(helpers.geoJson),
-            marker = layersOf(layer)[0];
+            marker = layer.getLayers()[0];
         expect(marker instanceof L.Marker).to.equal(true);
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
@@ -24,7 +24,7 @@ describe('mapbox.markerLayer', function() {
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
         server.respond();
 
-        var marker = layersOf(layer)[0];
+        var marker = layer.getLayers()[0];
         expect(marker instanceof L.Marker).to.equal(true);
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
@@ -38,7 +38,7 @@ describe('mapbox.markerLayer', function() {
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
         server.respond();
 
-        var marker = layersOf(layer)[0];
+        var marker = layer.getLayers()[0];
         expect(marker instanceof L.Marker).to.equal(true);
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
@@ -51,7 +51,7 @@ describe('mapbox.markerLayer', function() {
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
         server.respond();
 
-        var marker = layersOf(layer)[0];
+        var marker = layer.getLayers()[0];
         expect(marker instanceof L.Marker).to.equal(true);
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
@@ -71,10 +71,10 @@ describe('mapbox.markerLayer', function() {
             var fooFilter = function (f) { return f.properties.title === 'foo'; };
             expect(layer.setFilter(fooFilter)).to.eql(layer);
             expect(layer.getFilter()).to.eql(fooFilter);
-            expect(layersOf(layer).length).to.equal(1);
+            expect(layer.getLayers().length).to.equal(1);
 
             layer.setFilter(function (f) { return f.properties.title !== 'foo'; });
-            expect(layersOf(layer).length).to.equal(0);
+            expect(layer.getLayers().length).to.equal(0);
         });
     });
 });
