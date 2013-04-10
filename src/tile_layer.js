@@ -78,7 +78,7 @@ module.exports = L.TileLayer.extend({
             if (err) util.log('could not load TileJSON at ' + url);
             else if (json) this.setTileJSON(json);
             if (cb) cb.call(this, err, json);
-            this.fire('load', json);
+            this.fire('ready', json);
         }, this));
         return this;
     },
