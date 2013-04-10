@@ -10,10 +10,34 @@ module.exports = L.Control.extend({
         sanitizer: require('./sanitize')
     },
 
+    _currentContent: '',
+    _hidden: false,
+
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
         util.strict_instance(_, mapbox.gridLayer, 'mapbox.gridLayer');
         this._layer = _;
+    },
+
+    // change the content of the tooltip HTML if it has changed, otherwise
+    // noop
+    setContent: function(_) {
+        if (!_) {
+            this._hide();
+        } else if (_ !== this._currentContent) {
+            if (this._hidden) this._show();
+            this._currentContent = this._container.innerHTML = _;
+        }
+    },
+
+    _show: function() {
+        this._container.style.display = 'block';
+    },
+
+    _hide: function() {
+        this._container.innerHTML = '';
+        this._container.style.display = 'none';
+        this._hidden = true;
     },
 
     _handler: function(type, o) {
@@ -22,13 +46,13 @@ module.exports = L.Control.extend({
             if (typeof mapping[i] === 'function') {
                 var res = mapping[i](o);
                 if (typeof res === 'string') {
-                    this._container.innerHTML = this.options.sanitizer(res);
+                    this.setContent(this.options.sanitizer(res));
                 }
             } else if (o[mapping[i]]) {
                 if (mapping[i] === 'location') {
                     window.top.location.href = o[mapping[i]];
                 } else {
-                    this._container.innerHTML = this.options.sanitizer(o[mapping[i]]);
+                    this.setContent(this.options.sanitizer(o[mapping[i]]));
                 }
             }
         }
@@ -43,6 +67,9 @@ module.exports = L.Control.extend({
 
         var className = 'leaflet-control-grid map-tooltip',
             container = L.DomUtil.create('div', className);
+
+        // hide the container element initially
+        container.style.display = 'none';
 
         L.DomEvent.disableClickPropagation(container);
 

@@ -5,6 +5,7 @@
     -webkit-border-radius:3px;
     border-radius:3px;
 }
+
 .map-legends {
     -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.15);
     box-shadow:0 1px 2px rgba(0,0,0,0.15);
@@ -15,13 +16,40 @@
 }
 
 .map-tooltip {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #fff;
-    padding: 5px;
-    max-width: 500px;
-    min-width: 300px;
+    z-index:999999;
+    padding:10px;
+    top:10px;
+    right:10px;
+    max-width:300px;
+    opacity:1;
+    -webkit-transition:opacity 150ms;
+    -moz-transition:opacity 150ms;
+    -ms-transition:opacity 150ms;
+    -o-transition:opacity 150ms;
+    transition:opacity 150ms;
+    -webkit-user-select:auto;
+    -moz-user-select:auto;
+    user-select:auto;
+}
+
+.map-tooltip {
+    border:1px solid #bbb;
+    box-sizing:border-box;
+    background:#fff;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+}
+
+.map-tooltip {
+    min-width:180px;
+    max-width:280px;
+    max-height:400px;
+    width:220px\8; /*< IE 9*/
+}
+
+.map-tooltip {
+    -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.15);
+    box-shadow:0 1px 2px rgba(0,0,0,0.15);
 }
 
 /* Leaflet Overrides */
@@ -138,6 +166,3 @@
 .leaflet-container.dark .leaflet-control-mapbox-geocoder input:focus {
     border-color: #ccc;
 }
-
-
-
