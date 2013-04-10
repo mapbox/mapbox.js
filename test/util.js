@@ -15,15 +15,6 @@ expect.Assertion.prototype.near = function(expected, delta) {
     }
 };
 
-// enumerate the layers of a layerGroup. This should be fixed in Leaflet core
-helpers.layersOf = function(layerGroup) {
-    var result = [];
-    layerGroup.eachLayer(function(layer) {
-        result.push(layer);
-    });
-    return result;
-};
-
 helpers.tileJSON = {
     "attribution":"Data provided by NatureServe in collaboration with Robert Ridgely",
     "bounds":[-180,-85.0511,180,85.0511],
