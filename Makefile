@@ -9,7 +9,10 @@ all: \
 	dist/mapbox.ie.css \
 	dist/images
 
-node_modules/Leaflet/dist/leaflet-src.js:
+node_modules/.install: package.json
+	npm install && npm install leaflet && npm install leaflet-hash && touch node_modules/.install
+
+node_modules/Leaflet/dist/leaflet-src.js: node_modules/.install
 	cd node_modules/Leaflet && npm install && npm run-script prepublish
 
 mapbox%js:
@@ -30,16 +33,16 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 	cp node_modules/Leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.uncompressed.js: Makefile src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
+dist/mapbox.uncompressed.js: node_modules/.install src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
 	$(BROWSERIFY) --debug index.js > $@
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.private.js: Makefile src/*.js dist private.js
+dist/mapbox.private.js: node_modules/.install src/*.js dist private.js
 	$(BROWSERIFY) --debug private.js > $@
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled
-dist/mapbox.js: dist dist/mapbox.uncompressed.js
+dist/mapbox.js: dist/mapbox.uncompressed.js
 	$(UGLIFY) dist/mapbox.uncompressed.js -c -m -o dist/mapbox.js
 
 clean:
