@@ -117,7 +117,7 @@ describe('mapbox.geocoder', function() {
             var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
 
             server.respondWith('GET',
-                'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/-97.7,30.3.json',
+                'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/-97.7%2C30.3.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(revJson)]);
 
             g.reverseQuery({ lat: 30.3, lng: -97.7 }, function(err, res) {
