@@ -31,7 +31,7 @@ var map = mapbox.map('map', 'examples.map-zr0njcqy');
 var alert = document.getElementById('alert');
 
 map.markerLayer.on('click', function(e) {
-    
+
     // Pan to the clicked marker (optional)
     map.panTo(e.layer.getLatLng());
 
@@ -40,11 +40,11 @@ map.markerLayer.on('click', function(e) {
 
     // Clear the alert box
     alert.innerHTML = '';
-    
+
     // Add a header and paragraph, and fill them with content
     var h1 = alert.appendChild(document.createElement('h1'));
     var p = alert.appendChild(document.createElement('p'));
-    
+
     // Pull the title and description attributes of the feature.
     // This can be customized this to pull other properties that you've set.
     h1.innerHTML = e.layer.feature.properties.title;
