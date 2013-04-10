@@ -24,6 +24,7 @@ module.exports = L.Control.extend({
     setContent: function(_) {
         if (!_) {
             this._hide();
+            this._hidden = true;
         } else if (_ !== this._currentContent) {
             if (this._hidden) this._show();
             this._currentContent = this._container.innerHTML = _;
