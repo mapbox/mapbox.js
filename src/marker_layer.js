@@ -76,7 +76,7 @@ module.exports = L.FeatureGroup.extend({
             var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style);
 
             layer.feature = json;
-            layer.bindPopup(json.properties.title,{
+            layer.bindPopup(json.properties.title, {
                 closeButton: false
             });
 
