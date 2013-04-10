@@ -11,7 +11,7 @@
   "main": "index.js",
   "dependencies": {
     "leaflet": "git://github.com/Leaflet/Leaflet.git",
-    "leaflet-hash": "~0.1.0",
+    "leaflet-hash": "git://github.com/mlevans/leaflet-hash.git",
     "leaflet-fullscreen": "0.0.0",
     "mustache": "~0.7.2",
     "corslite": "0.0.2",
