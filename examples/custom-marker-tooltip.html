@@ -51,23 +51,25 @@
         }
     }];
 
+    function addCustomPopup(feature, layer) {
+        layer.on('click', function() {
+            // Create custom popup content
+            var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                                    '<img src="' + feature.properties.image + '">' +
+                                '   <h2>' + feature.properties.city + '</h2>' +
+                                '</a>';
+
+            // http://leafletjs.com/reference.html#popup
+            this.bindPopup(popupContent,{
+                closeButton: false,
+                minWidth: 300
+            });
+        });
+    }
+
     L.geoJson(features, {
         pointToLayer: mapbox.marker.style,
-        onEachFeature: function(feature, layer) {
-            layer.on('click', function() {
-                // Create custom popup content
-                var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
-                                        '<img src="' + feature.properties.image + '">' +
-                                    '   <h2>' + feature.properties.city + '</h2>' +
-                                    '</a>';
-
-                // http://leafletjs.com/reference.html#popup
-                this.bindPopup(popupContent,{
-                    closeButton: false,
-                    minWidth: 300
-                });
-            });
-        }
+        onEachFeature: addCustomPopup
     }).addTo(map);
 
     map.setView([45.908, -78.525], 5);
