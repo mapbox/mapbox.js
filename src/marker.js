@@ -31,12 +31,11 @@ function icon(fp) {
 // [simple-style specification](https://github.com/mapbox/simplestyle-spec)
 // and [Markers API](http://mapbox.com/developers/api/#markers).
 function style(f, latlon) {
-    var markerIcon = (f.properties.icon) ? f.properties.icon : icon(f.properties),
-        markerContent = f.properties.title;
+    var markerIcon = (f.properties.icon) ? f.properties.icon : icon(f.properties);
 
     return L.marker(latlon, {
         icon: markerIcon,
-        title: markerContent
+        title: f.properties.title
     });
 }
 
