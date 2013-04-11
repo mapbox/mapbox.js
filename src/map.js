@@ -19,22 +19,22 @@ var Map = L.Map.extend({
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
         if (this.options.tileLayer) {
-            this.tileLayer = new mapbox.tileLayer();
+            this.tileLayer = mapbox.tileLayer();
             this.addLayer(this.tileLayer);
         }
 
         if (this.options.markerLayer) {
-            this.markerLayer = new mapbox.markerLayer();
+            this.markerLayer = mapbox.markerLayer();
             this.addLayer(this.markerLayer);
         }
 
         if (this.options.gridLayer) {
-            this.gridLayer = new mapbox.gridLayer();
+            this.gridLayer = mapbox.gridLayer();
             this.addLayer(this.gridLayer);
         }
 
         if (this.options.legendControl) {
-            this.legendControl = new mapbox.legendControl();
+            this.legendControl = mapbox.legendControl();
             this.addControl(this.legendControl);
         }
 
