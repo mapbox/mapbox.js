@@ -130,7 +130,7 @@ var GridLayer = L.Class.extend({
         y = (y + max) % max;
 
         this.getGrid(map.getZoom(), x, y, L.bind(function(data) {
-            if (!data) return { latlng: latlng, data: null };
+            if (!data) return callback(null);
             var idx = this._utfDecode(data.grid[gridY].charCodeAt(gridX)),
                 key = data.keys[idx];
             if (!data.data.hasOwnProperty(key)) callback(null);
@@ -142,7 +142,7 @@ var GridLayer = L.Class.extend({
         var o = null;
         this.featureAtScreenPoint(e.latlng, L.bind(function(data) {
             if (!data) {
-                o = { latLng: e.latlng };
+                o = { latLng: e.latlng, data: null };
                 return callback(o);
             } else {
                 o = {
@@ -173,7 +173,6 @@ var GridLayer = L.Class.extend({
 
     // Load up all required json grid files
     _update: function() {
-
         if (!this.active()) return;
 
         var bounds = this._map.getPixelBounds(),

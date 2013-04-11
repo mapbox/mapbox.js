@@ -41,8 +41,6 @@ var GridControl = L.Control.extend({
     setContent: function(_) {
         if (!_) {
             this._hide();
-            this._hidden = true;
-            this._currentContent = '';
         } else if (_ !== this._currentContent) {
             if (this._hidden) this._show();
             this._currentContent = this._contentWrapper.innerHTML = _;
@@ -50,14 +48,16 @@ var GridControl = L.Control.extend({
     },
 
     _show: function() {
+        this._hidden = false;
         this._container.style.display = 'block';
     },
 
     _hide: function() {
-        this._contentWrapper.innerHTML = '';
-        this._container.style.display = 'none';
+        this._currentContent = '';
         this._hidden = true;
         this._pinned = false;
+        this._contentWrapper.innerHTML = '';
+        this._container.style.display = 'none';
         L.DomUtil.removeClass(this._container, 'closable');
     },
 
@@ -65,7 +65,6 @@ var GridControl = L.Control.extend({
         var mapping = this.options.mapping[type],
             format = mapping.format,
             formatted;
-        if (type === 'click') console.log(o);
         // mousemoves do not close or affect this control when
         // a tooltip is pinned open
         if ((type === 'mousemove' ||
@@ -84,8 +83,15 @@ var GridControl = L.Control.extend({
             } else {
                 this.setContent(this.options.sanitizer(formatted));
             }
+        // a click outside of valid features while the map is pinned
+        // should unpin the tooltip
+        } else if (type === 'click' &&
+            o.data === null &&
+            this._pinned) {
+            this.setContent('');
         }
-        if (mapping.pin) {
+
+        if (mapping.pin && o.data) {
             L.DomUtil.addClass(this._container, 'closable');
             this._pinned = true;
         } else {
