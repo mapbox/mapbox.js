@@ -131,24 +131,21 @@ describe('mapbox.gridLayer', function() {
         });
     });
 
-    describe('click event', function() {
+    describe('events', function() {
         var layer;
 
-        var fullGrid = {
+        var grid = {
             grid: [],
             keys: ["", "1"],
             data: {"1": "data"}
         };
 
-        var emptyGrid = {
-            grid: [],
-            keys: ["", "1"],
-            data: {"1": "data"}
-        };
+        for (var i = 0; i < 32; i++) {
+            grid.grid[i] = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        }
 
-        for (var i = 0; i < 64; i++) {
-            fullGrid.grid[i] = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-            emptyGrid.grid[i] = "                                                                "
+        for (; i < 64; i++) {
+            grid.grid[i] = "                                                                "
         }
 
         beforeEach(function() {
@@ -156,32 +153,93 @@ describe('mapbox.gridLayer', function() {
 
             layer = mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
                 .addTo(map);
+
+            server.respondWith('GET', '0/0/0',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(grid)]);
+            server.respond();
         });
 
-        it('is emitted when an area with data is clicked', function(done) {
+        it('emits click when an area with data is clicked', function(done) {
             layer.on('click', function(e) {
                 expect(e.data).to.equal("data");
                 done();
             });
 
-            server.respondWith('GET', '0/0/0',
-                [200, { "Content-Type": "application/json" }, JSON.stringify(fullGrid)]);
-            server.respond();
-
-            map.fire('click', {latlng: L.latLng(0, 0)});
+            map.fire('click', {latlng: L.latLng(1, 0)});
         });
 
-        it('is emitted with null data when an area without data is clicked', function(done) {
+        it('emits click with null data when an area without data is clicked', function(done) {
             layer.on('click', function(e) {
                 expect(e.data).to.equal(null);
                 done();
             });
 
-            server.respondWith('GET', '0/0/0',
-                [200, { "Content-Type": "application/json" }, JSON.stringify(emptyGrid)]);
-            server.respond();
-
-            map.fire('click', {latlng: L.latLng(0, 0)});
+            map.fire('click', {latlng: L.latLng(-1, 0)});
         });
-    });
+
+        it('emits mouseover when entering an area with data', function(done) {
+            layer.on('mouseover', function(e) {
+                expect(e.data).to.equal("data");
+                done();
+            });
+
+            map.fire('mousemove', {latlng: L.latLng(1, 0)});
+        });
+
+        it('emits no repetitive mouseover events', function() {
+            var calls = 0;
+
+            layer.on('mouseover', function(e) {
+                calls += 1;
+            });
+
+            map.fire('mousemove', {latlng: L.latLng(1, 0)});
+            map.fire('mousemove', {latlng: L.latLng(1, 0)});
+
+            expect(calls).to.equal(1);
+        });
+
+        it('emits no mouseover events for dataless areas', function() {
+            var calls = 0;
+
+            layer.on('mouseover', function(e) {
+                calls += 1;
+            });
+
+            map.fire('mousemove', {latlng: L.latLng(-1, 0)});
+
+            expect(calls).to.equal(0);
+        });
+
+        it('emits mousemove when moving in an area with data', function(done) {
+            layer.on('mousemove', function(e) {
+                expect(e.data).to.equal("data");
+                done();
+            });
+
+            map.fire('mousemove', {latlng: L.latLng(1, 0)});
+            map.fire('mousemove', {latlng: L.latLng(1, 0)});
+        });
+
+        it('emits mouseout when exiting an area with data', function(done) {
+            layer.on('mouseout', function(e) {
+                expect(e.data).to.equal("data");
+                done();
+            });
+
+            map.fire('mousemove', {latlng: L.latLng(1, 0)});
+            map.fire('mousemove', {latlng: L.latLng(-1, 0)});
+        });
+
+        it('emits no mouseout for dataless areas', function() {
+            var calls = 0;
+
+            layer.on('mouseout', function(e) {
+                calls += 1;
+            });
+
+            map.fire('mousemove', {latlng: L.latLng(-1, 0)});
+            map.fire('mousemove', {latlng: L.latLng(1, 0)});
+        });
+    })
 });
