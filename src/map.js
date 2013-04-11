@@ -16,7 +16,7 @@ var Map = L.Map.extend({
         L.Map.prototype.initialize.call(this, element, options);
 
         // disable the default 'Powered by Leaflet' text
-        this.attributionControl.setPrefix('');
+        if (this.attributionControl) this.attributionControl.setPrefix('');
 
         if (this.options.tileLayer) {
             this.tileLayer = new mapbox.tileLayer();
@@ -90,7 +90,7 @@ var Map = L.Map.extend({
                 center = L.latLng(json.center[1], json.center[0]);
 
             this.setView(center, zoom);
-        } else {
+        } else if (this.attributionControl) {
             this.attributionControl.addAttribution(json.attribution);
         }
     }
