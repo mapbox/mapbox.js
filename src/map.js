@@ -7,7 +7,8 @@ var Map = L.Map.extend({
         tileLayer: true,
         markerLayer: true,
         gridLayer: true,
-        legendControl: true
+        legendControl: true,
+        gridControl: true
     },
 
     _tilejson: {},
@@ -31,6 +32,11 @@ var Map = L.Map.extend({
         if (this.options.gridLayer) {
             this.gridLayer = mapbox.gridLayer();
             this.addLayer(this.gridLayer);
+        }
+
+        if (this.options.gridLayer && this.options.gridControl) {
+            this.gridControl = mapbox.gridControl(this.gridLayer);
+            this.addControl(this.gridControl);
         }
 
         if (this.options.legendControl) {

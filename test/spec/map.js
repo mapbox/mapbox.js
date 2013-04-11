@@ -72,6 +72,21 @@ describe('mapbox.map', function() {
             var map = mapbox.map(element, tileJSON, {legendControl: false});
             expect(map.legendControl).to.be(undefined);
         });
+
+        it('creates a gridControl', function() {
+            var map = mapbox.map(element, tileJSON);
+            expect(map.gridControl).to.be.ok();
+        });
+
+        it('creates no gridControl given gridLayer: false option', function() {
+            var map = mapbox.map(element, tileJSON, {gridLayer: false});
+            expect(map.gridControl).to.be(undefined);
+        });
+
+        it('creates no gridControl given gridControl: false option', function() {
+            var map = mapbox.map(element, tileJSON, {gridControl: false});
+            expect(map.gridControl).to.be(undefined);
+        });
     });
 
     describe('corner cases', function() {
