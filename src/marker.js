@@ -1,7 +1,7 @@
 'use strict';
 
 var url = require('./url'),
-    sanitizer: require('./sanitize');
+    sanitizer = require('./sanitize');
 // mapbox-related markers functionality
 // provide an icon from mapbox's simple-style spec and hosted markers
 // service
