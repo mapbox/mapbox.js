@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "git://github.com/Leaflet/Leaflet.git#dea408ad595d32ffd13298e74015446ea9b5df82",
+    "leaflet": "git://github.com/Leaflet/Leaflet.git#54b2887667f689fa12ed1ef5fd6971f3ee8a0c58",
     "leaflet-hash": "git://github.com/mlevans/leaflet-hash.git#b039a3aa4e2492a5c7448075172ac26769e601d6",
     "leaflet-fullscreen": "0.0.0",
     "mustache": "~0.7.2",
