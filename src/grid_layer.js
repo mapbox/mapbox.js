@@ -93,7 +93,7 @@ var GridLayer = L.Class.extend({
     _click: function(e) {
         if (!this.active()) return;
         this._objectForEvent(e, L.bind(function(on) {
-            this.fire('click', on.content);
+            this.fire('click', on);
         }, this));
     },
 
@@ -142,7 +142,8 @@ var GridLayer = L.Class.extend({
         var o = null;
         this.featureAtScreenPoint(e.latlng, L.bind(function(data) {
             if (!data) {
-                return { latLng: e.latlng };
+                o = { latLng: e.latlng };
+                return callback(o);
             } else {
                 o = {
                     latLng: e.latlng,

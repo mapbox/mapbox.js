@@ -1,17 +1,34 @@
 var util = require('./util');
 
 var GridControl = L.Control.extend({
+
     options: {
         mapping: {
-            mousemove: ['teaser'],
-            click: ['full'],
-            mouseout: [function() { return ''; }]
+            mousemove: {
+                format: 'teaser',
+                pin: false
+            },
+            click: {
+                format: 'full',
+                pin: true
+            },
+            mouseout: {
+                format: function() { return ''; },
+                poin: false
+            }
         },
         sanitizer: require('./sanitize')
     },
 
     _currentContent: '',
+
+    // is this control hidden? when true, the control has display:none
     _hidden: true,
+
+    // pinned means that this control is on a feature and the user has likely
+    // clicked. pinned will not become false unless the user clicks off
+    // of the feature onto another or clicks x
+    _pinned: false,
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
@@ -28,7 +45,7 @@ var GridControl = L.Control.extend({
             this._currentContent = '';
         } else if (_ !== this._currentContent) {
             if (this._hidden) this._show();
-            this._currentContent = this._container.innerHTML = _;
+            this._currentContent = this._contentWrapper.innerHTML = _;
         }
     },
 
@@ -37,26 +54,42 @@ var GridControl = L.Control.extend({
     },
 
     _hide: function() {
-        this._container.innerHTML = '';
+        this._contentWrapper.innerHTML = '';
         this._container.style.display = 'none';
         this._hidden = true;
+        this._pinned = false;
+        L.DomUtil.removeClass(this._container, 'closable');
     },
 
     _handler: function(type, o) {
-        var mapping = this.options.mapping[type];
-        for (var i = 0; i < mapping.length; i++) {
-            if (typeof mapping[i] === 'function') {
-                var res = mapping[i](o);
-                if (typeof res === 'string') {
-                    this.setContent(this.options.sanitizer(res));
-                }
-            } else if (o[mapping[i]]) {
-                if (mapping[i] === 'location') {
-                    window.top.location.href = o[mapping[i]];
-                } else {
-                    this.setContent(this.options.sanitizer(o[mapping[i]]));
-                }
+        var mapping = this.options.mapping[type],
+            format = mapping.format,
+            formatted;
+        if (type === 'click') console.log(o);
+        // mousemoves do not close or affect this control when
+        // a tooltip is pinned open
+        if ((type === 'mousemove' ||
+             type === 'mouseout') && this._pinned) return;
+        if (typeof format === 'function') {
+            formatted = format(o);
+            if (typeof formatted === 'string') {
+                this.setContent(this.options.sanitizer(formatted));
             }
+        // a template. in this case, the content will already be templated
+        // by `mapbox.gridLayer`
+        } else if (o[format]) {
+            formatted = o[format];
+            if (format === 'location') {
+                window.top.location.href = formatted;
+            } else {
+                this.setContent(this.options.sanitizer(formatted));
+            }
+        }
+        if (mapping.pin) {
+            L.DomUtil.addClass(this._container, 'closable');
+            this._pinned = true;
+        } else {
+            L.DomUtil.removeClass(this._container, 'closable');
         }
     },
 
@@ -64,14 +97,36 @@ var GridControl = L.Control.extend({
     _mouseout: function(o) { this._handler('mouseout', o); },
     _click: function(o) { this._handler('click', o); },
 
+    _createClosebutton: function(container, fn) {
+        var link = L.DomUtil.create('a', 'close', container);
+
+        link.innerHTML = 'close';
+        link.href = '#';
+        link.title = 'close';
+
+        L.DomEvent
+            .on(link, 'click', L.DomEvent.stopPropagation)
+            .on(link, 'mousedown', L.DomEvent.stopPropagation)
+            .on(link, 'dblclick', L.DomEvent.stopPropagation)
+            .on(link, 'click', L.DomEvent.preventDefault)
+            .on(link, 'click', fn, this);
+
+        return link;
+    },
+
     onAdd: function(map) {
         this._map = map;
 
         var className = 'leaflet-control-grid map-tooltip',
-            container = L.DomUtil.create('div', className);
+            container = L.DomUtil.create('div', className),
+            contentWrapper = L.DomUtil.create('div', 'map-tooltip-content');
 
         // hide the container element initially
         container.style.display = 'none';
+        this._createClosebutton(container, this._hide);
+        container.appendChild(contentWrapper);
+
+        this._contentWrapper = contentWrapper;
 
         L.DomEvent
             .disableClickPropagation(container)
