@@ -1,6 +1,7 @@
 'use strict';
 
-var url = require('./url');
+var url = require('./url'),
+    sanitizer: require('./sanitize');
 // mapbox-related markers functionality
 // provide an icon from mapbox's simple-style spec and hosted markers
 // service
@@ -45,7 +46,7 @@ function createPopup(f) {
     if (f.properties.description)
         popup += '<div class="marker-description">' + f.properties.description + '</div>';
 
-    return popup;
+    return this.sanitizer(popup);
 }
 
 module.exports = {
