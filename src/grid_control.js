@@ -73,7 +73,10 @@ var GridControl = L.Control.extend({
         // hide the container element initially
         container.style.display = 'none';
 
-        L.DomEvent.disableClickPropagation(container);
+        L.DomEvent
+            .disableClickPropagation(container)
+            // allow people to scroll tooltips with mousewheel
+            .addListener(container, 'mousewheel', L.DomEvent.stopPropagation);
 
         this._layer
             .on('mousemove', this._mousemove, this)
