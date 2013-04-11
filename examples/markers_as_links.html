@@ -20,7 +20,7 @@
         features: [{
             type: 'Feature',
             properties: {
-                title: 'foo',
+                title: 'Washington, D.C.',
                 'marker-color': '#f00',
                 'marker-size': 'large',
                 url: 'http://en.wikipedia.org/wiki/Washington,_D.C.'
@@ -33,7 +33,7 @@
         {
             type: 'Feature',
             properties: {
-                title: 'foo',
+                title: 'Baltimore, MD',
                 'marker-color': '#f00',
                 'marker-size': 'large',
                 url: 'http://en.wikipedia.org/wiki/Baltimore'
@@ -45,14 +45,14 @@
         }]
     };
 
-    L.geoJson(geoJson, {
-        pointToLayer: mapbox.marker.style,
-        onEachFeature: function(feature, layer) {
-            layer.on('click', function() {
-                window.open(feature.properties.url);
-            });
-        }
-    }).addTo(map);
+    // Pass features and a custom factory function to the map
+    map.markerLayer.setGeoJSON(geoJson, function(feature, layer) {
+        layer.on('click', function() {
+            this.unbindPopup();
+            window.open(feature.properties.url);
+        });
+    });
+
 </script>
 </body>
 </html>

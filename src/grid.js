@@ -1,0 +1,13 @@
+function utfDecode(c) {
+    if (c >= 93) c--;
+    if (c >= 35) c--;
+    return c - 32;
+}
+
+module.exports = function(data) {
+    return function(x, y) {
+        var idx = utfDecode(data.grid[y].charCodeAt(x)),
+            key = data.keys[idx];
+        return data.data[key];
+    }
+};

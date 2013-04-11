@@ -67,10 +67,8 @@
         });
     }
 
-    L.geoJson(features, {
-        pointToLayer: mapbox.marker.style,
-        onEachFeature: addCustomPopup
-    }).addTo(map);
+    // Pass features and a custom factory function to the map
+    map.markerLayer.setGeoJSON(features, addCustomPopup);
 
     map.setView([45.908, -78.525], 5);
 

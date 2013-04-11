@@ -24,9 +24,9 @@ var MarkerLayer = L.FeatureGroup.extend({
         }
     },
 
-    setGeoJSON: function(_) {
+    setGeoJSON: function(_, fn) {
         this._geojson = _;
-        this._initialize(_);
+        this._initialize(_, fn);
     },
 
     getGeoJSON: function() {
@@ -61,7 +61,7 @@ var MarkerLayer = L.FeatureGroup.extend({
         return this.options.filter;
     },
 
-    _initialize: function(json) {
+    _initialize: function(json, fn) {
         var features = L.Util.isArray(json) ? json : json.features,
             i, len;
 
@@ -69,16 +69,22 @@ var MarkerLayer = L.FeatureGroup.extend({
             for (i = 0, len = features.length; i < len; i++) {
                 // Only add this if geometry or geometries are set and not null
                 if (features[i].geometries || features[i].geometry || features[i].features) {
-                    this._initialize(features[i]);
+                    this._initialize(features[i], fn);
                 }
             }
         } else if (this.options.filter(json)) {
+
             var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style);
 
             layer.feature = json;
             layer.bindPopup(json.properties.title, {
                 closeButton: false
             });
+
+            // If function is provided, run features against it
+            if (fn) {
+                fn(json, layer);
+            }
 
             this.addLayer(layer);
         }
