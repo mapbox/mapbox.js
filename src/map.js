@@ -90,6 +90,8 @@ var Map = L.Map.extend({
                 center = L.latLng(json.center[1], json.center[0]);
 
             this.setView(center, zoom);
+        } else {
+            this.attributionControl.addAttribution(json.attribution);
         }
     }
 });
