@@ -44,6 +44,10 @@
         font-size: 20px;
         color: #DC1438;
         margin-left: 10px;
+        cursor: pointer;
+    }
+    #timeline #controls a:hover {
+        text-decoration: underline;
     }
 
     a.year-active {
@@ -58,14 +62,19 @@
     </div>
 </div>
 <div id='map'></div>
+
+<!-- We're using jQuery to load the GeoJSON, but you can use anything you want -->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 <script type='text/javascript'>
     var map = mapbox.map('map', 'examples.map-0l53fhk2')
         .setView([40, -130], 3);
 
-    mapbox.request('earthquakes.geojson', function(err, geojson) {
+    // We are using jQuery to get earthquakes.geojson, but you could use alternatives
+    $.getJSON('earthquakes.geojson', function(geojson) {
 
-        var markerLayer = (mapbox.markerLayer(geojson))
-            .filter(function() { return false; })
+        markerLayer = (mapbox.markerLayer(geojson));
+        markerLayer.setFilter(function() { return false; })
             .addTo(map);
 
         // A closure for clicking years. You give it a year, and it returns a function
@@ -76,7 +85,7 @@
                 var active = document.getElementsByClassName('year-active');
                 if (active.length) active[0].className = '';
                 document.getElementById('y' + y).className = 'year-active';
-                markerLayer.filter(function(f) {
+                markerLayer.setFilter(function(f) {
                     return f.properties.year == y;
                 });
                 return false;
