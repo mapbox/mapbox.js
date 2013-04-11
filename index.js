@@ -10,6 +10,7 @@ module.exports.gridControl = require('./src/grid_control');
 module.exports.gridLayer = require('./src/grid_layer');
 module.exports.markerLayer = require('./src/marker_layer');
 module.exports.map = require('./src/map');
+module.exports.config = require('./src/config');
 
 require('leaflet-hash/leaflet-hash');
 module.exports.hash = L.Hash;

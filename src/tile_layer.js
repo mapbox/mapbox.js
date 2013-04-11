@@ -49,6 +49,7 @@ var TileLayer = L.TileLayer.extend({
 
     setTileJSON: function(json) {
         util.strict(json, 'object');
+        json = url.httpsify(json);
 
         L.extend(this.options, {
             tiles: json.tiles,

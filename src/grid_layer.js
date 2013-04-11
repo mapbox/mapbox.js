@@ -27,6 +27,7 @@ var GridLayer = L.Class.extend({
 
     setTileJSON: function(_) {
         util.strict(_, 'object');
+        _ = url.httpsify(_);
         this._tilejson = _;
         if (this._tilejson.grids) this._urls = this._tilejson.grids;
         if (this._tilejson.template) {
