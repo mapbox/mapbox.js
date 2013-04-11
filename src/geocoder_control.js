@@ -1,6 +1,6 @@
 var geocoder = require('./geocoder');
 
-module.exports = L.Control.extend({
+var GeocoderControl = L.Control.extend({
     includes: L.Mixin.Events,
 
     initialize: function(_) {
@@ -64,3 +64,7 @@ module.exports = L.Control.extend({
         }, this));
     }
 });
+
+module.exports = function(options) {
+    return new GeocoderControl(options);
+};

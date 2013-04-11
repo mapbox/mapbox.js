@@ -2,7 +2,7 @@ var util = require('./util'),
     url = require('./url'),
     request = require('./request');
 
-module.exports = L.TileLayer.extend({
+var TileLayer = L.TileLayer.extend({
 
     options: {
         format: 'png'
@@ -106,3 +106,7 @@ module.exports = L.TileLayer.extend({
         }
     }
 });
+
+module.exports = function(_, options) {
+    return new TileLayer(_, options);
+};

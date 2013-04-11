@@ -6,7 +6,7 @@ var request = require('./request');
 //
 // A layer of markers, loaded from MapBox or else. Adds the ability
 // to reset markers, filter them, and load them from a GeoJSON URL.
-module.exports = L.FeatureGroup.extend({
+var MarkerLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; }
     },
@@ -84,3 +84,7 @@ module.exports = L.FeatureGroup.extend({
         }
     }
 });
+
+module.exports = function(_, options) {
+    return new MarkerLayer(_, options);
+};

@@ -54,13 +54,13 @@ with one addition:
 _Example_:
 
     // the second argument is optional
-    var layer = new mapbox.tileLayer('examples.map-20v6611k');
+    var layer = mapbox.tileLayer('examples.map-20v6611k');
 
     // you can also provide a full url to a tilejson resource
-    var layer = new mapbox.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json');
+    var layer = mapbox.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json');
 
     // if provided,you can support retina tiles
-    var layer = new mapbox.tileLayer('examples.map-20v6611k', {
+    var layer = mapbox.tileLayer('examples.map-20v6611k', {
         detectRetina: true,
         // if retina is detected, this layer is used instead
         retinaVersion: 'examples.map-zswgei2n'
@@ -133,7 +133,7 @@ with one addition:
 
 _Example_:
 
-    var markerLayer = (new mapbox.markerLayer(geojson))
+    var markerLayer = mapbox.markerLayer(geojson)
         .addTo(map);
 
 _Returns_ a `mapbox.markerLayer` object.
@@ -173,7 +173,7 @@ _Arguments_:
 
 _Example_:
 
-    var markerLayer = (new mapbox.markerLayer(geojson))
+    var markerLayer = mapbox.markerLayer(geojson)
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
@@ -188,7 +188,7 @@ _Arguments_: none
 
 _Example_:
 
-    var markerLayer = (new mapbox.markerLayer(geojson))
+    var markerLayer = mapbox.markerLayer(geojson)
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
@@ -202,7 +202,7 @@ _Returns_ the filter function.
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
-for the map. If the layer already has features, they are replaced with the new features.
+for the map. If the layer already has features, they are replaced with the  features.
 An empty array will clear the layer of all features.
 
 _Arguments:_
@@ -292,7 +292,7 @@ _Example_
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl(new mapbox.hash());
+        .addControl( mapbox.hash());
 
 _Returns_ a `mapbox.hash` object.
 
@@ -363,7 +363,7 @@ _Example_
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl(new mapbox.geocoder('examples.map-vyofok3q'));
+        .addControl( mapbox.geocoder('examples.map-vyofok3q'));
 
 _Returns_ a `mapbox.geocoderControl` object.
 

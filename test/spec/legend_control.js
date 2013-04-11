@@ -53,7 +53,7 @@ describe('mapbox.legendControl', function() {
 
     it('sanitizes its content', function() {
         var map = L.map(document.createElement('div'));
-        var legend = new mapbox.legendControl().addTo(map);
+        var legend = mapbox.legendControl().addTo(map);
 
         legend.addLegend('<script></script>');
 
@@ -62,7 +62,7 @@ describe('mapbox.legendControl', function() {
 
     it('supports a custom sanitizer', function() {
         var map = L.map(document.createElement('div'));
-        var legend = new mapbox.legendControl({
+        var legend = mapbox.legendControl({
             sanitizer: function(_) { return _; }
         }).addTo(map);
 

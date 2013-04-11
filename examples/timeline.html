@@ -64,7 +64,7 @@
 
     mapbox.request('earthquakes.geojson', function(err, geojson) {
 
-        var markerLayer = (new mapbox.markerLayer(geojson))
+        var markerLayer = (mapbox.markerLayer(geojson))
             .filter(function() { return false; })
             .addTo(map);
 

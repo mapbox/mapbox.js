@@ -1,6 +1,6 @@
 var util = require('./util');
 
-module.exports = L.Control.extend({
+var GridControl = L.Control.extend({
     options: {
         mapping: {
             mousemove: ['teaser'],
@@ -15,7 +15,7 @@ module.exports = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-        util.strict_instance(_, mapbox.gridLayer, 'mapbox.gridLayer');
+        util.strict_instance(_, L.Class, 'mapbox.gridLayer');
         this._layer = _;
     },
 
@@ -83,3 +83,7 @@ module.exports = L.Control.extend({
         return container;
     }
 });
+
+module.exports = function(_, options) {
+    return new GridControl(_, options);
+};

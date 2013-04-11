@@ -20,7 +20,7 @@
 <script type='text/javascript'>
     var map = mapbox.map('map', 'examples.youtube-embed');
 
-    var gridControl = new mapbox.gridControl(map.gridLayer, {
+    var gridControl = mapbox.gridControl(map.gridLayer, {
         // This line redefines part of the underlying code which
         // sanitizes HTML from MapBox Hosting. The original code is there
         // for the protection of sites, so that malicious map-creators

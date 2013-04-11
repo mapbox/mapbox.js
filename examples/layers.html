@@ -63,8 +63,8 @@
     var map = L.map('map').setView([38.902, -77.001], 13);
     var ui = document.getElementById('map-ui');
 
-    addLayer(new mapbox.tileLayer('tmcw.map-2f4ad161'), 'Bike Lanes');
-    addLayer(new mapbox.markerLayer('tmcw.map-j5a868tu'), 'Coffee Shops');
+    addLayer(mapbox.tileLayer('tmcw.map-2f4ad161'), 'Bike Lanes');
+    addLayer(mapbox.markerLayer('tmcw.map-j5a868tu'), 'Coffee Shops');
 
     function addLayer(layer, name) {
         layer.addTo(map);

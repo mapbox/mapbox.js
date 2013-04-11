@@ -4,7 +4,7 @@ var util = require('./util'),
     Mustache = require('mustache');
 
 // forked from danzel/L.UTFGrid
-module.exports = L.Class.extend({
+var GridLayer = L.Class.extend({
     includes: L.Mixin.Events,
 
     options: {
@@ -217,3 +217,7 @@ module.exports = L.Class.extend({
         return c - 32;
     }
 });
+
+module.exports = function(_, options) {
+    return new GridLayer(_, options);
+};

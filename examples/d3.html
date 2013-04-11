@@ -24,7 +24,7 @@ path {
 // http://bost.ocks.org/mike/leaflet/
 var map = mapbox.map('map')
     .setView([37.8, -96.9], 4)
-    .addLayer(new mapbox.tileLayer('examples.map-zmy97flj'));
+    .addLayer(mapbox.tileLayer('examples.map-zmy97flj'));
 
 var svg = d3.select(map.getPanes().overlayPane)
     .append('svg'),
@@ -59,7 +59,7 @@ d3.json('us-states.json', function(collection) {
 
   // Use Leaflet to implement a D3 geographic projection.
   function project(x) {
-    var point = map.latLngToLayerPoint(new L.LatLng(x[1], x[0]));
+    var point = map.latLngToLayerPoint(L.latLng(x[1], x[0]));
     return [point.x, point.y];
   }
 });
