@@ -2,7 +2,12 @@
 
 var util = require('./util'),
     url = require('./url'),
-    request = require('./request');
+    request = require('./request'),
+    tileLayer = require('./tile_layer'),
+    markerLayer = require('./marker_layer'),
+    gridLayer = require('./grid_layer'),
+    gridControl = require('./grid_control'),
+    legendControl = require('./legend_control');
 
 var Map = L.Map.extend({
     options: {
@@ -22,27 +27,27 @@ var Map = L.Map.extend({
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
         if (this.options.tileLayer) {
-            this.tileLayer = mapbox.tileLayer();
+            this.tileLayer = tileLayer();
             this.addLayer(this.tileLayer);
         }
 
         if (this.options.markerLayer) {
-            this.markerLayer = mapbox.markerLayer();
+            this.markerLayer = markerLayer();
             this.addLayer(this.markerLayer);
         }
 
         if (this.options.gridLayer) {
-            this.gridLayer = mapbox.gridLayer();
+            this.gridLayer = gridLayer();
             this.addLayer(this.gridLayer);
         }
 
         if (this.options.gridLayer && this.options.gridControl) {
-            this.gridControl = mapbox.gridControl(this.gridLayer);
+            this.gridControl = gridControl(this.gridLayer);
             this.addControl(this.gridControl);
         }
 
         if (this.options.legendControl) {
-            this.legendControl = mapbox.legendControl();
+            this.legendControl = legendControl();
             this.addControl(this.legendControl);
         }
 

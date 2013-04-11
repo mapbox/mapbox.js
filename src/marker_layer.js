@@ -3,6 +3,7 @@
 var util = require('./util');
 var urlhelper = require('./url');
 var request = require('./request');
+var marker = require('./marker');
 
 // # markerLayer
 //
@@ -76,8 +77,8 @@ var MarkerLayer = L.FeatureGroup.extend({
             }
         } else if (this.options.filter(json)) {
 
-            var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style),
-                popupHtml = mapbox.marker.createPopup(json);
+            var layer = L.GeoJSON.geometryToLayer(json, marker.style),
+                popupHtml = marker.createPopup(json);
 
             layer.feature = json;
             layer.bindPopup(popupHtml, {
