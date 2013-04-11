@@ -31,9 +31,19 @@ describe('mapbox.map', function() {
             expect(map.tileLayer.getTileJSON()).to.equal(tileJSON);
         });
 
-        it('adds a data layer immediately', function() {
+        it('creates no tile layer given tileLayer: false option', function() {
+            var map = mapbox.map(element, tileJSON, {tileLayer: false});
+            expect(map.tileLayer).to.be(undefined);
+        });
+
+        it('adds a maker layer immediately', function() {
             var map = mapbox.map(element, 'data/tilejson.json');
             expect(map.markerLayer).to.be.ok();
+        });
+
+        it('creates no marker layer given markerLayer: false option', function() {
+            var map = mapbox.map(element, tileJSON, {markerLayer: false});
+            expect(map.markerLayer).to.be(undefined);
         });
 
         it('adds a grid layer immediately', function() {
@@ -44,6 +54,23 @@ describe('mapbox.map', function() {
         it('initializes the grid layer', function() {
             var map = mapbox.map(element, tileJSON);
             expect(map.gridLayer.getTileJSON()).to.equal(tileJSON);
+        });
+
+        it('creates no grid layer given gridLayer: false option', function() {
+            var map = mapbox.map(element, tileJSON, {gridLayer: false});
+            expect(map.gridLayer).to.be(undefined);
+        });
+    });
+
+    describe('controls', function() {
+        it('creates a legendControl', function() {
+            var map = mapbox.map(element, tileJSON);
+            expect(map.legendControl).to.be.ok();
+        });
+
+        it('creates no legendControl given legendControl: false option', function() {
+            var map = mapbox.map(element, tileJSON, {legendControl: false});
+            expect(map.legendControl).to.be(undefined);
         });
     });
 

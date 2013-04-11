@@ -73,15 +73,19 @@ var Map = L.Map.extend({
     },
 
     _initialize: function(json) {
-        this.tileLayer.setTileJSON(json);
+        if (this.tileLayer) {
+            this.tileLayer.setTileJSON(json);
+        }
 
-        if (json.data && json.data[0]) {
+        if (this.markerLayer && json.data && json.data[0]) {
             this.markerLayer.loadURL(json.data[0]);
         }
 
-        this.gridLayer.setTileJSON(json);
+        if (this.gridLayer) {
+            this.gridLayer.setTileJSON(json);
+        }
 
-        if (json.legend) {
+        if (this.legendControl && json.legend) {
             this.legendControl.addLegend(json.legend);
         }
 
