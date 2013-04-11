@@ -89,8 +89,9 @@ var TileLayer = L.TileLayer.extend({
             index = (tilePoint.x + tilePoint.y) % tiles.length,
             url = tiles[index];
 
-        return L.Util.template(url, tilePoint)
-            .replace('.png', '.' + this.options.format);
+        var templated = L.Util.template(url, tilePoint);
+        if (!templated) return templated;
+        else return templated.replace('.png', '.' + this.options.format);
     },
 
     // TileJSON.TileLayers are added to the map immediately, so that they get
