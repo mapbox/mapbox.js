@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('./config');
 
 // Return the base url of a specific version of MapBox's API.

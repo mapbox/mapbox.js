@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     idUrl: function(_, t) {
         if (_.indexOf('/') == -1) t.loadID(_);

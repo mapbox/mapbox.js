@@ -1,3 +1,5 @@
+'use strict';
+
 var corslite = require('corslite'),
     JSON3 = require('json3'),
     strict = require('./util').strict;

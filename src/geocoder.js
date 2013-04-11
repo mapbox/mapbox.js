@@ -1,3 +1,5 @@
+'use strict';
+
 var util = require('./util'),
     urlhelper = require('./url'),
     request = require('./request');

@@ -1,3 +1,5 @@
+'use strict';
+
 var util = require('./util'),
     url = require('./url'),
     request = require('./request'),
@@ -27,7 +29,7 @@ var GridLayer = L.Class.extend({
 
     setTileJSON: function(json) {
         util.strict(json, 'object');
-        tilejson = url.httpsify(json);
+        json = url.httpsify(json);
 
         L.extend(this.options, {
             grids: json.grids,

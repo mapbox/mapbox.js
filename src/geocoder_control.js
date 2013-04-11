@@ -1,3 +1,5 @@
+'use strict';
+
 var geocoder = require('./geocoder');
 
 var GeocoderControl = L.Control.extend({

@@ -1,3 +1,5 @@
+'use strict';
+
 var html_sanitize = require('../ext/sanitizer/html-sanitizer-bundle.js');
 
 // https://bugzilla.mozilla.org/show_bug.cgi?id=255107
