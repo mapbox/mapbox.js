@@ -202,7 +202,7 @@ _Returns_ the filter function.
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
-for the map. If the layer already has features, they are replaced with the  features.
+for the map. If the layer already has features, they are replaced with the new features.
 An empty array will clear the layer of all features.
 
 _Arguments:_
