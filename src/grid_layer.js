@@ -1,7 +1,8 @@
 var util = require('./util'),
     url = require('./url'),
     request = require('./request'),
-    Mustache = require('mustache');
+    Mustache = require('mustache'),
+    grid = require('./grid');
 
 // forked from danzel/L.UTFGrid
 var GridLayer = L.Class.extend({
@@ -9,13 +10,12 @@ var GridLayer = L.Class.extend({
 
     options: {
         minZoom: 0,
-        maxZoom: 18
+        maxZoom: 18,
+        template: function() { return ''; }
     },
 
     _mouseOn: null,
-    _urls: [],
     _tilejson: {},
-    _template: function() { return ''; },
     _cache: {},
 
     initialize: function(_, options) {
@@ -25,15 +25,27 @@ var GridLayer = L.Class.extend({
         else if (_ && typeof _ === 'object') this.setTileJSON(_);
     },
 
-    setTileJSON: function(_) {
-        util.strict(_, 'object');
-        this._tilejson = _;
-        if (this._tilejson.grids) this._urls = this._tilejson.grids;
-        if (this._tilejson.template) {
-            this._template = this._getTemplate(this._tilejson.template);
+    setTileJSON: function(json) {
+        util.strict(json, 'object');
+
+        L.extend(this.options, {
+            grids: json.grids,
+            minZoom: json.minzoom,
+            maxZoom: json.maxzoom,
+            bounds: json.bounds && util.lbounds(json.bounds),
+            template: json.template && this._getTemplate(json.template)
+        });
+
+        if (json.template) {
+            this.options.template = this._getTemplate(json.template);
+        } else {
+            this.options.template = function() { return ''; };
         }
+
+        this._tilejson = json;
         this._cache = {};
         this._update();
+
         return this;
     },
 
@@ -42,7 +54,7 @@ var GridLayer = L.Class.extend({
     },
 
     active: function() {
-        return !!(this._map && this._urls && this._urls.length);
+        return !!(this._map && this.options.grids && this.options.grids.length);
     },
 
     loadURL: function(url, cb) {
@@ -59,12 +71,14 @@ var GridLayer = L.Class.extend({
         return this.loadURL(url.base() + id + '.json', cb);
     },
 
+    addTo: function (map) {
+        map.addLayer(this);
+        return this;
+    },
+
     onAdd: function(map) {
         this._map = map;
         this._update();
-
-        var zoom = this._map.getZoom();
-        if (zoom > this.options.maxZoom || zoom < this.options.minZoom) return;
 
         this._map
             .on('click', this._click, this)
@@ -115,8 +129,9 @@ var GridLayer = L.Class.extend({
         }, this));
     },
 
-    featureAtScreenPoint: function(latlng, callback) {
+    _objectForEvent: function(e, callback) {
         var map = this._map,
+            latlng = e.latlng,
             point = map.project(latlng),
             tileSize = 256,
             resolution = 4,
@@ -129,46 +144,31 @@ var GridLayer = L.Class.extend({
         x = (x + max) % max;
         y = (y + max) % max;
 
-        this.getGrid(map.getZoom(), x, y, L.bind(function(data) {
-            if (!data) return callback(null);
-            var idx = this._utfDecode(data.grid[gridY].charCodeAt(gridX)),
-                key = data.keys[idx];
-            if (!data.data.hasOwnProperty(key)) callback(null);
-            else callback(data.data[key]);
-        }, this));
-    },
-
-    _objectForEvent: function(e, callback) {
-        var o = null;
-        this.featureAtScreenPoint(e.latlng, L.bind(function(data) {
-            if (!data) {
-                o = { latLng: e.latlng, data: null };
-                return callback(o);
-            } else {
-                o = {
+        this._getTile(map.getZoom(), x, y, L.bind(function(grid) {
+            var data = grid(gridX, gridY);
+            if (data) {
+                callback({
                     latLng: e.latlng,
                     data: data,
-                    url: this._template(data, 'location'),
-                    teaser: this._template(data, 'teaser'),
-                    full: this._template(data, 'full')
-                };
-                return callback(o);
+                    url: this.options.template(data, 'location'),
+                    teaser: this.options.template(data, 'teaser'),
+                    full: this.options.template(data, 'full')
+                });
+            } else {
+                callback({
+                    latLng: e.latlng,
+                    data: null
+                });
             }
         }, this));
-        return o;
     },
 
-    // a successful grid load. returns a function that maintains the
-    // value of `key` in a closure, and fills the `_cache` with the
-    // value if returned
-    _load: function(key) {
-        return L.bind(function(err, json) {
-            if (!err) this._cache[key] = json;
-        }, this);
-    },
+    _getTileURL: function(tilePoint) {
+        var urls = this.options.grids,
+            index = (tilePoint.x + tilePoint.y) % urls.length,
+            url = urls[index];
 
-    _getURL: function(h) {
-        return this._urls[h % (this._urls.length - 1)] || '';
+        return L.Util.template(url, tilePoint);
     },
 
     // Load up all required json grid files
@@ -193,28 +193,55 @@ var GridLayer = L.Class.extend({
             for (var y = nwTilePoint.y; y <= seTilePoint.y; y++) {
                 // x wrapped
                 var xw = (x + max) % max, yw = (y + max) % max;
-                var key = z + '_' + xw + '_' + yw;
-                this.getGrid(z, xw, yw, this._load(key));
+                this._getTile(z, xw, yw);
             }
         }
     },
 
-    getGrid: function(z, x, y, callback) {
-        var key = z + '_' + x + '_' + y;
-        if (this._cache.hasOwnProperty(key)) {
-            callback(this._cache[key]);
-        } else {
-            this._cache[key] = null;
-            request(L.Util.template(this._getURL(x + y), {
-                z: z, x: x, y: y
-            }), callback, true);
+    _getTile: function(z, x, y, callback) {
+        var key = z + '_' + x + '_' + y,
+            tilePoint = L.point(x, y);
+
+        tilePoint.z = z;
+
+        if (key in this._cache) {
+            if (callback && this._cache[key]) callback(this._cache[key]);
+            return;
         }
+
+        this._cache[key] = null;
+
+        if (!this._tileShouldBeLoaded(tilePoint)) {
+            return;
+        }
+
+        request(this._getTileURL(tilePoint), L.bind(function(err, json) {
+            if (err) return;
+            this._cache[key] = grid(json);
+            if (callback) callback(this._cache[key]);
+        }, this));
     },
 
-    _utfDecode: function(c) {
-        if (c >= 93) c--;
-        if (c >= 35) c--;
-        return c - 32;
+    _tileShouldBeLoaded: function(tilePoint) {
+        var zoom = this._map.getZoom();
+        if (zoom > this.options.maxZoom || zoom < this.options.minZoom) {
+            return false;
+        }
+
+        if (this.options.bounds) {
+            var tileSize = 256,
+                nwPoint = tilePoint.multiplyBy(tileSize),
+                sePoint = nwPoint.add(new L.Point(tileSize, tileSize)),
+                nw = this._map.unproject(nwPoint),
+                se = this._map.unproject(sePoint),
+                bounds = new L.LatLngBounds([nw, se]);
+
+            if (!this.options.bounds.intersects(bounds)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 });
 
