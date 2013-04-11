@@ -73,7 +73,7 @@
     // We are using jQuery to get earthquakes.geojson, but you could use alternatives
     $.getJSON('earthquakes.geojson', function(geojson) {
 
-        markerLayer = (mapbox.markerLayer(geojson));
+        var markerLayer = mapbox.markerLayer(geojson);
         markerLayer.setFilter(function() { return false; })
             .addTo(map);
 
