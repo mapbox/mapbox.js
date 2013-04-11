@@ -37,15 +37,10 @@ var TileLayer = L.TileLayer.extend({
         }
     },
 
-    setOptions: function(key, value) {
-        // setOptions({foo:bar})
-        if (arguments.length == 1) L.setOptions(this, key);
-        // setOptions('foo', bar)
-        if (arguments.length == 2) {
-            var o = {};
-            o[key] = value;
-            L.setOptions(this, o);
-        }
+    setFormat: function(_) {
+        util.strict(_, 'string');
+        this.options.format = _;
+        this.redraw();
         return this;
     },
 

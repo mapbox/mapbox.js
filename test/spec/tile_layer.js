@@ -143,7 +143,7 @@ describe("mapbox.tileLayer", function() {
             expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/4/0.png');
         });
         it("changes format of tiles", function() {
-            var layer = mapbox.tileLayer().setOptions('format', 'jpg70');
+            var layer = mapbox.tileLayer().setFormat('jpg70');
             layer.setTileJSON(helpers.tileJSON);
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0.jpg70');
             expect(layer.getTileUrl({x: 1, y: 0, z: 0})).to.equal('http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/0/1/0.jpg70');
