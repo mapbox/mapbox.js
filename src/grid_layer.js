@@ -94,6 +94,26 @@ var GridLayer = L.Class.extend({
             .off('moveend', this._update, this);
     },
 
+    getData: function(latlng, callback) {
+        var map = this._map,
+            point = map.project(latlng),
+            tileSize = 256,
+            resolution = 4,
+            x = Math.floor(point.x / tileSize),
+            y = Math.floor(point.y / tileSize),
+            max = map.options.crs.scale(map.getZoom()) / tileSize;
+
+        x = (x + max) % max;
+        y = (y + max) % max;
+
+        this._getTile(map.getZoom(), x, y, function(grid) {
+            var gridX = Math.floor((point.x - (x * tileSize)) / resolution),
+                gridY = Math.floor((point.y - (y * tileSize)) / resolution);
+
+            callback(grid(gridX, gridY));
+        });
+    },
+
     // given a template string x, return a template function that accepts
     // (data, format)
     _getTemplate: function(x) {
@@ -131,22 +151,7 @@ var GridLayer = L.Class.extend({
     },
 
     _objectForEvent: function(e, callback) {
-        var map = this._map,
-            latlng = e.latlng,
-            point = map.project(latlng),
-            tileSize = 256,
-            resolution = 4,
-            x = Math.floor(point.x / tileSize),
-            y = Math.floor(point.y / tileSize),
-            gridX = Math.floor((point.x - (x * tileSize)) / resolution),
-            gridY = Math.floor((point.y - (y * tileSize)) / resolution),
-            max = map.options.crs.scale(map.getZoom()) / tileSize;
-
-        x = (x + max) % max;
-        y = (y + max) % max;
-
-        this._getTile(map.getZoom(), x, y, L.bind(function(grid) {
-            var data = grid(gridX, gridY);
+        return this.getData(e.latlng, L.bind(function(data) {
             if (data) {
                 callback({
                     latLng: e.latlng,
@@ -158,7 +163,7 @@ var GridLayer = L.Class.extend({
             } else {
                 callback({
                     latLng: e.latlng,
-                    data: null
+                    data: data
                 });
             }
         }, this));
@@ -205,27 +210,40 @@ var GridLayer = L.Class.extend({
 
         tilePoint.z = z;
 
-        if (key in this._cache) {
-            if (callback && this._cache[key]) callback(this._cache[key]);
-            return;
-        }
-
-        this._cache[key] = null;
-
         if (!this._tileShouldBeLoaded(tilePoint)) {
             return;
         }
 
+        if (key in this._cache) {
+            if (!callback) return;
+
+            if (typeof this._cache[key] === 'function') {
+                callback(this._cache[key]); // Already loaded
+            } else {
+                this._cache[key].push(callback); // Pending
+            }
+
+            return;
+        }
+
+        this._cache[key] = [];
+
+        if (callback) {
+            this._cache[key].push(callback);
+        }
+
         request(this._getTileURL(tilePoint), L.bind(function(err, json) {
             if (err) return;
+            var callbacks = this._cache[key];
             this._cache[key] = grid(json);
-            if (callback) callback(this._cache[key]);
+            for (var i = 0; i < callbacks.length; ++i) {
+                callbacks[i](this._cache[key]);
+            }
         }, this));
     },
 
     _tileShouldBeLoaded: function(tilePoint) {
-        var zoom = this._map.getZoom();
-        if (zoom > this.options.maxZoom || zoom < this.options.minZoom) {
+        if (tilePoint.z > this.options.maxZoom || tilePoint.z < this.options.minZoom) {
             return false;
         }
 

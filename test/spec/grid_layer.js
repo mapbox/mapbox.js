@@ -1,6 +1,20 @@
 describe('mapbox.gridLayer', function() {
     var server, element, map;
 
+    var grid = {
+        grid: [],
+        keys: ["", "1"],
+        data: {"1": "data"}
+    };
+
+    for (var i = 0; i < 32; i++) {
+        grid.grid[i] = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    }
+
+    for (; i < 64; i++) {
+        grid.grid[i] = "                                                                "
+    }
+
     beforeEach(function() {
         server = sinon.fakeServer.create();
         element = document.createElement('div');
@@ -87,6 +101,50 @@ describe('mapbox.gridLayer', function() {
         });
     });
 
+    describe('#getData', function() {
+        var layer;
+
+        beforeEach(function() {
+            map.setView([0, 0], 0);
+
+            layer = mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
+                .addTo(map);
+        });
+
+        it('calls the callback (data already loaded)', function(done) {
+            server.respondWith('GET', '0/0/0',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(grid)]);
+            server.respond();
+
+            layer.getData(L.latLng(1, 0), function(data) {
+                expect(data).to.equal('data');
+                done();
+            });
+        });
+
+        it('calls the callback (data pending)', function(done) {
+            layer.getData(L.latLng(1, 0), function(data) {
+                expect(data).to.equal('data');
+                done();
+            });
+
+            server.respondWith('GET', '0/0/0',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(grid)]);
+            server.respond();
+        });
+
+        it('calls the callback (undefined data)', function(done) {
+            server.respondWith('GET', '0/0/0',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(grid)]);
+            server.respond();
+
+            layer.getData(L.latLng(-1, 0), function(data) {
+                expect(data).to.equal(undefined);
+                done();
+            });
+        });
+    });
+
     describe('tile loading', function() {
         function requestURLs() {
             return server.requests.map(function(request) {
@@ -134,20 +192,6 @@ describe('mapbox.gridLayer', function() {
     describe('events', function() {
         var layer;
 
-        var grid = {
-            grid: [],
-            keys: ["", "1"],
-            data: {"1": "data"}
-        };
-
-        for (var i = 0; i < 32; i++) {
-            grid.grid[i] = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        }
-
-        for (; i < 64; i++) {
-            grid.grid[i] = "                                                                "
-        }
-
         beforeEach(function() {
             map.setView([0, 0], 0);
 
@@ -168,9 +212,9 @@ describe('mapbox.gridLayer', function() {
             map.fire('click', {latlng: L.latLng(1, 0)});
         });
 
-        it('emits click with null data when an area without data is clicked', function(done) {
+        it('emits click with undefined data when an area without data is clicked', function(done) {
             layer.on('click', function(e) {
-                expect(e.data).to.equal(null);
+                expect(e.data).to.equal(undefined);
                 done();
             });
 
