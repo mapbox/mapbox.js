@@ -18,8 +18,6 @@
 .map-tooltip {
     z-index:999999;
     padding:10px;
-    top:10px;
-    right:10px;
     max-width:300px;
     opacity:1;
 
@@ -135,7 +133,8 @@
     cursor: pointer;
 }
 
-.leaflet-bar {
+.leaflet-bar,
+.leaflet-touch .leaflet-bar {
     border: 1px solid #bbb;
 }
 
