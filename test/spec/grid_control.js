@@ -1,4 +1,4 @@
-describe("mapbox.gridControl", function() {
+describe("L.mapbox.gridControl", function() {
     var server;
 
     beforeEach(function() {
@@ -10,8 +10,8 @@ describe("mapbox.gridControl", function() {
     });
 
     it("is initialized", function() {
-        var layer = mapbox.gridLayer('examples.foo');
-        var control = mapbox.gridControl(layer);
+        var layer = L.mapbox.gridLayer('examples.foo');
+        var control = L.mapbox.gridControl(layer);
         expect(control).to.be.ok();
     });
 

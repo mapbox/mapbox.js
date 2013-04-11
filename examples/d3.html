@@ -22,9 +22,9 @@ path {
 <script type='text/javascript'>
 // This example is derived from an example by Mike Bostock:
 // http://bost.ocks.org/mike/leaflet/
-var map = mapbox.map('map')
+var map = L.mapbox.map('map')
     .setView([37.8, -96.9], 4)
-    .addLayer(mapbox.tileLayer('examples.map-zmy97flj'));
+    .addLayer(L.mapbox.tileLayer('examples.map-zmy97flj'));
 
 var svg = d3.select(map.getPanes().overlayPane)
     .append('svg'),

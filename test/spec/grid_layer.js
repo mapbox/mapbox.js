@@ -1,4 +1,4 @@
-describe('mapbox.gridLayer', function() {
+describe('L.mapbox.gridLayer', function() {
     var server, element, map;
 
     var grid = {
@@ -21,7 +21,7 @@ describe('mapbox.gridLayer', function() {
         document.body.appendChild(element);
         element.style.width = '256px';
         element.style.height = '256px';
-        map = mapbox.map(element);
+        map = L.mapbox.map(element);
     });
 
     afterEach(function() {
@@ -31,12 +31,12 @@ describe('mapbox.gridLayer', function() {
 
     describe('constructor', function() {
         it('is initialized', function() {
-            var layer = mapbox.gridLayer();
+            var layer = L.mapbox.gridLayer();
             expect(layer).to.be.ok();
         });
 
         it('is initialized with tilejson', function() {
-            var layer = mapbox.gridLayer(helpers.tileJSON);
+            var layer = L.mapbox.gridLayer(helpers.tileJSON);
             expect(layer).to.be.ok();
             expect(layer.getTileJSON()).to.be.eql(helpers.tileJSON);
         });
@@ -44,23 +44,23 @@ describe('mapbox.gridLayer', function() {
 
     describe('#getTileJSON', function() {
         it('is by default empty', function() {
-            var layer = mapbox.gridLayer();
+            var layer = L.mapbox.gridLayer();
             expect(layer.getTileJSON()).to.eql({});
         });
     });
 
     describe('#loadURL', function() {
         it('loads a TileJSON object', function(done) {
-            var layer = mapbox.gridLayer();
+            var layer = L.mapbox.gridLayer();
 
-            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
+            layer.loadURL('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json', function(err, json) {
                 expect(this).to.equal(layer);
                 expect(err).to.equal(null);
                 expect(json).to.eql(helpers.tileJSON);
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
@@ -68,16 +68,16 @@ describe('mapbox.gridLayer', function() {
 
     describe('#loadID', function() {
         it('loads a TileJSON object', function(done) {
-            var layer = mapbox.gridLayer();
+            var layer = L.mapbox.gridLayer();
 
-            layer.loadID('mapbox.map-0l53fhk2', function(err, json) {
+            layer.loadID('L.mapbox.map-0l53fhk2', function(err, json) {
                 expect(this).to.equal(layer);
                 expect(err).to.equal(null);
                 expect(json).to.eql(helpers.tileJSON);
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
@@ -85,7 +85,7 @@ describe('mapbox.gridLayer', function() {
 
     describe('#setTileJSON', function() {
         it('sets TileJSON', function() {
-            var layer = mapbox.gridLayer();
+            var layer = L.mapbox.gridLayer();
             expect(layer.setTileJSON(helpers.tileJSON)).to.eql(layer);
             expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
         });
@@ -93,7 +93,7 @@ describe('mapbox.gridLayer', function() {
         it('makes no tile requests if the JSON has an empty "grids" property', function() {
             map.setView([0, 0], 1);
 
-            var layer = mapbox.gridLayer()
+            var layer = L.mapbox.gridLayer()
                 .addTo(map);
 
             layer.setTileJSON(L.extend({}, helpers.tileJSON, {grids: []}));
@@ -107,7 +107,7 @@ describe('mapbox.gridLayer', function() {
         beforeEach(function() {
             map.setView([0, 0], 0);
 
-            layer = mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
+            layer = L.mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
                 .addTo(map);
         });
 
@@ -155,7 +155,7 @@ describe('mapbox.gridLayer', function() {
         it('requests tiles for the current view', function() {
             map.setView([0, 0], 0);
 
-            mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
+            L.mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
                 .addTo(map);
 
             expect(requestURLs()).to.eql(['0/0/0']);
@@ -164,7 +164,7 @@ describe('mapbox.gridLayer', function() {
         it('requests no tiles for zooms less than the minimum', function() {
             map.setView([0, 0], 0);
 
-            mapbox.gridLayer({grids: ['{z}/{x}/{y}'], minzoom: 1})
+            L.mapbox.gridLayer({grids: ['{z}/{x}/{y}'], minzoom: 1})
                 .addTo(map);
 
             expect(requestURLs()).to.eql([]);
@@ -173,7 +173,7 @@ describe('mapbox.gridLayer', function() {
         it('requests no tiles for zooms greater than the maximum', function() {
             map.setView([0, 0], 15);
 
-            mapbox.gridLayer({grids: ['{z}/{x}/{y}'], maxzoom: 14})
+            L.mapbox.gridLayer({grids: ['{z}/{x}/{y}'], maxzoom: 14})
                 .addTo(map);
 
             expect(requestURLs()).to.eql([]);
@@ -182,7 +182,7 @@ describe('mapbox.gridLayer', function() {
         it('requests no tiles outside of bounds', function() {
             map.setView([0, 0], 10);
 
-            mapbox.gridLayer({grids: ['{z}/{x}/{y}'], bounds: [-10,-10,-5,-5]})
+            L.mapbox.gridLayer({grids: ['{z}/{x}/{y}'], bounds: [-10,-10,-5,-5]})
                 .addTo(map);
 
             expect(requestURLs()).to.eql([]);
@@ -195,7 +195,7 @@ describe('mapbox.gridLayer', function() {
         beforeEach(function() {
             map.setView([0, 0], 0);
 
-            layer = mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
+            layer = L.mapbox.gridLayer({grids: ['{z}/{x}/{y}']})
                 .addTo(map);
 
             server.respondWith('GET', '0/0/0',

@@ -23,12 +23,12 @@
 <script type='text/javascript'>
 // var id = 'mapbox.flickr-places';
 var id = 'tmcw.superfundvoronoi';
-var interaction = mapbox.gridLayer(id);
+var interaction = L.mapbox.gridLayer(id);
 var map = L.map('map')
     .setView([40, -74], 4)
-    .addLayer(mapbox.tileLayer(id))
+    .addLayer(L.mapbox.tileLayer(id))
     .addLayer(interaction)
-    .addControl(mapbox.gridControl(interaction));
+    .addControl(L.mapbox.gridControl(interaction));
 </script>
 </body>
 </html>

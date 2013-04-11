@@ -36,9 +36,9 @@
 <script type='text/javascript'>
     var map = L.map('map');
     map.setView([38, -90], 4);
-    var tileLayer = mapbox.tileLayer('examples.map-8ced9urs');
+    var tileLayer = L.mapbox.tileLayer('examples.map-8ced9urs');
     map.addLayer(tileLayer);
-    var gridLayer = mapbox.gridLayer('examples.map-8ced9urs');
+    var gridLayer = L.mapbox.gridLayer('examples.map-8ced9urs');
     map.addLayer(gridLayer);
     gridLayer
         .on('mousemove', function(o) {

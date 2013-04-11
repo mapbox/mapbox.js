@@ -25,9 +25,9 @@
 <script type='text/javascript'>
     var map = L.map('map');
     map.setView([38, -90], 4);
-    var tileLayer = mapbox.tileLayer('examples.map-zmy97flj');
+    var tileLayer = L.mapbox.tileLayer('examples.map-zmy97flj');
     map.addLayer(tileLayer);
-    var gridLayer = mapbox.gridLayer('examples.map-zmy97flj');
+    var gridLayer = L.mapbox.gridLayer('examples.map-zmy97flj');
     map.addLayer(gridLayer);
     // This is example 'external data'. It's obviously very much an example,
     // and in practice you'll want to use jQuery's .ajax to pull in data or
@@ -58,7 +58,7 @@
             document.getElementById('currency').innerHTML = '';
         });
 
-    map.addControl(mapbox.gridControl(gridLayer));
+    map.addControl(L.mapbox.gridControl(gridLayer));
 </script>
 </body>
 </html>

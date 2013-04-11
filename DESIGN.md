@@ -17,7 +17,7 @@ through [JSHint](http://www.jshint.com/) with no warnings.
 ### Functions, Naming
 
 Controls are named with `Control` in their name. Layers are named with
-`Layer` in their name. For example: `mapbox.gridLayer`, `mapbox.geocoderControl`.
+`Layer` in their name. For example: `L.mapbox.gridLayer`, `L.mapbox.geocoderControl`.
 
 Getter/setter methods are named `getFoo` and `setFoo`. Magic d3-style getter/setters
 like `foo([optional])` are not supported in the core.

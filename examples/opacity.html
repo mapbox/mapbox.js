@@ -44,10 +44,10 @@
     <div id='handle'></div>
 </div>
 <script type='text/javascript'>
-    var map = mapbox.map('map', 'examples.map-vyofok3q')
+    var map = L.mapbox.map('map', 'examples.map-vyofok3q')
         .setView([43.6654, -79.4775], 15);
 
-    var overlay = mapbox.tileLayer('aibram.Aerial')
+    var overlay = L.mapbox.tileLayer('aibram.Aerial')
         .addTo(map);
 
     var handle = document.getElementById('handle'),

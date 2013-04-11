@@ -1,4 +1,4 @@
-describe('mapbox.geocoderControl', function() {
+describe('L.mapbox.geocoderControl', function() {
     var server;
 
     beforeEach(function() {
@@ -23,7 +23,7 @@ describe('mapbox.geocoderControl', function() {
 
     it('performs forward geolocation, centering the map on the first result', function() {
         var map = new L.Map(document.createElement('div')),
-            control = mapbox.geocoderControl('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json').addTo(map);
+            control = L.mapbox.geocoderControl('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json').addTo(map);
 
         server.respondWith('GET',
             'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
@@ -37,24 +37,24 @@ describe('mapbox.geocoderControl', function() {
     });
 
     it('sets url based on an id', function() {
-        var control = mapbox.geocoderControl('examples.map-vyofok3q');
+        var control = L.mapbox.geocoderControl('examples.map-vyofok3q');
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
     });
 
     it('#setURL', function() {
-        var control = mapbox.geocoderControl('examples.map-vyofok3q');
+        var control = L.mapbox.geocoderControl('examples.map-vyofok3q');
         control.setURL('foo/{query}.json');
         expect(control.getURL()).to.equal('foo/{query}.json');
     });
 
     it('#setID', function() {
-        var control = mapbox.geocoderControl('examples.map-vyofok3q');
+        var control = L.mapbox.geocoderControl('examples.map-vyofok3q');
         expect(control.setID('foobar')).to.eql(control);
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
     });
 
     it('#getID', function() {
-        var control = mapbox.geocoderControl('examples.map-vyofok3q');
+        var control = L.mapbox.geocoderControl('examples.map-vyofok3q');
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
         expect(control.setID('foobar')).to.eql(control);
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
@@ -65,7 +65,7 @@ describe('mapbox.geocoderControl', function() {
 
         beforeEach(function() {
             map = new L.Map(document.createElement('div'));
-            control = mapbox.geocoderControl('http://example.com/{query}.json').addTo(map);
+            control = L.mapbox.geocoderControl('http://example.com/{query}.json').addTo(map);
         });
 
         it('emits a "found" event when geocoding succeeds', function(done) {

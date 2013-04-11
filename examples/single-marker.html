@@ -12,7 +12,7 @@
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
-    var map = mapbox.map('map', 'examples.map-20v6611k');
+    var map = L.mapbox.map('map', 'examples.map-20v6611k');
 
     var feature = {
         type: 'Feature',
@@ -35,7 +35,7 @@
     };
 
     L.geoJson({ type: 'FeatureSet', features: [feature] }, {
-        pointToLayer: mapbox.marker.style
+        pointToLayer: L.mapbox.marker.style
     }).addTo(map);
 </script>
 </body>

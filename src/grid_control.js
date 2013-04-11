@@ -34,7 +34,7 @@ var GridControl = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-        util.strict_instance(_, L.Class, 'mapbox.gridLayer');
+        util.strict_instance(_, L.Class, 'L.L.mapbox.gridLayer');
         this._layer = _;
     },
 
@@ -77,7 +77,7 @@ var GridControl = L.Control.extend({
                 this.setContent(this.options.sanitizer(formatted));
             }
         // a template. in this case, the content will already be templated
-        // by `mapbox.gridLayer`
+        // by `L.L.mapbox.gridLayer`
         } else if (o[format]) {
             formatted = o[format];
             if (format === 'location') {

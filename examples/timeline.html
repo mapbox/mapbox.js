@@ -67,13 +67,13 @@
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 <script type='text/javascript'>
-    var map = mapbox.map('map', 'examples.map-0l53fhk2')
+    var map = L.mapbox.map('map', 'examples.map-0l53fhk2')
         .setView([40, -130], 3);
 
     // We are using jQuery to get earthquakes.geojson, but you could use alternatives
     $.getJSON('earthquakes.geojson', function(geojson) {
 
-        var markerLayer = mapbox.markerLayer(geojson);
+        var markerLayer = L.mapbox.markerLayer(geojson);
         markerLayer.setFilter(function() { return false; })
             .addTo(map);
 

@@ -1,4 +1,4 @@
-describe('mapbox.geocoder', function() {
+describe('L.mapbox.geocoder', function() {
     var server;
 
     beforeEach(function() {
@@ -35,18 +35,18 @@ describe('mapbox.geocoder', function() {
 
     describe('#setURL', function() {
         it('returns self', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             expect(g.setTileJSON(helpers.tileJSON)).to.eql(g);
         });
 
         it('sets URL', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             g.setURL('url');
             expect(g.getURL()).to.eql('url');
         });
 
         it('converts a jsonp URL', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             g.setURL('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp');
             expect(g.getURL()).to
                 .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
@@ -55,12 +55,12 @@ describe('mapbox.geocoder', function() {
 
     describe('#setTileJSON', function() {
         it('returns self', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             expect(g.setTileJSON(helpers.tileJSON)).to.eql(g);
         });
 
         it('validates its argument', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             expect(function() {
                 g.setTileJSON('foo');
             }).to.throwException(function(e) {
@@ -69,13 +69,13 @@ describe('mapbox.geocoder', function() {
         });
 
         it('sets URL based on geocoder property', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             g.setTileJSON({geocoder: 'http://example.com/geocode/{query}.json'});
             expect(g.getURL()).to.eql('http://example.com/geocode/{query}.json');
         });
 
         it('converts a jsonp URL', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             g.setTileJSON({geocoder: 'http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp'});
             expect(g.getURL()).to
                 .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
@@ -84,12 +84,12 @@ describe('mapbox.geocoder', function() {
 
     describe('#setID', function() {
         it('returns self', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             expect(g.setID('foo.bar')).to.eql(g);
         });
 
         it('sets URL', function() {
-            var g = mapbox.geocoder();
+            var g = L.mapbox.geocoder();
             g.setID('foo.bar');
             expect(g.getURL()).to
                 .eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
@@ -98,7 +98,7 @@ describe('mapbox.geocoder', function() {
 
     describe('#query', function() {
         it('performs forward geolocation', function() {
-            var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
 
             server.respondWith('GET',
                 'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
@@ -114,7 +114,7 @@ describe('mapbox.geocoder', function() {
 
     describe('#reverseQuery', function() {
         it('performs reverse geolocation', function() {
-            var g = mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
 
             server.respondWith('GET',
                 'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/-97.7%2C30.3.json',

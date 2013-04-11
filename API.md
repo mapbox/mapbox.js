@@ -1,6 +1,6 @@
 # Map
 
-## mapbox.map(element, id | url | tilejson, [options])
+## L.mapbox.map(element, id | url | tilejson, [options])
 
 Create and automatically configure a map with layers, markers, and
 interactivity.
@@ -20,20 +20,20 @@ The third argument is optional. If provided, it is the same options
 as provided to [L.Map](http://leafletjs.com/reference.html#map-options)
 with the following additions:
 
-* `tileLayer` (boolean). Whether or not to add a `mapbox.tileLayer` based on
+* `tileLayer` (boolean). Whether or not to add a `L.mapbox.tileLayer` based on
   the TileJSON. Default: `true`.
-* `markerLayer` (boolean). Whether or not to add a `mapbox.markerLayer` based on
+* `markerLayer` (boolean). Whether or not to add a `L.mapbox.markerLayer` based on
   the TileJSON. Default: `true`.
-* `gridLayer` (boolean). Whether or not to add a `mapbox.gridLayer` based on
+* `gridLayer` (boolean). Whether or not to add a `L.mapbox.gridLayer` based on
   the TileJSON. Default: `true`.
-* `legendControl` (boolean). Whether or not to add a `mapbox.legendControl`.
+* `legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`.
   Default: `true`.
 
 # Layers
 
-## mapbox.tileLayer(id | url | tilejson, [options])
+## L.mapbox.tileLayer(id | url | tilejson, [options])
 
-You can add a tiled layer to your map with `mapbox.tileLayer()`, a simple
+You can add a tiled layer to your map with `L.mapbox.tileLayer()`, a simple
 interface to layers from MapBox and elsewhere.
 
 _Arguments_:
@@ -49,24 +49,24 @@ as provided to [L.TileLayer](http://leafletjs.com/reference.html#tilelayer)
 with one addition:
 
 * `retinaVersion`, if provided, is an alternative value for the first argument
-  to `mapbox.tileLayer` which, if retina is detected, is used instead.
+  to `L.mapbox.tileLayer` which, if retina is detected, is used instead.
 
 _Example_:
 
     // the second argument is optional
-    var layer = mapbox.tileLayer('examples.map-20v6611k');
+    var layer = L.mapbox.tileLayer('examples.map-20v6611k');
 
     // you can also provide a full url to a tilejson resource
-    var layer = mapbox.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json');
+    var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json');
 
     // if provided,you can support retina tiles
-    var layer = mapbox.tileLayer('examples.map-20v6611k', {
+    var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
         detectRetina: true,
         // if retina is detected, this layer is used instead
         retinaVersion: 'examples.map-zswgei2n'
     });
 
-_Returns_ a `mapbox.tileLayer` object.
+_Returns_ a `L.mapbox.tileLayer` object.
 
 
 ### tileLayer.loadURL(`url`, [callback])
@@ -114,9 +114,9 @@ _Arguments_:
 
 _Returns_: the layer object
 
-## mapbox.markerLayer(id | url | tilejson, [options])
+## L.mapbox.markerLayer(id | url | tilejson, [options])
 
-`mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
+`L.mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from MapBox and elsewhere into your map.
 
 _Arguments_:
@@ -133,10 +133,10 @@ with one addition:
 
 _Example_:
 
-    var markerLayer = mapbox.markerLayer(geojson)
+    var markerLayer = L.mapbox.markerLayer(geojson)
         .addTo(map);
 
-_Returns_ a `mapbox.markerLayer` object.
+_Returns_ a `L.mapbox.markerLayer` object.
 
 ### markerLayer.loadURL(`url`, [callback])
 
@@ -162,7 +162,7 @@ _Arguments_:
 
 _Returns_: the layer object
 
-## mapbox.markerLayer.setFilter(function)
+## L.mapbox.markerLayer.setFilter(function)
 
 Sets the filter function for this data layer.
 
@@ -173,14 +173,14 @@ _Arguments_:
 
 _Example_:
 
-    var markerLayer = mapbox.markerLayer(geojson)
+    var markerLayer = L.mapbox.markerLayer(geojson)
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
 
 _Returns_ the markerLayer object.
 
-## mapbox.markerLayer.getFilter()
+## L.mapbox.markerLayer.getFilter()
 
 Gets the filter function for this data layer.
 
@@ -188,7 +188,7 @@ _Arguments_: none
 
 _Example_:
 
-    var markerLayer = mapbox.markerLayer(geojson)
+    var markerLayer = L.mapbox.markerLayer(geojson)
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
@@ -198,7 +198,7 @@ _Example_:
 
 _Returns_ the filter function.
 
-## mapbox.markerLayer.setGeoJSON(features)
+## L.mapbox.markerLayer.setGeoJSON(features)
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
@@ -212,7 +212,7 @@ _Arguments:_
 
 _Returns_ the markerLayer object
 
-## mapbox.markerLayer.getGeoJSON(features)
+## L.mapbox.markerLayer.getGeoJSON(features)
 
 Get the contents of this layer as GeoJSON data.
 
@@ -222,7 +222,7 @@ _Returns_ the GeoJSON represented by this layer
 
 # Geocoding
 
-## mapbox.geocoder(id | url)
+## L.mapbox.geocoder(id | url)
 
 A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
@@ -231,9 +231,9 @@ A low-level interface to geocoding, useful for more complex uses and reverse-geo
 * An `id` string `examples.map-foo`
 * A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
 
-_Returns_ a `mapbox.geocoder` object.
+_Returns_ a `L.mapbox.geocoder` object.
 
-## mapbox.geocoder.query(queryString, callback)
+## L.mapbox.geocoder.query(queryString, callback)
 
 Queries the geocoder with a query string, and returns its result, if any.
 
@@ -255,7 +255,7 @@ The callback is called with arguments
 
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
-## mapbox.geocoder.reverseQuery(location, callback)
+## L.mapbox.geocoder.reverseQuery(location, callback)
 
 Queries the geocoder with a location, and returns its result, if any.
 
@@ -299,7 +299,7 @@ _Returns_ a `mapbox.hash` object.
 _Ref_: this code uses [Leaflet.hash](https://github.com/mlevans/leaflet-hash)
 internally.
 
-## mapbox.legendControl()
+## L.mapbox.legendControl()
 
 A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
 
@@ -344,7 +344,7 @@ formatter and change page location.
 
 _Returns_: a `mapbox.interactionControl` object.
 
-## mapbox.geocoderControl(id | url)
+## L.mapbox.geocoderControl(id | url)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
@@ -363,11 +363,11 @@ _Example_
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl( mapbox.geocoder('examples.map-vyofok3q'));
+        .addControl( L.mapbox.geocoder('examples.map-vyofok3q'));
 
-_Returns_ a `mapbox.geocoderControl` object.
+_Returns_ a `L.mapbox.geocoderControl` object.
 
-## mapbox.geocoder.setURL(id)
+## L.mapbox.geocoder.setURL(id)
 
 Set the url used for geocoding.
 
@@ -377,7 +377,7 @@ _Arguments_:
 
 _Returns_: the geocoder control object
 
-## mapbox.geocoder.setID(id)
+## L.mapbox.geocoder.setID(id)
 
 Set the map id used for geocoding.
 
@@ -387,7 +387,7 @@ _Arguments_:
 
 _Returns_: the geocoder control object
 
-## mapbox.geocoder.setTileJSON(tilejson)
+## L.mapbox.geocoder.setTileJSON(tilejson)
 
 Set the TileJSON used for geocoding.
 
@@ -397,7 +397,7 @@ _Arguments_:
 
 _Returns_: the geocoder object
 
-## mapbox.geocoder.setErrorHandler(id)
+## L.mapbox.geocoder.setErrorHandler(id)
 
 Set the function called if a geocoding request returns an error.
 
@@ -408,7 +408,7 @@ _Arguments_:
 
 _Returns_: the geocoder control object
 
-## mapbox.geocoder.getErrorHandler(id)
+## L.mapbox.geocoder.getErrorHandler(id)
 
 Returns the current function used by this geocoderControl for error handling.
 
@@ -418,9 +418,9 @@ _Returns_: the geocoder control's error handler
 
 # Markers
 
-## mapbox.marker.icon
+## L.mapbox.marker.icon
 
-A core icon generator used in `mapbox.marker.style`
+A core icon generator used in `L.mapbox.marker.style`
 
 _Arguments_:
 
@@ -431,7 +431,7 @@ _Returns_:
 A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
 and `popupAnchor`.
 
-## mapbox.marker.style
+## L.mapbox.marker.style
 
 An icon generator for use in conjunction with `pointToLayer` to generate
 markers from the [MapBox Markers API](http://mapbox.com/developers/api/#markers)
@@ -446,7 +446,7 @@ _Arguments_:
 _Examples_:
 
     L.geoJson(geoJson, {
-        pointToLayer: mapbox.marker.style,
+        pointToLayer: L.mapbox.marker.style,
     });
 
 _Returns_:

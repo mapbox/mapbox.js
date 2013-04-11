@@ -1,7 +1,7 @@
-describe('mapbox.marker', function() {
+describe('L.mapbox.marker', function() {
     describe('#style', function() {
         it("produces a small marker", function() {
-            var marker = mapbox.marker.style({
+            var marker = L.mapbox.marker.style({
                 properties: {
                     'marker-size': 'small'
                 }
@@ -10,7 +10,7 @@ describe('mapbox.marker', function() {
         });
 
         it("produces a medium marker", function() {
-            var marker = mapbox.marker.style({
+            var marker = L.mapbox.marker.style({
                 properties: {
                     'marker-size': 'medium'
                 }
@@ -19,7 +19,7 @@ describe('mapbox.marker', function() {
         });
 
         it("produces a red marker", function() {
-            var marker = mapbox.marker.style({
+            var marker = L.mapbox.marker.style({
                 properties: {
                     'marker-color': 'f00'
                 }
@@ -32,7 +32,7 @@ describe('mapbox.marker', function() {
                 iconUrl: 'http://placehold.it/50x50'
             });
 
-            var marker = mapbox.marker.style({
+            var marker = L.mapbox.marker.style({
                 properties: {
                     'icon': markerIcon
                 }
@@ -46,7 +46,7 @@ describe('mapbox.marker', function() {
                 html: 'Marker text'
             });
 
-            var marker = mapbox.marker.style({
+            var marker = L.mapbox.marker.style({
                 properties: {
                     'icon': markerIcon
                 }
@@ -57,7 +57,7 @@ describe('mapbox.marker', function() {
         });
 
         it("sets a marker's title", function() {
-            var marker = mapbox.marker.style({
+            var marker = L.mapbox.marker.style({
                 properties: {
                     title: 'test'
                 }
@@ -68,7 +68,7 @@ describe('mapbox.marker', function() {
         it('integrates with leaflet', function() {
             expect(function() {
                 L.geoJson(helpers.geoJson, {
-                    pointToLayer: mapbox.marker.style
+                    pointToLayer: L.mapbox.marker.style
                 });
             }).to.not.throwException();
         });
@@ -76,7 +76,7 @@ describe('mapbox.marker', function() {
 
     describe('#icon', function() {
         it("produces an icon", function() {
-            var icon = mapbox.marker.icon({
+            var icon = L.mapbox.marker.icon({
                 'marker-size': 'large'
             });
             expect(icon.options.iconUrl).to.contain('pin-l');

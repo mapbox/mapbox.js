@@ -12,11 +12,11 @@
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
-    var m = mapbox.map('map').setView([38, -77], 5);
-    m.addLayer(mapbox.tileLayer('examples.map-8ced9urs'));
-    var gridLayer = mapbox.gridLayer('examples.map-8ced9urs');
+    var m = L.mapbox.map('map').setView([38, -77], 5);
+    m.addLayer(L.mapbox.tileLayer('examples.map-8ced9urs'));
+    var gridLayer = L.mapbox.gridLayer('examples.map-8ced9urs');
     m.addLayer(gridLayer);
-    m.addControl(mapbox.gridControl(gridLayer));
+    m.addControl(L.mapbox.gridControl(gridLayer));
 </script>
 </body>
 </html>

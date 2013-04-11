@@ -62,7 +62,7 @@
 </div>
 <script>
 
-var map = mapbox.map('map', 'examples.map-y7l23tes').setView([37, -99], 5);
+var map = L.mapbox.map('map', 'examples.map-y7l23tes').setView([37, -99], 5);
 
 var temperature = L.tileLayer.wms("http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer", {
     format: 'img/png',

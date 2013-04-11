@@ -21,8 +21,8 @@
 <body>
 <div id='map' class='dark'></div>
 <script type='text/javascript'>
-    var map = mapbox.map('map', 'examples.map-y7l23tes')
-        .addControl(mapbox.geocoderControl('examples.map-y7l23tes'))
+    var map = L.mapbox.map('map', 'examples.map-y7l23tes')
+        .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
         .setView([37.9, -77], 5);
 
     var feature = {
