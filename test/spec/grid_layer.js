@@ -11,7 +11,7 @@ describe('mapbox.gridLayer', function() {
     });
 
     afterEach(function() {
-        element.remove();
+        element.parentNode.removeChild(element);
         server.restore();
     });
 
