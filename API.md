@@ -198,7 +198,7 @@ _Example_:
 
 _Returns_ the filter function.
 
-## mapbox.markerLayer.setGeoJSON(features,[function])
+## mapbox.markerLayer.setGeoJSON(features)
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
@@ -209,21 +209,6 @@ _Arguments:_
 
 * `features`, an array of [GeoJSON feature objects](http://geojson.org/geojson-spec.html#feature-objects),
   or omitted to get the current value.
-* (optional) function to be called on each feature. Two objects available to the function – `feature` and `layer`. This replicates the behavior of the [L.geoJSON _onEachFeature_](http://leafletjs.com/reference.html#geojson) option.
-
-_Example_:
-
-    // the second argument is optional
-    map.markerLayer.setGeoJSON(geojson);
-
-    // you can provide a function to run for each feature
-    map.markerLayer.setGeoJSON(geojson, function(feature, layer) {
-        layer.on('click') {
-            // you can also access custom feature properties defined in the geojson
-            var popupContent = feature.properties.title + ' - ' + feature.properties.custom_description
-            this.bindPopup(popupContent);
-        }
-    });
 
 _Returns_ the markerLayer object
 

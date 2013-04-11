@@ -46,11 +46,10 @@
     };
 
     // Pass features and a custom factory function to the map
-    map.markerLayer.setGeoJSON(geoJson, function(feature, layer) {
-        layer.on('click', function() {
-            this.unbindPopup();
-            window.open(feature.properties.url);
-        });
+    map.markerLayer.setGeoJSON(geoJson);
+    map.markerLayer.on('click', function(e) {
+        e.layer.unbindPopup();
+        window.open(e.layer.feature.properties.url);
     });
 
 </script>
