@@ -31,15 +31,26 @@ function icon(fp) {
 // [simple-style specification](https://github.com/mapbox/simplestyle-spec)
 // and [Markers API](http://mapbox.com/developers/api/#markers).
 function style(f, latlon) {
-    var markerIcon = (f.properties.icon) ? f.properties.icon : icon(f.properties);
+    var markerIcon = (f.properties.icon) ? f.properties.icon : icon(f.properties),
+        markerContent = f.properties.title;
 
     return L.marker(latlon, {
         icon: markerIcon,
-        title: f.properties.title
+        title: markerContent
     });
+}
+
+function createPopup(f) {
+    var popup = '<div class="marker-title">' + f.properties.title + '</div>';
+
+    if (f.properties.description)
+        popup += '<div class="marker-description">' + f.properties.description + '</div>';
+
+    return popup;
 }
 
 module.exports = {
     icon: icon,
-    style: style
+    style: style,
+    createPopup: createPopup
 };

@@ -76,10 +76,11 @@ var MarkerLayer = L.FeatureGroup.extend({
             }
         } else if (this.options.filter(json)) {
 
-            var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style);
+            var layer = L.GeoJSON.geometryToLayer(json, mapbox.marker.style),
+                popupHtml = mapbox.marker.createPopup(json);
 
             layer.feature = json;
-            layer.bindPopup(json.properties.title, {
+            layer.bindPopup(popupHtml, {
                 closeButton: false
             });
 
