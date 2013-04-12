@@ -12,6 +12,3 @@ L.mapbox = module.exports = {
     map: require('./src/map'),
     config: require('./src/config')
 };
-
-require('leaflet-hash/leaflet-hash');
-require('leaflet-fullscreen/src/Leaflet.fullscreen');
