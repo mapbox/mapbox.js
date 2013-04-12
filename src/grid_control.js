@@ -47,7 +47,11 @@ var GridControl = L.Control.extend({
         if (!_) {
             this._hide();
             this._map.closePopup();
-        } else if (_ !== this._currentContent || popup !== this._hidden) {
+
+        } else if (_ !== this._currentContent ||  // switching content
+                popup !== this._hidden ||  // switching from popup to corner thing
+                popup && this._map._popup !== this._popup) {  // popup has since been closed
+
             if (popup) {
                 this._popup.setContent(_).openOn(this._map);
                 this._hide();
@@ -58,6 +62,7 @@ var GridControl = L.Control.extend({
             }
             this._currentContent = _;
         }
+        this._currentContent = _;
     },
 
     _show: function() {
