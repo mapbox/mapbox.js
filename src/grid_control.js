@@ -80,7 +80,7 @@ var GridControl = L.Control.extend({
             popup = mapping.popup,
             formatted;
 
-        if(format === 'teaser' && this._pinned === false) {
+        if (o[this.options.mapping.click.format]) {
             L.DomUtil.addClass(this._map._container, 'map-clickable');
         } else {
             L.DomUtil.removeClass(this._map._container, 'map-clickable');
