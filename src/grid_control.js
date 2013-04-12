@@ -1,5 +1,3 @@
-'use strict';
-
 var util = require('./util');
 
 var GridControl = L.Control.extend({
@@ -8,15 +6,18 @@ var GridControl = L.Control.extend({
         mapping: {
             mousemove: {
                 format: 'teaser',
+                popup: true,
                 pin: false
             },
             click: {
                 format: 'full',
+                popup: false,
                 pin: true
             },
             mouseout: {
                 format: function() { return ''; },
-                poin: false
+                popup: false,
+                pin: false
             }
         },
         sanitizer: require('./sanitize')
@@ -40,12 +41,20 @@ var GridControl = L.Control.extend({
 
     // change the content of the tooltip HTML if it has changed, otherwise
     // noop
-    setContent: function(_) {
+    setContent: function(_, popup) {
         if (!_) {
             this._hide();
-        } else if (_ !== this._currentContent) {
-            if (this._hidden) this._show();
-            this._currentContent = this._contentWrapper.innerHTML = _;
+            this._map.closePopup();
+        } else if (_ !== this._currentContent || popup !== this._hidden) {
+            if (popup) {
+                this._popup.setContent(_).openOn(this._map);
+                this._hide();
+            } else {
+                if (this._hidden) this._show();
+                this._contentWrapper.innerHTML = _;
+                this._map.closePopup();
+            }
+            this._currentContent = _;
         }
     },
 
@@ -66,6 +75,7 @@ var GridControl = L.Control.extend({
     _handler: function(type, o) {
         var mapping = this.options.mapping[type],
             format = mapping.format,
+            popup = mapping.popup,
             formatted;
 
         if(format === 'teaser' && this._pinned === false) {
@@ -81,7 +91,7 @@ var GridControl = L.Control.extend({
         if (typeof format === 'function') {
             formatted = format(o);
             if (typeof formatted === 'string') {
-                this.setContent(this.options.sanitizer(formatted));
+                this.setContent(this.options.sanitizer(formatted), popup);
             }
         // a template. in this case, the content will already be templated
         // by `L.L.mapbox.gridLayer`
@@ -90,17 +100,18 @@ var GridControl = L.Control.extend({
             if (format === 'location') {
                 window.top.location.href = formatted;
             } else {
-                this.setContent(this.options.sanitizer(formatted));
+                this.setContent(this.options.sanitizer(formatted), popup);
+                if (popup) this._popup.setLatLng(o.latLng);
             }
         // a click outside of valid features while the map is pinned
         // should unpin the tooltip
         } else if (type === 'click' &&
-            o.data === null &&
+            !o.data &&
             this._pinned) {
             this.setContent('');
         }
 
-        if (mapping.pin && o.data) {
+        if (mapping.pin && o[format]) {
             L.DomUtil.addClass(this._container, 'closable');
             this._pinned = true;
         } else {
@@ -142,6 +153,8 @@ var GridControl = L.Control.extend({
         container.appendChild(contentWrapper);
 
         this._contentWrapper = contentWrapper;
+        this._popup = new L.Popup({ autoPan: false }).setLatLng([0, 0]).addTo(map);
+        this._popup._close();
 
         L.DomEvent
             .disableClickPropagation(container)
