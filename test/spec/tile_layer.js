@@ -9,64 +9,31 @@ describe("L.mapbox.tileLayer", function() {
         server.restore();
     });
 
-    describe("#setTileJSON", function() {
+    describe("#constructor", function() {
         it("sets min and max zoom", function() {
-            var layer = L.mapbox.tileLayer();
-            expect(layer.setTileJSON(helpers.tileJSON)).to.eql(layer);
+            var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.options.minZoom).to.equal(0);
             expect(layer.options.maxZoom).to.equal(17);
         });
 
-        it("is strict", function() {
-            var layer = L.mapbox.tileLayer();
-            expect(function() {
-                layer.setTileJSON('foo');
-            }).to.throwException();
-        });
-
         it("sets attribution", function() {
-            var layer = L.mapbox.tileLayer();
-            layer.setTileJSON(helpers.tileJSON);
+            var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.options.attribution).to.equal('Data provided by NatureServe in collaboration with Robert Ridgely');
         });
 
         it("sets tms option", function() {
-            var layer = L.mapbox.tileLayer();
-            layer.setTileJSON(L.extend({}, helpers.tileJSON, {scheme: 'tms'}));
+            var layer = L.mapbox.tileLayer(L.extend({}, helpers.tileJSON, {scheme: 'tms'}));
             expect(layer.options.tms).to.equal(true);
         });
 
         it("sets bounds", function() {
-            var layer = L.mapbox.tileLayer();
-            layer.setTileJSON(helpers.tileJSON);
+            var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.options.bounds).to.eql(L.latLngBounds([[-85.0511, -180], [85.0511, 180]]));
         });
 
-        it("can be reinitialized", function() {
-            var layer = L.mapbox.tileLayer();
-
-            layer.setTileJSON(helpers.tileJSON);
-            layer.setTileJSON(L.extend({}, helpers.tileJSON, {attribution: 'Terms', bounds: undefined, scheme: 'tms'}));
-
-            expect(layer.options.attribution).to.equal('Terms');
-            expect(layer.options.tms).to.equal(true);
-            expect(layer.options.bounds).to.equal(undefined);
-        });
-    });
-
-    describe("#loadURL", function() {
-        it('returns self', function() {
-            var layer = L.mapbox.tileLayer();
-            expect(layer.loadURL('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json')).to.eql(layer);
-        });
-
-        it('supports a callback', function(done) {
-            var layer = L.mapbox.tileLayer();
-
-            layer.loadURL('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json', function(err, json) {
+        it('loads a URL with a callback', function(done) {
+            var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json').on('ready', function() {
                 expect(this).to.equal(layer);
-                expect(err).to.equal(null);
-                expect(json).to.eql(helpers.tileJSON);
                 done();
             });
 
@@ -74,21 +41,10 @@ describe("L.mapbox.tileLayer", function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
-    });
 
-    describe("#loadID", function() {
-        it('returns self', function() {
-            var layer = L.mapbox.tileLayer();
-            expect(layer.loadID('L.mapbox.map-0l53fhk2')).to.eql(layer);
-        });
-
-        it('calls a callback on success', function(done) {
-            var layer = L.mapbox.tileLayer();
-
-            layer.loadID('L.mapbox.map-0l53fhk2', function(err, json) {
+        it('loads an id with a callback', function(done) {
+            var layer = L.mapbox.tileLayer('L.mapbox.map-0l53fhk2').on('ready', function() {
                 expect(this).to.equal(layer);
-                expect(err).to.equal(null);
-                expect(json).to.eql(helpers.tileJSON);
                 done();
             });
 
@@ -98,12 +54,8 @@ describe("L.mapbox.tileLayer", function() {
         });
 
         it('calls a callback on error', function(done) {
-            var layer = L.mapbox.tileLayer();
-
-            layer.loadURL('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json', function(err, json) {
+            var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json').on('error', function() {
                 expect(this).to.equal(layer);
-                expect(err.status).to.equal(400);
-                expect(json).to.equal(null);
                 done();
             });
 
@@ -113,8 +65,7 @@ describe("L.mapbox.tileLayer", function() {
         });
 
         it('loads TileJSON from the appropriate URL', function() {
-            var layer = L.mapbox.tileLayer();
-            layer.loadID('L.mapbox.map-0l53fhk2');
+            var layer = L.mapbox.tileLayer('L.mapbox.map-0l53fhk2');
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
@@ -126,16 +77,14 @@ describe("L.mapbox.tileLayer", function() {
 
     describe("#getTileJSON", function() {
         it('gets tilejson', function() {
-            var layer = L.mapbox.tileLayer();
-            layer.setTileJSON(helpers.tileJSON);
+            var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
         });
     });
 
     describe("#getTileUrl", function() {
         it("distributes over the URLs in the tiles property", function() {
-            var layer = L.mapbox.tileLayer();
-            layer.setTileJSON(helpers.tileJSON);
+            var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0.png');
             expect(layer.getTileUrl({x: 1, y: 0, z: 0})).to.equal('http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/0/1/0.png');
             expect(layer.getTileUrl({x: 2, y: 0, z: 0})).to.equal('http://c.tiles.mapbox.com/v3/examples.map-8ced9urs/0/2/0.png');
@@ -143,8 +92,7 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/4/0.png');
         });
         it("changes format of tiles", function() {
-            var layer = L.mapbox.tileLayer().setFormat('jpg70');
-            layer.setTileJSON(helpers.tileJSON);
+            var layer = L.mapbox.tileLayer(helpers.tileJSON).setFormat('jpg70');
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0.jpg70');
             expect(layer.getTileUrl({x: 1, y: 0, z: 0})).to.equal('http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/0/1/0.jpg70');
             expect(layer.getTileUrl({x: 2, y: 0, z: 0})).to.equal('http://c.tiles.mapbox.com/v3/examples.map-8ced9urs/0/2/0.jpg70');

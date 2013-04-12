@@ -40,64 +40,34 @@ describe('L.mapbox.gridLayer', function() {
             expect(layer).to.be.ok();
             expect(layer.getTileJSON()).to.be.eql(helpers.tileJSON);
         });
+
+        it('loads a TileJSON object', function(done) {
+            var layer = L.mapbox.gridLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json').on('ready', function(json) {
+                expect(this).to.equal(layer);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+
+        it('loads a TileJSON object from an ID', function(done) {
+            var layer = L.mapbox.gridLayer('L.mapbox.map-0l53fhk2').on('ready', function(err, json) {
+                expect(this).to.equal(layer);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
     });
 
     describe('#getTileJSON', function() {
         it('is by default empty', function() {
             var layer = L.mapbox.gridLayer();
             expect(layer.getTileJSON()).to.eql({});
-        });
-    });
-
-    describe('#loadURL', function() {
-        it('loads a TileJSON object', function(done) {
-            var layer = L.mapbox.gridLayer();
-
-            layer.loadURL('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json', function(err, json) {
-                expect(this).to.equal(layer);
-                expect(err).to.equal(null);
-                expect(json).to.eql(helpers.tileJSON);
-                done();
-            });
-
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
-                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
-            server.respond();
-        });
-    });
-
-    describe('#loadID', function() {
-        it('loads a TileJSON object', function(done) {
-            var layer = L.mapbox.gridLayer();
-
-            layer.loadID('L.mapbox.map-0l53fhk2', function(err, json) {
-                expect(this).to.equal(layer);
-                expect(err).to.equal(null);
-                expect(json).to.eql(helpers.tileJSON);
-                done();
-            });
-
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
-                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
-            server.respond();
-        });
-    });
-
-    describe('#setTileJSON', function() {
-        it('sets TileJSON', function() {
-            var layer = L.mapbox.gridLayer();
-            expect(layer.setTileJSON(helpers.tileJSON)).to.eql(layer);
-            expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
-        });
-
-        it('makes no tile requests if the JSON has an empty "grids" property', function() {
-            map.setView([0, 0], 1);
-
-            var layer = L.mapbox.gridLayer()
-                .addTo(map);
-
-            layer.setTileJSON(L.extend({}, helpers.tileJSON, {grids: []}));
-            expect(server.requests).to.eql([]);
         });
     });
 

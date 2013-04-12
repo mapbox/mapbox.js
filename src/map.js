@@ -92,7 +92,7 @@ var Map = L.Map.extend({
 
     _initialize: function(json) {
         if (this.tileLayer) {
-            this.tileLayer.setTileJSON(json);
+            this.tileLayer._setTileJSON(json);
         }
 
         if (this.markerLayer && json.data && json.data[0]) {
@@ -100,7 +100,7 @@ var Map = L.Map.extend({
         }
 
         if (this.gridLayer) {
-            this.gridLayer.setTileJSON(json);
+            this.gridLayer._setTileJSON(json);
         }
 
         if (this.gridControl && json.template) {

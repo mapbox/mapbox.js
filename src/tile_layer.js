@@ -33,9 +33,10 @@ var TileLayer = L.TileLayer.extend({
         }
 
         if (typeof _ === 'string') {
-            util.idUrl(_, this);
+            if (_.indexOf('/') == -1) this._loadID(_);
+            else this._loadURL(_);
         } else if (_ && typeof _ === 'object') {
-            this.setTileJSON(_);
+            this._setTileJSON(_);
         }
     },
 
@@ -49,7 +50,7 @@ var TileLayer = L.TileLayer.extend({
     // disable the setUrl function, which is not available on mapbox tilelayers
     setUrl: null,
 
-    setTileJSON: function(json) {
+    _setTileJSON: function(json) {
         util.strict(json, 'object');
         json = url.httpsify(json);
 
@@ -71,22 +72,21 @@ var TileLayer = L.TileLayer.extend({
         return this._tilejson;
     },
 
-    loadURL: function(url, cb) {
+    _loadID: function(id) {
+        return this._loadURL(url.base() + id + '.json');
+    },
+
+    _loadURL: function(url) {
         request(url, L.bind(function(err, json) {
             if (err) {
                 util.log('could not load TileJSON at ' + url);
-                if (cb) cb.call(this, err, json);
+                this.fire('error');
             } else if (json) {
-                this.setTileJSON(json);
-                if (cb) cb.call(this, err, json);
+                this._setTileJSON(json);
                 this.fire('ready');
             }
         }, this));
         return this;
-    },
-
-    loadID: function(id, cb) {
-        return this.loadURL(url.base() + id + '.json', cb);
     },
 
     // this is an exception to mapbox.js naming rules because it's called

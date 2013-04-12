@@ -22,11 +22,15 @@ var GridLayer = L.Class.extend({
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
 
-        if (typeof _ === 'string') util.idUrl(_, this);
-        else if (_ && typeof _ === 'object') this.setTileJSON(_);
+        if (typeof _ === 'string') {
+            if (_.indexOf('/') == -1) this._loadID(_);
+            else this._loadURL(_);
+        } else if (_ && typeof _ === 'object') {
+            this._setTileJSON(_);
+        }
     },
 
-    setTileJSON: function(json) {
+    _setTileJSON: function(json) {
         util.strict(json, 'object');
         json = url.httpsify(json);
 
@@ -52,22 +56,21 @@ var GridLayer = L.Class.extend({
         return !!(this._map && this.options.grids && this.options.grids.length);
     },
 
-    loadURL: function(url, cb) {
+    _loadURL: function(url) {
         request(url, L.bind(function(err, json) {
             if (err) {
                 util.log('could not load TileJSON at ' + url);
-                if (cb) cb.call(this, err, json);
+                this.fire('error');
             } else if (json) {
-                this.setTileJSON(json);
-                if (cb) cb.call(this, err, json);
+                this._setTileJSON(json);
                 this.fire('ready');
             }
         }, this));
         return this;
     },
 
-    loadID: function(id, cb) {
-        return this.loadURL(url.base() + id + '.json', cb);
+    _loadID: function(id, cb) {
+        return this._loadURL(url.base() + id + '.json', cb);
     },
 
     addTo: function (map) {

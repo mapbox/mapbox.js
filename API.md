@@ -136,42 +136,6 @@ _Example_:
 
 _Returns_ a `L.mapbox.tileLayer` object.
 
-
-### tileLayer.loadURL(url: string, [callback: function])
-
-Load tiles from a map with its tiles described by a TileJSON object at the
-given `url`. If a callback function are provided as the second argument, it's
-called after the request completes and the changes are applied to the layer.
-
-_Arguments_:
-
-1. `string` a map id
-
-_Returns_: the layer object
-
-### tileLayer.loadID(id: string, [callback: function])
-
-Load tiles from a map with the given `id` on MapBox. If a callback function
-are provided as the second argument, it's called after the request completes
-and the changes are applied to the layer.
-
-_Arguments_:
-
-1. `string` a map id
-
-_Returns_: the layer object
-
-### tileLayer.setTileJSON(tilejson: object)
-
-Set the TileJSON object that determines this layer's tile source, zoom bounds
-and other metadata
-
-_Arguments_:
-
-1. `object` a TileJSON object
-
-_Returns_: the TileJSON object
-
 ### tileLayer.getTileJSON()
 
 Returns this layer's TileJSON object which determines its tile source,
@@ -213,47 +177,12 @@ _Example_:
 _Returns_ a `L.mapbox.gridLayer` object.
 
 
-### gridLayer.loadURL(url: string, [callback: function])
-
-Load tiles from a map with its tiles described by a TileJSON object at the
-given `url`. If a callback function are provided as the second argument, it's
-called after the request completes and the changes are applied to the layer.
-
-_Arguments_:
-
-1. `string` a map id
-
-_Returns_: the layer object
-
-### gridLayer.loadID(id: string, [callback: function])
-
-Load tiles from a map with the given `id` on MapBox. If a callback function
-are provided as the second argument, it's called after the request completes
-and the changes are applied to the layer.
-
-_Arguments_:
-
-1. `string` a map id
-
-_Returns_: the layer object
-
 ### gridLayer.getTileJSON()
 
 Returns this layer's TileJSON object which determines its tile source,
 zoom bounds and other metadata.
 
 _Arguments_: none
-
-_Returns_: the TileJSON object
-
-### gridLayer.setTileJSON(tilejson: object)
-
-Set the TileJSON object that determines this layer's tile source, zoom bounds
-and other metadata
-
-_Arguments_:
-
-1. `object` a TileJSON object
 
 _Returns_: the TileJSON object
 
@@ -295,8 +224,8 @@ _Returns_ a `L.mapbox.markerLayer` object.
 
 ### markerLayer.loadURL(url: string, [callback: function])
 
-Load tiles from a map with its tiles described by a TileJSON object at the
-given `url`. If a callback function are provided as the second argument, it's
+Load GeoJSON data for this layer from the URL given by `url`. If a
+callback function are provided as the second argument, it's
 called after the request completes and the changes are applied to the layer.
 
 _Arguments_:
