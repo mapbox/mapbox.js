@@ -8,6 +8,7 @@ function utfDecode(c) {
 
 module.exports = function(data) {
     return function(x, y) {
+        if (!data) return;
         var idx = utfDecode(data.grid[y].charCodeAt(x)),
             key = data.keys[idx];
         return data.data[key];

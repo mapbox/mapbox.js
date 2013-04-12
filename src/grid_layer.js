@@ -146,7 +146,7 @@ var GridLayer = L.Class.extend({
                 }
                 if (on.data) this.fire('mouseover', on);
                 this._mouseOn = on.data;
-            } else if (on.data) {
+            } else {
                 this.fire('mousemove', on);
             }
         }, this));
@@ -235,7 +235,6 @@ var GridLayer = L.Class.extend({
         }
 
         request(this._getTileURL(tilePoint), L.bind(function(err, json) {
-            if (err) return;
             var callbacks = this._cache[key];
             this._cache[key] = grid(json);
             for (var i = 0; i < callbacks.length; ++i) {
