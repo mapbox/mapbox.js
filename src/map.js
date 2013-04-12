@@ -59,6 +59,12 @@ var Map = L.Map.extend({
         }
     },
 
+    // Update certain properties on 'ready' event
+    addLayer: function(layer) {
+        layer.on('ready', L.bind(function() { this._updateLayer(layer); }, this));
+        return L.Map.prototype.addLayer.call(this, layer);
+    },
+
     // use a javascript object of tilejson data to configure this layer
     setTileJSON: function(_) {
         this._tilejson = _;
@@ -116,9 +122,26 @@ var Map = L.Map.extend({
                 center = L.latLng(json.center[1], json.center[0]);
 
             this.setView(center, zoom);
-        } else if (this.attributionControl) {
-            this.attributionControl.addAttribution(json.attribution);
         }
+
+        this._updateLayer(this.tileLayer);
+        this._updateLayer(this.gridLayer);
+    },
+
+    _updateLayer: function(layer) {
+
+        if (!layer.options) return;
+
+        if (this.attributionControl && this._loaded) {
+            this.attributionControl.addAttribution(layer.options.attribution);
+        }
+
+        if (!(L.stamp(layer) in this._zoomBoundLayers) &&
+                (layer.options.maxZoom || layer.options.minZoom)) {
+            this._zoomBoundLayers[L.stamp(layer)] = layer;
+        }
+
+        this._updateZoomLevels();
     }
 });
 
