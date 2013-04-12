@@ -291,24 +291,6 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 
 # Controls
 
-## mapbox.hash()
-
-Adds hash functionality to the map, so that pan and zoom state are copied
-when the URL of the page is copied.
-
-_Arguments_: none
-
-_Example_
-
-    var map = L.map('map')
-        .setView([37, -77], 5)
-        .addControl( mapbox.hash());
-
-_Returns_ a `mapbox.hash` object.
-
-_Ref_: this code uses [Leaflet.hash](https://github.com/mlevans/leaflet-hash)
-internally.
-
 ## L.mapbox.legendControl()
 
 A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
@@ -324,7 +306,7 @@ _Arguments_:
 
 _Returns_: a `mapbox.Legend` object.
 
-## mapbox.gridControl()
+## L.mapbox.gridControl()
 
 Interaction is what we call interactive parts of maps that are created with
 the powerful [tooltips & regions system](http://mapbox.com/tilemill/docs/crashcourse/tooltips/)
