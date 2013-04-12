@@ -452,3 +452,14 @@ _Examples_:
 _Returns_:
 
 A `L.Marker` object with the latitude, longitude position and a styled marker
+
+# Theming
+
+## Dark theme
+
+Mapbox.js implements a simple, light style on all interaction elements. A dark theme
+is available by applying `class="dark"` to the map div.
+
+_Example_:
+
+    <div id="map" class="dark"></div>
