@@ -48,6 +48,24 @@ served from a worldwide content-distribution network. There's no API key require
 the Javascript API - you'll identify with MapBox's services simply by using your own custom
 maps.
 
+## Reading this Documentation
+
+This documentation is organized by _methods_ in the Javascript API. Each method
+is shown with potential arguments, and their types. For instance, the `setFilter`
+method on `L.mapbox.markerLayer` is documented as:
+
+    markerLayer.setFilter(filter: function)
+
+The format `filter: function` means that the single argument to `setFilter`, a filter
+function, should be a Javascript function. Other kinds of arguments include
+`object`, `string`, or `Element`.
+
+When the API has a Javascript constructor function that returns an object, the constructor
+is documented with its full name and the functions on the object are named with just
+the type of the object. For instance, `L.mapbox.markerLayer` documents a function that
+returns a layer for markers. The methods on that object are then documented as
+`markerLayer.setFilter`, `markerLayer.getGeoJSON`, and so on.
+
 # Map
 
 ## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
