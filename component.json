@@ -1,9 +1,0 @@
-{
-  "name": "mapbox.js",
-  "version": "0.0.0",
-  "dependencies": {
-    "Leaflet": "https://github.com/Leaflet/Leaflet#~0.5.1",
-    "leaflet-hash": "https://github.com/mlevans/leaflet-hash.git",
-    "reqwest": "https://github.com/ded/reqwest.git#~0.6.4"
-  }
-}
