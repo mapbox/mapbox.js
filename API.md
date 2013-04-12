@@ -1,3 +1,53 @@
+# Getting Started
+
+This API documentation covers the MapBox Javascript API, an API for adding
+MapBox maps to webpages.
+
+## Prerequisites
+
+In order to use this API, you'll need to understand basic Javascript and mapping concepts.
+If you'd like to learn Javascript, start with [an interactive course](http://www.codecademy.com/tracks/javascript),
+[a book](http://eloquentjavascript.net/) or [a printed book](http://www.amazon.com/dp/0596517742/?tag=stackoverfl08-20).
+If you'd like to learn more about maps, [we've provided a helpful article explaining how web maps work](http://mapbox.com/developers/guide/).
+
+## MapBox.js & Leaflet
+
+The Javascript API is implemented as a [Leaflet](http://leafletjs.com/) plugin. Leaflet
+is an open-source library that provides the basic ability to embed a map, like
+a MapBox map or a map from OpenStreetMap, into a page. [The Leaflet API](http://leafletjs.com/reference.html)
+handles much of the fundamental operations of using maps, so this API documentation is
+meant to be used in conjunction with the [Leaflet](http://leafletjs.com/reference.html) API
+reference.
+
+The MapBox API includes Leaflet and makes it easier to integrate Leaflet with MapBox's
+maps and services.
+
+## Getting Started with the API
+
+Here's a simple page that you can set up with MapBox.js:
+
+    <html>
+    <head>
+      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0beta0.0/mapbox.css' rel='stylesheet' />
+      <!--[if lte IE 8]>
+        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0beta0.0/mapbox.ie.css' rel='stylesheet' />
+      <![endif]-->
+      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0beta0.0/mapbox.js'></script>
+    </head>
+    <body>
+      <div id='map' class='dark'></div>
+      <script type='text/javascript'>
+      var map = L.mapbox.map('map', 'examples.map-y7l23tes')
+          .setView([37.9, -77], 5);
+      </script>
+    </body>
+    </html>
+
+The necessary Javascript and CSS files for the map are hosted on MapBox's servers, so they're
+served from a worldwide content-distribution network. There's no API key required to include
+the Javascript API - you'll identify with MapBox's services simply by using your own custom
+maps.
+
 # Map
 
 ## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
