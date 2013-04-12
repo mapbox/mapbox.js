@@ -95,8 +95,7 @@ pre a {
         <span class='icon search'></span>
       </form>
       <ul class='nav pages'>
-      <li><a {% if page.url == '/examples/index.html' %}class='active'{% endif %} href='{{site.baseurl}}/examples'>A simple map</a></li>
-      {% for item in site.categories.example reversed %}
+      {% for item in site.categories['example/v1.0.0beta0'] reversed %}
       <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
       {% endfor %}
       </ul>

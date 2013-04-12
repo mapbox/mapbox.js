@@ -1,0 +1,42 @@
+---
+layout: example_v1
+categories: example/v1.0.0beta0
+version: v1.0.0beta0
+title: WMS
+description: Using WMS layers from NOAA
+tags:
+  - layers
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-y7l23tes')
+    .setView([37, -99], 5);
+
+var temperature = L.tileLayer.wms("http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer", {
+    format: 'img/png',
+    transparent: true,
+    layers: 16
+}).addTo(map);
+
+var precipitation = L.tileLayer.wms("http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs", {
+    format: 'image/png',
+    transparent: true,
+    layers: 'RAS_RIDGE_NEXRAD'
+}).addTo(map);
+
+// Layer switcher
+document.getElementById('temperature').onclick = function () {
+    var enable = this.className !== 'active';
+    temperature.setOpacity(enable ? 1 : 0);
+    this.className = enable ? 'active' : '';
+    return false;
+};
+
+document.getElementById('precipitation').onclick = function () {
+    var enable = this.className !== 'active';
+    precipitation.setOpacity(enable ? 1 : 0);
+    this.className = enable ? 'active' : '';
+    return false;
+};
+</script>
