@@ -1,6 +1,7 @@
 window.L = require('Leaflet/dist/leaflet-src');
 
 L.mapbox = module.exports = {
+    VERSION: require('./package.json').version,
     geocoder: require('./src/geocoder'),
     marker: require('./src/marker'),
     tileLayer: require('./src/tile_layer'),
