@@ -131,6 +131,26 @@
     padding: 5px 8px;
 }
 
+/* Cursors */
+.leaflet-container {
+    cursor: default;
+    cursor: -webkit-default;
+    cursor:    -moz-default;
+}
+
+.leaflet-dragging {
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor:    -moz-grabbing;
+}
+
+.leaflet-clickable,
+.leaflet-container.map-clickable {
+    cursor: pointer;
+    cursor: -webkit-pointer;
+    cursor:    -moz-pointer;
+}
+
 /* Light Theme (default) */
 
 .leaflet-control .mapbox-button {

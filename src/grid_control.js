@@ -67,6 +67,13 @@ var GridControl = L.Control.extend({
         var mapping = this.options.mapping[type],
             format = mapping.format,
             formatted;
+
+        if(format === 'teaser' && this._pinned === false) {
+            L.DomUtil.addClass(this._map._container, 'map-clickable');
+        } else {
+            L.DomUtil.removeClass(this._map._container, 'map-clickable');
+        }
+
         // mousemoves do not close or affect this control when
         // a tooltip is pinned open
         if ((type === 'mousemove' ||
