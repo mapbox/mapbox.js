@@ -49,8 +49,7 @@ var GridControl = L.Control.extend({
             this._map.closePopup();
 
         } else if (_ !== this._currentContent ||  // switching content
-                popup !== this._hidden ||  // switching from popup to corner thing
-                popup && this._map._popup !== this._popup) {  // popup has since been closed
+                popup !== this._hidden) {  // switching from popup to corner thing
 
             if (popup) {
                 this._popup.setContent(_).openOn(this._map);
@@ -107,8 +106,8 @@ var GridControl = L.Control.extend({
             if (format === 'location') {
                 window.top.location.href = formatted;
             } else {
-                this.setContent(this.options.sanitizer(formatted), popup);
                 if (popup) this._popup.setLatLng(o.latLng);
+                this.setContent(this.options.sanitizer(formatted), popup);
             }
         // a click outside of valid features while the map is pinned
         // should unpin the tooltip
@@ -160,8 +159,12 @@ var GridControl = L.Control.extend({
         container.appendChild(contentWrapper);
 
         this._contentWrapper = contentWrapper;
-        this._popup = new L.Popup({ autoPan: false }).setLatLng([0, 0]).addTo(map);
-        this._popup._close();
+        this._popup = new L.Popup({ autoPan: false });
+
+        map.on('popupclose', L.bind(function onPopupClose() {
+            this._currentContent = null;
+            this._pinned = false;
+        }, this));
 
         L.DomEvent
             .disableClickPropagation(container)
