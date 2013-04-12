@@ -1,0 +1,33 @@
+---
+layout: example_v1
+categories: example/v1.0.0beta0
+version: v1.0.0beta0
+title: YouTube
+description: Allowing for cross-domain content
+tags:
+  - ui
+---
+
+<style>
+.map-tooltip {
+    width:440px !important;
+    max-width:440px !important;
+}
+</style>
+<div id='map'></div>
+<script type='text/javascript'>
+var map = L.mapbox.map('map', 'examples.youtube-embed');
+
+var gridControl = L.mapbox.gridControl(map.gridLayer, {
+    // This line redefines part of the underlying code which
+    // sanitizes HTML from MapBox Hosting. The original code is there
+    // for the protection of sites, so that malicious map-creators
+    // can't add cross-site scripting attacks to sites that use their
+    // maps.
+    // Turning it off allows any content to be available in tooltips.
+    // It's recommended to only with trusted maps.
+    sanitizer: function(x) { return x; }
+});
+
+gridControl.addTo(map);
+</script>
