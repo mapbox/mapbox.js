@@ -93,15 +93,6 @@ _Arguments_:
 
 _Returns_: the layer object
 
-### tileLayer.getTileJSON()
-
-Returns this layer's TileJSON object which determines its tile source,
-zoom bounds and other metadata.
-
-_Arguments_: none
-
-_Returns_: the TileJSON object
-
 ### tileLayer.setTileJSON(tilejson: object)
 
 Set the TileJSON object that determines this layer's tile source, zoom bounds
@@ -110,6 +101,15 @@ and other metadata
 _Arguments_:
 
 1. `object` a TileJSON object
+
+_Returns_: the TileJSON object
+
+### tileLayer.getTileJSON()
+
+Returns this layer's TileJSON object which determines its tile source,
+zoom bounds and other metadata.
+
+_Arguments_: none
 
 _Returns_: the TileJSON object
 
@@ -123,6 +123,83 @@ _Arguments_:
 1. `string` an image format. valid options are: 'png', 'png32', 'png64', 'png128', 'png256', 'jpg70', 'jpg80', 'jpg90'
 
 _Returns_: the layer object
+
+## L.mapbox.gridLayer(id: string | url: string | tilejson: object, [options: object])
+
+An `L.mapbox.gridLayer` loads [UTFGrid](http://mapbox.com/developers/utfgrid/) tiles of
+interactivity into your map, which you can easily access with `L.mapbox.gridControl`.
+
+_Arguments_:
+
+The first argument is required and must be:
+
+* An `id` string `examples.map-foo`
+* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
+* A TileJSON object, from your own Javascript code
+
+_Example_:
+
+    // the second argument is optional
+    var layer = L.mapbox.gridLayer('examples.map-20v6611k');
+
+_Returns_ a `L.mapbox.gridLayer` object.
+
+
+### gridLayer.loadURL(url: string, [callback: function])
+
+Load tiles from a map with its tiles described by a TileJSON object at the
+given `url`. If a callback function are provided as the second argument, it's
+called after the request completes and the changes are applied to the layer.
+
+_Arguments_:
+
+1. `string` a map id
+
+_Returns_: the layer object
+
+### gridLayer.loadID(id: string, [callback: function])
+
+Load tiles from a map with the given `id` on MapBox. If a callback function
+are provided as the second argument, it's called after the request completes
+and the changes are applied to the layer.
+
+_Arguments_:
+
+1. `string` a map id
+
+_Returns_: the layer object
+
+### gridLayer.getTileJSON()
+
+Returns this layer's TileJSON object which determines its tile source,
+zoom bounds and other metadata.
+
+_Arguments_: none
+
+_Returns_: the TileJSON object
+
+### gridLayer.setTileJSON(tilejson: object)
+
+Set the TileJSON object that determines this layer's tile source, zoom bounds
+and other metadata
+
+_Arguments_:
+
+1. `object` a TileJSON object
+
+_Returns_: the TileJSON object
+
+### gridLayer.getData(latlng: LatLng, callback: function)
+
+Load data for a given latitude, longitude point on the map, and call the callback
+function with that data, if any.
+
+_Arguments_:
+
+1. `latlng` an L.LatLng object
+2. `callback` a function that is called with the grid data as an argument
+
+_Returns_: the L.mapbox.gridLayer object
 
 ## L.mapbox.markerLayer(id: string | url: string | tilejson: object, [options: object])
 
@@ -315,7 +392,7 @@ the [open UTFGrid specification.](https://github.com/mapbox/utfgrid-spec).
 
 _Arguments_:
 
-* The first argument must be a layer created with `mapbox.gridLayer()`
+* The first argument must be a layer created with `L.mapbox.gridLayer()`
 * The second argument can be an options object. Valid options are:
 
 * `sanitizer`: A function that accepts a string containing interactivity data, and returns a
