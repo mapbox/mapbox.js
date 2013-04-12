@@ -119,12 +119,8 @@ var GridControl = L.Control.extend({
             data['__' + format + '__'] = true;
             formatted = Mustache.to_html(this.options.template, L.extend(data, o.data));
 
-            if (format === 'location') {
-                window.top.location.href = formatted;
-            } else {
-                if (popup) this._popup.setLatLng(o.latLng);
-                this.setContent(this.options.sanitizer(formatted), popup);
-            }
+            if (popup) this._popup.setLatLng(o.latLng);
+            this.setContent(this.options.sanitizer(formatted), popup);
         }
 
         if (mapping.pin) {
