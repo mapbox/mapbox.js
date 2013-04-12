@@ -103,6 +103,10 @@ var Map = L.Map.extend({
             this.gridLayer.setTileJSON(json);
         }
 
+        if (this.gridControl && json.template) {
+            this.gridControl.setTemplate(json.template);
+        }
+
         if (this.legendControl && json.legend) {
             this.legendControl.addLegend(json.legend);
         }

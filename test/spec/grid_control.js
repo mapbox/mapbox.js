@@ -1,20 +1,28 @@
 describe("L.mapbox.gridControl", function() {
-    var server;
+    var element, map, gridLayer;
 
     beforeEach(function() {
-        server = sinon.fakeServer.create();
+        element = document.createElement('div');
+        map = L.mapbox.map(element);
+        gridLayer = L.mapbox.gridLayer().addTo(map);
     });
 
-    afterEach(function() {
-        server.restore();
+    it('sanitizes its content', function() {
+        var control = L.mapbox.gridControl(gridLayer, {
+            template: '<script></script>'
+        }).addTo(map);
+
+        gridLayer.fire('click', {latLng: L.latLng(0, 0), data: 'data'});
+        expect(control._currentContent).to.equal('');
     });
 
-    it("is initialized", function() {
-        var layer = L.mapbox.gridLayer('examples.foo');
-        var control = L.mapbox.gridControl(layer);
-        expect(control).to.be.ok();
-    });
+    it('supports a custom sanitizer', function() {
+        var control = L.mapbox.gridControl(gridLayer, {
+            template: '<script></script>',
+            sanitizer: function(_) { return _; }
+        }).addTo(map);
 
-    it('sanitizes its content');
-    it('supports a custom sanitizer');
+        gridLayer.fire('click', {latLng: L.latLng(0, 0), data: 'data'});
+        expect(control._currentContent).to.equal('<script></script>');
+    });
 });

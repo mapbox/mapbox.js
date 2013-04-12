@@ -3,7 +3,6 @@
 var util = require('./util'),
     url = require('./url'),
     request = require('./request'),
-    Mustache = require('mustache'),
     grid = require('./grid');
 
 // forked from danzel/L.UTFGrid
@@ -35,15 +34,8 @@ var GridLayer = L.Class.extend({
             grids: json.grids,
             minZoom: json.minzoom,
             maxZoom: json.maxzoom,
-            bounds: json.bounds && util.lbounds(json.bounds),
-            template: json.template && this._getTemplate(json.template)
+            bounds: json.bounds && util.lbounds(json.bounds)
         });
-
-        if (json.template) {
-            this.options.template = this._getTemplate(json.template);
-        } else {
-            this.options.template = function() { return ''; };
-        }
 
         this._tilejson = json;
         this._cache = {};
@@ -101,6 +93,8 @@ var GridLayer = L.Class.extend({
     },
 
     getData: function(latlng, callback) {
+        if (!this.active()) return;
+
         var map = this._map,
             point = map.project(latlng),
             tileSize = 256,
@@ -120,54 +114,35 @@ var GridLayer = L.Class.extend({
         });
     },
 
-    // given a template string x, return a template function that accepts
-    // (data, format)
-    _getTemplate: function(x) {
-        return function(data, format) {
-            var clone = {};
-            for (var key in data) { clone[key] = data[key]; }
-            if (format) { clone['__' + format + '__'] = true; }
-            return Mustache.to_html(x, clone);
-        };
-    },
-
     _click: function(e) {
-        if (!this.active()) return;
-        this._objectForEvent(e, L.bind(function(on) {
-            this.fire('click', on);
+        this.getData(e.latlng, L.bind(function(data) {
+            this.fire('click', {
+                latLng: e.latlng,
+                data: data
+            });
         }, this));
     },
 
     _move: function(e) {
-        if (!this.active()) return;
-        this._objectForEvent(e, L.bind(function(on) {
-            if (on.data !== this._mouseOn) {
+        this.getData(e.latlng, L.bind(function(data) {
+            if (data !== this._mouseOn) {
                 if (this._mouseOn) {
                     this.fire('mouseout', {
                         latLng: e.latlng,
                         data: this._mouseOn
                     });
                 }
-                if (on.data) this.fire('mouseover', on);
-                this._mouseOn = on.data;
-            } else {
-                this.fire('mousemove', on);
-            }
-        }, this));
-    },
 
-    _objectForEvent: function(e, callback) {
-        return this.getData(e.latlng, L.bind(function(data) {
-            if (data) {
-                callback({
-                    latLng: e.latlng,
-                    data: data,
-                    url: this.options.template(data, 'location'),
-                    teaser: this.options.template(data, 'teaser'),
-                    full: this.options.template(data, 'full')
-                });
+                if (data) {
+                    this.fire('mouseover', {
+                        latLng: e.latlng,
+                        data: data
+                    });
+                }
+
+                this._mouseOn = data;
             } else {
-                callback({
+                this.fire('mousemove', {
                     latLng: e.latlng,
                     data: data
                 });

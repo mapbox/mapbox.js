@@ -1,6 +1,7 @@
 'use strict';
 
-var util = require('./util');
+var util = require('./util'),
+    Mustache = require('mustache');
 
 var GridControl = L.Control.extend({
 
@@ -39,6 +40,10 @@ var GridControl = L.Control.extend({
         L.Util.setOptions(this, options);
         util.strict_instance(_, L.Class, 'L.L.mapbox.gridLayer');
         this._layer = _;
+    },
+
+    setTemplate: function(template) {
+        this.options.template = template;
     },
 
     // change the content of the tooltip HTML if it has changed, otherwise
@@ -94,30 +99,35 @@ var GridControl = L.Control.extend({
         // a tooltip is pinned open
         if ((type === 'mousemove' ||
              type === 'mouseout') && this._pinned) return;
+
+        // a click outside of valid features while the map is pinned
+        // should unpin the tooltip
+        if (type === 'click' && !o.data && this._pinned) {
+            this.setContent('');
+            this._pinned = false;
+            L.DomUtil.removeClass(this._container, 'closable');
+            return;
+        }
+
         if (typeof format === 'function') {
             formatted = format(o);
             if (typeof formatted === 'string') {
                 this.setContent(this.options.sanitizer(formatted), popup);
             }
-        // a template. in this case, the content will already be templated
-        // by `L.L.mapbox.gridLayer`
-        } else if (o[format]) {
-            formatted = o[format];
+        } else if (o.data && this.options.template) {
+            var data = {};
+            data['__' + format + '__'] = true;
+            formatted = Mustache.to_html(this.options.template, L.extend(data, o.data));
+
             if (format === 'location') {
                 window.top.location.href = formatted;
             } else {
                 if (popup) this._popup.setLatLng(o.latLng);
                 this.setContent(this.options.sanitizer(formatted), popup);
             }
-        // a click outside of valid features while the map is pinned
-        // should unpin the tooltip
-        } else if (type === 'click' &&
-            !o.data &&
-            this._pinned) {
-            this.setContent('');
         }
 
-        if (mapping.pin && o[format]) {
+        if (mapping.pin) {
             L.DomUtil.addClass(this._container, 'closable');
             this._pinned = true;
         } else {

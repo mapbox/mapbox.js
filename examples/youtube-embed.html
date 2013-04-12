@@ -20,18 +20,14 @@
 <script type='text/javascript'>
     var map = L.mapbox.map('map', 'examples.youtube-embed');
 
-    var gridControl = L.mapbox.gridControl(map.gridLayer, {
-        // This line redefines part of the underlying code which
-        // sanitizes HTML from MapBox Hosting. The original code is there
-        // for the protection of sites, so that malicious map-creators
-        // can't add cross-site scripting attacks to sites that use their
-        // maps.
-        // Turning it off allows any content to be available in tooltips.
-        // It's recommended to only with trusted maps.
-        sanitizer: function(x) { return x; }
-    });
-
-    gridControl.addTo(map);
+    // This line redefines part of the underlying code which
+    // sanitizes HTML from MapBox Hosting. The original code is there
+    // for the protection of sites, so that malicious map-creators
+    // can't add cross-site scripting attacks to sites that use their
+    // maps.
+    // Turning it off allows any content to be available in tooltips.
+    // It's recommended to only with trusted maps.
+    map.gridControl.options.sanitizer = function(x) { return x; };
 </script>
 </body>
 </html>
