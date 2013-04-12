@@ -10,8 +10,6 @@ var GridLayer = L.Class.extend({
     includes: L.Mixin.Events,
 
     options: {
-        minZoom: 0,
-        maxZoom: 18,
         template: function() { return ''; }
     },
 
