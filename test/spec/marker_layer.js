@@ -77,4 +77,30 @@ describe('L.mapbox.markerLayer', function() {
             expect(layer.getLayers().length).to.equal(0);
         });
     });
+
+    var unsanitary = {
+        type: 'Feature',
+        properties: {
+            title: '<script></script>',
+            description: '<script></script>'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [0, 0]
+        }
+    };
+
+    it('sanitizes marker content', function() {
+        var layer = L.mapbox.markerLayer(unsanitary);
+
+        expect(layer.getLayers()[0]._popup._content).not.to.match(/<script>/);
+    });
+
+    it('supports a custom sanitizer', function() {
+        var layer = L.mapbox.markerLayer(unsanitary, {
+            sanitizer: function(_) { return _; }
+        });
+
+        expect(layer.getLayers()[0]._popup._content).to.match(/<script>/);
+    });
 });

@@ -2,6 +2,7 @@
 
 var url = require('./url'),
     sanitize = require('./sanitize');
+
 // mapbox-related markers functionality
 // provide an icon from mapbox's simple-style spec and hosted markers
 // service
@@ -38,13 +39,13 @@ function style(f, latlon) {
     });
 }
 
-function createPopup(f) {
+function createPopup(f, sanitizer) {
     var popup = '<div class="marker-title">' + f.properties.title + '</div>';
 
     if (f.properties.description)
         popup += '<div class="marker-description">' + f.properties.description + '</div>';
 
-    return sanitize(popup);
+    return (sanitizer || sanitize)(popup);
 }
 
 module.exports = {

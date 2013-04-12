@@ -11,7 +11,8 @@ var marker = require('./marker');
 // to reset markers, filter them, and load them from a GeoJSON URL.
 var MarkerLayer = L.FeatureGroup.extend({
     options: {
-        filter: function() { return true; }
+        filter: function() { return true; },
+        sanitizer: require('./sanitize')
     },
 
     initialize: function(_, options) {
@@ -78,7 +79,7 @@ var MarkerLayer = L.FeatureGroup.extend({
         } else if (this.options.filter(json)) {
 
             var layer = L.GeoJSON.geometryToLayer(json, marker.style),
-                popupHtml = marker.createPopup(json);
+                popupHtml = marker.createPopup(json, this.options.sanitizer);
 
             layer.feature = json;
             layer.bindPopup(popupHtml, {
