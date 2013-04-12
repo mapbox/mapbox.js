@@ -1,6 +1,6 @@
 # Map
 
-## L.mapbox.map(element, id | url | tilejson, [options])
+## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
 
 Create and automatically configure a map with layers, markers, and
 interactivity.
@@ -31,7 +31,7 @@ with the following additions:
 
 # Layers
 
-## L.mapbox.tileLayer(id | url | tilejson, [options])
+## L.mapbox.tileLayer(id: string | url: string | tilejson: object, [options: object])
 
 You can add a tiled layer to your map with `L.mapbox.tileLayer()`, a simple
 interface to layers from MapBox and elsewhere.
@@ -69,7 +69,7 @@ _Example_:
 _Returns_ a `L.mapbox.tileLayer` object.
 
 
-### tileLayer.loadURL(`url`, [callback])
+### tileLayer.loadURL(url: string, [callback: function])
 
 Load tiles from a map with its tiles described by a TileJSON object at the
 given `url`. If a callback function are provided as the second argument, it's
@@ -81,7 +81,7 @@ _Arguments_:
 
 _Returns_: the layer object
 
-### tileLayer.loadID(id, [callback])
+### tileLayer.loadID(id: string, [callback: function])
 
 Load tiles from a map with the given `id` on MapBox. If a callback function
 are provided as the second argument, it's called after the request completes
@@ -102,19 +102,29 @@ _Arguments_: none
 
 _Returns_: the TileJSON object
 
-### tileLayer.setOptions(object)
-### tileLayer.setOptions(key, value)
+### tileLayer.setTileJSON(tilejson: object)
 
-Set options on this tile layer after initialization - provided either with
-an object of options or a single key and value that should be set.
+Set the TileJSON object that determines this layer's tile source, zoom bounds
+and other metadata
 
 _Arguments_:
 
-1. `object` an options argument _or_ a key and value
+1. `object` a TileJSON object
+
+_Returns_: the TileJSON object
+
+### tileLayer.setFormat(format: string)
+
+Set the image format of tiles in this layer. You can use lower-quality tiles
+in order to load maps faster
+
+_Arguments_:
+
+1. `string` an image format. valid options are: 'png', 'png32', 'png64', 'png128', 'png256', 'jpg70', 'jpg80', 'jpg90'
 
 _Returns_: the layer object
 
-## L.mapbox.markerLayer(id | url | tilejson, [options])
+## L.mapbox.markerLayer(id: string | url: string | tilejson: object, [options: object])
 
 `L.mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from MapBox and elsewhere into your map.
@@ -138,7 +148,7 @@ _Example_:
 
 _Returns_ a `L.mapbox.markerLayer` object.
 
-### markerLayer.loadURL(`url`, [callback])
+### markerLayer.loadURL(url: string, [callback: function])
 
 Load tiles from a map with its tiles described by a TileJSON object at the
 given `url`. If a callback function are provided as the second argument, it's
@@ -150,7 +160,7 @@ _Arguments_:
 
 _Returns_: the layer object
 
-### markerLayer.loadID(id, [callback])
+### markerLayer.loadID(id: string, [callback: function])
 
 Load tiles from a map with the given `id` on MapBox. If a callback function
 are provided as the second argument, it's called after the request completes
@@ -162,7 +172,7 @@ _Arguments_:
 
 _Returns_: the layer object
 
-## L.mapbox.markerLayer.setFilter(function)
+### markerLayer.setFilter(filter: function)
 
 Sets the filter function for this data layer.
 
@@ -180,7 +190,7 @@ _Example_:
 
 _Returns_ the markerLayer object.
 
-## L.mapbox.markerLayer.getFilter()
+### markerLayer.getFilter()
 
 Gets the filter function for this data layer.
 
@@ -198,7 +208,7 @@ _Example_:
 
 _Returns_ the filter function.
 
-## L.mapbox.markerLayer.setGeoJSON(features)
+### markerLayer.setGeoJSON(geojson: object)
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
@@ -212,7 +222,7 @@ _Arguments:_
 
 _Returns_ the markerLayer object
 
-## L.mapbox.markerLayer.getGeoJSON(features)
+### markerLayer.getGeoJSON()
 
 Get the contents of this layer as GeoJSON data.
 
@@ -222,7 +232,7 @@ _Returns_ the GeoJSON represented by this layer
 
 # Geocoding
 
-## L.mapbox.geocoder(id | url)
+## L.mapbox.geocoder(id: string | url: string)
 
 A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
@@ -233,7 +243,7 @@ A low-level interface to geocoding, useful for more complex uses and reverse-geo
 
 _Returns_ a `L.mapbox.geocoder` object.
 
-## L.mapbox.geocoder.query(queryString, callback)
+### geocoder.query(queryString: string, callback: function)
 
 Queries the geocoder with a query string, and returns its result, if any.
 
@@ -255,7 +265,7 @@ The callback is called with arguments
 
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
-## L.mapbox.geocoder.reverseQuery(location, callback)
+### geocoder.reverseQuery(location: object, callback: function)
 
 Queries the geocoder with a location, and returns its result, if any.
 
@@ -344,7 +354,7 @@ formatter and change page location.
 
 _Returns_: a `mapbox.interactionControl` object.
 
-## L.mapbox.geocoderControl(id | url)
+## L.mapbox.geocoderControl(id: string | url: string)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
@@ -367,7 +377,7 @@ _Example_
 
 _Returns_ a `L.mapbox.geocoderControl` object.
 
-## L.mapbox.geocoder.setURL(id)
+### geocoderControl.setURL(url: string)
 
 Set the url used for geocoding.
 
@@ -377,7 +387,7 @@ _Arguments_:
 
 _Returns_: the geocoder control object
 
-## L.mapbox.geocoder.setID(id)
+### geocoderControl.setID(id: string)
 
 Set the map id used for geocoding.
 
@@ -387,7 +397,7 @@ _Arguments_:
 
 _Returns_: the geocoder control object
 
-## L.mapbox.geocoder.setTileJSON(tilejson)
+### geocoderControl.setTileJSON(tilejson: object)
 
 Set the TileJSON used for geocoding.
 
@@ -397,7 +407,7 @@ _Arguments_:
 
 _Returns_: the geocoder object
 
-## L.mapbox.geocoder.setErrorHandler(id)
+### geocoderControl.setErrorHandler(errorhandler: function)
 
 Set the function called if a geocoding request returns an error.
 
@@ -408,7 +418,7 @@ _Arguments_:
 
 _Returns_: the geocoder control object
 
-## L.mapbox.geocoder.getErrorHandler(id)
+### geocoderControl.getErrorHandler()
 
 Returns the current function used by this geocoderControl for error handling.
 
@@ -418,7 +428,7 @@ _Returns_: the geocoder control's error handler
 
 # Markers
 
-## L.mapbox.marker.icon
+## L.mapbox.marker.icon(feature: object)
 
 A core icon generator used in `L.mapbox.marker.style`
 
@@ -431,7 +441,7 @@ _Returns_:
 A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
 and `popupAnchor`.
 
-## L.mapbox.marker.style
+## L.mapbox.marker.style(feature: object | latlon: object)
 
 An icon generator for use in conjunction with `pointToLayer` to generate
 markers from the [MapBox Markers API](http://mapbox.com/developers/api/#markers)
@@ -463,3 +473,4 @@ is available by applying `class="dark"` to the map div.
 _Example_:
 
     <div id="map" class="dark"></div>
+
