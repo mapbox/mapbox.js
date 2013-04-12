@@ -314,7 +314,7 @@ _Arguments_:
 
 _Returns_: a `mapbox.Legend` object.
 
-## mapbox.interactionControl()
+## mapbox.gridControl()
 
 Interaction is what we call interactive parts of maps that are created with
 the powerful [tooltips & regions system](http://mapbox.com/tilemill/docs/crashcourse/tooltips/)
@@ -323,12 +323,15 @@ the [open UTFGrid specification.](https://github.com/mapbox/utfgrid-spec).
 
 _Arguments_:
 
-* The first argument must be a layer created with `mapbox.interaction()`
+* The first argument must be a layer created with `mapbox.gridLayer()`
 * The second argument can be an options object. Valid options are:
 
 * `sanitizer`: A function that accepts a string containing interactivity data, and returns a
   sanitized result for HTML display. The default will remove dangerous script content,
   and is recommended.
+* `template`: A string in the [Moustache](http://mustache.github.io/) template
+  language that will be evaluated with data from the grid to produce HTML for the
+  interaction.
 * `mapping`: an object of the types of interaction showed on each interaction. The default is
 
         mapping: {
@@ -339,10 +342,9 @@ _Arguments_:
 
 Each mapping is from an event type, like `mousemove`, to an array of options
 to try. To fall-back the `teaser` formatter to `full`, one could write
-`['teaser', 'full']`. `location` can be specified to use the location
-formatter and change page location.
+`['teaser', 'full']`.
 
-_Returns_: a `mapbox.interactionControl` object.
+_Returns_: a `mapbox.gridControl` object.
 
 ## L.mapbox.geocoderControl(id | url)
 
