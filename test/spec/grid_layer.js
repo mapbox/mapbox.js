@@ -243,18 +243,6 @@ describe('L.mapbox.gridLayer', function() {
             expect(calls).to.equal(1);
         });
 
-        it('emits no mouseover events for dataless areas', function() {
-            var calls = 0;
-
-            layer.on('mouseover', function(e) {
-                calls += 1;
-            });
-
-            map.fire('mousemove', {latlng: L.latLng(-1, 0)});
-
-            expect(calls).to.equal(0);
-        });
-
         it('emits mousemove when moving in an area with data', function(done) {
             layer.on('mousemove', function(e) {
                 expect(e.data).to.equal("data");

@@ -6,30 +6,12 @@ var util = require('./util'),
 var GridControl = L.Control.extend({
 
     options: {
-        mapping: {
-            mousemove: {
-                format: 'teaser',
-                popup: false,
-                pin: false
-            },
-            click: {
-                format: 'full',
-                popup: false,
-                pin: true
-            },
-            mouseout: {
-                format: function() { return ''; },
-                popup: false,
-                pin: false
-            }
-        },
+        pinnable: true,
+        follow: false,
         sanitizer: require('./sanitize')
     },
 
     _currentContent: '',
-
-    // is this control hidden? when true, the control has display:none
-    _hidden: true,
 
     // pinned means that this control is on a feature and the user has likely
     // clicked. pinned will not become false unless the user clicks off
@@ -48,92 +30,77 @@ var GridControl = L.Control.extend({
 
     // change the content of the tooltip HTML if it has changed, otherwise
     // noop
-    setContent: function(_, popup) {
-        if (!_) {
-            this._hide();
-            this._map.closePopup();
+    _show: function(format, o) {
+        var content;
 
-        } else if (_ !== this._currentContent ||  // switching content
-                popup !== this._hidden) {  // switching from popup to corner thing
-
-            if (popup) {
-                this._popup.setContent(_).openOn(this._map);
-                this._hide();
-            } else {
-                if (this._hidden) this._show();
-                this._contentWrapper.innerHTML = _;
-                this._map.closePopup();
-            }
-            this._currentContent = _;
+        if (this.options.template) {
+            var data = {};
+            data['__' + format + '__'] = true;
+            content = this.options.sanitizer(
+                Mustache.to_html(this.options.template, L.extend(data, o.data)));
         }
-        this._currentContent = _;
-    },
 
-    _show: function() {
-        this._hidden = false;
-        this._container.style.display = 'block';
+        if (content === this._currentContent) return;
+
+        this._currentContent = content;
+
+        if (this.options.follow) {
+            this._popup.setContent(content)
+                .setLatLng(o.latLng)
+                .openOn(this._map);
+        } else {
+            this._container.style.display = 'block';
+            this._contentWrapper.innerHTML = content;
+        }
     },
 
     _hide: function() {
-        this._currentContent = '';
-        this._hidden = true;
         this._pinned = false;
-        this._contentWrapper.innerHTML = '';
+        this._currentContent = '';
+
+        this._map.closePopup();
         this._container.style.display = 'none';
+        this._contentWrapper.innerHTML = '';
+
         L.DomUtil.removeClass(this._container, 'closable');
     },
 
-    _handler: function(type, o) {
-        var mapping = this.options.mapping[type],
-            format = mapping.format,
-            popup = mapping.popup,
-            formatted;
-
-        if (o[this.options.mapping.click.format]) {
+    _mouseover: function(o) {
+        if (o.data) {
             L.DomUtil.addClass(this._map._container, 'map-clickable');
         } else {
             L.DomUtil.removeClass(this._map._container, 'map-clickable');
         }
 
-        // mousemoves do not close or affect this control when
-        // a tooltip is pinned open
-        if ((type === 'mousemove' ||
-             type === 'mouseout') && this._pinned) return;
+        if (this._pinned) return;
 
-        // a click outside of valid features while the map is pinned
-        // should unpin the tooltip
-        if (type === 'click' && !o.data && this._pinned) {
-            this.setContent('');
-            this._pinned = false;
-            L.DomUtil.removeClass(this._container, 'closable');
-            return;
-        }
-
-        if (typeof format === 'function') {
-            formatted = format(o);
-            if (typeof formatted === 'string') {
-                this.setContent(this.options.sanitizer(formatted), popup);
-            }
-        } else if (o.data && this.options.template) {
-            var data = {};
-            data['__' + format + '__'] = true;
-            formatted = Mustache.to_html(this.options.template, L.extend(data, o.data));
-
-            if (popup) this._popup.setLatLng(o.latLng);
-            this.setContent(this.options.sanitizer(formatted), popup);
-        }
-
-        if (mapping.pin) {
-            L.DomUtil.addClass(this._container, 'closable');
-            this._pinned = true;
+        if (o.data) {
+            this._show('teaser', o);
         } else {
-            L.DomUtil.removeClass(this._container, 'closable');
+            this._hide();
         }
     },
 
-    _mousemove: function(o) { this._handler('mousemove', o); },
-    _mouseout: function(o) { this._handler('mouseout', o); },
-    _click: function(o) { this._handler('click', o); },
+    _mousemove: function(o) {
+        if (this._pinned) return;
+        if (!this.options.follow) return;
+
+        this._popup.setLatLng(o.latLng);
+    },
+
+    _click: function(o) {
+        if (!this.options.pinnable) return;
+
+        if (o.data) {
+            L.DomUtil.addClass(this._container, 'closable');
+            this._pinned = true;
+            this._show('full', o);
+        } else if (this._pinned) {
+            L.DomUtil.removeClass(this._container, 'closable');
+            this._pinned = false;
+            this._hide();
+        }
+    },
 
     _createClosebutton: function(container, fn) {
         var link = L.DomUtil.create('a', 'close', container);
@@ -178,8 +145,8 @@ var GridControl = L.Control.extend({
             .addListener(container, 'mousewheel', L.DomEvent.stopPropagation);
 
         this._layer
+            .on('mouseover', this._mouseover, this)
             .on('mousemove', this._mousemove, this)
-            .on('mouseout', this._mouseout, this)
             .on('click', this._click, this);
 
         return container;

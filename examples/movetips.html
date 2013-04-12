@@ -13,24 +13,7 @@
 <div id='map'></div>
 <script type='text/javascript'>
     var map = L.mapbox.map('map', 'examples.map-8ced9urs');
-
-    map.gridControl.options.mapping = {
-        mousemove: {
-            format: 'teaser',
-            popup: true,
-            pin: false
-        },
-        click: {
-            format: 'teaser',
-            popup: true,
-            pin: true
-        },
-        mouseout: {
-            format: function() { return ''; },
-            popup: false,
-            pin: false
-        }
-    };
+    map.gridControl.options.follow = true;
 </script>
 </body>
 </html>

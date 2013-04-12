@@ -135,12 +135,10 @@ var GridLayer = L.Class.extend({
                     });
                 }
 
-                if (data) {
-                    this.fire('mouseover', {
-                        latLng: e.latlng,
-                        data: data
-                    });
-                }
+                this.fire('mouseover', {
+                    latLng: e.latlng,
+                    data: data
+                });
 
                 this._mouseOn = data;
             } else {
