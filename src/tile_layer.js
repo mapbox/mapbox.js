@@ -73,10 +73,14 @@ var TileLayer = L.TileLayer.extend({
 
     loadURL: function(url, cb) {
         request(url, L.bind(function(err, json) {
-            if (err) util.log('could not load TileJSON at ' + url);
-            else if (json) this.setTileJSON(json);
-            if (cb) cb.call(this, err, json);
-            this.fire('ready', json);
+            if (err) {
+                util.log('could not load TileJSON at ' + url);
+                if (cb) cb.call(this, err, json);
+            } else if (json) {
+                this.setTileJSON(json);
+                if (cb) cb.call(this, err, json);
+                this.fire('ready');
+            }
         }, this));
         return this;
     },

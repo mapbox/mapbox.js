@@ -56,6 +56,57 @@ describe('L.mapbox.markerLayer', function() {
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
 
+    describe("#loadURL", function() {
+        it('returns self', function() {
+            var layer = L.mapbox.markerLayer();
+            expect(layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json')).to.eql(layer);
+        });
+
+        it('calls a callback on success', function(done) {
+            var layer = L.mapbox.markerLayer();
+
+            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
+                expect(this).to.equal(layer);
+                expect(err).to.equal(null);
+                expect(json).to.eql(helpers.geoJson);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
+            server.respond();
+        });
+
+        it('calls a callback on error', function(done) {
+            var layer = L.mapbox.markerLayer();
+
+            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', function(err, json) {
+                expect(this).to.equal(layer);
+                expect(err.status).to.equal(400);
+                expect(json).to.equal(null);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
+            server.respond();
+        });
+
+        it('emits a ready event', function(done) {
+            var layer = L.mapbox.markerLayer();
+
+            layer.on('ready', function() {
+                done();
+            });
+
+            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
+            server.respond();
+        });
+    });
+
     describe("#getFilter", function() {
         it("returns the filter option when not given an argument", function() {
             var filter = function () {},

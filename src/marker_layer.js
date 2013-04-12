@@ -40,10 +40,14 @@ var MarkerLayer = L.FeatureGroup.extend({
     loadURL: function(url, cb) {
         url = urlhelper.jsonify(url);
         request(url, L.bind(function(err, json) {
-            if (err) return util.log('could not load markers at ' + url);
-            else if (json) this.setGeoJSON(json);
-            if (cb) cb.call(this, null, json);
-            this.fire('ready', json);
+            if (err) {
+                util.log('could not load markers at ' + url);
+                if (cb) cb.call(this, err, json);
+            } else if (json) {
+                this.setGeoJSON(json);
+                if (cb) cb.call(this, err, json);
+                this.fire('ready');
+            }
         }, this));
         return this;
     },
