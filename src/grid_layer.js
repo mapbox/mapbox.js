@@ -112,6 +112,8 @@ var GridLayer = L.Class.extend({
 
             callback(grid(gridX, gridY));
         });
+
+        return this;
     },
 
     _click: function(e) {

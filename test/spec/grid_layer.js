@@ -116,10 +116,10 @@ describe('L.mapbox.gridLayer', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify(grid)]);
             server.respond();
 
-            layer.getData(L.latLng(1, 0), function(data) {
+            expect(layer.getData(L.latLng(1, 0), function(data) {
                 expect(data).to.equal('data');
                 done();
-            });
+            })).to.eql(layer);
         });
 
         it('calls the callback (data pending)', function(done) {
