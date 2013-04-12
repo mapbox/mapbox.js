@@ -1,0 +1,14 @@
+---
+layout: example_v1
+categories: example/v1.0.0beta0
+title: Geocoding
+description: Using the MapBox Geocoding API
+tags:
+  - geocoding
+---
+
+<div id='map'></div>
+<script>
+L.mapbox.map('map', 'examples.map-vyofok3q')
+    .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
+</script>
