@@ -58,8 +58,6 @@
 .map-tooltip.closable .close:active  {
     border-color:#b0b0b0;
     background-color:#f0f0f0;
-    -webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.15);
-    box-shadow:inset 0 1px 3px rgba(0,0,0,0.15);
 }
 
 .map-tooltip.closable .close {
@@ -68,7 +66,8 @@
     right:4px;
     width:20px;
     height:20px;
-    background-position:-6px -6px;
+    background-position:-5px -5px;
+    border-radius: 10px;
 }
 
 .map-tooltip.closable .close {
