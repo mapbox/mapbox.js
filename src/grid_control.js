@@ -8,7 +8,7 @@ var GridControl = L.Control.extend({
         mapping: {
             mousemove: {
                 format: 'teaser',
-                popup: true,
+                popup: false,
                 pin: false
             },
             click: {
