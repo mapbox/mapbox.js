@@ -7,7 +7,7 @@ var util = require('./util'),
 
 // forked from danzel/L.UTFGrid
 var GridLayer = L.Class.extend({
-    includes: L.Mixin.Events,
+    includes: [L.Mixin.Events, require('./load_tilejson')],
 
     options: {
         template: function() { return ''; }
@@ -19,13 +19,7 @@ var GridLayer = L.Class.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-
-        if (typeof _ === 'string') {
-            if (_.indexOf('/') == -1) this._loadID(_);
-            else this._loadURL(_);
-        } else if (_ && typeof _ === 'object') {
-            this._setTileJSON(_);
-        }
+        this._loadTileJSON(_);
     },
 
     _setTileJSON: function(json) {
@@ -52,23 +46,6 @@ var GridLayer = L.Class.extend({
 
     active: function() {
         return !!(this._map && this.options.grids && this.options.grids.length);
-    },
-
-    _loadURL: function(url) {
-        request(url, L.bind(function(err, json) {
-            if (err) {
-                util.log('could not load TileJSON at ' + url);
-                this.fire('error', {error: err});
-            } else if (json) {
-                this._setTileJSON(json);
-                this.fire('ready');
-            }
-        }, this));
-        return this;
-    },
-
-    _loadID: function(id) {
-        return this._loadURL(url.base() + id + '.json');
     },
 
     addTo: function (map) {

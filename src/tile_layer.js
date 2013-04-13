@@ -1,10 +1,10 @@
 'use strict';
 
 var util = require('./util'),
-    url = require('./url'),
-    request = require('./request');
+    url = require('./url');
 
 var TileLayer = L.TileLayer.extend({
+    includes: [require('./load_tilejson')],
 
     options: {
         format: 'png'
@@ -32,12 +32,7 @@ var TileLayer = L.TileLayer.extend({
             util.strict_oneof(options.format, this.formats);
         }
 
-        if (typeof _ === 'string') {
-            if (_.indexOf('/') == -1) this._loadID(_);
-            else this._loadURL(_);
-        } else if (_ && typeof _ === 'object') {
-            this._setTileJSON(_);
-        }
+        this._loadTileJSON(_);
     },
 
     setFormat: function(_) {
@@ -70,23 +65,6 @@ var TileLayer = L.TileLayer.extend({
 
     getTileJSON: function() {
         return this._tilejson;
-    },
-
-    _loadID: function(id) {
-        return this._loadURL(url.base() + id + '.json');
-    },
-
-    _loadURL: function(url) {
-        request(url, L.bind(function(err, json) {
-            if (err) {
-                util.log('could not load TileJSON at ' + url);
-                this.fire('error', {error: err});
-            } else if (json) {
-                this._setTileJSON(json);
-                this.fire('ready');
-            }
-        }, this));
-        return this;
     },
 
     // this is an exception to mapbox.js naming rules because it's called

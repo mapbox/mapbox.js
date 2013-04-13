@@ -1,8 +1,6 @@
 'use strict';
 
 var util = require('./util'),
-    url = require('./url'),
-    request = require('./request'),
     tileLayer = require('./tile_layer'),
     markerLayer = require('./marker_layer'),
     gridLayer = require('./grid_layer'),
@@ -10,6 +8,8 @@ var util = require('./util'),
     legendControl = require('./legend_control');
 
 var Map = L.Map.extend({
+    includes: [require('./load_tilejson')],
+
     options: {
         tileLayer: true,
         markerLayer: true,
@@ -51,13 +51,7 @@ var Map = L.Map.extend({
             this.addControl(this.legendControl);
         }
 
-        if (typeof _ === 'string') {
-            if (_.indexOf('/') == -1) this._loadID(_);
-            else this._loadURL(_);
-        // javascript object of TileJSON data
-        } else if (_ && typeof _ === 'object') {
-            this._setTileJSON(_);
-        }
+        this._loadTileJSON(_);
     },
 
     // Update certain properties on 'ready' event
@@ -75,25 +69,6 @@ var Map = L.Map.extend({
 
     getTileJSON: function() {
         return this._tilejson;
-    },
-
-    // pull tilejson data from an endpoint
-    _loadURL: function(url) {
-        request(url, L.bind(function(err, json) {
-            if (err) {
-                util.log('could not load TileJSON at ' + url);
-                this.fire('error', {error: err});
-            } else if (json) {
-                this._setTileJSON(json);
-                this.fire('ready');
-            }
-        }, this));
-        return this;
-    },
-
-    // pull tilejson data from an endpoint, given just by an id
-    _loadID: function(id) {
-        return this._loadURL(url.base() + id + '.json');
     },
 
     _initialize: function(json) {
