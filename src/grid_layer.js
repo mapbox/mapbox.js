@@ -67,8 +67,8 @@ var GridLayer = L.Class.extend({
         return this;
     },
 
-    _loadID: function(id, cb) {
-        return this._loadURL(url.base() + id + '.json', cb);
+    _loadID: function(id) {
+        return this._loadURL(url.base() + id + '.json');
     },
 
     addTo: function (map) {
