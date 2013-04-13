@@ -37,23 +37,22 @@ var MarkerLayer = L.FeatureGroup.extend({
         return this._geojson;
     },
 
-    loadURL: function(url, cb) {
+    loadURL: function(url) {
         url = urlhelper.jsonify(url);
         request(url, L.bind(function(err, json) {
             if (err) {
                 util.log('could not load markers at ' + url);
-                if (cb) cb.call(this, err, json);
+                this.fire('error', {error: err});
             } else if (json) {
                 this.setGeoJSON(json);
-                if (cb) cb.call(this, err, json);
                 this.fire('ready');
             }
         }, this));
         return this;
     },
 
-    loadID: function(id, cb) {
-        return this.loadURL(urlhelper.base() + id + '/markers.geojson', cb);
+    loadID: function(id) {
+        return this.loadURL(urlhelper.base() + id + '/markers.geojson');
     },
 
     setFilter: function(_) {
