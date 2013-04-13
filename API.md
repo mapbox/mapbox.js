@@ -97,6 +97,15 @@ with the following additions:
 * `legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`.
   Default: `true`.
 
+## map.getTileJSON()
+
+Returns this map's TileJSON object which determines its tile source,
+zoom bounds and other metadata.
+
+_Arguments_: none
+
+_Returns_: the TileJSON object
+
 # Layers
 
 ## L.mapbox.tileLayer(id: string | url: string | tilejson: object, [options: object])

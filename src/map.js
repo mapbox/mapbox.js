@@ -52,15 +52,16 @@ var Map = L.Map.extend({
         }
 
         if (typeof _ === 'string') {
-            util.idUrl(_, this);
+            if (_.indexOf('/') == -1) this._loadID(_);
+            else this._loadURL(_);
         // javascript object of TileJSON data
         } else if (_ && typeof _ === 'object') {
-            this.setTileJSON(_);
+            this._setTileJSON(_);
         }
     },
 
     // use a javascript object of tilejson data to configure this layer
-    setTileJSON: function(_) {
+    _setTileJSON: function(_) {
         this._tilejson = _;
         this._initialize(_);
         return this;
@@ -71,14 +72,13 @@ var Map = L.Map.extend({
     },
 
     // pull tilejson data from an endpoint
-    loadURL: function(url, cb) {
+    _loadURL: function(url) {
         request(url, L.bind(function(err, json) {
             if (err) {
                 util.log('could not load TileJSON at ' + url);
-                if (cb) cb.call(this, err, json);
+                this.fire('error');
             } else if (json) {
-                this.setTileJSON(json);
-                if (cb) cb.call(this, err, json);
+                this._setTileJSON(json);
                 this.fire('ready');
             }
         }, this));
@@ -86,8 +86,8 @@ var Map = L.Map.extend({
     },
 
     // pull tilejson data from an endpoint, given just by an id
-    loadID: function(id, cb) {
-        return this.loadURL(url.base() + id + '.json', cb);
+    _loadID: function(id) {
+        return this._loadURL(url.base() + id + '.json');
     },
 
     _initialize: function(json) {
