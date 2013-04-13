@@ -58,7 +58,7 @@ var GridLayer = L.Class.extend({
         request(url, L.bind(function(err, json) {
             if (err) {
                 util.log('could not load TileJSON at ' + url);
-                this.fire('error');
+                this.fire('error', {error: err});
             } else if (json) {
                 this._setTileJSON(json);
                 this.fire('ready');

@@ -41,9 +41,12 @@ describe('L.mapbox.gridLayer', function() {
             expect(layer.getTileJSON()).to.be.eql(helpers.tileJSON);
         });
 
-        it('loads a TileJSON object', function(done) {
-            var layer = L.mapbox.gridLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json').on('ready', function(json) {
+        it('loads TileJSON from a URL', function(done) {
+            var layer = L.mapbox.gridLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json');
+
+            layer.on('ready', function() {
                 expect(this).to.equal(layer);
+                expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
                 done();
             });
 
@@ -52,14 +55,31 @@ describe('L.mapbox.gridLayer', function() {
             server.respond();
         });
 
-        it('loads a TileJSON object from an ID', function(done) {
-            var layer = L.mapbox.gridLayer('L.mapbox.map-0l53fhk2').on('ready', function(err, json) {
+        it('loads TileJSON from an ID', function(done) {
+            var layer = L.mapbox.gridLayer('L.mapbox.map-0l53fhk2');
+
+            layer.on('ready', function() {
                 expect(this).to.equal(layer);
+                expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
                 done();
             });
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+
+        it('emits an error event', function(done) {
+            var layer = L.mapbox.gridLayer('L.mapbox.map-0l53fhk2');
+
+            layer.on('error', function(e) {
+                expect(this).to.equal(layer);
+                expect(e.error.status).to.equal(400);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
+                [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'foo'})]);
             server.respond();
         });
     });

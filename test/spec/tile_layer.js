@@ -9,7 +9,7 @@ describe("L.mapbox.tileLayer", function() {
         server.restore();
     });
 
-    describe("#constructor", function() {
+    describe("constructor", function() {
         it("sets min and max zoom", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.options.minZoom).to.equal(0);
@@ -31,9 +31,12 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.options.bounds).to.eql(L.latLngBounds([[-85.0511, -180], [85.0511, 180]]));
         });
 
-        it('loads a URL with a callback', function(done) {
-            var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json').on('ready', function() {
+        it('loads TileJSON from a URL', function(done) {
+            var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json');
+
+            layer.on('ready', function() {
                 expect(this).to.equal(layer);
+                expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
                 done();
             });
 
@@ -42,9 +45,12 @@ describe("L.mapbox.tileLayer", function() {
             server.respond();
         });
 
-        it('loads an id with a callback', function(done) {
-            var layer = L.mapbox.tileLayer('L.mapbox.map-0l53fhk2').on('ready', function() {
+        it('loads TileJSON from an ID', function(done) {
+            var layer = L.mapbox.tileLayer('L.mapbox.map-0l53fhk2');
+
+            layer.on('ready', function() {
                 expect(this).to.equal(layer);
+                expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
                 done();
             });
 
@@ -53,25 +59,18 @@ describe("L.mapbox.tileLayer", function() {
             server.respond();
         });
 
-        it('calls a callback on error', function(done) {
-            var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json').on('error', function() {
+        it('emits an error event', function(done) {
+            var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json');
+
+            layer.on('error', function(e) {
                 expect(this).to.equal(layer);
+                expect(e.error.status).to.equal(400);
                 done();
             });
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
                 [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
             server.respond();
-        });
-
-        it('loads TileJSON from the appropriate URL', function() {
-            var layer = L.mapbox.tileLayer('L.mapbox.map-0l53fhk2');
-
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
-                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
-            server.respond();
-
-            expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
         });
     });
 

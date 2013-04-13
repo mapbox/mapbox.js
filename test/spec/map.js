@@ -20,10 +20,13 @@ describe('L.mapbox.map', function() {
         expect(map.options.zoomControl).to.equal(false);
     });
 
-    describe('initialization', function() {
-        it('calls a callback on success', function(done) {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json').on('ready', function() {
+    describe('constructor', function() {
+        it('loads TileJSON from a URL', function(done) {
+            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+
+            map.on('ready', function() {
                 expect(this).to.equal(map);
+                expect(map.getTileJSON()).to.eql(helpers.tileJSON);
                 done();
             });
 
@@ -32,25 +35,31 @@ describe('L.mapbox.map', function() {
             server.respond();
         });
 
-        it('calls a callback on error', function(done) {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json').on('error', function() {
+        it('loads TileJSON from an ID', function(done) {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2');
+
+            map.on('ready', function() {
                 expect(this).to.equal(map);
+                expect(map.getTileJSON()).to.eql(helpers.tileJSON);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+
+        it('emits an error event', function(done) {
+            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+
+            map.on('error', function(e) {
+                expect(this).to.equal(map);
+                expect(e.error.status).to.equal(400);
                 done();
             });
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
-            server.respond();
-        });
-
-        it('emits a ready event', function(done) {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json')
-                .on('ready', function(e) {
-                    done();
-                });
-
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
-                [200, { "Content-Type": "application/json" }, JSON.stringify({center: [0, 0, 0]})]);
             server.respond();
         });
     });

@@ -59,10 +59,13 @@ var GeocoderControl = L.Control.extend({
         L.DomUtil.addClass(this._container, 'searching');
         this.geocoder.query(this._input.value, L.bind(function(err, res) {
             L.DomUtil.removeClass(this._container, 'searching');
-            if (err) return this.fire('error', err);
-            if (res.lbounds) this._map.fitBounds(res.lbounds);
-            else this._map.setView(res.latlng, 6);
-            this.fire('found', res);
+            if (err) {
+                this.fire('error', {error: err});
+            } else {
+                if (res.lbounds) this._map.fitBounds(res.lbounds);
+                else this._map.setView(res.latlng, 6);
+                this.fire('found', res);
+            }
         }, this));
     }
 });

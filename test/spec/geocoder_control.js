@@ -83,8 +83,8 @@ describe('L.mapbox.geocoderControl', function() {
         });
 
         it('emits an "error" event when geocoding fails', function(done) {
-            control.on('error', function(err) {
-                expect(err.status).to.eql(400);
+            control.on('error', function(e) {
+                expect(e.error.status).to.eql(400);
                 done();
             });
 
