@@ -12,17 +12,17 @@ module.exports = {
     },
     strict: function(_, type) {
         if (typeof _ !== type) {
-            throw Error('Invalid argument: ' + type + ' expected');
+            throw new Error('Invalid argument: ' + type + ' expected');
         }
     },
     strict_instance: function(_, klass, name) {
         if (!(_ instanceof klass)) {
-            throw Error('Invalid argument: ' + name + ' expected');
+            throw new Error('Invalid argument: ' + name + ' expected');
         }
     },
     strict_oneof: function(_, values) {
         if (values.indexOf(_) == -1) {
-            throw Error('Invalid argument: ' + _ + ' given, valid values are ' +
+            throw new Error('Invalid argument: ' + _ + ' given, valid values are ' +
                 values.join(', '));
         }
     },
