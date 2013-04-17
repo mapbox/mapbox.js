@@ -540,7 +540,7 @@ _Example_:
     map.addLayer(gridLayer);
     map.addControl(L.mapbox.gridControl(gridLayer));
 
-_Returns_: a `mapbox.gridControl` object.
+_Returns_: a `L.mapbox.gridControl` object.
 
 ## L.mapbox.geocoderControl(id: string | url: string)
 
