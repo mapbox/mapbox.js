@@ -111,7 +111,7 @@ pre a {
         <span class='icon search'></span>
       </form>
       <ul class='nav pages'>
-      {% for item in site.categories['example/v1.0.0beta0'] reversed %}
+      {% for item in site.categories['example/v1.0.0'] reversed %}
       <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
       {% endfor %}
       </ul>
@@ -130,8 +130,11 @@ pre a {
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
-  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
+  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{page.version}}/mapbox.js'&gt;&lt;/script&gt;
+  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{page.version}}/mapbox.css' rel='stylesheet' /&gt;
+  &lt;!--[if lte IE 8]&gt;
+    &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{page.version}}/mapbox.ie.css' rel='stylesheet' &gt;
+  &lt;![endif]--&gt;
   &lt;style&gt;
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -160,9 +163,7 @@ pre a {
     var example = new Docs();
     $(example.page);
     $(example.copyCode);
-    example.colorCode(function(){
-        example.bindHints("{{ site.version }}");
-    });
+    example.colorCode(function(){ });
     example.bindSearch($('.doc-search input'), $('.doc-nav ul'), false);
   });
   $(mapbox.docs);
