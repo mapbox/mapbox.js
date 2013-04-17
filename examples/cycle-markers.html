@@ -15,7 +15,7 @@
     var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
     // Open popup when user mouses over a marker
-    map.markerLayer.on('load', function(e) {
+    map.markerLayer.on('ready', function(e) {
         var markers = [];
         this.eachLayer(function(marker) {
             markers.push(marker);
