@@ -18,5 +18,5 @@ module.exports = function(url, callback) {
             }
         }
         callback(err, resp);
-    }, true);
+    });
 };
