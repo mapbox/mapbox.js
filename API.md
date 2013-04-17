@@ -489,6 +489,11 @@ _Arguments_:
   sanitized result for HTML display. The default will remove dangerous script content,
   and is recommended.
 
+_Example_:
+
+    var map = L.mapbox.map('map').setView([38, -77], 5);
+    map.addControl(L.mapbox.legendControl());
+
 _Returns_: a `mapbox.Legend` object.
 
 ## L.mapbox.gridControl()
@@ -506,20 +511,22 @@ _Arguments_:
 * `sanitizer`: A function that accepts a string containing interactivity data, and returns a
   sanitized result for HTML display. The default will remove dangerous script content,
   and is recommended.
-* `template`: A string in the [Moustache](http://mustache.github.io/) template
+* `template`: A string in the [Mustache](http://mustache.github.io/) template
   language that will be evaluated with data from the grid to produce HTML for the
   interaction.
-* `mapping`: an object of the types of interaction showed on each interaction. The default is
+* `follow`: Whether the tooltip should follow the mouse in a constant
+  relative position, or should be fixed in the top-right side of the map.
+  By default, this is `false` and the tooltip is stationary.
+* `pinnable`: Whether clicking will 'pin' the tooltip open and expose a
+  'close' button for the user to close the tooltip. By default, this is `true`.
 
-        mapping: {
-          mousemove: ['teaser'],
-          click: ['full'],
-          mouseout: [function() { return ''; }]
-        }
+_Example_:
 
-Each mapping is from an event type, like `mousemove`, to an array of options
-to try. To fall-back the `teaser` formatter to `full`, one could write
-`['teaser', 'full']`.
+    var map = L.mapbox.map('map').setView([38, -77], 5);
+    var gridLayer = L.mapbox.gridLayer('examples.map-8ced9urs');
+    map.addLayer(L.mapbox.tileLayer('examples.map-8ced9urs'));
+    map.addLayer(gridLayer);
+    map.addControl(L.mapbox.gridControl(gridLayer));
 
 _Returns_: a `mapbox.gridControl` object.
 
