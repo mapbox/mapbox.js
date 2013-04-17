@@ -96,6 +96,18 @@ goes wrong, like if the map ID you provide is a 404:
         // passed to this function
     });
 
+## TileJSON & UTFGrid
+
+This library takes advantage of several open specficiations, including
+[TileJSON](http://mapbox.com/developers/tilejson/) and
+[UTFGrid](http://mapbox.com/developers/utfgrid/).
+
+For the purposes of this API, TileJSON is used as a way to _describe
+maps and resources_, so it
+is the configuration format given to layers, maps, and controls. UTFGrid
+is _a fast way to interact with maps_ with tooltips and customizable behaviors,
+and is easy to define and produce in [TileMill](http://mapbox.com/tilemill/).
+
 # Map
 
 ## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
@@ -494,7 +506,7 @@ _Example_:
     var map = L.mapbox.map('map').setView([38, -77], 5);
     map.addControl(L.mapbox.legendControl());
 
-_Returns_: a `mapbox.Legend` object.
+_Returns_: a `L.mapbox.legendControl` object.
 
 ## L.mapbox.gridControl()
 
