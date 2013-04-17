@@ -28,11 +28,11 @@ Here's a simple page that you can set up with MapBox.js:
 
     <html>
     <head>
-      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0beta0.0/mapbox.css' rel='stylesheet' />
+      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' />
       <!--[if lte IE 8]>
-        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0beta0.0/mapbox.ie.css' rel='stylesheet' />
+        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.ie.css' rel='stylesheet' />
       <![endif]-->
-      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0beta0.0/mapbox.js'></script>
+      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
     </head>
     <body>
       <div id='map' class='dark'></div>
@@ -66,6 +66,36 @@ the type of the object. For instance, `L.mapbox.markerLayer` documents a functio
 returns a layer for markers. The methods on that object are then documented as
 `markerLayer.setFilter`, `markerLayer.getGeoJSON`, and so on.
 
+## The `ready` Event
+
+Like many other Javascript libraries, some of what the MapBox.js plugin does
+is [asynchronous](http://recurial.com/programming/understanding-callback-functions-in-javascript/) - when
+you create a layer like `L.mapbox.tileLayer('examples.foo')`, the layer
+doesn't immediately know which tiles to load and its attribution information.
+Instead, it loads this information with an [AJAX](http://en.wikipedia.org/wiki/AJAX)
+call.
+
+For most things you'll write, this isn't a problem, since MapBox.js does a good
+job of handling these on-the-fly updates. If you're writing code that needs
+to know when layers and other dynamically-loaded objects are ready, you can
+use the `ready` event to listen for their ready state. For instance:
+
+    var layer = L.mapbox.tileLayer('examples.map-0l53fhk2');
+    layer.on('ready', function() {
+        // the layer has been fully loaded now, and you can
+        // call .getTileJSON and investigate its properties
+    });
+
+Similarly, dynamically-loaded objects produce an `error` event if something
+goes wrong, like if the map ID you provide is a 404:
+
+    var layer = L.mapbox.tileLayer('examples.map-0l53fhk2');
+    layer.on('error', function(err) {
+        // for some reason, this layer didn't load.
+        // you can find out more with the 'err' argument
+        // passed to this function
+    });
+
 # Map
 
 ## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
@@ -78,11 +108,11 @@ _Arguments_:
 The first argument is required and must be the id of an element, or a DOM element
 reference.
 
-The second argument is required and must be:
+The second argument is optional and can be:
 
-* An `id` string `examples.map-foo`
+* A map `id` string `examples.map-foo`
 * A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
-* A TileJSON object, from your own Javascript code
+* A [TileJSON](http://mapbox.com/wax/tilejson.html) object, from your own Javascript code
 
 The third argument is optional. If provided, it is the same options
 as provided to [L.Map](http://leafletjs.com/reference.html#map-options)
@@ -96,6 +126,18 @@ with the following additions:
   the TileJSON. Default: `true`.
 * `legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`.
   Default: `true`.
+
+_Example_:
+
+    // map refers to a <div> element with the ID map
+    // examples.map-4l7djmvo is the ID of a map on MapBox.com
+    var map = L.mapbox.map('map', 'examples.map-4l7djmvo');
+
+    // map refers to a <div> element with the ID map
+    // This map will have no layers initially
+    var map = L.mapbox.map('map');
+
+_Returns_: a map object
 
 ## map.getTileJSON()
 
@@ -152,6 +194,17 @@ zoom bounds and other metadata.
 
 _Arguments_: none
 
+_Example_:
+
+    var layer = L.mapbox.tileLayer('examples.map-20v6611k')
+        // since layers load asynchronously through AJAX, use the
+        // `.on` function to listen for them to be loaded before
+        // calling `getTileJSON()`
+        .on('load', function() {
+        // get TileJSON data from the loaded layer
+        var TileJSON = layer.getTileJSON();
+    });
+
 _Returns_: the TileJSON object
 
 ### tileLayer.setFormat(format: string)
@@ -162,6 +215,14 @@ in order to load maps faster
 _Arguments_:
 
 1. `string` an image format. valid options are: 'png', 'png32', 'png64', 'png128', 'png256', 'jpg70', 'jpg80', 'jpg90'
+
+_Example_:
+
+    // Downsample tiles for faster loading times on slow
+    // internet connections
+    var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
+        format: 'jpg70'
+    });
 
 _Returns_: the layer object
 
@@ -192,6 +253,17 @@ Returns this layer's TileJSON object which determines its tile source,
 zoom bounds and other metadata.
 
 _Arguments_: none
+
+_Example_:
+
+    var layer = L.mapbox.gridLayer('examples.map-20v6611k')
+        // since layers load asynchronously through AJAX, use the
+        // `.on` function to listen for them to be loaded before
+        // calling `getTileJSON()`
+        .on('load', function() {
+        // get TileJSON data from the loaded layer
+        var TileJSON = layer.getTileJSON();
+    });
 
 _Returns_: the TileJSON object
 
@@ -231,27 +303,39 @@ _Example_:
 
 _Returns_ a `L.mapbox.markerLayer` object.
 
-### markerLayer.loadURL(url: string, [callback: function])
+### markerLayer.loadURL(url: string)
 
-Load GeoJSON data for this layer from the URL given by `url`. If a
-callback function are provided as the second argument, it's
-called after the request completes and the changes are applied to the layer.
+Load GeoJSON data for this layer from the URL given by `url`.
 
 _Arguments_:
 
 1. `string` a map id
+
+_Example_:
+
+    var markerLayer = L.mapbox.markerLayer(geojson)
+        .addTo(map);
+
+    markerLayer.loadURL('my_local_markers.geojson');
 
 _Returns_: the layer object
 
-### markerLayer.loadID(id: string, [callback: function])
+### markerLayer.loadID(id: string)
 
-Load tiles from a map with the given `id` on MapBox. If a callback function
-are provided as the second argument, it's called after the request completes
-and the changes are applied to the layer.
+Load tiles from a map with the given `id` on MapBox.
 
 _Arguments_:
 
 1. `string` a map id
+
+_Example_:
+
+    var markerLayer = L.mapbox.markerLayer(geojson)
+        .addTo(map);
+
+    // loads markers from the map `examples.map-0l53fhk2` on MapBox,
+    // if that map has markers
+    markerLayer.loadID('examples.map-0l53fhk2');
 
 _Returns_: the layer object
 
@@ -302,6 +386,24 @@ _Arguments:_
 
 * `features`, an array of [GeoJSON feature objects](http://geojson.org/geojson-spec.html#feature-objects),
   or omitted to get the current value.
+
+_Example_:
+
+    var markerLayer = L.mapbox.markerLayer(geojson)
+        .addTo(map);
+    // a simple GeoJSON featureset with a single point
+    // with no properties
+    markerLayer.setGeoJSON({
+        type: "FeatureCollection",
+        features: [{
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: [102.0, 0.5]
+            },
+            properties: { }
+        }]
+    });
 
 _Returns_ the markerLayer object
 
