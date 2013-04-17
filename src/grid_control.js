@@ -20,7 +20,7 @@ var GridControl = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-        util.strict_instance(_, L.Class, 'L.L.mapbox.gridLayer');
+        util.strict_instance(_, L.Class, 'L.mapbox.gridLayer');
         this._layer = _;
     },
 
