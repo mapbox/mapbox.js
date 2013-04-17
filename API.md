@@ -98,7 +98,7 @@ goes wrong, like if the map ID you provide is a 404:
 
 ## TileJSON & UTFGrid
 
-This library takes advantage of several open specficiations, including
+This library takes advantage of several open specifications, including
 [TileJSON](http://mapbox.com/developers/tilejson/) and
 [UTFGrid](http://mapbox.com/developers/utfgrid/).
 
