@@ -128,7 +128,6 @@ span.bracket { color:#888; }
         <input type='text' placeholder='Filter methods'>
         <span class='icon search'></span>
       </form>
-      {% if page.navigation %}
       <ul class='nav anchors'>
       {% for section in page.navigation %}
         <li class='heading'><a href='#{{section.title|downcase|replace:' ','_'}}'>{{section.title}}</a></li>
@@ -141,7 +140,6 @@ span.bracket { color:#888; }
         {% endfor %}
       {% endfor %}
       </ul>
-      {% endif %}
     </div>
   </div>
   <div class='cell9'>
