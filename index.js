@@ -1,5 +1,10 @@
 window.L = require('Leaflet/dist/leaflet-src');
 
+// Hardcode image path, because Leaflet's autodetection
+// fails, because mapbox.js is not named leaflet.js
+window.L.Icon.Default.imagePath = 'http://api.tiles.mapbox.com/mapbox.js/' +
+    require('./package.json').version + '/images';
+
 L.mapbox = module.exports = {
     VERSION: require('./package.json').version,
     geocoder: require('./src/geocoder'),
