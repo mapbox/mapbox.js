@@ -10,27 +10,6 @@ tags:
 
 <div id='map'></div>
 <script type='text/javascript'>
-var m = L.mapbox.map('map').setView([38, -77], 5);
-m.addLayer(L.mapbox.tileLayer('examples.map-8ced9urs'));
-var gridLayer = L.mapbox.gridLayer('examples.map-8ced9urs');
-m.addLayer(gridLayer);
-m.addControl(L.mapbox.gridControl(gridLayer, {
-    mapping: {
-        mousemove: {
-            format: 'teaser',
-            popup: true,
-            pin: false
-        },
-        click: {
-            format: 'teaser',
-            popup: true,
-            pin: true
-        },
-        mouseout: {
-            format: function() { return ''; },
-            popup: false,
-            pin: false
-        }
-    }
-}));
+var map = L.mapbox.map('map', 'examples.map-8ced9urs');
+map.gridControl.options.follow = true;
 </script>
