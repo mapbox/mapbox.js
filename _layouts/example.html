@@ -75,7 +75,7 @@ pre a {
   <div class='cell8'>
     <h2>
       {{site.title}}
-      <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
+      <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.oldversion}}{% endif %}</span>
     </h2>
     <p>{{site.description}}</p>
   </div>
@@ -115,8 +115,8 @@ pre a {
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
-  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
+  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.js'&gt;&lt;/script&gt;
+  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.css' rel='stylesheet' /&gt;
   &lt;style&gt;
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -146,7 +146,7 @@ pre a {
     $(example.page);
     $(example.copyCode);
     example.colorCode(function(){
-        example.bindHints("{{ site.version }}");
+        example.bindHints("{{ site.oldversion }}");
     });
     example.bindSearch($('.doc-search input'), $('.doc-nav ul'), false);
   });
