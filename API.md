@@ -108,6 +108,12 @@ is the configuration format given to layers, maps, and controls. UTFGrid
 is _a fast way to interact with maps_ with tooltips and customizable behaviors,
 and is easy to define and produce in [TileMill](http://mapbox.com/tilemill/).
 
+## GeoJSON
+
+The MapBox marker API and the `L.mapbox.markers` interface use [GeoJSON](http://www.geojson.org/),
+a simple, open standard for geo-data based on [JSON](http://en.wikipedia.org/wiki/JSON)
+and simple features, like Points and Polygons.
+
 # Map
 
 ## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
@@ -305,8 +311,7 @@ _Arguments_:
 * A GeoJSON object, from your own Javascript code
 
 The second argument is optional. If provided, it is the same options
-as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup)
-with one addition:
+as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup).
 
 _Example_:
 
@@ -334,7 +339,7 @@ _Returns_: the layer object
 
 ### markerLayer.loadID(id: string)
 
-Load tiles from a map with the given `id` on MapBox.
+Load marker GeoJSON data from a map with the given `id` on MapBox.
 
 _Arguments_:
 
@@ -431,12 +436,13 @@ _Returns_ the GeoJSON represented by this layer
 
 ## L.mapbox.geocoder(id: string | url: string)
 
-A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
+A low-level interface to geocoding, useful for more complex uses and
+reverse geocoding.
 
 1. (required) must be:
 
 * An `id` string `examples.map-foo`
-* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
+* A URL `string` that points to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
 
 _Returns_ a `L.mapbox.geocoder` object.
 
@@ -488,7 +494,7 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 
 # Controls
 
-## L.mapbox.legendControl()
+## L.mapbox.legendControl(options: object)
 
 A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
 
@@ -508,11 +514,11 @@ _Example_:
 
 _Returns_: a `L.mapbox.legendControl` object.
 
-## L.mapbox.gridControl()
+## L.mapbox.gridControl(layer L.mapbox.gridLayer, options: object)
 
 Interaction is what we call interactive parts of maps that are created with
 the powerful [tooltips & regions system](http://mapbox.com/tilemill/docs/crashcourse/tooltips/)
-in TileMill. Under the hood, it's powered by
+in [TileMill](http://mapbox.com/tilemill/). Under the hood, it's powered by
 the [open UTFGrid specification.](https://github.com/mapbox/utfgrid-spec).
 
 _Arguments_:
@@ -629,7 +635,7 @@ _Returns_:
 A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
 and `popupAnchor`.
 
-## L.mapbox.marker.style(feature: object | latlon: object)
+## L.mapbox.marker.style(feature: object, latlon: object)
 
 An icon generator for use in conjunction with `pointToLayer` to generate
 markers from the [MapBox Markers API](http://mapbox.com/developers/api/#markers)
