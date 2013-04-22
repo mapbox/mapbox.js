@@ -54,20 +54,25 @@
     // Add features to the map
     map.markerLayer.setGeoJSON(geoJson);
 
-    // Customize the tooltip by listening for marker click event
-    map.markerLayer.on('click', function(e) {
-        var feature = e.layer.feature;
+    // Cycle through markers once geoJson is ready.
+    // Add custom popups to each using our custom feature properties
+    map.markerLayer.on('ready', function(e) {
+        this.eachLayer(function(marker) {
 
-        // Create custom popup content
-        var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
-                                '<img src="' + feature.properties.image + '">' +
-                            '   <h2>' + feature.properties.city + '</h2>' +
-                            '</a>';
+            var feature = marker.feature;
 
-        // http://leafletjs.com/reference.html#popup
-        e.layer.bindPopup(popupContent,{
-            closeButton: false,
-            minWidth: 300
+            // Create custom popup content
+            var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                                    '<img src="' + feature.properties.image + '">' +
+                                '   <h2>' + feature.properties.city + '</h2>' +
+                                '</a>';
+
+            // http://leafletjs.com/reference.html#popup
+            marker.bindPopup(popupContent,{
+                closeButton: false,
+                minWidth: 300
+            });
+
         });
     });
 
