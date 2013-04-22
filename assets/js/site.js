@@ -162,7 +162,7 @@
         },
 
         _mouseenter: function(e) {
-            this.$menu.find('.active').removeClass('active');
+            this.$menu.find('li.active').removeClass('active');
             $(e.currentTarget).addClass('active');
         },
 
