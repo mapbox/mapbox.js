@@ -34,7 +34,9 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.uncompressed.js: node_modules/.install src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
-	$(BROWSERIFY) --debug index.js > $@
+	# terrible hack to undefine `define` so that json3 doesn't break when requirejs is present
+	# pursuing a fix upstream
+	echo ";(function() { var define;" > $@ && $(BROWSERIFY) --debug index.js >> $@ && echo "})()" >> $@;
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.private.js: node_modules/.install src/*.js dist private.js
