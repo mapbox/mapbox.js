@@ -91,7 +91,7 @@ pre a {
   <div class='cell8'>
     <h2>
       {{site.title}}
-      <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
+      <span class='version'>{{site.version}}</span>
     </h2>
     <p>{{site.description}}</p>
   </div>
@@ -130,10 +130,10 @@ pre a {
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{page.version}}/mapbox.js'&gt;&lt;/script&gt;
-  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{page.version}}/mapbox.css' rel='stylesheet' /&gt;
+  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'&gt;&lt;/script&gt;
+  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' /&gt;
   &lt;!--[if lte IE 8]&gt;
-    &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{page.version}}/mapbox.ie.css' rel='stylesheet' &gt;
+    &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.ie.css' rel='stylesheet' &gt;
   &lt;![endif]--&gt;
   &lt;style&gt;
     body { margin:0; padding:0; }
