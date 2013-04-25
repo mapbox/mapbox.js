@@ -2,7 +2,7 @@
   "author": "MapBox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "git://github.com/Leaflet/Leaflet.git#f25c983cbb7909c4ff1dea929b4518071640d847",
+    "leaflet": "git://github.com/Leaflet/Leaflet.git#b31c9d50b81c5a73086d8180d6ace51967001316",
     "mustache": "~0.7.2",
     "corslite": "0.0.3",
     "json3": "~3.2.4"
