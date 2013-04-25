@@ -1,3 +1,13 @@
+## v1.0.2
+
+* Update Leaflet to blah including fixes for wrapping bugs
+
+## v1.0.1
+
+* Fix for use with RequireJS present
+* Fix for "SCRIPT5: Access is denied" issue in IE8/9
+* Fix for default image path
+
 ## v1.0.0
 
 **This is a breaking release that should be treated as a clean rewrite
