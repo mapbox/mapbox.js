@@ -71,7 +71,7 @@ var TileLayer = L.TileLayer.extend({
     // by `L.map`
     getTileUrl: function(tilePoint) {
         var tiles = this.options.tiles,
-            index = (tilePoint.x + tilePoint.y) % tiles.length,
+            index = Math.abs(tilePoint.x + tilePoint.y) % tiles.length,
             url = tiles[index];
 
         var templated = L.Util.template(url, tilePoint);
