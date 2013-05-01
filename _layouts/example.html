@@ -62,6 +62,22 @@ pre a {
   border-left:0;
   }
 
+.ad-v1 {
+  background: #8B8CC9;
+  color: white;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.ad-v1 a {
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.ad-v1 a:hover {
+  color: #D0D2FC;
+}
 
 @media (max-width:640px) {
   .doc-example { border-bottom:1px solid #ccc; border-left:0px; }
@@ -80,13 +96,19 @@ pre a {
     <p>{{site.description}}</p>
   </div>
   <ul class='cell4 doc-subnav clearfix'>
-    <li><a href='{{site.baseurl}}/api/'>API</a></li>
-    <li><a href='{{site.baseurl}}/examples/' class='active'>Examples</a></li>
+    <li><a href='{{site.baseurl}}/api/v0.6.7/'>API</a></li>
+    <li><a href='{{site.baseurl}}/example/v0.6.7/' class='active'>Examples</a></li>
     <li><a href='{{site.baseurl}}/changelog/'>Changelog</a></li>
   </ul>
 </div>
 
 <div class='doc-page pad3c fillM clearfix'>
+
+<div class='fillW clearfix ad-v1'>
+  <span class="icon reverse star"></span>
+  Try <a href="{{site.baseurl}}/example/v1.0.0/">MapBox.js v1.0.0</a>, built on Leaflet.
+</div>
+
 <div class='fillW clearfix'>
   <div class='cell3'>
     <div class='doc-nav'>
@@ -95,8 +117,7 @@ pre a {
         <span class='icon search'></span>
       </form>
       <ul class='nav pages'>
-      <li><a {% if page.url == '/examples/index.html' %}class='active'{% endif %} href='{{site.baseurl}}/examples'>A simple map</a></li>
-      {% for item in site.categories.example reversed %}
+      {% for item in site.categories['example/v0.6.7'] reversed %}
       <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
       {% endfor %}
       </ul>

@@ -1,0 +1,31 @@
+---
+layout: example
+categories: example/v0.6.7
+title: Centering markers on click
+tags:
+  - markers
+  - animation
+---
+<div id='map'></div>
+<script>
+  // Create map
+  mapbox.auto('map', 'examples.map-zr0njcqy', function(map, tiledata) {
+
+    // Replace marker factory function with our version
+    tiledata.markers.factory(function(m) {
+
+        // Create a marker using the simplestyle factory
+        var elem = mapbox.markers.simplestyle_factory(m);
+
+        // Add function that centers marker on click
+        MM.addEvent(elem, 'click', function(e) {
+            map.ease.location({
+              lat: m.geometry.coordinates[1],
+              lon: m.geometry.coordinates[0]
+            }).zoom(map.zoom()).optimal();
+        });
+
+        return elem;
+    });
+  });
+</script>
