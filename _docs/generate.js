@@ -24,7 +24,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
 
         l = lexed[i];;
 
-        matchedHeading = l.type === 'heading' && l.text.match(/(.*)\.([^\(]*)(\((.*)\))?/);
+        matchedHeading = l.type === 'heading' && l.text.match(/([^\(]*)\.([^\(]*)(\((.*)\))?/);
         matchedEvent = l.type === 'heading' && l.text.match(/Event:\s(.*)/);
         matchedSep = l.type === 'html' && l.text.match(/class=.separator.*>(.*)</);
 
