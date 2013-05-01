@@ -1,0 +1,42 @@
+---
+layout: example
+categories: example/v0.6.7
+title: Geocoding
+description: Using the MapBox Geocoding API
+tags:
+  - geocoding
+---
+
+<style>
+#form {
+    position:absolute;
+    top:10px;
+    right:10px;
+    padding:10px;
+    background:#fff;
+    z-index:100;
+}
+#form input {
+    padding:5px;
+    height:20px;
+}
+</style>
+
+<form id='form'>
+    <input type='text' id='geolocate' />
+    <input type='submit' value='go' />
+</form>
+<div id='map'></div>
+<script>
+    mapbox.auto('map', 'examples.map-vyofok3q', function(map) {
+        document.getElementById('form').onsubmit = function() {
+            wax.tilejson('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/' +
+            encodeURIComponent(document.getElementById('geolocate').value) + '.json', function(center) {
+                if (center && center.results && center.results.length) {
+                    map.zoom(6).center(center.results[0][0]);
+                }
+            });
+            return false;
+        };
+    });
+</script>

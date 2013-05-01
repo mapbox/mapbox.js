@@ -1,0 +1,30 @@
+---
+layout: example
+categories: example/v0.6.7
+title: Loading GeoJSON into Markers
+description: Using an AJAX call and a separate data file
+tags:
+  - auto
+---
+
+<div id='map'></div>
+<script>
+var map = mapbox.map('map');
+map.addLayer(mapbox.layer().id('examples.map-zr0njcqy'));
+
+map.ui.zoomer.add();
+
+// example.geojson is a well-formed GeoJSON document. For this
+// example, the file must be on the same domain name as the map,
+// or loading will not work due to cross-domain request restrictions
+var markers = mapbox.markers.layer().url('../../assets/data/example.geojson');
+mapbox.markers.interaction(markers);
+map.addLayer(markers);
+
+// Zoom and center the map
+map.zoom(2).center({ lat: 0, lon: 0 });
+
+// Attribute map
+map.ui.attribution.add()
+    .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
+</script>
