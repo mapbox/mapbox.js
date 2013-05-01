@@ -1,0 +1,37 @@
+---
+layout: example_v1
+categories: example/v1.0.0
+version: v1.0.0
+title: Leaflet.markercluster
+description: Using the Leaflet.markercluster plugin
+---
+
+<link rel="stylesheet" href="{{site.baseurl}}/assets/MarkerCluster.css" />
+<link rel="stylesheet" href="{{site.baseurl}}/assets/MarkerCluster.Default.css" />
+<!--[if lte IE 8]>
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/MarkerCluster.Default.ie.css" />
+<![endif]-->
+<script src="{{site.baseurl}}/assets/leaflet.markercluster.js"></script>
+<script src="{{site.baseurl}}/assets/realworld.388.js"></script>
+
+<div id='map'></div>
+
+<script type='text/javascript'>
+    var map = L.mapbox.map('map', 'examples.map-d40qac29')
+        .setView([-37.82, 175.215], 14);
+
+    var markers = new L.MarkerClusterGroup();
+
+    for (var i = 0; i < addressPoints.length; i++) {
+        var a = addressPoints[i];
+        var title = a[2];
+        var marker = L.marker(new L.LatLng(a[0], a[1]), {
+            icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
+            title: title
+        });
+        marker.bindPopup(title);
+        markers.addLayer(marker);
+    }
+
+    map.addLayer(markers);
+</script>
