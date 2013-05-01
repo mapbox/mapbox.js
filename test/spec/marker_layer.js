@@ -93,6 +93,20 @@ describe('L.mapbox.markerLayer', function() {
         });
     });
 
+    describe("#setGeoJSON", function() {
+        it("sets GeoJSON", function() {
+            var layer = L.mapbox.markerLayer();
+            layer.setGeoJSON(helpers.geoJson);
+            expect(layer.getGeoJSON()).to.eql(helpers.geoJson);
+        });
+
+        it("removes existing layers", function() {
+            var layer = L.mapbox.markerLayer(helpers.geoJson);
+            layer.setGeoJSON([]);
+            expect(layer.getLayers()).to.be.empty();
+        })
+    });
+
     describe("#getFilter", function() {
         it("returns the filter option when not given an argument", function() {
             var filter = function () {},
