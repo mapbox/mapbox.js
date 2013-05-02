@@ -56,7 +56,7 @@ var Map = L.Map.extend({
 
     // Update certain properties on 'ready' event
     addLayer: function(layer) {
-        layer.on('ready', L.bind(function() { this._updateLayer(layer); }, this));
+        if ('on' in layer) { layer.on('ready', L.bind(function() { this._updateLayer(layer); }, this)); }
         return L.Map.prototype.addLayer.call(this, layer);
     },
 
