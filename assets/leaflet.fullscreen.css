@@ -1,0 +1,17 @@
+.leaflet-container:-webkit-full-screen {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.leaflet-pseudo-fullscreen {
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0px !important;
+    left: 0px !important;
+    z-index:99999;
+}
+
+.leaflet-control-fullscreen a {
+    background-image: url(leaflet.fullscreen.png);
+}
