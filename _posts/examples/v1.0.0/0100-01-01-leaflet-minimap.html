@@ -1,0 +1,20 @@
+---
+layout: example_v1
+categories: example/v1.0.0
+version: v1.0.0
+title: Leaflet-MiniMap
+description: Using the Leaflet-MiniMap plugin
+---
+
+<link rel="stylesheet" href="{{site.baseurl}}/assets/Control.MiniMap.css" />
+<script src="{{site.baseurl}}/assets/Control.MiniMap.js"></script>
+
+<div id='map'></div>
+
+<script type='text/javascript'>
+    var map = L.mapbox.map('map', 'examples.map-vyofok3q')
+      .on('ready', function() {
+        new L.Control.MiniMap(L.mapbox.tileLayer('examples.map-d40qac29'))
+          .addTo(map);
+      });
+</script>
