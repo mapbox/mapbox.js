@@ -76,6 +76,33 @@ describe('L.mapbox.map', function() {
 
             expect(map.markerLayer.getGeoJSON()).to.eql(helpers.geoJson);
         });
+
+        it('passes tileLayer options to tile layer', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {tileLayer: {detectRetina: true}});
+            expect(map.tileLayer.options.detectRetina).to.equal(true);
+        });
+
+        it('passes markerLayer options to marker layer', function() {
+            var filter = function() { return true; },
+                map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {markerLayer: {filter: filter}});
+            expect(map.markerLayer.options.filter).to.equal(filter);
+        });
+
+        it('passes gridLayer options to grid layer', function() {
+            var template = function() { return ''; },
+                map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {gridLayer: {template: template}});
+            expect(map.gridLayer.options.template).to.equal(template);
+        });
+
+        it('passes gridControl options to grid control', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {gridControl: {pinnable: true}});
+            expect(map.gridControl.options.pinnable).to.equal(true);
+        });
+
+        it('passes legendControl options to legend control', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {legendControl: {position: 'topleft'}});
+            expect(map.legendControl.options.position).to.equal('topleft');
+        });
     });
 
     describe('layers', function() {
