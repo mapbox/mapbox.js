@@ -61,8 +61,9 @@ tags:
 var map = L.map('map').setView([38.902, -77.001], 13);
 var ui = document.getElementById('map-ui');
 
-addLayer(L.mapbox.tileLayer('tmcw.map-2f4ad161'), 'Bike Lanes');
-addLayer(L.mapbox.markerLayer('tmcw.map-j5a868tu'), 'Coffee Shops');
+addLayer(L.mapbox.tileLayer('examples.map-zgrqqx0w'), 'Base Map');
+addLayer(L.mapbox.tileLayer('examples.bike-locations'), 'Bike Stations');
+addLayer(L.mapbox.tileLayer('examples.bike-lanes'), 'Bike Lanes');
 
 function addLayer(layer, name) {
     layer.addTo(map);

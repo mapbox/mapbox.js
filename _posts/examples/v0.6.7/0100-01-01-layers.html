@@ -50,9 +50,9 @@ tags:
   var map = mapbox.map('map');
   var layers = document.getElementById('map-ui');
 
-  map.addLayer(mapbox.layer().id('tmcw.map-j5a868tu'));
-  map.addLayer(mapbox.layer().id('tmcw.map-2f4ad161'));
-  map.zoom(3);
+  map.addLayer(mapbox.layer().id('examples.map-zgrqqx0w'));
+  map.addLayer(mapbox.layer().id('examples.bike-lanes'));
+  map.zoom(11).center({ lat: 38.9, lon: -77.1 });
 
   // Create a simple layer switcher that toggles layers on
   // and off.
@@ -61,8 +61,8 @@ tags:
       var item = document.createElement('li');
       var layer = document.createElement('a');
           layer.href = '#';
-          layer.id = n; 
-          layer.className = 'active'; 
+          layer.id = n;
+          layer.className = 'active';
           layer.innerHTML = 'Layer ' + (i + 1);
 
       layer.onclick = function(e) {
