@@ -135,7 +135,7 @@ var GridControl = L.Control.extend({
         container.appendChild(contentWrapper);
 
         this._contentWrapper = contentWrapper;
-        this._popup = new L.Popup({ autoPan: false });
+        this._popup = new L.Popup({ autoPan: false, closeOnClick: false });
 
         map.on('popupclose', L.bind(function onPopupClose() {
             this._currentContent = null;
