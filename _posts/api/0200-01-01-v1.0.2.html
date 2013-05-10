@@ -68,7 +68,6 @@ maps and services.</p>
 <div id="content-MapBox.js & Leaflet"class="depth-2"><p>Here&#39;s a simple page that you can set up with MapBox.js:</p>
 <pre><code>&lt;html&gt;
 &lt;head&gt;
-&lt;meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' /&gt;
   &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css&#39; rel=&#39;stylesheet&#39; /&gt;
   &lt;!--[if lte IE 8]&gt;
     &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.ie.css&#39; rel=&#39;stylesheet&#39; /&gt;
@@ -137,22 +136,6 @@ and is easy to define and produce in <a href="http://mapbox.com/tilemill/">TileM
 <div id="content-MapBox.js & Leaflet"class="depth-2"><p>The MapBox marker API and the <code>L.mapbox.markers</code> interface use <a href="http://www.geojson.org/">GeoJSON</a>,
 a simple, open standard for geo-data based on <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>
 and simple features, like Points and Polygons.</p>
-<h2>Mobile</h2>
-<div id="content-MapBox.js & Leaflet"class="depth-2"><p>MapBox.js is optimized for mobile devices and small screens by default. There are however best practices to make sure your map always looks its best.</p>
-<h4>Retina</h4>
-<p>Having the ability to use retina tiles when the device supports them is easy. When creating the map, use the <code>detectRetina</code> to verify if retina is available and <code>retinaVersion</code> to use a tilelayer which is designed for retina screens.</p>
-<pre><code>
-var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-4l7djmvo&#39;, {
-    detectRetina: true,
-    // if retina is detected, this layer is used instead
-    retinaVersion: &#39;examples.map-zswgei2n&#39;
-  }).setView([40, -74.50], 9);</code></pre>
-<h4>Viewport</h4>
-<p>Modern mobile browsers now support scaling of webpages by leveraging the meta tag <code>viewport</code>. This enlarges the window making your map look better on a mobile device. Simply include this in the head of your document:</p>
-<pre><code>&lt;meta name=&#39;viewport&#39; content=&#39;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&#39; /&gt;</code></pre>
-<h4>Scrolling</h4>
-<p>If you're planning on having a page that has large amounts of scrolling, try to avoid a large map height. Having a 'tall' map can cause the user to get stuck on the map while scrolling. Another way around this is to disable <code>dragging</code> for mobile devices: <code>map.dragging.disable();</code></p>
-</div>
 </div><h1>Map</h1>
 <div id="content-MapBox.js & Leaflet"class="depth-1"></div><h2 id="L.mapbox.map">L.mapbox.map<span class="bracket">(</span><span class="args">element: Element, id: string | url: string | tilejson: object, [options: object]</span><span class="bracket">)</span></h2>
 <div id="content-L.mapbox.map"class="depth-2"><p>Create and automatically configure a map with layers, markers, and
