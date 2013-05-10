@@ -85,6 +85,21 @@ describe("L.mapbox.gridControl", function() {
         });
     });
 
+    describe('#_template', function() {
+        it('defaults to the template from the gridControl TileJSON', function() {
+            var control = L.mapbox.gridControl(gridLayer);
+            gridLayer._setTileJSON({template: '{{#__teaser__}}{{name}}{{/__teaser__}}'});
+            expect(control._template('teaser', {name: 'John'})).to.equal('John');
+        });
+
+        it('prefers a custom template', function() {
+            var control = L.mapbox.gridControl(gridLayer);
+            gridLayer._setTileJSON({template: '{{#__teaser__}}{{name}}{{/__teaser__}}'});
+            control.setTemplate('{{#__teaser__}}{{name}}{{/__teaser__}}');
+            expect(control._template('teaser', {name: 'John'})).to.equal('John');
+        });
+    });
+
     it('sanitizes its content', function() {
         var control = L.mapbox.gridControl(gridLayer, {
             template: '<script></script>'

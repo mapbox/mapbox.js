@@ -28,17 +28,20 @@ var GridControl = L.Control.extend({
         this.options.template = template;
     },
 
+    _template: function(format, data) {
+        var template = this.options.template || this._layer.getTileJSON().template;
+        if (template) {
+            var d = {};
+            d['__' + format + '__'] = true;
+            return this.options.sanitizer(
+                Mustache.to_html(template, L.extend(d, data)));
+        }
+    },
+
     // change the content of the tooltip HTML if it has changed, otherwise
     // noop
     _show: function(format, o) {
-        var content;
-
-        if (this.options.template) {
-            var data = {};
-            data['__' + format + '__'] = true;
-            content = this.options.sanitizer(
-                Mustache.to_html(this.options.template, L.extend(data, o.data)));
-        }
+        var content = this._template(format, o.data);
 
         if (content === this._currentContent) return;
 

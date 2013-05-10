@@ -86,10 +86,6 @@ var Map = L.Map.extend({
             this._updateLayer(this.gridLayer);
         }
 
-        if (this.gridControl && json.template) {
-            this.gridControl.setTemplate(json.template);
-        }
-
         if (this.legendControl && json.legend) {
             this.legendControl.addLegend(json.legend);
         }
