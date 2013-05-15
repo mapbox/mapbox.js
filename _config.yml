@@ -1,5 +1,3 @@
-auto: true
-server: true
 permalink: /:categories/:title
 baseurl: /mapbox.js
 version: v1.0.2
