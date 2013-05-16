@@ -114,6 +114,29 @@ The MapBox marker API and the `L.mapbox.markers` interface use [GeoJSON](http://
 a simple, open standard for geo-data based on [JSON](http://en.wikipedia.org/wiki/JSON)
 and simple features, like Points and Polygons.
 
+## Mobile
+
+MapBox.js is optimized for mobile devices and small screens by default. There are however best practices to make sure your map always looks its best.
+
+### Retina
+
+Having the ability to use retina tiles when the device supports them is easy. When creating the map, use the `detectRetina` to verify if retina is available and `retinaVersion` to use a tilelayer which is designed for retina screens.
+
+    var map = L.mapbox.map('map', 'examples.map-y7l23tes', {
+        detectRetina: true,
+        retinaVersion: 'examples.map-zswgei2n'
+      }).setView([40, -74.50], 9);
+
+### Viewport
+
+Modern mobile browsers now support scaling of webpages by leveraging the meta tag `viewport`. This enlarges the window making your map look better on a mobile device. Simply include this in the head of your document:
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+### Scrolling
+
+If you're planning on having a page that has large amounts of scrolling, try to avoid a large map height. Having a 'tall' map can cause the user to get stuck on the map while scrolling. Another way around this is to disable `dragging` for mobile devices: `map.dragging.disable();`
+
 # Map
 
 ## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
