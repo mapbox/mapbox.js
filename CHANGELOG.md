@@ -1,6 +1,18 @@
+## v1.0.3
+
+* Fix calculation of tooltip position on fixed-width layouts (#383)
+* L.mapbox.gridControl now avoids showing empty tooltips (fixes #392)
+* Ensure new tile layers have the correct z-index (#388)
+* Fixed click behavior of movable tooltips (#382)
+* Improve how L.mapbox.gridControl manages the template (#381, #384)
+* Sanitization no longer strips http URLs (#378)
+* Fix L.mapbox.addLayer for layers that don't support events (#372)
+* L.mapbox.setGeoJSON now removes existing layers (#369)
+* L.mapbox.tileLayer now handles negative tile coordinates
+
 ## v1.0.2
 
-* Update Leaflet to blah including fixes for wrapping bugs
+* Update Leaflet, includes fixes for wrapping bugs
 
 ## v1.0.1
 
