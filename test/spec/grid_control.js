@@ -16,15 +16,24 @@ describe("L.mapbox.gridControl", function() {
 
         it('shows teaser content', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: '{{#__teaser__}}{{name}}{{/__teaser__}}'
+                template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}'
             }).addTo(map);
             gridLayer.fire('mouseover', {data: {name: 'John'}});
-            expect(control._contentWrapper.innerHTML).to.equal('John');
+            expect(control._contentWrapper.innerHTML).to.equal('Name: John');
+        });
+
+        it('does not show empty content', function() {
+            var control = L.mapbox.gridControl(gridLayer, {
+                template: ''
+            }).addTo(map);
+            gridLayer.fire('mouseover', {data: {name: 'John'}});
+            expect(control._container.style.display).to.equal('none');
+            expect(control._contentWrapper.innerHTML).to.equal('');
         });
 
         it('does not change teaser content when pinned', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: '{{#__teaser__}}{{name}}{{/__teaser__}}'
+                template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}'
             }).addTo(map);
             control._pinned = true;
             gridLayer.fire('mouseover', {data: {name: 'John'}});
@@ -42,7 +51,7 @@ describe("L.mapbox.gridControl", function() {
 
         it('hides content', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: '{{name}}'
+                template: 'Name: {{name}}'
             }).addTo(map);
             gridLayer.fire('mouseover', {data: {name: 'John'}});
             gridLayer.fire('mouseover', {data: null});
@@ -52,31 +61,40 @@ describe("L.mapbox.gridControl", function() {
 
         it('does not hide when pinned', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: '{{name}}'
+                template: 'Name: {{name}}'
             }).addTo(map);
             gridLayer.fire('mouseover', {data: {name: 'John'}});
             control._pinned = true;
             gridLayer.fire('mouseover', {data: null});
             expect(control._container.style.display).to.equal('block');
-            expect(control._contentWrapper.innerHTML).to.equal('John');
+            expect(control._contentWrapper.innerHTML).to.equal('Name: John');
         });
     });
 
     describe('click data area', function() {
         it('pins full content', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: '{{#__full__}}{{name}}{{/__full__}}'
+                template: '{{#__full__}}Name: {{name}}{{/__full__}}'
             }).addTo(map);
             gridLayer.fire('click', {data: {name: 'John'}});
-            expect(control._contentWrapper.innerHTML).to.equal('John');
+            expect(control._contentWrapper.innerHTML).to.equal('Name: John');
             expect(control._pinned).to.equal(true);
+        });
+
+        it('does not show empty content', function() {
+            var control = L.mapbox.gridControl(gridLayer, {
+                template: ''
+            }).addTo(map);
+            gridLayer.fire('click', {data: {name: 'John'}});
+            expect(control._container.style.display).to.equal('none');
+            expect(control._contentWrapper.innerHTML).to.equal('');
         });
     });
 
     describe('click dataless area', function() {
         it('unpins content', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: '{{name}}'
+                template: 'Name: {{name}}'
             }).addTo(map);
             gridLayer.fire('click', {data: {name: 'John'}});
             gridLayer.fire('click', {data: null});
@@ -88,15 +106,15 @@ describe("L.mapbox.gridControl", function() {
     describe('#_template', function() {
         it('defaults to the template from the gridControl TileJSON', function() {
             var control = L.mapbox.gridControl(gridLayer);
-            gridLayer._setTileJSON({template: '{{#__teaser__}}{{name}}{{/__teaser__}}'});
-            expect(control._template('teaser', {name: 'John'})).to.equal('John');
+            gridLayer._setTileJSON({template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}'});
+            expect(control._template('teaser', {name: 'John'})).to.equal('Name: John');
         });
 
         it('prefers a custom template', function() {
             var control = L.mapbox.gridControl(gridLayer);
-            gridLayer._setTileJSON({template: '{{#__teaser__}}{{name}}{{/__teaser__}}'});
-            control.setTemplate('{{#__teaser__}}{{name}}{{/__teaser__}}');
-            expect(control._template('teaser', {name: 'John'})).to.equal('John');
+            gridLayer._setTileJSON({template: '{{#__teaser__}}Name 1: {{name}}{{/__teaser__}}'});
+            control.setTemplate('{{#__teaser__}}Name 2: {{name}}{{/__teaser__}}');
+            expect(control._template('teaser', {name: 'John'})).to.equal('Name 2: John');
         });
     });
 

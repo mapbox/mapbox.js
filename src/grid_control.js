@@ -29,6 +29,7 @@ var GridControl = L.Control.extend({
     },
 
     _template: function(format, data) {
+        if (!data) return;
         var template = this.options.template || this._layer.getTileJSON().template;
         if (template) {
             var d = {};
@@ -40,9 +41,7 @@ var GridControl = L.Control.extend({
 
     // change the content of the tooltip HTML if it has changed, otherwise
     // noop
-    _show: function(format, o) {
-        var content = this._template(format, o.data);
-
+    _show: function(content, o) {
         if (content === this._currentContent) return;
 
         this._currentContent = content;
@@ -77,8 +76,9 @@ var GridControl = L.Control.extend({
 
         if (this._pinned) return;
 
-        if (o.data) {
-            this._show('teaser', o);
+        var content = this._template('teaser', o.data);
+        if (content) {
+            this._show(content, o);
         } else {
             this._hide();
         }
@@ -94,10 +94,11 @@ var GridControl = L.Control.extend({
     _click: function(o) {
         if (!this.options.pinnable) return;
 
-        if (o.data) {
+        var content = this._template('full', o.data);
+        if (content) {
             L.DomUtil.addClass(this._container, 'closable');
             this._pinned = true;
-            this._show('full', o);
+            this._show(content, o);
         } else if (this._pinned) {
             L.DomUtil.removeClass(this._container, 'closable');
             this._pinned = false;
