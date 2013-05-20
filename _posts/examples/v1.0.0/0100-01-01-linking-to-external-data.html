@@ -50,7 +50,7 @@ var currency = document.getElementById('currency');
 // should be available in interaction.
 map.gridLayer
     .on('mousemove',function(o) {
-        document.getElementById('currency').innerHTML = currencies[o.data.admin] || '';
+        document.getElementById('currency').innerHTML = (o.data && currencies[o.data.admin]) || '';
     }).on('mouseout', function(o) {
         document.getElementById('currency').innerHTML = '';
     });
