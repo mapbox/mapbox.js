@@ -28,11 +28,11 @@ Here's a simple page that you can set up with MapBox.js:
 
     <html>
     <head>
-      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' />
+      <link href='//dnv9my2eseobd.cloudfront.net/mapbox.js/v1.0.2/mapbox.css' rel='stylesheet' />
       <!--[if lte IE 8]>
-        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.ie.css' rel='stylesheet' />
+        <link href='//dnv9my2eseobd.cloudfront.net/mapbox.js/v1.0.2/mapbox.ie.css' rel='stylesheet' />
       <![endif]-->
-      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
+      <script src='//dnv9my2eseobd.cloudfront.net/mapbox.js/v1.0.2/mapbox.js'></script>
     </head>
     <body>
       <div id='map' class='dark'></div>
