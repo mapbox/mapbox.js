@@ -28,11 +28,11 @@ Here's a simple page that you can set up with MapBox.js:
 
     <html>
     <head>
-      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' />
+      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.css' rel='stylesheet' />
       <!--[if lte IE 8]>
-        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.ie.css' rel='stylesheet' />
+        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.ie.css' rel='stylesheet' />
       <![endif]-->
-      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
+      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.js'></script>
     </head>
     <body>
       <div id='map' class='dark'></div>
@@ -334,7 +334,15 @@ _Arguments_:
 * A GeoJSON object, from your own Javascript code
 
 The second argument is optional. If provided, it is the same options
-as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup).
+as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup), as
+well as:
+
+* `filter`: A function that accepts a feature object and returns `true` or `false`
+  to indicate whether it should be displayed on the map. This can be changed
+  later using `setFilter`.
+* `sanitizer`: A function that accepts a string containing tooltip data, and returns a
+  sanitized result for HTML display. The default will remove dangerous script content,
+  and is recommended.
 
 _Example_:
 
