@@ -357,7 +357,7 @@ Load GeoJSON data for this layer from the URL given by `url`.
 
 _Arguments_:
 
-1. `string` a map id
+1. `string` a URL referencing a GeoJSON resource
 
 _Example_:
 
