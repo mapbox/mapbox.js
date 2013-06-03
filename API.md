@@ -659,7 +659,7 @@ A core icon generator used in `L.mapbox.marker.style`
 
 _Arguments_:
 
-1. A GeoJSON feature object
+1. A properties object from a GeoJSON feature object
 
 _Returns_:
 
