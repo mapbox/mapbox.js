@@ -361,7 +361,7 @@ _Arguments_:
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var markerLayer = L.mapbox.markerLayer()
         .addTo(map);
 
     markerLayer.loadURL('my_local_markers.geojson');
@@ -378,7 +378,7 @@ _Arguments_:
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var markerLayer = L.mapbox.markerLayer()
         .addTo(map);
 
     // loads markers from the map `examples.map-0l53fhk2` on MapBox,
