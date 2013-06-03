@@ -37,7 +37,6 @@ var geoJson = {
     }]
 };
 
-// Pass features and a custom factory function to the map
 map.markerLayer.setGeoJSON(geoJson);
 map.markerLayer.on('mouseover', function(e) {
     e.layer.openPopup();
