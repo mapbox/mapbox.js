@@ -1,0 +1,48 @@
+---
+layout: example_v1
+categories: example/v1.0.0
+version: v1.0.0
+title: Show Tooltips on Hover
+description: Show the marker tooltip on mouseover instead of on click
+tags:
+  - tooltips
+  - markers
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([39.12367, -76.81229], 9);
+
+var geoJson = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        properties: {
+            title: 'Washington, D.C.',
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.03201, 38.90065]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Baltimore, MD',
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-76.60767, 39.28755]
+        }
+    }]
+};
+
+// Pass features and a custom factory function to the map
+map.markerLayer.setGeoJSON(geoJson);
+map.markerLayer.on('mouseover', function(e) {
+    e.layer.openPopup();
+});
+map.markerLayer.on('mouseout', function(e) {
+    e.layer.closePopup();
+});
+</script>
