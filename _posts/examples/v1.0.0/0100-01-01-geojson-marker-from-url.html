@@ -1,0 +1,21 @@
+---
+layout: example_v1
+categories: example/v1.0.0
+version: v1.0.0
+title: GeoJSON Marker from URL
+description: Loading markers with loadURL
+tags:
+  - markers
+---
+
+<script src="{{site.baseurl}}/assets/leaflet-knn.min.js"></script>
+<div id='map'></div>
+<script type='text/javascript'>
+var map = L.mapbox.map('map', 'examples.map-4l7djmvo')
+    .setView([38, -102.0], 9);
+
+var markerLayer = L.mapbox.markerLayer()
+    .loadURL('{{site.baseurl}}/assets/example-single.geojson');
+
+map.addLayer(markerLayer);
+</script>
