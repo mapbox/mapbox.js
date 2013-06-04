@@ -167,6 +167,10 @@ with the following additions:
   the TileJSON. Default: `true`.
 * `legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`.
   Default: `true`.
+* `zoomControl` (boolean). Whether or not to add a zoom UI.
+  Default: `true`.
+
+
 
 _Example_:
 
