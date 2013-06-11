@@ -11,11 +11,11 @@ var Map = L.Map.extend({
     includes: [require('./load_tilejson')],
 
     options: {
-        tileLayer: true,
-        markerLayer: true,
-        gridLayer: true,
-        legendControl: true,
-        gridControl: true
+        tileLayer: {},
+        markerLayer: {},
+        gridLayer: {},
+        legendControl: {},
+        gridControl: {}
     },
 
     _tilejson: {},
@@ -27,27 +27,27 @@ var Map = L.Map.extend({
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
         if (this.options.tileLayer) {
-            this.tileLayer = tileLayer();
+            this.tileLayer = tileLayer(undefined, this.options.tileLayer);
             this.addLayer(this.tileLayer);
         }
 
         if (this.options.markerLayer) {
-            this.markerLayer = markerLayer();
+            this.markerLayer = markerLayer(undefined, this.options.markerLayer);
             this.addLayer(this.markerLayer);
         }
 
         if (this.options.gridLayer) {
-            this.gridLayer = gridLayer();
+            this.gridLayer = gridLayer(undefined, this.options.gridLayer);
             this.addLayer(this.gridLayer);
         }
 
         if (this.options.gridLayer && this.options.gridControl) {
-            this.gridControl = gridControl(this.gridLayer);
+            this.gridControl = gridControl(this.gridLayer, this.options.gridControl);
             this.addControl(this.gridControl);
         }
 
         if (this.options.legendControl) {
-            this.legendControl = legendControl();
+            this.legendControl = legendControl(this.options.legendControl);
             this.addControl(this.legendControl);
         }
 
