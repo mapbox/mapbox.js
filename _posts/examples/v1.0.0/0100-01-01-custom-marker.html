@@ -25,6 +25,7 @@ L.marker([40, -75.00], {
     })
 }).addTo(map);
 
+// You can optionally add a popup to your custom marker via bindPopup()
 L.marker([40, -74.00], {
     icon: L.icon({
         iconUrl: 'http://placekitten.com/100/100',
@@ -32,5 +33,5 @@ L.marker([40, -74.00], {
         iconAnchor:   [50, 50],
         popupAnchor:  [0, -55]
     })
-}).addTo(map);
+}).bindPopup('This is a kitten',{ closeButton: false }).addTo(map);
 </script>
