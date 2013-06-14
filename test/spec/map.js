@@ -62,6 +62,20 @@ describe('L.mapbox.map', function() {
                 [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
             server.respond();
         });
+
+        it('preserves manually-set marker layer GeoJSON', function() {
+            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            map.markerLayer.setGeoJSON(helpers.geoJson);
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/markers.geojson",
+                [200, { "Content-Type": "application/json" }, JSON.stringify({})]);
+
+            server.respond();
+
+            expect(map.markerLayer.getGeoJSON()).to.eql(helpers.geoJson);
+        });
     });
 
     describe('layers', function() {

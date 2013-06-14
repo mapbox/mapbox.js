@@ -77,7 +77,7 @@ var Map = L.Map.extend({
             this._updateLayer(this.tileLayer);
         }
 
-        if (this.markerLayer && json.data && json.data[0]) {
+        if (this.markerLayer && !this.markerLayer.getGeoJSON() && json.data && json.data[0]) {
             this.markerLayer.loadURL(json.data[0]);
         }
 
