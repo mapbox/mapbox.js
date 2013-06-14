@@ -1,3 +1,9 @@
+## v1.0.4
+
+* Documentation fixes
+* Fix calculation of mouse Y position (#411)
+* Preserve manually-set marker layer GeoJSON (#394)
+
 ## v1.0.3
 
 * Fix calculation of tooltip position on fixed-width layouts (#383)
