@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "git://github.com/Leaflet/Leaflet.git#72ac52cf4682d0e5a6ac2f598879f80233862746",
+    "leaflet": "git://github.com/Leaflet/Leaflet.git#016f635616fa1df18744baa036cc0e67f94f6248",
     "mustache": "~0.7.2",
     "corslite": "0.0.3",
     "json3": "~3.2.4"
