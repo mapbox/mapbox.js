@@ -13,7 +13,7 @@
     "leaflet": "git://github.com/Leaflet/Leaflet.git#016f635616fa1df18744baa036cc0e67f94f6248",
     "mustache": "~0.7.2",
     "corslite": "0.0.3",
-    "json3": "git://github.com/bestiejs/json3.git#2675fe379eadbf9549da340da2c9cde35a0d2ebc"
+    "json3": "~3.2.5"
   },
   "scripts": {
     "test": "mocha-phantomjs test/index.html"
