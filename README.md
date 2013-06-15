@@ -5,7 +5,7 @@
 This is the MapBox Javascript API, version 1.x. It's built as a [Leaflet](http://leafletjs.com/)
 plugin. You can [read about its launch](http://mapbox.com/blog/mapbox-js-with-leaflet/).
 
-## [API](mapbox.com/mapbox.js/api/)
+## [API](http://mapbox.com/mapbox.js/api/)
 
 Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 
