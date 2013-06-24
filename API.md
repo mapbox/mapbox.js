@@ -33,6 +33,12 @@ Here's a simple page that you can set up with MapBox.js:
         <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.ie.css' rel='stylesheet' />
       <![endif]-->
       <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.js'></script>
+      <style>
+      #map {
+        width:600px;
+        height:400px;
+      }
+      </style>
     </head>
     <body>
       <div id='map' class='dark'></div>
