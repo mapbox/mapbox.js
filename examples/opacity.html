@@ -47,7 +47,7 @@
     var map = L.mapbox.map('map', 'examples.map-vyofok3q')
         .setView([43.6654, -79.4775], 15);
 
-    var overlay = L.mapbox.tileLayer('aibram.Aerial')
+    var overlay = L.mapbox.tileLayer('aibram.Aerial', {zIndex: 2})
         .addTo(map);
 
     var handle = document.getElementById('handle'),
