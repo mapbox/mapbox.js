@@ -68,11 +68,15 @@ maps and services.</p>
 <div id="content-MapBox.js & Leaflet"class="depth-2"><p>Here&#39;s a simple page that you can set up with MapBox.js:</p>
 <pre><code>&lt;html&gt;
 &lt;head&gt;
-  &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.css&#39; rel=&#39;stylesheet&#39; /&gt;
+  &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.css&#39; rel=&#39;stylesheet&#39; /&gt;
   &lt;!--[if lte IE 8]&gt;
-    &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.ie.css&#39; rel=&#39;stylesheet&#39; /&gt;
+    &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.ie.css&#39; rel=&#39;stylesheet&#39; /&gt;
   &lt;![endif]--&gt;
-  &lt;script src=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.3/mapbox.js&#39;&gt;&lt;/script&gt;
+  &lt;script src=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.js&#39;&gt;&lt;/script&gt;
+  &lt;style&gt;
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;div id=&#39;map&#39; class=&#39;dark&#39;&gt;&lt;/div&gt;
