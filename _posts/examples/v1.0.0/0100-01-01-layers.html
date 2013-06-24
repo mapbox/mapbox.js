@@ -61,12 +61,14 @@ tags:
 var map = L.map('map').setView([38.902, -77.001], 13);
 var ui = document.getElementById('map-ui');
 
-addLayer(L.mapbox.tileLayer('examples.map-zgrqqx0w'), 'Base Map');
-addLayer(L.mapbox.tileLayer('examples.bike-locations'), 'Bike Stations');
-addLayer(L.mapbox.tileLayer('examples.bike-lanes'), 'Bike Lanes');
+addLayer(L.mapbox.tileLayer('examples.map-zgrqqx0w'), 'Base Map', 1);
+addLayer(L.mapbox.tileLayer('examples.bike-lanes'), 'Bike Lanes', 2);
+addLayer(L.mapbox.tileLayer('examples.bike-locations'), 'Bike Stations', 3);
 
-function addLayer(layer, name) {
-    layer.addTo(map);
+function addLayer(layer, name, zIndex) {
+    layer
+        .setZIndex(zIndex)
+        .addTo(map);
 
     // Create a simple layer switcher that toggles layers on
     // and off.
