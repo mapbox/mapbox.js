@@ -42,14 +42,20 @@ var LegendControl = L.Control.extend({
         if (!this._map) { return this; }
 
         this._container.innerHTML = '';
+        var hide = 'none';
 
         for (var i in this._legends) {
             if (this._legends.hasOwnProperty(i) && this._legends[i]) {
                 var div = this._container.appendChild(document.createElement('div'));
                 div.className = 'map-legend';
                 div.innerHTML = this.options.sanitizer(i);
+                hide = 'block';
             }
         }
+
+        // hide the control entirely unless there is at least one legend;
+        // otherwise there will be a small grey blemish on the map.
+        this._container.style.display = hide;
 
         return this;
     }
