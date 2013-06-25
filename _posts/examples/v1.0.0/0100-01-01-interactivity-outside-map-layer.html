@@ -37,7 +37,7 @@ var map = L.mapbox.map('map', 'examples.map-8ced9urs', {gridControl: false});
 
 map.gridLayer
     .on('mousemove',function(o) {
-        document.getElementById('count').innerHTML = o.data.count;
+        document.getElementById('count').innerHTML = (o.data && o.data.count) || '';
     }).on('mouseout', function(o) {
         document.getElementById('count').innerHTML = '';
     });
