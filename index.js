@@ -16,5 +16,6 @@ L.mapbox = module.exports = {
     gridLayer: require('./src/grid_layer'),
     markerLayer: require('./src/marker_layer'),
     map: require('./src/map'),
-    config: require('./src/config')
+    config: require('./src/config'),
+    shareControl: require('./src/share_control')
 };

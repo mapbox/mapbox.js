@@ -190,6 +190,10 @@
     border-color: #888;
 }
 
+.leaflet-mapbox-share-popup .leaflet-popup-tip-container {
+    display: none;
+}
+
 /* Dark Theme */
 
 .leaflet-container.dark .leaflet-bar {
