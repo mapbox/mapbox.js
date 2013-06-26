@@ -14,8 +14,8 @@ all: \
 node_modules/.install: package.json
 	npm install && npm install leaflet-hash && touch node_modules/.install
 
-node_modules/Leaflet/dist/leaflet-src.js: node_modules/.install
-	cd node_modules/Leaflet && npm install && npm run-script prepublish
+node_modules/leaflet/dist/leaflet-src.js: node_modules/.install
+	cd node_modules/leaflet && npm install && npm run-script prepublish
 
 mapbox%js:
 	@cat $(filter %.js,$^) > $@
@@ -23,25 +23,25 @@ mapbox%js:
 dist:
 	mkdir -p dist
 
-dist/mapbox.css: node_modules/Leaflet/dist/leaflet.css \
+dist/mapbox.css: node_modules/leaflet/dist/leaflet.css \
 	theme/style.css
-	cat node_modules/Leaflet/dist/leaflet.css \
+	cat node_modules/leaflet/dist/leaflet.css \
 		theme/style.css > dist/mapbox.css
 
 dist/mapbox.standalone.css: theme/style.css
 	cat theme/style.css > dist/mapbox.standalone.css
 
 dist/images:
-	cp -r node_modules/Leaflet/dist/images/ dist/images
+	cp -r node_modules/leaflet/dist/images/ dist/images
 
-dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
-	cp node_modules/Leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
+dist/mapbox.ie.css: node_modules/leaflet/dist/leaflet.ie.css
+	cp node_modules/leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list index.js)
 	$(BROWSERIFY) --debug index.js > $@
 
-# assemble an uncompressed library without bundled Leaflet
+# assemble an uncompressed library without bundled leaflet
 dist/mapbox.standalone.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list mapbox.js)
 	$(BROWSERIFY) --debug mapbox.js > $@
 
@@ -59,4 +59,4 @@ dist/mapbox.standalone.js: dist/mapbox.standalone.uncompressed.js
 	$(UGLIFY) $< -c -m -o $@
 
 clean:
-	rm -f dist/*
+	rm -rf dist/*
