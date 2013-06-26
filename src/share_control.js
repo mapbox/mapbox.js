@@ -19,11 +19,8 @@ var ShareControl = L.Control.extend({
     onAdd: function(map) {
         this._map = map;
 
-        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share');
+        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share leaflet-bar');
         var link = L.DomUtil.create('a', 'mapbox-share', container);
-
-        container.className = container.className + ' leaflet-bar';
-
         link.href = '#';
 
         L.DomEvent.addListener(link, 'click', this._share, this);
@@ -43,10 +40,10 @@ var ShareControl = L.Control.extend({
             + encodeURIComponent(tilejson.webpage || window.location)
             + '&t=' + encodeURIComponent(tilejson.name);
 
-        var share = L.DomUtil.create('div', 'mapbox-social-popup');
+        var share = L.DomUtil.create('div', 'mapbox-share-popup');
         share.innerHTML = ("<h3>Share this map</h3>"
-            + "<div class='mapbox-social-buttons'><a class='facebook' target='_blank' href='{{facebook}}'>Facebook</a>"
-            + "<a class='twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
+            + "<div class='mapbox-share-buttons'><a class='mapbox-share-facebook' target='_blank' href='{{facebook}}'>Facebook</a>"
+            + "<a class='mapbox-share-twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
             .replace('{{twitter}}', twitter)
             .replace('{{facebook}}', facebook);
         share.innerHTML += "<h3>Get the embed code</h3>";
@@ -66,7 +63,7 @@ var ShareControl = L.Control.extend({
 
         share.appendChild(embed);
 
-        new L.Popup({className: 'leaflet-mapbox-share-popup'})
+        new L.Popup({className: 'mapbox-share-popup'})
             .setContent(share)
             .setLatLng(this._map.getCenter())
             .openOn(this._map);
