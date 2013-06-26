@@ -11,7 +11,7 @@ module.exports = {
                 _ = url.base() + _ + '.json';
             }
 
-            request(_, L.bind(function(err, json) {
+            request(url.secureFlag(_), L.bind(function(err, json) {
                 if (err) {
                     util.log('could not load TileJSON at ' + _);
                     this.fire('error', {error: err});

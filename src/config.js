@@ -10,6 +10,9 @@ module.exports = {
 
     FORCE_HTTPS: false,
 
-    HTTPS_URLS: []
-
+    HTTPS_URLS: [
+        'https://a.tiles.mapbox.com/v3/',
+        'https://b.tiles.mapbox.com/v3/',
+        'https://c.tiles.mapbox.com/v3/',
+        'https://d.tiles.mapbox.com/v3/']
 };
