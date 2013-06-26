@@ -22,7 +22,8 @@ var ShareControl = L.Control.extend({
         var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share');
         var link = L.DomUtil.create('a', 'share', container);
 
-        link.innerHTML = 'Share +';
+        container.className = container.className + ' leaflet-bar';
+
         link.href = '#';
 
         L.DomEvent.addListener(link, 'click', this._share, this);
@@ -37,18 +38,18 @@ var ShareControl = L.Control.extend({
         var tilejson = this._tilejson || this._map._tilejson || {};
 
         var twitter = 'http://twitter.com/intent/tweet?status='
-            + encodeURIComponent(tilejson.name + ' (' + (tilejson.webpage || window.location) + ')');
+            + encodeURIComponent(tilejson.name + '\n' + (tilejson.webpage || window.location));
         var facebook = 'https://www.facebook.com/sharer.php?u='
             + encodeURIComponent(tilejson.webpage || window.location)
             + '&t=' + encodeURIComponent(tilejson.name);
 
-        var share = document.createElement('div');
+        var share = L.DomUtil.create('div', 'social-popup');
         share.innerHTML = ("<h3>Share this map</h3>"
-            + "<p><a class='facebook' target='_blank' href='{{facebook}}'>Facebook</a>"
-            + "<a class='twitter' target='_blank' href='{{twitter}}'>Twitter</a></p>")
+            + "<div class='social-buttons clearfix'><a class='facebook' target='_blank' href='{{facebook}}'>Facebook</a>"
+            + "<a class='twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
             .replace('{{twitter}}', twitter)
             .replace('{{facebook}}', facebook);
-        share.innerHTML += "<strong>Get the embed code</strong><br />";
+        share.innerHTML += "<h3>Get the embed code</h3>";
         share.innerHTML += "<small>Copy and paste this HTML into your website or blog.</small>";
 
         var embed = document.createElement('textarea');
