@@ -184,21 +184,21 @@
 
 /* Sharing */
 
-.leaflet-control a.share {
+.leaflet-control a.mapbox-share {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAWFJREFUeNrsmP1twjAQxVPUARiBEUAwAEwAG0AmQJmgI7SdIDACE+ABQHgERvAGcJYulRU1SvBHbKL3k07wh2P75d2dDVkGAAAAAAAAGDDzxeJGMfYx1ygRTVOKM4maDEVQJUo7NR2KIM2YndrYTvDRY53s6GNNseSNt5FfL5dDcoI4hUpOqVf5IVFFMEH8lsuWYXeKGW1EsZhzR0eaONBceagaKjumiuKO5SomelMQJEbw9y8PYl5yR/PpWdCRU1O7s3Ocy6opOAmiBZtqcN/kIMWJQvLzgl/AwxijKAobMSEcMg9JE8mbFC3PaTErGidtFw4laGlRB5LTTLos7F1Q7T72J4Yvn7qutpWDRspKdka5rh/CoUqQ/MeZ74ZanKXatk2K2qZV1gOhBIkODeCtBP3Guq57r6FYzqT6eyiuQ7UTPgkG51BUQb7+6XERlHtcO+/rbAIAAAAAAAD44CnAALi1c7yDFDGoAAAAAElFTkSuQmCC);
     background-position: 1px 0px;
     background-repeat: no-repeat;
     background-size: 26px 26px;
 }
 
-.social-buttons {
+.mapbox-social-buttons {
     clear: both;
     border-bottom: 1px solid #e2e2e2;
     margin-bottom: 10px;
     padding: 15px 0;
 }
 
-.social-buttons a {
+.mapbox-social-buttons a {
     background-position: 1px 0px;
     background-repeat: no-repeat;
     background-size: 26px 26px;
@@ -206,8 +206,7 @@
     border-radius: 2px;
 
     color: #fff;
-    display: block;
-    float: left;
+    display: inline-block;
     font-weight: bold;
     height: 26px;
     line-height: 26px;
@@ -218,34 +217,34 @@
     -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 
-.social-buttons a.facebook {
+.mapbox-social-buttons a.facebook {
     background-color: #3B5998;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANdJREFUeNrs2NENgjAQgGEwDuAIjMAG4gau4gZ1sroBHcUN6pH4cDE+YOWgXP4vaQgJpRy0dw1NAwAAAKAyOecx2xlLn6v9I6Bs+cJaUdLv4G3mHDccO0l7qvNe2mnLNVQqSuu+3C/qi/byhZIsjYvlAGuvoXvNaftnH/2vc6/dS5brPUw5c+4Cst4pTLXmpqr/Q/WfUrdO33GJnYJ1Uogz79V7SAraYjsE68LaycsOahoF9VUGOQzv07OHOhS81SHSNgEREAER0KoBJeP/DQAAAACq8hJgAIjqqfuWHF9jAAAAAElFTkSuQmCC);
     margin-right: 4%;
 }
 
-.social-buttons a.facebook:hover {
+.mapbox-social-buttons a.facebook:hover {
     background-color: #466EB2;
 }
 
-.social-buttons a.twitter {
+.mapbox-social-buttons a.twitter {
     background-color: #4099FF;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAWZJREFUeNrsmNttwzAMRa1M4G7gDZoRMoJGSDdJJyg6gbtBkgnUDTyCs4G8gUsDDKAPO7Wo58c9AGE4YGBdUiQoNQ0AAAAAAAAgDarER+d5PtJD8+tEdlNKPYpFgRbULSYRQmbmda5kLftp9jvmEtSTDc8FeIix82tGx8fkzNDIHx32ZupFZraEncm+fIIWIshliajekR0J51wZshs10G34X3KJOQg13VZ+W7I0cn3pwJh9UNf7yVlDp51RNlwHxjM7p9xt+1mwqRALUtKmkDhmb7TlptI1FItJKiZE0D2hoN+QP4sEcQdK1YXuTSkSNAYbOhkcAjV1kevpO6R+asuQzTK3/SOo5QE1BrqpARZlAsX01R19eaLuBWKGGsW0PFFbTzHX2HWjfBdOD/dYvMxc7879gA+f1NEuNWRDOydWCfnuCgTC+p3bzLJvciEqVkPgrditzGWPoldUAAAAAAAAgEj8CTAAmJRwdfv4WWoAAAAASUVORK5CYII=);
 }
 
-.social-buttons a.twitter:hover {
+.mapbox-social-buttons a.twitter:hover {
     background-color: #64B2FF;
 }
 
-.social-popup h3 {
+.mapbox-social-popup h3 {
     margin-bottom: 0px;
 }
 
-.social-popup small {
+.mapbox-social-popup small {
     color: #666;
 }
 
-.social-popup textarea {
+.mapbox-social-popup textarea {
     width: 100%;
 }
 
@@ -321,14 +320,4 @@
 
 .leaflet-container.dark .leaflet-control-mapbox-geocoder input:focus {
     border-color: #ccc;
-}
-
-/* Shared globals */
-
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
 }

@@ -20,7 +20,7 @@ var ShareControl = L.Control.extend({
         this._map = map;
 
         var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share');
-        var link = L.DomUtil.create('a', 'share', container);
+        var link = L.DomUtil.create('a', 'mapbox-share', container);
 
         container.className = container.className + ' leaflet-bar';
 
@@ -43,9 +43,9 @@ var ShareControl = L.Control.extend({
             + encodeURIComponent(tilejson.webpage || window.location)
             + '&t=' + encodeURIComponent(tilejson.name);
 
-        var share = L.DomUtil.create('div', 'social-popup');
+        var share = L.DomUtil.create('div', 'mapbox-social-popup');
         share.innerHTML = ("<h3>Share this map</h3>"
-            + "<div class='social-buttons clearfix'><a class='facebook' target='_blank' href='{{facebook}}'>Facebook</a>"
+            + "<div class='mapbox-social-buttons'><a class='facebook' target='_blank' href='{{facebook}}'>Facebook</a>"
             + "<a class='twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
             .replace('{{twitter}}', twitter)
             .replace('{{facebook}}', facebook);
