@@ -32,6 +32,11 @@ var ShareControl = L.Control.extend({
     _share: function(e) {
         L.DomEvent.stop(e);
 
+        if (this._popup) {
+            this._map.closePopup(this._popup);
+            return;
+        }
+
         var tilejson = this._tilejson || this._map._tilejson || {};
 
         var twitter = 'http://twitter.com/intent/tweet?status='
@@ -63,10 +68,15 @@ var ShareControl = L.Control.extend({
 
         share.appendChild(embed);
 
-        new L.Popup({className: 'mapbox-share-popup'})
+        this._popup = new L.Popup({className: 'mapbox-share-popup'});
+
+        this._popup
             .setContent(share)
             .setLatLng(this._map.getCenter())
-            .openOn(this._map);
+            .openOn(this._map)
+            .on('close', function() {
+                this._popup = null;
+            }, this);
     }
 });
 
