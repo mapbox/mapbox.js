@@ -33,11 +33,11 @@ dist/mapbox.ie.css: node_modules/Leaflet/dist/leaflet.ie.css
 	cp node_modules/Leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.uncompressed.js: node_modules/.install src/*.js dist index.js node_modules/Leaflet/dist/leaflet-src.js
+dist/mapbox.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list index.js)
 	$(BROWSERIFY) --debug index.js > $@
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.private.js: node_modules/.install src/*.js dist private.js
+dist/mapbox.private.js: node_modules/.install dist $(shell $(BROWSERIFY) --list private.js)
 	$(BROWSERIFY) --debug private.js > $@
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
