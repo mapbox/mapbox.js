@@ -12,7 +12,7 @@ all: \
 	dist/images
 
 node_modules/.install: package.json
-	npm install && npm install leaflet && npm install leaflet-hash && touch node_modules/.install
+	npm install && npm install leaflet-hash && touch node_modules/.install
 
 node_modules/Leaflet/dist/leaflet-src.js: node_modules/.install
 	cd node_modules/Leaflet && npm install && npm run-script prepublish
