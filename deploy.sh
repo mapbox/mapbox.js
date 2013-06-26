@@ -25,6 +25,7 @@ s3cmd put --acl-public --mime-type "application/javascript" dist/mapbox.standalo
 s3cmd put --acl-public --mime-type "application/javascript" dist/mapbox.standalone.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.uncompressed.js
 s3cmd put --acl-public --mime-type "text/css" dist/mapbox.css s3://mapbox-js/mapbox.js/$TAG/mapbox.css
 s3cmd put --acl-public --mime-type "text/css" dist/mapbox.ie.css s3://mapbox-js/mapbox.js/$TAG/mapbox.ie.css
+s3cmd put --acl-public --mime-type "text/css" dist/mapbox.standalone.css s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.css
 s3cmd put --acl-public --mime-type "image/png" dist/images/layers.png s3://mapbox-js/mapbox.js/$TAG/images/layers.png
 s3cmd put --acl-public --mime-type "image/png" dist/images/marker-icon.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon.png
 s3cmd put --acl-public --mime-type "image/png" dist/images/marker-icon-2x.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon-2x.png
