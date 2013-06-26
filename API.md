@@ -143,6 +143,41 @@ Modern mobile browsers now support scaling of webpages by leveraging the meta ta
 
 If you're planning on having a page that has large amounts of scrolling, try to avoid a large map height. Having a 'tall' map can cause the user to get stuck on the map while scrolling. Another way around this is to disable `dragging` for mobile devices: `map.dragging.disable();`
 
+## Standalone MapBox.js
+
+By default, MapBox.js includes a bundled version of Leaflet that MapBox has ensured
+is compatible. However, a standalone version of MapBox.js is also available without
+Leaflet included, which you can use if you would like to supply your own version of
+Leaflet. You will need to include Leaflet's JavaScript and CSS files, and Leaflet 0.6
+or greater is required.
+
+Here's an example of using standalone MapBox.js:
+
+    <html>
+    <head>
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6/leaflet.css" />
+      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.1.0/mapbox.standalone.css' rel='stylesheet' />
+      <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6/leaflet.ie.css" />
+      <![endif]-->
+      <script src="http://cdn.leafletjs.com/leaflet-0.6/leaflet.js"></script>
+      <script src='http://api.tiles.mapbox.com/mapbox.js/1.1.0/mapbox.standalone.js'></script>
+      <style>
+      #map {
+        width:600px;
+        height:400px;
+      }
+      </style>
+    </head>
+    <body>
+      <div id='map' class='dark'></div>
+      <script type='text/javascript'>
+      var map = L.mapbox.map('map', 'examples.map-y7l23tes')
+          .setView([37.9, -77], 5);
+      </script>
+    </body>
+    </html>
+
 # Map
 
 ## L.mapbox.map(element: Element, id: string | url: string | tilejson: object, [options: object])
