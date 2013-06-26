@@ -1,1 +1,1 @@
-window.L = require('Leaflet/dist/leaflet-src');
+window.L = require('leaflet/dist/leaflet-src');
