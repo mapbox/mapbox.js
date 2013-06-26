@@ -7,14 +7,14 @@ var config = require('./config');
 // `hash`, if provided must be a number and is used to distribute requests
 // against multiple `CNAME`s in order to avoid connection limits in browsers
 module.exports = {
+    isSSL: function() {
+        return 'https:' === document.location.protocol || config.FORCE_HTTPS;
+    },
     base: function(hash) {
-        var isSSL = 'https:' === document.location.protocol;
         // By default, use public HTTP urls
         // Support HTTPS if the user has specified HTTPS urls to use, and this
         // page is under HTTPS
-        var urls = (isSSL || config.FORCE_HTTPS) ?
-            config.HTTPS_URLS : config.HTTP_URLS;
-
+        var urls = this.isSSL() ? config.HTTPS_URLS : config.HTTP_URLS;
         if (hash === undefined || typeof hash !== 'number') {
             return urls[0];
         } else {
@@ -25,8 +25,7 @@ module.exports = {
     // to their URLs so that the server knows to send SSL-ified
     // resource references.
     secureFlag: function(url) {
-        var isSSL = 'https:' === document.location.protocol;
-        if (!isSSL) return url;
+        if (!this.isSSL()) return url;
         else if (url.match(/(\?|&)secure/)) return url;
         else if (url.indexOf('?') !== -1) return url + '&secure';
         else return url + '?secure';
