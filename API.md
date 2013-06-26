@@ -165,13 +165,17 @@ The third argument is optional. If provided, it is the same options
 as provided to [L.Map](http://leafletjs.com/reference.html#map-options)
 with the following additions:
 
-* `tileLayer` (boolean). Whether or not to add a `L.mapbox.tileLayer` based on
-  the TileJSON. Default: `true`.
-* `markerLayer` (boolean). Whether or not to add a `L.mapbox.markerLayer` based on
-  the TileJSON. Default: `true`.
-* `gridLayer` (boolean). Whether or not to add a `L.mapbox.gridLayer` based on
-  the TileJSON. Default: `true`.
-* `legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`.
+* `tileLayer` (boolean | object). If true, a `L.mapbox.tileLayer` is added to
+  the map based on the TileJSON. The value can also be an object which specifies
+  options for the tileLayer. Default: `true`.
+* `markerLayer` (boolean | object). If true, a `L.mapbox.markerLayer` is added to
+  the map based on the TileJSON. The value can also be an object which specifies
+  options for the markerLayer. Default: `true`.
+* `gridLayer` (boolean | object). If true, a `L.mapbox.gridLayer` is added to
+  the map based on the TileJSON. The value can also be an object which specifies
+  options for the gridLayer. Default: `true`.
+* `legendControl` (boolean | object). If true, a `L.mapbox.legendControl` is added to
+  the map. The value can also be an object which specifies options for the legendControl.
   Default: `true`.
 
 _Example_:
