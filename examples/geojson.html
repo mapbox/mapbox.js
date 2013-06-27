@@ -14,7 +14,6 @@
 <body>
 <div id='map'></div>
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="http://leafletjs.com/examples/us-states.js"></script>
 <script type='text/javascript'>
 
     var map = L.mapbox.map('map');
@@ -43,7 +42,7 @@
         // with http://leafletjs.com/reference.html#icon
         if (l instanceof L.Marker) l.setIcon(L.mapbox.marker.icon(f));
 
-        l.bindPopup('<pre>' +  html_sanitize(JSON.stringify(f.properties, null, 4)) + '</pre>');
+        l.bindPopup('<pre>' +  JSON.stringify(f.properties, null, 4) + '</pre>');
     }
 
 </script>
