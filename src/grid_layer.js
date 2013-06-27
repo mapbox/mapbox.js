@@ -24,7 +24,6 @@ var GridLayer = L.Class.extend({
 
     _setTileJSON: function(json) {
         util.strict(json, 'object');
-        json = url.httpsify(json);
 
         L.extend(this.options, {
             grids: json.grids,
