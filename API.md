@@ -757,6 +757,19 @@ _Returns_:
 
 A `L.Marker` object with the latitude, longitude position and a styled marker
 
+# Utility
+
+## L.mapbox.sanitize(text: string)
+
+A HTML sanitization function, with the same effect as the default value
+of the `sanitizer` option of `L.mapbox.markerLayer`, `L.mapbox.gridControl`,
+and `L.mapbox.legendControl`.
+
+## L.mapbox.template(template: string, data: object)
+
+A [mustache](http://mustache.github.io/) template rendering function, as used
+by the templating feature provided by `L.mapbox.gridControl`.
+
 # Theming
 
 ## Dark theme
