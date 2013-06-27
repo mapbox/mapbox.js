@@ -1,3 +1,10 @@
+## v1.1.0
+
+* Updated Leaflet dependency to v0.6
+* New standalone MapBox.js without bundled Leaflet dependency
+* Simpler SSL Support (#428)
+* Share Control (#432)
+
 ## v1.0.4
 
 * Documentation fixes
