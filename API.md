@@ -696,6 +696,30 @@ _Arguments_: none
 
 _Returns_: the geocoder control's error handler
 
+## L.mapbox.shareControl(id: string | url: string, options: object)
+
+Adds a "Share" button to the map, which can be used to share the map to Twitter
+or Facebook, or generate HTML for a map embed.
+
+_Arguments_:
+
+1. (optional) either:
+
+* An `id` string `examples.map-foo`
+* A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
+
+  If not supplied, the TileJSON from the map is used.
+
+2. (optional) Options for [L.Control](http://leafletjs.com/reference.html#control).
+
+_Example_
+
+    var map = L.map('map', 'examples.map-vyofok3q')
+        .setView([37, -77], 5)
+        .addControl(L.mapbox.shareControl());
+
+_Returns_ a `L.mapbox.shareControl` object.
+
 # Markers
 
 ## L.mapbox.marker.icon(feature: object)
