@@ -39,16 +39,16 @@ var ShareControl = L.Control.extend({
 
         var tilejson = this._tilejson || this._map._tilejson || {};
 
-        var twitter = 'http://twitter.com/intent/tweet?status='
-            + encodeURIComponent(tilejson.name + '\n' + (tilejson.webpage || window.location));
-        var facebook = 'https://www.facebook.com/sharer.php?u='
-            + encodeURIComponent(tilejson.webpage || window.location)
-            + '&t=' + encodeURIComponent(tilejson.name);
+        var twitter = 'http://twitter.com/intent/tweet?status=' +
+            encodeURIComponent(tilejson.name + '\n' + (tilejson.webpage || window.location));
+        var facebook = 'https://www.facebook.com/sharer.php?u=' +
+            encodeURIComponent(tilejson.webpage || window.location) +
+            '&t=' + encodeURIComponent(tilejson.name);
 
         var share = L.DomUtil.create('div', 'mapbox-share-popup');
-        share.innerHTML = ("<h3>Share this map</h3>"
-            + "<div class='mapbox-share-buttons'><a class='mapbox-share-facebook' target='_blank' href='{{facebook}}'>Facebook</a>"
-            + "<a class='mapbox-share-twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
+        share.innerHTML = ("<h3>Share this map</h3>" +
+            "<div class='mapbox-share-buttons'><a class='mapbox-share-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
+            "<a class='mapbox-share-twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
             .replace('{{twitter}}', twitter)
             .replace('{{facebook}}', facebook);
         share.innerHTML += "<h3>Get the embed code</h3>";
