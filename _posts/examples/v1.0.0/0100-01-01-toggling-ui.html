@@ -78,6 +78,8 @@ tags:
 <div id='map'>
     <div id='map-ui'>
         <ul>
+            <li><a href='#' id='grid' class='active'>Interactivity</a></li>
+            <li><a href='#' id='legend'>Legend</a></li>
             <li><a href='#' id='zoomer' class='active'>Zoomer</a></li>
             <li><a href='#' id='fullscreen'>Fullscreen</a></li>
             <li><a href='#' id='attribution' class='active'>Attribution</a></li>
@@ -86,7 +88,42 @@ tags:
     </div>
 </div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-d40qac29', {legendControl: false});
+var map = L.mapbox.map('map', 'examples.map-d40qac29', {attributionControl: false})
+    .setView([38.82, -94.96], 4);
+
+var tileLayer = L.mapbox.tileLayer('examples.npr-stations')
+    .addTo(map);
+var gridLayer = L.mapbox.gridLayer('examples.npr-stations')
+    .addTo(map);
+var gridControl = L.mapbox.gridControl(gridLayer, {follow: true})
+    .addTo(map);
+
+document.getElementById('grid').onclick = function() {
+    if (this.className === 'active') {
+        map.removeLayer(tileLayer);
+        map.removeLayer(gridLayer);
+        map.removeControl(gridControl);
+        this.className = '';
+    } else {
+        map.addLayer(tileLayer);
+        map.addLayer(gridLayer);
+        map.addControl(gridControl);
+        this.className = 'active';
+    }
+};
+
+var legend = 'Data from Robert Kieffer.';
+
+document.getElementById('legend').onclick = function() {
+    if (this.className === 'active') {
+        map.legendControl.removeLegend(legend);
+        this.className = '';
+    } else {
+        map.legendControl.addLegend(legend);
+        this.className = 'active';
+    }
+};
+
 var fullscreenControl = new L.Control.Fullscreen();
 var hash = L.hash();
 
