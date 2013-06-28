@@ -1,6 +1,12 @@
+## v1.2.0
+
+* Updated Leaflet dependency to v0.6.2
+* Added L.mapbox.sanitize and L.mapbox.template
+* Fix event removal in grid control (#440)
+
 ## v1.1.0
 
-* Updated Leaflet dependency to v0.6
+* Updated Leaflet dependency to v0.6.1
 * New standalone MapBox.js without bundled Leaflet dependency
 * Simpler SSL Support (#428)
 * Share Control (#432)

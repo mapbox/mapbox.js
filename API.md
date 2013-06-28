@@ -28,11 +28,11 @@ Here's a simple page that you can set up with MapBox.js:
 
     <html>
     <head>
-      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.1.0/mapbox.css' rel='stylesheet' />
+      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.css' rel='stylesheet' />
       <!--[if lte IE 8]>
-        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.1.0/mapbox.ie.css' rel='stylesheet' />
+        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.ie.css' rel='stylesheet' />
       <![endif]-->
-      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.1.0/mapbox.js'></script>
+      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.js'></script>
       <style>
       #map {
         width:600px;
@@ -156,12 +156,12 @@ Here's an example of using standalone MapBox.js:
     <html>
     <head>
       <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6/leaflet.css" />
-      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.1.0/mapbox.standalone.css' rel='stylesheet' />
+      <link href='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.standalone.css' rel='stylesheet' />
       <!--[if lte IE 8]>
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6/leaflet.ie.css" />
       <![endif]-->
       <script src="http://cdn.leafletjs.com/leaflet-0.6/leaflet.js"></script>
-      <script src='http://api.tiles.mapbox.com/mapbox.js/1.1.0/mapbox.standalone.js'></script>
+      <script src='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.standalone.js'></script>
       <style>
       #map {
         width:600px;
