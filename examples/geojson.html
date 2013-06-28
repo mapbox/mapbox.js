@@ -42,7 +42,7 @@
         // with http://leafletjs.com/reference.html#icon
         if (l instanceof L.Marker) l.setIcon(L.mapbox.marker.icon(f));
 
-        l.bindPopup('<pre>' +  JSON.stringify(f.properties, null, 4) + '</pre>');
+        l.bindPopup('<pre>' + L.mapbox.sanitize(JSON.stringify(f.properties, null, 4)) + '</pre>');
     }
 
 </script>
