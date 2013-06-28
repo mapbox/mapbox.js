@@ -770,6 +770,11 @@ and `L.mapbox.legendControl`.
 A [mustache](http://mustache.github.io/) template rendering function, as used
 by the templating feature provided by `L.mapbox.gridControl`.
 
+_Example_:
+
+    var output = L.mapbox.template('Name: {{name}}', {name: 'John'});
+    // output is "Name: John"
+
 # Theming
 
 ## Dark theme
