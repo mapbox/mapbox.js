@@ -14,9 +14,6 @@ all: \
 node_modules/.install: package.json
 	npm install && npm install leaflet-hash && touch node_modules/.install
 
-node_modules/leaflet/dist/leaflet-src.js: node_modules/.install
-	cd node_modules/leaflet && npm install && npm run-script prepublish
-
 mapbox%js:
 	@cat $(filter %.js,$^) > $@
 
