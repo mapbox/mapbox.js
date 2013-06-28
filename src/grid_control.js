@@ -106,6 +106,11 @@ var GridControl = L.Control.extend({
         }
     },
 
+    _onPopupClose: function() {
+        this._currentContent = null;
+        this._pinned = false;
+    },
+
     _createClosebutton: function(container, fn) {
         var link = L.DomUtil.create('a', 'close', container);
 
@@ -138,10 +143,7 @@ var GridControl = L.Control.extend({
         this._contentWrapper = contentWrapper;
         this._popup = new L.Popup({ autoPan: false, closeOnClick: false });
 
-        map.on('popupclose', L.bind(function onPopupClose() {
-            this._currentContent = null;
-            this._pinned = false;
-        }, this));
+        map.on('popupclose', this._onPopupClose, this);
 
         L.DomEvent
             .disableClickPropagation(container)
@@ -154,6 +156,16 @@ var GridControl = L.Control.extend({
             .on('click', this._click, this);
 
         return container;
+    },
+
+    onRemove: function (map) {
+
+        map.off('popupclose', this._onPopupClose, this);
+
+        this._layer
+            .off('mouseover', this._mouseover, this)
+            .off('mousemove', this._mousemove, this)
+            .off('click', this._click, this);
     }
 });
 
