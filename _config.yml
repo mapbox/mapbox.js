@@ -1,6 +1,6 @@
 permalink: /:categories/:title
 baseurl: /mapbox.js
-version: v1.1.0
+version: v1.2.0
 oldversion: v0.6.7
 url: http://mapbox.com
 title: mapbox.js
