@@ -643,7 +643,7 @@ _Example_
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl( L.mapbox.geocoder('examples.map-vyofok3q'));
+        .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
 
 _Returns_ a `L.mapbox.geocoderControl` object.
 
