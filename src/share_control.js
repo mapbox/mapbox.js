@@ -68,7 +68,10 @@ var ShareControl = L.Control.extend({
 
         share.appendChild(embed);
 
-        this._popup = new L.Popup({className: 'mapbox-share-popup'});
+        this._popup = new L.Popup({
+            className: 'mapbox-share-popup',
+            offset: L.point(0, 130)
+        });
 
         this._popup
             .setContent(share)
