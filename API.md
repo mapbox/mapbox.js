@@ -677,24 +677,15 @@ _Arguments_:
 
 _Returns_: the geocoder object
 
-### geocoderControl.setErrorHandler(errorhandler: function)
+### geocoderControl.on(event: string, callback: function)
 
-Set the function called if a geocoding request returns an error.
+Bind a listener to an event emitted by the geocoder control. Supported
+additional events are
 
-_Arguments_:
-
-1. a function that takes an error object - typically an XMLHttpRequest, and
-   handles it.
-
-_Returns_: the geocoder control object
-
-### geocoderControl.getErrorHandler()
-
-Returns the current function used by this geocoderControl for error handling.
-
-_Arguments_: none
-
-_Returns_: the geocoder control's error handler
+* `found`: success in finding a location. Called with a single argument,
+  the result.
+* `error`: failure to find a location. Called with the raw HTTP error from
+  MapBox.
 
 ## L.mapbox.shareControl(id: string | url: string, options: object)
 
