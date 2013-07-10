@@ -236,12 +236,13 @@
     background-color: #64B2FF;
 }
 
-.mapbox-share-popup .leaflet-popup-tip-container {
-    display: none;
+.mapbox-share-popup {
+    background: #fff;
+    padding: 20px;
 }
 
 .mapbox-share-popup h3 {
-    margin-bottom: 0px;
+    margin: 0px;
 }
 
 .mapbox-share-popup small {

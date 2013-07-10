@@ -16,7 +16,7 @@ describe('L.mapbox.legendControl', function() {
             var legend = L.mapbox.legendControl();
             legend.addTo(map);
             expect(legend.addLegend('foo')).to.eql(legend);
-            expect(legend._container.innerHTML).to.eql('<div class="map-legend">foo</div>');
+            expect(legend._container.innerHTML).to.eql('<div class="map-legend wax-legend">foo</div>');
         });
 
         it('handles multiple legends', function() {
@@ -26,7 +26,7 @@ describe('L.mapbox.legendControl', function() {
             expect(legend.addTo(map)).to.eql(legend);
             expect(legend.addLegend('foo')).to.eql(legend);
             expect(legend.addLegend('bar')).to.eql(legend);
-            expect(legend._container.innerHTML).to.eql('<div class="map-legend">foo</div><div class="map-legend">bar</div>');
+            expect(legend._container.innerHTML).to.eql('<div class="map-legend wax-legend">foo</div><div class="map-legend wax-legend">bar</div>');
         });
     });
 
@@ -45,9 +45,9 @@ describe('L.mapbox.legendControl', function() {
             legend.addTo(map);
             expect(legend.addLegend('foo')).to.eql(legend);
             expect(legend.addLegend('bar')).to.eql(legend);
-            expect(legend._container.innerHTML).to.eql('<div class="map-legend">foo</div><div class="map-legend">bar</div>');
+            expect(legend._container.innerHTML).to.eql('<div class="map-legend wax-legend">foo</div><div class="map-legend wax-legend">bar</div>');
             expect(legend.removeLegend('bar')).to.eql(legend);
-            expect(legend._container.innerHTML).to.eql('<div class="map-legend">foo</div>');
+            expect(legend._container.innerHTML).to.eql('<div class="map-legend wax-legend">foo</div>');
         });
     });
 
@@ -57,7 +57,7 @@ describe('L.mapbox.legendControl', function() {
 
         legend.addLegend('<script></script>');
 
-        expect(legend._container.innerHTML).to.eql('<div class="map-legend"></div>');
+        expect(legend._container.innerHTML).to.eql('<div class="map-legend wax-legend"></div>');
     });
 
     it('supports a custom sanitizer', function() {
@@ -68,6 +68,6 @@ describe('L.mapbox.legendControl', function() {
 
         legend.addLegend('<script></script>');
 
-        expect(legend._container.innerHTML).to.eql('<div class="map-legend"><script></script></div>');
+        expect(legend._container.innerHTML).to.eql('<div class="map-legend wax-legend"><script></script></div>');
     });
 });

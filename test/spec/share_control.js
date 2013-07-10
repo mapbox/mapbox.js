@@ -41,6 +41,6 @@ describe('L.mapbox.shareControl', function() {
 
         expect(element
             .getElementsByClassName('mapbox-share-popup').length)
-                .to.eql(2);
+                .to.eql(1);
     });
 });
