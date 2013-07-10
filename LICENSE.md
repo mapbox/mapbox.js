@@ -1,6 +1,6 @@
 # MapBox.js
 
-Copyright (c), MapBox
+Copyright (c), MapBox  
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
