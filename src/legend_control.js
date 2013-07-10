@@ -13,7 +13,7 @@ var LegendControl = L.Control.extend({
     },
 
     onAdd: function(map) {
-        this._container = L.DomUtil.create('div', 'map-legends');
+        this._container = L.DomUtil.create('div', 'map-legends wax-legends');
         L.DomEvent.disableClickPropagation(this._container);
 
         this._update();
@@ -47,7 +47,7 @@ var LegendControl = L.Control.extend({
         for (var i in this._legends) {
             if (this._legends.hasOwnProperty(i) && this._legends[i]) {
                 var div = this._container.appendChild(document.createElement('div'));
-                div.className = 'map-legend';
+                div.className = 'map-legend wax-legend';
                 div.innerHTML = this.options.sanitizer(i);
                 hide = 'block';
             }
