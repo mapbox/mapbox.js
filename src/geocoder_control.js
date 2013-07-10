@@ -5,6 +5,10 @@ var geocoder = require('./geocoder');
 var GeocoderControl = L.Control.extend({
     includes: L.Mixin.Events,
 
+    options: {
+        position: 'topleft'
+    },
+
     initialize: function(_) {
         this.geocoder = geocoder(_);
     },
@@ -28,28 +32,35 @@ var GeocoderControl = L.Control.extend({
         return this;
     },
 
+    _toggle: function(e) {
+        L.DomEvent.stop(e);
+        if (L.DomUtil.hasClass(this._container, 'active')) {
+            L.DomUtil.removeClass(this._container, 'active');
+        } else {
+            L.DomUtil.addClass(this._container, 'active');
+            this._input.focus();
+        }
+    },
+
     onAdd: function(map) {
         this._map = map;
 
-        var className = 'leaflet-control-mapbox-geocoder',
-            container = L.DomUtil.create('div', className);
+        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder leaflet-bar');
+        var wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container);
+        var link = L.DomUtil.create('a', 'mapbox-geocoder-toggle', wrap);
+        link.href = '#';
+        link.innerHTML = '&nbsp;';
 
+        L.DomEvent.addListener(link, 'click', this._toggle, this);
         L.DomEvent.disableClickPropagation(container);
 
-        var form = this._form = L.DomUtil.create('form', className + '-form');
+        var form = this._form = L.DomUtil.create('form', 'leaflet-control-mapbox-geocoder-form', wrap);
         L.DomEvent.addListener(form, 'submit', this._geocode, this);
 
-        var input = this._input = document.createElement('input');
+        var input = this._input = L.DomUtil.create('input', '', form);
         input.type = 'text';
-
-        var submit = this._submit = document.createElement('input');
-        submit.type = 'submit';
-        submit.className = 'mapbox-button';
-        submit.value = 'Locate';
-
-        form.appendChild(input);
-        form.appendChild(submit);
-        container.appendChild(form);
+        input.setAttribute('placeholder', 'Search');
+        this._input = input;
 
         return container;
     },
