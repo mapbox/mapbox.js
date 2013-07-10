@@ -47,9 +47,11 @@ var GeocoderControl = L.Control.extend({
 
         var container = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder leaflet-bar');
         var wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container);
-        var link = L.DomUtil.create('a', 'mapbox-geocoder-toggle', wrap);
+        var link = L.DomUtil.create('a', 'mapbox-geocoder-toggle', container);
         link.href = '#';
         link.innerHTML = '&nbsp;';
+
+        this._results = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-results', container);
 
         L.DomEvent.addListener(link, 'click', this._toggle, this);
         L.DomEvent.disableClickPropagation(container);
@@ -68,14 +70,36 @@ var GeocoderControl = L.Control.extend({
     _geocode: function(event) {
         L.DomEvent.preventDefault(event);
         L.DomUtil.addClass(this._container, 'searching');
-        this.geocoder.query(this._input.value, L.bind(function(err, res) {
+        var map = this._map;
+        this.geocoder.query(this._input.value, L.bind(function(err, resp) {
             L.DomUtil.removeClass(this._container, 'searching');
-            if (err) {
+            if (err || !resp || !resp.results || !resp.results.length) {
                 this.fire('error', {error: err});
             } else {
-                if (res.lbounds) this._map.fitBounds(res.lbounds);
-                else this._map.setView(res.latlng, 6);
-                this.fire('found', res);
+                if (resp.results.length === 1 && resp.lbounds) {
+                    return this._map.fitBounds(resp.lbounds);
+                } else {
+                    for (var i = 0, l = Math.min(resp.results.length, 5); i < l; i++) {
+                        var name = [];
+                        for (var j = 0; j < resp.results[i].length; j++) {
+                            resp.results[i][j].name && name.push(resp.results[i][j].name);
+                        }
+                        if (!name.length) continue;
+
+                        var r = L.DomUtil.create('a', '', this._results);
+                        r.innerHTML = name.join(', ');
+                        r.href = '#';
+
+                        (function(result) {
+                            L.DomEvent.addListener(r, 'click', function(e) {
+                                // var _ = result.bounds;
+                                // map.fitBounds(new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]));
+                                L.DomEvent.stop(e);
+                            });
+                        })(resp.results[i]);
+                    }
+                }
+                this.fire('found', resp);
             }
         }, this));
     }

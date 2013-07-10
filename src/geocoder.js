@@ -45,7 +45,7 @@ module.exports = function(_) {
                     res.lbounds = util.lbounds(res.bounds);
                 }
                 callback(null, res);
-            } else callback(err);
+            } else callback(err || true);
         });
 
         return geocoder;
