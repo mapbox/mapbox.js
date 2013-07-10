@@ -10,3 +10,4 @@
 
 * The version tag is updated in the `_config.yml` file under `version:`.
 * Each example should be tested against the version change.
+
