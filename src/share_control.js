@@ -4,7 +4,8 @@ var ShareControl = L.Control.extend({
     includes: [require('./load_tilejson')],
 
     options: {
-        position: 'topleft'
+        position: 'topleft',
+        url: ''
     },
 
     initialize: function(_, options) {
@@ -46,7 +47,7 @@ var ShareControl = L.Control.extend({
             twitter = 'http://twitter.com/intent/tweet?status=' +
                 encodeURIComponent(tilejson.name + '\n' + (tilejson.webpage || window.location)),
             facebook = 'https://www.facebook.com/sharer.php?u=' +
-                encodeURIComponent(tilejson.webpage || window.location) +
+                encodeURIComponent(this.options.url || tilejson.webpage || window.location) +
                 '&t=' + encodeURIComponent(tilejson.name),
             share =
                 "<a class='leaflet-popup-close-button' href='#close'>×</a>" +
