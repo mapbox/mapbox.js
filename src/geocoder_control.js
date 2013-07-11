@@ -33,42 +33,56 @@ var GeocoderControl = L.Control.extend({
     },
 
     _toggle: function(e) {
-        L.DomEvent.stop(e);
+        if (e) L.DomEvent.stop(e);
         if (L.DomUtil.hasClass(this._container, 'active')) {
             L.DomUtil.removeClass(this._container, 'active');
+            this._results.innerHTML = '';
+            this._input.blur();
         } else {
             L.DomUtil.addClass(this._container, 'active');
             this._input.focus();
         }
     },
 
-    onAdd: function(map) {
-        this._map = map;
+    _closeIfOpen: function(e) {
+        if (L.DomUtil.hasClass(this._container, 'active')) {
+            L.DomUtil.removeClass(this._container, 'active');
+            this._results.innerHTML = '';
+            this._input.blur();
+        }
+    },
 
-        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder leaflet-bar');
-        var wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container);
-        var link = L.DomUtil.create('a', 'mapbox-geocoder-toggle', container);
+    onAdd: function(map) {
+
+        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder leaflet-bar'),
+            link = L.DomUtil.create('a', 'leaflet-control-mapbox-geocoder-toggle', container),
+            results = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-results', container),
+            wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container),
+            form = L.DomUtil.create('form', 'leaflet-control-mapbox-geocoder-form', wrap),
+            input  = L.DomUtil.create('input', '', form);
+
         link.href = '#';
         link.innerHTML = '&nbsp;';
 
-        this._results = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-results', container);
-
-        L.DomEvent.addListener(link, 'click', this._toggle, this);
-        L.DomEvent.disableClickPropagation(container);
-
-        var form = this._form = L.DomUtil.create('form', 'leaflet-control-mapbox-geocoder-form', wrap);
-        L.DomEvent.addListener(form, 'submit', this._geocode, this);
-
-        var input = this._input = L.DomUtil.create('input', '', form);
         input.type = 'text';
         input.setAttribute('placeholder', 'Search');
+
+        L.DomEvent.addListener(link, 'click', this._toggle, this);
+        L.DomEvent.addListener(form, 'submit', this._geocode, this);
+        L.DomEvent.disableClickPropagation(container);
+
+        this._map = map;
+        this._results = results;
         this._input = input;
+        this._form = form;
+
+        this._map.on('click', this._closeIfOpen, this);
 
         return container;
     },
 
-    _geocode: function(event) {
-        L.DomEvent.preventDefault(event);
+    _geocode: function(e) {
+        L.DomEvent.preventDefault(e);
         L.DomUtil.addClass(this._container, 'searching');
         var map = this._map;
         this.geocoder.query(this._input.value, L.bind(function(err, resp) {
@@ -76,8 +90,10 @@ var GeocoderControl = L.Control.extend({
             if (err || !resp || !resp.results || !resp.results.length) {
                 this.fire('error', {error: err});
             } else {
+                this._results.innerHTML = '';
                 if (resp.results.length === 1 && resp.lbounds) {
-                    return this._map.fitBounds(resp.lbounds);
+                    this._map.fitBounds(resp.lbounds);
+                    this._closeIfOpen();
                 } else {
                     for (var i = 0, l = Math.min(resp.results.length, 5); i < l; i++) {
                         var name = [];
@@ -92,11 +108,15 @@ var GeocoderControl = L.Control.extend({
 
                         (function(result) {
                             L.DomEvent.addListener(r, 'click', function(e) {
-                                // var _ = result.bounds;
-                                // map.fitBounds(new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]));
+                                var _ = result[0].bounds;
+                                map.fitBounds(L.latLngBounds([[_[1], _[0]], [_[3], _[2]]]));
                                 L.DomEvent.stop(e);
                             });
                         })(resp.results[i]);
+                    }
+                    if (resp.results.length > 5) {
+                        var outof = L.DomUtil.create('span', '', this._results);
+                        outof.innerHTML = 'Top 5 of ' + resp.results.length + '  results';
                     }
                 }
                 this.fire('found', resp);
