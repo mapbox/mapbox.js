@@ -19,6 +19,7 @@ module.exports = function(_) {
     };
 
     geocoder.setID = function(_) {
+        util.strict(_, 'string');
         geocoder.setURL(urlhelper.base() + _ + '/geocode/{query}.json');
         return geocoder;
     };
@@ -30,10 +31,13 @@ module.exports = function(_) {
     };
 
     geocoder.queryURL = function(_) {
+        util.strict(_, 'string');
         return L.Util.template(geocoder.getURL(), { query: encodeURIComponent(_) });
     };
 
     geocoder.query = function(_, callback) {
+        util.strict(_, 'string');
+        util.strict(callback, 'function');
         request(geocoder.queryURL(_), function(err, json) {
             if (json && json.results && json.results.length) {
                 var res = {
