@@ -282,7 +282,13 @@
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     position:absolute;
+
     -webkit-transition:all 100ms;
+    -moz-transition:all 100ms;
+    -ms-transition:all 100ms;
+    -o-transition:all 100ms;
+    transition:all 100ms;
+
     overflow:hidden;
     top:-1px;
     left:27px;

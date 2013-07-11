@@ -30,7 +30,7 @@ describe('L.mapbox.geocoderControl', function() {
             [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
 
         control._input.value = 'austin';
-        happen.click(control._submit);
+        happen.once(control._form, { type: 'submit' });
         server.respond();
 
         expect(map.getCenter()).to.be.near({lat: 30.3, lng: -97.7}, 1e-1);
@@ -75,7 +75,7 @@ describe('L.mapbox.geocoderControl', function() {
             });
 
             control._input.value = 'austin';
-            happen.click(control._submit);
+            happen.once(control._form, { type: 'submit' });
 
             server.respondWith('GET', 'http://example.com/austin.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
@@ -89,7 +89,7 @@ describe('L.mapbox.geocoderControl', function() {
             });
 
             control._input.value = 'austin';
-            happen.click(control._submit);
+            happen.once(control._form, { type: 'submit' });
 
             server.respondWith('GET', 'http://example.com/austin.json',
                 [400, { "Content-Type": "application/json" }, JSON.stringify(json)]);
