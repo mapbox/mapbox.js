@@ -283,39 +283,68 @@
     -moz-box-sizing:border-box;
     position:absolute;
 
-    -webkit-transition:all 100ms;
-    -moz-transition:all 100ms;
-    -ms-transition:all 100ms;
-    -o-transition:all 100ms;
-    transition:all 100ms;
+    -webkit-transition:width 100ms;
+    -moz-transition:width 100ms;
+    -ms-transition:width 100ms;
+    -o-transition:width 100ms;
+    transition:width 100ms;
 
+    border:1px solid #ccc;
     overflow:hidden;
     top:-1px;
     left:27px;
     width:0;
     height:28px;
+    opacity: 0;
 }
 
 .leaflet-control-mapbox-geocoder.active .leaflet-control-mapbox-geocoder-wrap {
     width:175px;
-    border:1px solid #ccc;
     border-radius:0 2px 2px 0;
     border-left:0;
+    opacity: 1;
+}
+
+.leaflet-bar .leaflet-control-mapbox-geocoder-toggle,
+.leaflet-bar .leaflet-control-mapbox-geocoder-toggle:hover {
+    border-bottom: none;
 }
 
 .leaflet-control-mapbox-geocoder-toggle {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIdJREFUeNpiYBgFo2BEAwEgng/E/5EwiK9AbUveo1kCw++padl8NF84AHE/kth+almEbAkyaECSE6CmRQ5o4g545LACJiIt9MdiEQw8oHYcNUAtaKBFHCngSXWwlGdATcv2o1mwH8kBVLUMlqcckPKOAS0tQwfoljHQwzKaWzQKRsEgBQABBgCOcTzHNn4yUwAAAABJRU5ErkJggg==);
+    background-position: 1px 0px;
+    background-repeat: no-repeat;
+    background-size: 26px 26px;
+
     border-radius:2px;
     -webkit-border-radius:2px;
 }
 
+.leaflet-control-mapbox-geocoder.active,
+.leaflet-control-mapbox-geocoder.active .leaflet-control-mapbox-geocoder-toggle {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+}
+
+/* Retina icon */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .leaflet-control-mapbox-geocoder-toggle {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAASBJREFUeNrsmGENgzAQhdkUIIE5qAOQUAlImQMkVMKCAiQwB0joHGz340hIc0AHLLmy9yUvLKFN+ta79oUsAwAAAAAAAKRBTXqQPOk9Ucfv8lSMGFIfmJA0kGwKu+IjzExVa96Zb82M+slOXXbO79lUyJPU8u+SVAljXqQbP9WUWviv+5nFG+6fcPxdU7k9hAVWK+UpHRJqCHunj5jjBFPFkYu67pgb3iltxBxpjBpDKjnSULlxjJpTrhP6wayUqBdORVUJQTq1zIwZKRo5TYbymbtlXKhlNQtpotDWg3Zj7FG5Q0ull7wpuyOkqjWVczYbZjKe455xKZma3v4Vy0RGIPWmtuS605pqzmgqO5up5GlS+IgCAAAAAADA//IRYABzotHc0IVyrQAAAABJRU5ErkJggg==);
+    }
+}
+
 .leaflet-control-mapbox-geocoder .leaflet-control-mapbox-geocoder-form input {
+    border:0;
     width:175px;
-    padding-left:5px;
+    padding-left:10px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    height:28px;
-    border:0;
+    height:26px;
+
+    outline: none;
 }
 
 .leaflet-control-mapbox-geocoder .mapbox-geocoder-toggle {

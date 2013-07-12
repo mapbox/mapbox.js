@@ -41,6 +41,7 @@ var GeocoderControl = L.Control.extend({
         } else {
             L.DomUtil.addClass(this._container, 'active');
             this._input.focus();
+            this._input.select();
         }
     },
 
@@ -54,7 +55,7 @@ var GeocoderControl = L.Control.extend({
 
     onAdd: function(map) {
 
-        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder leaflet-bar'),
+        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder leaflet-bar leaflet-control'),
             link = L.DomUtil.create('a', 'leaflet-control-mapbox-geocoder-toggle', container),
             results = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-results', container),
             wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container),
