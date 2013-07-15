@@ -51,7 +51,7 @@ describe("L.mapbox.gridControl", function() {
 
         it('hides content', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: 'Name: {{name}}'
+                template: '{{#__full__}}Name: {{name}}{{/__full__}}'
             }).addTo(map);
             gridLayer.fire('mouseover', {data: {name: 'John'}});
             gridLayer.fire('mouseover', {data: null});
@@ -60,7 +60,7 @@ describe("L.mapbox.gridControl", function() {
         });
         it('does not hide when pinned', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: 'Name: {{name}}'
+                template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}'
             }).addTo(map);
             gridLayer.fire('mouseover', {data: {name: 'John'}});
             control._pinned = true;
@@ -127,7 +127,7 @@ describe("L.mapbox.gridControl", function() {
     describe('click dataless area', function() {
         it('unpins content', function() {
             var control = L.mapbox.gridControl(gridLayer, {
-                template: 'Name: {{name}}'
+                template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}'
             }).addTo(map);
             gridLayer.fire('click', {data: {name: 'John'}});
             gridLayer.fire('click', {data: null});
@@ -153,7 +153,7 @@ describe("L.mapbox.gridControl", function() {
 
     it('sanitizes its content', function() {
         var control = L.mapbox.gridControl(gridLayer, {
-            template: '<script></script>'
+            template: '{{#__full__}}<script></script>{{/__full__}}'
         }).addTo(map);
 
         gridLayer.fire('click', {latLng: L.latLng(0, 0), data: 'data'});
