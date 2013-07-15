@@ -32,6 +32,7 @@ module.exports = function(_) {
 
     geocoder.queryURL = function(_) {
         util.strict(_, 'string');
+        if (!geocoder.getURL()) throw new Error('Geocoding map ID not set');
         return L.Util.template(geocoder.getURL(), { query: encodeURIComponent(_) });
     };
 
