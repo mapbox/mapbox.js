@@ -65,8 +65,8 @@ var ShareControl = L.Control.extend({
         this._popup = L.marker(this._map.getCenter(), {
             icon: L.divIcon({
                 className: 'mapbox-share-popup',
-                iconSize: L.point(330, 200),
-                iconAnchor: L.point(165, 120),
+                iconSize: L.point(360, 240),
+                iconAnchor: L.point(180, 120),
                 html: share
             })
         })

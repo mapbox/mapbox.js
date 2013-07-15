@@ -1,6 +1,9 @@
 .map-legends {
     border:1px solid #bbb;
-    box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
     background:#fff;
     -webkit-border-radius:3px;
     border-radius:3px;
@@ -32,7 +35,9 @@
     user-select:auto;
 
     border:1px solid #bbb;
-    box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     background:#fff;
     -webkit-border-radius:3px;
     border-radius:3px;
@@ -191,7 +196,6 @@
 
     border-radius: 2px;
 
-    color: #fff;
     display: inline-block;
     font-weight: bold;
     height: 26px;
@@ -200,10 +204,13 @@
     text-decoration: none;
     width: 48%;
 
-    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .mapbox-share-buttons a.mapbox-share-facebook {
+    color: #fff;
     background-color: #3B5998;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANdJREFUeNrs2NENgjAQgGEwDuAIjMAG4gau4gZ1sroBHcUN6pH4cDE+YOWgXP4vaQgJpRy0dw1NAwAAAKAyOecx2xlLn6v9I6Bs+cJaUdLv4G3mHDccO0l7qvNe2mnLNVQqSuu+3C/qi/byhZIsjYvlAGuvoXvNaftnH/2vc6/dS5brPUw5c+4Cst4pTLXmpqr/Q/WfUrdO33GJnYJ1Uogz79V7SAraYjsE68LaycsOahoF9VUGOQzv07OHOhS81SHSNgEREAER0KoBJeP/DQAAAACq8hJgAIjqqfuWHF9jAAAAAElFTkSuQmCC);
     margin-right: 4%;
@@ -214,6 +221,7 @@
 }
 
 .mapbox-share-buttons a.mapbox-share-twitter {
+    color: #fff;
     background-color: #4099FF;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAWZJREFUeNrsmNttwzAMRa1M4G7gDZoRMoJGSDdJJyg6gbtBkgnUDTyCs4G8gUsDDKAPO7Wo58c9AGE4YGBdUiQoNQ0AAAAAAAAgDarER+d5PtJD8+tEdlNKPYpFgRbULSYRQmbmda5kLftp9jvmEtSTDc8FeIix82tGx8fkzNDIHx32ZupFZraEncm+fIIWIshliajekR0J51wZshs10G34X3KJOQg13VZ+W7I0cn3pwJh9UNf7yVlDp51RNlwHxjM7p9xt+1mwqRALUtKmkDhmb7TlptI1FItJKiZE0D2hoN+QP4sEcQdK1YXuTSkSNAYbOhkcAjV1kevpO6R+asuQzTK3/SOo5QE1BrqpARZlAsX01R19eaLuBWKGGsW0PFFbTzHX2HWjfBdOD/dYvMxc7879gA+f1NEuNWRDOydWCfnuCgTC+p3bzLJvciEqVkPgrditzGWPoldUAAAAAAAAgEj8CTAAmJRwdfv4WWoAAAAASUVORK5CYII=);
 }
@@ -225,6 +233,8 @@
 .mapbox-share-popup {
     background: #fff;
     padding: 20px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 
 .mapbox-share-popup h3 {
@@ -368,7 +378,7 @@
 .leaflet-control-mapbox-geocoder-results a,
 .leaflet-control-mapbox-geocoder-results span,
 .leaflet-control-mapbox-geocoder-results a:hover {
-    width:154px;
+    width:176px;
     padding:0 10px;
     text-overflow:ellipsis;
     border:1px solid #ccc;
@@ -379,6 +389,13 @@
     line-height:26px;
     overflow:hidden;
     text-align:center;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.leaflet-control-mapbox-geocoder-results a:hover {
+    background:#eee;
 }
 
 .leaflet-control-mapbox-geocoder-results a:last-child,
