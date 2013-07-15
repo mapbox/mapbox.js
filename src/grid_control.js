@@ -97,7 +97,7 @@ var GridControl = L.Control.extend({
 
         var location_formatted = this._template('location', o.data);
         if (this.options.location && location_formatted &&
-            location_formatted.search(/^https?:/)) {
+            location_formatted.search(/^https?:/) === 0) {
             window.top.location.href = this._template('location', o.data);
             return;
         }
