@@ -16,9 +16,8 @@ tags:
 </style>
 <div id='map'></div>
 <script type='text/javascript'>
-var map = L.mapbox.map('map', 'examples.youtube-embed');
-
-var gridControl = L.mapbox.gridControl(map.gridLayer, {
+var map = L.mapbox.map('map', 'examples.youtube-embed', {
+    gridLayer: {},
     // This line redefines part of the underlying code which
     // sanitizes HTML from MapBox Hosting. The original code is there
     // for the protection of sites, so that malicious map-creators
@@ -26,8 +25,8 @@ var gridControl = L.mapbox.gridControl(map.gridLayer, {
     // maps.
     // Turning it off allows any content to be available in tooltips.
     // It's recommended to only with trusted maps.
-    sanitizer: function(x) { return x; }
+    gridControl: {
+        sanitizer: function(x) { console.log(x); return x; }
+    }
 });
-
-gridControl.addTo(map);
 </script>
