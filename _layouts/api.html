@@ -108,10 +108,10 @@ span.bracket { color:#888; }
       </form>
       <ul class='nav anchors'>
       {% for section in page.navigation %}
-        <li class='heading'><a href='#{{section.title|replace:' ','_'}}'>{{section.title}}</a></li>
+        <li class='heading'><a href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a></li>
         {% for item in section.items %}
           {% if item.Separator %}
-          <li class='parent'><a href='#{{item.Separator|replace:' ','_'}}'>{{item.Separator}}</a></li>
+          <li class='parent'><a href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a></li>
           {% else %}
           <li><a href='#{{item|replace:' ','_'}}'>{{item}}</a></li>
           {% endif %}
