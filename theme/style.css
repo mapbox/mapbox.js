@@ -51,6 +51,9 @@
 
     -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.15);
     box-shadow:0 1px 2px rgba(0,0,0,0.15);
+
+    color:#222;
+    font:normal 13px/20px Arial,sans-serif;
 }
 
 .map-tooltip .close {
@@ -78,6 +81,23 @@
 .map-tooltip.closable .close {
     display:block;
 }
+
+.map-tooltip small { font-size:11px; }
+
+.map-tooltip h1,
+.map-tooltip h2,
+.map-tooltip h3,
+.map-tooltip h4,
+.map-tooltip h5,
+.map-tooltip h6 { font-size:16px; }
+
+.map-tooltip h1,
+.map-tooltip h2,
+.map-tooltip h3,
+.map-tooltip h4,
+.map-tooltip h5,
+.map-tooltip h6,
+.map-tooltip p { margin:0px 0px 10px; }
 
 /* Leaflet Overrides */
 
@@ -157,6 +177,13 @@
     cursor: default;
     cursor: -webkit-default;
     cursor:    -moz-default;
+}
+
+.leaflet-popu a,
+.map-tooltip a,
+.map-legend a {
+    color: #489;
+    text-decoration: none;
 }
 
 .leaflet-dragging {
