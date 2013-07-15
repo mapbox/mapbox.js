@@ -63,6 +63,7 @@ var ShareControl = L.Control.extend({
                         .replace('{{embed}}', tilejson.embed || window.location)));
 
         this._popup = L.marker(this._map.getCenter(), {
+            zIndexOffset: 10000,
             icon: L.divIcon({
                 className: 'mapbox-share-popup',
                 iconSize: L.point(360, 240),
