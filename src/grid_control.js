@@ -96,7 +96,9 @@ var GridControl = L.Control.extend({
     _click: function(o) {
         if (!this.options.pinnable) return;
 
-        if (this.options.location && this._template('location', o.data)) {
+        var location_formatted = this._template('location', o.data);
+        if (this.options.location && location_formatted &&
+            location_formatted.search(/^https?:/)) {
             window.top.location.href = this._template('location', o.data);
             return;
         }
