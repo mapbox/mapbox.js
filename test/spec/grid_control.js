@@ -38,7 +38,7 @@ describe("L.mapbox.gridControl", function() {
             control._pinned = true;
             gridLayer.fire('mouseover', {data: {name: 'John'}});
             expect(control._contentWrapper.innerHTML).to.equal('');
-        })
+        });
     });
 
     describe('mouseover dataless area', function() {
@@ -58,7 +58,6 @@ describe("L.mapbox.gridControl", function() {
             expect(control._container.style.display).to.equal('none');
             expect(control._contentWrapper.innerHTML).to.equal('');
         });
-
         it('does not hide when pinned', function() {
             var control = L.mapbox.gridControl(gridLayer, {
                 template: 'Name: {{name}}'
@@ -79,6 +78,40 @@ describe("L.mapbox.gridControl", function() {
             gridLayer.fire('click', {data: {name: 'John'}});
             expect(control._contentWrapper.innerHTML).to.equal('Name: John');
             expect(control._pinned).to.equal(true);
+        });
+
+        it('does a teaser fallback on touch', function() {
+            L.Browser.touch = true;
+            var control = L.mapbox.gridControl(gridLayer, {
+                template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}'
+            }).addTo(map);
+            gridLayer.fire('click', {data: {name: 'John'}});
+            expect(control._contentWrapper.innerHTML).to.equal('Name: John');
+            expect(control._pinned).to.equal(true);
+            L.Browser.touch = false;
+        });
+
+        it('does not teaser fallback on non touch', function() {
+            L.Browser.touch = false;
+            var control = L.mapbox.gridControl(gridLayer, {
+                template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}'
+            }).addTo(map);
+            gridLayer.fire('click', {data: {name: 'John'}});
+            expect(control._contentWrapper.innerHTML).to.equal('');
+            expect(control._pinned).to.equal(false);
+            L.Browser.touch = false;
+        });
+
+        it('does not teaser fallback when disabled', function() {
+            L.Browser.touch = true;
+            var control = L.mapbox.gridControl(gridLayer, {
+                template: '{{#__teaser__}}Name: {{name}}{{/__teaser__}}',
+                touchTeaser: false
+            }).addTo(map);
+            gridLayer.fire('click', {data: {name: 'John'}});
+            expect(control._contentWrapper.innerHTML).to.equal('');
+            expect(control._pinned).to.equal(false);
+            L.Browser.touch = false;
         });
 
         it('does not show empty content', function() {
@@ -129,7 +162,7 @@ describe("L.mapbox.gridControl", function() {
 
     it('supports a custom sanitizer', function() {
         var control = L.mapbox.gridControl(gridLayer, {
-            template: '<script></script>',
+            template: '{{#__full__}}<script></script>{{/__full__}}',
             sanitizer: function(_) { return _; }
         }).addTo(map);
 

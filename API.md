@@ -613,6 +613,10 @@ _Arguments_:
   By default, this is `false` and the tooltip is stationary.
 * `pinnable`: Whether clicking will 'pin' the tooltip open and expose a
   'close' button for the user to close the tooltip. By default, this is `true`.
+* `touchTeaser`: On touch devices, show the `teaser` formatter if there is
+  no output from the `full` formatter. By default, this is `true`.
+* `location`: Evaluate the `location` formatter on click events, and if it
+  provides output, navigate to that location. By default, this is `true`.
 
 _Example_:
 

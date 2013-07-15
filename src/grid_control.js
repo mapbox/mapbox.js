@@ -8,7 +8,9 @@ var GridControl = L.Control.extend({
     options: {
         pinnable: true,
         follow: false,
-        sanitizer: require('./sanitize')
+        sanitizer: require('./sanitize'),
+        touchTeaser: true,
+        location: true
     },
 
     _currentContent: '',
@@ -94,7 +96,17 @@ var GridControl = L.Control.extend({
     _click: function(o) {
         if (!this.options.pinnable) return;
 
+        if (this.options.location && this._template('location', o.data)) {
+            window.top.location.href = this._template('location', o.data);
+            return;
+        }
+
         var content = this._template('full', o.data);
+
+        if (!content && this.options.touchTeaser && L.Browser.touch) {
+            content = this._template('teaser', o.data);
+        }
+
         if (content) {
             L.DomUtil.addClass(this._container, 'closable');
             this._pinned = true;
