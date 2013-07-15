@@ -122,7 +122,7 @@
 
 /* General Toolbar Overrides */
 
-.leaflet-bar {
+.leaflet-bar, .leaflet-touch .leaflet-bar {
     box-shadow: none;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -130,14 +130,16 @@
 .leaflet-bar a {
 }
 
-.leaflet-bar a:first-child {
+.leaflet-bar a:first-child,
+.leaflet-touch .leaflet-bar a:first-child {
     -webkit-border-top-left-radius: 2px;
     border-top-left-radius: 2px;
     -webkit-border-top-right-radius: 2px;
     border-top-right-radius: 2px;
 }
 
-.leaflet-bar a:last-child {
+.leaflet-bar a:last-child,
+.leaflet-touch .leaflet-bar a:last-child {
     -webkit-border-bottom-left-radius: 2px;
     border-bottom-left-radius: 2px;
     -webkit-border-bottom-right-radius: 2px;
