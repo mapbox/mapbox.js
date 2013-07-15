@@ -94,7 +94,6 @@ var GridControl = L.Control.extend({
     },
 
     _click: function(o) {
-        if (!this.options.pinnable) return;
 
         var location_formatted = this._template('location', o.data);
         if (this.options.location && location_formatted &&
@@ -102,6 +101,8 @@ var GridControl = L.Control.extend({
             window.top.location.href = this._template('location', o.data);
             return;
         }
+
+        if (!this.options.pinnable) return;
 
         var content = this._template('full', o.data);
 
