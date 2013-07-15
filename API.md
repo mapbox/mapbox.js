@@ -707,6 +707,11 @@ _Arguments_:
 
 2. (optional) Options for [L.Control](http://leafletjs.com/reference.html#control).
 
+Also accepts the following options:
+
+* `url`: the URL of a page to which the share control will link instead of the URL
+  of the current page or that specified in TileJSON data.
+
 _Example_
 
     var map = L.map('map', 'examples.map-vyofok3q')

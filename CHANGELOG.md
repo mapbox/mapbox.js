@@ -1,3 +1,11 @@
+## v1.3.0
+
+* Redesigned geocoder control #449
+* Rewritten share control #448
+* Touch fallback for grid control #441
+* Location formatter for grid control #335
+* Custom url option for share control #451
+
 ## v1.2.0
 
 * Updated Leaflet dependency to v0.6.2
