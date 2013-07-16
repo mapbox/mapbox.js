@@ -53,4 +53,27 @@ describe('L.mapbox.marker', function() {
             expect(icon.options.iconUrl).to.contain('pin-l');
         });
     });
+
+    describe('#createPopup', function() {
+        it("returns an empty string for an undefined feature", function() {
+            expect(L.mapbox.marker.createPopup({})).to.eql('');
+            expect(L.mapbox.marker.createPopup({
+                properties: { title: '' }
+            })).to.eql('');
+        });
+
+        it("renders a title", function() {
+            expect(L.mapbox.marker.createPopup({})).to.eql('');
+            expect(L.mapbox.marker.createPopup({
+                properties: { title: 'test' }
+            })).to.eql('<div class="marker-title">test</div>');
+        });
+
+        it("renders a description", function() {
+            expect(L.mapbox.marker.createPopup({})).to.eql('');
+            expect(L.mapbox.marker.createPopup({
+                properties: { description: 'test' }
+            })).to.eql('<div class="marker-description">test</div>');
+        });
+    });
 });

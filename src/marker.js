@@ -40,10 +40,16 @@ function style(f, latlon) {
 }
 
 function createPopup(f, sanitizer) {
-    var popup = '<div class="marker-title">' + f.properties.title + '</div>';
+    if (!f || !f.properties) return '';
+    var popup = '';
 
-    if (f.properties.description)
+    if (f.properties.title) {
+        popup += '<div class="marker-title">' + f.properties.title + '</div>';
+    }
+
+    if (f.properties.description) {
         popup += '<div class="marker-description">' + f.properties.description + '</div>';
+    }
 
     return (sanitizer || sanitize)(popup);
 }
