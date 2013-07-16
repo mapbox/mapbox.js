@@ -93,13 +93,16 @@ var GridControl = L.Control.extend({
         this._popup.setLatLng(o.latLng);
     },
 
+    _navigateTo: function(url) {
+        window.top.location.href = url;
+    },
+
     _click: function(o) {
 
         var location_formatted = this._template('location', o.data);
         if (this.options.location && location_formatted &&
             location_formatted.search(/^https?:/) === 0) {
-            window.top.location.href = this._template('location', o.data);
-            return;
+            return this._navigateTo(this._template('location', o.data));
         }
 
         if (!this.options.pinnable) return;

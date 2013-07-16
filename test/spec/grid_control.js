@@ -41,6 +41,29 @@ describe("L.mapbox.gridControl", function() {
         });
     });
 
+    describe('location formatter', function() {
+        it('navigates on click', function(done) {
+            var control = L.mapbox.gridControl(gridLayer, {
+                template: '{{#__location__}}{{{name}}}{{/__location__}}'
+            }).addTo(map);
+            control._navigateTo = function(url) {
+                expect(url).to.equal('http://google.com/');
+                done();
+            };
+            gridLayer.fire('click', {data: {name: 'http://google.com/'}});
+        });
+
+        it('rejects xss', function() {
+            var control = L.mapbox.gridControl(gridLayer, {
+                template: '{{#__location__}}{{{name}}}{{/__location__}}'
+            }).addTo(map);
+            control._navigateTo = function(url) {
+                expect(true).to.equal(false);
+            };
+            gridLayer.fire('click', {data: {name: 'javascript://alert("oh no")'}});
+        });
+    });
+
     describe('mouseover dataless area', function() {
         it('removes map-clickable class from map container', function() {
             L.mapbox.gridControl(gridLayer).addTo(map);
