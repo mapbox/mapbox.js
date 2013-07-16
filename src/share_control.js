@@ -21,11 +21,14 @@ var ShareControl = L.Control.extend({
         this._map = map;
 
         var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share leaflet-bar');
-        var link = L.DomUtil.create('a', 'mapbox-share', container);
+        var link = L.DomUtil.create('a', 'mapbox-share mapbox-icon mapbox-icon-share', container);
         link.href = '#';
 
         L.DomEvent.addListener(link, 'click', this._share, this);
         L.DomEvent.disableClickPropagation(container);
+
+        // Close any open popups
+
 
         this._map.on('mousedown', this._clickOut, this);
 
@@ -52,8 +55,8 @@ var ShareControl = L.Control.extend({
             share =
                 "<a class='leaflet-popup-close-button' href='#close'>×</a>" +
                 ("<h3>Share this map</h3>" +
-                    "<div class='mapbox-share-buttons'><a class='mapbox-share-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
-                    "<a class='mapbox-share-twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
+                    "<div class='mapbox-share-buttons'><a class='mapbox-share-facebook mapbox-icon mapbox-icon-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
+                    "<a class='mapbox-share-twitter mapbox-icon mapbox-icon-twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
                     .replace('{{twitter}}', twitter)
                     .replace('{{facebook}}', facebook) +
                 ("<h3>Get the embed code</h3>" +
