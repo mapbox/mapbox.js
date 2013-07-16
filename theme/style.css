@@ -298,6 +298,7 @@ a.mapbox-icon-twitter {
 
 .mapbox-share-popup textarea {
     width: 100%;
+    height: 50px;
 }
 
 
