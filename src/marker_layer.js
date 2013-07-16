@@ -86,9 +86,12 @@ var MarkerLayer = L.FeatureGroup.extend({
                 popupHtml = marker.createPopup(json, this.options.sanitizer);
 
             layer.feature = json;
-            layer.bindPopup(popupHtml, {
-                closeButton: false
-            });
+
+            if (popupHtml) {
+                layer.bindPopup(popupHtml, {
+                    closeButton: false
+                });
+            }
 
             this.addLayer(layer);
         }
