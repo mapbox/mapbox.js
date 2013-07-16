@@ -56,7 +56,7 @@ var GeocoderControl = L.Control.extend({
     onAdd: function(map) {
 
         var container = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder leaflet-bar leaflet-control'),
-            link = L.DomUtil.create('a', 'leaflet-control-mapbox-geocoder-toggle', container),
+            link = L.DomUtil.create('a', 'leaflet-control-mapbox-geocoder-toggle mapbox-icon mapbox-icon-geocoder', container),
             results = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-results', container),
             wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container),
             form = L.DomUtil.create('form', 'leaflet-control-mapbox-geocoder-form', wrap),
