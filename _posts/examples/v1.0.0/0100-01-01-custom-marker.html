@@ -2,7 +2,7 @@
 layout: example_v1
 categories: example/v1.0.0
 version: v1.0.0
-title: Custom Marker
+title: Custom Marker Icons
 description: Setting a custom marker image
 tags:
   - ui
@@ -13,25 +13,47 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-uci7ul8p')
     .setView([40, -74.50], 9);
 
-// Define two unique marker icons
-// http://leafletjs.com/reference.html#icon
+var geoJson = [{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-75.00, 40]
+    },
+    "properties": {
+        "title": "Small kitten",
+        "icon": {
+            "iconUrl": "http://placekitten.com/50/50",
+            "iconSize": [50, 50], // size of the icon
+            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+            "popupAnchor": [0, -25]  // point from which the popup should open relative to the iconAnchor
+        }
+    }
+}, {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-74.00, 40]
+    },
+    "properties": {
+        "title": "Big kitten",
+        "icon": {
+            "iconUrl": "http://placekitten.com/100/100",
+            "iconSize": [100, 100],
+            "iconAnchor": [50, 50],
+            "popupAnchor": [0, -55]
+        }
+    }
+}];
 
-L.marker([40, -75.00], {
-    icon: L.icon({
-        iconUrl: 'http://placekitten.com/50/50',
-        iconSize:     [50, 50], // size of the icon
-        iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
-        popupAnchor:  [0, -25]  // point from which the popup should open relative to the iconAnchor
-    })
-}).addTo(map);
+// Set a custom icon on each marker based on feature properties
+map.markerLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
 
-// You can optionally add a popup to your custom marker via bindPopup()
-L.marker([40, -74.00], {
-    icon: L.icon({
-        iconUrl: 'http://placekitten.com/100/100',
-        iconSize:     [100, 100],
-        iconAnchor:   [50, 50],
-        popupAnchor:  [0, -55]
-    })
-}).bindPopup('This is a kitten',{ closeButton: false }).addTo(map);
+    marker.setIcon(L.icon(feature.properties.icon));
+});
+
+// Add features to the map
+map.markerLayer.setGeoJSON(geoJson);
+
 </script>
