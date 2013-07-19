@@ -11,10 +11,19 @@ tags:
 <!--
   This example requires csv2geojson, which you can get on GitHub:
   https://github.com/tmcw/csv2geojson
-  and jQuery to load the file with AJAX. You can use another tool for AJAX.
+  and jQuery to load the file with AJAX.
+
+  You can use another tool for AJAX, but if you want to use jQuery, add
+  these lines to the the page:
+
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
   This pulls the file airports.csv, converts into into GeoJSON by autodetecting
-  the latitude and longitude columns, and adds it to the map.
+  the latitude and longitude columns, and adds it to the map. The full URL
+  of the file is
+
+  http://mapbox.com/mapbox.js/assets/airports.csv
 
   Another CSV that you use will also need to contain latitude and longitude
   columns, and they must be similarly named.
@@ -28,6 +37,7 @@ var map = L.mapbox.map('map', 'examples.map-uci7ul8p')
     markerLayer = L.mapbox.markerLayer().addTo(map);
 
 $.ajax({
+    // you will need to replace this URL with the URL to your CSV file.
     url: '{{site.baseurl}}/assets/airports.csv',
     success: function csvLoad(csv) {
         markerLayer.setGeoJSON(csv2geojson.csv2geojson(csv));
