@@ -24,11 +24,8 @@ var ShareControl = L.Control.extend({
         var link = L.DomUtil.create('a', 'mapbox-share mapbox-icon mapbox-icon-share', container);
         link.href = '#';
 
-        L.DomEvent.addListener(link, 'click', this._share, this);
+        L.DomEvent.addListener(link, 'click', this._shareClick, this);
         L.DomEvent.disableClickPropagation(container);
-
-        // Close any open popups
-
 
         this._map.on('mousedown', this._clickOut, this);
 
@@ -43,8 +40,10 @@ var ShareControl = L.Control.extend({
         }
     },
 
-    _share: function(e) {
+    _shareClick: function(e) {
         L.DomEvent.stop(e);
+
+        if (this._popup) return this._clickOut(e);
 
         var tilejson = this._tilejson || this._map._tilejson || {},
             twitter = 'http://twitter.com/intent/tweet?status=' +

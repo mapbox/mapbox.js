@@ -56,4 +56,24 @@ describe('L.mapbox.shareControl', function() {
             .getElementsByClassName('mapbox-share-popup')[0].innerHTML)
                 .to.contain('foobar');
     });
+
+    it('clicking the share button again closes the popup', function() {
+        map.setView([0,0],0);
+        var shareControl = L.mapbox.shareControl(null, { url: 'foobar' });
+        expect(shareControl.addTo(map)).to.eql(shareControl);
+
+        happen.click(element
+            .getElementsByClassName('mapbox-share')[0]);
+
+        expect(element
+            .getElementsByClassName('mapbox-share-popup').length)
+            .to.eql(1);
+
+        happen.click(element
+            .getElementsByClassName('mapbox-share')[0]);
+
+        expect(element
+            .getElementsByClassName('mapbox-share-popup').length)
+            .to.eql(0);
+    });
 });
