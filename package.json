@@ -10,10 +10,10 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "0.6.2",
+    "leaflet": "0.6.3",
     "mustache": "~0.7.2",
     "corslite": "0.0.3",
-    "json3": "~3.2.5"
+    "json3": "git://github.com/bestiejs/json3.git#v3.2.5a"
   },
   "scripts": {
     "test": "mocha-phantomjs test/index.html"
