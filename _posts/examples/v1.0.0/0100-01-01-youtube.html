@@ -26,7 +26,7 @@ var map = L.mapbox.map('map', 'examples.youtube-embed', {
     // Turning it off allows any content to be available in tooltips.
     // It's recommended to only with trusted maps.
     gridControl: {
-        sanitizer: function(x) { console.log(x); return x; }
+        sanitizer: function(x) { return x; }
     }
 });
 </script>
