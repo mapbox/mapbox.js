@@ -590,6 +590,23 @@ _Example_:
 
 _Returns_: a `L.mapbox.legendControl` object.
 
+### legendControl.addLegend(legend: string)
+
+Adds a legend to the legendControl.
+
+_Arguments_:
+
+1. (required) legend data, a string which may contain HTML. It will be sanitized
+by the legendControl's sanitizer option.
+
+### legendControl.removeLegend(legend: string)
+
+Removes a legend from the legendControl.
+
+_Arguments_:
+
+1. (required) legend data to remove.
+
 ## L.mapbox.gridControl(layer L.mapbox.gridLayer, options: object)
 
 Interaction is what we call interactive parts of maps that are created with
