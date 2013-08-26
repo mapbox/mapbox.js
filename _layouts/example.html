@@ -1,9 +1,8 @@
 ---
 layout: default
 section: developers
-class: box
 ---
-<style type='text/css'>
+<style>
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
 .doc-nav {
@@ -87,30 +86,30 @@ pre a {
   }
 </style>
 
-<div class='clearfix doc-header pad3 fillL'>
-  <div class='cell8'>
+<div class='clearfix doc-header pad4 fill-light'>
+  <div class='col8'>
     <h2>
       {{site.title}}
       <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.oldversion}}{% endif %}</span>
     </h2>
     <p>{{site.description}}</p>
   </div>
-  <ul class='cell4 doc-subnav clearfix'>
+  <ul class='col4 doc-subnav clearfix'>
     <li><a href='{{site.baseurl}}/api/v0.6.7/'>API</a></li>
     <li><a href='{{site.baseurl}}/example/v0.6.7/' class='active'>Examples</a></li>
     <li><a href='{{site.baseurl}}/changelog/'>Changelog</a></li>
   </ul>
 </div>
 
-<div class='doc-page pad3c fillM clearfix'>
+<div class='doc-page pad4c fill-grey clearfix'>
 
-<div class='fillW clearfix ad-v1'>
+<div class='fill-white clearfix ad-v1'>
   <span class="icon reverse star"></span>
   Try <a href="{{site.baseurl}}/example/v1.0.0/">MapBox.js v1.0.0</a>, built on Leaflet.
 </div>
 
-<div class='fillW clearfix'>
-  <div class='cell3'>
+<div class='fill-white clearfix'>
+  <div class='col3'>
     <div class='doc-nav'>
       <form class='doc-search'>
         <input type='text' placeholder='Filter examples'>
@@ -123,7 +122,7 @@ pre a {
       </ul>
     </div>
   </div>
-  <div class='cell9 doc-example'>
+  <div class='col9 doc-example'>
     <div class='pad2 doc example-header'>
       <h3>{{page.title}}</h3>
       <span class='description'>{{page.description}}</span>
