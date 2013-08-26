@@ -3,22 +3,6 @@ layout: default
 section: developers
 ---
 
-<style>
-.doc li p {margin:0;}
-.parent {font-weight:bold;}
-.doc-footer {
-  border-top:1px solid #ccc;
-  border-left:1px solid #ccc;
-  text-align:center;
-  }
-
-@media only screen and (max-width: 640px) {
-  .doc-footer {
-    border-left:none;
-  }
-}
-</style>
-
 <div class='clearfix doc-header pad4 fill-light'>
   <div class='col8'>
     <h2>{{page.title}}</h2>
@@ -55,7 +39,7 @@ section: developers
         {% endfor %}
       </div>
     </div>
-    <div class='doc-footer'>
+    <div class='centered keyline-top'>
       <div class='pad2'>
         The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
       </div>

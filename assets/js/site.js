@@ -155,7 +155,7 @@
         },
 
         _select: function(e) {
-            var v = this.$menu.find('.active a').attr('href');
+            var v = this.$menu.find('a.active').attr('href');
             this.anchor ?
                 window.location.hash = v :
                 window.location = v

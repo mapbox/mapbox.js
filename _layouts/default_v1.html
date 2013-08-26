@@ -63,20 +63,14 @@ footer:
   <script src='{{site.baseurl}}/assets/js/site.js'></script>
 </head>
 <body class='{{page.class}}'>
-<div class='branding pad3h clearfix'>
-  <div class='cell5'>
+
+<div class='branding pad4x clearfix'>
+  <div class='col3'>
     <a id='mapbox-logo' class='logo' href='{{site.url}}/' onclick='window.location=(window.mapboxHome||"{{site.url}}/"); return false;'>MapBox</a>
-    {% if page.section %}
-    <a class='section-title' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
-    {% endif %}
   </div>
-  <ul class='menu cell7'>
+  <ul class='menu col6'>
     {% for item in page.navigation %}
-    {% if item.path contains 'http' %}
-      {% capture url %}{{item.path}}{% endcapture %}
-    {% else %}
       {% capture url %}{{site.url}}{{item.path}}/{% endcapture %}
-    {% endif %}
     {% if item.category contains page.category or item.category contains page.section or item.path == page.url %}
       {% capture class %}{{item.class}} active{% endcapture %}
     {% else %}
@@ -178,9 +172,7 @@ var _gauges = _gauges || [];
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(t, s);
 })();
-</script>
 
-<script type="text/javascript">
 setTimeout(function(){var a=document.createElement("script");
 var b=document.getElementsByTagName("script")[0];
 a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
