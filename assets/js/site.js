@@ -101,7 +101,7 @@
 
         _next: function() {
             var active = this.$menu.find('.active').removeClass('active'),
-                next = active.nextAll('a.filtered').first();
+                next = active.nextAll('.filtered').first();
 
             if (!next.length) {
                 next = $(this.$menu.find('a')[0]);
@@ -128,7 +128,7 @@
 
         _prev: function() {
             var active = this.$menu.find('.active').removeClass('active'),
-                prev = active.prevAll('a.filtered').first();
+                prev = active.prevAll('.filtered').first();
 
             if (!prev.length) {
                 prev = this.$menu.find('a').last();
