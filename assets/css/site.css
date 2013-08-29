@@ -117,27 +117,27 @@ pre a {
  *  ------------------------------------------------------- */
 
 /*greys*/
-.pln { color:#404040; }
-.com { color:#808080; }
-.pun,
-.opn,
-.clo { color:#909090; }
+pre .pln { color:#404040; }
+pre .com { color:#808080; }
+pre .pun,
+pre .opn,
+pre .clo { color:#909090; }
 
 /*rust*/
-.fun { color:#DF6637; font-weight:bold; }
+pre .fun { color:#DF6637; font-weight:bold; }
 
 /*green*/
-.str,
-.atv { color:#75A21C; }
+pre .str,
+pre .atv { color:#75A21C; }
 
 /*dark blue*/
-.kwd,
-.linenums,
-.tag { color:#0B5A91; }
+pre .kwd,
+pre .linenums,
+pre .tag { color:#0B5A91; }
 
 /*light blue*/
-.lit,
-.typ,
-.atn,
-.dec,
-.var { color:#0C9DC2; }
+pre .lit,
+pre .typ,
+pre .atn,
+pre .dec,
+pre .var { color:#0C9DC2; }
