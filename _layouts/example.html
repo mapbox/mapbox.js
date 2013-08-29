@@ -52,22 +52,36 @@ section: developers
           <div id='snippet' class='doc'>
           <a class='button icon embed' href='#' id='copy'>Select all</a>
           <div id='code' class='doc'>
-          <pre class='prettyprint code-header'>
-      &lt;!DOCTYPE html&gt;
-      &lt;html&gt;
-      &lt;head&gt;
-        &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.js'&gt;&lt;/script&gt;r
-        &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.css' rel='stylesheet' /&gt;
-        &lt;style&gt;
-          body { margin:0; padding:0; }
-          #map { position:absolute; top:0; bottom:0; width:100%; }
-        &lt;/style&gt;
-      &lt;/head&gt;
-      &lt;body&gt;</pre>
-          <pre class='prettyprint code-body'>{{content | escape}}</pre>
-          <pre class='prettyprint code-footer'>
-      &lt;/body&gt;
-      &lt;/html&gt;</pre>
+
+<div class='code-header'>
+{% highlight html %}
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset=utf-8 />
+  <title></title>
+    <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.js'></script>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.css' rel='stylesheet' />
+    <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+  </head>
+  <body>
+{% endhighlight %}
+</div>
+
+{% highlight html %}
+  {{content}}
+{% endhighlight %}
+
+<div class='code-footer'>
+{% highlight html %}
+  </body>
+  </html>
+{% endhighlight %}
+</div>
+
           </div>
           </div>
           <div class='keyline-top center small'>
