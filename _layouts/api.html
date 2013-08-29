@@ -50,12 +50,12 @@ section: developers
 
       <div class='col9 keyline-left'>
       {% if site.version != page.version %}
-      <div class='doc-content doc pad2 warn'>
+      <div class='doc-content doc pad4 warn'>
         Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.version}}'>{{site.version}} for the latest</a>.
       </div>
       {% endif %}
       <div id='docs' class='doc-content prose'>
-        <div class='doc pad2'>
+        <div class='doc pad4'>
           {{content}}
         </div>
         <div class='keyline-top center small'>
