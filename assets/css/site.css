@@ -1,9 +1,5 @@
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
-.doc-nav {
-  border-right: 1px solid #CCC;
-  margin-right: -1px;
-  }
 .doc-search .icon {
   position:absolute;
   top:30px;
@@ -86,13 +82,6 @@ pre a {
 .leaflet-control .mapbox-button:hover {
   background-color: #3bb2d0;
 }
-
-@media (max-width:640px) {
-  .doc-example { border-bottom:1px solid #ccc; border-left:0px; }
-  .doc-nav {
-    margin-right:0;
-    }
-  }
 
 /*  -------------------------------------------------------
  *    Syntax highlighting for prettify
