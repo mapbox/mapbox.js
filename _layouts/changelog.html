@@ -1,40 +1,23 @@
 ---
 layout: default
 section: developers
-class: box
 ---
 
-<style>
-.doc li p {margin:0;}
-.parent {font-weight:bold;}
-.doc-footer {
-  border-top:1px solid #ccc;
-  border-left:1px solid #ccc;
-  text-align:center;
-  }
-
-@media only screen and (max-width: 640px) {
-  .doc-footer {
-    border-left:none;
-  }
-}
-</style>
-
-<div class='clearfix doc-header pad3 fillL'>
-  <div class='cell8'>
+<div class='clearfix doc-header pad4 fill-light'>
+  <div class='col8'>
     <h2>{{page.title}}</h2>
     <p>{{site.description}}</p>
   </div>
-  <ul class='cell4 doc-subnav clearfix'>
+  <ul class='col4 doc-subnav clearfix'>
     <li><a href='{{site.baseurl}}/api/'>API</a></li>
     <li><a href='{{site.baseurl}}/examples/'>Examples</a></li>
     <li><a href='{{site.baseurl}}/changelog/' class='active'>Changelog</a></li>
   </ul>
 </div>
 
-<div class='doc-page pad3c fillM clearfix'>
-<div class='fillW clearfix'>
-  <div class='cell3'>
+<div class='doc-page pad4c fill-grey clearfix'>
+<div class='fill-white clearfix'>
+  <div class='col3'>
     <div class='doc-nav'>
       <ul class='nav anchors'>
       {% for item in page.releases %}
@@ -43,7 +26,7 @@ class: box
       </ul>
     </div>
   </div>
-  <div class='cell9'>
+  <div class='col9'>
     <div id='docs' class='doc-content prose'>
       <div class='doc pad2'>
         {% for item in page.releases %}
@@ -56,7 +39,7 @@ class: box
         {% endfor %}
       </div>
     </div>
-    <div class='doc-footer'>
+    <div class='center keyline-top small'>
       <div class='pad2'>
         The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
       </div>

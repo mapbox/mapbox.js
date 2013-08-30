@@ -49,31 +49,25 @@ footer:
   {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
   <title>{% if page.url == '/' %}{{page.title}} | Fast and beautiful maps{% else %}{{page.title}} | MapBox{% endif %}</title>
   <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
-  <link href='{{site.url}}/css/site.css' rel='stylesheet' />
   <!--[if IE]><link rel='stylesheet' href='{{site.url}}/css/site-ie.css' type='text/css'/><![endif]-->
   <link rel='shortcut icon' href='{{site.url}}/img/favicon.ico' type='image/x-icon' />
   <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
-  <link rel='stylesheet' href='{{site.url}}/css/developers.css' />
+  <link href='//mapbox.com/base/latest/base.css' rel='stylesheet' />
   <script src='{{site.url}}/js/site.js'></script>
   <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
   <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
   <script src='{{site.baseurl}}/assets/js/site.js'></script>
 </head>
+
 <body class='{{page.class}}'>
-<div class='branding pad3h clearfix'>
-  <div class='cell5'>
+
+<div class='branding pad4x clearfix'>
+  <div class='col3'>
     <a id='mapbox-logo' class='logo' href='{{site.url}}/' onclick='window.location=(window.mapboxHome||"{{site.url}}/"); return false;'>MapBox</a>
-    {% if page.section %}
-    <a class='section-title' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
-    {% endif %}
   </div>
-  <ul class='menu cell7'>
+  <ul class='menu col6'>
     {% for item in page.navigation %}
-    {% if item.path contains 'http' %}
-      {% capture url %}{{item.path}}{% endcapture %}
-    {% else %}
       {% capture url %}{{site.url}}{{item.path}}/{% endcapture %}
-    {% endif %}
     {% if item.category contains page.category or item.category contains page.section or item.path == page.url %}
       {% capture class %}{{item.class}} active{% endcapture %}
     {% else %}
@@ -86,13 +80,14 @@ footer:
   </ul>
 </div>
 
-<div class='wrapper'>{{content}}</div>
+{{content}}
 
 {% unless page.class contains 'fullscreen' %}
-<div class='footer clearfix'>
-  <div class='cell3 pad3 newsletter'>
-    <a class='button big follow' href='http://twitter.com/mapbox' target='_blank'><span class='icon reverse twitter'></span>Follow us</a>
-    <a class='button big contact' href='{{base}}/contact'><span class='icon reverse contact'></span>Contact us</a>
+<div class='footer fill-light clearfix small'>
+  <div class='col3 pad4 newsletter'>
+    <a class='button icon twitter' href='http://twitter.com/mapbox' target='_blank'>Follow us</a>
+    <a class='button icon contact' href='{{base}}/contact'>Contact us</a>
+
     <small>Subscribe to our newsletter</small>
     <!-- Begin MailChimp Signup Form -->
     <div id='mc-signup'>
@@ -100,7 +95,7 @@ footer:
         <div class='mc-field-group clearfix'>
           <input type='hidden' value='1' name='group[7417][2]'>
           <div class='field-wrapper'><input type='text' value='' placeholder='Email Address' name='EMAIL' class='required email' id='mce-EMAIL'></div>
-          <input type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button big icon reverse mail'>
+          <input type='submit' value='' name='subscribe' id='mc-embedded-subscribe' class='button icon mail'>
         </div>
         <div id='mce-responses'>
           <div class='response' id='mce-error-response' style='display:none'></div>
@@ -110,43 +105,38 @@ footer:
     </div>
   </div>
 
-  <div class='cell2 pad3'>
-    <h3>MapBox</h3>
-    <div class='links'>
-      {% for item in page.footer.tour %}
-      <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
-      {% endfor %}
-    </div>
-    <div class='links'>
+  <div class='col2 pad4'>
+    <h3 class='title'>MapBox</h3>
+    <p class='links'>
       {% for item in page.footer.mapbox %}
       <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
       {% endfor %}
-    </div>
+    </p>
   </div>
-  <div class='cell2 pad3'>
-    <h3>Resources</h3>
-    <div class='links'>
+  <div class='col2 pad4'>
+    <h3 class='title'>Resources</h3>
+    <p class='links'>
       {% for item in page.footer.resources %}
       <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
       {% endfor %}
-    </div>
-    <h3>Tools</h3>
-    <div class='links'>
+    </p>
+    <h3 class='title'>Tools</h3>
+    <p class='links'>
       {% for item in page.footer.tools %}
       <a id='footer-{{item.title | downcase | replace:' ','-'}}' href='{{site.url}}{{item.path}}/'>{{item.title}}</a>
       {% endfor %}
-    </div>
+    </p>
   </div>
-  <div class='cell5 pad3 blogposts'>
-    <h3>Recent blog posts</h3>
-    <div class='links'>
+  <div class='col5 pad4 blogposts'>
+    <h3 class='title'>Recent blog posts</h3>
+    <p class='links'>
       <script src='http://mapbox.com/snippets/blog-list.js'></script>
-    </div>
-    <a id='read-more' href='{{site.url}}/blog/'>Read more <span class='icon next blue'></span></a>
+    </p>
+    <a id='read-more' href='{{site.url}}/blog/' class='rcon next'>Read more</a>
   </div>
 </div>
 
-<div class='footer-copyright'>
+<div class='footer-copyright dark fill-denim center pad2 small'>
   <a href='{{base}}/tos'>Terms of service</a> +
   <a href='{{base}}/privacy'>Privacy policy</a>
   &copy; MapBox
@@ -155,7 +145,7 @@ footer:
 
 <script src='https://tiles.mapbox.com/snippets/user.js'></script>
 
-<script type='text/javascript'>
+<script>
 var _gaq = _gaq || [];
 var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
 _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
@@ -179,9 +169,7 @@ var _gauges = _gauges || [];
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(t, s);
 })();
-</script>
 
-<script type="text/javascript">
 setTimeout(function(){var a=document.createElement("script");
 var b=document.getElementsByTagName("script")[0];
 a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
