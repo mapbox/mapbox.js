@@ -1,163 +1,98 @@
 ---
 layout: default
 section: developers
-class: box
 ---
-<style type='text/css'>
-.example-header h3 { display:inline; margin-right:10px; }
-.doc-example { border-left:1px solid #ccc; }
-.doc-nav {
-  border-right: 1px solid #CCC;
-  margin-right: -1px;
-  }
-#map {
-  background:#fff;
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  }
 
-#demo {
-  position:relative;
-  height:400px;
-  }
-#demo *:not(.zoomer) {
-  box-sizing:content-box;
-  -moz-box-sizing:content-box;
-  }
-#demo label { display:inline; }
+<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 
-#snippet {
-  background:#fff;
-  position:relative;
-  overflow:hidden;
-  }
-  #snippet .button {
-    position:absolute;
-    bottom:20px; right:20px;
-    z-index:1;
-    }
-
-pre {
-  margin:0;
-  background:transparent;
-  }
-pre:hover { background:transparent; }
-pre a {
-  background:#EAF4F8;
-  border:0;
-  padding:0;
-  -webkit-box-shadow: 0 0 2px #EAF4F8;
-          box-shadow: 0 0 2px #EAF4F8;
-  }
-
-.code-header *,
-.code-footer * { color:#999; }
-
-.doc-footer {
-  border-top:1px solid #ccc;
-  text-align:center;
-  border-left:0;
-  }
-
-.ad-v1 {
-  background: #8B8CC9;
-  color: white;
-  font-size: 14px;
-  margin-bottom: 20px;
-  padding: 15px;
-}
-
-.ad-v1 a {
-  color: white;
-  font-weight: bold;
-  text-decoration: underline;
-}
-.ad-v1 a:hover {
-  color: #D0D2FC;
-}
-
-@media (max-width:640px) {
-  .doc-example { border-bottom:1px solid #ccc; border-left:0px; }
-  .doc-nav {
-    margin-right:0;
-    }
-  }
-</style>
-
-<div class='clearfix doc-header pad3 fillL'>
-  <div class='cell8'>
-    <h2>
-      {{site.title}}
-      <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.oldversion}}{% endif %}</span>
-    </h2>
-    <p>{{site.description}}</p>
+<div class='clearfix doc-header fill-light'>
+  <div class='col12 pad4x contain'>
+    <a class='tag pad1y2x fill-darken0' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
   </div>
-  <ul class='cell4 doc-subnav clearfix'>
-    <li><a href='{{site.baseurl}}/api/v0.6.7/'>API</a></li>
-    <li><a href='{{site.baseurl}}/example/v0.6.7/' class='active'>Examples</a></li>
-    <li><a href='{{site.baseurl}}/changelog/'>Changelog</a></li>
-  </ul>
-</div>
 
-<div class='doc-page pad3c fillM clearfix'>
-
-<div class='fillW clearfix ad-v1'>
-  <span class="icon reverse star"></span>
-  Try <a href="{{site.baseurl}}/example/v1.0.0/">MapBox.js v1.0.0</a>, built on Leaflet.
-</div>
-
-<div class='fillW clearfix'>
-  <div class='cell3'>
-    <div class='doc-nav'>
-      <form class='doc-search'>
-        <input type='text' placeholder='Filter examples'>
-        <span class='icon search'></span>
-      </form>
-      <ul class='nav pages'>
-      {% for item in site.categories['example/v0.6.7'] reversed %}
-      <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
-      {% endfor %}
+  <div class='pad4 clearfix'>
+      <div class='col8'>
+        <h2>
+          {{site.title}}
+          <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.oldversion}}{% endif %}</span>
+        </h2>
+        <p>{{site.description}}</p>
+      </div>
+      <nav class='col4 pill clearfix'>
+        <a class='button col4' href='{{site.baseurl}}/api/v0.6.7/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/v0.6.7/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
       </ul>
     </div>
-  </div>
-  <div class='cell9 doc-example'>
-    <div class='pad2 doc example-header'>
-      <h3>{{page.title}}</h3>
-      <span class='description'>{{page.description}}</span>
-    </div>
-    <div id='demo' class='doc'>{{content}}</div>
-    <div id='snippet' class='doc'>
-    <a class='button big' href='#' id='copy'><span class='icon embed reverse'></span> Select all</a>
-    <div id='code' class='doc'>
-    <pre class='prettyprint code-header'>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;script src='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.js'&gt;&lt;/script&gt;
-  &lt;link href='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.css' rel='stylesheet' /&gt;
-  &lt;style&gt;
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;</pre>
-    <pre class='prettyprint code-body'>{{content | escape}}</pre>
-    <pre class='prettyprint code-footer'>
-&lt;/body&gt;
-&lt;/html&gt;</pre>
-    </div>
-    </div>
-    <div class='doc-footer'>
-      <div class='pad2'>
-        The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
+
+    <div class='doc-page pad4c fill-grey clearfix'>
+      <div class='fill-white clearfix ad-v1'>
+        <span class="icon reverse star"></span>
+        Try <a href="{{site.baseurl}}/example/v1.0.0/">MapBox.js v1.0.0</a>, built on Leaflet.
+      </div>
+
+      <div class='fill-white clearfix'>
+        <div class='col3'>
+          <div class='doc-nav'>
+            <form class='doc-search contain pad2'>
+              <input class='stretch' type='text' placeholder='Filter examples'>
+              <span class='icon search'></span>
+            </form>
+            <ul class='nav pages'>
+            {% for item in site.categories['example/v0.6.7'] reversed %}
+            <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class='col9 doc-example'>
+          <div class='pad2 doc example-header'>
+            <h3>{{page.title}}</h3>
+            <span class='description'>{{page.description}}</span>
+          </div>
+          <div id='demo' class='doc'>{{content}}</div>
+          <div id='snippet' class='doc'>
+          <a class='button icon embed' href='#' id='copy'>Select all</a>
+          <div id='code' class='doc'>
+
+<div class='code-header'>
+{% highlight html %}
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset=utf-8 />
+  <title></title>
+    <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.js'></script>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.css' rel='stylesheet' />
+    <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+  </head>
+  <body>
+{% endhighlight %}
+</div>
+
+{% highlight html %}
+  {{content}}
+{% endhighlight %}
+
+<div class='code-footer'>
+{% highlight html %}
+  </body>
+  </html>
+{% endhighlight %}
+</div>
+
+          </div>
+          </div>
+          <div class='keyline-top center small'>
+            <div class='pad2'>
+              The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 
 {% include developers-footer.html %}
 
@@ -169,6 +104,6 @@ pre a {
     example.colorCode(function(){
         example.bindHints("{{ site.oldversion }}");
     });
-    example.bindSearch($('.doc-search input'), $('.doc-nav ul'), false);
+    example.bindSearch($('.doc-search input'), $('nav.v'), false);
   });
 </script>
