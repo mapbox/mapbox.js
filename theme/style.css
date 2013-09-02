@@ -212,7 +212,7 @@ a.mapbox-icon-twitter {
     cursor:    -moz-default;
 }
 
-.leaflet-popu a,
+.leaflet-popup a,
 .map-tooltip a,
 .map-legend a {
     color: #489;
