@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "0.6.3",
+    "leaflet": "0.6.4",
     "mustache": "~0.7.2",
     "corslite": "0.0.4",
     "json3": "git://github.com/bestiejs/json3.git#v3.2.5a"
