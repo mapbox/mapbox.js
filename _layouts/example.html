@@ -33,8 +33,10 @@ section: developers
         <div class='col3 keyline-right'>
           <div class='doc-nav'>
             <form class='doc-search contain pad2'>
-              <input class='stretch' type='text' placeholder='Filter examples'>
-              <span class='icon search'></span>
+              <fieldset class='search'>
+                <span class='icon search'></span>
+                <input class='stretch' type='text' placeholder='Filter examples'>
+              </fieldset>
             </form>
             <ul class='nav pages'>
             {% for item in site.categories['example/v0.6.7'] reversed %}
