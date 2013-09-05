@@ -51,7 +51,7 @@ footer:
   <meta name='robots' content='{% if page.hidden %}noindex{% else %}index{% endif %}'/>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
-  <title>{% if page.url == '/' %}{{page.title}} | Fast and beautiful maps{% else %}{{page.title}} | MapBox{% endif %}</title>
+  <title>mapbox.js {{page.title}} | MapBox</title>
   <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
   <!--[if lte IE 8]>
     <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.ie.css' rel='stylesheet' />
