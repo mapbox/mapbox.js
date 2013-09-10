@@ -60,6 +60,18 @@ describe('L.mapbox.geocoderControl', function() {
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v3/foobar/geocode/{query}.json');
     });
 
+    it('is by default in the top left', function() {
+        var control = L.mapbox.geocoderControl('examples.map-vyofok3q');
+        expect(control.options.position).to.equal('topleft');
+    });
+
+    it('supports an options object', function() {
+        var control = L.mapbox.geocoderControl('examples.map-vyofok3q', {
+            position: 'bottomright'
+        });
+        expect(control.options.position).to.equal('bottomright');
+    });
+
     describe('events', function() {
         var map, control;
 

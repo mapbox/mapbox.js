@@ -9,7 +9,8 @@ var GeocoderControl = L.Control.extend({
         position: 'topleft'
     },
 
-    initialize: function(_) {
+    initialize: function(_, options) {
+        L.Util.setOptions(this, options);
         this.geocoder = geocoder(_);
     },
 
@@ -126,6 +127,6 @@ var GeocoderControl = L.Control.extend({
     }
 });
 
-module.exports = function(options) {
-    return new GeocoderControl(options);
+module.exports = function(_, options) {
+    return new GeocoderControl(_, options);
 };
