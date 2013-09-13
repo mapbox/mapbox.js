@@ -12,7 +12,7 @@ var marker = require('./marker');
 var MarkerLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; },
-        sanitizer: require('./sanitize')
+        sanitizer: require('sanitize-caja')
     },
 
     initialize: function(_, options) {

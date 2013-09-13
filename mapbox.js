@@ -16,6 +16,6 @@ L.mapbox = module.exports = {
     markerLayer: require('./src/marker_layer'),
     map: require('./src/map'),
     config: require('./src/config'),
-    sanitize: require('./src/sanitize'),
+    sanitize: require('sanitize-caja'),
     template: require('mustache').to_html
 };

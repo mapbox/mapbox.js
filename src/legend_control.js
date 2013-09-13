@@ -4,7 +4,7 @@ var LegendControl = L.Control.extend({
 
     options: {
         position: 'bottomright',
-        sanitizer: require('./sanitize')
+        sanitizer: require('sanitize-caja')
     },
 
     initialize: function(options) {
