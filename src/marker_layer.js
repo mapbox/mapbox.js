@@ -39,9 +39,11 @@ var MarkerLayer = L.FeatureGroup.extend({
     },
 
     loadURL: function(url) {
+        if (this._request && 'abort' in this._request) this._request.abort();
         url = urlhelper.jsonify(url);
-        request(url, L.bind(function(err, json) {
-            if (err) {
+        this._request = request(url, L.bind(function(err, json) {
+            this._request = null;
+            if (err && err.type !== 'abort') {
                 util.log('could not load markers at ' + url);
                 this.fire('error', {error: err});
             } else if (json) {

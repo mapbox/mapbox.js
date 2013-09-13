@@ -1,13 +1,13 @@
-'use strict';
-
 var corslite = require('corslite'),
     JSON3 = require('json3'),
     strict = require('./util').strict;
 
 module.exports = function(url, callback) {
+    'use strict';
     strict(url, 'string');
     strict(callback, 'function');
-    corslite(url, function(err, resp) {
+    return corslite(url, onload);
+    function onload(err, resp) {
         if (!err && resp) {
             // hardcoded grid response
             if (resp.responseText[0] == 'g') {
@@ -18,5 +18,5 @@ module.exports = function(url, callback) {
             }
         }
         callback(err, resp);
-    });
+    }
 };
