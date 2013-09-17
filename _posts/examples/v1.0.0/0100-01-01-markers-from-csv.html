@@ -27,6 +27,13 @@ tags:
 
   Another CSV that you use will also need to contain latitude and longitude
   columns, and they must be similarly named.
+
+  As with any other AJAX request, this technique is subject to the Same Origin Policy:
+
+  http://en.wikipedia.org/wiki/Same_origin_policy
+
+  So the CSV file must be on the same domain as the Javascript, or the server
+  delivering it should support CORS.
 -->
 
 <script src="{{site.baseurl}}/assets/csv2geojson.js"></script>
