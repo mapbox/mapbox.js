@@ -133,6 +133,18 @@ Having the ability to use retina tiles when the device supports them is easy. Wh
         retinaVersion: 'examples.map-zswgei2n'
       }).setView([40, -74.50], 9);
 
+### Browser Compatibility
+
+MapBox.js aims to be compatible with **IE8+, Chrome, Safari, Firefox, Opera,
+Mobile Safari, and other [modern browsers](http://browsehappy.com/)**. Browser-specific
+issues should be reported [in the issue tracker](https://github.com/mapbox/mapbox.js/issues?state=open).
+
+The fragility of Internet Explorer and programming in general makes it simple
+to break code with subtle changes. We recommend checking code in [jshint](http://jshint.com/)
+as a first-line measure and [enabling browser debug tools](http://debugbrowser.com)
+to obtain precise error reports and debugging information that you should share
+as part of your debugging.
+
 ### Viewport
 
 Modern mobile browsers now support scaling of webpages by leveraging the meta tag `viewport`. This enlarges the window making your map look better on a mobile device. Simply include this in the head of your document:
