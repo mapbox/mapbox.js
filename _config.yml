@@ -3,7 +3,7 @@ baseurl: /mapbox.js
 pygments: true
 version: v1.3.1
 oldversion: v0.6.7
-url: http://mapbox.com
+url: https://www.mapbox.com
 title: mapbox.js
 description: MapBox JavaScript API
 rdiscount:
