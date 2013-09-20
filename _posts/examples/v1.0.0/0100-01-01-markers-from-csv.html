@@ -16,8 +16,8 @@ tags:
   You can use another tool for AJAX, but if you want to use jQuery, add
   these lines to the the page:
 
-  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
   This pulls the file airports.csv, converts into into GeoJSON by autodetecting
   the latitude and longitude columns, and adds it to the map. The full URL
@@ -27,12 +27,19 @@ tags:
 
   Another CSV that you use will also need to contain latitude and longitude
   columns, and they must be similarly named.
+
+  As with any other AJAX request, this technique is subject to the Same Origin Policy:
+
+  http://en.wikipedia.org/wiki/Same_origin_policy
+
+  So the CSV file must be on the same domain as the Javascript, or the server
+  delivering it should support CORS.
 -->
 
 <script src="{{site.baseurl}}/assets/csv2geojson.js"></script>
 <div id='map'></div>
 <script type='text/javascript'>
-var map = L.mapbox.map('map', 'examples.map-uci7ul8p')
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
     .setView([38, -102.0], 5),
     markerLayer = L.mapbox.markerLayer().addTo(map);
 

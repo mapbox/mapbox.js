@@ -10,9 +10,13 @@ tags:
 
 <div id='map'></div>
 <script type='text/javascript'>
-var map = L.mapbox.map('map', 'examples.map-uci7ul8p')
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
     .setView([38, -102.0], 9);
 
+// As with any other AJAX request, this technique is subject to the Same Origin Policy:
+// http://en.wikipedia.org/wiki/Same_origin_policy
+// So the CSV file must be on the same domain as the Javascript, or the server
+// delivering it should support CORS.
 var markerLayer = L.mapbox.markerLayer()
     .loadURL('{{site.baseurl}}/assets/example-single.geojson')
     .addTo(map);
