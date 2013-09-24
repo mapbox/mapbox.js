@@ -14,6 +14,7 @@ Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 ## Building
 
     git clone https://github.com/mapbox/mapbox.js.git
+    cd mapbox.js
     npm install
     make
 
