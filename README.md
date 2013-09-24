@@ -13,6 +13,8 @@ Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 
 ## Building
 
+Requires [node.js](http://nodejs.org/) installed on your system.
+
     git clone https://github.com/mapbox/mapbox.js.git
     cd mapbox.js
     npm install
