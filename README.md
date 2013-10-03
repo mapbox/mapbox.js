@@ -11,6 +11,28 @@ Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 
 ## [Examples](http://mapbox.com/mapbox.js/example/v1.0.0/)
 
+## Usage with Browserify
+
+Install the mapbox.js module and add it to `dependencies` in package.json:
+
+```sh
+npm install mapbox.js --save
+```
+
+Require mapbox in your script:
+
+```js
+// main.js
+
+require('mapbox.js'); // <-- auto-attaches to window.L
+```
+
+Browserify it:
+
+```sh
+browserify main.js -o bundle.js
+```
+
 ## Building
 
 Requires [node.js](http://nodejs.org/) installed on your system.
