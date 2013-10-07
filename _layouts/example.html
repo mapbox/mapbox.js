@@ -2,7 +2,7 @@
 layout: default
 section: developers
 ---
-
+{% capture version %}{% if page.v0 %}{{site.oldversion}}{% else %}{{site.version}}{% endif %}{% endcapture %}
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 
 <div class='clearfix doc-header fill-light'>
@@ -14,20 +14,22 @@ section: developers
       <div class='col8'>
         <h2>
           {{site.title}}
-          <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.oldversion}}{% endif %}</span>
+          <span class='version'>{{version}}</span>
         </h2>
         <p>{{site.description}}</p>
       </div>
       <nav class='col4 pill clearfix'>
-        <a class='button col4' href='{{site.baseurl}}/api/v0.6.7/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/v0.6.7/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
-      </ul>
+        <a class='button col4' href='{{site.baseurl}}/api/{{version}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{version}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
+      </nav>
     </div>
 
     <div class='doc-page pad4c fill-grey clearfix'>
+      {% if page.v0 %}
       <div class='fill-white clearfix ad-v1'>
-        <span class="icon reverse star"></span>
-        Try <a href="{{site.baseurl}}/example/v1.0.0/">MapBox.js v1.0.0</a>, built on Leaflet.
+        <span class='icon reverse star'></span>
+        Try <a href='{{site.baseurl}}/example/v1.0.0/'>MapBox.js v1.0.0</a>, built on Leaflet.
       </div>
+      {% endif %}
 
       <div class='fill-white clearfix'>
         <div class='col3 keyline-right'>
@@ -38,11 +40,17 @@ section: developers
                 <input class='stretch' type='text' placeholder='Filter examples'>
               </fieldset>
             </form>
-            <ul class='nav pages'>
-            {% for item in site.categories['example/v0.6.7'] reversed %}
-            <li><a {% if item.url == page.url %}class='active'{% endif %} href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a></li>
-            {% endfor %}
-            </ul>
+            <nav class='v small'>
+            {% if page.v0 %}
+              {% for item in site.categories['example/v0.6.7'] reversed %}
+              <a class='pad1y2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
+              {% endfor %}
+            {% else %}
+              {% for item in site.categories['example/v1.0.0'] reversed %}
+              <a class='pad1y2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
+              {% endfor %}
+            {% endif %}
+            </nav>
           </div>
         </div>
         <div class='col9'>
@@ -57,33 +65,35 @@ section: developers
 
 <div class='code-header'>
 {% highlight html %}
-  <!DOCTYPE html>
-  <html>
-  <head>
-  <meta charset=utf-8 />
-  <title></title>
-    <script src='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.js'></script>
-    <link href='http://api.tiles.mapbox.com/mapbox.js/{{site.oldversion}}/mapbox.css' rel='stylesheet' />
-    <style>
-      body { margin:0; padding:0; }
-      #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
-  </head>
-  <body>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title></title>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/{{version}}/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/{{version}}/mapbox.css' rel='stylesheet' />
+  {% unless page.v0 %}<!--[if lte IE 8]>
+    <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.ie.css' rel='stylesheet'>
+  <![endif]-->{% endunless %}
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+</head>
+<body>
 {% endhighlight %}
 </div>
 
 {% highlight html %}
-  {{content}}
+{{content}}
 {% endhighlight %}
 
 <div class='code-footer'>
 {% highlight html %}
-  </body>
-  </html>
+</body>
+</html>
 {% endhighlight %}
 </div>
-
           </div>
           </div>
           <div class='keyline-top center small'>
@@ -103,9 +113,11 @@ section: developers
     var example = new Docs();
     $(example.page);
     $(example.copyCode);
+    {% if page.v0 %}
     example.colorCode(function(){
         example.bindHints("{{ site.oldversion }}");
     });
+    {% endif %}
     example.bindSearch($('.doc-search input'), $('nav.v'), false);
   });
 </script>

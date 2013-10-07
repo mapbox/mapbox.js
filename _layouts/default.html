@@ -27,7 +27,7 @@ footer:
     - title: Blog
       path: /blog
     - title: Status
-      path: /status
+      path: http://mapbox.com/status
   resources:
     - title: Help
       path: /help
@@ -52,7 +52,6 @@ footer:
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
   <title>mapbox.js {{page.title}} | MapBox</title>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
   <!--[if IE]><link rel='stylesheet' href='{{site.url}}/css/site-ie.css' type='text/css'/><![endif]-->
   <link rel='shortcut icon' href='{{site.url}}/img/favicon.ico' type='image/x-icon' />
   <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
@@ -63,12 +62,19 @@ footer:
   analytics.load(window.location.hostname.indexOf('mapbox.com') !== -1 ? 'fl0c8p240n' : '0biiejpgfj');
   </script>
 
-  <script src='{{site.url}}/js/site.js'></script>
+  {% if page.v0 %}
   <script src='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+   <link href='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+  {% else %}
+  <script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.uncompressed.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
+  <!--[if lte IE 8]><link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.ie.css' rel='stylesheet' /><![endif]-->
+  {% endif %}
+
+  <script src='{{site.url}}/js/site.js'></script>
   <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
   <script src='{{site.baseurl}}/assets/js/site.js'></script>
 </head>
-
 <body class='{{page.class}}'>
 
 <div class='branding pad4x clearfix'>
