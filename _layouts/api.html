@@ -19,7 +19,7 @@ section: developers
       <p>{{site.description}}</p>
     </div>
 
-    <nav class='pill col4'>
+    <nav class='pill mobile-cols col4'>
       {% if page.version contains "v1" %}
         <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
     </nav>
