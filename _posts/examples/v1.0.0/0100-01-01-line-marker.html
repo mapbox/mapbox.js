@@ -13,20 +13,18 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
 map.markerLayer.on('ready', function(e) {
-    var markers = [];
-    var line = [];
+  
+  var line = [];
 
-    this.eachLayer(function(marker) {markers.push(marker); });
+  this.eachLayer(function(marker) {
+    line.push(marker.getLatLng());
+  });
 
-    for(i=0;i<markers.length;i++){
-        line.push(markers[i].getLatLng())
-    }
+  var polyline_options = {
+    color: '#000'
+  };
 
-    var polyline_options = {
-        color: '#000'
-    };
-
-    var polyline = L.polyline(line,polyline_options).addTo(map);
+  var polyline = L.polyline(line, polyline_options).addTo(map);
 
 });
 </script>
