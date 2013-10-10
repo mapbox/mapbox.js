@@ -178,6 +178,11 @@ a.mapbox-icon-twitter {
     padding: 5px 8px;
 }
 
+/* Fix for retina markers */
+.leaflet-marker-icon {
+  background-size: 100%;
+}
+
 /* General Toolbar Overrides */
 
 .leaflet-bar, .leaflet-touch .leaflet-bar {
