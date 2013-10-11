@@ -149,7 +149,7 @@ as part of your debugging.
 
 Modern mobile browsers now support scaling of webpages by leveraging the meta tag `viewport`. This enlarges the window making your map look better on a mobile device. Simply include this in the head of your document:
 
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
 
 ### Scrolling
 
