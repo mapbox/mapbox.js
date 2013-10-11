@@ -27,6 +27,11 @@ describe('L.mapbox.marker', function() {
             expect(marker.options.icon.options.iconUrl).to.contain('f00');
         });
 
+        it("tolerates empty input", function() {
+            var marker = L.mapbox.marker.style({});
+            expect(marker.options).to.be.ok();
+        });
+
         it("sets a marker's title", function() {
             var marker = L.mapbox.marker.style({
                 properties: {

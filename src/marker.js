@@ -35,7 +35,7 @@ function icon(fp) {
 function style(f, latlon) {
     return L.marker(latlon, {
         icon: icon(f.properties),
-        title: f.properties.title
+        title: (f.properties && f.properties.title) || ''
     });
 }
 
