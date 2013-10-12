@@ -37,10 +37,12 @@ browserify main.js -o bundle.js
 
 Requires [node.js](http://nodejs.org/) installed on your system.
 
-    git clone https://github.com/mapbox/mapbox.js.git
-    cd mapbox.js
-    npm install
-    make
+``` sh
+git clone https://github.com/mapbox/mapbox.js.git
+cd mapbox.js
+npm install
+make
+```
 
 This project uses [browserify](https://github.com/substack/node-browserify) to combine
 dependencies and installs a local copy when you run `npm install`.
@@ -50,7 +52,9 @@ dependencies and installs a local copy when you run `npm install`.
 
 Test with [phantomjs](http://phantomjs.org/):
 
-    npm test
+``` sh
+npm test
+```
 
 To test in a browser, run a [local development server](https://gist.github.com/tmcw/4989751)
 and go to `/test`.
