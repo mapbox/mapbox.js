@@ -2,28 +2,27 @@
 layout: default
 section: developers
 ---
-{% capture version %}{% if page.v0 %}{{site.oldversion}}{% else %}{{site.version}}{% endif %}{% endcapture %}
-<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 
-<div class='clearfix doc-header'>
-  <div class='col12 pad4x contain'>
-    <a class='tag pad1y pad2x fill-darken0' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
-  </div>
+<div class="clearfix">
+  <div class='col10 margin1 round box clearfix contain'>
+    <div class="keyline-bottom clearfix">
 
-  <div class='pad4 clearfix keyline-bottom'>
-      <div class='col8'>
-        <h2>
-          {{site.title}}
-          <span class='version'>{{version}}</span>
-        </h2>
-        <p>{{site.description}}</p>
-      </div>
-      <nav class='col4 pill mobile-cols clearfix'>
+      <form id='docs-form' class='doc-search contain col3'>
+        <div class="pad2">
+          <fieldset class='with-icon'>
+            <span class='icon search'></span>
+            <input id='search-filter' class='stretch' type='text' placeholder='Filter examples'>
+          </fieldset>
+        </div>
+      </form>
+
+      <nav id='docs-nav' class='pill mobile-cols col9 pad2'>
         <a class='button col4' href='{{site.baseurl}}/api/{{version}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{version}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
       </nav>
     </div>
 
-    <div class='doc-page clearfix'>
+    <div class='fill-white clearfix'>
+
       {% if page.v0 %}
       <div class='fill-white clearfix ad-v1'>
         <span class='icon reverse star'></span>
@@ -34,12 +33,6 @@ section: developers
       <div class='fill-white clearfix'>
         <div class='col3 keyline-right'>
           <div class='doc-nav'>
-            <form class='doc-search contain pad2'>
-              <fieldset class='with-icon'>
-                <span class='icon search'></span>
-                <input class='stretch' type='text' placeholder='Filter examples'>
-              </fieldset>
-            </form>
             <nav class='v small'>
             {% if page.v0 %}
               {% for item in site.categories['example/v0.6.7'] reversed %}

@@ -3,24 +3,7 @@ layout: default
 section: developers
 ---
 
-<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
-<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-<script src='{{site.baseurl}}/assets/js/site.js'></script>
-
-<div class='clearfix doc-header'>
-  <div class='pad4y clearfix'>
-    <div class='col10 margin1 contain'>
-      <div class="col6">
-        <h1 class='tag small quiet' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</h1>
-        <h2>
-          {{site.title}}
-          <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
-        </h2>
-      </div>
-
-    </div>
-  </div>
-
+<div class="clearfix">
   <div class='col10 margin1 round box clearfix contain'>
     <div class="keyline-bottom clearfix">
 
@@ -82,14 +65,6 @@ section: developers
 
 <script>
   $(function() {
-    $('#search-filter').focusin(function(){
-      $('#docs-form').addClass('col12');
-      $('#docs-nav').hide();
-    });
-    $('#search-filter').focusout(function(){
-      $('#docs-form').removeClass('col12');
-      $('#docs-nav').show();
-    });
 
     var docs = new Docs();
     docs.colorCode();
