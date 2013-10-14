@@ -6,35 +6,38 @@ section: developers
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 
 <div class='clearfix doc-header'>
-  <div class='col12 pad4x contain'>
-    <a class='tag pad1y2x fill-darken0' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
+
+  <div class='pad4y clearfix'>
+
+    <div class='col10 margin1 contain'>
+      <div class="col6">
+        <a class='tag quiet' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
+        <h2>
+          {{site.title}}
+          <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
+        </h2>
+      </div>
+
+      <nav class='pill mobile-cols col6'>
+        {% if page.version contains "v1" %}
+          <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
+      </nav>
+    </div>
   </div>
 
-  <div class='pad4 clearfix keyline-bottom'>
-    <div class='col8'>
-      <h2>
-        {{site.title}}
-        <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
-      </h2>
-      <p>{{site.description}}</p>
+  <div class='col10 margin1 round box clearfix contain'>
+    <div class="pad2 keyline-bottom">
+      <form class='doc-search contain'>
+        <fieldset class='with-icon'>
+          <span class='icon search'></span>
+          <input type='text' class='stretch' placeholder='Filter methods'>
+        </fieldset>
+      </form>
     </div>
 
-    <nav class='pill mobile-cols col4'>
-      {% if page.version contains "v1" %}
-        <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
-    </nav>
-  </div>
-
-  <div class='doc-page clearfix'>
     <div class='fill-white clearfix'>
       <div class='col3'>
         <div class='doc-nav'>
-          <form class='doc-search contain pad2'>
-            <fieldset class='with-icon'>
-              <span class='icon search'></span>
-              <input type='text' class='stretch' placeholder='Filter methods'>
-            </fieldset>
-          </form>
           <nav class='anchors v small'>
           {% for section in page.navigation %}
             <a class='heading pad1y2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
