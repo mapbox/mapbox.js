@@ -5,7 +5,10 @@ section: developers
 
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 
-<div class='clearfix doc-header'>
+<div class='clearfix doc-header fill-light'>
+  <div class='col12 pad4x contain'>
+    <a class='tag pad1y pad2x fill-darken0' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
+  </div>
 
   <div class='pad4y clearfix'>
 
@@ -40,12 +43,12 @@ section: developers
         <div class='doc-nav'>
           <nav class='anchors v small'>
           {% for section in page.navigation %}
-            <a class='heading pad1y2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
+            <a class='heading pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
             {% for item in section.items %}
               {% if item.Separator %}
-              <a class='parent pad1y2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
+              <a class='parent pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
               {% else %}
-              <a class='pad1y2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
+              <a class='pad1y pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
               {% endif %}
             {% endfor %}
           {% endfor %}
