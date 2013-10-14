@@ -4,6 +4,8 @@ section: developers
 ---
 
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
 
 <div class='clearfix doc-header fill-light'>
   <div class='col12 pad4x contain'>
@@ -14,28 +16,33 @@ section: developers
 
     <div class='col10 margin1 contain'>
       <div class="col6">
-        <a class='tag quiet' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
+        <h1 class='tag small quiet' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</h1>
         <h2>
           {{site.title}}
           <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
         </h2>
       </div>
 
-      <nav class='pill mobile-cols col6'>
-        {% if page.version contains "v1" %}
-          <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
-      </nav>
     </div>
   </div>
 
   <div class='col10 margin1 round box clearfix contain'>
-    <div class="pad2 keyline-bottom">
-      <form class='doc-search contain'>
-        <fieldset class='with-icon'>
-          <span class='icon search'></span>
-          <input type='text' class='stretch' placeholder='Filter methods'>
-        </fieldset>
+    <div class="keyline-bottom clearfix">
+
+      <form id='docs-form' class='doc-search contain col3'>
+        <div class='pad2'>
+          <fieldset class='with-icon'>
+            <span class='icon search'></span>
+            <input id='search-filter' type='text' class='stretch' placeholder='Filter methods'>
+          </fieldset>
+        </div>
       </form>
+
+      <nav id='docs-nav' class='pill mobile-cols col9 pad2'>
+        {% if page.version contains "v1" %}
+          <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
+      </nav>
+
     </div>
 
     <div class='fill-white clearfix'>
@@ -63,7 +70,7 @@ section: developers
       </div>
       {% endif %}
       <div id='docs' class='doc-content prose'>
-        <div class='doc pad4'>
+        <div class='doc pad2'>
           {{content}}
         </div>
         <div class='keyline-top center small'>
@@ -80,9 +87,19 @@ section: developers
 
 <script>
   $(function() {
+    $('#search-filter').focusin(function(){
+      $('#docs-form').addClass('col12');
+      $('#docs-nav').hide();
+    });
+    $('#search-filter').focusout(function(){
+      $('#docs-form').removeClass('col12');
+      $('#docs-nav').show();
+    });
+
     var docs = new Docs();
     docs.colorCode();
     docs.bindSearch($('.doc-search input'), $('nav.v'), true);
     docs.bindInlineCode();
+
   });
 </script>

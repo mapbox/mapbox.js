@@ -46,10 +46,6 @@
                 .on('keypress', $.proxy(this._keypress, this))
                 .on('keyup', $.proxy(this._keyup, this));
 
-              if ($.browser.webkit || $.browser.msie) {
-                this.$el.on('keydown', $.proxy(this._keydown, this));
-              }
-
               this.$menu.on('mouseenter', 'a', $.proxy(this._mouseenter, this));
         },
 
