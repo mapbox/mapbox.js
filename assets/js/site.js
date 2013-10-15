@@ -45,8 +45,6 @@
             this.$el
                 .on('keypress', $.proxy(this._keypress, this))
                 .on('keyup', $.proxy(this._keyup, this));
-
-              this.$menu.on('mouseenter', 'a', $.proxy(this._mouseenter, this));
         },
 
         _keydown: function(e) {

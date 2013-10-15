@@ -3,45 +3,44 @@ layout: default
 section: developers
 ---
 
-<div class="clearfix">
-  <div class='col10 margin1 round box clearfix contain'>
-    <div class="keyline-bottom clearfix">
+<div class='col10 margin1 round box clearfix contain'>
+  <div class="keyline-bottom clearfix">
 
-      <form id='docs-form' class='doc-search contain col3'>
-        <div class='pad2'>
-          <fieldset class='with-icon'>
-            <span class='icon search'></span>
-            <input id='search-filter' type='text' class='stretch' placeholder='Filter methods'>
-          </fieldset>
-        </div>
-      </form>
+    <form id='docs-form' class='doc-search contain col3'>
+      <div class='pad2'>
+        <fieldset class='with-icon'>
+          <span class='icon search'></span>
+          <input id='search-filter' type='text' class='stretch' placeholder='Filter methods'>
+        </fieldset>
+      </div>
+    </form>
 
-      <nav id='docs-nav' class='pill mobile-cols col9 pad2'>
-        {% if page.version contains "v1" %}
-          <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
-      </nav>
+    <nav id='docs-nav' class='pill mobile-cols col9 pad2'>
+      {% if page.version contains "v1" %}
+        <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
+    </nav>
 
+  </div>
+
+  <div class='fill-white clearfix'>
+    <div class='col3'>
+      <div class='doc-nav'>
+        <nav class='anchors v small'>
+        {% for section in page.navigation %}
+          <a class='heading pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
+          {% for item in section.items %}
+            {% if item.Separator %}
+            <a class='parent pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
+            {% else %}
+            <a class='pad1y pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+        </nav>
+      </div>
     </div>
 
-    <div class='fill-white clearfix'>
-      <div class='col3'>
-        <div class='doc-nav'>
-          <nav class='anchors v small'>
-          {% for section in page.navigation %}
-            <a class='heading pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
-            {% for item in section.items %}
-              {% if item.Separator %}
-              <a class='parent pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
-              {% else %}
-              <a class='pad1y pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
-              {% endif %}
-            {% endfor %}
-          {% endfor %}
-          </nav>
-        </div>
-      </div>
-
-      <div class='col9 keyline-left'>
+    <div class='col9 keyline-left'>
       {% if site.version != page.version %}
       <div class='doc-content doc pad4 warn'>
         Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.version}}'>{{site.version}} for the latest</a>.
@@ -57,10 +56,10 @@ section: developers
           </div>
         </div>
       </div>
-      </div>
     </div>
   </div>
 </div>
+
 {% include developers-footer.html %}
 
 <script>
