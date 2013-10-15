@@ -29,7 +29,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
         matchedSep = l.type === 'html' && l.text.match(/class=.separator.*>(.*)</);
 
         if (l.type === 'heading' || matchedSep) {
-
+            
             toParse = lexed.slice(start, i);
             toParse.links = lexed.links;
             out += marked.parser(toParse);
@@ -39,6 +39,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
 
             // Header is a function or property
             if (matchedHeading) {
+
                 anchor = matchedHeading[1] + '.' + matchedHeading[2];
                 out += '<h' + l.depth + ' id="' + anchor + '">';
                 out += anchor;
@@ -83,7 +84,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
             start = i + 1;
 
             // End header and start next group
-            out += '<div id="content-' + anchor + '"class="space-bottom depth-' + l.depth + '">';
+            out += '<div id="content-' + escape(anchor) + '"class="space-bottom depth-' + l.depth + '">';
         }
     }
 

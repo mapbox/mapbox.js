@@ -22,7 +22,7 @@ npm install mapbox.js@$TAG
 
 echo "Creating _posts/api/...$TAG"
 sed "s/__TAG__/$TAG/" header > ../_posts/api/0200-01-01-$TAG.html
-echo -e "version: $TAG" >> ../_posts/api/0200-01-01-$TAG.html
+echo "version: $TAG" >> ../_posts/api/0200-01-01-$TAG.html
 
 echo "Generating html..."
 if ! `node generate.js \

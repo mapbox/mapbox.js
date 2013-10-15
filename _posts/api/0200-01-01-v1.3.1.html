@@ -64,7 +64,7 @@ If you&#39;d like to learn Javascript, start with <a href="http://www.codecademy
 <a href="http://eloquentjavascript.net/">a book</a> or <a href="http://www.amazon.com/dp/0596517742/?tag=stackoverfl08-20">a printed book</a>.
 If you&#39;d like to learn more about maps, <a href="http://mapbox.com/developers/guide/">we&#39;ve provided a helpful article explaining how web maps work</a>.</p>
 </div><h2 id="MapBox.js & Leaflet">MapBox.js & Leaflet</h2>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-2"><p>The Javascript API is implemented as a <a href="http://leafletjs.com/">Leaflet</a> plugin. Leaflet
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-2"><p>The Javascript API is implemented as a <a href="http://leafletjs.com/">Leaflet</a> plugin. Leaflet
 is an open-source library that provides the basic ability to embed a map, like
 a MapBox map or a map from OpenStreetMap, into a page. <a href="http://leafletjs.com/reference.html">The Leaflet API</a>
 handles much of the fundamental operations of using maps, so this API documentation is
@@ -73,7 +73,7 @@ reference.</p>
 <p>The MapBox API includes Leaflet and makes it easier to integrate Leaflet with MapBox&#39;s
 maps and services.</p>
 </div><h2>Getting Started with the API</h2>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-2"><p>Here&#39;s a simple page that you can set up with MapBox.js:</p>
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-2"><p>Here&#39;s a simple page that you can set up with MapBox.js:</p>
 <pre><code>&lt;html&gt;
 &lt;head&gt;
   &lt;link href=&#39;//api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.css&#39; rel=&#39;stylesheet&#39; /&gt;
@@ -101,7 +101,7 @@ served from a worldwide content-distribution network. There&#39;s no API key req
 the Javascript API - you&#39;ll identify with MapBox&#39;s services simply by using your own custom
 maps.</p>
 </div><h2>Reading this Documentation</h2>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-2"><p>This documentation is organized by <em>methods</em> in the Javascript API. Each method
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-2"><p>This documentation is organized by <em>methods</em> in the Javascript API. Each method
 is shown with potential arguments, and their types. For instance, the <code>setFilter</code>
 method on <code>L.mapbox.markerLayer</code> is documented as:</p>
 <pre><code>markerLayer.setFilter(filter: function)</code></pre>
@@ -114,7 +114,7 @@ the type of the object. For instance, <code>L.mapbox.markerLayer</code> document
 returns a layer for markers. The methods on that object are then documented as
 <code>markerLayer.setFilter</code>, <code>markerLayer.getGeoJSON</code>, and so on.</p>
 </div><h2>The `ready` Event</h2>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-2"><p>Like many other Javascript libraries, some of what the MapBox.js plugin does
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-2"><p>Like many other Javascript libraries, some of what the MapBox.js plugin does
 is <a href="http://recurial.com/programming/understanding-callback-functions-in-javascript/">asynchronous</a> - when
 you create a layer like <code>L.mapbox.tileLayer(&#39;examples.foo&#39;)</code>, the layer
 doesn&#39;t immediately know which tiles to load and its attribution information.
@@ -138,7 +138,7 @@ layer.on(&#39;error&#39;, function(err) {
     // passed to this function
 });</code></pre>
 </div><h2>TileJSON & UTFGrid</h2>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-2"><p>This library takes advantage of several open specifications, including
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-2"><p>This library takes advantage of several open specifications, including
 <a href="http://mapbox.com/developers/tilejson/">TileJSON</a> and
 <a href="http://mapbox.com/developers/utfgrid/">UTFGrid</a>.</p>
 <p>For the purposes of this API, TileJSON is used as a way to <em>describe
@@ -147,25 +147,25 @@ is the configuration format given to layers, maps, and controls. UTFGrid
 is <em>a fast way to interact with maps</em> with tooltips and customizable behaviors,
 and is easy to define and produce in <a href="http://mapbox.com/tilemill/">TileMill</a>.</p>
 </div><h2>GeoJSON</h2>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-2"><p>The MapBox marker API and the <code>L.mapbox.markers</code> interface use <a href="http://www.geojson.org/">GeoJSON</a>,
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-2"><p>The MapBox marker API and the <code>L.mapbox.markers</code> interface use <a href="http://www.geojson.org/">GeoJSON</a>,
 a simple, open standard for geo-data based on <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>
 and simple features, like Points and Polygons.</p>
 </div><h2>Mobile</h2>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-2"><p>MapBox.js is optimized for mobile devices and small screens by default. There are however best practices to make sure your map always looks its best.</p>
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-2"><p>MapBox.js is optimized for mobile devices and small screens by default. There are however best practices to make sure your map always looks its best.</p>
 </div><h3>Retina</h3>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-3"><p>Having the ability to use retina tiles when the device supports them is easy. When creating the map, use the <code>detectRetina</code> to verify if retina is available and <code>retinaVersion</code> to use a tilelayer which is designed for retina screens.</p>
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-3"><p>Having the ability to use retina tiles when the device supports them is easy. When creating the map, use the <code>detectRetina</code> to verify if retina is available and <code>retinaVersion</code> to use a tilelayer which is designed for retina screens.</p>
 <pre><code>var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-y7l23tes&#39;, {
     detectRetina: true,
     retinaVersion: &#39;examples.map-zswgei2n&#39;
   }).setView([40, -74.50], 9);</code></pre>
 </div><h3>Viewport</h3>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-3"><p>Modern mobile browsers now support scaling of webpages by leveraging the meta tag <code>viewport</code>. This enlarges the window making your map look better on a mobile device. Simply include this in the head of your document:</p>
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-3"><p>Modern mobile browsers now support scaling of webpages by leveraging the meta tag <code>viewport</code>. This enlarges the window making your map look better on a mobile device. Simply include this in the head of your document:</p>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
 
 </div><h3>Scrolling</h3>
-<div id="content-MapBox.js & Leaflet"class="space-bottom depth-3"><p>If you&#39;re planning on having a page that has large amounts of scrolling, try to avoid a large map height. Having a &#39;tall&#39; map can cause the user to get stuck on the map while scrolling. Another way around this is to disable <code>dragging</code> for mobile devices: <code>map.dragging.disable();</code></p>
+<div id="content-MapBox.js%20%26%20Leaflet"class="space-bottom depth-3"><p>If you&#39;re planning on having a page that has large amounts of scrolling, try to avoid a large map height. Having a &#39;tall&#39; map can cause the user to get stuck on the map while scrolling. Another way around this is to disable <code>dragging</code> for mobile devices: <code>map.dragging.disable();</code></p>
 </div><h2 id="Standalone MapBox.js">Standalone MapBox.js</h2>
-<div id="content-Standalone MapBox.js"class="space-bottom depth-2"><p>By default, MapBox.js includes a bundled version of Leaflet that MapBox has ensured
+<div id="content-Standalone%20MapBox.js"class="space-bottom depth-2"><p>By default, MapBox.js includes a bundled version of Leaflet that MapBox has ensured
 is compatible. However, a standalone version of MapBox.js is also available without
 Leaflet included, which you can use if you would like to supply your own version of
 Leaflet. You will need to include Leaflet&#39;s JavaScript and CSS files, and Leaflet 0.6
@@ -196,7 +196,7 @@ or greater is required.</p>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 </div><h1>Map</h1>
-<div id="content-Standalone MapBox.js"class="space-bottom depth-1"></div><h2 id="L.mapbox.map">L.mapbox.map<span class="bracket">(</span><span class="args">element: Element, id: string | url: string | tilejson: object, [options: object]</span><span class="bracket">)</span></h2>
+<div id="content-Standalone%20MapBox.js"class="space-bottom depth-1"></div><h2 id="L.mapbox.map">L.mapbox.map<span class="bracket">(</span><span class="args">element: Element, id: string | url: string | tilejson: object, [options: object]</span><span class="bracket">)</span></h2>
 <div id="content-L.mapbox.map"class="space-bottom depth-2"><p>Create and automatically configure a map with layers, markers, and
 interactivity.</p>
 <p><em>Arguments</em>:</p>
