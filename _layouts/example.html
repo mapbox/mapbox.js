@@ -16,7 +16,11 @@ section: developers
       </form>
 
       <nav id='docs-nav' class='pill mobile-cols col9 pad2'>
-        <a class='button col4' href='{{site.baseurl}}/api/{{version}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{version}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
+        {% if page.v0 %}
+          <a class='button col4' href='{{site.baseurl}}/api/{{site.oldversion}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{site.oldversion}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
+        {% else %}
+          <a class='button col4' href='{{site.baseurl}}/api/{{site.version}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{page.version}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
+        {% endif %}
       </nav>
     </div>
 
