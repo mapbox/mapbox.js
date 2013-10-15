@@ -226,7 +226,7 @@
             }
 
             // mapbox.js v1
-            if (typeof mapbox.map === 'undefined') return;
+            if (typeof mapbox === 'undefined' || typeof mapbox.map === 'undefined') return;
 
             var map =  mapbox.map(document.createElement('div'));
             addThings('mapbox', mapbox);

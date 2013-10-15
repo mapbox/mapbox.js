@@ -22,6 +22,12 @@ section: developers
 
   </div>
 
+  {% if site.version != page.version %}
+  <div class='warning note keyline-bottom'>
+    Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.version}}'>{{site.version}} for the latest</a>.
+  </div>
+  {% endif %}
+
   <div class='fill-white clearfix'>
     <div class='col3'>
       <div class='doc-nav'>
@@ -41,11 +47,6 @@ section: developers
     </div>
 
     <div class='col9 keyline-left'>
-      {% if site.version != page.version %}
-      <div class='doc-content doc pad4 warn'>
-        Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.version}}'>{{site.version}} for the latest</a>.
-      </div>
-      {% endif %}
       <div id='docs' class='doc-content prose'>
         <div class='doc pad2'>
           {{content}}

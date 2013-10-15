@@ -70,7 +70,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
             // Separator
             } else if (matchedSep) {
                 anchor = matchedSep[1].replace(' ', '_');
-                out += '<div class="separator" id="' + anchor + '">' + matchedSep[1] + '</div>';
+                out += '<div class="separator keyline-bottom" id="' + anchor + '">' + matchedSep[1] + '</div>';
                 nav += '  - Separator: ' + matchedSep[1] + '\n';
                 l.depth = 0;
 
@@ -83,7 +83,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
             start = i + 1;
 
             // End header and start next group
-            out += '<div id="content-' + anchor + '"class="depth-' + l.depth + '">';
+            out += '<div id="content-' + anchor + '"class="space-bottom depth-' + l.depth + '">';
         }
     }
 
