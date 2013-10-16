@@ -657,7 +657,7 @@ _Example_:
 
 _Returns_: a `L.mapbox.gridControl` object.
 
-## L.mapbox.geocoderControl(id: string | url: string)
+## L.mapbox.geocoderControl(id: string | url: string, [options: object])
 
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
@@ -677,6 +677,13 @@ _Example_
     var map = L.map('map')
         .setView([37, -77], 5)
         .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
+
+2. (optional):
+
+An options argument with the same options as the `L.Control` class, as well as:
+
+* `keepOpen`: a boolean for whether the control will stay open always rather than
+  being toggled. Default `false`.
 
 _Returns_ a `L.mapbox.geocoderControl` object.
 
