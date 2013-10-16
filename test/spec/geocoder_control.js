@@ -72,6 +72,21 @@ describe('L.mapbox.geocoderControl', function() {
         expect(control.options.position).to.equal('bottomright');
     });
 
+    describe('#keepOpen', function(done) {
+        it('true', function() {
+            var map = new L.Map(document.createElement('div'));
+            var control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+                keepOpen: true
+            }).addTo(map);
+            expect(control._container.className).to.eql('leaflet-control-mapbox-geocoder leaflet-bar leaflet-control active');
+        });
+        it('false', function() {
+            var map = new L.Map(document.createElement('div'));
+            var control = L.mapbox.geocoderControl('http://example.com/{query}.json').addTo(map);
+            expect(control._container.className).to.eql('leaflet-control-mapbox-geocoder leaflet-bar leaflet-control');
+        });
+    });
+
     describe('events', function() {
         var map, control;
 
@@ -79,6 +94,7 @@ describe('L.mapbox.geocoderControl', function() {
             map = new L.Map(document.createElement('div'));
             control = L.mapbox.geocoderControl('http://example.com/{query}.json').addTo(map);
         });
+
 
         it('emits a "found" event when geocoding succeeds', function(done) {
             control.on('found', function(result) {

@@ -6,7 +6,8 @@ var GeocoderControl = L.Control.extend({
     includes: L.Mixin.Events,
 
     options: {
-        position: 'topleft'
+        position: 'topleft',
+        keepOpen: false
     },
 
     initialize: function(_, options) {
@@ -47,7 +48,8 @@ var GeocoderControl = L.Control.extend({
     },
 
     _closeIfOpen: function(e) {
-        if (L.DomUtil.hasClass(this._container, 'active')) {
+        if (L.DomUtil.hasClass(this._container, 'active') &&
+            !this.options.keepOpen) {
             L.DomUtil.removeClass(this._container, 'active');
             this._results.innerHTML = '';
             this._input.blur();
@@ -69,7 +71,6 @@ var GeocoderControl = L.Control.extend({
         input.type = 'text';
         input.setAttribute('placeholder', 'Search');
 
-        L.DomEvent.addListener(link, 'click', this._toggle, this);
         L.DomEvent.addListener(form, 'submit', this._geocode, this);
         L.DomEvent.disableClickPropagation(container);
 
@@ -78,7 +79,12 @@ var GeocoderControl = L.Control.extend({
         this._input = input;
         this._form = form;
 
-        this._map.on('click', this._closeIfOpen, this);
+        if (this.options.keepOpen) {
+            L.DomUtil.addClass(container, 'active');
+        } else {
+            this._map.on('click', this._closeIfOpen, this);
+            L.DomEvent.addListener(link, 'click', this._toggle, this);
+        }
 
         return container;
     },
@@ -86,8 +92,9 @@ var GeocoderControl = L.Control.extend({
     _geocode: function(e) {
         L.DomEvent.preventDefault(e);
         L.DomUtil.addClass(this._container, 'searching');
+
         var map = this._map;
-        this.geocoder.query(this._input.value, L.bind(function(err, resp) {
+        var onload = L.bind(function(err, resp) {
             L.DomUtil.removeClass(this._container, 'searching');
             if (err || !resp || !resp.results || !resp.results.length) {
                 this.fire('error', {error: err});
@@ -100,7 +107,7 @@ var GeocoderControl = L.Control.extend({
                     for (var i = 0, l = Math.min(resp.results.length, 5); i < l; i++) {
                         var name = [];
                         for (var j = 0; j < resp.results[i].length; j++) {
-                            resp.results[i][j].name && name.push(resp.results[i][j].name);
+                            if (resp.results[i][j].name) name.push(resp.results[i][j].name);
                         }
                         if (!name.length) continue;
 
@@ -123,7 +130,9 @@ var GeocoderControl = L.Control.extend({
                 }
                 this.fire('found', resp);
             }
-        }, this));
+        }, this);
+
+        this.geocoder.query(this._input.value, onload);
     }
 });
 
