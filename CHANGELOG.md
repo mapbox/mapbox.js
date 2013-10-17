@@ -1,3 +1,11 @@
+## v1.3.1
+
+* Fix markerLayer bug with popups #465
+* Test location formatter #458
+* Icon improvements #466
+* Informative geocoder error #402
+* Other style tweaks and improvements
+
 ## v1.3.0
 
 * Redesigned geocoder control #449
