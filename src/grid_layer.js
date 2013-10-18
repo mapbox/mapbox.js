@@ -73,7 +73,7 @@ var GridLayer = L.Class.extend({
         if (!this.active()) return;
 
         var map = this._map,
-            point = map.project(latlng),
+            point = map.project(latlng.wrap()),
             tileSize = 256,
             resolution = 4,
             x = Math.floor(point.x / tileSize),
