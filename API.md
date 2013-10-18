@@ -405,11 +405,12 @@ from MapBox and elsewhere into your map.
 
 _Arguments_:
 
-1. required and must be:
+1. optional and may be:
 
 * An `id` string `examples.map-foo`
 * A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`
 * A GeoJSON object, from your own Javascript code
+* `null`, if you wish to only provide `options` and not initial data.
 
 The second argument is optional. If provided, it is the same options
 as provided to [L.FeatureGroup](http://leafletjs.com/reference.html#featuregroup), as
