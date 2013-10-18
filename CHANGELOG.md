@@ -1,3 +1,14 @@
+## v1.4.0
+
+* Update to [Leaflet v0.6.4](https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#064-july-25-2013)
+* Simpler support for retina displays #507
+* `gridControl` wraps coordinates so world copies also get interaction #510
+* Documentation improvements #412 #495
+* Fix share control toggling #471
+* Fix marker race condition #481
+* Support `keepOpen` option for `geocoderControl` #497
+* Fix illegal character in style [db335](https://github.com/mapbox/mapbox.js/commit/db335c4a8ae04d822d50e857ed18b5fa5045e6d7)
+
 ## v1.3.1
 
 * Fix markerLayer bug with popups #465
