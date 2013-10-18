@@ -82,6 +82,7 @@ describe("L.mapbox.tileLayer", function() {
     });
 
     describe("#getTileUrl", function() {
+        beforeEach(setRetina(false));
         it("distributes over the URLs in the tiles property", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0.png');
@@ -99,4 +100,36 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/4/0.jpg70');
         });
     });
+
+    describe("#autoScale", function() {
+        it("uses retina automatically", function() {
+            setRetina(true)();
+            var layer = L.mapbox.tileLayer(helpers.tileJSON_autoscale, {
+                detectRetina: true
+            });
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/0/0/0@2x.png');
+        });
+        it("does not engage on non-retina systems", function() {
+            setRetina(false)();
+            var layer = L.mapbox.tileLayer(helpers.tileJSON_autoscale, {
+                detectRetina: true
+            });
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/0/0/0.png');
+        });
+        it("does not engage with detectRetina: false", function() {
+            setRetina(true)();
+            var layer = L.mapbox.tileLayer(helpers.tileJSON_autoscale, {
+                detectRetina: false
+            });
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/0/0/0.png');
+        });
+    });
+
+
+
+    function setRetina(x) {
+        return function() {
+            L.Browser.retina = x;
+        };
+    }
 });

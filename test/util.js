@@ -41,6 +41,40 @@ helpers.tileJSON = {
     "webpage":"http://tiles.mapbox.com/examples/map/map-8ced9urs"
 };
 
+helpers.tileJSON_autoscale = {
+  "webpage": "http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/page.html",
+  "tiles": [
+    "http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
+    "http://b.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
+    "http://c.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
+    "http://d.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png"
+  ],
+  "tilejson": "2.0.0",
+  "scheme": "xyz",
+  "private": true,
+  "name": "dot default",
+  "minzoom": 0,
+  "attribution": "<a href='http://mapbox.com/about/maps' target='_blank'>Terms & Feedback</a>",
+  "autoscale": true,
+  "bounds": [
+    -180,
+    -85,
+    180,
+    85
+  ],
+  "center": [
+    0,
+    0,
+    3
+  ],
+  "data": [
+    "http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/markers.geojsonp"
+  ],
+  "geocoder": "http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/geocode/{query}.jsonp",
+  "id": "tmcw.map-oitj0si5",
+  "maxzoom": 19
+};
+
 helpers.geoJson = {
     type: 'FeatureCollection',
     features: [{

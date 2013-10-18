@@ -18,6 +18,8 @@ var TileLayer = L.TileLayer.extend({
         // JPG
         'jpg70', 'jpg80', 'jpg90'],
 
+    scalePrefix: '@2x.',
+
     initialize: function(_, options) {
         L.TileLayer.prototype.initialize.call(this, undefined, options);
 
@@ -42,6 +44,14 @@ var TileLayer = L.TileLayer.extend({
         return this;
     },
 
+    _autoScale: function() {
+        return this.options &&
+            L.Browser.retina &&
+            this.options.detectRetina &&
+            (!this.options.retinaVersion) &&
+            this.options.autoscale;
+    },
+
     // disable the setUrl function, which is not available on mapbox tilelayers
     setUrl: null,
 
@@ -53,6 +63,7 @@ var TileLayer = L.TileLayer.extend({
             attribution: json.attribution,
             minZoom: json.minzoom,
             maxZoom: json.maxzoom,
+            autoscale: json.autoscale || false,
             tms: json.scheme === 'tms',
             bounds: json.bounds && util.lbounds(json.bounds)
         });
@@ -74,8 +85,12 @@ var TileLayer = L.TileLayer.extend({
             url = tiles[index];
 
         var templated = L.Util.template(url, tilePoint);
-        if (!templated) return templated;
-        else return templated.replace('.png', '.' + this.options.format);
+        if (!templated) {
+            return templated;
+        } else {
+            return templated.replace('.png',
+                (this._autoScale() ? this.scalePrefix : '.') + this.options.format);
+        }
     },
 
     // TileJSON.TileLayers are added to the map immediately, so that they get

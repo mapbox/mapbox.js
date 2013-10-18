@@ -122,16 +122,27 @@ and simple features, like Points and Polygons.
 
 ## Mobile
 
-MapBox.js is optimized for mobile devices and small screens by default. There are however best practices to make sure your map always looks its best.
+MapBox.js is optimized for mobile devices and small screens by default.
+There are, however, best practices to make sure your map always looks its best.
 
 ### Retina
 
-Having the ability to use retina tiles when the device supports them is easy. When creating the map, use the `detectRetina` to verify if retina is available and `retinaVersion` to use a tilelayer which is designed for retina screens.
+Having the ability to use retina tiles when the device supports them is easy.
+When creating the map, use the `detectRetina` to verify if retina is available
+and `retinaVersion` to use a tilelayer which is designed for retina screens.
 
     var map = L.mapbox.map('map', 'examples.map-y7l23tes', {
-        detectRetina: true,
-        retinaVersion: 'examples.map-zswgei2n'
-      }).setView([40, -74.50], 9);
+      detectRetina: true,
+      retinaVersion: 'examples.map-zswgei2n'
+    }).setView([40, -74.50], 9);
+
+Some MapBox maps support switching to retina scale automatically: if you're using
+one of these maps, you can simply set `detectRetina` and the higher-scale
+tiles will be used when retina is detected.
+
+    var map = L.mapbox.map('map', 'examples.map-y7l23tes', {
+      detectRetina: true
+    }).setView([40, -74.50], 9);
 
 ### Browser Compatibility
 
@@ -268,6 +279,10 @@ with one addition:
 * `retinaVersion`, if provided, is an alternative value for the first argument
   to `L.mapbox.tileLayer` which, if retina is detected, is used instead.
 
+If `detectRetina` is set to true and the map in question supports auto-scaling,
+then a scaled version will automatically be useful if retina is detected and
+you don't provide an explicit `retinaVersion` to be used.
+
 _Example_:
 
     // the second argument is optional
@@ -281,6 +296,12 @@ _Example_:
         detectRetina: true,
         // if retina is detected, this layer is used instead
         retinaVersion: 'examples.map-zswgei2n'
+    });
+
+    // if this map supports auto-scaling, `detectRetina` will automatically
+    // use scaled tiles when retina is detected.
+    var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
+        detectRetina: true,
     });
 
 _Returns_ a `L.mapbox.tileLayer` object.
