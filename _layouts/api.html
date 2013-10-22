@@ -3,11 +3,11 @@ layout: default
 section: developers
 ---
 
-<div class='col12 round box clearfix contain'>
-  <div class="keyline-bottom clearfix">
+<div class='col12 grid pad4 clearfix contain'>
+  <div class="clearfix space-bottom">
 
-    <form id='docs-form' class='doc-search contain col3'>
-      <div class='pad2'>
+    <form id='docs-form' class='doc-search contain col5'>
+      <div class=''>
         <fieldset class='with-icon'>
           <span class='icon search'></span>
           <input id='search-filter' type='text' class='stretch' placeholder='Filter methods'>
@@ -15,7 +15,7 @@ section: developers
       </div>
     </form>
 
-    <nav id='docs-nav' class='pill mobile-cols col9 pad2'>
+    <nav id='docs-nav' class='pill mobile-cols col6 margin1'>
       {% if page.version contains "v1" %}
         <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
     </nav>
@@ -28,7 +28,7 @@ section: developers
   </div>
   {% endif %}
 
-  <div class='fill-white clearfix'>
+  <div class='keyline-all clearfix'>
     <div class='col3'>
       <div class='doc-nav'>
         <nav class='anchors v small'>

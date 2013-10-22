@@ -179,15 +179,15 @@ footer:
   <script>document.write(App.nav());</script>
 </div>
 
-<div class='fill-white clearfix {% unless page.fullwidth %} grid {% endunless %}'>
+<div class='clearfix {% unless page.fullwidth %} grid {% endunless %}'>
 
   <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
   <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
   <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
-  <div class='clearfix doc-header'>
+  <div class='clearfix grid doc-header'>
     <div class='pad4y clearfix'>
-      <div class='col12 contain'>
+      <div class='col10 margin1 contain'>
         <div class="col6">
           <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
           <h2>
