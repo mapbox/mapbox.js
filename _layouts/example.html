@@ -38,17 +38,31 @@ examples:
   icon: search
 
 ---
+<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+
 <style>
+
+.doc-nav a {
+  color: #333;
+}
+.doc-nav a:hover {
+  color: #000;
+}
+.doc-nav ul a.active {
+  background: rgba(0,0,0,0.05);
+}
+
 {% for item in page.examples %}
-  #{{item.id}}:target ~ ul.examples-{{item.id}} {
+  #{{item.id}}:target ~ ul.examples-{{item.id}},
+  #{{item.id}}:target ~ ul.examples-{{item.id}} a {
     display: block;
   }
 
   #{{item.id}}:target ~ a.category-{{item.id}} {
-    background: rgba(0,0,0,0.05);
   }
 
 {% endfor %}
+
 </style>
 
 <div class='col12 grid pad4 clearfix contain'>
@@ -82,8 +96,8 @@ examples:
       </div>
       {% endif %}
 
-      <div class='keyline-all clearfix'>
-        <div class="col3 keyline-right">
+      <div class='clearfix'>
+        <div class="col3">
           <div class="doc-nav">
 
             {% for item in page.examples %}
@@ -92,13 +106,13 @@ examples:
 
             {% for item in page.examples %}
               
-              <a href='#{{item.id}}' class='category-{{item.id}} block keyline-bottom pad1 truncate {{item.id}} icon {{item.icon}}'>{{item.name}}</a>
+              <a href='#{{item.id}}' class='category-{{item.id}} block pad1 truncate {{item.id}} icon {{item.icon}}'>{{item.name}}</a>
 
-              <ul id='{{item.id}}' class='fill-light examples-{{item.id}} hidden'>
+              <ul id='{{item.id}}' class='examples-{{item.id}} hidden'>
                 {% for example in site.tags[item.id] %}
                   {% if example.version == 'v1.0.0' %}
                   <li>
-                    <a href='#' class='block small pad1y pad2x keyline-bottom'>{{example.title}}</a>
+                    <a href='{{site.baseurl}}{{example.url}}#{{item.id}}' class='block small pad1y pad2x {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
                   </li>
                   {% endif %}
                 {% endfor %}
@@ -122,7 +136,7 @@ examples:
             </nav>
           </div>
         </div>
-        <div class='col9'>
+        <div class='col9 keyline-all'>
           <div class='pad2 doc example-header'>
             <h3>{{page.title}}</h3>
             <span class='description'>{{page.description}}</span>
@@ -177,6 +191,8 @@ examples:
 
 {% include developers-footer.html %}
 
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
+
 <script>
   $(document).ready(function () {
     var example = new Docs();
@@ -188,12 +204,5 @@ examples:
     });
     {% endif %}
     example.bindSearch($('.doc-search input'), $('nav.v'), false);
-
-    // $("a[href^=#]").on("click", function(e) {
-    //   e.preventDefault();
-    //   history.pushState({}, "", this.href);
-    // });
-
-
   });
 </script>

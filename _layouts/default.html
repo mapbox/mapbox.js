@@ -70,7 +70,7 @@ footer:
   <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
 
   <script>
-  var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+  var analytics=analytics||[];(function(){var e=['identify','track','trackLink','trackForm','trackClick','trackSubmit','page','pageview','ab','alias','ready','group'],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':"http://")+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n)};
   analytics.load(window.location.hostname.indexOf('mapbox.com') !== -1 ? 'fl0c8p240n' : '0biiejpgfj');
   </script>
   <script src='https://js.stripe.com/v2/'></script>
@@ -79,16 +79,15 @@ footer:
     'pk_live_1Dy5fvoJB1pavBVrmrcbU1Gu' : 'pk_test_gmIyREg3sKzAiyMkAEeCsxUG');
   </script>
 
-  {% if page.v0 %}
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
-  {% else %}
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
-  {% endif %}
 
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+
+
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
   <!--[if lte IE 8]>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css' rel='stylesheet' >
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.ie.css' rel='stylesheet' >
   <![endif]-->
 
   <script src='{{site.api}}/api/session.js'></script>
@@ -105,12 +104,10 @@ footer:
   <script type='text/template' id='nav-template'>
   <div class='grid'>
     <nav id='nav' class='col10 margin1 text-right pad2y contain noprint'><!--
-    --><a class='mb-logo-thumb' href='{{site.url}}/#app'>
-      <span style='background-image:url("<%=thumb%>")'></span>
-    </a>
     <% if (!user.id) { %>
+    --><a class='mb-logo-thumb' href='{{site.url}}/'><span style='background-image:url("<%=thumb%>")'></span></a>
 
-    <div class='hide-mobile'>
+    <div class='strong hide-mobile'>
       <a href='{{site.url}}/tour/' class='{% if page.category == 'tour' %}active{% endif %}'>Tour</a><!--
       --><a href='{{site.url}}/showcase/' class='{% if page.category == 'showcase' %}active{% endif %}'>Showcase</a><!--
       --><a href='{{site.url}}/blog/' class='{% if page.category == 'blog' %}active{% endif %}'>Blog</a><!--
@@ -124,7 +121,7 @@ footer:
 
     <div class='show-mobile contain drop'>
       <a href='#' class='icon menu quiet droplink keyline-all'></a>
-      <div class='dropdown fill-white keyline-all round-bottom animate'>
+      <div class='dropdown strong fill-white keyline-all round-bottom animate'>
         <div>
           <a href='{{site.url}}/tour/'>Tour</a>
           <a href='{{site.url}}/showcase/'>Showcase</a>
@@ -139,10 +136,12 @@ footer:
     </div>
 
     <% } else { %>
+      --><a class='mb-logo-thumb' href='{{site.url}}/#app'><span style='background-image:url("<%=thumb%>")'></span></a>
+
       <div class='authmenu authed contain col2 fr keyline-all'>
         <a href='#dropdown' class='block fl droplink quiet avatar icon menu keyline-right' style='background-image:url("<%= user.avatar %>")'></a><!--
-      --><a href='#dropdown' class='block droplink username small truncate hide-mobile'><%= _(user.name || user.id).escape()  %></a>
-      <div class='dropdown fill-white keyline-all round-bottom animate'>
+        --><a href='#dropdown' class='block droplink username strong small truncate hide-mobile'><%= _(user.name || user.id).escape()  %></a>
+      <div class='dropdown strong fill-white keyline-all round-bottom animate'>
         <div class='plan contain'>
           <a href='{{site.url}}/account/billing' class='plan-icon big <%= user.plan.id.replace('2', '').replace('-annual', '') %>'></a>
           <a href='{{site.url}}/plans'>
@@ -157,6 +156,7 @@ footer:
         </div>
         <div>
           <a href='{{site.url}}/account'>Account</a>
+          <% if (App.user.group === 'admin') { %><a href='{{site.url}}/admin'>Admin</a><% } %>
           <a href='#signout' id='signout'>Sign out</a>
         </div>
         <div>
@@ -167,10 +167,10 @@ footer:
         </div>
       </div>
     </div>
-    <div class='hide-mobile fr'>
+    <div class='hide-mobile strong fr'>
        <a href='{{site.url}}/dashboard' class='quiet authed icon dashboard {% if page.url contains '/dashboard' %}active{% endif %}'>Dashboard</a><!--
-    --><a href='{{site.url}}/projects' class='quiet authed icon feed {% if page.url contains '/project' %}active{% endif %}'>Projects</a><!--
-    --><a href='{{site.url}}/data' class='quiet authed icon library {% if page.url contains '/data' %}active{% endif %}'>Data</a>
+    --><a href='{{site.url}}/projects' class='quiet authed icon folder {% if page.url contains '/project' %}active{% endif %}'>Projects</a><!--
+    --><a href='{{site.url}}/data' class='quiet authed icon book {% if page.url contains '/data' %}active{% endif %}'>Data</a>
     </div>
     <% } %>
     </nav>
@@ -179,51 +179,8 @@ footer:
   <script>document.write(App.nav());</script>
 </div>
 
-<div class='clearfix {% unless page.fullwidth %} grid {% endunless %}'>
-
-  <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
-  <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-  <script src='{{site.baseurl}}/assets/js/site.js'></script>
-
-  <div class='clearfix grid doc-header'>
-    <div class='pad4y clearfix'>
-      <div class='col10 margin1 contain'>
-        <div class="col6">
-          <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
-          <h2>
-            {{site.title}}
-
-            <span class='version'>
-              {% if page.v0 %}
-                {{site.oldversion}}
-              {% elsif page.version %}
-                {{page.version}}
-              {% else %}
-                {{site.version}}
-              {% endif %}
-            </span>
-          </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{content}}
-
-  <script>
-  $(function() {
-      $('#search-filter').focusin(function(){
-        $('#docs-form').addClass('col12');
-        $('#docs-nav').hide();
-      });
-      $('#search-filter').focusout(function(){
-        $('#docs-form').removeClass('col12');
-        $('#docs-nav').show();
-      });
-    });
-  </script>
-
-</div>
+<div class='{% unless page.fullwidth %} grid {% endunless %}'>{{content}}</div>
+{% endif %}
 
 <div class='footer keyline-top pad4y fill-white clearfix small'>
   <div class='grid'>
@@ -270,8 +227,6 @@ footer:
   &copy; MapBox
 </div>
 
-{% endif %}
-
 <div id='modal'>
   <div class='modal-mask fill-darken2 modal animate'></div>
   <div id='modal-content' class='contain modal modal-content animate'></div>
@@ -297,10 +252,10 @@ footer:
           </fieldset>
         </div>
         <div class='pad2y pad2x clearfix'>
-          <div class='col6 pad2x'>
-            <input type='submit' value='Send reset instructions' />
+          <div class='col8 pad2x'>
+            <input class='col12' type='submit' value='Send reset instructions' />
           </div>
-          <small class='col6 pad1y text-right'>
+          <small class='col4 pad1y text-right'>
             <a class='rcon next slide' href='#active2'>Sign in</a>
           </small>
         </div>
@@ -319,7 +274,11 @@ footer:
         <div class='pad2y pad4x keyline-bottom'>
           <fieldset>
             <label>Username</label>
+            <% if (obj.username) { %>
+            <input type='text' name='username' autocapitalize='off' class='stretch' tabindex='1' value='<%= obj.username %>' readonly />
+            <% } else { %>
             <input type='text' name='username' autocapitalize='off' class='stretch' tabindex='1' />
+            <% } %>
           </fieldset>
           <fieldset>
             <label>Password <small class='inline'><a href='#active1' class='slide' tabindex='3'>Forgot it?</a></small></label>
@@ -328,11 +287,13 @@ footer:
         </div>
         <div class='pad2y pad4x clearfix'>
           <div class='col6'>
-            <input type='submit' value='Sign in' />
+            <input class='col12' type='submit' value='Sign in' />
           </div>
+          <% if (!obj.username) { %>
           <small class='col6 pad1y text-right'>
             Need an account? <a class='rcon next slide' href='#active3'>Sign up</a>
           </small>
+          <% } %>
         </div>
       </div>
     </form>
@@ -343,8 +304,8 @@ footer:
         <% } else { %>
         <a href='/' class='quiet big icon fr close escape'></a>
         <% } %>
-        <div class='pad2y pad4x keyline-bottom center top-illustration'>
-          <span class='inline icon big account'></span>
+        <div class='pad2y pad4x keyline-bottom center'>
+          <span class='inline icon dot big account'></span>
         </div>
         <div class='pad2y pad2x keyline-bottom'>
           <fieldset class='col12 pad2x'>
@@ -376,7 +337,7 @@ footer:
             <a class='icon prev slide' href='#active2'>Sign in</a>
           </small>
           <div class='col6 pad2x text-right'>
-            <input type='submit' value='Sign up' />
+            <input class='col12' type='submit' value='Sign up for MapBox' />
           </div>
         </div>
       </div>
@@ -499,15 +460,6 @@ footer:
 </div>
 <% } %>
 </script>
-
-<style type="text/css">
-/* Fix .tag from prettify */
-.tag {
-  text-transform: lowercase;
-  display: inline;
-}
-
-</style>
 
 </body>
 </html>
