@@ -1,7 +1,7 @@
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
-version: v1.3.1
+version: v1.4.0
 oldversion: v0.6.7
 url: //www.mapbox.com
 title: mapbox.js
