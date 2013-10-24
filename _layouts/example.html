@@ -42,23 +42,20 @@ examples:
 
 <style>
 
-.doc-nav a {
-  color: #333;
-}
-.doc-nav a:hover {
-  color: #000;
-}
-.doc-nav ul a.active {
-  background: rgba(0,0,0,0.05);
-}
-
-{% for item in page.examples %}
-  #{{item.id}}:target ~ ul.examples-{{item.id}},
-  #{{item.id}}:target ~ ul.examples-{{item.id}} a {
-    display: block;
+.anchor {
+  position:absolute;
+  top:-20px;
   }
 
-  #{{item.id}}:target ~ a.category-{{item.id}} {
+{% for item in page.examples %}
+  
+  /* Slide in secondary pane */
+  #{{item.id}}:target ~ nav.examples-{{item.id}},
+  #{{item.id}}:target ~ nav.examples-{{item.id}} a {
+    -webkit-transform: translateX(0%);
+       -moz-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+            transform: translateX(0%);
   }
 
 {% endfor %}
@@ -96,9 +93,11 @@ examples:
       </div>
       {% endif %}
 
-      <div class='clearfix'>
+      <div class='clearfix keyline-all round'>
         <div class="col3">
-          <div class="doc-nav">
+          <div class="doc-nav clip contain">
+
+            <a id='all' class='anchor'></a>
 
             {% for item in page.examples %}
               <a id='{{item.id}}' class='anchor'></a>
@@ -106,17 +105,19 @@ examples:
 
             {% for item in page.examples %}
               
-              <a href='#{{item.id}}' class='category-{{item.id}} block pad1 truncate {{item.id}} icon {{item.icon}}'>{{item.name}}</a>
+              <a href='#{{item.id}}' class='category-{{item.id}} category keyline-bottom block pad1 truncate {{item.id}} icon {{item.icon}}'>{{item.name}}</a>
 
-              <ul id='{{item.id}}' class='examples-{{item.id}} hidden'>
-                {% for example in site.tags[item.id] %}
+              <nav id='{{item.id}}' class='col12 fill-white examples-{{item.id}} animate offcanvas-right pin-right v'>
+                  <a href='#all' class='block pad1y pad2x icon prev keyline-bottom'>{{item.name}}</a>
+                {% for example in site.tags[item.id] order:ascending %}
                   {% if example.version == 'v1.0.0' %}
-                  <li>
-                    <a href='{{site.baseurl}}{{example.url}}#{{item.id}}' class='block small pad1y pad2x {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
-                  </li>
+                  
+                    <a href='{{site.baseurl}}{{example.url}}#{{item.id}}' class='block small pad1y pad2x keyline-bottom {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+                  
                   {% endif %}
                 {% endfor %}
-              </ul>
+              
+              </nav>
 
             {% endfor %}
           </div>
@@ -136,7 +137,7 @@ examples:
             </nav>
           </div>
         </div>
-        <div class='col9 keyline-all'>
+        <div class='col9 keyline-left'>
           <div class='pad2 doc example-header'>
             <h3>{{page.title}}</h3>
             <span class='description'>{{page.description}}</span>
