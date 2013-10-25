@@ -19,7 +19,6 @@ section: developers
       {% if page.version contains "v1" %}
         <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
     </nav>
-
   </div>
 
   {% if site.version != page.version %}
@@ -65,11 +64,9 @@ section: developers
 
 <script>
   $(function() {
-
     var docs = new Docs();
     docs.colorCode();
     docs.bindSearch($('.doc-search input'), $('nav.v'), true);
     docs.bindInlineCode();
-
   });
 </script>
