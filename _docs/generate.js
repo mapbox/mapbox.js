@@ -10,7 +10,7 @@ try {
 
 var start, l, anchor, matched, toParse,
     out = '',
-    nav = '';
+    nav = 'navigation:\n';
 
 for (var j = 2; j < process.argv.length; j ++) {
 
@@ -28,8 +28,13 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
         matchedEvent = l.type === 'heading' && l.text.match(/Event:\s(.*)/);
         matchedSep = l.type === 'html' && l.text.match(/class=.separator.*>(.*)</);
 
+        if (l.depth && l.depth == 1) {
+            nav += '  - title: ' + l.text + '\n';
+            nav += '    nav:\n';
+        }
+
         if (l.type === 'heading' || matchedSep) {
-            
+
             toParse = lexed.slice(start, i);
             toParse.links = lexed.links;
             out += marked.parser(toParse);
@@ -54,10 +59,10 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
 
                 // Add to navigation tree
                 if (l.depth == 2) {
-                    nav += '- title: ' + anchor + '\n';
-                    nav += '  items:\n';
+                    nav += '      - title: ' + anchor + '\n';
+                    nav += '        sub:\n';
                 } else if (l.depth == 3) {
-                    nav += '  - ' + anchor + '\n';
+                    nav += '        - ' + anchor + '\n';
                 }
 
             // Header is for an event
@@ -94,7 +99,6 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
     out += '</div>';
 }
 
-console.log("navigation:");
 console.log(nav);
 console.log("---");
 console.log("{% raw %}");

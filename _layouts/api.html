@@ -30,24 +30,26 @@ section: developers
   <div class='fill-white clearfix'>
     <div class='col3'>
       <div class='doc-nav'>
-        <nav class='anchors v small'>
+        <nav class='anchors v'>
+
+        <h4 class='small pad1y pad2x keyline-bottom fill-light'>Introduction</h4>
         {% for intro in site.categories.introduction %}
           {% for n in intro.navigation %}
-            <a class='heading pad1y pad2x' href='#{{n.title|replace:' ','_'|replace:'&',''|replace:'`',''|downcase}}'>{{n.title}}</a>
+            <a class='heading pad1y pad2x strong' href='#{{n.title|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{n.title}}</a>
             {% for i in n.items %}
-              <a class='pad1y pad2x' href='#{{i|replace:' ','_'|replace:'&',''|replace:'`',''|downcase}}'>{{i}}</a>
+              <a class='pad1y pad4x small' href='#{{i|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{i}}</a>
             {% endfor %}
           {% endfor %}
         {% endfor %}
 
+        <h4 class='small pad1y pad2x keyline-top keyline-bottom fill-light'>API</h4>
         {% for section in page.navigation %}
-          <a class='heading pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
-          {% for item in section.items %}
-            {% if item.Separator %}
-            <a class='parent pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
-            {% else %}
-            <a class='pad1y pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
-            {% endif %}
+          <a class='heading pad1y pad2x strong' href='#{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
+          {% for nav in section.nav %}
+            <a class='pad1y pad4x small strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
+            {% for sub in nav.sub %}
+              <a class='pad1y pad4x small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
+            {% endfor %}
           {% endfor %}
         {% endfor %}
         </nav>
