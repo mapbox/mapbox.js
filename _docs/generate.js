@@ -22,7 +22,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
 
     for (var i = 0; i < lexed.length; i++) {
 
-        l = lexed[i];;
+        l = lexed[i];
 
         matchedHeading = l.type === 'heading' && l.text.match(/([^\(]*)\.([^\(]*)(\((.*)\))?/);
         matchedEvent = l.type === 'heading' && l.text.match(/Event:\s(.*)/);
@@ -55,7 +55,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
                 // Add to navigation tree
                 if (l.depth == 2) {
                     nav += '- title: ' + anchor + '\n';
-                    nav += '  items:\n'
+                    nav += '  items:\n';
                 } else if (l.depth == 3) {
                     nav += '  - ' + anchor + '\n';
                 }
@@ -97,6 +97,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
 console.log("navigation:");
 console.log(nav);
 console.log("---");
+console.log("{% include introduction.html %}");
 console.log("{% raw %}");
 console.log(out);
 console.log("{% endraw %}");

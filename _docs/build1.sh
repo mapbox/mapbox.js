@@ -5,7 +5,7 @@ echo $TAG
 
 if [ -z $TAG ]; then
     echo "Usage: build.sh <tag>"
-    echo "Tag must be in the form of v0.6.4"
+    echo "Tag must be in the form of v1.0.0"
     exit;
 fi
 
