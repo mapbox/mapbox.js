@@ -31,6 +31,15 @@ section: developers
     <div class='col3'>
       <div class='doc-nav'>
         <nav class='anchors v small'>
+        {% for intro in site.categories.introduction %}
+          {% for n in intro.navigation %}
+            <a class='heading pad1y pad2x' href='#{{n.title|replace:' ','_'|replace:'&',''|replace:'`',''|downcase}}'>{{n.title}}</a>
+            {% for i in n.items %}
+              <a class='pad1y pad2x' href='#{{i|replace:' ','_'|replace:'&',''|replace:'`',''|downcase}}'>{{i}}</a>
+            {% endfor %}
+          {% endfor %}
+        {% endfor %}
+
         {% for section in page.navigation %}
           <a class='heading pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
           {% for item in section.items %}
@@ -48,6 +57,10 @@ section: developers
     <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
         <div class='doc pad2'>
+          {% for item in site.categories.introduction %}
+            {{item.content}}
+          {% endfor %}
+
           {{content}}
         </div>
         <div class='keyline-top center small'>
