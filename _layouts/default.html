@@ -35,7 +35,7 @@ footer:
   <meta name='robots' content='{% if page.hidden %}noindex{% else %}index{% endif %}'/>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
-  <title>{% if page.url == '/' %}{{page.title}} | Fast and beautiful maps{% else %}{{page.title}} | MapBox{% endif %}</title>
+  <title>{% if page.url == '/' %}{{site.title}} {{page.title}} | Fast and beautiful maps{% else %}{{site.title}} {{page.title}} | MapBox{% endif %}</title>
 
   {% if page.card %}
   <meta name='twitter:site' content='@MapBox' />
@@ -98,7 +98,7 @@ footer:
 <body class='{{page.class}}'>
 
 {% if page.app %}
-{% include app/app.html %}
+  {% include app/app.html %}
 {% else %}
 <div class='masthead fill-white keyline-bottom col12 clearfix'>
   <script type='text/template' id='nav-template'>
@@ -179,8 +179,40 @@ footer:
   <script>document.write(App.nav());</script>
 </div>
 
-<div class='{% unless page.fullwidth %} grid {% endunless %}'>{{content}}</div>
-{% endif %}
+<div class='fill-white clearfix grid'>
+
+  <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+  <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+  <script src='{{site.baseurl}}/assets/js/site.js'></script>
+
+  <div class='clearfix doc-header'>
+    <div class='pad4y clearfix'>
+      <div class='col10 margin1 contain'>
+        <div class="col6">
+          <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
+          <h1>
+            {{site.title}}
+
+            {% if page.v0 %}
+            <sup class='small fill-yellow version'>
+              {{site.oldversion}}
+            {% elsif page.version %}
+            <sup class='small fill-grey version'>
+              {{page.version}}
+            {% else %}
+            <sup class='small fill-grey version'>
+              {{site.version}}
+            {% endif %}
+            </sup>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{content}}
+
+</div>
 
 <div class='footer keyline-top pad4y fill-white clearfix small'>
   <div class='grid'>
@@ -226,6 +258,8 @@ footer:
   <a href='{{site.url}}/privacy'>Privacy policy</a>
   &copy; MapBox
 </div>
+
+{% endif %}
 
 <div id='modal'>
   <div class='modal-mask fill-darken2 modal animate'></div>

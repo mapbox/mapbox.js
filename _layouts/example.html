@@ -1,7 +1,6 @@
 ---
 layout: default
 section: developers
-fullwidth: true
 examples:
 - id: animation
   name: Animation
@@ -40,7 +39,7 @@ examples:
 ---
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 
-<style type="text/css">
+<style>
 .examples {
   height: 180px;
 }
@@ -64,44 +63,38 @@ examples:
 
 </style>
 
-<div class='grid clearfix'>
-<div class='section col10 margin1 pad4y'>
-    <div class="clearfix space-bottom">
+<div class='col10 margin1 round box clearfix contain'>
+  <div class='keyline-bottom clearfix'>
+    <nav id='docs-nav' class='pill mobile-cols col12 pad2'>
+      {% if page.v0 %}
+        <a class='button col4' href='{{site.baseurl}}/api/{{site.oldversion}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{site.oldversion}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
+      {% else %}
+        <a class='button col4' href='{{site.baseurl}}/api/{{site.version}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{page.version}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
+      {% endif %}
+    </nav>
+  </div>
 
-      <nav id='docs-nav' class='pill mobile-cols col12'>
-        {% if page.v0 %}
-          <a class='button col4' href='{{site.baseurl}}/api/{{site.oldversion}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{site.oldversion}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
-        {% else %}
-          <a class='button col4' href='{{site.baseurl}}/api/{{site.version}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{page.version}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
-        {% endif %}
-      </nav>
-
+  <div class='clearfix'>
+    {% if page.v0 %}
+    <div class='clearfix ad-v1'>
+      <span class='icon reverse star'></span>
+      Try <a href='{{site.baseurl}}/example/v1.0.0/'>MapBox.js v1.0.0</a>, built on Leaflet.
     </div>
+    {% endif %}
 
     <div class='clearfix'>
+      <!-- Map + code sample -->
+      <div class='col12'>
+        <div class='pad2 doc example-header'>
+          <h3>{{page.title}}</h3>
+          <span class='description'>{{page.description}}</span>
+        </div>
+        <div id='demo' class='doc'>{{content}}</div>
+        <div id='snippet' class='doc keyline-bottom'>
+        <a class='button icon embed' href='#' id='copy'>Select all</a>
+        <div id='code' class='doc'>
 
-      {% if page.v0 %}
-      <div class='clearfix ad-v1'>
-        <span class='icon reverse star'></span>
-        Try <a href='{{site.baseurl}}/example/v1.0.0/'>MapBox.js v1.0.0</a>, built on Leaflet.
-      </div>
-      {% endif %}
-
-      <div class='clearfix keyline-all round'>
-
-        <!-- Map + code sample -->
-
-        <div class='col12'>
-          <div class='pad2 doc example-header'>
-            <h3>{{page.title}}</h3>
-            <span class='description'>{{page.description}}</span>
-          </div>
-          <div id='demo' class='doc'>{{content}}</div>
-          <div id='snippet' class='doc keyline-bottom'>
-          <a class='button icon embed' href='#' id='copy'>Select all</a>
-          <div id='code' class='doc'>
-
-<div class='code-header'>
+<div class='code-header quiet'>
 {% highlight html %}
 <!DOCTYPE html>
 <html>
@@ -132,13 +125,11 @@ examples:
 </html>
 {% endhighlight %}
 </div>
-          </div><!-- end #code -->
-        </div>
-
+  </div><!-- end #code -->
+</div>
 
         <!-- Navigation -->
-        <div class="col12 clearfix">
-
+        <div class='col12 clearfix'>
           <form id='docs-form' class='doc-search col12 pad2'>
             <div class=''>
               <fieldset class='with-icon'>
@@ -151,22 +142,15 @@ examples:
           {% for item in page.examples %}
           <div class="section pad2 col4">
             <h3 class='icon {{item.icon}} pad1y'>{{item.name}}</h3>
-
             <div id='{{item.id}}' class='col12 fill-white keyline-all scrollbar examples examples-{{item.id}}'>
               {% for example in site.tags[item.id] order:ascending %}
                 {% if example.version == 'v1.0.0' %}
-                
                   <a href='{{site.baseurl}}{{example.url}}' class='pad1 keyline-bottom small block {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
-                
                 {% endif %}
               {% endfor %}
-            
             </div>
-
           </div>
-
           {% endfor %}
-
         </div>
 
         <div class='keyline-top center small'>
@@ -179,12 +163,7 @@ examples:
   </div>
 </div>
 
-
-</div><!-- end .grid -->
-
 {% include developers-footer.html %}
-
-
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
 <script>
@@ -198,7 +177,6 @@ examples:
     });
     {% endif %}
     example.bindSearch($('.doc-search input'), $('nav.v'), false);
-
     map.scrollWheelZoom.disable();
   });
 </script>
