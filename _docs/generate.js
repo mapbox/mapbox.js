@@ -81,7 +81,10 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
                 l.depth = 0;
 
             } else {
-                out += '<h' + l.depth + '>';
+                anchor = l.text.toLowerCase();
+                out += (l.depth === 1) ?
+                    '<h' + l.depth + ' id="section-' + anchor + '">' :
+                    '<h' + l.depth + '>';
                 out += l.text;
                 out += '</h' + l.depth + '>\n';
             }

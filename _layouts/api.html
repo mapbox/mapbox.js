@@ -36,7 +36,7 @@ section: developers
           <h4 class='small quiet pad1x'>API</h4>
           {% for section in page.navigation %}
             <nav class='col3 pad1x'>
-              <a class='heading col12 pad1y quiet strong' href='#{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
+              <a class='heading col12 pad1y quiet strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
               {% for nav in section.nav %}
                 <a class='col12 truncate small quiet strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
                 <nav class='doc-sub-nav'>

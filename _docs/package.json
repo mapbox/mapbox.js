@@ -1,7 +1,10 @@
 {
-    "name": "mapbox.js-doc-generator",
-    "version": "0.0.0",
-    "devDependencies": {
-        "marked": "~0.2.5"
-    }
+  "name": "mapbox.js-doc-generator",
+  "version": "0.0.0",
+  "devDependencies": {
+    "marked": "~0.2.5"
+  },
+  "dependencies": {
+    "mapbox.js": "~1.3.1"
+  }
 }
