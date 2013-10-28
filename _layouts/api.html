@@ -5,7 +5,7 @@ section: developers
 
 <div class='col10 margin1 round box clearfix contain'>
   <div class='keyline-bottom clearfix'>
-    <nav id='docs-nav' class='pill mobile-cols col12 pad2'>
+    <nav id='docs-nav' class='pill mobile-cols col12 pad2 clearfix'>
       {% if page.version contains "v1" %}
         <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
     </nav>
@@ -17,42 +17,48 @@ section: developers
   </div>
   {% endif %}
 
-  <div class='col12 clearfix'>
-    <div class='col3'>
-      <div class='doc-nav'>
-        <nav class='anchors v pad1y'>
-        {% for intro in site.categories.introduction %}
-          {% for n in intro.navigation %}
-            <a class='heading pad1y pad2x strong' href='#{{n.title|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{n.title}}</a>
-            {% for i in n.items %}
-              <a class='pad1y pad2x small' href='#{{i|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{i}}</a>
+  <div class='clearfix'>
+    <div class='col12 keyline-bottom'>
+      <div class='doc-nav contain clearfix'>
+        <nav class='col3 pad2 pin-left keyline-right'>
+          <h4 class='small quiet'>Introduction</h4>
+          {% for intro in site.categories.introduction %}
+            {% for n in intro.navigation %}
+              <a class='heading col12 pad1y strong quiet' href='#{{n.title|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{n.title}}</a>
+              {% for i in n.items %}
+                <a class='small col12 quiet truncate' href='#{{i|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{i}}</a>
+              {% endfor %}
             {% endfor %}
           {% endfor %}
-        {% endfor %}
-
-        {% for section in page.navigation %}
-          <a class='heading pad1y pad2x strong' href='#{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
-          {% for nav in section.nav %}
-            <a class='pad1y pad2x small strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
-            {% for sub in nav.sub %}
-              <a class='pad1y pad2x small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
-            {% endfor %}
-          {% endfor %}
-        {% endfor %}
         </nav>
+
+        <div class='col9 margin3 clearfix pad1x pad2y'>
+          <h4 class='small quiet pad1x'>API</h4>
+          {% for section in page.navigation %}
+            <nav class='col3 pad1x'>
+              <a class='heading col12 pad1y quiet strong' href='#{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
+              {% for nav in section.nav %}
+                <a class='col12 truncate small quiet strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
+                <nav class='doc-sub-nav'>
+                {% for sub in nav.sub %}
+                  <a class='col12 truncate quiet small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
+                {% endfor %}
+                </nav>
+              {% endfor %}
+            </nav>
+          {% endfor %}
+        </div>
       </div>
     </div>
 
-    <div class='col9 keyline-left'>
+    <div class='col12'>
       <div id='docs' class='doc-content prose'>
         <div class='pad2 keyline-bottom'>
-          <h4 class='small quiet'>Introduction</h4>
           {% for item in site.categories.introduction %}
             {{item.content}}
           {% endfor %}
         </div>
         <div class='doc pad2'>
-          <h4 class='small quiet'>API</h4>
           {{content}}
         </div>
         <div class='keyline-top center small'>

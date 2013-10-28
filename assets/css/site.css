@@ -1,6 +1,13 @@
 .version { padding:2px 5px; }
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
+
+.doc-nav .strong {
+  color:rgba(0,0,0,0.75);
+  }
+.doc-sub-nav {
+  margin-bottom:5px;
+  }
 #map {
   background:#fff;
   position:absolute;
@@ -79,7 +86,7 @@ pre a {
 
 /*  -------------------------------------------------------
  *    Syntax highlighting for prettify
- *  
+ *
  *    Acronym Key
  *    =====================================================
  *   .str = string content
