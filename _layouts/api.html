@@ -6,11 +6,11 @@ section: developers
 {% include header.html %}
 
 <div class='col10 margin1 round box clearfix contain'>
-  
+
   <div class='keyline-bottom clearfix'>
     <nav id='docs-nav' class='pill mobile-cols col12 pad2 clearfix'>
       {% if page.version contains "v1" %}
-        <a href='{{site.baseurl}}/api/{{page.version}}' class='col3 margin3 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col3 button'>Examples</a>{% endif %}
+        <a href='{{site.baseurl}}/api/{{page.version}}' class='col3 margin3 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col3 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col3 button'>Examples</a>{% endif %}
     </nav>
   </div>
 
