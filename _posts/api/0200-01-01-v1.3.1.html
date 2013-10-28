@@ -4,45 +4,57 @@ title: v1.3.1
 categories: api
 version: v1.3.1
 navigation:
-- title: L.mapbox.map
-  items:
-- title: map.getTileJSON
-  items:
-- title: L.mapbox.tileLayer
-  items:
-  - tileLayer.getTileJSON
-  - tileLayer.setFormat
-- title: L.mapbox.gridLayer
-  items:
-  - gridLayer.getTileJSON
-  - gridLayer.getData
-- title: L.mapbox.markerLayer
-  items:
-  - markerLayer.loadURL
-  - markerLayer.loadID
-  - markerLayer.setFilter
-  - markerLayer.getFilter
-  - markerLayer.setGeoJSON
-  - markerLayer.getGeoJSON
-- title: L.mapbox.geocoder
-  items:
-  - geocoder.query
-  - geocoder.reverseQuery
-- title: L.mapbox.legendControl
-  items:
-- title: L.mapbox.gridControl
-  items:
-- title: L.mapbox.geocoderControl
-  items:
-  - geocoderControl.setURL
-  - geocoderControl.setID
-  - geocoderControl.setTileJSON
-  - geocoderControl.setErrorHandler
-  - geocoderControl.getErrorHandler
-- title: L.mapbox.marker.icon
-  items:
-- title: L.mapbox.marker.style
-  items:
+  - title: Map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.markerLayer
+        sub:
+        - markerLayer.loadURL
+        - markerLayer.loadID
+        - markerLayer.setFilter
+        - markerLayer.getFilter
+        - markerLayer.setGeoJSON
+        - markerLayer.getGeoJSON
+  - title: Geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    nav:
+      - title: L.mapbox.legendControl
+        sub:
+      - title: L.mapbox.gridControl
+        sub:
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.setErrorHandler
+        - geocoderControl.getErrorHandler
+  - title: Markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Theming
+    nav:
 
 ---
 {% raw %}

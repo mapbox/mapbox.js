@@ -35,7 +35,7 @@ footer:
   <meta name='robots' content='{% if page.hidden %}noindex{% else %}index{% endif %}'/>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
-  <title>{% if page.url == '/' %}{{page.title}} | Fast and beautiful maps{% else %}{{page.title}} | MapBox{% endif %}</title>
+  <title>{% if page.url == '/' %}{{site.title}} {{page.title}} | Fast and beautiful maps{% else %}{{site.title}} {{page.title}} | MapBox{% endif %}</title>
 
   {% if page.card %}
   <meta name='twitter:site' content='@MapBox' />
@@ -190,19 +190,21 @@ footer:
       <div class='col10 margin1 contain'>
         <div class="col6">
           <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
-          <h2>
+          <h1>
             {{site.title}}
 
-            <span class='version'>
-              {% if page.v0 %}
-                {{site.oldversion}}
-              {% elsif page.version %}
-                {{page.version}}
-              {% else %}
-                {{site.version}}
-              {% endif %}
-            </span>
-          </h2>
+            {% if page.v0 %}
+            <sup class='small fill-yellow version'>
+              {{site.oldversion}}
+            {% elsif page.version %}
+            <sup class='small fill-grey version'>
+              {{page.version}}
+            {% else %}
+            <sup class='small fill-grey version'>
+              {{site.version}}
+            {% endif %}
+            </sup>
+          </h1>
         </div>
       </div>
     </div>

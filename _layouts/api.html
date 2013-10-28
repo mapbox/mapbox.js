@@ -20,25 +20,22 @@ section: developers
   <div class='fill-white clearfix'>
     <div class='col3'>
       <div class='doc-nav'>
-        <nav class='anchors v'>
-
-        <h4 class='small pad1y pad2x keyline-bottom fill-light'>Introduction</h4>
+        <nav class='anchors v pad1y'>
         {% for intro in site.categories.introduction %}
           {% for n in intro.navigation %}
             <a class='heading pad1y pad2x strong' href='#{{n.title|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{n.title}}</a>
             {% for i in n.items %}
-              <a class='pad1y pad4x small' href='#{{i|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{i}}</a>
+              <a class='pad1y pad2x small' href='#{{i|replace:' ','_'|replace:'&',''|replace:'.',''|downcase}}'>{{i}}</a>
             {% endfor %}
           {% endfor %}
         {% endfor %}
 
-        <h4 class='small pad1y pad2x keyline-top keyline-bottom fill-light'>API</h4>
         {% for section in page.navigation %}
           <a class='heading pad1y pad2x strong' href='#{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
           {% for nav in section.nav %}
-            <a class='pad1y pad4x small strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
+            <a class='pad1y pad2x small strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
             {% for sub in nav.sub %}
-              <a class='pad1y pad4x small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
+              <a class='pad1y pad2x small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
             {% endfor %}
           {% endfor %}
         {% endfor %}
@@ -48,11 +45,14 @@ section: developers
 
     <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
-        <div class='doc pad2'>
+        <div class='pad2 keyline-bottom'>
+          <h4 class='small quiet'>Introduction</h4>
           {% for item in site.categories.introduction %}
             {{item.content}}
           {% endfor %}
-
+        </div>
+        <div class='doc pad2'>
+          <h4 class='small quiet'>API</h4>
           {{content}}
         </div>
         <div class='keyline-top center small'>

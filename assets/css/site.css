@@ -1,3 +1,4 @@
+.version { padding:2px 5px; }
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
 #map {
@@ -42,41 +43,39 @@ pre a {
 .code-footer * { color:#999; }
 
 .ad-v1 {
-  background: #8B8CC9;
-  color: white;
-  font-size: 14px;
-  margin-bottom: 20px;
-  padding: 15px;
-}
-
-.ad-v1 a {
-  color: white;
-  font-weight: bold;
-  text-decoration: underline;
-}
-.ad-v1 a:hover {
-  color: #D0D2FC;
-}
+  background:#8B8CC9;
+  color:white;
+  font-size:14px;
+  margin-bottom:20px;
+  padding:15px;
+  }
+  .ad-v1 a {
+    color:white;
+    font-weight:bold;
+    text-decoration:underline;
+    }
+    .ad-v1 a:hover {
+      color:#D0D2FC;
+      }
 
 .code-header *,
 .code-footer * { color:#999; }
 
 .leaflet-control-mapbox-geocoder-form {
-  background: #fff;
-  padding: 10px;
-}
-
+  background:#fff;
+  padding:10px;
+  }
 .leaflet-control-mapbox-geocoder-form input {
   padding:5px;
   height:20px;
-}
+  }
 .leaflet-control .mapbox-button {
-  background: #3887AC;
-  margin: 0 0 0 10px;
-}
+  background:#3887AC;
+  margin:0 0 0 10px;
+  }
 .leaflet-control .mapbox-button:hover {
-  background-color: #3bb2d0;
-}
+  background-color:#3bb2d0;
+  }
 
 /*  -------------------------------------------------------
  *    Syntax highlighting for prettify
