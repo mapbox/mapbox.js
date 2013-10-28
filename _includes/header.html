@@ -1,0 +1,25 @@
+<!-- Mapbox.js Header -->
+<div class='clearfix doc-header'>
+  <div class='pad4y clearfix'>
+    <div class='col10 margin1 contain'>
+      <div class="col6">
+        <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
+        <h1>
+          {{site.title}}
+
+          {% if page.v0 %}
+          <a class='small fill-yellow version' href='{{site.baseurl}}/changelog/'>
+            {{site.oldversion}}
+          {% elsif page.version %}
+          <a class='small fill-grey version' href='{{site.baseurl}}/changelog/'>
+            {{page.version}}
+          {% else %}
+          <a class='small fill-grey version' href='{{site.baseurl}}/changelog/'>
+            {{site.version}}
+          {% endif %}
+          </a>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
