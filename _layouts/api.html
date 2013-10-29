@@ -20,7 +20,7 @@ section: developers
   <div class='clearfix'>
     <div class='col12 keyline-bottom'>
       <div class='doc-nav contain clearfix'>
-        <nav class='col3 pad2 pin-left keyline-right'>
+        <nav class='col3 pad2'>
           <h4 class='small quiet'>Introduction</h4>
           {% for intro in site.categories.introduction %}
             {% for n in intro.navigation %}
@@ -32,7 +32,7 @@ section: developers
           {% endfor %}
         </nav>
 
-        <div class='col9 margin3 clearfix pad1x pad2y'>
+        <div class='col9 clearfix pad1x pad2y keyline-left'>
           <h4 class='small quiet pad1x'>API</h4>
           {% for section in page.navigation %}
             <nav class='col3 pad1x'>

@@ -5,9 +5,24 @@
 .doc-nav .strong {
   color:rgba(0,0,0,0.75);
   }
+.doc table em { color:rgba(0,0,0,0.5); }
 .doc-sub-nav {
   margin-bottom:5px;
   }
+.args {
+  color:rgba(0,0,0,0.5);
+  }
+
+.leaflet:before {
+  background:transparent url(../images/sprite.png) no-repeat 0 0;
+  content:'';
+  display:inline-block;
+  width:20px;
+  height:20px;
+  vertical-align:top;
+  margin-right:5px;
+  }
+
 #map {
   background:#fff;
   position:absolute;

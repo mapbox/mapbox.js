@@ -8,6 +8,10 @@ try {
     process.exit(1);
 }
 
+marked.setOptions({
+    gfm: true
+});
+
 var start, l, anchor, matched, toParse,
     out = '',
     nav = 'navigation:\n';
@@ -92,7 +96,7 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
             start = i + 1;
 
             // End header and start next group
-            out += '<div id="content-' + escape(anchor) + '"class="space-bottom depth-' + l.depth + '">';
+            out += '<div class="space-bottom api-group-content depth-' + l.depth + '">';
         }
     }
 
