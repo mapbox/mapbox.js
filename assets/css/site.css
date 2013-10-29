@@ -9,13 +9,15 @@
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
 
+nav a:first-of-type,
+nav a:first-child {
+  border-top:none;
+  }
+
 .doc-nav .strong {
   color:rgba(0,0,0,0.75);
   }
 .doc table em { color:rgba(0,0,0,0.5); }
-.doc-sub-nav {
-  margin-bottom:5px;
-  }
 .args {
   color:rgba(0,0,0,0.5);
   }

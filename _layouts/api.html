@@ -16,27 +16,21 @@ section: developers
   {% endif %}
 
   <div class='clearfix'>
-    <div class='col12 keyline-bottom'>
-      <div class='doc-nav contain clearfix'>
-        <div class='col12 clearfix pad1x pad2y keyline-left'>
-          {% for section in page.navigation %}
-            <nav class='col2 pad1x'>
-              <a class='heading col12 pad1y quiet strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
-              {% for nav in section.nav %}
-                <a class='col12 truncate small quiet strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
-                <nav class='doc-sub-nav'>
-                {% for sub in nav.sub %}
-                  <a class='col12 truncate quiet small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
-                {% endfor %}
-                </nav>
-              {% endfor %}
-            </nav>
+    <nav class='col3'>
+      {% for section in page.navigation %}
+        <a class='heading col12 keyline-top keyline-bottom pad1y pad2x strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
+        <div class='pad1y'>
+          {% for nav in section.nav %}
+            <a class='col12 pad1y pad2x truncate small strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
+            {% for sub in nav.sub %}
+              <a class='col12 pad2x truncate quiet small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
+            {% endfor %}
           {% endfor %}
         </div>
-      </div>
-    </div>
+      {% endfor %}
+    </nav>
 
-    <div class='col12'>
+    <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
         <div class='doc pad2'>
           {{content}}
