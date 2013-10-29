@@ -135,18 +135,20 @@ examples:
             </div>
           </form>
 
-          {% for item in page.examples %}
-          <div class="section pad2 col4">
-            <h3 class='icon {{item.icon}} pad1y'>{{item.name}}</h3>
-            <div id='{{item.id}}' class='col12 fill-white keyline-all scrollbar examples examples-{{item.id}}'>
-              {% for example in site.tags[item.id] order:ascending %}
-                {% if example.version == 'v1.0.0' %}
-                  <a href='{{site.baseurl}}{{example.url}}' class='pad1 keyline-bottom small block {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
-                {% endif %}
-              {% endfor %}
+          <div class="all-examples">
+            {% for item in page.examples %}
+            <div class="section pad2 col4">
+              <h3 class='icon {{item.icon}} pad1y'>{{item.name}}</h3>
+              <div id='{{item.id}}' class='col12 fill-white keyline-all scrollbar examples examples-{{item.id}}'>
+                {% for example in site.tags[item.id] order:ascending %}
+                  {% if example.version == 'v1.0.0' %}
+                    <a href='{{site.baseurl}}{{example.url}}' class='pad1 keyline-bottom small block {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
             </div>
-          </div>
-          {% endfor %}
+            {% endfor %}
+          </div><!-- end .all-examples -->
         </div>
 
         <div class='keyline-top center small'>
@@ -172,7 +174,6 @@ examples:
         example.bindHints("{{ site.oldversion }}");
     });
     {% endif %}
-    example.bindSearch($('.doc-search input'), $('nav.v'), false);
-    map.scrollWheelZoom.disable();
+    example.bindSearch($('.doc-search input'), $('.all-examples'), false);
   });
 </script>

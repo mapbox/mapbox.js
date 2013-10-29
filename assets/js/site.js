@@ -49,13 +49,13 @@
 
         _keydown: function(e) {
             this.keyRepeat = !~$.inArray(e.keyCode, [40,38,13]);
-            this._move(e);
+            // this._move(e);
         },
 
         _keypress: function(e) {
             // Surpress keys from being fired off twice.
             if (this.keyRepeat) return;
-            this._move(e);
+            // this._move(e);
         },
 
         _keyup: function(e) {
@@ -83,6 +83,14 @@
                 } else {
                     $this.removeClass('filtered');
                     $this.hide();
+                }
+            });
+
+            $('.examples').each(function(){
+                if($(this).find('.filtered').length !== 0) {
+                    $(this).parent('.section').show();
+                } else {
+                    $(this).parent('.section').hide();
                 }
             });
         },
