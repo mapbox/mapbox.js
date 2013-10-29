@@ -2,7 +2,7 @@ api: https://fruit-api-us-east-1.tilestream.net
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
-version: v1.3.1
+version: v1.4.0
 oldversion: v0.6.7
 url: https://122e4e-mapbox.global.ssl.fastly.net
 title: mapbox.js

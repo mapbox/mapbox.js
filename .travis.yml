@@ -1,0 +1,5 @@
+# blacklist
+branches:
+  except:
+  	- gh-pages
+    - staging
