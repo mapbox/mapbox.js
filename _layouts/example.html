@@ -67,13 +67,7 @@ examples:
 
 <div class='col10 margin1 round box clearfix contain'>
   <div class='keyline-bottom'>
-    <nav id='docs-nav' class='pill mobile-cols col12 pad2 clearfix'>
-      {% if page.v0 %}
-        <a class='button col3 margin3' href='{{site.baseurl}}/api/{{site.oldversion}}/'>API</a><a class='button col3 active' href='{{site.baseurl}}/example/{{site.oldversion}}/' >Examples</a>
-      {% else %}
-        <a class='button col3 margin3' href='{{site.baseurl}}/api/{{site.version}}/'>API</a><a class='button col3 active' href='{{site.baseurl}}/example/{{page.version}}/' >Examples</a>
-      {% endif %}
-    </nav>
+    {% include navigation.html %}
   </div>
 
   <div class='clearfix'>
