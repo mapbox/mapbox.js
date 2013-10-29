@@ -1,4 +1,21 @@
-.version { padding:2px 5px; }
+a.version { 
+  color: #666;
+  padding:2px 8px;
+  position: relative;
+}
+a.version:after {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+
+  content: '';
+  width: 0; 
+  height: 0; 
+  
+  border-width:0 6px 6px 0;
+  border-style:solid;
+  border-color:rgba(0,0,0,0.25) #fff;
+}
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
 
