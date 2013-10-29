@@ -6,16 +6,15 @@
         <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
         <h1>
           {{site.title}}
-
           {% if page.v0 %}
-          <a class='small fill-yellow version' href='{{site.baseurl}}/changelog/'>
-            {{site.oldversion}}
+          <a class='version' href='{{site.baseurl}}/changelog/'>
+            <sup class='fill-yellow small'>{{site.oldversion}}</sup>
           {% elsif page.version %}
-          <a class='small fill-grey version' href='{{site.baseurl}}/changelog/'>
-            {{page.version}}
+          <a class='version' href='{{site.baseurl}}/changelog/'>
+            <sup class='fill-grey small'>{{page.version}}</sup>
           {% else %}
-          <a class='small fill-grey version' href='{{site.baseurl}}/changelog/'>
-            {{site.version}}
+          <a class='version' href='{{site.baseurl}}/changelog/'>
+            <sup class='fill-grey small'>{{site.version}}</sup>
           {% endif %}
           </a>
         </h1>
