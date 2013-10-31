@@ -80,7 +80,7 @@ pre a {
 
 /*  -------------------------------------------------------
  *    Syntax highlighting for prettify
- *  
+ *
  *    Acronym Key
  *    =====================================================
  *   .str = string content
@@ -125,3 +125,9 @@ pre .typ,
 pre .atn,
 pre .dec,
 pre .var { color:#0C9DC2; }
+
+.tag {
+  text-transform:lowercase;
+  display:inline;
+  }
+

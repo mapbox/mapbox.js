@@ -1,3 +1,5 @@
+api: https://fruit-api-us-east-1.tilestream.net
+# api: https://tilestream.global.ssl.fastly.net
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
