@@ -1,11 +1,10 @@
-api: https://fruit-api-us-east-1.tilestream.net
-# api: https://tilestream.global.ssl.fastly.net
+api: https://122e4e-mapbox.global.ssl.fastly.net
+url: https://122e4e-mapbox.global.ssl.fastly.net
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
 version: v1.4.0
 oldversion: v0.6.7
-url: https://122e4e-mapbox.global.ssl.fastly.net
 title: mapbox.js
 description: MapBox JavaScript API
 rdiscount:
