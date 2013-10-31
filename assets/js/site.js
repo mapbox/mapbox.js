@@ -42,122 +42,20 @@
             this.$el = input;
             this.$menu = menu;
             this.anchor = anchor;
-            this.$el
-                .on('keypress', $.proxy(this._keypress, this))
-                .on('keyup', $.proxy(this._keyup, this));
-        },
-
-        _keydown: function(e) {
-            this.keyRepeat = !~$.inArray(e.keyCode, [40,38,13]);
-            this._move(e);
-        },
-
-        _keypress: function(e) {
-            // Surpress keys from being fired off twice.
-            if (this.keyRepeat) return;
-            this._move(e);
-        },
-
-        _move: function(e, doc) {
-            switch(e.keyCode) {
-                case 13: // enter
-                e.preventDefault();
-                break
-
-                case 38: // up arrow
-                e.preventDefault();
-                this._prev();
-                break
-
-                case 40: // down arrow
-                e.preventDefault();
-                this._next();
-                break
-            }
-          e.stopPropagation();
+            this.$el.on('keyup', $.proxy(this._keyup, this));
         },
 
         _keyup: function(e) {
           switch(e.keyCode) {
             case 40: // down arrow
             case 38: // up arrow
-              break;
-
             case 13: // enter
-              this._select(e);
-              break
+              break;
 
             default:
               this._search(e);
           }
           return false;
-        },
-
-        _next: function() {
-            var active = this.$menu.find('.active').removeClass('active'),
-                next = active.nextAll('.filtered').first();
-
-            if (!next.length) {
-                next = $(this.$menu.find('a')[0]);
-                next.addClass('active');
-                if ((this.$menu.offset().top) < this.$menu.height()) {
-                    $('html, body').animate({
-                        scrollTop: 0
-                    }, {
-                        duration: 300
-                    });
-                }
-            } else {
-                next.addClass('active');
-                var windowOffset = $(window).scrollTop() + $(window).height(),
-                    offset = next.offset();
-
-                if ((offset.top + 28) > windowOffset) {
-                    $('html, body').animate({
-                        scrollTop: offset.top
-                    }, 300);
-                }
-            }
-        },
-
-        _prev: function() {
-            var active = this.$menu.find('.active').removeClass('active'),
-                prev = active.prevAll('.filtered').first();
-
-            if (!prev.length) {
-                prev = this.$menu.find('a').last();
-                prev.addClass('active');
-                if ((this.$menu.offset().top) < this.$menu.height()) {
-                    $('html, body').animate({
-                        scrollTop: this.$menu.height()
-                    }, {
-                        duration: 300
-                    });
-                }
-            } else {
-                prev.addClass('active');
-
-                var windowOffset = $(window).scrollTop();
-                var offset = prev.offset();
-
-                if ((offset.top) < windowOffset) {
-                    $('html, body').animate({
-                        scrollTop: (offset.top + 28) - $(window).height()
-                    }, 300);
-                }
-            }
-        },
-
-        _select: function(e) {
-            var v = this.$menu.find('a.active').attr('href');
-            this.anchor ?
-                window.location.hash = v :
-                window.location = v
-        },
-
-        _mouseenter: function(e) {
-            this.$menu.find('a.active').removeClass('active');
-            $(e.currentTarget).addClass('active');
         },
 
         _search: function() {

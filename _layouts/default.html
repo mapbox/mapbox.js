@@ -182,50 +182,7 @@ footer:
   </div>
 </div>
 
-<div class='fill-white clearfix {% unless page.fullwidth %} limiter {% endunless %}'>
-
-  <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
-  <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-  <script src='{{site.baseurl}}/assets/js/site.js'></script>
-
-  <div class='clearfix doc-header'>
-    <div class='pad4y clearfix'>
-      <div class='col12 contain'>
-        <div class="col6">
-          <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
-          <h2>
-            {{site.title}}
-
-            <span class='version'>
-              {% if page.v0 %}
-                {{site.oldversion}}
-              {% elsif page.version %}
-                {{page.version}}
-              {% else %}
-                {{site.version}}
-              {% endif %}
-            </span>
-          </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{content}}
-
-  <script>
-  $(function() {
-      $('#search-filter').focusin(function(){
-        $('#docs-form').addClass('col12');
-        $('#docs-nav').hide();
-      });
-      $('#search-filter').focusout(function(){
-        $('#docs-form').removeClass('col12');
-        $('#docs-nav').show();
-      });
-    });
-  </script>
-</div>
+<div class='fill-white clearfix {% unless page.fullwidth %} limiter {% endunless %}'>{{content}}</div>
 
 <div class='footer keyline-top pad4y fill-white clearfix small'>
   <div class='limiter'>
