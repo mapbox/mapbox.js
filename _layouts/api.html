@@ -29,22 +29,18 @@ section: developers
   {% endif %}
 
   <div class='fill-white clearfix'>
-    <div class='col3'>
-      <div class='doc-nav'>
-        <nav class='anchors v small'>
-        {% for section in page.navigation %}
-          <a class='heading pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
-          {% for item in section.items %}
-            {% if item.Separator %}
-            <a class='parent pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
-            {% else %}
-            <a class='pad1y pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
-            {% endif %}
-          {% endfor %}
+    <nav class='col3 doc-nav anchors'>
+      {% for section in page.navigation %}
+        <a class='heading col12 keyline-bottom pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
+        {% for item in section.items %}
+          {% if item.Separator %}
+          <a class='parent col12 keyline-bottom pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
+          {% else %}
+          <a class='pad1y col12 keyline-bottom pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
+          {% endif %}
         {% endfor %}
-        </nav>
-      </div>
-    </div>
+      {% endfor %}
+    </nav>
 
     <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
@@ -68,7 +64,7 @@ section: developers
 
     var docs = new Docs();
     docs.colorCode();
-    docs.bindSearch($('.doc-search input'), $('nav.v'), true);
+    docs.bindSearch($('.doc-search input'), $('.doc-nav'), true);
     docs.bindInlineCode();
 
   });

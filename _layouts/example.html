@@ -34,21 +34,17 @@ section: developers
       {% endif %}
 
       <div class='fill-white clearfix'>
-        <div class='col3 keyline-right'>
-          <div class='doc-nav'>
-            <nav class='v small'>
-            {% if page.v0 %}
-              {% for item in site.categories['example/v0.6.7'] reversed %}
-              <a class='pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
-              {% endfor %}
-            {% else %}
-              {% for item in site.categories['example/v1.0.0'] reversed %}
-              <a class='pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
-              {% endfor %}
-            {% endif %}
-            </nav>
-          </div>
-        </div>
+        <nav class='col3 doc-nav keyline-right'>
+          {% if page.v0 %}
+            {% for item in site.categories['example/v0.6.7'] reversed %}
+            <a class='col12 keyline-bottom pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
+            {% endfor %}
+          {% else %}
+            {% for item in site.categories['example/v1.0.0'] reversed %}
+            <a class='col12 keyline-bottom pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
+            {% endfor %}
+          {% endif %}
+        </nav>
         <div class='col9'>
           <div class='pad2 doc example-header'>
             <h3>{{page.title}}</h3>
@@ -114,6 +110,6 @@ section: developers
         example.bindHints("{{ site.oldversion }}");
     });
     {% endif %}
-    example.bindSearch($('.doc-search input'), $('nav.v'), false);
+    example.bindSearch($('.doc-search input'), $('.doc-nav'), false);
   });
 </script>
