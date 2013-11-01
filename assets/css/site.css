@@ -1,3 +1,9 @@
+/* Base Candidate */
+.doc-nav a:hover,
+.doc-nav .active {
+  background-color:#f8f8f8;
+  }
+
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
 #map {
@@ -80,7 +86,7 @@ pre a {
 
 /*  -------------------------------------------------------
  *    Syntax highlighting for prettify
- *  
+ *
  *    Acronym Key
  *    =====================================================
  *   .str = string content
@@ -125,3 +131,9 @@ pre .typ,
 pre .atn,
 pre .dec,
 pre .var { color:#0C9DC2; }
+
+.tag {
+  text-transform:lowercase;
+  display:inline;
+  }
+

@@ -2,28 +2,11 @@
 layout: default
 section: developers
 ---
-{% capture version %}{% if page.v0 %}{{site.oldversion}}{% else %}{{site.version}}{% endif %}{% endcapture %}
-<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 
-<div class='clearfix doc-header fill-light'>
-  <div class='col12 pad4x contain'>
-    <a class='tag pad1y pad2x fill-darken0' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
-  </div>
+{% include header.html %}
 
-  <div class='pad4 clearfix'>
-      <div class='col8'>
-        <h2>
-          {{site.title}}
-          <span class='version'>{{version}}</span>
-        </h2>
-        <p>{{site.description}}</p>
-      </div>
-      <nav class='col4 pill clearfix'>
-        <a class='button col4' href='{{site.baseurl}}/api/{{version}}/'>API</a><a class='button col4 active' href='{{site.baseurl}}/example/{{version}}/' >Examples</a><a class='button col4' href='{{site.baseurl}}/changelog/'>Changelog</a>
-      </nav>
-    </div>
-
-    <div class='doc-page pad4 fill-grey clearfix'>
+<div class='col12 round keyline-all clearfix contain'>
+    <div class='clearfix'>
       {% if page.v0 %}
       <div class='fill-white clearfix ad-v1'>
         <span class='icon reverse star'></span>
@@ -32,29 +15,28 @@ section: developers
       {% endif %}
 
       <div class='fill-white clearfix'>
-        <div class='col3 keyline-right'>
-          <div class='doc-nav'>
-            <form class='doc-search contain pad2'>
-              <fieldset class='with-icon'>
-                <span class='icon search'></span>
-                <input class='stretch' type='text' placeholder='Filter examples'>
-              </fieldset>
-            </form>
-            <nav class='v small'>
+        <div class='col3'>
+          <div class='pad2 keyline-bottom'>
+            <fieldset class='search with-icon'>
+              <span class='icon search'></span>
+              <input id='search-filter' class='stretch' type='text' placeholder='Filter examples'>
+            </fieldset>
+          </div>
+          <nav class='doc-nav keyline-right'>
             {% if page.v0 %}
               {% for item in site.categories['example/v0.6.7'] reversed %}
-              <a class='pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
+              <a class='col12 keyline-bottom pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
               {% endfor %}
             {% else %}
               {% for item in site.categories['example/v1.0.0'] reversed %}
-              <a class='pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
+              <a class='col12 keyline-bottom pad1y pad2x {% if item.url == page.url %} active{% endif %}' href='{{site.baseurl}}{{item.url}}'>{{item.title}}</a>
               {% endfor %}
             {% endif %}
-            </nav>
-          </div>
+          </nav>
         </div>
+
         <div class='col9'>
-          <div class='pad2 doc example-header'>
+          <div class='pad2 doc keyline-left example-header'>
             <h3>{{page.title}}</h3>
             <span class='description'>{{page.description}}</span>
           </div>
@@ -95,16 +77,14 @@ section: developers
 {% endhighlight %}
 </div>
           </div>
-          </div>
-          <div class='keyline-top center small'>
-            <div class='pad2'>
-              The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class='keyline-bottom keyline-left keyline-right col12 pad2 center small'>
+  The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
+</div>
 
 {% include developers-footer.html %}
 
@@ -118,6 +98,6 @@ section: developers
         example.bindHints("{{ site.oldversion }}");
     });
     {% endif %}
-    example.bindSearch($('.doc-search input'), $('nav.v'), false);
+    example.bindSearch($('.search input'), $('.doc-nav'), false);
   });
 </script>

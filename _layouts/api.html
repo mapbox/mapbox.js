@@ -3,61 +3,40 @@ layout: default
 section: developers
 ---
 
-<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+{% include header.html %}
 
-<div class='clearfix doc-header fill-light'>
-  <div class='col12 pad4x contain'>
-    <a class='tag pad1y pad2x fill-darken0' href='{{site.url}}/{{page.section|downcase}}'>{{page.section}}</a>
+<div class='col12 round box clearfix contain'>
+  {% if site.version != page.version %}
+  <div class='warning note keyline-bottom'>
+    Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.version}}'>{{site.version}} for the latest</a>.
   </div>
+  {% endif %}
 
-  <div class='pad4 clearfix'>
-    <div class='col8'>
-      <h2>
-        {{site.title}}
-        <span class='version'>{% if page.version %}{{page.version}}{% else %}{{site.version}}{% endif %}</span>
-      </h2>
-      <p>{{site.description}}</p>
+  <div class='fill-white clearfix'>
+    <div class='col3'>
+      <div class='pad2 keyline-bottom'>
+        <fieldset class='search with-icon'>
+          <span class='icon search'></span>
+          <input id='search-filter' type='text' class='stretch' placeholder='Filter methods'>
+        </fieldset>
+      </div>
+      <nav class='doc-nav anchors'>
+        {% for section in page.navigation %}
+          <a class='heading col12 keyline-bottom pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
+          {% for item in section.items %}
+            {% if item.Separator %}
+            <a class='parent col12 keyline-bottom pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
+            {% else %}
+            <a class='pad1y col12 keyline-bottom pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </nav>
     </div>
 
-    <nav class='pill col4'>
-      {% if page.version contains "v1" %}
-        <a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>{% else %}<a href='{{site.baseurl}}/api/{{page.version}}' class='col4 button active'>API</a><a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button'>Examples</a>{% endif %}<a href='{{site.baseurl}}/changelog/' class='col4 button'>Changelog</a>
-    </nav>
-  </div>
-
-  <div class='doc-page pad2 fill-grey clearfix'>
-    <div class='fill-white clearfix'>
-      <div class='col3'>
-        <div class='doc-nav'>
-          <form class='doc-search contain pad2'>
-            <fieldset class='with-icon'>
-              <span class='icon search'></span>
-              <input type='text' class='stretch' placeholder='Filter methods'>
-            </fieldset>
-          </form>
-          <nav class='anchors v small'>
-          {% for section in page.navigation %}
-            <a class='heading pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
-            {% for item in section.items %}
-              {% if item.Separator %}
-              <a class='parent pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
-              {% else %}
-              <a class='pad1y pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
-              {% endif %}
-            {% endfor %}
-          {% endfor %}
-          </nav>
-        </div>
-      </div>
-
-      <div class='col9 keyline-left'>
-      {% if site.version != page.version %}
-      <div class='doc-content doc pad4 warn'>
-        Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.version}}'>{{site.version}} for the latest</a>.
-      </div>
-      {% endif %}
+    <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
-        <div class='doc pad4'>
+        <div class='doc pad2'>
           {{content}}
         </div>
         <div class='keyline-top center small'>
@@ -66,17 +45,19 @@ section: developers
           </div>
         </div>
       </div>
-      </div>
     </div>
   </div>
 </div>
+
 {% include developers-footer.html %}
 
 <script>
   $(function() {
+
     var docs = new Docs();
     docs.colorCode();
-    docs.bindSearch($('.doc-search input'), $('nav.v'), true);
+    docs.bindSearch($('.search input'), $('.doc-nav'), true);
     docs.bindInlineCode();
+
   });
 </script>
