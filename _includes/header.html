@@ -21,11 +21,12 @@
 </div>
 
 <nav class='pill mobile-cols col12 clearfix space-bottom'>
-  <a href='{{site.baseurl}}/api/{{site.version}}' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
-  {% if page.version contains 'v1' %}
-    <a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
-  {% else %}
+  {% if page.v0 %}
+    <a href='{{site.baseurl}}/api/v0.6.7/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
     <a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+  {% else %}
+    <a href='{{site.baseurl}}/api/{{site.version}}/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
+    <a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
   {% endif %}
     <a href='{{site.baseurl}}/changelog/' class='col4 button {% if page.url == "/changelog" %}active{% endif %}'>Changelog</a>
 </nav>
