@@ -80,16 +80,15 @@ footer:
   </script>
 
   {% if page.v0 %}
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
+  <script src='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
   {% else %}
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
-  {% endif %}
-
+  <script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
   <!--[if lte IE 8]>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css' rel='stylesheet' >
+    <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.ie.css' rel='stylesheet' >
   <![endif]-->
+  {% endif %}
 
   <script src='{{site.api}}/api/session.js'></script>
   <script src='{{site.url}}/js/site.js'></script>
