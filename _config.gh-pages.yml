@@ -1,9 +1,10 @@
+api: https://www.mapbox.com
+url: https://www.mapbox.com
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
-version: v1.3.1
+version: v1.4.0
 oldversion: v0.6.7
-url: https://122e4e-mapbox.global.ssl.fastly.net
 title: mapbox.js
 description: MapBox JavaScript API
 rdiscount:

@@ -5,30 +5,34 @@ section: developers
 
 {% include header.html %}
 
-<div class='col10 margin1 round box clearfix contain'>
-  <div class='keyline-bottom clearfix'>
-    {% include navigation.html %}
-  </div>
+<div class='col12 round box clearfix contain'>
   {% if site.version != page.version %}
   <div class='warning note keyline-bottom'>
     Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.version}}'>{{site.version}} for the latest</a>.
   </div>
   {% endif %}
 
-  <div class='clearfix'>
-    <nav class='col3'>
-      {% for section in page.navigation %}
-        <a class='heading col12 keyline-top keyline-bottom pad1y pad2x strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
-        <div class='pad1y'>
-          {% for nav in section.nav %}
-            <a class='col12 pad1y pad2x truncate small strong' href='#{{nav.title|replace:' ','_'}}'>{{nav.title}}</a>
-            {% for sub in nav.sub %}
-              <a class='col12 pad2x truncate quiet small' href='#{{sub|replace:' ','_'}}'>{{sub}}</a>
-            {% endfor %}
+  <div class='fill-white clearfix'>
+    <div class='col3'>
+      <div class='pad2 keyline-bottom'>
+        <fieldset class='search with-icon'>
+          <span class='icon search'></span>
+          <input id='search-filter' type='text' class='stretch' placeholder='Filter methods'>
+        </fieldset>
+      </div>
+      <nav class='doc-nav anchors'>
+        {% for section in page.navigation %}
+          <a class='heading col12 keyline-bottom pad1y pad2x' href='#{{section.title|replace:' ',' '}}'>{{section.title}}</a>
+          {% for item in section.items %}
+            {% if item.Separator %}
+            <a class='parent col12 keyline-bottom pad1y pad2x' href='#{{item.Separator|replace:' ',' '}}'>{{item.Separator}}</a>
+            {% else %}
+            <a class='pad1y col12 keyline-bottom pad2x' href='#{{item|replace:' ','_'}}'>{{item}}</a>
+            {% endif %}
           {% endfor %}
-        </div>
-      {% endfor %}
-    </nav>
+        {% endfor %}
+      </nav>
+    </div>
 
     <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
@@ -51,6 +55,7 @@ section: developers
   $(function() {
     var docs = new Docs();
     docs.colorCode();
+    docs.bindSearch($('.search input'), $('.doc-nav'), true);
     docs.bindInlineCode();
   });
 </script>

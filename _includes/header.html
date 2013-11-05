@@ -1,24 +1,32 @@
-<!-- Mapbox.js Header -->
-<div class='clearfix doc-header'>
-  <div class='pad4y clearfix'>
-    <div class='col10 margin1 contain'>
-      <div class='col6'>
-        <h1 class='tag small'><a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a></h1>
-        <h1>
-          {{site.title}}
-          {% if page.v0 %}
-          <a class='version' href='{{site.baseurl}}/changelog/'>
-            <sup class='fill-yellow small'>{{site.oldversion}}</sup>
-          {% elsif page.version %}
-          <a class='version' href='{{site.baseurl}}/changelog/'>
-            <sup class='fill-grey small'>{{page.version}}</sup>
-          {% else %}
-          <a class='version' href='{{site.baseurl}}/changelog/'>
-            <sup class='fill-grey small'>{{site.version}}</sup>
-          {% endif %}
-          </a>
-        </h1>
-      </div>
-    </div>
+<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
+
+<div class='pad4y col12 clearfix'>
+  <div class='col6'>
+    <h1 class='tag small'>
+      <a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a>
+    </h1>
+    <h2>
+      {{site.title}}
+      <span class='version'>
+        {% if page.v0 %}
+          {{site.oldversion}}
+        {% else %}
+          {{site.version}}
+        {% endif %}
+      </span>
+    </h2>
   </div>
 </div>
+
+<nav class='pill mobile-cols col12 clearfix space-bottom'>
+  {% if page.v0 %}
+    <a href='{{site.baseurl}}/api/v0.6.7/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
+    <a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+  {% else %}
+    <a href='{{site.baseurl}}/api/{{site.version}}/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
+    <a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+  {% endif %}
+    <a href='{{site.baseurl}}/changelog/' class='col4 button {% if page.url == "/changelog" %}active{% endif %}'>Changelog</a>
+</nav>

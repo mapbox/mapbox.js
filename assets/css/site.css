@@ -1,3 +1,9 @@
+/* Base Candidate */
+.doc-nav a:hover,
+.doc-nav .active {
+  background-color:#f8f8f8;
+  }
+
 .version,
 .version:hover {
   color:rgba(0,0,0,0.75);
@@ -5,7 +11,6 @@
   .version > *{
     padding:2px 5px;
     }
-
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
 
@@ -155,3 +160,9 @@ pre .typ,
 pre .atn,
 pre .dec,
 pre .var { color:#0C9DC2; }
+
+.tag {
+  text-transform:lowercase;
+  display:inline;
+  }
+

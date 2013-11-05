@@ -42,20 +42,7 @@
             this.$el = input;
             this.$menu = menu;
             this.anchor = anchor;
-            this.$el
-                .on('keypress', $.proxy(this._keypress, this))
-                .on('keyup', $.proxy(this._keyup, this));
-        },
-
-        _keydown: function(e) {
-            this.keyRepeat = !~$.inArray(e.keyCode, [40,38,13]);
-            // this._move(e);
-        },
-
-        _keypress: function(e) {
-            // Surpress keys from being fired off twice.
-            if (this.keyRepeat) return;
-            // this._move(e);
+            this.$el.on('keyup', $.proxy(this._keyup, this));
         },
 
         _keyup: function(e) {
