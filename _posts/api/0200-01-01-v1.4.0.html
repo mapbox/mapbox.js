@@ -38,6 +38,8 @@ navigation:
     nav:
       - title: L.mapbox.legendControl
         sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
       - title: L.mapbox.gridControl
         sub:
       - title: L.mapbox.geocoderControl
@@ -45,13 +47,20 @@ navigation:
         - geocoderControl.setURL
         - geocoderControl.setID
         - geocoderControl.setTileJSON
-        - geocoderControl.setErrorHandler
-        - geocoderControl.getErrorHandler
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
   - title: Markers
     nav:
       - title: L.mapbox.marker.icon
         sub:
       - title: L.mapbox.marker.style
+        sub:
+  - title: Utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
         sub:
   - title: Theming
     nav:
@@ -59,7 +68,7 @@ navigation:
 ---
 {% raw %}
 <div></div><h1 id="section-map">Map</h1>
-<div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.map">L.mapbox.map<span class="bracket">(</span><span class="args">element, id|url|tilejson, options</span><span class="bracket">)</span></h2>
+<div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.map">L.mapbox.map<span class="bracket">(</span><span class="args">element, id | url | tilejson, options</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p>Create and automatically configure a map with layers, markers, and
 interactivity.</p>
 <p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#map-options">L.Map</a></span></p>
@@ -79,7 +88,7 @@ interactivity.</p>
 </tr>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
-<td>string</td>
+<td><ul><li><code>string</code> if <em>id</em> or <em>url</em></li><li><code>object</code> if <em>tilejson</em></li></ul></td>
 <td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
@@ -103,7 +112,7 @@ var map = L.mapbox.map(&#39;map&#39;);</code></pre>
 zoom bounds and other metadata.</p>
 <p><em>Returns</em>: the TileJSON object</p>
 </div><h1 id="section-layers">Layers</h1>
-<div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.tileLayer">L.mapbox.tileLayer<span class="bracket">(</span><span class="args">id|url|tilejson, options</span><span class="bracket">)</span></h2>
+<div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.tileLayer">L.mapbox.tileLayer<span class="bracket">(</span><span class="args">id | url | tilejson, options</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p>You can add a tiled layer to your map with <code>L.mapbox.tileLayer()</code>, a simple
 interface to layers from MapBox and elsewhere.</p>
 <p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#tilelayer">L.TileLayer</a></span></p>
@@ -118,7 +127,7 @@ interface to layers from MapBox and elsewhere.</p>
 <tbody>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
-<td>string</td>
+<td><ul><li><code>string</code> if <em>id</em> or <em>url</em></li><li><code>object</code> if <em>tilejson</em></li></ul></td>
 <td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
@@ -128,6 +137,7 @@ interface to layers from MapBox and elsewhere.</p>
 </tr>
 </tbody>
 </table>
+<p>If <code>detectRetina</code> is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don&#39;t provide an explicit <code>retinaVersion</code> to be used.</p>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
 var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
@@ -140,6 +150,12 @@ var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
     detectRetina: true,
     // if retina is detected, this layer is used instead
     retinaVersion: &#39;examples.map-zswgei2n&#39;
+});
+
+// if this map supports auto-scaling, `detectRetina` will automatically
+// use scaled tiles when retina is detected.
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
+    detectRetina: true,
 });</code></pre>
 <p><em>Returns</em> a <code>L.mapbox.tileLayer</code> object.</p>
 </div><h3 id="tileLayer.getTileJSON">tileLayer.getTileJSON<span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
@@ -181,7 +197,7 @@ var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
     format: &#39;jpg70&#39;
 });</code></pre>
 <p><em>Returns</em>: the layer object</p>
-</div><h2 id="L.mapbox.gridLayer">L.mapbox.gridLayer<span class="bracket">(</span><span class="args">id|url|tilejson, options</span><span class="bracket">)</span></h2>
+</div><h2 id="L.mapbox.gridLayer">L.mapbox.gridLayer<span class="bracket">(</span><span class="args">id | url | tilejson, options</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p>An <code>L.mapbox.gridLayer</code> loads <a href="http://mapbox.com/developers/utfgrid/">UTFGrid</a> tiles of
 interactivity into your map, which you can easily access with <code>L.mapbox.gridControl</code>.</p>
 <table>
@@ -195,7 +211,7 @@ interactivity into your map, which you can easily access with <code>L.mapbox.gri
 <tbody>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
-<td>string</td>
+<td><ul><li><code>string</code> if <em>id</em> or <em>url</em></li><li><code>object</code> if <em>tilejson</em></li></ul></td>
 <td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 </tbody>
@@ -242,7 +258,7 @@ function with that data, if any.</p>
 </tbody>
 </table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>
-</div><h2 id="L.mapbox.markerLayer">L.mapbox.markerLayer<span class="bracket">(</span><span class="args">id|url|tilejson, options</span><span class="bracket">)</span></h2>
+</div><h2 id="L.mapbox.markerLayer">L.mapbox.markerLayer<span class="bracket">(</span><span class="args">id | url | tilejson, options</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p><code>L.mapbox.markerLayer</code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
 from MapBox and elsewhere into your map.</p>
 <table>
@@ -256,7 +272,7 @@ from MapBox and elsewhere into your map.</p>
 <tbody>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
-<td>string</td>
+<td><ul><li><code>string</code> if <em>id</em> or <em>url</em></li><li><code>object</code> if <em>tilejson</em></li></ul></td>
 <td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
@@ -289,13 +305,13 @@ from MapBox and elsewhere into your map.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
 markerLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
 </div><h3 id="markerLayer.loadID">markerLayer.loadID<span class="bracket">(</span><span class="args">id</span><span class="bracket">)</span></h3>
-<div class="space-bottom api-group-content depth-3"><p>Load tiles from a map with the given <code>id</code> on MapBox.</p>
+<div class="space-bottom api-group-content depth-3"><p>Load marker GeoJSON data from a map with the given <code>id</code> on MapBox.</p>
 <table>
 <thead>
 <tr>
@@ -313,7 +329,7 @@ markerLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
 // loads markers from the map `examples.map-0l53fhk2` on MapBox,
@@ -397,7 +413,7 @@ markerLayer.setGeoJSON({
 <div class="space-bottom api-group-content depth-3"><p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>
 </div><h1 id="section-geocoding">Geocoding</h1>
-<div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.geocoder">L.mapbox.geocoder<span class="bracket">(</span><span class="args">id|url</span><span class="bracket">)</span></h2>
+<div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.geocoder">L.mapbox.geocoder<span class="bracket">(</span><span class="args">id | url</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p>A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.</p>
 <table>
 <thead>
@@ -499,11 +515,44 @@ markerLayer.setGeoJSON({
 <pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
 map.addControl(L.mapbox.legendControl());</code></pre>
 <p><em>Returns</em>: a <code>L.mapbox.legendControl</code> object.</p>
+</div><h3 id="legendControl.addLegend">legendControl.addLegend<span class="bracket">(</span><span class="args">legend</span><span class="bracket">)</span></h3>
+<div class="space-bottom api-group-content depth-3"><p>Adds a legend to the legendControl.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>legend <em>required</em></td>
+<td>string</td>
+<td>legend data, a string which may contain HTML. It will be sanitized by the legendControl&#39;s sanitizer option.</td>
+</tr>
+</tbody>
+</table>
+</div><h3 id="legendControl.removeLegend">legendControl.removeLegend<span class="bracket">(</span><span class="args">legend</span><span class="bracket">)</span></h3>
+<div class="space-bottom api-group-content depth-3"><p>Removes a legend from the legendControl.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>legend <em>required</em></td>
+<td>string</td>
+<td>legend data to remove.</td>
+</tr>
+</tbody>
+</table>
 </div><h2 id="L.mapbox.gridControl">L.mapbox.gridControl<span class="bracket">(</span><span class="args">layer, options</span><span class="bracket">)</span></h2>
-<div class="space-bottom api-group-content depth-2"><p>Interaction is what we call interactive parts of maps that are created with
-the powerful <a href="http://mapbox.com/tilemill/docs/crashcourse/tooltips/">tooltips &amp; regions system</a>
-in TileMill. Under the hood, it&#39;s powered by
-the <a href="https://github.com/mapbox/utfgrid-spec">open UTFGrid specification.</a>.</p>
+<div class="space-bottom api-group-content depth-2"><p>Interaction is what we call interactive parts of maps that are created with the powerful <a href="http://mapbox.com/tilemill/docs/crashcourse/tooltips/">tooltips &amp; regions</a> system in <a href="http://mapbox.com/tilemill/">TileMill</a>. Under the hood, it&#39;s powered by the open <a href="https://github.com/mapbox/utfgrid-spec/">UTFGrid specification</a>.</p>
 <table>
 <thead>
 <tr>
@@ -515,13 +564,13 @@ the <a href="https://github.com/mapbox/utfgrid-spec">open UTFGrid specification.
 <tbody>
 <tr>
 <td>layer</td>
-<td>function</td>
-<td>A layer created with L.mapbox.gridLayer()</td>
+<td>L.mapbox.gridLayer</td>
+<td>The first argument must be a layer created with <code>L.mapbox.gridLayer()</code></td>
 </tr>
 <tr>
 <td>options</td>
 <td>object</td>
-<td>Valid options are: <ul><li><code>sanitizer</code>: A function that accepts a string containing interactivity data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>template</code>: A string in the <a href="http://mustache.github.io/">Mustache</a> template language that will be evaluated with data from the grid to produce HTML for the interaction.</li><li><code>follow</code>: Whether the tooltip should follow the mouse in a constant relative position, or should be fixed in the top-right side of the map. By default, this is <code>false</code> and the tooltip is stationary.</li><li><code>pinnable</code>: Whether clicking will &#39;pin&#39; the tooltip open and expose a &#39;close&#39; button for the user to close the tooltip. By default, this is <code>true</code>.</li></td>
+<td>Valid options are:<ul><li><code>sanitizer</code>: A function that accepts a string containing interactivity data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>template</code>: A string in the Mustache template language that will be evaluated with data from the grid to produce HTML for the interaction.</li><li><code>follow</code>: Whether the tooltip should follow the mouse in a constant relative position, or should be fixed in the top-right side of the map. By default, this is <code>false</code> and the tooltip is stationary.</li><li><code>pinnable</code>: Whether clicking will &#39;pin&#39; the tooltip open and expose a &#39;close&#39; button for the user to close the tooltip. By default, this is <code>true</code>.</li><li><code>touchTeaser</code>: On touch devices, show the teaser formatter if there is no output from the full formatter. By default, this is <code>true</code>.</li><li><code>location</code>: Evaluate the location formatter on click events, and if it provides output, navigate to that location. By default, this is <code>true</code>.</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -532,11 +581,13 @@ map.addLayer(L.mapbox.tileLayer(&#39;examples.map-8ced9urs&#39;));
 map.addLayer(gridLayer);
 map.addControl(L.mapbox.gridControl(gridLayer));</code></pre>
 <p><em>Returns</em>: a <code>L.mapbox.gridControl</code> object.</p>
-</div><h2 id="L.mapbox.geocoderControl">L.mapbox.geocoderControl<span class="bracket">(</span><span class="args">id|url</span><span class="bracket">)</span></h2>
+</div><h2 id="L.mapbox.geocoderControl">L.mapbox.geocoderControl<span class="bracket">(</span><span class="args">id | url, options</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p>Adds geocoder functionality as well as a UI element to a map. This uses
 the <a href="http://mapbox.com/developers/api/#geocoding">MapBox Geocoding API</a>.</p>
-<p>This function is currently in private beta:
-<a href="http://mapbox.com/about/contact/">contact MapBox</a> before using this functionality.</p>
+<div class='note warn'>
+This function is currently in private beta: <a href'http://mapbox.com/about/contact/'>Contact MapBox</a> before using this functionality.
+</div>
+
 <table>
 <thead>
 <tr>
@@ -551,12 +602,17 @@ the <a href="http://mapbox.com/developers/api/#geocoding">MapBox Geocoding API</
 <td>string</td>
 <td>Either a <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li></ul></td>
 </tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>An options argument with the same options as the <code>L.Control class</code>, as well as: <ul><li><code>keepOpen</code>: a boolean for whether the control will stay open always rather than being toggled. Default <code>false</code>.<li></ul></td>
+</tr>
 </tbody>
 </table>
-<p><em>Example</em></p>
+<p><em>Example</em>:</p>
 <pre><code>var map = L.map(&#39;map&#39;)
     .setView([37, -77], 5)
-    .addControl( L.mapbox.geocoder(&#39;examples.map-vyofok3q&#39;));</code></pre>
+    .addControl(L.mapbox.geocoderControl(&#39;examples.map-vyofok3q&#39;));</code></pre>
 <p><em>Returns</em> a <code>L.mapbox.geocoderControl</code> object.</p>
 </div><h3 id="geocoderControl.setURL">geocoderControl.setURL<span class="bracket">(</span><span class="args">url</span><span class="bracket">)</span></h3>
 <div class="space-bottom api-group-content depth-3"><p>Set the url used for geocoding.</p>
@@ -615,8 +671,8 @@ the <a href="http://mapbox.com/developers/api/#geocoding">MapBox Geocoding API</
 </tbody>
 </table>
 <p><em>Returns</em>: the geocoder object</p>
-</div><h3 id="geocoderControl.setErrorHandler">geocoderControl.setErrorHandler<span class="bracket">(</span><span class="args">errorhandler</span><span class="bracket">)</span></h3>
-<div class="space-bottom api-group-content depth-3"><p>Set the function called if a geocoding request returns an error.</p>
+</div><h3 id="geocoderControl.on">geocoderControl.on<span class="bracket">(</span><span class="args">event, callback</span><span class="bracket">)</span></h3>
+<div class="space-bottom api-group-content depth-3"><p>Bind a listener to an event emitted by the geocoder control. Supported additional events are</p>
 <table>
 <thead>
 <tr>
@@ -627,16 +683,42 @@ the <a href="http://mapbox.com/developers/api/#geocoding">MapBox Geocoding API</
 </thead>
 <tbody>
 <tr>
-<td>errorhandler</td>
-<td>function</td>
-<td>A function that takes an error object - typically an XMLHttpRequest, and handles it.</td>
+<td>event</td>
+<td>string</td>
+<td><ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from MapBox.</li></ul></td>
 </tr>
 </tbody>
 </table>
-<p><em>Returns</em>: the geocoder control object</p>
-</div><h3 id="geocoderControl.getErrorHandler">geocoderControl.getErrorHandler<span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
-<div class="space-bottom api-group-content depth-3"><p>Returns the current function used by this geocoderControl for error handling.</p>
-<p><em>Returns</em>: the geocoder control&#39;s error handler</p>
+</div><h2 id="L.mapbox.shareControl">L.mapbox.shareControl<span class="bracket">(</span><span class="args">id | url, options</span><span class="bracket">)</span></h2>
+<div class="space-bottom api-group-content depth-2"><p>Adds a &quot;Share&quot; button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.</p>
+<p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#control">L.Control</a></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>optional</em></td>
+<td>string</td>
+<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code><a href="https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json">https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</a></code> If not supplied, the TileJSON from the map is used.</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>Options for <a href="http://leafletjs.com/reference.html#control">L.Control</a></span> Also accepts the following options:<ul><li>url: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var map = L.map(&#39;map&#39;, &#39;examples.map-vyofok3q&#39;)
+    .setView([37, -77], 5)
+    .addControl(L.mapbox.shareControl());</code></pre>
+<p><em>Returns</em>:
+Returns a <code>L.mapbox.shareControl</code> object.</p>
 </div><h1 id="section-markers">Markers</h1>
 <div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.marker.icon">L.mapbox.marker.icon<span class="bracket">(</span><span class="args">feature</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p>A core icon generator used in <code>L.mapbox.marker.style</code></p>
@@ -691,6 +773,51 @@ features.</p>
 });</code></pre>
 <p><em>Returns</em>:</p>
 <p>A <code>L.Marker</code> object with the latitude, longitude position and a styled marker</p>
+</div><h1 id="section-utility">Utility</h1>
+<div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.sanitize">L.mapbox.sanitize<span class="bracket">(</span><span class="args">string</span><span class="bracket">)</span></h2>
+<div class="space-bottom api-group-content depth-2"><p>A HTML sanitization function, with the same effect as the default value of the <code>sanitizer</code> option of <code>L.mapbox.markerLayer</code>, <code>L.mapbox.gridControl</code>, and <code>L.mapbox.legendControl</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>String of content you wish to sanitize.</td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="L.mapbox.template">L.mapbox.template<span class="bracket">(</span><span class="args">template, data</span><span class="bracket">)</span></h2>
+<div class="space-bottom api-group-content depth-2"><p>A <a href="http://mustache.github.io/">mustache</a> template rendering function, as used by the templating feature provided by <code>L.mapbox.gridControl</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>template</td>
+<td>string</td>
+<td>The template string</td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>Data you wish to pass into the template string</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var output = L.mapbox.template(&#39;Name: {{name}}&#39;, {name: &#39;John&#39;});
+// output is &quot;Name: John&quot;</code></pre>
 </div><h1 id="section-theming">Theming</h1>
 <div class="space-bottom api-group-content depth-1"></div><h2>Dark theme</h2>
 <div class="space-bottom api-group-content depth-2"><p>Mapbox.js implements a simple, light style on all interaction elements. A dark theme

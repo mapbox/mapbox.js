@@ -39,9 +39,6 @@ nav a:first-child {
   border-top:none;
   }
 
-.doc-nav .strong {
-  color:rgba(0,0,0,0.75);
-  }
 .doc table em { color:rgba(0,0,0,0.5); }
 .args {
   color:rgba(0,0,0,0.5);
@@ -94,28 +91,6 @@ pre a {
   -webkit-box-shadow: 0 0 2px #EAF4F8;
           box-shadow: 0 0 2px #EAF4F8;
   }
-
-.code-header *,
-.code-footer * { color:#999; }
-
-.ad-v1 {
-  background:#8B8CC9;
-  color:white;
-  font-size:14px;
-  margin-bottom:20px;
-  padding:15px;
-  }
-  .ad-v1 a {
-    color:white;
-    font-weight:bold;
-    text-decoration:underline;
-    }
-    .ad-v1 a:hover {
-      color:#D0D2FC;
-      }
-
-.code-header *,
-.code-footer * { color:#999; }
 
 .leaflet-control-mapbox-geocoder-form {
   background:#fff;
