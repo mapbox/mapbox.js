@@ -4,8 +4,56 @@
   background-color:#f8f8f8;
   }
 
+.version,
+.version:hover {
+  color:rgba(0,0,0,0.75);
+  }
+  .version > *{
+    padding:2px 5px;
+    }
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
+
+.examples {
+  height:205px;
+  }
+
+/* Scrollbar */
+.scrollbar {
+  overflow-y: auto;
+  }
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  border-left: 1px solid rgba(0,0,0,.1);
+  background: transparent;
+  }
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.1);
+  border-radius: 0;
+  }
+.scrollbar::-webkit-scrollbar-track { background: none; }
+.scrollbar::-webkit-scrollbar:hover { background: rgba(0,0,0,.05); }
+nav a:first-of-type,
+nav a:first-child {
+  border-top:none;
+  }
+
+.doc table em { color:rgba(0,0,0,0.5); }
+.args {
+  color:rgba(0,0,0,0.5);
+  }
+
+.leaflet:before {
+  background:transparent url(../images/sprite.png) no-repeat 0 0;
+  content:'';
+  display:inline-block;
+  width:20px;
+  height:20px;
+  vertical-align:top;
+  margin-right:5px;
+  }
+
 #map {
   background:#fff;
   position:absolute;
@@ -44,45 +92,21 @@ pre a {
           box-shadow: 0 0 2px #EAF4F8;
   }
 
-.code-header *,
-.code-footer * { color:#999; }
-
-.ad-v1 {
-  background: #8B8CC9;
-  color: white;
-  font-size: 14px;
-  margin-bottom: 20px;
-  padding: 15px;
-}
-
-.ad-v1 a {
-  color: white;
-  font-weight: bold;
-  text-decoration: underline;
-}
-.ad-v1 a:hover {
-  color: #D0D2FC;
-}
-
-.code-header *,
-.code-footer * { color:#999; }
-
 .leaflet-control-mapbox-geocoder-form {
-  background: #fff;
-  padding: 10px;
-}
-
+  background:#fff;
+  padding:10px;
+  }
 .leaflet-control-mapbox-geocoder-form input {
   padding:5px;
   height:20px;
-}
+  }
 .leaflet-control .mapbox-button {
-  background: #3887AC;
-  margin: 0 0 0 10px;
-}
+  background:#3887AC;
+  margin:0 0 0 10px;
+  }
 .leaflet-control .mapbox-button:hover {
-  background-color: #3bb2d0;
-}
+  background-color:#3bb2d0;
+  }
 
 /*  -------------------------------------------------------
  *    Syntax highlighting for prettify
