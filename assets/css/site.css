@@ -14,6 +14,26 @@
 .example-header h3 { display:inline; margin-right:10px; }
 .doc-example { border-left:1px solid #ccc; }
 
+.examples {
+  height:205px;
+  }
+
+/* Scrollbar */
+.scrollbar {
+  overflow-y: auto;
+  }
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  border-left: 1px solid rgba(0,0,0,.1);
+  background: transparent;
+  }
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.1);
+  border-radius: 0;
+  }
+.scrollbar::-webkit-scrollbar-track { background: none; }
+.scrollbar::-webkit-scrollbar:hover { background: rgba(0,0,0,.05); }
 nav a:first-of-type,
 nav a:first-child {
   border-top:none;

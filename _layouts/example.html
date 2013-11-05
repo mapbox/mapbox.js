@@ -4,64 +4,27 @@ section: developers
 examples:
 - id: animation
   name: Animation
-  icon: bolt
 - id: geocoding
   name: Geocoding
-  icon: crosshair
 - id: handlers
   name: Handlers
-  icon: l-r-arrow
 - id: layers
   name: Layers
-  icon: document
 - id: legend
   name: Legend
-  icon: info
 - id: markers
   name: Markers
-  icon: marker
 - id: plugins
   name: Plugins
-  icon: plus
 - id: tooltips
   name: Tooltips
-  icon: tooltip
 - id: ui
   name: User Interface
-  icon: sprocket
 - id: vector
   name: Vector Overlays
-  icon: arrowright
 - id: zoom
   name: Zoom
-  icon: search
-
 ---
-<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
-
-<style>
-.examples {
-  height: 180px;
-}
-
-/* Scrollbar */
-.scrollbar {
-  overflow-y: auto;
-}
-.scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  border-left: 1px solid rgba(0,0,0,.1);
-  background: transparent;
-  }
-.scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.1);
-  border-radius: 0;
-  }
-.scrollbar::-webkit-scrollbar-track { background: none; }
-.scrollbar::-webkit-scrollbar:hover { background: rgba(0,0,0,.05); }
-
-</style>
 
 {% include header.html %}
 
@@ -82,8 +45,8 @@ examples:
           <span class='description'>{{page.description}}</span>
         </div>
         <div id='demo' class='doc'>{{content}}</div>
-        <div id='snippet' class='doc keyline-bottom'>
-        <a class='button icon embed' href='#' id='copy'>Select all</a>
+        <div id='snippet' class='doc space-bottom keyline-bottom'>
+        <a class='button icon clipboard' href='#' id='copy'>Select all</a>
         <div id='code' class='doc'>
 
 <div class='code-header quiet'>
@@ -121,24 +84,22 @@ examples:
 </div>
 
         <!-- Navigation -->
-        <div class='col12 clearfix'>
-          <form id='docs-form' class='doc-search col12 pad2'>
-            <div class=''>
-              <fieldset class='with-icon'>
-                <span class='icon search'></span>
-                <input id='search-filter' type='text' class='stretch' placeholder='Filter examples'>
-              </fieldset>
-            </div>
+        <div class='col12 pad1 clearfix'>
+          <form id='docs-form' class='doc-search clearfix col12 pad1'>
+            <fieldset class='col6 margin3 with-icon'>
+              <span class='icon search'></span>
+              <input id='search-filter' type='text' class='stretch' placeholder='Filter examples'>
+            </fieldset>
           </form>
 
-          <div class="all-examples">
+          <div class='clearfix'>
             {% for item in page.examples %}
-            <div class="section pad2 col4">
-              <h3 class='icon {{item.icon}} pad1y'>{{item.name}}</h3>
+            <div class='section pad1 col4'>
+              <h3 class='pad1y'>{{item.name}}</h3>
               <div id='{{item.id}}' class='col12 fill-white keyline-all scrollbar examples examples-{{item.id}}'>
                 {% for example in site.tags[item.id] order:ascending %}
                   {% if example.version == 'v1.0.0' %}
-                    <a href='{{site.baseurl}}{{example.url}}' class='pad1 keyline-bottom small block {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+                    <a href='{{site.baseurl}}{{example.url}}' class='pad1 keyline-bottom col12 truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
                   {% endif %}
                 {% endfor %}
               </div>
