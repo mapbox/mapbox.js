@@ -9,14 +9,12 @@
     </h2>
     <h1>
       {{site.title}}
+      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/{{site.masterbranch}}/CHANGELOG.md#{{site.version|replace:'.', ''}}'>
       {% if page.v0 %}
-      <a class='version' href='{{site.baseurl}}/changelog/'>
         <sup class='fill-yellow small'>{{site.oldversion}}</sup>
       {% elsif page.version %}
-      <a class='version' href='{{site.baseurl}}/changelog/'>
         <sup class='fill-grey small'>{{page.version}}</sup>
       {% else %}
-      <a class='version' href='{{site.baseurl}}/changelog/'>
         <sup class='fill-grey small'>{{site.version}}</sup>
       {% endif %}
       </a>
