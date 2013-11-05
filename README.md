@@ -42,4 +42,5 @@ git push origin gh-pages
 ### Updating the site to the latest deployed version of mapbox.js:
 
 * The version tag is updated in the `_config.yml` file under `version:`.
+* Rebuild the docs `cd _docs && ./build.sh VERSION`
 * Each example should be tested against the version change.
