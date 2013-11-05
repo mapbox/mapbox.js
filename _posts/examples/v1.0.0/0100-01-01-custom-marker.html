@@ -20,12 +20,13 @@ var geoJson = [{
         "coordinates": [-75.00, 40]
     },
     "properties": {
-        "title": "Small kitten",
+        "title": "Small astronaut",
         "icon": {
-            "iconUrl": "http://placekitten.com/50/50",
+            "iconUrl": "{{site.baseurl}}/assets/images/astronaut1.png",
             "iconSize": [50, 50], // size of the icon
             "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-            "popupAnchor": [0, -25]  // point from which the popup should open relative to the iconAnchor
+            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+            "className": "dot"
         }
     }
 }, {
@@ -35,12 +36,13 @@ var geoJson = [{
         "coordinates": [-74.00, 40]
     },
     "properties": {
-        "title": "Big kitten",
+        "title": "Big astronaut",
         "icon": {
-            "iconUrl": "http://placekitten.com/100/100",
+            "iconUrl": "{{site.baseurl}}/assets/images/astronaut2.png",
             "iconSize": [100, 100],
             "iconAnchor": [50, 50],
-            "popupAnchor": [0, -55]
+            "popupAnchor": [0, -55],
+            "className": "dot"
         }
     }
 }];
