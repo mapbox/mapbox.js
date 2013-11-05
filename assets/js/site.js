@@ -2,22 +2,6 @@
     var Docs = function() {};
 
     Docs.prototype = {
-
-        page: function() {
-            $('#toggle-sections').find('a').click(function() {
-                if ($('#demo').hasClass('active')) {
-                    $(this).text('Back to demo');
-                    $('#demo').removeClass('active');
-                    $('#snippet').addClass('active');
-                } else {
-                    $(this).text('View the code');
-                    $('#snippet').removeClass('active');
-                    $('#demo').addClass('active');
-                }
-                return false;
-            });
-        },
-
         copyCode: function() {
             $('#copy').click(function(e) {
                 e.preventDefault();
@@ -38,10 +22,10 @@
             prettyPrint(cb);
         },
 
-        bindSearch: function(input, menu, anchor) {
+        bindSearch: function(input, menu, cb) {
             this.$el = input;
             this.$menu = menu;
-            this.anchor = anchor;
+            this.cb = cb;
             this.$el.on('keyup', $.proxy(this._keyup, this));
         },
 
@@ -57,7 +41,7 @@
           return false;
         },
 
-        _search: function() {
+        _search: function(cb) {
             var q = this.$el.val() ? this.$el.val().toLowerCase() : null;
             this.$menu.find('[href]').each(function() {
                 var $this = $(this),
@@ -73,13 +57,7 @@
                 }
             });
 
-            $('.examples').each(function(){
-                if($(this).find('.filtered').length !== 0) {
-                    $(this).parent('.section').show();
-                } else {
-                    $(this).parent('.section').hide();
-                }
-            });
+            this.cb();
         },
 
         bindInlineCode: function() {

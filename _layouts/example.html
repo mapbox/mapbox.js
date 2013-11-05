@@ -90,7 +90,7 @@ examples:
             </fieldset>
           </form>
 
-          <div class='clearfix'>
+          <div class='all-examples clearfix'>
             {% for item in page.examples %}
             <div class='section pad1 col4'>
               <h3 class='pad1y'>{{item.name}}</h3>
@@ -103,7 +103,7 @@ examples:
               </div>
             </div>
             {% endfor %}
-          </div><!-- end .all-examples -->
+          </div>
         </div>
 
         <div class='keyline-top center small'>
@@ -122,13 +122,20 @@ examples:
 <script>
   $(document).ready(function () {
     var example = new Docs();
-    $(example.page);
     $(example.copyCode);
     {% if page.v0 %}
     example.colorCode(function(){
         example.bindHints("{{ site.oldversion }}");
     });
     {% endif %}
-    example.bindSearch($('.doc-search input'), $('.all-examples'), false);
+    example.bindSearch($('.doc-search input'), $('.all-examples'), function() {
+      $('.examples').each(function(){
+          if($(this).find('.filtered').length !== 0) {
+              $(this).parent('.section').show();
+          } else {
+              $(this).parent('.section').hide();
+          }
+      });
+    });
   });
 </script>
