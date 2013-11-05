@@ -9,7 +9,7 @@ interactivity.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | element (_required_) | string | Must be the id of an element, or a DOM element reference. |
-| id _or_ url _or_ tilejson | string | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](http://mapbox.com/wax/tilejson.html) object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson | <ul><li>`string` if _id_ or _url_</li><li>`object` if _tilejson_</li></ul> | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](http://mapbox.com/wax/tilejson.html) object, from your own Javascript code</li></ul> |
 | options | object | If provided, it is the same options as provided to [L.Map](http://leafletjs.com/reference.html#map-options) with the following additions: <ul><li>`tileLayer` (boolean). Whether or not to add a `L.mapbox.tileLayer` based on the TileJSON. Default: `true`</li><li>`markerLayer` (boolean). Whether or not to add a `L.mapbox.markerLayer` based on the TileJSON. Default: `true`.</li><li>`gridLayer` (boolean). Whether or not to add a `L.mapbox.gridLayer` based on the TileJSON. Default: `true`.</li><li>`legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`. Default: `true`.</li> |
 
 _Example_:
@@ -42,7 +42,7 @@ interface to layers from MapBox and elsewhere.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson (_required_) | string | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson (_required_) | <ul><li>`string` if _id_ or _url_</li><li>`object` if _tilejson_</li></ul> | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
 | options | object | The second argument is optional. If provided, it is the same options as provided to [L.TileLayer](http://leafletjs.com/reference.html#tilelayer) with one addition: <ul><li>`retinaVersion`, if provided, is an alternative value for the first argument to `L.mapbox.tileLayer` which, if retina is detected, is used instead.</li></ul>
 
 If `detectRetina` is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don't provide an explicit `retinaVersion` to be used.
@@ -114,7 +114,7 @@ interactivity into your map, which you can easily access with `L.mapbox.gridCont
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson (_required_) | string | <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson (_required_) | <ul><li>`string` if _id_ or _url_</li><li>`object` if _tilejson_</li></ul> | <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
 
 _Example_:
 
@@ -160,7 +160,7 @@ from MapBox and elsewhere into your map.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson | string | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
+| id _or_ url _or_ tilejson | <ul><li>`string` if _id_ or _url_</li><li>`object` if _tilejson_</li></ul> | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
 | options | object | If provided, it is the same options as provided to [http://leafletjs.com/reference.html#featuregroup](L.FeatureGroup), as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
