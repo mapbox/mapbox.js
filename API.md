@@ -1,6 +1,6 @@
 # Map
 
-## L.mapbox.map(element, id|url|tilejson, options)
+## L.mapbox.map(element, id | url | tilejson, options)
 Create and automatically configure a map with layers, markers, and
 interactivity.
 
@@ -33,7 +33,7 @@ _Returns_: the TileJSON object
 
 # Layers
 
-## L.mapbox.tileLayer(id|url|tilejson, options)
+## L.mapbox.tileLayer(id | url | tilejson, options)
 
 You can add a tiled layer to your map with `L.mapbox.tileLayer()`, a simple
 interface to layers from MapBox and elsewhere.
@@ -107,7 +107,7 @@ _Example_:
 
 _Returns_: the layer object
 
-## L.mapbox.gridLayer(id|url|tilejson, options)
+## L.mapbox.gridLayer(id | url | tilejson, options)
 
 An `L.mapbox.gridLayer` loads [UTFGrid](http://mapbox.com/developers/utfgrid/) tiles of
 interactivity into your map, which you can easily access with `L.mapbox.gridControl`.
@@ -153,7 +153,7 @@ function with that data, if any.
 
 _Returns_: the L.mapbox.gridLayer object
 
-## L.mapbox.markerLayer(id|url|tilejson, options)
+## L.mapbox.markerLayer(id | url | tilejson, options)
 
 `L.mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from MapBox and elsewhere into your map.
@@ -278,7 +278,7 @@ _Returns_ the GeoJSON represented by this layer
 
 # Geocoding
 
-## L.mapbox.geocoder(id|url)
+## L.mapbox.geocoder(id | url)
 
 A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
@@ -359,7 +359,7 @@ Interaction is what we call interactive parts of maps that are created with the 
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| layer | L.mapbox.gridLayer | The first argument must be a layer created with L`.mapbox.gridLayer()` |
+| layer | L.mapbox.gridLayer | The first argument must be a layer created with `L.mapbox.gridLayer()` |
 | options | object | Valid options are:<ul><li>`sanitizer`: A function that accepts a string containing interactivity data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li>`template`: A string in the Mustache template language that will be evaluated with data from the grid to produce HTML for the interaction.</li><li>`follow`: Whether the tooltip should follow the mouse in a constant relative position, or should be fixed in the top-right side of the map. By default, this is `false` and the tooltip is stationary.</li><li>`pinnable`: Whether clicking will 'pin' the tooltip open and expose a 'close' button for the user to close the tooltip. By default, this is `true`.</li><li>`touchTeaser`: On touch devices, show the teaser formatter if there is no output from the full formatter. By default, this is `true`.</li><li>`location`: Evaluate the location formatter on click events, and if it provides output, navigate to that location. By default, this is `true`.</li></ul> |
 
 _Example_:
@@ -372,14 +372,13 @@ _Example_:
 
 _Returns_: a `L.mapbox.gridControl` object.
 
-## L.mapbox.geocoderControl(id|url, options)
+## L.mapbox.geocoderControl(id | url, options)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
 
 <div class='note warn'>
-This function is currently in private beta:
-[contact MapBox](http://mapbox.com/about/contact/) before using this functionality.
+This function is currently in private beta: <a href'http://mapbox.com/about/contact/'>Contact MapBox</a> before using this functionality.
 </div>
 
 | Options | Value | Description |
@@ -432,7 +431,7 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 | ---- | ---- | ---- |
 | event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from MapBox.</li></ul> |
 
-## L.mapbox.shareControl(id|url, options)
+## L.mapbox.shareControl(id | url, options)
 
 Adds a "Share" button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.
 
@@ -495,7 +494,7 @@ A `L.Marker` object with the latitude, longitude position and a styled marker
 
 A HTML sanitization function, with the same effect as the default value of the `sanitizer` option of `L.mapbox.markerLayer`, `L.mapbox.gridControl`, and `L.mapbox.legendControl`.
 
-## L.mapbox.template(template: string, data: object)
+## L.mapbox.template(template, data)
 
 A [mustache](http://mustache.github.io/) template rendering function, as used by the templating feature provided by `L.mapbox.gridControl`.
 
