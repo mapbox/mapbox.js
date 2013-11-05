@@ -180,7 +180,7 @@ Load GeoJSON data for this layer from the URL given by `url`.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var markerLayer = L.mapbox.markerLayer()
         .addTo(map);
 
     markerLayer.loadURL('my_local_markers.geojson');
@@ -189,7 +189,7 @@ _Returns_: the layer object
 
 ### markerLayer.loadID(id)
 
-Load tiles from a map with the given `id` on MapBox.
+Load marker GeoJSON data from a map with the given `id` on MapBox.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -197,7 +197,7 @@ Load tiles from a map with the given `id` on MapBox.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var markerLayer = L.mapbox.markerLayer()
         .addTo(map);
 
     // loads markers from the map `examples.map-0l53fhk2` on MapBox,
@@ -493,6 +493,10 @@ A `L.Marker` object with the latitude, longitude position and a styled marker
 ## L.mapbox.sanitize(string)
 
 A HTML sanitization function, with the same effect as the default value of the `sanitizer` option of `L.mapbox.markerLayer`, `L.mapbox.gridControl`, and `L.mapbox.legendControl`.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| text | string | String of content you wish to sanitize. |
 
 ## L.mapbox.template(template, data)
 
