@@ -26,10 +26,12 @@
 <script>
   var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
       .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
+      .addControl(L.mapbox.shareControl())
       .setView([37.9, -77], 5);
 
   var maplight = L.mapbox.map('map-light', 'examples.map-20v6611k')
       .addControl(L.mapbox.geocoderControl('examples.map-20v6611k'))
+      .addControl(L.mapbox.shareControl())
       .setView([37.9, -77], 5);
 
   var feature = {
@@ -43,6 +45,9 @@
           description: 'This is a single marker.'
       }
   };
+
+  maplight.legendControl.addLegend('hee haw');
+  mapdark.legendControl.addLegend('hee haw');
 
   mapdark.markerLayer.setGeoJSON(feature);
   maplight.markerLayer.setGeoJSON(feature);
