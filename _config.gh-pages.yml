@@ -4,6 +4,7 @@ permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
 version: v1.4.0
+masterbranch: v1
 oldversion: v0.6.7
 title: mapbox.js
 description: MapBox JavaScript API
