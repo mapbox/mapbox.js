@@ -1,5 +1,5 @@
 .mapbox-icon {
-  background:transparent url(./icon-404040.png) no-repeat 0 0;
+  background:transparent url(./icons-404040.png) no-repeat 0 0;
   background-size:30px 240px;
   }
   .mapbox-icon-share    { background-position:0 -52px; }
@@ -10,7 +10,7 @@
 @media
   only screen and (-webkit-min-device-pixel-ratio:2),
   only screen and (min-device-pixel-ratio:2) {
-    background:transparent url(./icon-404040@2x.png) no-repeat 0 0;
+    background:transparent url(./icons-404040@2x.png) no-repeat 0 0;
     }
 }
 

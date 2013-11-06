@@ -28,7 +28,11 @@ dist/mapbox.css: node_modules/leaflet/dist/leaflet.css \
 dist/mapbox.standalone.css: theme/style.css
 	cat theme/style.css > dist/mapbox.standalone.css
 
-dist/images:
+theme/images: theme/images/icons.svg
+	./theme/images/render.sh
+
+dist/images: theme/images
+	cp -r theme/images/ dist/images
 	cp -r node_modules/leaflet/dist/images/ dist/images
 
 dist/mapbox.ie.css: node_modules/leaflet/dist/leaflet.ie.css
