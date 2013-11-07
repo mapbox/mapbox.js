@@ -20,10 +20,8 @@ mapbox%js:
 dist:
 	mkdir -p dist
 
-dist/mapbox.css: node_modules/leaflet/dist/leaflet.css \
-	theme/style.css
-	cat node_modules/leaflet/dist/leaflet.css \
-		theme/style.css > dist/mapbox.css
+dist/mapbox.css: theme/style.css
+	cat theme/style.css > dist/mapbox.css
 
 dist/mapbox.standalone.css: theme/style.css
 	cat theme/style.css > dist/mapbox.standalone.css
