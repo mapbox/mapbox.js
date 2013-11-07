@@ -1,0 +1,70 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Animating Marker with Video
+description: Animate a marker with a video in the tooltip
+tags:
+- markers
+- animation
+---
+<div id='map'></div>
+<script src='{{site.baseurl}}/assets/ridelapse.js'></script>
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k',{
+    closePopupOnClick:false})
+.setView([38.94999, -77.01459], 12);
+
+function style(feature) {
+    return {
+        weight: 7,
+        opacity: 1,
+        color: '#0d8709',
+        opacity:.7
+    };
+}
+
+var line = L.geoJson(ride, {
+    style:style
+}).addTo(map);
+
+var marker = L.marker([0, 0], {
+    icon: L.mapbox.marker.icon({
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-77,37.9]
+        },
+        properties: {
+            'marker-symbol': 'star',
+        }
+    })
+}).addTo(map)
+
+var coor = ride.features[0].geometry.coordinates;
+i=1;
+
+window.setInterval(function() {
+    i++;
+    marker.setLatLng(L.latLng(
+        coor[i][1],coor[i][0]
+        ));
+}, 18);
+
+marker.bindPopup('<iframe src="http://player.vimeo.com/video/69426498?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1" width="200" height="150" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',{
+    keepInView:false,
+    autoPan:false,
+    closeButton:false,
+    maxWidth:1000,
+}).openPopup();
+
+marker._popup.setLatLng = function(latlng) {
+    this._latlng = L.latLng(latlng);
+    this._updatePosition();
+    this._adjustPan();
+}
+
+</script>
+</script>
+</body>
+</html>
