@@ -1,6 +1,14 @@
 /* general typography */
 .leaflet-container { font:15px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif; }
 
+.leaflet-container *,
+.leaflet-container *:after,
+.leaflet-container *:before {
+  -webkit-box-sizing:border-box;
+     -moz-box-sizing:border-box;
+          box-sizing:border-box;
+  }
+
 /* Base Leaflet
 ------------------------------------------------------- */
 .leaflet-map-pane,
@@ -313,9 +321,6 @@
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.2);
   white-space: nowrap;
   overflow: hidden;
-  -webkit-box-sizing:border-box;
-     -moz-box-sizing:border-box;
-          box-sizing:border-box;
   }
 .leaflet-control-scale-line:not(:first-child) {
   border-top:2px solid #777;
@@ -421,7 +426,6 @@
 
 /* Leaflet + MapBox
 ------------------------------------------------------- */
-
 .mapbox-icon {
   background:transparent url(./images/icons-404040.png) no-repeat 0 0;
   background-size:30px 240px;
@@ -441,9 +445,6 @@
 .mapbox-share-popup,
 .map-legends,
 .map-tooltip {
-  -webkit-box-sizing:border-box;
-     -moz-box-sizing:border-box;
-          box-sizing:border-box;
   -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.15);
           box-shadow:0 1px 2px rgba(0,0,0,0.15);
   -webkit-border-radius:3px;
@@ -571,9 +572,6 @@
   width:48%;
   -webkit-border-radius:3px;
           border-radius:3px;
-  -webkit-box-sizing:border-box;
-     -moz-box-sizing:border-box;
-          box-sizing:border-box;
   }
 .mapbox-share-buttons a.mapbox-share-facebook {
   background-color:#3B5998;
@@ -629,9 +627,6 @@
     width:0;
     height:30px;
     opacity:0;
-    -webkit-box-sizing:border-box;
-       -moz-box-sizing:border-box;
-            box-sizing:border-box;
     -webkit-transition:width 100ms;
        -moz-transition:width 100ms;
          -o-transition:width 100ms;
@@ -665,9 +660,6 @@
   padding-left:10px;
   height:26px;
   outline: none;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
   }
 
 .leaflet-control-mapbox-geocoder .mapbox-geocoder-toggle {
@@ -697,9 +689,6 @@
   line-height:30px;
   overflow:hidden;
   text-align:center;
-  -webkit-box-sizing:border-box;
-     -moz-box-sizing:border-box;
-          box-sizing:border-box;
   }
 .leaflet-control-mapbox-geocoder-results a:hover {
   background:#eee;
