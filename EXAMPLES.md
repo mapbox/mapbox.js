@@ -8,3 +8,9 @@ to categorize your new example.
 
 * Try to keep external dependencies to a minimum
 * All new external dependencies must be HTTPS / SSL-safe
+
+## Code Style
+
+* [Same as Airbnb](https://github.com/airbnb/javascript)
+* Use comments extensively
+* Use descriptive, informative variable names.
