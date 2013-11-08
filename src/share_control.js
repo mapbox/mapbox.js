@@ -61,7 +61,7 @@ var ShareControl = L.Control.extend({
                     .replace('{{twitter}}', twitter)
                     .replace('{{facebook}}', facebook)
                     .replace('{{pinterest}}', pinterest) +
-                '<fieldset><span class="mapbox-icon mapbox-icon-share"></span><input type="text" value="{{value}}" /></fieldset>'.replace('{{value}}', '&lt;iframe width=&quot;500&quot; height=&quot;300&quot; frameBorder=&quot;0&quot; src=&quot;{{embed}}&quot;&gt;&lt;/iframe&gt;'.replace('{{embed}}', tilejson.embed || window.location)) +
+                '<fieldset><input type="text" value="{{value}}" /></fieldset>'.replace('{{value}}', '&lt;iframe width=&quot;500&quot; height=&quot;300&quot; frameBorder=&quot;0&quot; src=&quot;{{embed}}&quot;&gt;&lt;/iframe&gt;'.replace('{{embed}}', tilejson.embed || window.location)) +
                 '<small>Use this <strong>Share URL</strong> to link others to this map.</small>';
 
                     console.log(tilejson);

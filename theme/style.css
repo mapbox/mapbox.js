@@ -37,6 +37,7 @@
 .leaflet-container.dark a       { color:#63b6e5; }
 .leaflet-container.dark a:hover { color:#8fcaec; }
 
+.leaflet-container.dark .mapbox-button,
 .leaflet-container .mapbox-button {
   background-color:#3887be;
   display:inline-block;
@@ -46,6 +47,7 @@
   color:#fff;
   font-size:12px;
   }
+  .leaflet-container.dark .mapbox-button:hover,
   .leaflet-container .mapbox-button:hover {
     color:#fff;
     background-color:#3bb2d0;
@@ -391,8 +393,7 @@
   .mapbox-button-icon:before,
   .leaflet-container.dark .leaflet-control-zoom-in,
   .leaflet-container.dark .leaflet-control-zoom-out,
-  .leaflet-container.dark .leaflet-popup-close-button,
-  .leaflet-container.dark .mapbox-icon {
+  .leaflet-container.dark .leaflet-control a {
     background-image:url(./images/icons-FFFFFF.png);
     background-size:30px 240px;
     }
@@ -425,6 +426,7 @@
 
 .leaflet-control-layers,
 .leaflet-popup-content-wrapper,
+.mapbox-share-popup,
 .map-legends,
 .map-tooltip {
   background:#fff;
@@ -434,6 +436,7 @@
           border-radius:3px;
   }
 .leaflet-control-layers,
+.mapbox-share-popup,
 .map-legends,
 .map-tooltip {
   border:1px solid #bbb;
@@ -514,7 +517,6 @@
 /* Share modal
 ------------------------------------------------------- */
 .mapbox-share-popup {
-  background:#fff;
   padding:20px;
   z-index:1000;
   }
@@ -551,7 +553,7 @@
 .mapbox-share-popup input {
   width:100%;
   height:40px;
-  padding:10px 10px 10px 35px;
+  padding:10px;
   border:1px solid #ddd;
   border-color:rgba(0,0,0,0.10);
   }
