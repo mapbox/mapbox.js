@@ -7,9 +7,9 @@
   overflow:hidden;
   -ms-touch-action:none;
   }
-.leaflet-control *,
-.leaflet-control *:after,
-.leaflet-control *:before {
+.leaflet-container *,
+.leaflet-container *:after,
+.leaflet-container *:before {
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
