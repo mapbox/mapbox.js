@@ -7,7 +7,6 @@ all: \
 	dist/mapbox.private.js \
 	dist/mapbox.standalone.js \
 	dist/mapbox.css \
-	dist/mapbox.ie.css \
 	dist/mapbox.standalone.css \
 	dist/images
 
@@ -32,9 +31,6 @@ theme/images: theme/images/icons.svg
 dist/images: theme/images
 	cp -r theme/images/ dist/images
 	cp -r node_modules/leaflet/dist/images/ dist/images
-
-dist/mapbox.ie.css: node_modules/leaflet/dist/leaflet.ie.css
-	cp node_modules/leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list index.js)

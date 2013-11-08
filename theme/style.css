@@ -22,7 +22,8 @@
 .leaflet-container h5,
 .leaflet-container h6,
 .leaflet-container p {
-  font-size:15px line-height:25px;
+  font-size:15px;
+  line-height:25px;
   margin:0 0 10px;
   }
 .leaflet-container input,
@@ -520,7 +521,7 @@
   z-index:1000;
   }
 .mapbox-share-buttons {
-  margin:0 0 20px;
+  margin:0 0 10px;
   }
 .mapbox-share-buttons a {
   width:33.3333%;
