@@ -46,24 +46,25 @@ var ShareControl = L.Control.extend({
         if (this._popup) return this._clickOut(e);
 
         var tilejson = this._tilejson || this._map._tilejson || {},
-            twitter = 'http://twitter.com/intent/tweet?status=' +
-                encodeURIComponent(tilejson.name + '\n' + (tilejson.webpage || window.location)),
-            facebook = 'https://www.facebook.com/sharer.php?u=' +
-                encodeURIComponent(this.options.url || tilejson.webpage || window.location) +
-                '&t=' + encodeURIComponent(tilejson.name),
+            url = encodeURIComponent(this.options.url || tilejson.webpage || window.location),
+            name = encodeURIComponent(tilejson.name),
+            image = '//api.tiles.mapbox.com/v3/' + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png', 
+            twitter = '//twitter.com/intent/tweet?status=' + name + '\n' + url,
+            facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
+            pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,
             share =
-                "<a class='leaflet-popup-close-button' href='#close'>×</a>" +
+                "<a class='leaflet-popup-close-button' href='#close'>&times;</a>" +
                 ("<h3>Share this map</h3>" +
-                    "<div class='mapbox-share-buttons'><a class='mapbox-share-facebook mapbox-icon mapbox-icon-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
-                    "<a class='mapbox-share-twitter mapbox-icon mapbox-icon-twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
+                    "<div class='mapbox-share-buttons'><a class='mapbox-button mapbox-button-icon mapbox-icon-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
+                    "<a class='mapbox-button mapbox-button-icon mapbox-icon-twitter' target='_blank' href='{{twitter}}'>Twitter</a>" +
+                    "<a class='mapbox-button mapbox-button-icon mapbox-icon-pinterest' target='_blank' href='{{pinterest}}'>Pinterest</a></div>")
                     .replace('{{twitter}}', twitter)
-                    .replace('{{facebook}}', facebook) +
-                ("<h3>Get the embed code</h3>" +
-                "<small>Copy and paste this HTML into your website or blog.</small>") +
-                "<textarea rows=4>{{value}}</textarea>"
-                    .replace('{{value}}', ("&lt;iframe width='500' height='300' frameBorder='0' src='{{embed}}'&gt;&lt;/iframe&gt;"
-                        .replace('{{embed}}', tilejson.embed || window.location)));
+                    .replace('{{facebook}}', facebook)
+                    .replace('{{pinterest}}', pinterest) +
+                '<fieldset><span class="mapbox-icon mapbox-icon-share"></span><input type="text" value="{{value}}" /></fieldset>'.replace('{{value}}', '&lt;iframe width=&quot;500&quot; height=&quot;300&quot; frameBorder=&quot;0&quot; src=&quot;{{embed}}&quot;&gt;&lt;/iframe&gt;'.replace('{{embed}}', tilejson.embed || window.location)) +
+                '<small>Use this <strong>Share URL</strong> to link others to this map.</small>';
 
+                    console.log(tilejson);
         this._popup = L.marker(this._map.getCenter(), {
             zIndexOffset: 10000,
             icon: L.divIcon({
@@ -79,7 +80,7 @@ var ShareControl = L.Control.extend({
         .on('click', clickPopup, this).addTo(this._map);
 
         function clickPopup(e) {
-            if (e.originalEvent && e.originalEvent.target.nodeName === 'TEXTAREA') {
+            if (e.originalEvent && e.originalEvent.target.nodeName === 'INPUT') {
                 var target = e.originalEvent.target;
                 target.focus();
                 target.select();

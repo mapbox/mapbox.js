@@ -32,11 +32,33 @@
   line-height:20px;
   }
 
-.leaflet-container a        { color:#3887BE; text-decoration:none; }
-.leaflet-container a:hover  { color:#63b6e5; }
+.leaflet-container a            { color:#3887BE; text-decoration:none; }
+.leaflet-container a:hover      { color:#63b6e5; }
+.leaflet-container.dark a       { color:#63b6e5; }
+.leaflet-container.dark a:hover { color:#8fcaec; }
 
-.leaflet-container.dark a        { color:#63b6e5; }
-.leaflet-container.dark a:hover  { color:#8fcaec; }
+.leaflet-container .mapbox-button {
+  background-color:#3887be;
+  display:inline-block;
+  height:40px;
+  line-height:40px;
+  text-decoration:none;
+  color:#fff;
+  font-size:12px;
+  }
+  .leaflet-container .mapbox-button:hover {
+    color:#fff;
+    background-color:#3bb2d0;
+    }
+
+.mapbox-icon,
+.mapbox-button-icon:before {
+  content:'';
+  display:inline-block;
+  width:30px;
+  height:30px;
+  vertical-align:middle;
+  }
 
 /* Base Leaflet
 ------------------------------------------------------- */
@@ -176,18 +198,18 @@
   -webkit-border-radius:3px;
           border-radius:3px;
   }
+.leaflet-bar a {
+  width:30px;
+  height:30px;
+  line-height:30px;
+  display:block;
+  }
 .leaflet-bar a,
 .leaflet-bar a:hover {
   color:404040;
   color:rgba(0,0,0,0.75);
   border-bottom:1px solid #ddd;
   border-color:rgba(0,0,0,0.10);
-  width:30px;
-  height:30px;
-  line-height:30px;
-  display:block;
-  text-align:center;
-  text-decoration:none;
   }
   .leaflet-bar a:active,
   .leaflet-control .mapbox-button:hover,
@@ -255,7 +277,7 @@
   }
 
 .leaflet-container .leaflet-control-attribution {
-  background-color:rgba(255,255,255,0.75);
+  background-color:rgba(255,255,255,0.10);
   margin:0;
   }
 .leaflet-control-attribution,
@@ -366,21 +388,22 @@
   background:transparent url(./images/icons-404040.png) no-repeat 0 0;
   background-size:30px 240px;
   }
+  .mapbox-button-icon:before,
   .leaflet-container.dark .leaflet-control-zoom-in,
   .leaflet-container.dark .leaflet-control-zoom-out,
   .leaflet-container.dark .leaflet-popup-close-button,
   .leaflet-container.dark .mapbox-icon {
     background-image:url(./images/icons-FFFFFF.png);
+    background-size:30px 240px;
     }
-
-  .leaflet-control-zoom-in            { background-position:0 0; }
-  .leaflet-control-zoom-out           { background-position:0 -30px; }
-  .leaflet-popup-close-button         { background-position:0 -60px; }
-  .mapbox-icon.mapbox-icon-share      { background-position:0 -90px; }
-  .mapbox-icon.mapbox-icon-geocoder   { background-position:0 -120px; }
-  .mapbox-icon.mapbox-icon-facebook   { background-position:0 -150px; }
-  .mapbox-icon.mapbox-icon-twitter    { background-position:0 -180px; }
-  .mapbox-icon.mapbox-icon-pinterest  { background-position:0 -210px; }
+  .leaflet-control-zoom-in      { background-position:0 0; }
+  .leaflet-control-zoom-out     { background-position:0 -30px; }
+  .leaflet-popup-close-button   { background-position:0 -60px; }
+  .mapbox-icon-share:before, .mapbox-icon-share         { background-position:0 -90px; }
+  .mapbox-icon-geocoder:before, .mapbox-icon-geocoder   { background-position:0 -120px; }
+  .mapbox-icon-facebook:before, .mapbox-icon-facebook   { background-position:0 -150px; }
+  .mapbox-icon-twitter:before, .mapbox-icon-twitter     { background-position:0 -180px; }
+  .mapbox-icon-pinterest:before, .mapbox-icon-pinterest { background-position:0 -210px; }
 
 @media
   only screen and (-webkit-min-device-pixel-ratio:2),
@@ -391,6 +414,7 @@
     .mapbox-icon {
       background:transparent url(./images/icons-404040@2x.png) no-repeat 0 0;
       }
+    .mapbox-button-icon:before,
     .leaflet-container.dark .leaflet-control-zoom-in,
     .leaflet-container.dark .leaflet-control-zoom-out,
     .leaflet-container.dark .leaflet-popup-close-button,
@@ -401,7 +425,6 @@
 
 .leaflet-control-layers,
 .leaflet-popup-content-wrapper,
-.mapbox-share-popup,
 .map-legends,
 .map-tooltip {
   background:#fff;
@@ -411,7 +434,6 @@
           border-radius:3px;
   }
 .leaflet-control-layers,
-.mapbox-share-popup,
 .map-legends,
 .map-tooltip {
   border:1px solid #bbb;
@@ -492,51 +514,46 @@
 /* Share modal
 ------------------------------------------------------- */
 .mapbox-share-popup {
+  background:#fff;
   padding:20px;
   z-index:1000;
   }
 .mapbox-share-buttons {
-  border-bottom:1px solid #e2e2e2;
-  margin-bottom:10px;
-  padding:15px 0;
-  clear:both;
+  margin:0 0 20px;
   }
 .mapbox-share-buttons a {
-  display:inline-block;
-  font-weight:bold;
-  height:30px;
-  line-height:30px;
-  padding-left:30px;
-  text-decoration:none;
-  width:48%;
-  -webkit-border-radius:3px;
-          border-radius:3px;
+  width:33.3333%;
+  border-left:1px solid #fff;
+  text-align:center;
+  -webkit-border-radius:0;
+          border-radius:0;
   }
-.mapbox-share-buttons a.mapbox-share-facebook {
-  background-color:#3B5998;
-  color:#fff;
-  margin-right:4%;
-  }
-  .mapbox-share-buttons a.mapbox-share-facebook:hover {
-    background-color: #466EB2;
+  .mapbox-share-buttons a:last-child {
+    -webkit-border-radius:0 3px 3px 0;
+            border-radius:0 3px 3px 0;
+    }
+  .mapbox-share-buttons a:first-child {
+    border:none;
+    -webkit-border-radius:3px 0 0 3px;
+            border-radius:3px 0 0 3px;
     }
 
-.mapbox-share-buttons a.mapbox-share-twitter {
-  background-color:#4099FF;
-  color:#fff;
+.mapbox-share-popup fieldset {
+  position:relative;
+  border:none;
+  padding:0;margin:0;
   }
-.mapbox-share-buttons a.mapbox-share-twitter:hover {
-  background-color: #64B2FF;
+.mapbox-share-popup fieldset span {
+  position:absolute;
+  top:5px;
+  left:5px;
   }
-
-.mapbox-share-popup h3 { margin:0; }
-.mapbox-share-popup small {
-  color:#bbb;
-  color:rgba(0,0,0,0.5);
-  }
-.mapbox-share-popup textarea {
+.mapbox-share-popup input {
   width:100%;
-  height:50px;
+  height:40px;
+  padding:10px 10px 10px 35px;
+  border:1px solid #ddd;
+  border-color:rgba(0,0,0,0.10);
   }
 
 /* Geocoder
