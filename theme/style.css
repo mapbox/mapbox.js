@@ -2,6 +2,7 @@
 .leaflet-container {
   background:#fff;
   font:15px/25px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color:#404040;
   color:rgba(0,0,0,0.75);
   outline:0;
   overflow:hidden;
@@ -418,7 +419,6 @@
 }
 
 .leaflet-popup-content-wrapper,
-.mapbox-share-popup,
 .map-legends,
 .map-tooltip {
   background:#fff;
@@ -427,7 +427,6 @@
   -webkit-border-radius:3px;
           border-radius:3px;
   }
-.mapbox-share-popup,
 .map-legends,
 .map-tooltip {
   border:1px solid #bbb;
@@ -506,12 +505,50 @@
 
 /* Share modal
 ------------------------------------------------------- */
-.mapbox-share-popup {
+.mapbox-modal > div {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  overflow-y:auto;
+  }
+  .mapbox-modal.active > div {
+    z-index:99999;
+    transition:all .2s, z-index 0 0;
+    }
+
+.mapbox-modal .mapbox-modal-mask {
+  background:rgba(0,0,0,0.5);
+  opacity:0;
+  }
+  .mapbox-modal.active .mapbox-modal-mask { opacity:1; }
+
+.mapbox-modal .mapbox-modal-content {
+  -webkit-transform:translateY(-100%);
+     -moz-transform:translateY(-100%);
+      -ms-transform:translateY(-100%);
+          transform:translateY(-100%);
+  }
+  .mapbox-modal.active .mapbox-modal-content {
+    -webkit-transform:translateY(0);
+       -moz-transform:translateY(0);
+        -ms-transform:translateY(0);
+            transform:translateY(0);
+    }
+
+.mapbox-modal-body {
+  position:relative;
+  background:#fff;
   padding:20px;
   z-index:1000;
+  float:left;
+  width:50%;
+  margin:20px 0 20px 25%;
   }
 .mapbox-share-buttons {
-  margin:0 0 10px;
+  margin:0 0 20px;
   }
 .mapbox-share-buttons a {
   width:33.3333%;
@@ -530,22 +567,18 @@
             border-radius:3px 0 0 3px;
     }
 
-.mapbox-share-popup fieldset {
+.mapbox-modal fieldset {
   position:relative;
   border:none;
   padding:0;margin:0;
   }
-.mapbox-share-popup fieldset span {
-  position:absolute;
-  top:5px;
-  left:5px;
-  }
-.mapbox-share-popup input {
+.mapbox-modal input {
   width:100%;
   height:40px;
   padding:10px;
   border:1px solid #ddd;
   border-color:rgba(0,0,0,0.10);
+  color:rgba(0,0,0,0.5);
   }
 
 /* Geocoder
