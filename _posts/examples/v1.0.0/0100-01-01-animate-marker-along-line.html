@@ -5,7 +5,6 @@ version: v1.0.0
 title: Move Marker Along Line
 description: Simple marker animation
 tags:
-  - markers
   - vector
 ---
 
@@ -14,9 +13,11 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-20v6611k')
     .setView([0, 0], 1);
 
-var geojson = { type: 'LineString', coordinates: [] };
-
-var start = [10, 20], momentum = [3, 3];
+// Generate a GeoJSON line: you can load GeoJSON via AJAX, or
+// generate it some other way
+var geojson = { type: 'LineString', coordinates: [] },
+    start = [10, 20],
+    momentum = [3, 3];
 for (var i = 0; i < 300; i++) {
     start[0] += momentum[0];
     start[1] += momentum[1];
@@ -33,6 +34,8 @@ var geojsonLayer = L.geoJson(geojson).addTo(map),
 
 tick();
 function tick() {
+    // set the marker to be at the same point as one of the segments
+    // of the line
     marker.setLatLng(L.latLng(
         geojson.coordinates[j][1],
         geojson.coordinates[j][0]));
