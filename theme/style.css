@@ -177,7 +177,10 @@
 .leaflet-control {
   cursor:auto;
   }
-.leaflet-container,
+.leaflet-container {
+  cursor:-webkit-grab;
+  cursor:   -moz-grab;
+  }
 .leaflet-dragging,
 .leaflet-dragging .leaflet-clickable,
 .leaflet-dragging .leaflet-container {
