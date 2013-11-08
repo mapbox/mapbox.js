@@ -7,9 +7,9 @@
   overflow:hidden;
   -ms-touch-action:none;
   }
-.leaflet-container *,
-.leaflet-container *:after,
-.leaflet-container *:before {
+.leaflet-control *,
+.leaflet-control *:after,
+.leaflet-control *:before {
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -279,7 +279,7 @@
   }
 
 .leaflet-container .leaflet-control-attribution {
-  background-color:rgba(255,255,255,0.10);
+  background-color:rgba(255,255,255,0.25);
   margin:0;
   }
 .leaflet-control-attribution,
@@ -680,7 +680,7 @@
     }
 
 .leaflet-container.dark .leaflet-control-attribution {
-  background-color:rgba(0,0,0,0.75);
+  background-color:rgba(0,0,0,0.25);
   }
 .leaflet-container.dark .leaflet-bar a.leaflet-disabled,
 .leaflet-container.dark .leaflet-control .mapbox-button.disabled {
