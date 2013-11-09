@@ -433,23 +433,17 @@
   border:1px solid #bbb;
   border-color:rgba(0,0,0,0.25)
   }
-
 .map-legends .map-legend {
   padding:10px;
   }
-
 .map-tooltip {
   z-index:999999;
   padding:10px;
-  opacity:1;
-
   min-width:180px;
-  max-width:280px;
+  max-width:300px;
   max-height:400px;
-
   overflow:auto;
-  width:220px\8; /*< IE 9*/
-
+  opacity:1;
   -webkit-transition:opacity 150ms;
      -moz-transition:opacity 150ms;
        -o-transition:opacity 150ms;
@@ -720,3 +714,4 @@
 /* Older IEs don't support the translateY property for display animation */
 .leaflet-oldie .mapbox-modal .mapbox-modal-content        { display:none; }
 .leaflet-oldie .mapbox-modal.active .mapbox-modal-content { display:block; }
+.map-tooltip { width:280px\8; /* < IE9 */ }
