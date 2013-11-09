@@ -29,6 +29,7 @@
   }
 .leaflet-container input,
 .leaflet-container textarea,
+.leaflet-container label,
 .leaflet-container small {
   font-size:12px;
   line-height:20px;

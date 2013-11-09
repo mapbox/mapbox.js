@@ -7,8 +7,7 @@ all: \
 	dist/mapbox.private.js \
 	dist/mapbox.standalone.js \
 	dist/mapbox.css \
-	dist/mapbox.standalone.css \
-	dist/images
+	dist/mapbox.standalone.css
 
 node_modules/.install: package.json
 	npm install && npm install leaflet-hash && touch node_modules/.install

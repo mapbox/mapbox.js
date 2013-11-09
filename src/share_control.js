@@ -1,5 +1,7 @@
 'use strict';
 
+var url = require('./url');
+
 var ShareControl = L.Control.extend({
     includes: [require('./load_tilejson')],
 
@@ -19,6 +21,7 @@ var ShareControl = L.Control.extend({
 
     onAdd: function(map) {
         this._map = map;
+        this._url = url;
 
         var container = L.DomUtil.create('div', 'leaflet-bar');
         var link = L.DomUtil.create('a', 'mapbox-share mapbox-icon mapbox-icon-share', container);
@@ -39,7 +42,7 @@ var ShareControl = L.Control.extend({
     _clickOut: function(e) {
         if (this._sharing) {
             L.DomUtil.removeClass(this._modal, 'active');
-            this._body.innerHTML = '';
+            this._content.innerHTML = '';
             this._sharing = null;
             return;
         }
@@ -52,38 +55,40 @@ var ShareControl = L.Control.extend({
         var tilejson = this._tilejson || this._map._tilejson || {},
             url = encodeURIComponent(this.options.url || tilejson.webpage || window.location),
             name = encodeURIComponent(tilejson.name),
-            image = '//api.tiles.mapbox.com/v3/' + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png',
+            image = this._url.base() + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png',
             twitter = '//twitter.com/intent/tweet?status=' + name + '\n' + url,
             facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
             pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,
-            share =
-                "<a class='leaflet-popup-close-button' href='#close'>&times;</a>" +
-                ("<h3>Share this map</h3>" +
+            share = ("<h3>Share this map</h3>" +
                     "<div class='mapbox-share-buttons'><a class='mapbox-button mapbox-button-icon mapbox-icon-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
                     "<a class='mapbox-button mapbox-button-icon mapbox-icon-twitter' target='_blank' href='{{twitter}}'>Twitter</a>" +
                     "<a class='mapbox-button mapbox-button-icon mapbox-icon-pinterest' target='_blank' href='{{pinterest}}'>Pinterest</a></div>")
                     .replace('{{twitter}}', twitter)
                     .replace('{{facebook}}', facebook)
-                    .replace('{{pinterest}}', pinterest) +
-                '<fieldset><input type="text" value="{{value}}" /></fieldset>'.replace('{{value}}', '&lt;iframe width=&quot;100%&quot; height=&quot;500px&quot; frameBorder=&quot;0&quot; src=&quot;{{embed}}&quot;&gt;&lt;/iframe&gt;'.replace('{{embed}}', tilejson.embed || window.location)) +
-                '<small>Copy and paste this <strong>HTML code</strong> into documents to embed this map on web pages.</small>';
+                    .replace('{{pinterest}}', pinterest),
+            embedValue = '<iframe width="100%" height="500px" frameBorder="0" src="{{embed}}"></iframe>'.replace('{{embed}}', tilejson.embed || window.location),
+            embedLabel = 'Copy and paste this <strong>HTML code</strong> into documents to embed this map on web pages.';
 
         L.DomUtil.addClass(this._modal, 'active');
-        L.DomEvent.disableClickPropagation(this._content);
 
         this._sharing = this._map._createPane('mapbox-modal-body', this._content);
         this._sharing.innerHTML = share;
 
-        function clickPopup(e) {
-            if (e.originalEvent && e.originalEvent.target.nodeName === 'INPUT') {
-                var target = e.originalEvent.target;
-                target.focus();
-                target.select();
-            } else if (e.originalEvent && e.originalEvent.target.getAttribute('href') === '#close') {
-                this._clickOut(e);
-            }
-            L.DomEvent.stop(e.originalEvent);
-        }
+        var embed = L.DomUtil.create('input', 'mapbox-embed', this._sharing);
+        embed.type = 'text';
+        embed.value = embedValue;
+
+        var label = L.DomUtil.create('label', 'mapbox-embed-description', this._sharing);
+        label.innerHTML = embedLabel;
+
+        var close = L.DomUtil.create('a', 'leaflet-popup-close-button', this._sharing);
+        close.href = '#'
+
+        L.DomEvent.disableClickPropagation(this._sharing);
+        L.DomEvent.addListener(close, 'click', this._clickOut, this);
+        L.DomEvent.addListener(embed, 'click', function(e) {
+            e.target.select();
+        });
     }
 });
 
