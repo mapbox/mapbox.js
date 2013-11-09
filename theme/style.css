@@ -408,7 +408,7 @@
     .leaflet-popup-close-button,
     .leaflet-control-layers-toggle,
     .mapbox-icon {
-      background:transparent url(./images/icons-404040@2x.png) no-repeat 0 0;
+      background-image:url(./images/icons-404040@2x.png);
       }
     .mapbox-button-icon:before,
     .leaflet-container.dark .leaflet-control-zoom-in,
@@ -699,6 +699,17 @@
 .leaflet-container.dark .leaflet-control-mapbox-geocoder .leaflet-control-mapbox-geocoder-wrap {
   border-color:#202020;
   border-color:rgba(0,0,0,0.75);
+  }
+
+
+/* Smaller Screens
+------------------------------------------------------- */
+@media only screen and (max-width:640px) {
+  .mapbox-modal-body {
+    width:100%;
+    height:100%;
+    margin:0;
+    }
   }
 
 /* Browser Fixes
