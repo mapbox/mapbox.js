@@ -23,7 +23,7 @@ var ShareControl = L.Control.extend({
         this._map = map;
         this._url = url;
 
-        var container = L.DomUtil.create('div', 'leaflet-bar');
+        var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share leaflet-bar');
         var link = L.DomUtil.create('a', 'mapbox-share mapbox-icon mapbox-icon-share', container);
         link.href = '#';
 
