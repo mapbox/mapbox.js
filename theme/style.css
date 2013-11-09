@@ -544,7 +544,6 @@
   background:#fff;
   padding:20px;
   z-index:1000;
-  float:left;
   width:50%;
   margin:20px 0 20px 25%;
   }
@@ -568,11 +567,6 @@
             border-radius:3px 0 0 3px;
     }
 
-.mapbox-modal fieldset {
-  position:relative;
-  border:none;
-  padding:0;margin:0;
-  }
 .mapbox-modal input {
   width:100%;
   height:40px;
@@ -588,15 +582,12 @@
   position:relative;
   }
 .leaflet-control-mapbox-geocoder.searching:before {
-  background:#cccccc;
-  background:rgba(224,224,224,0.5);
+  background:#f8f8f8;
   content:'';
   position:absolute;
-  left:0;
-  top:0;
-  right:0;
-  bottom:0;
+  left:0;top:0;right:0;bottom:0;
   z-index:100;
+  opacity:0.5;
   }
 .leaflet-control-mapbox-geocoder .leaflet-control-mapbox-geocoder-wrap {
   background:#fff;
@@ -726,3 +717,6 @@
 .leaflet-tile-container img { -webkit-backface-visibility: hidden; }
 /* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
 .leaflet-overlay-pane svg { -moz-user-select: none; }
+/* Older IEs don't support the translateY property for display animation */
+.leaflet-oldie .mapbox-modal .mapbox-modal-content        { display:none; }
+.leaflet-oldie .mapbox-modal.active .mapbox-modal-content { display:block; }
