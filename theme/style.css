@@ -217,7 +217,9 @@
   display:block;
   }
 .leaflet-bar a,
-.leaflet-bar a:hover {
+.leaflet-bar a:hover,
+.leaflet-container.dark .leaflet-bar a,
+.leaflet-container.dark .leaflet-bar a:hover {
   color:404040;
   color:rgba(0,0,0,0.75);
   border-bottom:1px solid #ddd;
@@ -646,8 +648,7 @@
   top:30px;
   }
 .leaflet-control-mapbox-geocoder-results a,
-.leaflet-control-mapbox-geocoder-results span,
-.leaflet-control-mapbox-geocoder-results a:hover {
+.leaflet-control-mapbox-geocoder-results span {
   padding:0 10px;
   text-overflow:ellipsis;
   border:1px solid #ddd;
@@ -662,12 +663,14 @@
   text-align:left;
   overflow:hidden;
   }
+  .leaflet-control-mapbox-geocoder-results span {
+    border-color:#ddd;
+    border-color:rgba(0,0,0,0.25);
+    }
+  .leaflet-container.dark .leaflet-control .leaflet-control-mapbox-geocoder-results a:hover,
   .leaflet-control-mapbox-geocoder-results a:hover {
     background:#f8f8f8;
-    }
-  .leaflet-control-mapbox-geocoder-results span:last-child {
-    border-bottom-color:#bbb;
-    border-bottom-color:rgba(0,0,0,0.25);
+    opacity:1;
     }
 
 /* Dark Theme
@@ -677,14 +680,8 @@
   border-color:#202020;
   border-color:rgba(0,0,0,0.75);
   }
-  .leaflet-container.dark .leaflet-bar a {
-    border-color:#202020;
-    border-color:rgba(0,0,0,0.75);
-    }
-  .leaflet-container.dark .leaflet-bar a:hover,
-  .leaflet-container.dark .leaflet-control .mapbox-button:hover,
-  .leaflet-container.dark .leaflet-bar a:active,
-  .leaflet-container.dark .leaflet-control .mapbox-button:active {
+  .leaflet-container.dark .leaflet-bar a { border-color:rgba(0,0,0,0.5); }
+  .leaflet-container.dark .leaflet-bar a:hover {
     background-color:transparent;
     opacity:0.5;
     }
@@ -697,10 +694,18 @@
   background-color:#252525;
   color:#404040;
   }
-.leaflet-container.dark .leaflet-control-mapbox-geocoder .leaflet-control-mapbox-geocoder-wrap {
+.leaflet-container.dark .leaflet-control-mapbox-geocoder > div {
   border-color:#202020;
   border-color:rgba(0,0,0,0.75);
   }
+  .leaflet-container.dark .leaflet-control .leaflet-control-mapbox-geocoder-results a {
+    border-color:#ddd #202020;
+    border-color:rgba(0,0,0,0.10) rgba(0,0,0,0.75);
+    }
+  .leaflet-container.dark .leaflet-control .leaflet-control-mapbox-geocoder-results span {
+    border-color:#202020;
+    border-color:rgba(0,0,0,0.75);
+    }
 
 /* Larger Screens
 ------------------------------------------------------- */
