@@ -1,3 +1,16 @@
+## v1.4.1
+
+* Consistify colors in the stylesheet
+* Use the border-box model throughout
+* Consistify Leaflet controls and ui
+* Sprite icons [#364](https://github.com/mapbox/mapbox.js/issues/507)
+* Contain font sizes to the highest level and avoid defining specific cases so they may be overridden more easily
+* Removed IE stylesheet. Fix up cases where this is needed or write in changes to a browser section at the bottom of the stylesheet.
+* Remove duplicate max-width [#501](https://github.com/mapbox/mapbox.js/issues/507)
+* Add pinterest share button
+* Rewrite share modal to use _.createPane
+* Fix event binding [#514](https://github.com/mapbox/mapbox.js/issues/507)
+
 ## v1.4.0
 
 * Update to [Leaflet v0.6.4](https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#064-july-25-2013)
