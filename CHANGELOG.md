@@ -8,7 +8,7 @@
 * Removed IE stylesheet. Fix up cases where this is needed or write in changes to a browser section at the bottom of the stylesheet.
 * Remove duplicate max-width [#501](https://github.com/mapbox/mapbox.js/issues/507)
 * Add pinterest share button
-* Rewrite share modal to use _.createPane
+* Rewrite share modal to use `_.createPane`
 * Fix event binding [#514](https://github.com/mapbox/mapbox.js/issues/507)
 
 ## v1.4.0
