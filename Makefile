@@ -7,7 +7,8 @@ all: \
 	dist/mapbox.private.js \
 	dist/mapbox.standalone.js \
 	dist/mapbox.css \
-	dist/mapbox.standalone.css
+	dist/mapbox.standalone.css \
+	dist/images/icons-404040.png
 
 node_modules/.install: package.json
 	npm install && npm install leaflet-hash && touch node_modules/.install
@@ -27,7 +28,7 @@ dist/mapbox.standalone.css: theme/style.css
 theme/images: theme/images/icons.svg
 	./theme/images/render.sh
 
-dist/images: theme/images
+dist/images/icons-404040.png: theme/images
 	cp -r theme/images/ dist/images
 	cp -r node_modules/leaflet/dist/images/ dist/images
 
