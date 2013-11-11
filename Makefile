@@ -7,9 +7,8 @@ all: \
 	dist/mapbox.private.js \
 	dist/mapbox.standalone.js \
 	dist/mapbox.css \
-	dist/mapbox.ie.css \
 	dist/mapbox.standalone.css \
-	dist/images
+	dist/images/icons-404040.png
 
 node_modules/.install: package.json
 	npm install && npm install leaflet-hash && touch node_modules/.install
@@ -20,19 +19,18 @@ mapbox%js:
 dist:
 	mkdir -p dist
 
-dist/mapbox.css: node_modules/leaflet/dist/leaflet.css \
-	theme/style.css
-	cat node_modules/leaflet/dist/leaflet.css \
-		theme/style.css > dist/mapbox.css
+dist/mapbox.css: theme/style.css
+	cat theme/style.css > dist/mapbox.css
 
 dist/mapbox.standalone.css: theme/style.css
 	cat theme/style.css > dist/mapbox.standalone.css
 
-dist/images:
-	cp -r node_modules/leaflet/dist/images/ dist/images
+theme/images: theme/images/icons.svg
+	./theme/images/render.sh
 
-dist/mapbox.ie.css: node_modules/leaflet/dist/leaflet.ie.css
-	cp node_modules/leaflet/dist/leaflet.ie.css dist/mapbox.ie.css
+dist/images/icons-404040.png: theme/images
+	cp -r theme/images/ dist/images
+	cp -r node_modules/leaflet/dist/images/ dist/images
 
 # assemble an uncompressed but complete library for development
 dist/mapbox.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list index.js)

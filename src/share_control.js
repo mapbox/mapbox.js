@@ -1,5 +1,7 @@
 'use strict';
 
+var url = require('./url');
+
 var ShareControl = L.Control.extend({
     includes: [require('./load_tilejson')],
 
@@ -19,10 +21,15 @@ var ShareControl = L.Control.extend({
 
     onAdd: function(map) {
         this._map = map;
+        this._url = url;
 
         var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share leaflet-bar');
         var link = L.DomUtil.create('a', 'mapbox-share mapbox-icon mapbox-icon-share', container);
         link.href = '#';
+
+        this._modal = map._createPane('mapbox-modal', this._map._container);
+        this._mask = map._createPane('mapbox-modal-mask', this._modal);
+        this._content = map._createPane('mapbox-modal-content', this._modal);
 
         L.DomEvent.addListener(link, 'click', this._shareClick, this);
         L.DomEvent.disableClickPropagation(container);
@@ -33,61 +40,56 @@ var ShareControl = L.Control.extend({
     },
 
     _clickOut: function(e) {
-        if (this._popup) {
-            this._map.removeLayer(this._popup);
-            this._popup = null;
+        if (this._sharing) {
+            L.DomUtil.removeClass(this._modal, 'active');
+            this._content.innerHTML = '';
+            this._sharing = null;
             return;
         }
     },
 
     _shareClick: function(e) {
         L.DomEvent.stop(e);
-
-        if (this._popup) return this._clickOut(e);
+        if (this._sharing) return this._clickOut(e);
 
         var tilejson = this._tilejson || this._map._tilejson || {},
-            twitter = 'http://twitter.com/intent/tweet?status=' +
-                encodeURIComponent(tilejson.name + '\n' + (tilejson.webpage || window.location)),
-            facebook = 'https://www.facebook.com/sharer.php?u=' +
-                encodeURIComponent(this.options.url || tilejson.webpage || window.location) +
-                '&t=' + encodeURIComponent(tilejson.name),
-            share =
-                "<a class='leaflet-popup-close-button' href='#close'>×</a>" +
-                ("<h3>Share this map</h3>" +
-                    "<div class='mapbox-share-buttons'><a class='mapbox-share-facebook mapbox-icon mapbox-icon-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
-                    "<a class='mapbox-share-twitter mapbox-icon mapbox-icon-twitter' target='_blank' href='{{twitter}}'>Twitter</a></div>")
+            url = encodeURIComponent(this.options.url || tilejson.webpage || window.location),
+            name = encodeURIComponent(tilejson.name),
+            image = this._url.base() + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png',
+            twitter = '//twitter.com/intent/tweet?status=' + name + '\n' + url,
+            facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
+            pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,
+            share = ("<h3>Share this map</h3>" +
+                    "<div class='mapbox-share-buttons'><a class='mapbox-button mapbox-button-icon mapbox-icon-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
+                    "<a class='mapbox-button mapbox-button-icon mapbox-icon-twitter' target='_blank' href='{{twitter}}'>Twitter</a>" +
+                    "<a class='mapbox-button mapbox-button-icon mapbox-icon-pinterest' target='_blank' href='{{pinterest}}'>Pinterest</a></div>")
                     .replace('{{twitter}}', twitter)
-                    .replace('{{facebook}}', facebook) +
-                ("<h3>Get the embed code</h3>" +
-                "<small>Copy and paste this HTML into your website or blog.</small>") +
-                "<textarea rows=4>{{value}}</textarea>"
-                    .replace('{{value}}', ("&lt;iframe width='500' height='300' frameBorder='0' src='{{embed}}'&gt;&lt;/iframe&gt;"
-                        .replace('{{embed}}', tilejson.embed || window.location)));
+                    .replace('{{facebook}}', facebook)
+                    .replace('{{pinterest}}', pinterest),
+            embedValue = '<iframe width="100%" height="500px" frameBorder="0" src="{{embed}}"></iframe>'.replace('{{embed}}', tilejson.embed || window.location),
+            embedLabel = 'Copy and paste this <strong>HTML code</strong> into documents to embed this map on web pages.';
 
-        this._popup = L.marker(this._map.getCenter(), {
-            zIndexOffset: 10000,
-            icon: L.divIcon({
-                className: 'mapbox-share-popup',
-                iconSize: L.point(360, 240),
-                iconAnchor: L.point(180, 120),
-                html: share
-            })
-        })
-        .on('mousedown', function(e) {
-            L.DomEvent.stopPropagation(e.originalEvent);
-        })
-        .on('click', clickPopup, this).addTo(this._map);
+        L.DomUtil.addClass(this._modal, 'active');
 
-        function clickPopup(e) {
-            if (e.originalEvent && e.originalEvent.target.nodeName === 'TEXTAREA') {
-                var target = e.originalEvent.target;
-                target.focus();
-                target.select();
-            } else if (e.originalEvent && e.originalEvent.target.getAttribute('href') === '#close') {
-                this._clickOut(e);
-            }
-            L.DomEvent.stop(e.originalEvent);
-        }
+        this._sharing = this._map._createPane('mapbox-modal-body', this._content);
+        this._sharing.innerHTML = share;
+
+        var embed = L.DomUtil.create('input', 'mapbox-embed', this._sharing);
+        embed.type = 'text';
+        embed.value = embedValue;
+
+        var label = L.DomUtil.create('label', 'mapbox-embed-description', this._sharing);
+        label.innerHTML = embedLabel;
+
+        var close = L.DomUtil.create('a', 'leaflet-popup-close-button', this._sharing);
+        close.href = '#'
+
+        L.DomEvent.disableClickPropagation(this._sharing);
+        L.DomEvent.addListener(close, 'click', this._clickOut, this);
+        L.DomEvent.addListener(embed, 'click', function(e) {
+            e.target.focus();
+            e.target.select();
+        });
     }
 });
 

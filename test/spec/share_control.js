@@ -40,7 +40,7 @@ describe('L.mapbox.shareControl', function() {
             .getElementsByClassName('mapbox-share')[0]);
 
         expect(element
-            .getElementsByClassName('mapbox-share-popup').length)
+            .getElementsByClassName('mapbox-modal-body').length)
                 .to.eql(1);
     });
 
@@ -53,7 +53,7 @@ describe('L.mapbox.shareControl', function() {
             .getElementsByClassName('mapbox-share')[0]);
 
         expect(element
-            .getElementsByClassName('mapbox-share-popup')[0].innerHTML)
+            .getElementsByClassName('mapbox-modal-body')[0].innerHTML)
                 .to.contain('foobar');
     });
 
@@ -66,14 +66,14 @@ describe('L.mapbox.shareControl', function() {
             .getElementsByClassName('mapbox-share')[0]);
 
         expect(element
-            .getElementsByClassName('mapbox-share-popup').length)
+            .getElementsByClassName('mapbox-modal-body').length)
             .to.eql(1);
 
         happen.click(element
             .getElementsByClassName('mapbox-share')[0]);
 
         expect(element
-            .getElementsByClassName('mapbox-share-popup').length)
+            .getElementsByClassName('mapbox-modal-body').length)
             .to.eql(0);
     });
 });

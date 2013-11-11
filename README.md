@@ -62,3 +62,15 @@ and go to `/test`.
 ### Version v0.x.x
 
 [Version v0.x.x can be accessed in the old master branch.](https://github.com/mapbox/mapbox.js/tree/master).
+
+### Editing Icons
+
+Requirements:
+
+    inkscape
+    pngquant
+    convert (part of imagemagick)
+
+1. Make edits to `theme/images/icons.svg`.
+2. Run `./theme/images/render.sh` to update sprites from your edits.
+3. Add a CSS reference with the appropriate pixel coordinate if adding a new icon.
