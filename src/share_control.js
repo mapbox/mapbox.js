@@ -82,7 +82,7 @@ var ShareControl = L.Control.extend({
         label.innerHTML = embedLabel;
 
         var close = L.DomUtil.create('a', 'leaflet-popup-close-button', this._sharing);
-        close.href = '#'
+        close.href = '#';
 
         L.DomEvent.disableClickPropagation(this._sharing);
         L.DomEvent.addListener(close, 'click', this._clickOut, this);
