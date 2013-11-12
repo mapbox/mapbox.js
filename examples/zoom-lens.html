@@ -2,22 +2,16 @@
 <html>
 <head>
   <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../dist/mapbox.css"/>
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../dist/mapbox.js"></script>
+  <link rel='stylesheet' href='../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../dist/mapbox.js'></script>
 </head>
 <body>
 <style>
     #map {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: all;
-        cursor: none
+      pointer-events: all;
+      cursor: none
     }
-
     #zoommap {
         width: 200px;
         height: 200px;
@@ -70,7 +64,7 @@
 </div>
 <script>
     var map = L.mapbox.map('map', 'examples.map-20v6611k');
-    var zoommap = L.mapbox.map('zoommap', 'examples.map-4l7djmvo', {
+    var zoommap = L.mapbox.map('zoommap', 'tristen.map-ixqro653', {
         fadeAnimation: false,
         zoomControl: false,
         attributionControl: false

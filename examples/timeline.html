@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../dist/mapbox.css"/>
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../dist/mapbox.js"></script>
+  <link rel='stylesheet' href='../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../dist/mapbox.js'></script>
 </head>
 <body>
 <style>
@@ -52,18 +52,18 @@
     }
 </style>
 
-<div id='sidebar'>
-    <div id='timeline'>
-        <div id='controls'></div>
-        <h2>US Earthquakes <small>from the U.S. Geological Survey</small></h2>
-    </div>
+<div id='map' class='dark'>
+  <div id='sidebar'>
+      <div id='timeline'>
+          <div id='controls'></div>
+          <h2>US Earthquakes <small>from the U.S. Geological Survey</small></h2>
+      </div>
+  </div>
 </div>
-<div id='map'></div>
 
 <!-- We're using jQuery to load the GeoJSON, but you can use anything you want -->
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-
-<script type='text/javascript'>
+<script>
     var map = L.mapbox.map('map', 'examples.map-0l53fhk2')
         .setView([40, -130], 3);
 

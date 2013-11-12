@@ -213,6 +213,7 @@
   }
 .leaflet-control-layers-toggle,
 .leaflet-bar a {
+  background-repeat:no-repeat;
   width:30px;
   height:30px;
   line-height:30px;

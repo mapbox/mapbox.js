@@ -2,27 +2,29 @@
 <html>
 <head>
   <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../dist/mapbox.css"/>
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../dist/mapbox.js"></script>
+  <link rel='stylesheet' href='../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../dist/mapbox.js'></script>
 </head>
 <body>
 <style>
-    #filters {
-        position: absolute;
-        top: 75px;
-        left: 10px;
-        z-index: 100;
-        padding: 5px;
-        background: #fff;
+  #filters {
+    position: absolute;
+    top:80px;
+    left:10px;
+    z-index:100;
+    padding:10px;
+    background:#fff;
+    -webkit-border-radius:3px;
+            border-radius:3px;
     }
-
-    #filters ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
+  #filters ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
     }
 </style>
+<div id='map'>
 <div id='map-ui'>
     <form id='filters'>
         <ul id='options'>
@@ -35,10 +37,9 @@
         </ul>
     </form>
 </div>
-<div id='map'></div>
+</div>
 <script>
     var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
-
     var filters = document.getElementById('filters');
     var checkboxes = document.getElementsByClassName('filter');
 
