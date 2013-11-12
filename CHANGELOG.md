@@ -1,3 +1,8 @@
+## v1.4.2
+
+* Address overrides to leaflet.css when mapbox.standalone.css is used.
+* Fix Geocoder container results when the `dark` theme is used.
+
 ## v1.4.1
 
 * Consistify colors in the stylesheet
