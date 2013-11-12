@@ -223,7 +223,7 @@
 .leaflet-bar a:hover,
 .leaflet-container.dark .leaflet-bar a,
 .leaflet-container.dark .leaflet-bar a:hover {
-  color:404040;
+  color:#404040;
   color:rgba(0,0,0,0.75);
   border-bottom:1px solid #ddd;
   border-color:rgba(0,0,0,0.10);
