@@ -2,45 +2,43 @@
 <html>
 <head>
   <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../dist/mapbox.css"/>
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../dist/mapbox.js"></script>
+  <link rel='stylesheet' href='../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../dist/mapbox.js'></script>
   <style>
-      #control {
-          background: #FFF;
-          position: absolute;
-          left: 10px;
-          top: 80px;
-          height: 200px;
-          width: 28px;
-          border: 1px solid #BBB;
-          -webkit-border-radius: 3px;
-          border-radius: 3px;
-          z-index: 999;
-      }
-
-      #handle {
-          background: #000;
-          position: absolute;
-          left: 0;
-          top: 20px;
-          width: 28px;
-          height: 10px;
-      }
-
-      #handle:hover {
-          cursor: pointer;
-          background: #444;
-          cursor: ns-resize;
-      }
+      .control {
+        background:#FFF;
+        position:absolute;
+        left:10px;
+        top:80px;
+        height:200px;
+        width:30px;
+        border:1px solid #BBB;
+        z-index:999;
+        -webkit-border-radius:3px;
+                border-radius:3px;
+        }
+      .handle {
+        background:#404040;
+        position:absolute;
+        left:0;
+        top:20px;
+        width:30px;
+        height:10px;
+        }
+        .handle:hover {
+          background:#404040;
+          cursor:pointer;
+          cursor:ns-resize;
+          }
   </style>
 </head>
 <body>
 <div id='map'></div>
-<div id='control'>
-    <div id='handle'></div>
+<div class='control'>
+  <div id='handle' class='handle'></div>
 </div>
-<script type='text/javascript'>
+<script>
     var map = L.mapbox.map('map', 'examples.map-vyofok3q')
         .setView([43.6654, -79.4775], 15);
 

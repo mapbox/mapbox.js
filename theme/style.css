@@ -206,6 +206,8 @@
   background-color:#fff;
   border:1px solid #bbb;
   border-color:rgba(0,0,0,0.25);
+  -webkit-box-shadow:none;
+          box-shadow:none;
   -webkit-border-radius:3px;
           border-radius:3px;
   }
@@ -285,6 +287,8 @@
 .leaflet-container .leaflet-control-attribution {
   background-color:rgba(255,255,255,0.25);
   margin:0;
+  -webkit-box-shadow:none;
+          box-shadow:none;
   }
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
@@ -330,6 +334,8 @@
   }
 .leaflet-popup-content {
   padding:10px 10px 15px;
+  margin:0;
+  line-height:inherit;
   }
 .leaflet-popup-tip-container {
   width:20px;
@@ -340,9 +346,12 @@
 .leaflet-popup-tip {
   width:0;
 	height:0;
+  margin:0;
 	border-left:10px solid transparent;
 	border-right:10px solid transparent;
 	border-top:10px solid #fff;
+  -webkit-box-shadow:none;
+          box-shadow:none;
   }
 .leaflet-popup-close-button {
   display:block;
@@ -394,15 +403,15 @@
     background-image:url(./images/icons-FFFFFF.png);
     background-size:30px 270px;
     }
-  .leaflet-control-zoom-in        { background-position:0 0; }
-  .leaflet-control-zoom-out       { background-position:0 -30px; }
-  .leaflet-popup-close-button     { background-position:0 -60px; }
-  .leaflet-control-layers-toggle  { background-position:0 -90px; }
-  .mapbox-icon-share:before, .mapbox-icon-share         { background-position:0 -120px; }
-  .mapbox-icon-geocoder:before, .mapbox-icon-geocoder   { background-position:0 -150px; }
-  .mapbox-icon-facebook:before, .mapbox-icon-facebook   { background-position:0 -180px; }
-  .mapbox-icon-twitter:before, .mapbox-icon-twitter     { background-position:0 -210px; }
-  .mapbox-icon-pinterest:before, .mapbox-icon-pinterest { background-position:0 -240px; }
+  .leaflet-bar .leaflet-control-zoom-in                 { background-position:0 0; }
+  .leaflet-bar .leaflet-control-zoom-out                { background-position:0 -30px; }
+  .leaflet-popup-close-button                           { background-position:0 -60px; }
+  .leaflet-control-layers-toggle                        { background-position:0 -90px; }
+  .mapbox-icon-share:before, .leaflet-bar .mapbox-icon-share         { background-position:0 -120px; }
+  .mapbox-icon-geocoder:before, .leaflet-bar .mapbox-icon-geocoder   { background-position:0 -150px; }
+  .mapbox-icon-facebook:before, .leaflet-bar .mapbox-icon-facebook   { background-position:0 -180px; }
+  .mapbox-icon-twitter:before, .leaflet-bar .mapbox-icon-twitter     { background-position:0 -210px; }
+  .mapbox-icon-pinterest:before, .leaflet-bar .mapbox-icon-pinterest { background-position:0 -240px; }
 
 @media
   only screen and (-webkit-min-device-pixel-ratio:2),
@@ -493,13 +502,6 @@
   padding:5px 10px;
   -webkit-border-radius:3px;
           border-radius:3px;
-  }
-
-.leaflet-popup a,
-.map-tooltip a,
-.map-legend a {
-  color:#489;
-  text-decoration:none;
   }
 
 /* Share modal
@@ -688,6 +690,7 @@
 
 .leaflet-container.dark .leaflet-control-attribution {
   background-color:rgba(0,0,0,0.25);
+  color:#f8f8f8;
   }
 .leaflet-container.dark .leaflet-bar a.leaflet-disabled,
 .leaflet-container.dark .leaflet-control .mapbox-button.disabled {

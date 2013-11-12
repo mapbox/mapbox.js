@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset='UTF-8'/>
-  <link rel="stylesheet" href="../dist/mapbox.css"/>
-  <link rel="stylesheet" href="embed.css"/>
-  <script src="../dist/mapbox.uncompressed.js"></script>
+  <link rel='stylesheet' href='../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../dist/mapbox.uncompressed.js'></script>
 </head>
 <body>
 <style>
@@ -16,24 +16,18 @@
         width: 158px;
         margin-left: -80px;
         z-index: 1000;
-        font: 13px/18px;
         text-align: center;
         padding: 10px 0;
-        color: #3C4E5A;
         display: block;
-        border: 1px solid #BBB;
         -webkit-border-radius: 3px;
         border-radius: 3px;
     }
-
-    #geolocate:hover {
-        background: #ECF5FA;
-    }
 </style>
-<div id='map'></div>
-<a href='#' id='geolocate'>Find me</a>
+<div id='map'>
+  <a href='#' id='geolocate'>Find me</a>
+</div>
 <script>
-    var map = L.mapbox.map('map', 'examples.map-4l7djmvo');
+    var map = L.mapbox.map('map', 'tristen.map-ixqro653');
     var geolocate = document.getElementById('geolocate');
 
     // This uses the HTML5 geolocation API, which is available on
