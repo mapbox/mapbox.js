@@ -92,22 +92,6 @@ pre a {
           box-shadow: 0 0 2px #EAF4F8;
   }
 
-.leaflet-control-mapbox-geocoder-form {
-  background:#fff;
-  padding:10px;
-  }
-.leaflet-control-mapbox-geocoder-form input {
-  padding:5px;
-  height:20px;
-  }
-.leaflet-control .mapbox-button {
-  background:#3887AC;
-  margin:0 0 0 10px;
-  }
-.leaflet-control .mapbox-button:hover {
-  background-color:#3bb2d0;
-  }
-
 /*  -------------------------------------------------------
  *    Syntax highlighting for prettify
  *
