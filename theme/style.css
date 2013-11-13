@@ -206,10 +206,9 @@
   background-color:#fff;
   border:1px solid #bbb;
   border-color:rgba(0,0,0,0.25);
+  border-radius:3px;
   -webkit-box-shadow:none;
           box-shadow:none;
-  -webkit-border-radius:3px;
-          border-radius:3px;
   }
 .leaflet-control-layers-toggle,
 .leaflet-bar a {
@@ -235,13 +234,11 @@
     cursor:pointer;
     }
   .leaflet-bar a:first-child {
-    -webkit-border-radius:3px 3px 0 0;
-            border-radius:3px 3px 0 0;
+    border-radius:3px 3px 0 0;
     }
   .leaflet-bar a:last-child {
     border-bottom:none;
-    -webkit-border-radius:0 0 3px 3px;
-            border-radius:0 0 3px 3px;
+    border-radius:0 0 3px 3px;
     }
 
 .leaflet-bar .leaflet-disabled {
@@ -381,8 +378,7 @@
   border-color:rgba(0,0,0,0.25);
   }
 .leaflet-editing-icon {
-  -webkit-border-radius:3px;
-          border-radius:3px;
+  border-radius:3px;
   }
 
 /* Leaflet + MapBox
@@ -438,10 +434,9 @@
 .map-legends,
 .map-tooltip {
   background:#fff;
+  border-radius:3px;
   -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.10);
           box-shadow:0 1px 2px rgba(0,0,0,0.10);
-  -webkit-border-radius:3px;
-          border-radius:3px;
   }
 .map-legends,
 .map-tooltip {
@@ -477,8 +472,7 @@
     width:30px;
     height:30px;
     display:block;
-    -webkit-border-radius:3px;
-            border-radius:3px;
+    border-radius:3px;
     }
     .map-tooltip.closable .close:active  {
       border-color:#bbb;
@@ -500,8 +494,7 @@
   border:1px solid #ddd;
   border-color:rgba(0,0,0,0.10);
   padding:5px 10px;
-  -webkit-border-radius:3px;
-          border-radius:3px;
+  border-radius:3px;
   }
 
 /* Share modal
@@ -554,18 +547,10 @@
   width:33.3333%;
   border-left:1px solid #fff;
   text-align:center;
-  -webkit-border-radius:0;
-          border-radius:0;
+  border-radius:0;
   }
-  .mapbox-share-buttons a:last-child {
-    -webkit-border-radius:0 3px 3px 0;
-            border-radius:0 3px 3px 0;
-    }
-  .mapbox-share-buttons a:first-child {
-    border:none;
-    -webkit-border-radius:3px 0 0 3px;
-            border-radius:3px 0 0 3px;
-    }
+  .mapbox-share-buttons a:last-child  { border-radius:0 3px 3px 0; }
+  .mapbox-share-buttons a:first-child { border:none; border-radius:3px 0 0 3px; }
 
 .mapbox-modal input {
   width:100%;
@@ -599,13 +584,12 @@
   width:0;
   height:32px;
   top:-1px;
+  border-radius:0 3px 3px 0;
   opacity:0;
   -webkit-transition:opacity 100ms;
      -moz-transition:opacity 100ms;
        -o-transition:opacity 100ms;
           transition:opacity 100ms;
-  -webkit-border-radius:0 3px 3px 0;
-          border-radius:0 3px 3px 0;
   }
 .leaflet-control-mapbox-geocoder.active .leaflet-control-mapbox-geocoder-wrap {
   width:180px;
@@ -616,15 +600,12 @@
   border-bottom:none;
   }
 .leaflet-control-mapbox-geocoder-toggle {
-  -webkit-border-radius:3px;
-          border-radius:3px;
+  border-radius:3px;
   }
 .leaflet-control-mapbox-geocoder.active,
 .leaflet-control-mapbox-geocoder.active .leaflet-control-mapbox-geocoder-toggle {
-  -webkit-border-top-right-radius:0;
-          border-top-right-radius:0;
-  -webkit-border-bottom-right-radius:0;
-          border-bottom-right-radius:0;
+  border-top-right-radius:0;
+  border-bottom-right-radius:0;
   }
 .leaflet-control-mapbox-geocoder .leaflet-control-mapbox-geocoder-form input {
   background:transparent;
