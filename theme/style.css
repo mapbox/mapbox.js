@@ -401,7 +401,7 @@
   .leaflet-container.dark .leaflet-control-zoom-in,
   .leaflet-container.dark .leaflet-control-zoom-out,
   .leaflet-container.dark .leaflet-control a {
-    background-image:url(./images/icons-FFFFFF.png);
+    background-image:url(./images/icons-ffffff.png);
     background-size:30px 270px;
     }
   .leaflet-bar .leaflet-control-zoom-in                 { background-position:0 0; }
@@ -429,7 +429,7 @@
     .leaflet-container.dark .leaflet-control-zoom-out,
     .leaflet-container.dark .leaflet-control-layers-toggle,
     .leaflet-container.dark .mapbox-icon {
-      background-image:url(./images/icons-FFFFFF@2x.png);
+      background-image:url(./images/icons-ffffff@2x.png);
       }
 }
 
@@ -465,7 +465,7 @@
   }
 
 .map-tooltip .close {
-  background:transparent url(./icon-404040.png) no-repeat 0 0;
+  background:transparent url(./icons-404040.png) no-repeat 0 0;
   background-size:30px 240px;
   text-indent:-999em;
   overflow:hidden;
