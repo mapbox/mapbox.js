@@ -1,3 +1,9 @@
+/* TODO Stop gap for base overriding dark input style */
+.leaflet-container.dark textarea:focus,
+.leaflet-container.dark input[type=text]:focus {
+  color:#404040;
+  }
+
 /* Base Candidate */
 .doc-nav a:hover,
 .doc-nav .active {
