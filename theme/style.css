@@ -416,8 +416,8 @@
   .mapbox-icon-pinterest:before, .leaflet-bar .mapbox-icon-pinterest { background-position:0 -240px; }
 
 @media
-  only screen and (-webkit-min-device-pixel-ratio:2),
-  only screen and (min-device-pixel-ratio:2) {
+  (-webkit-min-device-pixel-ratio:2),
+  (min-resolution:192dpi) {
     .leaflet-control-zoom-in,
     .leaflet-control-zoom-out,
     .leaflet-popup-close-button,
