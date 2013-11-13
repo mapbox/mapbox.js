@@ -391,6 +391,7 @@
 .leaflet-control-zoom-out,
 .leaflet-popup-close-button,
 .leaflet-control-layers-toggle,
+.map-tooltip .close,
 .mapbox-icon {
   background-image:url(./images/icons-404040.png);
   background-repeat:no-repeat;
@@ -406,7 +407,7 @@
     }
   .leaflet-bar .leaflet-control-zoom-in                 { background-position:0 0; }
   .leaflet-bar .leaflet-control-zoom-out                { background-position:0 -30px; }
-  .leaflet-popup-close-button                           { background-position:0 -60px; }
+  .map-tooltip .close, .leaflet-popup-close-button      { background-position:0 -60px; }
   .leaflet-control-layers-toggle                        { background-position:0 -90px; }
   .mapbox-icon-share:before, .leaflet-bar .mapbox-icon-share         { background-position:0 -120px; }
   .mapbox-icon-geocoder:before, .leaflet-bar .mapbox-icon-geocoder   { background-position:0 -150px; }
@@ -465,8 +466,6 @@
   }
 
 .map-tooltip .close {
-  background:transparent url(./icons-404040.png) no-repeat 0 0;
-  background-size:30px 240px;
   text-indent:-999em;
   overflow:hidden;
   display:none;
