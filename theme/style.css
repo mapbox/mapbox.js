@@ -384,11 +384,11 @@
 .leaflet-control-zoom-out,
 .leaflet-popup-close-button,
 .leaflet-control-layers-toggle,
+.leaflet-container.dark .map-tooltip .close,
 .map-tooltip .close,
 .mapbox-icon {
   background-image:url(./images/icons-404040.png);
   background-repeat:no-repeat;
-  background-position:0 0;
   background-size:30px 270px;
   }
   .mapbox-button-icon:before,
