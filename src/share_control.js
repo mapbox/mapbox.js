@@ -41,6 +41,7 @@ var ShareControl = L.Control.extend({
 
     _clickOut: function(e) {
         if (this._sharing) {
+            L.DomEvent.preventDefault(e);
             L.DomUtil.removeClass(this._modal, 'active');
             this._content.innerHTML = '';
             this._sharing = null;
