@@ -9,7 +9,8 @@ try {
 }
 
 marked.setOptions({
-    gfm: true
+    gfm: true,
+    tables: true
 });
 
 var start, l, anchor, matched, toParse,
