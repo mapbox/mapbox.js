@@ -67,10 +67,6 @@ nav a:first-child {
   position:relative;
   height:400px;
   }
-#demo *:not(.zoomer) {
-  box-sizing:content-box;
-  -moz-box-sizing:content-box;
-  }
 #demo label { display:inline; }
 
 #snippet {
