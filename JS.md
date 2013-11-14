@@ -128,3 +128,48 @@ markerLayer.on('ready', function() {
 ```
 
 The `L.mapbox.markerLayer` class has a callback that fires right as soon as the markers are loaded in full. If you wait for this callback, then you can know for sure that `.getGeoJSON()` and all other functions that rely on those markers being fully downloaded will work just as expected.
+
+## JSON & GeoJSON
+
+You'll likely see the terms [JSON](http://www.json.org/) & [GeoJSON](http://geojson.org/) when you hear about map data: GeoJSON is a very popular format for storing things like the lines, points, and polygons that make up map overlays.
+
+GeoJSON is so-named because it's written in a more general language called JSON. JSON, which stands for JavaScript Object Notation, is a way of storing data that otherwise would be hardcoded into software, into standalone files that are easily readable not only by JavaScript but by other languages and systems.
+
+So, GeoJSON is a subset of JSON, and JSON is a subset of what you can represent in JavaScript. Let's say that in JavaScript you have an object like:
+
+```js
+var myBird = {
+   // this is the bird's age
+   age: 10,
+   // and its name
+   name: 'Smokey'
+};
+```
+
+JSON is like this but stricter: no `var`, no comments allowed, and you have to use `"` instead of `'` all the time:
+
+```json
+{
+   "age": 10,
+   "name": "Smokey"
+}
+```
+
+GeoJSON unfortunately doesn't have a way to represent this bird: it's only for maps. Some GeoJSON might look like
+
+```json
+{
+   "type": "Point",
+   "coordinates": [0, 0]
+}
+```
+
+That's a point at latitude=0, longitude=0.
+
+The important aha moment to have with GeoJSON and JSON in general is that, while it's pretty strict for how you write it, once you bring a JSON object into JavaScript by AJAX or however, it's the same as any other JavaScript object: you can change it, use it as a variable in functions, or anything else. That's why when there's a function like
+
+```js
+markerLayer.setGeoJSON(geoJsonObject);
+```
+
+What it's really saying is that it expects a JavaScript object that's formatted like GeoJSON. It doesn't care how it got there, or what's in its past. Now is the time.
