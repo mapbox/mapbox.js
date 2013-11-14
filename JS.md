@@ -49,11 +49,9 @@ Classes are ways to make the same kind of object more than once. For instance, i
 
 ```js
 function Dog(name, age, girl) {
-  return {
-      name: name,
-      age: age,
-      girl: girl
-  };
+  this.name = name;
+  this.age = age;
+  this.girl = girl;
 }
 
 // get a new dog
@@ -61,6 +59,28 @@ var newDog = new Dog('Professor Barksalot', 1, false);
 ```
 
 Classes make objects in a set way - if something is made with `Dog`, you know, for instance, that it has a `.name` you can grab and look at.
+
+## new
+
+Here's a little wrinkle that might be confusing: traditionally, when you create a JavaScript class like we did above, you then use `new`, a special operator in JavaScript, to create objects from it. To create a date, you would call
+
+```js
+var now = new Date();
+```
+
+`Date` is the class, `now` is the variable that you made that now contains the current date.
+
+This is a little awkward, and when you forget to write `new` before a class, you run into the worst kind of bug: software that's neither completely working nor totally broken.
+
+Because of this annoyance, a lot of classes that you run into will support what's called 'auto-new', which means, simply, that you don't need to write `new` in front of them to make one. In the case of maps and Leaflet/MapBox.js, there's a little hint: any class that starts with a lowercase letter is initialized with auto-new, whereas any that begins with a capital is a traditional class. So, for instance:
+
+```js
+// a place, created with auto-new
+var place = L.latLng(0, 0);
+
+// another place, with a traditional constructor
+var place2 = new L.LatLng(0, 0);
+```
 
 ## In Situ
 
