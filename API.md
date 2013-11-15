@@ -512,6 +512,42 @@ _Example_:
     var output = L.mapbox.template('Name: {{name}}', {name: 'John'});
     // output is "Name: John"
 
+# Mobile
+
+MapBox.js is optimized for mobile devices and small screens by default.
+There are, however, best practices to make sure your map always looks its best.
+
+## Viewport
+Modern mobile browsers now support scaling of webpages by leveraging the meta
+tag `viewport`. This enlarges the window making your map look better on a
+mobile device. Simply include this in the head of your document:
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+## Scrolling
+If you&#39;re planning on having a page that has large amounts of scrolling,
+try to avoid a large map height. Having a &#39;tall&#39; map can cause the user
+to get stuck on the map while scrolling. Another way around this is to disable
+`dragging` for mobile devices: `map.dragging.disable();`
+
+## Retina
+Having the ability to use retina tiles when the device supports them is easy.
+When creating the map, use the `detectRetina` to verify if retina is available
+and `retinaVersion` to use a tilelayer which is designed for retina screens.
+
+    var map = L.mapbox.map('map', '{{site.defaultid}}', {
+      detectRetina: true,
+      retinaVersion: '{{site.defaultid}}'
+    }).setView([40, -74.50], 9);
+
+Some MapBox maps support switching to retina scale automatically: if you're using
+one of these maps, you can simply set `detectRetina` and the higher-scale
+tiles will be used when retina is detected.
+
+    var map = L.mapbox.map('map', '{{site.defaultid}}', {
+      detectRetina: true
+    }).setView([40, -74.50], 9);
+
 # Theming
 
 ## Dark theme
