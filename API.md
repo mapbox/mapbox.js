@@ -377,7 +377,7 @@ _Returns_: a `L.mapbox.gridControl` object.
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
 
-<div class='note warn'>
+<div class='note warning'>
 This function is currently in private beta: <a href'http://mapbox.com/about/contact/'>Contact MapBox</a> before using this functionality.
 </div>
 
