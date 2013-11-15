@@ -1,6 +1,6 @@
 # Map
 
-## L.mapbox.map(element, id | url | tilejson, options)
+## L.mapbox.map(element, id|url|tilejson, options)
 Create and automatically configure a map with layers, markers, and
 interactivity.
 
@@ -33,7 +33,7 @@ _Returns_: the TileJSON object
 
 # Layers
 
-## L.mapbox.tileLayer(id | url | tilejson, options)
+## L.mapbox.tileLayer(id|url|tilejson, options)
 
 You can add a tiled layer to your map with `L.mapbox.tileLayer()`, a simple
 interface to layers from MapBox and elsewhere.
@@ -107,7 +107,7 @@ _Example_:
 
 _Returns_: the layer object
 
-## L.mapbox.gridLayer(id | url | tilejson, options)
+## L.mapbox.gridLayer(id|url|tilejson, options)
 
 An `L.mapbox.gridLayer` loads [UTFGrid](http://mapbox.com/developers/utfgrid/) tiles of
 interactivity into your map, which you can easily access with `L.mapbox.gridControl`.
@@ -153,7 +153,7 @@ function with that data, if any.
 
 _Returns_: the L.mapbox.gridLayer object
 
-## L.mapbox.markerLayer(id | url | tilejson, options)
+## L.mapbox.markerLayer(id|url|tilejson, options)
 
 `L.mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from MapBox and elsewhere into your map.
@@ -278,7 +278,7 @@ _Returns_ the GeoJSON represented by this layer
 
 # Geocoding
 
-## L.mapbox.geocoder(id | url)
+## L.mapbox.geocoder(id|url)
 
 A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
@@ -372,7 +372,7 @@ _Example_:
 
 _Returns_: a `L.mapbox.gridControl` object.
 
-## L.mapbox.geocoderControl(id | url, options)
+## L.mapbox.geocoderControl(id|url, options)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
@@ -431,7 +431,7 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 | ---- | ---- | ---- |
 | event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from MapBox.</li></ul> |
 
-## L.mapbox.shareControl(id | url, options)
+## L.mapbox.shareControl(id|url, options)
 
 Adds a "Share" button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.
 
