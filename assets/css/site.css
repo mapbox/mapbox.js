@@ -7,6 +7,13 @@
 /* Base Candidate */
 .note pre { background:#fff; }
 
+/* Otherwise the controls are hidden
+ * on the landing page when animating the
+ * different map examples in. */
+.sliding div {
+  -webkit-transform:translate3d(0,0,0);
+  }
+
 .version,
 .version:hover {
   color:rgba(0,0,0,0.75);

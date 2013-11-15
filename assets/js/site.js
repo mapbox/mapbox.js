@@ -178,7 +178,9 @@
 
         replaceDefaultID: function() {
             $('pre, code').each(function() {
-                $(this).html($(this).html().replace('{{site.defaultid}}', App.map ? App.map : '{{site.defaultid}}'));
+                var content = $(this).html();
+                content = content.replace(/'{{site.defaultid}}'/g, App.map ? App.map : '{{site.defaultid}}');
+                $(this).html(content);
             });
         }
     };

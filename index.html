@@ -116,37 +116,31 @@ examples:
     </div>
 
     <div class='col5 margin1 pad2y prose'>
-      <h2 id='mobile' class='icon big mobile'>Optimized for mobile</h2>
+      <h2 id='mobile'>Optimized for <span class='icon big mobile'></span> mobile</h2>
       <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, checkout the <a href='{{site.baseurl}}/api/{{site.version}}/#section-mobile'>Mobile section in the documentation</a></p>
     </div>
   </div>
 </div>
 
-<div class='clearfix'>
-  <div class='col8 margin2 pad2y prose'>
-    <h2 id='getting-started'>Get started fast</h2>
-    <p>MapBox.js is hosted on a worldwide content-distribution network plus there&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML document</p>
+<div class='clearfix pad2y'>
+  <div class='col10 margin1 keyline-all'>
+    <div class='pad2 prose'>
+      <h2 id='getting-started'>Get started fast</h2>
+      <p>MapBox.js is hosted on a worldwide content-distribution network plus there&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML document</p>
 {% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
 <script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>{% endhighlight %}
+    </div>
 
-    <div class='pad2y'>
+    <div class='note keyline-top'>
       <h3 id='standalone'>Need MapBox.js on it&#39;s own?</h3>
-      <p>A standalone version of MapBox.js is also available without Leaflet included Include the following in your HTML document:</p>
+      <div class='prose'>
+        <p>A standalone version of MapBox.js is also available without Leaflet included Include the following in your HTML document:</p>
 {% highlight html %}
 <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.css' rel='stylesheet' />
 <script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.js'></script>
 {% endhighlight %}
-      <small class='quiet'>Note: <strong>Leaflet 0.6</strong> or greater is required.</small>
-    </div>
-  </div>
-</div>
-
-<div class='clearfix'>
-  <div class='col6 margin3 pad2y prose'>
-    <h2 id='getting-started' class='center'>Community resources</h2>
-    <div class='col12 clearfix pill'><!--
-      --><a href='//github.com/mapbox/mapbox.js/' class='col6 icon github button'>Project hosting on GitHub</a><!--
-      --><a href='//stackoverflow.com/questions/tagged/mapbox' class='col6 button'>Community help on StackOverflow</a>
+        <small>Note: <strong>Leaflet 0.6</strong> or greater is required.</small>
+      </div>
     </div>
   </div>
 </div>
