@@ -40,6 +40,22 @@ section: developers
     <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
         <div class='doc pad2'>
+          <h2>Reading this Documentation</h2>
+          <p>The documentation is organized by <em>methods</em>. Each method
+          is shown with potential arguments along with it&#39;s type and description in a table.</p>
+
+          <p>When the API has a Javascript constructor function that returns an object, the constructor
+          is documented with its full name and the methods on the object are named with just
+          the type of the object. For instance, <code>L.mapbox.markerLayer</code> documents a function that
+          returns a layer for markers. The methods on that object are then documented as
+          <code>markerLayer.setFilter</code>, <code>markerLayer.getGeoJSON</code>, and so on.</p>
+
+          <div class='note'>
+            <p>To use this API, you&#39;ll need to understand basic Javascript and mapping concepts.
+            If you&#39;d like to learn Javascript, start with <a href='http://www.codecademy.com/tracks/javascript'>an interactive course</a>, or
+            <a href='http://eloquentjavascript.net/'>book</a>.
+            If you&#39;d like to learn more about maps, <a href='http://mapbox.com/developers/guide/'>we&#39;ve provided a helpful article explaining how web maps work</a>.</p>
+          </div>
           {{content}}
         </div>
         <div class='keyline-top center small'>

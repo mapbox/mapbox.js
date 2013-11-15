@@ -6,7 +6,7 @@ pygments: true
 version: v1.4.2
 masterbranch: master
 oldversion: v0.6.7
-title: mapbox.js
+title: MapBox.js
 description: MapBox JavaScript API
 rdiscount:
   extensions: [smart]

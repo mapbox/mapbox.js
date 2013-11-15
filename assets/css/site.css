@@ -5,10 +5,7 @@
   }
 
 /* Base Candidate */
-.doc-nav a:hover,
-.doc-nav .active {
-  background-color:#f8f8f8;
-  }
+.note pre { background:#fff; }
 
 .version,
 .version:hover {
@@ -57,8 +54,10 @@ nav a:first-child {
   width:20px;
   height:20px;
   vertical-align:top;
-  margin-right:5px;
   }
+  .doc-content .leaflet:before {
+    margin-right:5px;
+    }
 
 #map {
   background:#fff;
@@ -68,7 +67,9 @@ nav a:first-child {
   top:0;
   left:0;
   }
-
+.code {
+  overflow:auto;
+  }
 #demo {
   position:relative;
   height:400px;
