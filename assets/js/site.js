@@ -1,3 +1,6 @@
+---
+---
+
 (function(context) {
     var Docs = function() {};
 
@@ -170,6 +173,12 @@
                     if (!object) return;
                     $this.html($('<a target="_blank" href="/mapbox.js/api/' + version + '/#' + object + '.' + name + '">' + name + '</a>'));
                 });
+            });
+        },
+
+        replaceDefaultID: function() {
+            $('pre, code').each(function() {
+                $(this).html($(this).html().replace('{{site.defaultid}}', App.map ? App.map : '{{site.defaultid}}'));
             });
         }
     };

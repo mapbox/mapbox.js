@@ -2,7 +2,6 @@
 layout: default
 category: introduction
 section: developers
-defaultid: 'examples.map-9ijuk24y'
 examples:
   - title: 'Basic'
     id: 'map-basic'
@@ -27,27 +26,14 @@ examples:
     script: |
       L.mapbox.map('map-geojson', 'examples.map-9ijuk24y')
         .setView([37.9, -77], 5);
-navigation:
-  - title: 'MapBox.js & Leaflet'
-    url: mapbox-and-leaflet
-  - title: 'Browser compatibility'
-    url: browser-compatibility
-  - title: 'Open specifications'
-    url: specifications
-  - title: 'GeoJSON'
-    url: geojson
-  - title: 'Mobile'
-    url: mobile
-  - title: 'Standalone MapBox.js'
-    url: standalone-mapboxjs
 ---
 
 {% include header.html %}
 
 <div class='col12 pad2y center space-bottom clearfix'>
   <div class='col8 margin2'>
-    <h1>Build interactive maps with MapBox.js</h1>
-    <p>Create beautiful interactive maps using our powerful MapBox Javascript API</p>
+    <h1>Interactive maps with MapBox.js</h1>
+    <p>Build maps the way you want with the powerful MapBox Javascript API</p>
   </div>
 </div>
 
@@ -110,7 +96,7 @@ navigation:
   <div class='col8 margin2 clearfix'>
     <div class='col6 pad2y prose'>
       <h2 id='mapbox-and-leaflet'><span class='leaflet'></span> leaflet built in</h2>
-      <p>MapBox.js is built on top of <a href='http://leafletjs.com/'>Leaflet</a> &#8212; an open-source mapping library. <a href='http://leafletjs.com/reference.html'>Leaflet's API</a> handles much of the fundamental operations of using maps, so the MapBox API documentation should be used in conjunction with the <a href='http://leafletjs.com/reference.html'>Leaflet API reference.</a></p>
+      <p>MapBox.js is built on top of <a href='http://leafletjs.com/'>Leaflet</a> &#8212; an open-source mapping library. <a href='http://leafletjs.com/reference.html'>Leaflet's API</a> handles much of the fundamental operations of using maps. MapBox.js API documentation should be read in conjunction with the <a href='http://leafletjs.com/reference.html'>Leaflet API reference.</a></p>
     </div>
 
     <div class='col5 margin1 pad2y prose'>
@@ -121,142 +107,54 @@ navigation:
 </div>
 
 <div class='clearfix'>
+  <div class='col8 margin2 clearfix'>
+    <div class='col6 pad2y prose'>
+      <h2 id='open-specs'>Open specifications</h2>
+      <p>The library takes advantage of open specifications, including <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a> and <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a>.</p>
+
+      <p>The markers API uses <a href='http://www.geojson.org/'>GeoJSON</a>, a simple &amp; open standard for geo data. It&#39;s based on <a href='http://en.wikipedia.org/wiki/JSON'>JSON</a> and supports features like points and polygons.</p>
+    </div>
+
+    <div class='col5 margin1 pad2y prose'>
+      <h2 id='mobile' class='icon big mobile'>Optimized for mobile</h2>
+      <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, checkout the <a href='{{site.baseurl}}/api/{{site.version}}/#section-mobile'>Mobile section in the documentation</a></p>
+    </div>
+  </div>
+</div>
+
+<div class='clearfix'>
   <div class='col8 margin2 pad2y prose'>
     <h2 id='getting-started'>Get started fast</h2>
     <p>MapBox.js is hosted on a worldwide content-distribution network plus there&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML document</p>
 {% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
 <script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>{% endhighlight %}
+
+    <div class='pad2y'>
+      <h3 id='standalone'>Need MapBox.js on it&#39;s own?</h3>
+      <p>A standalone version of MapBox.js is also available without Leaflet included Include the following in your HTML document:</p>
+{% highlight html %}
+<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.js'></script>
+{% endhighlight %}
+      <small class='quiet'>Note: <strong>Leaflet 0.6</strong> or greater is required.</small>
+    </div>
   </div>
 </div>
 
-
-<div class='col12 round box clearfix contain'>
-  <div class='clearfix'>
-    <nav class='col3'>
-      {% for item in page.navigation %}
-        <a class='heading col12 keyline-bottom pad1y pad2x truncate' href='#{{item.url}}'>{{item.title}}</a>
-      {% endfor %}
-    </nav>
-
-    <div class='col9 keyline-left'>
-      <div id='docs' class='prose'>
-        <div class='doc pad2'>
-
-<h3 id='the-ready-event'>The ready event</h3>
-<p>Like many Javascript libraries, some of what the MapBox.js plugin does
-is <a href='http://recurial.com/programming/understanding-callback-functions-in-javascript/'>asynchronous</a> - when
-you create a layer like <code>L.mapbox.tileLayer('{{page.defaultid}}')</code>, the layer
-doesn&#39;t immediately know which tiles to load and its attribution information.
-Instead, it loads this information with an <a href='http://en.wikipedia.org/wiki/AJAX'>AJAX</a>
-call.</p>
-
-<p>For most things you&#39;ll write, this isn&#39;t a problem, since MapBox.js does a good
-job of handling these on-the-fly updates. If you&#39;re writing code that needs
-to know when layers and other dynamically-loaded objects are ready, you can
-use the <code>ready</code> event to listen for their ready state. For instance:</p>
-
-{% highlight javascript %}
-var layer = L.mapbox.tileLayer('{{page.defaultid}}');
-layer.on('ready', function() {
-    // the layer has been fully loaded now, and you can
-    // call .getTileJSON and investigate its properties
-});
-{% endhighlight %}
-
-<p>Similarly, dynamically-loaded objects produce an `error` event if something
-goes wrong, like if the map ID you provide is a 404:</p>
-
-{% highlight javascript %}
-var layer = L.mapbox.tileLayer('{{page.defaultid}}');
-layer.on('error', function(err) {
-    // for some reason, this layer didn't load.
-    // you can find out more with the 'err' argument
-    // passed to this function
-});
-{% endhighlight %}
-
-<h2 id='tilejson-and-utfgrid'>Open specifications</h2>
-<p>This library takes advantage of several open specifications, including
-<a href="http://mapbox.com/developers/tilejson/">TileJSON</a> and
-<a href="http://mapbox.com/developers/utfgrid/">UTFGrid</a>.</p>
-
-<p>For the purposes of this API, TileJSON is used as a way to <em>describe
-maps and resources</em>, so it
-is the configuration format given to layers, maps, and controls. UTFGrid
-is <em>a fast way to interact with maps</em> with tooltips and customizable behaviors,
-and is easy to define and produce in <a href="http://mapbox.com/tilemill/">TileMill</a>.</p>
-
-<h2 id='geojson'>GeoJSON</h2>
-<p>The MapBox marker API and the <code>L.mapbox.markers</code> interface use <a href="http://www.geojson.org/">GeoJSON</a>,
-a simple, open standard for geo-data based on <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>
-and simple features, like Points and Polygons.</p>
-
-
-<h2 id='mobile'>Mobile</h2>
-<p>MapBox.js is optimized for mobile devices and small screens by default.
-There are, however, best practices to make sure your map always looks its best.</p>
-
-<h3 id='viewport'>Viewport</h3>
-<p>Modern mobile browsers now support scaling of webpages by leveraging the meta tag <code>viewport</code>. This enlarges the window making your map look better on a mobile device. Simply include this in the head of your document:</p>
-
-{% highlight html %}
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-{% endhighlight %}
-
-<h3 id='scrolling'>Scrolling</h3>
-<p>If you&#39;re planning on having a page that has large amounts of scrolling, try to avoid a large map height. Having a &#39;tall&#39; map can cause the user to get stuck on the map while scrolling. Another way around this is to disable <code>dragging</code> for mobile devices: <code>map.dragging.disable();</code></p>
-
-<h3 id='retina'>Retina</h3>
-<p>Having the ability to use retina tiles when the device supports them is easy.
-When creating the map, use the <code>detectRetina</code> to verify if retina is available
-and <code>retinaVersion</code> to use a tilelayer which is designed for retina screens.</p>
-
-{% highlight javascript %}
-var map = L.mapbox.map('map', '{{page.defaultid}}', {
-  detectRetina: true,
-  retinaVersion: '{{page.defaultid}}'
-}).setView([40, -74.50], 9);
-{% endhighlight %}
-
-<p>Some MapBox maps support switching to retina scale automatically: if you're using
-one of these maps, you can simply set `detectRetina` and the higher-scale
-tiles will be used when retina is detected.</p>
-
-{% highlight javascript %}
-var map = L.mapbox.map('map', '{{page.defaultid}}', {
-  detectRetina: true
-}).setView([40, -74.50], 9);
-{% endhighlight %}
-
-<h2 id='standalone-mapboxjs'>Standalone MapBox.js</h2>
-<p>By default, MapBox.js includes a bundled version of Leaflet that MapBox has ensured
-is compatible. However, a standalone version of MapBox.js is also available without
-Leaflet included, which you can use if you would like to supply your own version of
-Leaflet. You will need to include Leaflet&#39;s JavaScript and CSS files, and <strong>Leaflet 0.6
-  or greater is required.</strong> Include the following in your HTML document:</p>
-
-{% highlight html %}
-<link href='//cdn.leafletjs.com/leaflet-0.6/leaflet.css' rel='stylesheet' />
-<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.css' rel='stylesheet' />
-<script src='//cdn.leafletjs.com/leaflet-0.6/leaflet.js'></script>
-<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.js'></script>
-{% endhighlight %}
-        </div>
-        <div class='keyline-top center small'>
-          <div class='pad2'>
-            The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
-          </div>
-        </div>
-      </div>
+<div class='clearfix'>
+  <div class='col6 margin3 pad2y prose'>
+    <h2 id='getting-started' class='center'>Community resources</h2>
+    <div class='col12 clearfix pill'><!--
+      --><a href='//github.com/mapbox/mapbox.js/' class='col6 icon github button'>Project hosting on GitHub</a><!--
+      --><a href='//stackoverflow.com/questions/tagged/mapbox' class='col6 button'>Community help on StackOverflow</a>
     </div>
   </div>
 </div>
 
 <script>
 $(function() {
-  $('pre, code').each(function() {
-    $(this).html($(this).html().replace('{{page.defaultid}}', App.map ? App.map : '{{page.defaultid}}'));
-  });
+  var docs = new Docs();
+  docs.replaceDefaultID();
 
   $('.example').click(function() {
     var current = $(this).attr('href').split('#').pop();
