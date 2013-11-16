@@ -193,3 +193,55 @@ markerLayer.setGeoJSON(geoJsonObject);
 ```
 
 What it's really saying is that it expects a JavaScript object that's formatted like GeoJSON. It doesn't care how it got there, or what's in its past. Now is the time.
+
+## The Parts of a L.mapbox.map
+
+As we discussed earlier, the `L.mapbox.map` class includes 'everything that you need for a map'. What are these things, and what do we call them?
+
+The map itself doesn't actually contain much: it basically keeps track of:
+
+* Dimensions of the map in pixels
+* Centerpoint & Zoom
+
+Beyond those, it keeps references to other bits of code that do particulars, like:
+
+* Layers, like `L.mapbox.tileLayer`
+* Handlers, like `.scrollWheelZoom`
+* Controls, like `L.mapbox.legend`
+
+## LayerGroups and .eachLayer
+
+One design quirk that might be unfamiliar coming from other systems is how Leaflet keeps track of 'layers' and 'layer groups'.
+
+The most common kind of layer you have in a map is a tile layer, like `L.tileLayer` or `L.mapbox.tileLayer`. These layers are just themselves, so if you add a few to a map, the setup will look like:
+
+* Map
+ * tileLayer a
+ * tileLayer b
+ * tileLayer c
+
+To access these layers, you could call
+
+```js
+map.eachLayer(function(l) {
+  // here you have each layer object in order
+  // this callback function is called with
+  // a, b, and then c
+});
+```
+
+For more complex layers, this gets a little bit trickier. For instance, for an `L.geoJson` layer, instead of having
+
+* Map
+ * tileLayer a
+ * geojsonLayer b
+
+Instead, a `L.geoJson` layer is actually a `L.layerGroup` behind the scenes: so it's really a collection of smaller layers representing each feature:
+
+* Map
+ * tileLayer a
+ * geojsonLayer b
+  * L.Path a
+  * L.Circle b
+
+So, for each `feature` in your GeoJSON data, the geojsonLayer actually has a specific little layer for that feature.
