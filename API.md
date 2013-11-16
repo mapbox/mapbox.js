@@ -1,6 +1,6 @@
 # Map
 
-## L.mapbox.map(element, id | url | tilejson, options)
+## L.mapbox.map(element, id|url|tilejson, options)
 Create and automatically configure a map with layers, markers, and
 interactivity.
 
@@ -33,7 +33,7 @@ _Returns_: the TileJSON object
 
 # Layers
 
-## L.mapbox.tileLayer(id | url | tilejson, options)
+## L.mapbox.tileLayer(id|url|tilejson, options)
 
 You can add a tiled layer to your map with `L.mapbox.tileLayer()`, a simple
 interface to layers from MapBox and elsewhere.
@@ -107,7 +107,7 @@ _Example_:
 
 _Returns_: the layer object
 
-## L.mapbox.gridLayer(id | url | tilejson, options)
+## L.mapbox.gridLayer(id|url|tilejson, options)
 
 An `L.mapbox.gridLayer` loads [UTFGrid](http://mapbox.com/developers/utfgrid/) tiles of
 interactivity into your map, which you can easily access with `L.mapbox.gridControl`.
@@ -153,7 +153,7 @@ function with that data, if any.
 
 _Returns_: the L.mapbox.gridLayer object
 
-## L.mapbox.markerLayer(id | url | tilejson, options)
+## L.mapbox.markerLayer(id|url|tilejson, options)
 
 `L.mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from MapBox and elsewhere into your map.
@@ -278,7 +278,7 @@ _Returns_ the GeoJSON represented by this layer
 
 # Geocoding
 
-## L.mapbox.geocoder(id | url)
+## L.mapbox.geocoder(id|url)
 
 A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
@@ -372,12 +372,12 @@ _Example_:
 
 _Returns_: a `L.mapbox.gridControl` object.
 
-## L.mapbox.geocoderControl(id | url, options)
+## L.mapbox.geocoderControl(id|url, options)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
 the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
 
-<div class='note warn'>
+<div class='note warning'>
 This function is currently in private beta: <a href'http://mapbox.com/about/contact/'>Contact MapBox</a> before using this functionality.
 </div>
 
@@ -431,7 +431,7 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 | ---- | ---- | ---- |
 | event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from MapBox.</li></ul> |
 
-## L.mapbox.shareControl(id | url, options)
+## L.mapbox.shareControl(id|url, options)
 
 Adds a "Share" button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.
 
@@ -511,6 +511,42 @@ _Example_:
 
     var output = L.mapbox.template('Name: {{name}}', {name: 'John'});
     // output is "Name: John"
+
+# Mobile
+
+MapBox.js is optimized for mobile devices and small screens by default.
+There are, however, best practices to make sure your map always looks its best.
+
+## Viewport
+Modern mobile browsers now support scaling of webpages by leveraging the meta
+tag `viewport`. This enlarges the window making your map look better on a
+mobile device. Simply include this in the head of your document:
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+## Scrolling
+If you&#39;re planning on having a page that has large amounts of scrolling,
+try to avoid a large map height. Having a &#39;tall&#39; map can cause the user
+to get stuck on the map while scrolling. Another way around this is to disable
+`dragging` for mobile devices: `map.dragging.disable();`
+
+## Retina
+Having the ability to use retina tiles when the device supports them is easy.
+When creating the map, use the `detectRetina` to verify if retina is available
+and `retinaVersion` to use a tilelayer which is designed for retina screens.
+
+    var map = L.mapbox.map('map', '{{site.defaultid}}', {
+      detectRetina: true,
+      retinaVersion: '{{site.defaultid}}'
+    }).setView([40, -74.50], 9);
+
+Some MapBox maps support switching to retina scale automatically: if you're using
+one of these maps, you can simply set `detectRetina` and the higher-scale
+tiles will be used when retina is detected.
+
+    var map = L.mapbox.map('map', '{{site.defaultid}}', {
+      detectRetina: true
+    }).setView([40, -74.50], 9);
 
 # Theming
 
