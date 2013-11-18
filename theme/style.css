@@ -390,7 +390,11 @@
   .mapbox-button-icon:before,
   .leaflet-container.dark .leaflet-control-zoom-in,
   .leaflet-container.dark .leaflet-control-zoom-out,
-  .leaflet-container.dark .leaflet-control a {
+  .leaflet-container.dark .leaflet-popup-close-button,
+  .leaflet-container.dark .leaflet-control-layers-toggle,
+  .leaflet-container.dark .leaflet-container.dark .map-tooltip .close,
+  .leaflet-container.dark .map-tooltip .close,
+  .leaflet-container.dark .mapbox-icon {
     background-image:url(./images/icons-ffffff.png);
     background-size:26px 234px;
     }
