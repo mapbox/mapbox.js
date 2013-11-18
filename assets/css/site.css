@@ -7,10 +7,13 @@
 /* Base Candidate */
 .note pre { background:#fff; }
 
+.space-bottom1 { margin:0 0 10px; }
+
 /* Otherwise the controls are hidden
  * on the landing page when animating the
  * different map examples in. */
-.sliding div {
+.sliding .pin-bottom,
+.sliding .leaflet-control {
   -webkit-transform:translate3d(0,0,0);
   }
 

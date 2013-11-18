@@ -5,141 +5,331 @@ section: developers
 examples:
   - title: 'Basic'
     id: 'map-basic'
-    script: |
-      var map = L.mapbox.map('map-basic', 'examples.map-9ijuk24y')
-        .setView([37.9, -77], 5);
+    description: 'With just a few lines of code, embed your own map with customizable controls like search and share.'
+    code: |
+      <script>
+        var map = L.mapbox.map('map-basic', 'examples.map-9ijuk24y')
+          .setView([37.8, -96], 4);
 
-        map.addControl(L.mapbox.geocoderControl('examples.map-9ijuk24y'))
-        map.addControl(L.mapbox.shareControl())
+          map.addControl(L.mapbox.geocoderControl('examples.map-9ijuk24y'))
+          map.addControl(L.mapbox.shareControl())
+      </script>
   - title: 'Markers'
     id: 'map-markers'
-    script: |
-      L.mapbox.map('map-markers', 'examples.map-9ijuk24y')
-        .setView([37.9, -77], 5);
+    description: 'Use <a href="http://www.geojson.org/">GeoJSON</a>, a simple specification for adding data to create points of interest on a map and much more.'
+    code: |
+      <script>
+        var geojson = [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [-77.03238901390978,38.913188059745586]
+            },
+            "properties": {
+              "title": "MapBox DC",
+              "description": "1714 14th St NW, Washington DC",
+              "marker-color": "#fc4353",
+              "marker-size": "large",
+              "marker-symbol": "monument"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [-122.414, 37.776]
+            },
+            "properties": {
+              "title": "MapBox SF",
+              "description": "155 9th St, San Francisco",
+              "marker-color": "#fc4353",
+              "marker-size": "large",
+              "marker-symbol": "harbor"
+            }
+          }
+        ];
+
+        L.mapbox.map('map-markers', 'examples.map-9ijuk24y')
+          .setView([37.8, -96], 4)
+          .markerLayer.setGeoJSON(geojson);
+      </script>
   - title: 'Storytelling'
     id: 'map-storytelling'
-    script: |
-      L.mapbox.map('map-storytelling', 'examples.map-9ijuk24y')
-        .setView([37.9, -77], 5);
+    description: 'Tell stories like a walk through of locations told in Doyle&#39;s Sherlock Holmes short story, &#34;The Adventure of the Bruce-Partington Plans&#34;.'
+    code: |
+      <script>
+        var mapstories = L.mapbox.map('map-storytelling', 'examples.map-9ijuk24y')
+          .setView([51.5086, -0.1214], 13);
+
+        var markers = L.mapbox.markerLayer()
+          .loadURL('/mapbox.js/examples/storytelling.geojson')
+          .addTo(mapstories);
+
+        mapstories.markerLayer.on('ready', function(e) {
+            var chapters = [];
+            markers.eachLayer(function(chapter) {
+              chapters.push(chapter);
+            });
+
+            cycle(chapters);
+        });
+
+        function cycle(chapters) {
+          var i = 0;
+          function run() {
+            if (++i > chapters.length - 1) i = 0;
+            mapstories.setView(chapters[i].getLatLng(), 13);
+            chapters[i].openPopup();
+            window.setTimeout(run, 3000);
+          }
+          run();
+        }
+      </script>
   - title: 'Data Visualizations'
     id: 'map-dataviz'
-    script: |
-      L.mapbox.map('map-geojson', 'examples.map-9ijuk24y')
-        .setView([37.9, -77], 5);
+    description: 'Create choropleths from data using Leaflet&#39;s <a href="http://leafletjs.com/reference.html#geojson">L.geoJson</a>.'
+    code: |
+      <style>
+      .map-legend .swatch {
+        width:20px;
+        height:20px;
+        float:left;
+        margin-right:10px;
+        }
+      .leaflet-popup-close-button {
+        display: none;
+        }
+      .leaflet-popup-content-wrapper {
+        pointer-events: none;
+        }
+      </style>
+      <script src='http://leafletjs.com/examples/us-states.js'></script>
+      <script>
+          var mapdataviz = L.mapbox.map('map-dataviz', 'examples.map-9ijuk24y')
+            .setView([37.8, -96], 4);
+
+          var popup = new L.Popup({ autoPan: false });
+
+          // statesData comes from the 'us-states.js' script included above
+          var statesLayer = L.geoJson(statesData,  {
+              style: getStyle,
+              onEachFeature: onEachFeature
+          }).addTo(mapdataviz);
+
+          function getStyle(feature) {
+              return {
+                  weight: 2,
+                  opacity: 0.1,
+                  color: 'black',
+                  fillOpacity: 0.7,
+                  fillColor: getColor(feature.properties.density)
+              };
+          }
+
+          // get color depending on population density value
+          function getColor(d) {
+              return d > 1000 ? '#8c2d04' :
+                  d > 500  ? '#cc4c02' :
+                  d > 200  ? '#ec7014' :
+                  d > 100  ? '#fe9929' :
+                  d > 50   ? '#fec44f' :
+                  d > 20   ? '#fee391' :
+                  d > 10   ? '#fff7bc' :
+                  '#ffffe5';
+          }
+
+          function onEachFeature(feature, layer) {
+              layer.on({
+                  mousemove: mousemove,
+                  mouseout: mouseout,
+                  click: zoomToFeature
+              });
+          }
+
+          var closeTooltip;
+
+          function mousemove(e) {
+              var layer = e.target;
+
+              popup.setLatLng(e.latlng);
+              popup.setContent('<div class="marker-title">' + layer.feature.properties.name + '</div>' +
+                  layer.feature.properties.density + ' people per square mile');
+
+              if (!popup._map) popup.openOn(mapdataviz);
+              window.clearTimeout(closeTooltip);
+
+              // highlight feature
+              layer.setStyle({
+                  weight: 3,
+                  opacity: 0.3,
+                  fillOpacity: 0.9
+              });
+
+              if (!L.Browser.ie && !L.Browser.opera) {
+                  layer.bringToFront();
+              }
+          }
+
+          function mouseout(e) {
+              statesLayer.resetStyle(e.target);
+              closeTooltip = window.setTimeout(function() {
+                  mapdataviz.closePopup();
+              }, 100);
+          }
+
+          function zoomToFeature(e) {
+              mapdataviz.fitBounds(e.target.getBounds());
+          }
+
+          mapdataviz.legendControl.addLegend(getLegendHTML());
+
+          function getLegendHTML() {
+            var grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+            labels = [],
+            from, to;
+
+            for (var i = 0; i < grades.length; i++) {
+              from = grades[i];
+              to = grades[i + 1];
+
+              labels.push(
+                '<span class="swatch" style="background:' + getColor(from + 1) + '"></span> ' +
+                from + (to ? '&ndash;' + to : '+'));
+            }
+
+            return '<span>People per square mile</span><br>' + labels.join('<br>');
+          }
+
+      </script>
 ---
 
 {% include header.html %}
 
-<div class='col12 pad2y center space-bottom clearfix'>
+<div class='col12 pad2y space-bottom center clearfix'>
   <div class='col8 margin2'>
-    <h1>Interactive maps with MapBox.js</h1>
+    <h1 class='space-bottom1'>Interactive maps with MapBox.js</h1>
     <p>Build maps the way you want with the powerful MapBox Javascript API</p>
   </div>
 </div>
 
-{% capture htmltop %}
-<html>
+{% capture htmltop %}<html>
 <head>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
   <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
   <script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
   <style>#map { position:absolute; width:100%; height:100%; }</style>
 </head>
-<body>
-{% endcapture %}
+<body>{% endcapture %}
 
-{% capture htmlbottom %}
-</body>
+{% capture htmlbottom %}</body>
 </html>
 {% endcapture %}
 
 <div class='space-bottom clearfix'>
-  <div class='col10 margin1'>
-    <div class='example col12 clearfix tabs'>
-      {% for eg in page.examples %}
-      <a class='example col3 {% if forloop.index == 1 %}active{% endif %}' href='#active{{forloop.index}}'>{{eg.title}}</a>
-      {% endfor %}
-    </div>
+  <div class='example col10 margin1 clearfix tabs'>
+    {% for eg in page.examples %}
+    <a class='select-example col3 {% if forloop.index == 1 %}active{% endif %}' href='#active{{forloop.index}}'>{{eg.title}}</a>
+    {% endfor %}
   </div>
 </div>
 
-<div class='clearfix'>
-  <div id='examples' class='col10 margin1 clip sliding h active1 fill-light row10 clearfix space-bottom round keyline-all'> {% for example in page.examples %}
-      <div class='example animate col12 clearfix row10'>
-        <div class='sliding v active1 row10'>
-          <div class='col12 row10 animate'>
-            <div id='{{example.id}}' class='col12 row10'></div>
-            <script>
-              {{example.script}}
-            </script>
-          </div>
-          <div class='col12 row10 animate'>
-            <div class='row8 code keyline-bottom'>
+<div id='examples' class='col10 margin1 clip sliding h active1 fill-light row10 clearfix space-bottom round keyline-all'> {% for example in page.examples %}
+    <div class='example animate col12 clearfix row10'>
+      <div class='sliding v active1 row10'>
+        <div class='col12 row10 animate'>
+          <div id='{{example.id}}' class='col12 row10'></div>
+          {{example.code}}
+        </div>
+        <div class='col12 row10 animate'>
+          <div class='row8 code pad1 keyline-bottom'>
 {% highlight html %}{{htmltop}}<div id='{{example.id}}'></div>
-<script>
-{{example.script}}</script>{{htmlbottom}}{% endhighlight %}
-            </div>
+{{example.code}}{{htmlbottom}}{% endhighlight %}
           </div>
         </div>
-        <div class='pad2 col12 pin-bottom clearfix'>
-          <div class='col6 margin3 clearfix tabs'>
+      </div>
+      <div class='pad2y pad1x col12 pin-bottom fill-darken3 dark clearfix'>
+        <div class='col8 pad1x prose'>
+          {{example.description}}
+        </div>
+        <div class='col4 pad1x'>
+          <div class='tabs col12 clearfix'>
             <a class='col6 toggle active' href='#active1'>Map</a>
             <a class='col6 toggle icon sprocket' href='#active2'>Code</a>
           </div>
         </div>
       </div>
-    {% endfor %}
-  </div>
+    </div>
+  {% endfor %}
 </div>
 
-<div class='clearfix'>
-  <div class='col8 margin2 clearfix'>
-    <div class='col6 pad2y prose'>
-      <h2 id='mapbox-and-leaflet'><span class='leaflet'></span> leaflet built in</h2>
-      <p>MapBox.js is built on top of <a href='http://leafletjs.com/'>Leaflet</a> &#8212; an open-source mapping library. <a href='http://leafletjs.com/reference.html'>Leaflet's API</a> handles much of the fundamental operations of using maps. MapBox.js API documentation should be read in conjunction with the <a href='http://leafletjs.com/reference.html'>Leaflet API reference.</a></p>
-    </div>
+<div class='pad2y'>
+  <div class='clearfix'>
+    <div class='col10 margin1 clearfix'>
+      <div class='col6 pad2'>
+        <h2 id='mapbox-and-leaflet' class='space-bottom1'>Leaflet built-in</h2>
+        <div class='prose'>
+          <p>MapBox.js is built on top of <a href='http://leafletjs.com/'>Leaflet</a> &#8212; an open-source mapping library. <a href='http://leafletjs.com/reference.html'>Leaflet's API</a> handles much of the fundamental operations of using maps. MapBox.js API documentation should be read in conjunction with the <a href='http://leafletjs.com/reference.html'>Leaflet API reference</a>.</p>
+        </div>
+      </div>
 
-    <div class='col5 margin1 pad2y prose'>
-      <h2 id='browser-supported'>Browser Supported</h2>
-      <p>MapBox.js aims to be compatible with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.</p>
-    </div>
-  </div>
-</div>
-
-<div class='clearfix'>
-  <div class='col8 margin2 clearfix'>
-    <div class='col6 pad2y prose'>
-      <h2 id='open-specs'>Open specifications</h2>
-      <p>The library takes advantage of open specifications, including <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a> and <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a>.</p>
-
-      <p>The markers API uses <a href='http://www.geojson.org/'>GeoJSON</a>, a simple &amp; open standard for geo data. It&#39;s based on <a href='http://en.wikipedia.org/wiki/JSON'>JSON</a> and supports features like points and polygons.</p>
-    </div>
-
-    <div class='col5 margin1 pad2y prose'>
-      <h2 id='mobile'>Optimized for <span class='icon big mobile'></span> mobile</h2>
-      <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, checkout the <a href='{{site.baseurl}}/api/{{site.version}}/#section-mobile'>Mobile section in the documentation</a></p>
+      <div class='col6 pad2'>
+        <h2 id='open-specs' class='space-bottom1'>Open</h2>
+        <div class='prose'>
+          <p>The source code is open source and available on <a href='//github.com/mapbox/mapbox.js/'>GitHub</a>.</p>
+          <p>The library also takes advantage of open specifications including <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a> and <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a> and the markers API uses <a href='http://www.geojson.org/'>GeoJSON</a>, a simple &amp; open standard for geo data.</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<div class='clearfix pad2y'>
-  <div class='col10 margin1 keyline-all'>
-    <div class='pad2 prose'>
-      <h2 id='getting-started'>Get started fast</h2>
-      <p>MapBox.js is hosted on a worldwide content-distribution network plus there&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML document</p>
-{% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
-<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>{% endhighlight %}
+  <div class='clearfix'>
+    <div class='col10 margin1 clearfix'>
+      <div class='col6 pad2'>
+        <h2 id='resources' class='space-bottom1'>A community of resources</h2>
+        <div class='prose'>
+          <p>Have a question? visit the MapBox.js section of <a href='//support.mapbox.com/discussions/mapboxjs'>support.mapbox.com</a>. There&#39;s also questions answered everyday from the <a href='//stackoverflow.com/questions/tagged/mapbox'>Stack Overflow community</a> or on <a href='https://github.com/mapbox/mapbox.js/issues'>GitHub issues</a>.</p>
+        </div>
+      </div>
+
+      <div class='col6 pad2'>
+        <h2 id='mobile' class='space-bottom1'>Optimized for mobile</h2>
+        <div class='prose'>
+          <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, checkout the <a href='{{site.baseurl}}/api/{{site.version}}/#section-mobile'>Mobile section in the documentation</a>.</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class='note keyline-top'>
-      <h3 id='standalone'>Need MapBox.js on it&#39;s own?</h3>
+  <div class='clearfix pad2y'>
+    <div class='col10 margin1 center clearfix'>
+      <h2 id='browser-supported' class='space-bottom1'>Browser tested &amp; supported</h2>
       <div class='prose'>
-        <p>A standalone version of MapBox.js is also available without Leaflet included Include the following in your HTML document:</p>
-{% highlight html %}
-<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.css' rel='stylesheet' />
-<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.js'></script>
-{% endhighlight %}
-        <small>Note: <strong>Leaflet 0.6</strong> or greater is required.</small>
+        <p>MapBox.js is compatible with IE8+ and <a href='http://browsehappy.com/'>modern browsers</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class='clearfix pad2y'>
+    <div class='col10 margin1 keyline-all round'>
+      <div class='pad2'>
+        <h2 id='getting-started' class='space-bottom1'>Get started fast</h2>
+        <div class='prose'>
+          <p>MapBox.js is hosted on a worldwide content-distribution network plus there&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML document.</p>
+    {% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>{% endhighlight %}
+          <a href='#standalone' id='trigger-standalone' class='small strong'>Need MapBox.js without Leaflet bundled?</a>
+        </div>
+      </div>
+
+      <div id='standalone' class='note hidden'>
+        <h3 id='standalone' class='space-bottom1'>MapBox.js standalone</h3>
+        <div class='prose'>
+          <p>A standalone version of MapBox.js is also available without Leaflet included. Add the following in your HTML document:</p>
+{% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.js'></script>{% endhighlight %}
+          <small>Note: <strong>Leaflet 0.6</strong> or greater is required.</small>
+        </div>
       </div>
     </div>
   </div>
@@ -147,10 +337,12 @@ examples:
 
 <script>
 $(function() {
+  if (window.location.hash === '#standalone') $('#standalone').removeClass('hidden');
+
   var docs = new Docs();
   docs.replaceDefaultID();
 
-  $('.example').click(function() {
+  $('.select-example').click(function() {
     var current = $(this).attr('href').split('#').pop();
     var exmaples = document.getElementById('examples');
 
@@ -158,6 +350,11 @@ $(function() {
     examples.className = examples.className.replace(/active[0-9]+/, current);
 
     $(this).addClass('active').siblings().removeClass('active');
+    return false;
+  });
+
+  $('#trigger-standalone').click(function() {
+    $('#standalone').removeClass('hidden');
     return false;
   });
 

@@ -1,0 +1,125 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.15591514,
+          51.51830379
+        ]
+      },
+      "properties": {
+        "title": "221b Baker St.",
+        "marker-symbol": "1",
+        "marker-color": "#404040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.07571203,
+          51.51424049
+        ]
+      },
+      "properties": {
+        "title": "Aldgate Station",
+        "marker-symbol": "2",
+        "marker-color": "#404040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.08533793,
+          51.50438536
+        ]
+      },
+      "properties": {
+        "title": "London Bridge",
+        "marker-symbol": "3",
+        "marker-color": "#404040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.05991101,
+          51.48752939
+        ]
+      },
+      "properties": {
+        "title": "Woolwich Arsenal",
+        "marker-symbol": "4",
+        "marker-color": "#404040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.18335806,
+          51.49439521
+        ]
+      },
+      "properties": {
+        "title": "Gloucester Road",
+        "marker-symbol": "5",
+        "marker-color": "#404040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.19684993,
+          51.5033856
+        ]
+      },
+      "properties": {
+        "title": "13 Caulfield Gardens",
+        "marker-symbol": "6",
+        "marker-color": "#404040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.10669358,
+          51.51433123
+        ]
+      },
+      "properties": {
+        "title": "Daily Telegraph",
+        "marker-symbol": "7",
+        "marker-color": "#404040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.12416858,
+          51.50779757
+        ]
+      },
+      "properties": {
+        "title": "Charing Cross Hotel",
+        "marker-symbol": "8",
+        "marker-color": "#404040"
+      }
+    }
+  ]
+}
