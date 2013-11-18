@@ -208,8 +208,8 @@ examples:
 
 <div class='col12 pad2y space-bottom center clearfix'>
   <div class='col8 margin2'>
-    <h1 class='space-bottom1'>Interactive maps with MapBox.js</h1>
-    <p>Build maps the way you want with the powerful MapBox Javascript API</p>
+    <h1 class='space-bottom1'>Build maps the way you want</h1>
+    <p>Using the powerful MapBox javascript API</p>
   </div>
 </div>
 
@@ -226,41 +226,43 @@ examples:
 </html>
 {% endcapture %}
 
-<div class='space-bottom clearfix'>
-  <div class='example col10 margin1 clearfix tabs'>
-    {% for eg in page.examples %}
-    <a class='select-example col3 {% if forloop.index == 1 %}active{% endif %}' href='#active{{forloop.index}}'>{{eg.title}}</a>
+<div class='col10 margin1 clearfix keyline-all round space-bottom'>
+  <div class='clearfix col12 pad2'>
+    <div class='example clearfix tabs'>
+      {% for eg in page.examples %}
+      <a class='select-example col3 {% if forloop.index == 1 %}active{% endif %}' href='#active{{forloop.index}}'>{{eg.title}}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div id='examples' class='col12 clip sliding h active1 fill-light row10 clearfix'>
+    {% for example in page.examples %}
+      <div class='example animate col12 clearfix row10'>
+        <div class='sliding v active1 row10'>
+          <div class='col12 row10 animate'>
+            <div id='{{example.id}}' class='col12 row10'></div>
+            {{example.code}}
+          </div>
+          <div class='col12 row10 animate'>
+            <div class='row8 code pad1 keyline-bottom'>
+  {% highlight html %}{{htmltop}}<div id='{{example.id}}'></div>
+  {{example.code}}{{htmlbottom}}{% endhighlight %}
+            </div>
+          </div>
+        </div>
+        <div class='pad2y pad1x col12 pin-bottom fill-darken3 dark clearfix'>
+          <div class='col8 pad1x prose'>
+            {{example.description}}
+          </div>
+          <div class='col4 pad1x'>
+            <div class='tabs col12 clearfix'>
+              <a class='col6 toggle active' href='#active1'>Map</a>
+              <a class='col6 toggle icon sprocket' href='#active2'>Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
     {% endfor %}
   </div>
-</div>
-
-<div id='examples' class='col10 margin1 clip sliding h active1 fill-light row10 clearfix space-bottom round keyline-all'> {% for example in page.examples %}
-    <div class='example animate col12 clearfix row10'>
-      <div class='sliding v active1 row10'>
-        <div class='col12 row10 animate'>
-          <div id='{{example.id}}' class='col12 row10'></div>
-          {{example.code}}
-        </div>
-        <div class='col12 row10 animate'>
-          <div class='row8 code pad1 keyline-bottom'>
-{% highlight html %}{{htmltop}}<div id='{{example.id}}'></div>
-{{example.code}}{{htmlbottom}}{% endhighlight %}
-          </div>
-        </div>
-      </div>
-      <div class='pad2y pad1x col12 pin-bottom fill-darken3 dark clearfix'>
-        <div class='col8 pad1x prose'>
-          {{example.description}}
-        </div>
-        <div class='col4 pad1x'>
-          <div class='tabs col12 clearfix'>
-            <a class='col6 toggle active' href='#active1'>Map</a>
-            <a class='col6 toggle icon sprocket' href='#active2'>Code</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endfor %}
 </div>
 
 <div class='pad2y'>
