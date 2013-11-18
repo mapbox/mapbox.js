@@ -529,8 +529,8 @@
   background:#fff;
   padding:20px;
   z-index:1000;
-  width:83.3333%;
-  margin:20px 0 20px 8.3333%;
+  width:50%;
+  margin:20px 0 20px 25%;
   }
 .mapbox-share-buttons {
   margin:0 0 20px;
@@ -681,10 +681,10 @@
 
 /* Larger Screens
 ------------------------------------------------------- */
-@media only screen and (min-width:1824px) {
+@media only screen and (max-width:800px) {
 .mapbox-modal-body {
-  width:50%;
-  margin-left:25%;
+  width:83.3333%;
+  margin-left:8.3333%;
   }
 }
 
