@@ -174,14 +174,6 @@
                     $this.html($('<a target="_blank" href="/mapbox.js/api/' + version + '/#' + object + '.' + name + '">' + name + '</a>'));
                 });
             });
-        },
-
-        replaceDefaultID: function() {
-            $('pre, code').each(function() {
-                var content = $(this).html();
-                content = content.replace(/'{{site.defaultid}}'/g, App.map ? App.map : '{{site.defaultid}}');
-                $(this).html(content);
-            });
         }
     };
 

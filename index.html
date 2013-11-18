@@ -340,7 +340,6 @@ $(function() {
   if (window.location.hash === '#standalone') $('#standalone').removeClass('hidden');
 
   var docs = new Docs();
-  docs.replaceDefaultID();
 
   $('.select-example').click(function() {
     var current = $(this).attr('href').split('#').pop();
