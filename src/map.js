@@ -5,7 +5,8 @@ var util = require('./util'),
     markerLayer = require('./marker_layer'),
     gridLayer = require('./grid_layer'),
     gridControl = require('./grid_control'),
-    legendControl = require('./legend_control');
+    legendControl = require('./legend_control'),
+    attributionControl = require('./attribution_control');
 
 var Map = L.Map.extend({
     includes: [require('./load_tilejson')],
@@ -15,7 +16,8 @@ var Map = L.Map.extend({
         markerLayer: {},
         gridLayer: {},
         legendControl: {},
-        gridControl: {}
+        gridControl: {},
+        attributionControl: false
     },
 
     _tilejson: {},
@@ -23,7 +25,7 @@ var Map = L.Map.extend({
     initialize: function(element, _, options) {
         L.Map.prototype.initialize.call(this, element, options);
 
-        // disable the default 'Powered by Leaflet' text
+        // disable the default 'Leaflet' text
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
         if (this.options.tileLayer) {
@@ -50,6 +52,9 @@ var Map = L.Map.extend({
             this.legendControl = legendControl(this.options.legendControl);
             this.addControl(this.legendControl);
         }
+
+        this.attributionControl = attributionControl();
+        this.addControl(this.attributionControl);
 
         this._loadTileJSON(_);
     },

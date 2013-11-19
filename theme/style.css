@@ -27,6 +27,7 @@
   line-height:25px;
   margin:0 0 10px;
   }
+.mapbox-small,
 .leaflet-container input,
 .leaflet-container textarea,
 .leaflet-container label,
@@ -556,16 +557,6 @@
 
 /* Attribution
 ------------------------------------------------------- */
-
-/* TODO FIX THIS */
-.leaflet-container .leaflet-control-attribution { display:none; }
-
-/* Move this into a small size */
-.mapbox-small {
-  font-size:12px;
-  line-height:20px;
-  }
-
 .mapbox-control-attribution.leaflet-control  {
   margin:5px 5px 5px 30px;
   }
