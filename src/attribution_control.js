@@ -11,7 +11,7 @@ var AttributionControl = L.Control.extend({
     },
 
     onAdd: function(map) {
-        this._container = L.DomUtil.create('div', 'mapbox-control-attribution');
+        this._container = L.DomUtil.create('div', 'mapbox-control-attribution mapbox-small');
 
         var link = L.DomUtil.create('a', 'mapbox-attribution-toggle mapbox-icon mapbox-icon-info', this._container);
         link.href = '#';
@@ -32,7 +32,7 @@ var AttributionControl = L.Control.extend({
         // Show the attribution here.
         var edit = L.DomUtil.create('a', '', this._content);
         edit.href = '#';
-        edit.innerHTML = 'Edit in osm';
+        edit.innerHTML = 'Improve this map';
         edit.title = 'Edit in OpenStreetMap';
         L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
 

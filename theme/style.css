@@ -561,30 +561,35 @@
 .leaflet-container .leaflet-control-attribution { display:none; }
 
 /* Move this into a small size */
-.mapbox-control-attribution {
+.mapbox-small {
   font-size:12px;
   line-height:20px;
   }
 
 .mapbox-control-attribution.leaflet-control  {
-  margin:0;
-  padding:0 5px;
-  }
-.mapbox-control-attribution.active {
-  background:#fff;
-  background:rgba(255,255,255,0.5);
+  margin:5px 5px 5px 30px;
   }
 .mapbox-attribution-toggle {
   background-color:#fff;
   background-color:rgba(255,255,255,0.25);
   border-radius:50%;
-  float:right;
+  position:absolute;
+  bottom:5px;right:5px;
+  z-index:1;
   }
-  .mapbox-attribution-toggle:hover {
-    background-color:rgba(255,255,255,0.5);
-    }
+  .mapbox-control-attribution.active .mapbox-attribution-toggle { background-color:#fff; }
+  .mapbox-attribution-toggle:hover { background-color:rgba(255,255,255,0.5); }
 
-.map-attributions-container { display:none; }
+.map-attributions-container {
+  background:#fff;
+  background:rgba(255,255,255,0.5);
+  padding:2px 20px 2px 5px;
+  display:none;
+  position:relative;
+  bottom:6px;
+  right:18px;
+  border-radius:3px;
+  }
 .mapbox-control-attribution.active .map-attributions-container { display:inline-block; }
 
 /* Geocoder
