@@ -33,6 +33,12 @@ var AttributionControl = L.Control.extend({
         return this._update();
     },
 
+    removeAttribution: function (text) {
+        if (!text) return this;
+        if (this._attributions[text]) this._attributions[text]--;
+        return this._update();
+    },
+
     _showAttribution: function(e) {
         L.DomEvent.preventDefault(e);
         if (this._active === true) return this._hidecontent();
