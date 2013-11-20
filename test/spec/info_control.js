@@ -16,7 +16,7 @@ describe('L.mapbox.infoControl', function() {
             var info = L.mapbox.infoControl();
             info.addTo(map);
             expect(info.addInfo('foo')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('<span class="map-attribute">foo </span>');
+            expect(info._content.innerHTML).to.eql('foo');
         });
 
         it('handles multiple infos', function() {
@@ -26,7 +26,7 @@ describe('L.mapbox.infoControl', function() {
             expect(info.addTo(map)).to.eql(info);
             expect(info.addInfo('foo')).to.eql(info);
             expect(info.addInfo('bar')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('<span class="map-attribute">foo </span><span class="map-attribute">bar </span>');
+            expect(info._content.innerHTML).to.eql('foo | bar');
         });
     });
 
@@ -45,9 +45,9 @@ describe('L.mapbox.infoControl', function() {
             info.addTo(map);
             expect(info.addInfo('foo')).to.eql(info);
             expect(info.addInfo('bar')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('<span class="map-attribute">foo </span><span class="map-attribute">bar </span>');
+            expect(info._content.innerHTML).to.eql('foo | bar');
             expect(info.removeInfo('bar')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('<span class="map-attribute">foo </span>');
+            expect(info._content.innerHTML).to.eql('foo');
         });
     });
 
@@ -68,6 +68,6 @@ describe('L.mapbox.infoControl', function() {
 
         info.addInfo('<script></script>');
 
-        expect(info._content.innerHTML).to.eql('<span class="map-attribute"><script></script> </span>');
+        expect(info._content.innerHTML).to.eql('<script></script>');
     });
 });
