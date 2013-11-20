@@ -28,6 +28,7 @@ var GridControl = L.Control.extend({
 
     setTemplate: function(template) {
         this.options.template = template;
+        return this;
     },
 
     _template: function(format, data) {
@@ -58,7 +59,7 @@ var GridControl = L.Control.extend({
         }
     },
 
-    _hide: function() {
+    hide: function() {
         this._pinned = false;
         this._currentContent = '';
 
@@ -67,6 +68,8 @@ var GridControl = L.Control.extend({
         this._contentWrapper.innerHTML = '';
 
         L.DomUtil.removeClass(this._container, 'closable');
+
+        return this;
     },
 
     _mouseover: function(o) {
@@ -82,7 +85,7 @@ var GridControl = L.Control.extend({
         if (content) {
             this._show(content, o);
         } else {
-            this._hide();
+            this.hide();
         }
     },
 
@@ -120,7 +123,7 @@ var GridControl = L.Control.extend({
         } else if (this._pinned) {
             L.DomUtil.removeClass(this._container, 'closable');
             this._pinned = false;
-            this._hide();
+            this.hide();
         }
     },
 
@@ -155,7 +158,7 @@ var GridControl = L.Control.extend({
 
         // hide the container element initially
         container.style.display = 'none';
-        this._createClosebutton(container, this._hide);
+        this._createClosebutton(container, this.hide);
         container.appendChild(contentWrapper);
 
         this._contentWrapper = contentWrapper;

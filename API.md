@@ -376,6 +376,23 @@ _Example_:
 
 _Returns_: a `L.mapbox.gridControl` object.
 
+### gridControl.hide()
+
+If a tooltip is currently shown by the gridControl, hide and close it.
+
+_Returns_: the `L.mapbox.gridControl` object.
+
+### gridControl.setTemplate(template)
+
+Change the [Mustache template](http://mustache.github.io/) used to transform
+the UTFGrid data in the map's interactivity into HTML for display.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| template | string | A string of Mustache template code for popups. |
+
+_Returns_: the `L.mapbox.gridControl` object.
+
 ## L.mapbox.geocoderControl(id|url, options)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
