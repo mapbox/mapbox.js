@@ -76,22 +76,22 @@ var InfoControl = L.Control.extend({
         if (!this._map) { return this; }
         this._content.innerHTML = '';
         var hide = 'none';
+        var info = [];
 
         for (var i in this._info) {
             if (this._info.hasOwnProperty(i) && this._info[i]) {
-                var sanitized = this.options.sanitizer(i);
-                if (sanitized !== '') {
-                    var attribute = L.DomUtil.create('span', 'map-attribute', this._content);
-                    attribute.innerHTML = this.options.sanitizer(i) + ' ';
-                    hide = 'block';
-                }
+                info.push(this.options.sanitizer(i));
+                hide = 'block';
             }
         }
 
+        this._content.innerHTML += info.join(' | ');
+
         if (this.options.editLink && !L.Browser.mobile) {
+            this._content.innerHTML += (info.length) ? ' | ' : '';
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
-            edit.innerHTML = 'Improve this map';
+            edit.innerHTML += 'Improve this map';
             edit.title = 'Edit in OpenStreetMap';
             L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
         }
