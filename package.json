@@ -2,7 +2,7 @@
   "author": "MapBox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -10,26 +10,27 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "0.6.4",
-    "mustache": "~0.7.2",
+    "leaflet": "0.7.0",
+    "mustache": "0.7.3",
     "corslite": "0.0.5",
     "json3": "git://github.com/bestiejs/json3.git#v3.2.5a",
     "sanitize-caja": "0.0.0",
-    "leaflet-hash": "~0.2.1"
+    "leaflet-hash": "0.2.1"
   },
   "scripts": {
-    "test": "mocha-phantomjs test/index.html"
+    "test": "jshint src/*.js && mocha-phantomjs test/index.html"
   },
   "devDependencies": {
     "leaflet-hash": "git://github.com/mlevans/leaflet-hash.git#b039a3aa4e2492a5c7448075172ac26769e601d6",
     "leaflet-fullscreen": "0.0.0",
-    "uglify-js": "~2.2.5",
-    "mocha": "~1.9",
-    "expect.js": "~0.2.0",
-    "sinon": "~1.7.3",
-    "mocha-phantomjs": "~1.1.1",
-    "happen": "~0.1.3",
-    "browserify": "~2.22.0"
+    "uglify-js": "2.4.3",
+    "mocha": "1.14.0",
+    "expect.js": "0.2.0",
+    "sinon": "1.7.3",
+    "mocha-phantomjs": "3.1.6",
+    "happen": "0.1.3",
+    "browserify": "2.35.4",
+    "jshint": "~2.3.0"
   },
   "optionalDependencies": {},
   "engines": {

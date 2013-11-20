@@ -5,10 +5,11 @@ var util = require('./util'),
     markerLayer = require('./marker_layer'),
     gridLayer = require('./grid_layer'),
     gridControl = require('./grid_control'),
-    legendControl = require('./legend_control'),
-    infoControl = require('./info_control');
+    infoControl = require('./info_control'),
+    shareControl = require('./share_control'),
+    legendControl = require('./legend_control');
 
-var Map = L.Map.extend({
+var LMap = L.Map.extend({
     includes: [require('./load_tilejson')],
 
     options: {
@@ -19,6 +20,7 @@ var Map = L.Map.extend({
         gridControl: {},
         infoControl: {},
         attributionControl: false
+        shareControl: false
     },
 
     _tilejson: {},
@@ -57,6 +59,11 @@ var Map = L.Map.extend({
         if (this.options.legendControl) {
             this.legendControl = legendControl(this.options.legendControl);
             this.addControl(this.legendControl);
+        }
+
+        if (this.options.shareControl) {
+            this.shareControl = shareControl(this.options.shareControl);
+            this.addControl(this.shareControl);
         }
 
         this._loadTileJSON(_);
@@ -102,6 +109,10 @@ var Map = L.Map.extend({
             this.legendControl.addLegend(json.legend);
         }
 
+        if (this.shareControl) {
+            this.shareControl._setTileJSON(json);
+        }
+
         if (!this._loaded) {
             var zoom = json.center[2],
                 center = L.latLng(json.center[1], json.center[0]);
@@ -127,5 +138,5 @@ var Map = L.Map.extend({
 });
 
 module.exports = function(element, _, options) {
-    return new Map(element, _, options);
+    return new LMap(element, _, options);
 };

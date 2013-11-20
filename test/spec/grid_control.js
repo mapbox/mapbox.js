@@ -192,4 +192,32 @@ describe("L.mapbox.gridControl", function() {
         gridLayer.fire('click', {latLng: L.latLng(0, 0), data: 'data'});
         expect(control._currentContent).to.equal('<script></script>');
     });
+
+    it('#setTemplate', function() {
+        var control = L.mapbox.gridControl(gridLayer, {
+            template: '{{#__full__}}foo{{/__full__}}',
+        }).addTo(map);
+        expect(control.setTemplate('{{#__full__}}bar{{/__full__}}')).to.equal(control);
+        gridLayer.fire('click', {latLng: L.latLng(0, 0), data: 'data'});
+        expect(control._currentContent).to.equal('bar');
+    });
+
+    it('#setTemplate - strict', function() {
+        var control = L.mapbox.gridControl(gridLayer, {
+            template: '{{#__full__}}foo{{/__full__}}',
+        }).addTo(map);
+        expect(function() {
+            control.setTemplate([]);
+        }).to.throwException();
+    });
+
+    it('#hide', function() {
+        var control = L.mapbox.gridControl(gridLayer, {
+            template: '{{#__full__}}foo{{/__full__}}',
+        }).addTo(map);
+        gridLayer.fire('click', {latLng: L.latLng(0, 0), data: 'data'});
+        expect(control._currentContent).to.equal('foo');
+        expect(control.hide()).to.equal(control);
+        expect(control._currentContent).to.equal('');
+    });
 });
