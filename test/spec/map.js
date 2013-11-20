@@ -163,6 +163,16 @@ describe('L.mapbox.map', function() {
             expect(map.gridControl).to.be.ok();
         });
 
+        it('does not create a shareControl by default', function() {
+            var map = L.mapbox.map(element, tileJSON);
+            expect(map.shareControl).to.be(undefined);
+        });
+
+        it('creates a shareControl by default', function() {
+            var map = L.mapbox.map(element, tileJSON, {shareControl: true});
+            expect(map.shareControl).to.be.ok();
+        });
+
         it('creates no gridControl given gridLayer: false option', function() {
             var map = L.mapbox.map(element, tileJSON, {gridLayer: false});
             expect(map.gridControl).to.be(undefined);

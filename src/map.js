@@ -5,6 +5,7 @@ var util = require('./util'),
     markerLayer = require('./marker_layer'),
     gridLayer = require('./grid_layer'),
     gridControl = require('./grid_control'),
+    shareControl = require('./share_control'),
     legendControl = require('./legend_control');
 
 var LMap = L.Map.extend({
@@ -15,7 +16,8 @@ var LMap = L.Map.extend({
         markerLayer: {},
         gridLayer: {},
         legendControl: {},
-        gridControl: {}
+        gridControl: {},
+        shareControl: false
     },
 
     _tilejson: {},
@@ -49,6 +51,11 @@ var LMap = L.Map.extend({
         if (this.options.legendControl) {
             this.legendControl = legendControl(this.options.legendControl);
             this.addControl(this.legendControl);
+        }
+
+        if (this.options.shareControl) {
+            this.shareControl = shareControl(this.options.shareControl);
+            this.addControl(this.shareControl);
         }
 
         this._loadTileJSON(_);
@@ -88,6 +95,10 @@ var LMap = L.Map.extend({
 
         if (this.legendControl && json.legend) {
             this.legendControl.addLegend(json.legend);
+        }
+
+        if (this.shareControl) {
+            this.shareControl._setTileJSON(json);
         }
 
         if (!this._loaded) {
