@@ -16,7 +16,7 @@ describe('L.mapbox.attributionControl', function() {
             var attribution = L.mapbox.attributionControl();
             attribution.addTo(map);
             expect(attribution.addAttribution('foo')).to.eql(attribution);
-            expect(attribution._container.innerHTML).to.eql('<div class="map-attribution wax-attribution">foo</div>');
+            expect(attribution._content.innerHTML).to.eql('<span class="map-attribute">foo | </span><a class="" href="#" title="Edit in OpenStreetMap">Improve this map</a>');
         });
 
         it('handles multiple attributions', function() {
@@ -26,7 +26,7 @@ describe('L.mapbox.attributionControl', function() {
             expect(attribution.addTo(map)).to.eql(attribution);
             expect(attribution.addAttribution('foo')).to.eql(attribution);
             expect(attribution.addAttribution('bar')).to.eql(attribution);
-            expect(attribution._container.innerHTML).to.eql('<div class="map-attribution wax-attribution">foo</div><div class="map-attribution wax-attribution">bar</div>');
+            expect(attribution._content.innerHTML).to.eql('<span class="map-attribute">foo | </span><span class="map-attribute">bar | </span><a class="" href="#" title="Edit in OpenStreetMap">Improve this map</a>');
         });
     });
 
@@ -45,9 +45,9 @@ describe('L.mapbox.attributionControl', function() {
             attribution.addTo(map);
             expect(attribution.addAttribution('foo')).to.eql(attribution);
             expect(attribution.addAttribution('bar')).to.eql(attribution);
-            expect(attribution._container.innerHTML).to.eql('<div class="map-attribution wax-attribution">foo</div><div class="map-attribution wax-attribution">bar</div>');
+            expect(attribution._content.innerHTML).to.eql('<span class="map-attribute">foo | </span><span class="map-attribute">bar | </span><a class="" href="#" title="Edit in OpenStreetMap">Improve this map</a>');
             expect(attribution.removeAttribution('bar')).to.eql(attribution);
-            expect(attribution._container.innerHTML).to.eql('<div class="map-attribution wax-attribution">foo</div>');
+            expect(attribution._content.innerHTML).to.eql('<span class="map-attribute">foo | </span><a class="" href="#" title="Edit in OpenStreetMap">Improve this map</a>');
         });
     });
 
@@ -57,7 +57,7 @@ describe('L.mapbox.attributionControl', function() {
 
         attribution.addAttribution('<script></script>');
 
-        expect(attribution._container.innerHTML).to.eql('<div class="map-attribution wax-attribution"></div>');
+        expect(attribution._content.innerHTML).to.eql('<a class="" href="#" title="Edit in OpenStreetMap">Improve this map</a>');
     });
 
     it('supports a custom sanitizer', function() {
@@ -68,6 +68,6 @@ describe('L.mapbox.attributionControl', function() {
 
         attribution.addAttribution('<script></script>');
 
-        expect(attribution._container.innerHTML).to.eql('<div class="map-attribution wax-attribution"><script></script></div>');
+        expect(attribution._content.innerHTML).to.eql('<span class="map-attribute"><script></script> | </span><a class="" href="#" title="Edit in OpenStreetMap">Improve this map</a>');
     });
 });

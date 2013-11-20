@@ -68,8 +68,11 @@ var AttributionControl = L.Control.extend({
 
         for (var i in this._attributions) {
             if (this._attributions.hasOwnProperty(i) && this._attributions[i]) {
-                var attribute = L.DomUtil.create('span', 'map-attribute', this._content);
-                attribute.innerHTML = this.options.sanitizer(i) + ' | ';
+                var sanitized = this.options.sanitizer(i);
+                if (sanitized !== '') {
+                    var attribute = L.DomUtil.create('span', 'map-attribute', this._content);
+                    attribute.innerHTML = this.options.sanitizer(i) + ' | ';
+                }
             }
         }
 
