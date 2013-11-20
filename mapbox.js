@@ -8,6 +8,7 @@ L.mapbox = module.exports = {
     geocoder: require('./src/geocoder'),
     marker: require('./src/marker'),
     tileLayer: require('./src/tile_layer'),
+    infoControl: require('./src/info_control'),
     shareControl: require('./src/share_control'),
     legendControl: require('./src/legend_control'),
     geocoderControl: require('./src/geocoder_control'),

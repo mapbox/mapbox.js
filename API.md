@@ -328,12 +328,40 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 
 # Controls
 
+## L.mapbox.infoControl(options)
+A map control that shows a toggleable info container. This is triggered by default and attribution is auto-detected from active layers and added to the info container.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`editLink`: A boolean that adds an `Improve this map` link to your map allowing users to make edits to OpenStreetMap from the current map coordinates being viewed.</li><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
+
+_Example_:
+
+    var map = L.mapbox.map('map').setView([38, -77], 5);
+    map.addControl(L.mapbox.infoControl());
+
+_Returns_: a `L.mapbox.infoControl` object.
+
+### infoControl.addInfo(info)
+Adds a legend to the legendControl.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| info _required_ | string | A string which may contain HTML. It will be sanitized by the infoControl's sanitizer option. |
+
+### infoControl.removeInfo(info)
+Removes a info string from the infoControl.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| info _required_ | string | data to remove. |
+
 ## L.mapbox.legendControl(options)
 A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| options _optional_ | object | An options object. Beyond the default options for map controls, this object has one special parameter: `sanitizer`: A function that accepts a string containing legend data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended. |
+| options _optional_ | object | An options object. Beyond the default options for map controls, this object has one special parameter: `sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended. |
 
 _Example_:
 
@@ -347,7 +375,7 @@ Adds a legend to the legendControl.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| legend _required_ | string | legend data, a string which may contain HTML. It will be sanitized by the legendControl's sanitizer option. |
+| legend _required_ | string | A string which may contain HTML. It will be sanitized by the legendControl's sanitizer option. |
 
 
 ### legendControl.removeLegend(legend)

@@ -5,6 +5,7 @@ var util = require('./util'),
     markerLayer = require('./marker_layer'),
     gridLayer = require('./grid_layer'),
     gridControl = require('./grid_control'),
+    infoControl = require('./info_control'),
     shareControl = require('./share_control'),
     legendControl = require('./legend_control');
 
@@ -17,6 +18,8 @@ var LMap = L.Map.extend({
         gridLayer: {},
         legendControl: {},
         gridControl: {},
+        infoControl: {},
+        attributionControl: false,
         shareControl: false
     },
 
@@ -25,7 +28,7 @@ var LMap = L.Map.extend({
     initialize: function(element, _, options) {
         L.Map.prototype.initialize.call(this, element, options);
 
-        // disable the default 'Powered by Leaflet' text
+        // disable the default 'Leaflet' text
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
         if (this.options.tileLayer) {
@@ -46,6 +49,11 @@ var LMap = L.Map.extend({
         if (this.options.gridLayer && this.options.gridControl) {
             this.gridControl = gridControl(this.gridLayer, this.options.gridControl);
             this.addControl(this.gridControl);
+        }
+
+        if (this.options.infoControl) {
+            this.infoControl = infoControl(this.options.infoControl);
+            this.addControl(this.infoControl);
         }
 
         if (this.options.legendControl) {
@@ -93,6 +101,10 @@ var LMap = L.Map.extend({
             this._updateLayer(this.gridLayer);
         }
 
+        if (this.infoControl && json.attribution) {
+            this.infoControl.addInfo(json.attribution);
+        }
+
         if (this.legendControl && json.legend) {
             this.legendControl.addLegend(json.legend);
         }
@@ -110,11 +122,10 @@ var LMap = L.Map.extend({
     },
 
     _updateLayer: function(layer) {
-
         if (!layer.options) return;
 
-        if (this.attributionControl && this._loaded) {
-            this.attributionControl.addAttribution(layer.options.attribution);
+        if (this.infoControl && this._loaded) {
+            this.infoControl.addInfo(layer.options.infoControl);
         }
 
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&

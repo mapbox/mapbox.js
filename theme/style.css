@@ -27,6 +27,9 @@
   line-height:25px;
   margin:0 0 10px;
   }
+.mapbox-small,
+.leaflet-control-attribution,
+.leaflet-control-scale,
 .leaflet-container input,
 .leaflet-container textarea,
 .leaflet-container label,
@@ -269,14 +272,15 @@
   margin:0;
   box-shadow:none;
   }
+.leaflet-control-attribution a:hover,
+.map-info-container a:hover {
+  color:inherit;
+  text-decoration:underline;
+  }
+
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
   padding:0 5px;
-  }
-.leaflet-control-attribution,
-.leaflet-control-scale {
-  font-size:12px;
-  line-height:20px;
   }
   .leaflet-left .leaflet-control-scale    { margin-left:5px; }
   .leaflet-bottom .leaflet-control-scale  { margin-bottom:5px; }
@@ -385,28 +389,26 @@
 .mapbox-icon {
   background-image:url(./images/icons-404040.png);
   background-repeat:no-repeat;
-  background-size:26px 234px;
+  background-size:26px 260px;
   }
   .mapbox-button-icon:before,
   .leaflet-container.dark .leaflet-control-zoom-in,
   .leaflet-container.dark .leaflet-control-zoom-out,
-  .leaflet-container.dark .leaflet-popup-close-button,
   .leaflet-container.dark .leaflet-control-layers-toggle,
-  .leaflet-container.dark .leaflet-container.dark .map-tooltip .close,
-  .leaflet-container.dark .map-tooltip .close,
   .leaflet-container.dark .mapbox-icon {
     background-image:url(./images/icons-ffffff.png);
-    background-size:26px 234px;
+    background-size:26px 260px;
     }
   .leaflet-bar .leaflet-control-zoom-in                 { background-position:0 0; }
   .leaflet-bar .leaflet-control-zoom-out                { background-position:0 -26px; }
   .map-tooltip .close, .leaflet-popup-close-button      { background-position:0 -52px; }
-  .leaflet-control-layers-toggle                        { background-position:0 -78px; }
-  .mapbox-icon-share:before, .leaflet-bar .mapbox-icon-share         { background-position:0 -104px; }
-  .mapbox-icon-geocoder:before, .leaflet-bar .mapbox-icon-geocoder   { background-position:0 -130px; }
-  .mapbox-icon-facebook:before, .leaflet-bar .mapbox-icon-facebook   { background-position:0 -156px; }
-  .mapbox-icon-twitter:before, .leaflet-bar .mapbox-icon-twitter     { background-position:0 -182px; }
-  .mapbox-icon-pinterest:before, .leaflet-bar .mapbox-icon-pinterest { background-position:0 -208px; }
+  .mapbox-icon-info                                     { background-position:0 -78px; }
+  .leaflet-control-layers-toggle                        { background-position:0 -104px; }
+  .mapbox-icon-share:before, .mapbox-icon-share         { background-position:0 -130px; }
+  .mapbox-icon-geocoder:before, .mapbox-icon-geocoder   { background-position:0 -156px; }
+  .mapbox-icon-facebook:before, .mapbox-icon-facebook   { background-position:0 -182px; }
+  .mapbox-icon-twitter:before, .mapbox-icon-twitter     { background-position:0 -208px; }
+  .mapbox-icon-pinterest:before, .mapbox-icon-pinterest { background-position:0 -234px; }
 
 @media
   (-webkit-min-device-pixel-ratio:2),
@@ -546,6 +548,35 @@
   color:rgba(0,0,0,0.5);
   }
 
+/* Attribution
+------------------------------------------------------- */
+.mapbox-control-info.leaflet-control {
+  margin:5px 30px 5px 5px;
+  min-height:26px;
+  }
+.mapbox-info-toggle {
+  background-color:#fff;
+  background-color:rgba(255,255,255,0.25);
+  border-radius:50%;
+  position:absolute;
+  bottom:5px;left:5px;
+  z-index:1;
+  }
+  .mapbox-control-info.active .mapbox-info-toggle { background-color:#fff; }
+  .mapbox-info-toggle:hover { background-color:rgba(255,255,255,0.5); }
+
+.map-info-container {
+  background:#fff;
+  background:rgba(255,255,255,0.5);
+  padding:3px 5px 3px 15px;
+  display:none;
+  position:relative;
+  bottom:5px;
+  left:20px;
+  border-radius:3px;
+  }
+.mapbox-control-info.active .map-info-container { display:inline-block; }
+
 /* Geocoder
 ------------------------------------------------------- */
 .leaflet-control-mapbox-geocoder {
@@ -650,6 +681,8 @@
     opacity:0.5;
     }
 
+.leaflet-container.dark .mapbox-info-toggle,
+.leaflet-container.dark .map-info-container,
 .leaflet-container.dark .leaflet-control-attribution {
   background-color:rgba(0,0,0,0.25);
   color:#f8f8f8;
@@ -684,12 +717,12 @@
 /* Smaller Screens
 ------------------------------------------------------- */
 @media only screen and (max-width:640px) {
-  .mapbox-modal-body {
-    width:100%;
-    height:100%;
-    margin:0;
-    }
+.mapbox-modal-body {
+  width:100%;
+  height:100%;
+  margin:0;
   }
+}
 
 /* Browser Fixes
 ------------------------------------------------------- */
