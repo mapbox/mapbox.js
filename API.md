@@ -52,20 +52,24 @@ _Example_:
     // the second argument is optional
     var layer = L.mapbox.tileLayer('examples.map-20v6611k');
 
-    // you can also provide a full url to a tilejson resource
+    // you can also provide a full url to a TileJSON resource
     var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json');
 
-    // if provided,you can support retina tiles
+    // if provided, you can support retina tiles
     var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
-        detectRetina: true,
-        // if retina is detected, this layer is used instead
-        retinaVersion: 'examples.map-zswgei2n'
+        tileLayer: {
+            detectRetina: true,
+            // if retina is detected, this layer is used instead
+            retinaVersion: 'examples.map-zswgei2n'
+        }
     });
 
     // if this map supports auto-scaling, `detectRetina` will automatically
     // use scaled tiles when retina is detected.
     var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
-        detectRetina: true,
+        tileLayer: {
+            detectRetina: true,
+        }
     });
 
 _Returns_ a `L.mapbox.tileLayer` object.
@@ -420,7 +424,7 @@ Set the TileJSON used for geocoding.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| tilejson | object | A Tilejson object |
+| tilejson | object | A TileJSON object |
 
 _Returns_: the geocoder object
 
@@ -466,7 +470,7 @@ _Returns_:
 A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
 and `popupAnchor`.
 
-## L.mapbox.marker.style(feature, latlon)
+## L.mapbox.marker.style(feature, latlng)
 
 An icon generator for use in conjunction with `pointToLayer` to generate
 markers from the [MapBox Markers API](http://mapbox.com/developers/api/#markers)
@@ -476,7 +480,7 @@ features.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | feature | object | A GeoJSON feature object |
-| latlon | object | The latitude, longitude position of the marker |
+| latlng | object | The latitude, longitude position of the marker |
 
 _Examples_:
 
