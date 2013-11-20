@@ -1,3 +1,12 @@
+## v1.5.0
+
+* Updates to [Leaflet 0.7](http://leafletjs.com/2013/11/18/leaflet-0-7-released-plans-for-future.html)
+* Fixes shareControl & design bugs #550 #547 #549 #501 #551
+* First release of [JS.md](https://github.com/mapbox/mapbox.js/blob/f54fdaa7f8c0e57ab07089a9acdcebe6a9c09808/JS.md)
+* Fix documentation bugs #562
+* [Enforce JSHint validity with Travis](https://github.com/mapbox/mapbox.js/commit/2e3e243909ac431776cebf821028b98471a6910f)
+* Updated attribution control and edit on OSM functionality #485
+
 ## v1.4.2
 
 * Address overrides to leaflet.css when mapbox.standalone.css is used.
