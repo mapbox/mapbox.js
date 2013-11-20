@@ -551,8 +551,8 @@
 
 /* Attribution
 ------------------------------------------------------- */
-.mapbox-control-attribution.leaflet-control  {
-  margin:5px 5px 5px 30px;
+.mapbox-control-attribution.leaflet-control {
+  margin:5px 30px 5px 5px;
   min-height:26px;
   }
 .mapbox-attribution-toggle {
@@ -560,7 +560,7 @@
   background-color:rgba(255,255,255,0.25);
   border-radius:50%;
   position:absolute;
-  bottom:5px;right:5px;
+  bottom:5px;left:5px;
   z-index:1;
   }
   .mapbox-control-attribution.active .mapbox-attribution-toggle { background-color:#fff; }
@@ -569,11 +569,11 @@
 .map-attributions-container {
   background:#fff;
   background:rgba(255,255,255,0.5);
-  padding:3px 15px 3px 5px;
+  padding:3px 5px 3px 15px;
   display:none;
   position:relative;
   bottom:5px;
-  right:20px;
+  left:20px;
   border-radius:3px;
   }
 .mapbox-control-attribution.active .map-attributions-container { display:inline-block; }

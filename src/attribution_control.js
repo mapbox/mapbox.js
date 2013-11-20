@@ -2,7 +2,7 @@
 
 var AttributionControl = L.Control.extend({
     options: {
-        position: 'bottomright',
+        position: 'bottomleft',
         sanitizer: require('sanitize-caja')
     },
 
