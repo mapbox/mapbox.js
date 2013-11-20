@@ -679,7 +679,7 @@
 .leaflet-container.dark .map-attributions-container,
 .leaflet-container.dark .leaflet-control-attribution {
   background-color:rgba(0,0,0,0.25);
-  color:#999;
+  color:#f8f8f8;
   }
 .leaflet-container.dark .leaflet-bar a.leaflet-disabled,
 .leaflet-container.dark .leaflet-control .mapbox-button.disabled {
