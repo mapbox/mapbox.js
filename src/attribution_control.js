@@ -55,13 +55,6 @@ var AttributionControl = L.Control.extend({
         return;
     },
 
-    _osmlink: function() {
-        var center = this._map.getCenter();
-        var z = this._map.getZoom();
-        window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
-            '&editor=id' + '&lat=' + center.lat + '&lon=' + center.lng);
-    },
-
     _update: function() {
         if (!this._map) { return this; }
         this._content.innerHTML = '';
@@ -71,17 +64,10 @@ var AttributionControl = L.Control.extend({
                 var sanitized = this.options.sanitizer(i);
                 if (sanitized !== '') {
                     var attribute = L.DomUtil.create('span', 'map-attribute', this._content);
-                    attribute.innerHTML = this.options.sanitizer(i) + ' | ';
+                    attribute.innerHTML = this.options.sanitizer(i) + ' ';
                 }
             }
         }
-
-        // Show the attribution here.
-        var edit = L.DomUtil.create('a', '', this._content);
-        edit.href = '#';
-        edit.innerHTML = 'Improve this map';
-        edit.title = 'Edit in OpenStreetMap';
-        L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
 
         return this;
     }
