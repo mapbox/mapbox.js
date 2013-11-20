@@ -28,6 +28,9 @@ var Map = L.Map.extend({
         // disable the default 'Leaflet' text
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
+        this.attributionControl = attributionControl();
+        this.addControl(this.attributionControl);
+
         if (this.options.tileLayer) {
             this.tileLayer = tileLayer(undefined, this.options.tileLayer);
             this.addLayer(this.tileLayer);
@@ -52,9 +55,6 @@ var Map = L.Map.extend({
             this.legendControl = legendControl(this.options.legendControl);
             this.addControl(this.legendControl);
         }
-
-        this.attributionControl = attributionControl();
-        this.addControl(this.attributionControl);
 
         this._loadTileJSON(_);
     },
