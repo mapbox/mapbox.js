@@ -36,12 +36,12 @@
             case 13: // enter
               break;
             default:
-              this._search(e);
+              this._search();
           }
           return false;
         },
 
-        _search: function(cb) {
+        _search: function() {
             var q = this.$el.val() ? this.$el.val().toLowerCase() : null;
             this.$menu.find('[href]').each(function() {
                 var $this = $(this),
@@ -56,8 +56,6 @@
                     $this.hide();
                 }
             });
-
-            this.cb();
         },
 
         bindInlineCode: function() {
