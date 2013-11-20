@@ -49,8 +49,10 @@ var Map = L.Map.extend({
             this.addControl(this.gridControl);
         }
 
-        this.infoControl = infoControl(this.options.infoControl);
-        this.addControl(this.infoControl);
+        if (this.options.infoControl) {
+            this.infoControl = infoControl(this.options.infoControl);
+            this.addControl(this.infoControl);
+        }
 
         if (this.options.legendControl) {
             this.legendControl = legendControl(this.options.legendControl);
