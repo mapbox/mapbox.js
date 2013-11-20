@@ -19,7 +19,7 @@ var LMap = L.Map.extend({
         legendControl: {},
         gridControl: {},
         infoControl: {},
-        attributionControl: false
+        attributionControl: false,
         shareControl: false
     },
 
