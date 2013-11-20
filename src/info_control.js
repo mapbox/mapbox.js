@@ -14,7 +14,7 @@ var InfoControl = L.Control.extend({
 
     onAdd: function(map) {
         this._container = L.DomUtil.create('div', 'mapbox-control-info mapbox-small');
-        this._content = L.DomUtil.create('div', 'map-infos-container', this._container);
+        this._content = L.DomUtil.create('div', 'map-info-container', this._container);
 
         var link = L.DomUtil.create('a', 'mapbox-info-toggle mapbox-icon mapbox-icon-info', this._container);
         link.href = '#';
