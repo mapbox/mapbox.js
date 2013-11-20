@@ -85,7 +85,7 @@ var InfoControl = L.Control.extend({
         var center = this._map.getCenter();
         var z = this._map.getZoom();
         window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
-        '&editor=id' + '&lat=' + center.lat + '&lon=' + center.lng);
+        '&lat=' + center.lat + '&lon=' + center.lng);
     },
 });
 
