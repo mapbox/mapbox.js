@@ -195,8 +195,8 @@
 .leaflet-control-layers,
 .leaflet-bar {
   background-color:#fff;
-  border:1px solid #bbb;
-  border-color:rgba(0,0,0,0.25);
+  border:1px solid #999;
+  border-color:rgba(0,0,0,0.4);
   border-radius:3px;
   box-shadow:none;
   }
@@ -283,8 +283,8 @@
 
 .leaflet-control-scale-line {
   background-color:rgba(255,255,255,0.5);
-  border:1px solid #bbb;
-  border-color:rgba(0,0,0,0.25);
+  border:1px solid #999;
+  border-color:rgba(0,0,0,0.4);
   border-top:none;
   padding:2px 5px 1px;
   white-space:nowrap;
@@ -350,8 +350,8 @@
 /* div icon */
 .leaflet-div-icon {
   background:#fff;
-  border:1px solid #bbb;
-  border-color:rgba(0,0,0,0.25);
+  border:1px solid #999;
+  border-color:rgba(0,0,0,0.4);
   }
 .leaflet-editing-icon {
   border-radius:3px;
@@ -434,11 +434,6 @@
   border-radius:3px;
   box-shadow:0 1px 2px rgba(0,0,0,0.10);
   }
-.map-legends,
-.map-tooltip {
-  border:1px solid #bbb;
-  border-color:rgba(0,0,0,0.25)
-  }
 .map-legends .map-legend {
   padding:10px;
   }
@@ -467,8 +462,6 @@
     border-radius:3px;
     }
     .map-tooltip.closable .close:active  {
-      border-color:#bbb;
-      border-color:rgba(0,0,0,0.25);
       background-color:#f8f8f8;
       }
 
@@ -569,8 +562,8 @@
 .leaflet-control-mapbox-geocoder .leaflet-control-mapbox-geocoder-wrap {
   background:#fff;
   position:absolute;
-  border:1px solid #bbb;
-  border-color:rgba(0,0,0,0.25);
+  border:1px solid #999;
+  border-color:rgba(0,0,0,0.4);
   border-bottom-width:0;
   overflow:hidden;
   left:26px;
@@ -617,8 +610,8 @@
   }
   .leaflet-control-mapbox-geocoder.active .leaflet-control-mapbox-geocoder-results {
     background:#fff;
-    border:1px solid #bbb;
-    border-color:rgba(0,0,0,0.25);
+    border:1px solid #999;
+    border-color:rgba(0,0,0,0.4);
     }
 
 .leaflet-control-mapbox-geocoder-results a,
@@ -634,8 +627,8 @@
   overflow:hidden;
   }
   .leaflet-control-mapbox-geocoder-results a:first-child {
-    border-top:1px solid #bbb;
-    border-top-color:rgba(0,0,0,0.25);
+    border-top:1px solid #999;
+    border-top-color:rgba(0,0,0,0.4);
     border-radius:0;
     }
   .leaflet-container.dark .leaflet-control .leaflet-control-mapbox-geocoder-results a:hover,
