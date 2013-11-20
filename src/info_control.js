@@ -4,7 +4,7 @@ var InfoControl = L.Control.extend({
     options: {
         position: 'bottomleft',
         sanitizer: require('sanitize-caja'),
-        editinosm: false
+        editLink: false
     },
 
     initialize: function(options) {
@@ -70,7 +70,7 @@ var InfoControl = L.Control.extend({
             }
         }
 
-        if (this.options.editinosm && !L.Browser.mobile) {
+        if (this.options.editLink && !L.Browser.mobile) {
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
             edit.innerHTML = 'Improve this map';
