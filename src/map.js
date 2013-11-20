@@ -7,7 +7,7 @@ var util = require('./util'),
     gridControl = require('./grid_control'),
     legendControl = require('./legend_control');
 
-var Map = L.Map.extend({
+var LMap = L.Map.extend({
     includes: [require('./load_tilejson')],
 
     options: {
@@ -116,5 +116,5 @@ var Map = L.Map.extend({
 });
 
 module.exports = function(element, _, options) {
-    return new Map(element, _, options);
+    return new LMap(element, _, options);
 };

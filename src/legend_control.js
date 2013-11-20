@@ -46,8 +46,7 @@ var LegendControl = L.Control.extend({
 
         for (var i in this._legends) {
             if (this._legends.hasOwnProperty(i) && this._legends[i]) {
-                var div = this._container.appendChild(document.createElement('div'));
-                div.className = 'map-legend wax-legend';
+                var div = L.DomUtil.create('div', 'map-legend wax-legend', this._container);
                 div.innerHTML = this.options.sanitizer(i);
                 hide = 'block';
             }
