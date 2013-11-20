@@ -3,7 +3,8 @@
 var AttributionControl = L.Control.extend({
     options: {
         position: 'bottomleft',
-        sanitizer: require('sanitize-caja')
+        sanitizer: require('sanitize-caja'),
+        editinosm: false
     },
 
     initialize: function(options) {
@@ -69,8 +70,23 @@ var AttributionControl = L.Control.extend({
             }
         }
 
+        if (this.options.editinosm && !L.Browser.mobile) {
+            var edit = L.DomUtil.create('a', '', this._content);
+            edit.href = '#';
+            edit.innerHTML = 'Improve this map';
+            edit.title = 'Edit in OpenStreetMap';
+            L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
+        }
+
         return this;
-    }
+    },
+
+    _osmlink: function() {
+        var center = this._map.getCenter();
+        var z = this._map.getZoom();
+        window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
+        '&editor=id' + '&lat=' + center.lat + '&lon=' + center.lng);
+    },
 });
 
 module.exports = function(options) {

@@ -48,7 +48,7 @@ var Map = L.Map.extend({
             this.addControl(this.gridControl);
         }
 
-        this.attributionControl = attributionControl();
+        this.attributionControl = attributionControl(this.options.attributionControl);
         this.addControl(this.attributionControl);
 
         if (this.options.legendControl) {
