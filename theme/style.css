@@ -391,10 +391,7 @@
   .mapbox-button-icon:before,
   .leaflet-container.dark .leaflet-control-zoom-in,
   .leaflet-container.dark .leaflet-control-zoom-out,
-  .leaflet-container.dark .leaflet-popup-close-button,
   .leaflet-container.dark .leaflet-control-layers-toggle,
-  .leaflet-container.dark .leaflet-container.dark .map-tooltip .close,
-  .leaflet-container.dark .map-tooltip .close,
   .leaflet-container.dark .mapbox-icon {
     background-image:url(./images/icons-ffffff.png);
     background-size:26px 260px;
@@ -559,6 +556,7 @@
 ------------------------------------------------------- */
 .mapbox-control-attribution.leaflet-control  {
   margin:5px 5px 5px 30px;
+  min-height:26px;
   }
 .mapbox-attribution-toggle {
   background-color:#fff;
@@ -574,11 +572,11 @@
 .map-attributions-container {
   background:#fff;
   background:rgba(255,255,255,0.5);
-  padding:2px 20px 2px 5px;
+  padding:3px 15px 3px 5px;
   display:none;
   position:relative;
-  bottom:6px;
-  right:18px;
+  bottom:5px;
+  right:20px;
   border-radius:3px;
   }
 .mapbox-control-attribution.active .map-attributions-container { display:inline-block; }
@@ -687,9 +685,11 @@
     opacity:0.5;
     }
 
+.leaflet-container.dark .mapbox-attribution-toggle,
+.leaflet-container.dark .map-attributions-container,
 .leaflet-container.dark .leaflet-control-attribution {
   background-color:rgba(0,0,0,0.25);
-  color:#f8f8f8;
+  color:#999;
   }
 .leaflet-container.dark .leaflet-bar a.leaflet-disabled,
 .leaflet-container.dark .leaflet-control .mapbox-button.disabled {
