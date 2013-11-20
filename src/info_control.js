@@ -1,6 +1,6 @@
 'use strict';
 
-var AttributionControl = L.Control.extend({
+var InfoControl = L.Control.extend({
     options: {
         position: 'bottomleft',
         sanitizer: require('sanitize-caja'),
@@ -9,38 +9,38 @@ var AttributionControl = L.Control.extend({
 
     initialize: function(options) {
         L.setOptions(this, options);
-        this._attributions = {};
+        this._infos = {};
     },
 
     onAdd: function(map) {
-        this._container = L.DomUtil.create('div', 'mapbox-control-attribution mapbox-small');
-        this._content = L.DomUtil.create('div', 'map-attributions-container', this._container);
+        this._container = L.DomUtil.create('div', 'mapbox-control-info mapbox-small');
+        this._content = L.DomUtil.create('div', 'map-infos-container', this._container);
 
-        var link = L.DomUtil.create('a', 'mapbox-attribution-toggle mapbox-icon mapbox-icon-info', this._container);
+        var link = L.DomUtil.create('a', 'mapbox-info-toggle mapbox-icon mapbox-icon-info', this._container);
         link.href = '#';
 
-        L.DomEvent.addListener(link, 'click', this._showAttribution, this);
+        L.DomEvent.addListener(link, 'click', this._showInfo, this);
         L.DomEvent.disableClickPropagation(this._container);
 
         this._update();
         return this._container;
     },
 
-    addAttribution: function(text) {
+    addInfo: function(text) {
         if (!text) return this;
-        if (!this._attributions[text]) this._attributions[text] = 0;
+        if (!this._infos[text]) this._infos[text] = 0;
 
-        this._attributions[text]++;
+        this._infos[text]++;
         return this._update();
     },
 
-    removeAttribution: function (text) {
+    removeInfo: function (text) {
         if (!text) return this;
-        if (this._attributions[text]) this._attributions[text]--;
+        if (this._infos[text]) this._infos[text]--;
         return this._update();
     },
 
-    _showAttribution: function(e) {
+    _showInfo: function(e) {
         L.DomEvent.preventDefault(e);
         if (this._active === true) return this._hidecontent();
 
@@ -60,8 +60,8 @@ var AttributionControl = L.Control.extend({
         if (!this._map) { return this; }
         this._content.innerHTML = '';
 
-        for (var i in this._attributions) {
-            if (this._attributions.hasOwnProperty(i) && this._attributions[i]) {
+        for (var i in this._infos) {
+            if (this._infos.hasOwnProperty(i) && this._infos[i]) {
                 var sanitized = this.options.sanitizer(i);
                 if (sanitized !== '') {
                     var attribute = L.DomUtil.create('span', 'map-attribute', this._content);
@@ -90,5 +90,5 @@ var AttributionControl = L.Control.extend({
 });
 
 module.exports = function(options) {
-    return new AttributionControl(options);
+    return new InfoControl(options);
 };

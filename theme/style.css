@@ -544,11 +544,11 @@
 
 /* Attribution
 ------------------------------------------------------- */
-.mapbox-control-attribution.leaflet-control {
+.mapbox-control-info.leaflet-control {
   margin:5px 30px 5px 5px;
   min-height:26px;
   }
-.mapbox-attribution-toggle {
+.mapbox-info-toggle {
   background-color:#fff;
   background-color:rgba(255,255,255,0.25);
   border-radius:50%;
@@ -556,10 +556,10 @@
   bottom:5px;left:5px;
   z-index:1;
   }
-  .mapbox-control-attribution.active .mapbox-attribution-toggle { background-color:#fff; }
-  .mapbox-attribution-toggle:hover { background-color:rgba(255,255,255,0.5); }
+  .mapbox-control-info.active .mapbox-info-toggle { background-color:#fff; }
+  .mapbox-info-toggle:hover { background-color:rgba(255,255,255,0.5); }
 
-.map-attributions-container {
+.map-infos-container {
   background:#fff;
   background:rgba(255,255,255,0.5);
   padding:3px 5px 3px 15px;
@@ -569,7 +569,7 @@
   left:20px;
   border-radius:3px;
   }
-.mapbox-control-attribution.active .map-attributions-container { display:inline-block; }
+.mapbox-control-info.active .map-infos-container { display:inline-block; }
 
 /* Geocoder
 ------------------------------------------------------- */
@@ -675,8 +675,8 @@
     opacity:0.5;
     }
 
-.leaflet-container.dark .mapbox-attribution-toggle,
-.leaflet-container.dark .map-attributions-container,
+.leaflet-container.dark .mapbox-info-toggle,
+.leaflet-container.dark .map-infos-container,
 .leaflet-container.dark .leaflet-control-attribution {
   background-color:rgba(0,0,0,0.25);
   color:#f8f8f8;

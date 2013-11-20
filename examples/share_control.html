@@ -11,10 +11,14 @@
 <div id='map'>
 </div>
 <script>
-    var map = L.mapbox.map('map', 'tristen.map-ixqro653')
-        .addControl(L.mapbox.shareControl());
+  var map = L.mapbox.map('map', 'tristen.map-ixqro653', {
+      infoControl: {
+        editinosm: true
+      }
+    })
+    .addControl(L.mapbox.shareControl());
 
-    map.attributionControl.addAttribution('hee haw');
+    map.infoControl.addInfo('hee haw');
 
 </script>
 </body>

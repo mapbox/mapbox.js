@@ -6,7 +6,7 @@ var util = require('./util'),
     gridLayer = require('./grid_layer'),
     gridControl = require('./grid_control'),
     legendControl = require('./legend_control'),
-    attributionControl = require('./attribution_control');
+    infoControl = require('./info_control');
 
 var Map = L.Map.extend({
     includes: [require('./load_tilejson')],
@@ -17,6 +17,7 @@ var Map = L.Map.extend({
         gridLayer: {},
         legendControl: {},
         gridControl: {},
+        infoControl: {},
         attributionControl: false
     },
 
@@ -48,8 +49,8 @@ var Map = L.Map.extend({
             this.addControl(this.gridControl);
         }
 
-        this.attributionControl = attributionControl(this.options.attributionControl);
-        this.addControl(this.attributionControl);
+        this.infoControl = infoControl(this.options.infoControl);
+        this.addControl(this.infoControl);
 
         if (this.options.legendControl) {
             this.legendControl = legendControl(this.options.legendControl);
@@ -91,8 +92,8 @@ var Map = L.Map.extend({
             this._updateLayer(this.gridLayer);
         }
 
-        if (this.attributionControl && json.attribution) {
-            this.attributionControl.addAttribution(json.attribution);
+        if (this.infoControl && json.attribution) {
+            this.infoControl.addInfo(json.attribution);
         }
 
         if (this.legendControl && json.legend) {
@@ -110,8 +111,8 @@ var Map = L.Map.extend({
     _updateLayer: function(layer) {
         if (!layer.options) return;
 
-        if (this.attributionControl && this._loaded) {
-            this.attributionControl.addAttribution(layer.options.attribution);
+        if (this.infoControl && this._loaded) {
+            this.infoControl.addInfo(layer.options.infoControl);
         }
 
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
