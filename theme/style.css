@@ -28,6 +28,8 @@
   margin:0 0 10px;
   }
 .mapbox-small,
+.leaflet-control-attribution,
+.leaflet-control-scale,
 .leaflet-container input,
 .leaflet-container textarea,
 .leaflet-container label,
@@ -273,11 +275,6 @@
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
   padding:0 5px;
-  }
-.leaflet-control-attribution,
-.leaflet-control-scale {
-  font-size:12px;
-  line-height:20px;
   }
   .leaflet-left .leaflet-control-scale    { margin-left:5px; }
   .leaflet-bottom .leaflet-control-scale  { margin-bottom:5px; }
@@ -721,12 +718,12 @@
 /* Smaller Screens
 ------------------------------------------------------- */
 @media only screen and (max-width:640px) {
-  .mapbox-modal-body {
-    width:100%;
-    height:100%;
-    margin:0;
-    }
+.mapbox-modal-body {
+  width:100%;
+  height:100%;
+  margin:0;
   }
+}
 
 /* Browser Fixes
 ------------------------------------------------------- */
