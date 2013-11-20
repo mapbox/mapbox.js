@@ -91,7 +91,7 @@ var InfoControl = L.Control.extend({
             this._content.innerHTML += (info.length) ? ' | ' : '';
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
-            edit.innerHTML += 'Improve this map';
+            edit.innerHTML = 'Improve this map';
             edit.title = 'Edit in OpenStreetMap';
             L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
         }
