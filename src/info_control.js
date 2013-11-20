@@ -112,6 +112,9 @@ var InfoControl = L.Control.extend({
         if (e.layer.getAttribution) {
             this.addInfo(e.layer.getAttribution());
         }
+        if ('on' in e.layer && e.layer.getAttribution) {
+            e.layer.on('ready', L.bind(function() { this.addInfo(e.layer.getAttribution()); }, this));
+        }
     },
 
     _onLayerRemove: function (e) {
