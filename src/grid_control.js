@@ -27,6 +27,7 @@ var GridControl = L.Control.extend({
     },
 
     setTemplate: function(template) {
+        util.strict(template, 'string');
         this.options.template = template;
         return this;
     },
