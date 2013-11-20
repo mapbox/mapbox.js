@@ -9,7 +9,7 @@ var InfoControl = L.Control.extend({
 
     initialize: function(options) {
         L.setOptions(this, options);
-        this._infos = {};
+        this._info = {};
     },
 
     onAdd: function(map) {
@@ -22,21 +22,37 @@ var InfoControl = L.Control.extend({
         L.DomEvent.addListener(link, 'click', this._showInfo, this);
         L.DomEvent.disableClickPropagation(this._container);
 
+        for (var i in map._layers) {
+            if (map._layers[i].getAttribution) {
+                this.addInfo(map._layers[i].getAttribution());
+            }
+        }
+
+        map
+            .on('layeradd', this._onLayerAdd, this)
+            .on('layerremove', this._onLayerRemove, this);
+
         this._update();
         return this._container;
     },
 
+    onRemove: function(map) {
+        map
+            .off('layeradd', this._onLayerAdd)
+            .off('layerremove', this._onLayerRemove);
+    },
+
     addInfo: function(text) {
         if (!text) return this;
-        if (!this._infos[text]) this._infos[text] = 0;
+        if (!this._info[text]) this._info[text] = 0;
 
-        this._infos[text]++;
+        this._info[text]++;
         return this._update();
     },
 
     removeInfo: function (text) {
         if (!text) return this;
-        if (this._infos[text]) this._infos[text]--;
+        if (this._info[text]) this._info[text]--;
         return this._update();
     },
 
@@ -59,13 +75,15 @@ var InfoControl = L.Control.extend({
     _update: function() {
         if (!this._map) { return this; }
         this._content.innerHTML = '';
+        var hide = 'none';
 
-        for (var i in this._infos) {
-            if (this._infos.hasOwnProperty(i) && this._infos[i]) {
+        for (var i in this._info) {
+            if (this._info.hasOwnProperty(i) && this._info[i]) {
                 var sanitized = this.options.sanitizer(i);
                 if (sanitized !== '') {
                     var attribute = L.DomUtil.create('span', 'map-attribute', this._content);
                     attribute.innerHTML = this.options.sanitizer(i) + ' ';
+                    hide = 'block';
                 }
             }
         }
@@ -78,6 +96,8 @@ var InfoControl = L.Control.extend({
             L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
         }
 
+        // If there are no results in _info then hide this.
+        this._container.style.display = hide;
         return this;
     },
 
@@ -87,6 +107,18 @@ var InfoControl = L.Control.extend({
         window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
         '&lat=' + center.lat + '&lon=' + center.lng);
     },
+
+    _onLayerAdd: function(e) {
+        if (e.layer.getAttribution) {
+            this.addInfo(e.layer.getAttribution());
+        }
+    },
+
+    _onLayerRemove: function (e) {
+        if (e.layer.getAttribution) {
+            this.removeInfo(e.layer.getAttribution());
+        }
+    }
 });
 
 module.exports = function(options) {
