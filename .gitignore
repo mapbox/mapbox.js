@@ -1,1 +1,4 @@
+node_modules
+_docs/node_modules/
+dist/
 _site

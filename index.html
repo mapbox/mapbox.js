@@ -216,8 +216,8 @@ examples:
 {% capture htmltop %}<html>
 <head>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-  <link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
-  <script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
+  <script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
   <style>#map { position:absolute; width:100%; height:100%; }</style>
 </head>
 <body>{% endcapture %}
@@ -296,7 +296,7 @@ examples:
       <div class='col6 pad2'>
         <h2 id='mobile' class='space-bottom1'>Optimized for mobile</h2>
         <div class='prose'>
-          <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, check out the <a href='{{site.baseurl}}/api/{{site.version}}/#section-mobile'>Mobile section in the documentation</a>.</p>
+          <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, check out the <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'>Mobile section in the documentation</a>.</p>
         </div>
       </div>
     </div>
@@ -317,8 +317,8 @@ examples:
         <h2 id='getting-started' class='space-bottom1'>Get started fast</h2>
         <div class='prose'>
           <p>MapBox.js is hosted on the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML.</p>
-    {% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
-<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>{% endhighlight %}
+    {% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>{% endhighlight %}
           <a href='#standalone' id='trigger-standalone' class='small strong'>Need MapBox.js without Leaflet bundled?</a>
         </div>
       </div>
@@ -327,8 +327,8 @@ examples:
         <h3 id='standalone' class='space-bottom1'>MapBox.js standalone</h3>
         <div class='prose'>
           <p>A standalone version of MapBox.js is also available without Leaflet included. Add the following in your HTML document:</p>
-{% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.css' rel='stylesheet' />
-<script src='//api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.standalone.js'></script>{% endhighlight %}
+{% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.js'></script>{% endhighlight %}
           <small>Note: <strong>Leaflet 0.7</strong> or greater is required.</small>
         </div>
       </div>

@@ -9,13 +9,13 @@
     </h3>
     <h2>
       {{site.title}}
-      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.version|replace:'.', ''}}'>
+      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
       {% if page.v0 %}
         <sup class='fill-yellow small'>{{site.oldversion}}</sup>
       {% elsif page.version %}
         <sup class='fill-grey small'>{{page.version}}</sup>
       {% else %}
-        <sup class='fill-grey small'>{{site.version}}</sup>
+        <sup class='fill-grey small'>{{site.mapboxjs}}</sup>
       {% endif %}
       </a>
     </h2>
@@ -28,7 +28,7 @@
     <a href='{{site.baseurl}}/api/v0.6.7/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
     <a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
   {% else %}
-    <a href='{{site.baseurl}}/api/{{site.version}}/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
+    <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
     <a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
   {% endif %}
 </nav>
