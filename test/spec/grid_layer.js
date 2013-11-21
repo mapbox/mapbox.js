@@ -1,4 +1,6 @@
 describe('L.mapbox.gridLayer', function() {
+    'use strict';
+
     var server, element, map;
 
     var grid = {
@@ -8,11 +10,11 @@ describe('L.mapbox.gridLayer', function() {
     };
 
     for (var i = 0; i < 32; i++) {
-        grid.grid[i] = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        grid.grid[i] = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     }
 
     for (; i < 64; i++) {
-        grid.grid[i] = "                                                                "
+        grid.grid[i] = "                                                                ";
     }
 
     beforeEach(function() {
@@ -263,5 +265,5 @@ describe('L.mapbox.gridLayer', function() {
             map.fire('mousemove', {latlng: L.latLng(-1, 0)});
             map.fire('mousemove', {latlng: L.latLng(1, 0)});
         });
-    })
+    });
 });

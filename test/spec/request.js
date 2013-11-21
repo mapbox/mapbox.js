@@ -1,4 +1,6 @@
 describe('request', function() {
+    'use strict';
+
     var server;
 
     beforeEach(function() {
@@ -17,7 +19,7 @@ describe('request', function() {
             expect(err).to.be(null);
             expect(data).to.eql({status: 'success'});
             done();
-        })).to.be.ok;
+        })).to.be.ok();
 
         server.respond();
     });
@@ -30,7 +32,7 @@ describe('request', function() {
             expect(err).to.be.ok();
             expect(data).to.be(null);
             done();
-        })).to.be.ok;
+        })).to.be.ok();
 
         server.respond();
     });

@@ -1,4 +1,6 @@
 describe('L.mapbox.markerLayer', function() {
+    'use strict';
+
     var server;
 
     beforeEach(function() {
@@ -104,7 +106,7 @@ describe('L.mapbox.markerLayer', function() {
             var layer = L.mapbox.markerLayer(helpers.geoJson);
             layer.setGeoJSON([]);
             expect(layer.getLayers()).to.be.empty();
-        })
+        });
     });
 
     describe("#getFilter", function() {

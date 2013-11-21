@@ -1,4 +1,5 @@
 describe('L.mapbox.infoControl', function() {
+    'use strict';
     it('constructor', function() {
         var info = L.mapbox.infoControl();
         expect(info).to.be.ok();

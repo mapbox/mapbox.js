@@ -1,4 +1,6 @@
 describe("L.mapbox.gridControl", function() {
+    'use strict';
+
     var element, map, gridLayer;
 
     beforeEach(function() {
