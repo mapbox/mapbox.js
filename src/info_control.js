@@ -16,6 +16,11 @@ var InfoControl = L.Control.extend({
         this._container = L.DomUtil.create('div', 'mapbox-control-info mapbox-small');
         this._content = L.DomUtil.create('div', 'map-info-container', this._container);
 
+        if (this.options.position === 'bottomright' ||
+            this.options.position === 'topright') {
+           this._container.className += ' mapbox-control-info-right';
+        }
+
         var link = L.DomUtil.create('a', 'mapbox-info-toggle mapbox-icon mapbox-icon-info', this._container);
         link.href = '#';
 
