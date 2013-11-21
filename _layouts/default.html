@@ -81,11 +81,8 @@ footer:
   Stripe.setPublishableKey(window.location.hostname.indexOf('mapbox.com') !== -1 ?
     'pk_live_hI6mmOTIg7KkywK6vo3vJvpk' : 'pk_test_gmIyREg3sKzAiyMkAEeCsxUG');
   </script>
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
-  <!--[if lte IE 8]>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.ie.css' rel='stylesheet' >
-  <![endif]-->
+  <script src='https://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/{{site.version}}/mapbox.css' rel='stylesheet' />
   <script src='{{site.url}}/js/site.js'></script>
   {% if page.head %}{{page.head}}{% endif %}
 
