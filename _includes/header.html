@@ -4,12 +4,12 @@
 
 <div class='pad4y col12 clearfix'>
   <div class='col6'>
-    <h2 class='tag small'>
+    <h3 class='tag small'>
       <a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a>
-    </h2>
-    <h1>
+    </h3>
+    <h2>
       {{site.title}}
-      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/{{site.masterbranch}}/CHANGELOG.md#{{site.version|replace:'.', ''}}'>
+      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.version|replace:'.', ''}}'>
       {% if page.v0 %}
         <sup class='fill-yellow small'>{{site.oldversion}}</sup>
       {% elsif page.version %}
@@ -18,12 +18,12 @@
         <sup class='fill-grey small'>{{site.version}}</sup>
       {% endif %}
       </a>
-    </h1>
+    </h2>
   </div>
 </div>
 
 <nav class='pill mobile-cols col12 clearfix space-bottom'>
-    <a href='{{site.baseurl}}/overview/' class='col4 button {% if page.url == "/overview/index.html" %}active{% endif %}'>Overview</a>
+    <a href='{{site.baseurl}}/' class='col4 button {% if page.url == "/index.html" %}active{% endif %}'>Overview</a>
   {% if page.v0 %}
     <a href='{{site.baseurl}}/api/v0.6.7/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
     <a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
