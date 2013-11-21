@@ -343,14 +343,14 @@ _Example_:
 _Returns_: a `L.mapbox.infoControl` object.
 
 ### infoControl.addInfo(info)
-Adds a legend to the legendControl.
+Adds an info string to infoControl.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | info _required_ | string | A string which may contain HTML. It will be sanitized by the infoControl's sanitizer option. |
 
 ### infoControl.removeInfo(info)
-Removes a info string from the infoControl.
+Removes an info string from infoControl.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
