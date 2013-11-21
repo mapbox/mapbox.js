@@ -354,7 +354,7 @@ Removes an info string from infoControl.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| info _required_ | string | data to remove. |
+| info _required_ | string | Info to remove. |
 
 ## L.mapbox.legendControl(options)
 A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
