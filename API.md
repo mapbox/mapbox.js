@@ -584,17 +584,21 @@ Having the ability to use retina tiles when the device supports them is easy.
 When creating the map, use the `detectRetina` to verify if retina is available
 and `retinaVersion` to use a tilelayer which is designed for retina screens.
 
-    var map = L.mapbox.map('map', '{{site.defaultid}}', {
-      detectRetina: true,
-      retinaVersion: '{{site.defaultid}}'
+    var map = L.mapbox.map('map', 'your.mapid', {
+        tileLayer: {
+            detectRetina: true,
+            retinaVersion: 'your.mapid'
+        }
     }).setView([40, -74.50], 9);
 
 Some MapBox maps support switching to retina scale automatically: if you're using
 one of these maps, you can simply set `detectRetina` and the higher-scale
 tiles will be used when retina is detected.
 
-    var map = L.mapbox.map('map', '{{site.defaultid}}', {
-      detectRetina: true
+    var map = L.mapbox.map('map', 'your.mapid', {
+        tileLayer: {
+            detectRetina: true
+        }
     }).setView([40, -74.50], 9);
 
 # Theming
