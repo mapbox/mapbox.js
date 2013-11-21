@@ -3,7 +3,7 @@ url: https://www.mapbox.com
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
-version: v1.4.2
+version: v1.5.0
 masterbranch: master
 oldversion: v0.6.7
 title: mapbox.js
