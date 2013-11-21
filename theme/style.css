@@ -550,12 +550,12 @@
 
 /* Info Control
 ------------------------------------------------------- */
-.leaftlet-control.mapbox-control-info {
-  margin:5px 30px 5px 5px;
+.leaflet-control.mapbox-control-info {
+  margin:5px 30px 10px 10px;
   min-height:26px;
   }
   .leaflet-control.mapbox-control-info-right {
-    margin:5px 5px 5px 30px;
+    margin:5px 10px 10px 30px;
     }
 
 .mapbox-info-toggle {
@@ -563,27 +563,27 @@
   background-color:rgba(255,255,255,0.25);
   border-radius:50%;
   position:absolute;
-  bottom:5px;left:5px;
+  bottom:0;left:0;
   z-index:1;
   }
-  .mapbox-control-info-right .mapbox-info-toggle  { left:auto; right:5px; }
+  .mapbox-control-info-right .mapbox-info-toggle  { left:auto; right:0; }
   .mapbox-control-info.active .mapbox-info-toggle { background-color:#fff; }
   .mapbox-info-toggle:hover { background-color:rgba(255,255,255,0.5); }
 
 .map-info-container {
   background:#fff;
-  background:rgba(255,255,255,0.5);
+  background:rgba(255,255,255,0.75);
   padding:3px 5px 3px 15px;
   display:none;
   position:relative;
-  bottom:5px;
-  left:20px;
+  bottom:0;
+  left:13px;
   border-radius:3px;
   }
 .mapbox-control-info.active .map-info-container { display:inline-block; }
 .mapbox-control-info-right .map-info-container {
   left:auto;
-  right:20px;
+  right:13px;
   padding:3px 15px 3px 5px;
   }
 
