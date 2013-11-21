@@ -104,7 +104,7 @@ examples:
         pointer-events: none;
         }
       </style>
-      <script src='http://leafletjs.com/examples/us-states.js'></script>
+      <script src='./examples/us-states.js'></script>
       <script>
           var mapdataviz = L.mapbox.map('map-dataviz', 'examples.map-9ijuk24y')
             .setView([37.8, -96], 4);
@@ -194,11 +194,11 @@ examples:
               to = grades[i + 1];
 
               labels.push(
-                '<span class="swatch" style="background:' + getColor(from + 1) + '"></span> ' +
-                from + (to ? '&ndash;' + to : '+'));
+                '<li><span class="swatch" style="background:' + getColor(from + 1) + '"></span> ' +
+                from + (to ? '&ndash;' + to : '+')) + '</li>';
             }
 
-            return '<span>People per square mile</span><br>' + labels.join('<br>');
+            return '<span>People per square mile</span><ul>' + labels.join('') + '</ul>';
           }
 
       </script>
