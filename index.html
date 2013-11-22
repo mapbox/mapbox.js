@@ -59,9 +59,7 @@ examples:
     description: 'Tell stories like a walk through of locations told in Doyle&#39;s Sherlock Holmes short narrative, &#34;The Adventure of the Bruce-Partington Plans&#34;.'
     code: |
       <script>
-        var mapstories = L.mapbox.map('map-storytelling', 'examples.map-9ijuk24y')
-          .setView([51.5086, -0.1214], 13);
-
+        var mapstories = L.mapbox.map('map-storytelling', 'examples.map-9ijuk24y');
         var markers = L.mapbox.markerLayer()
           .loadURL('/mapbox.js/examples/storytelling.geojson')
           .addTo(mapstories);
@@ -79,7 +77,8 @@ examples:
           var i = 0;
           function run() {
             if (++i > chapters.length - 1) i = 0;
-            mapstories.setView(chapters[i].getLatLng(), 13);
+            var c = chapters[i].feature.geometry.coordinates;
+            mapstories.setView([c[1], c[0]], 13);
             chapters[i].openPopup();
             window.setTimeout(run, 3000);
           }
