@@ -41,6 +41,15 @@ describe('L.mapbox.marker', function() {
             expect(marker.options.title).to.equal('test');
         });
 
+        it("strips tags from a marker's title", function() {
+            var marker = L.mapbox.marker.style({
+                properties: {
+                    title: '<a href="foo">test</a>'
+                }
+            });
+            expect(marker.options.title).to.equal('test');
+        });
+
         it('integrates with leaflet', function() {
             expect(function() {
                 L.geoJson(helpers.geoJson, {

@@ -31,4 +31,16 @@ describe("util", function() {
             });
         });
     });
+
+    describe('#strip_tags', function() {
+        it('strips a basic tag', function() {
+            expect(private.util.strip_tags('<div>foo</div>')).to.eql('foo');
+        });
+        it('strips a self-closing tag', function() {
+            expect(private.util.strip_tags('foo <br /> bar')).to.eql('foo  bar');
+        });
+        it('does not botch non-tag input', function() {
+            expect(private.util.strip_tags('rabbit')).to.eql('rabbit');
+        });
+    });
 });

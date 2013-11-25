@@ -26,6 +26,11 @@ module.exports = {
                 values.join(', '));
         }
     },
+    strip_tags: function(_) {
+        var div = document.createElement('div');
+        div.innerHTML = _;
+        return div.textContent || div.innerText || '';
+    },
     lbounds: function(_) {
         // leaflet-compatible bounds, since leaflet does not do geojson
         return new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]);

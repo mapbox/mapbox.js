@@ -1,6 +1,7 @@
 'use strict';
 
 var url = require('./url'),
+    util = require('./util'),
     sanitize = require('sanitize-caja');
 
 // mapbox-related markers functionality
@@ -35,10 +36,13 @@ function icon(fp) {
 function style(f, latlon) {
     return L.marker(latlon, {
         icon: icon(f.properties),
-        title: (f.properties && f.properties.title) || ''
+        title: util.strip_tags(
+            sanitize((f.properties && f.properties.title) || ''))
     });
 }
 
+// Sanitize and format properties of a GeoJSON Feature object in order
+// to form the HTML string used as the argument for `L.createPopup`
 function createPopup(f, sanitizer) {
     if (!f || !f.properties) return '';
     var popup = '';
