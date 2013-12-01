@@ -245,3 +245,111 @@ Instead, a `L.geoJson` layer is actually a `L.layerGroup` behind the scenes: so 
   * L.Circle b
 
 So, for each `feature` in your GeoJSON data, the geojsonLayer actually has a specific little layer for that feature.
+
+## L.geoJson, map.markerLayer, L.marker, and L.mapbox.markerLayer
+
+Want to put a point on the map? There are quite a few ways! Let's nail down
+when you'd want each of them.
+
+The lowest-level interface is putting shape layers on the map: let's say you
+add a marker and a line to the map:
+
+```js
+// a line
+var polyline = L.polyline([[0,0], [10, 20]]).addTo(map);
+
+// a marker
+var marker = L.marker([0,0]).addTo(map);
+```
+
+These are the low-level interfaces to Leaflet's drawing code, and they're very
+useful if you have basic ideas of what you want to draw, like 'a line from A to B'.
+
+They have the drawback that there's no easy way to transfer this kind of
+overlay as data, since there's no format for it, and it's not immediately
+simple to manage what you put on the map. You can fix the management problem
+by using a [L.layerGroup](http://leafletjs.com/reference.html#layergroup):
+
+```js
+var group = L.layerGroup([polyline, marker]);
+```
+
+If you want to transfer these overlays around, you'll want to use a real file
+format: that's GeoJSON.
+
+```js
+var myVectors = L.geoJson({
+  type: 'FeatureCollection',
+  features: [{
+      type: 'Feature',
+      properties: {},
+      geometry: {
+          type: 'LineString',
+          coordinates: [[0, 0], [10, 20]]
+      }
+  }, {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+          type: 'Point',
+          coordinates: [0, 0]
+      }
+  }]
+})
+```
+
+The output of this is similar to the `group` we made before - the GeoJSON
+data is, behind the scenes, instantiated with Leaflet's lower-level shapes but
+kept in a group. This has the advantage that you can AJAX your data in or
+manage it with any tool that knows how to talk GeoJSON.
+
+How about nice-looking markers, and data that you've added in MapBox?
+MapBox.js extends Leaflet with some simple abstractions to make this simpler.
+The basic element is the [`L.mapbox.markerLayer()`](https://www.mapbox.com/mapbox.js/api/v1.5.0/#L.mapbox.markerLayer).
+This is like a `L.geoJson` object but with some differences:
+
+You can instantiate a `markerLayer` just with a map id, and it will magically
+pull the markers down for you:
+
+```js
+var markers = L.mapbox.markerLayer('my.mapid').addTo(map);
+// behind the scenes the markers are downloaded with AJAX, and when they're
+// done, the `ready` event is fired.
+```
+
+You can do the same with another GeoJSON file:
+
+```js
+markers.loadURL('mymarkers.geojson');
+// behind the scenes the markers are downloaded with AJAX, and when they're
+// done, the `ready` event is fired.
+```
+
+Finally, a special convenience built in to `L.mapbox.map()` is that markers
+for a given map ID are automatically loaded into `map.markerLayer`:
+
+```js
+var map = L.mapbox.map('my.mapofthings');
+
+// this marker layer contains any markers that are saved along with the map
+// mapofthings
+map.markerLayer;
+```
+
+If you _don't_ want this to happen, it's easy to opt-out:
+
+```js
+var map = L.mapbox.map('my.mapofthings', {
+    markerLayer: false
+});
+```
+
+That said, if you want to _load custom GeoJSON data_, you should _not_ just
+reuse `map.markerLayer`, because it'll get overwritten by the data automatically
+downloaded. So just create a new `L.mapbox.markerLayer`, add it to the map
+as demonstrated above, and load your custom data into it.
+
+`L.mapbox.markerLayer` instances have the special feature that they will style
+markers with [simplestyle](https://www.mapbox.com/developers/simplestyle/) and
+will use the fancy [markers api](https://www.mapbox.com/developers/api/#Stand-alone.markers)
+for marker icons.
