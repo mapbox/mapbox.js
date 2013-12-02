@@ -26,12 +26,6 @@
   .version > *{
     padding:2px 5px;
     }
-.example-header h3 { display:inline; margin-right:10px; }
-.doc-example { border-left:1px solid #ccc; }
-
-.examples {
-  height:205px;
-  }
 
 /* Scrollbar */
 .scrollbar {

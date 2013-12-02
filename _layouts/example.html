@@ -36,8 +36,33 @@ examples:
     {% endif %}
 
     <div class='clearfix'>
+      <!-- Navigation -->
+      <div class='col3 keyline-right'>
+        <div class='doc-search pad2 keyline-bottom'>
+          <fieldset class='with-icon'>
+            <span class='icon search'></span>
+            <input id='search-filter' type='text' class='stretch' placeholder='Filter'>
+          </fieldset>
+        </div>
+
+        <div class='doc-nav'>
+          {% for item in page.examples %}
+          <div class='section'>
+            <strong class='heading col12 pad2 {% unless forloop.first %}keyline-top{% endunless %}'>{{item.name}}</strong>
+            <div id='{{item.id}}' class='examples examples-{{item.id}}'>
+            {% for example in site.tags[item.id] order:ascending %}
+              {% if example.version == 'v1.0.0' %}
+                <a href='{{site.baseurl}}{{example.url}}' class='col12 pad1y pad2x keyline-top {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+              {% endif %}
+            {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
       <!-- Map + code sample -->
-      <div class='col12'>
+      <div class='col9'>
         <div class='pad2 doc example-header'>
           <h3>{{page.title}}</h3>
           <span class='description'>{{page.description}}</span>
@@ -83,43 +108,12 @@ examples:
 </div>
   </div><!-- end #code -->
 </div>
-
-        <!-- Navigation -->
-        <div class='col12 pad1 clearfix'>
-
-          <div class='center col12 clearfix'>
-            <h1 class='title'>Browse all examples</h1>
-          </div>
-
-          <div class='doc-search clearfix col12 pad1'>
-            <fieldset class='col6 margin3 with-icon'>
-              <span class='icon search'></span>
-              <input id='search-filter' type='text' class='stretch' placeholder='Filter'>
-            </fieldset>
-          </div>
-
-          <div class='all-examples clearfix'>
-            {% for item in page.examples %}
-            <div class='section pad1 col4'>
-              <h3 class='pad1y'>{{item.name}}</h3>
-              <div id='{{item.id}}' class='col12 fill-white keyline-all scrollbar examples examples-{{item.id}}'>
-                {% for example in site.tags[item.id] order:ascending %}
-                  {% if example.version == 'v1.0.0' %}
-                    <a href='{{site.baseurl}}{{example.url}}' class='pad1 keyline-bottom col12 truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class='keyline-top center small'>
-          <div class='pad2'>
-            The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+  <div class='col12 keyline-top center small'>
+    <div class='pad2'>
+      The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
     </div>
   </div>
 </div>
@@ -128,7 +122,7 @@ examples:
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
 <script>
-  $(document).ready(function () {
+  $(function () {
     var example = new Docs();
     $(example.copyCode);
     {% if page.v0 %}
@@ -136,8 +130,8 @@ examples:
         example.bindHints("{{ site.oldversion }}");
     });
     {% endif %}
-    example.bindSearch($('.doc-search input'), $('.all-examples'), function() {
-      $('.examples').each(function(){
+    example.bindSearch($('.doc-search input'), $('.doc-nav'), function() {
+      $('.section').each(function(){
           if($(this).find('.filtered').length !== 0) {
               $(this).parent('.section').show();
           } else {
