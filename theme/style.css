@@ -38,7 +38,11 @@
   line-height:20px;
   }
 
-.leaflet-container a            { color:#3887BE; text-decoration:none; }
+.leaflet-container a            {
+  color:#3887BE;
+  font-weight:normal;
+  text-decoration:none;
+  }
 .leaflet-container a:hover      { color:#63b6e5; }
 .leaflet-container.dark a       { color:#63b6e5; }
 .leaflet-container.dark a:hover { color:#8fcaec; }
