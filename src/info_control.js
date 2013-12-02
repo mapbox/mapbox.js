@@ -2,7 +2,7 @@
 
 var InfoControl = L.Control.extend({
     options: {
-        position: 'bottomleft',
+        position: 'bottomright',
         sanitizer: require('sanitize-caja'),
         editLink: false
     },
