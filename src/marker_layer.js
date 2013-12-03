@@ -32,6 +32,7 @@ var MarkerLayer = L.FeatureGroup.extend({
         this._geojson = _;
         this.clearLayers();
         this._initialize(_);
+        return this;
     },
 
     getGeoJSON: function() {

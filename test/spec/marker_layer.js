@@ -98,7 +98,7 @@ describe('L.mapbox.markerLayer', function() {
     describe("#setGeoJSON", function() {
         it("sets GeoJSON", function() {
             var layer = L.mapbox.markerLayer();
-            layer.setGeoJSON(helpers.geoJson);
+            expect(layer.setGeoJSON(helpers.geoJson)).to.eql(layer);
             expect(layer.getGeoJSON()).to.eql(helpers.geoJson);
         });
 
