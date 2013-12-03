@@ -3,7 +3,7 @@ url: https://122e4e-mapbox.global.ssl.fastly.net
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
-mapboxjs: v1.5.0
+mapboxjs: v1.5.1
 oldversion: v0.6.7
 title: MapBox.js
 defaultid: 'examples.map-9ijuk24y'
