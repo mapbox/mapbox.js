@@ -1,3 +1,9 @@
+## v1.5.1
+
+* Adjusted infoControls default position to the bottom right.
+* New hover style on map controls.
+* Fix bug setGeoJSON should return `this` [#586](https://github.com/mapbox/mapbox.js/issues/586)
+
 ## v1.5.0
 
 * Updates to [Leaflet 0.7](http://leafletjs.com/2013/11/18/leaflet-0-7-released-plans-for-future.html)
