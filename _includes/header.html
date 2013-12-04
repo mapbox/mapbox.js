@@ -13,7 +13,11 @@
       {% if page.v0 %}
         <sup class='fill-yellow small'>{{site.oldversion}}</sup>
       {% elsif page.version %}
-        <sup class='fill-grey small'>{{page.version}}</sup>
+        {% if page.category == 'examples' %}
+          <sup class='fill-grey small'>{{site.mapboxjs}}</sup>
+        {% else %}
+          <sup class='fill-grey small'>{{page.version}}</sup>
+        {% endif %}
       {% else %}
         <sup class='fill-grey small'>{{site.mapboxjs}}</sup>
       {% endif %}
