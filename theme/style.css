@@ -173,6 +173,7 @@
 .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; }
 
 /* cursors */
+.map-clickable,
 .leaflet-clickable {
   cursor: pointer;
   }
@@ -185,6 +186,7 @@
   cursor:   -moz-grab;
   }
 .leaflet-dragging,
+.leaflet-dragging .map-clickable,
 .leaflet-dragging .leaflet-clickable,
 .leaflet-dragging .leaflet-container {
   cursor:move;
