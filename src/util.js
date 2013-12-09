@@ -27,9 +27,7 @@ module.exports = {
         }
     },
     strip_tags: function(_) {
-        var div = document.createElement('div');
-        div.innerHTML = _;
-        return div.textContent || div.innerText || '';
+        return _.replace(/<[^<]+>/g, '');
     },
     lbounds: function(_) {
         // leaflet-compatible bounds, since leaflet does not do geojson
