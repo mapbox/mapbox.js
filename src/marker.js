@@ -30,7 +30,7 @@ function icon(fp) {
     });
 }
 
-// a factory that provides markers for Leaflet from MapBox's
+// a factory that provides markers for Leaflet from Mapbox's
 // [simple-style specification](https://github.com/mapbox/simplestyle-spec)
 // and [Markers API](http://mapbox.com/developers/api/#markers).
 function style(f, latlon) {

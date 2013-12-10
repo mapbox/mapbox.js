@@ -7,7 +7,7 @@ var marker = require('./marker');
 
 // # markerLayer
 //
-// A layer of markers, loaded from MapBox or else. Adds the ability
+// A layer of markers, loaded from Mapbox or else. Adds the ability
 // to reset markers, filter them, and load them from a GeoJSON URL.
 var MarkerLayer = L.FeatureGroup.extend({
     options: {

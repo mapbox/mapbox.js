@@ -1,4 +1,4 @@
-# Deploying MapBox.js
+# Deploying Mapbox.js
 
 You need `s3cmd`
 

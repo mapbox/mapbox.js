@@ -1,4 +1,4 @@
-## MapBox.js Design
+## Mapbox.js Design
 
 This document covers some of the basics of mapbox.js v1's style and direction.
 It's not set in stone.
