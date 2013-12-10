@@ -67,7 +67,7 @@
 ## v1.1.0
 
 * Updated Leaflet dependency to v0.6.1
-* New standalone MapBox.js without bundled Leaflet dependency
+* New standalone Mapbox.js without bundled Leaflet dependency
 * Simpler SSL Support (#428)
 * Share Control (#432)
 
@@ -102,7 +102,7 @@
 ## v1.0.0
 
 **This is a breaking release that should be treated as a clean rewrite
-of MapBox.js. Existing code that uses MapBox v0.6.x will need to be rewritten.**
+of Mapbox.js. Existing code that uses Mapbox v0.6.x will need to be rewritten.**
 
 Consult documentation for the new API.
 
@@ -111,7 +111,7 @@ Consult documentation for the new API.
 * Fix for JSONP issues in IE9 and IE10 in upstream libraries
 * Fix bug in `layer.disable` and `layer.enable` when layer not attached to a map
 * Fix bug where disabling a layer didn't update compositing
-* Automatic compositing now checks that a layer is hosted by MapBox hosting
+* Automatic compositing now checks that a layer is hosted by Mapbox hosting
 
 ### v0.6.6
 
@@ -157,7 +157,7 @@ Consult documentation for the new API.
 
 ### v0.6.0
 
-* Add automatic support for MapBox hosting composting
+* Add automatic support for Mapbox hosting composting
 * Update Wax to 7.0.0dev7
 * New api for `mapbox.ui`
 * Name layers using IDs instead of names

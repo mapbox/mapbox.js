@@ -2,7 +2,7 @@
 
 var config = require('./config');
 
-// Return the base url of a specific version of MapBox's API.
+// Return the base url of a specific version of Mapbox's API.
 //
 // `hash`, if provided must be a number and is used to distribute requests
 // against multiple `CNAME`s in order to avoid connection limits in browsers
@@ -30,7 +30,7 @@ module.exports = {
         else if (url.indexOf('?') !== -1) return url + '&secure';
         else return url + '?secure';
     },
-    // Convert a JSONP url to a JSON URL. (MapBox TileJSON sometimes hardcodes JSONP.)
+    // Convert a JSONP url to a JSON URL. (Mapbox TileJSON sometimes hardcodes JSONP.)
     jsonify: function(url) {
         return url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
     }

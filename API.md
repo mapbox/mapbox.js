@@ -15,7 +15,7 @@ interactivity.
 _Example_:
 
     // map refers to a <div> element with the ID map
-    // examples.map-4l7djmvo is the ID of a map on MapBox.com
+    // examples.map-4l7djmvo is the ID of a map on Mapbox.com
     var map = L.mapbox.map('map', 'examples.map-4l7djmvo');
 
     // map refers to a <div> element with the ID map
@@ -36,7 +36,7 @@ _Returns_: the TileJSON object
 ## L.mapbox.tileLayer(id|url|tilejson, options)
 
 You can add a tiled layer to your map with `L.mapbox.tileLayer()`, a simple
-interface to layers from MapBox and elsewhere.
+interface to layers from Mapbox and elsewhere.
 
 <span class='leaflet'>_Extends_: [L.TileLayer](http://leafletjs.com/reference.html#tilelayer)</span>
 
@@ -160,7 +160,7 @@ _Returns_: the L.mapbox.gridLayer object
 ## L.mapbox.markerLayer(id|url|tilejson, options)
 
 `L.mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
-from MapBox and elsewhere into your map.
+from Mapbox and elsewhere into your map.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -193,7 +193,7 @@ _Returns_: the layer object
 
 ### markerLayer.loadID(id)
 
-Load marker GeoJSON data from a map with the given `id` on MapBox.
+Load marker GeoJSON data from a map with the given `id` on Mapbox.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -204,7 +204,7 @@ _Example_:
     var markerLayer = L.mapbox.markerLayer()
         .addTo(map);
 
-    // loads markers from the map `examples.map-0l53fhk2` on MapBox,
+    // loads markers from the map `examples.map-0l53fhk2` on Mapbox,
     // if that map has markers
     markerLayer.loadID('examples.map-0l53fhk2');
 
@@ -322,7 +322,7 @@ Queries the geocoder with a location, and returns its result, if any.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | location (_required_) | object | A query, expressed as an object:<ul><li><pre>[lon, lat] // an array of lon, lat</pre></li><li><pre>{ lat: 0, lon: 0 } // a lon, lat object</pre></li><li><pre>{ lat: 0, lng: 0 } // a lng, lat object</pre></li></ul> The first argument can also be an array of objects in that form to geocode more than one item. |
-| callback (_required_) | function | The callback is called with arguments <ul><li>An error, if any</li><li>The result. This is an object of the raw result from MapBox.</li></ul>
+| callback (_required_) | function | The callback is called with arguments <ul><li>An error, if any</li><li>The result. This is an object of the raw result from Mapbox.</li></ul>
 
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
@@ -357,7 +357,7 @@ Removes an info string from infoControl.
 | info _required_ | string | Info to remove. |
 
 ## L.mapbox.legendControl(options)
-A map control that shows legends added to maps in MapBox. Legends are auto-detected from active layers.
+A map control that shows legends added to maps in Mapbox. Legends are auto-detected from active layers.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -424,10 +424,10 @@ _Returns_: the `L.mapbox.gridControl` object.
 ## L.mapbox.geocoderControl(id|url, options)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
-the [MapBox Geocoding API](http://mapbox.com/developers/api/#geocoding).
+the [Mapbox Geocoding API](http://mapbox.com/developers/api/#geocoding).
 
 <div class='note warning'>
-This function is currently in private beta: <a href='http://mapbox.com/about/contact/'>Contact MapBox</a> before using this functionality.
+This function is currently in private beta: <a href='http://mapbox.com/about/contact/'>Contact Mapbox</a> before using this functionality.
 </div>
 
 | Options | Value | Description |
@@ -478,7 +478,7 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from MapBox.</li></ul> |
+| event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from Mapbox.</li></ul> |
 
 ## L.mapbox.shareControl(id|url, options)
 
@@ -518,7 +518,7 @@ and `popupAnchor`.
 ## L.mapbox.marker.style(feature, latlng)
 
 An icon generator for use in conjunction with `pointToLayer` to generate
-markers from the [MapBox Markers API](http://mapbox.com/developers/api/#markers)
+markers from the [Mapbox Markers API](http://mapbox.com/developers/api/#markers)
 and support the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) for
 features.
 
@@ -563,7 +563,7 @@ _Example_:
 
 # Mobile
 
-MapBox.js is optimized for mobile devices and small screens by default.
+Mapbox.js is optimized for mobile devices and small screens by default.
 There are, however, best practices to make sure your map always looks its best.
 
 ## Viewport
@@ -591,7 +591,7 @@ and `retinaVersion` to use a tilelayer which is designed for retina screens.
         }
     }).setView([40, -74.50], 9);
 
-Some MapBox maps support switching to retina scale automatically: if you're using
+Some Mapbox maps support switching to retina scale automatically: if you're using
 one of these maps, you can simply set `detectRetina` and the higher-scale
 tiles will be used when retina is detected.
 

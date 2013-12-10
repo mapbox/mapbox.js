@@ -1,4 +1,4 @@
-## JavaScript and MapBox.js Fundamentals
+## JavaScript and Mapbox.js Fundamentals
 
 Making maps is a great way to learn JavaScript. Along with specific guides, like [Codecademy](http://www.codecademy.com/tracks/javascript) and [Eloquent Javascript](http://eloquentjavascript.net/), it's useful to have some specific guidance on how mapping JavaScript works.
 
@@ -72,7 +72,7 @@ var now = new Date();
 
 This is a little awkward, and when you forget to write `new` before a class, you run into the worst kind of bug: software that's neither completely working nor totally broken.
 
-Because of this annoyance, a lot of classes that you run into will support what's called 'auto-new', which means, simply, that you don't need to write `new` in front of them to make one. In the case of maps and Leaflet/MapBox.js, there's a little hint: any class that starts with a lowercase letter is initialized with auto-new, whereas any that begins with a capital is a traditional class. So, for instance:
+Because of this annoyance, a lot of classes that you run into will support what's called 'auto-new', which means, simply, that you don't need to write `new` in front of them to make one. In the case of maps and Leaflet/Mapbox.js, there's a little hint: any class that starts with a lowercase letter is initialized with auto-new, whereas any that begins with a capital is a traditional class. So, for instance:
 
 ```js
 // a place, created with auto-new
@@ -303,8 +303,8 @@ data is, behind the scenes, instantiated with Leaflet's lower-level shapes but
 kept in a group. This has the advantage that you can AJAX your data in or
 manage it with any tool that knows how to talk GeoJSON.
 
-How about nice-looking markers, and data that you've added in MapBox?
-MapBox.js extends Leaflet with some simple abstractions to make this simpler.
+How about nice-looking markers, and data that you've added in Mapbox?
+Mapbox.js extends Leaflet with some simple abstractions to make this simpler.
 The basic element is the [`L.mapbox.markerLayer()`](https://www.mapbox.com/mapbox.js/api/v1.5.0/#L.mapbox.markerLayer).
 This is like a `L.geoJson` object but with some differences:
 

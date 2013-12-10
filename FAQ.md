@@ -24,9 +24,9 @@ Solution: swap the order of coordinates when traveling between GeoJSON & Leaflet
 L.marker([coords[1], coords[0]]);
 ```
 
-## Can MapBox.js read [MBTiles](https://www.mapbox.com/mbtiles-spec/)?
+## Can Mapbox.js read [MBTiles](https://www.mapbox.com/mbtiles-spec/)?
 
-No: MBTiles files are meant to be read by server-side applications like [MapBox](https://www.mapbox.com/)
+No: MBTiles files are meant to be read by server-side applications like [Mapbox](https://www.mapbox.com/)
 or [TileStache](http://tilestache.org/) and delivered as individual tiles to
-MapBox.js. Reading straight from MBTiles would be inefficient since potentially
+Mapbox.js. Reading straight from MBTiles would be inefficient since potentially
 millions of tiles must be transferred in order to view just one.
