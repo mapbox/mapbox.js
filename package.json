@@ -2,7 +2,7 @@
   "author": "Mapbox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -10,12 +10,11 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "0.7.0",
+    "leaflet": "0.7.1",
     "mustache": "0.7.3",
     "corslite": "0.0.5",
-    "json3": "git://github.com/bestiejs/json3.git#v3.2.5a",
-    "sanitize-caja": "0.0.0",
-    "leaflet-hash": "~0.2.1"
+    "json3": "git://github.com/bestiejs/json3.git#v3.2.6",
+    "sanitize-caja": "0.0.0"
   },
   "scripts": {
     "test": "jshint src/*.js && mocha-phantomjs test/index.html"

@@ -1,3 +1,10 @@
+## v1.5.2
+
+* Updated to [Leaflet 0.7.1](https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#071-december-6-2013)
+* Improved performance of adding `markerLayer`. [#595](https://github.com/mapbox/mapbox.js/issues/595)
+* Added `max-width` to the legend. [#592](https://github.com/mapbox/mapbox.js/issues/592)
+* Started maintaining a [FAQ](https://github.com/mapbox/mapbox.js/blob/master/FAQ.md).
+
 ## v1.5.1
 
 * Adjusted infoControls default position to the bottom right.
