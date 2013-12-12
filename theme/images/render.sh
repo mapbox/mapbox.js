@@ -2,7 +2,7 @@
 set -e -u
 
 # Color variations to be generated
-COLORS="404040 ffffff"
+COLORS="000000 ffffff"
 
 # Check for required commands
 COMMANDS="inkscape pngquant convert"
