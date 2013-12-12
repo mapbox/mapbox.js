@@ -393,7 +393,8 @@
 .leaflet-container.dark .map-tooltip .close,
 .map-tooltip .close,
 .mapbox-icon {
-  background-image:url(./images/icons-404040.png);
+  opacity: .75;
+  background-image:url(./images/icons-000000.png);
   background-repeat:no-repeat;
   background-size:26px 260px;
   }
@@ -402,6 +403,7 @@
   .leaflet-container.dark .leaflet-control-zoom-out,
   .leaflet-container.dark .leaflet-control-layers-toggle,
   .leaflet-container.dark .mapbox-icon {
+    opacity: 1;
     background-image:url(./images/icons-ffffff.png);
     background-size:26px 260px;
     }
@@ -424,7 +426,7 @@
     .leaflet-popup-close-button,
     .leaflet-control-layers-toggle,
     .mapbox-icon {
-      background-image:url(./images/icons-404040@2x.png);
+      background-image:url(./images/icons-000000@2x.png);
       }
     .mapbox-button-icon:before,
     .leaflet-container.dark .leaflet-control-zoom-in,
@@ -569,31 +571,31 @@
 
 .mapbox-info-toggle {
   background-color:#fff;
-  background-color:rgba(255,255,255,0.25);
+  background-color:rgba(255,255,255,0.5);
   border-radius:50%;
   position:absolute;
   bottom:0;left:0;
   z-index:1;
   }
   .mapbox-control-info-right .mapbox-info-toggle  { left:auto; right:0; }
-  .mapbox-control-info.active .mapbox-info-toggle { background-color:#fff; }
-  .mapbox-info-toggle:hover { background-color:rgba(255,255,255,0.5); }
+  .mapbox-info-toggle:hover { background-color:#fff; }
 
 .map-info-container {
   background:#fff;
-  background:rgba(255,255,255,0.75);
-  padding:3px 5px 3px 15px;
+  padding:3px 5px 3px 27px;
   display:none;
   position:relative;
-  bottom:0;
-  left:13px;
-  border-radius:3px;
+  bottom:0;left:0;
+  border-radius:13px 3px 3px 13px;
   }
-.mapbox-control-info.active .map-info-container { display:inline-block; }
+.mapbox-control-info.active .map-info-container {
+  display:inline-block;
+  }
 .mapbox-control-info-right .map-info-container {
-  left:auto;
-  right:13px;
-  padding:3px 15px 3px 5px;
+  left: auto;
+  right: 0;
+  padding: 3px 27px 3px 5px;
+  border-radius:3px 13px 13px 3px;
   }
 
 /* Geocoder
