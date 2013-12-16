@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel='stylesheet' href='../../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../../dist/mapbox.js'></script>
+  <style>
+    #map {
+      right: 100px;
+      }
+    #count {
+      background:#000;
+      color:#fff;
+      position:absolute;
+      right:0;
+      top:0;
+      bottom:0;
+      width:100px;
+      font-size:40px;
+      z-index:99;
+      padding:10px;
+      }
+  </style>
+</head>
+<body>
+<div id='map' class='dark'></div>
+<div id='count'></div>
+<script>
+    var map = L.mapbox.map('map', 'examples.map-8ced9urs', {gridControl: false});
+
+    map.gridLayer
+        .on('mousemove',function(o) {
+            document.getElementById('count').innerHTML = o.data.count;
+        }).on('mouseout', function(o) {
+            document.getElementById('count').innerHTML = '';
+        });
+</script>
+</body>
+</html>

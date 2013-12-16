@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel='stylesheet' href='../../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../../dist/mapbox.js'></script>
+  <style>
+          /*
+          These classes override the default styles of the zoom control,
+          defined in mapbox.css.
+
+          You can also omit mapbox.css if you want to style everything from
+          scratch
+          */
+    .leaflet-bar {
+      background:transparent;
+      border:none;
+      }
+      .leaflet-bar a,
+      .leaflet-bar a:first-child,
+      .leaflet-bar a:last-child {
+        background-color:#3B9096;
+        border-radius:40px;
+        margin-bottom:10px;
+        padding:8px;
+        border:none;
+        }
+        .leaflet-bar a:active {
+          background-color:#2B7D7F;
+          }
+  </style>
+</head>
+<body>
+<div id='map'></div>
+<script>L.mapbox.map('map', 'tristen.map-ixqro653');</script>
+</body>
+</html>

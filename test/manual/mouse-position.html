@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel='stylesheet' href='../../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../../dist/mapbox.js'></script>
+  <style>
+      .output {
+        background:#fff;
+        position:absolute;
+        top:10px;
+        right:10px;
+        padding:10px;
+        z-index:100;
+        -webkit-border-radius:3px;
+                border-radius:3px;
+        }
+  </style>
+</head>
+<body>
+<div id='map'>
+  <div class='output'>
+    <strong>click:</strong> <code id='click'></code><br/>
+    <strong>mousemove:</strong> <code id='mousemove'></code><br/>
+  </div>
+</div>
+<script>
+    var click = document.getElementById('click'),
+        mousemove = document.getElementById('mousemove');
+
+    var map = L.mapbox.map('map', 'examples.map-20v6611k');
+
+    map.on('mousemove click', function(e) {
+        window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();
+    });
+</script>
+</body>
+</html>

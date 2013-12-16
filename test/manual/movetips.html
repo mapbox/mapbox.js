@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel='stylesheet' href='../../dist/mapbox.css'/>
+  <link rel="stylesheet" href='embed.css'/>
+  <script src='../../dist/mapbox.uncompressed.js'></script>
+</head>
+<body>
+<div id='map' class='dark'></div>
+<script>
+    var map = L.mapbox.map('map', 'examples.map-8ced9urs');
+    map.gridControl.options.follow = true;
+</script>
+</body>
+</html>

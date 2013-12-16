@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel='stylesheet' href='http://cdn.leafletjs.com/leaflet-0.6/leaflet.css' />
+  <link rel='stylesheet' href='../../dist/mapbox.standalone.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='http://cdn.leafletjs.com/leaflet-0.6/leaflet.js'></script>
+  <script src='../../dist/mapbox.standalone.js'></script>
+</head>
+<body>
+<div id='map'></div>
+<script>
+  var map = L.mapbox.map('map', 'examples.map-zr0njcqy')
+      .addControl(L.mapbox.geocoderControl('examples.map-20v6611k'))
+      .addControl(L.mapbox.shareControl())
+
+  map.legendControl.addLegend('hee haw');
+</script>
+</body>
+</html>
