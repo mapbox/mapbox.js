@@ -1,18 +1,20 @@
 'use strict';
 
-var util = require('./util');
-var urlhelper = require('./url');
-var request = require('./request');
-var marker = require('./marker');
+var util = require('./util'),
+    urlhelper = require('./url'),
+    request = require('./request'),
+    marker = require('./marker'),
+    simplestyle = require('./simplestyle');
 
-// # markerLayer
+// # featureLayer
 //
-// A layer of markers, loaded from Mapbox or else. Adds the ability
-// to reset markers, filter them, and load them from a GeoJSON URL.
-var MarkerLayer = L.FeatureGroup.extend({
+// A layer of features, loaded from Mapbox or else. Adds the ability
+// to reset features, filter them, and load them from a GeoJSON URL.
+var FeatureLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; },
-        sanitizer: require('sanitize-caja')
+        sanitizer: require('sanitize-caja'),
+        style: simplestyle.style
     },
 
     initialize: function(_, options) {
@@ -45,7 +47,7 @@ var MarkerLayer = L.FeatureGroup.extend({
         this._request = request(url, L.bind(function(err, json) {
             this._request = null;
             if (err && err.type !== 'abort') {
-                util.log('could not load markers at ' + url);
+                util.log('could not load features at ' + url);
                 this.fire('error', {error: err});
             } else if (json) {
                 this.setGeoJSON(json);
@@ -88,6 +90,10 @@ var MarkerLayer = L.FeatureGroup.extend({
             var layer = L.GeoJSON.geometryToLayer(json, marker.style),
                 popupHtml = marker.createPopup(json, this.options.sanitizer);
 
+            if ('setStyle' in layer) {
+                layer.setStyle(simplestyle.style(json));
+            }
+
             layer.feature = json;
 
             if (popupHtml) {
@@ -102,5 +108,5 @@ var MarkerLayer = L.FeatureGroup.extend({
 });
 
 module.exports = function(_, options) {
-    return new MarkerLayer(_, options);
+    return new FeatureLayer(_, options);
 };
