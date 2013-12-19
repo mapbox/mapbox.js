@@ -63,9 +63,29 @@ describe('L.mapbox.map', function() {
             server.respond();
         });
 
+        it('aliases featureLayer as markerLayer', function() {
+            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            expect(map.featureLayer).to.be.ok();
+            expect(map.markerLayer).to.be.ok();
+        });
+
+        it('can deactivate markerLayer as markerLayer', function() {
+            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
+                markerLayer: false
+            });
+            expect(map.featureLayer).to.eql(undefined);
+        });
+
+        it('can deactivate markerLayer as featureLayer', function() {
+            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
+                featureLayer: false
+            });
+            expect(map.featureLayer).to.eql(undefined);
+        });
+
         it('preserves manually-set marker layer GeoJSON', function() {
             var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
-            map.markerLayer.setGeoJSON(helpers.geoJson);
+            map.featureLayer.setGeoJSON(helpers.geoJson);
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
@@ -74,7 +94,7 @@ describe('L.mapbox.map', function() {
 
             server.respond();
 
-            expect(map.markerLayer.getGeoJSON()).to.eql(helpers.geoJson);
+            expect(map.featureLayer.getGeoJSON()).to.eql(helpers.geoJson);
         });
 
         it('passes tileLayer options to tile layer', function() {
@@ -82,10 +102,10 @@ describe('L.mapbox.map', function() {
             expect(map.tileLayer.options.detectRetina).to.equal(true);
         });
 
-        it('passes markerLayer options to marker layer', function() {
+        it('passes featureLayer options to marker layer', function() {
             var filter = function() { return true; },
-                map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {markerLayer: {filter: filter}});
-            expect(map.markerLayer.options.filter).to.equal(filter);
+                map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {featureLayer: {filter: filter}});
+            expect(map.featureLayer.options.filter).to.equal(filter);
         });
 
         it('passes gridLayer options to grid layer', function() {
@@ -123,12 +143,12 @@ describe('L.mapbox.map', function() {
 
         it('adds a maker layer immediately', function() {
             var map = L.mapbox.map(element, 'data/tilejson.json');
-            expect(map.markerLayer).to.be.ok();
+            expect(map.featureLayer).to.be.ok();
         });
 
-        it('creates no marker layer given markerLayer: false option', function() {
-            var map = L.mapbox.map(element, tileJSON, {markerLayer: false});
-            expect(map.markerLayer).to.be(undefined);
+        it('creates no marker layer given featureLayer: false option', function() {
+            var map = L.mapbox.map(element, tileJSON, {featureLayer: false});
+            expect(map.featureLayer).to.be(undefined);
         });
 
         it('adds a grid layer immediately', function() {
