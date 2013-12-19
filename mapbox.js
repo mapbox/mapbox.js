@@ -7,6 +7,7 @@ L.mapbox = module.exports = {
     VERSION: require('./package.json').version,
     geocoder: require('./src/geocoder'),
     marker: require('./src/marker'),
+    simplestyle: require('./src/simplestyle'),
     tileLayer: require('./src/tile_layer'),
     infoControl: require('./src/info_control'),
     shareControl: require('./src/share_control'),
@@ -14,9 +15,11 @@ L.mapbox = module.exports = {
     geocoderControl: require('./src/geocoder_control'),
     gridControl: require('./src/grid_control'),
     gridLayer: require('./src/grid_layer'),
-    markerLayer: require('./src/marker_layer'),
+    featureLayer: require('./src/feature_layer'),
     map: require('./src/map'),
     config: require('./src/config'),
     sanitize: require('sanitize-caja'),
     template: require('mustache').to_html
 };
+
+L.mapbox.markerLayer = L.mapbox.featureLayer;

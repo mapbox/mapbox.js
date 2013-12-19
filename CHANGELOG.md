@@ -1,3 +1,10 @@
+## v1.6.0
+
+* Added support for [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) 1.1.0,
+  with Polygon and LineString featuretype support.
+* `L.mapbox.markerLayer` is now `L.mapbox.featureLayer`. An alias from the former
+  to the latter is in place and will be removed at `v2.0.0`.
+
 ## v1.5.2
 
 * Updated to [Leaflet 0.7.1](https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#071-december-6-2013)

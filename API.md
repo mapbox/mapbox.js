@@ -157,9 +157,9 @@ function with that data, if any.
 
 _Returns_: the L.mapbox.gridLayer object
 
-## L.mapbox.markerLayer(id|url|tilejson, options)
+## L.mapbox.featureLayer(id|url|tilejson, options)
 
-`L.mapbox.markerLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
+`L.mapbox.featureLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from Mapbox and elsewhere into your map.
 
 | Options | Value | Description |
@@ -169,12 +169,12 @@ from Mapbox and elsewhere into your map.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var featureLayer = L.mapbox.featureLayer(geojson)
         .addTo(map);
 
-_Returns_ a `L.mapbox.markerLayer` object.
+_Returns_ a `L.mapbox.featureLayer` object.
 
-### markerLayer.loadURL(url)
+### featureLayer.loadURL(url)
 
 Load GeoJSON data for this layer from the URL given by `url`.
 
@@ -184,14 +184,14 @@ Load GeoJSON data for this layer from the URL given by `url`.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer()
+    var featureLayer = L.mapbox.featureLayer()
         .addTo(map);
 
-    markerLayer.loadURL('my_local_markers.geojson');
+    featureLayer.loadURL('my_local_markers.geojson');
 
 _Returns_: the layer object
 
-### markerLayer.loadID(id)
+### featureLayer.loadID(id)
 
 Load marker GeoJSON data from a map with the given `id` on Mapbox.
 
@@ -201,16 +201,16 @@ Load marker GeoJSON data from a map with the given `id` on Mapbox.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer()
+    var featureLayer = L.mapbox.featureLayer()
         .addTo(map);
 
     // loads markers from the map `examples.map-0l53fhk2` on Mapbox,
     // if that map has markers
-    markerLayer.loadID('examples.map-0l53fhk2');
+    featureLayer.loadID('examples.map-0l53fhk2');
 
 _Returns_: the layer object
 
-### markerLayer.setFilter(filter)
+### featureLayer.setFilter(filter)
 
 Sets the filter function for this data layer.
 
@@ -220,30 +220,30 @@ Sets the filter function for this data layer.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var featureLayer = L.mapbox.featureLayer(geojson)
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
 
-_Returns_ the markerLayer object.
+_Returns_ the featureLayer object.
 
-### markerLayer.getFilter()
+### featureLayer.getFilter()
 
 Gets the filter function for this data layer.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var featureLayer = L.mapbox.featureLayer(geojson)
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
 
     // get the filter function
-    var fn = markerLayer.getFilter()
+    var fn = featureLayer.getFilter()
 
 _Returns_ the filter function.
 
-### markerLayer.setGeoJSON(geojson)
+### featureLayer.setGeoJSON(geojson)
 
 Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
@@ -256,11 +256,11 @@ An empty array will clear the layer of all features.
 
 _Example_:
 
-    var markerLayer = L.mapbox.markerLayer(geojson)
+    var featureLayer = L.mapbox.featureLayer(geojson)
         .addTo(map);
     // a simple GeoJSON featureset with a single point
     // with no properties
-    markerLayer.setGeoJSON({
+    featureLayer.setGeoJSON({
         type: "FeatureCollection",
         features: [{
             type: "Feature",
@@ -272,9 +272,9 @@ _Example_:
         }]
     });
 
-_Returns_ the markerLayer object
+_Returns_ the featureLayer object
 
-### markerLayer.getGeoJSON()
+### featureLayer.getGeoJSON()
 
 Get the contents of this layer as GeoJSON data.
 
@@ -537,11 +537,35 @@ _Returns_:
 
 A `L.Marker` object with the latitude, longitude position and a styled marker
 
+# Simplestyle
+
+The other sections of the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) are implemented
+by `L.mapbox.simplestyle`
+
+## L.simplestyle.style(feature)
+
+Given a GeoJSON Feature with optional simplestyle-spec properties, return an
+options object formatted to be used as [Leaflet Path options](http://leafletjs.com/reference.html#path).
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| feature | object | A GeoJSON feature object |
+
+_Examples_:
+
+    L.geoJson(geoJson, {
+        pointToLayer: L.mapbox.simplestyle.style,
+    });
+
+_Returns_:
+
+An object formatted to be used as [Leaflet Path options](http://leafletjs.com/reference.html#path).
+
 # Utility
 
 ## L.mapbox.sanitize(string)
 
-A HTML sanitization function, with the same effect as the default value of the `sanitizer` option of `L.mapbox.markerLayer`, `L.mapbox.gridControl`, and `L.mapbox.legendControl`.
+A HTML sanitization function, with the same effect as the default value of the `sanitizer` option of `L.mapbox.featureLayer`, `L.mapbox.gridControl`, and `L.mapbox.legendControl`.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |

@@ -2,7 +2,7 @@
 
 var util = require('./util'),
     tileLayer = require('./tile_layer'),
-    markerLayer = require('./marker_layer'),
+    featureLayer = require('./feature_layer'),
     gridLayer = require('./grid_layer'),
     gridControl = require('./grid_control'),
     infoControl = require('./info_control'),
@@ -14,7 +14,7 @@ var LMap = L.Map.extend({
 
     options: {
         tileLayer: {},
-        markerLayer: {},
+        featureLayer: {},
         gridLayer: {},
         legendControl: {},
         gridControl: {},
@@ -36,9 +36,16 @@ var LMap = L.Map.extend({
             this.addLayer(this.tileLayer);
         }
 
-        if (this.options.markerLayer) {
-            this.markerLayer = markerLayer(undefined, this.options.markerLayer);
-            this.addLayer(this.markerLayer);
+        if (this.options.featureLayer === false || this.options.markerLayer === false) {
+            this.options.featureLayer = this.options.markerLayer = false;
+        } else if (this.options.markerLayer) {
+            this.options.featureLayer = this.options.markerLayer;
+        }
+
+        if (this.options.featureLayer) {
+            this.featureLayer = this.markerLayer =
+                featureLayer(undefined, this.options.featureLayer);
+            this.addLayer(this.featureLayer);
         }
 
         if (this.options.gridLayer) {
@@ -92,8 +99,8 @@ var LMap = L.Map.extend({
             this._updateLayer(this.tileLayer);
         }
 
-        if (this.markerLayer && !this.markerLayer.getGeoJSON() && json.data && json.data[0]) {
-            this.markerLayer.loadURL(json.data[0]);
+        if (this.featureLayer && !this.featureLayer.getGeoJSON() && json.data && json.data[0]) {
+            this.featureLayer.loadURL(json.data[0]);
         }
 
         if (this.gridLayer) {

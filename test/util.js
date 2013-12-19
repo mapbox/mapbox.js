@@ -91,6 +91,45 @@ helpers.geoJson = {
     }]
 };
 
+helpers.geoJsonPoly = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke-width": 1,
+        "stroke": "#f00"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -16.171875,
+              31.653381399664
+            ],
+            [
+              -16.171875,
+              46.07323062540838
+            ],
+            [
+              5.2734375,
+              46.07323062540838
+            ],
+            [
+              5.2734375,
+              31.653381399664
+            ],
+            [
+              -16.171875,
+              31.653381399664
+            ]
+          ]
+        ]
+      }
+    }]};
+
+
 helpers.gridJson = { "grid": [
     "                                                    !!!#########",
     "                                                    !!!#########",
