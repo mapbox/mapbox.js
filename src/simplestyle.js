@@ -15,11 +15,11 @@ function style(feature) {
     return {
         color: properties.stroke || defaults.stroke,
         weight: properties['stroke-width'] || defaults['stroke-width'],
-        opacity: properties['stroke-opacity'] || defaults['stroke-opacity'],
+        opacity: properties['stroke-opacity'] !== undefined ? properties['stroke-opacity'] : defaults['stroke-opacity'],
         fill: (feature.geometry &&
             (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon')),
         fillColor: properties.fill || defaults.fill,
-        fillOpacity: properties['fill-opacity'] || defaults['fill-opacity'],
+        fillOpacity: properties['fill-opacity'] !== undefined ? properties['fill-opacity'] : defaults['fill-opacity'],
     };
 }
 
