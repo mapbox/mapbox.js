@@ -34,8 +34,8 @@ s3cmd put --acl-public --mime-type "image/png" dist/images/marker-icon.png s3://
 s3cmd put --acl-public --mime-type "image/png" dist/images/marker-icon-2x.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon-2x.png
 s3cmd put --acl-public --mime-type "image/png" dist/images/marker-shadow.png s3://mapbox-js/mapbox.js/$TAG/images/marker-shadow.png
 
-s3cmd put --acl-public --mime-type "image/png" dist/images/icons-404040.png s3://mapbox-js/mapbox.js/$TAG/images/icons-404040.png
-s3cmd put --acl-public --mime-type "image/png" dist/images/icons-404040@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-404040@2x.png
+s3cmd put --acl-public --mime-type "image/png" dist/images/icons-000000.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000.png
+s3cmd put --acl-public --mime-type "image/png" dist/images/icons-000000@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000@2x.png
 s3cmd put --acl-public --mime-type "image/png" dist/images/icons-ffffff.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff.png
 s3cmd put --acl-public --mime-type "image/png" dist/images/icons-ffffff@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff@2x.png
 
