@@ -1,4 +1,5 @@
 describe('L.mapbox.simplestyle', function() {
+    'use strict';
     describe('#style', function() {
         it("defaults", function() {
             var style = L.mapbox.simplestyle.style({});
@@ -13,22 +14,12 @@ describe('L.mapbox.simplestyle', function() {
             });
             expect(style.color).to.eql('#f00');
         });
-        it("polygon knock-out", function() {
-            var style = L.mapbox.simplestyle.style({
-                properties: {
-                    fill: '#f00'
-                },
-                geometry: {
-                    type: 'LineString'
-                }
-            });
-            expect(style.fill).to.eql(false);
-        });
-        it("allows opacity to be zero", function() {
+        it("allows opacity and stroke to be zero", function() {
             var style = L.mapbox.simplestyle.style({
                 properties: {
                     'stroke-opacity': 0,
-                    'fill-opacity': 0
+                    'fill-opacity': 0,
+                    'stroke-width': 0
                 },
                 geometry: {
                     type: 'Polygon'
@@ -36,18 +27,7 @@ describe('L.mapbox.simplestyle', function() {
             });
             expect(style.opacity).to.eql(0);
             expect(style.fillOpacity).to.eql(0);
-        });
-
-        it("is polygon", function() {
-            var style = L.mapbox.simplestyle.style({
-                properties: {
-                    fill: '#f00'
-                },
-                geometry: {
-                    type: 'Polygon'
-                }
-            });
-            expect(style.fill).to.eql(true);
+            expect(style.weight).to.eql(0);
         });
     });
 });

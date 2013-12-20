@@ -10,17 +10,33 @@ var defaults = {
     'fill-opacity': 0.5
 };
 
+var mapping = [
+    ['stroke', 'color'],
+    ['stroke-width', 'weight'],
+    ['stroke-opacity', 'opacity'],
+    ['fill', 'fillColor'],
+    ['fill-opacity', 'fillOpacity']
+];
+
+function fallback(a, b) {
+    var c = {};
+    for (var k in b) {
+        if (a[k] === undefined) c[k] = b[k];
+        else c[k] = a[k];
+    }
+    return c;
+}
+
+function remap(a) {
+    var d = {};
+    for (var i = 0; i < mapping.length; i++) {
+        d[mapping[i][1]] = a[mapping[i][0]];
+    }
+    return d;
+}
+
 function style(feature) {
-    var properties = feature.properties || {};
-    return {
-        color: properties.stroke || defaults.stroke,
-        weight: properties['stroke-width'] || defaults['stroke-width'],
-        opacity: properties['stroke-opacity'] !== undefined ? properties['stroke-opacity'] : defaults['stroke-opacity'],
-        fill: (feature.geometry &&
-            (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon')),
-        fillColor: properties.fill || defaults.fill,
-        fillOpacity: properties['fill-opacity'] !== undefined ? properties['fill-opacity'] : defaults['fill-opacity'],
-    };
+    return remap(fallback(feature.properties || {}, defaults));
 }
 
 module.exports = {
