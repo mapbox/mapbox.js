@@ -749,8 +749,6 @@
 .leaflet-container img { max-width:none!important; }
 /* Stupid Android 2 doesn't understand "max-width: none" properly */
 .leaflet-container img.leaflet-image-layer { max-width:15000px!important; }
-/* Android chrome makes tiles disappear without this */
-.leaflet-tile-container img { -webkit-backface-visibility:hidden; }
 /* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
 .leaflet-overlay-pane svg { -moz-user-select:none; }
 /* Older IEs don't support the translateY property for display animation */
