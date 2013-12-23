@@ -32,7 +32,7 @@ tags:
             se = map.containerPointToLayerPoint(map.getSize()),
             clipX = nw.x + (se.x - nw.x) * range.value;
 
-        overlay._container.style.clip = 'rect(' + [nw.y, clipX, se.y, nw.x].join('px,') + 'px)';
+        overlay.getContainer().style.clip = 'rect(' + [nw.y, clipX, se.y, nw.x].join('px,') + 'px)';
     }
 
     range['oninput' in range ? 'oninput' : 'onchange'] = clip;
