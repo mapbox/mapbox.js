@@ -87,11 +87,17 @@ var f = fs.readFileSync(process.argv[j], 'utf8'),
 
             } else {
                 anchor = l.text.toLowerCase();
-                out += (l.depth === 1) ?
-                    '<h' + l.depth + ' id="section-' + anchor + '">' :
-                    '<h' + l.depth + '>';
+                out += '<h' + l.depth + ' id="section-' + anchor + '">';
                 out += l.text;
                 out += '</h' + l.depth + '>\n';
+
+                // Add to navigation tree
+                if (l.depth == 2) {
+                    nav += '      - title: "section-' + anchor + '"\n';
+                    nav += '        sub:\n';
+                } else if (l.depth == 3) {
+                    nav += '        - "section-' + anchor + '"\n';
+                }
             }
 
             start = i + 1;

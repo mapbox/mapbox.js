@@ -70,8 +70,16 @@ navigation:
         sub:
   - title: Mobile
     nav:
+      - title: "section-viewport"
+        sub:
+      - title: "section-scrolling"
+        sub:
+      - title: "section-retina"
+        sub:
   - title: Theming
     nav:
+      - title: "section-dark theme"
+        sub:
 
 ---
 {% raw %}
@@ -914,17 +922,17 @@ features.</p>
 </div><h1 id="section-mobile">Mobile</h1>
 <div class="space-bottom api-group-content depth-1"><p>MapBox.js is optimized for mobile devices and small screens by default.
 There are, however, best practices to make sure your map always looks its best.</p>
-</div><h2>Viewport</h2>
+</div><h2 id="section-viewport">Viewport</h2>
 <div class="space-bottom api-group-content depth-2"><p>Modern mobile browsers now support scaling of webpages by leveraging the meta
 tag <code>viewport</code>. This enlarges the window making your map look better on a
 mobile device. Simply include this in the head of your document:</p>
 <pre><code>&lt;meta name=&#39;viewport&#39; content=&#39;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&#39; /&gt;</code></pre>
-</div><h2>Scrolling</h2>
+</div><h2 id="section-scrolling">Scrolling</h2>
 <div class="space-bottom api-group-content depth-2"><p>If you&#39;re planning on having a page that has large amounts of scrolling,
 try to avoid a large map height. Having a &#39;tall&#39; map can cause the user
 to get stuck on the map while scrolling. Another way around this is to disable
 <code>dragging</code> for mobile devices: <code>map.dragging.disable();</code></p>
-</div><h2>Retina</h2>
+</div><h2 id="section-retina">Retina</h2>
 <div class="space-bottom api-group-content depth-2"><p>Having the ability to use retina tiles when the device supports them is easy.
 When creating the map, use the <code>detectRetina</code> to verify if retina is available
 and <code>retinaVersion</code> to use a tilelayer which is designed for retina screens.</p>
@@ -939,7 +947,7 @@ tiles will be used when retina is detected.</p>
   detectRetina: true
 }).setView([40, -74.50], 9);</code></pre>
 </div><h1 id="section-theming">Theming</h1>
-<div class="space-bottom api-group-content depth-1"></div><h2>Dark theme</h2>
+<div class="space-bottom api-group-content depth-1"></div><h2 id="section-dark theme">Dark theme</h2>
 <div class="space-bottom api-group-content depth-2"><p>Mapbox.js implements a simple, light style on all interaction elements. A dark theme
 is available by applying <code>class=&quot;dark&quot;</code> to the map div.</p>
 <p><em>Example</em>:</p>
