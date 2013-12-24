@@ -12,6 +12,6 @@
     "node_modules",
     "bower_components",
     "test",
-    "examples",
+    "examples"
   ]
 }
