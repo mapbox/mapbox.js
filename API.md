@@ -159,6 +159,10 @@ _Returns_: the L.mapbox.gridLayer object
 
 ## L.mapbox.featureLayer(id|url|tilejson, options)
 
+**NOTE: in version 1.6.0, `L.mapbox.markerLayer` was renamed to `L.mapbox.featureLayer`
+to signal the addition of support for lines and polygons. The `L.mapbox.markerLayer`
+alias will be removed in Mapbox.js 2.0.0**
+
 `L.mapbox.featureLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from Mapbox and elsewhere into your map.
 
