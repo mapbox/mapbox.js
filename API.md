@@ -57,19 +57,15 @@ _Example_:
 
     // if provided, you can support retina tiles
     var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
-        tileLayer: {
-            detectRetina: true,
-            // if retina is detected, this layer is used instead
-            retinaVersion: 'examples.map-zswgei2n'
-        }
+        detectRetina: true,
+        // if retina is detected, this layer is used instead
+        retinaVersion: 'examples.map-zswgei2n'
     });
 
     // if this map supports auto-scaling, `detectRetina` will automatically
     // use scaled tiles when retina is detected.
     var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
-        tileLayer: {
-            detectRetina: true,
-        }
+        detectRetina: true,
     });
 
 _Returns_ a `L.mapbox.tileLayer` object.
