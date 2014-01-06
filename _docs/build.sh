@@ -16,16 +16,11 @@ fi
 
 echo "--- BUILDING mapbox.js $TAG ---"
 
+mkdir -p ../_posts/api/$TAG
 
 echo "Installing..."
-npm install mapbox.js@$TAG
-
-echo "Creating _posts/api/...$TAG"
-sed "s/__TAG__/$TAG/" header > ../_posts/api/0200-01-01-$TAG.html
-echo "version: $TAG" >> ../_posts/api/0200-01-01-$TAG.html
+# npm install mapbox.js@$TAG
 
 echo "Generating html..."
 
-node generate.js node_modules/mapbox.js/API.md >> ../_posts/api/0200-01-01-$TAG.html
-
-cat leaflet-reference.html >> ../_posts/api/0200-01-01-$TAG.html
+node generate.js node_modules/mapbox.js/API.md leaflet-reference.html -l ../_posts/api/0200-01-01-$TAG.html -o ../_posts/api/0200-01-01-$TAG-all.html -d ../_posts/api/$TAG -t $TAG
