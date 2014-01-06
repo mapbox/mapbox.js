@@ -1,8 +1,9 @@
 ---
-layout: all
-title: v1.6.0
+layout: individual
+title: "v1.6.0 API: noConflict"
 categories: api
 version: v1.6.0
+permalink: /api/v1.6.0/leaflet-noconflict
 navigation:
   - title: View on single page
     id: all
@@ -193,4 +194,17 @@ navigation:
     id: leaflet-noconflict
   - title: version
     id: leaflet-version
+
 ---
+<h2 id="noconflict">noConflict</h2>
+
+<p>This method restores the L global variable to the original value it had before Leaflet inclusion, and returns the real Leaflet namespace so you can put it elsewhere, like this:<p>
+
+<pre><code>// L points to some other library
+...
+// you include Leaflet, it replaces the L variable to Leaflet namespace
+
+var Leaflet = L.noConflict();
+// now L points to that other library again, and you can use Leaflet.Map etc.</code></pre>
+
+

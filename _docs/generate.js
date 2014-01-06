@@ -13,6 +13,9 @@ var start, l, anchor, matched, toParse,
     all = '',
     nav = 'navigation:\n';
 
+nav += '  - title: View on single page\n' +
+       '    id: all\n';
+
 var output = fs.createWriteStream(argv.o);
 var landOutput = fs.createWriteStream(argv.l);
 
@@ -60,11 +63,9 @@ function readDocumentation(filename) {
         var lines = f.split('\n');
         var chunks = splitChunks(lines);
         all += f;
-        nav += '  - title: Leaflet\n';
-        nav += '    nav:\n';
         chunks.forEach(function(c) {
-            nav += '      - title: ' + c.name + '\n';
-            nav += '        id: leaflet-' + c.name.toLowerCase() + '\n';
+            nav += '  - title: ' + c.name + '\n';
+            nav += '    id: leaflet-' + c.name.toLowerCase() + '\n';
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: headerAll.replace('All', c.name) + 'version: ' + argv.t + '\n' +
@@ -181,7 +182,7 @@ function readDocumentation(filename) {
                 contents: headerAll.replace('All', c.name) +
                     'version: ' + argv.t + '\n' +
                     'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n' +
-                    marked.parser(c.chunks)
+                    marked.parser(c.chunks).replace('id="map"', '')
             });
         });
         toParse = lexed.slice(start, i);

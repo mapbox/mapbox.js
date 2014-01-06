@@ -1,0 +1,506 @@
+---
+layout: individual
+title: "v1.6.0 API: Layers"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/mapbox-layers
+navigation:
+  - title: View on single page
+    id: all
+  - title: Map
+    id: mapbox-map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    id: mapbox-layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.featureLayer
+        sub:
+        - featureLayer.loadURL
+        - featureLayer.loadID
+        - featureLayer.setFilter
+        - featureLayer.getFilter
+        - featureLayer.setGeoJSON
+        - featureLayer.getGeoJSON
+  - title: Geocoding
+    id: mapbox-geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    id: mapbox-controls
+    nav:
+      - title: L.mapbox.infoControl
+        sub:
+        - infoControl.addInfo
+        - infoControl.removeInfo
+      - title: L.mapbox.legendControl
+        sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
+      - title: L.mapbox.gridControl
+        sub:
+        - gridControl.hide
+        - gridControl.setTemplate
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
+  - title: Markers
+    id: mapbox-markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Simplestyle
+    id: mapbox-simplestyle
+    nav:
+      - title: L.simplestyle.style
+        sub:
+  - title: Utility
+    id: mapbox-utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
+        sub:
+  - title: Mobile
+    id: mapbox-mobile
+    nav:
+  - title: Theming
+    id: mapbox-theming
+    nav:
+      - title: Map
+      - title: Layers
+      - title: Geocoding
+      - title: Controls
+      - title: Markers
+      - title: Simplestyle
+      - title: Utility
+      - title: Mobile
+  - title: Map
+    id: leaflet-map
+  - title: Marker
+    id: leaflet-marker
+  - title: Popup
+    id: leaflet-popup
+  - title: TileLayer
+    id: leaflet-tilelayer
+  - title: TileLayer.WMS
+    id: leaflet-tilelayer.wms
+  - title: TileLayer.Canvas
+    id: leaflet-tilelayer.canvas
+  - title: ImageOverlay
+    id: leaflet-imageoverlay
+  - title: Path
+    id: leaflet-path
+  - title: Polyline
+    id: leaflet-polyline
+  - title: MultiPolyline
+    id: leaflet-multipolyline
+  - title: Polygon
+    id: leaflet-polygon
+  - title: MultiPolygon
+    id: leaflet-multipolygon
+  - title: Rectangle
+    id: leaflet-rectangle
+  - title: Circle
+    id: leaflet-circle
+  - title: CircleMarker
+    id: leaflet-circlemarker
+  - title: LayerGroup
+    id: leaflet-layergroup
+  - title: FeatureGroup
+    id: leaflet-featuregroup
+  - title: GeoJson
+    id: leaflet-geojson
+  - title: LatLng
+    id: leaflet-latlng
+  - title: LatLngBounds
+    id: leaflet-latlngbounds
+  - title: Point
+    id: leaflet-point
+  - title: Bounds
+    id: leaflet-bounds
+  - title: Icon
+    id: leaflet-icon
+  - title: DivIcon
+    id: leaflet-divicon
+  - title: Control
+    id: leaflet-control
+  - title: Control.zoom
+    id: leaflet-control.zoom
+  - title: Control.Attribution
+    id: leaflet-control.attribution
+  - title: Control.Layers
+    id: leaflet-control.layers
+  - title: Control.Scale
+    id: leaflet-control.scale
+  - title: Events methods
+    id: leaflet-events methods
+  - title: Event objects
+    id: leaflet-event objects
+  - title: Class
+    id: leaflet-class
+  - title: Browser
+    id: leaflet-browser
+  - title: Util
+    id: leaflet-util
+  - title: Transformation
+    id: leaflet-transformation
+  - title: LineUtil
+    id: leaflet-lineutil
+  - title: PolyUtil
+    id: leaflet-polyutil
+  - title: DomEvent
+    id: leaflet-domevent
+  - title: DomUtil
+    id: leaflet-domutil
+  - title: PosAnimation
+    id: leaflet-posanimation
+  - title: Draggable
+    id: leaflet-draggable
+  - title: IHandler
+    id: leaflet-ihandler
+  - title: ILayer
+    id: leaflet-ilayer
+  - title: IControl
+    id: leaflet-icontrol
+  - title: IProjection
+    id: leaflet-iprojection
+  - title: ICRS
+    id: leaflet-icrs
+  - title: Global Switches
+    id: leaflet-global switches
+  - title: noConflict
+    id: leaflet-noconflict
+  - title: version
+    id: leaflet-version
+
+---
+<h1 id="layers">Layers</h1>
+<h2 id="l-mapbox-tilelayer-id-url-tilejson-options-">L.mapbox.tileLayer(id|url|tilejson, options)</h2>
+<p>You can add a tiled layer to your map with <code>L.mapbox.tileLayer()</code>, a simple
+interface to layers from Mapbox and elsewhere.</p>
+<p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#tilelayer">L.TileLayer</a></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>The second argument is optional. If provided, it is the same options as provided to <a href="http://leafletjs.com/reference.html#tilelayer">L.TileLayer</a> with one addition: <ul><li><code>retinaVersion</code>, if provided, is an alternative value for the first argument to <code>L.mapbox.tileLayer</code> which, if retina is detected, is used instead.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p>If <code>detectRetina</code> is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don&#39;t provide an explicit <code>retinaVersion</code> to be used.</p>
+<p><em>Example</em>:</p>
+<pre><code>// the second argument is optional
+var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;);
+
+// you can also provide a full url to a TileJSON resource
+var layer = L.mapbox.tileLayer(&amp;#39;http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json&amp;#39;);
+
+// if provided, you can support retina tiles
+var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;, {
+    tileLayer: {
+        detectRetina: true,
+        // if retina is detected, this layer is used instead
+        retinaVersion: &amp;#39;examples.map-zswgei2n&amp;#39;
+    }
+});
+
+// if this map supports auto-scaling, `detectRetina` will automatically
+// use scaled tiles when retina is detected.
+var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;, {
+    tileLayer: {
+        detectRetina: true,
+    }
+});</code></pre>
+<p><em>Returns</em> a <code>L.mapbox.tileLayer</code> object.</p>
+<h3 id="tilelayer-gettilejson-">tileLayer.getTileJSON()</h3>
+<p>Returns this layer&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Example</em>:</p>
+<pre><code>var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;)
+    // since layers load asynchronously through AJAX, use the
+    // `.on` function to listen for them to be loaded before
+    // calling `getTileJSON()`
+    .on(&amp;#39;load&amp;#39;, function() {
+    // get TileJSON data from the loaded layer
+    var TileJSON = layer.getTileJSON();
+});</code></pre>
+<p><em>Returns</em>: the TileJSON object</p>
+<h3 id="tilelayer-setformat-format-">tileLayer.setFormat(format)</h3>
+<p>Set the image format of tiles in this layer. You can use lower-quality tiles
+in order to load maps faster</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>format</td>
+<td>string</td>
+<td><code>string</code> an image format. valid options are: &#39;png&#39;, &#39;png32&#39;, &#39;png64&#39;, &#39;png128&#39;, &#39;png256&#39;, &#39;jpg70&#39;, &#39;jpg80&#39;, &#39;jpg90&#39;</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// Downsample tiles for faster loading times on slow
+// internet connections
+var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;, {
+    format: &amp;#39;jpg70&amp;#39;
+});</code></pre>
+<p><em>Returns</em>: the layer object</p>
+<h2 id="l-mapbox-gridlayer-id-url-tilejson-options-">L.mapbox.gridLayer(id|url|tilejson, options)</h2>
+<p>An <code>L.mapbox.gridLayer</code> loads <a href="http://mapbox.com/developers/utfgrid/">UTFGrid</a> tiles of
+interactivity into your map, which you can easily access with <code>L.mapbox.gridControl</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// the second argument is optional
+var layer = L.mapbox.gridLayer(&amp;#39;examples.map-20v6611k&amp;#39;);</code></pre>
+<p><em>Returns</em> a <code>L.mapbox.gridLayer</code> object.</p>
+<h3 id="gridlayer-gettilejson-">gridLayer.getTileJSON()</h3>
+<p>Returns this layer&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Example</em>:</p>
+<pre><code>var layer = L.mapbox.gridLayer(&amp;#39;examples.map-20v6611k&amp;#39;)
+    // since layers load asynchronously through AJAX, use the
+    // `.on` function to listen for them to be loaded before
+    // calling `getTileJSON()`
+    .on(&amp;#39;load&amp;#39;, function() {
+    // get TileJSON data from the loaded layer
+    var TileJSON = layer.getTileJSON();
+});</code></pre>
+<p><em>Returns</em>: the TileJSON object</p>
+<h3 id="gridlayer-getdata-latlng-callback-">gridLayer.getData(latlng, callback)</h3>
+<p>Load data for a given latitude, longitude point on the map, and call the callback
+function with that data, if any.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latlng</td>
+<td>object</td>
+<td><code>latlng</code> a <a href="L.LatLng object"><a href="http://leafletjs.com/reference.html#latlng">http://leafletjs.com/reference.html#latlng</a></a></td>
+</tr>
+<tr>
+<td>callback</td>
+<td>function</td>
+<td><code>callback</code> a function that is called with the grid data as an argument</td>
+</tr>
+</tbody>
+</table>
+<p><em>Returns</em>: the L.mapbox.gridLayer object</p>
+<h2 id="l-mapbox-featurelayer-id-url-tilejson-options-">L.mapbox.featureLayer(id|url|tilejson, options)</h2>
+<p><strong>NOTE: in version 1.6.0, <code>L.mapbox.markerLayer</code> was renamed to <code>L.mapbox.featureLayer</code>
+to signal the addition of support for lines and polygons. The <code>L.mapbox.markerLayer</code>
+alias will be removed in Mapbox.js 2.0.0</strong></p>
+<p><code>L.mapbox.featureLayer</code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
+from Mapbox and elsewhere into your map.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to <a href="L.FeatureGroup"><a href="http://leafletjs.com/reference.html#featuregroup">http://leafletjs.com/reference.html#featuregroup</a></a>, as well as: <ul><li><code>filter</code>: A function that accepts a feature object and returns <code>true</code> or <code>false</code> to indicate whether it should be displayed on the map. This can be changed later using <code>setFilter</code>.</li><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    .addTo(map);</code></pre>
+<p><em>Returns</em> a <code>L.mapbox.featureLayer</code> object.</p>
+<h3 id="featurelayer-loadurl-url-">featureLayer.loadURL(url)</h3>
+<p>Load GeoJSON data for this layer from the URL given by <code>url</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>A map id</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer()
+    .addTo(map);
+
+featureLayer.loadURL(&amp;#39;my_local_markers.geojson&amp;#39;);</code></pre>
+<p><em>Returns</em>: the layer object</p>
+<h3 id="featurelayer-loadid-id-">featureLayer.loadID(id)</h3>
+<p>Load marker GeoJSON data from a map with the given <code>id</code> on Mapbox.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url (<em>required</em>)</td>
+<td>string</td>
+<td>A map id</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer()
+    .addTo(map);
+
+// loads markers from the map `examples.map-0l53fhk2` on Mapbox,
+// if that map has markers
+featureLayer.loadID(&amp;#39;examples.map-0l53fhk2&amp;#39;);</code></pre>
+<p><em>Returns</em>: the layer object</p>
+<h3 id="featurelayer-setfilter-filter-">featureLayer.setFilter(filter)</h3>
+<p>Sets the filter function for this data layer.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter (<em>required</em>)</td>
+<td>function</td>
+<td>a function that takes GeoJSON features and returns true to show and false to hide features.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    // hide all markers
+    .setFilter(function() { return false; })
+    .addTo(map);</code></pre>
+<p><em>Returns</em> the featureLayer object.</p>
+<h3 id="featurelayer-getfilter-">featureLayer.getFilter()</h3>
+<p>Gets the filter function for this data layer.</p>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    // hide all markers
+    .setFilter(function() { return false; })
+    .addTo(map);
+
+// get the filter function
+var fn = featureLayer.getFilter()</code></pre>
+<p><em>Returns</em> the filter function.</p>
+<h3 id="featurelayer-setgeojson-geojson-">featureLayer.setGeoJSON(geojson)</h3>
+<p>Set the contents of a markers layer: run the provided
+features through the filter function and then through the factory function to create elements
+for the map. If the layer already has features, they are replaced with the new features.
+An empty array will clear the layer of all features.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>geojson (<em>required</em>)</td>
+<td>object</td>
+<td><code>features</code>, an array of <a href="http://geojson.org/geojson-spec.html#feature-objects">GeoJSON feature objects</a>, or omitted to get the current value.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    .addTo(map);
+// a simple GeoJSON featureset with a single point
+// with no properties
+featureLayer.setGeoJSON({
+    type: &amp;quot;FeatureCollection&amp;quot;,
+    features: [{
+        type: &amp;quot;Feature&amp;quot;,
+        geometry: {
+            type: &amp;quot;Point&amp;quot;,
+            coordinates: [102.0, 0.5]
+        },
+        properties: { }
+    }]
+});</code></pre>
+<p><em>Returns</em> the featureLayer object</p>
+<h3 id="featurelayer-getgeojson-">featureLayer.getGeoJSON()</h3>
+<p>Get the contents of this layer as GeoJSON data.</p>
+<p><em>Returns</em> the GeoJSON represented by this layer</p>

@@ -1,8 +1,9 @@
 ---
-layout: all
-title: v1.6.0
+layout: individual
+title: "v1.6.0 API: Simplestyle"
 categories: api
 version: v1.6.0
+permalink: /api/v1.6.0/mapbox-simplestyle
 navigation:
   - title: View on single page
     id: all
@@ -193,4 +194,33 @@ navigation:
     id: leaflet-noconflict
   - title: version
     id: leaflet-version
+
 ---
+<h1 id="simplestyle">Simplestyle</h1>
+<p>The other sections of the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> are implemented
+by <code>L.mapbox.simplestyle</code></p>
+<h2 id="l-simplestyle-style-feature-">L.simplestyle.style(feature)</h2>
+<p>Given a GeoJSON Feature with optional simplestyle-spec properties, return an
+options object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feature</td>
+<td>object</td>
+<td>A GeoJSON feature object</td>
+</tr>
+</tbody>
+</table>
+<p><em>Examples</em>:</p>
+<pre><code>L.geoJson(geoJson, {
+    pointToLayer: L.mapbox.simplestyle.style,
+});</code></pre>
+<p><em>Returns</em>:</p>
+<p>An object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>

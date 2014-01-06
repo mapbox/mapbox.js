@@ -1,8 +1,9 @@
 ---
-layout: all
-title: v1.6.0
+layout: individual
+title: "v1.6.0 API: Utility"
 categories: api
 version: v1.6.0
+permalink: /api/v1.6.0/mapbox-utility
 navigation:
   - title: View on single page
     id: all
@@ -193,4 +194,50 @@ navigation:
     id: leaflet-noconflict
   - title: version
     id: leaflet-version
+
 ---
+<h1 id="utility">Utility</h1>
+<h2 id="l-mapbox-sanitize-string-">L.mapbox.sanitize(string)</h2>
+<p>A HTML sanitization function, with the same effect as the default value of the <code>sanitizer</code> option of <code>L.mapbox.featureLayer</code>, <code>L.mapbox.gridControl</code>, and <code>L.mapbox.legendControl</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>String of content you wish to sanitize.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="l-mapbox-template-template-data-">L.mapbox.template(template, data)</h2>
+<p>A <a href="http://mustache.github.io/">mustache</a> template rendering function, as used by the templating feature provided by <code>L.mapbox.gridControl</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>template</td>
+<td>string</td>
+<td>The template string</td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>Data you wish to pass into the template string</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var output = L.mapbox.template(&amp;#39;Name: {{name}}&amp;#39;, {name: &amp;#39;John&amp;#39;});
+// output is &amp;quot;Name: John&amp;quot;</code></pre>
