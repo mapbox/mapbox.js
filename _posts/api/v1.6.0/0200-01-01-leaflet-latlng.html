@@ -1,0 +1,322 @@
+---
+layout: individual
+title: "v1.6.0 API: LatLng"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/leaflet-latlng
+navigation:
+  - title: View on single page
+    id: all
+  - title: Map
+    id: mapbox-map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    id: mapbox-layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.featureLayer
+        sub:
+        - featureLayer.loadURL
+        - featureLayer.loadID
+        - featureLayer.setFilter
+        - featureLayer.getFilter
+        - featureLayer.setGeoJSON
+        - featureLayer.getGeoJSON
+  - title: Geocoding
+    id: mapbox-geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    id: mapbox-controls
+    nav:
+      - title: L.mapbox.infoControl
+        sub:
+        - infoControl.addInfo
+        - infoControl.removeInfo
+      - title: L.mapbox.legendControl
+        sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
+      - title: L.mapbox.gridControl
+        sub:
+        - gridControl.hide
+        - gridControl.setTemplate
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
+  - title: Markers
+    id: mapbox-markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Simplestyle
+    id: mapbox-simplestyle
+    nav:
+      - title: L.simplestyle.style
+        sub:
+  - title: Utility
+    id: mapbox-utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
+        sub:
+  - title: Mobile
+    id: mapbox-mobile
+    nav:
+  - title: Theming
+    id: mapbox-theming
+    nav:
+      - title: Map
+      - title: Layers
+      - title: Geocoding
+      - title: Controls
+      - title: Markers
+      - title: Simplestyle
+      - title: Utility
+      - title: Mobile
+  - title: Map
+    id: leaflet-map
+  - title: Marker
+    id: leaflet-marker
+  - title: Popup
+    id: leaflet-popup
+  - title: TileLayer
+    id: leaflet-tilelayer
+  - title: TileLayer.WMS
+    id: leaflet-tilelayer.wms
+  - title: TileLayer.Canvas
+    id: leaflet-tilelayer.canvas
+  - title: ImageOverlay
+    id: leaflet-imageoverlay
+  - title: Path
+    id: leaflet-path
+  - title: Polyline
+    id: leaflet-polyline
+  - title: MultiPolyline
+    id: leaflet-multipolyline
+  - title: Polygon
+    id: leaflet-polygon
+  - title: MultiPolygon
+    id: leaflet-multipolygon
+  - title: Rectangle
+    id: leaflet-rectangle
+  - title: Circle
+    id: leaflet-circle
+  - title: CircleMarker
+    id: leaflet-circlemarker
+  - title: LayerGroup
+    id: leaflet-layergroup
+  - title: FeatureGroup
+    id: leaflet-featuregroup
+  - title: GeoJson
+    id: leaflet-geojson
+  - title: LatLng
+    id: leaflet-latlng
+  - title: LatLngBounds
+    id: leaflet-latlngbounds
+  - title: Point
+    id: leaflet-point
+  - title: Bounds
+    id: leaflet-bounds
+  - title: Icon
+    id: leaflet-icon
+  - title: DivIcon
+    id: leaflet-divicon
+  - title: Control
+    id: leaflet-control
+  - title: Control.zoom
+    id: leaflet-control.zoom
+  - title: Control.Attribution
+    id: leaflet-control.attribution
+  - title: Control.Layers
+    id: leaflet-control.layers
+  - title: Control.Scale
+    id: leaflet-control.scale
+  - title: Events methods
+    id: leaflet-events methods
+  - title: Event objects
+    id: leaflet-event objects
+  - title: Class
+    id: leaflet-class
+  - title: Browser
+    id: leaflet-browser
+  - title: Util
+    id: leaflet-util
+  - title: Transformation
+    id: leaflet-transformation
+  - title: LineUtil
+    id: leaflet-lineutil
+  - title: PolyUtil
+    id: leaflet-polyutil
+  - title: DomEvent
+    id: leaflet-domevent
+  - title: DomUtil
+    id: leaflet-domutil
+  - title: PosAnimation
+    id: leaflet-posanimation
+  - title: Draggable
+    id: leaflet-draggable
+  - title: IHandler
+    id: leaflet-ihandler
+  - title: ILayer
+    id: leaflet-ilayer
+  - title: IControl
+    id: leaflet-icontrol
+  - title: IProjection
+    id: leaflet-iprojection
+  - title: ICRS
+    id: leaflet-icrs
+  - title: Global Switches
+    id: leaflet-global switches
+  - title: noConflict
+    id: leaflet-noconflict
+  - title: version
+    id: leaflet-version
+
+---
+<h2 id="latlng">LatLng</h2>
+
+<p>Represents a geographical point with a certain latitude and longitude.</p>
+<pre><code class="javascript">var latlng = L.latLng(50.5, 30.5);</code></pre>
+
+<p>All Leaflet methods that accept LatLng objects also accept them in a simple Array form and simple object form (unless noted otherwise), so these lines are equivalent:</p>
+
+<pre><code>map.panTo([50, 30]);
+map.panTo({lon: 30, lat: 50});
+map.panTo({lat: 50, lng: 30});
+map.panTo(L.latLng(50, 30));</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='latlng'>
+	<tr>
+		<th class="width200">Factory</th>
+
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>L.latLng</b>(
+			<nobr>&lt;Number&gt; <i>latitude</i></nobr>,
+			<nobr>&lt;Number&gt; <i>longitude</i></nobr>,
+			<nobr>&lt;Number&gt; <i>altitude?</i> )</nobr>
+		</code></td>
+
+
+		<td>Creates an object representing a geographical point with the given latitude and longitude (and optionally altitude).</td>
+	</tr>
+</table>
+
+<h3>Properties</h3>
+
+<table data-id='latlng'>
+	<tr>
+		<th class="width100">Property</th>
+		<th class="width100">Type</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>lat</b></code></td>
+		<td><code>Number</code></td>
+		<td>Latitude in degrees.</td>
+	</tr>
+	<tr>
+		<td><code><b>lng</b></code></td>
+		<td><code>Number</code></td>
+		<td>Longitude in degrees.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='latlng'>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>distanceTo</b>(
+			<nobr>&lt;<a href="#latlng">LatLng</a>&gt; <i>otherLatlng</i> )</nobr>
+		</code></td>
+
+		<td><code>Number</code></td>
+		<td>Returns the distance (in meters) to the given LatLng calculated using the Haversine formula. See <a href="http://en.wikipedia.org/wiki/Haversine_formula">description on wikipedia</a></td>
+	</tr>
+	<tr>
+		<td><code><b>equals</b>(
+			<nobr>&lt;<a href="#latlng">LatLng</a>&gt; <i>otherLatlng</i> )</nobr>
+		</code></td>
+
+		<td><code>Boolean</code></td>
+		<td>Returns <code><span class="literal">true</span></code> if the given LatLng point is at the same position (within a small margin of error).</td>
+	</tr>
+	<tr>
+		<td><code><b>toString</b>()</code></td>
+		<td><code>String</code></td>
+		<td>Returns a string representation of the point (for debugging purposes).</td>
+	</tr>
+	<tr>
+		<td><code><b>wrap</b>(
+			<nobr>&lt;Number&gt; <i>left</i></nobr>,
+			<nobr>&lt;Number&gt; <i>right</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="#latlng">LatLng</a></code></td>
+		<td>Returns a new <code>LatLng</code> object with the longitude wrapped around <code>left</code> and <code>right</code> boundaries (<code><span class="number">-180</span></code> to <code><span class="number">180</span></code> by default).</td>
+	</tr>
+</table>
+
+<h3>Constants</h3>
+
+<table data-id='latlng'>
+	<tr>
+		<th class="width100">Constant</th>
+		<th class="width100">Type</th>
+		<th class="width100">Value</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>DEG_TO_RAD</b></code></td>
+		<td><code>Number</code></td>
+		<td><code>Math.PI / <span class="number">180</span></code></td>
+		<td>A multiplier for converting degrees into radians.</td>
+	</tr>
+	<tr>
+		<td><code><b>RAD_TO_DEG</b></code></td>
+		<td><code>Number</code></td>
+		<td><code><span class="number">180</span> / Math.PI</code></td>
+		<td>A multiplier for converting radians into degrees.</td>
+	</tr>
+	<tr>
+		<td><code><b>MAX_MARGIN</b></code></td>
+		<td><code>Number</code></td>
+		<td><code><span class="number">1.0E-9</span></code></td>
+		<td>Max margin of error for the equality check.</td>
+	</tr>
+</table>
+
+
+
+

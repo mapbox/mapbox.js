@@ -1,0 +1,290 @@
+---
+layout: individual
+title: "v1.6.0 API: DomEvent"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/leaflet-domevent
+navigation:
+  - title: View on single page
+    id: all
+  - title: Map
+    id: mapbox-map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    id: mapbox-layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.featureLayer
+        sub:
+        - featureLayer.loadURL
+        - featureLayer.loadID
+        - featureLayer.setFilter
+        - featureLayer.getFilter
+        - featureLayer.setGeoJSON
+        - featureLayer.getGeoJSON
+  - title: Geocoding
+    id: mapbox-geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    id: mapbox-controls
+    nav:
+      - title: L.mapbox.infoControl
+        sub:
+        - infoControl.addInfo
+        - infoControl.removeInfo
+      - title: L.mapbox.legendControl
+        sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
+      - title: L.mapbox.gridControl
+        sub:
+        - gridControl.hide
+        - gridControl.setTemplate
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
+  - title: Markers
+    id: mapbox-markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Simplestyle
+    id: mapbox-simplestyle
+    nav:
+      - title: L.simplestyle.style
+        sub:
+  - title: Utility
+    id: mapbox-utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
+        sub:
+  - title: Mobile
+    id: mapbox-mobile
+    nav:
+  - title: Theming
+    id: mapbox-theming
+    nav:
+      - title: Map
+      - title: Layers
+      - title: Geocoding
+      - title: Controls
+      - title: Markers
+      - title: Simplestyle
+      - title: Utility
+      - title: Mobile
+  - title: Map
+    id: leaflet-map
+  - title: Marker
+    id: leaflet-marker
+  - title: Popup
+    id: leaflet-popup
+  - title: TileLayer
+    id: leaflet-tilelayer
+  - title: TileLayer.WMS
+    id: leaflet-tilelayer.wms
+  - title: TileLayer.Canvas
+    id: leaflet-tilelayer.canvas
+  - title: ImageOverlay
+    id: leaflet-imageoverlay
+  - title: Path
+    id: leaflet-path
+  - title: Polyline
+    id: leaflet-polyline
+  - title: MultiPolyline
+    id: leaflet-multipolyline
+  - title: Polygon
+    id: leaflet-polygon
+  - title: MultiPolygon
+    id: leaflet-multipolygon
+  - title: Rectangle
+    id: leaflet-rectangle
+  - title: Circle
+    id: leaflet-circle
+  - title: CircleMarker
+    id: leaflet-circlemarker
+  - title: LayerGroup
+    id: leaflet-layergroup
+  - title: FeatureGroup
+    id: leaflet-featuregroup
+  - title: GeoJson
+    id: leaflet-geojson
+  - title: LatLng
+    id: leaflet-latlng
+  - title: LatLngBounds
+    id: leaflet-latlngbounds
+  - title: Point
+    id: leaflet-point
+  - title: Bounds
+    id: leaflet-bounds
+  - title: Icon
+    id: leaflet-icon
+  - title: DivIcon
+    id: leaflet-divicon
+  - title: Control
+    id: leaflet-control
+  - title: Control.zoom
+    id: leaflet-control.zoom
+  - title: Control.Attribution
+    id: leaflet-control.attribution
+  - title: Control.Layers
+    id: leaflet-control.layers
+  - title: Control.Scale
+    id: leaflet-control.scale
+  - title: Events methods
+    id: leaflet-events methods
+  - title: Event objects
+    id: leaflet-event objects
+  - title: Class
+    id: leaflet-class
+  - title: Browser
+    id: leaflet-browser
+  - title: Util
+    id: leaflet-util
+  - title: Transformation
+    id: leaflet-transformation
+  - title: LineUtil
+    id: leaflet-lineutil
+  - title: PolyUtil
+    id: leaflet-polyutil
+  - title: DomEvent
+    id: leaflet-domevent
+  - title: DomUtil
+    id: leaflet-domutil
+  - title: PosAnimation
+    id: leaflet-posanimation
+  - title: Draggable
+    id: leaflet-draggable
+  - title: IHandler
+    id: leaflet-ihandler
+  - title: ILayer
+    id: leaflet-ilayer
+  - title: IControl
+    id: leaflet-icontrol
+  - title: IProjection
+    id: leaflet-iprojection
+  - title: ICRS
+    id: leaflet-icrs
+  - title: Global Switches
+    id: leaflet-global switches
+  - title: noConflict
+    id: leaflet-noconflict
+  - title: version
+    id: leaflet-version
+
+---
+<h2 id="domevent">DomEvent</h2>
+
+<p>Utility functions to work with the DOM events, used by Leaflet internally.</p>
+
+<h3>Methods</h3>
+
+<table data-id='domevent'>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>addListener</b>(
+			<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+			<nobr>&lt;String&gt; <i>type</i></nobr>,
+			<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+			<nobr>&lt;Object&gt; <i>context?</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Adds a listener <code>fn</code> to the element's DOM event of the specified type. <code><span class="keyword">this</span></code> keyword inside the listener will point to <code>context</code>, or to the element if not specified.</td>
+	</tr>
+	<tr>
+		<td><code><b>removeListener</b>(
+			<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+			<nobr>&lt;String&gt; <i>type</i></nobr>,
+			<nobr>&lt;Function&gt; <i>fn</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Removes an event listener from the element.</td>
+	</tr>
+	<tr>
+		<td><code><b>stopPropagation</b>(
+			<nobr>&lt;DOMEvent&gt; <i>e</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Stop the given event from propagation to parent elements. Used inside the listener functions:
+<pre><code>L.DomEvent.addListener(div, 'click', function (e) {
+	L.DomEvent.stopPropagation(e);
+});</code></pre>
+		</td>
+	</tr>
+	<tr>
+		<td><code><b>preventDefault</b>(
+			<nobr>&lt;DOMEvent&gt; <i>e</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Prevents the default action of the event from happening (such as following a link in the <code>href</code> of the <code>a</code> element, or doing a <code>POST</code> request with page reload when <code>form</code> is submitted). Use it inside listener functions.</pre>
+		</td>
+	</tr>
+	<tr>
+		<td><code><b>stop</b>(
+			<nobr>&lt;DOMEvent&gt; <i>e</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Does <code>stopPropagation</code> and <code>preventDefault</code> at the same time.</td>
+	</tr>
+	<tr>
+		<td><code><b>disableClickPropagation</b>(
+			<nobr>&lt;HTMLElement&gt; <i>el</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Adds <code>stopPropagation</code> to the element's <code><span class="string">'click'</span></code>, <code><span class="string">'doubleclick'</span></code>, <code><span class="string">'mousedown'</span></code> and <code><span class="string">'touchstart'</span></code> events.</td>
+	</tr>
+	<tr>
+		<td><code><b>getMousePosition</b>(
+			<nobr>&lt;DOMEvent&gt; <i>e</i></nobr>,
+			<nobr>&lt;HTMLElement&gt; <i>container?</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="#point">Point</a></code></td>
+		<td>Gets normalized mouse position from a DOM event relative to the container or to the whole page if not specified.</td>
+	</tr>
+	<tr>
+		<td><code><b>getWheelDelta</b>(
+			<nobr>&lt;DOMEvent&gt; <i>e</i> )</nobr>
+		</code></td>
+
+		<td><code>Number</code></td>
+		<td>Gets normalized wheel delta from a <code>mousewheel</code> DOM event.</td>
+	</tr>
+</table>
+
+
+
+

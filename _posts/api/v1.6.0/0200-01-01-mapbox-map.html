@@ -1,0 +1,242 @@
+---
+layout: individual
+title: "v1.6.0 API: Map"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/mapbox-map
+navigation:
+  - title: View on single page
+    id: all
+  - title: Map
+    id: mapbox-map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    id: mapbox-layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.featureLayer
+        sub:
+        - featureLayer.loadURL
+        - featureLayer.loadID
+        - featureLayer.setFilter
+        - featureLayer.getFilter
+        - featureLayer.setGeoJSON
+        - featureLayer.getGeoJSON
+  - title: Geocoding
+    id: mapbox-geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    id: mapbox-controls
+    nav:
+      - title: L.mapbox.infoControl
+        sub:
+        - infoControl.addInfo
+        - infoControl.removeInfo
+      - title: L.mapbox.legendControl
+        sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
+      - title: L.mapbox.gridControl
+        sub:
+        - gridControl.hide
+        - gridControl.setTemplate
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
+  - title: Markers
+    id: mapbox-markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Simplestyle
+    id: mapbox-simplestyle
+    nav:
+      - title: L.simplestyle.style
+        sub:
+  - title: Utility
+    id: mapbox-utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
+        sub:
+  - title: Mobile
+    id: mapbox-mobile
+    nav:
+  - title: Theming
+    id: mapbox-theming
+    nav:
+      - title: Map
+      - title: Layers
+      - title: Geocoding
+      - title: Controls
+      - title: Markers
+      - title: Simplestyle
+      - title: Utility
+      - title: Mobile
+  - title: Map
+    id: leaflet-map
+  - title: Marker
+    id: leaflet-marker
+  - title: Popup
+    id: leaflet-popup
+  - title: TileLayer
+    id: leaflet-tilelayer
+  - title: TileLayer.WMS
+    id: leaflet-tilelayer.wms
+  - title: TileLayer.Canvas
+    id: leaflet-tilelayer.canvas
+  - title: ImageOverlay
+    id: leaflet-imageoverlay
+  - title: Path
+    id: leaflet-path
+  - title: Polyline
+    id: leaflet-polyline
+  - title: MultiPolyline
+    id: leaflet-multipolyline
+  - title: Polygon
+    id: leaflet-polygon
+  - title: MultiPolygon
+    id: leaflet-multipolygon
+  - title: Rectangle
+    id: leaflet-rectangle
+  - title: Circle
+    id: leaflet-circle
+  - title: CircleMarker
+    id: leaflet-circlemarker
+  - title: LayerGroup
+    id: leaflet-layergroup
+  - title: FeatureGroup
+    id: leaflet-featuregroup
+  - title: GeoJson
+    id: leaflet-geojson
+  - title: LatLng
+    id: leaflet-latlng
+  - title: LatLngBounds
+    id: leaflet-latlngbounds
+  - title: Point
+    id: leaflet-point
+  - title: Bounds
+    id: leaflet-bounds
+  - title: Icon
+    id: leaflet-icon
+  - title: DivIcon
+    id: leaflet-divicon
+  - title: Control
+    id: leaflet-control
+  - title: Control.zoom
+    id: leaflet-control.zoom
+  - title: Control.Attribution
+    id: leaflet-control.attribution
+  - title: Control.Layers
+    id: leaflet-control.layers
+  - title: Control.Scale
+    id: leaflet-control.scale
+  - title: Events methods
+    id: leaflet-events methods
+  - title: Event objects
+    id: leaflet-event objects
+  - title: Class
+    id: leaflet-class
+  - title: Browser
+    id: leaflet-browser
+  - title: Util
+    id: leaflet-util
+  - title: Transformation
+    id: leaflet-transformation
+  - title: LineUtil
+    id: leaflet-lineutil
+  - title: PolyUtil
+    id: leaflet-polyutil
+  - title: DomEvent
+    id: leaflet-domevent
+  - title: DomUtil
+    id: leaflet-domutil
+  - title: PosAnimation
+    id: leaflet-posanimation
+  - title: Draggable
+    id: leaflet-draggable
+  - title: IHandler
+    id: leaflet-ihandler
+  - title: ILayer
+    id: leaflet-ilayer
+  - title: IControl
+    id: leaflet-icontrol
+  - title: IProjection
+    id: leaflet-iprojection
+  - title: ICRS
+    id: leaflet-icrs
+  - title: Global Switches
+    id: leaflet-global switches
+  - title: noConflict
+    id: leaflet-noconflict
+  - title: version
+    id: leaflet-version
+
+---
+<h1 >Map</h1>
+<h2 id="l-mapbox-map-element-id-url-tilejson-options-">L.mapbox.map(element, id|url|tilejson, options)</h2>
+<p>Create and automatically configure a map with layers, markers, and
+interactivity.</p>
+<p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#map-options">L.Map</a></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element (<em>required</em>)</td>
+<td>string</td>
+<td>Must be the id of an element, or a DOM element reference.</td>
+</tr>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to <a href="http://leafletjs.com/reference.html#map-options">L.Map</a> with the following additions: <ul><li><code>tileLayer</code> (boolean). Whether or not to add a <code>L.mapbox.tileLayer</code> based on the TileJSON. Default: <code>true</code></li><li><code>markerLayer</code> (boolean). Whether or not to add a <code>L.mapbox.markerLayer</code> based on the TileJSON. Default: <code>true</code>.</li><li><code>gridLayer</code> (boolean). Whether or not to add a <code>L.mapbox.gridLayer</code> based on the TileJSON. Default: <code>true</code>.</li><li><code>legendControl</code> (boolean). Whether or not to add a <code>L.mapbox.legendControl</code>. Default: <code>true</code>.</li></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// map refers to a &amp;lt;div&amp;gt; element with the ID map
+// examples.map-4l7djmvo is the ID of a map on Mapbox.com
+var map = L.mapbox.map(&amp;#39;map&amp;#39;, &amp;#39;examples.map-4l7djmvo&amp;#39;);
+
+// map refers to a &amp;lt;div&amp;gt; element with the ID map
+// This map will have no layers initially
+var map = L.mapbox.map(&amp;#39;map&amp;#39;);</code></pre>
+<p><em>Returns</em>: a map object</p>
+<h2 id="map-gettilejson-">map.getTileJSON()</h2>
+<p>Returns this map&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Returns</em>: the TileJSON object</p>

@@ -23,12 +23,12 @@ section: developers
       <nav class='anchors'>
         {% for section in page.navigation %}
         <div class='pad2 keyline-bottom'>
-          <a class='heading col12 strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
+            <a class='heading col12 strong' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
           {% for nav in section.nav %}
           <div class='pad1y'>
-            <a class='col12 truncate' href='#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+            <a class='col12 truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
             {% for sub in nav.sub %}
-              <a class='col12 truncate quiet small' href='#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+              <a class='col12 truncate quiet small' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
             {% endfor %}
           </div>
           {% endfor %}
@@ -44,7 +44,7 @@ section: developers
             <h2>Reading this Documentation</h2>
 
             <p>The documentation is organized by <em>methods</em>. Each method
-            is shown with potential arguments along with its type and description in a table.
+            is shown with potential arguments along with it&#39;s type and description in a table.
             When the API has a Javascript constructor function that returns an object, the constructor
             is documented with its full name and the methods on the object are named with just
             the type of the object. For instance, <code>L.mapbox.markerLayer</code> documents a function that
@@ -86,7 +86,7 @@ section: developers
         </div>
         <div class='keyline-top center small'>
           <div class='pad2'>
-            The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
+            The <a href='http://github.com/mapbox/mapbox.js'>code and documentation to mapbox.js</a> and <a href='https://github.com/leaflet/leaflet'>Leaflet</a> is hosted on GitHub</a> where you can contribute changes and improvements.
           </div>
         </div>
       </div>

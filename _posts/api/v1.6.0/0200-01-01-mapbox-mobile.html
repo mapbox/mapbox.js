@@ -1,0 +1,229 @@
+---
+layout: individual
+title: "v1.6.0 API: Mobile"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/mapbox-mobile
+navigation:
+  - title: View on single page
+    id: all
+  - title: Map
+    id: mapbox-map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    id: mapbox-layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.featureLayer
+        sub:
+        - featureLayer.loadURL
+        - featureLayer.loadID
+        - featureLayer.setFilter
+        - featureLayer.getFilter
+        - featureLayer.setGeoJSON
+        - featureLayer.getGeoJSON
+  - title: Geocoding
+    id: mapbox-geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    id: mapbox-controls
+    nav:
+      - title: L.mapbox.infoControl
+        sub:
+        - infoControl.addInfo
+        - infoControl.removeInfo
+      - title: L.mapbox.legendControl
+        sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
+      - title: L.mapbox.gridControl
+        sub:
+        - gridControl.hide
+        - gridControl.setTemplate
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
+  - title: Markers
+    id: mapbox-markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Simplestyle
+    id: mapbox-simplestyle
+    nav:
+      - title: L.simplestyle.style
+        sub:
+  - title: Utility
+    id: mapbox-utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
+        sub:
+  - title: Mobile
+    id: mapbox-mobile
+    nav:
+  - title: Theming
+    id: mapbox-theming
+    nav:
+      - title: Map
+      - title: Layers
+      - title: Geocoding
+      - title: Controls
+      - title: Markers
+      - title: Simplestyle
+      - title: Utility
+      - title: Mobile
+  - title: Map
+    id: leaflet-map
+  - title: Marker
+    id: leaflet-marker
+  - title: Popup
+    id: leaflet-popup
+  - title: TileLayer
+    id: leaflet-tilelayer
+  - title: TileLayer.WMS
+    id: leaflet-tilelayer.wms
+  - title: TileLayer.Canvas
+    id: leaflet-tilelayer.canvas
+  - title: ImageOverlay
+    id: leaflet-imageoverlay
+  - title: Path
+    id: leaflet-path
+  - title: Polyline
+    id: leaflet-polyline
+  - title: MultiPolyline
+    id: leaflet-multipolyline
+  - title: Polygon
+    id: leaflet-polygon
+  - title: MultiPolygon
+    id: leaflet-multipolygon
+  - title: Rectangle
+    id: leaflet-rectangle
+  - title: Circle
+    id: leaflet-circle
+  - title: CircleMarker
+    id: leaflet-circlemarker
+  - title: LayerGroup
+    id: leaflet-layergroup
+  - title: FeatureGroup
+    id: leaflet-featuregroup
+  - title: GeoJson
+    id: leaflet-geojson
+  - title: LatLng
+    id: leaflet-latlng
+  - title: LatLngBounds
+    id: leaflet-latlngbounds
+  - title: Point
+    id: leaflet-point
+  - title: Bounds
+    id: leaflet-bounds
+  - title: Icon
+    id: leaflet-icon
+  - title: DivIcon
+    id: leaflet-divicon
+  - title: Control
+    id: leaflet-control
+  - title: Control.zoom
+    id: leaflet-control.zoom
+  - title: Control.Attribution
+    id: leaflet-control.attribution
+  - title: Control.Layers
+    id: leaflet-control.layers
+  - title: Control.Scale
+    id: leaflet-control.scale
+  - title: Events methods
+    id: leaflet-events methods
+  - title: Event objects
+    id: leaflet-event objects
+  - title: Class
+    id: leaflet-class
+  - title: Browser
+    id: leaflet-browser
+  - title: Util
+    id: leaflet-util
+  - title: Transformation
+    id: leaflet-transformation
+  - title: LineUtil
+    id: leaflet-lineutil
+  - title: PolyUtil
+    id: leaflet-polyutil
+  - title: DomEvent
+    id: leaflet-domevent
+  - title: DomUtil
+    id: leaflet-domutil
+  - title: PosAnimation
+    id: leaflet-posanimation
+  - title: Draggable
+    id: leaflet-draggable
+  - title: IHandler
+    id: leaflet-ihandler
+  - title: ILayer
+    id: leaflet-ilayer
+  - title: IControl
+    id: leaflet-icontrol
+  - title: IProjection
+    id: leaflet-iprojection
+  - title: ICRS
+    id: leaflet-icrs
+  - title: Global Switches
+    id: leaflet-global switches
+  - title: noConflict
+    id: leaflet-noconflict
+  - title: version
+    id: leaflet-version
+
+---
+<h1 id="mobile">Mobile</h1>
+<p>Mapbox.js is optimized for mobile devices and small screens by default.
+There are, however, best practices to make sure your map always looks its best.</p>
+<h2 id="viewport">Viewport</h2>
+<p>Modern mobile browsers now support scaling of webpages by leveraging the meta
+tag <code>viewport</code>. This enlarges the window making your map look better on a
+mobile device. Simply include this in the head of your document:</p>
+<pre><code>&amp;lt;meta name=&amp;#39;viewport&amp;#39; content=&amp;#39;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&amp;#39; /&amp;gt;</code></pre>
+<h2 id="scrolling">Scrolling</h2>
+<p>If you&#39;re planning on having a page that has large amounts of scrolling,
+try to avoid a large map height. Having a &#39;tall&#39; map can cause the user
+to get stuck on the map while scrolling. Another way around this is to disable
+<code>dragging</code> for mobile devices: <code>map.dragging.disable();</code></p>
+<h2 id="retina">Retina</h2>
+<p>Having the ability to use retina tiles when the device supports them is easy.
+When creating the map, use the <code>detectRetina</code> to verify if retina is available
+and <code>retinaVersion</code> to use a tilelayer which is designed for retina screens.</p>
+<pre><code>var map = L.mapbox.map(&amp;#39;map&amp;#39;, &amp;#39;your.mapid&amp;#39;, {
+    tileLayer: {
+        detectRetina: true,
+        retinaVersion: &amp;#39;your.mapid&amp;#39;
+    }
+}).setView([40, -74.50], 9);</code></pre>
+<p>Some Mapbox maps support switching to retina scale automatically: if you&#39;re using
+one of these maps, you can simply set <code>detectRetina</code> and the higher-scale
+tiles will be used when retina is detected.</p>
+<pre><code>var map = L.mapbox.map(&amp;#39;map&amp;#39;, &amp;#39;your.mapid&amp;#39;, {
+    tileLayer: {
+        detectRetina: true
+    }
+}).setView([40, -74.50], 9);</code></pre>

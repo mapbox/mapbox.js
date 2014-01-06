@@ -1,0 +1,226 @@
+---
+layout: individual
+title: "v1.6.0 API: Simplestyle"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/mapbox-simplestyle
+navigation:
+  - title: View on single page
+    id: all
+  - title: Map
+    id: mapbox-map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    id: mapbox-layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.featureLayer
+        sub:
+        - featureLayer.loadURL
+        - featureLayer.loadID
+        - featureLayer.setFilter
+        - featureLayer.getFilter
+        - featureLayer.setGeoJSON
+        - featureLayer.getGeoJSON
+  - title: Geocoding
+    id: mapbox-geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    id: mapbox-controls
+    nav:
+      - title: L.mapbox.infoControl
+        sub:
+        - infoControl.addInfo
+        - infoControl.removeInfo
+      - title: L.mapbox.legendControl
+        sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
+      - title: L.mapbox.gridControl
+        sub:
+        - gridControl.hide
+        - gridControl.setTemplate
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
+  - title: Markers
+    id: mapbox-markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Simplestyle
+    id: mapbox-simplestyle
+    nav:
+      - title: L.simplestyle.style
+        sub:
+  - title: Utility
+    id: mapbox-utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
+        sub:
+  - title: Mobile
+    id: mapbox-mobile
+    nav:
+  - title: Theming
+    id: mapbox-theming
+    nav:
+      - title: Map
+      - title: Layers
+      - title: Geocoding
+      - title: Controls
+      - title: Markers
+      - title: Simplestyle
+      - title: Utility
+      - title: Mobile
+  - title: Map
+    id: leaflet-map
+  - title: Marker
+    id: leaflet-marker
+  - title: Popup
+    id: leaflet-popup
+  - title: TileLayer
+    id: leaflet-tilelayer
+  - title: TileLayer.WMS
+    id: leaflet-tilelayer.wms
+  - title: TileLayer.Canvas
+    id: leaflet-tilelayer.canvas
+  - title: ImageOverlay
+    id: leaflet-imageoverlay
+  - title: Path
+    id: leaflet-path
+  - title: Polyline
+    id: leaflet-polyline
+  - title: MultiPolyline
+    id: leaflet-multipolyline
+  - title: Polygon
+    id: leaflet-polygon
+  - title: MultiPolygon
+    id: leaflet-multipolygon
+  - title: Rectangle
+    id: leaflet-rectangle
+  - title: Circle
+    id: leaflet-circle
+  - title: CircleMarker
+    id: leaflet-circlemarker
+  - title: LayerGroup
+    id: leaflet-layergroup
+  - title: FeatureGroup
+    id: leaflet-featuregroup
+  - title: GeoJson
+    id: leaflet-geojson
+  - title: LatLng
+    id: leaflet-latlng
+  - title: LatLngBounds
+    id: leaflet-latlngbounds
+  - title: Point
+    id: leaflet-point
+  - title: Bounds
+    id: leaflet-bounds
+  - title: Icon
+    id: leaflet-icon
+  - title: DivIcon
+    id: leaflet-divicon
+  - title: Control
+    id: leaflet-control
+  - title: Control.zoom
+    id: leaflet-control.zoom
+  - title: Control.Attribution
+    id: leaflet-control.attribution
+  - title: Control.Layers
+    id: leaflet-control.layers
+  - title: Control.Scale
+    id: leaflet-control.scale
+  - title: Events methods
+    id: leaflet-events methods
+  - title: Event objects
+    id: leaflet-event objects
+  - title: Class
+    id: leaflet-class
+  - title: Browser
+    id: leaflet-browser
+  - title: Util
+    id: leaflet-util
+  - title: Transformation
+    id: leaflet-transformation
+  - title: LineUtil
+    id: leaflet-lineutil
+  - title: PolyUtil
+    id: leaflet-polyutil
+  - title: DomEvent
+    id: leaflet-domevent
+  - title: DomUtil
+    id: leaflet-domutil
+  - title: PosAnimation
+    id: leaflet-posanimation
+  - title: Draggable
+    id: leaflet-draggable
+  - title: IHandler
+    id: leaflet-ihandler
+  - title: ILayer
+    id: leaflet-ilayer
+  - title: IControl
+    id: leaflet-icontrol
+  - title: IProjection
+    id: leaflet-iprojection
+  - title: ICRS
+    id: leaflet-icrs
+  - title: Global Switches
+    id: leaflet-global switches
+  - title: noConflict
+    id: leaflet-noconflict
+  - title: version
+    id: leaflet-version
+
+---
+<h1 id="simplestyle">Simplestyle</h1>
+<p>The other sections of the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> are implemented
+by <code>L.mapbox.simplestyle</code></p>
+<h2 id="l-simplestyle-style-feature-">L.simplestyle.style(feature)</h2>
+<p>Given a GeoJSON Feature with optional simplestyle-spec properties, return an
+options object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feature</td>
+<td>object</td>
+<td>A GeoJSON feature object</td>
+</tr>
+</tbody>
+</table>
+<p><em>Examples</em>:</p>
+<pre><code>L.geoJson(geoJson, {
+    pointToLayer: L.mapbox.simplestyle.style,
+});</code></pre>
+<p><em>Returns</em>:</p>
+<p>An object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>

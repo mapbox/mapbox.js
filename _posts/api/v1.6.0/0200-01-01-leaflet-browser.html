@@ -1,0 +1,290 @@
+---
+layout: individual
+title: "v1.6.0 API: Browser"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/leaflet-browser
+navigation:
+  - title: View on single page
+    id: all
+  - title: Map
+    id: mapbox-map
+    nav:
+      - title: L.mapbox.map
+        sub:
+      - title: map.getTileJSON
+        sub:
+  - title: Layers
+    id: mapbox-layers
+    nav:
+      - title: L.mapbox.tileLayer
+        sub:
+        - tileLayer.getTileJSON
+        - tileLayer.setFormat
+      - title: L.mapbox.gridLayer
+        sub:
+        - gridLayer.getTileJSON
+        - gridLayer.getData
+      - title: L.mapbox.featureLayer
+        sub:
+        - featureLayer.loadURL
+        - featureLayer.loadID
+        - featureLayer.setFilter
+        - featureLayer.getFilter
+        - featureLayer.setGeoJSON
+        - featureLayer.getGeoJSON
+  - title: Geocoding
+    id: mapbox-geocoding
+    nav:
+      - title: L.mapbox.geocoder
+        sub:
+        - geocoder.query
+        - geocoder.reverseQuery
+  - title: Controls
+    id: mapbox-controls
+    nav:
+      - title: L.mapbox.infoControl
+        sub:
+        - infoControl.addInfo
+        - infoControl.removeInfo
+      - title: L.mapbox.legendControl
+        sub:
+        - legendControl.addLegend
+        - legendControl.removeLegend
+      - title: L.mapbox.gridControl
+        sub:
+        - gridControl.hide
+        - gridControl.setTemplate
+      - title: L.mapbox.geocoderControl
+        sub:
+        - geocoderControl.setURL
+        - geocoderControl.setID
+        - geocoderControl.setTileJSON
+        - geocoderControl.on
+      - title: L.mapbox.shareControl
+        sub:
+  - title: Markers
+    id: mapbox-markers
+    nav:
+      - title: L.mapbox.marker.icon
+        sub:
+      - title: L.mapbox.marker.style
+        sub:
+  - title: Simplestyle
+    id: mapbox-simplestyle
+    nav:
+      - title: L.simplestyle.style
+        sub:
+  - title: Utility
+    id: mapbox-utility
+    nav:
+      - title: L.mapbox.sanitize
+        sub:
+      - title: L.mapbox.template
+        sub:
+  - title: Mobile
+    id: mapbox-mobile
+    nav:
+  - title: Theming
+    id: mapbox-theming
+    nav:
+      - title: Map
+      - title: Layers
+      - title: Geocoding
+      - title: Controls
+      - title: Markers
+      - title: Simplestyle
+      - title: Utility
+      - title: Mobile
+  - title: Map
+    id: leaflet-map
+  - title: Marker
+    id: leaflet-marker
+  - title: Popup
+    id: leaflet-popup
+  - title: TileLayer
+    id: leaflet-tilelayer
+  - title: TileLayer.WMS
+    id: leaflet-tilelayer.wms
+  - title: TileLayer.Canvas
+    id: leaflet-tilelayer.canvas
+  - title: ImageOverlay
+    id: leaflet-imageoverlay
+  - title: Path
+    id: leaflet-path
+  - title: Polyline
+    id: leaflet-polyline
+  - title: MultiPolyline
+    id: leaflet-multipolyline
+  - title: Polygon
+    id: leaflet-polygon
+  - title: MultiPolygon
+    id: leaflet-multipolygon
+  - title: Rectangle
+    id: leaflet-rectangle
+  - title: Circle
+    id: leaflet-circle
+  - title: CircleMarker
+    id: leaflet-circlemarker
+  - title: LayerGroup
+    id: leaflet-layergroup
+  - title: FeatureGroup
+    id: leaflet-featuregroup
+  - title: GeoJson
+    id: leaflet-geojson
+  - title: LatLng
+    id: leaflet-latlng
+  - title: LatLngBounds
+    id: leaflet-latlngbounds
+  - title: Point
+    id: leaflet-point
+  - title: Bounds
+    id: leaflet-bounds
+  - title: Icon
+    id: leaflet-icon
+  - title: DivIcon
+    id: leaflet-divicon
+  - title: Control
+    id: leaflet-control
+  - title: Control.zoom
+    id: leaflet-control.zoom
+  - title: Control.Attribution
+    id: leaflet-control.attribution
+  - title: Control.Layers
+    id: leaflet-control.layers
+  - title: Control.Scale
+    id: leaflet-control.scale
+  - title: Events methods
+    id: leaflet-events methods
+  - title: Event objects
+    id: leaflet-event objects
+  - title: Class
+    id: leaflet-class
+  - title: Browser
+    id: leaflet-browser
+  - title: Util
+    id: leaflet-util
+  - title: Transformation
+    id: leaflet-transformation
+  - title: LineUtil
+    id: leaflet-lineutil
+  - title: PolyUtil
+    id: leaflet-polyutil
+  - title: DomEvent
+    id: leaflet-domevent
+  - title: DomUtil
+    id: leaflet-domutil
+  - title: PosAnimation
+    id: leaflet-posanimation
+  - title: Draggable
+    id: leaflet-draggable
+  - title: IHandler
+    id: leaflet-ihandler
+  - title: ILayer
+    id: leaflet-ilayer
+  - title: IControl
+    id: leaflet-icontrol
+  - title: IProjection
+    id: leaflet-iprojection
+  - title: ICRS
+    id: leaflet-icrs
+  - title: Global Switches
+    id: leaflet-global switches
+  - title: noConflict
+    id: leaflet-noconflict
+  - title: version
+    id: leaflet-version
+
+---
+<h2 id="browser">Browser</h2>
+
+<p>A namespace with properties for browser/feature detection used by Leaflet internally.</p>
+
+<pre><code>if (L.Browser.ie6) {
+	alert('Upgrade your browser, dude!');
+}</code></pre>
+
+<table data-id='browser'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>ie</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for all Internet Explorer versions.</td>
+	</tr>
+	<tr>
+		<td><code><b>ie6</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for Internet Explorer 6.</td>
+	</tr>
+	<tr>
+		<td><code><b>ie7</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for Internet Explorer 7.</td>
+	</tr>
+	<tr>
+		<td><code><b>webkit</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for webkit-based browsers like Chrome and Safari (including mobile versions).</td>
+	</tr>
+	<tr>
+		<td><code><b>webkit3d</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for webkit-based browsers that support CSS 3D transformations.</td>
+	</tr>
+	<!--<tr>
+		<td><code><b>gecko</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for Gecko-based browsers like Firefox and Mozilla.</td>
+	</tr>
+	<tr>
+		<td><code><b>opera</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for Opera.</td>
+	</tr>-->
+	<tr>
+		<td><code><b>android</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for Android mobile browser.</td>
+	</tr>
+	<tr>
+		<td><code><b>android23</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for old Android stock browsers (2 and 3).</td>
+	</tr>
+	<tr>
+		<td><code><b>mobile</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for modern mobile browsers (including iOS Safari and different Android browsers).</td>
+	</tr>
+	<tr>
+		<td><code><b>mobileWebkit</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for mobile webkit-based browsers.</td>
+	</tr>
+	<tr>
+		<td><code><b>mobileOpera</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for mobile Opera.</td>
+	</tr>
+	<tr>
+		<td><code><b>touch</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for all browsers on touch devices.</td>
+	</tr>
+	<tr>
+		<td><code><b>msTouch</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for browsers with Microsoft touch model (e.g. IE10).</td>
+	</tr>
+	<tr>
+		<td><code><b>retina</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code> for devices with Retina screens.</td>
+	</tr>
+</table>
+
+
