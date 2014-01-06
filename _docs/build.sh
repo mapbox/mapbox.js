@@ -25,9 +25,7 @@ sed "s/__TAG__/$TAG/" header > ../_posts/api/0200-01-01-$TAG.html
 echo "version: $TAG" >> ../_posts/api/0200-01-01-$TAG.html
 
 echo "Generating html..."
-if ! `node generate.js \
-    node_modules/mapbox.js/API.md \
-    >> ../_posts/api/0200-01-01-$TAG.html`; then 
 
-    rm ../_posts/api/0200-01-01-$TAG.html;
-fi
+node generate.js node_modules/mapbox.js/API.md >> ../_posts/api/0200-01-01-$TAG.html
+
+cat leaflet-reference.html >> ../_posts/api/0200-01-01-$TAG.html
