@@ -61,12 +61,12 @@ examples:
     code: |
       <script>
         var mapstories = L.mapbox.map('map-storytelling', 'examples.map-9ijuk24y');
+        var chapters = [];
         var markers = L.mapbox.markerLayer()
           .loadURL('/mapbox.js/examples/storytelling.geojson')
           .addTo(mapstories);
 
         mapstories.markerLayer.on('ready', function(e) {
-            var chapters = [];
             markers.eachLayer(function(chapter) {
               chapters.push(chapter);
             });
@@ -77,12 +77,15 @@ examples:
         function cycle(chapters) {
           var i = 0;
           function run() {
-            if (++i > chapters.length - 1) i = 0;
-            var c = chapters[i].feature.geometry.coordinates;
-            mapstories.setView([c[1], c[0]], 13);
-            chapters[i].openPopup();
+            if (chapters.length) {
+              if (++i > chapters.length - 1) i = 0;
+              var c = chapters[i].feature.geometry.coordinates;
+              mapstories.setView([c[1], c[0]], 13);
+              chapters[i].openPopup();
+            }
             window.setTimeout(run, 3000);
           }
+
           run();
         }
       </script>

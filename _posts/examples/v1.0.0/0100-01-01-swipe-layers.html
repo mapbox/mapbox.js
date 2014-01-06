@@ -1,0 +1,43 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Swipe Layers
+description: Swipe between layers
+tags:
+  - layers
+---
+<style>
+#range {
+  width: 100%;
+  position: absolute;
+}
+.leaflet-top .leaflet-control-zoom {
+  margin-top: 20px;
+}
+</style>
+
+<div id='map'></div>
+<input id="range" type="range" min="0" max="1.0" step="any" style="width: 100%; position: absolute" />
+<script>
+    var map = L.mapbox.map('map');
+
+    L.mapbox.tileLayer('examples.map-a1dcgmtr').addTo(map);
+    var overlay = L.mapbox.tileLayer('examples.map-20v6611k').addTo(map);
+
+    var range = document.getElementById('range');
+
+    function clip() {
+        var nw = map.containerPointToLayerPoint([0, 0]),
+            se = map.containerPointToLayerPoint(map.getSize()),
+            clipX = nw.x + (se.x - nw.x) * range.value;
+
+        overlay.getContainer().style.clip = 'rect(' + [nw.y, clipX, se.y, nw.x].join('px,') + 'px)';
+    }
+
+    range['oninput' in range ? 'oninput' : 'onchange'] = clip;
+    map.on('move', clip);
+
+    map.setView([0, 0], 3);
+
+</script>

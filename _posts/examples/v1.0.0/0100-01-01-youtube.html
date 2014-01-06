@@ -24,7 +24,7 @@ var map = L.mapbox.map('map', 'examples.youtube-embed', {
     // can't add cross-site scripting attacks to sites that use their
     // maps.
     // Turning it off allows any content to be available in tooltips.
-    // It's recommended to only with trusted maps.
+    // It's recommended to only implement with trusted maps.
     gridControl: {
         sanitizer: function(x) { return x; }
     }
