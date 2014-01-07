@@ -65,7 +65,7 @@ function readDocumentation(filename) {
         all += f;
         chunks.forEach(function(c) {
             nav += '  - title: ' + c.name + '\n';
-            nav += '    id: leaflet-' + c.name.toLowerCase() + '\n';
+            nav += '    id: ' + c.id + '\n';
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: headerAll.replace('All', c.name) + 'version: ' + argv.t + '\n' +
