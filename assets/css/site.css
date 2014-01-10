@@ -2,12 +2,7 @@
   overflow:auto;
   overflow-y:auto;
   overflow-x:hidden;
-  top:80px;
   }
-  .fixed-sidebar.fixed {
-    position:fixed;
-    top:0;
-    }
 
 .masthead {
   position:relative;
