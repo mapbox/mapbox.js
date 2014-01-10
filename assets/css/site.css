@@ -2,11 +2,13 @@
   overflow:auto;
   overflow-y:auto;
   overflow-x:hidden;
-  top:80px;
+  position:fixed;
   }
-  .fixed-sidebar a       { color:rgba(0,0,0,0.75); }
-  .fixed-sidebar a.quiet { color:rgba(0,0,0,0.5); }
-  .fixed-sidebar a:hover { background-color:rgba(0,0,0,0.05); }
+
+.masthead {
+  position:relative;
+  z-index:10;
+  }
 
 /* TODO Stop gap for base overriding dark input style */
 .leaflet-container.dark textarea:focus,
@@ -17,9 +19,13 @@
 /* Base Candidate */
 .note pre { background:#fff; }
 
-.space-bottom1      { margin-bottom:10px; }
 .space-bottom4,
 .depth-3, .depth-2  { margin-bottom:40px; }
+
+.anchors .strong,
+.anchors .strong:hover {
+  color:rgba(0,0,0,0.75);
+  }
 
 /* Otherwise the controls are hidden
  * on the landing page when animating the
@@ -87,17 +93,6 @@
   height:400px;
   }
 #demo label { display:inline; }
-
-#snippet {
-  background:#fff;
-  position:relative;
-  overflow:hidden;
-  }
-  #snippet .button {
-    position:absolute;
-    bottom:20px; right:20px;
-    z-index:1;
-    }
 
 .quiet-scroll::-webkit-scrollbar {
   width:8px;

@@ -7,16 +7,13 @@ fullwidth: true
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
-<div class='hide-mobile col3 fixed-sidebar quiet-scroll pin-left fill-light'>
-  <div class='col12 clearfix pad2y'>
+<div class='hide-mobile col3 fixed-sidebar quiet-scroll pin-left keyline-right fill-light'>
 
+  <div class='row2'></div>
+
+  <div class='col12 clearfix pad2y'>
     <div class='pad2x'>
-      <h3 class='tag small'>
-        <a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a>
-      </h3>
-      <h2>
-        {{site.title}}
-        <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+      <h2><a href='{{site.baseurl}}/'>{{site.title}}</a><a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
         {% if page.v0 %}
           <sup class='fill-yellow small'>{{site.oldversion}}</sup>
         {% elsif page.version %}
@@ -41,24 +38,50 @@ fullwidth: true
       </nav>
     </div>
 
-    <nav class='anchors'>
+    {% if page.navigation or page.examples %}
+    <div class='anchor-search pad2 keyline-bottom'>
+      <fieldset class='with-icon'>
+        <span class='icon search'></span>
+        <input id='search-filter' type='text' class='stretch' placeholder='Filter'>
+      </fieldset>
+    </div>
+    {% endif %}
+
+    <nav class='anchors pad2x'>
       {% for section in page.navigation %}
-      <div class='keyline-bottom'>
-        <a class='heading pad1y pad2x col12 strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
+        <a class='col12 pad1y strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
         {% for nav in section.nav %}
-        <div class='space-bottom1'>
-          <a class='col12 pad2x truncate' href='#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-          {% for sub in nav.sub %}
-            <a class='col12 pad2x truncate quiet small' href='#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-          {% endfor %}
-        </div>
+          <a class='col12 truncate' href='#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+
+          {% if nav.sub %}
+            <div class='pad1y'>
+              {% for sub in nav.sub %}
+                <a class='col12 truncate small quiet' href='#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+              {% endfor %}
+            </div>
+          {% endif %}
         {% endfor %}
+      {% endfor %}
+
+      {% for item in page.examples %}
+      <div class='section'>
+        <strong class='col12 pad1y'>{{item.name}}</strong>
+        <div id='{{item.id}}' class='examples examples-{{item.id}}'>
+        {% for example in site.tags[item.id] order:ascending %}
+          {% if example.version == 'v1.0.0' %}
+            <a href='{{site.baseurl}}{{example.url}}' class='col12 truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+          {% endif %}
+        {% endfor %}
+        </div>
       </div>
       {% endfor %}
+
     </nav>
   </div>
 </div>
 
-<div class='margin3 pad4 col8 fill-white clearfix'>
+<div class='margin3 pad4 col8 clearfix'>
 {{content}}
 </div>
+
+
