@@ -47,7 +47,7 @@ function splitChunks(lines) {
             };
         } else {
             if (chunk) {
-                chunk.text.push(lines[i]);
+                chunk.text.push(transformLinks(lines[i]));
             }
         }
     }
@@ -55,13 +55,23 @@ function splitChunks(lines) {
     return chunks;
 }
 
+function transformLinks(line) {
+    return line.replace(/href=['"]([^"']*)['"]/, function(all, content) {
+        if (content.indexOf('#') === 0) {
+            return all.replace(content, '/mapbox.js/api/' + argv.t + '/leaflet-' + content.replace('#', ''));
+        } else {
+            return all;
+        }
+    });
+}
 
 function readDocumentation(filename) {
     var f = fs.readFileSync(filename, 'utf8');
+    var chunks;
 
     if (filename.match(/html$/)) {
         var lines = f.split('\n');
-        var chunks = splitChunks(lines);
+        chunks = splitChunks(lines);
         all += f;
         chunks.forEach(function(c) {
             nav += '  - title: ' + c.name + '\n';
@@ -78,7 +88,8 @@ function readDocumentation(filename) {
         var lexed = marked.lexer(f);
         mdout += '<div>';
         start = 0;
-        var chunks = [], chunk;
+        chunks = [];
+        var chunk;
 
         for (var i = 0; i < lexed.length; i++) {
 

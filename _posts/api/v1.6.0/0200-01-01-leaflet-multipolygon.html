@@ -198,7 +198,7 @@ navigation:
 ---
 <h2 id="multipolygon">MultiPolygon</h2>
 
-<p>Extends <a href="#featuregroup">FeatureGroup</a> to allow creating multi-polygons (single layer that consists of several polygons that share styling/popup).</p>
+<p>Extends <a href="/mapbox.js/api/v1.6.0/leaflet-featuregroup">FeatureGroup</a> to allow creating multi-polygons (single layer that consists of several polygons that share styling/popup).</p>
 
 <h3>Creation</h3>
 
@@ -210,8 +210,8 @@ navigation:
 	</tr>
 	<tr>
 		<td><code><b>L.multiPolygon</b>(
-			<nobr>&lt;<a href="#latlng">LatLng</a>[][]&gt; <i>latlngs</i></nobr>,
-			<nobr>&lt;<a href="#polyline-options">Polyline options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>[][]&gt; <i>latlngs</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-polyline-options">Polyline options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 
 
@@ -221,7 +221,7 @@ navigation:
 
 <h3>Methods</h3>
 
-<p>MultiPolygons accept all <a href="#polyline">Polyline methods</a> but
+<p>MultiPolygons accept all <a href="/mapbox.js/api/v1.6.0/leaflet-polyline">Polyline methods</a> but
 have different behavior around their coordinate contents since they can contain
 multiple polygon features:</p>
 
@@ -233,7 +233,7 @@ multiple polygon features:</p>
 	</tr>
 	<tr>
 		<td><code><b>setLatLngs</b>(
-			<nobr>&lt;<a href="#latlng">LatLng</a>[][]&gt; <i>latlngs</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>[][]&gt; <i>latlngs</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -243,7 +243,7 @@ multiple polygon features:</p>
 	<tr>
 		<td><code><b>getLatLngs</b>()</td>
 
-		<td><code><nobr>&lt;<a href="#latlng">LatLng</a>[][]&gt; <i>latlngs</i></nobr>
+		<td><code><nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>[][]&gt; <i>latlngs</i></nobr>
 		</code></td>
 		<td>Returns an array of arrays of geographical points in each polygon.</td>
     </tr>
@@ -251,7 +251,7 @@ multiple polygon features:</p>
 		<td><code><b>openPopup</b>()</td>
 
 		<td><code>this</code></td>
-		<td>Opens the popup previously bound by <a href="#path-bindpopup">bindPopup</a>.</td>
+		<td>Opens the popup previously bound by <a href="/mapbox.js/api/v1.6.0/leaflet-path-bindpopup">bindPopup</a>.</td>
     </tr>
 	<tr id="multipolygon-togeojson">
 		<td><code><b>toGeoJSON</b>()</code></td>

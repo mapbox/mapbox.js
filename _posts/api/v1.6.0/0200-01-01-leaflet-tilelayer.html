@@ -198,7 +198,7 @@ navigation:
 ---
 <h2 id="tilelayer">TileLayer</h2>
 
-<p>Used to load and display tile layers on the map, implements <a href="#ilayer">ILayer</a> interface.</p>
+<p>Used to load and display tile layers on the map, implements <a href="/mapbox.js/api/v1.6.0/leaflet-ilayer">ILayer</a> interface.</p>
 
 <h3>Usage example</h3>
 
@@ -217,12 +217,12 @@ navigation:
 	</tr>
 	<tr>
 		<td><code><b>L.tileLayer</b>(
-			<nobr>&lt;String&gt; <i><a href="#url-template">urlTemplate</a></i>,</nobr>
-			<nobr>&lt;<a href="#tilelayer-options">TileLayer options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;String&gt; <i><a href="/mapbox.js/api/v1.6.0/leaflet-url-template">urlTemplate</a></i>,</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-tilelayer-options">TileLayer options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 
 
-		<td>Instantiates a tile layer object given a <a href="#url-template">URL template</a> and optionally an options object.</td>
+		<td>Instantiates a tile layer object given a <a href="/mapbox.js/api/v1.6.0/leaflet-url-template">URL template</a> and optionally an options object.</td>
 	</tr>
 </table>
 
@@ -234,7 +234,7 @@ navigation:
 
 <p><code>{s}</code> means one of the available subdomains (used sequentially to help with browser parallel requests per domain limitation; subdomain values are specified in options; <code>a</code>, <code>b</code> or <code>c</code> by default, can be omitted), <code>{z}</code> &mdash; zoom level, <code>{x}</code> and <code>{y}</code> &mdash; tile coordinates.</p>
 
-<p>You can use custom keys in the template, which will be <a href="#util-template">evaluated</a> from TileLayer options, like this:</p>
+<p>You can use custom keys in the template, which will be <a href="/mapbox.js/api/v1.6.0/leaflet-util-template">evaluated</a> from TileLayer options, like this:</p>
 
 <pre><code class="javascript">L.tileLayer('http://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png', {foo: 'bar'});</code></pre>
 
@@ -359,7 +359,7 @@ navigation:
 
 <h3>Events</h3>
 
-<p>You can subscribe to the following events using <a href="#events">these methods</a>.</p>
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v1.6.0/leaflet-events">these methods</a>.</p>
 
 <table data-id='tilelayer'>
 	<tr>
@@ -369,27 +369,27 @@ navigation:
 	</tr>
 	<tr>
 		<td><code><b>loading</b></code></td>
-		<td><code><a href="#event">Event</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-event">Event</a></code></td>
 		<td>Fired when the tile layer starts loading tiles.</td>
 	</tr>
 	<tr>
 		<td><code><b>load</b></code></td>
-		<td><code><a href="#event">Event</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-event">Event</a></code></td>
 		<td>Fired when the tile layer loaded all visible tiles.</td>
 	</tr>
     <tr>
 		<td><code><b>tileloadstart</b></code></td>
-		<td><code><a href="#tile-event">TileEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-tile-event">TileEvent</a></code></td>
 		<td>Fired when a tile is requested and starts loading.</td>
 	</tr>
 	<tr>
 		<td><code><b>tileload</b></code></td>
-		<td><code><a href="#tile-event">TileEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-tile-event">TileEvent</a></code></td>
 		<td>Fired when a tile loads.</td>
 	</tr>
 	<tr>
 		<td><code><b>tileunload</b></code></td>
-		<td><code><a href="#tile-event">TileEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-tile-event">TileEvent</a></code></td>
 		<td>Fired when a tile is removed (e.g. when you have <code>unloadInvisibleTiles</code> on).</td>
 	</tr>
 </table>
@@ -404,7 +404,7 @@ navigation:
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-map">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -443,7 +443,7 @@ navigation:
 	</tr>
 	<tr>
 		<td><code><b>setUrl</b>(
-			<nobr>&lt;String&gt; <i><a href="#url-template">urlTemplate</a></i> )</nobr>
+			<nobr>&lt;String&gt; <i><a href="/mapbox.js/api/v1.6.0/leaflet-url-template">urlTemplate</a></i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Updates the layer's URL template and redraws it.</td>
