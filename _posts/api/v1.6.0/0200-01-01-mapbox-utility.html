@@ -196,7 +196,7 @@ navigation:
     id: leaflet-version
 
 ---
-<h1 id="utility">Utility</h1>
+{% raw %}<h1 id="utility">Utility</h1>
 <h2 id="l-mapbox-sanitize-string-">L.mapbox.sanitize(string)</h2>
 <p>A HTML sanitization function, with the same effect as the default value of the <code>sanitizer</code> option of <code>L.mapbox.featureLayer</code>, <code>L.mapbox.gridControl</code>, and <code>L.mapbox.legendControl</code>.</p>
 <table>
@@ -239,5 +239,6 @@ navigation:
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var output = L.mapbox.template(&amp;#39;Name: {{name}}&amp;#39;, {name: &amp;#39;John&amp;#39;});
-// output is &amp;quot;Name: John&amp;quot;</code></pre>
+<pre><code>var output = L.mapbox.template(&#39;Name: {{name}}&#39;, {name: &#39;John&#39;});
+// output is &quot;Name: John&quot;</code></pre>
+{% endraw %}

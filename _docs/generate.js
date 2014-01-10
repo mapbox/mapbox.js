@@ -86,6 +86,7 @@ function readDocumentation(filename) {
     } else {
         var mdout = '';
         var lexed = marked.lexer(f);
+        var lexed2 = marked.lexer(f);
         mdout += '<div>';
         start = 0;
         chunks = [];
@@ -94,6 +95,7 @@ function readDocumentation(filename) {
         for (var i = 0; i < lexed.length; i++) {
 
             l = lexed[i];
+            l2 = lexed2[i];
 
             if (l.type === 'heading') matchedHeading = l.text.match(/([^\(]*)\.([^\(]*)(\((.*)\))?/);
             if (l.type === 'heading') matchedEvent = l.text.match(/Event:\s(.*)/);
@@ -180,7 +182,7 @@ function readDocumentation(filename) {
                 mdout += '<div class="space-bottom api-group-content depth-' + l.depth + '">';
             } else {
                 if (chunk) {
-                    chunk.chunks.push(l);
+                    chunk.chunks.push(l2);
                 }
             }
         }
@@ -192,8 +194,8 @@ function readDocumentation(filename) {
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: headerAll.replace('All', c.name) +
                     'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n' +
-                    marked.parser(c.chunks).replace('id="map"', '')
+                    'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n{% raw %}' +
+                    marked.parser(c.chunks).replace('id="map"', '') + '{% endraw %}'
             });
         });
         toParse = lexed.slice(start, i);
