@@ -1,6 +1,20 @@
 ---
 ---
 
+function ui() {
+    var offset = 80; // Height of the masthead.
+
+    // Control the header nav
+    $(window).scroll(_.throttle(function() {
+        var scrollTop = $(window).scrollTop();
+        if (scrollTop > offset) {
+            $('.fixed-sidebar').addClass('fixed');
+        } else {
+            $('.fixed-sidebar').removeClass('fixed');
+        }
+    }, 100));
+};
+
 (function(context) {
     var Docs = function() {};
 
@@ -177,3 +191,5 @@
 
     window.Docs = Docs;
 })(window);
+
+$(ui);

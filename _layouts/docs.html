@@ -8,9 +8,6 @@ fullwidth: true
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
 <div class='hide-mobile col3 fixed-sidebar quiet-scroll pin-left keyline-right fill-light'>
-
-  <div class='row2'></div>
-
   <div class='col12 clearfix pad2y'>
     <div class='pad2x'>
       <h2><a href='{{site.baseurl}}/'>{{site.title}}</a><a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
@@ -38,14 +35,12 @@ fullwidth: true
       </nav>
     </div>
 
-    {% if page.navigation or page.examples %}
-    <div class='anchor-search pad2 keyline-bottom'>
+    <div class='anchor-search pad2'>
       <fieldset class='with-icon'>
         <span class='icon search'></span>
         <input id='search-filter' type='text' class='stretch' placeholder='Filter'>
       </fieldset>
     </div>
-    {% endif %}
 
     <nav class='anchors pad2x'>
       {% for section in page.navigation %}
