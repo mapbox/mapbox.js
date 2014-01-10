@@ -1,0 +1,64 @@
+---
+layout: default
+fullwidth: true
+---
+
+<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
+
+<div class='hide-mobile col3 fixed-sidebar quiet-scroll pin-left fill-light'>
+  <div class='col12 clearfix pad2y'>
+
+    <div class='pad2x'>
+      <h3 class='tag small'>
+        <a href='{{site.url}}/{{page.section|downcase}}' class='quiet'>{{page.section}}</a>
+      </h3>
+      <h2>
+        {{site.title}}
+        <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+        {% if page.v0 %}
+          <sup class='fill-yellow small'>{{site.oldversion}}</sup>
+        {% elsif page.version %}
+          {% if page.category == 'examples' %}
+            <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+          {% else %}
+            <sup class='fill-darken0 small'>{{page.version}}</sup>
+          {% endif %}
+        {% else %}
+          <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+        {% endif %}
+        </a>
+      </h2>
+      <nav class='tabs mobile-cols col12 clearfix pad2y'>
+        {% if page.v0 %}
+          <a href='{{site.baseurl}}/api/v0.6.7/' class='col6 {% if page.url contains "api" %}active{% endif %}'>API</a>
+          <a href='{{site.baseurl}}/example/v0.6.7/' class='col6 {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+        {% else %}
+          <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col6 {% if page.url contains "api" %}active{% endif %}'>API</a>
+          <a href='{{site.baseurl}}/example/v1.0.0/' class='col6 {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+        {% endif %}
+      </nav>
+    </div>
+
+    <nav class='anchors'>
+      {% for section in page.navigation %}
+      <div class='keyline-bottom'>
+        <a class='heading pad1y pad2x col12 strong' href='#section-{{section.title|replace:' ',' '|downcase}}'>{{section.title}}</a>
+        {% for nav in section.nav %}
+        <div class='space-bottom1'>
+          <a class='col12 pad2x truncate' href='#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+          {% for sub in nav.sub %}
+            <a class='col12 pad2x truncate quiet small' href='#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </nav>
+  </div>
+</div>
+
+<div class='margin3 pad4 col8 fill-white clearfix'>
+{{content}}
+</div>

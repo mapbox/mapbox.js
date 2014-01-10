@@ -25,14 +25,14 @@ navigation:
         sub:
         - gridLayer.getTileJSON
         - gridLayer.getData
-      - title: L.mapbox.featureLayer
+      - title: L.mapbox.markerLayer
         sub:
-        - featureLayer.loadURL
-        - featureLayer.loadID
-        - featureLayer.setFilter
-        - featureLayer.getFilter
-        - featureLayer.setGeoJSON
-        - featureLayer.getGeoJSON
+        - markerLayer.loadURL
+        - markerLayer.loadID
+        - markerLayer.setFilter
+        - markerLayer.getFilter
+        - markerLayer.setGeoJSON
+        - markerLayer.getGeoJSON
   - title: Geocoding
     id: mapbox-geocoding
     nav:
@@ -70,11 +70,6 @@ navigation:
         sub:
       - title: L.mapbox.marker.style
         sub:
-  - title: Simplestyle
-    id: mapbox-simplestyle
-    nav:
-      - title: L.simplestyle.style
-        sub:
   - title: Utility
     id: mapbox-utility
     nav:
@@ -93,7 +88,6 @@ navigation:
       - title: Geocoding
       - title: Controls
       - title: Markers
-      - title: Simplestyle
       - title: Utility
       - title: Mobile
   - title: Map
@@ -347,11 +341,8 @@ function with that data, if any.</p>
 </tbody>
 </table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>
-<h2 id="l-mapbox-featurelayer-id-url-tilejson-options-">L.mapbox.featureLayer(id|url|tilejson, options)</h2>
-<p><strong>NOTE: in version 1.6.0, <code>L.mapbox.markerLayer</code> was renamed to <code>L.mapbox.featureLayer</code>
-to signal the addition of support for lines and polygons. The <code>L.mapbox.markerLayer</code>
-alias will be removed in Mapbox.js 2.0.0</strong></p>
-<p><code>L.mapbox.featureLayer</code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
+<h2 id="l-mapbox-markerlayer-id-url-tilejson-options-">L.mapbox.markerLayer(id|url|tilejson, options)</h2>
+<p><code>L.mapbox.markerLayer</code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
 from Mapbox and elsewhere into your map.</p>
 <table>
 <thead>
@@ -375,10 +366,10 @@ from Mapbox and elsewhere into your map.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     .addTo(map);</code></pre>
-<p><em>Returns</em> a <code>L.mapbox.featureLayer</code> object.</p>
-<h3 id="featurelayer-loadurl-url-">featureLayer.loadURL(url)</h3>
+<p><em>Returns</em> a <code>L.mapbox.markerLayer</code> object.</p>
+<h3 id="markerlayer-loadurl-url-">markerLayer.loadURL(url)</h3>
 <p>Load GeoJSON data for this layer from the URL given by <code>url</code>.</p>
 <table>
 <thead>
@@ -397,12 +388,12 @@ from Mapbox and elsewhere into your map.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer()
+<pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
-featureLayer.loadURL(&amp;#39;my_local_markers.geojson&amp;#39;);</code></pre>
+markerLayer.loadURL(&amp;#39;my_local_markers.geojson&amp;#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
-<h3 id="featurelayer-loadid-id-">featureLayer.loadID(id)</h3>
+<h3 id="markerlayer-loadid-id-">markerLayer.loadID(id)</h3>
 <p>Load marker GeoJSON data from a map with the given <code>id</code> on Mapbox.</p>
 <table>
 <thead>
@@ -421,14 +412,14 @@ featureLayer.loadURL(&amp;#39;my_local_markers.geojson&amp;#39;);</code></pre>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer()
+<pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
 // loads markers from the map `examples.map-0l53fhk2` on Mapbox,
 // if that map has markers
-featureLayer.loadID(&amp;#39;examples.map-0l53fhk2&amp;#39;);</code></pre>
+markerLayer.loadID(&amp;#39;examples.map-0l53fhk2&amp;#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
-<h3 id="featurelayer-setfilter-filter-">featureLayer.setFilter(filter)</h3>
+<h3 id="markerlayer-setfilter-filter-">markerLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>
 <table>
 <thead>
@@ -447,23 +438,23 @@ featureLayer.loadID(&amp;#39;examples.map-0l53fhk2&amp;#39;);</code></pre>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     // hide all markers
     .setFilter(function() { return false; })
     .addTo(map);</code></pre>
-<p><em>Returns</em> the featureLayer object.</p>
-<h3 id="featurelayer-getfilter-">featureLayer.getFilter()</h3>
+<p><em>Returns</em> the markerLayer object.</p>
+<h3 id="markerlayer-getfilter-">markerLayer.getFilter()</h3>
 <p>Gets the filter function for this data layer.</p>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     // hide all markers
     .setFilter(function() { return false; })
     .addTo(map);
 
 // get the filter function
-var fn = featureLayer.getFilter()</code></pre>
+var fn = markerLayer.getFilter()</code></pre>
 <p><em>Returns</em> the filter function.</p>
-<h3 id="featurelayer-setgeojson-geojson-">featureLayer.setGeoJSON(geojson)</h3>
+<h3 id="markerlayer-setgeojson-geojson-">markerLayer.setGeoJSON(geojson)</h3>
 <p>Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
 for the map. If the layer already has features, they are replaced with the new features.
@@ -485,11 +476,11 @@ An empty array will clear the layer of all features.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     .addTo(map);
 // a simple GeoJSON featureset with a single point
 // with no properties
-featureLayer.setGeoJSON({
+markerLayer.setGeoJSON({
     type: &amp;quot;FeatureCollection&amp;quot;,
     features: [{
         type: &amp;quot;Feature&amp;quot;,
@@ -500,7 +491,7 @@ featureLayer.setGeoJSON({
         properties: { }
     }]
 });</code></pre>
-<p><em>Returns</em> the featureLayer object</p>
-<h3 id="featurelayer-getgeojson-">featureLayer.getGeoJSON()</h3>
+<p><em>Returns</em> the markerLayer object</p>
+<h3 id="markerlayer-getgeojson-">markerLayer.getGeoJSON()</h3>
 <p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>

@@ -25,14 +25,14 @@ navigation:
         sub:
         - gridLayer.getTileJSON
         - gridLayer.getData
-      - title: L.mapbox.featureLayer
+      - title: L.mapbox.markerLayer
         sub:
-        - featureLayer.loadURL
-        - featureLayer.loadID
-        - featureLayer.setFilter
-        - featureLayer.getFilter
-        - featureLayer.setGeoJSON
-        - featureLayer.getGeoJSON
+        - markerLayer.loadURL
+        - markerLayer.loadID
+        - markerLayer.setFilter
+        - markerLayer.getFilter
+        - markerLayer.setGeoJSON
+        - markerLayer.getGeoJSON
   - title: Geocoding
     id: mapbox-geocoding
     nav:
@@ -70,11 +70,6 @@ navigation:
         sub:
       - title: L.mapbox.marker.style
         sub:
-  - title: Simplestyle
-    id: mapbox-simplestyle
-    nav:
-      - title: L.simplestyle.style
-        sub:
   - title: Utility
     id: mapbox-utility
     nav:
@@ -93,7 +88,6 @@ navigation:
       - title: Geocoding
       - title: Controls
       - title: Markers
-      - title: Simplestyle
       - title: Utility
       - title: Mobile
   - title: Map
@@ -198,7 +192,7 @@ navigation:
 ---
 <h1 id="utility">Utility</h1>
 <h2 id="l-mapbox-sanitize-string-">L.mapbox.sanitize(string)</h2>
-<p>A HTML sanitization function, with the same effect as the default value of the <code>sanitizer</code> option of <code>L.mapbox.featureLayer</code>, <code>L.mapbox.gridControl</code>, and <code>L.mapbox.legendControl</code>.</p>
+<p>A HTML sanitization function, with the same effect as the default value of the <code>sanitizer</code> option of <code>L.mapbox.markerLayer</code>, <code>L.mapbox.gridControl</code>, and <code>L.mapbox.legendControl</code>.</p>
 <table>
 <thead>
 <tr>

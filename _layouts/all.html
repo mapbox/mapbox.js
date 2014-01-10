@@ -1,46 +1,15 @@
 ---
-layout: default
-section: developers
+layout: global
 ---
 
-{% include header.html %}
-
-<div class='col12 round box clearfix contain'>
+<div class='col12 round clearfix contain'>
   {% if site.mapboxjs != page.version %}
   <div class='warning note keyline-bottom'>
     Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}'>{{site.mapboxjs}} for the latest</a>.
   </div>
   {% endif %}
 
-  <div class='fill-white clearfix'>
-    <div class='col3'>
-      <div class='pad2 keyline-bottom'>
-        <fieldset class='search with-icon'>
-          <span class='icon search'></span>
-          <input id='search-filter' type='text' class='stretch' placeholder='Filter methods'>
-        </fieldset>
-      </div>
-      <nav class='anchors'>
-        {% for section in page.navigation %}
-        <div class='pad2 keyline-bottom'>
-            <a class='heading col12 strong' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
-          {% for nav in section.nav %}
-          <div class='pad1y'>
-            <a class='col12 truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-            {% for sub in nav.sub %}
-              <a class='col12 truncate quiet small' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-            {% endfor %}
-          </div>
-          {% endfor %}
-        </div>
-        {% endfor %}
-      </nav>
-    </div>
-
-    <div class='col9 keyline-left'>
       <div id='docs' class='doc-content prose'>
-        <div class='pad2 doc'>
-          <div class='space-bottom4'>
             <h2>Reading this Documentation</h2>
 
             <p>The documentation is organized by <em>methods</em>. Each method
@@ -89,18 +58,11 @@ section: developers
             The <a href='http://github.com/mapbox/mapbox.js'>code and documentation to mapbox.js</a> and <a href='https://github.com/leaflet/leaflet'>Leaflet</a> is hosted on GitHub</a> where you can contribute changes and improvements.
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-{% include developers-footer.html %}
 
 <script>
   $(function() {
     var docs = new Docs();
     docs.colorCode();
-    docs.bindSearch($('.search input'), $('nav'));
     docs.bindInlineCode();
   });
 </script>

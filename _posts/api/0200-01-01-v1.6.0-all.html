@@ -25,14 +25,14 @@ navigation:
         sub:
         - gridLayer.getTileJSON
         - gridLayer.getData
-      - title: L.mapbox.featureLayer
+      - title: L.mapbox.markerLayer
         sub:
-        - featureLayer.loadURL
-        - featureLayer.loadID
-        - featureLayer.setFilter
-        - featureLayer.getFilter
-        - featureLayer.setGeoJSON
-        - featureLayer.getGeoJSON
+        - markerLayer.loadURL
+        - markerLayer.loadID
+        - markerLayer.setFilter
+        - markerLayer.getFilter
+        - markerLayer.setGeoJSON
+        - markerLayer.getGeoJSON
   - title: Geocoding
     id: mapbox-geocoding
     nav:
@@ -70,11 +70,6 @@ navigation:
         sub:
       - title: L.mapbox.marker.style
         sub:
-  - title: Simplestyle
-    id: mapbox-simplestyle
-    nav:
-      - title: L.simplestyle.style
-        sub:
   - title: Utility
     id: mapbox-utility
     nav:
@@ -93,7 +88,6 @@ navigation:
       - title: Geocoding
       - title: Controls
       - title: Markers
-      - title: Simplestyle
       - title: Utility
       - title: Mobile
   - title: Map
@@ -391,11 +385,8 @@ function with that data, if any.</p>
 </tbody>
 </table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>
-</div><h2 id="section-L.mapbox.featureLayer">L.mapbox.featureLayer<span class="bracket">(</span><span class="args">id|url|tilejson, options</span><span class="bracket">)</span></h2>
-<div class="space-bottom api-group-content depth-2"><p><strong>NOTE: in version 1.6.0, <code>L.mapbox.markerLayer</code> was renamed to <code>L.mapbox.featureLayer</code>
-to signal the addition of support for lines and polygons. The <code>L.mapbox.markerLayer</code>
-alias will be removed in Mapbox.js 2.0.0</strong></p>
-<p><code>L.mapbox.featureLayer</code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
+</div><h2 id="section-L.mapbox.markerLayer">L.mapbox.markerLayer<span class="bracket">(</span><span class="args">id|url|tilejson, options</span><span class="bracket">)</span></h2>
+<div class="space-bottom api-group-content depth-2"><p><code>L.mapbox.markerLayer</code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
 from Mapbox and elsewhere into your map.</p>
 <table>
 <thead>
@@ -419,10 +410,10 @@ from Mapbox and elsewhere into your map.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     .addTo(map);</code></pre>
-<p><em>Returns</em> a <code>L.mapbox.featureLayer</code> object.</p>
-</div><h3 id="section-featureLayer.loadURL">featureLayer.loadURL<span class="bracket">(</span><span class="args">url</span><span class="bracket">)</span></h3>
+<p><em>Returns</em> a <code>L.mapbox.markerLayer</code> object.</p>
+</div><h3 id="section-markerLayer.loadURL">markerLayer.loadURL<span class="bracket">(</span><span class="args">url</span><span class="bracket">)</span></h3>
 <div class="space-bottom api-group-content depth-3"><p>Load GeoJSON data for this layer from the URL given by <code>url</code>.</p>
 <table>
 <thead>
@@ -441,12 +432,12 @@ from Mapbox and elsewhere into your map.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer()
+<pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
-featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
+markerLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
-</div><h3 id="section-featureLayer.loadID">featureLayer.loadID<span class="bracket">(</span><span class="args">id</span><span class="bracket">)</span></h3>
+</div><h3 id="section-markerLayer.loadID">markerLayer.loadID<span class="bracket">(</span><span class="args">id</span><span class="bracket">)</span></h3>
 <div class="space-bottom api-group-content depth-3"><p>Load marker GeoJSON data from a map with the given <code>id</code> on Mapbox.</p>
 <table>
 <thead>
@@ -465,14 +456,14 @@ featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer()
+<pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
 // loads markers from the map `examples.map-0l53fhk2` on Mapbox,
 // if that map has markers
-featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);</code></pre>
+markerLayer.loadID(&#39;examples.map-0l53fhk2&#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
-</div><h3 id="section-featureLayer.setFilter">featureLayer.setFilter<span class="bracket">(</span><span class="args">filter</span><span class="bracket">)</span></h3>
+</div><h3 id="section-markerLayer.setFilter">markerLayer.setFilter<span class="bracket">(</span><span class="args">filter</span><span class="bracket">)</span></h3>
 <div class="space-bottom api-group-content depth-3"><p>Sets the filter function for this data layer.</p>
 <table>
 <thead>
@@ -491,23 +482,23 @@ featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);</code></pre>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     // hide all markers
     .setFilter(function() { return false; })
     .addTo(map);</code></pre>
-<p><em>Returns</em> the featureLayer object.</p>
-</div><h3 id="section-featureLayer.getFilter">featureLayer.getFilter<span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<p><em>Returns</em> the markerLayer object.</p>
+</div><h3 id="section-markerLayer.getFilter">markerLayer.getFilter<span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
 <div class="space-bottom api-group-content depth-3"><p>Gets the filter function for this data layer.</p>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     // hide all markers
     .setFilter(function() { return false; })
     .addTo(map);
 
 // get the filter function
-var fn = featureLayer.getFilter()</code></pre>
+var fn = markerLayer.getFilter()</code></pre>
 <p><em>Returns</em> the filter function.</p>
-</div><h3 id="section-featureLayer.setGeoJSON">featureLayer.setGeoJSON<span class="bracket">(</span><span class="args">geojson</span><span class="bracket">)</span></h3>
+</div><h3 id="section-markerLayer.setGeoJSON">markerLayer.setGeoJSON<span class="bracket">(</span><span class="args">geojson</span><span class="bracket">)</span></h3>
 <div class="space-bottom api-group-content depth-3"><p>Set the contents of a markers layer: run the provided
 features through the filter function and then through the factory function to create elements
 for the map. If the layer already has features, they are replaced with the new features.
@@ -529,11 +520,11 @@ An empty array will clear the layer of all features.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+<pre><code>var markerLayer = L.mapbox.markerLayer(geojson)
     .addTo(map);
 // a simple GeoJSON featureset with a single point
 // with no properties
-featureLayer.setGeoJSON({
+markerLayer.setGeoJSON({
     type: &quot;FeatureCollection&quot;,
     features: [{
         type: &quot;Feature&quot;,
@@ -544,8 +535,8 @@ featureLayer.setGeoJSON({
         properties: { }
     }]
 });</code></pre>
-<p><em>Returns</em> the featureLayer object</p>
-</div><h3 id="section-featureLayer.getGeoJSON">featureLayer.getGeoJSON<span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
+<p><em>Returns</em> the markerLayer object</p>
+</div><h3 id="section-markerLayer.getGeoJSON">markerLayer.getGeoJSON<span class="bracket">(</span><span class="args"></span><span class="bracket">)</span></h3>
 <div class="space-bottom api-group-content depth-3"><p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>
 </div><h1 id="section-geocoding">Geocoding</h1>
@@ -990,37 +981,9 @@ features.</p>
 });</code></pre>
 <p><em>Returns</em>:</p>
 <p>A <code>L.Marker</code> object with the latitude, longitude position and a styled marker</p>
-</div><h1 id="section-simplestyle">Simplestyle</h1>
-<div class="space-bottom api-group-content depth-1"><p>The other sections of the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> are implemented
-by <code>L.mapbox.simplestyle</code></p>
-</div><h2 id="section-L.simplestyle.style">L.simplestyle.style<span class="bracket">(</span><span class="args">feature</span><span class="bracket">)</span></h2>
-<div class="space-bottom api-group-content depth-2"><p>Given a GeoJSON Feature with optional simplestyle-spec properties, return an
-options object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>
-<table>
-<thead>
-<tr>
-<th>Options</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>feature</td>
-<td>object</td>
-<td>A GeoJSON feature object</td>
-</tr>
-</tbody>
-</table>
-<p><em>Examples</em>:</p>
-<pre><code>L.geoJson(geoJson, {
-    pointToLayer: L.mapbox.simplestyle.style,
-});</code></pre>
-<p><em>Returns</em>:</p>
-<p>An object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>
 </div><h1 id="section-utility">Utility</h1>
 <div class="space-bottom api-group-content depth-1"></div><h2 id="section-L.mapbox.sanitize">L.mapbox.sanitize<span class="bracket">(</span><span class="args">string</span><span class="bracket">)</span></h2>
-<div class="space-bottom api-group-content depth-2"><p>A HTML sanitization function, with the same effect as the default value of the <code>sanitizer</code> option of <code>L.mapbox.featureLayer</code>, <code>L.mapbox.gridControl</code>, and <code>L.mapbox.legendControl</code>.</p>
+<div class="space-bottom api-group-content depth-2"><p>A HTML sanitization function, with the same effect as the default value of the <code>sanitizer</code> option of <code>L.mapbox.markerLayer</code>, <code>L.mapbox.gridControl</code>, and <code>L.mapbox.legendControl</code>.</p>
 <table>
 <thead>
 <tr>
