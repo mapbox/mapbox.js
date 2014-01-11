@@ -86,13 +86,12 @@
         {% endfor %}
       </div>
       {% endfor %}
-
     </nav>
   </div>
 </div>
 
-<div class='limiter'>
-  <div class='margin3 pad4y col8 clearfix'>
+<div class='limiter clearfix'>
+  <div class='margin3 pad4y col8'>
     {% include nav.html %}
     {{content}}
     <div class='keyline-top pad2y center small'>
@@ -107,7 +106,7 @@
     $(docs.copyCode);
 
     {% if page.v0 %}
-    docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
+      docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
     {% endif %}
 
     docs.bindSearch($('#filter'), $('.anchors'));

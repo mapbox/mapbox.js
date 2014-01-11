@@ -196,6 +196,7 @@ function readDocumentation(filename) {
 landOutput.write(nav);
 output.write(nav);
 landOutput.write("---\n");
+landOutput.write("{% include api.introduction.html %}");
 output.write("---\n");
 output.write("{% raw %}\n");
 output.write(all + '\n');
