@@ -25,10 +25,9 @@
             prettyPrint(cb);
         },
 
-        bindSearch: function(input, menu, cb) {
+        bindSearch: function(input, menu) {
             this.$el = input;
             this.$menu = menu;
-            this.cb = cb;
             this.$el.on('keyup', $.proxy(this._keyup, this));
         },
 
@@ -52,10 +51,8 @@
                     body = $(document.getElementById('content-' + id)).text();
 
                 if (!q || body.toLowerCase().indexOf(q) !== -1 || id.toLowerCase().indexOf(q) !== -1) {
-                    $this.addClass('filtered');
                     $this.show();
                 } else {
-                    $this.removeClass('filtered');
                     $this.hide();
                 }
             });
@@ -177,5 +174,3 @@
 
     window.Docs = Docs;
 })(window);
-
-$(ui);

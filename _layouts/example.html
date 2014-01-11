@@ -1,5 +1,6 @@
 ---
 layout: docs
+category: examples
 examples:
 - id: animation
   name: Animation
@@ -39,7 +40,7 @@ examples:
       <h3>{{page.title}}</h3>
       <p>{{page.description}}</p>
     </div>
-    <div id='demo'>{{content}}</div>
+    <div id='demo' class='contain row10'>{{content}}</div>
     <div id='snippet'>
     <div id='code' class='fill-light'>
 
@@ -82,26 +83,3 @@ examples:
   <a class='button icon clipboard col12 round-bottom' href='#' id='copy'>Select code</a>
   </div>
 </div>
-
-<script src='{{site.baseurl}}/assets/js/site.js'></script>
-
-<script>
-  $(function () {
-    var example = new Docs();
-    $(example.copyCode);
-    {% if page.v0 %}
-    example.colorCode(function(){
-        example.bindHints("{{ site.oldversion }}");
-    });
-    {% endif %}
-    example.bindSearch($('.anchor-search input'), $('.anchors'), function() {
-      $('.section').each(function(){
-          if($(this).find('.filtered').length !== 0) {
-              $(this).parent('.section').show();
-          } else {
-              $(this).parent('.section').hide();
-          }
-      });
-    });
-  });
-</script>

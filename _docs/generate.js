@@ -19,12 +19,11 @@ nav += '  - title: View on single page\n' +
 var output = fs.createWriteStream(argv.o);
 var landOutput = fs.createWriteStream(argv.l);
 
-var headerSummary = fs.readFileSync('header', 'utf8').replace(/__TAG__/g, argv.t);
-var headerAll = fs.readFileSync('header-all', 'utf8').replace(/__TAG__/g, argv.t);
+var header = fs.readFileSync('header', 'utf8').replace(/__TAG__/g, argv.t);
 var writes = [];
 
-landOutput.write(headerSummary);
-output.write(headerAll);
+landOutput.write(header);
+output.write(header);
 output.write('version: ' + argv.t + '\n');
 landOutput.write('version: ' + argv.t + '\n');
 output.write('permalink: /api/' + argv.t + '/all/\n');
@@ -68,7 +67,7 @@ function readDocumentation(filename) {
             nav += '    id: ' + c.id + '\n';
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
-                contents: headerAll.replace('All', c.name) + 'version: ' + argv.t + '\n' +
+                contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
                     'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n' +
                     c.text.join('\n')
             });
@@ -179,7 +178,7 @@ function readDocumentation(filename) {
             c.chunks.links = lexed.links;
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
-                contents: headerAll.replace('All', c.name) +
+                contents: header.replace('All', c.name) +
                     'version: ' + argv.t + '\n' +
                     'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n' +
                     marked.parser(c.chunks).replace('id="map"', '')

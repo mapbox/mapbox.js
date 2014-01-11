@@ -2,37 +2,30 @@
   overflow:auto;
   overflow-y:auto;
   overflow-x:hidden;
+  position:fixed;
   }
+  .fixed-sidebar input {
+    border:none;
+    }
 
 .masthead {
   position:relative;
   z-index:10;
   }
 
-/* TODO Stop gap for base overriding dark input style */
-.leaflet-container.dark textarea:focus,
-.leaflet-container.dark input[type=text]:focus {
-  color:#404040;
-  }
+.anchors .pad1y:empty { padding:0; }
+.anchors .sub         { padding:5px 20px; }
 
-/* Base Candidate */
-.note pre { background:#fff; }
-
-.space-bottom4,
-.depth-3, .depth-2  { margin-bottom:40px; }
-
-.anchors .strong,
+.fixed-sidebar .inline,
+.anchors a:not(.quiet),
+.anchors .active,
 .anchors .strong:hover {
   color:rgba(0,0,0,0.75);
   }
-
-/* Otherwise the controls are hidden
- * on the landing page when animating the
- * different map examples in. */
-.sliding .pin-bottom,
-.sliding .leaflet-control {
-  -webkit-transform:translate3d(0,0,0);
-  }
+  .anchors .active:not(.quiet),
+  .anchors a:hover:not(.quiet) {
+    background-color:rgba(0,0,0,0.05);
+    }
 
 .version,
 .version:hover {
@@ -41,23 +34,6 @@
   .version > *{
     padding:2px 5px;
     }
-
-/* Scrollbar */
-.scrollbar {
-  overflow-y: auto;
-  }
-.scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  border-left: 1px solid rgba(0,0,0,.1);
-  background: transparent;
-  }
-.scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.1);
-  border-radius: 0;
-  }
-.scrollbar::-webkit-scrollbar-track { background: none; }
-.scrollbar::-webkit-scrollbar:hover { background: rgba(0,0,0,.05); }
 
 .doc table em { color:rgba(0,0,0,0.5); }
 .args {
@@ -71,10 +47,8 @@
   width:20px;
   height:20px;
   vertical-align:top;
+  margin-right:5px;
   }
-  .doc-content .leaflet:before {
-    margin-right:5px;
-    }
 
 #map {
   background:#fff;
@@ -87,11 +61,6 @@
 .code {
   overflow:auto;
   }
-#demo {
-  position:relative;
-  height:400px;
-  }
-#demo label { display:inline; }
 
 .quiet-scroll::-webkit-scrollbar {
   width:8px;
