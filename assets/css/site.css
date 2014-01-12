@@ -8,11 +8,6 @@
     border:none;
     }
 
-.masthead {
-  position:relative;
-  z-index:10;
-  }
-
 .navigation .pad1y:empty { padding:0; }
 .navigation .sub         { padding:5px 20px; }
 
@@ -38,9 +33,7 @@
     }
 
 .doc table em { color:rgba(0,0,0,0.5); }
-.args {
-  color:rgba(0,0,0,0.5);
-  }
+.args { color:rgba(0,0,0,0.5); }
 
 .leaflet:before {
   background:transparent url(../images/sprite.png) no-repeat 0 0;
@@ -52,33 +45,46 @@
   margin-right:5px;
   }
 
+/*Examples*/
 #map {
-  background:#fff;
   position:absolute;
+  top:0;left:0;
   width:100%;
   height:100%;
-  top:0;
-  left:0;
-  }
-.code {
-  overflow:auto;
   }
 
+/*Landing*/
+.feature { padding-left:100px; }
+.feature,
+.feature:hover { color:rgba(0,0,0,0.75); }
+.feature:hover { background-color:#fbfbfb; }
+
+.code-scroll pre {
+  overflow:auto;
+  white-space:pre;
+  word-wrap:normal;
+  word-break:normal;
+  }
+
+.code-scroll pre::-webkit-scrollbar,
 .quiet-scroll::-webkit-scrollbar {
   width:8px;
   height:8px;
   border-left:0;
-  background: rgba(0,0,0,.1);
+  background:rgba(0,0,0,0.1);
   }
+.code-scroll pre::-webkit-scrollbar-track,
 .quiet-scroll::-webkit-scrollbar-track {
   background:none;
   }
+.code-scroll pre::-webkit-scrollbar-thumb,
 .quiet-scroll::-webkit-scrollbar-thumb {
-  background:rgba(0,0,0,.1);
-  border-radius: 0;
+  background:rgba(0,0,0,0.1);
+  border-radius:0;
   }
+.code-scroll pre::-webkit-scrollbar:hover,
 .quiet-scroll::-webkit-scrollbar:hover {
-  background: rgba(0,0,0,.15);
+  background:rgba(0,0,0,0.15);
   }
 
 pre a {

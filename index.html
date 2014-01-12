@@ -27,23 +27,45 @@ layout: default
 <div class='clearfix space-bottom4'>
   <div class='col5'>
     <h2 id='getting-started' class='space-bottom1'>Get started fast</h2>
-    <div class='prose'>
-      <p>MapBox.js is hosted on the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML.</p>
+    <div class='prose space-bottom2'>
+      <p>Use the hosted on the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. Add a reference to the JavaScript &amp; CSS in your HTML.</p>
+    </div>
+    <div class='code-scroll'>
+{% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>{% endhighlight %}
     </div>
   </div>
   <div class='col6 margin1'>
-{% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
-<script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>{% endhighlight %}
+    <a href='{{site.baseurl}}/example/v1.0.0/load-geojson/' class='contain feature clearfix pad2 round-top keyline-bottom'>
+      <div class='pad2 pin-left'><img class='dot' src='{{site.baseurl}}/assets/images/feature-data.png' /></div>
+      <div class='prose'>
+        <p><strong>Add data</strong> like <strong>GeoJSON</strong> a simple format for adding interactive features to a map.</p>
+      </div>
+    </a>
+    <a href='{{site.baseurl}}/example/v1.0.0/choropleth/' class='contain feature clearfix pad2 round-bottom keyline-bottom'>
+      <div class='pad2 pin-left'><img class='dot' src='{{site.baseurl}}/assets/images/feature-viz.png' /></div>
+      <div class='prose'>
+        <p><strong>Create data visualizations</strong> like choropleths graphings population density.</p>
+      </div>
+    </a>
+
+    <a href='{{site.baseurl}}/example/v1.0.0/cycle-markers/' class='contain feature clearfix pad2'>
+      <div class='pad2 pin-left'><img class='dot' src='{{site.baseurl}}/assets/images/feature-story.png' /></div>
+      <div class='prose pad1y'>
+        <p><strong>Tell stories</strong> like a walk through locations.</p>
+      </div>
+    </a>
+
   </div>
 </div>
 
-<div class='clearfix col12'>
+<div class='clearfix'>
   <div class='col3 pad2 center'>
     <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
       <span class='icon big leaflet'></span>
     </span>
     <div class='prose'>
-      <p>MapBox.js is built on top of <a href='http://leafletjs.com/'><strong>Leaflet</strong></a> &#8212; an open-source mapping library.</p>
+      <p>MapBox.js is <strong>built on top of <a href='http://leafletjs.com/'>Leaflet</a></strong> &#8212; an open-source mapping library.</p>
     </div>
   </div>
 
@@ -52,7 +74,7 @@ layout: default
       <span class='icon big heart'></span>
     </span>
     <div class='prose'>
-      <p>The source code is <strong>open</strong> and available on <a href='//github.com/mapbox/mapbox.js/'>GitHub</a> and takes advantage of open specifications like <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a>, <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a> and  <a href='http://www.geojson.org/'>GeoJSON</a>.</p>
+      <p><strong>The source code is open</strong> and available on <a href='//github.com/mapbox/mapbox.js/'>GitHub</a> and takes advantage of open specifications like <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a>, <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a> and  <a href='http://www.geojson.org/'>GeoJSON</a>.</p>
     </div>
   </div>
 
