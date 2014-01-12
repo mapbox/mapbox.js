@@ -3,61 +3,90 @@ title: MapBox.js
 layout: default
 ---
 
-<h2 id='getting-started' class='space-bottom1'>Get started fast</h2>
-<div class='prose'>
-  <p>MapBox.js is hosted on the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML.</p>
+<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
+
+<div class='pad4y col12 clearfix'>
+  <div class='col6'>
+    <h1>
+      {{site.title}}
+      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+        <sup class='fill-grey small'>{{site.mapboxjs}}</sup>
+      </a>
+    </h1>
+  </div>
+
+  <nav class='pill mobile-cols col6 clearfix'>
+    <a href='{{site.baseurl}}/' class='col4 button active'>Overview</a>
+    <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col4 button'>API</a>
+    <a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>
+  </nav>
+</div>
+
+<div class='pad4y clearfix col12'>
+  <div class='col5'>
+    <h2 id='getting-started' class='space-bottom1'>Get started fast</h2>
+    <div class='prose'>
+      <p>MapBox.js is hosted on the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. All that's needed is a reference to the script &amp; CSS in your HTML.</p>
+    </div>
+  </div>
+  <div class='col6 margin1'>
 {% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
 <script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>{% endhighlight %}
-</div>
-
-<div class='clearfix'>
-  <div class='col6 pad2'>
-    <div class='center'>
-      <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-        <span class='icon big leaflet'></span>
-      </span>
-      <h3 id='mapbox-and-leaflet' class='space-bottom1'>Leaflet built-in</h3>
-    </div>
-    <div class='prose'>
-      <p>MapBox.js is built on top of <a href='http://leafletjs.com/'>Leaflet</a> &#8212; an open-source mapping library. <a href='http://leafletjs.com/reference.html'>Leaflet's API</a> handles much of the fundamental operations of using maps.</p>
-    </div>
-  </div>
-
-  <div class='col6 pad2'>
-    <div class='center'>
-      <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-        <span class='icon big heart'></span>
-      </span>
-      <h3 id='open-specs' class='space-bottom1'>Open</h3>
-    </div>
-    <div class='prose'>
-      <p>The source code is open source and available on <a href='//github.com/mapbox/mapbox.js/'>GitHub</a>. It takes advantage of open specifications like <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a>, <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a> and  <a href='http://www.geojson.org/'>GeoJSON</a>.</p>
-    </div>
   </div>
 </div>
 
-<div class='clearfix'>
-  <div class='col6 pad2'>
-    <div class='center'>
-      <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-        <span class='icon big check'></span>
-      </span>
-      <h3 id='browser-supported' class='space-bottom1'>Browser tested &amp; supported</h3>
+<div class='clearfix col12'>
+  <div class='col8 margin2 clearfix'>
+    <div class='col6 pad2'>
+      <div class='center'>
+        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
+          <span class='icon big leaflet'></span>
+        </span>
+        <h3 id='mapbox-and-leaflet' class='space-bottom1'>Leaflet built-in</h3>
+      </div>
+      <div class='prose'>
+        <p>MapBox.js is built on top of <a href='http://leafletjs.com/'>Leaflet</a> &#8212; an open-source mapping library. <a href='http://leafletjs.com/reference.html'>Leaflet's API</a> handles much of the fundamental operations of using maps.</p>
+      </div>
     </div>
-    <div class='prose'>
-      <p>MapBox.js is compatible with IE8+ and <a href='http://browsehappy.com/'>modern browsers</a> like Chrome, Firefox, and Safari.</p>
+
+    <div class='col6 pad2'>
+      <div class='center'>
+        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
+          <span class='icon big heart'></span>
+        </span>
+        <h3 id='open-specs' class='space-bottom1'>Open</h3>
+      </div>
+      <div class='prose'>
+        <p>The source code is open source and available on <a href='//github.com/mapbox/mapbox.js/'>GitHub</a>. It takes advantage of open specifications like <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a>, <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a> and  <a href='http://www.geojson.org/'>GeoJSON</a>.</p>
+      </div>
     </div>
   </div>
 
-  <div class='col6 pad2'>
-    <div class='center'>
-      <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-        <span class='icon big mobile'></span>
-      </span>
-      <h3 id='mobile' class='space-bottom1'>Optimized for mobile</h3>
+  <div class='col8 margin2 clearfix'>
+    <div class='col6 pad2'>
+      <div class='center'>
+        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
+          <span class='icon big check'></span>
+        </span>
+        <h3 id='browser-supported' class='space-bottom1'>Browser tested &amp; supported</h3>
+      </div>
+      <div class='prose'>
+        <p>MapBox.js is compatible with IE8+ and <a href='http://browsehappy.com/'>modern browsers</a> like Chrome, Firefox, and Safari.</p>
+      </div>
     </div>
-    <div class='prose'>
-      <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, check out the <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'>Mobile section in the documentation</a>.</p>
+
+    <div class='col6 pad2'>
+      <div class='center'>
+        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
+          <span class='icon big mobile'></span>
+        </span>
+        <h3 id='mobile' class='space-bottom1'>Optimized for mobile</h3>
+      </div>
+      <div class='prose'>
+        <p>MapBox.js is optimized for mobile devices and small screens by default. For additional tools for managing mobile maps, check out the <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'>Mobile section in the documentation</a>.</p>
+      </div>
     </div>
   </div>
 </div>

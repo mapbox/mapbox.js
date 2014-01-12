@@ -1,6 +1,6 @@
 <nav class='pill mobile-cols col12 clearfix pad4y'>
   <a href='{{site.url}}/' class='icon fl mapbox button'></a>
-  <a href='{{site.baseurl}}/' class='col3 button quiet {% if page.url contains "mapbox.js/" %}active{% endif %}'>Overview</a>
+  <a href='{{site.baseurl}}/' class='col3 button quiet {% if page.url contains "/index.html" %}active{% endif %}'>Overview</a>
   {% if page.v0 %}
     <a href='{{site.baseurl}}/api/v0.6.7/' class='col3 button quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
     <a href='{{site.baseurl}}/example/v0.6.7/' class='col3 button quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>

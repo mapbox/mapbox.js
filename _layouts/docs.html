@@ -62,9 +62,9 @@
       </fieldset>
     </div>
 
-    <nav class='anchors'>
+    <nav class='navigation'>
       {% for section in page.navigation %}
-        <a class='col12 pad1y pad2x strong' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
+        <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
         {% for nav in section.nav %}
           <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
 
@@ -91,10 +91,10 @@
 </div>
 
 <div class='limiter clearfix'>
-  <div class='margin3 pad4y col8'>
+  <div class='margin3 pad4y col9'>
     {% include nav.html %}
     {{content}}
-    <div class='keyline-top pad2y center small'>
+    <div class='pad2y center small'>
       The <a href='http://github.com/mapbox/mapbox.js'>code and documentation to mapbox.js</a> and <a href='https://github.com/leaflet/leaflet'>Leaflet</a> is hosted on GitHub</a> where you can contribute changes and improvements.
     </div>
   </div>
@@ -109,7 +109,7 @@
       docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
     {% endif %}
 
-    docs.bindSearch($('#filter'), $('.anchors'));
+    docs.bindSearch($('#filter'), $('.navigation'));
   }
 
   $(load);

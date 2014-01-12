@@ -13,18 +13,20 @@
   z-index:10;
   }
 
-.anchors .pad1y:empty { padding:0; }
-.anchors .sub         { padding:5px 20px; }
+.navigation .pad1y:empty { padding:0; }
+.navigation .sub         { padding:5px 20px; }
 
 .fixed-sidebar .inline,
-.anchors a:not(.quiet),
-.anchors .active,
-.anchors .strong:hover {
+.navigation a:not(.quiet),
+.navigation .active,
+.navigation .strong:hover {
   color:rgba(0,0,0,0.75);
   }
-  .anchors .active:not(.quiet),
-  .anchors a:hover:not(.quiet) {
+  .navigation a:hover:not(.quiet) {
     background-color:rgba(0,0,0,0.05);
+    }
+  .navigation .active:not(.quiet) {
+    background-color:rgba(0,0,0,0.1);
     }
 
 .version,
