@@ -20,6 +20,7 @@
   .navigation a:hover:not(.quiet) {
     background-color:rgba(0,0,0,0.05);
     }
+  .navigation .active:hover:not(.quiet),
   .navigation .active:not(.quiet) {
     background-color:rgba(0,0,0,0.1);
     }
