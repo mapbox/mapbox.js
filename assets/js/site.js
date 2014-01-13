@@ -188,6 +188,15 @@ function updateAvatar() {
 function load() {
     $('.js-tabs a').click(App.tabs);
     updateAvatar();
+
+    var docs = new Docs();
+    $(docs.copyCode);
+
+    {% if page.v0 %}
+      docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
+    {% endif %}
+
+    docs.bindSearch($('#filter'), $('.navigation'));
 }
 
 $(load);

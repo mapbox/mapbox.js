@@ -65,21 +65,24 @@ examples:
 <div class='hide-mobile col3 pad1 fixed-sidebar pin-left'>
   <div class='col12 clearfix keyline-all fill-grey quiet-scroll'>
 
-    <div class='row1 keyline-bottom'>
-      <a href='#' id='avatar' class='keyline-right pad2 inline'></a>
-      <a class='inline strong' href='{{site.baseurl}}/'>{{site.title}}</a><a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
-        {% if page.v0 %}
-          <sup class='fill-yellow small'>{{site.oldversion}}</sup>
-        {% elsif page.version %}
-          {% if page.category == 'examples' %}
-            <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+    <div class='row1 keyline-bottom space-bottom2'>
+      <a href='{{site.url}}' id='avatar' class='keyline-right pad2 fl inline'></a>
+      <p class='fl pad1 strong small'>
+        {{site.title}}
+        <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+          {% if page.v0 %}
+            <span class='fill-yellow'>{{site.oldversion}}</span>
+          {% elsif page.version %}
+            {% if page.category == 'examples' %}
+              <span class='fill-darken0'>{{site.mapboxjs}}</span>
+            {% else %}
+              <span class='fill-darken0'>{{page.version}}</span>
+            {% endif %}
           {% else %}
-            <sup class='fill-darken0 small'>{{page.version}}</sup>
+            <span class='fill-darken0'>{{site.mapboxjs}}</span>
           {% endif %}
-        {% else %}
-          <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
-        {% endif %}
-      </a>
+        </a>
+      </p>
     </div>
 
     {% capture api %}
@@ -90,53 +93,55 @@ examples:
     {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
     {% endcapture %}
 
-    <nav class='hide-mobile js-tabs tabs mobile-cols col12 clearfix pad4y'>
+    <nav class='hide-mobile js-tabs tabs mobile-cols col12 clearfix pad2x'>
       <a href='#api' class='col6 {% if page.url contains "api" %}active{% endif %}'>API</a>
       <a href='#examples' class='col6 {% if page.url contains "example" %}active{% endif %}'>Examples</a>
     </nav>
 
-    <div class='navigation sliding h col12 row8 clip active1'>
+    <div class='navigation sliding h col12 row9 clip active1'>
       <div id='api' class='col12 animate'>
-
         <div class='anchor-search pad2'>
           <fieldset class='with-icon'>
             <span class='icon search'></span>
-            <input id='filter' type='text' class='round col12' placeholder='Filter'>
+            <input id='filter' type='text' class='round col12' placeholder='Filter documentation'>
           </fieldset>
         </div>
 
-        {% for section in page.navigation %}
-          <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
-          {% for nav in section.nav %}
-            <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-            {% if nav.sub %}
-              {% for sub in nav.sub %}
-                <a class='col12 truncate pad2x small quiet' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-              {% endfor %}
-            {% endif %}
+        <div class='navigation quiet-scroll row6 keyline-top keyline-bottom'>
+          {% for section in page.navigation %}
+            <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
+            {% for nav in section.nav %}
+              <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+              {% if nav.sub %}
+                {% for sub in nav.sub %}
+                  <a class='col12 truncate pad2x small quiet' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
           {% endfor %}
-        {% endfor %}
+        </div>
       </div>
 
       <div id='examples' class='col12 animate'>
-
         <div class='anchor-search pad2'>
           <fieldset class='with-icon'>
             <span class='icon search'></span>
-            <input id='filter' type='text' class='round col12' placeholder='Filter'>
+            <input id='filter' type='text' class='round col12' placeholder='Filter examples'>
           </fieldset>
         </div>
 
-        {% for item in page.examples %}
-        <div class='section'>
-          <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
-          {% for example in site.tags[item.id] order:ascending %}
-            {% if example.version == 'v1.0.0' %}
-              <a href='{{site.baseurl}}{{example.url}}' class='col12 example sub truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
-            {% endif %}
+        <div class='navigation quiet-scroll row6 keyline-top keyline-bottom'>
+          {% for item in page.examples %}
+          <div class='section'>
+            <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
+            {% for example in site.tags[item.id] order:ascending %}
+              {% if example.version == 'v1.0.0' %}
+                <a href='{{site.baseurl}}{{example.url}}' class='col12 example sub truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
           {% endfor %}
         </div>
-        {% endfor %}
       </div>
     </div>
 
@@ -148,21 +153,5 @@ examples:
     {{content}}
   </div>
 </div>
-
-<script>
-  function load() {
-    var docs = new Docs();
-    $(docs.copyCode);
-
-    {% if page.v0 %}
-      docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
-    {% endif %}
-
-    docs.bindSearch($('#filter'), $('.navigation'));
-  }
-
-  $(load);
-</script>
-
 </body>
 </html>
