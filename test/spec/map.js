@@ -123,6 +123,11 @@ describe('L.mapbox.map', function() {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {legendControl: {position: 'topleft'}});
             expect(map.legendControl.options.position).to.equal('topleft');
         });
+
+        it('passes shareControl options to share control', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {shareControl: {position: 'bottomleft'}});
+            expect(map.shareControl.options.position).to.equal('bottomleft');
+        });
     });
 
     describe('layers', function() {

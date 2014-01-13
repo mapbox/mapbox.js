@@ -69,7 +69,7 @@ var LMap = L.Map.extend({
         }
 
         if (this.options.shareControl) {
-            this.shareControl = shareControl(this.options.shareControl);
+            this.shareControl = shareControl(undefined, this.options.shareControl);
             this.addControl(this.shareControl);
         }
 
