@@ -1,9 +1,6 @@
 .fixed-sidebar {
   position:fixed;
   }
-.fixed-sidebar > div {
-  height:100%;
-  }
   .fixed-sidebar .navigation {
     overflow:auto;
     overflow-y:auto;

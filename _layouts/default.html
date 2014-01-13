@@ -66,7 +66,7 @@ examples:
   <div class='col12 clearfix keyline-all fill-grey quiet-scroll'>
 
     <div class='row1 keyline-bottom space-bottom2'>
-      <a href='{{site.url}}' id='avatar' class='keyline-right fill-white pad2 fl inline'></a>
+      <a href='{{site.url}}' id='avatar' class='keyline-right fill-darken0 pad2 fl inline'></a>
       <p class='fl pad1 strong small'>
         {{site.title}}
         <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
@@ -98,16 +98,16 @@ examples:
       <a href='#examples' class='col6 {% if page.url contains "example" %}active{% endif %}'>Examples</a>
     </nav>
 
-    <div class='navigation sliding h col12 row9 clip active1'>
-      <div id='api' class='col12 animate'>
-        <div class='anchor-search pad2'>
+    <div class='navigation sliding h col12 row10 clip active1'>
+      <div id='api' class='col12 row10 animate'>
+        <div class='anchor-search pad2 row2'>
           <fieldset class='with-icon'>
             <span class='icon search'></span>
             <input id='filter' type='text' class='round col12' placeholder='Filter documentation'>
           </fieldset>
         </div>
 
-        <div class='navigation quiet-scroll row6 keyline-top keyline-bottom'>
+        <div class='navigation quiet-scroll row8 keyline-top'>
           {% for section in page.navigation %}
             <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
             {% for nav in section.nav %}
@@ -122,15 +122,15 @@ examples:
         </div>
       </div>
 
-      <div id='examples' class='col12 animate'>
-        <div class='anchor-search pad2'>
+      <div id='examples' class='col12 row10 animate'>
+        <div class='anchor-search pad2 row2'>
           <fieldset class='with-icon'>
             <span class='icon search'></span>
             <input id='filter' type='text' class='round col12' placeholder='Filter examples'>
           </fieldset>
         </div>
 
-        <div class='navigation quiet-scroll row6 keyline-top keyline-bottom'>
+        <div class='navigation quiet-scroll row8 keyline-top'>
           {% for item in page.examples %}
           <div class='section'>
             <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
@@ -148,7 +148,7 @@ examples:
   </div>
 </div>
 
-<div class='margin3 pad2y col8'>
+<div class='margin3 pad2y col8 pad4x'>
   {{content}}
 </div>
 
