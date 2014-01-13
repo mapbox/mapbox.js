@@ -18,45 +18,39 @@ layout: default
   </div>
 
   <nav class='pill mobile-cols col6 clearfix'>
-    <a href='{{site.baseurl}}/' class='col4 button active'>Overview</a>
-    <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col4 button'>API</a>
-    <a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button'>Examples</a>
+    <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col6 button'>API</a>
+    <a href='{{site.baseurl}}/example/v1.0.0/' class='col6 button'>Examples</a>
   </nav>
 </div>
 
 <div class='clearfix space-bottom4'>
-  <div class='col5 space-bottom4'>
-    <h2 id='getting-started' class='space-bottom1'>Get started fast</h2>
-    <div class='prose space-bottom2'>
-      <p>Use the hosted on the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. Add a reference to the JavaScript &amp; CSS in your HTML.</p>
-    </div>
-    <div class='code-scroll'>
+
+  <div class='col12 clearfix'>
+    <div class='col4 row6 keyline-top keyline-left pad2'>
+      <h3 id='getting-started' class='space-bottom1'>Get started fast</h3>
+      <div class='prose space-bottom2 quiet small'>
+        <p>Use the hostedjon the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. Add a reference to the JavaScript &amp; CSS in your HTML.</p>
+      </div>
+      <div class='code-scroll'>
 {% highlight html %}<link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
 <script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>{% endhighlight %}
+      </div>
+    </div>
+
+    <div class='col8 row6 pad2 fill-grey'></div>
+  </div>
+
+  <div class='col12 dark clearfix'>
+    <div class='col6 row10 fill-darken3'></div>
+    <div class='col6 row10 clearfix'>
+      <div class='pad2 row5 col12 fill-green'></div>
+      <div class='col12 row5 clearfix'>
+        <div class='pad2 col6 fill-blue row5'></div>
+        <div class='pad2 col6 fill-purple row5'></div>
+      </div>
     </div>
   </div>
-  <div class='col6 margin1'>
-    <a href='{{site.baseurl}}/example/v1.0.0/load-geojson/' class='contain feature clearfix pad2 round-top keyline-bottom'>
-      <div class='pad2 pin-left'><img class='dot' src='{{site.baseurl}}/assets/images/feature-data.png' /></div>
-      <div class='prose'>
-        <p><strong>Add data</strong> like <strong>GeoJSON</strong> a simple format for adding interactive features to a map.</p>
-      </div>
-    </a>
-    <a href='{{site.baseurl}}/example/v1.0.0/choropleth/' class='contain feature clearfix pad2 round-bottom keyline-bottom'>
-      <div class='pad2 pin-left'><img class='dot' src='{{site.baseurl}}/assets/images/feature-viz.png' /></div>
-      <div class='prose'>
-        <p><strong>Create data visualizations</strong> like choropleths graphings population density.</p>
-      </div>
-    </a>
 
-    <a href='{{site.baseurl}}/example/v1.0.0/cycle-markers/' class='contain feature clearfix pad2'>
-      <div class='pad2 pin-left'><img class='dot' src='{{site.baseurl}}/assets/images/feature-story.png' /></div>
-      <div class='prose pad1y'>
-        <p><strong>Tell stories</strong> like a walk through locations.</p>
-      </div>
-    </a>
-
-  </div>
 </div>
 
 <div class='clearfix'>

@@ -37,18 +37,11 @@
 <body>
 
 {% capture api %}
-  {% if page.v0 %}
-    v0.6.7
-  {% else %}
-    {{site.mapboxjs}}
-  {% endif %}
+{% if page.v0 %}v0.6.7{% else %}{{site.mapboxjs}}{% endif %}
 {% endcapture %}
+
 {% capture examples %}
-  {% if page.v0 %}
-    v0.6.7
-  {% else %}
-    v1.0.0
-  {% endif %}
+{% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
 
 <div id='dropdown' class='show-mobile drop pad4'>
