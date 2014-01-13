@@ -1,11 +1,21 @@
-<nav class='pill mobile-cols col12 clearfix pad4y'>
-  <a href='{{site.url}}/' class='icon fl mapbox button'></a>
-  <a href='{{site.baseurl}}/' class='col3 button {% if page.url contains "/index.html" %}active{% endif %}'>Overview</a>
+{% capture api %}
   {% if page.v0 %}
-    <a href='{{site.baseurl}}/api/v0.6.7/' class='col3 button {% if page.url contains "api" %}active{% endif %}'>API</a>
-    <a href='{{site.baseurl}}/example/v0.6.7/' class='col3 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+    v0.6.7
   {% else %}
-    <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col3 button {% if page.url contains "api" %}active{% endif %}'>API</a>
-    <a href='{{site.baseurl}}/example/v1.0.0/' class='col3 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+    {{site.mapboxjs}}
   {% endif %}
+{% endcapture %}
+{% capture examples %}
+  {% if page.v0 %}
+    v0.6.7
+  {% else %}
+    v1.0.0
+  {% endif %}
+{% endcapture %}
+
+<nav class='hide-mobile pill mobile-cols col12 clearfix pad4y'>
+  <a href='{{site.url}}/' class='icon fl mapbox button'></a>
+  <a href='{{site.baseurl}}/' class='col3 button quiet {% if page.url contains "/index.html" %}active{% endif %}'>Overview</a>
+  <a href='{{site.baseurl}}/api/{{api}}/' class='col3 button quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
+  <a href='{{site.baseurl}}/example/{{examples}}/' class='col3 button quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
 </nav>

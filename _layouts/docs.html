@@ -36,6 +36,57 @@
 </head>
 <body>
 
+{% capture api %}
+  {% if page.v0 %}
+    v0.6.7
+  {% else %}
+    {{site.mapboxjs}}
+  {% endif %}
+{% endcapture %}
+{% capture examples %}
+  {% if page.v0 %}
+    v0.6.7
+  {% else %}
+    v1.0.0
+  {% endif %}
+{% endcapture %}
+
+<div id='dropdown' class='show-mobile drop pad4'>
+  <a href='#dropdown' class='icon menu quiet pad1 keyline-all'></a>
+  <div class='dropdown fill-white strong keyline-top keyline-right keyline-left round-bottom'>
+    <div class='close pin-left col12'>
+      <a href='#' class='icon menu quiet pad1 keyline-all fill-light'></a>
+    </div>
+    <div class='contents contain'>
+      <a href='{{site.baseurl}}/' class='pad1 strong col12'>Overview</a>
+      <a href='{{site.baseurl}}/api/{{api}}/' class='pad1 keyline-top strong col12'>API</a>
+      {% for section in page.navigation %}
+        <a class='col12 pad1y pad2x strong small' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
+        {% for nav in section.nav %}
+          <a class='col12 sub truncate small pad2x' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+          {% if nav.sub %}
+            {% for sub in nav.sub %}
+              <a class='col12 truncate pad2x small quiet pad2x' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+
+      <a href='{{site.baseurl}}/example/{{examples}}/' class='pad1 keyline-top strong col12'>Examples</a>
+      {% for item in page.examples %}
+      <div class='section'>
+        <strong class='col12 pad1y pad2x small'>{{item.name}}</strong>
+        {% for example in site.tags[item.id] order:ascending %}
+          {% if example.version == 'v1.0.0' %}
+            <a href='{{site.baseurl}}{{example.url}}' class='col12 pad2x example sub truncate small {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
 <div class='hide-mobile col3 fixed-sidebar quiet-scroll pin-left fill-green'>
   <div class='col12 clearfix pad2y'>
     <div class='pad2x'>
@@ -67,7 +118,6 @@
         <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
         {% for nav in section.nav %}
           <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-
           {% if nav.sub %}
             {% for sub in nav.sub %}
               <a class='col12 truncate pad2x small quiet' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>

@@ -25,6 +25,24 @@
     background-color:rgba(0,0,0,0.1);
     }
 
+
+/* Dropdown Menu in the masthead */
+.dropdown {
+  display:none;
+  margin-top:20px;
+  }
+  .dropdown .contents {
+    z-index:1000;
+    }
+  .dropdown .close {
+    top:20px;
+    left:20px;
+    }
+  .drop:target .dropdown {
+    display:block;
+    z-index:100;
+    }
+
 .version,
 .version:hover {
   color:rgba(0,0,0,0.75);
