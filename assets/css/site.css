@@ -72,11 +72,39 @@
   height:100%;
   }
 
-/*Landing*/
-.feature { padding-left:100px; }
-.feature,
-.feature:hover { color:rgba(0,0,0,0.75); }
-.feature:hover { background-color:#fbfbfb; }
+.content-block[class*='block-'] {
+  background: url(../images/home-maps-all.jpg) no-repeat 0 0;
+}
+
+.content-block.block-1  { background-position: 0 0; }
+.content-block.block-2  { background-position: 0 -330px; }
+.content-block.block-3  { background-position: 0 -550px; }
+.content-block.block-4  { background-position: 0 -680px; }
+.content-block.block-5  { background-position: 0 -1090px; }
+.content-block.block-6  { background-position: 0 -1420px; }
+.content-block.block-7  { background-position: 0 -1550px; }
+.content-block.block-8  { background-position: 0 -1760px; }
+.content-block.block-9  { background-position: 0 -1970px; }
+.content-block.block-10 { background-position: 0 -2180px; }
+.content-block.block-11 { background-position: 0 -2360px; }
+
+.content-block .overlay {
+  /*opacity:0;*/
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  }
+.content-block:hover .overlay {
+  background-color:transparent;
+  }
+.content-block .inner {
+  height: 70px;
+  position: absolute;
+  margin: auto;
+  top: 0; bottom: 0; left: 0; right: 0;
+  }
 
 .code-scroll pre {
   overflow:auto;
