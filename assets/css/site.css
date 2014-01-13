@@ -2,11 +2,13 @@
   position:fixed;
   }
 .fixed-sidebar > div {
-  overflow:auto;
-  overflow-y:auto;
-  overflow-x:hidden;
   height:100%;
   }
+  .fixed-sidebar .navigation {
+    overflow:auto;
+    overflow-y:auto;
+    overflow-x:hidden;
+    }
 
 .navigation .pad1y:empty { padding:0; }
 .navigation .sub         { padding:5px 20px; }

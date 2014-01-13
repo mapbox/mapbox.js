@@ -1,3 +1,29 @@
+---
+examples:
+- id: animation
+  name: Animation
+- id: geocoding
+  name: Geocoding
+- id: handlers
+  name: Handlers
+- id: layers
+  name: Layers
+- id: legend
+  name: Legend
+- id: markers
+  name: Markers
+- id: plugins
+  name: Plugins
+- id: tooltips
+  name: Tooltips
+- id: ui
+  name: User Interface
+- id: vector
+  name: Vector Overlays
+- id: zoom
+  name: Zoom
+---
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,9 +63,11 @@
 <body>
 
 <div class='hide-mobile col3 pad1 fixed-sidebar pin-left'>
-  <div class='col12 clearfix keyline-all quiet-scroll'>
-    <div class='pad2x'>
-      <h2><a class='inline' href='{{site.baseurl}}/'>{{site.title}}</a><a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+  <div class='col12 clearfix keyline-all fill-grey quiet-scroll'>
+
+    <div class='row1 keyline-bottom'>
+      <a href='#' id='avatar' class='keyline-right pad2 inline'></a>
+      <a class='inline strong' href='{{site.baseurl}}/'>{{site.title}}</a><a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
         {% if page.v0 %}
           <sup class='fill-yellow small'>{{site.oldversion}}</sup>
         {% elsif page.version %}
@@ -51,47 +79,72 @@
         {% else %}
           <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
         {% endif %}
-        </a>
-      </h2>
+      </a>
     </div>
 
-    <div class='anchor-search pad2'>
-      <fieldset class='with-icon'>
-        <span class='icon search'></span>
-        <input id='filter' type='text' class='round col12' placeholder='Filter'>
-      </fieldset>
-    </div>
+    {% capture api %}
+    {% if page.v0 %}v0.6.7{% else %}{{site.mapboxjs}}{% endif %}
+    {% endcapture %}
 
-    <nav class='navigation'>
-      {% for section in page.navigation %}
-        <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
-        {% for nav in section.nav %}
-          <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-          {% if nav.sub %}
-            {% for sub in nav.sub %}
-              <a class='col12 truncate pad2x small quiet' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
+    {% capture examples %}
+    {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
+    {% endcapture %}
 
-      {% for item in page.examples %}
-      <div class='section'>
-        <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
-        {% for example in site.tags[item.id] order:ascending %}
-          {% if example.version == 'v1.0.0' %}
-            <a href='{{site.baseurl}}{{example.url}}' class='col12 example sub truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
-          {% endif %}
+    <nav class='hide-mobile js-tabs tabs mobile-cols col12 clearfix pad4y'>
+      <a href='#api' class='col6 {% if page.url contains "api" %}active{% endif %}'>API</a>
+      <a href='#examples' class='col6 {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+    </nav>
+
+    <div class='navigation sliding h col12 row8 clip active1'>
+      <div id='api' class='col12 animate'>
+
+        <div class='anchor-search pad2'>
+          <fieldset class='with-icon'>
+            <span class='icon search'></span>
+            <input id='filter' type='text' class='round col12' placeholder='Filter'>
+          </fieldset>
+        </div>
+
+        {% for section in page.navigation %}
+          <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
+          {% for nav in section.nav %}
+            <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+            {% if nav.sub %}
+              {% for sub in nav.sub %}
+                <a class='col12 truncate pad2x small quiet' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
         {% endfor %}
       </div>
-      {% endfor %}
-    </nav>
+
+      <div id='examples' class='col12 animate'>
+
+        <div class='anchor-search pad2'>
+          <fieldset class='with-icon'>
+            <span class='icon search'></span>
+            <input id='filter' type='text' class='round col12' placeholder='Filter'>
+          </fieldset>
+        </div>
+
+        {% for item in page.examples %}
+        <div class='section'>
+          <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
+          {% for example in site.tags[item.id] order:ascending %}
+            {% if example.version == 'v1.0.0' %}
+              <a href='{{site.baseurl}}{{example.url}}' class='col12 example sub truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
   </div>
 </div>
 
 <div class='limiter clearfix'>
-  <div class='margin3 col9'>
-    {% include nav.html %}
+  <div class='margin3 pad2y col9'>
     {{content}}
   </div>
 </div>

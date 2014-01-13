@@ -174,3 +174,20 @@
 
     window.Docs = Docs;
 })(window);
+
+function updateAvatar() {
+    if (App.user && App.user.avatar) {
+        $('#avatar').removeClass('big mapbox');
+        $('#avatar').css('background-image', 'url("' + App.user.avatar + '")');
+        $('#avatar').css('background-size', 'cover');
+    } else {
+        $('#avatar').addClass('big mapbox');
+    }
+}
+
+function load() {
+    $('.js-tabs a').click(App.tabs);
+    updateAvatar();
+}
+
+$(load);
