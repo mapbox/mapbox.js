@@ -11,22 +11,27 @@
   }
   /*.mast a,*/
   /*.mast a:hover { color:#fff; }*/
-  /*.mast a.active,*/
-  /*.mast a:hover { background-color:rgba(0,0,0,0.25); }*/
+  .mast a.active,
+  .mast a:hover { background-color:rgba(0,0,0,0.05); }
 
 .fixed-sidebar {
   position:fixed;
   top:10px;left:10px;bottom:10px;
+  border-color:rgba(0,0,0,0.25);
   }
   .fixed-sidebar .sliding {
     height:100%;
     }
   .fixed-sidebar .navigation {
     overflow:auto;
-    overflow-y:scroll;
     overflow-x:hidden;
-    height:100%;
+    overflow-y:auto;
+    padding-bottom:140px;
     }
+.content {
+  height:100vm;
+  height:100vmin;
+  }
 
 .navigation .pad1y:empty { padding:0; }
 .navigation .sub         { padding:5px 20px; }
@@ -35,6 +40,16 @@
 .navigation .active:not(.quiet) {
   background-color:rgba(0,0,0,0.05);
   }
+
+.wireframe {
+  border:3px solid rgba(0,0,0,0.5);
+  border-bottom:none;
+  }
+  .wireframe .dot {
+    display:inline-block;
+    width:10px;
+    height:10px;
+    }
 
 /* Dropdown Menu in the masthead */
 .dropdown {

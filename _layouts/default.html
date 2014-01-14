@@ -73,9 +73,9 @@ examples:
 <!--Full bleed intro-->
 <div class='full-y fill-green col12'>
   <div class='margin3 pad4y col8 pad4x prose'>
-    <p class='fl pad1 strong small'>
+    <h2>
       {{site.title}}
-      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+      <a class='quiet' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
         {% if page.v0 %}
           <span class='fill-yellow'>{{site.oldversion}}</span>
         {% elsif page.version %}
@@ -88,7 +88,7 @@ examples:
           {{site.mapboxjs}}
         {% endif %}
       </a>
-    </p>
+    </h2>
 
     <!--
     <div class='clearfix'>
@@ -129,11 +129,23 @@ examples:
       </div>
     </div>
     -->
+
+    <div class='clearfix'>
+      <div class='wireframe fr col6'>
+        <div class='top pad1 round-top'>
+          <span class='dot fill-darken1'></span>
+          <span class='dot fill-darken1'></span>
+          <span class='dot fill-darken1'></span>
+        </div>
+        <div id='map-example' class='row6 col12 fill-darken0 body'></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 fixed-sidebar clip fill-grey'>
+<div class='hide-mobile col3 fixed-sidebar keyline-all clip fill-light'>
 
   <div class='row1 mast col12 keyline-bottom'>
     <a href='{{site.url}}' id='avatar' class='pin-left quiet pad2 fl inline'></a>
@@ -152,7 +164,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav class='navigation v js-nav-docs quiet-scroll keyline-top'>
+      <nav class='navigation full-y v js-nav-docs quiet-scroll keyline-top'>
         {% for section in page.navigation %}
           <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
           {% for nav in section.nav %}
@@ -175,7 +187,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav class='navigation v js-nav-examples quiet-scroll keyline-top'>
+      <nav class='navigation v full-y js-nav-examples quiet-scroll keyline-top'>
         {% for item in page.examples %}
         <div class='section'>
           <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
@@ -192,7 +204,7 @@ examples:
 </div>
 
 <!--Content area-->
-<div class='margin3 pad4y col8 pad4x'>{{content}}</div>
+<div class='margin3 pad4y col8 pad4x content'>{{content}}</div>
 
 </body>
 </html>
