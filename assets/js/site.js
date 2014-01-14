@@ -45,11 +45,11 @@
 
         _search: function() {
             var q = this.$el.val() ? this.$el.val().toLowerCase() : null;
+
             this.$menu.find('[href]').each(function() {
                 var $this = $(this),
                     id = $this.attr('href').replace('#', ''),
                     body = $(document.getElementById('content-' + id)).text();
-
                 if (!q || body.toLowerCase().indexOf(q) !== -1 || id.toLowerCase().indexOf(q) !== -1) {
                     $this.show();
                 } else {
@@ -181,7 +181,7 @@ function updateAvatar() {
         $('#avatar').css('background-image', 'url("' + App.user.avatar + '")');
         $('#avatar').css('background-size', 'cover');
     } else {
-        $('#avatar').addClass('big mapbox');
+        $('#avatar').addClass('big icon mapbox');
     }
 }
 
@@ -190,13 +190,22 @@ function load() {
     updateAvatar();
 
     var docs = new Docs();
-    $(docs.copyCode);
+    docs.copyCode();
+    docs.colorCode();
 
     {% if page.v0 %}
       docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
     {% endif %}
 
-    docs.bindSearch($('#filter'), $('.navigation'));
+    docs.bindSearch($('#filter-api'), $('.js-nav-docs'));
+
+    $('#about').click(function() {
+        App.modal.show('about');
+        return false;
+    });
+
+    var examples = new Docs();
+    examples.bindSearch($('#filter-examples'), $('.js-nav-examples'));
 }
 
 $(load);

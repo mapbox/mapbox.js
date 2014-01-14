@@ -1,28 +1,40 @@
+/*Base candidate*/
+.full-y {
+  height:100vh;
+  }
+.dark pre { background:transparent; }
+
+.mast {
+  position:relative;
+  z-index:10;
+  padding-left:40px;
+  }
+  /*.mast a,*/
+  /*.mast a:hover { color:#fff; }*/
+  /*.mast a.active,*/
+  /*.mast a:hover { background-color:rgba(0,0,0,0.25); }*/
+
 .fixed-sidebar {
   position:fixed;
+  top:10px;left:10px;bottom:10px;
   }
+  .fixed-sidebar .sliding {
+    height:100%;
+    }
   .fixed-sidebar .navigation {
     overflow:auto;
-    overflow-y:auto;
+    overflow-y:scroll;
     overflow-x:hidden;
+    height:100%;
     }
 
 .navigation .pad1y:empty { padding:0; }
 .navigation .sub         { padding:5px 20px; }
 
-.fixed-sidebar .inline,
-.navigation a:not(.quiet),
-.navigation .active,
-.navigation .strong:hover {
-  color:rgba(0,0,0,0.75);
+.navigation .active:hover:not(.quiet),
+.navigation .active:not(.quiet) {
+  background-color:rgba(0,0,0,0.05);
   }
-  .navigation a:hover:not(.quiet) {
-    background-color:rgba(0,0,0,0.05);
-    }
-  .navigation .active:hover:not(.quiet),
-  .navigation .active:not(.quiet) {
-    background-color:rgba(0,0,0,0.1);
-    }
 
 /* Dropdown Menu in the masthead */
 .dropdown {
@@ -41,10 +53,6 @@
     z-index:100;
     }
 
-.version,
-.version:hover {
-  color:rgba(0,0,0,0.75);
-  }
   .version > *{
     padding:2px 5px;
     }
@@ -70,30 +78,29 @@
   height:100%;
   }
 
-.code-scroll pre {
+.quiet-scroll pre {
   overflow:auto;
   white-space:pre;
   word-wrap:normal;
   word-break:normal;
   }
-
-.code-scroll pre::-webkit-scrollbar,
+.quiet-scroll pre::-webkit-scrollbar,
 .quiet-scroll::-webkit-scrollbar {
   width:8px;
   height:8px;
   border-left:0;
   background:rgba(0,0,0,0.1);
   }
-.code-scroll pre::-webkit-scrollbar-track,
+.quiet-scroll pre::-webkit-scrollbar-track,
 .quiet-scroll::-webkit-scrollbar-track {
   background:none;
   }
-.code-scroll pre::-webkit-scrollbar-thumb,
+.quiet-scroll pre::-webkit-scrollbar-thumb,
 .quiet-scroll::-webkit-scrollbar-thumb {
   background:rgba(0,0,0,0.1);
   border-radius:0;
   }
-.code-scroll pre::-webkit-scrollbar:hover,
+.quiet-scroll pre::-webkit-scrollbar:hover,
 .quiet-scroll::-webkit-scrollbar:hover {
   background:rgba(0,0,0,0.15);
   }

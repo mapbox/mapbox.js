@@ -13,8 +13,8 @@ var start, l, anchor, matched, toParse,
     all = '',
     nav = 'navigation:\n';
 
-nav += '  - title: View on single page\n' +
-       '    id: all\n';
+nav += '  - title: Overview\n' +
+       '    id:\n';
 
 var output = fs.createWriteStream(argv.o);
 var landOutput = fs.createWriteStream(argv.l);
