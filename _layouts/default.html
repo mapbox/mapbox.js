@@ -148,14 +148,14 @@ examples:
 <div class='hide-mobile col3 fixed-sidebar keyline-all clip fill-light'>
 
   <div class='row1 mast col12 keyline-bottom'>
-    <a href='{{site.url}}' id='avatar' class='pin-left quiet pad2 fl inline'></a>
+    <a href='{{site.url}}' id='avatar' class='pin-left pad2 fl inline'></a>
     <nav class='js-tabs fl small strong col12 clearfix center'>
       <a href='#api' class='col6 pad1 keyline-left quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
       <a href='#examples' class='col6 pad1 keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
     </nav>
   </div>
 
-  <div class='sliding h col12 clip active1'>
+  <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% else %}active1{% endif %}'>
     <div id='api' class='col12 animate'>
       <div class='anchor-search pad2 row2'>
         <fieldset class='with-icon'>
@@ -164,7 +164,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav class='navigation full-y v js-nav-docs quiet-scroll keyline-top'>
+      <nav class='navigation fill-white full-y v js-nav-docs quiet-scroll keyline-top'>
         {% for section in page.navigation %}
           <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
           {% for nav in section.nav %}
@@ -187,7 +187,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav class='navigation v full-y js-nav-examples quiet-scroll keyline-top'>
+      <nav class='navigation v fill-white full-y js-nav-examples quiet-scroll keyline-top'>
         {% for item in page.examples %}
         <div class='section'>
           <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
