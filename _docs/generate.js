@@ -68,7 +68,7 @@ function readDocumentation(filename) {
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n' +
+                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' +
                     c.text.join('\n')
             });
         });
@@ -180,7 +180,7 @@ function readDocumentation(filename) {
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: header.replace('All', c.name) +
                     'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n' +
+                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' +
                     marked.parser(c.chunks).replace('id="map"', '')
             });
         });
@@ -192,16 +192,15 @@ function readDocumentation(filename) {
     }
 }
 
-
+landOutput.write('tags: ' + argv.t + '\n');
 landOutput.write(nav);
-output.write(nav);
-landOutput.write("---\n");
-landOutput.write("{% include api.introduction.html %}");
-output.write("---\n");
-output.write("{% raw %}\n");
+landOutput.write('---\n');
+landOutput.write('{% include api.introduction.html %}');
+output.write('---\n');
+output.write('{% raw %}\n');
 output.write(all + '\n');
-output.write("{% endraw %}");
+output.write('{% endraw %}');
 
 writes.forEach(function(w) {
-    fs.writeFileSync(w.file, w.contents.replace('__NAV__', nav));
+    fs.writeFileSync(w.file, w.contents);
 });

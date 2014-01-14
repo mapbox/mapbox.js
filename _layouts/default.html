@@ -130,8 +130,7 @@ examples:
     </div>
     -->
 
-    <div class='clearfix'>
-      <div class='wireframe fr col6'>
+      <div class='wireframe'>
         <div class='top pad1 round-top'>
           <span class='dot fill-darken1'></span>
           <span class='dot fill-darken1'></span>
@@ -139,7 +138,6 @@ examples:
         </div>
         <div id='map-example' class='row6 col12 fill-darken0 body'></div>
       </div>
-    </div>
 
   </div>
 </div>
@@ -164,19 +162,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav class='navigation fill-white full-y v js-nav-docs quiet-scroll keyline-top'>
-        {% for section in page.navigation %}
-          <a class='col12 pad1y pad2x strong {% if page.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}'>{{section.title}}</a>
-          {% for nav in section.nav %}
-            <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-            {% if nav.sub %}
-              {% for sub in nav.sub %}
-                <a class='col12 truncate pad2x small quiet' href='{{site.baseurl}}/api/{{page.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-        {% endfor %}
-      </nav>
+      {% include api.nav.html %}
     </div>
 
     <div id='examples' class='col12 animate'>
@@ -204,7 +190,7 @@ examples:
 </div>
 
 <!--Content area-->
-<div class='margin3 pad4y col8 pad4x content'>{{content}}</div>
+<div class='col8 margin3 pad4x content'>{{content}}</div>
 
 </body>
 </html>
