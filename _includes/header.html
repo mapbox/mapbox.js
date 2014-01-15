@@ -27,12 +27,13 @@
 </div>
 
 <nav class='pill mobile-cols col12 clearfix space-bottom'>
-    <a href='{{site.baseurl}}/' class='col4 button {% if page.url == "/index.html" %}active{% endif %}'>Overview</a>
+    <a href='{{site.baseurl}}/' class='col3 button {% if page.url == "/index.html" %}active{% endif %}'>Overview</a>
   {% if page.v0 %}
-    <a href='{{site.baseurl}}/api/v0.6.7/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
-    <a href='{{site.baseurl}}/example/v0.6.7/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+    <a href='{{site.baseurl}}/api/v0.6.7/' class='col3 button {% if page.url contains "api" %}active{% endif %}'>API</a>
+    <a href='{{site.baseurl}}/example/v0.6.7/' class='col3 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
   {% else %}
-    <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col4 button {% if page.url contains "api" %}active{% endif %}'>API</a>
-    <a href='{{site.baseurl}}/example/v1.0.0/' class='col4 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+    <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='col3 button {% if page.url contains "api" %}active{% endif %}'>API</a>
+    <a href='{{site.baseurl}}/example/v1.0.0/' class='col3 button {% if page.url contains "example" %}active{% endif %}'>Examples</a>
   {% endif %}
+  <a href='{{site.baseurl}}/plugins/' class='col3 button {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
 </nav>

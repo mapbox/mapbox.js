@@ -1,0 +1,21 @@
+<div id='{{permalink}}' class='contain pad4y clearfix'>
+  <div class='clearfix space-bottom keyline-bottom pad2y'>
+    <div class='col4'>
+      <h2>{{item.title | markdownify | strip_html }}</h2>
+      <p><a class='icon github' href='{{ item.brackets }}'>{{ item.license }} open source</a></p>
+    </div>
+    <div class='prose col8'>
+      {{ item.content | markdownify  }}
+    </div>
+  </div>
+  <div class='clearfix'>
+    <div class='prose col5'>
+      <h4>Include</h4>
+      {% highlight html %}{{ item.snippet }}{% endhighlight %}
+    </div>
+    <div class='prose col6 margin0'>
+      <h4>Example</h4>
+      {% highlight js %}{{ item.example }}{% endhighlight %}
+    </div>
+  </div>
+</div>
