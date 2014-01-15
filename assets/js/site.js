@@ -21,7 +21,7 @@
         },
 
         colorCode: function(cb) {
-            $('pre').addClass('prettyprint');
+            $('pre', '#content').addClass('prettyprint');
             prettyPrint(cb);
         },
 
@@ -186,15 +186,25 @@ function updateAvatar() {
 }
 
 function load() {
+    var key = /username.mapid/g;
+    var unique = (App && App.user) ? App.user.id + '.' + App.tmpkey : 'username.mapid';
+    unique = (App && App.user && App.currentmap) ? App.currentmap : unique;
+
+    // Replace username.mapid with the current one.
+    $('pre').each(function() {
+        $(this).html($(this).html().replace(key, unique));
+    });
+
     $('.js-tabs a').click(App.tabs);
     updateAvatar();
 
     var docs = new Docs();
     docs.copyCode();
-    docs.colorCode();
 
     {% if page.v0 %}
-      docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
+        docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
+    {% else %}
+        docs.colorCode();
     {% endif %}
 
     docs.bindSearch($('#filter-api'), $('.js-nav-docs'));

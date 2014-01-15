@@ -1,5 +1,11 @@
-<div class='row8 fill-green clip col12'>
-  <div class='margin3 pad4y col8 pad4x prose'>
+{% capture example %}
+var map = L.mapbox.map('map', '<strong>examples.map-9ijuk24y</strong>', {
+    scrollWheelZoom: false
+});
+{% endcapture %}
+
+<div class='fill-green col12 clearfix'>
+  <div class='margin3 pad4y col8 pad4x'>
     <h2>
       {{site.title}}
       <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
@@ -17,55 +23,47 @@
       </a>
     </h2>
 
-    <!--
-    <div class='clearfix'>
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big leaflet'></span>
-        </span>
-        <div class='prose'>
-          <p>MapBox.js is <strong>built on top of <a href='http://leafletjs.com/'>Leaflet</a></strong> &#8212; an open-source mapping library.</p>
+    <div class='col12 clearfix'>
+      <div class='col5'>
+        <div class='space-bottom2 prose'>
+          <p>Build desktop and mobile web applications with Mapbox.js, our open-source JavaScript library.</p>
         </div>
-
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big heart'></span>
-        </span>
-        <div class='prose'>
-          <p><strong>The source code is open</strong> and available on <a href='//github.com/mapbox/mapbox.js/'>GitHub</a> and takes advantage of open specifications like <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a>, <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a> and  <a href='http://www.geojson.org/'>GeoJSON</a>.</p>
+        <div class='dark output'>
+<pre id='output' class='space-bottom2 block'>{{example}}</pre>
         </div>
-
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big check'></span>
-        </span>
-        <div class='prose'>
-          <p>MapBox.js is <strong>browser tested &amp; supported.</strong> Compatible with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.</p>
-        </div>
-
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big mobile'></span>
-        </span>
-        <div class='prose'>
-          <p>MapBox.js is <strong>optimized for mobile</strong> devices and small screens by default. For additional features, check out the <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'>Mobile section</a>.</p>
-        </div>
-    </div>
-
-    <div class='clearfix pad4y'>
-      <div class='center clearfix'>
-        <div class='prose'>
-          <p><strong>Have a question?</strong> Try <a href='http://stackoverflow.com/questions/tagged/mapbox?sort=votes&pageSize=100'>StackOverflow</a>. We're also happy to help out with code on <a href='http://support.mapbox.com/discussions/mapboxjs'>support.mapbox.com</a>.</p>
+        <nav class='keyline-all toggle-options round space-bottom2 col12'>
+          <a href='#' data-option='zoom' class='col12 keyline-bottom quiet space pad1 active'>
+            <span class='icon check dot dark fill-darken3'></span>
+            Zoom Controls
+          </a>
+          <a href='#' data-option='noscroll' class='col12 keyline-bottom quiet space pad1 active'>
+            <span class='icon check dot dark fill-darken3'></span>
+            Disable mouse scrolling
+          </a>
+          <a href='#' data-option='search' class='col12 keyline-bottom quiet space pad1'>
+            <span class='icon check dot fill-darken0'></span>
+            Search
+          </a>
+          <a href='#' data-option='share' class='col12 keyline-bottom quiet space pad1'>
+            <span class='icon check dot fill-darken0'></span>
+            Share
+          </a>
+          <a href='#' data-option='markers' class='col12 quiet space pad1'>
+            <span class='icon check dot fill-darken0'></span>
+            Markers
+          </a>
+        </nav>
+      </div>
+      <div class='col6 margin1'>
+        <div class='wireframe'>
+          <div class='top pad1 round-top'>
+            <span class='dot fill-darken1'></span>
+            <span class='dot fill-darken1'></span>
+            <span class='dot fill-darken1'></span>
+          </div>
+          <div id='map-example' class='row6 col12 fill-darken0 body'></div>
         </div>
       </div>
     </div>
-    -->
-
-    <div class='wireframe'>
-      <div class='top pad1 round-top'>
-        <span class='dot fill-darken1'></span>
-        <span class='dot fill-darken1'></span>
-        <span class='dot fill-darken1'></span>
-      </div>
-      <div id='map-example' class='row6 col12 fill-darken0 body'></div>
-    </div>
-
   </div>
 </div>
-

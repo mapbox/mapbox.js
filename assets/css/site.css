@@ -51,6 +51,9 @@
     height:10px;
     }
 
+.dark pre { background:rgba(0,0,0,0.7); }
+.dark pre strong { color:#fff; }
+
 /* Dropdown Menu in the masthead */
 .dropdown {
   display:none;
