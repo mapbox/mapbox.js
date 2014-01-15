@@ -5,7 +5,7 @@ categories: api
 version: v1.6.0
 permalink: /api/v1.6.0/mapbox-layers
 ---
-<h1 id="layers">Layers</h1>
+{% raw %}<h1 id="layers">Layers</h1>
 <h2 id="l-mapbox-tilelayer-id-url-tilejson-options-">L.mapbox.tileLayer(id|url|tilejson, options)</h2>
 <p>You can add a tiled layer to your map with <code>L.mapbox.tileLayer()</code>, a simple
 interface to layers from Mapbox and elsewhere.</p>
@@ -34,23 +34,23 @@ interface to layers from Mapbox and elsewhere.</p>
 <p>If <code>detectRetina</code> is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don&#39;t provide an explicit <code>retinaVersion</code> to be used.</p>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;);
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
 
 // you can also provide a full url to a TileJSON resource
-var layer = L.mapbox.tileLayer(&amp;#39;http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json&amp;#39;);
+var layer = L.mapbox.tileLayer(&#39;http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json&#39;);
 
 // if provided, you can support retina tiles
-var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;, {
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
     tileLayer: {
         detectRetina: true,
         // if retina is detected, this layer is used instead
-        retinaVersion: &amp;#39;examples.map-zswgei2n&amp;#39;
+        retinaVersion: &#39;examples.map-zswgei2n&#39;
     }
 });
 
 // if this map supports auto-scaling, `detectRetina` will automatically
 // use scaled tiles when retina is detected.
-var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;, {
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
     tileLayer: {
         detectRetina: true,
     }
@@ -60,11 +60,11 @@ var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;, {
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;)
+<pre><code>var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
-    .on(&amp;#39;load&amp;#39;, function() {
+    .on(&#39;load&#39;, function() {
     // get TileJSON data from the loaded layer
     var TileJSON = layer.getTileJSON();
 });</code></pre>
@@ -91,8 +91,8 @@ in order to load maps faster</p>
 <p><em>Example</em>:</p>
 <pre><code>// Downsample tiles for faster loading times on slow
 // internet connections
-var layer = L.mapbox.tileLayer(&amp;#39;examples.map-20v6611k&amp;#39;, {
-    format: &amp;#39;jpg70&amp;#39;
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
+    format: &#39;jpg70&#39;
 });</code></pre>
 <p><em>Returns</em>: the layer object</p>
 <h2 id="l-mapbox-gridlayer-id-url-tilejson-options-">L.mapbox.gridLayer(id|url|tilejson, options)</h2>
@@ -116,17 +116,17 @@ interactivity into your map, which you can easily access with <code>L.mapbox.gri
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.gridLayer(&amp;#39;examples.map-20v6611k&amp;#39;);</code></pre>
+var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);</code></pre>
 <p><em>Returns</em> a <code>L.mapbox.gridLayer</code> object.</p>
 <h3 id="gridlayer-gettilejson-">gridLayer.getTileJSON()</h3>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.gridLayer(&amp;#39;examples.map-20v6611k&amp;#39;)
+<pre><code>var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
-    .on(&amp;#39;load&amp;#39;, function() {
+    .on(&#39;load&#39;, function() {
     // get TileJSON data from the loaded layer
     var TileJSON = layer.getTileJSON();
 });</code></pre>
@@ -206,7 +206,7 @@ from Mapbox and elsewhere into your map.</p>
 <pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
-markerLayer.loadURL(&amp;#39;my_local_markers.geojson&amp;#39;);</code></pre>
+featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
 <h3 id="markerlayer-loadid-id-">markerLayer.loadID(id)</h3>
 <p>Load marker GeoJSON data from a map with the given <code>id</code> on Mapbox.</p>
@@ -232,7 +232,7 @@ markerLayer.loadURL(&amp;#39;my_local_markers.geojson&amp;#39;);</code></pre>
 
 // loads markers from the map `examples.map-0l53fhk2` on Mapbox,
 // if that map has markers
-markerLayer.loadID(&amp;#39;examples.map-0l53fhk2&amp;#39;);</code></pre>
+featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
 <h3 id="markerlayer-setfilter-filter-">markerLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>
@@ -295,12 +295,12 @@ An empty array will clear the layer of all features.</p>
     .addTo(map);
 // a simple GeoJSON featureset with a single point
 // with no properties
-markerLayer.setGeoJSON({
-    type: &amp;quot;FeatureCollection&amp;quot;,
+featureLayer.setGeoJSON({
+    type: &quot;FeatureCollection&quot;,
     features: [{
-        type: &amp;quot;Feature&amp;quot;,
+        type: &quot;Feature&quot;,
         geometry: {
-            type: &amp;quot;Point&amp;quot;,
+            type: &quot;Point&quot;,
             coordinates: [102.0, 0.5]
         },
         properties: { }
@@ -310,3 +310,4 @@ markerLayer.setGeoJSON({
 <h3 id="markerlayer-getgeojson-">markerLayer.getGeoJSON()</h3>
 <p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>
+{% endraw %}

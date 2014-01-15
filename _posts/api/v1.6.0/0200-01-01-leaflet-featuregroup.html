@@ -7,7 +7,7 @@ permalink: /api/v1.6.0/leaflet-featuregroup
 ---
 <h2 id="featuregroup">FeatureGroup</h2>
 
-<p>Extended <a href="#layergroup">layerGroup</a> that also has mouse events (propagated from members of the group) and a shared bindPopup method. Implements <a href="#ilayer">ILayer</a> interface.</p>
+<p>Extended <a href="/mapbox.js/api/v1.6.0/leaflet-layergroup">layerGroup</a> that also has mouse events (propagated from members of the group) and a shared bindPopup method. Implements <a href="#ilayer">ILayer</a> interface.</p>
 
 <pre><code class="javascript">L.featureGroup([marker1, marker2, polyline])
 	.bindPopup('Hello world!')
@@ -24,7 +24,7 @@ permalink: /api/v1.6.0/leaflet-featuregroup
 	</tr>
 	<tr>
 		<td><code><b>L.featureGroup</b>(
-			<nobr>&lt;<a href="#ilayer">ILayer</a>[]&gt; <i>layers?</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-ilayer">ILayer</a>[]&gt; <i>layers?</i> )</nobr>
 		</code></td>
 
 
@@ -35,7 +35,7 @@ permalink: /api/v1.6.0/leaflet-featuregroup
 
 <h3>Methods</h3>
 
-<p>Has all <a href="#layergroup">layerGroup</a> methods and additionally:</p>
+<p>Has all <a href="/mapbox.js/api/v1.6.0/leaflet-layergroup">layerGroup</a> methods and additionally:</p>
 
 <table data-id='featuregroup'>
 	<tr>
@@ -46,7 +46,7 @@ permalink: /api/v1.6.0/leaflet-featuregroup
 	<tr>
 		<td><code><b>bindPopup</b>(
 			<nobr>&lt;String&gt; <i>htmlContent</i></nobr>,
-			<nobr>&lt;<a href="#popup-options">Popup options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-popup-options">Popup options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -54,12 +54,12 @@ permalink: /api/v1.6.0/leaflet-featuregroup
 	</tr>
 	<tr>
 		<td><code><b>getBounds</b>()</code></td>
-		<td><code><a href="#latlngbounds">LatLngBounds</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-latlngbounds">LatLngBounds</a></code></td>
 		<td>Returns the LatLngBounds of the Feature Group (created from bounds and coordinates of its children).</td>
 	</tr>
 	<tr>
 		<td><code><b>setStyle</b>(
-			<nobr>&lt;<a href="#path-options">Path options</a>&gt; <i>style</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-path-options">Path options</a>&gt; <i>style</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets the given path options to each layer of the group that has a <code>setStyle</code> method.</td>
@@ -78,7 +78,7 @@ permalink: /api/v1.6.0/leaflet-featuregroup
 
 <h3>Events</h3>
 
-<p>You can subscribe to the following events using <a href="#events">these methods</a>.</p>
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v1.6.0/leaflet-events">these methods</a>.</p>
 
 <table data-id='featuregroup'>
 	<tr>
@@ -88,42 +88,42 @@ permalink: /api/v1.6.0/leaflet-featuregroup
 	</tr>
 	<tr>
 		<td><code><b>click</b></code></td>
-		<td><code><a href="#mouse-event">MouseEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-mouse-event">MouseEvent</a></code></td>
 		<td>Fired when the user clicks (or taps) the group.</td>
 	</tr>
 	<tr>
 		<td><code><b>dblclick</b></code></td>
-		<td><code><a href="#mouse-event">MouseEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-mouse-event">MouseEvent</a></code></td>
 		<td>Fired when the user double-clicks (or double-taps) the group.</td>
 	</tr>
 	<tr>
 		<td><code><b>mouseover</b></code></td>
-		<td><code><a href="#mouse-event">MouseEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-mouse-event">MouseEvent</a></code></td>
 		<td>Fired when the mouse enters the group.</td>
 	</tr>
 	<tr>
 		<td><code><b>mouseout</b></code></td>
-		<td><code><a href="#mouse-event">MouseEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-mouse-event">MouseEvent</a></code></td>
 		<td>Fired when the mouse leaves the group.</td>
 	</tr>
 	<tr>
 		<td><code><b>mousemove</b></code></td>
-		<td><code><a href="#mouse-event">MouseEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-mouse-event">MouseEvent</a></code></td>
 		<td>Fired while the mouse moves over the layers of the group.</td>
 	</tr>
 	<tr>
 		<td><code><b>contextmenu</b></code></td>
-		<td><code><a href="#mouse-event">MouseEvent</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-mouse-event">MouseEvent</a></code></td>
 		<td>Fired when the user right-clicks on one of the layers.</td>
 	</tr>
 	<tr>
 		<td><code><b>layeradd</b></code></td>
-		<td><code><a href="#layer-event">LayerEvent</a></code>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-layer-event">LayerEvent</a></code>
 		<td>Fired when a layer is added to the group.</td>
 	</tr>
 	<tr>
 		<td><code><b>layerremove</b></code></td>
-		<td><code><a href="#layer-event">LayerEvent</a></code>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-layer-event">LayerEvent</a></code>
 		<td>Fired when a layer is removed from the map.</td>
 	</tr>
 </table>

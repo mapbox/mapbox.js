@@ -110,6 +110,7 @@ document.getElementById('grid').onclick = function() {
         map.addControl(gridControl);
         this.className = 'active';
     }
+    return false;
 };
 
 var legend = 'Data from Robert Kieffer.';
@@ -122,6 +123,7 @@ document.getElementById('legend').onclick = function() {
         map.legendControl.addLegend(legend);
         this.className = 'active';
     }
+    return false;
 };
 
 var fullscreenControl = new L.Control.Fullscreen();
@@ -140,14 +142,17 @@ function toggle(control, element) {
 
 document.getElementById('zoomer').onclick = function() {
     toggle(map.zoomControl, this);
+    return false;
 };
 
 document.getElementById('fullscreen').onclick = function() {
     toggle(fullscreenControl, this);
+    return false;
 };
 
 document.getElementById('attribution').onclick = function() {
     toggle(map.attributionControl, this);
+    return false;
 };
 
 document.getElementById('hash').onclick = function() {
@@ -158,5 +163,6 @@ document.getElementById('hash').onclick = function() {
         hash.init(map);
         this.className = 'active';
     }
+    return false;
 };
 </script>

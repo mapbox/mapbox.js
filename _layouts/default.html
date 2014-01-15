@@ -37,7 +37,6 @@ examples:
   <meta property='og:url' content='{{page.permalink}}' />
   <meta name='twitter:title' content='{{page.title | replace:"'","&lsquo;"}}' />
   <meta property='og:title' content='{{page.title | replace:"'","&lsquo;"}}' />
-
   <title>{{page.title}} | Mapbox</title>
   <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
   <link href='{{site.url}}/css/site.css' rel='stylesheet' />
@@ -47,11 +46,12 @@ examples:
   <link href='https://api.tiles.mapbox.com/mapbox.js/{% if site.mapboxjs %}{{site.mapboxjs}}{% else %}v1.5.1{% endif %}/mapbox.css' rel='stylesheet' />
 
   <script src='{{site.api}}/api/session.js'></script>
+  <script src='https://js.stripe.com/v2/'></script>
   <script>
+  var KM_COOKIE_DOMAIN = 'www.mapbox.com';
   var analytics=analytics||[];(function(){var e=['identify','track','trackLink','trackForm','trackClick','trackSubmit','page','pageview','ab','alias','ready','group'],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':"http://")+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n)};
   analytics.load(window.location.hostname.indexOf('mapbox.com') !== -1 ? 'fl0c8p240n' : '0biiejpgfj');
   </script>
-
   <script src='https://api.tiles.mapbox.com/mapbox.js/{% if site.mapboxjs %}{{site.mapboxjs}}{% else %}v1.5.1{% endif %}/mapbox.js'></script>
   <script src='{{site.url}}/js/api.js'></script>
   <script src='{{site.url}}/js/libs.js'></script>

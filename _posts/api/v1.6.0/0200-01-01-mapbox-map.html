@@ -5,7 +5,7 @@ categories: api
 version: v1.6.0
 permalink: /api/v1.6.0/mapbox-map
 ---
-<h1 >Map</h1>
+{% raw %}<h1 >Map</h1>
 <h2 id="l-mapbox-map-element-id-url-tilejson-options-">L.mapbox.map(element, id|url|tilejson, options)</h2>
 <p>Create and automatically configure a map with layers, markers, and
 interactivity.</p>
@@ -37,15 +37,16 @@ interactivity.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>// map refers to a &amp;lt;div&amp;gt; element with the ID map
+<pre><code>// map refers to a &lt;div&gt; element with the ID map
 // examples.map-4l7djmvo is the ID of a map on Mapbox.com
-var map = L.mapbox.map(&amp;#39;map&amp;#39;, &amp;#39;examples.map-4l7djmvo&amp;#39;);
+var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-4l7djmvo&#39;);
 
-// map refers to a &amp;lt;div&amp;gt; element with the ID map
+// map refers to a &lt;div&gt; element with the ID map
 // This map will have no layers initially
-var map = L.mapbox.map(&amp;#39;map&amp;#39;);</code></pre>
+var map = L.mapbox.map(&#39;map&#39;);</code></pre>
 <p><em>Returns</em>: a map object</p>
 <h2 id="map-gettilejson-">map.getTileJSON()</h2>
 <p>Returns this map&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Returns</em>: the TileJSON object</p>
+{% endraw %}

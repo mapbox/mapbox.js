@@ -30,7 +30,7 @@ permalink: /api/v1.6.0/leaflet-geojson
 	<tr>
 		<td><code><b>L.geoJson</b>(
 			<nobr>&lt;Object&gt; <i>geojson?</i></nobr>,
-			<nobr>&lt;<a href="#geojson-options">GeoJSON options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-geojson-options">GeoJSON options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 
 		<td>Creates a GeoJSON layer. Optionally accepts an object in <a href="http://geojson.org/geojson-spec.html">GeoJSON format</a> to display on the map (you can alternatively add it later with <code>addData</code> method) and an options object.</td>
@@ -47,7 +47,7 @@ permalink: /api/v1.6.0/leaflet-geojson
 	<tr id="geojson-pointtolayer">
 		<td><code><b>pointToLayer</b>(
 			<nobr>&lt;GeoJSON&gt; <i>featureData</i></nobr>,
-			<nobr>&lt;<a href="#latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
 		</code></td>
 
 		<td>Function that will be used for creating layers for GeoJSON points (if not specified, simple markers will be created).</td>
@@ -62,7 +62,7 @@ permalink: /api/v1.6.0/leaflet-geojson
 	<tr id="geojson-oneachfeature">
 		<td><code><b>onEachFeature</b>(
 			<nobr>&lt;GeoJSON&gt; <i>featureData</i></nobr>,
-			<nobr>&lt;<a href="#ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
 		</code></td>
 
 		<td>Function that will be called on each created feature layer. Useful for attaching events and popups to features.</td>
@@ -70,7 +70,7 @@ permalink: /api/v1.6.0/leaflet-geojson
 	<tr id="geojson-filter">
 		<td><code><b>filter</b>(
 			<nobr>&lt;GeoJSON&gt; <i>featureData</i></nobr>,
-			<nobr>&lt;<a href="#ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
 		</code></td>
 
 		<td>Function that will be used to decide whether to show a feature or not.</td>
@@ -80,11 +80,11 @@ permalink: /api/v1.6.0/leaflet-geojson
 			<nobr>&lt;Array&gt; <i>coords</i></nobr> )</nobr>
 		</code></td>
 
-		<td>Function that will be used for converting GeoJSON coordinates to <a href="#latlng">LatLng</a> points (if not specified, coords will be assumed to be WGS84 &mdash; standard <code>[longitude, latitude]</code> values in degrees).</td>
+		<td>Function that will be used for converting GeoJSON coordinates to <a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a> points (if not specified, coords will be assumed to be WGS84 &mdash; standard <code>[longitude, latitude]</code> values in degrees).</td>
 	</tr>
 </table>
 
-<p>Additionally accepts all <a href="#path-options">Path options</a> for polylines and polygons.</p>
+<p>Additionally accepts all <a href="/mapbox.js/api/v1.6.0/leaflet-path-options">Path options</a> for polylines and polygons.</p>
 
 <h3>Methods</h3>
 
@@ -104,7 +104,7 @@ permalink: /api/v1.6.0/leaflet-geojson
 	</tr>
 	<tr id="geojson-setstyle">
 		<td><code><b>setStyle</b>(
-			<nobr>&lt;Function&gt; <i><a href="#geojson-style">style</a></i> )</nobr>
+			<nobr>&lt;Function&gt; <i><a href="/mapbox.js/api/v1.6.0/leaflet-geojson-style">style</a></i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -112,7 +112,7 @@ permalink: /api/v1.6.0/leaflet-geojson
 	</tr>
 	<tr id="geojson-resetstyle">
 		<td><code><b>resetStyle</b>(
-			<nobr>&lt;<a href="#path">Path</a>&gt; <i>layer</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-path">Path</a>&gt; <i>layer</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -131,10 +131,10 @@ permalink: /api/v1.6.0/leaflet-geojson
 	<tr>
 		<td><code><b>geometryToLayer</b>(
 			<nobr>&lt;GeoJSON&gt; <i>featureData</i></nobr>,
-			<nobr>&lt;<a href="#geojson-pointtolayer">Function</a>&gt; <i>pointToLayer?</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-geojson-pointtolayer">Function</a>&gt; <i>pointToLayer?</i> )</nobr>
 		</code></td>
 
-		<td><code><a href="#ilayer">ILayer</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-ilayer">ILayer</a></code></td>
 		<td>Creates a layer from a given GeoJSON feature.</td>
 	</tr>
 	<tr>
@@ -143,7 +143,7 @@ permalink: /api/v1.6.0/leaflet-geojson
 			<nobr>&lt;Boolean&gt; <i>reverse?</i> )</nobr>
 		</code></td>
 
-		<td><code><a href="#latlng">LatLng</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a></code></td>
 		<td>Creates a LatLng object from an array of 2 numbers (latitude, longitude) used in GeoJSON for points. If <code>reverse</code> is set to <code><span class="literal">true</span></code>, the numbers will be interpreted as (longitude, latitude).</td>
 	</tr>
 	<tr>

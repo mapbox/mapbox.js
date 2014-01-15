@@ -46,7 +46,7 @@ function splitChunks(lines) {
             };
         } else {
             if (chunk) {
-                chunk.text.push(lines[i]);
+                chunk.text.push(transformLinks(lines[i]));
             }
         }
     }
@@ -54,13 +54,23 @@ function splitChunks(lines) {
     return chunks;
 }
 
+function transformLinks(line) {
+    return line.replace(/href=['"]([^"']*)['"]/, function(all, content) {
+        if (content.indexOf('#') === 0) {
+            return all.replace(content, '/mapbox.js/api/' + argv.t + '/leaflet-' + content.replace('#', ''));
+        } else {
+            return all;
+        }
+    });
+}
 
 function readDocumentation(filename) {
     var f = fs.readFileSync(filename, 'utf8');
+    var chunks;
 
     if (filename.match(/html$/)) {
         var lines = f.split('\n');
-        var chunks = splitChunks(lines);
+        chunks = splitChunks(lines);
         all += f;
         chunks.forEach(function(c) {
             nav += '  - title: ' + c.name + '\n';
@@ -75,13 +85,16 @@ function readDocumentation(filename) {
     } else {
         var mdout = '';
         var lexed = marked.lexer(f);
+        var lexed2 = marked.lexer(f);
         mdout += '<div>';
         start = 0;
-        var chunks = [], chunk;
+        chunks = [];
+        var chunk;
 
         for (var i = 0; i < lexed.length; i++) {
 
             l = lexed[i];
+            l2 = lexed2[i];
 
             if (l.type === 'heading') matchedHeading = l.text.match(/([^\(]*)\.([^\(]*)(\((.*)\))?/);
             if (l.type === 'heading') matchedEvent = l.text.match(/Event:\s(.*)/);
@@ -168,7 +181,7 @@ function readDocumentation(filename) {
                 mdout += '<div class="space-bottom api-group-content depth-' + l.depth + '">';
             } else {
                 if (chunk) {
-                    chunk.chunks.push(l);
+                    chunk.chunks.push(l2);
                 }
             }
         }
@@ -181,7 +194,7 @@ function readDocumentation(filename) {
                 contents: header.replace('All', c.name) +
                     'version: ' + argv.t + '\n' +
                     'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' +
-                    marked.parser(c.chunks).replace('id="map"', '')
+                    marked.parser(c.chunks).replace('id="map"', '') + '{% endraw %}'
             });
         });
         toParse = lexed.slice(start, i);

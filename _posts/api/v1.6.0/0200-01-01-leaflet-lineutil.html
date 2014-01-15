@@ -19,19 +19,19 @@ permalink: /api/v1.6.0/leaflet-lineutil
 	</tr>
 	<tr>
 		<td><code><b>simplify</b>(
-			<nobr>&lt;<a href="#point">Point</a>[]&gt; <i>points</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>[]&gt; <i>points</i></nobr>,
 			<nobr>&lt;Number&gt; <i>tolerance</i> )</nobr>
 		</code></td>
 
-		<td><code><a href="#point">Point</a>[]</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>[]</code></td>
 
 		<td>Dramatically reduces the number of points in a polyline while retaining its shape and returns a new array of simplified points. Used for a huge performance boost when processing/displaying Leaflet polylines for each zoom level and also reducing visual noise. <code>tolerance</code> affects the amount of simplification (lesser value means higher quality but slower and with more points). Also released as a separated micro-library <a href="http://mourner.github.com/simplify-js/">Simplify.js</a>.</td>
 	</tr>
 	<tr>
 		<td><code><b>pointToSegmentDistance</b>(
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>p</i></nobr>,
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>p1</i></nobr>,
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>p2</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>p</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>p1</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>p2</i> )</nobr>
 		</code></td>
 
 		<td><code>Number</code></td>
@@ -40,20 +40,20 @@ permalink: /api/v1.6.0/leaflet-lineutil
 	</tr>
 	<tr>
 		<td><code><b>closestPointOnSegment</b>(
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>p</i></nobr>,
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>p1</i></nobr>,
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>p2</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>p</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>p1</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>p2</i> )</nobr>
 		</code></td>
 
-		<td><code><a href="#point">Point</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a></code></td>
 
 		<td>Returns the closest point from a point <code>p</code> on a segment <code>p1</code> to <code>p2</code>.</td>
 	</tr>
 	<tr>
 		<td><code><b>clipSegment</b>(
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>a</i></nobr>,
-			<nobr>&lt;<a href="#point">Point</a>&gt; <i>b</i></nobr>,
-			<nobr>&lt;<a href="#bounds">Bounds</a>&gt; <i>bounds</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>a</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-point">Point</a>&gt; <i>b</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-bounds">Bounds</a>&gt; <i>bounds</i> )</nobr>
 		</code></td>
 
 		<td><code>-</code></td>

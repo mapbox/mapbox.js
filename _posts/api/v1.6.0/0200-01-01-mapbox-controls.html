@@ -5,7 +5,7 @@ categories: api
 version: v1.6.0
 permalink: /api/v1.6.0/mapbox-controls
 ---
-<h1 id="controls">Controls</h1>
+{% raw %}<h1 id="controls">Controls</h1>
 <h2 id="l-mapbox-infocontrol-options-">L.mapbox.infoControl(options)</h2>
 <p>A map control that shows a toggleable info container. This is triggered by default and attribution is auto-detected from active layers and added to the info container.</p>
 <table>
@@ -25,7 +25,7 @@ permalink: /api/v1.6.0/mapbox-controls
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.mapbox.map(&amp;#39;map&amp;#39;).setView([38, -77], 5);
+<pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
 map.addControl(L.mapbox.infoControl());</code></pre>
 <p><em>Returns</em>: a <code>L.mapbox.infoControl</code> object.</p>
 <h3 id="infocontrol-addinfo-info-">infoControl.addInfo(info)</h3>
@@ -83,7 +83,7 @@ map.addControl(L.mapbox.infoControl());</code></pre>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.mapbox.map(&amp;#39;map&amp;#39;).setView([38, -77], 5);
+<pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
 map.addControl(L.mapbox.legendControl());</code></pre>
 <p><em>Returns</em>: a <code>L.mapbox.legendControl</code> object.</p>
 <h3 id="legendcontrol-addlegend-legend-">legendControl.addLegend(legend)</h3>
@@ -146,9 +146,9 @@ map.addControl(L.mapbox.legendControl());</code></pre>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.mapbox.map(&amp;#39;map&amp;#39;).setView([38, -77], 5);
-var gridLayer = L.mapbox.gridLayer(&amp;#39;examples.map-8ced9urs&amp;#39;);
-map.addLayer(L.mapbox.tileLayer(&amp;#39;examples.map-8ced9urs&amp;#39;));
+<pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
+var gridLayer = L.mapbox.gridLayer(&#39;examples.map-8ced9urs&#39;);
+map.addLayer(L.mapbox.tileLayer(&#39;examples.map-8ced9urs&#39;));
 map.addLayer(gridLayer);
 map.addControl(L.mapbox.gridControl(gridLayer));</code></pre>
 <p><em>Returns</em>: a <code>L.mapbox.gridControl</code> object.</p>
@@ -204,9 +204,9 @@ This function is currently in private beta: <a href='http://mapbox.com/about/con
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.map(&amp;#39;map&amp;#39;)
+<pre><code>var map = L.map(&#39;map&#39;)
     .setView([37, -77], 5)
-    .addControl(L.mapbox.geocoderControl(&amp;#39;examples.map-vyofok3q&amp;#39;));</code></pre>
+    .addControl(L.mapbox.geocoderControl(&#39;examples.map-vyofok3q&#39;));</code></pre>
 <p><em>Returns</em> a <code>L.mapbox.geocoderControl</code> object.</p>
 <h3 id="geocodercontrol-seturl-url-">geocoderControl.setURL(url)</h3>
 <p>Set the url used for geocoding.</p>
@@ -308,8 +308,9 @@ This function is currently in private beta: <a href='http://mapbox.com/about/con
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.map(&amp;#39;map&amp;#39;, &amp;#39;examples.map-vyofok3q&amp;#39;)
+<pre><code>var map = L.map(&#39;map&#39;, &#39;examples.map-vyofok3q&#39;)
     .setView([37, -77], 5)
     .addControl(L.mapbox.shareControl());</code></pre>
 <p><em>Returns</em>:
 Returns a <code>L.mapbox.shareControl</code> object.</p>
+{% endraw %}

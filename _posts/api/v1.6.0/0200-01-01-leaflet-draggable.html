@@ -7,7 +7,7 @@ permalink: /api/v1.6.0/leaflet-draggable
 ---
 <h2 id="draggable">Draggable</h2>
 
-<p>A class for making DOM elements draggable (including touch support). Used internally for map and marker dragging. Only works for elements that were positioned with <a href="#domutil-setposition">DomUtil#setPosition</a></p>
+<p>A class for making DOM elements draggable (including touch support). Used internally for map and marker dragging. Only works for elements that were positioned with <a href="/mapbox.js/api/v1.6.0/leaflet-domutil-setposition">DomUtil#setPosition</a></p>
 
 <pre><code class="javascript">var draggable = new L.Draggable(elementToDrag);
 draggable.enable();
@@ -32,7 +32,7 @@ draggable.enable();
 
 <h3>Events</h3>
 
-<p>You can subscribe to the following events using <a href="#events">these methods</a>.</p>
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v1.6.0/leaflet-events">these methods</a>.</p>
 
 <table data-id='draggable'>
 	<tr>
@@ -42,22 +42,22 @@ draggable.enable();
 	</tr>
 	<tr>
 		<td><code><b>dragstart</b></code></td>
-		<td><code><a href="#event">Event</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-event">Event</a></code></td>
 		<td>Fired when the dragging starts.</td>
 	</tr>
 	<tr>
 		<td><code><b>predrag</b></code></td>
-		<td><code><a href="#event">Event</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-event">Event</a></code></td>
 		<td>Fired continuously during dragging <em>before</em> each corresponding update of the element position.</td>
 	</tr>
 	<tr>
 		<td><code><b>drag</b></code></td>
-		<td><code><a href="#event">Event</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-event">Event</a></code></td>
 		<td>Fired continuously during dragging.</td>
 	</tr>
 	<tr>
 		<td><code><b>dragend</b></code></td>
-		<td><code><a href="#event">Event</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-event">Event</a></code></td>
 		<td>Fired when the dragging ends.</td>
 	</tr>
 </table>

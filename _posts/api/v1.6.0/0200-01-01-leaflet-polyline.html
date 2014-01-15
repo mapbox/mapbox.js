@@ -7,7 +7,7 @@ permalink: /api/v1.6.0/leaflet-polyline
 ---
 <h2 id="polyline">Polyline</h2>
 
-<p>A class for drawing polyline overlays on a map. Extends <a href="#path">Path</a>. Use <a href="#map-addlayer">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing polyline overlays on a map. Extends <a href="/mapbox.js/api/v1.6.0/leaflet-path">Path</a>. Use <a href="#map-addlayer">Map#addLayer</a> to add it to the map.</p>
 
 <h3>Usage example</h3>
 <pre><code class="javascript">// create a red polyline from an arrays of LatLng points
@@ -26,8 +26,8 @@ map.fitBounds(polyline.getBounds());</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>L.polyline</b>(
-			<nobr>&lt;<a href="#latlng">LatLng</a>[]&gt; <i>latlngs</i></nobr>,
-			<nobr>&lt;<a href="#polyline-options">Polyline options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>[]&gt; <i>latlngs</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-polyline-options">Polyline options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 
 
@@ -37,7 +37,7 @@ map.fitBounds(polyline.getBounds());</code></pre>
 
 <h3 id="polyline-options">Options</h3>
 
-<p>You can use <a href="#path-options">Path options</a> and additionally the following options:</p>
+<p>You can use <a href="/mapbox.js/api/v1.6.0/leaflet-path-options">Path options</a> and additionally the following options:</p>
 
 <table data-id='polyline'>
 	<tr>
@@ -62,7 +62,7 @@ map.fitBounds(polyline.getBounds());</code></pre>
 
 <h3>Methods</h3>
 
-<p>You can use <a href="#path-methods">Path methods</a> and additionally the following methods:</p>
+<p>You can use <a href="/mapbox.js/api/v1.6.0/leaflet-path-methods">Path methods</a> and additionally the following methods:</p>
 
 <table data-id='polyline'>
 	<tr>
@@ -72,7 +72,7 @@ map.fitBounds(polyline.getBounds());</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addLatLng</b>(
-			<nobr>&lt;<a href="#latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -80,7 +80,7 @@ map.fitBounds(polyline.getBounds());</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>setLatLngs</b>(
-			<nobr>&lt;<a href="#latlng">LatLng</a>[]&gt; <i>latlngs</i> )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>[]&gt; <i>latlngs</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -88,22 +88,22 @@ map.fitBounds(polyline.getBounds());</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>getLatLngs</b>()</code></td>
-		<td><code><a href="#latlng">LatLng</a>[]</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>[]</code></td>
 		<td>Returns an array of the points in the path.</td>
 	</tr>
 	<tr>
 		<td><code><b>spliceLatLngs</b>(
 			<nobr>&lt;Number&gt; <i>index</i></nobr>,
 			<nobr>&lt;Number&gt; <i>pointsToRemove</i></nobr>,
-			<nobr>&lt;<a href="#latlng">LatLng</a>&gt; <i>latlng?</i>, &hellip; )</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>&gt; <i>latlng?</i>, &hellip; )</nobr>
 		</code></td>
 
-		<td><code><a href="#latlng">LatLng</a>[]</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-latlng">LatLng</a>[]</code></td>
 		<td>Allows adding, removing or replacing points in the polyline. Syntax is the same as in <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice">Array#splice</a>. Returns the array of removed points (if any).</td>
 	</tr>
 	<tr id="path-getbounds">
 		<td><code><b>getBounds</b>()</code></td>
-		<td><code><a href="#latlngbounds">LatLngBounds</a></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.0/leaflet-latlngbounds">LatLngBounds</a></code></td>
 		<td>Returns the LatLngBounds of the polyline.</td>
 	</tr>
 	<tr id="polyline-togeojson">
