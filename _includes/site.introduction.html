@@ -1,19 +1,19 @@
-<div class='full-y fill-green clip col12'>
+<div class='row8 fill-green clip col12'>
   <div class='margin3 pad4y col8 pad4x prose'>
     <h2>
       {{site.title}}
-      <a class='quiet' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
-        {% if page.v0 %}
-          <span class='fill-yellow'>{{site.oldversion}}</span>
-        {% elsif page.version %}
-          {% if page.category == 'examples' %}
-            {{site.mapboxjs}}
-          {% else %}
-            {{page.version}}
-          {% endif %}
+      <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+      {% if page.v0 %}
+        <sup class='fill-yellow small'>{{site.oldversion}}</sup>
+      {% elsif page.version %}
+        {% if page.category == 'examples' %}
+          <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
         {% else %}
-          {{site.mapboxjs}}
+          <sup class='fill-darken0 small'>{{page.version}}</sup>
         {% endif %}
+      {% else %}
+        <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+      {% endif %}
       </a>
     </h2>
 
@@ -57,14 +57,14 @@
     </div>
     -->
 
-      <!--<div class='wireframe'>-->
-        <!--<div class='top pad1 round-top'>-->
-          <!--<span class='dot fill-darken1'></span>-->
-          <!--<span class='dot fill-darken1'></span>-->
-          <!--<span class='dot fill-darken1'></span>-->
-        <!--</div>-->
-        <!--<div id='map-example' class='row6 col12 fill-darken0 body'></div>-->
-      <!--</div>-->
+    <div class='wireframe'>
+      <div class='top pad1 round-top'>
+        <span class='dot fill-darken1'></span>
+        <span class='dot fill-darken1'></span>
+        <span class='dot fill-darken1'></span>
+      </div>
+      <div id='map-example' class='row6 col12 fill-darken0 body'></div>
+    </div>
 
   </div>
 </div>

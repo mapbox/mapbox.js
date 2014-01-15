@@ -75,9 +75,9 @@ examples:
 {% endif %}
 
 <!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 fixed-sidebar keyline-all clip fill-light'>
+<div class='hide-mobile col3 fixed-sidebar round fill-grey clip'>
 
-  <div class='row1 mast col12 keyline-bottom'>
+  <div class='row1 mast col12'>
     <a href='{{site.url}}' id='avatar' class='pin-left pad2 fl inline'></a>
     <nav class='js-tabs fl small strong col12 clearfix center'>
       <a href='#api-menu' class='col6 pad1 keyline-left quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
@@ -87,8 +87,9 @@ examples:
 
   <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% else %}active1{% endif %}'>
     <div id='api-menu' class='col12 animate'>
-      <div class='anchor-search pad2 row2'>
+      <div class='keyline-top keyline-bottom pad2 row2'>
         <fieldset class='with-icon'>
+          <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 dark fill-blue pad2x button round-right'>All</a>
           <span class='icon search'></span>
           <input id='filter-api' type='text' class='round col12' placeholder='Filter documentation'>
         </fieldset>
@@ -98,14 +99,14 @@ examples:
     </div>
 
     <div id='examples-menu' class='col12 animate'>
-      <div class='anchor-search pad2 row2'>
+      <div class='pad2 keyline-top keyline-bottom row2'>
         <fieldset class='with-icon'>
           <span class='icon search'></span>
           <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
         </fieldset>
       </div>
 
-      <nav class='navigation v fill-white full-y js-nav-examples quiet-scroll keyline-top'>
+      <nav class='navigation v full-y js-nav-examples quiet-scroll'>
         {% for item in page.examples %}
         <div class='section'>
           <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
