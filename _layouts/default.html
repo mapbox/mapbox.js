@@ -77,17 +77,18 @@ examples:
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 fixed-sidebar round fill-grey clip'>
 
-  <div class='row1 mast col12'>
+  <div class='row1 mast keyline-bottom col12'>
     <a href='{{site.url}}' id='avatar' class='pin-left pad2 fl inline'></a>
     <nav class='js-tabs fl small strong col12 clearfix center'>
-      <a href='#api-menu' class='col6 pad1 keyline-left quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
-      <a href='#examples-menu' class='col6 pad1 keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+      <a href='#api-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
+      <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+      <a href='#plugins-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
     </nav>
   </div>
 
   <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% else %}active1{% endif %}'>
     <div id='api-menu' class='col12 animate'>
-      <div class='keyline-top keyline-bottom pad2 row2'>
+      <div class='keyline-bottom pad2 row2'>
         <fieldset class='with-icon'>
           <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 dark fill-blue pad2x button round-right'>All</a>
           <span class='icon search'></span>
@@ -99,14 +100,14 @@ examples:
     </div>
 
     <div id='examples-menu' class='col12 animate'>
-      <div class='pad2 keyline-top keyline-bottom row2'>
+      <div class='pad2 keyline-bottom row2'>
         <fieldset class='with-icon'>
           <span class='icon search'></span>
           <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
         </fieldset>
       </div>
 
-      <nav class='navigation v full-y js-nav-examples quiet-scroll'>
+      <nav class='navigation v full-y fill-light js-nav-examples quiet-scroll'>
         {% for item in page.examples %}
         <div class='section'>
           <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
@@ -119,6 +120,11 @@ examples:
         {% endfor %}
       </nav>
     </div>
+
+    <div id='plugins-menu' class='col12 animate'>
+      Adds plugin listings here. 
+    </div>
+
   </div>
 </div>
 
