@@ -98,8 +98,8 @@ map.markerLayer.on('layeradd', function(e) {
                                 slideshowContent +
                             '</div>' +
                             '<div class="cycle">' +
-                                '<a href="#" class="prev" onclick="return moveSlide(\'prev\')">&laquo; Previous</a>' +
-                                '<a href="#" class="next" onclick="return moveSlide(\'next\')">Next &raquo;</a>' +
+                                '<a href="#" class="prev">&laquo; Previous</a>' +
+                                '<a href="#" class="next">Next &raquo;</a>' +
                             '</div>'
                         '</div>';
 
@@ -115,17 +115,17 @@ map.markerLayer.setGeoJSON(geoJson);
 
 // This example uses jQuery to make selecting items in the slideshow easier.
 // Download it from http://jquery.com
-function moveSlide(direction) {
+$('#map').on('click', '.popup .cycle a', function() {
     var $slideshow = $('.slideshow'),
-        totalSlides = $slideshow.children().length;
+        $newSlide;
 
-    if (direction === 'prev') {
-        var $newSlide = $slideshow.find('.active').prev();
+    if ($(this).hasClass('prev')) {
+        $newSlide = $slideshow.find('.active').prev();
         if ($newSlide.index() < 0) {
             $newSlide = $('.image').last();
         }
     } else {
-        var $newSlide = $slideshow.find('.active').next();
+        $newSlide = $slideshow.find('.active').next();
         if ($newSlide.index() < 0) {
             $newSlide = $('.image').first();
         }
@@ -134,7 +134,7 @@ function moveSlide(direction) {
     $slideshow.find('.active').removeClass('active').hide();
     $newSlide.addClass('active').show();
     return false;
-}
+});
 
 map.setView([40, -75], 6);
 </script>
