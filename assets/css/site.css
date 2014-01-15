@@ -19,15 +19,22 @@
   top:10px;left:10px;bottom:10px;
   border-color:rgba(0,0,0,0.25);
   }
+  .fixed-sidebar pre {
+    background-color:#fff;
+    }
   .fixed-sidebar .sliding {
     height:100%;
     }
-  .fixed-sidebar .navigation {
-    overflow:auto;
-    overflow-x:hidden;
-    overflow-y:auto;
+
+.scroll-y {
+  overflow:auto;
+  overflow-x:hidden;
+  overflow-y:auto;
+  }
+  .fixed-sidebar .scroll-y {
     padding-bottom:140px;
     }
+
 .content {
   height:100vm;
   height:100vmin;

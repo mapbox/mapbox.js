@@ -107,11 +107,11 @@ examples:
         </fieldset>
       </div>
 
-      <nav class='navigation v full-y fill-light js-nav-examples quiet-scroll'>
-        {% for item in page.examples %}
+      <nav class='navigation scroll-y v full-y fill-light js-nav-examples quiet-scroll'>
+        {% for example in page.examples %}
         <div class='section'>
-          <strong class='col12 pad1y pad2x'>{{item.name}}</strong>
-          {% for example in site.tags[item.id] order:ascending %}
+          <strong class='col12 pad1y pad2x'>{{example.name}}</strong>
+          {% for example in site.tags[example.id] order:ascending %}
             {% if example.version == 'v1.0.0' %}
               <a href='{{site.baseurl}}{{example.url}}' class='col12 example sub truncate {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
             {% endif %}
@@ -122,14 +122,31 @@ examples:
     </div>
 
     <div id='plugins-menu' class='col12 animate'>
-      Adds plugin listings here. 
+      <div class='col12 full-y scroll-y quiet-scroll fill-light pad1y'>
+        {% for plugin in site.categories.plugin %}
+          <div id='{{plugin.permalink}}' class='pad2 space-bottom1 keyline-bottom'>
+            <h3 class='space'><a class='icon github' href='#'></a>{{plugin.title}}</h3>
+            <span class='quiet small'>{{plugin.content}}</span>
+            <h4 class='pad1y'>Include</h4>
+            <div class='quiet-scroll'>
+              {% highlight html %}{{ plugin.snippet }}{% endhighlight %}
+            </div>
+            <h4 class='pad1y'>Example</h4>
+            <div class='quiet-scroll'>
+              {% highlight js %}{{ plugin.example }}{% endhighlight %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
 
   </div>
 </div>
 
 <!--Content area-->
-<div id='content' class='col8 margin3 pad4x content'>{{content}}</div>
+<div class='limiter clearfix'>
+  <div id='content' class='col9 margin3 pad4y content'>{{content}}</div>
+</div>
 
 </body>
 </html>

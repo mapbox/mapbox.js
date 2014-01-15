@@ -186,6 +186,7 @@ function updateAvatar() {
 }
 
 function load() {
+    /*
     var key = /username.mapid/g;
     var unique = (App && App.user) ? App.user.id + '.' + App.tmpkey : 'username.mapid';
     unique = (App && App.user && App.currentmap) ? App.currentmap : unique;
@@ -194,6 +195,7 @@ function load() {
     $('pre').each(function() {
         $(this).html($(this).html().replace(key, unique));
     });
+    */
 
     $('.js-tabs a').click(App.tabs);
     updateAvatar();
