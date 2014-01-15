@@ -70,77 +70,9 @@ examples:
 {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
 
-<!--Full bleed intro-->
-<div class='full-y fill-green col12'>
-  <div class='margin3 pad4y col8 pad4x prose'>
-    <h2>
-      {{site.title}}
-      <a class='quiet' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
-        {% if page.v0 %}
-          <span class='fill-yellow'>{{site.oldversion}}</span>
-        {% elsif page.version %}
-          {% if page.category == 'examples' %}
-            {{site.mapboxjs}}
-          {% else %}
-            {{page.version}}
-          {% endif %}
-        {% else %}
-          {{site.mapboxjs}}
-        {% endif %}
-      </a>
-    </h2>
-
-    <!--
-    <div class='clearfix'>
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big leaflet'></span>
-        </span>
-        <div class='prose'>
-          <p>MapBox.js is <strong>built on top of <a href='http://leafletjs.com/'>Leaflet</a></strong> &#8212; an open-source mapping library.</p>
-        </div>
-
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big heart'></span>
-        </span>
-        <div class='prose'>
-          <p><strong>The source code is open</strong> and available on <a href='//github.com/mapbox/mapbox.js/'>GitHub</a> and takes advantage of open specifications like <a href='http://mapbox.com/developers/tilejson/'>TileJSON</a>, <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a> and  <a href='http://www.geojson.org/'>GeoJSON</a>.</p>
-        </div>
-
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big check'></span>
-        </span>
-        <div class='prose'>
-          <p>MapBox.js is <strong>browser tested &amp; supported.</strong> Compatible with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.</p>
-        </div>
-
-        <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-          <span class='icon big mobile'></span>
-        </span>
-        <div class='prose'>
-          <p>MapBox.js is <strong>optimized for mobile</strong> devices and small screens by default. For additional features, check out the <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'>Mobile section</a>.</p>
-        </div>
-    </div>
-
-    <div class='clearfix pad4y'>
-      <div class='center clearfix'>
-        <div class='prose'>
-          <p><strong>Have a question?</strong> Try <a href='http://stackoverflow.com/questions/tagged/mapbox?sort=votes&pageSize=100'>StackOverflow</a>. We're also happy to help out with code on <a href='http://support.mapbox.com/discussions/mapboxjs'>support.mapbox.com</a>.</p>
-        </div>
-      </div>
-    </div>
-    -->
-
-      <div class='wireframe'>
-        <div class='top pad1 round-top'>
-          <span class='dot fill-darken1'></span>
-          <span class='dot fill-darken1'></span>
-          <span class='dot fill-darken1'></span>
-        </div>
-        <div id='map-example' class='row6 col12 fill-darken0 body'></div>
-      </div>
-
-  </div>
-</div>
+{% if page.intro %}
+{% include site.introduction.html %}
+{% endif %}
 
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 fixed-sidebar keyline-all clip fill-light'>
@@ -148,13 +80,13 @@ examples:
   <div class='row1 mast col12 keyline-bottom'>
     <a href='{{site.url}}' id='avatar' class='pin-left pad2 fl inline'></a>
     <nav class='js-tabs fl small strong col12 clearfix center'>
-      <a href='#api' class='col6 pad1 keyline-left quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
-      <a href='#examples' class='col6 pad1 keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+      <a href='#api-menu' class='col6 pad1 keyline-left quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
+      <a href='#examples-menu' class='col6 pad1 keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
     </nav>
   </div>
 
   <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% else %}active1{% endif %}'>
-    <div id='api' class='col12 animate'>
+    <div id='api-menu' class='col12 animate'>
       <div class='anchor-search pad2 row2'>
         <fieldset class='with-icon'>
           <span class='icon search'></span>
@@ -165,7 +97,7 @@ examples:
       {% include api.nav.html %}
     </div>
 
-    <div id='examples' class='col12 animate'>
+    <div id='examples-menu' class='col12 animate'>
       <div class='anchor-search pad2 row2'>
         <fieldset class='with-icon'>
           <span class='icon search'></span>

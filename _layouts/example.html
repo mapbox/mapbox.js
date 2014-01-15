@@ -3,60 +3,62 @@ layout: default
 category: examples
 ---
 
-<div class='col12 round box clearfix contain'>
-  <div class='clearfix'>
-    {% if page.v0 %}
-    <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-    <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
-    <div class='clearfix col12 note warn'>
-      Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}'>{{site.mapboxjs}} for the latest</a>.
-    </div>
+<div class='pad4y'>
+  <div class='col12 round keyline-all clearfix contain'>
+    <div class='clearfix'>
+      {% if page.v0 %}
+      <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+      <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+      <div class='clearfix col12 note warn'>
+        Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}'>{{site.mapboxjs}} for the latest</a>.
+      </div>
+      {% endif %}
+
+      <div class='pad2'>
+        <h3>{{page.title}}</h3>
+        <p>{{page.description}}</p>
+      </div>
+      <div id='demo' class='contain row10'>{{content}}</div>
+      <div id='snippet'>
+      <div id='code' class='fill-light'>
+
+  <div class='code-header quiet'>
+  {% highlight html %}
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset=utf-8 />
+  <title>{{page.title}}</title>
+    {% if page.v0 -%}
+    <script src='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+    <link href='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+    {% else %}
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
+    <link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
     {% endif %}
+    <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+  </head>
+  <body>
+  {% endhighlight %}
+  </div>
 
-    <div class='pad2'>
-      <h3>{{page.title}}</h3>
-      <p>{{page.description}}</p>
+  {% highlight html %}
+  {{content}}
+  {% endhighlight %}
+
+  <div class='code-footer'>
+  {% highlight html %}
+  </body>
+  </html>
+  {% endhighlight %}
+  </div>
+    </div><!-- end #code -->
+  </div>
+    <a class='button icon clipboard col12 round-bottom' href='#' id='copy'>Select code</a>
     </div>
-    <div id='demo' class='contain row10'>{{content}}</div>
-    <div id='snippet'>
-    <div id='code' class='fill-light'>
-
-<div class='code-header quiet'>
-{% highlight html %}
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset=utf-8 />
-<title>{{page.title}}</title>
-  {% if page.v0 -%}
-  <script src='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
-  {% else %}
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-  <script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
-  {% endif %}
-  <style>
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
-  </style>
-</head>
-<body>
-{% endhighlight %}
-</div>
-
-{% highlight html %}
-{{content}}
-{% endhighlight %}
-
-<div class='code-footer'>
-{% highlight html %}
-</body>
-</html>
-{% endhighlight %}
-</div>
-  </div><!-- end #code -->
-</div>
-  <a class='button icon clipboard col12 round-bottom' href='#' id='copy'>Select code</a>
   </div>
 </div>

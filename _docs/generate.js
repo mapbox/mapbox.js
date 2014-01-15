@@ -193,6 +193,7 @@ function readDocumentation(filename) {
 }
 
 landOutput.write('tags: ' + argv.t + '\n');
+landOutput.write('intro: true\n');
 landOutput.write(nav);
 landOutput.write('---\n');
 landOutput.write('{% include api.introduction.html %}');
