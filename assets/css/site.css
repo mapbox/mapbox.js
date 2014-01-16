@@ -31,8 +31,10 @@
   .grid-view .grid:nth-child(even) .overlay {
     border-left:1px solid rgba(255,255,255,0.25);
     }
-  .grid .overlay        { opacity:0; }
-  .grid:hover .overlay  { opacity:1; }
+  .grid:hover .overlay  {
+    background-color:rgba(0,0,0,0.75);
+    color:#fff;
+    }
 
 .scroll-y {
   overflow:auto;
