@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+{% for plugin in site.categories.plugin %}
+<div id='{{plugin.title}}' class='contain pad4y clearfix'>
+  <div class='clearfix space-bottom keyline-bottom pad2y'>
+    <div class='col4'>
+      <h2>{{plugin.title | markdownify | strip_html }}</h2>
+      <p><a class='icon github' href='{{ plugin.code }}'>{{ plugin.license }} License</a></p>
+    </div>
+    <div class='prose col8'>
+      {{ plugin.content | markdownify  }}
+    </div>
+  </div>
+  <div class='clearfix'>
+    <div class='prose col5'>
+      <h4>Include</h4>
+      {% highlight html %}{{ plugin.snippet }}{% endhighlight %}
+    </div>
+    <div class='prose col6 margin0'>
+      <h4>Example</h4>
+      {% highlight js %}{{ plugin.example }}{% endhighlight %}
+    </div>
+  </div>
+</div>
+{% endfor %}
