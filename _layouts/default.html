@@ -86,9 +86,26 @@ examples:
     </nav>
   </div>
 
+  <div class='row1 pad2x pad1y'>
+    <a href='{{site.baseurl}}/' class='version'>
+      {{site.title}}
+      {% if page.v0 %}
+      <span class='fill-yellow strong small'>{{site.oldversion}}</span>
+      {% elsif page.version %}
+        {% if page.category == 'examples' %}
+          <span class='strong small'>{{site.mapboxjs}}</span>
+        {% else %}
+          <span class='strong small'>{{page.version}}</span>
+        {% endif %}
+      {% else %}
+        <span class='strong small'>{{site.mapboxjs}}</span>
+      {% endif %}
+    </a>
+  </div>
+
   <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% else %}active1{% endif %}'>
-    <div id='api-menu' class='col12 animate'>
-      <div class='keyline-bottom pad2 row2'>
+    <div id='api-menu' class='col12 animate full-y'>
+      <div class='pad2x row1 space-bottom2'>
         <fieldset class='with-icon'>
           <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 pad2x round-right small strong'>View all?</a>
           <span class='icon search'></span>
@@ -100,7 +117,7 @@ examples:
     </div>
 
     <div id='examples-menu' class='col12 animate full-y'>
-      <div class='pad2 keyline-bottom row2'>
+      <div class='pad2x row1 space-bottom2'>
         <fieldset class='with-icon'>
           <span class='icon search'></span>
           <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
@@ -117,13 +134,11 @@ examples:
 
       <div class='fill-light sliding h col12 clip active1'>
         <div id='examples-grid' class='full-y quiet-scroll scroll-y animate col12'>
-          <div class='clearfix col12'>
+          <div class='clearfix col12 grid-view js-nav-examples'>
             {% for grid in site.categories['example/v1.0.0'] order:ascending %}
-            <a href='{{site.baseurl}}{{grid.url}}' style='background-image: url("{{site.baseurl}}/assets/images/test.png");' class='grid col6 row3 contain fill-darken0 example small strong sub truncate {% if grid.title == page.title %} active{% endif %}'>
-              <div class='overlay fill-darken3 pin-left row3 col12 animate'></div>
-              <div class='pad1 pin-bottom'>
-                {{grid.title}}
-              </div>
+            <a href='{{site.baseurl}}{{grid.url}}' style='background-image: url("{{site.baseurl}}/assets/images/test.png");' class='grid col6 row3 contain fill-darken0 example dark small strong clip {% if grid.title == page.title %} active{% endif %}'>
+              <div class='overlay fill-darken1 pin-left row3 col12 animate offcanvas-bottom keyline-bottom'></div>
+              <div class='pad1 fill-darken3 pin-bottom offcanvas-bottom animate'>{{grid.title}}</div>
             </a>
             {% endfor %}
           </div>
@@ -144,7 +159,7 @@ examples:
       </div>
     </div>
 
-    <div id='plugins-menu' class='col12 animate'>
+    <div id='plugins-menu' class='col12 animate full-y'>
       <div class='col12 full-y scroll-y quiet-scroll fill-light pad1y'>
         {% for plugin in site.categories.plugin %}
           <div id='{{plugin.permalink}}' class='pad2 space-bottom1 keyline-bottom'>

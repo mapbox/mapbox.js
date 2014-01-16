@@ -1,7 +1,5 @@
 /*Base candidate*/
-.full-y {
-  height:100%;
-  }
+.full-y   { height:100%; }
 .dark pre { background:transparent; }
 
 .mast {
@@ -9,8 +7,6 @@
   z-index:10;
   padding-left:40px;
   }
-  /*.mast a,*/
-  /*.mast a:hover { color:#fff; }*/
   .mast a.active,
   .mast a:hover { background-color:rgba(0,0,0,0.05); }
 
@@ -30,6 +26,16 @@
   background-repeat:no-repeat;
   background-size:cover;
   }
+  .grid-view .grid:nth-child(even) .overlay {
+    border-left:1px solid rgba(255,255,255,0.25);
+    }
+  .grid:hover > div {
+    -webkit-transform:translateY(0);
+       -moz-transform:translateY(0);
+        -ms-transform:translateY(0);
+            transform:translateY(0);
+    }
+
 .scroll-y {
   overflow:auto;
   overflow-x:hidden;
@@ -52,14 +58,16 @@
   border-bottom:none;
   }
   .wireframe .body {
-    background:transparent url(../images/developers-grid.png) no-repeat 0 0;
+    background-image:url(../images/developers-grid.png);
+    background-repeat:repeat;
+    background-position:0 0;
     -webkit-background-size:60px 60px;
-    background-size:60px 60px;
+            background-size:60px 60px;
     }
     @media
       (-webkit-min-device-pixel-ratio:2),
       (min-resolution:192dpi) {
-      .wireframe .body { background-image:url(../images/developers-grid@2x.png?1); }
+      .wireframe .body { background-image:url(../images/developers-grid@2x.png); }
       }
 
   .wireframe .body .mock-popup:after {
@@ -127,6 +135,7 @@
 
 /*Examples*/
 #map {
+  background:#eee;
   position:absolute;
   top:0;left:0;
   width:100%;
