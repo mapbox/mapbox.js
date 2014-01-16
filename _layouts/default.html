@@ -59,9 +59,6 @@ examples:
   <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
   <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
   <script src='{{site.baseurl}}/assets/js/site.js'></script>
-  <style type="text/css">
-
-  </style>
 </head>
 <body>
 
@@ -152,11 +149,11 @@ examples:
 
         <nav id='examples-list' class='navigation v full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
           {% for example in page.examples %}
-          <div class='section'>
+          <div class='section pad1y'>
             <strong class='col12 pad1y pad2x'>{{example.name}}</strong>
             {% for listing in site.tags[example.id] order:ascending %}
               {% if listing.version == 'v1.0.0' %}
-                <a href='{{site.baseurl}}{{listing.url}}' class='col12 example sub truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
+                <a href='{{site.baseurl}}{{listing.url}}' class='pad4x col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
               {% endif %}
             {% endfor %}
           </div>

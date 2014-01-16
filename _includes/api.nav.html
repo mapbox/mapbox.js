@@ -7,7 +7,7 @@
         <a class='col12 truncate pad4x' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
         {% if nav.sub %}
           {% for sub in nav.sub %}
-            <a class='col12 truncate pad6l small quiet' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+            <a class='col12 truncate pad4x small quiet' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
           {% endfor %}
         {% endif %}
       {% endfor %}
