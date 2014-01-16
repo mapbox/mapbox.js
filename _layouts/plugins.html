@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<div id='api' class='prose doc pad4y'>
+  <div id='{{page.permalink}}' class='pad2 space-bottom1 keyline-bottom'>
+    <h3 class='space'><a class='icon github' href='#'></a>{{page.title}}</h3>
+    <span class='quiet small'>{{page.content}}</span>
+    <h4 class='pad1y'>Include</h4>
+    <div class='quiet-scroll'>
+      {% highlight html %}{{ page.snippet }}{% endhighlight %}
+    </div>
+    <h4 class='pad1y'>Example</h4>
+    <div class='quiet-scroll'>
+      {% highlight js %}{{ page.example }}{% endhighlight %}
+    </div>
+  </div>
+</div>

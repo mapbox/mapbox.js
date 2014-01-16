@@ -136,9 +136,12 @@ examples:
         <div id='examples-grid' class='full-y quiet-scroll scroll-y animate col12'>
           <div class='clearfix col12 grid-view js-nav-examples'>
             {% for grid in site.categories['example/v1.0.0'] order:ascending %}
-            <a href='{{site.baseurl}}{{grid.url}}' style='background-image: url("{{site.baseurl}}/assets/images/test.png");' class='grid col6 row3 contain fill-darken0 example dark small strong clip {% if grid.title == page.title %} active{% endif %}'>
-              <div class='overlay fill-darken1 pin-left row3 col12 animate offcanvas-bottom keyline-bottom'></div>
-              <div class='pad1 fill-darken3 pin-bottom offcanvas-bottom animate'>{{grid.title}}</div>
+            <a href='{{site.baseurl}}{{grid.url}}' style='background-image: url("{{site.baseurl}}/assets/images/test.png");' class='grid col6 row3 contain fill-darken0 example dark strong clip {% if grid.title == page.title %} active{% endif %}'>
+              <div class='overlay fill-darken3 pin-left row3 col12 animate keyline-bottom'>
+                <div class='pad1'>
+                  {{grid.title}}
+                </div>
+              </div>
             </a>
             {% endfor %}
           </div>
@@ -160,22 +163,11 @@ examples:
     </div>
 
     <div id='plugins-menu' class='col12 animate full-y'>
-      <div class='col12 full-y scroll-y quiet-scroll fill-light pad1y'>
+      <nav class='col12 v full-y scroll-y quiet-scroll fill-light pad1y'>
         {% for plugin in site.categories.plugin %}
-          <div id='{{plugin.permalink}}' class='pad2 space-bottom1 keyline-bottom'>
-            <h3 class='space'><a class='icon github' href='#'></a>{{plugin.title}}</h3>
-            <span class='quiet small'>{{plugin.content}}</span>
-            <h4 class='pad1y'>Include</h4>
-            <div class='quiet-scroll'>
-              {% highlight html %}{{ plugin.snippet }}{% endhighlight %}
-            </div>
-            <h4 class='pad1y'>Example</h4>
-            <div class='quiet-scroll'>
-              {% highlight js %}{{ plugin.example }}{% endhighlight %}
-            </div>
-          </div>
+          <a href='{{plugin.url}}' class='pad1y pad2x'>{{plugin.title}}</a>
         {% endfor %}
-      </div>
+      </nav>
     </div>
 
   </div>
