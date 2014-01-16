@@ -21,7 +21,7 @@
         },
 
         colorCode: function(cb) {
-            $('pre', '#content').addClass('prettyprint');
+            $('pre', '#content-section').addClass('prettyprint');
             prettyPrint(cb);
         },
 
@@ -186,19 +186,20 @@ function updateAvatar() {
 }
 
 function load() {
-    /*
-    var key = /username.mapid/g;
-    var unique = (App && App.user) ? App.user.id + '.' + App.tmpkey : 'username.mapid';
-    unique = (App && App.user && App.currentmap) ? App.currentmap : unique;
+    if (App) {
+        $('.js-tabs label').click(function(ev) {
+            App.storage('mapboxjs.exampleview', $(this).attr('for'));
+            App.tabs(ev);
+        });
 
-    // Replace username.mapid with the current one.
-    $('pre').each(function() {
-        $(this).html($(this).html().replace(key, unique));
-    });
-    */
+        $('.js-tabs a').click(App.tabs);
+    }
 
-    $('.js-tabs a').click(App.tabs);
     updateAvatar();
+
+    if (App.storage('mapboxjs.exampleview')) {
+        $('label[for="' + App.storage('mapboxjs.exampleview') + '"]').trigger('click');
+    }
 
     var docs = new Docs();
     docs.copyCode();

@@ -89,11 +89,28 @@ examples:
     </nav>
   </div>
 
+  <div class='row1 pad2x pad1y'>
+    <a href='{{site.baseurl}}/' class='version'>
+      {{site.title}}
+      {% if page.v0 %}
+      <span class='fill-yellow strong small'>{{site.oldversion}}</span>
+      {% elsif page.version %}
+        {% if page.category == 'examples' %}
+          <span class='strong small'>{{site.mapboxjs}}</span>
+        {% else %}
+          <span class='strong small'>{{page.version}}</span>
+        {% endif %}
+      {% else %}
+        <span class='strong small'>{{site.mapboxjs}}</span>
+      {% endif %}
+    </a>
+  </div>
+
   <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% else %}active1{% endif %}'>
-    <div id='api-menu' class='col12 animate'>
-      <div class='keyline-bottom pad2 row2'>
+    <div id='api-menu' class='col12 animate full-y'>
+      <div class='pad2x row1 space-bottom2'>
         <fieldset class='with-icon'>
-          <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 dark fill-blue pad2x button round-right'>All</a>
+          <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 pad2x round-right small strong'>View all?</a>
           <span class='icon search'></span>
           <input id='filter-api' type='text' class='round col12' placeholder='Filter documentation'>
         </fieldset>
@@ -102,11 +119,19 @@ examples:
       {% include api.nav.html %}
     </div>
 
-    <div id='examples-menu' class='col12 animate'>
-      <div class='pad2 keyline-bottom row2'>
+    <div id='examples-menu' class='col12 animate full-y'>
+      <div class='pad2x row1 space-bottom2'>
         <fieldset class='with-icon'>
           <span class='icon search'></span>
           <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
+          <div class='pin-right view-options pad1'>
+            <div class='js-tabs rounded-toggle clearfix'>
+              <input id='examples-grid-toggle' type='radio' value='examples-grid' name='examples-menu' checked='checked'>
+              <label for='examples-grid-toggle' class='animate'>Grid</label>
+              <input id='examples-list-toggle' type='radio' value='examples-list' name='examples-menu'>
+              <label for='examples-list-toggle' class='animate'>List</label>
+            </div>
+          </div>
         </fieldset>
       </div>
 
@@ -120,11 +145,23 @@ examples:
             {% endif %}
           {% endfor %}
         </div>
-        {% endfor %}
-      </nav>
+
+        <nav id='examples-list' class='navigation v full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
+          {% for example in page.examples %}
+          <div class='section'>
+            <strong class='col12 pad1y pad2x'>{{example.name}}</strong>
+            {% for listing in site.tags[example.id] order:ascending %}
+              {% if listing.version == 'v1.0.0' %}
+                <a href='{{site.baseurl}}{{listing.url}}' class='col12 example sub truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </nav>
+      </div>
     </div>
 
-    <div id='plugins-menu' class='col12 animate'>
+    <div id='plugins-menu' class='col12 animate full-y'>
       <div class='col12 full-y scroll-y quiet-scroll fill-light pad1y'>
         {% for plugin in site.categories.plugin %}
           <div id='{{plugin.permalink}}' class='pad2 space-bottom1 keyline-bottom'>
@@ -148,7 +185,7 @@ examples:
 
 <!--Content area-->
 <div class='limiter clearfix'>
-  <div id='content' class='col9 margin3 pad4y content'>{{content}}</div>
+  <div id='content-section' class='col9 margin3 content'>{{content}}</div>
 </div>
 
 </body>

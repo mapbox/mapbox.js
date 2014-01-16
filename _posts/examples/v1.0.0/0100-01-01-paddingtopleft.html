@@ -9,19 +9,27 @@ tags:
 ---
 
 <style>
+#container {
+  position:relative;
+  height:100%;
+  }
 #content {
-    position:absolute;
-    top:0;
-    left:0;
-    width:200px;
-    bottom:0;
-    background:#000;
-    background:rgba(0, 0, 0, 0.5);
-}
+  background:#000;
+  background:rgba(0, 0, 0, 0.5);
+  width:200px;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  z-index:100000;
+  }
 </style>
 
-<div id='map'></div>
-<div id='content'>Content</div>
+<div id='container'>
+  <div id='content'>Content</div>
+  <div id='map'></div>
+</div>
+
 <script>
 var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
 
