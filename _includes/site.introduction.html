@@ -4,65 +4,44 @@ var map = L.mapbox.map('map', '<strong>examples.map-9ijuk24y</strong>', {
 });
 {% endcapture %}
 
-<div class='fill-green col12'>
+<div class='fill-green col12 row6 clip'>
   <div class='limiter clearfix'>
     <div class='col9 margin3 pad4y clearfix'>
-      <h2>
-        {{site.title}}
-        <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
-        {% if page.v0 %}
-          <sup class='fill-yellow small'>{{site.oldversion}}</sup>
-        {% elsif page.version %}
-          {% if page.category == 'examples' %}
-            <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+      <div class='col5'>
+        <h2>
+          {{site.title}}
+          <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+          {% if page.v0 %}
+            <sup class='fill-yellow small'>{{site.oldversion}}</sup>
+          {% elsif page.version %}
+            {% if page.category == 'examples' %}
+              <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+            {% else %}
+              <sup class='fill-darken0 small'>{{page.version}}</sup>
+            {% endif %}
           {% else %}
-            <sup class='fill-darken0 small'>{{page.version}}</sup>
+            <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
           {% endif %}
-        {% else %}
-          <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
-        {% endif %}
-        </a>
-      </h2>
-
-      <div class='col12 clearfix'>
-        <div class='col5'>
-          <div class='space-bottom2 prose'>
-            <p>Build desktop and mobile web applications with Mapbox.js, our open-source JavaScript library.</p>
-          </div>
-          <!--<div class='dark output'>-->
-  <!--<pre id='output' class='space-bottom2 block'>{{example}}</pre>-->
-          <!--</div>-->
-          <!--<nav class='keyline-all toggle-options round space-bottom2 col12'>-->
-            <!--<a href='#' data-option='zoom' class='col12 keyline-bottom quiet space pad1 active'>-->
-              <!--<span class='icon check dot dark fill-darken3'></span>-->
-              <!--Zoom Controls-->
-            <!--</a>-->
-            <!--<a href='#' data-option='noscroll' class='col12 keyline-bottom quiet space pad1 active'>-->
-              <!--<span class='icon check dot dark fill-darken3'></span>-->
-              <!--Disable mouse scrolling-->
-            <!--</a>-->
-            <!--<a href='#' data-option='search' class='col12 keyline-bottom quiet space pad1'>-->
-              <!--<span class='icon check dot fill-darken0'></span>-->
-              <!--Search-->
-            <!--</a>-->
-            <!--<a href='#' data-option='share' class='col12 keyline-bottom quiet space pad1'>-->
-              <!--<span class='icon check dot fill-darken0'></span>-->
-              <!--Share-->
-            <!--</a>-->
-            <!--<a href='#' data-option='markers' class='col12 quiet space pad1'>-->
-              <!--<span class='icon check dot fill-darken0'></span>-->
-              <!--Markers-->
-            <!--</a>-->
-          <!--</nav>-->
+          </a>
+        </h2>
+        <div class='space-bottom2 prose'>
+          <p>Build desktop and mobile web applications with Mapbox.js, our open-source JavaScript library.</p>
         </div>
-        <div class='col6 margin1'>
-          <div class='wireframe'>
-            <div class='top pad1 round-top'>
-              <span class='dot fill-darken1'></span>
-              <span class='dot fill-darken1'></span>
-              <span class='dot fill-darken1'></span>
-            </div>
-            <div id='map-example' class='row6 col12 fill-darken0 body'></div>
+      </div>
+      <div class='col6 margin1'>
+        <div class='wireframe'>
+          <div class='top pad1 round-top'>
+            <span class='dot fill-darken1'></span>
+            <span class='dot fill-darken1'></span>
+            <span class='dot fill-darken1'></span>
+          </div>
+          <div id='map-example' class='row6 col12 fill-darken0 contain body'>
+            <div class='keyline-all margin5r fill-darken0 space-bottom1 fill-green row1 space-top1 margin1 col3'></div>
+            <div class='keyline-all fill-darken0 row4 margin1 col3'></div>
+            <div class='icon marker margin2r space-top1 pin-right quiet big thumbnail'></div>
+            <div class='keyline-all mock-popup margin3r col3 row1 fill-darken0 space-top4 pin-right'></div>
+            <div class='icon marker margin4r space-top5 pin-right quiet big thumbnail'></div>
+            <div class='icon marker margin6r space-top2 pin-right quiet big thumbnail'></div>
           </div>
         </div>
       </div>

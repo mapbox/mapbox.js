@@ -1,6 +1,6 @@
 /*Base candidate*/
 .full-y {
-  height:100vh;
+  height:100%;
   }
 .dark pre { background:transparent; }
 
@@ -26,6 +26,10 @@
     height:100%;
     }
 
+.grid {
+  background-repeat:no-repeat;
+  background-size:cover;
+  }
 .scroll-y {
   overflow:auto;
   overflow-x:hidden;
@@ -34,11 +38,6 @@
   .fixed-sidebar .scroll-y {
     padding-bottom:140px;
     }
-
-.content {
-  height:100vm;
-  height:100vmin;
-  }
 
 .navigation .pad1y:empty { padding:0; }
 .navigation .sub         { padding:5px 20px; }
@@ -52,12 +51,39 @@
   border:3px solid rgba(0,0,0,0.5);
   border-bottom:none;
   }
+  .wireframe .body {
+    background:transparent url(../images/developers-grid.png) no-repeat 0 0;
+    -webkit-background-size:60px 60px;
+    background-size:60px 60px;
+    }
+    @media
+      (-webkit-min-device-pixel-ratio:2),
+      (min-resolution:192dpi) {
+      .wireframe .body { background-image:url(../images/developers-grid@2x.png?1); }
+      }
+
+  .wireframe .body .mock-popup:after {
+    content:'';
+    display:block;
+    position:absolute;
+    height:0;
+    width:0;
+    left:0;
+    right:0;
+    bottom:-5px;
+    margin:auto;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-top:5px solid #95a85a;
+    }
   .wireframe .dot {
     display:inline-block;
     width:10px;
     height:10px;
     }
 
+.wireframe.mobile .body .mock-popup:after { border-top: 5px solid #6f6ea5; }
+.view-options { top:-2px;right:-2px; }
 .dark pre { background:rgba(0,0,0,0.7); }
 .dark pre strong { color:#fff; }
 
@@ -194,4 +220,3 @@ pre .var { color:#0C9DC2; }
   text-transform:lowercase;
   display:inline;
   }
-
