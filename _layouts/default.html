@@ -78,8 +78,7 @@ examples:
 {% endif %}
 
 <!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 fixed-sidebar round fill-grey clip'>
-
+<div class='hide-mobile col3 fixed-sidebar fill-grey clip round'>
   <div class='row1 mast keyline-bottom col12'>
     <a href='{{site.url}}' id='avatar' class='pin-left pad2 fl inline'></a>
     <nav class='js-tabs fl small strong col12 clearfix center'>
@@ -172,14 +171,11 @@ examples:
         {% endfor %}
       </nav>
     </div>
-
   </div>
 </div>
 
 <!--Content area-->
-<div class='limiter clearfix'>
-  <div id='content-section' class='col9 margin3 content'>{{content}}</div>
-</div>
+<div id='content-section' class='col9 pad4 margin3 content enclosure'>{{content}}</div>
 
 </body>
 </html>

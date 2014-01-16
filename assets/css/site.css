@@ -1,3 +1,5 @@
+.enclosure { max-width:1000px; }
+
 /*Base candidate*/
 .full-y   { height:100%; }
 .dark pre { background:transparent; }
@@ -11,10 +13,9 @@
   .mast a:hover { background-color:rgba(0,0,0,0.05); }
 
 .fixed-sidebar {
-  font-size: 13px;
   position:fixed;
-  top:10px;left:10px;bottom:10px;
   border-color:rgba(0,0,0,0.25);
+  top:10px;left:10px;bottom:10px;
   }
   .fixed-sidebar pre {
     background-color:#fff;
