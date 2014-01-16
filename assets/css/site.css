@@ -11,6 +11,7 @@
   .mast a:hover { background-color:rgba(0,0,0,0.05); }
 
 .fixed-sidebar {
+  font-size: 13px;
   position:fixed;
   top:10px;left:10px;bottom:10px;
   border-color:rgba(0,0,0,0.25);
@@ -225,3 +226,7 @@ pre .var { color:#0C9DC2; }
   text-transform:lowercase;
   display:inline;
   }
+
+.pad6l {
+  padding-left: 60px;
+}

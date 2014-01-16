@@ -1,15 +1,17 @@
 {% for p in site.tags[site.mapboxjs] %}
 <nav class='navigation fill-light full-y scroll-y v js-nav-docs quiet-scroll'>
   {% for section in p.navigation %}
-    <a class='col12 pad1y pad2x strong {% if p.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#api'>{{section.title}}</a>
-    {% for nav in section.nav %}
-      <a class='col12 sub truncate' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-      {% if nav.sub %}
-        {% for sub in nav.sub %}
-          <a class='col12 truncate pad2x small quiet' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
+    <div class='section pad1y'>
+      <a class='col12 pad2x strong {% if p.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#api'>{{section.title}}</a>
+      {% for nav in section.nav %}
+        <a class='col12 truncate pad4x' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+        {% if nav.sub %}
+          {% for sub in nav.sub %}
+            <a class='col12 truncate pad6l small quiet' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
   {% endfor %}
 </nav>
 {% endfor %}
