@@ -177,16 +177,7 @@
 
 function load() {
     if (App) {
-        $('.js-tabs label').click(function(ev) {
-            App.storage('mapboxjs.exampleview', $(this).attr('for'));
-            App.tabs(ev);
-        });
-
         $('.js-tabs a').click(App.tabs);
-    }
-
-    if (App.storage('mapboxjs.exampleview')) {
-        $('label[for="' + App.storage('mapboxjs.exampleview') + '"]').trigger('click');
     }
 
     var docs = new Docs();
