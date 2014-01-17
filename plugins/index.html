@@ -1,16 +1,17 @@
 ---
 layout: default
+title: Plugins
 ---
 
 {% for plugin in site.categories.plugin %}
-<div id='{{plugin.title}}' class='contain pad4y clearfix'>
+<div id='{{plugin.prefix || plugin.id}}' class='contain pad4y clearfix'>
   <div class='clearfix space-bottom keyline-bottom pad2y'>
     <div class='col4'>
-      <h2>{{plugin.title | markdownify | strip_html }}</h2>
+      <h2><a href="#{{plugin.prefix || plugin.id}}">{{plugin.title | markdownify | strip_html }}</a></h2>
       <p><a class='icon github' href='{{ plugin.code }}'>{{ plugin.license }} License</a></p>
     </div>
     <div class='prose col8'>
-      {{ plugin.content | markdownify  }}
+      {{ plugin.content | markdownify }}
     </div>
   </div>
   <div class='clearfix'>
