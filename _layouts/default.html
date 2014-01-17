@@ -123,7 +123,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav id='examples-list' class='keyline-top navigation v full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
+      <nav id='examples-list' class='keyline-top navigation v fill-light full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
         {% for example in page.examples %}
         <div class='section space-bottom1'>
           <strong class='col12 sub'>{{example.name}}</strong>
@@ -148,7 +148,12 @@ examples:
 </div>
 
 <!--Content area-->
-<div id='content-section' class='col9 pad4x margin3 content enclosure'>{{content}}</div>
+<div id='content-section' class='col9 pad4x margin3 content enclosure'>
+  {{content}}
+  <div class='center small space-bottom4'>
+    <p>The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.</p>
+  </div>
+</div>
 
 </body>
 </html>
