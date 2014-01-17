@@ -83,7 +83,7 @@ examples:
     <nav class='js-tabs fl small strong col12 clearfix center'>
       <a href='#api-menu' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active fill-darken0{% endif %}'>API</a>
       <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active fill-darken0{% endif %}'>Examples</a>
-      <a href='#plugins-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active fill-darken0{% endif %}'>Plugins</a>
+      <a href='{% if page.url contains "plugins" %}#plugins-menu{% else %}{{site.baseurl}}/plugins/{% endif %}' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active fill-darken0{% endif %}'>Plugins</a>
     </nav>
   </div>
 
