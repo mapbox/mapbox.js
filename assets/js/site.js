@@ -175,16 +175,6 @@
     window.Docs = Docs;
 })(window);
 
-function updateAvatar() {
-    if (App.user && App.user.avatar) {
-        $('#avatar').removeClass('big mapbox');
-        $('#avatar').css('background-image', 'url("' + App.user.avatar + '")');
-        $('#avatar').css('background-size', 'cover');
-    } else {
-        $('#avatar').addClass('big icon mapbox');
-    }
-}
-
 function load() {
     if (App) {
         $('.js-tabs label').click(function(ev) {
@@ -194,8 +184,6 @@ function load() {
 
         $('.js-tabs a').click(App.tabs);
     }
-
-    updateAvatar();
 
     if (App.storage('mapboxjs.exampleview')) {
         $('label[for="' + App.storage('mapboxjs.exampleview') + '"]').trigger('click');
