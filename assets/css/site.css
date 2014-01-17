@@ -4,13 +4,8 @@
 .full-y   { height:100%; }
 .dark pre { background:transparent; }
 
-.mast {
-  position:relative;
-  z-index:10;
-  padding-left:40px;
-  }
-  .mast nav a.active,
-  .mast nav a:hover { background-color:rgba(0,0,0,0.05); }
+.site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
+.site-nav a.active { background-color:#f8f8f8; }
 
 .fixed-sidebar {
   position:fixed;

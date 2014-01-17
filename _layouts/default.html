@@ -75,55 +75,41 @@ examples:
 {% endif %}
 
 <!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 fixed-sidebar fill-grey clip round'>
-  <div class='row1 mast keyline-bottom col12'>
-    <a href='{{site.url}}' class='pin-left pad2 fl inline icon big unround button mapbox'></a>
-    <nav class='js-tabs fl small strong col12 clearfix center'>
+<div class='hide-mobile col3 fixed-sidebar fill-light clip round'>
+  <div class='row1 pad2x pad1y mast clip keyline-bottom'>
+    <a href='{{site.baseurl}}/' class='strong version icon mapbox'>{{site.title}}</a>
+    <a href='{{site.url}}' class='fr small inline'>Mapbox.com</a>
+  </div>
+
+  <div class='row1 col12'>
+    <nav class='js-tabs site-nav fill-darken0 fl small strong col12 clearfix center'>
       <a href='#api-menu' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
       <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
       <a href='#plugins-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
     </nav>
   </div>
 
-  <div class='row1 pad2x pad1y'>
-    <a href='{{site.baseurl}}/' class='strong version'>
-      {{site.title}}
-      {% if page.v0 %}
-      <span class='fill-yellow small'>{{site.oldversion}}</span>
-      {% elsif page.version %}
-        {% if page.category == 'examples' %}
-          <span class='small'>{{site.mapboxjs}}</span>
-        {% else %}
-          <span class='small'>{{page.version}}</span>
-        {% endif %}
-      {% else %}
-        <span class='small'>{{site.mapboxjs}}</span>
-      {% endif %}
-    </a>
-  </div>
-
   <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% else %}active1{% endif %}'>
     <div id='api-menu' class='col12 animate full-y'>
-      <div class='pad2x row1 space-bottom2'>
+      <div class='pad2 row2'>
         <fieldset class='with-icon'>
           <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 pad2x round-right small strong'>View all?</a>
           <span class='icon search'></span>
           <input id='filter-api' type='text' class='round col12' placeholder='Filter documentation'>
         </fieldset>
       </div>
-
       {% include api.nav.html %}
     </div>
 
     <div id='examples-menu' class='col12 animate full-y'>
-      <div class='pad2x row1 space-bottom2'>
+      <div class='pad2 row2'>
         <fieldset class='with-icon'>
           <span class='icon search'></span>
           <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
         </fieldset>
       </div>
 
-      <nav id='examples-list' class='keyline-top navigation v fill-light full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
+      <nav id='examples-list' class='pad1y keyline-top navigation v full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
         {% for example in page.examples %}
         <div class='section space-bottom1'>
           <strong class='col12 sub'>{{example.name}}</strong>
@@ -138,7 +124,7 @@ examples:
     </div>
 
     <div id='plugins-menu' class='col12 animate full-y'>
-      <nav class='col12 v full-y scroll-y quiet-scroll fill-light pad1y'>
+      <nav class='col12 v full-y scroll-y quiet-scroll pad1y'>
         {% for plugin in site.categories.plugin %}
           <a href='{{plugin.url}}' class='pad1y pad2x'>{{plugin.title}}</a>
         {% endfor %}

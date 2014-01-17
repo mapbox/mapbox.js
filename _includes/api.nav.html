@@ -1,5 +1,5 @@
 {% for p in site.tags[site.mapboxjs] %}
-<nav class='navigation keyline-top fill-light full-y scroll-y v js-nav-docs quiet-scroll'>
+<nav class='navigation pad1y full-y keyline-top scroll-y v js-nav-docs quiet-scroll'>
   {% for section in p.navigation %}
     <div class='section'>
       <a class='col12 sub strong {% if p.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#api'>{{section.title}}</a>
