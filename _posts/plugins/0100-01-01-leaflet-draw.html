@@ -2,18 +2,17 @@
 layout: default
 categories: plugin
 title: Leaflet Draw
-id: leaflet-draw
-description: Let users draw shapes on your maps
+prefix: leaflet-draw
+description: Let users draw shapes on your maps.
 tags:
   - bsd
 snippet: |
-  <script src='//api.tiles.mapbox.com/mapbox.js/plugin/leaflet-draw.js'></script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/plugin/leaflet-draw.css' rel='stylesheet' />
+  <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' rel='stylesheet' />
 example: |
   var drawControl = (new L.Control.Draw()).addTo(map);
 code: https://github.com/Leaflet/Leaflet.draw
 license: BSD
 ---
 
-`leaflet-draw` adds a toolbar that allows people to draw points, lines, and
-polygons on the map.
+`leaflet-draw` adds a toolbar that allows users to draw points, lines, and polygons on the map.
