@@ -75,30 +75,31 @@ examples:
 {% endif %}
 
 <!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 fixed-sidebar round fill-grey clip'>
-
-  <div class='row1 mast keyline-bottom col12'>
-    <a href='{{site.url}}' id='avatar' class='pin-left pad2 fl inline'></a>
+<div class='fixed-logo'>
+  <a href='{{site.url}}' class='mb-logo'></a>
+</div>
+<div class='hide-mobile col3 fixed-sidebar clip fill-grey round keyline-all'>
+  <div class='row1 keyline-bottom col12'>
     <nav class='js-tabs fl small strong col12 clearfix center'>
-      <a href='#api-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
-      <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
-      <a href='{% if page.url contains "plugins" %}{{site.baseurl}}/#plugins-menu{% else %}{{site.baseurl}}/plugins{% endif %}' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+      <a href='#api-menu' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active fill-darken0{% endif %}'>API</a>
+      <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active fill-darken0{% endif %}'>Examples</a>
+      <a href='{% if page.url contains "plugins" %}#plugins-menu{% else %}{{site.baseurl}}/plugins/{% endif %}' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active fill-darken0{% endif %}'>Plugins</a>
     </nav>
   </div>
 
   <div class='row1 pad2x pad1y'>
-    <a href='{{site.baseurl}}/' class='version'>
+    <a href='{{site.baseurl}}/' class='strong version'>
       {{site.title}}
       {% if page.v0 %}
-      <span class='fill-yellow strong small'>{{site.oldversion}}</span>
+      <span class='fill-yellow small'>{{site.oldversion}}</span>
       {% elsif page.version %}
         {% if page.category == 'examples' %}
-          <span class='strong small'>{{site.mapboxjs}}</span>
+          <span class='small'>{{site.mapboxjs}}</span>
         {% else %}
-          <span class='strong small'>{{page.version}}</span>
+          <span class='small'>{{page.version}}</span>
         {% endif %}
       {% else %}
-        <span class='strong small'>{{site.mapboxjs}}</span>
+        <span class='small'>{{site.mapboxjs}}</span>
       {% endif %}
     </a>
   </div>
@@ -121,45 +122,20 @@ examples:
         <fieldset class='with-icon'>
           <span class='icon search'></span>
           <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
-          <div class='pin-right view-options pad1'>
-            <div class='js-tabs rounded-toggle clearfix'>
-              <input id='examples-grid-toggle' type='radio' value='examples-grid' name='examples-menu' checked='checked'>
-              <label for='examples-grid-toggle' class='animate'>Grid</label>
-              <input id='examples-list-toggle' type='radio' value='examples-list' name='examples-menu'>
-              <label for='examples-list-toggle' class='animate'>List</label>
-            </div>
-          </div>
         </fieldset>
       </div>
-
-      <div class='fill-light sliding h col12 clip active1'>
-        <div id='examples-grid' class='full-y quiet-scroll scroll-y animate col12'>
-          <div class='clearfix col12 grid-view js-nav-examples'>
-            {% for grid in site.categories['example/v1.0.0'] order:ascending %}
-            <a href='{{site.baseurl}}{{grid.url}}' style='background-image: url("{{site.baseurl}}/assets/images/test.png");' class='grid col6 row3 contain fill-darken0 example dark strong clip {% if grid.title == page.title %} active{% endif %}'>
-              <div class='overlay fill-darken3 pin-left row3 col12 animate keyline-bottom'>
-                <div class='pad1'>
-                  {{grid.title}}
-                </div>
-              </div>
-            </a>
-            {% endfor %}
-          </div>
-        </div>
-
-        <nav id='examples-list' class='navigation v full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
-          {% for example in page.examples %}
-          <div class='section pad1y'>
-            <strong class='col12 pad1y pad2x'>{{example.name}}</strong>
-            {% for listing in site.tags[example.id] order:ascending %}
-              {% if listing.version == 'v1.0.0' %}
-                <a href='{{site.baseurl}}{{listing.url}}' class='pad4x col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
-              {% endif %}
-            {% endfor %}
-          </div>
+      <nav id='examples-list' class='navigation v full-y js-nav-examples quiet-scroll scroll-y col12'>
+        {% for example in page.examples %}
+        <div class='section space-bottom1'>
+          <strong class='col12 sub'>{{example.name}}</strong>
+          {% for listing in site.tags[example.id] order:ascending %}
+            {% if listing.version == 'v1.0.0' %}
+              <a href='{{site.baseurl}}{{listing.url}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
+            {% endif %}
           {% endfor %}
-        </nav>
-      </div>
+        </div>
+        {% endfor %}
+      </nav>
     </div>
 
     <div id='plugins-menu' class='col12 animate full-y'>
@@ -169,14 +145,11 @@ examples:
         {% endfor %}
       </nav>
     </div>
-
   </div>
 </div>
 
 <!--Content area-->
-<div class='limiter clearfix'>
-  <div id='content-section' class='col9 margin3 content'>{{content}}</div>
-</div>
+<div id='content-section' class='col9 pad4x margin3 content enclosure'>{{content}}</div>
 
 </body>
 </html>
