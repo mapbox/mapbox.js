@@ -75,15 +75,13 @@ examples:
 {% endif %}
 
 <!--Fixed sidebar navigation-->
-<div class='fixed-logo'>
-  <a href='{{site.url}}' class='mb-logo'></a>
-</div>
-<div class='hide-mobile col3 fixed-sidebar clip fill-grey round keyline-all'>
-  <div class='row1 keyline-bottom col12'>
+<div class='hide-mobile col3 fixed-sidebar fill-grey clip round'>
+  <div class='row1 mast keyline-bottom col12'>
+    <a href='{{site.url}}' class='pin-left pad2 fl inline icon big unround button mapbox'></a>
     <nav class='js-tabs fl small strong col12 clearfix center'>
-      <a href='#api-menu' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active fill-darken0{% endif %}'>API</a>
-      <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active fill-darken0{% endif %}'>Examples</a>
-      <a href='{% if page.url contains "plugins" %}#plugins-menu{% else %}{{site.baseurl}}/plugins/{% endif %}' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active fill-darken0{% endif %}'>Plugins</a>
+      <a href='#api-menu' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
+      <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+      <a href='#plugins-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
     </nav>
   </div>
 
@@ -124,7 +122,8 @@ examples:
           <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
         </fieldset>
       </div>
-      <nav id='examples-list' class='navigation v full-y js-nav-examples quiet-scroll scroll-y col12'>
+
+      <nav id='examples-list' class='keyline-top navigation v fill-light full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
         {% for example in page.examples %}
         <div class='section space-bottom1'>
           <strong class='col12'>{{example.name}}</strong>
@@ -149,7 +148,12 @@ examples:
 </div>
 
 <!--Content area-->
-<div id='content-section' class='col9 pad4x margin3 content enclosure'>{{content}}</div>
+<div id='content-section' class='col9 pad4x margin3 content enclosure'>
+  {{content}}
+  <div class='center small space-bottom4'>
+    <p>The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.</p>
+  </div>
+</div>
 
 </body>
 </html>
