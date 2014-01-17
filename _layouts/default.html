@@ -162,7 +162,7 @@ examples:
     <div id='plugins-menu' class='col12 animate full-y'>
       <nav class='col12 v full-y scroll-y quiet-scroll pad1y'>
         {% for plugin in site.categories.plugin %}
-          <a href='{{plugin.url}}' class='pad1y pad2x'>{{plugin.title}}</a>
+          <a href='{{site.baseurl}}/plugins/#{{plugin.prefix}}' class='pad1y pad2x'>{{plugin.title}}</a>
         {% endfor %}
       </nav>
     </div>
