@@ -99,9 +99,11 @@
   .dropdown .contents {
     z-index:1000;
     }
-  .dropdown .close {
+  .dropdown .closedrop {
+    position:absolute;
     top:20px;
-    left:20px;
+    right:20px;
+    left:auto;
     }
   .drop:target .dropdown {
     display:block;
