@@ -227,3 +227,7 @@ pre .var { color:#0C9DC2; }
   text-transform:lowercase;
   display:inline;
   }
+
+.plugin h2, .plugin h4, .plugin div.highlight {
+  margin-bottom: 0;
+}

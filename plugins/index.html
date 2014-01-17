@@ -1,31 +1,36 @@
 ---
-layout: default
+layout: plugins
 title: Plugins
 ---
 
 {% for plugin in site.categories.plugin %}
-<div id='{{plugin.prefix}}' class='box round clearfix'>
+<div id='{{plugin.prefix}}' class='box round clearfix plugin'>
   <div class='clearfix keyline-bottom pad2'>
-    <div class='col7'>
-      <h2><a href="#{{plugin.prefix}}">{{plugin.title | markdownify | strip_html }}</a></h2>
-      {{ plugin.content | markdownify }}
+    <div class='col8'>
+      <h2><a href="#{{plugin.prefix}}">{{plugin.title | markdownify | strip_html }}</a>
+      <span class="version">
+        <sup class="fill-grey small">{{plugin.license}} License</sup>
+      </span>
+      </h2>
+      <p class="prose">{{plugin.description}}</p>
     </div>
-    <div class="col4 margin0" style="list-style-type: disc;">
-      <ul>
-        <li>XYZ License</li>
-        <li>Source Code</li>
-        <li>Full Documentation</li>
-      </ul>
+    <div class='col3 margin1 pill'>
+        <a href='{{plugin.code}}' class='col12 button {% if plugin.code contains "github" %}icon github{% endif %}'>Source Code</a>
+        <a href='{{plugin.documentation}}' class='col12 button'>Documentation</a>
     </div>
   </div>
   <div class='col12 pad2'>
     <div style="padding-bottom: 10px;">
       <h4>Include</h4>
-      {% highlight html %}{{ plugin.snippet }}{% endhighlight %}
+      <div class="quiet-scroll">
+        {% highlight html %}{{ plugin.snippet }}{% endhighlight %}
+      </div>
     </div>
     <div>
       <h4>Example</h4>
-      {% highlight js %}{{ plugin.example }}{% endhighlight %}
+      <div class="quiet-scroll">
+        {% highlight js %}{{ plugin.example }}{% endhighlight %}
+      </div>
     </div>
   </div>
 </div>
