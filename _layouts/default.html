@@ -77,7 +77,7 @@ examples:
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 fixed-sidebar fill-grey clip round'>
   <div class='row1 mast keyline-bottom col12'>
-    <a href='{{site.url}}' class='pin-left pad2 fl inline icon big dark fill-blue mapbox'></a>
+    <a href='{{site.url}}' class='pin-left pad2 fl inline icon big unround button mapbox'></a>
     <nav class='js-tabs fl small strong col12 clearfix center'>
       <a href='#api-menu' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
       <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
@@ -123,7 +123,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav id='examples-list' class='navigation v full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
+      <nav id='examples-list' class='keyline-top navigation v full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
         {% for example in page.examples %}
         <div class='section space-bottom1'>
           <strong class='col12 sub'>{{example.name}}</strong>

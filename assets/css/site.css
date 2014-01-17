@@ -9,8 +9,8 @@
   z-index:10;
   padding-left:40px;
   }
-  .mast a.active,
-  .mast a:hover { background-color:rgba(0,0,0,0.05); }
+  .mast nav a.active,
+  .mast nav a:hover { background-color:rgba(0,0,0,0.05); }
 
 .fixed-sidebar {
   position:fixed;
