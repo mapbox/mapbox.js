@@ -8,9 +8,11 @@ title: Plugins
   <div class='clearfix keyline-bottom pad2'>
     <div class='col8'>
       <h2><a href="#{{plugin.prefix}}">{{plugin.title | markdownify | strip_html }}</a>
+      {% if plugin.license %}
       <span class="version">
         <sup class="fill-grey small">{{plugin.license}} License</sup>
       </span>
+      {% endif %}
       </h2>
       <p class="prose">{{plugin.description}}</p>
     </div>

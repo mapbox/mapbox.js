@@ -172,6 +172,8 @@
         }
     };
 
+    console.log('here');
+
     window.Docs = Docs;
 })(window);
 
