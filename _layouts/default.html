@@ -70,9 +70,45 @@ examples:
 {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
 
-{% if page.intro %}
-{% include site.introduction.html %}
-{% endif %}
+<!--Mobile menu-->
+<div id='dropdown' class='show-mobile pad4 drop fill-green clearfix'>
+  <a href='#dropdown' class='fr icon menu quiet pad1 keyline-all'></a>
+  <h2>
+    {{site.title}}
+    <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+    {% if page.v0 %}
+      <sup class='fill-yellow small'>{{site.oldversion}}</sup>
+    {% elsif page.version %}
+      {% if page.category == 'examples' %}
+        <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+      {% else %}
+        <sup class='fill-darken0 small'>{{page.version}}</sup>
+      {% endif %}
+    {% else %}
+      <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+    {% endif %}
+    </a>
+  </h2>
+  <div class='dropdown fill-white strong keyline-top keyline-right keyline-left round-bottom'>
+    <div class='close pin-left col12'>
+      <a href='#' class='icon menu quiet pad1 keyline-all fill-darken0'></a>
+    </div>
+    <div class='contents contain'>
+      {% for item in site.categories.subject reversed %}
+      <a href='{{site.baseurl}}{{item.url}}' class='pad1 keyline-bottom strong col12 {% if item.url == page.url %}active{% endif %}'>
+        {{item.title}}
+      </a>
+        {% if site.categories[item.section] %}
+        <div class='pad1 keyline-bottom'>
+          {% for subnav in site.categories[item.section] reversed %}
+          <a href='{{site.baseurl}}{{subnav.url}}' class='small col12 {% if subnav.url == page.url %}active{% endif %}'>{{subnav.title}}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 fixed-sidebar fill-light clip round'>
@@ -89,7 +125,7 @@ examples:
     </nav>
   </div>
 
-  <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% elseif page.url contains "plugins" %}active3{% else %}active1{% endif %}'>
+  <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% elsif page.url contains "plugins" %}active3{% else %}active1{% endif %}'>
     <div id='api-menu' class='col12 animate full-y'>
       <div class='pad2 row2'>
         <fieldset class='with-icon'>
@@ -131,6 +167,12 @@ examples:
       </nav>
     </div>
   </div>
+</div>
+
+<div class='hide-mobile'>
+  {% if page.intro %}
+  {% include site.introduction.html %}
+  {% endif %}
 </div>
 
 <!--Content area-->
