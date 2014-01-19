@@ -6,5 +6,7 @@ layout: default
   {% if site.mapboxjs != page.version %}
   <div class='warning note round space-bottom2'>Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}'>{{site.mapboxjs}} for the latest</a>.</div>
   {% endif %}
+
+  {% include site.nav.html %}
   {{content}}
 </div>

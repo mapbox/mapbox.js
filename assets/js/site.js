@@ -178,9 +178,7 @@
 })(window);
 
 function load() {
-    if (App) {
-        $('.js-tabs a').click(App.tabs);
-    }
+    // if (App) $('.js-tabs a').click(App.tabs);
 
     var docs = new Docs();
     docs.copyCode();

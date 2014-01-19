@@ -75,7 +75,7 @@ examples:
   <nav class='navigation pad1y full-y keyline-top scroll-y v js-nav-docs quiet-scroll'>
     {% for section in p.navigation %}
       <div class='section'>
-        <a class='col12 sub strong {% if p.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#api'>{{section.title}}</a>
+        <a class='col12 sub strong {% if p.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}'>{{section.title}}</a>
         {% for nav in section.nav %}
           <a class='col12 truncate sub' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
           {% if nav.sub %}
@@ -138,16 +138,15 @@ examples:
 
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 fixed-sidebar fill-light clip round'>
-  <div class='row1 pad2x pad1y mast clip keyline-bottom'>
-    <a href='{{site.baseurl}}/' class='strong version icon mapbox'>{{site.title}}</a>
-    <a href='{{site.url}}' class='fr small inline'>Mapbox.com</a>
-  </div>
+  <div class='row1 contain col12'>
+    <div class='fill-green pin-left keyline-right'>
+      <a href='{{site.baseurl}}/' class='{% if page-url == '/index.htm' %}dark fill-darken1{% else %}quiet{% endif %} inline pad1 icon home'></a>
+    </div>
 
-  <div class='row1 col12'>
-    <nav class='js-tabs site-nav fill-darken0 fl small strong col12 clearfix center'>
-      <a href='#api-menu' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
-      <a href='#examples-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
-      <a href='#plugins-menu' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+    <nav class='site-nav fill-darken0 fl small strong col12 clearfix center'>
+      <a href='{{site.baseurl}}/api' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
+      <a href='{{site.baseurl}}/examples' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+      <a href='{{site.baseurl}}/plugins' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
     </nav>
   </div>
 
@@ -193,12 +192,6 @@ examples:
       </nav>
     </div>
   </div>
-</div>
-
-<div class='hide-mobile'>
-  {% if page.intro %}
-  {% include site.introduction.html %}
-  {% endif %}
 </div>
 
 <!--Content area-->

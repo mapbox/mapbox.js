@@ -1,15 +1,14 @@
 ---
+layout: default
 ---
-<!DOCTYPE html>
-<html>
-  <head></head>
-  <body>
-      <script>
-          var redirect = '{{site.baseurl}}/api/{{site.mapboxjs}}/';
-          if (window.location && window.location.hash) {
-              window.location.href = redirect + window.location.hash;
-          } else { window.location.href = redirect }
-      </script>
-      <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/'>if not redirected, click here.</a>
-  </body>
-</html>
+
+<div class='hide-mobile'>
+  {% include site.introduction.html %}
+</div>
+
+<h2>Get started fast</h2>
+<p>Use the latest hosted version on the same reliable and speedy CDN that powers MapBox tiles. There&#39;s no API key to use it. Add a reference to the JavaScript &amp; CSS in your HTML.</p>
+
+<div class='quiet-scroll'>
+{% highlight html %}<link href='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>{% endhighlight %}
