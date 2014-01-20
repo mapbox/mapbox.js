@@ -206,7 +206,7 @@ from Mapbox and elsewhere into your map.</p>
 <pre><code>var markerLayer = L.mapbox.markerLayer()
     .addTo(map);
 
-featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
+markerLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
 <h3 id="markerlayer-loadid-id-">markerLayer.loadID(id)</h3>
 <p>Load marker GeoJSON data from a map with the given <code>id</code> on Mapbox.</p>
@@ -232,7 +232,7 @@ featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre>
 
 // loads markers from the map `examples.map-0l53fhk2` on Mapbox,
 // if that map has markers
-featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);</code></pre>
+markerLayer.loadID(&#39;examples.map-0l53fhk2&#39;);</code></pre>
 <p><em>Returns</em>: the layer object</p>
 <h3 id="markerlayer-setfilter-filter-">markerLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>
@@ -295,7 +295,7 @@ An empty array will clear the layer of all features.</p>
     .addTo(map);
 // a simple GeoJSON featureset with a single point
 // with no properties
-featureLayer.setGeoJSON({
+markerLayer.setGeoJSON({
     type: &quot;FeatureCollection&quot;,
     features: [{
         type: &quot;Feature&quot;,

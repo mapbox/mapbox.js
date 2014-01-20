@@ -5,19 +5,15 @@
     var Docs = function() {};
 
     Docs.prototype = {
-        copyCode: function() {
-            $('#copy').click(function(e) {
-                e.preventDefault();
-                if (document.selection) {
-                    var rangeD = document.body.createTextRange();
-                    rangeD.moveToElementText(document.getElementById('code'));
-                    rangeD.select();
-                } else if (window.getSelection) {
-                    var rangeW = document.createRange();
-                    rangeW.selectNode(document.getElementById('code'));
-                    window.getSelection().addRange(rangeW);
-                }
-            });
+        copyCode: function(el) {
+            if (window.getSelection && document.createRange) {
+                el = document.getElementById(el);
+                var range = document.createRange();
+                range.selectNodeContents(el);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
         },
 
         colorCode: function(cb) {
@@ -172,16 +168,11 @@
         }
     };
 
-    console.log('here');
-
     window.Docs = Docs;
 })(window);
 
 function load() {
-    // if (App) $('.js-tabs a').click(App.tabs);
-
     var docs = new Docs();
-    docs.copyCode();
 
     {% if page.v0 %}
         docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
@@ -191,8 +182,8 @@ function load() {
 
     docs.bindSearch($('#filter-api'), $('.js-nav-docs'));
 
-    $('#about').click(function() {
-        App.modal.show('about');
+    $('.js-select').click(function() {
+        docs.copyCode($(this).data('target'));
         return false;
     });
 

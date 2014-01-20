@@ -2,11 +2,15 @@
 layout: default
 ---
 
-<div id='api' class='prose pad4y doc'>
+<div id='api' class='prose pad2y doc'>
+  {% include site.nav.html %}
   {% if site.mapboxjs != page.version %}
   <div class='warning note round space-bottom2'>Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}'>{{site.mapboxjs}} for the latest</a>.</div>
   {% endif %}
 
-  {% include site.nav.html %}
   {{content}}
+</div>
+
+<div class='center small space-bottom4'>
+  <p>The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.</p>
 </div>

@@ -10,17 +10,17 @@ license: BSD 2-Clause
 snippet: |
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.3/leaflet-image.js'></script>
 example: |
-    leafletImage(map, function(err, canvas) {
-        // now you have a canvas image of the map
-        // example thing to do with that canvas:
-        var img = document.createElement('img');
-        var dimensions = map.getSize();
-        img.width = dimensions.x;
-        img.height = dimensions.y;
-        img.src = canvas.toDataURL();
-        document.getElementById('images').innerHTML = '';
-        document.getElementById('images').appendChild(img);
-    });
+  leafletImage(map, function(err, canvas) {
+      // now you have a canvas image of the map
+      // example thing to do with that canvas:
+      var img = document.createElement('img');
+      var dimensions = map.getSize();
+      img.width = dimensions.x;
+      img.height = dimensions.y;
+      img.src = canvas.toDataURL();
+      document.getElementById('images').innerHTML = '';
+      document.getElementById('images').appendChild(img);
+  });
 code: https://github.com/mapbox/leaflet-image
 documentation: https://github.com/mapbox/leaflet-image#usage
 ---

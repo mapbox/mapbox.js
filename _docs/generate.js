@@ -193,7 +193,7 @@ function readDocumentation(filename) {
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: header.replace('All', c.name) +
                     'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' +
+                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n{% raw %}' +
                     marked.parser(c.chunks).replace('id="map"', '') + '{% endraw %}'
             });
         });
@@ -207,12 +207,13 @@ function readDocumentation(filename) {
 
 landOutput.write('tags: ' + argv.t + '\n');
 landOutput.write(nav);
-landOutput.write('{% include api.introduction.html %}');
 landOutput.write('---\n');
-output.write('---\n');
-output.write('{% raw %}\n');
+landOutput.write('{% include api.introduction.html %}\n');
+
+output.write("---\n");
+output.write("{% raw %}\n");
 output.write(all + '\n');
-output.write('{% endraw %}');
+output.write("{% endraw %}");
 
 writes.forEach(function(w) {
     fs.writeFileSync(w.file, w.contents);

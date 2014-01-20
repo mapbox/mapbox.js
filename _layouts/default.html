@@ -139,8 +139,8 @@ examples:
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 fixed-sidebar fill-light clip round'>
   <div class='row1 contain col12'>
-    <div class='fill-green pin-left keyline-right'>
-      <a href='{{site.baseurl}}/' class='{% if page-url == '/index.htm' %}dark fill-darken1{% else %}quiet{% endif %} inline pad1 icon home'></a>
+    <div class='fill-green pin-left keyline-left keyline-right'>
+      <a href='{{site.baseurl}}/' class='{% if page.url == "/index.html" %}fill-darken0{% endif %} quiet inline pad1 icon home'></a>
     </div>
 
     <nav class='site-nav fill-darken0 fl small strong col12 clearfix center'>
@@ -170,7 +170,7 @@ examples:
         </fieldset>
       </div>
 
-      <nav id='examples-list' class='keyline-top pad1y  navigation v fill-light full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
+      <nav id='examples-list' class='keyline-top pad1y navigation v fill-light full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
         {% for example in page.examples %}
         <div class='section space-bottom1'>
           <strong class='col12 sub'>{{example.name}}</strong>
@@ -185,22 +185,28 @@ examples:
     </div>
 
     <div id='plugins-menu' class='col12 animate full-y'>
-      <nav class='col12 v full-y scroll-y quiet-scroll pad1y'>
+      <div class='pad2 keyline-bottom prose'>
+        <strong>Mapbox hosted plugins</strong>
+        <p class='quiet'>
+          Plugins extend the functionality of mapbox.js. This list is a collection
+          of high quality ones that are hosted on the same speedy CDN service that hosts mapbox.js.
+        </p>
+      </div>
+      <nav class='navigation col12 v full-y scroll-y quiet-scroll pad1y'>
         {% for plugin in site.categories.plugin %}
-          <a href='{{site.baseurl}}/plugins/#{{plugin.prefix}}' class='pad1y pad2x'>{{plugin.title}}</a>
+          <a href='{{site.baseurl}}/plugins/#{{plugin.prefix}}' class='sub'>{{plugin.title}}</a>
         {% endfor %}
       </nav>
     </div>
   </div>
 </div>
 
+{% if page.intro %}
+{% include site.introduction.html %}
+{% endif %}
+
 <!--Content area-->
-<div id='content-section' class='col9 pad4x margin3 content enclosure'>
-  {{content}}
-  <div class='center small space-bottom4'>
-    <p>The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.</p>
-  </div>
-</div>
+<div id='content-section' class='col9 pad4x margin3 content enclosure'>{{content}}</div>
 
 </body>
 </html>

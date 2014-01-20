@@ -1,12 +1,17 @@
 .enclosure { max-width:900px; }
 
 /*Base candidate*/
-.full-y   { height:100%; }
-.dark pre { background:transparent; }
+.full-y         { height:100%; }
+
+.fill-white pre,
+.fill-light pre,
+.dark pre       { background-color:transparent; }
 
 .site-nav { padding-left:40px; }
 .site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
 .site-nav a.active { background-color:#f8f8f8; }
+
+.fill-green .home:hover { background-color:rgba(0,0,0,0.10); }
 
 .fixed-sidebar {
   position:fixed;
@@ -16,6 +21,9 @@
   .fixed-sidebar .sliding {
     height:100%;
     }
+
+.plugin-label   { padding:20px 20px 10px; }
+.plugin-source  { padding:0 20px 20px; }
 
 .grid {
   background-repeat:no-repeat;
@@ -36,7 +44,7 @@
   overflow-y:auto;
   }
   .fixed-sidebar .scroll-y {
-    padding-bottom:170px;
+    padding-bottom:130px;
     }
 
 .navigation .pad1y:empty { padding:0; }
@@ -225,7 +233,3 @@ pre .var { color:#0C9DC2; }
   text-transform:lowercase;
   display:inline;
   }
-
-.plugin h2, .plugin h4, .plugin div.highlight {
-  margin-bottom: 0;
-}

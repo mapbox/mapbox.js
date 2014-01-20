@@ -1,4 +1,16 @@
-<div class='space-bottom2 pad1y keyline-bottom'>
+<div class='space-bottom2 pad1y'>
   <a href='{{site.url}}' class='mb-logo small'>Mapbox</a>
-  <a href='{{site.url}}' class='fr quiet'>Mapbox.js</a>
+  <a href='{{site.baseurl}}' class='fr quiet'>mapbox.js
+      {% if page.v0 %}
+       <span class='fill-yellow small'>{{site.oldversion}}</span>
+      {% elsif page.version %}
+      {% if page.category == 'examples' %}
+        {{site.mapboxjs}}
+      {% else %}
+        {{page.version}}
+      {% endif %}
+      {% else %}
+        {{site.mapboxjs}}
+      {% endif %}
+  </a>
 </div>

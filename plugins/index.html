@@ -4,36 +4,40 @@ title: Plugins
 ---
 
 {% for plugin in site.categories.plugin %}
-<div id='{{plugin.prefix}}' class='box round clearfix plugin'>
-  <div class='clearfix keyline-bottom pad2'>
-    <div class='col8'>
-      <h2><a href="#{{plugin.prefix}}">{{plugin.title | markdownify | strip_html }}</a>
+<div class='keyline-all round clearfix space-bottom4'>
+  <div class='clearfix pad2 keyline-bottom space-bottom2'>
+    <div class='col6 space'>
+      <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }}
       {% if plugin.license %}
-      <span class="version">
-        <sup class="fill-grey small">{{plugin.license}} License</sup>
-      </span>
+      <span class='quiet small'>{{plugin.license}}</span>
       {% endif %}
-      </h2>
-      <p class="prose">{{plugin.description}}</p>
+      </h3>
+      <p class='prose'>{{plugin.description}}</p>
     </div>
-    <div class='col3 margin1 pill'>
-        <a href='{{plugin.code}}' class='col12 button {% if plugin.code contains "github" %}icon github{% endif %}'>Source Code</a>
-        <a href='{{plugin.documentation}}' class='col12 button'>Documentation</a>
+    <div class='col5 margin1 pill clearfix'>
+      <a href='{{plugin.code}}' class='col6 button icon {% if plugin.code contains "github" %}github{% else %}home{% endif %}'>
+        {% if plugin.code contains "github" %}
+          GitHub
+        {% else %}
+          Project
+        {% endif %}
+      </a>
+      <a href='{{plugin.documentation}}' class='col6 button'>Documentation</a>
     </div>
   </div>
-  <div class='col12 pad2'>
-    <div style="padding-bottom: 10px;">
-      <h4>Include</h4>
-      <div class="quiet-scroll">
-        {% highlight html %}{{ plugin.snippet }}{% endhighlight %}
-      </div>
-    </div>
-    <div>
+  <div class='col12 pad2x fill-white keyline-bottom'>
+    <div class='space-bottom1'>
       <h4>Example</h4>
-      <div class="quiet-scroll">
-        {% highlight js %}{{ plugin.example }}{% endhighlight %}
+      <div class='quiet-scroll round'>
+{% highlight js %}{{plugin.example}}{% endhighlight %}
       </div>
     </div>
+  </div>
+  <div class='col12 quiet-scroll fill-light'>
+    <div class='plugin-label space small strong'>
+      <h4 class='inline'>Source</h4><a href='#' data-target='snippet-{{forloop.index}}' class='inline js-select'>Select all</a>
+    </div>
+    <pre id='snippet-{{forloop.index}}' class='plugin-source pad2'>{{ plugin.snippet | replace:'&','&amp;' | replace:'<','&lt;' | replace:'>', '&gt;'}}</pre>
   </div>
 </div>
 {% endfor %}
