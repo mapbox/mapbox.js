@@ -6,23 +6,12 @@ title: Plugins
 {% for plugin in site.categories.plugin %}
 <div class='keyline-all round clearfix space-bottom4'>
   <div class='clearfix pad2 keyline-bottom space-bottom2'>
-    <div class='col6 space'>
-      <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }}
-      {% if plugin.license %}
-      <span class='quiet small'>{{plugin.license}}</span>
-      {% endif %}
-      </h3>
+    <div class='col8'>
+      <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }}</h3>
       <p class='prose'>{{plugin.description}}</p>
     </div>
-    <div class='col5 margin1 pill clearfix'>
-      <a href='{{plugin.code}}' class='col6 button icon {% if plugin.code contains "github" %}github{% else %}home{% endif %}'>
-        {% if plugin.code contains "github" %}
-          GitHub
-        {% else %}
-          Project
-        {% endif %}
-      </a>
-      <a href='{{plugin.documentation}}' class='col6 button'>Documentation</a>
+    <div class='col4'>
+      <p class='text-right'><a href='{{plugin.code}}'>Project page</a> {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed</em>{% endif %}</p>
     </div>
   </div>
   <div class='col12 pad2x fill-white keyline-bottom'>
