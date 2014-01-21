@@ -58,13 +58,23 @@ function splitChunks(lines) {
     return chunks;
 }
 
-function transformLinks(line) {
+function transformLinks(line, relative) {
     return line.replace(/href=['"]([^"']*)['"]/g, function(all, content) {
         if (content.indexOf('#') === 0) {
-            return all.replace(content, BASE_URL + 'l-' + content.replace(/\-.*/g, '').replace('#', ''));
+            if (relative) {
+                return all.replace(content, '#l-' + content.replace(/\-.*/g, '').replace('#', ''));
+            } else {
+                return all.replace(content, BASE_URL + 'l-' + content.replace(/\-.*/g, '').replace('#', ''));
+            }
         } else {
             return all;
         }
+    });
+}
+
+function transformHeaders(text) {
+    return text.replace(/<h2 id="([^"]+)">([^<]+)<\/h2>/, function(all, content) {
+        return all.replace(content, 'l-' + content);
     });
 }
 
@@ -83,7 +93,9 @@ function readDocumentation(filename) {
     if (filename.match(/html$/)) {
         var lines = f.split('\n');
         chunks = splitChunks(lines);
-        all += f;
+        all += lines.map(function(l) {
+            return transformHeaders(transformLinks(l, true));
+        }).join('\n');
         nav += '  - title: Leaflet\n';
         nav += '    nav:\n';
         chunks.forEach(function(c) {
@@ -112,13 +124,22 @@ function readDocumentation(filename) {
                 escapedText = text.replace(/\..*/, '').toLowerCase().replace(/[^\w]+/g, '-');
             }
             escapedText = text.replace(/\(.*/, '').toLowerCase().replace(/[^\w]+/g, '-');
-            var html = '<h' + level + ' id="section-' + escapedText + '">' + text + '</h' + level + '>\n';
+            var html = '<h' + level + ' id="' + escapeFn(text) + '">' + text + '</h' + level + '>\n';
             var indent = (new Array(1 + (level * 2))).join(' ');
             var cleanTitle = text.replace(/\(.*/, '');
             nav += indent + '- title: "' + cleanTitle + '"\n';
             nav += indent + '  id: ' + escapedText + '\n';
             nav += indent + '  nav:\n';
             return html;
+        };
+
+        renderer.codespan = function(text) {
+            if (text.match(/^L\.mapbox/)) {
+                return '<code><a href="#' + escapeFn(text) + '">' + text + '</a></code>';
+            } else if (text.match(/^L\./)) {
+                return '<code><a href="#' + escapeFn(text) + '">' + text + '</a></code>';
+            }
+            return '<code>' + text + '</code>';
         };
 
         var html = marked(f, { renderer: renderer });
