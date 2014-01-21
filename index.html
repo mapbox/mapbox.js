@@ -5,11 +5,10 @@ title: Mapbox.js
 
 <div class='hide-mobile fill-green col12 row8 clip'>
   <div class='limiter pad2y clearfix'>
-    <div class='space-bottom2'>
-      <a href='{{site.url}}' class='mb-logo white'>Mapbox</a>
-    </div>
-
     <div class='col5'>
+      <div class='space-bottom2'>
+        <a href='{{site.url}}' class='mb-logo white'>Mapbox</a>
+      </div>
       <h2>
         {{site.title}}
         <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
@@ -29,15 +28,20 @@ title: Mapbox.js
       <div class='space-bottom2 prose'>
         <p>Build desktop and mobile web applications with Mapbox.js, our open-source JavaScript library.</p>
       </div>
+      <div class='tabs clearfix col12'><!--
+        --><a class='col4' href='{{site.baseurl}}/api'>API</a><!--
+        --><a class='col4' href='{{site.baseurl}}/examples'>Examples</a><!--
+        --><a class='col4' href='{{site.baseurl}}/plugins'>Plugins</a>
+      </div>
     </div>
-    <div class='col6 margin1'>
+    <div class='col6 pad2y margin1'>
       <div class='wireframe'>
         <div class='top pad1 keyline-bottom round-top'>
           <span class='dot fill-darken1'></span>
           <span class='dot fill-darken1'></span>
           <span class='dot fill-darken1'></span>
         </div>
-        <div id='map-example' class='row6 col12 fill-darken0 contain body'>
+        <div class='row6 col12 fill-darken0 contain body'>
           <div class='keyline-all margin5r fill-darken0 space-bottom1 fill-gray row1 space-top1 margin1 col3'></div>
           <div class='keyline-all fill-darken0 row4 margin1 col3'></div>
           <div class='icon marker margin2r space-top1 pin-right quiet big thumbnail'></div>
@@ -50,8 +54,8 @@ title: Mapbox.js
   </div>
 </div>
 
-<div id='content-section' class='limiter doc'>
-  <div class='clearfix pad4y'>
+<div id='content-section'>
+  <div class='clearfix limiter pad4y'>
     <div class='col5'>
       <h2 id='getting-started' class='space-bottom1'>Get started fast</h2>
       <div class='prose'>
@@ -65,7 +69,7 @@ title: Mapbox.js
     </div>
   </div>
 
-  <div class='clearfix'>
+  <div class='clearfix limiter'>
     <div class='col3 pad2 center'>
       <span class='small-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
         <span class='icon big leaflet'></span>
@@ -103,7 +107,7 @@ title: Mapbox.js
     </div>
   </div>
 
-  <div class='clearfix pad4y'>
+  <div class='clearfix limiter pad4y'>
     <div class='center clearfix'>
       <div class='prose'>
         <p><strong>Have a question?</strong> Try <a href='http://stackoverflow.com/questions/tagged/mapbox?sort=votes&pageSize=100'>StackOverflow</a>. We're also happy to help out with code on <a href='http://support.mapbox.com/discussions/mapboxjs'>support.mapbox.com</a>.</p>
