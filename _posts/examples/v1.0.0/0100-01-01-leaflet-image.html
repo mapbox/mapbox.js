@@ -9,9 +9,9 @@ tags:
 ---
     <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.3/leaflet-image.js'></script>
 
-    <button id='snap-button' style='position: absolute; bottom: 10px; right: 10px;'>Snap image</button>
-    <div id='images' style='float: right; width: 40%;'></div>
-    <div id='map' style='width: 59%;'></div>
+    <button id='snap' style='position: absolute; bottom: 10px; right: 10px;'>Snap image</button>
+    <div id='images' style='float: right; width: 49%;'></div>
+    <div id='map' style='width: 49%;'></div>
 
     <script type="text/javascript">
         var map = L.mapbox.map('map', 'examples.map-vyofok3q', {
@@ -19,14 +19,11 @@ tags:
             zoom: 15
         });
 
-        document.getElementById('snap-button').onclick = snapMap;
+        document.getElementById('snap').addEventListener('click', function() {
+            leafletImage(map, doImage);
+        });
 
-        // this doesn't work
-        
-        var snapMap = function() {
-          leafletImage(map, function(err, canvas) {
-            // now you have a canvas image of the map
-            // example thing to do with that canvas:
+        function doImage(err, canvas) {
             var img = document.createElement('img');
             var dimensions = map.getSize();
             img.width = dimensions.x;
@@ -34,7 +31,5 @@ tags:
             img.src = canvas.toDataURL();
             document.getElementById('images').innerHTML = '';
             document.getElementById('images').appendChild(img);
-            console.log('hey hey hey');
-          });
-        };
+        }
     </script>
