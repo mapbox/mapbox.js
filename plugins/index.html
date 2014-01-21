@@ -4,7 +4,7 @@ title: Plugins
 ---
 
 {% for plugin in site.categories.plugin %}
-<div class='keyline-all round clearfix space-bottom4'>
+<div class='keyline-all round-top clearfix'>
   <div class='clearfix pad2 keyline-bottom space-bottom2'>
     <div class='col8'>
       <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }}</h3>
@@ -23,10 +23,8 @@ title: Plugins
     </div>
   </div>
   <div class='col12 quiet-scroll fill-light'>
-    <div class='plugin-label space small strong'>
-      <h4 class='inline'>Source</h4><a href='#' data-target='snippet-{{forloop.index}}' class='inline js-select'>Select all</a>
-    </div>
-    <pre id='snippet-{{forloop.index}}' class='plugin-source pad2'>{{ plugin.snippet | replace:'&','&amp;' | replace:'<','&lt;' | replace:'>', '&gt;'}}</pre>
+    <pre id='snippet-{{forloop.index}}' class='pad2'>{{ plugin.snippet | replace:'&','&amp;' | replace:'<','&lt;' | replace:'>', '&gt;'}}</pre>
   </div>
 </div>
+<a href='#' data-target='snippet-{{forloop.index}}' class='space-bottom4 col12 round-bottom icon clipboard button js-select'>Select source</a>
 {% endfor %}
