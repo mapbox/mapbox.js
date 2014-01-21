@@ -135,7 +135,7 @@
   }
 
 /*Examples*/
-#map {
+#map, .example-map {
   background:#eee;
   position:absolute;
   top:0;left:0;

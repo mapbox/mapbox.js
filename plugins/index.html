@@ -14,6 +14,11 @@ title: Plugins
       <p class='text-right'><a href='{{plugin.code}}'>Project page</a> {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed</em>{% endif %}</p>
     </div>
   </div>
+  {% if plugin.demo %}
+  <div class='plugin-demo col12 row8 fill-white keyline-bottom contain space-bottom2'>
+    {{ plugin.demo }}
+  </div>
+  {% endif %}
   <div class='col12 pad2x fill-white keyline-bottom'>
     <div class='space-bottom1'>
       <h4>Example</h4>
