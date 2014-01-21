@@ -24,7 +24,7 @@ _Example_:
 
 _Returns_: a map object
 
-## map.getTileJSON()
+### map.getTileJSON()
 
 Returns this map's TileJSON object which determines its tile source,
 zoom bounds and other metadata.
