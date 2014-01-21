@@ -4,13 +4,13 @@
 Create and automatically configure a map with layers, markers, and
 interactivity.
 
-<span class='leaflet'>_Extends_: [L.Map](http://leafletjs.com/reference.html#map-options)</span>
+<span class='leaflet'>_Extends_: `L.Map`</span>
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | element (_required_) | string | Must be the id of an element, or a DOM element reference. |
 | id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](http://mapbox.com/wax/tilejson.html) object, from your own Javascript code</li></ul> |
-| options | object | If provided, it is the same options as provided to [L.Map](http://leafletjs.com/reference.html#map-options) with the following additions: <ul><li>`tileLayer` (boolean). Whether or not to add a `L.mapbox.tileLayer` based on the TileJSON. Default: `true`</li><li>`markerLayer` (boolean). Whether or not to add a `L.mapbox.markerLayer` based on the TileJSON. Default: `true`.</li><li>`gridLayer` (boolean). Whether or not to add a `L.mapbox.gridLayer` based on the TileJSON. Default: `true`.</li><li>`legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`. Default: `true`.</li> |
+| options | object | If provided, it is the same options as provided to `L.Map` with the following additions: <ul><li>`tileLayer` (boolean). Whether or not to add a `L.mapbox.tileLayer` based on the TileJSON. Default: `true`</li><li>`markerLayer` (boolean). Whether or not to add a `L.mapbox.markerLayer` based on the TileJSON. Default: `true`.</li><li>`gridLayer` (boolean). Whether or not to add a `L.mapbox.gridLayer` based on the TileJSON. Default: `true`.</li><li>`legendControl` (boolean). Whether or not to add a `L.mapbox.legendControl`. Default: `true`.</li> |
 
 _Example_:
 
@@ -38,12 +38,12 @@ _Returns_: the TileJSON object
 You can add a tiled layer to your map with `L.mapbox.tileLayer()`, a simple
 interface to layers from Mapbox and elsewhere.
 
-<span class='leaflet'>_Extends_: [L.TileLayer](http://leafletjs.com/reference.html#tilelayer)</span>
+<span class='leaflet'>_Extends_: `L.TileLayer`</span>
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
-| options | object | The second argument is optional. If provided, it is the same options as provided to [L.TileLayer](http://leafletjs.com/reference.html#tilelayer) with one addition: <ul><li>`retinaVersion`, if provided, is an alternative value for the first argument to `L.mapbox.tileLayer` which, if retina is detected, is used instead.</li></ul>
+| options | object | The second argument is optional. If provided, it is the same options as provided to `L.TileLayer` with one addition: <ul><li>`retinaVersion`, if provided, is an alternative value for the first argument to `L.mapbox.tileLayer` which, if retina is detected, is used instead.</li></ul>
 
 If `detectRetina` is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don't provide an explicit `retinaVersion` to be used.
 
@@ -148,7 +148,7 @@ function with that data, if any.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| latlng | object | `latlng` a [http://leafletjs.com/reference.html#latlng](L.LatLng object) |
+| latlng | object | `latlng` a L.LatLng object |
 | callback | function | `callback` a function that is called with the grid data as an argument |
 
 _Returns_: the L.mapbox.gridLayer object
@@ -165,7 +165,7 @@ from Mapbox and elsewhere into your map.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
-| options | object | If provided, it is the same options as provided to [http://leafletjs.com/reference.html#featuregroup](L.FeatureGroup), as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
+| options | object | If provided, it is the same options as provided to `L.FeatureGroup`, as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
 
@@ -391,7 +391,7 @@ Interaction is what we call interactive parts of maps that are created with the 
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| layer | L.mapbox.gridLayer | The first argument must be a layer created with `L.mapbox.gridLayer()` |
+| layer | `L.mapbox.gridLayer` | The first argument must be a layer created with `L.mapbox.gridLayer()` |
 | options | object | Valid options are:<ul><li>`sanitizer`: A function that accepts a string containing interactivity data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li>`template`: A string in the Mustache template language that will be evaluated with data from the grid to produce HTML for the interaction.</li><li>`follow`: Whether the tooltip should follow the mouse in a constant relative position, or should be fixed in the top-right side of the map. By default, this is `false` and the tooltip is stationary.</li><li>`pinnable`: Whether clicking will 'pin' the tooltip open and expose a 'close' button for the user to close the tooltip. By default, this is `true`.</li><li>`touchTeaser`: On touch devices, show the teaser formatter if there is no output from the full formatter. By default, this is `true`.</li><li>`location`: Evaluate the location formatter on click events, and if it provides output, navigate to that location. By default, this is `true`.</li></ul> |
 
 _Example_:
@@ -486,12 +486,12 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 
 Adds a "Share" button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.
 
-<span class='leaflet'>_Extends_: [L.Control](http://leafletjs.com/reference.html#control)</span>
+<span class='leaflet'>_Extends_: L.Control</span>
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url _optional_ | string | Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul> |
-| options | object | Options for [L.Control](http://leafletjs.com/reference.html#control)</span> Also accepts the following options:<ul><li>url: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li></ul> |
+| options | object | Options for L.Control</span> Also accepts the following options:<ul><li>url: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li></ul> |
 
 _Example_:
 
@@ -500,7 +500,7 @@ _Example_:
         .addControl(L.mapbox.shareControl());
 
 _Returns_:
-Returns a <code>L.mapbox.shareControl</code> object.
+Returns a `L.mapbox.shareControl` object.
 
 # Markers
 
