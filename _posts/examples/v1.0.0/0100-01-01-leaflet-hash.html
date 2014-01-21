@@ -1,0 +1,19 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Leaflet Hash
+description: Using the Leaflet Hash plugin
+tags:
+  - plugins
+---
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+<div id='map'></div>
+
+<script type="text/javascript">
+    var map = L.mapbox.map('map', 'examples.map-vyofok3q', {
+        center: [38.9, -77.0],
+        zoom: 15
+    });
+    var hash = L.hash(map);
+</script>

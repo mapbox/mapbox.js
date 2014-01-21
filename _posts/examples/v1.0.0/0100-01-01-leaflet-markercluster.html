@@ -2,28 +2,15 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Leaflet.markercluster
-description: Using the Leaflet.markercluster plugin
+title: Leaflet Markercluster
+description: Using the Leaflet Markercluster plugin
 tags:
   - plugins
 ---
 
-<!--
-  Include Leaflet.markercluster's CSS and JavaScript assets.
-  Unlike mapbox.js, these are not hosted by MapBox; you will
-  need to download and host them yourself.
-
-  Note that the 0.2 release of Leaflet.markercluster is not
-  compatible with the version of Leaflet used by mapbox.js.
-  This example uses assets from the master branch (@ 6fda9a206)
-  of https://github.com/Leaflet/Leaflet.markercluster.
--->
-<link rel="stylesheet" href="{{site.baseurl}}/assets/MarkerCluster.css" />
-<link rel="stylesheet" href="{{site.baseurl}}/assets/MarkerCluster.Default.css" />
-<!--[if lte IE 8]>
-  <link rel="stylesheet" href="{{site.baseurl}}/assets/MarkerCluster.Default.ie.css" />
-<![endif]-->
-<script src="{{site.baseurl}}/assets/leaflet.markercluster.js"></script>
+<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 
 <!-- Example data. -->
 <script src="{{site.baseurl}}/assets/realworld.388.js"></script>

@@ -22,36 +22,4 @@ example: |
       document.getElementById('images').appendChild(img);
   });
 code: https://github.com/mapbox/leaflet-image
-demo: |
-    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.3/leaflet-image.js'></script>
-
-    <button id='snap-button' style='position: absolute; bottom: 10px; right: 10px;'>Snap image</button>
-    <div id='images' style='float: right; width: 40%;'></div>
-    <div id='imageMap' class='example-map' style='width: 59%;'></div>
-
-    <script type="text/javascript">
-    var imageMap = L.mapbox.map('imageMap', 'examples.map-vyofok3q', {
-        center: [38.88995, -77.00906],
-        zoom: 15
-    });
-
-    document.getElementById('snap-button').onclick = snapMap;
-
-    // this doesn't work
-    
-    var snapMap = function() {
-      leafletImage(imageMap, function(err, canvas) {
-        // now you have a canvas image of the map
-        // example thing to do with that canvas:
-        var img = document.createElement('img');
-        var dimensions = imageMap.getSize();
-        img.width = dimensions.x;
-        img.height = dimensions.y;
-        img.src = canvas.toDataURL();
-        document.getElementById('images').innerHTML = '';
-        document.getElementById('images').appendChild(img);
-        console.log('hey hey hey');
-      });
-    };
-    </script>
 ---
