@@ -479,6 +479,8 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from Mapbox.</li></ul> |
+| event | string | <ul><li><code>select</code>: fired when the user selects a location from a list of options returned from a geocoding request. The geocoding data is attached to the `data` property of the event.
+| event | string | <ul><li><code>autoselect</code>: fired when the geocoder control automatically chooses the first result of a query that returns only one result, and repositions the map accordingly. The geocoding data is attached to the `data` property of the event.
 
 ## L.mapbox.shareControl(id|url, options)
 

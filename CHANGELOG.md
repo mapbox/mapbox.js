@@ -1,3 +1,8 @@
+## v1.6.1
+
+* Adds `select` and `autoselect` events to the geocoderControl to allow for
+  finer-tuned listening for user actions around geocoding.
+
 ## v1.6.0
 
 * Added support for [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) 1.1.0,

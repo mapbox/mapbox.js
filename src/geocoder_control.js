@@ -101,6 +101,7 @@ var GeocoderControl = L.Control.extend({
             } else {
                 this._results.innerHTML = '';
                 if (resp.results.length === 1 && resp.lbounds) {
+                    this.fire('autoselect', { data: resp });
                     this._map.fitBounds(resp.lbounds);
                     this._closeIfOpen();
                 } else {
@@ -115,13 +116,14 @@ var GeocoderControl = L.Control.extend({
                         r.innerHTML = name.join(', ');
                         r.href = '#';
 
-                        (function(result) {
+                        (L.bind(function(result) {
                             L.DomEvent.addListener(r, 'click', function(e) {
                                 var _ = result[0].bounds;
                                 map.fitBounds(L.latLngBounds([[_[1], _[0]], [_[3], _[2]]]));
                                 L.DomEvent.stop(e);
-                            });
-                        })(resp.results[i]);
+                                this.fire('select', { data: result });
+                            }, this);
+                        }, this))(resp.results[i]);
                     }
                     if (resp.results.length > 5) {
                         var outof = L.DomUtil.create('span', '', this._results);
