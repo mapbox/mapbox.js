@@ -1,29 +1,3 @@
----
-examples:
-- id: animation
-  name: Animation
-- id: geocoding
-  name: Geocoding
-- id: handlers
-  name: Handlers
-- id: layers
-  name: Layers
-- id: legend
-  name: Legend
-- id: markers
-  name: Markers
-- id: plugins
-  name: Plugins
-- id: tooltips
-  name: Tooltips
-- id: ui
-  name: User Interface
-- id: vector
-  name: Vector Overlays
-- id: zoom
-  name: Zoom
----
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,26 +44,6 @@ examples:
 {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
 
-{% capture apinav %}
-  {% for p in site.tags[site.mapboxjs] %}
-  <nav class='navigation pad1y full-y keyline-top scroll-y v js-nav-docs quiet-scroll'>
-    {% for section in p.navigation %}
-      <div class='section'>
-        <a class='col12 sub strong {% if p.url contains section.id %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}'>{{section.title}}</a>
-        {% for nav in section.nav %}
-          <a class='col12 truncate sub' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{nav.title|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-          {% if nav.sub %}
-            {% for sub in nav.sub %}
-              <a class='col12 truncate pad4x small quiet' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endfor %}
-  </nav>
-  {% endfor %}
-{% endcapture %}
-
 <!--Mobile menu-->
 <div id='dropdown' class='show-mobile pad4 drop fill-green clearfix'>
   <a href='#dropdown' class='fr icon menu quiet pad1 keyline-all'></a>
@@ -113,7 +67,7 @@ examples:
       </a>
       <a href='{{site.baseurl}}/api/' class='strong quiet col12 pad1 truncate  {% if page.url contains "api" %}fill-darken0 active{% endif %}'>API</a>
       {% if page.url contains 'api' %}
-      {{apinav}}
+      {% include api.nav.html %}
       {% endif %}
       <a href='{{site.baseurl}}/examples/' class='keyline-top keyline-bottom strong quiet col12 pad1 truncate {% if page.url contains "example" %}fill-darken0 active{% endif %}'>Examples</a>
       {% if page.url contains 'example' %}
