@@ -150,7 +150,27 @@ examples:
     </nav>
   </div>
 
-  <div class='sliding h col12 clip {% if page.url contains "example" %}active2{% elsif page.url contains "plugins" %}active3{% else %}active1{% endif %}'>
+  {% capture pane %}
+    {% if page.url contains "api" %}
+      active2
+    {% elsif page.url contains "example" %}
+      active3
+    {% elsif page.url contains "plugins" %}
+      active4
+    {% else %}
+      active1
+    {% endif %}
+  {% endcapture %}
+
+  <div class='sliding h col12 clip {{pane}}'>
+    <div id='overview-menu' class='col12 animate full-y'>
+      <nav class='navigation v pad2y'>
+        <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='strong keyline-top pad2x pad1y col12'>{{site.mapboxjs}} documentation</a>
+        <a href='{{site.baseurl}}/examples/' class='strong keyline-top pad2x pad1y col12'>Examples</a>
+        <a href='{{site.baseurl}}/plugins/' class='strong keyline-top keyline-bottom pad2x pad1y col12'>Plugins</a>
+      </nav>
+    </div>
+
     <div id='api-menu' class='col12 animate full-y'>
       <div class='pad2 row2'>
         <fieldset class='with-icon'>
