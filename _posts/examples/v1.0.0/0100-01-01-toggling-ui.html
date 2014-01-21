@@ -98,7 +98,7 @@ var gridLayer = L.mapbox.gridLayer('examples.npr-stations')
 var gridControl = L.mapbox.gridControl(gridLayer, {follow: true})
     .addTo(map);
 
-document.getElementById('grid').onclick = function() {
+map.getContainer().querySelector('#grid').onclick = function() {
     if (this.className === 'active') {
         map.removeLayer(tileLayer);
         map.removeLayer(gridLayer);
@@ -115,7 +115,7 @@ document.getElementById('grid').onclick = function() {
 
 var legend = 'Data from Robert Kieffer.';
 
-document.getElementById('legend').onclick = function() {
+map.getContainer().querySelector('#legend').onclick = function() {
     if (this.className === 'active') {
         map.legendControl.removeLegend(legend);
         this.className = '';
@@ -140,22 +140,22 @@ function toggle(control, element) {
     }
 }
 
-document.getElementById('zoomer').onclick = function() {
+map.getContainer().querySelector('#zoomer').onclick = function() {
     toggle(map.zoomControl, this);
     return false;
 };
 
-document.getElementById('fullscreen').onclick = function() {
+map.getContainer().querySelector('#fullscreen').onclick = function() {
     toggle(fullscreenControl, this);
     return false;
 };
 
-document.getElementById('attribution').onclick = function() {
+map.getContainer().querySelector('#attribution').onclick = function() {
     toggle(map.attributionControl, this);
     return false;
 };
 
-document.getElementById('hash').onclick = function() {
+map.getContainer().querySelector('#hash').onclick = function() {
     if (this.className === 'active') {
         hash.remove();
         this.className = '';

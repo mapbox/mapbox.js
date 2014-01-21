@@ -22,9 +22,6 @@
     height:100%;
     }
 
-.plugin-label   { padding:20px 20px 10px; }
-.plugin-source  { padding:0 20px 20px; }
-
 .grid {
   background-repeat:no-repeat;
   background-size:cover;
@@ -57,8 +54,12 @@
 
 .wireframe {
   border:3px solid rgba(0,0,0,0.5);
-  border-bottom:none;
+  border-bottom-width:0;
   }
+  .wireframe.example {
+    border-right-width:0;
+    border-bottom-width:3px;
+    }
   .wireframe .body {
     background-image:url(../images/developers-grid.png);
     background-repeat:repeat;
@@ -138,7 +139,7 @@
   }
 
 /*Examples*/
-#map {
+#map, .example-map {
   background:#eee;
   position:absolute;
   top:0;left:0;

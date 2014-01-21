@@ -1,0 +1,43 @@
+---
+layout: default
+categories: plugin
+title: Leaflet OSM
+prefix: leaflet-osm
+description: A convenient way of rendering tiles and vector data from OpenStreetMap.org.
+tags:
+  - bsd
+snippet: |
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-osm/v0.1.0/leaflet-osm.js'></script>
+example: |
+    // for tiles
+    new L.OSM.Mapnik().addTo(map);
+    // or L.OSM.CycleMap, L.OSM.TransportMap, or L.OSM.MapQuestOpen
+
+    // for data
+    $.ajax({
+      url: "http://www.openstreetmap.org/api/0.6/way/52477381/full",
+      dataType: "xml",
+      success: function (xml) {
+        var layer = new L.OSM.DataLayer(xml).addTo(map);
+        map.fitBounds(layer.getBounds());
+      }
+    });
+code: https://github.com/jfirebaugh/leaflet-osm
+license: BSD
+demo: |
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-osm/v0.1.0/leaflet-osm.js'></script>
+
+    <div id='OSMmap' class='example-map'></div>
+    <script>
+        var OSMmap = L.mapbox.map('OSMmap', 'examples.map-vyofok3q');
+
+        $.ajax({
+          url: "http://www.openstreetmap.org/api/0.6/way/252570871/full",
+          dataType: "xml",
+          success: function (xml) {
+            var layer = new L.OSM.DataLayer(xml).addTo(OSMmap);
+            OSMmap.fitBounds(layer.getBounds());
+          }
+        });
+    </script>
+---

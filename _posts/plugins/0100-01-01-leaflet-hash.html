@@ -13,6 +13,21 @@ example: |
   var hash = L.hash(map);
 code: https://github.com/mlevans/leaflet-hash
 license: BSD
+demo: |
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+    <div id='hashMap' class='example-map'></div>
+
+    <script type="text/javascript">
+        var hashMap = L.mapbox.map('hashMap', 'examples.map-vyofok3q', {
+            center: [38.9, -77.0],
+            zoom: 15
+        });
+        // var hash = L.hash(hashMap);
+        // idea: don't actually call the hash because that populates our location
+        // mock up a fake url, and have that update just like L.hash on dragend.
+        // updates? behavior divergence? forget about it?
+        // console.log(hash);
+    </script>
 ---
 
 `leaflet-hash` adds information to the URL in your browser that makes it easy

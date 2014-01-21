@@ -1,0 +1,115 @@
+---
+layout: default
+examples:
+  - id: animation
+    name: Animation
+  - id: geocoding
+    name: Geocoding
+  - id: handlers
+    name: Handlers
+  - id: layers
+    name: Layers
+  - id: legend
+    name: Legend
+  - id: markers
+    name: Markers
+  - id: plugins
+    name: Plugins
+  - id: tooltips
+    name: Tooltips
+  - id: ui
+    name: User Interface
+  - id: vector
+    name: Vector Overlays
+  - id: zoom
+    name: Zoom
+---
+
+<!--Fixed sidebar navigation-->
+<div class='hide-mobile col3 fixed-sidebar fill-light clip round'>
+  <div class='row1 contain col12'>
+    <div class='fill-green pin-left keyline-left keyline-right'>
+      <a href='{{site.baseurl}}/' class='{% if page.url == "/index.html" %}fill-darken0{% endif %} quiet inline pad1 icon home'></a>
+    </div>
+
+    <nav class='site-nav fill-darken0 fl small strong col12 clearfix center'>
+      <a href='{{site.baseurl}}/api' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
+      <a href='{{site.baseurl}}/examples' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
+      <a href='{{site.baseurl}}/plugins' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+    </nav>
+  </div>
+
+  {% capture pane %}
+    {% if page.url contains "api" %}
+      active2
+    {% elsif page.url contains "example" %}
+      active3
+    {% elsif page.url contains "plugins" %}
+      active4
+    {% else %}
+      active1
+    {% endif %}
+  {% endcapture %}
+
+  <div class='sliding h col12 clip {{pane}}'>
+    <div id='overview-menu' class='col12 animate full-y'>
+      <nav class='navigation v pad2y'>
+        <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='strong keyline-top pad2x pad1y col12'>{{site.mapboxjs}} documentation</a>
+        <a href='{{site.baseurl}}/examples/' class='strong keyline-top pad2x pad1y col12'>Examples</a>
+        <a href='{{site.baseurl}}/plugins/' class='strong keyline-top keyline-bottom pad2x pad1y col12'>Plugins</a>
+      </nav>
+    </div>
+
+    <div id='api-menu' class='col12 animate full-y'>
+      <div class='pad2 row2'>
+        <fieldset class='with-icon'>
+          <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 pad2x round-right small strong'>View all?</a>
+          <span class='icon search'></span>
+          <input id='filter-api' type='text' class='round col12' placeholder='Filter documentation'>
+        </fieldset>
+      </div>
+      {% include api.nav.html %}
+    </div>
+
+    <div id='examples-menu' class='col12 animate full-y'>
+      <div class='pad2 row2'>
+        <fieldset class='with-icon'>
+          <span class='icon search'></span>
+          <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
+        </fieldset>
+      </div>
+
+      <nav id='examples-list' class='keyline-top pad1y navigation v fill-light full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
+        {% for example in page.examples %}
+        <div class='section space-bottom1'>
+          <strong class='col12 sub'>{{example.name}}</strong>
+          {% for listing in site.tags[example.id] order:ascending %}
+            {% if listing.version == 'v1.0.0' %}
+              <a href='{{site.baseurl}}{{listing.url}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </nav>
+    </div>
+
+    <div id='plugins-menu' class='col12 animate full-y'>
+      <div class='pad2 keyline-bottom prose'>
+        <strong>Mapbox hosted plugins</strong>
+        <p class='quiet'>
+          Plugins extend the functionality of mapbox.js. This list is a collection
+          of high quality ones that are hosted on the same speedy CDN service that hosts mapbox.js.
+        </p>
+      </div>
+      <nav class='navigation col12 v full-y scroll-y quiet-scroll pad1y'>
+        {% for plugin in site.categories.plugin %}
+          <a href='{{site.baseurl}}/plugins/#{{plugin.prefix}}' class='sub'>{{plugin.title}}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!--Content area-->
+<div id='content-section' class='col9 pad4x margin3 content enclosure'>{{content}}</div>
+

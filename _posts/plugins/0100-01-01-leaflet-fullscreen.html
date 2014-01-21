@@ -13,6 +13,19 @@ example: |
   L.control.fullscreen().addTo(map);
 code: https://github.com/mapbox/leaflet.fullscreen
 license: BSD
+demo: |
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+    <div id='fullMap' class='example-map'></div>
+
+    <script type="text/javascript">
+        var fullMap = L.mapbox.map('fullMap', 'examples.map-vyofok3q', {
+            center: [38.8896, -77.0417],
+            zoom: 15
+        });
+        L.control.fullscreen().addTo(fullMap);
+    </script>
 ---
 
 `leaflet-fullscreen` adds a control to your map that uses the HTML5 fullscreen

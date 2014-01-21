@@ -1,0 +1,31 @@
+---
+layout: default
+categories: plugin
+title: Leaflet Locate
+prefix: leaflet-locatecontrol
+description: Adds a button to your map that finds the user's location using the HTML5 Geolocation API.
+tags:
+  - mit
+snippet: |
+  <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.css' rel='stylesheet' />
+  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.0.5.css' rel='stylesheet' />
+  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+example: |
+  L.control.locate().addTo(map);
+code: https://github.com/domoritz/leaflet-locatecontrol
+license: MIT
+demo: |
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.js'></script>
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.css' rel='stylesheet' />
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.0.5.css' rel='stylesheet' />
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+
+    <div id='locateMap' class='example-map'></div>
+    <script>
+        var locateMap = L.mapbox.map('locateMap', 'examples.map-vyofok3q');
+        L.control.locate().addTo(locateMap);
+    </script>
+---

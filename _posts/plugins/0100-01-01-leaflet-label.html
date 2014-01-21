@@ -1,0 +1,36 @@
+---
+layout: default
+categories: plugin
+title: Leaflet Label
+prefix: leaflet-label
+description: Adds labels to markers and other vector layers that can be shown when hovering over that item or bound to other JavaScript events.
+tags:
+  - mit
+snippet: |
+  <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
+example: |
+  L.marker([38.9206, -77.0357]).bindLabel('Meridian Hill Park').addTo(map);
+code: https://github.com/Leaflet/Leaflet.label
+license: MIT
+demo: |
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
+    <div id='labelMap' class='example-map'></div>
+
+    <script type="text/javascript">
+        var labelMap = L.mapbox.map('labelMap', 'examples.map-vyofok3q', {
+            center: [38.91557, -77.03198],
+            zoom: 16
+        });
+        L.marker([38.9206, -77.0357]).bindLabel('Meridian Hill Park').addTo(labelMap);
+        L.marker([38.909776, -77.034097]).bindLabel('Sweetgreen').addTo(labelMap);
+        L.marker([38.917139, -77.031745]).bindLabel('Subway').addTo(labelMap);
+        L.marker([38.915300, -77.031724]).bindLabel('Manny & Olga\'s Pizza').addTo(labelMap);
+        L.marker([38.913388, -77.032351]).bindLabel('Crossfit DC').addTo(labelMap);
+        L.marker([38.91371, -77.03590]).bindLabel('House of the Temple').addTo(labelMap);
+        L.marker([38.914722, -77.034414]).bindLabel('St James Church').addTo(labelMap);
+        L.marker([38.91680, -77.02889]).bindLabel('U Street Metro').addTo(labelMap);
+        L.marker([38.914271, -77.028293]).bindLabel('The Coffee Bar').addTo(labelMap);
+    </script>
+---
