@@ -5,19 +5,15 @@
     var Docs = function() {};
 
     Docs.prototype = {
-        copyCode: function() {
-            $('#copy').click(function(e) {
-                e.preventDefault();
-                if (document.selection) {
-                    var rangeD = document.body.createTextRange();
-                    rangeD.moveToElementText(document.getElementById('code'));
-                    rangeD.select();
-                } else if (window.getSelection) {
-                    var rangeW = document.createRange();
-                    rangeW.selectNode(document.getElementById('code'));
-                    window.getSelection().addRange(rangeW);
-                }
-            });
+        copyCode: function(el) {
+            if (window.getSelection && document.createRange) {
+                el = document.getElementById(el);
+                var range = document.createRange();
+                range.selectNodeContents(el);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
         },
 
         colorCode: function(cb) {
@@ -175,34 +171,8 @@
     window.Docs = Docs;
 })(window);
 
-function updateAvatar() {
-    if (App.user && App.user.avatar) {
-        $('#avatar').removeClass('big mapbox');
-        $('#avatar').css('background-image', 'url("' + App.user.avatar + '")');
-        $('#avatar').css('background-size', 'cover');
-    } else {
-        $('#avatar').addClass('big icon mapbox');
-    }
-}
-
 function load() {
-    if (App) {
-        $('.js-tabs label').click(function(ev) {
-            App.storage('mapboxjs.exampleview', $(this).attr('for'));
-            App.tabs(ev);
-        });
-
-        $('.js-tabs a').click(App.tabs);
-    }
-
-    updateAvatar();
-
-    if (App.storage('mapboxjs.exampleview')) {
-        $('label[for="' + App.storage('mapboxjs.exampleview') + '"]').trigger('click');
-    }
-
     var docs = new Docs();
-    docs.copyCode();
 
     {% if page.v0 %}
         docs.colorCode(function(){ docs.bindHints('{{ site.oldversion }}'); });
@@ -212,8 +182,8 @@ function load() {
 
     docs.bindSearch($('#filter-api'), $('.js-nav-docs'));
 
-    $('#about').click(function() {
-        App.modal.show('about');
+    $('.js-select').click(function() {
+        docs.copyCode($(this).data('target'));
         return false;
     });
 

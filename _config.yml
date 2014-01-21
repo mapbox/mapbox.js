@@ -8,5 +8,6 @@ oldversion: v0.6.7
 title: MapBox.js
 defaultid: 'examples.map-9ijuk24y'
 description: MapBox JavaScript API
+exclude: [node_modules]
 rdiscount:
   extensions: [smart]

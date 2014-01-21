@@ -1,33 +1,29 @@
 .enclosure { max-width:900px; }
 
 /*Base candidate*/
-.full-y   { height:100%; }
-.dark pre { background:transparent; }
+.full-y         { height:100%; }
 
-.mast {
-  position:relative;
-  z-index:10;
-  padding-left:40px;
-  }
-  .mast a.active,
-  .mast a:hover { background-color:rgba(0,0,0,0.05); }
+.fill-white pre,
+.fill-light pre,
+.dark pre       { background-color:transparent; }
 
-.fixed-logo {
-  position:fixed;
-  top:20px;
-  left:20px;
-  }
+.site-nav { padding-left:40px; }
+.site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
+.site-nav a.active { background-color:#f8f8f8; }
+
+.fill-green .home:hover { background-color:rgba(0,0,0,0.10); }
+
 .fixed-sidebar {
   position:fixed;
   border-color:rgba(0,0,0,0.25);
-  top:100px;left:10px;bottom:10px;
+  top:10px;left:10px;bottom:10px;
   }
-  .fixed-sidebar pre {
-    background-color:#fff;
-    }
   .fixed-sidebar .sliding {
     height:100%;
     }
+
+.plugin-label   { padding:20px 20px 10px; }
+.plugin-source  { padding:0 20px 20px; }
 
 .grid {
   background-repeat:no-repeat;
@@ -36,6 +32,7 @@
   .grid-view .grid:nth-child(even) .overlay {
     border-left:1px solid rgba(255,255,255,0.25);
     }
+  .grid.active .overlay,
   .grid:hover .overlay  {
     background-color:rgba(0,0,0,0.75);
     color:#fff;
@@ -47,7 +44,7 @@
   overflow-y:auto;
   }
   .fixed-sidebar .scroll-y {
-    padding-bottom:140px;
+    padding-bottom:130px;
     }
 
 .navigation .pad1y:empty { padding:0; }
@@ -108,9 +105,11 @@
   .dropdown .contents {
     z-index:1000;
     }
-  .dropdown .close {
+  .dropdown .closedrop {
+    position:absolute;
     top:20px;
-    left:20px;
+    right:20px;
+    left:auto;
     }
   .drop:target .dropdown {
     display:block;
@@ -145,7 +144,7 @@
   top:0;left:0;
   width:100%;
   height:100%;
-  }
+  l}
 
 .quiet-scroll pre {
   overflow:auto;

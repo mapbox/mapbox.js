@@ -28,8 +28,12 @@ output.write('version: ' + argv.t + '\n');
 landOutput.write('version: ' + argv.t + '\n');
 output.write('permalink: /api/' + argv.t + '/all/\n');
 
+var BASE_URL = '/mapbox.js/api/' + argv.t + '/';
+
 argv._.forEach(readDocumentation);
 
+// Split Leaflet's HTML documentation by its `h2` elements into chunks
+// that will be represented by individual pages
 function splitChunks(lines) {
     var chunks = [], chunk;
     var re = /<h2 id="([^"]+)">([^<]+)<\/h2>/;
@@ -40,7 +44,7 @@ function splitChunks(lines) {
                 chunks.push(chunk);
             }
             chunk = {
-                id: 'leaflet-' + match[1],
+                id: 'l-' + match[1],
                 name: match[2],
                 text: [lines[i]]
             };
@@ -55,13 +59,21 @@ function splitChunks(lines) {
 }
 
 function transformLinks(line) {
-    return line.replace(/href=['"]([^"']*)['"]/, function(all, content) {
+    return line.replace(/href=['"]([^"']*)['"]/g, function(all, content) {
         if (content.indexOf('#') === 0) {
-            return all.replace(content, '/mapbox.js/api/' + argv.t + '/leaflet-' + content.replace('#', ''));
+            return all.replace(content, BASE_URL + 'l-' + content.replace(/\-.*/g, '').replace('#', ''));
         } else {
             return all;
         }
     });
+}
+
+function escapeFn(text) {
+    return chopFn(text).toLowerCase().replace(/[^\w]+/g, '-');
+}
+
+function chopFn(text) {
+    return text.replace(/\(.*/, '');
 }
 
 function readDocumentation(filename) {
@@ -72,9 +84,18 @@ function readDocumentation(filename) {
         var lines = f.split('\n');
         chunks = splitChunks(lines);
         all += f;
+        nav += '  - title: Leaflet\n';
+        nav += '    nav:\n';
         chunks.forEach(function(c) {
-            nav += '  - title: ' + c.name + '\n';
-            nav += '    id: ' + c.id + '\n';
+            if (c.name.match(/\s/g)) {
+                nav += '    - title: ' + c.name + '\n';
+                nav += '      id: ' + c.id + '\n';
+            } else {
+                // code
+                c.name = 'L.' + c.name;
+                nav += '    - title: ' + c.name + '\n';
+                nav += '      id: ' + c.id + '\n';
+            }
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
@@ -93,7 +114,8 @@ function readDocumentation(filename) {
             escapedText = text.replace(/\(.*/, '').toLowerCase().replace(/[^\w]+/g, '-');
             var html = '<h' + level + ' id="section-' + escapedText + '">' + text + '</h' + level + '>\n';
             var indent = (new Array(1 + (level * 2))).join(' ');
-            nav += indent + '- title: "' + text + '"\n';
+            var cleanTitle = text.replace(/\(.*/, '');
+            nav += indent + '- title: "' + cleanTitle + '"\n';
             nav += indent + '  id: ' + escapedText + '\n';
             nav += indent + '  nav:\n';
             return html;
@@ -112,28 +134,40 @@ function readDocumentation(filename) {
                 chunk += lines[i] + '\n';
             }
         }
+        if (chunk) chunks.push(chunk);
 
         chunks.forEach(function(c) {
             var renderer = new marked.Renderer();
             var main = '';
+
             renderer.heading = function(text, level) {
                 var escapedText;
-                if (level == 3) {
+                if (level == 2) {
                     escapedText = text.replace(/\..*/, '').toLowerCase().replace(/[^\w]+/g, '-');
                     main = text;
                 }
-                escapedText = text.replace(/\(.*/, '').toLowerCase().replace(/[^\w]+/g, '-');
+                escapedText = escapeFn(text);
                 var html = '<h' + level + ' id="section-' + escapedText + '">' + text + '</h' + level + '>\n';
                 var indent = (new Array(1 + (level * 2))).join(' ');
                 return html;
             };
-            var html = marked(f, { renderer: renderer });
-            var escapedText = main.replace(/\..*/, '').toLowerCase().replace(/[^\w]+/g, '-');
+
+            renderer.codespan = function(text) {
+                if (text.match(/^L\.mapbox/)) {
+                    return '<code><a href="' + BASE_URL + escapeFn(text) + '">' + text + '</a></code>';
+                } else if (text.match(/^L\./)) {
+                    return '<code><a href="' + BASE_URL + escapeFn(text) + '">' + text + '</a></code>';
+                }
+                return '<code>' + text + '</code>';
+            };
+
+            var html = marked(c, { renderer: renderer });
+            var escapedText = escapeFn(main);
             writes.push({
                 file: argv.d + '/0200-01-01-' + escapedText + '.html',
                 contents: header.replace('All', main) +
                     'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n{% raw %}' +
+                    'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n{% raw %}' +
                     html.replace('id="map"', '') + '{% endraw %}'
             });
         });
@@ -143,16 +177,15 @@ function readDocumentation(filename) {
 }
 
 landOutput.write('tags: ' + argv.t + '\n');
-landOutput.write('intro: true\n');
 landOutput.write(nav);
 landOutput.write('---\n');
-landOutput.write('{% include api.introduction.html %}');
-output.write('---\n');
-output.write('{% raw %}\n');
-output.write(all + '\n');
-output.write('{% endraw %}');
+landOutput.write('{% include api.introduction.html %}\n');
 
-console.log(writes);
+output.write("---\n");
+output.write("{% raw %}\n");
+output.write(all + '\n');
+output.write("{% endraw %}");
+
 writes.forEach(function(w) {
     fs.writeFileSync(w.file, w.contents);
 });

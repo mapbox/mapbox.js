@@ -2,17 +2,7 @@
 layout: default
 ---
 
-<div id='api' class='prose doc'>
-  <div id='{{page.permalink}}' class='pad2 space-bottom1 keyline-bottom'>
-    <h3 class='space'><a class='icon github' href='#'></a>{{page.title}}</h3>
-    <span class='quiet small'>{{page.content}}</span>
-    <h4 class='pad1y'>Include</h4>
-    <div class='quiet-scroll'>
-      {% highlight html %}{{ page.snippet }}{% endhighlight %}
-    </div>
-    <h4 class='pad1y'>Example</h4>
-    <div class='quiet-scroll'>
-      {% highlight js %}{{ page.example }}{% endhighlight %}
-    </div>
-  </div>
+<div id='plugins' class='pad2y doc'>
+  {% include site.nav.html %}
+  {{content}}
 </div>
