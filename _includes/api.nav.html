@@ -1,8 +1,8 @@
 {% for p in site.tags[site.mapboxjs] %}
 <nav class='navigation pad1y full-y keyline-top scroll-y v js-nav-docs quiet-scroll'>
   {% for section in p.navigation %}
-    <div class='section'>
-      {{section.title}}
+    <div class='section space-bottom1'>
+      <h3 class='sub'>{{section.title}}</h3>
       {% for nav in section.nav %}
         <a class='col12 truncate sub' href='{{site.baseurl}}/api/{{p.version}}/{{nav.id|replace:' ','_'|downcase}}'>{{nav.title}}</a>
         {% if nav.sub %}
