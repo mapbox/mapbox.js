@@ -10,11 +10,6 @@
       <h3 class='sub'>{{section.title}}</h3>
       {% for nav in section.nav %}
         <a class='col12 truncate sub{% if endpath == nav.id | replace: ' ', '_' | downcase %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{nav.id|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-        {% if nav.sub %}
-          {% for sub in nav.sub %}
-            <a class='col12 truncate pad4x small quiet' href='{{site.baseurl}}/api/{{p.version}}/{{section.id}}#{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-          {% endfor %}
-        {% endif %}
       {% endfor %}
     </div>
   {% endfor %}
