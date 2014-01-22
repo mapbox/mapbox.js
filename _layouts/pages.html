@@ -118,7 +118,7 @@ examples:
 <div class='hide-mobile col3 fixed-sidebar fill-light clip round'>
   <div class='fill-denim keyline-bottom pad1 contain'>
     <a href='{{site.url}}' class='mb-logo white small'>Mapbox</a>
-    <div class='pin-right pad2x small strong'>
+    <div class='pin-right pad2x'>
       <a href='{{site.baseurl}}/' class='site-title'>mapbox.js
           {% if page.v0 %}
            <span class='fill-yellow small'>{{site.oldversion}}</span>
@@ -144,7 +144,7 @@ examples:
   </div>
 
   {% capture pane %}
-    {% elsif page.url contains "example" %}
+    {% if page.url contains "example" %}
       active2
     {% elsif page.url contains "plugins" %}
       active3
