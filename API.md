@@ -427,7 +427,7 @@ Adds geocoder functionality as well as a UI element to a map. This uses
 the [Mapbox Geocoding API](http://mapbox.com/developers/api/#geocoding).
 
 <div class='note warning'>
-This function is currently in private beta: <a href='http://mapbox.com/about/contact/'>Contact Mapbox</a> before using this functionality.
+This function is currently in private beta: [Contact Mapbox](https://mapbox.com/contact/) before using this functionality.
 </div>
 
 | Options | Value | Description |
