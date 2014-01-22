@@ -40,7 +40,7 @@
         },
 
         _search: function() {
-            var q = this.$el.val() ? this.$el.val().toLowerCase() : null;
+            var q = this.$el.val() ? this.$el.val().toLowerCase().match(/(\w+)/g) : null;
 
             this.$menu.find('[href]').each(function() {
                 var $this = $(this),
