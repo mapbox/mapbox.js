@@ -58,7 +58,7 @@ describe('L.mapbox.infoControl', function() {
             editLink: true
         }).addTo(map);
 
-        expect(info._content.innerHTML).to.eql('<a class="" href="#" title="Edit in OpenStreetMap">Improve this map</a>');
+        expect(info._content.innerText || info._content.textContent).to.eql('Improve this map');
     });
 
     it('sanitizes its content', function() {
