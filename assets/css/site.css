@@ -2,12 +2,19 @@
 
 /*Base candidate*/
 .full-y         { height:100%; }
+.bump-up { position:relative; top:-1px; }
+
+.site-title {
+  position:relative;
+  top:15px;
+  }
+  .site-title,
+  .site-title:hover { color:#fff; }
 
 .fill-white pre,
 .fill-light pre,
 .dark pre       { background-color:transparent; }
 
-.site-nav { padding-left:40px; }
 .site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
 .site-nav a.active { background-color:#f8f8f8; }
 
@@ -41,7 +48,7 @@
   overflow-y:auto;
   }
   .fixed-sidebar .scroll-y {
-    padding-bottom:130px;
+    padding-bottom:170px;
     }
 
 .navigation .pad1y:empty { padding:0; }
@@ -69,7 +76,7 @@
     }
     @media
       (-webkit-min-device-pixel-ratio:2),
-      (min-resolution:192dpi) {
+      (min-resolution:192dppx) {
       .wireframe .body { background-image:url(../images/developers-grid@2x.png); }
       }
 

@@ -1,34 +1,36 @@
 ---
 layout: default
+fullwidth: true
 title: Mapbox.js
+head: |
+  <link rel='stylesheet' href='assets/css/site.css' />
+  <script src='assets/js/site.js'></script>
+  <script src='assets/js/prettify.js'></script>
 ---
 
-<div class='hide-mobile fill-green col12 row8 clip'>
-  <div class='limiter pad2y clearfix'>
+<div class='hide-mobile fill-green col12 row10 pad4y clip bump-up'>
+  <div class='limiter clearfix'>
     <div class='col5'>
-      <div class='space-bottom2'>
-        <a href='{{site.url}}' class='mb-logo white'>Mapbox</a>
-      </div>
-      <h2>
-        {{site.title}}
-        <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
-        {% if page.v0 %}
-          <sup class='fill-yellow small'>{{site.oldversion}}</sup>
-        {% elsif page.version %}
-          {% if page.category == 'examples' %}
-            <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+      <div class='prose'>
+        <h2>
+          {{site.title}}
+          <a class='version' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+          {% if page.v0 %}
+            <sup class='fill-yellow small'>{{site.oldversion}}</sup>
+          {% elsif page.version %}
+            {% if page.category == 'examples' %}
+              <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+            {% else %}
+              <sup class='fill-darken0 small'>{{page.version}}</sup>
+            {% endif %}
           {% else %}
-            <sup class='fill-darken0 small'>{{page.version}}</sup>
+            <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
           {% endif %}
-        {% else %}
-          <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
-        {% endif %}
-        </a>
-      </h2>
-      <div class='space-bottom2 prose'>
+          </a>
+        </h2>
         <p>Build anything with Mapbox.js, our open-source JavaScript library for fast &amp; interactive maps.</p>
       </div>
-      <div class='tabs clearfix col12'><!--
+      <div class='tabs pad2y clearfix col12'><!--
         --><a class='col4' href='{{site.baseurl}}/api'>API</a><!--
         --><a class='col4' href='{{site.baseurl}}/examples'>Examples</a><!--
         --><a class='col4' href='{{site.baseurl}}/plugins'>Plugins</a>
@@ -41,7 +43,7 @@ title: Mapbox.js
           <span class='dot fill-darken1'></span>
           <span class='dot fill-darken1'></span>
         </div>
-        <div class='row6 col12 fill-darken0 contain body'>
+        <div class='row8 col12 fill-darken0 contain body'>
           <div class='keyline-all margin5r fill-darken0 space-bottom1 fill-gray row1 space-top1 margin1 col3'></div>
           <div class='keyline-all fill-darken0 row4 margin1 col3'></div>
           <div class='icon marker margin2r space-top1 pin-right quiet big thumbnail'></div>
@@ -75,7 +77,7 @@ title: Mapbox.js
         <span class='icon big leaflet'></span>
       </span>
       <div class='prose'>
-        <p>Mapbox.js is based on an open source core called <a href='http://leafletjs.com/'>Leaflet</a></strong>.</p>
+        <p>Based on an open source core called <a href='http://leafletjs.com/'>Leaflet</a>.</p>
       </div>
     </div>
 
@@ -84,7 +86,7 @@ title: Mapbox.js
         <span class='icon big heart'></span>
       </span>
       <div class='prose'>
-        <p><strong>The source code is open</strong> and available on <a href='https://github.com/mapbox/mapbox.js/'>GitHub</a>. It is built on open standards like <a href='http://www.geojson.org/'>GeoJSON</a> &amp; <a href='http://mapbox.com/developers/utfgrid/'>UTFGrid</a>.</p>
+        <p><strong>Open source</strong> and available on <a href='https://github.com/mapbox/mapbox.js/'>GitHub</a>.</p>
       </div>
     </div>
 
@@ -93,7 +95,7 @@ title: Mapbox.js
         <span class='icon big check'></span>
       </span>
       <div class='prose'>
-        <p>MapBox.js is <strong>browser tested &amp; supported.</strong> Compatible with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.</p>
+        <p><strong>Browser tested &amp; supported:</strong> compatible with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.</p>
       </div>
     </div>
 
@@ -102,7 +104,7 @@ title: Mapbox.js
         <span class='icon big mobile'></span>
       </span>
       <div class='prose'>
-        <p>MapBox.js is <strong>optimized for mobile</strong> devices and small screens by default. For additional features, check out the <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'>Mobile section</a>.</p>
+          <p><a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'><strong>Optimized for mobile</strong></a> devices and small screens by default.</p>
       </div>
     </div>
   </div>
