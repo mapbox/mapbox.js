@@ -1,6 +1,6 @@
 {% assign endpath = page.url | split: '/' | last %}
 
-{% for p in site.tags[site.mapboxjs] %}
+{% for p in site.tags[page.version] %}
 <nav class='navigation pad1y full-y keyline-top scroll-y v js-nav-docs quiet-scroll'>
   <div class='section space-bottom1'>
     <a class='col12 truncate sub{% if endpath == p.version %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/'>Overview</a>
