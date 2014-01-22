@@ -1,0 +1,35 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Leaflet Image
+description: Using the Leaflet Image plugin
+tags:
+  - plugins
+---
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.3/leaflet-image.js'></script>
+
+    <button id='snap' style='position: absolute; bottom: 10px; right: 10px;'>Snap image</button>
+    <div id='images' style='float: right; width: 49%;'></div>
+    <div id='map' style='width: 49%;'></div>
+
+    <script type="text/javascript">
+        var map = L.mapbox.map('map', 'examples.map-vyofok3q', {
+            center: [38.88995, -77.00906],
+            zoom: 15
+        });
+
+        document.getElementById('snap').addEventListener('click', function() {
+            leafletImage(map, doImage);
+        });
+
+        function doImage(err, canvas) {
+            var img = document.createElement('img');
+            var dimensions = map.getSize();
+            img.width = dimensions.x;
+            img.height = dimensions.y;
+            img.src = canvas.toDataURL();
+            document.getElementById('images').innerHTML = '';
+            document.getElementById('images').appendChild(img);
+        }
+    </script>

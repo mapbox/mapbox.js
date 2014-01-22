@@ -10,42 +10,6 @@ snippet: |
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
   <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
   <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
-example: |
-  var cluster = new L.MarkerClusterGroup();
-  cluster.addLayer(new L.Marker(getRandomLatLon(map)));
-  map.addLayer(cluster);
 code: https://github.com/Leaflet/Leaflet.markercluster
 license: MIT
-demo: |
-    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
-
-    <div id='clusterMap' class='example-map'></div>
-    <script>
-        var clusterMap = L.mapbox.map('clusterMap', 'examples.map-vyofok3q');
-
-        var cluster = new L.MarkerClusterGroup();
-
-        var center = [38.91, -77.03],
-            quantity = 300;
-
-        while(quantity) {
-            // need to remove the floor
-            // snaps everything to too perfect a grid
-            // instead do random coordinates within a bbox
-            var lat = Math.floor(Math.random() * 10) + 1;
-                lon = Math.floor(Math.random() * 10) + 1;
-            if (lat%2 == 0) lat = lat * -1;
-            if (lon%2 == 0) lon = lon * -1;
-            lat = center[0] + (lat * 0.01);
-            lon = center[1] + (lon * 0.01);
-
-            cluster.addLayer(new L.Marker([lat, lon]));
-            quantity--;
-        }
-
-        clusterMap.addLayer(cluster);
-        clusterMap.setView(center, 12);
-    </script>
 ---

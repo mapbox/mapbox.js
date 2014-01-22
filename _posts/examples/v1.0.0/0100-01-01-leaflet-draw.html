@@ -2,22 +2,14 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Leaflet.draw
-description: Using the Leaflet.draw plugin
+title: Leaflet Draw
+description: Using the Leaflet Draw plugin
 tags:
   - plugins
 ---
 
-<!--
-  Include Leaflet.draw's CSS and JavaScript assets.
-  Unlike mapbox.js, these are not hosted by MapBox; you will
-  need to download and host them yourself.
--->
-<link rel='stylesheet' href='{{site.baseurl}}/assets/leaflet.draw.css' />
-<!--[if lte IE 8]>
-  <link rel="stylesheet" href="{{site.baseurl}}/assets/leaflet.draw.ie.css" />
-<![endif]-->
-<script src='{{site.baseurl}}/assets/leaflet.draw.js'></script>
+<link rel='stylesheet' href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' />
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
 
 <div id='map'></div>
 

@@ -5,26 +5,14 @@ title: Plugins
 
 {% for plugin in site.categories.plugin %}
 <div class='keyline-all round-top clearfix'>
-  <div class='clearfix pad2 keyline-bottom space-bottom2'>
+  <div class='clearfix pad2 keyline-bottom'>
     <div class='col8'>
       <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }}</h3>
       <p class='prose'>{{plugin.description}}</p>
     </div>
     <div class='col4'>
       <p class='text-right'><a href='{{plugin.code}}'>Project page</a> {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed</em>{% endif %}</p>
-    </div>
-  </div>
-  {% if plugin.demo %}
-  <div class='plugin-demo col12 row8 fill-white keyline-bottom contain space-bottom2'>
-    {{ plugin.demo }}
-  </div>
-  {% endif %}
-  <div class='col12 pad2x fill-white keyline-bottom'>
-    <div class='space-bottom1'>
-      <h4>Example</h4>
-      <div class='quiet-scroll round'>
-{% highlight js %}{{plugin.example}}{% endhighlight %}
-      </div>
+      <p class='text-right'><a href='{{site.baseurl}}/example/v1.0.0/{{plugin.prefix}}'>Example</a></p>
     </div>
   </div>
   <div class='col12 quiet-scroll fill-light'>
