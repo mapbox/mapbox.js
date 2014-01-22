@@ -40,17 +40,22 @@
         },
 
         _search: function() {
-            var q = this.$el.val() ? this.$el.val().toLowerCase().match(/(\w+)/g) : null;
+            var query = this.$el.val() ? this.$el.val().toLowerCase().match(/(\w+)/g) : null;
 
             this.$menu.find('[href]').each(function() {
                 var $this = $(this),
                     id = $this.attr('href').replace('#', ''),
                     body = $(document.getElementById('content-' + id)).text();
-                if (!q || body.toLowerCase().indexOf(q) !== -1 || id.toLowerCase().indexOf(q) !== -1) {
-                    $this.show();
-                } else {
-                    $this.hide();
-                }
+
+                _(query).each(function(q) {
+                    if (!q ||
+                        body.toLowerCase().indexOf(q) !== -1 ||
+                        id.toLowerCase().indexOf(q) !== -1) {
+                        $this.show();
+                    } else {
+                        $this.hide();
+                    }
+                });
             });
         },
 
