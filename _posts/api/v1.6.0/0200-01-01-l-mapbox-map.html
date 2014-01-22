@@ -1,0 +1,47 @@
+---
+layout: api
+title: "v1.6.0 API: L.mapbox.map(element, id|url|tilejson, options)"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/l-mapbox-map
+---
+{% raw %}<h2 id="section-l-mapbox-map">L.mapbox.map(element, id|url|tilejson, options)</h2>
+<p>Create and automatically configure a map with layers, markers, and
+interactivity.</p>
+<p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#map-options">L.Map</a></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element (<em>required</em>)</td>
+<td>string</td>
+<td>Must be the id of an element, or a DOM element reference.</td>
+</tr>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to <a href="http://leafletjs.com/reference.html#map-options">L.Map</a> with the following additions: <ul><li><code>tileLayer</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Default: <code>true</code></li><li><code>markerLayer</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-markerlayer">L.mapbox.markerLayer</a></code> based on the TileJSON. Default: <code>true</code>.</li><li><code>gridLayer</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Default: <code>true</code>.</li><li><code>legendControl</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>. Default: <code>true</code>.</li></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// map refers to a &lt;div&gt; element with the ID map
+// examples.map-4l7djmvo is the ID of a map on Mapbox.com
+var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-4l7djmvo&#39;);
+
+// map refers to a &lt;div&gt; element with the ID map
+// This map will have no layers initially
+var map = L.mapbox.map(&#39;map&#39;);
+</code></pre><p><em>Returns</em>: a map object</p>
+{% endraw %}

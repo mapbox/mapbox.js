@@ -1,147 +1,56 @@
 ---
-layout: default
-section: developers
+layout: pages
 category: examples
-examples:
-- id: animation
-  name: Animation
-- id: geocoding
-  name: Geocoding
-- id: handlers
-  name: Handlers
-- id: layers
-  name: Layers
-- id: legend
-  name: Legend
-- id: markers
-  name: Markers
-- id: plugins
-  name: Plugins
-- id: tooltips
-  name: Tooltips
-- id: ui
-  name: User Interface
-- id: vector
-  name: Vector Overlays
-- id: zoom
-  name: Zoom
 ---
 
-{% include header.html %}
-
-<div class='col12 round box clearfix contain'>
+<div class='pad2y'>
+<div class='col12 round keyline-all clearfix contain'>
   <div class='clearfix'>
     {% if page.v0 %}
     <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
     <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
     <div class='clearfix col12 note warn'>
-      Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}'>{{site.mapboxjs}} for the latest</a>.
+      Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/'>{{site.mapboxjs}} for the latest</a>.
     </div>
     {% endif %}
 
-    <div class='clearfix'>
-      <!-- Navigation -->
-      <div class='col3 keyline-right'>
-        <div class='doc-search pad2 keyline-bottom'>
-          <fieldset class='with-icon'>
-            <span class='icon search'></span>
-            <input id='search-filter' type='text' class='stretch' placeholder='Filter'>
-          </fieldset>
-        </div>
-
-        <div class='doc-nav'>
-          {% for item in page.examples %}
-          <div class='section'>
-            <strong class='heading col12 pad2 {% unless forloop.first %}keyline-top{% endunless %}'>{{item.name}}</strong>
-            <div id='{{item.id}}' class='examples examples-{{item.id}}'>
-            {% for example in site.tags[item.id] order:ascending %}
-              {% if example.version == 'v1.0.0' %}
-                <a href='{{site.baseurl}}{{example.url}}' class='col12 pad1y pad2x keyline-top {% if example.title == page.title %} active{% endif %}'>{{example.title}}</a>
-              {% endif %}
-            {% endfor %}
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-
-      <!-- Map + code sample -->
-      <div class='col9'>
-        <div class='pad2 doc example-header'>
-          <h3>{{page.title}}</h3>
-          <span class='description'>{{page.description}}</span>
-        </div>
-        <div id='demo' class='doc'>{{content}}</div>
-        <div id='snippet' class='doc space-bottom keyline-bottom'>
-        <a class='button icon clipboard' href='#' id='copy'>Select all</a>
-        <div id='code' class='doc'>
+    <div class='pad2'>
+      <h3>{{page.title}}</h3>
+      <p>{{page.description}}</p>
+    </div>
+    <div id='demo' class='contain row10'>{{content}}</div>
+    <div id='snippet'>
+    <div id='code' class='fill-light'>
 
 <div class='code-header quiet'>
-{% highlight html %}
-<!DOCTYPE html>
+{% highlight html %}<!DOCTYPE html>
 <html>
 <head>
 <meta charset=utf-8 />
 <title>{{page.title}}</title>
-  {% if page.v0 -%}
-  <script src='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
-  {% else %}
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-  <script src='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
-  {% endif %}
-  <style>
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
-  </style>
+{% if page.v0 -%}
+<script src='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+{% else %}
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
+{% endif %}
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
 </head>
-<body>
-{% endhighlight %}
+<body>{% endhighlight %}
 </div>
-
-{% highlight html %}
-{{content}}
-{% endhighlight %}
-
+{% highlight html %}{{content}}{% endhighlight %}
 <div class='code-footer'>
-{% highlight html %}
-</body>
-</html>
-{% endhighlight %}
+{% highlight html %}</body>
+</html>{% endhighlight %}
 </div>
   </div><!-- end #code -->
 </div>
-      </div>
-    </div>
-  </div>
-  <div class='col12 keyline-top center small'>
-    <div class='pad2'>
-      The code and documentation to <a href='http://github.com/mapbox/mapbox.js'>mapbox.js is hosted on GitHub</a> where you can contribute changes and improvements.
-    </div>
+  <a class='button icon clipboard col12 round-bottom js-select' href='#' data-target='code' id='copy'>Select</a>
   </div>
 </div>
-
-{% include developers-footer.html %}
-<script src='{{site.baseurl}}/assets/js/site.js'></script>
-
-<script>
-  $(function () {
-    var example = new Docs();
-    $(example.copyCode);
-    {% if page.v0 %}
-    example.colorCode(function(){
-        example.bindHints("{{ site.oldversion }}");
-    });
-    {% endif %}
-    example.bindSearch($('.doc-search input'), $('.doc-nav'), function() {
-      $('.section').each(function(){
-          if($(this).find('.filtered').length !== 0) {
-              $(this).parent('.section').show();
-          } else {
-              $(this).parent('.section').hide();
-          }
-      });
-    });
-  });
-</script>
+</div>

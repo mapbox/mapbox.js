@@ -1,0 +1,69 @@
+---
+layout: api
+title: "v1.6.0 API: L.mapbox.gridLayer(id|url|tilejson, options)"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/l-mapbox-gridlayer
+---
+{% raw %}<h2 id="section-l-mapbox-gridlayer">L.mapbox.gridLayer(id|url|tilejson, options)</h2>
+<p>An <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> loads <a href="http://mapbox.com/developers/utfgrid/">UTFGrid</a> tiles of
+interactivity into your map, which you can easily access with <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// the second argument is optional
+var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
+</code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
+<h3 id="section-gridlayer-gettilejson">gridLayer.getTileJSON()</h3>
+<p>Returns this layer&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Example</em>:</p>
+<pre><code>var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;)
+    // since layers load asynchronously through AJAX, use the
+    // `.on` function to listen for them to be loaded before
+    // calling `getTileJSON()`
+    .on(&#39;load&#39;, function() {
+    // get TileJSON data from the loaded layer
+    var TileJSON = layer.getTileJSON();
+});
+</code></pre><p><em>Returns</em>: the TileJSON object</p>
+<h3 id="section-gridlayer-getdata">gridLayer.getData(latlng, callback)</h3>
+<p>Load data for a given latitude, longitude point on the map, and call the callback
+function with that data, if any.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latlng</td>
+<td>object</td>
+<td><code>latlng</code> a <a href="L.LatLng object"><a href="http://leafletjs.com/reference.html#latlng">http://leafletjs.com/reference.html#latlng</a></a></td>
+</tr>
+<tr>
+<td>callback</td>
+<td>function</td>
+<td><code>callback</code> a function that is called with the grid data as an argument</td>
+</tr>
+</tbody>
+</table>
+<p><em>Returns</em>: the L.mapbox.gridLayer object</p>
+{% endraw %}

@@ -13,24 +13,24 @@ var start, l, anchor, matched, toParse,
     all = '',
     nav = 'navigation:\n';
 
-nav += '  - title: View on single page\n' +
-       '    id: all\n';
-
 var output = fs.createWriteStream(argv.o);
 var landOutput = fs.createWriteStream(argv.l);
 
-var headerSummary = fs.readFileSync('header', 'utf8').replace(/__TAG__/g, argv.t);
-var headerAll = fs.readFileSync('header-all', 'utf8').replace(/__TAG__/g, argv.t);
+var header = fs.readFileSync('header', 'utf8').replace(/__TAG__/g, argv.t);
 var writes = [];
 
-landOutput.write(headerSummary);
-output.write(headerAll);
+landOutput.write(header);
+output.write(header);
 output.write('version: ' + argv.t + '\n');
 landOutput.write('version: ' + argv.t + '\n');
 output.write('permalink: /api/' + argv.t + '/all/\n');
 
+var BASE_URL = '/mapbox.js/api/' + argv.t + '/';
+
 argv._.forEach(readDocumentation);
 
+// Split Leaflet's HTML documentation by its `h2` elements into chunks
+// that will be represented by individual pages
 function splitChunks(lines) {
     var chunks = [], chunk;
     var re = /<h2 id="([^"]+)">([^<]+)<\/h2>/;
@@ -41,7 +41,7 @@ function splitChunks(lines) {
                 chunks.push(chunk);
             }
             chunk = {
-                id: 'leaflet-' + match[1],
+                id: 'l-' + match[1],
                 name: match[2],
                 text: [lines[i]]
             };
@@ -55,14 +55,32 @@ function splitChunks(lines) {
     return chunks;
 }
 
-function transformLinks(line) {
-    return line.replace(/href=['"]([^"']*)['"]/, function(all, content) {
+function transformLinks(line, relative) {
+    return line.replace(/href=['"]([^"']*)['"]/g, function(all, content) {
         if (content.indexOf('#') === 0) {
-            return all.replace(content, '/mapbox.js/api/' + argv.t + '/leaflet-' + content.replace('#', ''));
+            if (relative) {
+                return all.replace(content, '#l-' + content.replace(/\-.*/g, '').replace('#', ''));
+            } else {
+                return all.replace(content, BASE_URL + 'l-' + content.replace(/\-.*/g, '').replace('#', ''));
+            }
         } else {
             return all;
         }
     });
+}
+
+function transformHeaders(text) {
+    return text.replace(/<h2 id="([^"]+)">([^<]+)<\/h2>/, function(all, content) {
+        return all.replace(content, 'l-' + content);
+    });
+}
+
+function escapeFn(text) {
+    return chopFn(text).toLowerCase().replace(/[^\w]+/g, '-');
+}
+
+function chopFn(text) {
+    return text.replace(/\(.*/, '');
 }
 
 function readDocumentation(filename) {
@@ -72,149 +90,120 @@ function readDocumentation(filename) {
     if (filename.match(/html$/)) {
         var lines = f.split('\n');
         chunks = splitChunks(lines);
-        all += f;
+        all += lines.map(function(l) {
+            return transformHeaders(transformLinks(l, true));
+        }).join('\n');
+        nav += '  - title: Leaflet\n';
+        nav += '    nav:\n';
         chunks.forEach(function(c) {
-            nav += '  - title: ' + c.name + '\n';
-            nav += '    id: ' + c.id + '\n';
+            if (c.name.match(/\s/g)) {
+                nav += '    - title: ' + c.name + '\n';
+                nav += '      id: ' + c.id + '\n';
+            } else {
+                // code
+                c.name = 'L.' + c.name;
+                nav += '    - title: ' + c.name + '\n';
+                nav += '      id: ' + c.id + '\n';
+            }
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
-                contents: headerAll.replace('All', c.name) + 'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n' +
+                contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
+                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' +
                     c.text.join('\n')
             });
         });
     } else {
-        var mdout = '';
-        var lexed = marked.lexer(f);
-        var lexed2 = marked.lexer(f);
-        mdout += '<div>';
-        start = 0;
-        chunks = [];
-        var chunk;
 
-        for (var i = 0; i < lexed.length; i++) {
-
-            l = lexed[i];
-            l2 = lexed2[i];
-
-            if (l.type === 'heading') matchedHeading = l.text.match(/([^\(]*)\.([^\(]*)(\((.*)\))?/);
-            if (l.type === 'heading') matchedEvent = l.text.match(/Event:\s(.*)/);
-            if (l.type === 'html') matchedSep = l.text.match(/class=.separator.*>(.*)</);
-
-            if (l.depth && l.depth == 1) {
-                nav += '  - title: ' + l.text + '\n';
-                nav += '    id: mapbox-' + l.text.toLowerCase() + '\n';
-                nav += '    nav:\n';
+        var renderer = new marked.Renderer();
+        renderer.heading = function(text, level) {
+            var escapedText;
+            if (level == 2) {
+                escapedText = text.replace(/\..*/, '').toLowerCase().replace(/[^\w]+/g, '-');
             }
+            escapedText = text.replace(/\(.*/, '').toLowerCase().replace(/[^\w]+/g, '-');
+            var html = '<h' + level + ' id="' + escapeFn(text) + '">' + text + '</h' + level + '>\n';
+            var indent = (new Array(1 + (level * 2))).join(' ');
+            var cleanTitle = text.replace(/\(.*/, '');
+            nav += indent + '- title: "' + cleanTitle + '"\n';
+            nav += indent + '  id: ' + escapedText + '\n';
+            nav += indent + '  nav:\n';
+            return html;
+        };
 
-            if (l.type === 'heading' || matchedSep) {
+        renderer.codespan = function(text) {
+            if (text.match(/^L\.mapbox/)) {
+                return '<code><a href="#' + escapeFn(text) + '">' + text + '</a></code>';
+            } else if (text.match(/^L\./)) {
+                return '<code><a href="#' + escapeFn(text) + '">' + text + '</a></code>';
+            }
+            return '<code>' + text + '</code>';
+        };
 
-                toParse = lexed.slice(start, i);
-                toParse.links = lexed.links;
-                mdout += marked.parser(toParse);
+        var html = marked(f, { renderer: renderer });
 
-                // End previous group
-                mdout += '</div>';
-
-                if (l.depth === 1) {
-                    if (chunk) {
-                        chunks.push(chunk);
-                    }
-                    chunk = {
-                        id: 'mapbox-' + l.text.toLowerCase(),
-                        name: l.text,
-                        chunks: [l]
-                    };
-                } else if (chunk) {
-                    chunk.chunks.push(l);
-                }
-
-                // Header is a function or property
-                if (matchedHeading) {
-
-                    anchor = matchedHeading[1] + '.' + matchedHeading[2];
-                    mdout += '<h' + l.depth + ' id="section-' + anchor + '">';
-                    mdout += anchor;
-
-                    if (matchedHeading[3]) {
-                        mdout += '<span class="bracket">(</span>';
-                        mdout += '<span class="args">' + matchedHeading[4] + '</span>';
-                        mdout += '<span class="bracket">)</span>';
-                    }
-
-                    mdout += '</h' + l.depth + '>\n';
-
-                    // Add to navigation tree
-                    if (l.depth == 2) {
-                        nav += '      - title: ' + anchor + '\n';
-                        nav += '        sub:\n';
-                    } else if (l.depth == 3) {
-                        nav += '        - ' + anchor + '\n';
-                    }
-
-                // Header is for an event
-                } else if (matchedEvent) {
-                    anchor = 'Event_"' + matchedEvent[1] + '"';
-                    mdout += '<h' + l.depth + " id='section-" + anchor + "'>";
-                    mdout += l.text;
-                    mdout += '</h' + l.depth + '>\n';
-                    nav += '  - Event "' + matchedEvent[1] + '"\n';
-
-                // Separator
-                } else if (matchedSep) {
-                    anchor = matchedSep[1].replace(' ', '_');
-                    out += '<div class="separator keyline-bottom" id="section-' + anchor + '">' + matchedSep[1] + '</div>';
-                    nav += '  - Separator: ' + matchedSep[1] + '\n';
-                    l.depth = 0;
-
-                } else {
-                    anchor = l.text.toLowerCase();
-                    mdout += (l.depth === 1) ?
-                        '<h' + l.depth + ' id="section-' + anchor + '">' :
-                        '<h' + l.depth + '>';
-                    mdout += l.text;
-                    mdout += '</h' + l.depth + '>\n';
-                }
-
-                start = i + 1;
-
-                // End header and start next group
-                mdout += '<div class="space-bottom api-group-content depth-' + l.depth + '">';
+        var chunks = [], chunk = '';
+        var lines = f.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            if (lines[i].match(/^##\s/)) {
+                if (chunk) chunks.push(chunk);
+                chunk = lines[i] + '\n';
+            } else if (lines[i].match(/^#\s/)) {
             } else {
-                if (chunk) {
-                    chunk.chunks.push(l2);
-                }
+                chunk += lines[i] + '\n';
             }
         }
+        if (chunk) chunks.push(chunk);
 
         chunks.forEach(function(c) {
-            nav += '      - title: ' + c.name + '\n';
-            c.chunks.links = lexed.links;
+            var renderer = new marked.Renderer();
+            var main = '';
+
+            renderer.heading = function(text, level) {
+                var escapedText;
+                if (level == 2) {
+                    escapedText = text.replace(/\..*/, '').toLowerCase().replace(/[^\w]+/g, '-');
+                    main = text;
+                }
+                escapedText = escapeFn(text);
+                var html = '<h' + level + ' id="section-' + escapedText + '">' + text + '</h' + level + '>\n';
+                var indent = (new Array(1 + (level * 2))).join(' ');
+                return html;
+            };
+
+            renderer.codespan = function(text) {
+                if (text.match(/^L\.mapbox/)) {
+                    return '<code><a href="' + BASE_URL + escapeFn(text) + '">' + text + '</a></code>';
+                } else if (text.match(/^L\./)) {
+                    return '<code><a href="' + BASE_URL + escapeFn(text) + '">' + text + '</a></code>';
+                }
+                return '<code>' + text + '</code>';
+            };
+
+            var html = marked(c, { renderer: renderer });
+            var escapedText = escapeFn(main);
             writes.push({
-                file: argv.d + '/0200-01-01-' + c.id + '.html',
-                contents: headerAll.replace('All', c.name) +
+                file: argv.d + '/0200-01-01-' + escapedText + '.html',
+                contents: header.replace('All', main) +
                     'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n__NAV__\n---\n{% raw %}' +
-                    marked.parser(c.chunks).replace('id="map"', '') + '{% endraw %}'
+                    'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n{% raw %}' +
+                    html.replace('id="map"', '') + '{% endraw %}'
             });
         });
-        toParse = lexed.slice(start, i);
-        toParse.links = lexed.links;
-        mdout += marked.parser(toParse);
-        mdout += '</div>\n';
-        all += mdout;
+
+        all += html;
     }
 }
 
-
+landOutput.write('tags: ' + argv.t + '\n');
 landOutput.write(nav);
-output.write(nav);
-landOutput.write("---\n");
+landOutput.write('---\n');
+landOutput.write('{% include api.introduction.html %}\n');
+
 output.write("---\n");
 output.write("{% raw %}\n");
 output.write(all + '\n');
 output.write("{% endraw %}");
 
 writes.forEach(function(w) {
-    fs.writeFileSync(w.file, w.contents.replace('__NAV__', nav));
+    fs.writeFileSync(w.file, w.contents);
 });
