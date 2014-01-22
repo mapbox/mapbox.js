@@ -16,9 +16,9 @@ If you&#39;d like to learn more about maps, <a href='http://mapbox.com/developer
 </div>
 
 <h3 id='the-ready-event'>The `ready` event</h3>
-<p>MapBox.js is <a href='http://recurial.com/programming/understanding-callback-functions-in-javascript/'>asynchronous</a> - when you create a layer like <code>L.mapbox.tileLayer('{{site.defaultid}}')</code>, the layer doesn&#39;t immediately know which tiles to load and its attribution information. Instead, it loads the information in an <a href='http://en.wikipedia.org/wiki/AJAX'>AJAX</a> call.</p>
+<p>Mapbox.js is <a href='http://recurial.com/programming/understanding-callback-functions-in-javascript/'>asynchronous</a> - when you create a layer like <code>L.mapbox.tileLayer('{{site.defaultid}}')</code>, the layer doesn&#39;t immediately know which tiles to load and its attribution information. Instead, it loads the information in an <a href='http://en.wikipedia.org/wiki/AJAX'>AJAX</a> call.</p>
 
-<p>For most things you&#39;ll write, this isn&#39;t a problem, since MapBox.js does a good
+<p>For most things you&#39;ll write, this isn&#39;t a problem, since Mapbox.js does a good
 job of handling these on-the-fly updates. If you&#39;re writing code that needs
 to know when layers and other dynamically-loaded objects are ready, you can
 use the <code>ready</code> event to listen for their ready state. For instance:</p>

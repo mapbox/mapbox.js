@@ -5,8 +5,8 @@ baseurl: /mapbox.js
 pygments: true
 mapboxjs: v1.6.1
 oldversion: v0.6.7
-title: MapBox.js
+title: Mapbox.js
 defaultid: 'examples.map-9ijuk24y'
-description: MapBox JavaScript API
+description: Mapbox JavaScript API
 rdiscount:
   extensions: [smart]
