@@ -4,6 +4,10 @@
 .full-y         { height:100%; }
 .bump-up { position:relative; top:-1px; }
 
+/* API Filtering and view all link */
+#filter-api { padding-right:88px; }
+.view-all { top:1px;right:1px;bottom:1px; }
+
 .site-title {
   position:relative;
   top:15px;
