@@ -5,7 +5,7 @@
     "marked": "0.3.0"
   },
   "dependencies": {
-    "mapbox.js": "~1.5.1",
+    "mapbox.js": "~1.6.1",
     "minimist": "0.0.5",
     "marked": "~0.3.0"
   }

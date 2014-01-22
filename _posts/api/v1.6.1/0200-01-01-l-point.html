@@ -1,0 +1,144 @@
+---
+layout: api
+title: "v1.6.1 API: L.Point"
+categories: api
+version: v1.6.1
+permalink: /api/v1.6.1/l-point
+---
+<h2 id="point">Point</h2>
+
+<p>Represents a point with x and y coordinates in pixels.</p>
+
+<pre><code>var point = L.point(200, 300);</code></pre>
+
+<p>All Leaflet methods and options that accept Point objects also accept them in a simple Array form (unless noted otherwise), so these lines are equivalent:</p>
+
+<pre><code>map.panBy([200, 300]);
+map.panBy(L.point(200, 300));</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='point'>
+	<tr>
+		<th class="width250">Factory</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>L.point</b>(
+			<nobr>&lt;Number&gt; <i>x</i>, &lt;Number&gt; <i>y</i></nobr>,
+			<nobr>&lt;Boolean&gt; <i>round?</i> )</nobr>
+		</code></td>
+
+		<td>Creates a Point object with the given <code>x</code> and <code>y</code> coordinates. If optional <code>round</code> is set to <code><span class="literal">true</span></code>, rounds the <code>x</code> and <code>y</code> values.</td>
+	</tr>
+</table>
+
+<h3>Properties</h3>
+
+<table data-id='point'>
+	<tr>
+		<th class="width100">Property</th>
+		<th class="width100">Type</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>x</b></code></td>
+		<td><code>Number</code></td>
+		<td>The x coordinate.</td>
+	</tr>
+	<tr>
+		<td><code><b>y</b></code></td>
+		<td><code>Number</code></td>
+		<td>The y coordinate.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='point'>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>add</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.1/l-point">Point</a>&gt; <i>otherPoint</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Returns the result of addition of the current and the given points.</td>
+	</tr>
+	<tr>
+		<td><code><b>subtract</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.1/l-point">Point</a>&gt; <i>otherPoint</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Returns the result of subtraction of the given point from the current.</td>
+	</tr>
+	<tr>
+		<td><code><b>multiplyBy</b>(
+			<nobr>&lt;Number&gt; <i>number</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Returns the result of multiplication of the current point by the given number.</td>
+	</tr>
+	<tr>
+		<td><code><b>divideBy</b>(
+			<nobr>&lt;Number&gt; <i>number</i></nobr>,
+			<nobr>&lt;Boolean&gt; <i>round?</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Returns the result of division of the current point by the given number. If optional <code>round</code> is set to <code><span class="literal">true</span></code>, returns a rounded result.</td>
+	</tr>
+	<tr>
+		<td><code><b>distanceTo</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.1/l-point">Point</a>&gt; <i>otherPoint</i> )</nobr>
+		</code></td>
+
+		<td><code>Number</code></td>
+		<td>Returns the distance between the current and the given points.</td>
+	</tr>
+	<tr>
+		<td><code><b>clone</b>()</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Returns a copy of the current point.</td>
+	</tr>
+	<tr>
+		<td><code><b>round</b>()</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Returns a copy of the current point with rounded coordinates.</td>
+	</tr>
+	<tr>
+		<td><code><b>floor</b>()</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Returns a copy of the current point with floored coordinates (rounded down).</td>
+	</tr>
+	<tr>
+		<td><code><b>equals</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.1/l-point">Point</a>&gt; <i>otherPoint</i> )</nobr>
+		</code></td>
+
+		<td><code>Boolean</code></td>
+		<td>Returns <code><span class="literal">true</span></code> if the given point has the same coordinates.</td>
+	</tr>
+	<tr>
+		<td><code><b>contains</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.1/l-point">Point</a>&gt; <i>otherPoint</i> )</nobr>
+		</code></td>
+
+		<td><code>Boolean</code></td>
+		<td>Returns <code><span class="literal">true</span></code> if the both coordinates of the given point are less than the corresponding current point coordinates (in absolute values).</td>
+	</tr>
+	<tr>
+		<td><code><b>toString</b>()</code></td>
+		<td><code>String</code></td>
+		<td>Returns a string representation of the point for debugging purposes.</td>
+	</tr>
+</table>
+
+
+

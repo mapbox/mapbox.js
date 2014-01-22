@@ -19,7 +19,7 @@ echo "--- BUILDING mapbox.js $TAG ---"
 mkdir -p ../_posts/api/$TAG
 
 echo "Installing..."
-# npm install mapbox.js@$TAG
+  npm install mapbox.js@$TAG
 
 echo "Generating html..."
 
