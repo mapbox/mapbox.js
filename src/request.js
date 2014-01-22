@@ -1,9 +1,10 @@
+'use strict';
+
 var corslite = require('corslite'),
     JSON3 = require('json3'),
     strict = require('./util').strict;
 
 module.exports = function(url, callback) {
-    'use strict';
     strict(url, 'string');
     strict(callback, 'function');
     return corslite(url, onload);

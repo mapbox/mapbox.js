@@ -2,6 +2,8 @@
 
 * Adds `select` and `autoselect` events to the geocoderControl to allow for
   finer-tuned listening for user actions around geocoding.
+* Improved documentation
+* Updated to [Leaflet 0.7.2](https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#072-january-17-2014)
 
 ## v1.6.0
 

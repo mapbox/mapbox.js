@@ -1,4 +1,4 @@
-# Map
+# Map Object
 
 ## L.mapbox.map(element, id|url|tilejson, options)
 Create and automatically configure a map with layers, markers, and
@@ -433,7 +433,7 @@ This function is currently in private beta: <a href='http://mapbox.com/about/con
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url (_required_) | string | Either a <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li></ul> |
-| options | object | An options argument with the same options as the `L.Control class`, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`.<li></ul> |
+| options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`.<li></ul> |
 
 _Example_:
 
@@ -587,25 +587,27 @@ _Example_:
     var output = L.mapbox.template('Name: {{name}}', {name: 'John'});
     // output is "Name: John"
 
-# Mobile
+# Guides
+
+## Mobile
 
 Mapbox.js is optimized for mobile devices and small screens by default.
 There are, however, best practices to make sure your map always looks its best.
 
-## Viewport
+### Viewport
 Modern mobile browsers now support scaling of webpages by leveraging the meta
 tag `viewport`. This enlarges the window making your map look better on a
 mobile device. Simply include this in the head of your document:
 
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
 
-## Scrolling
+### Scrolling
 If you&#39;re planning on having a page that has large amounts of scrolling,
 try to avoid a large map height. Having a &#39;tall&#39; map can cause the user
 to get stuck on the map while scrolling. Another way around this is to disable
 `dragging` for mobile devices: `map.dragging.disable();`
 
-## Retina
+### Retina
 Having the ability to use retina tiles when the device supports them is easy.
 When creating the map, use the `detectRetina` to verify if retina is available
 and `retinaVersion` to use a tilelayer which is designed for retina screens.
@@ -627,9 +629,9 @@ tiles will be used when retina is detected.
         }
     }).setView([40, -74.50], 9);
 
-# Theming
+## Theming
 
-## Dark theme
+### Dark theme
 
 Mapbox.js implements a simple, light style on all interaction elements. A dark theme
 is available by applying `class="dark"` to the map div.
