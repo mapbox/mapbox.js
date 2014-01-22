@@ -7,7 +7,7 @@ permalink: /api/v1.6.0/l-mapbox-sharecontrol
 ---
 {% raw %}<h2 id="section-l-mapbox-sharecontrol">L.mapbox.shareControl(id|url, options)</h2>
 <p>Adds a &quot;Share&quot; button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.</p>
-<p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#control">L.Control</a></span></p>
+<p><span class='leaflet'><em>Extends</em>: L.Control</span></p>
 <table>
 <thead>
 <tr>
@@ -25,7 +25,7 @@ permalink: /api/v1.6.0/l-mapbox-sharecontrol
 <tr>
 <td>options</td>
 <td>object</td>
-<td>Options for <a href="http://leafletjs.com/reference.html#control">L.Control</a></span> Also accepts the following options:<ul><li>url: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li></ul></td>
+<td>Options for L.Control</span> Also accepts the following options:<ul><li>url: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -34,5 +34,5 @@ permalink: /api/v1.6.0/l-mapbox-sharecontrol
     .setView([37, -77], 5)
     .addControl(L.mapbox.shareControl());
 </code></pre><p><em>Returns</em>:
-Returns a <code>L.mapbox.shareControl</code> object.</p>
+Returns a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-sharecontrol">L.mapbox.shareControl</a></code> object.</p>
 {% endraw %}

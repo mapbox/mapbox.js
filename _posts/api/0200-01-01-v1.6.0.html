@@ -7,15 +7,15 @@ tags: v1.6.0
 navigation:
   - title: Overview
     id:
-  - title: "Map"
-    id: map
+  - title: "Map Object"
+    id: map-object
     nav:
     - title: "L.mapbox.map"
       id: l-mapbox-map
       nav:
-    - title: "map.getTileJSON"
-      id: map-gettilejson
-      nav:
+      - title: "map.getTileJSON"
+        id: map-gettilejson
+        nav:
   - title: "Layers"
     id: layers
     nav:
@@ -37,26 +37,26 @@ navigation:
       - title: "gridLayer.getData"
         id: gridlayer-getdata
         nav:
-    - title: "L.mapbox.markerLayer"
-      id: l-mapbox-markerlayer
+    - title: "L.mapbox.featureLayer"
+      id: l-mapbox-featurelayer
       nav:
-      - title: "markerLayer.loadURL"
-        id: markerlayer-loadurl
+      - title: "featureLayer.loadURL"
+        id: featurelayer-loadurl
         nav:
-      - title: "markerLayer.loadID"
-        id: markerlayer-loadid
+      - title: "featureLayer.loadID"
+        id: featurelayer-loadid
         nav:
-      - title: "markerLayer.setFilter"
-        id: markerlayer-setfilter
+      - title: "featureLayer.setFilter"
+        id: featurelayer-setfilter
         nav:
-      - title: "markerLayer.getFilter"
-        id: markerlayer-getfilter
+      - title: "featureLayer.getFilter"
+        id: featurelayer-getfilter
         nav:
-      - title: "markerLayer.setGeoJSON"
-        id: markerlayer-setgeojson
+      - title: "featureLayer.setGeoJSON"
+        id: featurelayer-setgeojson
         nav:
-      - title: "markerLayer.getGeoJSON"
-        id: markerlayer-getgeojson
+      - title: "featureLayer.getGeoJSON"
+        id: featurelayer-getgeojson
         nav:
   - title: "Geocoding"
     id: geocoding
@@ -127,6 +127,12 @@ navigation:
     - title: "L.mapbox.marker.style"
       id: l-mapbox-marker-style
       nav:
+  - title: "Simplestyle"
+    id: simplestyle
+    nav:
+    - title: "L.simplestyle.style"
+      id: l-simplestyle-style
+      nav:
   - title: "Utility"
     id: utility
     nav:
@@ -136,24 +142,27 @@ navigation:
     - title: "L.mapbox.template"
       id: l-mapbox-template
       nav:
-  - title: "Mobile"
-    id: mobile
+  - title: "Guides"
+    id: guides
     nav:
-    - title: "Viewport"
-      id: viewport
+    - title: "Mobile"
+      id: mobile
       nav:
-    - title: "Scrolling"
-      id: scrolling
+      - title: "Viewport"
+        id: viewport
+        nav:
+      - title: "Scrolling"
+        id: scrolling
+        nav:
+      - title: "Retina"
+        id: retina
+        nav:
+    - title: "Theming"
+      id: theming
       nav:
-    - title: "Retina"
-      id: retina
-      nav:
-  - title: "Theming"
-    id: theming
-    nav:
-    - title: "Dark theme"
-      id: dark-theme
-      nav:
+      - title: "Dark theme"
+        id: dark-theme
+        nav:
   - title: Leaflet
     nav:
     - title: L.Map
