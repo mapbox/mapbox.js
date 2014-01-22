@@ -70,26 +70,6 @@ examples:
 {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
 
-{% capture apinav %}
-  {% for p in site.tags[site.mapboxjs] %}
-  <nav class='navigation pad1y full-y keyline-top scroll-y v js-nav-docs quiet-scroll'>
-    {% for section in p.navigation %}
-      <div class='section'>
-        {{section.title}}
-        {% for nav in section.nav %}
-          <a class='col12 truncate sub' href='{{site.baseurl}}/api/{{p.version}}/{{nav.id}}'>{{nav.title}}</a>
-          {% if nav.sub %}
-            {% for sub in nav.sub %}
-              <a class='col12 truncate pad4x small quiet' href='{{site.baseurl}}/api/{{p.version}}/{{sub|replace:' ','_'|downcase}}'>{{sub}}</a>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endfor %}
-  </nav>
-  {% endfor %}
-{% endcapture %}
-
 <!--Mobile menu-->
 <div id='dropdown' class='show-mobile pad4 drop fill-green clearfix'>
   <a href='#dropdown' class='fr icon menu quiet pad1 keyline-all'></a>
@@ -164,26 +144,16 @@ examples:
   </div>
 
   {% capture pane %}
-    {% if page.url contains "api" %}
-      active2
     {% elsif page.url contains "example" %}
-      active3
+      active2
     {% elsif page.url contains "plugins" %}
-      active4
+      active3
     {% else %}
       active1
     {% endif %}
   {% endcapture %}
 
   <div class='sliding h col12 clip {{pane}}'>
-    <div id='overview-menu' class='col12 animate full-y'>
-      <nav class='navigation v pad2y'>
-        <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/' class='strong keyline-top pad2x pad1y col12'>{{site.mapboxjs}} documentation</a>
-        <a href='{{site.baseurl}}/examples/' class='strong keyline-top pad2x pad1y col12'>Examples</a>
-        <a href='{{site.baseurl}}/plugins/' class='strong keyline-top keyline-bottom pad2x pad1y col12'>Plugins</a>
-      </nav>
-    </div>
-
     <div id='api-menu' class='col12 animate full-y'>
       <div class='pad2 row2'>
         <fieldset class='with-icon'>
