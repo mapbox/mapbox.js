@@ -879,20 +879,21 @@ options object formatted to be used as <a href="http://leafletjs.com/reference.h
 <p><em>Example</em>:</p>
 <pre><code>var output = L.mapbox.template(&#39;Name: {{name}}&#39;, {name: &#39;John&#39;});
 // output is &quot;Name: John&quot;
-</code></pre><h1 id="mobile">Mobile</h1>
+</code></pre><h1 id="guides">Guides</h1>
+<h2 id="mobile">Mobile</h2>
 <p>Mapbox.js is optimized for mobile devices and small screens by default.
 There are, however, best practices to make sure your map always looks its best.</p>
-<h2 id="viewport">Viewport</h2>
+<h3 id="viewport">Viewport</h3>
 <p>Modern mobile browsers now support scaling of webpages by leveraging the meta
 tag <code>viewport</code>. This enlarges the window making your map look better on a
 mobile device. Simply include this in the head of your document:</p>
 <pre><code>&lt;meta name=&#39;viewport&#39; content=&#39;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&#39; /&gt;
-</code></pre><h2 id="scrolling">Scrolling</h2>
+</code></pre><h3 id="scrolling">Scrolling</h3>
 <p>If you&#39;re planning on having a page that has large amounts of scrolling,
 try to avoid a large map height. Having a &#39;tall&#39; map can cause the user
 to get stuck on the map while scrolling. Another way around this is to disable
 <code>dragging</code> for mobile devices: <code>map.dragging.disable();</code></p>
-<h2 id="retina">Retina</h2>
+<h3 id="retina">Retina</h3>
 <p>Having the ability to use retina tiles when the device supports them is easy.
 When creating the map, use the <code>detectRetina</code> to verify if retina is available
 and <code>retinaVersion</code> to use a tilelayer which is designed for retina screens.</p>
@@ -910,8 +911,8 @@ tiles will be used when retina is detected.</p>
         detectRetina: true
     }
 }).setView([40, -74.50], 9);
-</code></pre><h1 id="theming">Theming</h1>
-<h2 id="dark-theme">Dark theme</h2>
+</code></pre><h2 id="theming">Theming</h2>
+<h3 id="dark-theme">Dark theme</h3>
 <p>Mapbox.js implements a simple, light style on all interaction elements. A dark theme
 is available by applying <code>class=&quot;dark&quot;</code> to the map div.</p>
 <p><em>Example</em>:</p>
