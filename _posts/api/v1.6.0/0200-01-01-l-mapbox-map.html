@@ -8,7 +8,7 @@ permalink: /api/v1.6.0/l-mapbox-map
 {% raw %}<h2 id="section-l-mapbox-map">L.mapbox.map(element, id|url|tilejson, options)</h2>
 <p>Create and automatically configure a map with layers, markers, and
 interactivity.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="/mapbox.js/api/v1.6.0/l-map">L.Map</a></code></span></p>
+<p><span class='leaflet'><em>Extends</em>: <a href="http://leafletjs.com/reference.html#map-options">L.Map</a></span></p>
 <table>
 <thead>
 <tr>
@@ -31,7 +31,7 @@ interactivity.</p>
 <tr>
 <td>options</td>
 <td>object</td>
-<td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> (<a href="../leaflet-tilelayer/#tilelayer-options">TileLayer options</a>). Options passed to a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="/mapbox.js/api/v1.6.0/l-featurelayer">L.FeatureLayer</a></code> options. Options passed to a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>. Options passed to a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> options. Options passed to a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>.</li></td>
+<td>If provided, it is the same options as provided to <a href="http://leafletjs.com/reference.html#map-options">L.Map</a> with the following additions: <ul><li><code>tileLayer</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Default: <code>true</code></li><li><code>markerLayer</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-markerlayer">L.mapbox.markerLayer</a></code> based on the TileJSON. Default: <code>true</code>.</li><li><code>gridLayer</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Default: <code>true</code>.</li><li><code>legendControl</code> (boolean). Whether or not to add a <code><a href="/mapbox.js/api/v1.6.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>. Default: <code>true</code>.</li></td>
 </tr>
 </tbody>
 </table>
@@ -44,8 +44,4 @@ var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-4l7djmvo&#39;);
 // This map will have no layers initially
 var map = L.mapbox.map(&#39;map&#39;);
 </code></pre><p><em>Returns</em>: a map object</p>
-<h3 id="section-map-gettilejson">map.getTileJSON()</h3>
-<p>Returns this map&#39;s TileJSON object which determines its tile source,
-zoom bounds and other metadata.</p>
-<p><em>Returns</em>: the TileJSON object</p>
 {% endraw %}

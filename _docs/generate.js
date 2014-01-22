@@ -13,9 +13,6 @@ var start, l, anchor, matched, toParse,
     all = '',
     nav = 'navigation:\n';
 
-nav += '  - title: Overview\n' +
-       '    id:\n';
-
 var output = fs.createWriteStream(argv.o);
 var landOutput = fs.createWriteStream(argv.l);
 
