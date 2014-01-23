@@ -16,7 +16,7 @@ var start, l, anchor, matched, toParse,
 var output = fs.createWriteStream(argv.o);
 var landOutput = fs.createWriteStream(argv.l);
 
-var header = fs.readFileSync('header', 'utf8').replace(/__TAG__/g, argv.t);
+var header = fs.readFileSync('_docs/header', 'utf8').replace(/__TAG__/g, argv.t);
 var writes = [];
 
 landOutput.write(header);
