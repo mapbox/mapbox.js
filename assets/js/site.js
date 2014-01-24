@@ -193,6 +193,29 @@ function load() {
         return false;
     });
 
+    ZeroClipboard.setDefaults({
+        moviePath: '../assets/js/ZeroClipboard.swf',
+        forceHandCursor: true
+    });
+
+
+    $('.js-clipboard').each(function() {
+        var $clip = $(this);
+        if (!$clip.data('zeroclipboard-bound')) {
+            var clip = new ZeroClipboard(this);
+            $clip.data('zeroclipboard-bound', true);
+            clip.on('complete', function() {
+                var $this = $(this);
+                $this.siblings('input').select();
+                $this.text('Copied to clipboard! ');
+                setTimeout(function() {
+                    $this.text('');
+                }, 1000);
+                analytics.track('Copied plugin with clipboard');
+            });
+        }
+    });
+
     var examples = new Docs();
     examples.bindSearch($('#filter-examples'), $('.js-nav-examples'));
 }
