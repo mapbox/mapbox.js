@@ -31,6 +31,7 @@ GEM
     rack-jekyll (0.4.1)
       jekyll (>= 0.12.0, < 2.0)
       rack (~> 1.5.0)
+    rake (10.1.1)
     safe_yaml (0.7.1)
     syntax (1.0.0)
     yajl-ruby (1.1.0)
@@ -41,3 +42,4 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 1.0)
   rack-jekyll
+  rake
