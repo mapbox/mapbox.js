@@ -188,30 +188,31 @@ function load() {
 
     docs.bindSearch($('#filter-api'), $('.js-nav-docs'));
 
-    $('.js-select').click(function() {
-        docs.copyCode($(this).data('target'));
-        return false;
-    });
+    if (!window.location.origin) {
+        window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+    }
 
     ZeroClipboard.setDefaults({
-        moviePath: '../assets/js/ZeroClipboard.swf',
+        moviePath: window.location.origin + '/mapbox.js/assets/js/ZeroClipboard.swf',
         forceHandCursor: true
     });
-
 
     $('.js-clipboard').each(function() {
         var $clip = $(this);
         if (!$clip.data('zeroclipboard-bound')) {
-            var clip = new ZeroClipboard(this);
+            $clip.attr('data-clipboard-text', $('#' + $clip.data('ref-id')).text().trim());
             $clip.data('zeroclipboard-bound', true);
+            var clip = new ZeroClipboard(this);
             clip.on('complete', function() {
                 var $this = $(this);
                 $this.siblings('input').select();
+                var text = $this.text();
                 $this.text('Copied to clipboard! ');
                 setTimeout(function() {
-                    $this.text('');
+                    $this.text(text);
                 }, 1000);
-                analytics.track('Copied plugin with clipboard');
+                var type = (location.pathname.split('plugins').length > 1) ? 'plugin' : 'example';
+                analytics.track('Copied ' + type + ' with clipboard');
             });
         }
     });

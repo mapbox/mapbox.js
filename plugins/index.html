@@ -15,7 +15,7 @@ title: Plugins
     </div>
   </div>
   <div class='col12 quiet-scroll fill-light'>
-    <a title='Copy plugin to clipboard' id='snippet-{{forloop.index}}' data-clipboard-text="{{plugin.snippet}}" class='pad1 keyline-left keyline-bottom quiet rcon clipboard js-clipboard fr'></a>
+    <a title='Copy plugin to clipboard' data-ref-id="snippet-{{forloop.index}}" class='pad1 keyline-left keyline-bottom quiet rcon clipboard js-clipboard fr'></a>
     <pre id='snippet-{{forloop.index}}' class='pad2'>{{ plugin.snippet | replace:'&','&amp;' | replace:'<','&lt;' | replace:'>', '&gt;'}}</pre>
   </div>
 </div>
