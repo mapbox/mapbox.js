@@ -58,6 +58,15 @@
                     $this.show();
                 }
             });
+
+            if (query) {
+                this.$menu.children('.section').each(function() {
+                    var $this = $(this);
+                    if ($this.children(':visible').length < 2) $this.hide();
+                });
+            } else {
+                this.$menu.children().show();
+            }
         },
 
         bindInlineCode: function() {
