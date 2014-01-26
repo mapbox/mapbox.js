@@ -245,3 +245,5 @@ pre .var { color:#0C9DC2; }
   text-transform:lowercase;
   display:inline;
   }
+
+.js-clipboard:hover { cursor: pointer; }
