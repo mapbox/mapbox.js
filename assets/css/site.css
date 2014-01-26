@@ -3,6 +3,7 @@
 /*Base candidate*/
 .full-y         { height:100%; }
 .bump-up { position:relative; top:-1px; }
+.pin-rightbottom { position:absolute; bottom:0; right:0; }
 
 /* API Filtering and view all link */
 #filter-api { padding-right:88px; }
