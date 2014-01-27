@@ -2,28 +2,36 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Marker Tooltips Outside the Map
-description: Show tooltip contents outside of the map
+title: Marker tooltips outside the map
+description: Display tooltip data outside of the map
 tags:
   - markers
 ---
 
 <style>
-  #map { position:absolute; top:0; bottom:0; right:300px; left:0; }
-  #info {
-      position:absolute; top: 0; right: 0;
-      bottom: 0; width: 260px; background:#333; color: #fff;
-      padding:20px;
-  }
-  h1 { margin-top:0; }
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
 </style>
+</head>
+<body>
 
+<style>
+  #info {
+    background:#fff;
+    position:absolute;
+    width:260px;
+    top:10px;
+    bottom:10px;
+    right:10px;
+    padding:20px;
+    }
+</style>
 
 <div id='map'></div>
 <div id='info'></div>
 
 <script>
-var map = L.mapbox.map('map', 'examples.map-20v6611k')
+var map = L.mapbox.map('map', 'examples.h186knp8')
     .setView([37.9, -77], 6);
 
 var geoJson = [
@@ -34,10 +42,9 @@ var geoJson = [
             coordinates: [-77, 37.9]
         },
         properties: {
-            title: 'Marker One',
+            title: 'Marker one',
             description: '<strong>Wow</strong>, this tooltip is breaking all the rules.',
-            // http://mapbox.com/developers/simplestyle/
-            'marker-color': '#CC0033'
+            'marker-color': '#548cba'
         }
     },
     {
@@ -47,9 +54,9 @@ var geoJson = [
             coordinates: [-78, 36.5]
         },
         properties: {
-            title: 'Marker Two',
+            title: 'Marker two',
             description: 'Another marker, including <a href="http://mapbox.com">a link</a>.',
-            'marker-color': '#0099ff'
+            'marker-color': '#548cba'
         }
     }
 ];
@@ -58,10 +65,8 @@ map.markerLayer.setGeoJSON(geoJson);
 
 // Listen for individual marker clicks
 map.markerLayer.on('click',function(e) {
-    e.layer.unbindPopup();
-
     var feature = e.layer.feature;
-    var info = '<h1>' + feature.properties.title + '</h1>' +
+    var info = '<h2>' + feature.properties.title + '</h2>' +
                '<p>' + feature.properties.description + '</p>';
 
     document.getElementById('info').innerHTML = info;
