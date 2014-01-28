@@ -1,13 +1,14 @@
 /* general typography */
 .leaflet-container {
   background:#fff;
-  font:15px/25px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font:12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   color:#404040;
   color:rgba(0,0,0,0.75);
   outline:0;
   overflow:hidden;
   -ms-touch-action:none;
   }
+
 .leaflet-container *,
 .leaflet-container *:after,
 .leaflet-container *:before {
@@ -15,6 +16,11 @@
      -moz-box-sizing:border-box;
           box-sizing:border-box;
   }
+
+.leaflet-container .marker-description {
+  max-height: 300px;
+  overflow: auto;
+}
 
 .leaflet-container h1,
 .leaflet-container h2,
@@ -24,9 +30,14 @@
 .leaflet-container h6,
 .leaflet-container p {
   font-size:15px;
-  line-height:25px;
+  line-height:20px;
   margin:0 0 10px;
   }
+
+.leaflet-container img {
+  margin-bottom: 10px;
+  }
+
 .mapbox-small,
 .leaflet-control-attribution,
 .leaflet-control-scale,
@@ -746,9 +757,9 @@
 /* Browser Fixes
 ------------------------------------------------------- */
 /* Map is broken in FF if you have max-width: 100% on tiles */
-.leaflet-container img { max-width:none!important; }
+.leaflet-container img.leaflet-tile { max-width:none; }
 /* Stupid Android 2 doesn't understand "max-width: none" properly */
-.leaflet-container img.leaflet-image-layer { max-width:15000px!important; }
+.leaflet-container img.leaflet-image-layer { max-width:15000px; }
 /* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
 .leaflet-overlay-pane svg { -moz-user-select:none; }
 /* Older IEs don't support the translateY property for display animation */
