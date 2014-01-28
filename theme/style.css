@@ -757,9 +757,9 @@
 /* Browser Fixes
 ------------------------------------------------------- */
 /* Map is broken in FF if you have max-width: 100% on tiles */
-.leaflet-container img.leaflet-tile { max-width:none; }
+.leaflet-container img.leaflet-tile { max-width:none !important; }
 /* Stupid Android 2 doesn't understand "max-width: none" properly */
-.leaflet-container img.leaflet-image-layer { max-width:15000px; }
+.leaflet-container img.leaflet-image-layer { max-width:15000px !important; }
 /* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
 .leaflet-overlay-pane svg { -moz-user-select:none; }
 /* Older IEs don't support the translateY property for display animation */
