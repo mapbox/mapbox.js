@@ -17,11 +17,6 @@
           box-sizing:border-box;
   }
 
-.leaflet-container .marker-description {
-  max-height: 300px;
-  overflow: auto;
-}
-
 .leaflet-container h1,
 .leaflet-container h2,
 .leaflet-container h3,
