@@ -14,7 +14,8 @@
     "mustache": "0.7.3",
     "corslite": "0.0.5",
     "json3": "git://github.com/bestiejs/json3.git#v3.2.6",
-    "sanitize-caja": "0.0.0"
+    "sanitize-caja": "0.0.0",
+    "leaflet-hash": "~0.2.1"
   },
   "scripts": {
     "test": "jshint src/*.js && mocha-phantomjs test/index.html"

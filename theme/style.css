@@ -177,9 +177,9 @@
   cursor:-webkit-grab;
   cursor:   -moz-grab;
   }
-.leaflet-container .map-clickable,
-.leaflet-container .leaflet-clickable {
-  cursor: pointer;
+.leaflet-container.map-clickable,
+.leaflet-container.leaflet-clickable {
+  cursor:pointer;
   }
 .leaflet-popup-pane,
 .leaflet-control {
