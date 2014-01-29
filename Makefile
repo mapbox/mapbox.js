@@ -1,4 +1,5 @@
 UGLIFY = node_modules/.bin/uglifyjs
+CLEANCSS = node_modules/.bin/cleancss
 BROWSERIFY = node_modules/.bin/browserify
 
 # the default rule when someone runs simply `make`
@@ -19,11 +20,14 @@ mapbox%js:
 dist:
 	mkdir -p dist
 
-dist/mapbox.css: theme/style.css
-	cat theme/style.css > dist/mapbox.css
+dist/mapbox.css: dist/mapbox.uncompressed.css
+	$(CLEANCSS) dist/mapbox.uncompressed.css -o dist/mapbox.css
+
+dist/mapbox.uncompressed.css: theme/style.css
+	cat theme/style.css > dist/mapbox.uncompressed.css
 
 dist/mapbox.standalone.css: theme/style.css
-	cat theme/style.css > dist/mapbox.standalone.css
+	cat theme/style.css | $(CLEANCSS) > dist/mapbox.standalone.css
 
 theme/images: theme/images/icons.svg
 	./theme/images/render.sh
