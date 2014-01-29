@@ -173,17 +173,17 @@
 .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; }
 
 /* cursors */
-.map-clickable,
-.leaflet-clickable {
+.leaflet-container {
+  cursor:-webkit-grab;
+  cursor:   -moz-grab;
+  }
+.leaflet-container .map-clickable,
+.leaflet-container .leaflet-clickable {
   cursor: pointer;
   }
 .leaflet-popup-pane,
 .leaflet-control {
   cursor:auto;
-  }
-.leaflet-container {
-  cursor:-webkit-grab;
-  cursor:   -moz-grab;
   }
 .leaflet-dragging,
 .leaflet-dragging .map-clickable,
