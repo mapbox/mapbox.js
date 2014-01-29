@@ -1,5 +1,5 @@
 # blacklist
 branches:
   except:
-    - gh-pages
+    - mb-pages
     - staging

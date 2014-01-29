@@ -16,7 +16,7 @@
 
 To create a new example, git clone this branch:
 
-  git clone -b gh-pages git@github.com:mapbox/mapbox.js.git mapbox.js-site
+  git clone -b mb-pages git@github.com:mapbox/mapbox.js.git mapbox.js-site
   cd mapbox.js-site
 
 You will need [jekyll](http://jekyllrb.com/) installed.
@@ -27,7 +27,7 @@ Run the site:
 jekyll serve -w -p 4000
 ```
 
-Edit the site. Existing examples [are located here](https://github.com/mapbox/mapbox.js/tree/gh-pages/_posts/examples/v1.0.0) -
+Edit the site. Existing examples [are located here](https://github.com/mapbox/mapbox.js/tree/mb-pages/_posts/examples/v1.0.0) -
 copy one to a new file with the same naming convention to start a new example. Test your new example
 by going to http://localhost:4000/mapbox.js/ and finding and using it.
 
@@ -36,7 +36,7 @@ When you're done,
 ```
 git add _posts/...newexample
 git commit -m "Added a new example, showing off XYZ"
-git push origin gh-pages
+git push origin mb-pages
 ```
 
 ### Updating the site to the latest deployed version of mapbox.js:
