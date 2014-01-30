@@ -333,7 +333,7 @@ A map control that shows a toggleable info container. This is triggered by defau
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`editLink`: A boolean that adds an `Improve this map` link to your map allowing users to learn more and make edits to OpenStreetMap from the current map coordinates being viewed.</li><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li>`open`: A boolean value that controls whether attribution should be open by default.</li></ul> |
+| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`editLink`: A boolean that adds an `Improve this map` link to your map allowing users to learn more and make edits to OpenStreetMap from the current map coordinates being viewed.</li><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li>`open`: A boolean that controls whether attribution should be open by default.</li></ul> |
 
 _Example_:
 
