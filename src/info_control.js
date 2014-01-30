@@ -4,7 +4,8 @@ var InfoControl = L.Control.extend({
     options: {
         position: 'bottomright',
         sanitizer: require('sanitize-caja'),
-        editLink: true
+        editLink: true,
+        open: false
     },
 
     initialize: function(options) {
@@ -21,10 +22,16 @@ var InfoControl = L.Control.extend({
             this._container.className += ' mapbox-control-info-right';
         }
 
+        if (this.options.open) this._showInfo();
+
         var link = L.DomUtil.create('a', 'mapbox-info-toggle mapbox-icon mapbox-icon-info', this._container);
         link.href = '#';
 
-        L.DomEvent.addListener(link, 'click', this._showInfo, this);
+        L.DomEvent.addListener(link, 'click', function(e) {
+            L.DomEvent.preventDefault(e);
+            this._showInfo();
+        }, this);
+
         L.DomEvent.disableClickPropagation(this._container);
 
         for (var i in map._layers) {
@@ -62,9 +69,7 @@ var InfoControl = L.Control.extend({
     },
 
     _showInfo: function(e) {
-        L.DomEvent.preventDefault(e);
         if (this._active === true) return this._hidecontent();
-
         L.DomUtil.addClass(this._container, 'active');
         this._active = true;
         this._update();
