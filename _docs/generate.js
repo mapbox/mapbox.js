@@ -76,7 +76,12 @@ function transformHeaders(text) {
 }
 
 function escapeFn(text) {
-    return chopFn(text).toLowerCase().replace(/[^\w]+/g, '-');
+    // Special case for https://github.com/mapbox/mapbox.js/issues/661
+    if (text === 'L.Map') {
+        return "l-map-class";
+    } else {
+        return chopFn(text).toLowerCase().replace(/[^\w]+/g, '-');
+    }
 }
 
 function chopFn(text) {
