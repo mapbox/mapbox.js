@@ -582,6 +582,7 @@
 
 .map-info-container {
   background:#fff;
+  background-color:rgba(255,255,255,0.9);
   padding:3px 5px 3px 27px;
   display:none;
   position:relative;
@@ -594,12 +595,11 @@
 .mapbox-control-info-right .map-info-container {
   left: auto;
   right: 0;
-  padding: 3px 27px 3px 5px;
+  padding:4px 30px 5px 7px;
   border-radius:3px 13px 13px 3px;
   }
 .leaflet-container .mapbox-improve-link {
   font-size:15px;
-  line-height:25px;
   font-weight:bold;
   display:block;
   text-align:right;
