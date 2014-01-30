@@ -1,5 +1,7 @@
 describe('L.mapbox.infoControl', function() {
     'use strict';
+    var improvelink = '<a class="mapbox-improve-link" href="#" title="Improve this map">Improve this map</a>';
+
     it('constructor', function() {
         var info = L.mapbox.infoControl();
         expect(info).to.be.ok();
@@ -17,7 +19,7 @@ describe('L.mapbox.infoControl', function() {
             var info = L.mapbox.infoControl();
             info.addTo(map);
             expect(info.addInfo('foo')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('foo');
+            expect(info._content.innerHTML).to.eql('foo' + improvelink);
         });
 
         it('handles multiple infos', function() {
@@ -27,7 +29,7 @@ describe('L.mapbox.infoControl', function() {
             expect(info.addTo(map)).to.eql(info);
             expect(info.addInfo('foo')).to.eql(info);
             expect(info.addInfo('bar')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('foo | bar');
+            expect(info._content.innerHTML).to.eql('foo | bar' + improvelink);
         });
     });
 
@@ -46,19 +48,10 @@ describe('L.mapbox.infoControl', function() {
             info.addTo(map);
             expect(info.addInfo('foo')).to.eql(info);
             expect(info.addInfo('bar')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('foo | bar');
+            expect(info._content.innerHTML).to.eql('foo | bar' + improvelink);
             expect(info.removeInfo('bar')).to.eql(info);
-            expect(info._content.innerHTML).to.eql('foo');
+            expect(info._content.innerHTML).to.eql('foo' + improvelink);
         });
-    });
-
-    it('adds an improve this map link', function() {
-        var map = L.map(document.createElement('div'));
-        var info = L.mapbox.infoControl({
-            editLink: true
-        }).addTo(map);
-
-        expect(info._content.innerText || info._content.textContent).to.eql('Improve this map');
     });
 
     it('sanitizes its content', function() {
@@ -66,8 +59,7 @@ describe('L.mapbox.infoControl', function() {
         var info = L.mapbox.infoControl().addTo(map);
 
         info.addInfo('<script></script>');
-
-        expect(info._content.innerHTML).to.eql('');
+        expect(info._content.innerHTML).to.eql(improvelink);
     });
 
     it('supports a custom sanitizer', function() {
@@ -78,6 +70,6 @@ describe('L.mapbox.infoControl', function() {
 
         info.addInfo('<script></script>');
 
-        expect(info._content.innerHTML).to.eql('<script></script>');
+        expect(info._content.innerHTML).to.eql('<script></script>' + improvelink);
     });
 });
