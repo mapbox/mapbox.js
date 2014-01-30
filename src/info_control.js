@@ -114,8 +114,8 @@ var InfoControl = L.Control.extend({
     _editlink: function() {
         var center = this._map.getCenter();
         var z = this._map.getZoom();
-        window.open('http://www.mapbox.com/map-feedback?' + 'zoom=' + z +
-        '&lat=' + center.lat + '&lon=' + center.lng);
+        var url = 'https://www.mapbox.com/map-feedback/?' + 'zoom=' + z + '&lat=' + center.lat + '&lon=' + center.lng;
+        window.open(url);
     },
 
     _onLayerAdd: function(e) {
