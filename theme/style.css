@@ -597,6 +597,13 @@
   padding: 3px 27px 3px 5px;
   border-radius:3px 13px 13px 3px;
   }
+.leaflet-container .mapbox-improve-link {
+  font-size:15px;
+  line-height:25px;
+  font-weight:bold;
+  display:block;
+  text-align:right;
+  }
 
 /* Geocoder
 ------------------------------------------------------- */

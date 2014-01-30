@@ -98,12 +98,12 @@ var InfoControl = L.Control.extend({
         this._content.innerHTML += info.join(' | ');
 
         if (this.options.editLink && !L.Browser.mobile) {
-            this._content.innerHTML += (info.length) ? ' | ' : '';
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
+            edit.className = 'mapbox-improve-link';
             edit.innerHTML = 'Improve this map';
-            edit.title = 'Edit in OpenStreetMap';
-            L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
+            edit.title = 'Improve this map';
+            L.DomEvent.on(edit, 'click', L.bind(this._editlink, this), this);
         }
 
         // If there are no results in _info then hide this.
@@ -111,10 +111,10 @@ var InfoControl = L.Control.extend({
         return this;
     },
 
-    _osmlink: function() {
+    _editlink: function() {
         var center = this._map.getCenter();
         var z = this._map.getZoom();
-        window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
+        window.open('http://www.mapbox.com/map-feedback?' + 'zoom=' + z +
         '&lat=' + center.lat + '&lon=' + center.lng);
     },
 
