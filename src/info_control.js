@@ -112,9 +112,11 @@ var InfoControl = L.Control.extend({
     },
 
     _editlink: function() {
+        var tilejson = this._tilejson || this._map._tilejson || {};
+        var id = tilejson.id || '';
         var center = this._map.getCenter();
         var z = this._map.getZoom();
-        var url = 'https://www.mapbox.com/map-feedback/?' + 'zoom=' + z + '&lat=' + center.lat + '&lon=' + center.lng;
+        var url = 'https://www.mapbox.com/map-feedback/?id=' + id + '&zoom=' + z + '&lat=' + center.lat + '&lon=' + center.lng;
         window.open(url);
     },
 
