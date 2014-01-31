@@ -32,6 +32,21 @@ describe("util", function() {
         });
     });
 
+    describe('#strict_oneof', function() {
+        it('does not throw an error when in list', function() {
+            expect(function() {
+                private.util.strict_oneof('a', ['a']);
+            }).to.not.throwException();
+        });
+        it('throws an error when not in list', function() {
+            expect(function() {
+                private.util.strict_oneof('c', ['a']);
+            }).to.throwException(function(e) {
+                expect(e.message).to.eql('Invalid argument: c given, valid values are a');
+            });
+        });
+    });
+
     describe('#strip_tags', function() {
         it('strips a basic tag', function() {
             expect(private.util.strip_tags('<div>foo</div>')).to.eql('foo');
