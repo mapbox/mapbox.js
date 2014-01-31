@@ -1,0 +1,20 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Leaflet Hash
+description: Using the Leaflet Hash plugin
+tags:
+  - plugins
+---
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.0.1/leaflet-heat.js'></script>
+<div id='map'></div>
+
+<!-- Example data. -->
+<script src="{{site.baseurl}}/assets/realworld.388.js"></script>
+
+<script type="text/javascript">
+    var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([-37.821, 175.219], 16);
+
+    L.heatLayer(addressPoints).addTo(map);
+</script>
