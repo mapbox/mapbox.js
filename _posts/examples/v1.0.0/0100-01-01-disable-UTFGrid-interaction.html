@@ -1,0 +1,22 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Disable UTFGrid Interaction
+description: By adding the map using gridLayer you can control the default interaction handling of the UTFGrid.
+tags:
+  - layers
+---
+
+<div id='map'></div>
+<script>
+  var map = L.mapbox.map('map').setView([35, -82], 3);
+  var gridLayer = L.mapbox.gridLayer('examples.map-8ced9urs');
+  map.addLayer(L.mapbox.tileLayer('examples.map-8ced9urs'));
+  map.addLayer(gridLayer);
+
+  /* By not adding the gridControl below you can disable the
+     interaction that comes along with it. */
+
+  // map.addControl(L.mapbox.gridControl(gridLayer));
+</script>
