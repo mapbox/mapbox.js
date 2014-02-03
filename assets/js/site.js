@@ -228,6 +228,15 @@ function load() {
 
     var examples = new Docs();
     examples.bindSearch($('#filter-examples'), $('.js-nav-examples'));
+
+    $(window).scroll(_.throttle(function() {
+        var top = $(window).scrollTop();
+        if (top > 80) {
+            $('.docs-sidebar').addClass('fixed');
+        } else {
+            $('.docs-sidebar').removeClass('fixed');
+        }
+    }, 250));
 }
 
 $(load);

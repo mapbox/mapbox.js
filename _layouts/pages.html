@@ -69,6 +69,104 @@ examples:
 </head>
 <body>
 
+<script data-template='doc_nav' type='text/html'>
+<%
+var active = {};
+var section = window.location.pathname.split('/')[1];
+if (section) active[section] = 'active';
+%>
+<% if (!user.id) { %>
+  <a class='mb-logo' href='/'></a>
+
+  <div class='strong small primary hide-mobile'>
+    <a href='/help/' class='animate inline pad1 round quiet truncate'>Help</a><!--
+    --><a href='/developers/' class='animate inline pad1 round quiet truncate active'>Developers</a>
+    <div class='authmenu contain fr center keyline-all'><!--
+      --><a href='#signin' class='action signin inline animate keyline-right pad1 quiet truncate'>Sign in</a><!--
+      --><a href='#signup' class='action signup inline animate pad1 quiet truncate'>Sign up</a>
+    </div>
+  </div>
+
+  <div class='show-mobile contain drop'>
+    <a href='#' class='icon menu round quiet droplink keyline-all'></a>
+    <div class='dropdown strong fill-white keyline-all round animate'>
+      <div>
+        <a href='/help/'>Help</a>
+        <a href='/developers/'>Developers</a>
+      </div>
+      <div>
+        <a href='#signin' class='signin'>Sign in</a>
+        <a href='#signup' class='signup'>Sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <% } else { %>
+  <div id='authed-logo'>
+    <a class='mb-logo' href='/projects/'> </a>
+    <!-- Back button -->
+    <% if (obj._type === 'tileset' || App.param('from') === 'data') { %>
+      <a href='/data/' class='truncate return-to-previous icon return quiet animate small hide-mobile'>Return to data</a>
+    <% } else if (App.param('from') === 'projects') { %>
+      <a href='/projects/' class='truncate return-to-previous icon return quiet animate small hide-mobile'>Return to projects</a>
+    <% } else if (App.param('from') === 'editor') { %>
+      <a href='/editor/?id=<%=App.param('id')%>' class='truncate return-to-previous icon return quiet animate small hide-mobile'>Return to editor</a>
+    <% } %>
+  </div>
+
+  <div class='primary small strong'>
+    <a href='/help/' class='hide-mobile quiet authed animate round pad1 truncate inline'>Help</a>
+    <a href='/developers/' class='hide-mobile quiet authed animate round pad1 truncate inline active'>Developers</a>
+
+    <a href='#dropdown' class='show-mobile keyline-all authmenu droplink quiet icon menu round animate fr'></a>
+    <a href='#dropdown' class='hide-mobile pad1 block authmenu droplink quiet round animate fr'>
+      <img class='avatar' src='<%= user.avatar %>' />
+      <%= _(user.id || user.name).escape() %>
+    </a>
+
+    <div class='dropdown fill-white keyline-all round animate'>
+      <div class='plan contain'>
+        <a href='/plans/' class='plan-icon big <%= user.plan.id.replace('2', '').replace('-annual', '') %>'>
+        </a>
+        <a href='/plans/' class='truncate'>
+          <%= _(user.plan?user.plan.name:'').escape() %><br />
+          <span class='quiet'>(<%= numeral(user.plan.views).format('0a') %> views)</span>
+        </a>
+      </div>
+      <div>
+        <a href='/account/'>Account</a>
+        <% if (App.user.group === 'admin') { %><a href='/admin/'>Admin</a><% } %>
+        <a href='#signout' id='signout'>Sign out</a>
+      </div>
+      <div class='show-mobile'>
+        <a href='/help/'>Help</a>
+        <a href='/developers/'>Developers</a>
+      </div>
+    </div>
+
+  </div>
+<% } %>
+</script>
+
+<script>
+var templates = {
+  doc_nav: _($('script[data-template]').html()).template()
+}
+
+App.docNav = function() {
+  var user = App.user || {};
+  return templates.doc_nav({user: user});
+};
+</script>
+
+<div class='masthead fill-white keyline-bottom col12 animate clearfix {% if page.app %}hide-mobile{% else if page.share %}row2{% endif %}'>
+  <div class='pad2x clearfix'>
+    <nav id='nav' class='{% if page.share %}col4 margin4{% else %}col12 text-right pad2y{% endif %} contain clearfix noprint '>
+      <script>document.write(App.docNav());</script>
+    </nav>
+  </div>
+</div>
+
 {% capture api %}
 {% if page.v0 %}v0.6.7{% else %}{{site.mapboxjs}}{% endif %}
 {% endcapture %}
@@ -121,25 +219,23 @@ examples:
     </div>
   </div>
 </div>
+
 <!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 fixed-sidebar fill-light clip round'>
-  <div class='fill-denim keyline-bottom pad1 contain'>
-    <a href='{{site.url}}' class='mb-logo white small'>Mapbox</a>
-    <div class='pin-right pad2x'>
-      <a href='{{site.baseurl}}/' class='site-title'>Mapbox.js
-          {% if page.v0 %}
-           <span class='fill-yellow small'>{{site.oldversion}}</span>
-          {% elsif page.version %}
-          {% if page.category == 'examples' %}
-            {{site.mapboxjs}}
-          {% else %}
-            {{page.version}}
-          {% endif %}
-          {% else %}
-            {{site.mapboxjs}}
-          {% endif %}
-      </a>
-    </div>
+<div class='hide-mobile col3 docs-sidebar fill-light clip'>
+  <div class='fill-denim keyline-bottom pad1y contain'>
+    <a href='{{site.baseurl}}/' class='pad2x strong small site-title'>Mapbox.js
+      {% if page.v0 %}
+       <span class='fill-yellow small'>{{site.oldversion}}</span>
+      {% elsif page.version %}
+      {% if page.category == 'examples' %}
+        {{site.mapboxjs}}
+      {% else %}
+        {{page.version}}
+      {% endif %}
+      {% else %}
+        {{site.mapboxjs}}
+      {% endif %}
+    </a>
   </div>
 
   <div class='row1 contain col12'>
@@ -209,6 +305,11 @@ examples:
 
 <!--Content area-->
 <div id='content-section' class='col9 pad4x margin3 content enclosure'>{{content}}</div>
+
+<div id='modal'>
+  <div class='modal-mask fill-darken2 modal animate'></div>
+  <div id='modal-content' class='contain modal modal-content animate'></div>
+</div>
 
 </body>
 </html>

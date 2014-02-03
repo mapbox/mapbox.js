@@ -9,12 +9,8 @@
 #filter-api { padding-right:88px; }
 .view-all { top:1px;right:1px;bottom:1px; }
 
-.site-title {
-  position:relative;
-  top:15px;
-  }
-  .site-title,
-  .site-title:hover { color:#fff; }
+.site-title,
+.site-title:hover { color:#fff; }
 
 .fill-white pre,
 .fill-light pre,
@@ -25,12 +21,13 @@
 
 .fill-green .home:hover { background-color:rgba(0,0,0,0.10); }
 
-.fixed-sidebar {
-  position:fixed;
+.docs-sidebar {
+  position:absolute;
   border-color:rgba(0,0,0,0.25);
-  top:10px;left:10px;bottom:10px;
+  top:80px;left:0;bottom:0;
   }
-  .fixed-sidebar .sliding {
+  .docs-sidebar.fixed { position:fixed; top:0; }
+  .docs-sidebar .sliding {
     height:100%;
     }
 
