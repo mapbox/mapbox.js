@@ -33,14 +33,14 @@ var API_ENDPOINT = 'https://api.foursquare.com/v2/venues/search' +
   '&client_secret=CLIENT_SECRET' +
   '&v=20130815' +
   '&ll=LATLON' +
-  '&query=coffee';
+  '&query=coffee' +
+  '&callback=?';
 
 // Keep our place markers organized in a nice group.
 var foursquarePlaces = L.layerGroup().addTo(map);
 
 // Use jQuery to make an AJAX request to Foursquare to load markers
-// data. This uses CORS rather than JSONP, so legacy browser support -
-// specifically Internet Explorer under version 10 - is not guaranteed.
+// data.
 $.getJSON(API_ENDPOINT
     .replace('CLIENT_ID', CLIENT_ID)
     .replace('CLIENT_SECRET', CLIENT_SECRET)
