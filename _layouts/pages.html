@@ -148,17 +148,8 @@ examples:
     </nav>
   </div>
 
-  {% capture pane %}
-    {% if page.url contains "example" %}
-      active2
-    {% elsif page.url contains "plugins" %}
-      active3
-    {% else %}
-      active1
-    {% endif %}
-  {% endcapture %}
-
-  <div class='sliding h col12 clip {{pane}}'>
+  <div class='col12 clip full-y'>
+    {% if page.url contains 'api' %}
     <div id='api-menu' class='col12 animate full-y'>
       <div class='pad2 row2'>
         <fieldset class='with-icon'>
@@ -169,7 +160,9 @@ examples:
       </div>
       {% include api.nav.html %}
     </div>
+    {% endif %}
 
+    {% if page.url contains 'example' %}
     <div id='examples-menu' class='col12 animate full-y'>
       <div class='pad2 row2'>
         <fieldset class='with-icon'>
@@ -191,7 +184,9 @@ examples:
         {% endfor %}
       </nav>
     </div>
+    {% endif %}
 
+    {% if page.url contains 'plugins' %}
     <div id='plugins-menu' class='col12 animate full-y'>
       <div class='pad2 keyline-bottom prose'>
         <strong>Mapbox.js Plugins</strong>
@@ -206,6 +201,7 @@ examples:
         {% endfor %}
       </nav>
     </div>
+    {% endif %}
   </div>
 </div>
 
