@@ -24,7 +24,7 @@
 .docs-sidebar {
   position:absolute;
   border-color:rgba(0,0,0,0.25);
-  top:80px;left:0;bottom:0;
+  top:100px;left:10px;bottom:10px;
   }
   .docs-sidebar.fixed { position:fixed; top:0; }
   .docs-sidebar .sliding {

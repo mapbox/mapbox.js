@@ -159,7 +159,7 @@ App.docNav = function() {
 };
 </script>
 
-<div class='masthead fill-white keyline-bottom col12 animate clearfix {% if page.app %}hide-mobile{% else if page.share %}row2{% endif %}'>
+<div class='hide-mobile masthead keyline-bottom col12 animate clearfix {% if page.app %}hide-mobile{% else if page.share %}row2{% endif %}'>
   <div class='pad2x clearfix'>
     <nav id='nav' class='{% if page.share %}col4 margin4{% else %}col12 text-right pad2y{% endif %} contain clearfix noprint '>
       <script>document.write(App.docNav());</script>
@@ -222,22 +222,6 @@ App.docNav = function() {
 
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 docs-sidebar fill-light clip'>
-  <div class='fill-denim keyline-bottom pad1y contain'>
-    <a href='{{site.baseurl}}/' class='pad2x strong small site-title'>Mapbox.js
-      {% if page.v0 %}
-       <span class='fill-yellow small'>{{site.oldversion}}</span>
-      {% elsif page.version %}
-      {% if page.category == 'examples' %}
-        {{site.mapboxjs}}
-      {% else %}
-        {{page.version}}
-      {% endif %}
-      {% else %}
-        {{site.mapboxjs}}
-      {% endif %}
-    </a>
-  </div>
-
   <div class='row1 contain col12'>
     <nav class='site-nav fill-darken0 fl small strong col12 clearfix center'>
       <a href='{{site.baseurl}}/api' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
