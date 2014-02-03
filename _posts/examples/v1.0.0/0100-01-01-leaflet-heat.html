@@ -16,5 +16,9 @@ tags:
 <script>
     var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([-37.821, 175.219], 16);
 
-    L.heatLayer(addressPoints, {maxZoom: 18}).addTo(map);
+    var heat = L.heatLayer(addressPoints, {maxZoom: 18}).addTo(map);
+
+    map.on('mousemove', function (e) {
+        heat.addLatLng(e.latlng);
+    });
 </script>
