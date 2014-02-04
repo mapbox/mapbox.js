@@ -15,8 +15,17 @@ tags:
   map.addLayer(L.mapbox.tileLayer('examples.map-8ced9urs'));
   map.addLayer(gridLayer);
 
-  /* By not adding the gridControl below you can disable the
-     interaction that comes along with it. */
+  /*
+     By not adding the gridControl line below you can control the
+     default interaction in a different way.
+  */
 
   // map.addControl(L.mapbox.gridControl(gridLayer));
+
+  /*
+    If you just want to display the map and not worry about managing the
+    interaction in a different way, you could write it like this:
+  */
+
+  // var map = L.mapbox.map('map', 'examples.map-8ced9urs', {gridControl: false});
 </script>
