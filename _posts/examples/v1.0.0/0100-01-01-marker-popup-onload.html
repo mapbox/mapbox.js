@@ -12,6 +12,7 @@ tags: [ui, markers]
 var map = L.mapbox.map('map', 'examples.map-h67hf2ic');
 map.setView([40.7271, -73.9840], 14);
 
+// Build a marker from a simple .geojson object:
 var marker = L.mapbox.featureLayer({
     type: 'Feature',
     geometry: {
@@ -24,6 +25,8 @@ var marker = L.mapbox.featureLayer({
     }
 }).addTo(map);
 
+// Iterate over the featureLayer we've called "marker"
+// and open its popup instead of clicking to trigger it.
 marker.eachLayer(function(m) {
   m.openPopup();
 });

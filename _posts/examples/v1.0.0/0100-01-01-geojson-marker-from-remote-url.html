@@ -14,7 +14,12 @@ tags:
 <script>
 var url = 'https://api.github.com/repos/mapbox/mapbox.js/contents/test/manual/example.geojson';
 
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+  .setView([0.3941, -78.2227], 7);
+
 function load() {
+  // Fetch just the contents of the .geojson file from GitHub
+  // by passing `application/vnd.github.v3.raw` into the Accept header
   $.ajax({
     headers: {
       'Accept': 'application/vnd.github.v3.raw'
@@ -22,9 +27,7 @@ function load() {
     dataType: 'json',
     url: url,
     success: function(geojson) {
-      var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
-        .setView([0.3941, -78.2227], 7);
-
+        // On success add add the remote data to our map.
         var remoteLayer = L.mapbox.featureLayer().addTo(map);
         remoteLayer.setGeoJSON(geojson);
     }

@@ -10,6 +10,9 @@ tags:
 
 <div id='map'></div>
 <script>
+
+// Downsample tiles for faster load times on slow internet connections by adjusting the format property in tileLayer.
+// See https://www.mapbox.com/developers/api/#Image.quality.&.scale for all options.
 L.mapbox.map('map', 'examples.h186knp8', {
     tileLayer: {format: 'jpg70'}
 }).setView([37.7762, -122.4299], 13);
