@@ -1,0 +1,39 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: GeoJSON Marker from remote URL
+description: Load a marker from a remote location like <a href='https://github.com/mapbox/mapbox.js/blob/master/test/manual/example.geojson'>GitHub</a>.
+tags:
+  - markers
+---
+
+<div id='map'></div>
+<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+
+<script>
+var url = 'https://api.github.com/repos/mapbox/mapbox.js/contents/test/manual/example.geojson';
+
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+  .setView([0.3941, -78.2227], 7);
+
+function load() {
+  // Fetch just the contents of a .geojson file from GitHub by passing
+  // `application/vnd.github.v3.raw` to the Accept header
+  // As with any other AJAX request, this technique is subject to the Same Origin Policy:
+  // http://en.wikipedia.org/wiki/Same_origin_policy the server delivering the request should support CORS.
+  $.ajax({
+    headers: {
+      'Accept': 'application/vnd.github.v3.raw'
+    },
+    dataType: 'json',
+    url: url,
+    success: function(geojson) {
+        // On success add fetched data to the map.
+        L.mapbox.featureLayer(geojson).addTo(map);
+    }
+  });
+}
+
+$(load);
+</script>
