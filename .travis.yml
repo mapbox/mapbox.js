@@ -1,5 +1,6 @@
-# blacklist
+# Don't run CI on the mb-pages branch or any branch descended from it.
+# This doesn't disable CI for branches descended from master because
+# they will be built using their own .travis.yml, not this one.
 branches:
-  except:
-    - mb-pages
-    - staging
+  only:
+    - master
