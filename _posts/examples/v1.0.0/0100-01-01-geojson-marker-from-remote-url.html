@@ -20,6 +20,8 @@ var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
 function load() {
   // Fetch just the contents of a .geojson file from GitHub by passing
   // `application/vnd.github.v3.raw` to the Accept header
+  // As with any other AJAX request, this technique is subject to the Same Origin Policy:
+  // http://en.wikipedia.org/wiki/Same_origin_policy the server delivering the request should support CORS.
   $.ajax({
     headers: {
       'Accept': 'application/vnd.github.v3.raw'
@@ -28,8 +30,7 @@ function load() {
     url: url,
     success: function(geojson) {
         // On success add fetched data to the map.
-        var remoteLayer = L.mapbox.featureLayer().addTo(map);
-        remoteLayer.setGeoJSON(geojson);
+        L.mapbox.featureLayer(geojson).addTo(map);
     }
   });
 }
