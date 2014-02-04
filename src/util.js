@@ -21,7 +21,7 @@ module.exports = {
         }
     },
     strict_oneof: function(_, values) {
-        if (values.indexOf(_) == -1) {
+        if (!contains(_, values)) {
             throw new Error('Invalid argument: ' + _ + ' given, valid values are ' +
                 values.join(', '));
         }
@@ -34,3 +34,11 @@ module.exports = {
         return new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]);
     }
 };
+
+function contains(item, list) {
+    if (!list || !list.length) return false;
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] == item) return true;
+    }
+    return false;
+}
