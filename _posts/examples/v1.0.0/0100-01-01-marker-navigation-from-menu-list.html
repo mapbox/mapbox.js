@@ -1,0 +1,111 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Marker navigation from a marker menu
+description: Zoom to a marker and open its popup when its marker menu in a list is clicked.
+tags:
+  - ui
+---
+
+<style>
+  .info {
+    background:#fff;
+    position:absolute;
+    width:260px;
+    top:10px;
+    right:10px;
+    border-radius:2px;
+    }
+    .info .item {
+      display:block;
+      border-bottom:1px solid #eee;
+      padding:10px;
+      text-decoration:none;
+      }
+      .info .item small { color:#888; }
+      .info .item:hover,
+      .info .item.active { background:#f8f8f8; }
+      .info .item:last-child { border-bottom:none; }
+</style>
+
+<div id='map' class='map'></div>
+<div id='info' class='info'></div>
+
+<script>
+var info = document.getElementById('info');
+var map = L.mapbox.map('map', 'examples.h186knp8').setView([37.9, -77], 6);
+var geojson = [
+    {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-77, 37.9]
+        },
+        properties: {
+            title: 'Marker one',
+            description: 'This marker has a description',
+            'marker-id': 'marker-1',
+            'marker-color': '#f86767'
+        }
+    },
+    {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-78, 36.5]
+        },
+        properties: {
+            title: 'Marker two',
+            description: 'So does this one!',
+            'marker-id': 'marker-2',
+            'marker-color': '#f86767'
+        }
+    }
+];
+var markers = map.featureLayer.setGeoJSON(geojson);
+var markerGroup = [];
+
+markers.eachLayer(function(m) {
+  markerGroup.push(m);
+});
+
+for (var i = 0; i < geojson.length; i++) {
+  var props = geojson[i].properties;
+  var geo = geojson[i].geometry.coordinates;
+  var link = document.createElement('a');
+
+  link.className = 'item';
+  link.href = '#';
+  link.setAttribute('data-index', i);
+  link.setAttribute('data-lat', geo[0]);
+  link.setAttribute('data-lng', geo[1]);
+
+  link.innerHTML = props.title + '<br /><small>' + props.description + '</small>';
+
+  link.onclick = function() {
+    if (/active/.test(this.className)) {
+      this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
+    } else {
+      var siblings = info.getElementsByTagName('a');
+      for (var i = 0; i < siblings.length; i++) { 
+        siblings[i].className = siblings[i].className.replace(/active/, '').replace(/\s\s*$/, '');
+      };
+
+      this.className += ' active';
+      var index = this.getAttribute('data-index');
+      var lat = this.getAttribute('data-lat');
+      var lng = this.getAttribute('data-lng');
+
+      map.panTo([lng, lat]);
+      markerGroup[index].openPopup();
+    }
+
+    var markergroup = markers.getGeoJSON();
+    return false;
+  }
+
+  info.appendChild(link);
+}
+
+</script>
