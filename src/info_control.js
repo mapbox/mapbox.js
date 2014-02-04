@@ -4,7 +4,8 @@ var InfoControl = L.Control.extend({
     options: {
         position: 'bottomright',
         sanitizer: require('sanitize-caja'),
-        editLink: false
+        editLink: true,
+        open: false
     },
 
     initialize: function(options) {
@@ -21,10 +22,16 @@ var InfoControl = L.Control.extend({
             this._container.className += ' mapbox-control-info-right';
         }
 
+        if (this.options.open) this._showInfo();
+
         var link = L.DomUtil.create('a', 'mapbox-info-toggle mapbox-icon mapbox-icon-info', this._container);
         link.href = '#';
 
-        L.DomEvent.addListener(link, 'click', this._showInfo, this);
+        L.DomEvent.addListener(link, 'click', function(e) {
+            L.DomEvent.preventDefault(e);
+            this._showInfo();
+        }, this);
+
         L.DomEvent.disableClickPropagation(this._container);
 
         for (var i in map._layers) {
@@ -62,9 +69,7 @@ var InfoControl = L.Control.extend({
     },
 
     _showInfo: function(e) {
-        L.DomEvent.preventDefault(e);
         if (this._active === true) return this._hidecontent();
-
         L.DomUtil.addClass(this._container, 'active');
         this._active = true;
         this._update();
@@ -93,12 +98,12 @@ var InfoControl = L.Control.extend({
         this._content.innerHTML += info.join(' | ');
 
         if (this.options.editLink && !L.Browser.mobile) {
-            this._content.innerHTML += (info.length) ? ' | ' : '';
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
+            edit.className = 'mapbox-improve-link';
             edit.innerHTML = 'Improve this map';
-            edit.title = 'Edit in OpenStreetMap';
-            L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
+            edit.title = 'Improve this map';
+            L.DomEvent.on(edit, 'click', L.bind(this._editlink, this), this);
         }
 
         // If there are no results in _info then hide this.
@@ -106,11 +111,13 @@ var InfoControl = L.Control.extend({
         return this;
     },
 
-    _osmlink: function() {
+    _editlink: function() {
+        var tilejson = this._tilejson || this._map._tilejson || {};
+        var id = tilejson.id || '';
         var center = this._map.getCenter();
         var z = this._map.getZoom();
-        window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
-        '&lat=' + center.lat + '&lon=' + center.lng);
+        var url = 'https://www.mapbox.com/map-feedback/#' + id + '/' + center.lng + '/' + center.lat + '/' + z;
+        window.open(url);
     },
 
     _onLayerAdd: function(e) {

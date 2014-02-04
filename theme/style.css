@@ -38,7 +38,7 @@
   line-height:20px;
   }
 
-.leaflet-container a            {
+.leaflet-container a {
   color:#3887BE;
   font-weight:normal;
   text-decoration:none;
@@ -278,11 +278,17 @@
   margin:0;
   box-shadow:none;
   }
-.leaflet-control-attribution a:hover,
-.map-info-container a:hover {
-  color:inherit;
-  text-decoration:underline;
+
+.leaflet-control-attribution a,
+.map-info-container a {
+  color:#404040;
+  color:rgba(0,0,0,0.75);
   }
+  .leaflet-control-attribution a:hover,
+  .map-info-container a:hover {
+    color:inherit;
+    text-decoration:underline;
+    }
 
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
@@ -582,6 +588,7 @@
 
 .map-info-container {
   background:#fff;
+  background-color:rgba(255,255,255,0.9);
   padding:3px 5px 3px 27px;
   display:none;
   position:relative;
@@ -594,8 +601,14 @@
 .mapbox-control-info-right .map-info-container {
   left: auto;
   right: 0;
-  padding: 3px 27px 3px 5px;
+  padding:4px 30px 5px 7px;
   border-radius:3px 13px 13px 3px;
+  }
+.leaflet-container .mapbox-improve-link {
+  font-size:15px;
+  font-weight:bold;
+  display:block;
+  text-align:right;
   }
 
 /* Geocoder
@@ -699,6 +712,13 @@
   .leaflet-container.dark .leaflet-bar a:hover {
     background-color:#505050;
     }
+
+.dark .leaflet-control-attribution a,
+.dark .map-info-container a,
+.dark .leaflet-control-attribution a:hover,
+.dark .map-info-container a:hover {
+  color:#fff;
+  }
 
 .leaflet-container.dark .mapbox-info-toggle,
 .leaflet-container.dark .map-info-container,
