@@ -18,8 +18,8 @@ var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
   .setView([0.3941, -78.2227], 7);
 
 function load() {
-  // Fetch just the contents of the .geojson file from GitHub
-  // by passing `application/vnd.github.v3.raw` into the Accept header
+  // Fetch just the contents of a .geojson file from GitHub by passing
+  // `application/vnd.github.v3.raw` to the Accept header
   $.ajax({
     headers: {
       'Accept': 'application/vnd.github.v3.raw'
@@ -27,7 +27,7 @@ function load() {
     dataType: 'json',
     url: url,
     success: function(geojson) {
-        // On success add add the remote data to our map.
+        // On success add fetched data to the map.
         var remoteLayer = L.mapbox.featureLayer().addTo(map);
         remoteLayer.setGeoJSON(geojson);
     }
