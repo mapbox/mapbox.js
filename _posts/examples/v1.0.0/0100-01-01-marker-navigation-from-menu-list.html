@@ -33,9 +33,8 @@ tags:
 <div id='info' class='info'></div>
 
 <script>
-var info = document.getElementById('info');
 var map = L.mapbox.map('map', 'examples.h186knp8').setView([37.9, -77], 6);
-var geojson = [
+map.featureLayer.setGeoJSON([
     {
         type: 'Feature',
         geometry: {
@@ -62,50 +61,30 @@ var geojson = [
             'marker-color': '#f86767'
         }
     }
-];
-var markers = map.featureLayer.setGeoJSON(geojson);
-var markerGroup = [];
+]);
 
-markers.eachLayer(function(m) {
-  markerGroup.push(m);
-});
+var info = document.getElementById('info');
 
-for (var i = 0; i < geojson.length; i++) {
-  var props = geojson[i].properties;
-  var geo = geojson[i].geometry.coordinates;
-  var link = document.createElement('a');
-
+map.featureLayer.eachLayer(function(marker) {
+  var link = info.appendChild(document.createElement('a'));
   link.className = 'item';
   link.href = '#';
-  link.setAttribute('data-index', i);
-  link.setAttribute('data-lat', geo[0]);
-  link.setAttribute('data-lng', geo[1]);
-
-  link.innerHTML = props.title + '<br /><small>' + props.description + '</small>';
-
+  link.innerHTML = marker.feature.properties.title +
+    '<br /><small>' + marker.feature.properties.description + '</small>';
   link.onclick = function() {
     if (/active/.test(this.className)) {
       this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
     } else {
       var siblings = info.getElementsByTagName('a');
-      for (var i = 0; i < siblings.length; i++) { 
-        siblings[i].className = siblings[i].className.replace(/active/, '').replace(/\s\s*$/, '');
+      for (var i = 0; i < siblings.length; i++) {
+        siblings[i].className = siblings[i].className
+          .replace(/active/, '').replace(/\s\s*$/, '');
       };
-
       this.className += ' active';
-      var index = this.getAttribute('data-index');
-      var lat = this.getAttribute('data-lat');
-      var lng = this.getAttribute('data-lng');
-
-      map.panTo([lng, lat]);
-      markerGroup[index].openPopup();
+      map.panTo(marker.getLatLng());
+      marker.openPopup();
     }
-
-    var markergroup = markers.getGeoJSON();
     return false;
-  }
-
-  info.appendChild(link);
-}
-
+  };
+});
 </script>
