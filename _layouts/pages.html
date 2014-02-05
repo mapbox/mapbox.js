@@ -77,6 +77,7 @@ examples:
 {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
 
+
 <!--Mobile menu-->
 <div id='dropdown' class='show-mobile pad4 drop fill-green clearfix'>
   <a href='#dropdown' class='fr icon menu quiet pad1 keyline-all'></a>
@@ -98,8 +99,8 @@ examples:
         {{site.mapboxjs}}
       {% endif %}
       </a>
-      <a href='{{site.baseurl}}/api/' class='strong quiet col12 pad1 truncate  {% if page.url contains "api" %}fill-darken0 active{% endif %}'>API</a>
-      {% if page.url contains 'api' %}
+      <a href='{{site.baseurl}}/api/' class='strong quiet col12 pad1 truncate  {% if page.categories contains "api" %}fill-darken0 active{% endif %}'>API</a>
+      {% if page.categories contains 'api' %}
       {% include api.nav.html %}
       {% endif %}
       <a href='{{site.baseurl}}/examples/' class='keyline-top keyline-bottom strong quiet col12 pad1 truncate {% if page.url contains "example" %}fill-darken0 active{% endif %}'>Examples</a>
@@ -144,14 +145,14 @@ examples:
 
   <div class='row1 contain col12'>
     <nav class='site-nav fill-darken0 fl small strong col12 clearfix center'>
-      <a href='{{site.baseurl}}/api' class='col4 pad1 truncate quiet {% if page.url contains "api" %}active{% endif %}'>API</a>
+      <a href='{{site.baseurl}}/api' class='col4 pad1 truncate quiet {% if page.categories contains "api" %}active{% endif %}'>API</a>
       <a href='{{site.baseurl}}/examples' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
       <a href='{{site.baseurl}}/plugins' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
     </nav>
   </div>
 
   <div class='col12 clip full-y'>
-    {% if page.url contains 'api' %}
+    {% if page.categories contains 'api' %}
     <div id='api-menu' class='col12 animate full-y'>
       <div class='pad2 row2'>
         <fieldset class='with-icon'>
