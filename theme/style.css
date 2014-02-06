@@ -29,7 +29,7 @@
   margin:0 0 10px;
   }
 
-.leaflet-container img {
+.leaflet-container .marker-description img {
   margin-bottom: 10px;
   }
 
