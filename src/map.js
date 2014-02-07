@@ -135,6 +135,10 @@ var LMap = L.Map.extend({
             this.infoControl.addInfo(layer.options.infoControl);
         }
 
+        if (this.attributionControl && this._loaded) {
+            this.attributionControl.addAttribution(layer.options.attribution);
+        }
+
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
                 (layer.options.maxZoom || layer.options.minZoom)) {
             this._zoomBoundLayers[L.stamp(layer)] = layer;
