@@ -1,0 +1,26 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Loading KML Data with Omnivore
+description: Loading and parsing KML data
+tags:
+  - markers
+---
+
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.0.0/leaflet-omnivore.min.js'></script>
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
+
+// omnivore will AJAX-request this file behind the scenes and parse it:
+// note that there are considerations:
+// - The file must either be on the same domain as the page that requests it,
+//   or both the server it is requested from and the user's browser must
+//   support CORS.
+var runLayer = omnivore.kml('{{site.baseurl}}/assets/line.kml')
+    .on('ready', function() {
+        map.fitBounds(runLayer.getBounds());
+    })
+    .addTo(map);
+</script>
