@@ -92,13 +92,17 @@ var InfoControl = L.Control.extend({
 
         this._content.innerHTML += info.join(' | ');
 
-        if (this.options.editLink && !L.Browser.mobile) {
+        // Check for the existence of this element in the attribution list
+        // and attach an event handler to it.
+        var improvemap = L.DomUtil.get('mapbox-improve-map');
+        if (improvemap) L.DomEvent.on(improvemap, 'click', L.bind(this._editlink, this), this);
+
+        if (this.options.editLink && !L.Browser.mobile && !improvemap) {
             this._content.innerHTML += (info.length) ? ' | ' : '';
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
             edit.innerHTML = 'Improve this map';
-            edit.title = 'Edit in OpenStreetMap';
-            L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
+            L.DomEvent.on(edit, 'click', L.bind(this._editlink, this), this);
         }
 
         // If there are no results in _info then hide this.
@@ -106,11 +110,12 @@ var InfoControl = L.Control.extend({
         return this;
     },
 
-    _osmlink: function() {
+    _editlink: function(e) {
+        L.DomEvent.preventDefault(e);
+        var tilejson = this._tilejson || this._map._tilejson || {};
+        var id = tilejson.id || '';
         var center = this._map.getCenter();
-        var z = this._map.getZoom();
-        window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
-        '&lat=' + center.lat + '&lon=' + center.lng);
+        window.open('https://www.mapbox.com/map-feedback/#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom());
     },
 
     _onLayerAdd: function(e) {
