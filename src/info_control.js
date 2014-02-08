@@ -94,7 +94,7 @@ var InfoControl = L.Control.extend({
 
         // Check for the existence of this element in the attribution list
         // and attach an event handler to it.
-        var improvemap = document.querySelectorAll('.mapbox-improve-map');
+        var improvemap = this._content.querySelectorAll('.mapbox-improve-map');
         if (improvemap.length) {
             var self = this;
             Array.prototype.forEach.call(improvemap, function(el) {
