@@ -94,10 +94,15 @@ var InfoControl = L.Control.extend({
 
         // Check for the existence of this element in the attribution list
         // and attach an event handler to it.
-        var improvemap = L.DomUtil.get('mapbox-improve-map');
-        if (improvemap) L.DomEvent.on(improvemap, 'click', L.bind(this._editlink, this), this);
+        var improvemap = document.querySelectorAll('.mapbox-improve-map');
+        if (improvemap.length) {
+            var self = this;
+            Array.prototype.forEach.call(improvemap, function(el) {
+                L.DomEvent.on(el, 'click', L.bind(self._editlink, self), self);
+            });
+        }
 
-        if (this.options.editLink && !L.Browser.mobile && !improvemap) {
+        if (this.options.editLink && !L.Browser.mobile && !improvemap.length) {
             this._content.innerHTML += (info.length) ? ' | ' : '';
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
