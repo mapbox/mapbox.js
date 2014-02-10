@@ -1,0 +1,98 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Marker navigation from a marker menu
+description: Zoom to a marker and open its popup when its marker menu in a list is clicked.
+tags:
+  - ui
+---
+
+<style>
+  .info {
+    background:#fff;
+    position:absolute;
+    width:260px;
+    top:10px;
+    right:10px;
+    border-radius:2px;
+    }
+    .info .item {
+      display:block;
+      border-bottom:1px solid #eee;
+      padding:10px;
+      text-decoration:none;
+      }
+      .info .item small { color:#888; }
+      .info .item:hover,
+      .info .item.active { background:#f8f8f8; }
+      .info .item:last-child { border-bottom:none; }
+</style>
+
+<div id='map' class='map'></div>
+<div id='info' class='info'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.h186knp8').setView([37.9, -77], 6);
+map.featureLayer.setGeoJSON([
+    {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-77, 37.9]
+        },
+        properties: {
+            title: 'Marker one',
+            description: 'This marker has a description',
+            'marker-id': 'marker-1',
+            'marker-color': '#f86767'
+        }
+    },
+    {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-78, 36.5]
+        },
+        properties: {
+            title: 'Marker two',
+            description: 'So does this one!',
+            'marker-id': 'marker-2',
+            'marker-color': '#f86767'
+        }
+    }
+]);
+
+var info = document.getElementById('info');
+
+// Iterate through each feature layer item, build a
+// marker menu item and enable a click event that pans to + opens
+// a marker that's associated to the marker item.
+map.featureLayer.eachLayer(function(marker) {
+  var link = info.appendChild(document.createElement('a'));
+  link.className = 'item';
+  link.href = '#';
+
+  // Populate content from each markers object.
+  link.innerHTML = marker.feature.properties.title +
+    '<br /><small>' + marker.feature.properties.description + '</small>';
+  link.onclick = function() {
+    if (/active/.test(this.className)) {
+      this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
+    } else {
+      var siblings = info.getElementsByTagName('a');
+      for (var i = 0; i < siblings.length; i++) {
+        siblings[i].className = siblings[i].className
+          .replace(/active/, '').replace(/\s\s*$/, '');
+      };
+      this.className += ' active';
+
+      // When a menu item is clicked, animate the map to center
+      // its associated marker and open its popup.
+      map.panTo(marker.getLatLng());
+      marker.openPopup();
+    }
+    return false;
+  };
+});
+</script>
