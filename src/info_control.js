@@ -97,7 +97,7 @@ var InfoControl = L.Control.extend({
         var improvemap = this._content.querySelectorAll('.mapbox-improve-map');
 
         for (var link = 0; link < improvemap.length; link++) {
-            L.DomEvent.on(improvemap[link], 'click', L.bind(this._editlink, this), this);
+            L.DomEvent.on(improvemap[link], 'click', this._editlink, this);
         }
 
         if (this.options.editLink && !L.Browser.mobile && !improvemap.length) {
@@ -105,7 +105,7 @@ var InfoControl = L.Control.extend({
             var edit = L.DomUtil.create('a', '', this._content);
             edit.href = '#';
             edit.innerHTML = 'Improve this map';
-            L.DomEvent.on(edit, 'click', L.bind(this._editlink, this), this);
+            L.DomEvent.on(edit, 'click', this._editlink, this);
         }
 
         // If there are no results in _info then hide this.
