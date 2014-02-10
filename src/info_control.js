@@ -95,11 +95,9 @@ var InfoControl = L.Control.extend({
         // Check for the existence of this element in the attribution list
         // and attach an event handler to it.
         var improvemap = this._content.querySelectorAll('.mapbox-improve-map');
-        if (improvemap.length) {
-            var self = this;
-            Array.prototype.forEach.call(improvemap, function(el) {
-                L.DomEvent.on(el, 'click', L.bind(self._editlink, self), self);
-            });
+
+        for (var link = 0; link < improvemap.length; link++) {
+            L.DomEvent.on(improvemap[link], 'click', L.bind(this._editlink, this), this);
         }
 
         if (this.options.editLink && !L.Browser.mobile && !improvemap.length) {
