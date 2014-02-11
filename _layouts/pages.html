@@ -1,4 +1,5 @@
 ---
+layout: simple
 examples:
   - id: animation
     name: Animation
@@ -26,146 +27,7 @@ examples:
     name: Zoom
 ---
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset=utf-8 />
-  <meta name='robots' content='{% if page.hidden %}noindex{% else %}index{% endif %}'/>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-
-  <meta name='twitter:site' content='@Mapbox' />
-  <meta property='og:site_name' content='Mapbox' />
-  <meta name='twitter:url' content='{{page.permalink}}' />
-  <meta property='og:url' content='{{page.permalink}}' />
-  <meta name='twitter:title' content='{{page.title | replace:"'","&lsquo;"}}' />
-  <meta property='og:title' content='{{page.title | replace:"'","&lsquo;"}}' />
-  <title>{{page.title}} | Mapbox</title>
-  <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
-  <link href='{{site.url}}/css/site.css' rel='stylesheet' />
-  <!--[if IE 9]><link href='{{site.url}}/css/site-ie9.css' rel='stylesheet' /><![endif]-->
-  <link rel='shortcut icon' href='{{site.url}}/img/favicon.ico' type='image/x-icon' />
-  <link rel='alternate' type='application/rss+xml' title='RSS' href='{{site.url}}/blog/blog.rss' />
-  <link href='https://api.tiles.mapbox.com/mapbox.js/{% if site.mapboxjs %}{{site.mapboxjs}}{% else %}v1.5.1{% endif %}/mapbox.css' rel='stylesheet' />
-
-  <script src='{{site.api}}/api/session.js'></script>
-  <script src='https://js.stripe.com/v2/'></script>
-  <script>
-  var KM_COOKIE_DOMAIN = 'www.mapbox.com';
-  var analytics=analytics||[];(function(){var e=['identify','track','trackLink','trackForm','trackClick','trackSubmit','page','pageview','ab','alias','ready','group'],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':"http://")+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n)};
-  analytics.load(window.location.hostname.indexOf('mapbox.com') !== -1 ? 'fl0c8p240n' : '0biiejpgfj');
-  </script>
-  <script src='https://api.tiles.mapbox.com/mapbox.js/{% if site.mapboxjs %}{{site.mapboxjs}}{% else %}v1.5.1{% endif %}/mapbox.js'></script>
-  <script src='{{site.url}}/js/api.js'></script>
-  <script src='{{site.url}}/js/libs.js'></script>
-  <script src='{{site.url}}/js/site.js'></script>
-  <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
-  <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
-  <script src='{{site.baseurl}}/assets/js/site.js'></script>
-  <style type='text/css'>
-    .button.zeroclipboard-is-hover {
-      background: #3bb2d0 !important;
-    }
-  </style>
-</head>
-<body>
-
-<script data-template='doc_nav' type='text/html'>
-<%
-var active = {};
-var section = window.location.pathname.split('/')[1];
-if (section) active[section] = 'active';
-%>
-<% if (!user.id) { %>
-  <a class='mb-logo' href='/'></a>
-
-  <div class='strong small primary hide-mobile'>
-    <a href='/help/' class='animate inline pad1 round quiet truncate'>Help</a><!--
-    --><a href='/developers/' class='animate inline pad1 round quiet truncate active'>Developers</a>
-    <div class='authmenu contain fr center keyline-all'><!--
-      --><a href='#signin' class='action signin inline animate keyline-right pad1 quiet truncate'>Sign in</a><!--
-      --><a href='#signup' class='action signup inline animate pad1 quiet truncate'>Sign up</a>
-    </div>
-  </div>
-
-  <div class='show-mobile contain drop'>
-    <a href='#' class='icon menu round quiet droplink keyline-all'></a>
-    <div class='dropdown strong fill-white keyline-all round animate'>
-      <div>
-        <a href='/help/'>Help</a>
-        <a href='/developers/'>Developers</a>
-      </div>
-      <div>
-        <a href='#signin' class='signin'>Sign in</a>
-        <a href='#signup' class='signup'>Sign up</a>
-      </div>
-    </div>
-  </div>
-
-  <% } else { %>
-  <div id='authed-logo'>
-    <a class='mb-logo' href='/projects/'> </a>
-    <!-- Back button -->
-    <% if (obj._type === 'tileset' || App.param('from') === 'data') { %>
-      <a href='/data/' class='truncate return-to-previous icon return quiet animate small hide-mobile'>Return to data</a>
-    <% } else if (App.param('from') === 'projects') { %>
-      <a href='/projects/' class='truncate return-to-previous icon return quiet animate small hide-mobile'>Return to projects</a>
-    <% } else if (App.param('from') === 'editor') { %>
-      <a href='/editor/?id=<%=App.param('id')%>' class='truncate return-to-previous icon return quiet animate small hide-mobile'>Return to editor</a>
-    <% } %>
-  </div>
-
-  <div class='primary small strong'>
-    <a href='/help/' class='hide-mobile quiet authed animate round pad1 truncate inline'>Help</a>
-    <a href='/developers/' class='hide-mobile quiet authed animate round pad1 truncate inline active'>Developers</a>
-
-    <a href='#dropdown' class='show-mobile keyline-all authmenu droplink quiet icon menu round animate fr'></a>
-    <a href='#dropdown' class='hide-mobile pad1 block authmenu droplink quiet round animate fr'>
-      <img class='avatar' src='<%= user.avatar %>' />
-      <%= _(user.id || user.name).escape() %>
-    </a>
-
-    <div class='dropdown fill-white keyline-all round animate'>
-      <div class='plan contain'>
-        <a href='/plans/' class='plan-icon big <%= user.plan.id.replace('2', '').replace('-annual', '') %>'>
-        </a>
-        <a href='/plans/' class='truncate'>
-          <%= _(user.plan?user.plan.name:'').escape() %><br />
-          <span class='quiet'>(<%= numeral(user.plan.views).format('0a') %> views)</span>
-        </a>
-      </div>
-      <div>
-        <a href='/account/'>Account</a>
-        <% if (App.user.group === 'admin') { %><a href='/admin/'>Admin</a><% } %>
-        <a href='#signout' id='signout'>Sign out</a>
-      </div>
-      <div class='show-mobile'>
-        <a href='/help/'>Help</a>
-        <a href='/developers/'>Developers</a>
-      </div>
-    </div>
-
-  </div>
-<% } %>
-</script>
-
-<script>
-var templates = {
-  doc_nav: _($('script[data-template]').html()).template()
-}
-
-App.docNav = function() {
-  var user = App.user || {};
-  return templates.doc_nav({user: user});
-};
-</script>
-
-<div class='hide-mobile masthead keyline-bottom col12 animate clearfix {% if page.app %}hide-mobile{% else if page.share %}row2{% endif %}'>
-  <div class='pad2x clearfix'>
-    <nav id='nav' class='{% if page.share %}col4 margin4{% else %}col12 text-right pad2y{% endif %} contain clearfix noprint '>
-      <script>document.write(App.docNav());</script>
-    </nav>
-  </div>
-</div>
+{% include site.masthead.html %}
 
 {% capture api %}
 {% if page.v0 %}v0.6.7{% else %}{{site.mapboxjs}}{% endif %}
@@ -174,7 +36,6 @@ App.docNav = function() {
 {% capture examples %}
 {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
-
 
 <!--Mobile menu-->
 <div id='dropdown' class='show-mobile pad4 drop fill-green clearfix'>
@@ -222,15 +83,7 @@ App.docNav = function() {
 </div>
 
 <!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 docs-sidebar fill-light clip'>
-  <div class='row1 contain col12'>
-    <nav class='site-nav fill-darken0 fl small strong col12 clearfix center'>
-      <a href='{{site.baseurl}}/api' class='col4 pad1 truncate quiet {% if page.categories contains "api" %}active{% endif %}'>API</a>
-      <a href='{{site.baseurl}}/examples' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
-      <a href='{{site.baseurl}}/plugins' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-    </nav>
-  </div>
-
+<div class='hide-mobile col3 docs-sidebar round fill-light clip'>
   <div class='col12 clip full-y'>
     {% if page.categories contains 'api' %}
     <div id='api-menu' class='col12 animate full-y'>
@@ -289,12 +142,13 @@ App.docNav = function() {
 </div>
 
 <!--Content area-->
-<div id='content-section' class='col9 pad4x margin3 content enclosure'>{{content}}</div>
+<div id='content-section' class='limiter clearfix'>
+  <div class='col9 margin3'>
+    {{content}}
+  </div>
+</div>
 
 <div id='modal'>
   <div class='modal-mask fill-darken2 modal animate'></div>
   <div id='modal-content' class='contain modal modal-content animate'></div>
 </div>
-
-</body>
-</html>

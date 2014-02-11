@@ -1,17 +1,18 @@
 ---
-layout: plugins
+layout: pages
 title: Plugins
 ---
 
+<div id='plugins' class='pad4y doc'>
 {% for plugin in site.categories.plugin %}
-<div class='keyline-all round-top clearfix space-bottom4 contain'>
+<div class='keyline-all round-top clearfix space-bottom2 contain'>
   <div class='clearfix contain pad2'>
     <div class='col9'>
       <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }} <a href='{{plugin.code}}' title='Project page' class='icon github'></a></h3>
       <p class='prose'>{{plugin.description}} {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed. </em>{% endif %}<a href='{{site.baseurl}}/example/v1.0.0/{{plugin.prefix}}' class='rcon next'>View example</a></p>
     </div>
-    <div class='pin-rightbottom pad2x'>
-      <a href='#' title='Copy plugin to clipboard' data-ref-id='snippet-{{forloop.index}}' class='button round-top icon clipboard js-clipboard'>Copy</a>
+    <div class='pin-rightbottom pad2'>
+      <a href='#' title='Copy plugin to clipboard' data-ref-id='snippet-{{forloop.index}}' class='button icon clipboard js-clipboard'>Copy</a>
     </div>
   </div>
   <div class='col12 quiet-scroll fill-light'>
@@ -19,3 +20,4 @@ title: Plugins
   </div>
 </div>
 {% endfor %}
+</div>

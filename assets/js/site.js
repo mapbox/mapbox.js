@@ -231,12 +231,12 @@ function load() {
 
     $(window).scroll(_.throttle(function() {
         var top = $(window).scrollTop();
-        if (top > 80) {
+        if (top > 82) {
             $('.docs-sidebar').addClass('fixed');
         } else {
             $('.docs-sidebar').removeClass('fixed');
         }
-    }, 250));
+    }, 100));
 }
 
 $(load);

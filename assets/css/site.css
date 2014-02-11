@@ -1,4 +1,13 @@
-.enclosure { max-width:900px; }
+.mb-developers {
+  margin-top:-1px;
+  }
+  .mb-developers nav > a {
+    margin-left:10px;
+    }
+  .mb-developers nav > a.active,
+  .mb-developers nav > a:hover {
+    background:rgba(0,0,0,0.05);
+    }
 
 /*Base candidate*/
 .full-y         { height:100%; }
@@ -16,17 +25,14 @@
 .fill-light pre,
 .dark pre       { background-color:transparent; }
 
-.site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
-.site-nav a.active { background-color:#f8f8f8; }
-
 .fill-green .home:hover { background-color:rgba(0,0,0,0.10); }
 
 .docs-sidebar {
   position:absolute;
   border-color:rgba(0,0,0,0.25);
-  top:100px;left:10px;bottom:10px;
+  top:94px;left:10px;bottom:10px;
   }
-  .docs-sidebar.fixed { position:fixed; top:0; }
+  .docs-sidebar.fixed { position:fixed; top:10px; }
   .docs-sidebar .sliding {
     height:100%;
     }
@@ -126,13 +132,9 @@
     z-index:100;
     }
 
-.version,
-.version:hover {
-  color:rgba(0,0,0,0.75);
+.version > *{
+  padding:2px 5px;
   }
-  .version > *{
-    padding:2px 5px;
-    }
 
 .doc table em { color:rgba(0,0,0,0.5); }
 .args { color:rgba(0,0,0,0.5); }
@@ -245,3 +247,8 @@ pre .var { color:#0C9DC2; }
   }
 
 .js-clipboard:hover { cursor: pointer; }
+
+.button.zeroclipboard-is-hover {
+  background:#3bb2d0!important;
+  }
+
