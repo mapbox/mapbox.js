@@ -1,5 +1,6 @@
 ---
-layout: simple
+layout: default
+fullwidth: true
 examples:
   - id: animation
     name: Animation
@@ -25,7 +26,15 @@ examples:
     name: Vector Overlays
   - id: zoom
     name: Zoom
+head: |
+  <style>
+  div.footer,
+  div.footer-copyright { display:none; }
+  </style>
 ---
+<link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+<script src='{{site.baseurl}}/assets/js/prettify.js'></script>
+<script src='{{site.baseurl}}/assets/js/site.js'></script>
 
 {% include site.masthead.html %}
 
@@ -44,7 +53,7 @@ examples:
   <div class='dropdown keyline-all round'>
     <a href='#' class='closedrop icon menu quiet pad1 keyline-all fill-darken0'></a>
     <div class='contents contain'>
-      <a href='{{site.baseurl}}/' class='quiet keyline-bottom col12 strong pad2x pad1y {% if page.url == '/index.html' %}fill-darken0 active{% endif %}'>
+      <a href='{{site.baseurl}}/api/' class='quiet keyline-bottom col12 strong pad2x pad1y {% if page.url == '/index.html' %}fill-darken0 active{% endif %}'>
       {{site.title}}
       {% if page.v0 %}
         <span class='fill-yellow small'>{{site.oldversion}}</span>
@@ -146,9 +155,4 @@ examples:
   <div class='col9 margin3'>
     {{content}}
   </div>
-</div>
-
-<div id='modal'>
-  <div class='modal-mask fill-darken2 modal animate'></div>
-  <div id='modal-content' class='contain modal modal-content animate'></div>
 </div>

@@ -1,3 +1,7 @@
+.tiny-graphic {
+  width:40px;
+  height:40px;
+  }
 .mb-developers {
   margin-top:-1px;
   }
@@ -67,48 +71,6 @@
   background-color:rgba(0,0,0,0.05);
   }
 
-.wireframe {
-  border:3px solid rgba(0,0,0,0.5);
-  border-bottom-width:0;
-  }
-  .wireframe.example {
-    border-right-width:0;
-    border-bottom-width:3px;
-    }
-  .wireframe .body {
-    background-image:url(../images/developers-grid.png);
-    background-repeat:repeat;
-    background-position:0 0;
-    -webkit-background-size:60px 60px;
-            background-size:60px 60px;
-    }
-    @media
-      (-webkit-min-device-pixel-ratio:2),
-      (min-resolution:192dppx) {
-      .wireframe .body { background-image:url(../images/developers-grid@2x.png); }
-      }
-
-  .wireframe .body .mock-popup:after {
-    content:'';
-    display:block;
-    position:absolute;
-    height:0;
-    width:0;
-    left:0;
-    right:0;
-    bottom:-5px;
-    margin:auto;
-    border-left:5px solid transparent;
-    border-right:5px solid transparent;
-    border-top:5px solid #95a85a;
-    }
-  .wireframe .dot {
-    display:inline-block;
-    width:10px;
-    height:10px;
-    }
-
-.wireframe.mobile .body .mock-popup:after { border-top: 5px solid #6f6ea5; }
 .view-options { top:-2px;right:-2px; }
 .dark pre { background:rgba(0,0,0,0.7); }
 .dark pre strong { color:#fff; }
@@ -148,6 +110,8 @@
   vertical-align:top;
   margin-right:5px;
   }
+
+.prose .code-copy { margin-bottom:0; }
 
 /*Examples*/
 #map {
