@@ -88,6 +88,8 @@ describe('L.mapbox.infoControl', function() {
 
         map.on('ready', function() {
             expect(map.infoControl._content.innerHTML).to.eql('Data provided by NatureServe in collaboration with Robert Ridgely');
+            map.removeLayer(map.tileLayer);
+            expect(map.infoControl._content.innerHTML).to.eql('');
             done();
         });
 

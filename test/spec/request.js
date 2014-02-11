@@ -15,7 +15,7 @@ describe('request', function() {
         server.respondWith("GET", "data/tilejson.json",
             [200, { "Content-Type": "application/json" }, '{"status": "success"}']);
 
-        expect(private.request('data/tilejson.json', function(err, data) {
+        expect(internals.request('data/tilejson.json', function(err, data) {
             expect(err).to.be(null);
             expect(data).to.eql({status: 'success'});
             done();
@@ -28,7 +28,7 @@ describe('request', function() {
         server.respondWith("GET", "data/tilejson.json",
             [500, { "Content-Type": "application/json" }, '{"status": "error"}']);
 
-        expect(private.request('data/tilejson.json', function(err, data) {
+        expect(internals.request('data/tilejson.json', function(err, data) {
             expect(err).to.be.ok();
             expect(data).to.be(null);
             done();

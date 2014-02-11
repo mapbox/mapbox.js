@@ -229,6 +229,8 @@ describe('L.mapbox.map', function() {
 
             map.on('ready', function() {
                 expect(map.attributionControl._container.innerHTML).to.eql('Data provided by NatureServe in collaboration with Robert Ridgely');
+                map.removeLayer(map.tileLayer);
+                expect(map.attributionControl._container.innerHTML).to.eql('');
                 done();
             });
 
