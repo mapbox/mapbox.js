@@ -1,7 +1,12 @@
-.tiny-graphic {
+.features .small-graphic {
   width:40px;
   height:40px;
+  left:10px;
   }
+.features .text-bite {
+  padding:0 0 20px 70px;
+  }
+
 .mb-developers {
   margin-top:-1px;
   }

@@ -1,52 +1,35 @@
-<h2>{{site.title}}</h2>
-
-<div class='clearfix space-bottom4'>
-  <div class='col5'>
-    <p>Build anything with Mapbox.js, our open-source JavaScript library for fast &amp; interactive maps.</p>
-    <h3 id='getting-started' class='space-bottom1'>Get started fast</h3>
-    <p>Just reference the JavaScript &amp; CSS to start building with Mapbox. <a class='rcon next' href='{{site.baseurl}}/examples/v1.0.0/'>Dive in with a simple example</a></p>
-  </div>
-  <div class='col6 margin1 quiet-scroll'>
-<pre id='source' class='code-copy'>&lt;link href='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' /&gt;
-&lt;script src='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'&gt;&lt;/script&gt;</pre>
-    <a href='#' data-ref-id='source' class='js-clipboard button icon clipboard col12 round-bottom'>Copy</a>
-  </div>
+<div class='space-bottom4'>
+  <h1>Build anything with {{site.title | downcase}}</h1>
 </div>
 
-<div class='clearfix pad1x pad2y keyline-top keyline-bottom space-bottom4'>
-  <div class='col3 pad1x center'>
-    <span class='tiny-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-      <span class='icon leaflet'></span>
-    </span>
-    <div class='prose'>
-      <p><strong>Built on top of <a href='http://leafletjs.com/'>Leaflet</a></strong>, an open source library.</p>
+<div class='clearfix space-bottom2'>
+  <div class='col5 margin1r'>
+    <p>A fast JavaScript library for interactive maps.</p>
+    <h3 id='getting-started' class='space-bottom1'>Get started fast</h3>
+    <p>Just reference the JavaScript &amp; CSS to start building with Mapbox.</p>
+    <div class='quiet-scroll'>
+<pre id='source' class='code-copy'>&lt;link href='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' /&gt;
+&lt;script src='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'&gt;&lt;/script&gt;</pre>
+      <a href='#' data-ref-id='source' class='js-clipboard button icon clipboard col12 round-bottom'>Copy</a>
     </div>
   </div>
 
-  <div class='col3 pad1x center'>
-    <span class='tiny-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-      <span class='icon heart'></span>
-    </span>
-    <div class='prose'>
-      <p><strong>Open source</strong> and available on <a href='https://github.com/mapbox/mapbox.js/'>GitHub</a>.</p>
+  <div class='col6 features hide-mobile'>
+    <div class='contain space-bottom2 keyline-bottom'>
+      <span class='pin-left small-graphic dot fill-darken1 pad1 dark inline'><span class='icon leaflet'></span></span>
+      <span class='inline prose text-bite'><strong>Built on top of <a href='http://leafletjs.com/'>Leaflet</a></strong>, an open source library.</span>
     </div>
-  </div>
-
-  <div class='col3 pad1x center'>
-    <span class='tiny-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-      <span class='icon check'></span>
-    </span>
-    <div class='prose'>
-      <p><strong>Browser tested &amp; supported:</strong> compatible with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.</p>
+    <div class='contain space-bottom2 keyline-bottom'>
+      <span class='pin-left small-graphic dot fill-darken1 inline pad1 dark'><span class='icon heart'></span></span>
+      <span class='inline prose text-bite'><strong>Open source.</strong> Released under a <a href='https://github.com/mapbox/mapbox.js/blob/master/LICENSE.md'>BSD licence</a> and available on <a href='https://github.com/mapbox/mapbox.js/'>GitHub</a>.</span>
     </div>
-  </div>
-
-  <div class='col3 pad1x center'>
-    <span class='tiny-graphic dot fill-darken1 inline pad1 dark space-bottom2'>
-      <span class='icon mobile'></span>
-    </span>
-    <div class='prose'>
-        <p><a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'><strong>Optimized for mobile</strong></a> devices and small screens by default.</p>
+    <div class='contain space-bottom2 keyline-bottom'>
+      <span class='pin-left small-graphic dot fill-darken1 inline pad1 dark'><span class='icon check'></span></span>
+      <span class='inline prose text-bite'><strong>Browser tested &amp; supported:</strong> compatible with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.</span>
+    </div>
+    <div class='contain clearfix'>
+      <span class='pin-left small-graphic dot fill-darken1 inline pad1 dark'><span class='icon mobile'></span></span>
+      <span class='inline prose text-bite'><a href='{{site.baseurl}}/api/{{site.mapboxjs}}/#section-mobile'><strong>Optimized for mobile</strong></a> devices and small screens by default.</span>
     </div>
   </div>
 </div>
