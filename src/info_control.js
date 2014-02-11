@@ -51,13 +51,13 @@ var InfoControl = L.Control.extend({
         if (!text) return this;
         if (!this._info[text]) this._info[text] = 0;
 
-        this._info[text]++;
+        this._info[text] = true;
         return this._update();
     },
 
     removeInfo: function (text) {
         if (!text) return this;
-        if (this._info[text]) this._info[text]--;
+        if (this._info[text]) this._info[text] = false;
         return this._update();
     },
 
@@ -114,11 +114,12 @@ var InfoControl = L.Control.extend({
     },
 
     _onLayerAdd: function(e) {
-        if (e.layer.getAttribution) {
+        if (e.layer.getAttribution && e.layer.getAttribution()) {
             this.addInfo(e.layer.getAttribution());
-        }
-        if ('on' in e.layer && e.layer.getAttribution) {
-            e.layer.on('ready', L.bind(function() { this.addInfo(e.layer.getAttribution()); }, this));
+        } else if ('on' in e.layer && e.layer.getAttribution) {
+            e.layer.on('ready', L.bind(function() {
+                this.addInfo(e.layer.getAttribution());
+            }, this));
         }
     },
 

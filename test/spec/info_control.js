@@ -80,4 +80,21 @@ describe('L.mapbox.infoControl', function() {
 
         expect(info._content.innerHTML).to.eql('<script></script>');
     });
+
+    it('receives attribution from a layer', function(done) {
+        var server = sinon.fakeServer.create();
+        var element = document.createElement('div');
+        var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2');
+
+        map.on('ready', function() {
+            expect(map.infoControl._content.innerHTML).to.eql('Data provided by NatureServe in collaboration with Robert Ridgely');
+            map.removeLayer(map.tileLayer);
+            expect(map.infoControl._content.innerHTML).to.eql('');
+            done();
+        });
+
+        server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+        server.respond();
+    });
 });

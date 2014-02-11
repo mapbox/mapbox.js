@@ -5,7 +5,7 @@ BROWSERIFY = node_modules/.bin/browserify
 # the default rule when someone runs simply `make`
 all: \
 	dist/mapbox.js \
-	dist/mapbox.private.js \
+	dist/mapbox.internals.js \
 	dist/mapbox.standalone.js \
 	dist/mapbox.css \
 	dist/mapbox.standalone.css \
@@ -45,8 +45,8 @@ dist/mapbox.standalone.uncompressed.js: node_modules/.install dist $(shell $(BRO
 	$(BROWSERIFY) --debug mapbox.js > $@
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.private.js: node_modules/.install dist $(shell $(BROWSERIFY) --list private.js)
-	$(BROWSERIFY) --debug private.js > $@
+dist/mapbox.internals.js: node_modules/.install dist $(shell $(BROWSERIFY) --list internals.js)
+	$(BROWSERIFY) --debug internals.js > $@
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled
