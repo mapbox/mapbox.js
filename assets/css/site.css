@@ -15,7 +15,7 @@
     }
   .mb-developers nav > a.active,
   .mb-developers nav > a:hover {
-    background:rgba(0,0,0,0.05);
+    background:rgba(0,0,0,0.10);
     }
 
 /*Base candidate*/
@@ -64,7 +64,7 @@
   overflow-x:hidden;
   overflow-y:auto;
   }
-  .fixed-sidebar .scroll-y {
+  .docs-sidebar .scroll-y {
     padding-bottom:170px;
     }
 
@@ -83,14 +83,14 @@
 /* Dropdown Menu in the masthead */
 .dropdown {
   display:none;
-  margin-top:20px;
+  padding-bottom:20px;
   }
   .dropdown .contents {
     z-index:1000;
     }
   .dropdown .closedrop {
     position:absolute;
-    top:20px;
+    top:10px;
     right:20px;
     left:auto;
     }

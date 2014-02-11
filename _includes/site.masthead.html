@@ -1,27 +1,30 @@
 <header class='mb-developers fill-green small'>
-  <div class='limiter pad1y clearfix'>
-    <div class='col5 margin3 space pad1y'>
-      <a class='strong quiet' href='{{site.baseurl}}/'>
-        Mapbox.js
-        <span class='version'>
-        {% if page.v0 %}
-          <span class='fill-yellow'>{{site.oldversion}}</span>
-        {% elsif page.version %}
-          {% if page.category == 'examples' %}
-            {{site.mapboxjs}}
+  <div class='limiter'>
+    <div class='clearfix'>
+      <div class='col5 margin3 space pad2y'>
+        <span class='quiet'>Developers | </span>
+        <a class='strong quiet' href='{{site.baseurl}}/'>
+          Mapbox.js
+          <span class='version'>
+          {% if page.v0 %}
+            <span class='fill-yellow'>{{site.oldversion}}</span>
+          {% elsif page.version %}
+            {% if page.category == 'examples' %}
+              {{site.mapboxjs}}
+            {% else %}
+              {{page.version}}
+            {% endif %}
           {% else %}
-            {{page.version}}
+            {{site.mapboxjs}}
           {% endif %}
-        {% else %}
-          {{site.mapboxjs}}
-        {% endif %}
-        </span>
-      </a>
+          </span>
+        </a>
+      </div>
+      <nav class='col4 pad2y strong text-right hide-mobile'><!--
+        --><a href='{{site.baseurl}}/api' class='animate round pad1 quiet {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
+        --><a href='{{site.baseurl}}/examples' class='animate round pad1 quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
+        --><a href='{{site.baseurl}}/plugins' class='animate round pad1 quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+      </nav>
     </div>
-    <nav class='col4 pad1y strong text-right'><!--
-      --><a href='{{site.baseurl}}/api' class='round pad1 quiet {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
-      --><a href='{{site.baseurl}}/examples' class='round pad1 quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
-      --><a href='{{site.baseurl}}/plugins' class='round pad1 quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-    </nav>
   </div>
 </header>
