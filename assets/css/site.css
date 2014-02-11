@@ -27,15 +27,6 @@
 #filter-api { padding-right:88px; }
 .view-all { top:1px;right:1px;bottom:1px; }
 
-.site-title,
-.site-title:hover { color:#fff; }
-
-.fill-white pre,
-.fill-light pre,
-.dark pre       { background-color:transparent; }
-
-.fill-green .home:hover { background-color:rgba(0,0,0,0.10); }
-
 .docs-sidebar {
   position:absolute;
   border-color:rgba(0,0,0,0.25);
@@ -44,19 +35,6 @@
   .docs-sidebar.fixed { position:fixed; top:10px; }
   .docs-sidebar .sliding {
     height:100%;
-    }
-
-.grid {
-  background-repeat:no-repeat;
-  background-size:cover;
-  }
-  .grid-view .grid:nth-child(even) .overlay {
-    border-left:1px solid rgba(255,255,255,0.25);
-    }
-  .grid.active .overlay,
-  .grid:hover .overlay  {
-    background-color:rgba(0,0,0,0.75);
-    color:#fff;
     }
 
 .scroll-y {
