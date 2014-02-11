@@ -135,8 +135,8 @@ var LMap = L.Map.extend({
             this.infoControl.addInfo(layer.options.infoControl);
         }
 
-        if (this.attributionControl && this._loaded) {
-            this.attributionControl.addAttribution(layer.options.attribution);
+        if (this.attributionControl && this._loaded && layer.getAttribution) {
+            this.attributionControl.addAttribution(layer.getAttribution());
         }
 
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
