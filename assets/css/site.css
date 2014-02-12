@@ -23,12 +23,8 @@
     background:rgba(0,0,0,0.10);
     }
 
-.site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
-.site-nav a.active { background-color:#f8f8f8; }
-
 /*Base candidate*/
 .full-y         { height:100%; }
-.bump-up { position:relative; top:-1px; }
 
 /* API Filtering and view all link */
 #filter-api { padding-right:88px; }
@@ -205,14 +201,3 @@ pre .var { color:#0C9DC2; }
 .button.zeroclipboard-is-hover {
   background:#3bb2d0!important;
   }
-
-.wireframe {
-  border:3px solid rgba(0,0,0,0.5);
-  border-bottom-width:0;
-  }
-  .wireframe .dot {
-    display:inline-block;
-    width:10px;
-    height:10px;
-    }
-

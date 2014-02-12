@@ -64,10 +64,12 @@ head: |
     </div>
 
     <div class='limiter clearfix'>
-      <div class='margin6 col6'>
-      </div>
+      <nav class='text-right pad2y small strong'><!--
+      --><a href='{{site.baseurl}}/api' class='quiet animate pad1 round {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
+      --><a href='{{site.baseurl}}/examples' class='quiet animate pad1 round {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
+      --><a href='{{site.baseurl}}/plugins' class='quiet animate pad1 round {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+      </nav>
     </div>
-
   </header>
 
   <!--Mobile menu-->
@@ -105,14 +107,6 @@ head: |
 
 <!--Fixed sidebar navigation-->
 <div class='hide-mobile col3 docs-sidebar round fill-light clip'>
-  <div class='row1 contain col12'>
-    <nav class='site-nav fill-darken0 fl small strong col12 clearfix center'>
-      <a href='{{site.baseurl}}/api' class='col4 pad1 truncate quiet {% if page.categories contains "api" %}active{% endif %}'>API</a>
-      <a href='{{site.baseurl}}/examples' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "example" %}active{% endif %}'>Examples</a>
-      <a href='{{site.baseurl}}/plugins' class='col4 pad1 truncate keyline-left quiet {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-    </nav>
-  </div>
-
   <div class='col12 clip full-y'>
     {% if page.categories contains 'api' %}
     <div id='api-menu' class='col12 animate full-y'>
