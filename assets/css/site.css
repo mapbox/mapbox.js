@@ -18,10 +18,12 @@
     background:rgba(0,0,0,0.10);
     }
 
+.site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
+.site-nav a.active { background-color:#f8f8f8; }
+
 /*Base candidate*/
 .full-y         { height:100%; }
 .bump-up { position:relative; top:-1px; }
-.pin-rightbottom { position:absolute; bottom:0; right:0; }
 
 /* API Filtering and view all link */
 #filter-api { padding-right:88px; }
