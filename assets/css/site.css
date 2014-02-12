@@ -1,3 +1,8 @@
+.masthead a[href='/developers/'] {
+  background-color:#F8F8F8;
+  color:rgba(0,0,0,0.75);
+  }
+
 .features .small-graphic {
   width:40px;
   height:40px;
