@@ -45,7 +45,30 @@ head: |
 {% endcapture %}
 
 <div class='contain'>
-  {% include site.masthead.html %}
+  <header class='mb-developers fill-green row2 pad1y clip clearfix'>
+    <div class='pin-left pad2y'>
+      <a href='{{site.baseurl}}/' class='quiet inline pad2x'>Mapbox.js
+        {% if page.v0 %}
+         <span class='fill-yellow small'>{{site.oldversion}}</span>
+        {% elsif page.version %}
+        {% if page.category == 'examples' %}
+          {{site.mapboxjs}}
+        {% else %}
+          {{page.version}}
+        {% endif %}
+        {% else %}
+          {{site.mapboxjs}}
+        {% endif %}
+        documentation
+      </a>
+    </div>
+
+    <div class='limiter clearfix'>
+      <div class='margin6 col6'>
+      </div>
+    </div>
+
+  </header>
 
   <!--Mobile menu-->
   <div id='dropdown' class='show-mobile drop fill-green clearfix'>

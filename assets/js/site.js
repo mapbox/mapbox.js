@@ -231,7 +231,7 @@ function load() {
 
     $(window).scroll(_.throttle(function() {
         var top = $(window).scrollTop();
-        if (top > 80) {
+        if (top > 125) {
             $('.docs-sidebar').addClass('fixed');
         } else {
             $('.docs-sidebar').removeClass('fixed');

@@ -37,7 +37,7 @@
 .docs-sidebar {
   position:absolute;
   border-color:rgba(0,0,0,0.25);
-  top:94px;left:10px;bottom:10px;
+  top:135px;left:10px;bottom:10px;
   }
   .docs-sidebar.fixed { position:fixed; top:10px; }
   .docs-sidebar .sliding {
@@ -205,4 +205,14 @@ pre .var { color:#0C9DC2; }
 .button.zeroclipboard-is-hover {
   background:#3bb2d0!important;
   }
+
+.wireframe {
+  border:3px solid rgba(0,0,0,0.5);
+  border-bottom-width:0;
+  }
+  .wireframe .dot {
+    display:inline-block;
+    width:10px;
+    height:10px;
+    }
 
