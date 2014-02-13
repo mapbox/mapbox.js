@@ -46,8 +46,9 @@ head: |
 
 <div class='contain'>
   <header class='mb-developers fill-green row2 pad1y clip clearfix'>
-    <div class='pin-left pad2y'>
-      <a href='{{site.baseurl}}/' class='quiet inline pad2x'>Mapbox.js
+    <div class='pin-left pad2y pad4x'>
+      <span class='quiet'>Documentation | </span>
+      <a href='{{site.baseurl}}/' class='quiet active'>Mapbox.js
         {% if page.v0 %}
          <span class='fill-yellow small'>{{site.oldversion}}</span>
         {% elsif page.version %}
@@ -59,7 +60,6 @@ head: |
         {% else %}
           {{site.mapboxjs}}
         {% endif %}
-        documentation
       </a>
     </div>
 
