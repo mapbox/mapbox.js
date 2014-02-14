@@ -544,7 +544,7 @@ A `L.Marker` object with the latitude, longitude position and a styled marker
 The other sections of the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) are implemented
 by `L.mapbox.simplestyle`
 
-## L.simplestyle.style(feature)
+## L.mapbox.simplestyle.style(feature)
 
 Given a GeoJSON Feature with optional simplestyle-spec properties, return an
 options object formatted to be used as [Leaflet Path options](http://leafletjs.com/reference.html#path).
