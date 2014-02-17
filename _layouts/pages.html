@@ -28,13 +28,16 @@ examples:
     name: Zoom
 head: |
   <style>
-  div.footer,
-  div.footer-copyright { display:none; }
+    div.footer,
+    div.footer-copyright { display:none; }
   </style>
 ---
+
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
+
+{% include site.nav.html %}
 
 {% capture api %}
 {% if page.v0 %}v0.6.7{% else %}{{site.mapboxjs}}{% endif %}
@@ -44,129 +47,104 @@ head: |
 {% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
 {% endcapture %}
 
-<div class='contain'>
-  <header class='mb-developers fill-green row2 pad1y clip clearfix'>
-    <div class='pin-left pad2y pad4x'>
-      <span class='quiet'>Documentation | </span>
-      <a href='{{site.baseurl}}/' class='quiet active'>Mapbox.js
-        {% if page.v0 %}
-         <span class='fill-yellow small'>{{site.oldversion}}</span>
-        {% elsif page.version %}
-        {% if page.category == 'examples' %}
-          {{site.mapboxjs}}
-        {% else %}
-          {{page.version}}
-        {% endif %}
-        {% else %}
-          {{site.mapboxjs}}
-        {% endif %}
-      </a>
+<!--Mobile menu-->
+{% if page.categories contains 'api' or page.url contains 'example' %}
+<div id='dropdown' class='show-mobile clearfix contain space-bottom4'>
+  <div class='menu pad4x pad2y row1 keyline-top keyline-bottom clearfix mobile-cols'>
+    <h3 class='small col6'>Sub Menu</h3>
+    <div class='col6 text-right'>
+      <a href='#dropdown' class='icon menu quiet pad1'></a>
     </div>
+  </div>
+  <div class='sub-dropdown keyline-bottom keyline-left keyline-right round'>
+    <div class='pin-right close-sub-dropdown'>
+      <a href='#' class='icon x quiet pad1 inline fill-grey'></a>
+    </div>
+    <div class='contents contain'>
+      {% if page.categories contains 'api' %}
+      {% include api.nav.html %}
+      {% endif %}
 
-    <div class='limiter clearfix hide-mobile'>
-      <nav class='text-right pad2y small strong'><!--
-      --><a href='{{site.baseurl}}/api' class='quiet animate pad1 round {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
-      --><a href='{{site.baseurl}}/examples' class='quiet animate pad1 round {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
-      --><a href='{{site.baseurl}}/plugins' class='quiet animate pad1 round {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-      </nav>
-    </div>
-  </header>
-
-  <!--Mobile menu-->
-  <div id='dropdown' class='show-mobile drop fill-green clearfix'>
-    <div class='pin-right pad4x pad2y'>
-      <a href='#dropdown' class='fr icon menu quiet pad1 keyline-all'></a>
-    </div>
-    <div class='dropdown keyline-all round'>
-      <a href='#' class='closedrop icon menu quiet pad1 keyline-all fill-darken0'></a>
-      <div class='contents contain'>
-        <a href='{{site.baseurl}}/api/' class='strong quiet col12 pad1y pad4x truncate  {% if page.categories contains "api" %}fill-darken0 active{% endif %}'>API</a>
-        {% if page.categories contains 'api' %}
-        {% include api.nav.html %}
-        {% endif %}
-        <a href='{{site.baseurl}}/examples/' class='keyline-top keyline-bottom strong quiet col12 pad1y pad4x truncate {% if page.url contains "example" %}fill-darken0 active{% endif %}'>Examples</a>
-        {% if page.url contains 'example' %}
-          <nav class='navigation pad1y full-y keyline-bottom scroll-y v js-nav-docs quiet-scroll'>
-            {% for example in page.examples %}
-            <div class='section space-bottom1'>
-              <strong class='col12 sub'>{{example.name}}</strong>
-              {% for listing in site.tags[example.id] order:ascending %}
-                {% if listing.version == 'v1.0.0' %}
-                  <a href='{{site.baseurl}}{{listing.url}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
-                {% endif %}
-              {% endfor %}
-            </div>
+      {% if page.url contains 'example' %}
+        <nav class='navigation v pad1y keyline-bottom js-nav-docs fill-y scroll-y scroll-styled'>
+          {% for example in page.examples %}
+          <div class='section space-bottom1'>
+            <strong class='col12 sub'>{{example.name}}</strong>
+            {% for listing in site.tags[example.id] order:ascending %}
+              {% if listing.version == 'v1.0.0' %}
+              <a href='{{site.baseurl}}{{listing.url}}' title='{{listing.title}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
+              {% endif %}
             {% endfor %}
           </div>
-        {% endif %}
-        <a href='{{site.baseurl}}/plugins/' class='quiet col12 pad1y pad4x strong truncate {% if page.url contains "plugins" %}fill-darken0 active{% endif %}'>Plugins</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--Fixed sidebar navigation-->
-<div class='hide-mobile col3 docs-sidebar round fill-light clip'>
-  <div class='col12 clip full-y'>
-    {% if page.categories contains 'api' %}
-    <div id='api-menu' class='col12 animate full-y'>
-      <div class='pad2 row2'>
-        <fieldset class='with-icon'>
-          <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 pad2x round-right small view-all fill-white strong'>View all?</a>
-          <span class='icon search'></span>
-          <input id='filter-api' type='text' class='round col12' placeholder='Filter documentation'>
-        </fieldset>
-      </div>
-      {% include api.nav.html %}
-    </div>
-    {% endif %}
-
-    {% if page.url contains 'example' %}
-    <div id='examples-menu' class='col12 animate full-y'>
-      <div class='pad2 row2'>
-        <fieldset class='with-icon'>
-          <span class='icon search'></span>
-          <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
-        </fieldset>
-      </div>
-
-      <nav id='examples-list' class='keyline-top pad1y navigation v fill-light full-y js-nav-examples quiet-scroll scroll-y col12 animate'>
-        {% for example in page.examples %}
-        <div class='section space-bottom1'>
-          <strong class='col12 sub'>{{example.name}}</strong>
-          {% for listing in site.tags[example.id] order:ascending %}
-            {% if listing.version == 'v1.0.0' %}
-              <a href='{{site.baseurl}}{{listing.url}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
-            {% endif %}
           {% endfor %}
         </div>
-        {% endfor %}
-      </nav>
+      {% endif %}
     </div>
-    {% endif %}
-
-    {% if page.url contains 'plugins' %}
-    <div id='plugins-menu' class='col12 animate full-y'>
-      <div class='pad2 keyline-bottom prose'>
-        <strong>Mapbox.js Plugins</strong>
-        <p class='quiet'>
-          Plugins extend Mapbox.js with layers, interactions,
-          and stuff that make maps awesome.
-        </p>
-      </div>
-      <nav class='navigation col12 v full-y scroll-y quiet-scroll pad1y'>
-        {% for plugin in site.categories.plugin %}
-          <a href='{{site.baseurl}}/plugins/#{{plugin.prefix}}' class='sub'>{{plugin.title}}</a>
-        {% endfor %}
-      </nav>
-    </div>
-    {% endif %}
   </div>
 </div>
+{% endif %}
 
 <!--Content area-->
-<div id='content-section' class='limiter clearfix'>
-  <div class='col9 margin3'>
-    {{content}}
+<div class='limiter clearfix contain'>
+  <div class='hide-mobile col3 docs-sidebar round clip fill-light'>
+    <div class='col12 full-y'>
+      {% if page.categories contains 'api' %}
+      <div id='api-menu' class='col12 animate full-y'>
+        <div class='pad2 row2'>
+          <fieldset class='with-icon'>
+            <a href='{{site.baseurl}}/api/{{page.version}}/all' class='pin-right pad1 round-right small view-all fill-white strong'>View all?</a>
+            <span class='icon search'></span>
+            <input id='filter-api' type='text' class='round col12' placeholder='Filter API'>
+          </fieldset>
+        </div>
+        {% include api.nav.html %}
+      </div>
+      {% endif %}
+
+      {% if page.url contains 'example' %}
+      <div id='examples-menu' class='col12 animate full-y'>
+        <div class='pad2 row2'>
+          <fieldset class='with-icon'>
+            <span class='icon search'></span>
+            <input id='filter-examples' type='text' class='round col12' placeholder='Filter examples'>
+          </fieldset>
+        </div>
+
+        <nav id='examples-list' class='keyline-top pad1y navigation v fill-light full-y js-nav-examples scroll-styled scroll-y col12 animate'>
+          {% for example in page.examples %}
+          <div class='section space-bottom1'>
+            <strong class='col12 sub'>{{example.name}}</strong>
+            {% for listing in site.tags[example.id] order:ascending %}
+              {% if listing.version == 'v1.0.0' %}
+                <a href='{{site.baseurl}}{{listing.url}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </nav>
+      </div>
+      {% endif %}
+
+      {% if page.url contains 'plugins' %}
+      <div id='plugins-menu' class='col12 animate full-y'>
+        <div class='pad2 keyline-bottom prose'>
+          <strong>Mapbox.js Plugins</strong>
+          <p class='quiet'>
+            Plugins extend Mapbox.js with layers, interactions,
+            and stuff that make maps awesome.
+          </p>
+        </div>
+        <nav class='navigation col12 v full-y scroll-y scroll-styled pad1y'>
+          {% for plugin in site.categories.plugin %}
+            <a href='{{site.baseurl}}/plugins/#{{plugin.prefix}}' class='sub'>{{plugin.title}}</a>
+          {% endfor %}
+        </nav>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div id='content-section' class='col9 margin3'>
+    <div class='margin0'>{{content}}</div>
   </div>
 </div>

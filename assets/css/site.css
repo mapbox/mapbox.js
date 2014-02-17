@@ -3,51 +3,27 @@
   color:rgba(0,0,0,0.75);
   }
 
-.features .small-graphic {
-  width:40px;
-  height:40px;
-  left:10px;
-  }
-.features .text-bite {
-  padding:0 0 20px 70px;
-  }
-
-.mb-developers {
-  margin-top:-1px;
-  }
-  .mb-developers nav > a {
-    margin-left:10px;
-    }
-  .mb-developers nav > a.active,
-  .mb-developers nav > a:hover {
-    background:rgba(0,0,0,0.10);
-    }
-
-/*Base candidate*/
-.full-y         { height:100%; }
-
 /* API Filtering and view all link */
-#filter-api { padding-right:88px; }
+#filter-api { padding-right:70px; }
 .view-all { top:1px;right:1px;bottom:1px; }
 
 .docs-sidebar {
   position:absolute;
-  border-color:rgba(0,0,0,0.25);
-  top:135px;left:10px;bottom:10px;
+  top:0;bottom:10px;
   }
-  .docs-sidebar.fixed { position:fixed; top:10px; }
-  .docs-sidebar .sliding {
-    height:100%;
+  .docs-sidebar.fixed {
+    position:fixed;
+    top:10px;
+    width:19.8333%; /* 25% of 83.3333% = 0.20833325 */
     }
 
-.scroll-y {
+.full-y { height:100%; }
+.fixed .scroll-y {
   overflow:auto;
   overflow-x:hidden;
   overflow-y:auto;
+  padding-bottom:100px;
   }
-  .docs-sidebar .scroll-y {
-    padding-bottom:170px;
-    }
 
 .navigation .pad1y:empty { padding:0; }
 .navigation .sub         { padding:5px 20px; }
@@ -62,23 +38,14 @@
 .dark pre strong { color:#fff; }
 
 /* Dropdown Menu in the masthead */
-.dropdown {
+.sub-dropdown {
   display:none;
   padding-bottom:20px;
+  z-index:100;
   }
-  .dropdown .contents {
-    z-index:1000;
-    }
-  .dropdown .closedrop {
-    position:absolute;
-    top:10px;
-    right:20px;
-    left:auto;
-    }
-  .drop:target .dropdown {
-    display:block;
-    z-index:100;
-    }
+  #dropdown:target .menu { background-color:#eee; }
+  #dropdown:target .sub-dropdown { display:block; }
+  .close-sub-dropdown { right:20px; top:1px; }
 
 .version > *{
   padding:2px 5px;
@@ -106,33 +73,13 @@
   top:0;left:0;
   width:100%;
   height:100%;
-  l}
+  }
 
-.quiet-scroll pre {
+.code-h pre {
   overflow:auto;
   white-space:pre;
   word-wrap:normal;
   word-break:normal;
-  }
-.quiet-scroll pre::-webkit-scrollbar,
-.quiet-scroll::-webkit-scrollbar {
-  width:8px;
-  height:8px;
-  border-left:0;
-  background:rgba(0,0,0,0.1);
-  }
-.quiet-scroll pre::-webkit-scrollbar-track,
-.quiet-scroll::-webkit-scrollbar-track {
-  background:none;
-  }
-.quiet-scroll pre::-webkit-scrollbar-thumb,
-.quiet-scroll::-webkit-scrollbar-thumb {
-  background:rgba(0,0,0,0.1);
-  border-radius:0;
-  }
-.quiet-scroll pre::-webkit-scrollbar:hover,
-.quiet-scroll::-webkit-scrollbar:hover {
-  background:rgba(0,0,0,0.15);
   }
 
 pre a {

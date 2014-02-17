@@ -3,10 +3,10 @@ layout: pages
 title: Plugins
 ---
 
-<div id='plugins' class='pad4y doc'>
+<div id='plugins' class='doc'>
 {% for plugin in site.categories.plugin %}
 <div class='keyline-all round-top clearfix space-bottom2 contain'>
-  <div class='clearfix contain pad2'>
+  <div class='clearfix contain pad2 mobile-cols'>
     <div class='col9'>
       <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }} <a href='{{plugin.code}}' title='Project page' class='icon github'></a></h3>
       <p class='prose'>{{plugin.description}} {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed. </em>{% endif %}<a href='{{site.baseurl}}/example/v1.0.0/{{plugin.prefix}}' class='rcon next'>View example</a></p>
@@ -15,7 +15,7 @@ title: Plugins
       <a href='#' title='Copy plugin to clipboard' data-ref-id='snippet-{{forloop.index}}' class='button icon clipboard js-clipboard'>Copy</a>
     </div>
   </div>
-  <div class='col12 quiet-scroll fill-light'>
+  <div class='col12 code-h scroll-styled fill-light'>
     <pre id='snippet-{{forloop.index}}' class='pad2'>{{ plugin.snippet | replace:'&','&amp;' | replace:'<','&lt;' | replace:'>', '&gt;'}}</pre>
   </div>
 </div>
