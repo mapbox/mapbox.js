@@ -153,7 +153,7 @@ function with that data, if any.
 
 _Returns_: the L.mapbox.gridLayer object
 
-## L.mapbox.featureLayer(id|url|tilejson, options)
+## L.mapbox.featureLayer(id|url|geojson, options)
 
 **NOTE: in version 1.6.0, `L.mapbox.markerLayer` was renamed to `L.mapbox.featureLayer`
 to signal the addition of support for lines and polygons. The `L.mapbox.markerLayer`
@@ -164,7 +164,7 @@ from Mapbox and elsewhere into your map.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
+| id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
 | options | object | If provided, it is the same options as provided to `L.FeatureGroup`, as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
@@ -544,7 +544,7 @@ A `L.Marker` object with the latitude, longitude position and a styled marker
 The other sections of the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) are implemented
 by `L.mapbox.simplestyle`
 
-## L.simplestyle.style(feature)
+## L.mapbox.simplestyle.style(feature)
 
 Given a GeoJSON Feature with optional simplestyle-spec properties, return an
 options object formatted to be used as [Leaflet Path options](http://leafletjs.com/reference.html#path).
