@@ -24,7 +24,7 @@
 <div id='map-dark' class='dark map'></div>
 
 <script>
-  var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
+var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
       .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
       .addControl(L.mapbox.shareControl())
       .setView([37.9, -77], 5);
@@ -48,6 +48,12 @@
 
   maplight.legendControl.addLegend('hee haw');
   mapdark.legendControl.addLegend('hee haw');
+
+  // Added as a passed in option
+  mapdark.infoControl.options.editLink = true;
+
+  // Added manually
+  maplight.infoControl.addInfo('<a class="mapbox-improve-map" href="#">improve this map</a>');
 
   mapdark.markerLayer.setGeoJSON(feature);
   maplight.markerLayer.setGeoJSON(feature);
