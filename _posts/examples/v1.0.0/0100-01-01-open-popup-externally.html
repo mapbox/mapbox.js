@@ -20,9 +20,9 @@ tags:
 <script>
 var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
-// wait until the markers are loaded, so we know that `map.markerLayer.eachLayer`
+// wait until the markers are loaded, so we know that `map.featureLayer.eachLayer`
 // will actually go over each marker
-map.markerLayer.on('ready', function(e) {
+map.featureLayer.on('ready', function(e) {
     // when a user clicks the button run the `clickButton` function.
     // Thanks to function hoisting in Javascript, we can define the function
     // after we reference it here.
@@ -30,7 +30,7 @@ map.markerLayer.on('ready', function(e) {
 });
 
 function clickButton() {
-    map.markerLayer.eachLayer(function(marker) {
+    map.featureLayer.eachLayer(function(marker) {
         // you can replace this test for anything else, to choose the right
         // marker on which to open a popup. by default, popups are exclusive
         // so opening a new one will close all of the others.

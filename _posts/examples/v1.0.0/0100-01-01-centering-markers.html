@@ -12,7 +12,7 @@ tags:
 <script>
     var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
-    map.markerLayer.on('click', function(e) {
+    map.featureLayer.on('click', function(e) {
         map.panTo(e.layer.getLatLng());
     });
 </script>

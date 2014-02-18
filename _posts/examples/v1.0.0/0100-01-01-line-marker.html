@@ -3,7 +3,7 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Line from Markers
-description: Adding a line from markerLayer
+description: Adding a line from featureLayer
 tags:
   - vector
 ---
@@ -12,7 +12,7 @@ tags:
 <script>
 var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
-map.markerLayer.on('ready', function(e) {
+map.featureLayer.on('ready', function(e) {
   
   var line = [];
 

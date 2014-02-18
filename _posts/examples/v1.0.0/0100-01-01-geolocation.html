@@ -57,7 +57,7 @@ if (!navigator.geolocation) {
 map.on('locationfound', function(e) {
     map.fitBounds(e.bounds);
 
-    map.markerLayer.setGeoJSON({
+    map.featureLayer.setGeoJSON({
         type: "Feature",
         geometry: {
             type: "Point",

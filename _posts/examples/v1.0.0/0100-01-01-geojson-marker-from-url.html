@@ -17,7 +17,7 @@ var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
 // http://en.wikipedia.org/wiki/Same_origin_policy
 // So the CSV file must be on the same domain as the Javascript, or the server
 // delivering it should support CORS.
-var markerLayer = L.mapbox.markerLayer()
+var featureLayer = L.mapbox.featureLayer()
     .loadURL('{{site.baseurl}}/assets/example-single.geojson')
     .addTo(map);
 </script>
