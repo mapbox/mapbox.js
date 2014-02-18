@@ -49,12 +49,6 @@ var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
   maplight.legendControl.addLegend('hee haw');
   mapdark.legendControl.addLegend('hee haw');
 
-  // Added as a passed in option
-  mapdark.infoControl.options.editLink = true;
-
-  // Added manually
-  maplight.infoControl.addInfo('<a class="mapbox-improve-map" href="#">improve this map</a>');
-
   mapdark.markerLayer.setGeoJSON(feature);
   maplight.markerLayer.setGeoJSON(feature);
 </script>

@@ -3,8 +3,7 @@
 var InfoControl = L.Control.extend({
     options: {
         position: 'bottomright',
-        sanitizer: require('sanitize-caja'),
-        editLink: false
+        sanitizer: require('sanitize-caja')
     },
 
     initialize: function(options) {
@@ -93,16 +92,9 @@ var InfoControl = L.Control.extend({
 
         this._content.innerHTML += info.join(' | ');
 
-        if (this.options.editLink && !L.Browser.mobile) {
-            this._content.innerHTML += (info.length) ? ' | ' : '';
-            var edit = L.DomUtil.create('a', '', this._content);
-            edit.innerHTML = 'Improve this map';
-            edit.className = 'mapbox-improve-map';
-        }
-
         // Check for the existence of this element in the attribution list
         // and attach an event handler to it.
-        this._improvemap = this._content.querySelectorAll('.mapbox-improve-map');
+        this._improvemap = this._content.getElementsByClassName('mapbox-improve-map');
         this._map.on('moveend', this._editLink, this);
 
         // If there are no results in _info then hide this.
@@ -116,8 +108,8 @@ var InfoControl = L.Control.extend({
             var tilejson = this._tilejson || this._map._tilejson || {};
             var id = tilejson.id || '';
 
-            for (var link = 0; link < this._improvemap.length; link++) {
-                this._improvemap[link].href = 'https://www.mapbox.com/map-feedback/#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+            for (var i = 0; i < this._improvemap.length; i++) {
+                this._improvemap[i].href = 'https://www.mapbox.com/map-feedback/#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
             }
         }
     },
