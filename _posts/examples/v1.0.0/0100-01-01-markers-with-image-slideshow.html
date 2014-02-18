@@ -76,7 +76,7 @@ var geoJson = [{
 }];
 
 // Add custom popup html to each marker
-map.markerLayer.on('layeradd', function(e) {
+map.featureLayer.on('layeradd', function(e) {
     var marker = e.layer;
     var feature = marker.feature;
     var images = feature.properties.images
@@ -111,7 +111,7 @@ map.markerLayer.on('layeradd', function(e) {
 });
 
 // Add features to the map
-map.markerLayer.setGeoJSON(geoJson);
+map.featureLayer.setGeoJSON(geoJson);
 
 // This example uses jQuery to make selecting items in the slideshow easier.
 // Download it from http://jquery.com

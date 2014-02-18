@@ -17,7 +17,7 @@ var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
 // http://en.wikipedia.org/wiki/Same_origin_policy
 // So the CSV file must be on the same domain as the Javascript, or the server
 // delivering it should support CORS.
-var markerLayer = L.mapbox.markerLayer()
+var featureLayer = L.mapbox.featureLayer()
     .loadURL('{{site.baseurl}}/assets/data/eastcoast_cities.geojson')
     .addTo(map);
 
@@ -29,9 +29,9 @@ var markerLayer = L.mapbox.markerLayer()
 // waiting for the ready event. If you don't load your markers with an async
 // method and instead set them with setGeoJSON or similar, you don't need
 // to do this.
-markerLayer.on('ready', function() {
-    // markerLayer.getBounds() returns the corners of the furthest-out markers,
+featureLayer.on('ready', function() {
+    // featureLayer.getBounds() returns the corners of the furthest-out markers,
     // and map.fitBounds() makes sure that the map contains these.
-    map.fitBounds(markerLayer.getBounds());
+    map.fitBounds(featureLayer.getBounds());
 });
 </script>

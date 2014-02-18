@@ -13,7 +13,7 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
     .setView([0, 0], 9);
 
-var markerLayer = L.mapbox.markerLayer({
+var featureLayer = L.mapbox.featureLayer({
         type: 'FeatureCollection',
         features: [{
             type: 'Feature',
@@ -31,9 +31,9 @@ var markerLayer = L.mapbox.markerLayer({
 
 // note that calling `.eachLayer` here depends on setting GeoJSON _directly_
 // above. If you're loading GeoJSON asynchronously, like from CSV or from a file,
-// you will need to do this within a `markerLayer.on('ready'` event
+// you will need to do this within a `featureLayer.on('ready'` event
 
-markerLayer.eachLayer(function(layer) {
+featureLayer.eachLayer(function(layer) {
 
     // here you call `bindPopup` with a string of HTML you create - the feature
     // properties declared above are available under `layer.feature.properties`

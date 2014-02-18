@@ -22,16 +22,16 @@ map.on('zoomend', function() {
     // you want something other than just one zoom level, like
     // (map.getZoom > 10)
     if (map.getZoom() === 13) {
-        // setFilter is available on L.mapbox.markerLayers only. Here
+        // setFilter is available on L.mapbox.featureLayers only. Here
         // we're hiding and showing the default marker layer that's attached
         // to the map - change the reference if you want to hide or show a
-        // different markerLayer.
+        // different featureLayer.
         // If you want to hide or show a different kind of layer, you can use
         // similar methods like .setOpacity(0) and .setOpacity(1)
         // to hide or show it.
-        map.markerLayer.setFilter(function() { return true; });
+        map.featureLayer.setFilter(function() { return true; });
     } else {
-        map.markerLayer.setFilter(function() { return false; });
+        map.featureLayer.setFilter(function() { return false; });
     }
 });
 </script>

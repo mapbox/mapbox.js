@@ -62,10 +62,10 @@ var geoJson = [
     }
 ];
 
-map.markerLayer.setGeoJSON(geoJson);
+map.featureLayer.setGeoJSON(geoJson);
 
 // Listen for individual marker clicks
-map.markerLayer.on('click',function(e) {
+map.featureLayer.on('click',function(e) {
     var feature = e.layer.feature;
     var info = '<h2>' + feature.properties.title + '</h2>' +
                '<p>' + feature.properties.description + '</p>';

@@ -3,7 +3,7 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Load GeoJSON
-description: Use markerLayer.setGeoJSON to load features on your map.
+description: Use featureLayer.setGeoJSON to load features on your map.
 tags:
   - markers
   - data
@@ -44,5 +44,5 @@ var geojson = [
 
 L.mapbox.map('map', 'examples.map-9ijuk24y')
   .setView([37.8, -96], 4)
-  .markerLayer.setGeoJSON(geojson);
+  .featureLayer.setGeoJSON(geojson);
 </script>
