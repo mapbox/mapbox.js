@@ -22,7 +22,7 @@ tags:
 <script>
 var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
     .setView([38, -102.0], 5),
-    markerLayer = L.mapbox.markerLayer().addTo(map);
+    featureLayer = L.mapbox.featureLayer().addTo(map);
 
 $('#search').keyup(search);
 
@@ -39,14 +39,14 @@ $.ajax({
 // Though these functions are below the places where they're used in this
 // script, they'll still work due to JavaScript's function hoisting feature.
 function csvLoaded(csv) {
-    markerLayer.setGeoJSON(csv2geojson.csv2geojson(csv));
+    featureLayer.setGeoJSON(csv2geojson.csv2geojson(csv));
 }
 
 function search() {
     // get the value of the search input field
     var searchString = $('#search').val().toLowerCase();
 
-    markerLayer.setFilter(showState);
+    featureLayer.setFilter(showState);
 
     // here we're simply comparing the 'state' property of each marker
     // to the search string, seeing whether the former contains the latter.

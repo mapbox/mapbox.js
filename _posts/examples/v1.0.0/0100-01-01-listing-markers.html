@@ -43,7 +43,7 @@ for (var x = -120; x < 120; x += 20) {
     }
 }
 
-map.markerLayer.setGeoJSON({
+map.featureLayer.setGeoJSON({
     type: 'FeatureCollection',
     features: features
 });
@@ -56,7 +56,7 @@ map.on('move', function() {
 
     // for each marker, consider whether it is currently visible by comparing
     // with the current map bounds
-    map.markerLayer.eachLayer(function(marker) {
+    map.featureLayer.eachLayer(function(marker) {
         if (bounds.contains(marker.getLatLng())) {
             inBounds.push(marker.options.title);
         }

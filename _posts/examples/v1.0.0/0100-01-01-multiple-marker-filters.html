@@ -36,15 +36,15 @@ var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 var filters = document.getElementById('filters');
 
 // Wait until the marker layer is loaded in order to build a list of possible
-// types. If you are doing this with another markerLayer, you should change
-// map.markerLayer to the variable you have assigned to your markerLayer
-map.markerLayer.on('ready', function() {
+// types. If you are doing this with another featureLayer, you should change
+// map.featureLayer to the variable you have assigned to your featureLayer
+map.featureLayer.on('ready', function() {
   // collect the types of symbols in this layer. you can also just
   // hardcode an array of types if you know what you want to filter on,
   // like
   // var types = ['foo', 'bar'];
   var typesObj = {}, types = [];
-  var features = map.markerLayer.getGeoJSON().features;
+  var features = map.featureLayer.getGeoJSON().features;
   for (var i = 0; i < features.length; i++) {
     typesObj[features[i].properties['marker-symbol']] = true;
   }
@@ -79,7 +79,7 @@ map.markerLayer.on('ready', function() {
     for (var i = 0; i < checkboxes.length; i++) {
       if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
     }
-    map.markerLayer.setFilter(function(feature) {
+    map.featureLayer.setFilter(function(feature) {
       // if this symbol is in the list, return true. if not, return false.
       // the 'in' operator in javascript does exactly that: given a string
       // or number, it says if that is in a object

@@ -37,11 +37,11 @@ var geoJson = {
     }]
 };
 
-map.markerLayer.setGeoJSON(geoJson);
-map.markerLayer.on('mouseover', function(e) {
+map.featureLayer.setGeoJSON(geoJson);
+map.featureLayer.on('mouseover', function(e) {
     e.layer.openPopup();
 });
-map.markerLayer.on('mouseout', function(e) {
+map.featureLayer.on('mouseout', function(e) {
     e.layer.closePopup();
 });
 </script>

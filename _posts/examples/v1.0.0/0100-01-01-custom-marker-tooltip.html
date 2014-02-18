@@ -48,7 +48,7 @@ var geoJson = [{
 }];
 
 // Add custom popups to each using our custom feature properties
-map.markerLayer.on('layeradd', function(e) {
+map.featureLayer.on('layeradd', function(e) {
     var marker = e.layer,
         feature = marker.feature;
 
@@ -66,7 +66,7 @@ map.markerLayer.on('layeradd', function(e) {
 });
 
 // Add features to the map
-map.markerLayer.setGeoJSON(geoJson);
+map.featureLayer.setGeoJSON(geoJson);
 
 map.setView([45.908, -78.525], 4);
 </script>

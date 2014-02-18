@@ -1,0 +1,28 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Binding Click Events in Popups
+description: Using jQuery to listen for events from bindPopup
+tags:
+  - markers
+---
+
+<div id='map'></div>
+<script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([0, 0], 9);
+
+var marker = L.marker([0, 0])
+    .bindPopup('<button id="mybutton">say hi</button>')
+    .addTo(map);
+
+// The HTML we put in bindPopup doesn't exist yet, so we can't just say
+// $('#mybutton'). Instead, we listen for click events on the map element
+// which will bubble up from the tooltip, once it's created and someone clicks
+// on it.
+$('#map').on('click', '#mybutton', function() {
+    alert('hi!');
+});
+</script>
