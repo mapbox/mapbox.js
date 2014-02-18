@@ -118,7 +118,7 @@ var InfoControl = L.Control.extend({
         var tilejson = this._tilejson || this._map._tilejson || {};
         var id = tilejson.id || '';
         var url = 'https://www.mapbox.com/map-feedback/#';
-        el.href = url + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom(); 
+        el.href = url + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
     },
 
     _onLayerAdd: function(e) {
