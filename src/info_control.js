@@ -68,6 +68,7 @@ var InfoControl = L.Control.extend({
         L.DomUtil.addClass(this._container, 'active');
         this._active = true;
         this._update();
+        this._editLink();
     },
 
     _hidecontent: function() {
@@ -92,33 +93,35 @@ var InfoControl = L.Control.extend({
 
         this._content.innerHTML += info.join(' | ');
 
-        // Check for the existence of this element in the attribution list
-        // and attach an event handler to it.
-        var improvemap = this._content.querySelectorAll('.mapbox-improve-map');
-
-        for (var link = 0; link < improvemap.length; link++) {
-            this._map.on('moveend', this._editlink(improvemap[link]));
-        }
-
-        if (this.options.editLink && !L.Browser.mobile && !improvemap.length) {
+        if (this.options.editLink && !L.Browser.mobile) {
             this._content.innerHTML += (info.length) ? ' | ' : '';
             var edit = L.DomUtil.create('a', '', this._content);
-            edit.href = 'https://www.mapbox.com/map-feedback/';
             edit.innerHTML = 'Improve this map';
-            this._map.on('moveend', this._editlink(edit));
+            edit.className = 'mapbox-improve-map';
         }
+
+        // Check for the existence of this element in the attribution list
+        // and attach an event handler to it.
+        this._improvemap = this._content.querySelectorAll('.mapbox-improve-map');
+        this._map.on('moveend', this._editLink, this);
 
         // If there are no results in _info then hide this.
         this._container.style.display = hide;
         return this;
     },
 
-    _editlink: function(el) {
-        var center = this._map.getCenter();
-        var tilejson = this._tilejson || this._map._tilejson || {};
-        var id = tilejson.id || '';
-        var url = 'https://www.mapbox.com/map-feedback/#';
-        el.href = url + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+    _editLink: function(el) {
+        if (this._improvemap.length) {
+            for (var link = 0; link < this._improvemap.length; link++) {
+
+                var center = this._map.getCenter();
+                var tilejson = this._tilejson || this._map._tilejson || {};
+                var id = tilejson.id || '';
+                var url = 'https://www.mapbox.com/map-feedback/#';
+
+                this._improvemap[link].href = url + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+            }
+        }
     },
 
     _onLayerAdd: function(e) {
