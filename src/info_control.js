@@ -112,14 +112,12 @@ var InfoControl = L.Control.extend({
 
     _editLink: function(el) {
         if (this._improvemap.length) {
+            var center = this._map.getCenter();
+            var tilejson = this._tilejson || this._map._tilejson || {};
+            var id = tilejson.id || '';
+
             for (var link = 0; link < this._improvemap.length; link++) {
-
-                var center = this._map.getCenter();
-                var tilejson = this._tilejson || this._map._tilejson || {};
-                var id = tilejson.id || '';
-                var url = 'https://www.mapbox.com/map-feedback/#';
-
-                this._improvemap[link].href = url + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+                this._improvemap[link].href = 'https://www.mapbox.com/map-feedback/#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
             }
         }
     },
