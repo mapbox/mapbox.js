@@ -60,6 +60,7 @@
             });
 
             if (query) {
+                this.$menu.children().show();
                 this.$menu.children('.section').each(function() {
                     var $this = $(this);
                     if ($this.children(':visible').length < 2) $this.hide();
