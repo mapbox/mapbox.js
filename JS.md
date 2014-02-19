@@ -118,20 +118,20 @@ map.on('click', function() {
 
 ## AJAX & Downloads
 
-One of the main places where we see the existence of callbacks is in concert with AJAX, the way that JavaScript is able to download resources on the fly in order to show content. For instance, when you create a new `L.mapbox.markerLayer`, you might be tempted to do this:
+One of the main places where we see the existence of callbacks is in concert with AJAX, the way that JavaScript is able to download resources on the fly in order to show content. For instance, when you create a new `L.mapbox.featureLayer`, you might be tempted to do this:
 
 ```js
 // get the markerlayer with the map id `foo.bar`
-var markerLayer = L.mapbox.markerLayer('foo.bar');
+var featureLayer = L.mapbox.featureLayer('foo.bar');
 
 // what GeoJSON content do those markers have?
-var thatGeoJSON = markerLayer.getGeoJSON();
+var thatGeoJSON = featureLayer.getGeoJSON();
 ```
 
 But you'll find, to your chagrin, that there's no content in that `getGeoJSON` call. That's because when JavaScript wants to download something like a bunch of markers from a server, it doesn't stop at the line
 
 ```js
-var markerLayer = L.mapbox.markerLayer('foo.bar');
+var featureLayer = L.mapbox.featureLayer('foo.bar');
 ```
 
 Before starting up and running the next line - it says "start downloading those markers!" and then keeps on keeping on.
@@ -139,15 +139,15 @@ Before starting up and running the next line - it says "start downloading those 
 So how do you know when the markers are downloaded? Events and callbacks.
 
 ```js
-var markerLayer = L.mapbox.markerLayer('foo.bar');
+var featureLayer = L.mapbox.featureLayer('foo.bar');
 
-markerLayer.on('ready', function() {
+featureLayer.on('ready', function() {
   // what GeoJSON content do those markers have?
-  var thatGeoJSON = markerLayer.getGeoJSON();
+  var thatGeoJSON = featureLayer.getGeoJSON();
 }):
 ```
 
-The `L.mapbox.markerLayer` class has a callback that fires right as soon as the markers are loaded in full. If you wait for this callback, then you can know for sure that `.getGeoJSON()` and all other functions that rely on those markers being fully downloaded will work just as expected.
+The `L.mapbox.featureLayer` class has a callback that fires right as soon as the markers are loaded in full. If you wait for this callback, then you can know for sure that `.getGeoJSON()` and all other functions that rely on those markers being fully downloaded will work just as expected.
 
 ## JSON & GeoJSON
 
@@ -189,7 +189,7 @@ That's a point at latitude=0, longitude=0.
 The important aha moment to have with GeoJSON and JSON in general is that, while it's pretty strict for how you write it, once you bring a JSON object into JavaScript by AJAX or however, it's the same as any other JavaScript object: you can change it, use it as a variable in functions, or anything else. That's why when there's a function like
 
 ```js
-markerLayer.setGeoJSON(geoJsonObject);
+featureLayer.setGeoJSON(geoJsonObject);
 ```
 
 What it's really saying is that it expects a JavaScript object that's formatted like GeoJSON. It doesn't care how it got there, or what's in its past. Now is the time.
@@ -246,7 +246,7 @@ Instead, a `L.geoJson` layer is actually a `L.layerGroup` behind the scenes: so 
 
 So, for each `feature` in your GeoJSON data, the geojsonLayer actually has a specific little layer for that feature.
 
-## L.geoJson, map.markerLayer, L.marker, and L.mapbox.markerLayer
+## L.geoJson, map.featureLayer, L.marker, and L.mapbox.featureLayer
 
 Want to put a point on the map? There are quite a few ways! Let's nail down
 when you'd want each of them.
@@ -305,14 +305,14 @@ manage it with any tool that knows how to talk GeoJSON.
 
 How about nice-looking markers, and data that you've added in Mapbox?
 Mapbox.js extends Leaflet with some simple abstractions to make this simpler.
-The basic element is the [`L.mapbox.markerLayer()`](https://www.mapbox.com/mapbox.js/api/v1.5.0/#L.mapbox.markerLayer).
+The basic element is the [`L.mapbox.featureLayer()`](https://www.mapbox.com/mapbox.js/api/v1.5.0/#L.mapbox.featureLayer).
 This is like a `L.geoJson` object but with some differences:
 
-You can instantiate a `markerLayer` just with a map id, and it will magically
+You can instantiate a `featureLayer` just with a map id, and it will magically
 pull the markers down for you:
 
 ```js
-var markers = L.mapbox.markerLayer('my.mapid').addTo(map);
+var markers = L.mapbox.featureLayer('my.mapid').addTo(map);
 // behind the scenes the markers are downloaded with AJAX, and when they're
 // done, the `ready` event is fired.
 ```
@@ -326,30 +326,30 @@ markers.loadURL('mymarkers.geojson');
 ```
 
 Finally, a special convenience built in to `L.mapbox.map()` is that markers
-for a given map ID are automatically loaded into `map.markerLayer`:
+for a given map ID are automatically loaded into `map.featureLayer`:
 
 ```js
 var map = L.mapbox.map('my.mapofthings');
 
 // this marker layer contains any markers that are saved along with the map
 // mapofthings
-map.markerLayer;
+map.featureLayer;
 ```
 
 If you _don't_ want this to happen, it's easy to opt-out:
 
 ```js
 var map = L.mapbox.map('my.mapofthings', {
-    markerLayer: false
+    featureLayer: false
 });
 ```
 
 That said, if you want to _load custom GeoJSON data_, you should _not_ just
-reuse `map.markerLayer`, because it'll get overwritten by the data automatically
-downloaded. So just create a new `L.mapbox.markerLayer`, add it to the map
+reuse `map.featureLayer`, because it'll get overwritten by the data automatically
+downloaded. So just create a new `L.mapbox.featureLayer`, add it to the map
 as demonstrated above, and load your custom data into it.
 
-`L.mapbox.markerLayer` instances have the special feature that they will style
+`L.mapbox.featureLayer` instances have the special feature that they will style
 markers with [simplestyle](https://www.mapbox.com/developers/simplestyle/) and
 will use the fancy [markers api](https://www.mapbox.com/developers/api/#Stand-alone.markers)
 for marker icons.
