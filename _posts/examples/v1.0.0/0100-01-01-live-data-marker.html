@@ -1,0 +1,32 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: GeoJSON from Live Realtime API
+description: Moving a marker based on an API response
+tags:
+  - markers
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([38, -102.0], 2);
+
+// As with any other AJAX request, this technique is subject to the Same Origin Policy:
+// http://en.wikipedia.org/wiki/Same_origin_policy
+var featureLayer = L.mapbox.featureLayer()
+    .loadURL('https://wanderdrone.appspot.com/')
+    // Once this layer loads, we set a timer to load it again in a few seconds
+    .on('ready', run)
+    .addTo(map);
+
+function run() {
+    featureLayer.eachLayer(function(l) {
+        map.panTo(l.getLatLng());
+    });
+    window.setTimeout(function() {
+        featureLayer.loadURL('https://wanderdrone.appspot.com/');
+    }, 2000);
+}
+</script>
