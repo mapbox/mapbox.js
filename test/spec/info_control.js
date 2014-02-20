@@ -62,6 +62,18 @@ describe('L.mapbox.infoControl', function() {
             map.setView([38.902, -77.001], 13);
             expect(info._content.innerHTML).to.eql('<a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#/-77.001/38.902/13"></a>');
         });
+
+        it('checks moveend is no longer bound to map when .mapbox-improve-map is present', function() {
+            var map = L.mapbox.map(document.createElement('div'), 'examples.map-9ijuk24y');
+
+            var info = L.mapbox.infoControl().addTo(map);
+            info.addInfo('<a class="mapbox-improve-map"></a>');
+            info.addInfo('foo');
+            info.removeInfo('<a class="mapbox-improve-map"></a>');
+
+            map.setView([38.902, -77.001], 13);
+            expect(info._content.innerHTML).to.eql('foo');
+        });
     });
 
     it('sanitizes its content', function() {
