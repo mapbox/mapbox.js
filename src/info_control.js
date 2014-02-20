@@ -100,7 +100,7 @@ var InfoControl = L.Control.extend({
 
     _editLink: function() {
         var link = this._content.getElementsByClassName('mapbox-improve-map');
-        if (link.length) {
+        if (link.length && this._map._loaded) {
             var center = this._map.getCenter();
             var tilejson = this._tilejson || this._map._tilejson || {};
             var id = tilejson.id || '';
