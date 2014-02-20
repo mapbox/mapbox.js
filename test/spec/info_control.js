@@ -53,22 +53,14 @@ describe('L.mapbox.infoControl', function() {
     });
 
     describe('#editLink', function() {
-        it('tracks the presence of `.mapbox-improve-map`', function() {
-            var map = L.map(document.createElement('div')).setView([0,0],1);
-            var info = L.mapbox.infoControl();
-            info.addTo(map);
-            info.addInfo('<a href="#" class="mapbox-improve-map"><a>');
-            map.fire('moveend');
-            expect(info._content.innerHTML).to.contain('#');
-        });
+        it('checks moveend is bound to map when .mapbox-improve-map is present', function() {
+            var map = L.mapbox.map(document.createElement('div'), 'examples.map-9ijuk24y');
 
-        it('does not track the presence of .mapbox-improve-map', function() {
-            var map = L.map(document.createElement('div'));
-            var info = L.mapbox.infoControl();
-            info.addTo(map);
-            info.addInfo('foo');
-            map.fire('moveend');
-            expect(info._content.innerHTML.indexOf('#')).to.be(-1);
+            var info = L.mapbox.infoControl().addTo(map);
+            info.addInfo('<a class="mapbox-improve-map"></a>');
+
+            map.setView([38.902, -77.001], 13);
+            expect(info._content.innerHTML).to.eql('<a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#/-77.001/38.902/13"></a>');
         });
     });
 
