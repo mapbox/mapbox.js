@@ -52,6 +52,26 @@ describe('L.mapbox.infoControl', function() {
         });
     });
 
+    describe('#editLink', function() {
+        it('tracks the presence of `.mapbox-improve-map`', function() {
+            var map = L.map(document.createElement('div')).setView([0,0],1);
+            var info = L.mapbox.infoControl();
+            info.addTo(map);
+            info.addInfo('<a href="#" class="mapbox-improve-map"><a>');
+            map.fire('moveend');
+            expect(info._content.innerHTML).to.contain('#');
+        });
+
+        it('does not track the presence of .mapbox-improve-map', function() {
+            var map = L.map(document.createElement('div'));
+            var info = L.mapbox.infoControl();
+            info.addTo(map);
+            info.addInfo('foo');
+            map.fire('moveend');
+            expect(info._content.innerHTML.indexOf('#')).to.be(-1);
+        });
+    });
+
     it('sanitizes its content', function() {
         var map = L.map(document.createElement('div'));
         var info = L.mapbox.infoControl().addTo(map);
