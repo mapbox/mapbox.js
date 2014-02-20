@@ -52,15 +52,6 @@ describe('L.mapbox.infoControl', function() {
         });
     });
 
-    it('adds an improve this map link', function() {
-        var map = L.map(document.createElement('div'));
-        var info = L.mapbox.infoControl({
-            editLink: true
-        }).addTo(map);
-
-        expect(info._content.innerText || info._content.textContent).to.eql('Improve this map');
-    });
-
     it('sanitizes its content', function() {
         var map = L.map(document.createElement('div'));
         var info = L.mapbox.infoControl().addTo(map);

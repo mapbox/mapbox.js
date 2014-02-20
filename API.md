@@ -333,7 +333,7 @@ A map control that shows a toggleable info container. This is triggered by defau
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`editLink`: A boolean that adds an `Improve this map` link to your map allowing users to make edits to OpenStreetMap from the current map coordinates being viewed.</li><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
+| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
 
@@ -544,7 +544,7 @@ A `L.Marker` object with the latitude, longitude position and a styled marker
 The other sections of the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) are implemented
 by `L.mapbox.simplestyle`
 
-## L.simplestyle.style(feature)
+## L.mapbox.simplestyle.style(feature)
 
 Given a GeoJSON Feature with optional simplestyle-spec properties, return an
 options object formatted to be used as [Leaflet Path options](http://leafletjs.com/reference.html#path).
