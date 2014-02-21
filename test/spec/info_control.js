@@ -60,7 +60,7 @@ describe('L.mapbox.infoControl', function() {
             info.addInfo('<a class="mapbox-improve-map"></a>');
 
             map.setView([38.902, -77.001], 13);
-            expect(info._content.innerHTML).to.eql('<a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#/-77.001/38.902/13"></a>');
+            expect(info._content.innerHTML).to.eql('<a class="mapbox-improve-map" href="#/-77.001/38.902/13"></a>');
         });
 
         it('checks moveend is no longer bound to map when .mapbox-improve-map is present', function() {

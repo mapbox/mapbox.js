@@ -106,7 +106,8 @@ var InfoControl = L.Control.extend({
             var id = tilejson.id || '';
 
             for (var i = 0; i < link.length; i++) {
-                link[i].href = 'https://www.mapbox.com/map-feedback/#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+                if (!this._editurl) this._editurl = link[i].href;
+                link[i].href = this._editurl + '#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
             }
         }
     },
