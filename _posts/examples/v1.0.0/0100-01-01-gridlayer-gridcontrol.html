@@ -1,0 +1,37 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Using gridLayer and gridControl
+description: Manually specifying how interaction works
+tags:
+  - layers
+---
+
+<style>
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100px;
+}
+</style>
+<div id='map'></div>
+<script>
+// Let's define a map without a map id, so we have to add each part of it
+// manually
+var map = L.mapbox.map('map');
+
+// The visible tile layer
+var myTiles = L.mapbox.tileLayer('examples.map-8ced9urs').addTo(map);
+
+// Load interactivity data into the map with a gridLayer
+var myGridLayer = L.mapbox.gridLayer('examples.map-8ced9urs').addTo(map);
+
+// And use that interactivity to drive a control the user can see
+var myGridControl = L.mapbox.gridControl(myGridLayer).addTo(map);
+
+// Finally, center the map
+map.setView([37, -80], 3);
+</script>
