@@ -229,6 +229,17 @@ function load() {
 
     var examples = new Docs();
     examples.bindSearch($('#filter-examples'), $('.js-nav-examples'));
+
+    var top = $('.docs-sidebar').offset().top - 10;
+
+    $(window).scroll(_.throttle(function() {
+        var y = $(window).scrollTop();
+        if (y > top) {
+            $('.docs-sidebar').addClass('fixed');
+        } else {
+            $('.docs-sidebar').removeClass('fixed');
+        }
+    }, 100));
 }
 
 $(load);

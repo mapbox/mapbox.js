@@ -1,0 +1,31 @@
+<header class='limiter'>
+  <div class='pad2y clearfix'>
+    <div class='col3'>
+      <h3 class='small quiet'>Developers</h3>
+        <h2>
+          {{site.title}}
+          <a class='version quiet' href='https://github.com/mapbox/mapbox.js/blob/master/CHANGELOG.md#{{site.mapboxjs|replace:'.', ''}}'>
+          {% if page.v0 %}
+            <sup class='fill-yellow small'>{{site.oldversion}}</sup>
+          {% elsif page.version %}
+            {% if page.category == 'examples' %}
+              <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+            {% else %}
+              <sup class='fill-darken0 small'>{{page.version}}</sup>
+            {% endif %}
+          {% else %}
+            <sup class='fill-darken0 small'>{{site.mapboxjs}}</sup>
+          {% endif %}
+          </a>
+        </h2>
+    </div>
+
+    <div class='col9'>
+      <nav class='pill mobile-cols pad2y margin0 small strong clearfix'><!--
+      --><a href='{{site.baseurl}}/api' class='animate button col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
+      --><a href='{{site.baseurl}}/examples' class='button col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
+      --><a href='{{site.baseurl}}/plugins' class='button col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+      </nav>
+    </div>
+  </div>
+</header>
