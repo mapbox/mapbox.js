@@ -106,8 +106,7 @@ var InfoControl = L.Control.extend({
             var id = tilejson.id || '';
 
             for (var i = 0; i < link.length; i++) {
-                if (!this._editurl) this._editurl = link[i].href;
-                link[i].href = this._editurl + '#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
             }
         }
     },
