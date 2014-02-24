@@ -43,9 +43,9 @@ var InfoControl = L.Control.extend({
 
     onRemove: function(map) {
         map
-            .off('moveend', this._editLink)
-            .off('layeradd', this._onLayerAdd)
-            .off('layerremove', this._onLayerRemove);
+            .off('moveend', this._editLink, this)
+            .off('layeradd', this._onLayerAdd, this)
+            .off('layerremove', this._onLayerRemove, this);
     },
 
     addInfo: function(text) {
