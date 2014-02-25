@@ -1,17 +1,15 @@
 {% assign endpath = page.url | split: '/' | last %}
 
 {% for p in site.tags[page.version] %}
-<nav class='navigation pad1y full-y keyline-top scroll-y v js-nav-docs quiet-scroll'>
-  <div class='section space-bottom1'>
-    <a class='col12 truncate sub{% if endpath == p.version %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/'>Overview</a>
-  </div>
-  {% for section in p.navigation %}
-    <div class='section space-bottom1'>
-      <h3 class='sub'>{{section.title}}</h3>
-      {% for nav in section.nav %}
-        <a class='col12 truncate sub{% if endpath == nav.id | replace: ' ', '_' | downcase %} active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{nav.id|replace:' ','_'|downcase}}'>{{nav.title}}</a>
-      {% endfor %}
-    </div>
+<div class='space-bottom'>
+  <a class='block quiet strong small truncate {% if endpath == p.version %}active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/'>API {{p.version}}</a>
+</div>
+{% for section in p.navigation %}
+<div class='space-bottom'>
+  <strong class='block quiet small'>{{section.title}}</strong>
+  {% for nav in section.nav %}
+  <a class='block small truncate {% if endpath == nav.id | replace: ' ', '_' | downcase %}active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{nav.id|replace:' ','_'|downcase}}'>{{nav.title}}</a>
   {% endfor %}
-</nav>
+</div>
+{% endfor %}
 {% endfor %}

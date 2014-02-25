@@ -167,8 +167,8 @@
   }
 .quiet-scroll pre::-webkit-scrollbar,
 .quiet-scroll::-webkit-scrollbar {
-  width:8px;
-  height:8px;
+  width:1px;
+  height:1px;
   border-left:0;
   background:rgba(0,0,0,0.1);
   }
@@ -178,12 +178,12 @@
   }
 .quiet-scroll pre::-webkit-scrollbar-thumb,
 .quiet-scroll::-webkit-scrollbar-thumb {
-  background:rgba(0,0,0,0.1);
+  background:rgba(0,0,0,0.4);
   border-radius:0;
   }
 .quiet-scroll pre::-webkit-scrollbar:hover,
 .quiet-scroll::-webkit-scrollbar:hover {
-  background:rgba(0,0,0,0.15);
+  background:rgba(0,0,0,0.4);
   }
 
 pre a {
