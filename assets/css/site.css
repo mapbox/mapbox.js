@@ -247,4 +247,6 @@ pre .var { color:#0C9DC2; }
   display:inline;
   }
 
-.js-clipboard:hover { cursor: pointer; }
+.button.zeroclipboard-is-hover { background:#3bb2d0!important; }
+.js-clipboard:hover { cursor:pointer; }
+
