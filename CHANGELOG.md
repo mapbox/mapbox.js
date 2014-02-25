@@ -2,6 +2,8 @@
 
 * Removes `editLink` option for `L.mapbox.infoControl`
 * Recognizes and updates `Improve this Map` link in `L.mapbox.infoControl`
+* Improved documentation
+* Improved [popup styles](https://github.com/mapbox/mapbox.js/pull/659)
 
 ## v1.6.1
 
