@@ -30,7 +30,7 @@ examples:
 head: |
   <style>
   .masthead {
-    z-index:1;
+    z-index:10000;
     position:fixed; top:0px; left:0px; right:0px;
     height:60px;
   }
@@ -50,22 +50,26 @@ head: |
   }
   body { padding-top:60px; }
   .footer.fill-white {
-    padding:20px 0px;
-    border:0px;
+    padding:0;
+    border:0;
     background:transparent;
   }
+  .docs-search input {
+    border:none; 
+    border-radius:3px;
+    }
   .footer .limiter > .newsletter { display:none; }
   .footer .limiter > .mobile-cols {
     margin-left:25%;
     width:75%;
-    padding:20px 40px;
-    border-radius:3px;
-    background:rgba(0,0,0,0.05);
+    padding:20px;
     position:relative;
     z-index:1;
   }
   /* @TODO */
   .footer-copyright { display:none; }
+
+  .footer-heading { margin-top:20px; }
   </style>
 ---
 
@@ -122,16 +126,16 @@ head: |
 </div>
 
 <div class='limiter clearfix'>
-  <div class='contain margin3 col9 fill-green space-bottom round-bottom pad1 dark small mobile-cols'>
-    <div class='col8 fill-darken0 round'>
-      <strong class='col3 pad1y center icon brackets clip'>Mapbox.js</strong><!--
+  <div class='contain margin3 col9 space-bottom fill-green round-bottom pad2 small mobile-cols'>
+    <div class='col8'>
+      <strong class='col3 pad1y icon quiet brackets'>Mapbox.js</strong><!--
       --><span class='col9 tabs mobile-cols fill-green'><!--
         --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
         --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
         --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
       </span>
     </div>
-    <fieldset class='margin1 col3 with-icon'>
+    <fieldset class='margin1 col3 with-icon docs-search'>
       <span class='icon search'></span>
       <input type='text' class='col12' />
     </fieldset>
@@ -141,3 +145,8 @@ head: |
   </div>
 </div>
 
+<div class='limiter footer-heading'>
+  <div class='margin3 col9 pad2x'>
+    <strong>Mapbox.com</strong>
+  </div>
+</div>
