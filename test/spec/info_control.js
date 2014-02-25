@@ -52,15 +52,6 @@ describe('L.mapbox.infoControl', function() {
         });
     });
 
-    it('adds an improve this map link', function() {
-        var map = L.map(document.createElement('div'));
-        var info = L.mapbox.infoControl({
-            editLink: true
-        }).addTo(map);
-
-        expect(info._content.innerText || info._content.textContent).to.eql('Improve this map');
-    });
-
     it('sanitizes its content', function() {
         var map = L.map(document.createElement('div'));
         var info = L.mapbox.infoControl().addTo(map);
@@ -95,6 +86,21 @@ describe('L.mapbox.infoControl', function() {
 
         server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+        server.respond();
+    });
+
+    it('adds map location to improve link in attribution when .mapbox-improve-map is present', function() {
+        var server = sinon.fakeServer.create();
+        var element = document.createElement('div');
+        var map = L.mapbox.map(element, 'examples.h8e9h88l');
+
+        map.on('ready', function() {
+            map.setView([38.902, -77.001], 13);
+            expect(map.infoControl._content.innerHTML).to.eql('<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/38.902/13" target="_blank">Improve this map</a>');
+        });
+
+        server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.h8e9h88l.json",
+            [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
         server.respond();
     });
 });

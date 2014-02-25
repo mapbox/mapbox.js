@@ -62,9 +62,10 @@
 
     addLayer(L.mapbox.tileLayer('tristen.map-ixqro653'), 'Mapbox Streets');
     addLayer(L.mapbox.tileLayer('tmcw.dc-ddot-bike-lanes'), 'Bike Lanes');
-    addLayer(L.mapbox.markerLayer('tmcw.map-j5a868tu'), 'Coffee Shops');
+    addLayer(L.mapbox.featureLayer('tmcw.map-j5a868tu'), 'Coffee Shops');
 
     function addLayer(layer, name) {
+
         layer.addTo(map);
 
         // Create a simple layer switcher that toggles layers on

@@ -1,3 +1,8 @@
+## v1.6.2
+
+* Removes `editLink` option for `L.mapbox.infoControl`
+* Recognizes and updates `Improve this Map` link in `L.mapbox.infoControl`
+
 ## v1.6.1
 
 * Adds `select` and `autoselect` events to the geocoderControl to allow for

@@ -3,8 +3,7 @@
 var InfoControl = L.Control.extend({
     options: {
         position: 'bottomright',
-        sanitizer: require('sanitize-caja'),
-        editLink: false
+        sanitizer: require('sanitize-caja')
     },
 
     initialize: function(options) {
@@ -34,6 +33,7 @@ var InfoControl = L.Control.extend({
         }
 
         map
+            .on('moveend', this._editLink, this)
             .on('layeradd', this._onLayerAdd, this)
             .on('layerremove', this._onLayerRemove, this);
 
@@ -43,14 +43,14 @@ var InfoControl = L.Control.extend({
 
     onRemove: function(map) {
         map
-            .off('layeradd', this._onLayerAdd)
-            .off('layerremove', this._onLayerRemove);
+            .off('moveend', this._editLink, this)
+            .off('layeradd', this._onLayerAdd, this)
+            .off('layerremove', this._onLayerRemove, this);
     },
 
     addInfo: function(text) {
         if (!text) return this;
         if (!this._info[text]) this._info[text] = 0;
-
         this._info[text] = true;
         return this._update();
     },
@@ -91,26 +91,27 @@ var InfoControl = L.Control.extend({
         }
 
         this._content.innerHTML += info.join(' | ');
-
-        if (this.options.editLink && !L.Browser.mobile) {
-            this._content.innerHTML += (info.length) ? ' | ' : '';
-            var edit = L.DomUtil.create('a', '', this._content);
-            edit.href = '#';
-            edit.innerHTML = 'Improve this map';
-            edit.title = 'Edit in OpenStreetMap';
-            L.DomEvent.on(edit, 'click', L.bind(this._osmlink, this), this);
-        }
+        this._editLink();
 
         // If there are no results in _info then hide this.
         this._container.style.display = hide;
         return this;
     },
 
-    _osmlink: function() {
-        var center = this._map.getCenter();
-        var z = this._map.getZoom();
-        window.open('http://www.openstreetmap.org/edit?' + 'zoom=' + z +
-        '&lat=' + center.lat + '&lon=' + center.lng);
+    _editLink: function() {
+        if (!this._content.getElementsByClassName) {
+            return;
+        }
+        var link = this._content.getElementsByClassName('mapbox-improve-map');
+        if (link.length && this._map._loaded) {
+            var center = this._map.getCenter();
+            var tilejson = this._tilejson || this._map._tilejson || {};
+            var id = tilejson.id || '';
+
+            for (var i = 0; i < link.length; i++) {
+                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+            }
+        }
     },
 
     _onLayerAdd: function(e) {
