@@ -96,7 +96,7 @@ describe('L.mapbox.infoControl', function() {
 
         map.on('ready', function() {
             map.setView([38.902, -77.001], 13);
-            expect(map.infoControl._content.innerHTML).to.eql('<a class="mapbox-improve-map" href="#/-77.001/38.902/13"></a>');
+            expect(map.infoControl._content.innerHTML).to.eql('<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/38.902/13" target="_blank">Improve this map</a>');
         });
 
         server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.h8e9h88l.json",
