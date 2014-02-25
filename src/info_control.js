@@ -99,6 +99,9 @@ var InfoControl = L.Control.extend({
     },
 
     _editLink: function() {
+        if (!this._content.getElementsByClassName) {
+            return;
+        }
         var link = this._content.getElementsByClassName('mapbox-improve-map');
         if (link.length && this._map._loaded) {
             var center = this._map.getCenter();
