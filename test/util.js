@@ -41,6 +41,24 @@ helpers.tileJSON = {
     "webpage":"http://tiles.mapbox.com/examples/map/map-8ced9urs"
 };
 
+helpers.tileJSON_improvemap = {
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>",
+    "autoscale": true,
+    "bounds": [-180, -85.0511, 180, 85.0511],
+    "center": [0, 0, 3],
+    "data": ["http://a.tiles.mapbox.com/v3/examples.h8e9h88l/markers.geojsonp"],
+    "geocoder": "http://a.tiles.mapbox.com/v3/examples.h8e9h88l/geocode/{query}.jsonp",
+    "id": "examples.h8e9h88l",
+    "maxzoom": 22,
+    "minzoom": 0,
+    "name": "My Mapbox Streets Map",
+    "private": true,
+    "scheme": "xyz",
+    "tilejson": "2.0.0",
+    "tiles": ["http://a.tiles.mapbox.com/v3/examples.h8e9h88l/{z}/{x}/{y}.png"],
+    "webpage": "http://a.tiles.mapbox.com/v3/examples.h8e9h88l/page.html"
+};
+
 helpers.tileJSON_autoscale = {
   "webpage": "http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/page.html",
   "tiles": [

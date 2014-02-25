@@ -52,30 +52,6 @@ describe('L.mapbox.infoControl', function() {
         });
     });
 
-    describe('#editLink', function() {
-        it('checks moveend is bound to map when .mapbox-improve-map is present', function() {
-            var map = L.mapbox.map(document.createElement('div'), 'examples.map-9ijuk24y');
-
-            var info = L.mapbox.infoControl().addTo(map);
-            info.addInfo('<a class="mapbox-improve-map"></a>');
-
-            map.setView([38.902, -77.001], 13);
-            expect(info._content.innerHTML).to.eql('<a class="mapbox-improve-map" href="#/-77.001/38.902/13"></a>');
-        });
-
-        it('checks moveend is no longer bound to map when .mapbox-improve-map is present', function() {
-            var map = L.mapbox.map(document.createElement('div'), 'examples.map-9ijuk24y');
-
-            var info = L.mapbox.infoControl().addTo(map);
-            info.addInfo('<a class="mapbox-improve-map"></a>');
-            info.addInfo('foo');
-            info.removeInfo('<a class="mapbox-improve-map"></a>');
-
-            map.setView([38.902, -77.001], 13);
-            expect(info._content.innerHTML).to.eql('foo');
-        });
-    });
-
     it('sanitizes its content', function() {
         var map = L.map(document.createElement('div'));
         var info = L.mapbox.infoControl().addTo(map);
@@ -110,6 +86,21 @@ describe('L.mapbox.infoControl', function() {
 
         server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+        server.respond();
+    });
+
+    it('adds map location to improve link in attribution when .mapbox-improve-map is present', function() {
+        var server = sinon.fakeServer.create();
+        var element = document.createElement('div');
+        var map = L.mapbox.map(element, 'examples.h8e9h88l');
+
+        map.on('ready', function() {
+            map.setView([38.902, -77.001], 13);
+            expect(map.infoControl._content.innerHTML).to.eql('<a class="mapbox-improve-map" href="#/-77.001/38.902/13"></a>');
+        });
+
+        server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.h8e9h88l.json",
+            [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
         server.respond();
     });
 });
