@@ -103,10 +103,10 @@ head: |
 
       {% if page.url contains 'example' %}
       <div class='space-bottom'>
-        <a class='block quiet strong small truncate' href='{{site.baseurl}}/examples/'>Examples</a>
+        <a class='block quiet active strong small truncate' href='{{site.baseurl}}/examples/'>Examples</a>
       </div>
       {% for example in page.examples %}
-      <div class='space-bottom'>
+      <div class='space-bottom1'>
         <strong class='block quiet small'>{{example.name}}</strong>
         {% for listing in site.tags[example.id] order:ascending %}
           {% if listing.version == 'v1.0.0' %}
