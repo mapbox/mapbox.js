@@ -1,4 +1,22 @@
-<h2>Reading this Documentation</h2>
+<h2>Getting started with Mapbox.js</h2>
+
+<p>Include the Mapbox.js Javascript library and CSS stylesheet in your HTML header.</p>
+
+{% highlight html %}
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet' />
+{% endhighlight html %}
+
+<p>Then create a map on your page in a <code>&lt;div&gt;</code> element with an <code>id</code> attribute.</p>
+
+{% highlight html %}
+<script>
+L.mapbox.map('map', 'username.mapid');
+</script>
+{% endhighlight html %}
+
+
+<h2>Reading this documentation</h2>
 
 <p>The documentation is organized by <em>methods</em>. Each method
 is shown with potential arguments along with its type and description in a table.
