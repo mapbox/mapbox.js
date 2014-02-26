@@ -84,14 +84,6 @@ head: |
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
-{% capture api %}
-{% if page.v0 %}v0.6.7{% else %}{{site.mapboxjs}}{% endif %}
-{% endcapture %}
-
-{% capture examples %}
-{% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
-{% endcapture %}
-
 <!--Fixed sidebar navigation-->
 <div class='docnav hide-mobile'>
   <div class='limiter'><div class='col3 contain'>
@@ -109,9 +101,7 @@ head: |
       <div class='space-bottom1'>
         <strong class='block quiet small'>{{example.name}}</strong>
         {% for listing in site.tags[example.id] order:ascending %}
-          {% if listing.version == 'v1.0.0' %}
           <a href='{{site.baseurl}}{{listing.url}}' class='block small truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
-          {% endif %}
         {% endfor %}
       </div>
       {% endfor %}
@@ -135,21 +125,17 @@ head: |
 <div class='limiter clearfix'>
   <div class='pad2y'>
     <div class='contain margin3 col9 fill-green space-bottom round small mobile-cols'>
-      <div class='col9'>
-        <strong class='col3 fill-green center round-left keyline-right icon brackets pad2 inline'>Mapbox.js</strong>
-        <span class='col9 tabs mobile-cols pad1y pad2x'><!--
-          --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
-          --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
-          --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-        </span>
-      </div>
-      <div class='col3 pad1'>
-        <div class='margin1'>
-          <fieldset class='col12 with-icon docs-search'>
-            <span class='icon search'></span>
-            <input type='text' class='col12' />
-          </fieldset>
-        </div>
+      <strong class='col3 round-left keyline-right icon brackets pad2 center truncate'>Mapbox.js</strong>
+      <span class='col6 tabs mobile-cols pad1'><!--
+        --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
+        --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
+        --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+      </span>
+      <div class='col3 pad1 keyline-left'>
+        <fieldset class='col12 with-icon docs-search'>
+          <span class='icon search'></span>
+          <input type='text' class='col12' />
+        </fieldset>
       </div>
     </div>
   </div>

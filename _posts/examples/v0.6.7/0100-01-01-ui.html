@@ -1,21 +1,4 @@
 ---
-layout: example
-v0: true
-categories: example/v0.6.7
-title: Simple Zoom Controls
-description: Add zoom controls to a map
-tags:
-    - zooming
-    - ui
+layout: redirect
+redirect: /example/v1.0.0/
 ---
-
-<div id='map'></div>
-<script>
-    var map = mapbox.map('map');
-    map.addLayer(mapbox.layer().id('examples.map-zgrqqx0w'));
-    map.ui.zoomer.add();
-    map.ui.zoombox.add();
-    map.ui.attribution.add()
-        .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
-    map.zoom(3);
-</script>
