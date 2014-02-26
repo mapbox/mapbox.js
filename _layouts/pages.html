@@ -44,11 +44,6 @@ head: |
 {% if page.v0 %}v0.6.7{% else %}{{site.mapboxjs}}{% endif %}
 {% endcapture %}
 
-{% capture examples %}
-{% if page.v0 %}v0.6.7{% else %}v1.0.0{% endif %}
-{% endcapture %}
-
-
 <!--Mobile menu-->
 <div id='dropdown' class='show-mobile pad4 drop fill-green clearfix'>
   <a href='#dropdown' class='fr icon menu quiet pad1 keyline-all'></a>
@@ -81,9 +76,7 @@ head: |
           <div class='section space-bottom1'>
             <strong class='col12 sub'>{{example.name}}</strong>
             {% for listing in site.tags[example.id] order:ascending %}
-              {% if listing.version == 'v1.0.0' %}
-                <a href='{{site.baseurl}}{{listing.url}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
-              {% endif %}
+              <a href='{{site.baseurl}}{{listing.url}}' class='sub col12 example truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
             {% endfor %}
           </div>
           {% endfor %}
