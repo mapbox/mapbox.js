@@ -50,7 +50,7 @@ head: |
   }
   body { padding-top:60px; }
   .footer.fill-white {
-    padding:0;
+    padding:20px 0 0;
     border:0;
     background:transparent;
   }
@@ -59,17 +59,24 @@ head: |
     border-radius:3px;
     }
   .footer .limiter > .newsletter { display:none; }
-  .footer .limiter > .mobile-cols {
+  .footer .limiter > .mobile-cols,
+  .footer-copyright .limiter > div {
     margin-left:25%;
     width:75%;
+    }
+  .footer .limiter > .mobile-cols {
+    background:#eee;
     padding:20px;
     position:relative;
     z-index:1;
+    border-radius:3px;
   }
-  /* @TODO */
-  .footer-copyright { display:none; }
-
+  .fill-green { background-color:#98cf6f; }
   .footer-heading { margin-top:20px; }
+  .footer-copyright {
+    background:transparent;
+    margin-bottom:20px;
+    }
   </style>
 ---
 
@@ -112,7 +119,7 @@ head: |
 
       {% if page.url contains 'plugins' %}
       <div class='space-bottom'>
-        <a class='block quiet strong small truncate' href='{{site.baseurl}}/plugins/'>Plugins</a>
+        <a class='block quiet strong small truncate active' href='{{site.baseurl}}/plugins/'>Plugins</a>
       </div>
       <div class='space-bottom'>
         {% for plugin in site.categories.plugin %}
@@ -126,27 +133,27 @@ head: |
 </div>
 
 <div class='limiter clearfix'>
-  <div class='contain margin3 col9 space-bottom fill-green round-bottom pad2 small mobile-cols'>
-    <div class='col8'>
-      <strong class='col3 pad1y icon quiet brackets'>Mapbox.js</strong><!--
-      --><span class='col9 tabs mobile-cols fill-green'><!--
-        --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
-        --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
-        --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-      </span>
+  <div class='pad2y'>
+    <div class='contain margin3 col9 fill-green space-bottom round small mobile-cols'>
+      <div class='col9'>
+        <strong class='col3 fill-green round-left keyline-right icon brackets pad2 inline'>Mapbox.js</strong>
+        <span class='col8 margin1 tabs mobile-cols pad1y'><!--
+          --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
+          --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
+          --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
+        </span>
+      </div>
+      <div class='col3 pad1'>
+        <div class='margin1'>
+          <fieldset class='col12 with-icon docs-search'>
+            <span class='icon search'></span>
+            <input type='text' class='col12' />
+          </fieldset>
+        </div>
+      </div>
     </div>
-    <fieldset class='margin1 col3 with-icon docs-search'>
-      <span class='icon search'></span>
-      <input type='text' class='col12' />
-    </fieldset>
   </div>
   <div class='contain margin3 col9'>
   {{content}}
-  </div>
-</div>
-
-<div class='limiter footer-heading'>
-  <div class='margin3 col9 pad2x'>
-    <strong>Mapbox.com</strong>
   </div>
 </div>
