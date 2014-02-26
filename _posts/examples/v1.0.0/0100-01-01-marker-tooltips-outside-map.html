@@ -17,19 +17,21 @@ tags:
 
 <style>
   #info {
-    background:rgba(255,255,255,0.5);
+    background:rgba(255,255,255,0.75);
+    border:1px solid #fff;
     position:absolute;
     width:260px;
     top:10px;
-    bottom:10px;
     right:10px;
-    padding:20px;
-    border-radius:2px;
+    padding:10px;
+    border-radius:3px;
     }
 </style>
 
 <div id='map'></div>
-<div id='info'></div>
+<div id='info'>
+  <h2>Click a marker</h2>
+</div>
 
 <script>
 var map = L.mapbox.map('map', 'examples.h186knp8')
@@ -66,6 +68,9 @@ map.featureLayer.setGeoJSON(geoJson);
 
 // Listen for individual marker clicks
 map.featureLayer.on('click',function(e) {
+    // Force the popup closed.
+    e.layer.closePopup();
+
     var feature = e.layer.feature;
     var info = '<h2>' + feature.properties.title + '</h2>' +
                '<p>' + feature.properties.description + '</p>';
@@ -73,9 +78,10 @@ map.featureLayer.on('click',function(e) {
     document.getElementById('info').innerHTML = info;
 });
 
+
 // Clear the tooltip when map is clicked
-map.on('click',function(e){
-    document.getElementById('info').innerHTML = '';
+map.on('move',function(e){
+    document.getElementById('info').innerHTML = '<h2>Click a marker</h2>';
 });
 
 </script>
