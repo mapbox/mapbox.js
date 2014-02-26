@@ -9,6 +9,18 @@ Components:
 * Return value
 * Example, in 4-indent
 
+## RECOMMENDATIONS
+
+* Write [gender-neutral](http://writingcenter.unc.edu/handouts/gender-sensitive-language/)
+  standard English.
+* Spell & grammar check your writing.
+* When functionality extends Leaflet, include a reference to
+  the extended class:
+
+```html
+<span class='leaflet'>_Extends_: `L.Map`</span>
+```
+
 ## LOCAL SETUP
 
 The API documentation is fed by `API.md` in the `master` branch, and built by a
