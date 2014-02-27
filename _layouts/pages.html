@@ -34,6 +34,7 @@ head: |
     position:fixed; top:0px; left:0px; right:0px;
     height:60px;
   }
+  body { padding-top:60px; }
   #nav {
     padding-top:10px;
     padding-bottom:10px;
@@ -48,13 +49,12 @@ head: |
     position:absolute;
     left:0px; top:20px; right:20px; bottom:20px;
   }
-  body { padding-top:60px; }
   .footer.fill-white {
     padding:20px 0 0;
     border:0;
     background:transparent;
   }
-  .docs-search input {
+  .search-field input {
     border:none; 
     border-radius:3px;
     }
@@ -87,6 +87,7 @@ head: |
 ---
 
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
+<script src='{{site.baseurl}}/assets/js/jquery.swiftype.autocomplete-dirty.js'></script>
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
@@ -130,20 +131,22 @@ head: |
 
 <div class='limiter clearfix'>
   <div class='pad2y'>
-    <div class='contain margin3 col9 fill-green space-bottom round small'>
-      <strong class='col3 round-left keyline-right icon brackets pad2 center truncate'>Mapbox.js</strong>
-      <span class='col6 tabs mobile-cols pad1'><!--
+    <nav id='site-nav' class='contain margin3 col9 fill-green space-bottom round small'>
+      <div class='js-title col3 animate round-left keyline-right pad2y pad1x center truncate'>
+        <strong class='icon brackets'>Mapbox.js</strong>
+      </div>
+      <div class='js-nav col6 animate tabs mobile-cols pad1'><!--
         --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
         --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
         --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-      </span>
-      <div class='col3 pad1 keyline-left'>
-        <fieldset class='col12 with-icon docs-search'>
+      </div>
+      <div class='js-search col3 animate pad1 keyline-left'>
+        <fieldset class='col12 with-icon search-field'>
           <span class='icon search'></span>
-          <input type='text' class='col12' />
+          <input id='docsearch' type='text' class='col12' />
         </fieldset>
       </div>
-    </div>
+    </nav>
   </div>
   <div class='contain margin3 col9'>
   {{content}}
