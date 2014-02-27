@@ -77,6 +77,12 @@ head: |
     background:transparent;
     margin-bottom:20px;
     }
+
+  /* Mobile */
+  @media only screen and (max-width:640px) {
+    .footer .limiter > .mobile-cols,
+    .footer-copyright .limiter > div { width:100%; margin:0; }
+    }
   </style>
 ---
 
@@ -124,7 +130,7 @@ head: |
 
 <div class='limiter clearfix'>
   <div class='pad2y'>
-    <div class='contain margin3 col9 fill-green space-bottom round small mobile-cols'>
+    <div class='contain margin3 col9 fill-green space-bottom round small'>
       <strong class='col3 round-left keyline-right icon brackets pad2 center truncate'>Mapbox.js</strong>
       <span class='col6 tabs mobile-cols pad1'><!--
         --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
