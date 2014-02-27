@@ -46,16 +46,6 @@ function load() {
         },
         engineKey: 'ByE7bq3YmMASdFvY7L4h'
     });
-
-    $('#docsearch').on('focus', function() {
-        $('.js-title', '#site-nav').removeClass('col3').addClass('col2');
-        $('.js-nav', '#site-nav').removeClass('col6').addClass('col5');
-        $('.js-search', '#site-nav').removeClass('col3').addClass('col5');
-    }).on('blur', function() {
-        $('.js-title', '#site-nav').removeClass('col2').addClass('col3');
-        $('.js-nav', '#site-nav').removeClass('col5').addClass('col6');
-        $('.js-search', '#site-nav').removeClass('col5').addClass('col3');
-    });
 }
 
 $(load);
