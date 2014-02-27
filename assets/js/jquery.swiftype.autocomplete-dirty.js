@@ -89,7 +89,7 @@ $.fn.swiftype = function (options) {
         };
 
         var $swiftypeWidget = $('<div class="swiftype-widget" />');
-        var $list = $('<nav />').addClass('v fill-white keyline-all round z1 pin-top col12 pad1y quiet-scroll ').appendTo($swiftypeWidget).hide();
+        var $list = $('<nav />').addClass('v fill-white keyline-all round col12 pad1y quiet-scroll ').appendTo($swiftypeWidget).hide();
         $swiftypeWidget.appendTo(config.autocompleteContainingElement);
 
         $this.data('swiftype-list', $list);

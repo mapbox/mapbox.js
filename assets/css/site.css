@@ -1,8 +1,13 @@
 /* Base Candidates */
 .fill-white pre { background-color:transparent; }
-.z1 { z-index:1; }
-
-.swiftype-widget > nav { margin-top:45px; }
+.swiftype-widget > nav {
+  position:absolute;
+  top:100%;
+  right:0;
+  margin-top:5px;
+  z-index:10000;
+  width:25%;
+  }
 nav .sub { padding:4px 10px; }
 
 .navigation .active:hover:not(.quiet),
