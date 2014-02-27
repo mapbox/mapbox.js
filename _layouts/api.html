@@ -1,87 +1,11 @@
 ---
 layout: pages
-section: api
+section: mapboxjs-api
 ---
-{% if page.splash %}
-<div class='row6 contain'>
-  <div id='example-map' class='pin-bottom pin-top round-top'></div>
-  <div id='example-snippet' class='pin-bottom margin3 row3 col6'>
-    <div class='clip row3 fill-light pad2x'>
-{% highlight html %}
-<script>
-// Create a map in the div #map
-L.mapbox.map('map', 'username.mapid');
-</script>
-{% endhighlight html %}
-    </div>
-  </div>
-</div>
-<div class='pad2 prose round-bottom keyline-all fill-white space-bottom contain center'>
-  <h2 class='space-bottom1'>
-  Build anything with Mapbox.js,<br/>
-  a library for fast & interactive maps.
-  </h2>
-  <div class='clearfix'>
-    <div class='col4 pad1 center'>
-      <span class='small-graphic dot fill-green inline pad1 dark space-bottom1'>
-        <span class='icon big leaflet'></span>
-      </span>
-      <div class='col12'>
-        <strong>Built on top of <a href='http://leafletjs.com/'>Leaflet</a></strong>, an open source library.
-      </div>
-    </div>
-
-    <div class='col4 pad1 center'>
-      <span class='small-graphic dot fill-blue inline pad1 dark space-bottom1'>
-        <span class='icon big github'></span>
-      </span>
-      <div class='col12'>
-        <strong>Open source</strong> and available on <a href='https://github.com/mapbox/mapbox.js/'>GitHub</a>.
-      </div>
-    </div>
-
-    <div class='col4 pad1 center'>
-      <span class='small-graphic dot fill-purple inline pad1 dark space-bottom1'>
-        <span class='icon big check'></span>
-      </span>
-      <div class='col12'>
-        <strong>Browser tested</strong> with IE8+ and all <a href='http://browsehappy.com/'>modern browsers</a>.
-      </div>
-    </div>
-  </div>
-</div>
-<script>L.mapbox.map('example-map', 'examples.map-vyofok3q', { scrollWheelZoom: false, center: [40.70, -73.98], zoom: 14 });</script>
-<style>
-#example-snippet {
-  box-shadow: rgba(0,0,0,0.1) 0px 0px 10px 5px;
-}
-#example-snippet:before,
-#example-snippet:after {
-  content:'';
-  display:block;
-  position:absolute;
-}
-#example-snippet:before {
-  left:20px; right:0px;
-  top:-20px; height:20px;
-  background:#f8f8f8;
-}
-#example-snippet:after {
-  width:0px; height:0px;
-  border-width:10px;
-  border-color:transparent #e8e8e8 #e8e8e8 transparent;
-  border-style:solid;
-  position:absolute;
-  left:0px; top:-20px;
-}
-#example-snippet .highlight { width:200%; }
-</style>
-{% endif %}
 
 <div id='api' class='prose pad2 doc round fill-white keyline-all'>
   {% if site.mapboxjs != page.version %}
   <div class='warning note round space-bottom2'>Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/'>{{site.mapboxjs}} for the latest</a>.</div>
   {% endif %}
-
   {{content}}
 </div>
