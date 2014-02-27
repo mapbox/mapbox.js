@@ -387,7 +387,7 @@ var defaultResultRenderFunction = function (ctx, results) {
 };
 
 var defaultRenderFunction = function (document_type, item) {
-    return '<a href="' + item['url'] + '" class="col12 pad1x strong small sub truncate">' + Swiftype.htmlEscape(item['title']) + '</a>';
+    return '<a href="' + item['url'] + '" class="col12 pad1x small sub truncate">' + Swiftype.htmlEscape(item['title']) + '</a>';
 };
 
 var defaultOnComplete = function (item, prefix) {

@@ -3,7 +3,7 @@
 .z1 { z-index:1; }
 
 .swiftype-widget > nav { margin-top:45px; }
-nav .sub         { padding:5px 10px; }
+nav .sub { padding:4px 10px; }
 
 .navigation .active:hover:not(.quiet),
 .navigation .active:not(.quiet) {
@@ -97,7 +97,7 @@ pre .atv { color:#75A21C; }
 /*dark blue*/
 pre .kwd,
 pre .linenums,
-pre .tag { color:#0B5A91; }
+pre .tag { color:#0B5A91; display:inline; }
 
 /*light blue*/
 pre .lit,
