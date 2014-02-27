@@ -1,5 +1,9 @@
-/* API Filtering and view all link */
-.navigation .sub         { padding:5px 20px; }
+/* Base Candidates */
+.fill-white pre { background-color:transparent; }
+.z1 { z-index:1; }
+
+.swiftype-widget > nav { margin-top:45px; }
+nav .sub         { padding:5px 10px; }
 
 .navigation .active:hover:not(.quiet),
 .navigation .active:not(.quiet) {
