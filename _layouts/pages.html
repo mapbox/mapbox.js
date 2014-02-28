@@ -27,55 +27,12 @@ examples:
     name: Vector Overlays
   - id: zoom
     name: Zoom
-head: |
-  <style>
-  .masthead {
-    z-index:10000;
-    position:fixed; top:0px; left:0px; right:0px;
-  }
-  body { padding-top:60px; }
-
-  .docnav { position:fixed; top:60px; bottom:0px; width:100%; }
-  .docnav .limiter { height:100%; }
-  .docnav .col3 { height:100%; }
-  .docnav nav {
-    position:absolute;
-    left:0px; top:20px; right:20px; bottom:20px;
-  }
-  .footer.fill-white {
-    padding:20px 0 0;
-    border:0;
-    background:transparent;
-  }
-  input.minimal { border:none; }
-  .footer .limiter > .newsletter { display:none; }
-  .footer .limiter > .mobile-cols,
-  .footer-copyright .limiter > div {
-    margin-left:25%;
-    width:75%;
-    }
-  .footer .limiter > .mobile-cols {
-    background:#eee;
-    padding:20px;
-    position:relative;
-    z-index:1;
-    border-radius:3px;
-  }
-  .footer-heading { margin-top:20px; }
-  .footer-copyright {
-    background:transparent;
-    }
-
-  /* Mobile */
-  @media only screen and (max-width:640px) {
-    .footer .limiter > .mobile-cols,
-    .footer-copyright .limiter > div { width:100%; margin:0; }
-    }
-  </style>
 ---
 
+<link href='{{site.url}}/css/docs.css' rel='stylesheet' />
+<script src='{{site.url}}/js/docs.js'></script>
+
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
-<script src='{{site.baseurl}}/assets/js/jquery.swiftype.autocomplete-dirty.js'></script>
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 

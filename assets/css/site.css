@@ -1,29 +1,8 @@
 /* Base Candidates */
 .fill-white pre { background-color:transparent; }
-.swiftype-widget > nav {
-  position:absolute;
-  top:100%;
-  right:0;
-  margin-top:5px;
-  z-index:2000;
-  width:25%;
-  }
-nav .sub { padding:4px 10px; }
-@media only screen and (max-width:640px) {
-  .swiftype-widget > nav {
-    width:100%;
-  }
-}
+.button.zeroclipboard-is-hover { background:#3bb2d0!important; }
+.js-clipboard:hover { cursor:pointer; }
 
-.navigation .active:hover:not(.quiet),
-.navigation .active:not(.quiet) {
-  background-color:rgba(0,0,0,0.05);
-  }
-
-.dark pre { background:rgba(0,0,0,0.7); }
-.dark pre strong { color:#fff; }
-.doc table em { color:rgba(0,0,0,0.5); }
-.args { color:rgba(0,0,0,0.5); }
 .leaflet:before {
   background:transparent url(../images/sprite.png) no-repeat 0 0;
   content:'';
@@ -33,32 +12,7 @@ nav .sub { padding:4px 10px; }
   vertical-align:top;
   margin-right:5px;
   }
-.quiet-scroll pre {
-  overflow:auto;
-  white-space:pre;
-  word-wrap:normal;
-  word-break:normal;
-  }
-.quiet-scroll pre::-webkit-scrollbar,
-.quiet-scroll::-webkit-scrollbar {
-  width:1px;
-  height:1px;
-  border-left:0;
-  background:rgba(0,0,0,0.1);
-  }
-.quiet-scroll pre::-webkit-scrollbar-track,
-.quiet-scroll::-webkit-scrollbar-track {
-  background:none;
-  }
-.quiet-scroll pre::-webkit-scrollbar-thumb,
-.quiet-scroll::-webkit-scrollbar-thumb {
-  background:rgba(0,0,0,0.4);
-  border-radius:0;
-  }
-.quiet-scroll pre::-webkit-scrollbar:hover,
-.quiet-scroll::-webkit-scrollbar:hover {
-  background:rgba(0,0,0,0.4);
-  }
+
 /*Examples*/
 #map {
   background:#eee;
@@ -115,7 +69,4 @@ pre .typ,
 pre .atn,
 pre .dec,
 pre .var { color:#0C9DC2; }
-
-.button.zeroclipboard-is-hover { background:#3bb2d0!important; }
-.js-clipboard:hover { cursor:pointer; }
 
