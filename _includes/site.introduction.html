@@ -5,7 +5,7 @@
 {% highlight html %}
 <script>
 // Create a map in the div #map
-L.mapbox.map('map', 'username.mapid');
+L.mapbox.map('map', '{{site.defaultid}}');
 </script>
 {% endhighlight html %}
     </div>
@@ -57,12 +57,24 @@ L.mapbox.map('map', 'username.mapid');
 <link href='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />{% endhighlight html %}
     </div>
     <div class='pad1x small quiet'>
-    Include mapbox.js and CSS in your HTML header and call <code>L.mapbox.map('map', 'username.mapid')</code> to load your first map. <a class='truncate rcon next' href='{{site.baseurl}}/example/v1.0.0/'>View simple example</a>
+    Include mapbox.js and CSS in your HTML header and call <code>L.mapbox.map('map', '{{site.defaultid}}')</code> to load your first map. <a class='truncate rcon next' href='{{site.baseurl}}/example/v1.0.0/'>View simple example</a>
     </div>
   </div>
 </div>
 
-<script>L.mapbox.map('example-map', 'examples.map-vyofok3q', { scrollWheelZoom: false, center: [40.70, -73.98], zoom: 14 });</script>
+<script>
+$(function load() {
+    L.mapbox.map('example-map', '{{site.defaultid}}', { scrollWheelZoom: false, center: [40.70, -73.98], zoom: 14 });
+
+    // Replace username.mapid with the current one.
+    var key = /{{site.defaultid}}/g;
+    var unique = (App && App.user) ? App.user.id + '.' + App.tmpkey : '{{site.defaultid}}';
+    $('pre, code').each(function() {
+        $(this).html($(this).html().replace(key, unique));
+    });
+});
+</script>
+
 <style>
 #example-snippet {
   box-shadow: rgba(0,0,0,0.1) 0px 0px 10px 5px;
