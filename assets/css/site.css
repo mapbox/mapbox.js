@@ -5,10 +5,15 @@
   top:100%;
   right:0;
   margin-top:5px;
-  z-index:10000;
+  z-index:2000;
   width:25%;
   }
 nav .sub { padding:4px 10px; }
+@media only screen and (max-width:640px) {
+  .swiftype-widget > nav {
+    width:100%;
+  }
+}
 
 .navigation .active:hover:not(.quiet),
 .navigation .active:not(.quiet) {
