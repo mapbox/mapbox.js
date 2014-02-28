@@ -1,5 +1,6 @@
 /* Base Candidates */
 .fill-white pre { background-color:transparent; }
+
 .button.zeroclipboard-is-hover { background:#3bb2d0!important; }
 .js-clipboard:hover { cursor:pointer; }
 
