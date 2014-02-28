@@ -37,8 +37,8 @@ function load() {
         }
     });
 
-    $('#docsearch').swiftype({
-        autocompleteContainingElement: $('.search-field'),
+    $('#docs-search input').swiftype({
+        autocompleteContainingElement: $('#docs-search'),
         filters: {
           page: {
             type: ['examples', 'mapboxjs-api', 'mapboxjs-plugins']

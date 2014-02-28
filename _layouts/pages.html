@@ -30,7 +30,7 @@ examples:
 head: |
   <style>
   .masthead {
-    z-index:10000;
+    z-index:100000;
     position:fixed; top:0px; left:0px; right:0px;
     height:60px;
   }
@@ -54,10 +54,7 @@ head: |
     border:0;
     background:transparent;
   }
-  .search-field input {
-    border:none; 
-    border-radius:3px;
-    }
+  input.minimal { border:none; }
   .footer .limiter > .newsletter { display:none; }
   .footer .limiter > .mobile-cols,
   .footer-copyright .limiter > div {
@@ -71,7 +68,7 @@ head: |
     z-index:1;
     border-radius:3px;
   }
-  .fill-green { background-color:#98cf6f; }
+  .fill-green { background-color:#56b881; }
   .footer-heading { margin-top:20px; }
   .footer-copyright {
     background:transparent;
@@ -132,18 +129,18 @@ head: |
 <div class='limiter clearfix'>
   <div class='pad2y'>
     <nav class='contain margin3 col9 fill-green space-bottom round small'>
-      <div class='col3 animate round-left keyline-right pad2y pad1x center truncate'>
+      <div class='col3 dark round-left keyline-right pad2y pad1x center truncate'>
         <strong class='icon brackets'>Mapbox.js</strong>
       </div>
-      <div class='col6 animate tabs mobile-cols pad1'><!--
+      <div class='col6 dark tabs mobile-cols pad1'><!--
         --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
         --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
         --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
       </div>
-      <div class='col3 animate pad1 keyline-left'>
-        <fieldset class='col12 with-icon search-field'>
+      <div id='docs-search' class='col3 pad1 keyline-left'>
+        <fieldset class='col12 with-icon dark'>
           <span class='icon search'></span>
-          <input id='docsearch' type='text' class='col12' />
+          <input type='text' class='col12 round minimal' />
         </fieldset>
       </div>
     </nav>
