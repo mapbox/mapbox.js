@@ -120,7 +120,7 @@ var LMap = L.Map.extend({
             this.shareControl._setTileJSON(json);
         }
 
-        if (!this._loaded) {
+        if (!this._loaded && json.center) {
             var zoom = json.center[2],
                 center = L.latLng(json.center[1], json.center[0]);
 
