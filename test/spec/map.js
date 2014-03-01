@@ -128,6 +128,12 @@ describe('L.mapbox.map', function() {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {shareControl: {position: 'bottomleft'}});
             expect(map.shareControl.options.position).to.equal('bottomleft');
         });
+
+        it('supports tilejson without a center property', function(){
+            var map = L.mapbox.map(element, helpers.tileJSON_nocenter);
+            expect(map._loaded).not.to.be.ok();
+
+        });
     });
 
     describe('layers', function() {
