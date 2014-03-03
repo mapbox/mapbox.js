@@ -1,21 +1,19 @@
-<h2>Reading this Documentation</h2>
+<h2>API documentation</h2>
 
-<p>The documentation is organized by <em>methods</em>. Each method
-is shown with potential arguments along with its type and description in a table.
-When the API has a Javascript constructor function that returns an object, the constructor
-is documented with its full name and the methods on the object are named with just
-the type of the object. For instance, <code>L.mapbox.markerLayer</code> documents a function that
+<p>The Mapbox.js documentation is organized by <em>methods</em>.
+Each method is shown with potential arguments in a table.
+Objects returned by constructors are documented by just their object type.
+For instance, <code>L.mapbox.markerLayer</code> documents a function that
 returns a layer for markers. The methods on that object are then documented as
 <code>markerLayer.setFilter</code>, <code>markerLayer.getGeoJSON</code>, and so on.</p>
 
-<div class='note'>
+<div class='note small'>
 <p>To use this API, you&#39;ll need to understand basic Javascript and mapping concepts.
-If you&#39;d like to learn Javascript, start with <a href='http://www.codecademy.com/tracks/javascript'>an interactive course</a>, or
-<a href='http://eloquentjavascript.net/'>book</a>.
-If you&#39;d like to learn more about maps, <a href='http://mapbox.com/developers/guide/'>we&#39;ve provided a helpful article explaining how web maps work</a>.</p>
+If you&#39;d like to learn Javascript, start with an <a href='http://www.codecademy.com/tracks/javascript'>interactive course</a> or
+<a href='http://eloquentjavascript.net/'>book</a>. To learn more about maps, we&#39;ve provided a helpful article explaining <a href='http://mapbox.com/developers/guide/'>how web maps work</a>.</p>
 </div>
 
-<h3 id='the-ready-event'>The `ready` event</h3>
+<h3 id='the-ready-event'>Asynchronous calls and the `ready` event</h3>
 <p>Mapbox.js is <a href='http://recurial.com/programming/understanding-callback-functions-in-javascript/'>asynchronous</a> - when you create a layer like <code>L.mapbox.tileLayer('{{site.defaultid}}')</code>, the layer doesn&#39;t immediately know which tiles to load and its attribution information. Instead, it loads the information in an <a href='http://en.wikipedia.org/wiki/AJAX'>AJAX</a> call.</p>
 
 <p>For most things you&#39;ll write, this isn&#39;t a problem, since Mapbox.js does a good

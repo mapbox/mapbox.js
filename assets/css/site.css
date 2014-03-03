@@ -1,144 +1,8 @@
-.enclosure { max-width:900px; }
+/* Base Candidates */
+.fill-white pre { background-color:transparent; }
 
-/*Base candidate*/
-.full-y         { height:100%; }
-.bump-up { position:relative; top:-1px; }
-.pin-rightbottom { position:absolute; bottom:0; right:0; }
-
-/* API Filtering and view all link */
-#filter-api { padding-right:88px; }
-.view-all { top:1px;right:1px;bottom:1px; }
-
-.site-title {
-  position:relative;
-  top:10px;
-  }
-  .site-title,
-  .site-title:hover { color:#fff; }
-
-.fill-white pre,
-.fill-light pre,
-.dark pre       { background-color:transparent; }
-
-.site-nav a:hover  { background-color:rgba(0,0,0,0.05); }
-.site-nav a.active { background-color:#f8f8f8; }
-
-.fill-green .home:hover { background-color:rgba(0,0,0,0.10); }
-
-.fixed-sidebar {
-  position:fixed;
-  border-color:rgba(0,0,0,0.25);
-  top:10px;left:10px;bottom:10px;
-  }
-  .fixed-sidebar .sliding {
-    height:100%;
-    }
-
-.grid {
-  background-repeat:no-repeat;
-  background-size:cover;
-  }
-  .grid-view .grid:nth-child(even) .overlay {
-    border-left:1px solid rgba(255,255,255,0.25);
-    }
-  .grid.active .overlay,
-  .grid:hover .overlay  {
-    background-color:rgba(0,0,0,0.75);
-    color:#fff;
-    }
-
-.scroll-y {
-  overflow:auto;
-  overflow-x:hidden;
-  overflow-y:auto;
-  }
-  .fixed-sidebar .scroll-y {
-    padding-bottom:170px;
-    }
-
-.navigation .pad1y:empty { padding:0; }
-.navigation .sub         { padding:5px 20px; }
-
-.navigation .active:hover:not(.quiet),
-.navigation .active:not(.quiet) {
-  background-color:rgba(0,0,0,0.05);
-  }
-
-.wireframe {
-  border:3px solid rgba(0,0,0,0.5);
-  border-bottom-width:0;
-  }
-  .wireframe.example {
-    border-right-width:0;
-    border-bottom-width:3px;
-    }
-  .wireframe .body {
-    background-image:url(../images/developers-grid.png);
-    background-repeat:repeat;
-    background-position:0 0;
-    -webkit-background-size:60px 60px;
-            background-size:60px 60px;
-    }
-    @media
-      (-webkit-min-device-pixel-ratio:2),
-      (min-resolution:192dppx) {
-      .wireframe .body { background-image:url(../images/developers-grid@2x.png); }
-      }
-
-  .wireframe .body .mock-popup:after {
-    content:'';
-    display:block;
-    position:absolute;
-    height:0;
-    width:0;
-    left:0;
-    right:0;
-    bottom:-5px;
-    margin:auto;
-    border-left:5px solid transparent;
-    border-right:5px solid transparent;
-    border-top:5px solid #95a85a;
-    }
-  .wireframe .dot {
-    display:inline-block;
-    width:10px;
-    height:10px;
-    }
-
-.wireframe.mobile .body .mock-popup:after { border-top: 5px solid #6f6ea5; }
-.view-options { top:-2px;right:-2px; }
-.dark pre { background:rgba(0,0,0,0.7); }
-.dark pre strong { color:#fff; }
-
-/* Dropdown Menu in the masthead */
-.dropdown {
-  display:none;
-  margin-top:20px;
-  }
-  .dropdown .contents {
-    z-index:1000;
-    }
-  .dropdown .closedrop {
-    position:absolute;
-    top:20px;
-    right:20px;
-    left:auto;
-    }
-  .drop:target .dropdown {
-    display:block;
-    z-index:100;
-    }
-
-.version,
-.version:hover {
-  color:rgba(0,0,0,0.75);
-  }
-  .version > *{
-    padding:2px 5px;
-    }
-
-.doc table em { color:rgba(0,0,0,0.5); }
-.args { color:rgba(0,0,0,0.5); }
+.button.zeroclipboard-is-hover { background:#3bb2d0!important; }
+.js-clipboard:hover { cursor:pointer; }
 
 .leaflet:before {
   background:transparent url(../images/sprite.png) no-repeat 0 0;
@@ -157,41 +21,6 @@
   top:0;left:0;
   width:100%;
   height:100%;
-  l}
-
-.quiet-scroll pre {
-  overflow:auto;
-  white-space:pre;
-  word-wrap:normal;
-  word-break:normal;
-  }
-.quiet-scroll pre::-webkit-scrollbar,
-.quiet-scroll::-webkit-scrollbar {
-  width:8px;
-  height:8px;
-  border-left:0;
-  background:rgba(0,0,0,0.1);
-  }
-.quiet-scroll pre::-webkit-scrollbar-track,
-.quiet-scroll::-webkit-scrollbar-track {
-  background:none;
-  }
-.quiet-scroll pre::-webkit-scrollbar-thumb,
-.quiet-scroll::-webkit-scrollbar-thumb {
-  background:rgba(0,0,0,0.1);
-  border-radius:0;
-  }
-.quiet-scroll pre::-webkit-scrollbar:hover,
-.quiet-scroll::-webkit-scrollbar:hover {
-  background:rgba(0,0,0,0.15);
-  }
-
-pre a {
-  background:#EAF4F8;
-  border:0;
-  padding:0;
-  -webkit-box-shadow: 0 0 2px #EAF4F8;
-          box-shadow: 0 0 2px #EAF4F8;
   }
 
 /*  -------------------------------------------------------
@@ -233,7 +62,7 @@ pre .atv { color:#75A21C; }
 /*dark blue*/
 pre .kwd,
 pre .linenums,
-pre .tag { color:#0B5A91; }
+pre .tag { color:#0B5A91; display:inline; }
 
 /*light blue*/
 pre .lit,
@@ -241,12 +70,4 @@ pre .typ,
 pre .atn,
 pre .dec,
 pre .var { color:#0C9DC2; }
-
-.tag {
-  text-transform:lowercase;
-  display:inline;
-  }
-
-.button.zeroclipboard-is-hover { background:#3bb2d0!important; }
-.js-clipboard:hover { cursor:pointer; }
 

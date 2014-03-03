@@ -4,14 +4,13 @@ category: examples
 section: mapboxjs-examples
 ---
 
-<div class='pad2y'>
-<div class='col12 round keyline-all clearfix contain'>
+<div class='col12 round keyline-all clearfix contain fill-white'>
   <div class='clearfix'>
     {% if page.v0 %}
     <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
     <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
     <div class='clearfix col12 note warn'>
-      Viewing an older version of {{site.title}}. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/'>{{site.mapboxjs}} for the latest</a>.
+      You are viewing an older version of Mapbox.js. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/'>{{site.mapboxjs}} for the latest</a>.
     </div>
     {% endif %}
 
@@ -21,7 +20,7 @@ section: mapboxjs-examples
     </div>
     <div id='demo' class='contain row10'>{{content}}</div>
     <div id='snippet'>
-    <div id='code' class='fill-light'>
+    <div id='code' class='fill-white'>
 
 <div class='code-header quiet'>
 {% highlight html %}<!DOCTYPE html>
@@ -53,5 +52,4 @@ section: mapboxjs-examples
 </div>
   <a class='button icon clipboard col12 round-bottom js-clipboard' href='#' data-target='code' data-ref-id='code' id='copy'>Copy example</a>
   </div>
-</div>
 </div>

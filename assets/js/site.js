@@ -1,83 +1,12 @@
 ---
 ---
 
-(function(context) {
-    var Docs = function() {};
-
-    Docs.prototype = {
-        copyCode: function(el) {
-            if (window.getSelection && document.createRange) {
-                el = document.getElementById(el);
-                var range = document.createRange();
-                range.selectNodeContents(el);
-                var sel = window.getSelection();
-                sel.removeAllRanges();
-                sel.addRange(range);
-            }
-        },
-
-        colorCode: function(cb) {
-            $('pre', '#content-section').addClass('prettyprint');
-            prettyPrint(cb);
-        },
-
-        bindSearch: function(input, menu) {
-            this.$el = input;
-            this.$menu = menu;
-            this.$el.on('keyup', $.proxy(this._keyup, this));
-        },
-
-        _keyup: function(e) {
-          switch(e.keyCode) {
-            case 40: // down arrow
-            case 38: // up arrow
-            case 13: // enter
-              break;
-            default:
-              this._search();
-          }
-          return false;
-        },
-
-        _search: function() {
-            var query = this.$el.val() ? this.$el.val().toLowerCase().match(/(\w+)/g) : null;
-
-            this.$menu.find('[href]').each(function() {
-                var $this = $(this),
-                    id = $this.attr('href').replace('#', '');
-
-                if (query) {
-                    _(query).each(function(q) {
-                        if (id.toLowerCase().indexOf(q) !== -1) {
-                            $this.show();
-                        } else {
-                            $this.hide();
-                        }
-                    });
-                } else {
-                    $this.show();
-                }
-            });
-
-            if (query) {
-                this.$menu.children().show();
-                this.$menu.children('.section').each(function() {
-                    var $this = $(this);
-                    if ($this.children(':visible').length < 2) $this.hide();
-                });
-            } else {
-                this.$menu.children().show();
-            }
-        },
-    };
-
-    window.Docs = Docs;
-})(window);
-
 function load() {
-    var docs = new Docs();
-        docs.colorCode();
-    docs.bindSearch($('#filter-api'), $('.js-nav-docs'));
+
+    // We generate our API from github.com/mapbox/mapbox.js/API.md
+    // so let prettyprint handle syntax highlighting.
+    $('pre', '#api').addClass('prettyprint');
+    prettyPrint();
 
     if (!window.location.origin) {
         window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
@@ -107,9 +36,14 @@ function load() {
             });
         }
     });
-
-    var examples = new Docs();
-    examples.bindSearch($('#filter-examples'), $('.js-nav-examples'));
+    $('#docs-search input').swiftype({
+        autocompleteContainingElement: $('#docs-search'),
+        filters: {
+          page: {
+            type: ['examples', 'mapboxjs-api', 'mapboxjs-plugins']
+          }
+        }
+    });
 }
 
 $(load);

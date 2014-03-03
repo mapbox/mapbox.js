@@ -4,10 +4,7 @@ permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
 mapboxjs: v1.6.1
-oldversion: v0.6.7
-title: Mapbox.js
 defaultid: 'examples.map-9ijuk24y'
-description: Mapbox JavaScript API
 exclude: [node_modules]
 rdiscount:
   extensions: [smart]
