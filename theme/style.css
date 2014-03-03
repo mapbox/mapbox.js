@@ -426,7 +426,7 @@
 
 @media
   (-webkit-min-device-pixel-ratio:2),
-  (min-resolution:192dpi) {
+  (min-resolution:192dppx) {
     .leaflet-control-zoom-in,
     .leaflet-control-zoom-out,
     .leaflet-popup-close-button,
