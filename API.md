@@ -155,7 +155,7 @@ _Returns_: the L.mapbox.gridLayer object
 
 ## L.mapbox.featureLayer(id|url|geojson, options)
 
-<span class='leaflet'>_Extends_: L.FeatureGroup</span>
+<span class='leaflet'>_Extends_: `L.FeatureGroup`</span>
 
 **NOTE: in version 1.6.0, `L.mapbox.markerLayer` was renamed to `L.mapbox.featureLayer`
 to signal the addition of support for lines and polygons. The `L.mapbox.markerLayer`
@@ -332,7 +332,7 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 
 ## L.mapbox.infoControl(options)
 
-<span class='leaflet'>_Extends_: L.Control</span>
+<span class='leaflet'>_Extends_: `L.Control`</span>
 
 A map control that shows a toggleable info container. This is triggered by default and attribution is auto-detected from active layers and added to the info container.
 
@@ -395,7 +395,7 @@ Removes a legend from the legendControl.
 
 ## L.mapbox.gridControl(layer, options)
 
-<span class='leaflet'>_Extends_: L.Control</span>
+<span class='leaflet'>_Extends_: `L.Control`</span>
 
 Interaction is what we call interactive parts of maps that are created with the powerful [tooltips &amp; regions](http://mapbox.com/tilemill/docs/crashcourse/tooltips/) system in [TileMill](http://mapbox.com/tilemill/). Under the hood, it's powered by the open [UTFGrid specification](https://github.com/mapbox/utfgrid-spec/).
 
@@ -496,7 +496,7 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 
 Adds a "Share" button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.
 
-<span class='leaflet'>_Extends_: L.Control</span>
+<span class='leaflet'>_Extends_: `L.Control`</span>
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
