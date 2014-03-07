@@ -7,6 +7,7 @@ var GeocoderControl = L.Control.extend({
 
     options: {
         position: 'topleft',
+        pointZoom: 8,
         keepOpen: false
     },
 
@@ -100,9 +101,9 @@ var GeocoderControl = L.Control.extend({
                 this.fire('error', {error: err});
             } else {
                 this._results.innerHTML = '';
-                if (resp.results.length === 1 && resp.lbounds) {
+                if (resp.results.length === 1) {
                     this.fire('autoselect', { data: resp });
-                    this._map.fitBounds(resp.lbounds);
+                    chooseResult(resp.results[0][0]);
                     this._closeIfOpen();
                 } else {
                     for (var i = 0, l = Math.min(resp.results.length, 5); i < l; i++) {
@@ -118,8 +119,7 @@ var GeocoderControl = L.Control.extend({
 
                         (L.bind(function(result) {
                             L.DomEvent.addListener(r, 'click', function(e) {
-                                var _ = result[0].bounds;
-                                map.fitBounds(L.latLngBounds([[_[1], _[0]], [_[3], _[2]]]));
+                                chooseResult(result[0]);
                                 L.DomEvent.stop(e);
                                 this.fire('select', { data: result });
                             }, this);
@@ -131,6 +131,17 @@ var GeocoderControl = L.Control.extend({
                     }
                 }
                 this.fire('found', resp);
+            }
+        }, this);
+
+        var chooseResult = L.bind(function(result) {
+            if (result.bounds) {
+                var _ = result.bounds;
+                this._map.fitBounds(L.latLngBounds([[_[1], _[0]], [_[3], _[2]]]));
+            } else if (result.lat !== undefined && result.lon !== undefined) {
+                this._map.setView([result.lat, result.lon], (map.getZoom() === undefined) ?
+                    this.options.pointZoom :
+                    Math.max(map.getZoom(), this.options.pointZoom));
             }
         }, this);
 
