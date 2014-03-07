@@ -4,6 +4,7 @@
 * Recognizes and updates `Improve this Map` link in `L.mapbox.infoControl`
 * Improved documentation
 * Improved [popup styles](https://github.com/mapbox/mapbox.js/pull/659)
+* Support for point results from the geocoder in `L.mapbox.geocoderControl`
 
 ## v1.6.1
 
