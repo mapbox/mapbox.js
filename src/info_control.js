@@ -104,12 +104,15 @@ var InfoControl = L.Control.extend({
         }
         var link = this._content.getElementsByClassName('mapbox-improve-map');
         if (link.length && this._map._loaded) {
-            var center = this._map.getCenter();
+            var center = this._map.getCenter().wrap();
             var tilejson = this._tilejson || this._map._tilejson || {};
             var id = tilejson.id || '';
 
             for (var i = 0; i < link.length; i++) {
-                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' + center.lng + '/' + center.lat + '/' + this._map.getZoom();
+                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' +
+                    center.lng.toFixed(3) + '/' +
+                    center.lat.toFixed(3) + '/' +
+                    this._map.getZoom();
             }
         }
     },
