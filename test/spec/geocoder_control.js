@@ -40,7 +40,7 @@ describe('L.mapbox.geocoderControl', function() {
         server.respond();
 
         expect(map.getCenter()).to.be.near({lat:  38.898761, lng: -77.035117}, 1e-1);
-        expect(map.getZoom()).to.eql(8);
+        expect(map.getZoom()).to.eql(16);
     });
 
     it('supports the pointzoom option for preferred zoom for point results', function() {

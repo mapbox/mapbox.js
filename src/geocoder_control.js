@@ -7,7 +7,7 @@ var GeocoderControl = L.Control.extend({
 
     options: {
         position: 'topleft',
-        pointZoom: 8,
+        pointZoom: 16,
         keepOpen: false
     },
 
