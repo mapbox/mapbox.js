@@ -1,0 +1,187 @@
+---
+layout: api
+title: "v1.6.2 API: L.Popup"
+categories: api
+version: v1.6.2
+permalink: /api/v1.6.2/l-popup
+---
+<h2 id="popup">Popup</h2>
+
+<p>Used to open popups in certain places of the map. Use <a href="/mapbox.js/api/v1.6.2/l-map">Map#openPopup</a> to open popups while making sure that only one popup is open at one time (recommended for usability), or use <a href="/mapbox.js/api/v1.6.2/l-map">Map#addLayer</a> to open as many as you want.</p>
+
+<h3>Usage example</h3>
+<p>If you want to just bind a popup to marker click and then open it, it's really easy:</p>
+<pre><code class="javascript">marker.bindPopup(popupContent).openPopup();</code></pre>
+<p>Path overlays like polylines also have a <code>bindPopup</code> method. Here's a more complicated way to open a popup on a map:</p>
+
+<pre><code class="javascript">var popup = L.popup()
+	.setLatLng(latlng)
+	.setContent('&lt;p&gt;Hello world!&lt;br /&gt;This is a nice popup.&lt;/p&gt;')
+	.openOn(map);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='popup'>
+	<tr>
+		<th>Factory</th>
+
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>L.popup</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-popup">Popup options</a>&gt; <i>options?</i>,</nobr>
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-ilayer">ILayer</a>&gt; <i>source?</i> )</nobr>
+		</code></td>
+
+
+		<td>Instantiates a Popup object given an optional options object that describes its appearance and location and an optional source object that is used to tag the popup with a reference to the ILayer to which it refers.</td>
+	</tr>
+</table>
+
+<h3 id="popup-options">Options</h3>
+
+<table data-id='popup'>
+	<tr>
+		<th>Option</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>maxWidth</b></code></td>
+		<td><code>Number</code></td>
+		<td><code><span class="number">300</span></code></td>
+		<td>Max width of the popup.</td>
+	</tr>
+	<tr>
+		<td><code><b>minWidth</b></code></td>
+		<td><code>Number</code></td>
+		<td><code><span class="number">50</span></code></td>
+		<td>Min width of the popup.</td>
+	</tr>
+	<tr>
+		<td><code><b>maxHeight</b></code></td>
+		<td><code>Number</code></td>
+		<td><code><span class="literal">null</span></code></td>
+		<td>If set, creates a scrollable container of the given height inside a popup if its content exceeds it.</td>
+	</tr>
+	<tr>
+		<td><code><b>autoPan</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code></td>
+		<td>Set it to <code><span class="literal">false</span></code> if you don't want the map to do panning animation to fit the opened popup.</td>
+	</tr>
+	<tr>
+		<td><code><b>keepInView</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">false</span></code></td>
+		<td>Set it to <code><span class="literal">true</span></code> if you want to prevent users from panning the popup off of the screen while it is open.</td>
+	</tr>
+	<tr>
+		<td><code><b>closeButton</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code></td>
+		<td>Controls the presense of a close button in the popup.</td>
+	</tr>
+	<tr>
+		<td><code><b>offset</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-point">Point</a></code></td>
+		<td><code><nobr>Point(<span class="number">0</span>, <span class="number">6</span>)</nobr>
+		</code></td>
+		<td>The offset of the popup position. Useful to control the anchor of the popup when opening it on some overlays.</td>
+	</tr>
+	<tr>
+		<td><code><b>autoPanPaddingTopLeft</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-point">Point</a></code></td>
+		<td><code><span class="literal">null</span></code></td>
+		</code></td>
+		<td>The margin between the popup and the top left corner of the map view after autopanning was performed.</td>
+	</tr>
+	<tr>
+		<td><code><b>autoPanPaddingBottomRight</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-point">Point</a></code></td>
+		<td><code><span class="literal">null</span></code></td>
+		</code></td>
+		<td>The margin between the popup and the bottom right corner of the map view after autopanning was performed.</td>
+	</tr>
+	<tr>
+		<td><code><b>autoPanPadding</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-point">Point</a></code></td>
+		<td><code><nobr>Point(<span class="number">5</span>, <span class="number">5</span>)</nobr>
+		</code></td>
+		<td>Equivalent of setting both top left and bottom right autopan padding to the same value.</td>
+	</tr>
+	<tr>
+		<td><code><b>zoomAnimation</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">true</span></code></td>
+		<td>Whether to animate the popup on zoom. Disable it if you have problems with Flash content inside popups.</td>
+	</tr>
+	<tr>
+		<td><code><b>closeOnClick</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">null</span></code></td>
+		<td>Set it to <code><span class="literal">false</span></code> if you want to override the default behavior of the popup closing when user clicks the map (set globally by the <code>Map</code> <code>closePopupOnClick</code> option).</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='popup'>
+	<tr>
+		<th class="width250">Method</th>
+		<th class="minwidth">Returns</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>addTo</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-map">Map</a>&gt; <i>map</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Adds the popup to the map.</td>
+	</tr>
+	<tr>
+		<td><code><b>openOn</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-map">Map</a>&gt; <i>map</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Adds the popup to the map and closes the previous one. The same as <code>map.openPopup(popup)</code>.</td>
+	</tr>
+	<tr>
+		<td><code><b>setLatLng</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Sets the geographical point where the popup will open.</td>
+	</tr>
+	<tr>
+		<td><code><b>getLatLng</b>()</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a></code></td>
+		<td>Returns the geographical point of popup.</td>
+	</tr>
+	<tr>
+		<td><code><b>setContent</b>(
+			<nobr>&lt;String|HTMLElement&gt; <i>htmlContent</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Sets the HTML content of the popup.</td>
+	</tr>
+	<tr>
+		<td><code><b>getContent</b>()</code></td>
+		<td><code>&lt;String|HTMLElement&gt;</code></td>
+		<td>Returns the content of the popup.</td>
+	</tr>
+	<tr>
+		<td><code><b>update</b>()</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Updates the popup content, layout and position. Useful for updating the popup after something inside changed, e.g. image loaded.</td>
+	</tr>
+</table>
+
+
+

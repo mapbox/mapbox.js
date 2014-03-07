@@ -58,10 +58,16 @@ function splitChunks(lines) {
 function transformLinks(line, relative) {
     return line.replace(/href=['"]([^"']*)['"]/g, function(all, content) {
         if (content.indexOf('#') === 0) {
-            if (relative) {
-                return all.replace(content, '#l-' + content.replace(/\-.*/g, '').replace('#', ''));
+            var replacement;
+            if (content.match(/event$/)) {
+                replacement = 'l-event-objects';
             } else {
-                return all.replace(content, BASE_URL + 'l-' + content.replace(/\-.*/g, '').replace('#', ''));
+                replacement = 'l-' + content.replace(/\-.*/g, '').replace('#', '');
+            }
+            if (relative) {
+                return all.replace(content, '#' + replacement);
+            } else {
+                return all.replace(content, BASE_URL + replacement);
             }
         } else {
             return all;
@@ -213,3 +219,4 @@ output.write("{% endraw %}");
 writes.forEach(function(w) {
     fs.writeFileSync(w.file, w.contents);
 });
+

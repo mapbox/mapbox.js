@@ -1,0 +1,117 @@
+---
+layout: api
+title: "v1.6.2 API: L.Polyline"
+categories: api
+version: v1.6.2
+permalink: /api/v1.6.2/l-polyline
+---
+<h2 id="polyline">Polyline</h2>
+
+<p>A class for drawing polyline overlays on a map. Extends <a href="/mapbox.js/api/v1.6.2/l-path">Path</a>. Use <a href="/mapbox.js/api/v1.6.2/l-map">Map#addLayer</a> to add it to the map.</p>
+
+<h3>Usage example</h3>
+<pre><code class="javascript">// create a red polyline from an arrays of LatLng points
+var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+
+// zoom the map to the polyline
+map.fitBounds(polyline.getBounds());</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='polyline'>
+	<tr>
+		<th class="width250">Factory</th>
+
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>L.polyline</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a>[]&gt; <i>latlngs</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-polyline">Polyline options</a>&gt; <i>options?</i> )</nobr>
+		</code></td>
+
+
+		<td>Instantiates a polyline object given an array of geographical points and optionally an options object.</td>
+	</tr>
+</table>
+
+<h3 id="polyline-options">Options</h3>
+
+<p>You can use <a href="/mapbox.js/api/v1.6.2/l-path">Path options</a> and additionally the following options:</p>
+
+<table data-id='polyline'>
+	<tr>
+		<th>Option</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>smoothFactor</b></code></td>
+		<td><code>Number</code></td>
+		<td><code><span class="number">1.0</span></code></td>
+		<td>How much to simplify the polyline on each zoom level. More means better performance and smoother look, and less means more accurate representation.</td>
+	</tr>
+	<tr>
+		<td><code><b>noClip</b></code></td>
+		<td><code>Boolean</code></td>
+		<td><code><span class="literal">false</span></code></td>
+		<td>Disabled polyline clipping.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<p>You can use <a href="/mapbox.js/api/v1.6.2/l-path">Path methods</a> and additionally the following methods:</p>
+
+<table data-id='polyline'>
+	<tr>
+		<th class="width250">Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>addLatLng</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Adds a given point to the polyline.</td>
+	</tr>
+	<tr>
+		<td><code><b>setLatLngs</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a>[]&gt; <i>latlngs</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Replaces all the points in the polyline with the given array of geographical points.</td>
+	</tr>
+	<tr>
+		<td><code><b>getLatLngs</b>()</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a>[]</code></td>
+		<td>Returns an array of the points in the path.</td>
+	</tr>
+	<tr>
+		<td><code><b>spliceLatLngs</b>(
+			<nobr>&lt;Number&gt; <i>index</i></nobr>,
+			<nobr>&lt;Number&gt; <i>pointsToRemove</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a>&gt; <i>latlng?</i>, &hellip; )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-latlng">LatLng</a>[]</code></td>
+		<td>Allows adding, removing or replacing points in the polyline. Syntax is the same as in <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice">Array#splice</a>. Returns the array of removed points (if any).</td>
+	</tr>
+	<tr id="path-getbounds">
+		<td><code><b>getBounds</b>()</code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.2/l-latlngbounds">LatLngBounds</a></code></td>
+		<td>Returns the LatLngBounds of the polyline.</td>
+	</tr>
+	<tr id="polyline-togeojson">
+		<td><code><b>toGeoJSON</b>()</code></td>
+		<td><code>Object</code></td>
+		<td>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a> representation of the polyline (GeoJSON LineString Feature).</td>
+	</tr>
+</table>
+
+
+
