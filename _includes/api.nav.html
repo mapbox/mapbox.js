@@ -8,7 +8,7 @@
 <div class='space-bottom1'>
   <strong class='block quiet small'>{{section.title}}</strong>
   {% for nav in section.nav %}
-  <a class='block small truncate {% if endpath == nav.id | replace: ' ', '_' | downcase %}active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{nav.id|replace:' ','_'|downcase}}'>{{nav.title}}</a>
+  <a class='block small truncate {% if endpath == nav.id | replace: ' ', '_' | downcase %}active{% endif %}' href='{{site.baseurl}}/api/{{p.version}}/{{nav.id|replace:' ','_'|downcase}}/'>{{nav.title}}</a>
   {% endfor %}
 </div>
 {% endfor %}
