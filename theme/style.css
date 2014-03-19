@@ -714,6 +714,12 @@
   background-color:rgba(0,0,0,0.25);
   color:#f8f8f8;
   }
+.leaflet-container.dark .leaflet-control-layers-list span {
+  color:#f8f8f8;
+  }
+.leaflet-container.dark .leaflet-control-layers-separator {
+  border-top-color:rgba(255,255,255,0.10);
+  }
 .leaflet-container.dark .leaflet-bar a.leaflet-disabled,
 .leaflet-container.dark .leaflet-control .mapbox-button.disabled {
   background-color:#252525;
