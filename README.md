@@ -61,7 +61,7 @@ and go to `/test`.
 
 ### Version v0.x.x
 
-[Version v0.x.x can be accessed in the old master branch.](https://github.com/mapbox/mapbox.js/tree/master).
+[Version v0.x.x can be accessed in the v0 branch.](https://github.com/mapbox/mapbox.js/tree/v0).
 
 ### Editing Icons
 
