@@ -27,9 +27,9 @@ var ShareControl = L.Control.extend({
         var link = L.DomUtil.create('a', 'mapbox-share mapbox-icon mapbox-icon-share', container);
         link.href = '#';
 
-        this._modal = map._createPane('mapbox-modal', this._map._container);
-        this._mask = map._createPane('mapbox-modal-mask', this._modal);
-        this._content = map._createPane('mapbox-modal-content', this._modal);
+        this._modal = L.DomUtil.create('div', 'mapbox-modal', this._map._container);
+        this._mask = L.DomUtil.create('div', 'mapbox-modal-mask', this._modal);
+        this._content = L.DomUtil.create('div', 'mapbox-modal-content', this._modal);
 
         L.DomEvent.addListener(link, 'click', this._shareClick, this);
         L.DomEvent.disableClickPropagation(container);
@@ -72,7 +72,7 @@ var ShareControl = L.Control.extend({
 
         L.DomUtil.addClass(this._modal, 'active');
 
-        this._sharing = this._map._createPane('mapbox-modal-body', this._content);
+        this._sharing = L.DomUtil.create('div', 'mapbox-modal-body', this._content);
         this._sharing.innerHTML = share;
 
         var embed = L.DomUtil.create('input', 'mapbox-embed', this._sharing);
