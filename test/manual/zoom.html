@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'/>
+    <link rel="stylesheet" href="../../dist/mapbox.css"/>
+    <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../../dist/mapbox/mapbox.ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" href="embed.css"/>
+    <script src="../../dist/mapbox.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+    // var map = L.map('map')
+    //     .addLayer(L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png'))
+    //     .setView([0, 0], 1);
+    var map = L.mapbox.map('map', 'tmcw.map-0nuti4xd')
+         .setView([0, 0], 1.2);
+</script>
+</body>
+</html>

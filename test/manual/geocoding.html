@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel="stylesheet" href="../../dist/mapbox.css"/>
+  <link rel="stylesheet" href="embed.css"/>
+  <script src="../../dist/mapbox.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+    var geocoderControl = L.mapbox.geocoderControl('examples.map-vyofok3q');
+    L.mapbox.map('map', 'examples.map-vyofok3q')
+        .addControl(geocoderControl);
+    geocoderControl.on('select', function(e) {
+        console.log(e.data[0]);
+    });
+</script>
+</body>
+</html>

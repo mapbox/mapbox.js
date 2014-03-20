@@ -1,0 +1,17 @@
+{
+  "name": "mapbox.js",
+  "main": "index.js",
+  "version": "1.5.2",
+  "homepage": "https://github.com/mapbox/mapbox.js",
+  "authors": [ "Mapbox" ],
+  "description": "Mapbox Javascript API",
+  "keywords": [ "mapbox" ],
+  "license": "See LICENSE.md",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "examples"
+  ]
+}

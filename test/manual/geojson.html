@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel='stylesheet' href='../../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../../dist/mapbox.js'></script>
+</head>
+<body>
+<div id='map'></div>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type='text/javascript'>
+
+    var map = L.mapbox.map('map');
+    var tiles = L.mapbox.tileLayer('tristen.map-ixqro653');
+
+    $.getJSON('example2.geojson', function(geojson) {
+        var layer = L.geoJson(geojson, {
+            style: getStyle,
+            onEachFeature: bindPopup
+        });
+        map.fitBounds(layer.getBounds()).addLayer(layer).addLayer(tiles);
+    });
+
+    function getStyle() {
+        return {
+            color: '#666',
+            opacity: 0.9,
+            fillColor: '#ddd',
+            fillOpacity: 0.4,
+            weight: 4
+        };
+    }
+
+    function bindPopup(f, l) {
+        // Here we use a mapbox marker, but a custom icon can be created
+        // with http://leafletjs.com/reference.html#icon
+        if (l instanceof L.Marker) l.setIcon(L.mapbox.marker.icon(f));
+
+        l.bindPopup('<pre>' + L.mapbox.sanitize(JSON.stringify(f.properties, null, 4)) + '</pre>');
+    }
+
+</script>
+</body>
+</html>

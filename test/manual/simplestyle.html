@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel='stylesheet' href='../../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../../dist/mapbox.uncompressed.js'></script>
+</head>
+<body>
+<div id='map'></div>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type='text/javascript'>
+
+    var map = L.mapbox.map('map');
+    var tiles = L.mapbox.tileLayer('tristen.map-ixqro653').addTo(map);
+    var fl = L.mapbox.featureLayer({
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke-width": 1,
+        "stroke": "#f00"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -16.171875,
+              31.653381399664
+            ],
+            [
+              -16.171875,
+              46.07323062540838
+            ],
+            [
+              5.2734375,
+              46.07323062540838
+            ],
+            [
+              5.2734375,
+              31.653381399664
+            ],
+            [
+              -16.171875,
+              31.653381399664
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "bus"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.1640625,
+          38.272688535980976
+        ]
+      }
+    }
+  ]
+}).addTo(map);
+map.fitBounds(fl.getBounds());
+
+</script>
+</body>
+</html>
