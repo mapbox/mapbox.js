@@ -1,0 +1,17 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Change Zoom Control Location
+description: Move the zoom control to a different corner
+tags:
+  - zoom
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y', { zoomControl: false })
+    .setView([40, -74.50], 9);
+
+new L.Control.Zoom({ position: 'topright' }).addTo(map);
+</script>

@@ -1,0 +1,22 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Zoom to Double Click
+description: Instead of zooming around double-clicked points, zoom to them
+tags:
+  - zoompan
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y', {
+    // disable default double-click behavior
+    doubleClickZoom: false
+})
+.setView([40, -74.50], 9)
+// zoom exactly to each double-clicked point
+.on('dblclick', function(e) {
+    map.setView(e.latlng, map.getZoom() + 1);
+});
+</script>

@@ -1,0 +1,46 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: paddingTopLeft - Reserve space on the map for content
+description: Center the map, allowing for an overlay
+tags:
+  - zoom
+---
+
+<style>
+#container {
+  position:relative;
+  height:100%;
+  }
+#content {
+  background:#000;
+  background:rgba(0, 0, 0, 0.5);
+  width:200px;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  z-index:100000;
+  }
+</style>
+
+<div id='container'>
+  <div id='content'>Content</div>
+  <div id='map'></div>
+</div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
+
+map.fitBounds([
+    [39.0, -77.18],
+    [38.72, -76.89]
+], {
+    // this preserves the space from the left of the real map to 200px
+    // for content. the format is [x, y]. See
+    // http://leafletjs.com/reference.html#map-paddingtopleft
+    // for full documentation and other options
+    paddingTopLeft: [200, 0]
+});
+</script>

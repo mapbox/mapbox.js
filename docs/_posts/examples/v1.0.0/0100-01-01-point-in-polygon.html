@@ -1,0 +1,60 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Point in Polygon
+description: Drag the marker to see what state it is in
+tags:
+  - markers
+---
+
+<style>
+#state {
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:#fff;
+    font-size:30px;
+    padding:10px;
+    z-index:999;
+}
+</style>
+
+<!--
+  This example requires leaflet-pip, which you can get on GitHub:
+  https://github.com/tmcw/leaflet-pip
+  and jQuery to load the file with AJAX. You can use another tool for AJAX.
+
+  This pulls the file airports.csv, converts into into GeoJSON by autodetecting
+  the latitude and longitude columns, and adds it to the map.
+
+  Another CSV that you use will also need to contain latitude and longitude
+  columns, and they must be similarly named.
+-->
+
+<script src='{{site.baseurl}}/assets/leaflet-pip.js'></script>
+<div id='map'></div>
+<div id='state'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([38, -102.0], 5);
+
+$.ajax({
+    url: '{{site.baseurl}}/assets/data/us-states.geojson',
+    dataType: 'json',
+    success: function load(d) {
+        var states = L.geoJson(d).addTo(map);
+        L.marker([38, -102], {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '#f22'
+            }),
+            draggable: true
+        }).addTo(map)
+        .on('dragend', function(e) {
+            var layer = leafletPip.pointInLayer(this.getLatLng(), states, true);
+            document.getElementById('state').innerHTML = layer.length ?
+                layer[0].feature.properties.name : '';
+        });
+    }
+});
+</script>

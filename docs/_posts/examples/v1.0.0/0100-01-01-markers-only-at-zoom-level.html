@@ -1,0 +1,37 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Markers Only At One Zoom Level
+description: Hiding markers outside of a specific zoom level
+tags:
+  - ui
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+
+map.setView([38.90, -77], 13);
+
+// the function given to this callback will be called every time the map
+// completes a zoom animation.
+map.on('zoomend', function() {
+    // here's where you decided what zoom levels the layer should and should
+    // not be available for: use javascript comparisons like < and > if
+    // you want something other than just one zoom level, like
+    // (map.getZoom > 10)
+    if (map.getZoom() === 13) {
+        // setFilter is available on L.mapbox.featureLayers only. Here
+        // we're hiding and showing the default marker layer that's attached
+        // to the map - change the reference if you want to hide or show a
+        // different featureLayer.
+        // If you want to hide or show a different kind of layer, you can use
+        // similar methods like .setOpacity(0) and .setOpacity(1)
+        // to hide or show it.
+        map.featureLayer.setFilter(function() { return true; });
+    } else {
+        map.featureLayer.setFilter(function() { return false; });
+    }
+});
+</script>

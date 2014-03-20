@@ -1,0 +1,30 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Line from Markers
+description: Adding a line from featureLayer
+tags:
+  - vector
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+
+map.featureLayer.on('ready', function(e) {
+  
+  var line = [];
+
+  this.eachLayer(function(marker) {
+    line.push(marker.getLatLng());
+  });
+
+  var polyline_options = {
+    color: '#000'
+  };
+
+  var polyline = L.polyline(line, polyline_options).addTo(map);
+
+});
+</script>

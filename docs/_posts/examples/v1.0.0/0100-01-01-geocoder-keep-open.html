@@ -1,0 +1,17 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Geocoder keepOpen
+description: Disabling toggling to make the geocoder control ui static.
+tags:
+  - geocoding
+---
+
+<div id='map'></div>
+<script>
+L.mapbox.map('map', 'examples.map-vyofok3q')
+    .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q', {
+        keepOpen: true
+    }));
+</script>

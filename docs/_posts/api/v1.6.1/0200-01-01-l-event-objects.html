@@ -1,0 +1,277 @@
+---
+layout: api
+title: "v1.6.1 API: Event objects"
+categories: api
+version: v1.6.1
+permalink: /api/v1.6.1/l-event-objects
+---
+<h2 id="event-objects">Event objects</h2>
+
+<p>Event object is an object that you recieve as an argument in a listener function when some event is fired, containing useful information about that event. For example:</p>
+
+<pre><code class="javascript">map.on('click', function(e) {
+	alert(e.latlng); // e is an event object (MouseEvent in this case)
+});</code></pre>
+
+<h3 id="event">Event</h3>
+
+<p>The base event object. All other event objects contain these properties too.</p>
+
+<table data-id='events'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>type</b></code></td>
+		<td><code>String</code></td>
+		<td>The event type (e.g. <code><span class="string">'click'</span></code>).</td>
+	</tr>
+	<tr>
+		<td><code><b>target</b></code></td>
+		<td><code>Object</code></td>
+		<td>The object that fired the event.</td>
+	</tr>
+</table>
+
+<h3 id="mouse-event">MouseEvent</h3>
+
+<table data-id='events'>
+	<tr>
+		<th class="width100">property</th>
+		<th>type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>latlng</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-latlng">LatLng</a></code></td>
+		<td>The geographical point where the mouse event occured.</td>
+	</tr>
+	<tr>
+		<td><code><b>layerPoint</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Pixel coordinates of the point where the mouse event occured relative to the map layer.</td>
+	</tr>
+	<tr>
+		<td><code><b>containerPoint</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>Pixel coordinates of the point where the mouse event occured relative to the map сontainer.</td>
+	</tr>
+	<tr>
+		<td><code><b>originalEvent</b></code></td>
+		<td><code>DOMMouseEvent</code></td>
+		<td>The original DOM mouse event fired by the browser.</td>
+	</tr>
+</table>
+
+<h3 id="location-event">LocationEvent</h3>
+
+<table data-id='events'>
+	<tr>
+		<th class="width100">property</th>
+		<th>type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>latlng</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-latlng">LatLng</a></code></td>
+		<td>Detected geographical location of the user.</td>
+	</tr>
+	<tr>
+		<td><code><b>bounds</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-latlngbounds">LatLngBounds</a></code></td>
+		<td>Geographical bounds of the area user is located in (with respect to the accuracy of location).</td>
+	</tr>
+	<tr>
+		<td><code><b>accuracy</b></code></td>
+		<td><code>Number</code></td>
+		<td>Accuracy of location in meters.</td>
+	</tr>
+	<tr>
+		<td><code><b>altitude</b></code></td>
+		<td><code>Number</code></td>
+		<td>Height of the position above the WGS84 ellipsoid in meters.</td>
+	</tr>
+	<tr>
+		<td><code><b>altitudeAccuracy</b></code></td>
+		<td><code>Number</code></td>
+		<td>Accuracy of altitude in meters.</td>
+	</tr>
+	<tr>
+		<td><code><b>heading</b></code></td>
+		<td><code>Number</code></td>
+		<td>The direction of travel in degrees counting clockwise from true North.</td>
+	</tr>
+	<tr>
+		<td><code><b>speed</b></code></td>
+		<td><code>Number</code></td>
+		<td>Current velocity in meters per second.</td>
+	</tr>
+	<tr>
+		<td><code><b>timestamp</b></code></td>
+		<td><code>Number</code></td>
+		<td>The time when the position was acquired.</td>
+	</tr>
+</table>
+
+<h3 id="error-event">ErrorEvent</h3>
+
+<table data-id='error-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>message</b></code></td>
+		<td><code>String</code></td>
+		<td>Error message.</td>
+	</tr>
+	<tr>
+		<td><code><b>code</b></code></td>
+		<td><code>Number</code></td>
+		<td>Error code (if applicable).</td>
+	</tr>
+</table>
+
+<h3 id="layer-event">LayerEvent</h3>
+
+<table data-id='layer-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>layer</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-ilayer">ILayer</a></code></td>
+		<td>The layer that was added or removed.</td>
+	</tr>
+</table>
+
+<h3 id="layers-control-event">LayersControlEvent</h3>
+
+<table data-id='layer-control-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>layer</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-ilayer">ILayer</a></code></td>
+		<td>The layer that was added or removed.</td>
+	</tr>
+	<tr>
+		<td><code><b>name</b></code></td>
+		<td><code>String</code></td>
+		<td>The name of the layer that was added or removed.</td>
+	</tr>
+</table>
+
+<h3 id="tile-event">TileEvent</h3>
+
+<table data-id='tile-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>tile</b></code></td>
+		<td><code>HTMLElement</code></td>
+		<td>The tile element (image).</td>
+	</tr>
+	<tr>
+		<td><code><b>url</b></code></td>
+		<td><code>String</code></td>
+		<td>The source URL of the tile.</td>
+	</tr>
+</table>
+
+<h3 id="resize-event">ResizeEvent</h3>
+
+<table data-id='resize-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>oldSize</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>The old size before resize event.</td>
+	</tr>
+	<tr>
+		<td><code><b>newSize</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-point">Point</a></code></td>
+		<td>The new size after the resize event.</td>
+	</tr>
+</table>
+
+<h3 id="geojson-event">GeoJSON event</h3>
+
+<table data-id='geojson-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>layer</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-ilayer">ILayer</a></code></td>
+		<td>The layer for the GeoJSON feature that is being added to the map.</td>
+	</tr>
+	<tr>
+		<td><code><b>properties</b></code></td>
+		<td><code>Object</code></td>
+		<td>GeoJSON properties of the feature.</td>
+	</tr>
+	<tr>
+		<td><code><b>geometryType</b></code></td>
+		<td><code>String</code></td>
+		<td>GeoJSON geometry type of the feature.</td>
+	</tr>
+	<tr>
+		<td><code><b>id</b></code></td>
+		<td><code>String</code></td>
+		<td>GeoJSON ID of the feature (if present).</td>
+	</tr>
+</table>
+
+<h3 id="popup-event">Popup event</h3>
+
+<table data-id='popup-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>popup</b></code></td>
+		<td><code><a href="/mapbox.js/api/v1.6.1/l-popup">Popup</a></code></td>
+		<td>The popup that was opened or closed.</td>
+	</tr>
+</table>
+
+<h3 id="dragend-event">DragEndEvent</h3>
+
+<table data-id='layer-event'>
+	<tr>
+		<th class="width100">property</th>
+		<th class="width100">type</th>
+		<th>description</th>
+	</tr>
+	<tr>
+		<td><code><b>distance</b></code></td>
+		<td><code>Number</code></td>
+		<td>The distance in pixels the draggable element was moved by.</td>
+	</tr>
+</table>
+
+
+<!-- <h3>TileEvent</h3> -->
+
+
+

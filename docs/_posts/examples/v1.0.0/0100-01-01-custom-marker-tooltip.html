@@ -1,0 +1,72 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Custom Marker Tooltips
+description: Setting custom content in a marker tooltip
+tags:
+  - ui
+---
+
+<div id='map'></div>
+<style>
+.popup {
+    text-align: center;
+}
+.popup img {
+    width: 100%;
+}
+</style>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
+
+var geoJson = [{
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [-77.03, 38.90]},
+    "properties": {
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cherry_Blossoms_and_Washington_Monument.jpg/320px-Cherry_Blossoms_and_Washington_Monument.jpg",
+        "url": "https://en.wikipedia.org/wiki/Washington,_D.C.",
+        "marker-symbol": "star",
+        "city": "Washington, D.C."
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [-87.63, 41.88]},
+    "properties": {
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Chicago_sunrise_1.jpg/640px-Chicago_sunrise_1.jpg",
+        "url": "https://en.wikipedia.org/wiki/Chicago",
+        "city": "Chicago"
+    }
+}, {
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [-74.00, 40.71]},
+    "properties": {
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "https://en.wikipedia.org/wiki/New_York_City",
+        "city": "New York City"
+    }
+}];
+
+// Add custom popups to each using our custom feature properties
+map.featureLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    // Create custom popup content
+    var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                            '<img src="' + feature.properties.image + '">' +
+                        '   <h2>' + feature.properties.city + '</h2>' +
+                        '</a>';
+
+    // http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+        closeButton: false,
+        minWidth: 320
+    });
+});
+
+// Add features to the map
+map.featureLayer.setGeoJSON(geoJson);
+
+map.setView([45.908, -78.525], 4);
+</script>

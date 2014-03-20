@@ -1,0 +1,163 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Toggling UI
+description: Enabling and disabling UI elements
+tags:
+  - ui
+---
+
+<link rel="stylesheet" href="//api.tiles.mapbox.com/mapbox.js/plugin/leaflet-fullscreen.css" />
+<script src="//api.tiles.mapbox.com/mapbox.js/plugin/leaflet-fullscreen.js"></script>
+<script src="//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js"></script>
+
+<style>
+#map-ui {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+}
+
+#map-ui ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#map-ui a {
+    font-size: 13px;
+    background: #FFF;
+    color: #3C4E5A;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #BBB;
+    border-bottom-width: 0;
+    min-width: 138px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+#map-ui a:hover {
+    background: #ECF5FA;
+}
+
+#map-ui li:last-child a {
+    border-bottom-width: 1px;
+    -webkit-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+}
+
+#map-ui li:first-child a {
+    -webkit-border-radius: 3px 3px 0 0;
+    border-radius: 3px 3px 0 0;
+}
+
+#map-ui a.active {
+    background: #3887BE;
+    border-color: #3887BE;
+    border-top-color: #FFF;
+    color: #FFF;
+}
+
+#map-ui li:first-child a.active {
+    border-top-color: #3887BE;
+}
+
+#map .map-fullscreen {
+    background-color: #28353D;
+}
+</style>
+<div id='map'>
+    <div id='map-ui'>
+        <ul>
+            <li><a href='#' id='grid' class='active'>Interactivity</a></li>
+            <li><a href='#' id='legend'>Legend</a></li>
+            <li><a href='#' id='zoomer' class='active'>Zoomer</a></li>
+            <li><a href='#' id='fullscreen'>Fullscreen</a></li>
+            <li><a href='#' id='attribution' class='active'>Attribution</a></li>
+            <li><a href='#' id='hash'>Hash</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y', {attributionControl: true})
+    .setView([38.82, -94.96], 4);
+
+var tileLayer = L.mapbox.tileLayer('examples.npr-stations')
+    .addTo(map);
+var gridLayer = L.mapbox.gridLayer('examples.npr-stations')
+    .addTo(map);
+var gridControl = L.mapbox.gridControl(gridLayer, {follow: true})
+    .addTo(map);
+
+map.getContainer().querySelector('#grid').onclick = function() {
+    if (this.className === 'active') {
+        map.removeLayer(tileLayer);
+        map.removeLayer(gridLayer);
+        map.removeControl(gridControl);
+        this.className = '';
+    } else {
+        map.addLayer(tileLayer);
+        map.addLayer(gridLayer);
+        map.addControl(gridControl);
+        this.className = 'active';
+    }
+    return false;
+};
+
+var legend = 'Data from Robert Kieffer.';
+
+map.getContainer().querySelector('#legend').onclick = function() {
+    if (this.className === 'active') {
+        map.legendControl.removeLegend(legend);
+        this.className = '';
+    } else {
+        map.legendControl.addLegend(legend);
+        this.className = 'active';
+    }
+    return false;
+};
+
+var fullscreenControl = new L.Control.Fullscreen();
+var hash = L.hash();
+
+// Connect check boxes to ui functions
+function toggle(control, element) {
+    if (element.className === 'active') {
+        control.removeFrom(map);
+        element.className = '';
+    } else {
+        control.addTo(map);
+        element.className = 'active';
+    }
+}
+
+map.getContainer().querySelector('#zoomer').onclick = function() {
+    toggle(map.zoomControl, this);
+    return false;
+};
+
+map.getContainer().querySelector('#fullscreen').onclick = function() {
+    toggle(fullscreenControl, this);
+    return false;
+};
+
+map.getContainer().querySelector('#attribution').onclick = function() {
+    toggle(map.attributionControl, this);
+    return false;
+};
+
+map.getContainer().querySelector('#hash').onclick = function() {
+    if (this.className === 'active') {
+        hash.remove();
+        this.className = '';
+    } else {
+        hash.init(map);
+        this.className = 'active';
+    }
+    return false;
+};
+</script>

@@ -1,0 +1,32 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Cycling Through Markers
+description: Automatically center and show markers
+tags:
+  - markers
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+
+// Open popup when user mouses over a marker
+map.featureLayer.on('ready', function(e) {
+    var markers = [];
+    this.eachLayer(function(marker) { markers.push(marker); });
+    cycle(markers);
+});
+
+function cycle(markers) {
+    var i = 0;
+    function run() {
+        if (++i > markers.length - 1) i = 0;
+        map.setView(markers[i].getLatLng(), 12);
+        markers[i].openPopup();
+        window.setTimeout(run, 3000);
+    }
+    run();
+}
+</script>

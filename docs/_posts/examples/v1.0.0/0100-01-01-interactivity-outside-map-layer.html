@@ -1,0 +1,44 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Interactivity Outside of Map
+description: Show data from UTFGrid in other elements
+tags:
+  - ui
+---
+
+<style>
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100px;
+}
+
+#count {
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    top: 0px;
+    bottom: 0px;
+    font-size: 40px;
+    z-index: 99;
+    color: #fff;
+    padding: 10px;
+    background: #000;
+}
+</style>
+<div id='map'></div>
+<div id='count'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-8ced9urs', {gridControl: false});
+
+map.gridLayer
+    .on('mousemove',function(o) {
+        document.getElementById('count').innerHTML = (o.data && o.data.count) || '';
+    }).on('mouseout', function(o) {
+        document.getElementById('count').innerHTML = '';
+    });
+</script>

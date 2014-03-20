@@ -1,0 +1,18 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Centering Markers
+description: Center the map on the clicked marker
+tags:
+  - markers
+  - animation
+---
+<div id='map'></div>
+<script>
+    var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+
+    map.featureLayer.on('click', function(e) {
+        map.panTo(e.layer.getLatLng());
+    });
+</script>

@@ -1,0 +1,30 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Theme
+description: Changing the appearance of a map
+tags:
+  - layers
+---
+
+<div id='map' class='dark'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-y7l23tes')
+    .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
+    .setView([37.9, -77], 5);
+
+var feature = {
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        coordinates: [-77, 37.9]
+    },
+    properties: {
+        title: 'Example Marker',
+        description: 'This is a single marker.'
+    }
+};
+
+map.featureLayer.setGeoJSON(feature);
+</script>

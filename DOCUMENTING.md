@@ -1,6 +1,49 @@
-## DOCUMENTATION STANDARDS
+Examples and API documentation for Mapbox.js live in the `docs` subdirectory.
+It's generated as a static site using [jekyll](http://jekyllrb.com/).
 
-Components:
+## Examples
+
+* The structure of an example is `_posts/examplename/0100-01-01-examplename.html`.
+* All files necessary for examples must be in their own directory.
+* Examples use hosted mapbox.js, with the latest deployed version.
+* Use the [AirBnb style guide styles](https://github.com/airbnb/javascript), but with 4 spaces not 2.
+* Example code should pass [jshint](http://jshint.com/)
+* Where possible, examples should be cross-browser and touch-compatible.
+* Use long, descriptive names for variables.
+* Add comments for pitfalls where users might run into problems, and for parts of the code that
+  users will need to modify to get things working.
+
+### Creating a new Example
+
+To create a new example, first get jekyll running
+
+```sh
+git clone git@github.com:mapbox/mapbox.js.git
+jekyll serve -w -p 4000
+```
+
+Edit the site. Existing examples [are located here](https://github.com/mapbox/mapbox.js/tree/master/docs/_posts/examples/v1.0.0) -
+copy one to a new file with the same naming convention to start a new example. Test your new example
+by going to http://localhost:4000/mapbox.js/ and finding and using it.
+
+When you're done,
+
+```sh
+git add _posts/...newexample
+git commit -m "Added a new example, showing off XYZ"
+git push origin master
+```
+
+## API Documentation
+
+API documentation is fed by `API.md`. To rebuild the docs and serve the Jekyll site:
+
+```sh
+./_docs/build.sh v1.6.0
+jekyll serve
+```
+
+### Style Conventions
 
 * Heading - h3 for functions, h2 for object creation, h1 for topics
 * Short description. For functions, this should start with a verb, like
@@ -8,9 +51,6 @@ Components:
 * Arguments, if any
 * Return value
 * Example, in 4-indent
-
-## RECOMMENDATIONS
-
 * Write [gender-neutral](http://writingcenter.unc.edu/handouts/gender-sensitive-language/)
   standard English.
 * Spell & grammar check your writing.
@@ -21,69 +61,8 @@ Components:
 <span class='leaflet'>_Extends_: `L.Map`</span>
 ```
 
-## LOCAL SETUP
+## Updating the site to the latest deployed version of mapbox.js:
 
-The API documentation is fed by `API.md` in the `master` branch, and built by a
-script in the `gh-pages` branch. To see your changes requires running
-Jekyll on the `gh-pages` branch, but referencing your adjusted version of `API.md`.
-
-Follow these instructions to make changes to the docs locally and see what
-you've done before commiting anything to this repository.
-
-1. Clone the repository, make a new branch, and make some changes
-
-```sh
-cd ~
-git clone git@github.com:mapbox/mapbox.js && cd mapbox.js
-git checkout -b my-work
-# ... make some changes ...
-git commit -am "adjusted the API docs"
-```
-
-2. Link your adjusted version of mapbox.js on you computer
-
-```sh
-npm link
-```
-
-3. Clone the repo again, this time checking out the `gh-pages` branch.
-
-```sh
-cd ~
-git clone git@github.com:mapbox.js mapbox.js.docs -b gh-pages
-```
-
-4. Setup the small node app that builds the documentation for you,
-   linking to your locally changed version of mapbox.js.
-
-```sh
-cd ~/mapbox.js.docs/_docs
-npm install
-npm link mapbox.js
-```
-
-5. Build the docs and serve the Jekyll site
-
-```sh
-./build.sh v1.6.0
-cd ~/mapbox.js.docs
-jekyll serve
-```
-
-When you're happy with your changes, you can make a pull request to get your
-changes merged from the `my-work` branch into `master`.
-
-## Deploying Docs
-
-Docs are only deployed **with tagged versions of mapbox.js, once**. Only
-extremely unusual circumstances would cause them to be updated in place or
-changed after being pushed.
-
-If you have used `npm link` to include a working copy of `mapbox.js` for
-testing, unlink it, and run
-
-```sh
-./build.sh v1.6.0
-```
-
-Replacing `v1.6.0` with the version of docs in question.
+* The version tag is updated in the `_config.yml` file under `version:`.
+* Rebuild the docs: `./_docs/build.sh VERSION`
+* Each example should be tested against the version change.

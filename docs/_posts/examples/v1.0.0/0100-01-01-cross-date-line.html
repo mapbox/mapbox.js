@@ -1,0 +1,28 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Line Crossing the Date Line
+description: Using unwrapped coordinates to cross the line
+tags:
+  - vector
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k')
+    .setView([37.9, -77], 6);
+
+L.geoJson({
+    type: 'Feature',
+    geometry: {
+        type: 'LineString',
+        // the coordinate -233.9 is technically invalid but Leaflet
+        // permits it because it can imply the direction of wrapping -
+        // to wrap in a direction, you can add or subtract 360 from
+        // the desired end coordinate
+        coordinates: [[-77, 37.9], [-233.9, 36.5]]
+    },
+    properties: { }
+}).addTo(map);
+</script>

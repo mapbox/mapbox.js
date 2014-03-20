@@ -1,0 +1,37 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Fit Map to Markers
+description: Using fitBounds instead of zoom and center
+tags:
+  - markers
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([38, -102.0], 9);
+
+// As with any other AJAX request, this technique is subject to the Same Origin Policy:
+// http://en.wikipedia.org/wiki/Same_origin_policy
+// So the CSV file must be on the same domain as the Javascript, or the server
+// delivering it should support CORS.
+var featureLayer = L.mapbox.featureLayer()
+    .loadURL('{{site.baseurl}}/assets/data/eastcoast_cities.geojson')
+    .addTo(map);
+
+// Especially with dynamic data, it's useful to automatically fit all markers
+// in the map bounds instead of guessing and checking center and zoom values
+
+// Since this layer is loaded with the asynchronous method loadURL, that uses
+// AJAX in the background, we wait for all of the markers to be loaded by
+// waiting for the ready event. If you don't load your markers with an async
+// method and instead set them with setGeoJSON or similar, you don't need
+// to do this.
+featureLayer.on('ready', function() {
+    // featureLayer.getBounds() returns the corners of the furthest-out markers,
+    // and map.fitBounds() makes sure that the map contains these.
+    map.fitBounds(featureLayer.getBounds());
+});
+</script>

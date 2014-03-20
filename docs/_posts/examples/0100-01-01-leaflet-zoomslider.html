@@ -1,0 +1,28 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Zoom Bar
+description: Control the map's scale with a UI element
+tags:
+  - ui
+---
+
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.js'></script>
+<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.css' rel='stylesheet' />
+<style>
+/* Adjustments to account for mapbox.css box-sizing rules */
+.leaflet-control-zoomslider-knob { width:14px; height:6px; }
+.leaflet-container .leaflet-control-zoomslider-body {
+  -webkit-box-sizing:content-box;
+     -moz-box-sizing:content-box;
+          box-sizing:content-box;
+  }
+</style>
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-vyofok3q', {
+  zoomControl: false
+});
+L.control.zoomslider().addTo(map);
+</script>

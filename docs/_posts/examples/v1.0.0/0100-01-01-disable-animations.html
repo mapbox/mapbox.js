@@ -1,0 +1,28 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Disable Animations and Inertia
+description: Using map constructor options, make the map's behavior simpler
+tags:
+  - zoompan
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y', {
+    // you can specify any combination of these options to
+    // change the behavior of your map
+
+    // Disable the animation on double-click and other zooms
+    zoomAnimation: false,
+
+    // Disable the animation of tiles fading in and out
+    fadeAnimation: false,
+
+    // Disable the inertia that causes the map to keep moving
+    // when you drag it quickly
+    inertia: false
+})
+.setView([40, -74.50], 9)
+</script>

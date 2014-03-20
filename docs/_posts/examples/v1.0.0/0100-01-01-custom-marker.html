@@ -1,0 +1,61 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Custom Marker Icons
+description: Setting a custom marker image
+tags:
+  - ui
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([40, -74.50], 9);
+
+var geoJson = [{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-75.00, 40]
+    },
+    "properties": {
+        "title": "Small astronaut",
+        "icon": {
+            "iconUrl": "{{site.baseurl}}/assets/images/astronaut1.png",
+            "iconSize": [50, 50], // size of the icon
+            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+            "className": "dot"
+        }
+    }
+}, {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-74.00, 40]
+    },
+    "properties": {
+        "title": "Big astronaut",
+        "icon": {
+            "iconUrl": "{{site.baseurl}}/assets/images/astronaut2.png",
+            "iconSize": [100, 100],
+            "iconAnchor": [50, 50],
+            "popupAnchor": [0, -55],
+            "className": "dot"
+        }
+    }
+}];
+
+// Set a custom icon on each marker based on feature properties
+map.featureLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    marker.setIcon(L.icon(feature.properties.icon));
+});
+
+// Add features to the map
+map.featureLayer.setGeoJSON(geoJson);
+
+</script>

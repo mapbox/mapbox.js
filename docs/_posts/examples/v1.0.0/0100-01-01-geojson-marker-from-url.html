@@ -1,0 +1,23 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: GeoJSON Marker from URL
+description: Loading markers with loadURL
+tags:
+  - markers
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([38, -102.0], 9);
+
+// As with any other AJAX request, this technique is subject to the Same Origin Policy:
+// http://en.wikipedia.org/wiki/Same_origin_policy
+// So the CSV file must be on the same domain as the Javascript, or the server
+// delivering it should support CORS.
+var featureLayer = L.mapbox.featureLayer()
+    .loadURL('{{site.baseurl}}/assets/data/example-single.geojson')
+    .addTo(map);
+</script>

@@ -1,0 +1,15 @@
+---
+layout: pages
+section: mapboxjs-api
+---
+
+{% if page.splash %}{% include site.introduction.html %}{% endif %}
+
+<div id='api' class='prose pad2 doc round fill-white keyline-all'>
+  {% if site.mapboxjs != page.version %}
+  <div class='warning note round space-bottom2'>You are viewing an older version of Mapbox.js. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/'>{{site.mapboxjs}} for the latest</a>.</div>
+  {% endif %}
+  <div data-swiftype-index=true>
+    {{content}}
+  </div>
+</div>

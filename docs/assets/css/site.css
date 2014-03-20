@@ -1,0 +1,73 @@
+/* Base Candidates */
+.fill-white pre { background-color:transparent; }
+
+.button.zeroclipboard-is-hover { background:#3bb2d0!important; }
+.js-clipboard:hover { cursor:pointer; }
+
+.leaflet:before {
+  background:transparent url(../images/sprite.png) no-repeat 0 0;
+  content:'';
+  display:inline-block;
+  width:20px;
+  height:20px;
+  vertical-align:top;
+  margin-right:5px;
+  }
+
+/*Examples*/
+#demo #map {
+  background:#eee;
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  }
+
+/*  -------------------------------------------------------
+ *    Syntax highlighting for prettify
+ *
+ *    Acronym Key
+ *    =====================================================
+ *   .str = string content
+ *   .kwd = keyword
+ *   .com = comment
+ *   .typ = type name
+ *   .lit = literal value
+ *   .pun = punctuation
+ *   .opn = lisp open bracket
+ *   .clo = listp close bracket
+ *   .tag = markup tag name
+ *   .atn = markup attribute name
+ *   .atv = markup attribute value
+ *   .dec = declaration
+ *   .var = variable name
+ *   .fun = function name
+ *
+ *  ------------------------------------------------------- */
+
+/*greys*/
+pre .pln { color:#404040; }
+pre .com { color:#808080; }
+pre .pun,
+pre .opn,
+pre .clo { color:#909090; }
+
+/*rust*/
+pre .fun { color:#DF6637; font-weight:bold; }
+
+/*green*/
+pre .str,
+pre .atv { color:#75A21C; }
+
+/*dark blue*/
+pre .kwd,
+pre .linenums,
+pre .tag { color:#0B5A91; display:inline; }
+
+/*light blue*/
+pre .lit,
+pre .typ,
+pre .atn,
+pre .dec,
+pre .var { color:#0C9DC2; }
+

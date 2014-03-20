@@ -1,0 +1,50 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Using L.divIcon to create markers with HTML
+description: To define markers that are more custom than basic styles
+tags:
+  - markers
+---
+
+<style>
+/*
+ * Unlike other icons, you can style `L.divIcon` instances with CSS.
+ * These styles make each marker a circle with a border and centered
+ * text
+ */
+.count-icon {
+    background:#fee;
+    text-align:center;
+    vertical-align:middle;
+    border:1px solid #000;
+    border-radius:20px;
+    line-height:40px;
+}
+</style>
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([0, 0], 2);
+
+// For 0->9, create markers in a circle
+for (var i = 0; i < 10; i++) {
+    // use a little math to position markers - you will replace this with your
+    // own code for marker positions
+    L.marker([
+        Math.cos(i / 10 * 2 * Math.PI) * 40,
+        Math.sin(i / 10 * 2 * Math.PI) * 40
+    ], {
+        icon: L.divIcon({
+            // specify a class name that we can refer to in styles, as we
+            // do above.
+            className: 'count-icon',
+            // html here defines what goes in the div created for each marker
+            html: i,
+            // and the marker width and height
+            iconSize: [40, 40]
+        })
+    }).addTo(map);
+}
+</script>

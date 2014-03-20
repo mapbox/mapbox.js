@@ -1,0 +1,34 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Using setFormat to load low-bandwidth tiles in tileLayer
+description: Loading low-quality JPEG tiles
+tags:
+  - layers
+---
+
+<style>
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100px;
+}
+</style>
+<div id='map'></div>
+<script>
+// Let's define a map without a map id, so we have to add each part of it
+// manually
+var map = L.mapbox.map('map');
+
+// see a full list of supported formats in the documentation:
+// https://www.mapbox.com/mapbox.js/api/v1.6.1/l-mapbox-tilelayer/#section-tilelayer-setformat
+var myTiles = L.mapbox.tileLayer('examples.map-8ced9urs')
+    .setFormat('jpg70')
+    .addTo(map);
+
+// Finally, center the map
+map.setView([37, -80], 3);
+</script>

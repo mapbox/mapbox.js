@@ -1,0 +1,23 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Arc.js
+description: Drawing a great arc with arc.js
+tags:
+  - plugins
+---
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/arc.js/v0.1.0/arc.js'></script>
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k')
+    .setView([42.87596410238254, -100.546875], 4);
+
+// Start and end points, in x = longitude, y = latitude values
+var start = { x: -122, y: 48 };
+var end = { x: -77, y: 39 };
+var generator = new arc.GreatCircle(start, end, { name: 'Seattle to DC' });
+var line = generator.Arc(100, { offset: 10 });
+L.geoJson(line.json()).addTo(map);
+</script>

@@ -1,0 +1,40 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Map Navigation to Places
+description: Making a simple list of places to move to
+tags:
+  - ui
+---
+
+<style>
+#navigation {
+    background:#fff;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    width:100px;
+    padding:20px;
+}
+#navigation a {
+    display:block;
+}
+</style>
+<div id='map'></div>
+<div id='navigation'>
+    <a href='#' data-position='42.36,-71'>Boston</a>
+    <a href='#' data-position='40.4,-3.7'>Madrid</a>
+    <a href='#' data-position='31.76,35.2'>Jerusalem</a>
+</div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
+document.getElementById('navigation').onclick = function(e) {
+    var pos = e.target.getAttribute('data-position');
+    if (pos) {
+        var loc = pos.split(',');
+        map.setView(loc, 11);
+    }
+}
+</script>

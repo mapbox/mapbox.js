@@ -1,0 +1,10 @@
+source: docs
+api: https://www.mapbox.com
+url: https://www.mapbox.com
+permalink: /:categories/:title
+baseurl: /mapbox.js
+pygments: true
+mapboxjs: v1.6.2
+defaultid: 'examples.map-9ijuk24y'
+rdiscount:
+  extensions: [smart]

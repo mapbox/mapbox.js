@@ -1,0 +1,40 @@
+<h2>API documentation</h2>
+
+<p>The Mapbox.js documentation is organized by <em>methods</em>.
+Each method is shown with potential arguments in a table.
+Objects returned by constructors are documented by just their object type.
+For instance, <code>L.mapbox.markerLayer</code> documents a function that
+returns a layer for markers. The methods on that object are then documented as
+<code>markerLayer.setFilter</code>, <code>markerLayer.getGeoJSON</code>, and so on.</p>
+
+<div class='note small'>
+<p>To use this API, you&#39;ll need to understand basic Javascript and mapping concepts.
+If you&#39;d like to learn Javascript, start with an <a href='http://www.codecademy.com/tracks/javascript'>interactive course</a> or
+<a href='http://eloquentjavascript.net/'>book</a>. To learn more about maps, we&#39;ve provided a helpful article explaining <a href='http://mapbox.com/developers/guide/'>how web maps work</a>.</p>
+</div>
+
+<h3 id='the-ready-event'>Asynchronous calls and the `ready` event</h3>
+<p>Mapbox.js is <a href='http://recurial.com/programming/understanding-callback-functions-in-javascript/'>asynchronous</a> - when you create a layer like <code>L.mapbox.tileLayer('{{site.defaultid}}')</code>, the layer doesn&#39;t immediately know which tiles to load and its attribution information. Instead, it loads the information in an <a href='http://en.wikipedia.org/wiki/AJAX'>AJAX</a> call.</p>
+
+<p>For most things you&#39;ll write, this isn&#39;t a problem, since Mapbox.js does a good
+job of handling these on-the-fly updates. If you&#39;re writing code that needs
+to know when layers and other dynamically-loaded objects are ready, you can
+use the <code>ready</code> event to listen for their ready state. For instance:</p>
+
+{% highlight javascript %}
+var layer = L.mapbox.tileLayer('{{site.defaultid}}');
+layer.on('ready', function() {
+  // the layer has been fully loaded now, and you can
+  // call .getTileJSON and investigate its properties
+});
+{% endhighlight %}
+
+<p>Similarly, dynamically-loaded objects produce an `error` event if something
+goes wrong:</p>
+
+{% highlight javascript %}
+var layer = L.mapbox.tileLayer('{{site.defaultid}}');
+layer.on('error', function(err) {
+  // Handle error
+});
+{% endhighlight %}

@@ -1,0 +1,31 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Leaflet Heat
+description: Using the Leaflet Heat plugin
+tags:
+  - plugins
+---
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.0/leaflet-heat.js'></script>
+<div id='map'></div>
+
+<!-- Example data. -->
+<script src="{{site.baseurl}}/assets/data/realworld.388.js"></script>
+
+<script>
+    var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([-37.821, 175.219], 16),
+        heat = L.heatLayer(addressPoints, {maxZoom: 18}).addTo(map),
+        draw = true;
+
+    // add points on mouse move (except when interacting with the map)
+    map.on({
+        movestart: function () { draw = false; },
+        moveend:   function () { draw = true; },
+        mousemove: function (e) {
+            if (draw) {
+                heat.addLatLng(e.latlng);
+            }
+        }
+    })
+</script>

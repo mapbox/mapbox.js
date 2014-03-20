@@ -1,0 +1,61 @@
+---
+layout: api
+title: "v1.6.0 API: L.Rectangle"
+categories: api
+version: v1.6.0
+permalink: /api/v1.6.0/l-rectangle
+---
+<h2 id="rectangle">Rectangle</h2>
+
+<p>A class for drawing rectangle overlays on a map. Extends <a href="/mapbox.js/api/v1.6.0/l-polygon">Polygon</a>. Use <a href="/mapbox.js/api/v1.6.0/l-map">Map#addLayer</a> to add it to the map.</p>
+
+<h3>Usage example</h3>
+<pre><code class="javascript">// define rectangle geographical bounds
+var bounds = [[54.559322, -5.767822], [56.1210604, -3.021240]];
+
+// create an orange rectangle
+L.rectangle(bounds, {color: "#ff7800", weight: 1}).addTo(map);
+
+// zoom the map to the rectangle bounds
+map.fitBounds(bounds);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='rectangle'>
+	<tr>
+		<th class="width250">Factory</th>
+
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>L.rectangle</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/l-path">Path options</a>&gt; <i>options?</i> )</nobr>
+		</code></td>
+
+
+		<td>Instantiates a rectangle object with the given geographical bounds and optionally an options object.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<p>You can use <a href="/mapbox.js/api/v1.6.0/l-path">Path methods</a> and additionally the following methods:</p>
+
+<table data-id='rectangle'>
+	<tr>
+		<th class="width250">Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>setBounds</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.0/l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i> )</nobr>
+		</code></td>
+
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Redraws the rectangle with the passed bounds.</td>
+	</tr>
+</table>
+
+
