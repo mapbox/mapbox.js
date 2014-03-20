@@ -1,3 +1,4 @@
+source: docs
 api: https://122e4e-mapbox.global.ssl.fastly.net
 url: https://122e4e-mapbox.global.ssl.fastly.net
 permalink: /:categories/:title
@@ -5,6 +6,5 @@ baseurl: /mapbox.js
 pygments: true
 mapboxjs: v1.6.2
 defaultid: 'examples.map-9ijuk24y'
-exclude: [node_modules]
 rdiscount:
   extensions: [smart]

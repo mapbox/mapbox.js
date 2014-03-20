@@ -1,3 +1,4 @@
+source: docs
 api: https://www.mapbox.com
 url: https://www.mapbox.com
 permalink: /:categories/:title
