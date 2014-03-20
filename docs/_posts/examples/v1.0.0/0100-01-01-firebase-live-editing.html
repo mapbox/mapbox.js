@@ -64,10 +64,13 @@ base.limit(200).on('child_added', function(snapshot) {
             // Which positions markers below the marker you drag, so that
             // they don't overlap in the z-index
             l.setZIndexOffset(-1000)
-                // And each marker should have a label with its title.
-                .bindLabel(l.toGeoJSON().properties.title || '', {
+            // And each marker should have a label with its title.
+            var geojson = l.toGeoJSON();
+            if (geojson && geojson.properties && geojson.properties.title) {
+                l.bindLabel(geojson.properties.title || '', {
                     noHide: true
                 });
+            }
         })
         .addTo(map);
 });
