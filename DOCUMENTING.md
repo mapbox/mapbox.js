@@ -3,7 +3,7 @@ It's generated as a static site using [jekyll](http://jekyllrb.com/).
 
 ## Examples
 
-* The structure of an example is `_posts/examplename/0100-01-01-examplename.html`.
+* The structure of an example is `docs/_posts/examplename/0100-01-01-examplename.html`.
 * All files necessary for examples must be in their own directory.
 * Examples use hosted mapbox.js, with the latest deployed version.
 * Use the [AirBnb style guide styles](https://github.com/airbnb/javascript), but with 4 spaces not 2.
@@ -12,6 +12,9 @@ It's generated as a static site using [jekyll](http://jekyllrb.com/).
 * Use long, descriptive names for variables.
 * Add comments for pitfalls where users might run into problems, and for parts of the code that
   users will need to modify to get things working.
+* Use comments extensively
+* Try to keep external dependencies to a minimum
+* All new external dependencies must be HTTPS / SSL-safe
 
 ### Creating a new Example
 
