@@ -1,0 +1,74 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Live Collaborative Editing with Firebase
+description: Using Firebase as a database for multiple editors at the same time, with Leaflet.label to display text associated with markers.
+tags:
+  - zoompan
+  - plugins
+---
+
+<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
+<div id='map'></div>
+<script>
+// Connect to the example firebase. This is a free account, and so it
+// will fail if given more than 50 concurrent users. Create an account at
+// http://firebaseio.com/ and use your own database if you want to try out
+// this example.
+var base = new Firebase('https://mapboxexample.firebaseio.com/'),
+    // generate a random color for the marker, just for fun.
+    color = '#' + [
+        (~~(Math.random() * 16)).toString(16),
+        (~~(Math.random() * 16)).toString(16),
+        (~~(Math.random() * 16)).toString(16)].join('');
+    map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([0, 0], 3);
+
+// Create the marker that the user drags to add their message to the map
+var marker = L.marker([0, 0], {
+    draggable: true,
+    icon: L.mapbox.marker.icon({
+        'marker-color': color
+    })
+    // Add a form to that marker that lets them specify a message and click Add
+    // to add the data.
+})
+    .bindPopup('<input type="text" id="message" /><br /><button id="add-button">Add</button>')
+    .addTo(map)
+    .openPopup();
+
+// every time the marker is dragged, update the form
+marker.on('dragend', function(e) {
+    marker.openPopup();
+    // When the user clicks Add
+    L.DomEvent.addListener(L.DomUtil.get('add-button'), 'click', function() {
+        // First, clean the potential-HTML they've added to the value.
+        var message = L.mapbox.sanitize(L.DomUtil.get('message').value);
+        // Get the current draggable marker's position and GeoJSON representation
+        var geojson = marker.toGeoJSON();
+        geojson.properties['marker-color'] = color;
+        geojson.properties.title = message;
+        // And save it to Firebase
+        base.push(geojson);
+        marker.closePopup();
+    });
+});
+
+// with a cap of 200, listen for new markers being added to the map
+base.limit(200).on('child_added', function(snapshot) {
+    // And for each new marker, add a featureLayer
+    L.mapbox.featureLayer(snapshot.val())
+        .eachLayer(function(l) {
+            // Which positions markers below the marker you drag, so that
+            // they don't overlap in the z-index
+            l.setZIndexOffset(-1000)
+                // And each marker should have a label with its title.
+                .bindLabel(l.toGeoJSON().properties.title || '', {
+                    noHide: true
+                });
+        })
+        .addTo(map);
+});
+</script>
