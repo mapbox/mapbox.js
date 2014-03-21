@@ -7,7 +7,8 @@ title: Plugins
 <div class='keyline-all round-top clearfix space-bottom contain fill-white'>
   <div class='clearfix contain pad2'>
     <div class='col9'>
-      <h3 id='{{plugin.prefix}}'>{{plugin.title | markdownify | strip_html }} <a href='{{plugin.code}}' title='Project page' class='icon github'></a></h3>
+      <a class='doc-section' id='{{plugin.prefix}}'></a>
+      <h3>{{plugin.title | markdownify | strip_html }} <a href='{{plugin.code}}' title='Project page' class='icon github'></a></h3>
       <p class='prose'>{{plugin.description}} {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed. </em>{% endif %}<a href='{{site.baseurl}}/example/v1.0.0/{% if plugin.example %}{{plugin.example}}{% else %}{{plugin.prefix}}{% endif %}' class='rcon next'>View example</a></p>
     </div>
     <div class='pin-right pad2'>
