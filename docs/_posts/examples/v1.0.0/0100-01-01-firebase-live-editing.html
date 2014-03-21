@@ -45,7 +45,7 @@ marker.on('dragend', function(e) {
     // When the user clicks Add
     L.DomEvent.addListener(L.DomUtil.get('add-button'), 'click', function() {
         // First, clean the potential-HTML they've added to the value.
-        var message = L.mapbox.sanitize(L.DomUtil.get('message').value);
+        var message = L.DomUtil.get('message').value;
         // Get the current draggable marker's position and GeoJSON representation
         var geojson = marker.toGeoJSON();
         geojson.properties['marker-color'] = color;
@@ -67,7 +67,7 @@ base.limit(200).on('child_added', function(snapshot) {
             // And each marker should have a label with its title.
             var geojson = l.toGeoJSON();
             if (geojson && geojson.properties && geojson.properties.title) {
-                l.bindLabel(geojson.properties.title || '', {
+                l.bindLabel(L.mapbox.sanitize(geojson.properties.title), {
                     noHide: true
                 });
             }
