@@ -2,8 +2,8 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: KML Data
-description: Loading and parsing KML data
+title: Imported data with custom tooltips
+description: After the ready event you can customize tooltips bound to features based on GeoJSON data
 tags:
   - omnivore
 ---
@@ -21,6 +21,15 @@ var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
 var runLayer = omnivore.kml('{{site.baseurl}}/assets/data/line.kml')
     .on('ready', function() {
         map.fitBounds(runLayer.getBounds());
+
+        // After the 'ready' event fires, the GeoJSON contents are accessible
+        // and you can iterate through layers to bind custom popups.
+        runLayer.eachLayer(function(layer) {
+            // See the `.bindPopup` documentation for full details. This
+            // dataset has a property called `name`: your dataset might not,
+            // so inspect it and customize to taste.
+            layer.bindPopup(layer.feature.properties.name);
+        });
     })
     .addTo(map);
 </script>
