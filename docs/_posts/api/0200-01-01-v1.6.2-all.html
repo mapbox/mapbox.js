@@ -28,12 +28,12 @@ interactivity.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li></ul></td>
+<td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="https://www.mapbox.com/developers/tilejson/">TileJSON</a> object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
 <td>object</td>
-<td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> L.TileLayer options. Options passed to a <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> options. Options passed to a <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>. Options passed to a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> options. Options passed to a <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>.</li><li><code>shareControl</code>: Options passed to a <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>. Set to <code>false</code> to disable the <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>.</li><li><code>infoControl</code>: Options passed to a <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>. Set to <code>false</code> to disable the <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>.</li></td>
+<td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> L.TileLayer options. Options passed to a <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> options. Options passed to a <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>. Options passed to a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> options. Options passed to a <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>.</li><li><code>shareControl</code>: Options passed to a <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>. Set to <code>false</code> to disable the <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>.</li><li><code>infoControl</code>: Options passed to a <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>. Set to <code>false</code> to disable the <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>.</li></td>
 </tr>
 </tbody>
 </table>
@@ -883,7 +883,23 @@ options object formatted to be used as <a href="http://leafletjs.com/reference.h
 <p><em>Example</em>:</p>
 <pre><code>var output = L.mapbox.template(&#39;Name: {{name}}&#39;, {name: &#39;John&#39;});
 // output is &quot;Name: John&quot;
-</code></pre><h1 id="guides">Guides</h1>
+</code></pre><h1 id="configuration">Configuration</h1>
+<h2 id="l-mapbox-config-force_https">L.mapbox.config.FORCE_HTTPS</h2>
+<p>By default, this is <code>false</code>. Mapbox.js auto-detects whether the page your map
+is embedded in is using HTTPS or SSL, and matches: if you use HTTPS on your site,
+it uses HTTPS resources.</p>
+<p>Setting <code>FORCE_HTTPS</code> to <code>true</code> makes Mapbox.js always require HTTPS resources,
+regardless of the host page&#39;s scheme.</p>
+<p><em>Example</em>:</p>
+<pre><code>L.mapbox.config.FORCE_HTTPS = true;
+</code></pre><h2 id="l-mapbox-config-http_urls">L.mapbox.config.HTTP_URLS</h2>
+<p>An array of base URLs. By default, these point to the <a href="https://www.mapbox.com/developers/api/">Mapbox Web Services</a>.
+When you refer to a tileset, grid, marker, or geocoding endpoint, a URL
+from this array is chosen.</p>
+<h2 id="l-mapbox-config-https_urls">L.mapbox.config.HTTPS_URLS</h2>
+<p>The same as <code><a href="#l-mapbox-config-http_urls">L.mapbox.config.HTTP_URLS</a></code>, but used when SSL mode is detected or
+<code>FORCE_HTTPS</code> is set to <code>true</code>.</p>
+<h1 id="guides">Guides</h1>
 <h2 id="mobile">Mobile</h2>
 <p>Mapbox.js is optimized for mobile devices and small screens by default.
 There are, however, best practices to make sure your map always looks its best.</p>
