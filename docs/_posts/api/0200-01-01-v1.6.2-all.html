@@ -159,7 +159,52 @@ interactivity into your map, which you can easily access with <code><a href="#l-
 <pre><code>// the second argument is optional
 var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
-<h3 id="gridlayer-gettilejson">gridLayer.getTileJSON()</h3>
+<h3 id="gridlayer-on">gridLayer.on(event, handler, context)</h3>
+<p>Bind an event handler to a given event on this <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> instance.
+GridLayers expose a number of useful events that give you access to UTFGrid
+data as the user interacts with the map.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event (<em>required</em>)</td>
+<td><strong>string</strong></td>
+<td>the event name</td>
+</tr>
+<tr>
+<td>handler (<em>required</em>)</td>
+<td><strong>function</strong></td>
+<td>a callback function run every time that the event is fired</td>
+</tr>
+<tr>
+<td>context (<em>optional</em>)</td>
+<td><strong>object</strong></td>
+<td>the context of the handler function: this is the value of <code>this</code> when that function returns</td>
+</tr>
+</tbody>
+</table>
+<p>After binding an event with <code>.on</code>, you can unbind it with <code>.off</code>, with the
+same argument structure.</p>
+<p>The default events are:</p>
+<ul>
+<li><code>click</code>: mouse has clicked while on a feature in UTFGrid. Event has <code>{ latLng: location, data: featureData }</code> as its data.</li>
+<li><code>mouseover</code>: mouse has moved onto a new feature in UTFGrid. Event has <code>{ latLng: location, data: featureData }</code> as its data.</li>
+<li><code>mousemove</code>: mouse has moved within a feature in UTFGrid. Event has <code>{ latLng: location, data: featureData }</code> as its data.</li>
+<li><code>mouseout</code>: mouse has moved from a feature to an area without any features. Event has <code>{ latLng: location, data: featureData }</code> as its data, in which <code>featureData</code> is the feature data the mouse was previously on.</li>
+</ul>
+<p><em>Example</em>:</p>
+<pre><code>map.gridLayer.on(&#39;click&#39;, function(e) {
+    if (e.data &amp;&amp; e.data.url) {
+        window.open(e.data.url);
+    }
+});
+</code></pre><h3 id="gridlayer-gettilejson">gridLayer.getTileJSON()</h3>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>

@@ -123,6 +123,36 @@ _Example_:
 
 _Returns_ a `L.mapbox.gridLayer` object.
 
+### gridLayer.on(event, handler, context)
+
+Bind an event handler to a given event on this `L.mapbox.gridLayer` instance.
+GridLayers expose a number of useful events that give you access to UTFGrid
+data as the user interacts with the map.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| event (_required_) | __string__ | the event name |
+| handler (_required_) | __function__ | a callback function run every time that the event is fired |
+| context (_optional_) | __object__ | the context of the handler function: this is the value of `this` when that function returns |
+
+After binding an event with `.on`, you can unbind it with `.off`, with the
+same argument structure.
+
+The default events are:
+
+* `click`: mouse has clicked while on a feature in UTFGrid. Event has `{ latLng: location, data: featureData }` as its data.
+* `mouseover`: mouse has moved onto a new feature in UTFGrid. Event has `{ latLng: location, data: featureData }` as its data.
+* `mousemove`: mouse has moved within a feature in UTFGrid. Event has `{ latLng: location, data: featureData }` as its data.
+* `mouseout`: mouse has moved from a feature to an area without any features. Event has `{ latLng: location, data: featureData }` as its data, in which `featureData` is the feature data the mouse was previously on.
+
+_Example_:
+
+    map.gridLayer.on('click', function(e) {
+        if (e.data && e.data.url) {
+            window.open(e.data.url);
+        }
+    });
+
 ### gridLayer.getTileJSON()
 
 Returns this layer's TileJSON object which determines its tile source,
