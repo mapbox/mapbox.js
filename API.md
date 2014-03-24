@@ -597,6 +597,32 @@ _Example_:
     var output = L.mapbox.template('Name: {{name}}', {name: 'John'});
     // output is "Name: John"
 
+# Configuration
+
+## L.mapbox.config.FORCE_HTTPS
+
+By default, this is `false`. Mapbox.js auto-detects whether the page your map
+is embedded in is using HTTPS or SSL, and matches: if you use HTTPS on your site,
+it uses HTTPS resources.
+
+Setting `FORCE_HTTPS` to `true` makes Mapbox.js always require HTTPS resources,
+regardless of the host page's scheme.
+
+_Example_:
+
+    L.mapbox.config.FORCE_HTTPS = true;
+
+## L.mapbox.config.HTTP_URLS
+
+An array of base URLs. By default, these point to the [Mapbox Web Services](https://www.mapbox.com/developers/api/).
+When you refer to a tileset, grid, marker, or geocoding endpoint, a URL
+from this array is chosen.
+
+## L.mapbox.config.HTTPS_URLS
+
+The same as `L.mapbox.config.HTTP_URLS`, but used when SSL mode is detected or
+`FORCE_HTTPS` is set to `true`.
+
 # Guides
 
 ## Mobile
