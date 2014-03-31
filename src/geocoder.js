@@ -32,21 +32,34 @@ module.exports = function(_) {
     };
 
     geocoder.queryURL = function(_) {
-        util.strict(_, 'string');
         if (!geocoder.getURL()) throw new Error('Geocoding map ID not set');
-        return L.Util.template(geocoder.getURL(), { query: encodeURIComponent(_) });
+        if (typeof _ !== 'string') {
+            var parts = [];
+            for (var i = 0; i < _.length; i++) {
+                parts[i] = encodeURIComponent(_[i]);
+            }
+            return L.Util.template(geocoder.getURL(), {
+                query: parts.join(';')
+            });
+        } else {
+            return L.Util.template(geocoder.getURL(), {
+                query: encodeURIComponent(_)
+            });
+        }
     };
 
     geocoder.query = function(_, callback) {
-        util.strict(_, 'string');
         util.strict(callback, 'function');
         request(geocoder.queryURL(_), function(err, json) {
-            if (json && json.results && json.results.length) {
+            if (json && (json.length || json.results)) {
                 var res = {
-                    results: json.results,
-                    latlng: [json.results[0][0].lat, json.results[0][0].lon]
+                    results: json.length ? json : json.results,
                 };
-                if (json.results[0][0].bounds !== undefined) {
+                if (json.results) {
+                    res.latlng = [json.results[0][0].lat,
+                        json.results[0][0].lon];
+                }
+                if (json.results && json.results[0][0].bounds !== undefined) {
                     res.bounds = json.results[0][0].bounds;
                     res.lbounds = util.lbounds(res.bounds);
                 }
@@ -63,16 +76,25 @@ module.exports = function(_) {
     geocoder.reverseQuery = function(_, callback) {
         var q = '';
 
-        function norm(x) {
-            if (x.lat !== undefined && x.lng !== undefined) return x.lng + ',' + x.lat;
-            else if (x.lat !== undefined && x.lon !== undefined) return x.lon + ',' + x.lat;
-            else return x[0] + ',' + x[1];
+        // sort through different ways people represent lat and lon pairs
+        function normalize(x) {
+            if (x.lat !== undefined && x.lng !== undefined) {
+                return x.lng + ',' + x.lat;
+            } else if (x.lat !== undefined && x.lon !== undefined) {
+                return x.lon + ',' + x.lat;
+            } else {
+                return x[0] + ',' + x[1];
+            }
         }
 
         if (_.length && _[0].length) {
-            for (var i = 0, pts = []; i < _.length; i++) pts.push(norm(_[i]));
+            for (var i = 0, pts = []; i < _.length; i++) {
+                pts.push(normalize(_[i]));
+            }
             q = pts.join(';');
-        } else q = norm(_);
+        } else {
+            q = normalize(_);
+        }
 
         request(geocoder.queryURL(q), function(err, json) {
             callback(err, json);
@@ -84,8 +106,9 @@ module.exports = function(_) {
     if (typeof _ === 'string') {
         if (_.indexOf('/') == -1) geocoder.setID(_);
         else geocoder.setURL(_);
+    } else if (typeof _ === 'object') {
+        geocoder.setTileJSON(_);
     }
-    else if (typeof _ === 'object') geocoder.setTileJSON(_);
 
     return geocoder;
 };
