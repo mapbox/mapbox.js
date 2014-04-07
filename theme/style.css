@@ -183,6 +183,8 @@
   cursor:-webkit-grab;
   cursor:   -moz-grab;
   }
+.leaflet-overlay-pane path,
+.leaflet-marker-icon,
 .leaflet-container.map-clickable,
 .leaflet-container.leaflet-clickable {
   cursor:pointer;
