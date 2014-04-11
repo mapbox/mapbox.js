@@ -61,8 +61,8 @@ var TileLayer = L.TileLayer.extend({
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: json.attribution,
-            minZoom: json.minzoom,
-            maxZoom: json.maxzoom,
+            minZoom: json.minzoom || 0,
+            maxZoom: json.maxzoom || 18,
             autoscale: json.autoscale || false,
             tms: json.scheme === 'tms',
             bounds: json.bounds && util.lbounds(json.bounds)
