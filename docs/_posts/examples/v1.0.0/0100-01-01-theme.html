@@ -14,6 +14,8 @@ var map = L.mapbox.map('map', 'examples.map-y7l23tes')
     .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
     .setView([37.9, -77], 5);
 
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
 var feature = {
     type: 'Feature',
     geometry: {
@@ -26,5 +28,5 @@ var feature = {
     }
 };
 
-map.featureLayer.setGeoJSON(feature);
+myLayer.setGeoJSON(feature);
 </script>

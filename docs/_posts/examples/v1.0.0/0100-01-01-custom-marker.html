@@ -13,6 +13,8 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
     .setView([40, -74.50], 9);
 
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
 var geoJson = [{
     "type": "Feature",
     "geometry": {
@@ -48,7 +50,7 @@ var geoJson = [{
 }];
 
 // Set a custom icon on each marker based on feature properties
-map.featureLayer.on('layeradd', function(e) {
+myLayer.on('layeradd', function(e) {
     var marker = e.layer,
         feature = marker.feature;
 
@@ -56,6 +58,6 @@ map.featureLayer.on('layeradd', function(e) {
 });
 
 // Add features to the map
-map.featureLayer.setGeoJSON(geoJson);
+myLayer.setGeoJSON(geoJson);
 
 </script>

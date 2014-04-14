@@ -13,6 +13,8 @@ tags:
 <script>
 var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([39.12367, -76.81229], 9);
 
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
 var geoJson = {
     type: 'FeatureCollection',
     features: [{
@@ -37,11 +39,11 @@ var geoJson = {
     }]
 };
 
-map.featureLayer.setGeoJSON(geoJson);
-map.featureLayer.on('mouseover', function(e) {
+myLayer.setGeoJSON(geoJson);
+myLayer.on('mouseover', function(e) {
     e.layer.openPopup();
 });
-map.featureLayer.on('mouseout', function(e) {
+myLayer.on('mouseout', function(e) {
     e.layer.closePopup();
 });
 </script>

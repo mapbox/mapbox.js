@@ -48,6 +48,8 @@ tags:
 <script>
 var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
 
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
 var geoJson = [{
     type: 'Feature',
     "geometry": { "type": "Point", "coordinates": [-77.03, 38.90]},
@@ -76,7 +78,7 @@ var geoJson = [{
 }];
 
 // Add custom popup html to each marker
-map.featureLayer.on('layeradd', function(e) {
+myLayer.on('layeradd', function(e) {
     var marker = e.layer;
     var feature = marker.feature;
     var images = feature.properties.images
@@ -111,7 +113,7 @@ map.featureLayer.on('layeradd', function(e) {
 });
 
 // Add features to the map
-map.featureLayer.setGeoJSON(geoJson);
+myLayer.setGeoJSON(geoJson);
 
 // This example uses jQuery to make selecting items in the slideshow easier.
 // Download it from http://jquery.com

@@ -37,6 +37,8 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
 var geolocate = document.getElementById('geolocate');
 
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
 // This uses the HTML5 geolocation API, which is available on
 // most mobile browsers and modern browsers, but not in Internet Explorer
 //
@@ -57,7 +59,7 @@ if (!navigator.geolocation) {
 map.on('locationfound', function(e) {
     map.fitBounds(e.bounds);
 
-    map.featureLayer.setGeoJSON({
+    myLayer.setGeoJSON({
         type: "Feature",
         geometry: {
             type: "Point",

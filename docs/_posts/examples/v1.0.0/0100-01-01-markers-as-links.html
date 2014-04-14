@@ -12,6 +12,8 @@ tags:
 <script>
 var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([39.12367, -76.81229], 9);
 
+var myLayer = L.mapbox.featureLayer();
+
 // The GeoJSON representing the two point features
 var geoJson = {
     type: 'FeatureCollection',
@@ -44,8 +46,8 @@ var geoJson = {
 };
 
 // Pass features and a custom factory function to the map
-map.featureLayer.setGeoJSON(geoJson);
-map.featureLayer.on('click', function(e) {
+myLayer.setGeoJSON(geoJson);
+myLayer.on('click', function(e) {
     e.layer.unbindPopup();
     window.open(e.layer.feature.properties.url);
 });
