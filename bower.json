@@ -1,7 +1,7 @@
 {
   "name": "mapbox.js",
   "main": "index.js",
-  "version": "1.5.2",
+  "version": "1.6.2",
   "homepage": "https://github.com/mapbox/mapbox.js",
   "authors": [ "Mapbox" ],
   "description": "Mapbox Javascript API",
