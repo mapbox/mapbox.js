@@ -10,16 +10,11 @@ module.exports = {
     isSSL: function() {
         return 'https:' === document.location.protocol || config.FORCE_HTTPS;
     },
-    base: function(hash) {
+    base: function() {
         // By default, use public HTTP urls
         // Support HTTPS if the user has specified HTTPS urls to use, and this
         // page is under HTTPS
-        var urls = this.isSSL() ? config.HTTPS_URLS : config.HTTP_URLS;
-        if (hash === undefined || typeof hash !== 'number') {
-            return urls[0];
-        } else {
-            return urls[hash % urls.length];
-        }
+        return (this.isSSL() ? config.HTTPS_URLS : config.HTTP_URLS)[0];
     },
     // Requests that contain URLs need a secure flag appended
     // to their URLs so that the server knows to send SSL-ified
