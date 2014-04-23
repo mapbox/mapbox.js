@@ -12,7 +12,7 @@ all: \
 	dist/images/icons-404040.png
 
 node_modules/.install: package.json
-	npm install && npm install leaflet-hash && touch node_modules/.install
+	npm install && touch node_modules/.install
 
 mapbox%js:
 	@cat $(filter %.js,$^) > $@

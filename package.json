@@ -14,14 +14,13 @@
     "mustache": "0.7.3",
     "corslite": "0.0.5",
     "json3": "git://github.com/bestiejs/json3.git#v3.2.6",
-    "sanitize-caja": "0.0.0",
-    "leaflet-hash": "~0.2.1"
+    "sanitize-caja": "0.0.0"
   },
   "scripts": {
     "test": "jshint src/*.js && mocha-phantomjs test/index.html"
   },
   "devDependencies": {
-    "leaflet-hash": "git://github.com/mlevans/leaflet-hash.git#b039a3aa4e2492a5c7448075172ac26769e601d6",
+    "leaflet-hash": "0.2.1",
     "leaflet-fullscreen": "0.0.0",
     "uglify-js": "2.4.8",
     "mocha": "1.17.1",
