@@ -57,6 +57,7 @@ var ShareControl = L.Control.extend({
             url = encodeURIComponent(this.options.url || tilejson.webpage || window.location),
             name = encodeURIComponent(tilejson.name),
             image = this._url.base() + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png',
+            embed = this._url.base() + tilejson.id + '.html?secure',
             twitter = '//twitter.com/intent/tweet?status=' + name + ' ' + url,
             facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
             pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,
@@ -67,7 +68,7 @@ var ShareControl = L.Control.extend({
                     .replace('{{twitter}}', twitter)
                     .replace('{{facebook}}', facebook)
                     .replace('{{pinterest}}', pinterest),
-            embedValue = '<iframe width="100%" height="500px" frameBorder="0" src="{{embed}}"></iframe>'.replace('{{embed}}', tilejson.embed || window.location),
+            embedValue = '<iframe width="100%" height="500px" frameBorder="0" src="{{embed}}"></iframe>'.replace('{{embed}}', embed),
             embedLabel = 'Copy and paste this <strong>HTML code</strong> into documents to embed this map on web pages.';
 
         L.DomUtil.addClass(this._modal, 'active');
@@ -75,9 +76,9 @@ var ShareControl = L.Control.extend({
         this._sharing = L.DomUtil.create('div', 'mapbox-modal-body', this._content);
         this._sharing.innerHTML = share;
 
-        var embed = L.DomUtil.create('input', 'mapbox-embed', this._sharing);
-        embed.type = 'text';
-        embed.value = embedValue;
+        var input = L.DomUtil.create('input', 'mapbox-embed', this._sharing);
+        input.type = 'text';
+        input.value = embedValue;
 
         var label = L.DomUtil.create('label', 'mapbox-embed-description', this._sharing);
         label.innerHTML = embedLabel;
