@@ -88,7 +88,7 @@ var ShareControl = L.Control.extend({
 
         L.DomEvent.disableClickPropagation(this._sharing);
         L.DomEvent.addListener(close, 'click', this._clickOut, this);
-        L.DomEvent.addListener(embed, 'click', function(e) {
+        L.DomEvent.addListener(input, 'click', function(e) {
             e.target.focus();
             e.target.select();
         });
