@@ -44,6 +44,11 @@ function load() {
           }
         }
     });
+
+    $('.js-signup').on('click',function() {
+        $('a.action.signup').trigger('click');
+        return false;
+    });
 }
 
 $(load);
