@@ -16,9 +16,12 @@ var geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
 geocoder.query('Chester, NJ', showMap);
 
 function showMap(err, data) {
+    // The geocoder can either yield an area, like a city, or a
+    // point, like an address. Here we handle both cases,
+    // by fitting the map bounds to an area of zooming to a point.
     if (data.lbounds) {
         map.fitBounds(data.lbounds);
-    } else if (data.latlng){
+    } else if (data.latlng) {
         map.setView([data.latlng[0], data.latlng[1]], 13);
     }
 }
