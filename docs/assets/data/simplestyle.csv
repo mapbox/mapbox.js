@@ -1,0 +1,7 @@
+marker-symbol,marker-size,iata,title,city,state,country,latitude,longitude
+bus,small,00M,Thigpen,Bay Springs,MS,USA,31.95376472,-89.23450472
+bus,small,00R,Livingston Municipal,Livingston,TX,USA,30.68586111,-95.01792778
+bus,medium,00V,Meadow Lake,Colorado Springs,CO,USA,38.94574889,-104.5698933
+bus,large,01G,Perry-Warsaw,Perry,NY,USA,42.74134667,-78.05208056
+bus,small,01J,Hilliard Airpark,Hilliard,FL,USA,30.6880125,-81.90594389
+bus,medium,01M,Tishomingo County,Belmont,MS,USA,34.49166667,-88.20111111
