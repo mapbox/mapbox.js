@@ -1,0 +1,35 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: L.mapbox.simplestyle with L.geoJson
+description: Using the standalone simplestyle styler with L.geoJson
+tags:
+  - markers
+  - data
+---
+
+<div id='map'></div>
+<script>
+var geojson = [
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [-77.03238901390978,38.913188059745586],
+        [-122.414, 37.776]
+      ]
+    },
+    "properties": {
+      "stroke": "#fc4353",
+      "stroke-width": 10
+    }
+  }
+];
+
+var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+  .setView([37.8, -96], 4);
+
+L.geoJson(geojson, { style: L.mapbox.simplestyle.style }).addTo(map);
+</script>
