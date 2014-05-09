@@ -1,0 +1,42 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Static map with the geo-viewport plugin
+description: Using geo-viewport to find a zoom level and centerpoint that contains a static map
+tags:
+  - plugins
+---
+
+<!-- create a placeholder for this static map -->j
+<img id='static-map'></div>
+
+<!-- include the geo-viewport plugin -->
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/geo-viewport/v0.1.1/geo-viewport.js'></script>
+
+<script>
+// This is an example using geo-viewport. See the full docs for full details
+// https://github.com/mapbox/geo-viewport
+
+// a bounding box in west, south, east, north order
+var bounds = [
+    5.668343999999995,
+    45.111511000000014,
+    5.852471999999996,
+    45.26800200000002
+];
+
+// The size of the desired map.
+var size = [600, 300];
+
+// calculate a zoom level and centerpoint for this map
+var vp = geoViewport.viewport(bounds, size);
+
+// construct a static map url
+// https://www.mapbox.com/developers/api/static/
+document.getElementById('static-map').src =
+    'http://api.tiles.mapbox.com/v3/examples.map-zr0njcqy/' +
+    vp.center.join(',') + ',' +
+    vp.zoom + '/' +
+    size.join('x') + '.png';
+</script>
