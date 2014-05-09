@@ -544,7 +544,7 @@ Returns a `L.mapbox.shareControl` object.
 
 # Markers
 
-## L.mapbox.marker.icon(feature)
+## L.mapbox.marker.icon(properties)
 
 A core icon generator used in `L.mapbox.marker.style`
 
@@ -556,6 +556,8 @@ _Returns_:
 
 A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
 and `popupAnchor`.
+
+[A working example of L.mapbox.marker.icon in use](/mapbox.js/example/v1.0.0/l-mapbox-marker/)
 
 ## L.mapbox.marker.style(feature, latlng)
 
