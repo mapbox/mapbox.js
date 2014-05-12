@@ -275,7 +275,8 @@
   margin:0;
   box-shadow:none;
   }
-  .leaflet-container .leaflet-control-attribution a {
+  .leaflet-container .leaflet-control-attribution a,
+  .leaflet-container .map-info-container a {
     color:#404040;
     }
     .leaflet-control-attribution a:hover,
@@ -709,7 +710,9 @@
   color:#f8f8f8;
   }
   .leaflet-container.dark .leaflet-control-attribution a,
-  .leaflet-container.dark .leaflet-control-attribution a:hover {
+  .leaflet-container.dark .leaflet-control-attribution a:hover,
+  .leaflet-container.dark .map-info-container a,
+  .leaflet-container.dark .map-info-container a:hover {
     color:#fff;
     }
 
