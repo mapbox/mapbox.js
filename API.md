@@ -1,6 +1,7 @@
 # Map Object
 
 ## L.mapbox.map(element, id|url|tilejson, options)
+
 Create and automatically configure a map with layers, markers, and
 interactivity.
 
@@ -23,6 +24,8 @@ _Example_:
     var map = L.mapbox.map('map');
 
 _Returns_: a map object
+
+_Class_: `L.mapbox.Map`
 
 ### map.getTileJSON()
 
@@ -70,6 +73,8 @@ _Example_:
 
 _Returns_ a `L.mapbox.tileLayer` object.
 
+_Class_: `L.mapbox.TileLayer`
+
 ### tileLayer.getTileJSON()
 
 Returns this layer's TileJSON object which determines its tile source,
@@ -105,6 +110,8 @@ _Example_:
         format: 'jpg70'
     });
 
+[Live example of .setFormat in use](https://www.mapbox.com/mapbox.js/example/v1.0.0/tilelayer-setformat/)
+
 _Returns_: the layer object
 
 ## L.mapbox.gridLayer(id|url|tilejson, options)
@@ -122,6 +129,8 @@ _Example_:
     var layer = L.mapbox.gridLayer('examples.map-20v6611k');
 
 _Returns_ a `L.mapbox.gridLayer` object.
+
+_Class_: `L.mapbox.GridLayer`
 
 ### gridLayer.on(event, handler, context)
 
@@ -206,6 +215,8 @@ _Example_:
 
 _Returns_ a `L.mapbox.featureLayer` object.
 
+_Class_: `L.mapbox.FeatureLayer`
+
 ### featureLayer.loadURL(url)
 
 Load GeoJSON data for this layer from the URL given by `url`.
@@ -256,6 +267,8 @@ _Example_:
         // hide all markers
         .setFilter(function() { return false; })
         .addTo(map);
+
+[See a live example of .setFilter](https://www.mapbox.com/mapbox.js/example/v1.0.0/multiple-marker-filters/)
 
 _Returns_ the featureLayer object.
 
@@ -345,6 +358,8 @@ The callback is called with arguments
             lbounds: // leaflet-style bounds of the first result
         }
 
+_Example_: [Live example of geocoder.query centering a map.](https://www.mapbox.com/mapbox.js/example/v1.0.0/map-center-geocoding/)
+
 _Returns_: the geocoder object. The return value of this function is not useful - you must use a callback to get results.
 
 ### geocoder.reverseQuery(location, callback)
@@ -377,6 +392,8 @@ _Example_:
 
 _Returns_: a `L.mapbox.infoControl` object.
 
+_Class_: `L.mapbox.InfoControl`
+
 ### infoControl.addInfo(info)
 Adds an info string to infoControl.
 
@@ -407,6 +424,8 @@ _Example_:
     map.addControl(L.mapbox.legendControl());
 
 _Returns_: a `L.mapbox.legendControl` object.
+
+_Class_: `L.mapbox.LegendControl`
 
 ### legendControl.addLegend(legend)
 Adds a legend to the legendControl.
@@ -444,6 +463,8 @@ _Example_:
 
 _Returns_: a `L.mapbox.gridControl` object.
 
+_Class_: `L.mapbox.GridControl`
+
 ### gridControl.hide()
 
 If a tooltip is currently shown by the gridControl, hide and close it.
@@ -473,7 +494,7 @@ This function is currently in private beta: [Contact Mapbox](https://mapbox.com/
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url (_required_) | string | Either a <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li></ul> |
-| options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`.<li></ul> |
+| options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li></ul> |
 
 _Example_:
 
@@ -482,6 +503,8 @@ _Example_:
         .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
 
 _Returns_ a `L.mapbox.geocoderControl` object.
+
+_Class_: `L.mapbox.GeocoderControl`
 
 ### geocoderControl.setURL(url)
 
@@ -557,7 +580,7 @@ _Returns_:
 A `L.Icon` object with custom settings for `iconUrl`, `iconSize`, `iconAnchor`,
 and `popupAnchor`.
 
-[A working example of L.mapbox.marker.icon in use](/mapbox.js/example/v1.0.0/l-mapbox-marker/)
+[A working example of L.mapbox.marker.icon in use](https://www.mapbox.com/mapbox.js/example/v1.0.0/l-mapbox-marker/)
 
 ## L.mapbox.marker.style(feature, latlng)
 
@@ -576,6 +599,8 @@ _Examples_:
     L.geoJson(geoJson, {
         pointToLayer: L.mapbox.marker.style,
     });
+
+
 
 _Returns_:
 
@@ -600,6 +625,8 @@ _Examples_:
     L.geoJson(geoJson, {
         pointToLayer: L.mapbox.simplestyle.style,
     });
+
+[A working example of L.mapbox.simplestyle in use](https://www.mapbox.com/mapbox.js/example/v1.0.0/geojson-simplestyle/)
 
 _Returns_:
 

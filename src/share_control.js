@@ -95,6 +95,8 @@ var ShareControl = L.Control.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.ShareControl = ShareControl;
+
+module.exports.shareControl = function(_, options) {
     return new ShareControl(_, options);
 };

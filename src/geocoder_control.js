@@ -149,6 +149,8 @@ var GeocoderControl = L.Control.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.GeocoderControl = GeocoderControl;
+
+module.exports.geocoderControl = function(_, options) {
     return new GeocoderControl(_, options);
 };

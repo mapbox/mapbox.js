@@ -16,6 +16,8 @@ describe('L.mapbox.geocoderControl', function() {
         var map = new L.Map(document.createElement('div')),
             control = L.mapbox.geocoderControl('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json').addTo(map);
 
+        expect(control instanceof L.mapbox.GeocoderControl).to.eql(true);
+
         server.respondWith('GET',
             'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);

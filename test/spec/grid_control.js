@@ -14,6 +14,7 @@ describe("L.mapbox.gridControl", function() {
             L.mapbox.gridControl(gridLayer).addTo(map);
             gridLayer.fire('mouseover', {data: 'data'});
             expect(element.className).to.match(/map-clickable/);
+            expect(gridLayer instanceof L.mapbox.GridLayer);
         });
 
         it('shows teaser content', function() {

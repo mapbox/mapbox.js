@@ -1,13 +1,13 @@
 'use strict';
 
 var util = require('./util'),
-    tileLayer = require('./tile_layer'),
-    featureLayer = require('./feature_layer'),
-    gridLayer = require('./grid_layer'),
-    gridControl = require('./grid_control'),
-    infoControl = require('./info_control'),
-    shareControl = require('./share_control'),
-    legendControl = require('./legend_control');
+    tileLayer = require('./tile_layer').tileLayer,
+    featureLayer = require('./feature_layer').featureLayer,
+    gridLayer = require('./grid_layer').gridLayer,
+    gridControl = require('./grid_control').gridControl,
+    infoControl = require('./info_control').infoControl,
+    shareControl = require('./share_control').shareControl,
+    legendControl = require('./legend_control').legendControl;
 
 var LMap = L.Map.extend({
     includes: [require('./load_tilejson')],
@@ -168,6 +168,8 @@ var LMap = L.Map.extend({
     }
 });
 
-module.exports = function(element, _, options) {
+module.exports.Map = LMap;
+
+module.exports.map = function(element, _, options) {
     return new LMap(element, _, options);
 };

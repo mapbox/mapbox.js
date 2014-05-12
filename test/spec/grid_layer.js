@@ -35,6 +35,7 @@ describe('L.mapbox.gridLayer', function() {
         it('is initialized', function() {
             var layer = L.mapbox.gridLayer();
             expect(layer).to.be.ok();
+            expect(layer instanceof L.mapbox.GridLayer).to.be.ok();
         });
 
         it('is initialized with tilejson', function() {

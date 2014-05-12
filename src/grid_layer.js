@@ -221,6 +221,8 @@ var GridLayer = L.Class.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.GridLayer = GridLayer;
+
+module.exports.gridLayer = function(_, options) {
     return new GridLayer(_, options);
 };

@@ -112,6 +112,8 @@ var InfoControl = L.Control.extend({
     }
 });
 
-module.exports = function(options) {
+module.exports.InfoControl = InfoControl;
+
+module.exports.infoControl = function(options) {
     return new InfoControl(options);
 };

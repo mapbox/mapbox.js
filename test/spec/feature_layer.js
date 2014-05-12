@@ -15,6 +15,7 @@ describe('L.mapbox.featureLayer', function() {
         var layer = L.mapbox.featureLayer(helpers.geoJson),
             marker = layer.getLayers()[0];
         expect(marker instanceof L.Marker).to.equal(true);
+        expect(layer instanceof L.mapbox.FeatureLayer).to.be.equal(true);
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
 
