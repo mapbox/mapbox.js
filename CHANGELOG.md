@@ -4,6 +4,8 @@
 * Adds IE8 vector layer support with VML
 * No longer uses `._createPane` internally
 * CSS improvements
+* Exposes non-magic constructors like `L.mapbox.TileLayer`
+* No longer requires `embed` property from TileJSON
 
 ## v1.6.2
 
