@@ -127,6 +127,25 @@ var LMap = L.Map.extend({
         }
     },
 
+    _editLink: function() {
+        if (!this._controlContainer.getElementsByClassName) {
+            return;
+        }
+        var link = this._controlContainer.getElementsByClassName('mapbox-improve-map');
+        if (link.length && this._loaded) {
+            var center = this.getCenter().wrap();
+            var tilejson = this._tilejson || this._map._tilejson || {};
+            var id = tilejson.id || '';
+
+            for (var i = 0; i < link.length; i++) {
+                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' +
+                    center.lng.toFixed(3) + '/' +
+                    center.lat.toFixed(3) + '/' +
+                    this.getZoom();
+            }
+        }
+    },
+
     _updateLayer: function(layer) {
         if (!layer.options) return;
 
@@ -137,6 +156,9 @@ var LMap = L.Map.extend({
         if (this.attributionControl && this._loaded && layer.getAttribution) {
             this.attributionControl.addAttribution(layer.getAttribution());
         }
+
+        this.off('moveend', this._editLink, this);
+        this.on('moveend', this._editLink, this);
 
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
                 (layer.options.maxZoom || layer.options.minZoom)) {
