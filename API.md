@@ -379,11 +379,11 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 
 <span class='leaflet'>_Extends_: `L.Control`</span>
 
-A map control that shows a toggleable info container. This is triggered by default and attribution is auto-detected from active layers and added to the info container.
+A map control that shows a toggleable info container. If set, attribution is auto-detected from active layers and added to the info container.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
+| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a one additional parameter: <ul><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
 
