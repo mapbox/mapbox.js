@@ -128,9 +128,7 @@ var LMap = L.Map.extend({
     },
 
     _editLink: function() {
-        if (!this._controlContainer.getElementsByClassName) {
-            return;
-        }
+        if (!this._controlContainer.getElementsByClassName) return;
         var link = this._controlContainer.getElementsByClassName('mapbox-improve-map');
         if (link.length && this._loaded) {
             var center = this.getCenter().wrap();
@@ -165,6 +163,7 @@ var LMap = L.Map.extend({
             this._zoomBoundLayers[L.stamp(layer)] = layer;
         }
 
+        this._editLink();
         this._updateZoomLevels();
     }
 });
