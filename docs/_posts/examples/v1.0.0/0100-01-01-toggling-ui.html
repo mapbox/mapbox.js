@@ -152,7 +152,7 @@ map.getContainer().querySelector('#attribution').onclick = function() {
 
 map.getContainer().querySelector('#hash').onclick = function() {
     if (this.className === 'active') {
-        hash.remove();
+        hash.removeFrom(map);
         this.className = '';
     } else {
         hash.init(map);
