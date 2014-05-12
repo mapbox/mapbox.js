@@ -9,6 +9,7 @@ describe('L.mapbox.infoControl', function() {
         it('returns the info object', function() {
             var info = L.mapbox.infoControl();
             expect(info.addInfo('foo')).to.eql(info);
+            expect(info instanceof L.mapbox.InfoControl).to.eql(true);
         });
 
         it('adds a map info element to its container', function() {

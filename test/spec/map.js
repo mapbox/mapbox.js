@@ -13,6 +13,7 @@ describe('L.mapbox.map', function() {
     it('allows access to the tilejson object after assignment', function() {
         var map = L.mapbox.map(element, tileJSON);
         expect(map.getTileJSON()).to.equal(tileJSON);
+        expect(map instanceof L.mapbox.Map).to.eql(true);
     });
 
     it('passes options to constructor when called without new', function() {

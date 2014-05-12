@@ -16,6 +16,7 @@ describe('L.mapbox.shareControl', function() {
 
     it('can be constructed', function() {
         expect(L.mapbox.shareControl()).to.be.ok();
+        expect(L.mapbox.shareControl() instanceof L.mapbox.ShareControl).to.be.ok();
     });
 
     it('can be added to a map', function() {

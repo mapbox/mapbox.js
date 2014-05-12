@@ -60,6 +60,8 @@ var LegendControl = L.Control.extend({
     }
 });
 
-module.exports = function(options) {
+module.exports.LegendControl = LegendControl;
+
+module.exports.legendControl = function(options) {
     return new LegendControl(options);
 };

@@ -8,6 +8,7 @@ describe('L.mapbox.legendControl', function() {
         it('returns the legend object', function() {
             var legend = L.mapbox.legendControl();
             expect(legend.addLegend('foo')).to.eql(legend);
+            expect(legend instanceof L.mapbox.LegendControl).to.eql(true);
         });
 
         it('adds a map legend element to its container', function() {

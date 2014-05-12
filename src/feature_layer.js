@@ -107,6 +107,8 @@ var FeatureLayer = L.FeatureGroup.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.FeatureLayer = FeatureLayer;
+
+module.exports.featureLayer = function(_, options) {
     return new FeatureLayer(_, options);
 };

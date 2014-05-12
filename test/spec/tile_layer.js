@@ -14,6 +14,7 @@ describe("L.mapbox.tileLayer", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.options.minZoom).to.equal(0);
             expect(layer.options.maxZoom).to.equal(17);
+            expect(layer instanceof L.mapbox.TileLayer).to.eql(true);
         });
 
         it("sets attribution", function() {

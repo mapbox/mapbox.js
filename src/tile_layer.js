@@ -102,6 +102,8 @@ var TileLayer = L.TileLayer.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.TileLayer = TileLayer;
+
+module.exports.tileLayer = function(_, options) {
     return new TileLayer(_, options);
 };
