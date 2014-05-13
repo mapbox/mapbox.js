@@ -132,7 +132,7 @@ var LMap = L.Map.extend({
         var link = this._controlContainer.getElementsByClassName('mapbox-improve-map');
         if (link.length && this._loaded) {
             var center = this.getCenter().wrap();
-            var tilejson = this._tilejson || this._map._tilejson || {};
+            var tilejson = this._tilejson || {};
             var id = tilejson.id || '';
 
             for (var i = 0; i < link.length; i++) {
@@ -155,7 +155,6 @@ var LMap = L.Map.extend({
             this.attributionControl.addAttribution(layer.getAttribution());
         }
 
-        this.off('moveend', this._editLink, this);
         this.on('moveend', this._editLink, this);
 
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
