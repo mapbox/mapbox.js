@@ -621,10 +621,9 @@
   position:absolute;
   border:1px solid #999;
   border-color:rgba(0,0,0,0.4);
-  border-bottom-width:0;
   overflow:hidden;
   left:26px;
-  height:27px;
+  height:28px;
   width:0;
   top:-1px;
   border-radius:0 3px 3px 0;
@@ -670,7 +669,6 @@
     border:1px solid #999;
     border-color:rgba(0,0,0,0.4);
     }
-
 .leaflet-control-mapbox-geocoder-results a,
 .leaflet-control-mapbox-geocoder-results span {
   padding:0 10px;
@@ -683,16 +681,30 @@
   text-align:left;
   overflow:hidden;
   }
-  .leaflet-control-mapbox-geocoder-results a:first-child {
-    border-top:1px solid #999;
-    border-top-color:rgba(0,0,0,0.4);
-    border-radius:0;
-    }
   .leaflet-container.dark .leaflet-control .leaflet-control-mapbox-geocoder-results a:hover,
   .leaflet-control-mapbox-geocoder-results a:hover {
     background:#f8f8f8;
     opacity:1;
     }
+
+.leaflet-right .leaflet-control-mapbox-geocoder-wrap,
+.leaflet-right .leaflet-control-mapbox-geocoder-results {
+  left:auto;
+  right:26px;
+  }
+.leaflet-right .leaflet-control-mapbox-geocoder-wrap {
+  border-radius:3px 0 0 3px;
+  }
+.leaflet-right .leaflet-control-mapbox-geocoder.active,
+.leaflet-right .leaflet-control-mapbox-geocoder.active .leaflet-control-mapbox-geocoder-toggle {
+  border-radius:0 3px 3px 0;
+  }
+
+.leaflet-bottom .leaflet-control-mapbox-geocoder-results {
+  top:auto;
+  bottom:25px;
+  border-radius:3px 3px 0 0;
+  }
 
 /* Dark Theme
 ------------------------------------------------------- */
