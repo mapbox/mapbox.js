@@ -574,7 +574,7 @@
   margin:5px 30px 10px 10px;
   min-height:26px;
   }
-  .leaflet-control.mapbox-control-info-right {
+  .leaflet-right .leaflet-control.mapbox-control-info {
     margin:5px 10px 10px 30px;
     }
 
@@ -586,7 +586,7 @@
   bottom:0;left:0;
   z-index:1;
   }
-  .mapbox-control-info-right .mapbox-info-toggle  { left:auto; right:0; }
+  .leaflet-right .mapbox-control-info .mapbox-info-toggle  { left:auto; right:0; }
   .mapbox-info-toggle:hover { background-color:#fff; }
 
 .map-info-container {
@@ -597,15 +597,14 @@
   bottom:0;left:0;
   border-radius:13px 3px 3px 13px;
   }
-.mapbox-control-info.active .map-info-container {
-  display:inline-block;
-  }
-.mapbox-control-info-right .map-info-container {
-  left: auto;
-  right: 0;
-  padding: 3px 27px 3px 5px;
-  border-radius:3px 13px 13px 3px;
-  }
+  .leaflet-right .map-info-container {
+    left:auto;
+    right:0;
+    padding:3px 27px 3px 5px;
+    border-radius:3px 13px 13px 3px;
+    }
+
+.mapbox-control-info.active .map-info-container { display:inline-block; }
 .leaflet-container .mapbox-improve-map { font-weight:bold; }
 
 /* Geocoder
