@@ -76,7 +76,9 @@ describe('L.mapbox.infoControl', function() {
     it('receives attribution from a layer', function(done) {
         var server = sinon.fakeServer.create();
         var element = document.createElement('div');
-        var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2');
+        var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {
+            infoControl: true
+        });
 
         map.on('ready', function() {
             expect(map.infoControl._content.innerHTML).to.eql('Data provided by NatureServe in collaboration with Robert Ridgely');
@@ -93,7 +95,9 @@ describe('L.mapbox.infoControl', function() {
     it('adds map location to improve link in attribution when .mapbox-improve-map is present', function(done) {
         var server = sinon.fakeServer.create();
         var element = document.createElement('div');
-        var map = L.mapbox.map(element, 'examples.h8e9h88l');
+        var map = L.mapbox.map(element, 'examples.h8e9h88l', {
+            infoControl: true
+        });
 
         map.on('ready', function() {
             map.setView([38.902, -77.001], 13);
