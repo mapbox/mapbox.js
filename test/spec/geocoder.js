@@ -100,18 +100,18 @@ describe('L.mapbox.geocoder', function() {
 
     describe('#queryURL', function() {
         it('supports multiple arguments', function() {
-            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/{query}.json');
             expect(g.queryURL(['austin', 'houston']))
-                .to.eql('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin;houston.json');
+                .to.eql('http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/austin;houston.json');
         });
     });
 
     describe('#query', function() {
         it('supports multiple arguments', function(done) {
-            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/{query}.json');
 
             server.respondWith('GET',
-                'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin;houston.json',
+                'http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/austin;houston.json',
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(multiJson)]);
 
             g.query(['austin', 'houston'], function(err, res) {
@@ -123,10 +123,10 @@ describe('L.mapbox.geocoder', function() {
         });
 
         it('performs forward geolocation', function(done) {
-            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/{query}.json');
 
             server.respondWith('GET',
-                'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/austin.json',
+                'http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/austin.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(json)]);
 
             g.query('austin', function(err, res) {
@@ -140,10 +140,10 @@ describe('L.mapbox.geocoder', function() {
 
     describe('#reverseQuery', function() {
         it('performs reverse geolocation', function() {
-            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/{query}.json');
+            var g = L.mapbox.geocoder('http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/{query}.json');
 
             server.respondWith('GET',
-                'http://api.tiles.mapbox.com/v3/examples.map-vyofok3q/geocode/-97.7%2C30.3.json',
+                'http://api.tiles.mapbox.com/v3/examples.map-i875kd35/geocode/-97.7%2C30.3.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(revJson)]);
 
             g.reverseQuery({ lat: 30.3, lng: -97.7 }, function(err, res) {
