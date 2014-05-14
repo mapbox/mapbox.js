@@ -245,5 +245,35 @@ describe('L.mapbox.map', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
+
+        it('adds mapid and coordinates to improve link in attribution when .mapbox-improve-map is present', function(done) {
+            'use strict';
+            var server = sinon.fakeServer.create();
+            var element = document.createElement('div');
+            var map = L.mapbox.map(element, 'examples.h8e9h88l', {
+                infoControl: true
+            });
+
+            map.on('ready', function() {
+                map.setView([38.902, -77.001], 13);
+                var val = '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/38.902/13" target="_blank">Improve this map</a>';
+                expect(map.infoControl._content.innerHTML).to.eql(val);
+                 expect(map.attributionControl._container.innerHTML).to.eql(val);
+                map.setView([48.902, -77.001], 13);
+                val = '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/48.902/13" target="_blank">Improve this map</a>';
+                expect(map.infoControl._content.innerHTML).to.eql(val);
+                expect(map.attributionControl._container.innerHTML).to.eql(val);
+                map.setView([48.902, -77.001 - 360], 13);
+                val = '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/48.902/13" target="_blank">Improve this map</a>';
+                expect(map.infoControl._content.innerHTML).to.eql(val);
+                expect(map.attributionControl._container.innerHTML).to.eql(val);
+                done();
+            });
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.h8e9h88l.json",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
+            server.respond();
+        });
+
     });
 });
