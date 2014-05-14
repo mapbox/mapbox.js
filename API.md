@@ -500,7 +500,7 @@ _Example_:
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
+        .addControl(L.mapbox.geocoderControl('examples.map-i875kd35'));
 
 _Returns_ a `L.mapbox.geocoderControl` object.
 
@@ -558,7 +558,7 @@ Adds a "Share" button to the map, which can be used to share the map to Twitter 
 
 _Example_:
 
-    var map = L.map('map', 'examples.map-vyofok3q')
+    var map = L.map('map', 'examples.map-i875kd35')
         .setView([37, -77], 5)
         .addControl(L.mapbox.shareControl());
 
