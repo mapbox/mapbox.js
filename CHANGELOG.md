@@ -6,6 +6,7 @@
 * CSS improvements
 * Exposes non-magic constructors like `L.mapbox.TileLayer`
 * No longer requires `embed` property from TileJSON
+* Fix Geocoder results position when controls are positioned to the right or bottom of a map.
 
 ## v1.6.2
 
