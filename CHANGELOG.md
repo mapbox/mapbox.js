@@ -7,6 +7,8 @@
 * Exposes non-magic constructors like `L.mapbox.TileLayer`
 * No longer requires `embed` property from TileJSON
 * Fix Geocoder results position when controls are positioned to the right or bottom of a map.
+* AttributionControl is now default on the map. infoControl may be added as an option.
+* Improve this map link now updates it's coordinates on the AttributionControl.
 
 ## v1.6.2
 
