@@ -21,9 +21,8 @@ tags:
 </style>
 
 <!--
-  This example requires leaflet-pip, which you can get on GitHub:
-  https://github.com/tmcw/leaflet-pip
-  and jQuery to load the file with AJAX. You can use another tool for AJAX.
+  This example requires jQuery to load the file with AJAX.
+  You can use another tool for AJAX.
 
   This pulls the file airports.csv, converts into into GeoJSON by autodetecting
   the latitude and longitude columns, and adds it to the map.
@@ -32,7 +31,7 @@ tags:
   columns, and they must be similarly named.
 -->
 
-<script src='{{site.baseurl}}/assets/leaflet-pip.js'></script>
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.1/leaflet-pip.js'></script>
 <div id='map'></div>
 <div id='state'></div>
 <script>
