@@ -5,6 +5,6 @@ permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
 mapboxjs: v1.6.2
-defaultid: 'examples.map-9ijuk24y'
+defaultid: 'examples.map-i86nkdio'
 rdiscount:
   extensions: [smart]

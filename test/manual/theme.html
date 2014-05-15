@@ -24,33 +24,41 @@
 <div id='map-dark' class='dark map'></div>
 
 <script>
-  var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
-      .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
-      .addControl(L.mapbox.shareControl())
-      .setView([37.9, -77], 5);
+var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
+  .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes', {
+    position: 'topright'
+  }))
+  .addControl(L.mapbox.shareControl())
+  .setView([37.9, -77], 5);
 
-  var maplight = L.mapbox.map('map-light', 'examples.map-20v6611k')
-      .addControl(L.mapbox.geocoderControl('examples.map-20v6611k'))
-      .addControl(L.mapbox.shareControl())
-      .setView([37.9, -77], 5);
+var maplight = L.mapbox.map('map-light', 'examples.map-20v6611k', {
+    infoControl: true
+  })
+  .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
+  .addControl(L.mapbox.shareControl())
+  .setView([37.9, -77], 5);
 
-  var feature = {
-      type: 'Feature',
-      geometry: {
-          type: 'Point',
-          coordinates: [-77, 37.9]
-      },
-      properties: {
-          title: 'Example Marker',
-          description: 'This is a single marker.'
-      }
-  };
+var info = L.mapbox.infoControl({
+  position: 'bottomleft'
+}).addInfo('foo').addTo(mapdark);
 
-  maplight.legendControl.addLegend('hee haw');
-  mapdark.legendControl.addLegend('hee haw');
+var feature = {
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        coordinates: [-77, 37.9]
+    },
+    properties: {
+        title: 'Example Marker',
+        description: 'This is a single marker.'
+    }
+};
 
-  mapdark.markerLayer.setGeoJSON(feature);
-  maplight.markerLayer.setGeoJSON(feature);
+maplight.legendControl.addLegend('hee haw');
+mapdark.legendControl.addLegend('hee haw');
+
+mapdark.markerLayer.setGeoJSON(feature);
+maplight.markerLayer.setGeoJSON(feature);
 </script>
 </body>
 </html>

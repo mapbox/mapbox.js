@@ -11,7 +11,7 @@ interactivity.
 | ---- | ---- | ---- |
 | element (_required_) | string | Must be the id of an element, or a DOM element reference. |
 | id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](https://www.mapbox.com/developers/tilejson/) object, from your own Javascript code</li></ul> |
-| options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.mapbox.featureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.featureLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `false` to disable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `false` to disable the `L.mapbox.infoControl`.</li> |
+| options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.mapbox.featureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.featureLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `true` to enable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `true` to enable the `L.mapbox.infoControl`.</li> |
 
 _Example_:
 
@@ -379,16 +379,16 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 
 <span class='leaflet'>_Extends_: `L.Control`</span>
 
-A map control that shows a toggleable info container. This is triggered by default and attribution is auto-detected from active layers and added to the info container.
+A map control that shows a toggleable info container. If set, attribution is auto-detected from active layers and added to the info container.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a two additional parameters: <ul><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
+| options _optional_ | object | An options object. Beyond the default options for map controls, this object has a one additional parameter: <ul><li>`sanitizer`: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
 
     var map = L.mapbox.map('map').setView([38, -77], 5);
-    map.addControl(L.mapbox.infoControl());
+    map.addControl(L.mapbox.infoControl().addInfo('foo'));
 
 _Returns_: a `L.mapbox.infoControl` object.
 
@@ -500,7 +500,7 @@ _Example_:
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
+        .addControl(L.mapbox.geocoderControl('examples.map-i875kd35'));
 
 _Returns_ a `L.mapbox.geocoderControl` object.
 
@@ -558,7 +558,7 @@ Adds a "Share" button to the map, which can be used to share the map to Twitter 
 
 _Example_:
 
-    var map = L.map('map', 'examples.map-vyofok3q')
+    var map = L.map('map', 'examples.map-i875kd35')
         .setView([37, -77], 5)
         .addControl(L.mapbox.shareControl());
 
