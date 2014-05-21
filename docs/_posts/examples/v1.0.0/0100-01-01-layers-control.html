@@ -2,18 +2,18 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Layers Control
-description: Using the default layer switcher
+title: Leaflet layers control
+description: Use Leaflet's default layer switcher in Mapbox.js.
 tags:
   - layers
 ---
-
 <div id='map'></div>
+
 <script>
-var map = L.map('map').setView([38.902, -77.001], 13);
+var map = L.map('map').setView([38.8922,-77.0348], 14);
 
 L.control.layers({
-    'Base Map': L.mapbox.tileLayer('examples.map-zgrqqx0w').addTo(map),
+    'Base Map': L.mapbox.tileLayer('examples.map-i87786ca').addTo(map),
     'Grey Map': L.mapbox.tileLayer('examples.map-20v6611k')
 }, {
     'Bike Stations': L.mapbox.tileLayer('examples.bike-locations'),

@@ -3,26 +3,32 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Linking to external data
-description: Hover over countries to view data in interactivity along with data from an external source.
+description: Hover over countries to view UTFGrid data along with data from an external source.
 tags:
   - layers
 ---
-
 <style>
-#map { position:absolute; top:0; bottom:0; width:100%; }
 #currency {
-  z-index:9999;
   position:absolute;
   bottom:10px;
   left:10px;
-  font-size:36px;
-  font-weight:bold;
+  z-index:1000;
   }
+  #currency p {
+    font-size:36px;
+    font-weight:bold;
+    background:#fff;
+    display:block;
+    padding:20px;
+    }
 </style>
-<div id='currency'></div>
-<div id='map'></div>
+<div id='map'>
+  <div id='currency'></div>
+</div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-zmy97flj');
+var map = L.mapbox.map('map', 'examples.map-zmy97flj')
+  .setView([40.21, -97.47], 4);
 
 // This is example 'external data'. It's obviously very much an example,
 // and in practice you'll want to use jQuery's .ajax to pull in data or
@@ -50,8 +56,12 @@ var currency = document.getElementById('currency');
 // should be available in interaction.
 map.gridLayer
     .on('mousemove',function(o) {
-        document.getElementById('currency').innerHTML = (o.data && currencies[o.data.admin]) || '';
+        if (o.data && currencies[o.data.admin]) {
+          currency.innerHTML = '<p>' + currencies[o.data.admin] + '</p>';
+        } else {
+          currency.innerHTML = '';
+        }
     }).on('mouseout', function(o) {
-        document.getElementById('currency').innerHTML = '';
+        currency.innerHTML = '';
     });
 </script>
