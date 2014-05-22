@@ -15,8 +15,7 @@
   }
 
 /*Examples*/
-#demo #map {
-  background:#eee;
+#map {
   position:absolute;
   top:0;left:0;
   width:100%;

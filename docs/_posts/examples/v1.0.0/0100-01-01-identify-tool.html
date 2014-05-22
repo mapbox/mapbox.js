@@ -2,17 +2,25 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Identify Tool
-description: Using leaflet-pip to identify overlapping polygons
+title: Identify overlapping polygons
+description: Use leaflet-pip to identify overlapping polygons and highlight them.
 tags:
   - plugins
 ---
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
 
+<style>
+.leaflet-popup { width:240px; }
+.leaflet-popup button {
+  float:right;
+  height:30px;
+  line-height:10px;
+  }
+</style>
 <div id='map'></div>
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
 <script>
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([40, -104.50], 4);
+    .setView([38, -95], 4);
 
 var statesLayer = L.mapbox.featureLayer()
     .loadURL('{{site.baseurl}}/assets/data/states.geojson')
@@ -83,11 +91,11 @@ function handleClick(e) {
         // if there's overlap, add some content to the popup: the layer name
         // and a table of attributes
         if (match.length) {
-            html += '<h2>' + layers[i].name +
-                ' <button onclick="highlightMatch(this)" data-layer="' + i +
+            html += '<strong>' + layers[i].name +
+                '<button onclick="highlightMatch(this)" data-layer="' + i +
                 '" data-latlng="' +
                 [e.latlng.lat, e.latlng.lng] +
-                '">highlight</button></h2>';
+                '">highlight</button></strong>';
             html += propertyTable(match[0].feature.properties);
         }
     }
