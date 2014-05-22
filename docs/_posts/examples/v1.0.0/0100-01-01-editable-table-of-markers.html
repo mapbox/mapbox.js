@@ -3,53 +3,61 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Editable table controlling marker data
-description: Using the handsontable jQuery plugin to control a L.mapbox.featureLayer
+description: Use the <a href='http://handsontable.com/'>handsontable jQuery plugin</a> to control a L.mapbox.featureLayer.
 tags:
+  - ui
   - markers
 ---
-
 <style>
-#table { position:absolute; top:0; bottom:0; right:0; width:300px; background:#fff;overflow:scroll; }
+.ui-table.handsontable {
+  background:#fff;
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:100
+  }
 </style>
-<div id='map'></div>
-<div id='table'></div>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<link
-    href='//cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.full.min.css'
-    rel='stylesheet'
-    type='text/css' />
-<script src='//cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.full.min.js'></script>
-<script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([41.89409955811395, 12.493515014648438], 4);
 
-// handsontable changes this data by reference, so when it is edited,
+<div id='table' class='ui-table'></div>
+<div id='map'></div>
+
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+<script src='https://code.jquery.com/jquery-migrate-1.2.1.min.js'></script>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.full.min.css' rel='stylesheet' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.full.min.js'></script>
+
+<script>
+var map = L.mapbox.map('map', 'examples.h186knp8')
+    .setView([43.945, 19.380], 5);
+
+// Handsontable changes this data by reference, so when it is edited,
 // this copy will be modified in-place.
 // http://handsontable.com/demo/understanding_reference.html
 var data = [{
     lon: 12.493515014648438,
     lat: 41.89409955811395,
     name: 'Rome',
-    size: 'large'
+    size: 'large',
+    color: '#c091e6'
 }, {
     lon: 28.939361572265625,
     lat: 41.01099329360268,
     size: 'small',
-    name: 'Istanbul'
+    name: 'Istanbul',
+    color: '#fa946e'
 }];
 
-// create the layer that will contain these markers: this is used in the
-// dataToMarkers function below with .setGeoJSON to update marker data
+// Create the layer that will contain these markers: this is used in the
+// dataToMarkers function below with .setGeoJSON to update marker data.
 var dataLayer = L.mapbox.featureLayer().addTo(map);
 
-// create the table: see full documentation for this call at
+// Create the table: see full documentation for this call at
 // http://handsontable.com/index.html
 $("#table").handsontable({
   data: data,
   startRows: 7,
   startCols: 4,
-  colHeaders: ["lon", "lat", "name", "size"],
+  colHeaders: ['Lon', 'Lat', 'Name', 'Size', 'Color'],
   columnSorting: true,
   columns: [
     {
@@ -68,19 +76,21 @@ $("#table").handsontable({
       editor: 'select',
       selectOptions: ['small', 'medium', 'large']
     },
+    {
+      data: 'color'
+    }
   ],
   minSpareRows: 1,
-  // every time the table is changed, update the markers on the map
+  // Everytime the table is changed, update the markers on the map.
   afterChange: dataToMarkers
 });
 
 function dataToMarkers() {
-  // create a new geojson object that'll represent the table values
+  // Create a new geojson object that'll represent the table values.
   var geojson = { type: 'FeatureCollection', features: [] };
-  // for each table row, create a marker
+  // For each table row, create a marker.
   for (var i = 0; i < data.length; i++) {
-    // blank rows shouldn't be included - they're easy to detect
-    // and skip.
+    // Blank rows shouldn't be included - they're easy to detect and skip.
     if (data[i].lon === null || data[i].lat === null) continue;
     geojson.features.push({
       type: 'Feature',
@@ -90,6 +100,7 @@ function dataToMarkers() {
       },
       properties: {
         'marker-size': data[i].size,
+        'marker-color': data[i].color,
         'title': data[i].name
       }
     });

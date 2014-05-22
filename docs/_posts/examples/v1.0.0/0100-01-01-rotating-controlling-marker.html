@@ -2,13 +2,14 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Rotating and Controllable Marker
-description: Interactivity for vehicle data and simulations
+title: Rotating and controllable marker
+description: Simulate a flight path from vehicle data. Use your left and right arrow keys to change direction.
 tags:
   - markers
+  - animation
 ---
-
 <div id='map'></div>
+
 <script>
 // MIT-licensed code by Benjamin Becquet
 // https://github.com/bbecquet/Leaflet.PolylineDecorator
@@ -33,7 +34,7 @@ L.rotatedMarker = function(pos, options) {
     return new L.RotatedMarker(pos, options);
 };
 
-var map = L.mapbox.map('map', 'examples.map-20v6611k', {
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic', {
     keyboard: false
 }).setView([37.9, -77],4);
 

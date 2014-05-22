@@ -2,39 +2,38 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Change Marker Color on Click
-description: Change a marker's color and then change it back
+title: Change a markers color on click
+description: Set an active marker color depending on the one selected.
 tags:
   - markers
 ---
-
 <div id='map'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-20v6611k')
+var map = L.mapbox.map('map', 'examples.h186knp8')
     .setView([37.9, -77], 6);
 
 var geoJson = [{
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-77, 37.9]
-    },
-    properties: {
-        title: 'Marker One',
-        // http://mapbox.com/developers/simplestyle/
-        'marker-color': '#CC0033'
-    }
-},
-{
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-78, 36.5]
-    },
-    properties: {
-        title: 'Marker Two',
-        'marker-color': '#0099ff'
-    }
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [-77, 37.9]
+      },
+      properties: {
+          title: 'Marker One',
+          'marker-color': '#aaa'
+      }
+  },
+  {
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [-78, 36.5]
+      },
+      properties: {
+          title: 'Marker Two',
+          'marker-color': '#aaa'
+  }
 }];
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
@@ -49,10 +48,10 @@ function resetColors() {
     myLayer.setGeoJSON(geoJson);
 }
 
-myLayer.on('click',function(e) {
+myLayer.on('click', function(e) {
     resetColors();
     e.layer.feature.properties['old-color'] = e.layer.feature.properties['marker-color'];
-    e.layer.feature.properties['marker-color'] = '#000';
+    e.layer.feature.properties['marker-color'] = '#ff8888';
     myLayer.setGeoJSON(geoJson);
 });
 

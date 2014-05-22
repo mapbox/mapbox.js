@@ -5,7 +5,7 @@ version: v1.0.0
 title: Markers as links
 description: Click on a marker to go to a web page.
 tags:
-  - layers
+  - markers
 ---
 <div id='map'></div>
 <script>
@@ -15,7 +15,7 @@ var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
 // The GeoJSON representing the two point features
-var geoJson = {
+var geojson = {
     type: 'FeatureCollection',
     features: [{
         type: 'Feature',
@@ -48,7 +48,7 @@ var geoJson = {
 };
 
 // Pass features and a custom factory function to the map
-myLayer.setGeoJSON(geoJson);
+myLayer.setGeoJSON(geojson);
 myLayer.on('click', function(e) {
     e.layer.unbindPopup();
     window.open(e.layer.feature.properties.url);
