@@ -3,21 +3,19 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Plain Leaflet API
-description: Using the Leaflet API only
+description: Using Mapbox.js you can use the Leaflet API exclusively.
 tags:
   - leaflet
 ---
-
 <div id='map'></div>
-<script>
-// This example will run with just Leaflet, without the Mapbox.js
-// dependency. Use Leaflet v0.6.3 or newer.
 
-// In the URL below, replace 'examples.map-zr0njcqy' with your map id.
-var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/examples.map-zr0njcqy/{z}/{x}/{y}.png', {
+<script>
+// Replace 'examples.map-i87786ca' with your map id.
+var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v3/examples.map-i87786ca/{z}/{x}/{y}.png', {
     attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
 });
+
 var map = L.map('map')
     .addLayer(mapboxTiles)
-    .setView([38, -102.0], 9);
+    .setView([42.3610, -71.0587], 15);
 </script>
