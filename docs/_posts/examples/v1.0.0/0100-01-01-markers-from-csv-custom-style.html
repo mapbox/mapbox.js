@@ -2,18 +2,20 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Imported Data Custom Marker Styles
-description: Customizing colors and icons of markers based on attributes in imported data
+title: Custom marker styles for imported data
+description: Customize colors and icons of markers based on attributes in imported data.
 tags:
   - omnivore
 ---
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.1/leaflet-omnivore.min.js'></script>
 
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.1/leaflet-omnivore.min.js'></script>
 <div id='map'></div>
-<script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio');
 
-// omnivore will AJAX-request this file behind the scenes and parse it:
+<script>
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+  .setView([38, -95], 4);
+
+// Omnivore will AJAX-request this file behind the scenes and parse it:
 // note that there are considerations:
 // - The CSV file must contain latitude and longitude values, in column
 //   named roughly latitude and longitude
@@ -32,7 +34,7 @@ omnivore.csv('{{site.baseurl}}/assets/data/airports.csv')
                 // simplestyle-spec: see that specification for a full
                 // description of options.
                 marker.setIcon(L.mapbox.marker.icon({
-                    'marker-color': '#55ff55',
+                    'marker-color': '#ff8888',
                     'marker-size': 'large'
                 }));
             } else {
@@ -42,7 +44,6 @@ omnivore.csv('{{site.baseurl}}/assets/data/airports.csv')
             marker.bindPopup(marker.toGeoJSON().properties.city + ', ' +
                 marker.toGeoJSON().properties.state);
         });
-        map.fitBounds(this.getBounds());
     })
     .addTo(map);
 </script>

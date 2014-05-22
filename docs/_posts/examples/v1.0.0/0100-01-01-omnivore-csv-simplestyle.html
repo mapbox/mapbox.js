@@ -2,17 +2,18 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Markers from CSV with simplestyle-spc
-description: Using Leaflet Omnivore and L.mapbox.featureLayer, showing custom styles
+title: Styled markers from CSV data
+description: Using Leaflet Omnivore and L.mapbox.featureLayer, apply style defined by the <a href='https://www.mapbox.com/foundations/glossary/#simplestyle'>Simplestyle spec</a>.
 tags:
   - omnivore
 ---
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.1/leaflet-omnivore.min.js'></script>
 
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.1/leaflet-omnivore.min.js'></script>
 <div id='map'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([38, -102.0], 5);
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([38, -95.0], 4);
 
 // omnivore will AJAX-request this file behind the scenes and parse it:
 // note that there are considerations:
