@@ -327,6 +327,10 @@
   margin:0;
   line-height:inherit;
   }
+  .leaflet-popup-close-button + .leaflet-popup-content-wrapper .leaflet-popup-content {
+    padding-top:15px;
+    }
+
 .leaflet-popup-tip-container {
   width:20px;
   height:20px;
@@ -410,7 +414,13 @@
     }
   .leaflet-bar .leaflet-control-zoom-in                 { background-position:0 0; }
   .leaflet-bar .leaflet-control-zoom-out                { background-position:0 -26px; }
-  .map-tooltip .close, .leaflet-popup-close-button      { background-position:0 -52px; }
+  .map-tooltip.closable .close,
+  .leaflet-popup-close-button {
+    background-position:-3px -55px;
+    width:20px;
+    height:20px;
+    border-radius:0 3px 0 0;
+    }
   .mapbox-icon-info                                     { background-position:0 -78px; }
   .leaflet-control-layers-toggle                        { background-position:0 -104px; }
   .mapbox-icon-share:before, .mapbox-icon-share         { background-position:0 -130px; }
