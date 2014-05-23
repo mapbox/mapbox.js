@@ -2,18 +2,18 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Legend in a Custom Position
-description: Putting the legend in a different corner
+title: Legend in a custom position
+description: Put a legend in a different position on the map other than default.
 tags:
   - legend
 ---
-
 <div id='map'></div>
+
 <script>
 L.mapbox.map('map', 'examples.map-zmy97flj', {
     legendControl: {
-        // any of the valid control positions:
-        // http://leafletjs.com/reference.html#control-positions
+        // Any of the valid control positions:
+        // https://www.mapbox.com/mapbox.js/api/{{site.mapboxjs}}/l-control/#control-positions
         position: 'bottomleft'
     }
 });

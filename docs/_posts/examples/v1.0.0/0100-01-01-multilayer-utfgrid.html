@@ -2,16 +2,20 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Multiple UTFGrid Interactivity Layers at Once
+title: UTFGrid interactivity from multiple layers
 description: Pulling interactivity from overlapping layers made in TileMill
 tags:
   - layers
+  - tilemill
 ---
 
-<div id='map'></div>
+<div id='map' class='dark'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([40, -100], 3);
+var map = L.mapbox.map('map', 'examples.map-i86nkdio', {
+      attributionControl: false,
+      infoControl: true
+    })
+    .setView([40, -100], 4);
 
 // Pulling multiple layers of interactivity isn't too tricky, it
 // just requires that you don't use compositing, and instead add each

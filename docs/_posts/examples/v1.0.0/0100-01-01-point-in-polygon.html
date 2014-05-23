@@ -2,22 +2,25 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Point in Polygon
-description: Drag the marker to see what state it is in
+title: Point in polygon
+description: Drag a marker to see what state it's in.
 tags:
   - markers
 ---
-
 <style>
-#state {
-    position:absolute;
-    top:10px;
-    right:10px;
-    background:#fff;
-    font-size:30px;
+.state {
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:1000;
+  }
+  .state strong {
+    background:#404040;
+    color:#fff;
+    display:block;
     padding:10px;
-    z-index:999;
-}
+    border-radius:3px;
+    }
 </style>
 
 <!--
@@ -33,10 +36,11 @@ tags:
 
 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
 <div id='map'></div>
-<div id='state'></div>
+<div id='state' class='state'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([38, -102.0], 5);
+var state = document.getElementById('state');
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([38, -95], 4);
 
 $.ajax({
     url: '{{site.baseurl}}/assets/data/us-states.geojson',
@@ -45,14 +49,17 @@ $.ajax({
         var states = L.geoJson(d).addTo(map);
         L.marker([38, -102], {
             icon: L.mapbox.marker.icon({
-                'marker-color': '#f22'
+                'marker-color': '#f86767'
             }),
             draggable: true
         }).addTo(map)
         .on('dragend', function(e) {
             var layer = leafletPip.pointInLayer(this.getLatLng(), states, true);
-            document.getElementById('state').innerHTML = layer.length ?
-                layer[0].feature.properties.name : '';
+            if (layer.length) {
+              state.innerHTML = '<strong>' + layer[0].feature.properties.name + '</strong>';
+            } else {
+              state.innerHTML = '';
+            }
         });
     }
 });

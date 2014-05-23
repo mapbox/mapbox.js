@@ -2,15 +2,15 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Geocoder keepOpen
-description: Disabling toggling to make the geocoder control ui static.
+title: Open geocoder control by default
+description: Disable toggling to make the geocoder control open by default.
 tags:
   - geocoding
 ---
 
 <div id='map'></div>
 <script>
-L.mapbox.map('map', 'examples.map-i875kd35')
+L.mapbox.map('map', 'examples.h186knp8')
     .addControl(L.mapbox.geocoderControl('examples.map-i875kd35', {
         keepOpen: true
     }));

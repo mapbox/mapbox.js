@@ -2,69 +2,44 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Custom Legend
-description: Adding a custom legend
+title: Custom legend
+description: Add a custom legend to your map from HTML contained in your code.
 tags:
   - legend
 ---
+<style>
+.legend label,
+.legend span {
+  display:block;
+  float:left;
+  height:15px;
+  width:20%;
+  text-align:center;
+  font-size:9px;
+  color:#808080;
+  }
+</style>
 
-<div id='map'></div>
-
-<div id='legend-content' style='display: none;'>
-  <div class='my-legend'>
-  <div class='legend-title'>The Title or Explanation of your Map</div>
-  <div class='legend-scale'>
-    <ul class='legend-labels'>
-      <li><span style='background:#F1EEF6;'></span>0 - 20%</li>
-      <li><span style='background:#BDC9E1;'></span>40%</li>
-      <li><span style='background:#74A9CF;'></span>60%</li>
-      <li><span style='background:#2B8CBE;'></span>80%</li>
-      <li><span style='background:#045A8D;'></span>100%</li>
-    </ul>
-  </div>
-  <div class='legend-source'>Source: <a href="#link to source">Name of source</a></div>
-  </div>
-
-  <style type='text/css'>
-    .my-legend .legend-title {
-      text-align: left;
-      margin-bottom: 8px;
-      font-weight: bold;
-      font-size: 90%;
-      }
-    .my-legend .legend-scale ul {
-      margin: 0;
-      padding: 0;
-      float: left;
-      list-style: none;
-      }
-    .my-legend .legend-scale ul li {
-      display: block;
-      float: left;
-      width: 50px;
-      margin-bottom: 6px;
-      text-align: center;
-      font-size: 80%;
-      list-style: none;
-      }
-    .my-legend ul.legend-labels li span {
-      display: block;
-      float: left;
-      height: 15px;
-      width: 50px;
-      }
-    .my-legend .legend-source {
-      font-size: 70%;
-      color: #999;
-      clear: both;
-      }
-    .my-legend a {
-      color: #777;
-      }
-  </style>
+<!-- Set the display of this container to none so we can
+     add it programmatically to `legendControl` -->
+<div id='legend' style='display:none;'>
+  <strong>The Title or Explanation of your Map</strong>
+  <nav class='legend clearfix'>
+    <span style='background:#F1EEF6;'></span>
+    <span style='background:#BDC9E1;'></span>
+    <span style='background:#74A9CF;'></span>
+    <span style='background:#2B8CBE;'></span>
+    <span style='background:#045A8D;'></span>
+    <label>0 - 20%</label>
+    <label>40%</label>
+    <label>60%</label>
+    <label>80%</label>
+    <label>100%</label>
+    <small>Source: <a href="#link to source">Name of source</a></small>
 </div>
+<div id='map' class='dark'></div>
 
 <script>
   var map = L.mapbox.map('map', 'examples.map-y7l23tes');
-  map.legendControl.addLegend(document.getElementById('legend-content').innerHTML);
+  map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 </script>

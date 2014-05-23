@@ -7,13 +7,14 @@ description: Loading and parsing TopoJSON data with Leaflet-Omnivore
 tags:
   - omnivore
 ---
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.2/leaflet-omnivore.min.js'></script>
 
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.2/leaflet-omnivore.min.js'></script>
 <div id='map'></div>
+
 <script>
 var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([40, -80], 5);
 
-// omnivore will AJAX-request this file behind the scenes and parse it:
+// Omnivore will AJAX-request this file behind the scenes and parse it:
 // note that there are considerations:
 // - The file must either be on the same domain as the page that requests it,
 //   or both the server it is requested from and the user's browser must

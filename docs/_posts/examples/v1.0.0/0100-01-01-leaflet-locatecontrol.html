@@ -3,29 +3,27 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Leaflet Locate
-description: Using the Leaflet Locate Plugin
+description: Add a find me control that sets the map view to the current coordinates a user is in the world.
 tags:
   - plugins
 ---
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
-<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
 <!--[if lt IE 9]>
-  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
 <![endif]-->
 
-<style type="text/css">
-    .leaflet-control-locate {
-        border: 1px solid rgba(0,0,0,0.4);
-    }
-
-    .leaflet-control-locate a {
-        background-color: #fff;
-        background-position: -3px, -2px;
-    }
-
-    .leaflet-control-locate.active a {
-        background-position: -33px -2px;
-    }
+<style>
+.leaflet-control-locate {
+  border:1px solid rgba(0,0,0,0.4);
+  }
+.leaflet-control-locate a {
+  background-color:#fff;
+  background-position:-3px, -2px;
+  }
+.leaflet-control-locate.active a {
+  background-position:-33px -2px;
+  }
 </style>
 
 <div id='map'></div>

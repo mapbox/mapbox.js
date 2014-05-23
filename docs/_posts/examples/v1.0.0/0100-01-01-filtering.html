@@ -2,27 +2,31 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Searching for Points
-description: Using setFilter as a fast search
+title: Searching for markers
+description: Use setFilter as a fast search to filter out markers based on a user query.
 tags:
+  - ui
   - markers
 ---
-
 <style>
-#search {
-    position:absolute;
-    top:10px;
-    right:10px;
-    font-size:150%;
-}
+.search-ui {
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:1000;
+  }
 </style>
-<script src="/mapbox.js/assets/csv2geojson.js"></script>
+
+<!-- This example relies on https://github.com/mapbox/csv2geojson -->
+<script src='/mapbox.js/assets/csv2geojson.js'></script>
 <div id='map'></div>
-<input placeholder='state abbreviation' id='search' />
+<input id='search' class='search-ui' placeholder='Enter state code' />
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([38, -102.0], 5),
-    featureLayer = L.mapbox.featureLayer().addTo(map);
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([40, -95], 4);
+
+var featureLayer = L.mapbox.featureLayer().addTo(map);
 
 $('#search').keyup(search);
 

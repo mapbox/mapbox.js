@@ -2,31 +2,28 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Marker Movement
-description: Simple marker animation
+title: Marker movement
+description: Simple marker animation.
 tags:
+  - animation
   - markers
 ---
-
 <div id='map'></div>
-<script>
-var map = L.mapbox.map('map', 'examples.map-20v6611k');
 
-var marker = L.marker([0, 0], {
+<script>
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+  .setView([29, -26], 2);
+
+var marker = L.marker([-73, 40], {
     icon: L.mapbox.marker.icon({
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [-77, 37.9]
-        },
-        properties: { }
+      'marker-color': '#f86767'
     })
 });
 
 var t = 0;
 window.setInterval(function() {
-    // making a lissajous curve here just for fun. this isn't necessary
-    // Reassign the features
+    // Making a lissajous curve just for fun.
+    // Create your own animated path here.
     marker.setLatLng(L.latLng(
         Math.cos(t * 0.5) * 50,
         Math.sin(t) * 50));

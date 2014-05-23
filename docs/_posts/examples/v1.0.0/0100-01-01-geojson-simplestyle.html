@@ -3,13 +3,12 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: L.mapbox.simplestyle with L.geoJson
-description: Using the standalone simplestyle styler with L.geoJson
+description: Use standalone simplestyle to style a linestring.
 tags:
-  - markers
-  - data
+  - features
 ---
-
 <div id='map'></div>
+
 <script>
 var geojson = [
   {
@@ -23,7 +22,7 @@ var geojson = [
     },
     "properties": {
       "stroke": "#fc4353",
-      "stroke-width": 10
+      "stroke-width": 5
     }
   }
 ];

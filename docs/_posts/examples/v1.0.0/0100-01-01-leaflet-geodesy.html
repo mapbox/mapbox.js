@@ -3,26 +3,33 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Leaflet Geodesy
-description: Generating true geodesic circles that exhibit projection distortion
+description: Generate true <a href='http://en.wikipedia.org/wiki/Geodesic'>geodesic circles</a> that exhibit projection distortion using the Geodesy plugin.
 tags:
   - plugins
 ---
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
 
 <style>
-.radius-form {
-    position:absolute;
-    top:10px;
-    right:10px;
-    background:#fff;
-    padding:10px;
-}
+.ui-form {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  padding:10px;
+  border-radius:3px;
+  }
+  .ui-form label {
+    font-size:12px;
+    display:block;
+    margin-bottom:5px;
+    }
 </style>
+
 <div id='map'></div>
-<div class='radius-form'>
-  <label for='radius'>Radius (m)</label>
+<div class='ui-form'>
+  <label for='radius'>Enter a radius (m)</label>
   <input id='radius' type='number' step=1000 value=2000000 min=1 max=20000000 />
 </div>
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
+
 <script>
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([0, 20], 2);

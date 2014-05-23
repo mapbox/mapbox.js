@@ -7,14 +7,15 @@ description: Allowing for cross-domain content
 tags:
   - ui
 ---
-
 <style>
-.map-tooltip {
-    width:440px !important;
-    max-width:440px !important;
-}
+#map .map-tooltip {
+  width:440px;
+  max-width:440px;
+  }
 </style>
+
 <div id='map'></div>
+
 <script>
 var map = L.mapbox.map('map', 'examples.youtube-embed', {
     gridLayer: {},
@@ -22,8 +23,7 @@ var map = L.mapbox.map('map', 'examples.youtube-embed', {
     // sanitizes HTML from Mapbox Hosting. The original code is there
     // for the protection of sites, so that malicious map-creators
     // can't add cross-site scripting attacks to sites that use their
-    // maps.
-    // Turning it off allows any content to be available in tooltips.
+    // maps. Turning it off allows any content to be available in tooltips.
     // It's recommended to only implement with trusted maps.
     gridControl: {
         sanitizer: function(x) { return x; }
