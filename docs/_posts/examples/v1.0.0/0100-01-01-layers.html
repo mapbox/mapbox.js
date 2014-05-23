@@ -9,7 +9,7 @@ tags:
   - layers
 ---
 <style>
-.layer-ui {
+.menu-ui {
   background:#fff;
   position:absolute;
   top:10px;right:10px;
@@ -18,7 +18,7 @@ tags:
   width:120px;
   border:1px solid rgba(0,0,0,0.4);
   }
-  .layer-ui a {
+  .menu-ui a {
     font-size:13px;
     color:#404040;
     display:block;
@@ -28,31 +28,31 @@ tags:
     border-bottom:1px solid rgba(0,0,0,0.25);
     text-align:center;
     }
-    .layer-ui a:first-child {
+    .menu-ui a:first-child {
       border-radius:3px 3px 0 0;
       }
-    .layer-ui a:last-child {
+    .menu-ui a:last-child {
       border:none;
       border-radius:0 0 3px 3px;
       }
-    .layer-ui a:hover {
+    .menu-ui a:hover {
       background:#f8f8f8;
       color:#404040;
       }
-    .layer-ui a.active {
+    .menu-ui a.active {
       background:#3887BE;
       color:#FFF;
       }
-      .layer-ui a.active:hover {
+      .menu-ui a.active:hover {
         background:#3074a4;
         }
 </style>
-<nav id='layer-ui' class='layer-ui'></nav>
+<nav id='menu-ui' class='menu-ui'></nav>
 <div id='map'></div>
 
 <script>
 var map = L.map('map').setView([38.8922,-77.0348], 14);
-var layers = document.getElementById('layer-ui');
+var layers = document.getElementById('menu-ui');
 
 addLayer(L.mapbox.tileLayer('examples.map-i87786ca'), 'Base Map', 1);
 addLayer(L.mapbox.tileLayer('examples.bike-lanes'), 'Bike Lanes', 2);

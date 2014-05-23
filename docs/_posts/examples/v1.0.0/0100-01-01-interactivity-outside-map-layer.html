@@ -2,43 +2,57 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Interactivity Outside of Map
-description: Show data from UTFGrid in other elements
+title: Interactivity outside the map
+description: Show UTFGrid data from an HTML element outside the map container.
 tags:
   - ui
+  - tilemill
 ---
-
 <style>
 #map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 100px;
-}
-
-#count {
-    position: absolute;
-    right: 0px;
-    width: 100px;
-    top: 0px;
-    bottom: 0px;
-    font-size: 40px;
-    z-index: 99;
-    color: #fff;
-    padding: 10px;
-    background: #000;
-}
+  right:25%;
+  }
+.ui-control {
+  font:bold 12px/20px 'Helvetica', sans-serif;
+  background:#404040;
+  color:#fff;
+  position:absolute;
+  top:0;right:0;bottom:0;
+  z-index:100;
+  width:25%;
+  padding:10px;
+  }
+  .ui-control label {
+    text-transform:uppercase;
+    display:block;
+    font-weight:bold;
+    color:rgba(255,255,255,0.5);
+    margin-bottom:5px;
+    }
+  .ui-control strong {
+    font-size:32px;
+    line-height:38px;
+    }
 </style>
-<div id='map'></div>
-<div id='count'></div>
+<div id='map' class='dark'></div>
+<div id='count' class='ui-control'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-8ced9urs', {gridControl: false});
+var count = document.getElementById('count');
+var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
+    attributionControl: false,
+    infoControl: true,
+    gridControl: false // Disable default gridControl interactivity.
+}).setView([40.85, -75.94], 3);
 
 map.gridLayer
     .on('mousemove',function(o) {
-        document.getElementById('count').innerHTML = (o.data && o.data.count) || '';
+        if (o.data && o.data.count) {
+          count.innerHTML = '<label>Number of bird species</label><strong>' + o.data.count + '</strong>';
+        } else {
+          count.innerHTML = '';
+        }
     }).on('mouseout', function(o) {
-        document.getElementById('count').innerHTML = '';
+        count.innerHTML = '';
     });
 </script>

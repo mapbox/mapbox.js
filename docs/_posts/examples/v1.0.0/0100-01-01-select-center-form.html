@@ -8,7 +8,7 @@ tags:
   - layers
 ---
 <style>
-.ui-coordinates {
+pre.ui-coordinates {
   position:absolute;
   bottom:10px;
   left:10px;
@@ -18,10 +18,13 @@ tags:
   font-size:11px;
   line-height:18px;
   border-radius:3px;
+  max-height:240px;
+  overflow:auto;
+  width:100px;
   }
 </style>
 <div id='map'></div>
-<div id='coordinates' class='ui-coordinates'></div>
+<pre id='coordinates' class='ui-coordinates'></pre>
 <script>
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([0, 0], 2);

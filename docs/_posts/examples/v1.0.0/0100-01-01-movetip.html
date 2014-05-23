@@ -3,13 +3,17 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Movetip
-description: A Moving tooltip
+description: Open a tooltip just above gridLayer interactivity as a cursor moves.
 tags:
   - ui
+  - tilemill
 ---
+<div id='map' class='dark'></div>
 
-<div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-8ced9urs');
+var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
+        attributionControl: false,
+        infoControl:true
+    });
 map.gridControl.options.follow = true;
 </script>

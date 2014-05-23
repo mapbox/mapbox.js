@@ -20,6 +20,7 @@ tags:
 
 <div id='map'></div>
 <input id='range' class='range' type='range' min='0' max='1.0' step='any' />
+
 <script>
 var map = L.mapbox.map('map');
 L.mapbox.tileLayer('examples.map-i87786ca').addTo(map);
@@ -37,7 +38,7 @@ function clip() {
 
 range['oninput' in range ? 'oninput' : 'onchange'] = clip;
 map.on('move', clip);
-map.setView([49.434,-123.272], 8);
+map.setView([49.434,-123.272], 7);
 
 clip();
 </script>
