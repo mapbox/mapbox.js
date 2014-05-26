@@ -1,0 +1,23 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Center and zoom to gridLayer
+description: When TileMill interactivity is selected center and zoom to it's coordinates on a map.
+tags:
+  - ui
+  - tilemill
+---
+<div id='map' class='dark'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
+        attributionControl: false,
+        infoControl:true
+    });
+
+map.gridLayer.on('click', function(e) {
+    map.setView([e.latLng.lat, e.latLng.lng], 9);
+});
+
+</script>
