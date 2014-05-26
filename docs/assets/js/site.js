@@ -40,7 +40,8 @@ function load() {
         autocompleteContainingElement: $('#docs-search'),
         filters: {
           page: {
-            type: ['mapboxjs']
+            type: ['mapboxjs'],
+            info: ['{{site.mapboxjs}}', 'latest']
           }
         }
     });
