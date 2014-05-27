@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "leaflet": "0.7.2",
+    "leaflet": "0.7.3",
     "mustache": "0.7.3",
     "corslite": "0.0.5",
     "json3": "3.3.1",
