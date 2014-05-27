@@ -3,18 +3,19 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Loading markers from CSV
-description: Using Leaflet Omnivore, Load and parse a CSV file with latitude &amp; longitude values
+description: Using Leaflet Omnivore, Load and parse a CSV file containing latitude &amp; longitude values on a map.
 tags:
   - omnivore
 ---
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.2/leaflet-omnivore.min.js'></script>
 
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.2/leaflet-omnivore.min.js'></script>
 <div id='map'></div>
+
 <script>
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([38, -102.0], 5);
+    .setView([38, -95], 4);
 
-// omnivore will AJAX-request this file behind the scenes and parse it:
+// Omnivore will AJAX-request this file behind the scenes and parse it:
 // note that there are considerations:
 // - The CSV file must contain latitude and longitude values, in column
 //   named roughly latitude and longitude

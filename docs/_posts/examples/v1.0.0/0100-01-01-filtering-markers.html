@@ -2,73 +2,60 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Filtering Markers
-description: Show a different set of markers based on user interaction
+title: Filtering markers
+description: Show a different set of markers based on user interaction.
 tags:
+  - ui
   - markers
 ---
 
 <style>
-    #map-ui {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 100;
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
     }
-
-    #map-ui ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    #map-ui a {
-        font-size: 13px;
-        background: #FFF;
-        color: #3C4E5A;
-        display: block;
-        margin: 0;
-        padding: 0;
-        border: 1px solid #BBB;
-        border-bottom-width: 0;
-        min-width: 138px;
-        padding: 10px;
-        text-decoration: none;
-    }
-
-    #map-ui a:hover {
-        background: #ECF5FA;
-    }
-
-    #map-ui li:last-child a {
-        border-bottom-width: 1px;
-        -webkit-border-radius: 0 0 3px 3px;
-        border-radius: 0 0 3px 3px;
-    }
-
-    #map-ui li:first-child a {
-        -webkit-border-radius: 3px 3px 0 0;
-        border-radius: 3px 3px 0 0;
-    }
-
-    #map-ui a.active {
-        background: #3887BE;
-        border-color: #3887BE;
-        color: #FFF;
-    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active,
+    .menu-ui a.active:hover {
+      background:#3887BE;
+      color:#FFF;
+      }
 </style>
-<div id='map-ui'>
-    <ul>
-        <li><a href='#' id='filter-food'>show only food events</a></li>
-        <li><a href='#' class='active' id='filter-all'>show all events</a></li>
-    </ul>
-</div>
+<nav id='menu-ui' class='menu-ui'>
+  <a href='#' class='active' id='filter-all'>All events</a>
+  <a href='#' id='filter-food'>Food events</a>
+</nav>
 <div id='map'></div>
-<script>
-    var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
-    var food = document.getElementById('filter-food');
-    var all = document.getElementById('filter-all');
+<script>
+    var map = L.mapbox.map('map', 'examples.map-zr0njcqy'),
+        food = document.getElementById('filter-food'),
+        all = document.getElementById('filter-all');
 
     food.onclick = function(e) {
         all.className = '';

@@ -2,16 +2,15 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Custom Marker Icons
-description: Setting a custom marker image
+title: Custom marker icons
+description: Setting a custom marker image.
 tags:
   - ui
 ---
-
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
-    .setView([40, -74.50], 9);
+var map = L.mapbox.map('map', 'examples.map-h68a1pf7')
+    .setView([40, -74.50], 8);
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
@@ -49,7 +48,7 @@ var geoJson = [{
     }
 }];
 
-// Set a custom icon on each marker based on feature properties
+// Set a custom icon on each marker based on feature properties.
 myLayer.on('layeradd', function(e) {
     var marker = e.layer,
         feature = marker.feature;
@@ -57,7 +56,6 @@ myLayer.on('layeradd', function(e) {
     marker.setIcon(L.icon(feature.properties.icon));
 });
 
-// Add features to the map
+// Add features to the map.
 myLayer.setGeoJSON(geoJson);
-
 </script>

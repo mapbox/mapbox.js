@@ -2,42 +2,44 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Timeline with Scaled Markers
-description: Using d3 to brush through a timeline of scaled markers with popups
+title: Timeline with scaled markers
+description: Use <a href='http://d3js.org'>d3</a> to brush through a timeline of scaled markers with popups.
 tags:
   - vector
 ---
-
+<!-- This example requires d3 for AJAX and the brush,
+     though you can bring your own library. -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js' charset="utf-8"></script>
 <style>
-#brush {
-    position:absolute;
-    bottom:0px;
-    right:0px;
-    left:0px;
-    background:#fff;
-    height:100px;
-}
+.ui-brush {
+  background:#f8f8f8;
+  position:absolute;
+  bottom:0;right:0;left:0;
+  height:100px;
+  }
 .brush .extent {
-  stroke: #fff;
-  fill-opacity: .125;
-  shape-rendering: crispEdges;
-}
+  stroke:#fff;
+  fill-opacity:0.125;
+  shape-rendering:crispEdges;
+  }
 </style>
-<!-- this example requires d3 for AJAX and the brush,
-     though you can bring your own library -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js" charset="utf-8"></script>
-<div id='map'></div>
-<div id='brush'></div>
-<script>
-var map = L.mapbox.map('map', 'examples.map-zga3rxng')
-    .setView([0, 0], 2);
 
-// Credit our friendly open data producers
-map.attributionControl.addAttribution(
+<div id='map' class='dark'></div>
+<div id='brush' class='ui-brush'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-2k9d7u0c', {
+        attributionControl: false,
+        infoControl: true
+    })
+    .setView([0, 0], 1);
+
+// Credit our friendly open data producers.
+map.infoControl.addInfo (
     '<a href="http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">Data from USGS</a>');
 
 // Create a new layer with a special pointToLayer function
-// that'll generate scaled points
+// that'll generate scaled points.
 var earthquakesLayer = L.geoJson(null, { pointToLayer: scaledPoint })
     .addTo(map);
 
@@ -62,7 +64,7 @@ function scaledPoint(feature, latlng) {
         feature.properties.mag + ' magnitude');
 }
 
-// Request our data and add it to the earthquakesLayer
+// Request our data and add it to the earthquakesLayer.
 d3.json('{{site.baseurl}}/assets/data/earthquakes.geojson', function(err, data) {
     earthquakesLayer.addData(data);
     setBrush(data);
@@ -78,15 +80,15 @@ function setBrush(data) {
         return new Date(d.properties.time);
     });
 
-    var svg = container.append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
+    var svg = container.append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom);
 
-    var context = svg.append("g")
-        .attr("class", "context")
-        .attr("transform", "translate(" +
-            margin.left + "," +
-            margin.top + ")");
+    var context = svg.append('g')
+        .attr('class', 'context')
+        .attr('transform', 'translate(' +
+            margin.left + ',' +
+            margin.top + ')');
 
     var x = d3.time.scale()
         .range([0, width])
@@ -94,7 +96,7 @@ function setBrush(data) {
 
     var brush = d3.svg.brush()
         .x(x)
-        .on("brushend", brushend);
+        .on('brushend', brushend);
 
     context.selectAll('circle.quake')
         .data(data.features)
@@ -109,20 +111,20 @@ function setBrush(data) {
         .attr('stroke-width', 0.5)
         .attr('fill', pointColor);
 
-    context.append("g")
-        .attr("class", "x brush")
+    context.append('g')
+        .attr('class', 'x brush')
         .call(brush)
-        .selectAll("rect")
-        .attr("y", -6)
-        .attr("height", height);
+        .selectAll('rect')
+        .attr('y', -6)
+        .attr('height', height);
 
     function brushend() {
         var filter;
-            // if the user has selected no brush area, share everything
+            // If the user has selected no brush area, share everything.
         if (brush.empty()) {
             filter = function() { return true; }
         } else {
-            // otherwise, restrict features to only things in the brush extent
+            // Otherwise, restrict features to only things in the brush extent.
             filter = function(feature) {
                 return feature.properties.time > +brush.extent()[0] &&
                     feature.properties.time < (+brush.extent()[1]);

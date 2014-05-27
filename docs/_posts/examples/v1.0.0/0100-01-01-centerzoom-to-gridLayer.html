@@ -2,8 +2,8 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Movetip
-description: Open a tooltip just above gridLayer interactivity as a cursor moves.
+title: Center and zoom to gridLayer
+description: When TileMill interactivity is selected center and zoom to it's coordinates on a map.
 tags:
   - ui
   - tilemill
@@ -15,5 +15,9 @@ var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
         attributionControl: false,
         infoControl:true
     });
-map.gridControl.options.follow = true;
+
+map.gridLayer.on('click', function(e) {
+    map.setView([e.latLng.lat, e.latLng.lng], 9);
+});
+
 </script>

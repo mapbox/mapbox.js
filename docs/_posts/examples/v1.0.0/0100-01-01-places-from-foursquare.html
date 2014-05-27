@@ -3,27 +3,25 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Places from Foursquare
-description: Use Foursquare's API to request places
+description: Use Foursquare's API to request points of interest on a map like Cafes.
 tags:
   - markers
 ---
-
-<script src='http://code.jquery.com/jquery-1.10.1.min.js'></script>
 <div id='map'></div>
+
+<!-- jQuery is required for this example. Uncomment this line -->
+<!-- <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script> -->
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio', {
-        attributionControl: true
-    })
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
     .setView([40, -74.50], 10);
 
 // Credit Foursquare for their wonderful data
 map.attributionControl
     .addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>');
 
-// Create a Foursquare developer account:
-// https://developer.foursquare.com/
-// AND CHANGE THESE VALUES TO YOUR OWN:
-// otherwise they can be cycled or deactivated with zero notice.
+// Create a Foursquare developer account: https://developer.foursquare.com/
+// NOTE: CHANGE THESE VALUES TO YOUR OWN:
+// Otherwise they can be cycled or deactivated with zero notice.
 var CLIENT_ID = 'L4UK14EMS0MCEZOVVUYX2UO5ULFHJN3EHOFVQFSW0Z1MSFSR';
 var CLIENT_SECRET = 'YKJB0JRFDPPSGTHALFOEP5O1NDDATHKQ2IZ5RO2GOX452SFA';
 
@@ -39,8 +37,7 @@ var API_ENDPOINT = 'https://api.foursquare.com/v2/venues/search' +
 // Keep our place markers organized in a nice group.
 var foursquarePlaces = L.layerGroup().addTo(map);
 
-// Use jQuery to make an AJAX request to Foursquare to load markers
-// data.
+// Use jQuery to make an AJAX request to Foursquare to load markers data.
 $.getJSON(API_ENDPOINT
     .replace('CLIENT_ID', CLIENT_ID)
     .replace('CLIENT_SECRET', CLIENT_SECRET)
@@ -53,9 +50,15 @@ $.getJSON(API_ENDPOINT
     for (var i = 0; i < result.response.venues.length; i++) {
       var venue = result.response.venues[i];
       var latlng = L.latLng(venue.location.lat, venue.location.lng);
-      var marker = L.marker(latlng)
-        .bindPopup('<h2><a href="https://foursquare.com/v/' + venue.id + '">' +
-            venue.name + '</a></h2>')
+      var marker = L.marker(latlng, {
+          icon: L.mapbox.marker.icon({
+            'marker-color': '#BE9A6B',
+            'marker-symbol': 'cafe',
+            'marker-size': 'large'
+          })
+        })
+      .bindPopup('<strong><a href="https://foursquare.com/v/' + venue.id + '">' +
+        venue.name + '</a></strong>')
         .addTo(foursquarePlaces);
     }
 

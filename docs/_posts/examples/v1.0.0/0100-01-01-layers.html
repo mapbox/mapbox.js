@@ -2,66 +2,59 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Layers
-description: Toggling layers on and off
+title: Toggling layers
+description: Create a custom layer switcher to display different maps.
 tags:
+  - ui
   - layers
 ---
-
 <style>
-#map-ui {
-    position: absolute;
-    top: 75px;
-    left: 10px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    z-index: 100;
-}
-
-#map-ui a {
-    font: normal 13px/18px 'Helvetica Neue', Helvetica, sans-serif;
-    background: #FFF;
-    color: #3C4E5A;
-    display: block;
-    margin: 0;
-    padding: 0;
-    border: 1px solid #BBB;
-    border-bottom-width: 0;
-    min-width: 138px;
-    padding: 10px;
-    text-decoration: none;
-}
-
-#map-ui a:hover {
-    background: #ECF5FA;
-}
-
-#map-ui li:last-child a {
-    border-bottom-width: 1px;
-    -webkit-border-radius: 0 0 3px 3px;
-    border-radius: 0 0 3px 3px;
-}
-
-#map-ui li:first-child a {
-    -webkit-border-radius: 3px 3px 0 0;
-    border-radius: 3px 3px 0 0;
-}
-
-#map-ui a.active {
-    background: #3887BE;
-    border-color: #3887BE;
-    border-top-color: #FFF;
-    color: #FFF;
-}
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active {
+      background:#3887BE;
+      color:#FFF;
+      }
+      .menu-ui a.active:hover {
+        background:#3074a4;
+        }
 </style>
-<ul id='map-ui'></ul>
+<nav id='menu-ui' class='menu-ui'></nav>
 <div id='map'></div>
-<script>
-var map = L.map('map').setView([38.902, -77.001], 13);
-var ui = document.getElementById('map-ui');
 
-addLayer(L.mapbox.tileLayer('examples.map-zgrqqx0w'), 'Base Map', 1);
+<script>
+var map = L.map('map').setView([38.8922,-77.0348], 14);
+var layers = document.getElementById('menu-ui');
+
+addLayer(L.mapbox.tileLayer('examples.map-i87786ca'), 'Base Map', 1);
 addLayer(L.mapbox.tileLayer('examples.bike-lanes'), 'Bike Lanes', 2);
 addLayer(L.mapbox.tileLayer('examples.bike-locations'), 'Bike Stations', 3);
 
@@ -70,14 +63,12 @@ function addLayer(layer, name, zIndex) {
         .setZIndex(zIndex)
         .addTo(map);
 
-    // Create a simple layer switcher that toggles layers on
-    // and off.
-    var item = document.createElement('li');
+    // Create a simple layer switcher that
+    // toggles layers on and off.
     var link = document.createElement('a');
-
-    link.href = '#';
-    link.className = 'active';
-    link.innerHTML = name;
+        link.href = '#';
+        link.className = 'active';
+        link.innerHTML = name;
 
     link.onclick = function(e) {
         e.preventDefault();
@@ -92,7 +83,6 @@ function addLayer(layer, name, zIndex) {
         }
     };
 
-    item.appendChild(link);
-    ui.appendChild(item);
+    layers.appendChild(link);
 }
 </script>

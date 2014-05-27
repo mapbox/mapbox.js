@@ -218,14 +218,14 @@
     background-color:#f8f8f8;
     cursor:pointer;
     }
-  .leaflet-bar a:first-child {
+  .leaflet-bar a:hover:first-child {
     border-radius:3px 3px 0 0;
     }
-  .leaflet-bar a:last-child {
+  .leaflet-bar a:hover:last-child {
     border-bottom:none;
     border-radius:0 0 3px 3px;
     }
-  .leaflet-bar a:only-of-type {
+  .leaflet-bar a:hover:only-of-type {
     border-radius:3px;
     }
 
@@ -327,6 +327,10 @@
   margin:0;
   line-height:inherit;
   }
+  .leaflet-popup-close-button + .leaflet-popup-content-wrapper .leaflet-popup-content {
+    padding-top:15px;
+    }
+
 .leaflet-popup-tip-container {
   width:20px;
   height:20px;
@@ -395,7 +399,7 @@
 .map-tooltip .close,
 .mapbox-icon {
   opacity: .75;
-  background-image:url(./images/icons-000000.png);
+  background-image:url(./images/icons-000000@2x.png);
   background-repeat:no-repeat;
   background-size:26px 260px;
   }
@@ -405,12 +409,18 @@
   .leaflet-container.dark .leaflet-control-layers-toggle,
   .leaflet-container.dark .mapbox-icon {
     opacity: 1;
-    background-image:url(./images/icons-ffffff.png);
+    background-image:url(./images/icons-ffffff@2x.png);
     background-size:26px 260px;
     }
   .leaflet-bar .leaflet-control-zoom-in                 { background-position:0 0; }
   .leaflet-bar .leaflet-control-zoom-out                { background-position:0 -26px; }
-  .map-tooltip .close, .leaflet-popup-close-button      { background-position:0 -52px; }
+  .map-tooltip.closable .close,
+  .leaflet-popup-close-button {
+    background-position:-3px -55px;
+    width:20px;
+    height:20px;
+    border-radius:0 3px 0 0;
+    }
   .mapbox-icon-info                                     { background-position:0 -78px; }
   .leaflet-control-layers-toggle                        { background-position:0 -104px; }
   .mapbox-icon-share:before, .mapbox-icon-share         { background-position:0 -130px; }
@@ -418,26 +428,6 @@
   .mapbox-icon-facebook:before, .mapbox-icon-facebook   { background-position:0 -182px; }
   .mapbox-icon-twitter:before, .mapbox-icon-twitter     { background-position:0 -208px; }
   .mapbox-icon-pinterest:before, .mapbox-icon-pinterest { background-position:0 -234px; }
-
-@media
-  (-webkit-min-device-pixel-ratio:2),
-  (min-resolution:192dpi),
-  (min-resolution:2dppx) {
-    .leaflet-control-zoom-in,
-    .leaflet-control-zoom-out,
-    .leaflet-popup-close-button,
-    .leaflet-control-layers-toggle,
-    .mapbox-icon {
-      background-image:url(./images/icons-000000@2x.png);
-      }
-    .mapbox-button-icon:before,
-    .leaflet-container.dark .leaflet-control-zoom-in,
-    .leaflet-container.dark .leaflet-control-zoom-out,
-    .leaflet-container.dark .leaflet-control-layers-toggle,
-    .leaflet-container.dark .mapbox-icon {
-      background-image:url(./images/icons-ffffff@2x.png);
-      }
-}
 
 .leaflet-popup-content-wrapper,
 .map-legends,

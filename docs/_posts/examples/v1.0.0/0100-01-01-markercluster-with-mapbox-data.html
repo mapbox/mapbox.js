@@ -3,14 +3,13 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Markercluster with Mapbox marker data
-description: Instead of using pre-packaged data, cluster markers coming from a Mapbox featureLayer
+description: Cluster markers from a Mapbox featureLayer using MarkerClusterGroup.
 tags:
   - plugins
 ---
-
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
-<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https:////api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
 <div id='map'></div>
 
@@ -20,7 +19,7 @@ tags:
 // backing tileLayer, and then use the featureLayer only for its data.
 var map = L.mapbox.map('map')
     .setView([40.73, -74.011], 13)
-    .addLayer(L.mapbox.tileLayer('examples.map-h61e8o8e'));
+    .addLayer(L.mapbox.tileLayer('examples.h186knp8'));
 
 // Since featureLayer is an asynchronous method, we use the `.on('ready'`
 // call to only use its marker data once we know it is actually loaded.

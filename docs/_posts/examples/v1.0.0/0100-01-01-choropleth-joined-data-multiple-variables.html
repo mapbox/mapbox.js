@@ -2,44 +2,40 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Choropleth with multiple variables and joined data
-description: Joining JSON data to a GeoJSON file and transitioning between types of visualizations
+title: Multiple choropleth maps
+description: Joining JSON data to a GeoJSON file and transitioning between different data visualizations.
 tags:
   - layers
 ---
-
 <style>
-#variables {
-    position:absolute;
-    top:0;
-    right:0;
-    padding:5px;
-    background:#fff;
-}
-/*
- * Do a fancy data transition for browsers that support it
- */
+.menu-ui {
+  position:absolute;
+  top:10px;
+  right:10px;
+  }
+
+/* Do a fancy data transition for browsers that support it */
 path {
-    transition:fill 200ms;
-    -webkit-transition:fill 200ms;
-}
+  -webkit-transition:fill 200ms;
+          transition:fill 200ms;
+  }
 </style>
+
 <div id='map'></div>
-<div id='variables'></div>
-<!-- This example requires jQuery -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<div id='variables' class='menu-ui'></div>
+
+<!-- jQuery is required for this example. Uncomment this line -->
+<!-- <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script> -->
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio', {
-    infoControl: false, attributionControl: true
-    })
-    .setView([40, -104.50], 4);
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([40, -96], 4);
 
-// Be nice and credit our data source, Census Reporter
+// Be nice and credit our data source, Census Reporter.
 map.attributionControl.addAttribution('Data from ' +
-        '<a href="http://censusreporter.org/data/map/?table=B06011&geo_ids=040%7C01000US#">' +
-        'Census Reporter</a>');
+  '<a href="http://censusreporter.org/data/map/?table=B06011&geo_ids=040%7C01000US#">' +
+  'Census Reporter</a>');
 
-// choropleth colors from http://colorbrewer2.org/
+// Choropleth colors from http://colorbrewer2.org/
 // You can choose your own range (or different number of colors)
 // and the code will compensate.
 var hues = [
@@ -92,7 +88,7 @@ function loadData() {
 }
 
 function joinData(data, layer) {
-    // First, get the US state GeoJSON data for reference
+    // First, get the US state GeoJSON data for reference.
     var usGeoJSON = usLayer.toGeoJSON(),
         byState = {};
 
@@ -106,24 +102,24 @@ function joinData(data, layer) {
     for (i = 0; i < data.length; i++) {
         // Match the GeoJSON data (byState) with the tabular data
         // (data), replacing the GeoJSON feature properties
-        // with the full data
+        // with the full data.
         byState[data[i].name].properties = data[i];
         for (var j = 0; j < variables.length; j++) {
             // Simultaneously build the table of min and max
-            // values for each attribute
+            // values for each attribute.
             var n = variables[j];
             ranges[n].min = Math.min(data[i][n], ranges[n].min);
             ranges[n].max = Math.max(data[i][n], ranges[n].max);
         }
     }
     // Create a new GeoJSON array of features and set it
-    // as the new usLayer content
+    // as the new usLayer content.
     var newFeatures = [];
     for (i in byState) {
         newFeatures.push(byState[i]);
     }
     usLayer.setGeoJSON(newFeatures);
-    // and kick off by filtering on an attribute
+    // Kick off by filtering on an attribute.
     setVariable(variables[0]);
 }
 
@@ -134,9 +130,9 @@ function joinData(data, layer) {
 function setVariable(name) {
     var scale = ranges[name];
     usLayer.eachLayer(function(layer) {
-        // decide the color for each state by finding its
+        // Decide the color for each state by finding its
         // place between min & max, and choosing a particular
-        // color as index
+        // color as index.
         var division = Math.floor(
             (hues.length - 1) *
             ((layer.feature.properties[name] - scale.min) /
