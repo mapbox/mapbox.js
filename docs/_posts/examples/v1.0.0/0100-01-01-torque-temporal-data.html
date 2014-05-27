@@ -48,7 +48,11 @@ var torqueLayer = new L.TorqueLayer({
     user: 'viz2',
     table: 'ow',
     cartocss: style,
-    blendmode: 'lighter'
+    blendmode: 'lighter',
+    // All Mapbox resources use HTTPS when available, so we'll need
+    // to make torque do the same.
+    tiler_protocol: 'https',
+    tiler_port: 443
 });
 
 // This example autoplays: there are other options available:
