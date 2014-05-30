@@ -81,9 +81,8 @@ map.on('click', function(ev) {
     featureLayer.setGeoJSON(geojson);
 
     // Finally, print the distance between these two points
-    // on the screen using the distanceTo() method found in Leaflets L.latLng.
+    // on the screen using distanceTo().
     var container = document.getElementById('distance');
-    var ll = L.latLng([fc.lat, fc.lng]);
-    container.innerHTML = (ll.distanceTo([c.lat, c.lng])).toFixed(0) + 'm';
+    container.innerHTML = (fc.distanceTo([c.lat, c.lng])).toFixed(0) + 'm';
 });
 </script>
