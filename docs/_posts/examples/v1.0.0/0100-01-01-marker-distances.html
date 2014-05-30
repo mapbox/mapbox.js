@@ -3,7 +3,7 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Distance between two markers
-description: Calculate the distance between two points in metres using distanceYo.
+description: Calculate the distance between two points in metres using distanceTo.
 tags:
   - ui
   - features
@@ -29,7 +29,7 @@ var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
     .setView([38.9, -77], 12);
 
 // Start with a fixed marker.
-var fixedMarker = L.marker(new L.LatLng(38.91317751066771, -77.03254401683807), {
+var fixedMarker = L.marker(new L.LatLng(38.9131775, -77.032544), {
     icon: L.mapbox.marker.icon({
         'marker-color': 'ff8888'
     })
