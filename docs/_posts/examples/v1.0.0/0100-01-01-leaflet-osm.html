@@ -16,7 +16,7 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-i875kd35');
 
 $.ajax({
-    url: "http://www.openstreetmap.org/api/0.6/way/260501602/full",
+    url: "https://www.openstreetmap.org/api/0.6/way/260501602/full",
     dataType: "xml",
     success: function (xml) {
         var layer = new L.OSM.DataLayer(xml).addTo(map);
