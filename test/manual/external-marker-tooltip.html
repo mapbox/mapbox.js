@@ -27,7 +27,7 @@ var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
 var alert = document.getElementById('alert');
 
-map.markerLayer.on('click', function(e) {
+map.featureLayer.on('click', function(e) {
 
     // Pan to the clicked marker (optional)
     map.panTo(e.layer.getLatLng());

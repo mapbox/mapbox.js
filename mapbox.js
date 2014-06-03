@@ -42,5 +42,3 @@ L.mapbox = module.exports = {
     sanitize: require('sanitize-caja'),
     template: require('mustache').to_html
 };
-
-L.mapbox.markerLayer = L.mapbox.featureLayer;

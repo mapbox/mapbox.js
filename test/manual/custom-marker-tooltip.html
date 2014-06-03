@@ -48,11 +48,11 @@
     }];
 
     // Add features to the map
-    map.markerLayer.setGeoJSON(geoJson);
+    map.featureLayer.setGeoJSON(geoJson);
 
     // Cycle through markers once geoJson is ready.
     // Add custom popups to each using our custom feature properties
-    map.markerLayer.eachLayer(function(marker) {
+    map.featureLayer.eachLayer(function(marker) {
 
         var feature = marker.feature;
 

@@ -51,7 +51,7 @@
         }
         // The filter function takes a GeoJSON feature object
         // and returns true to show it or false to hide it.
-        map.markerLayer.setFilter(function (f) {
+        map.featureLayer.setFilter(function (f) {
             // check each marker's symbol to see if its value is in the list
             // of symbols that should be on, stored in the 'on' array
             return on.indexOf(f.properties['marker-symbol']) !== -1;

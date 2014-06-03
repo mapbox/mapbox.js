@@ -64,20 +64,7 @@ describe('L.mapbox.map', function() {
             server.respond();
         });
 
-        it('aliases featureLayer as markerLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
-            expect(map.featureLayer).to.be.ok();
-            expect(map.markerLayer).to.be.ok();
-        });
-
-        it('can deactivate markerLayer as markerLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
-                markerLayer: false
-            });
-            expect(map.featureLayer).to.eql(undefined);
-        });
-
-        it('can deactivate markerLayer as featureLayer', function() {
+        it('can deactivate featureLayer', function() {
             var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
                 featureLayer: false
             });

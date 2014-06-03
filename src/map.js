@@ -35,15 +35,8 @@ var LMap = L.Map.extend({
             this.addLayer(this.tileLayer);
         }
 
-        if (this.options.featureLayer === false || this.options.markerLayer === false) {
-            this.options.featureLayer = this.options.markerLayer = false;
-        } else if (this.options.markerLayer) {
-            this.options.featureLayer = this.options.markerLayer;
-        }
-
         if (this.options.featureLayer) {
-            this.featureLayer = this.markerLayer =
-                featureLayer(undefined, this.options.featureLayer);
+            this.featureLayer = featureLayer(undefined, this.options.featureLayer);
             this.addLayer(this.featureLayer);
         }
 
