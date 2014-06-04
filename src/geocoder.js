@@ -15,7 +15,7 @@ module.exports = function(_) {
     };
 
     geocoder.setURL = function(_) {
-        url = urlhelper.jsonify(_);
+        url = _;
         return geocoder;
     };
 

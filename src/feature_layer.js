@@ -43,7 +43,6 @@ var FeatureLayer = L.FeatureGroup.extend({
 
     loadURL: function(url) {
         if (this._request && 'abort' in this._request) this._request.abort();
-        url = urlhelper.jsonify(url);
         this._request = request(url, L.bind(function(err, json) {
             this._request = null;
             if (err && err.type !== 'abort') {

@@ -46,19 +46,6 @@ describe('L.mapbox.featureLayer', function() {
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
 
-    it('replaces jsonp URLs with the equivalent json URL', function() {
-        var url = 'http://api.tiles.mapbox.com/v3/examples.map-zr0njcqy/markers.geojson',
-            layer = L.mapbox.featureLayer(url + 'p');
-
-        server.respondWith("GET", url,
-            [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
-        server.respond();
-
-        var marker = layer.getLayers()[0];
-        expect(marker instanceof L.Marker).to.equal(true);
-        expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
-    });
-
     describe("#loadURL", function() {
         it('returns self', function() {
             var layer = L.mapbox.featureLayer();
@@ -102,6 +89,7 @@ describe('L.mapbox.featureLayer', function() {
             expect(layer.setGeoJSON(helpers.geoJson)).to.eql(layer);
             expect(layer.getGeoJSON()).to.eql(helpers.geoJson);
         });
+
         it("styles GeoJSON features", function(done) {
             var layer = L.mapbox.featureLayer();
             expect(layer.setGeoJSON(helpers.geoJsonPoly)).to.eql(layer);
@@ -110,6 +98,7 @@ describe('L.mapbox.featureLayer', function() {
                 done();
             });
         });
+
         it("removes existing layers", function() {
             var layer = L.mapbox.featureLayer(helpers.geoJson);
             layer.setGeoJSON([]);

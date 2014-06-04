@@ -46,13 +46,6 @@ describe('L.mapbox.geocoder', function() {
             g.setURL('url');
             expect(g.getURL()).to.eql('url');
         });
-
-        it('converts a jsonp URL', function() {
-            var g = L.mapbox.geocoder();
-            g.setURL('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp');
-            expect(g.getURL()).to
-                .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
-        });
     });
 
     describe('#setTileJSON', function() {
@@ -74,13 +67,6 @@ describe('L.mapbox.geocoder', function() {
             var g = L.mapbox.geocoder();
             g.setTileJSON({geocoder: 'http://example.com/geocode/{query}.json'});
             expect(g.getURL()).to.eql('http://example.com/geocode/{query}.json');
-        });
-
-        it('converts a jsonp URL', function() {
-            var g = L.mapbox.geocoder();
-            g.setTileJSON({geocoder: 'http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp'});
-            expect(g.getURL()).to
-                .eql('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.json');
         });
     });
 
