@@ -6,7 +6,7 @@ describe('L.mapbox.marker', function() {
                     'marker-size': 'small'
                 }
             });
-            expect(marker.options.icon.options.iconUrl).to.contain('pin-s');
+            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/marker/pin-s+7e7e7e.png'));
         });
 
         it("produces a medium marker", function() {
@@ -25,6 +25,17 @@ describe('L.mapbox.marker', function() {
                 }
             });
             expect(marker.options.icon.options.iconUrl).to.contain('f00');
+        });
+
+        it("supports custom access token", function() {
+            var marker = L.mapbox.marker.style({
+                properties: {
+                    'marker-size': 'small'
+                }
+            }, [0, 0], {
+                accessToken: 'custom'
+            });
+            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/marker/pin-s+7e7e7e.png', 'custom'));
         });
 
         it("tolerates empty input", function() {
@@ -64,7 +75,16 @@ describe('L.mapbox.marker', function() {
             var icon = L.mapbox.marker.icon({
                 'marker-size': 'large'
             });
-            expect(icon.options.iconUrl).to.contain('pin-l');
+            expect(icon.options.iconUrl).to.equal(internals.url('/marker/pin-l+7e7e7e.png'));
+        });
+
+        it("supports custom access token", function() {
+            var icon = L.mapbox.marker.icon({
+                'marker-size': 'large'
+            }, {
+                accessToken: 'custom'
+            });
+            expect(icon.options.iconUrl).to.equal(internals.url('/marker/pin-l+7e7e7e.png', 'custom'));
         });
     });
 

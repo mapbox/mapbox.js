@@ -78,9 +78,9 @@ describe('L.mapbox.geocoder', function() {
 
         it('sets URL', function() {
             var g = L.mapbox.geocoder();
-            g.setID('foo.bar');
+            g.setID('mapbox.mapbox-places');
             expect(g.getURL()).to
-                .eql('http://a.tiles.mapbox.com/v3/foo.bar/geocode/{query}.json');
+                .eql('http://a.tiles.mapbox.com/v4/geocode/mapbox.mapbox-places/{query}.json?access_token=key');
         });
     });
 

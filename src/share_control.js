@@ -1,6 +1,6 @@
 'use strict';
 
-var url = require('./url');
+var urlhelper = require('./url');
 
 var ShareControl = L.Control.extend({
     includes: [require('./load_tilejson')],
@@ -21,7 +21,6 @@ var ShareControl = L.Control.extend({
 
     onAdd: function(map) {
         this._map = map;
-        this._url = url;
 
         var container = L.DomUtil.create('div', 'leaflet-control-mapbox-share leaflet-bar');
         var link = L.DomUtil.create('a', 'mapbox-share mapbox-icon mapbox-icon-share', container);
@@ -56,8 +55,8 @@ var ShareControl = L.Control.extend({
         var tilejson = this._tilejson || this._map._tilejson || {},
             url = encodeURIComponent(this.options.url || tilejson.webpage || window.location),
             name = encodeURIComponent(tilejson.name),
-            image = this._url.base() + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png',
-            embed = this._url.base() + tilejson.id + '.html?secure',
+            image = urlhelper(tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png', this.options.accessToken),
+            embed = urlhelper(tilejson.id + '.html', this.options.accessToken),
             twitter = '//twitter.com/intent/tweet?status=' + name + ' ' + url,
             facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
             pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,

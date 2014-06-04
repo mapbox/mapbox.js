@@ -1,19 +1,36 @@
 describe("url", function() {
-    describe('#base', function() {
-        it("returns 'http://a.tiles.mapbox.com/v3/'", function() {
-            expect(internals.url.base()).to.equal('http://a.tiles.mapbox.com/v3/');
-        });
+    var FORCE_HTTPS;
+
+    beforeEach(function() {
+        FORCE_HTTPS = internals.config.FORCE_HTTPS;
     });
-    describe('#secureFlag', function() {
-        it('adds a json flag to urls when the page is secure', function() {
-            internals.url.isSSL = function() { return true; };
-            expect(internals.url.secureFlag('foo')).to.equal('foo?secure');
-            expect(internals.url.secureFlag('foo?foo=bar')).to.equal('foo?foo=bar&secure');
+
+    afterEach(function() {
+        internals.config.FORCE_HTTPS = FORCE_HTTPS;
+    });
+
+    describe('.tileJSON', function() {
+        it('returns the input when passed a URL', function() {
+            expect(internals.url.tileJSON('http://a.tiles.mapbox.com/v3/user.map.json')).to.equal('http://a.tiles.mapbox.com/v3/user.map.json')
         });
-        it('does not add an ssl flag when pages are not ssl', function() {
-            internals.url.isSSL = function() { return false; };
-            expect(internals.url.secureFlag('foo')).to.equal('foo');
-            expect(internals.url.secureFlag('foo?foo=bar')).to.equal('foo?foo=bar');
+
+        describe('when L.mapbox.key is set', function() {
+            beforeEach(function() {
+                L.mapbox.key = 'key';
+            });
+
+            afterEach(function() {
+                delete L.mapbox.key;
+            });
+
+            it('returns a v4 URL with access_token parameter', function() {
+                expect(internals.url.tileJSON('user.map')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=key')
+            });
+
+            it('appends &secure and uses https when FORCE_HTTPS is set', function() {
+                internals.config.FORCE_HTTPS = true;
+                expect(internals.url.tileJSON('user.map')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key&secure');
+            });
         });
     });
 });

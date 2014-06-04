@@ -21,7 +21,7 @@ module.exports = function(_) {
 
     geocoder.setID = function(_) {
         util.strict(_, 'string');
-        geocoder.setURL(urlhelper.base() + _ + '/geocode/{query}.json');
+        geocoder.setURL(urlhelper('/geocode/' + _ + '/{query}.json'));
         return geocoder;
     };
 
@@ -32,7 +32,7 @@ module.exports = function(_) {
     };
 
     geocoder.queryURL = function(_) {
-        if (!geocoder.getURL()) throw new Error('Geocoding map ID not set');
+        if (!geocoder.getURL()) throw new Error('Geocoding index ID not set');
         if (typeof _ !== 'string') {
             var parts = [];
             for (var i = 0; i < _.length; i++) {

@@ -1,5 +1,9 @@
 var helpers = {};
 
+before(function() {
+    L.mapbox.accessToken = 'key';
+});
+
 // permissive test of leaflet-like location objects
 expect.Assertion.prototype.near = function(expected, delta) {
     if (this.obj.lat !== undefined) {
