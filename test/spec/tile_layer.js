@@ -1,12 +1,14 @@
 describe("L.mapbox.tileLayer", function() {
-    var server;
+    var server, retina;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
+        retina = L.Browser.retina;
     });
 
     afterEach(function() {
         server.restore();
+        L.Browser.retina = retina;
     });
 
     describe("constructor", function() {
@@ -125,8 +127,6 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/0/0/0.png');
         });
     });
-
-
 
     function setRetina(x) {
         return function() {
