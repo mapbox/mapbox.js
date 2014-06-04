@@ -1,14 +1,12 @@
 describe("L.mapbox.tileLayer", function() {
-    var server, retina;
+    var server;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        retina = L.Browser.retina;
     });
 
     afterEach(function() {
         server.restore();
-        L.Browser.retina = retina;
     });
 
     describe("constructor", function() {
@@ -99,7 +97,17 @@ describe("L.mapbox.tileLayer", function() {
     });
 
     describe("#getTileUrl", function() {
-        beforeEach(setRetina(false));
+        var retina;
+
+        beforeEach(function() {
+            retina = L.Browser.retina;
+            L.Browser.retina = false;
+        });
+
+        afterEach(function() {
+            L.Browser.retina = retina;
+        });
+
         it("distributes over the URLs in the tiles property", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0.png');
@@ -108,6 +116,7 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.getTileUrl({x: 3, y: 0, z: 0})).to.equal('http://d.tiles.mapbox.com/v3/examples.map-8ced9urs/0/3/0.png');
             expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/4/0.png');
         });
+
         it("changes format of tiles", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON).setFormat('jpg70');
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0.jpg70');
@@ -116,35 +125,11 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.getTileUrl({x: 3, y: 0, z: 0})).to.equal('http://d.tiles.mapbox.com/v3/examples.map-8ced9urs/0/3/0.jpg70');
             expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/4/0.jpg70');
         });
-    });
 
-    describe("#autoScale", function() {
-        it("uses retina automatically", function() {
-            setRetina(true)();
-            var layer = L.mapbox.tileLayer(helpers.tileJSON_autoscale, {
-                detectRetina: true
-            });
-            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/0/0/0@2x.png');
-        });
-        it("does not engage on non-retina systems", function() {
-            setRetina(false)();
-            var layer = L.mapbox.tileLayer(helpers.tileJSON_autoscale, {
-                detectRetina: true
-            });
-            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/0/0/0.png');
-        });
-        it("does not engage with detectRetina: false", function() {
-            setRetina(true)();
-            var layer = L.mapbox.tileLayer(helpers.tileJSON_autoscale, {
-                detectRetina: false
-            });
-            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/0/0/0.png');
+        it("requests @2x tiles on retina", function() {
+            L.Browser.retina = true;
+            var layer = L.mapbox.tileLayer(helpers.tileJSON);
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0@2x.png');
         });
     });
-
-    function setRetina(x) {
-        return function() {
-            L.Browser.retina = x;
-        };
-    }
 });
