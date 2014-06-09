@@ -6,33 +6,21 @@ var util = require('./util'),
 
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
-module.exports = function(_) {
+module.exports = function(url, options) {
 
-    var geocoder = {}, url;
+    var geocoder = {};
 
-    geocoder.getURL = function(_) {
+    util.strict(url, 'string');
+
+    if (url.indexOf('/') === -1) {
+        url = urlhelper('/geocode/' + url + '/{query}.json', options && options.accessToken);
+    }
+
+    geocoder.getURL = function() {
         return url;
     };
 
-    geocoder.setURL = function(_) {
-        url = _;
-        return geocoder;
-    };
-
-    geocoder.setID = function(_) {
-        util.strict(_, 'string');
-        geocoder.setURL(urlhelper('/geocode/' + _ + '/{query}.json'));
-        return geocoder;
-    };
-
-    geocoder.setTileJSON = function(_) {
-        util.strict(_, 'object');
-        geocoder.setURL(_.geocoder);
-        return geocoder;
-    };
-
     geocoder.queryURL = function(_) {
-        if (!geocoder.getURL()) throw new Error('Geocoding index ID not set');
         if (typeof _ !== 'string') {
             var parts = [];
             for (var i = 0; i < _.length; i++) {
@@ -102,13 +90,6 @@ module.exports = function(_) {
 
         return geocoder;
     };
-
-    if (typeof _ === 'string') {
-        if (_.indexOf('/') == -1) geocoder.setID(_);
-        else geocoder.setURL(_);
-    } else if (typeof _ === 'object') {
-        geocoder.setTileJSON(_);
-    }
 
     return geocoder;
 };

@@ -13,11 +13,11 @@ var GeocoderControl = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-        this.geocoder = geocoder(_);
+        this.setURL(_);
     },
 
     setURL: function(_) {
-        this.geocoder.setURL(_);
+        this.geocoder = geocoder(_, {accessToken: this.options.accessToken});
         return this;
     },
 
@@ -26,13 +26,11 @@ var GeocoderControl = L.Control.extend({
     },
 
     setID: function(_) {
-        this.geocoder.setID(_);
-        return this;
+        return this.setURL(_);
     },
 
     setTileJSON: function(_) {
-        this.geocoder.setTileJSON(_);
-        return this;
+        return this.setURL(_.geocoder);
     },
 
     _toggle: function(e) {
