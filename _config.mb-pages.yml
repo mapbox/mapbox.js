@@ -4,7 +4,7 @@ url: https://www.mapbox.com
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
-mapboxjs: v1.6.3
+mapboxjs: v1.6.4
 defaultid: 'examples.map-i86nkdio'
 rdiscount:
   extensions: [smart]
