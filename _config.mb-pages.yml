@@ -8,3 +8,4 @@ mapboxjs: v1.6.3
 defaultid: 'examples.map-i86nkdio'
 rdiscount:
   extensions: [smart]
+exclude: [dist]
