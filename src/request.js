@@ -10,7 +10,7 @@ module.exports = function(url, callback) {
     strict(callback, 'function');
 
     url = url.replace(protocol, function(match, protocol) {
-        if (!('withCredentials' in new XMLHttpRequest())) {
+        if (!('withCredentials' in new window.XMLHttpRequest())) {
             // XDomainRequest in use; doesn't support cross-protocol requests
             return document.location.protocol;
         } else if ('https:' === protocol || 'https:' === document.location.protocol || config.FORCE_HTTPS) {
