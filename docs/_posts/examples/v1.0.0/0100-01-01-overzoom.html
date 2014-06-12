@@ -19,7 +19,7 @@ tags:
 }
 </style>
 <div id='map'></div>
-<div id="zoom-level"></div>
+<div id='zoom-level'></div>
 <script>
 
 // The native maximum zoom level for this tile layer is 19
@@ -29,7 +29,7 @@ var map = L.mapbox.map('map', 'examples.map-igb471ik', {
     }
 }).setView([40.7275, -73.9948], 14);
 
-map.on('zoomend', function(e){
+map.on('zoomend', function(){
     document.getElementById('zoom-level').innerHTML = 'Zoom Level: ' + map.getZoom();
 });
 
