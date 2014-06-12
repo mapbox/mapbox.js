@@ -145,19 +145,15 @@ var GridLayer = L.Class.extend({
 
         if (z > this.options.maxZoom || z < this.options.minZoom) return;
 
-        var nwTilePoint = new L.Point(
-                Math.floor(bounds.min.x / tileSize),
-                Math.floor(bounds.min.y / tileSize)),
-            seTilePoint = new L.Point(
-                Math.floor(bounds.max.x / tileSize),
-                Math.floor(bounds.max.y / tileSize)),
+        var tileBounds = L.bounds(
+                bounds.min.divideBy(tileSize)._floor(),
+                bounds.max.divideBy(tileSize)._floor()),
             max = this._map.options.crs.scale(z) / tileSize;
 
-        for (var x = nwTilePoint.x; x <= seTilePoint.x; x++) {
-            for (var y = nwTilePoint.y; y <= seTilePoint.y; y++) {
+        for (var x = tileBounds.min.x; x <= tileBounds.max.x; x++) {
+            for (var y = tileBounds.min.y; y <= tileBounds.max.y; y++) {
                 // x wrapped
-                var xw = (x + max) % max, yw = (y + max) % max;
-                this._getTile(z, xw, yw);
+                this._getTile(z, ((x % max) + max) % max, ((y % max) + max) % max);
             }
         }
     },
