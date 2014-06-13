@@ -23,7 +23,7 @@
     "leaflet-hash": "0.2.1",
     "leaflet-fullscreen": "0.0.0",
     "uglify-js": "2.4.8",
-    "mocha": "1.17.1",
+    "mocha": "1.20.1",
     "expect.js": "0.3.1",
     "sinon": "1.10.2",
     "mocha-phantomjs": "3.1.6",
