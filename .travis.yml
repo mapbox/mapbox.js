@@ -1,5 +1,9 @@
 language: node_js
 node_js:
-  - "0.10"
+- '0.10'
 before_script:
-  - "make"
+- make
+env:
+  global:
+  - secure: eHCAIoynDlCvkTbsWScJ7ezLbQdoOf8lzTyhQQm/YD+kJRn05J1MmrJ7v8I7YUa1WLCysJ4J9rFiThVGlg2Z2dAOW1m7noHkinCT3jMjT6A30VUEggeivuR/EjdT/ZxD7C5tld8GQpyQreEsvY3Cuc2OOckXHK9mLMl+6+OfVQw=
+  - secure: Jirtxk05m0ESOkiUPQ2aI5Q0bjUyU4FhxRJ9xMk4LZ8+uwYpTQUO2yQ4Rzb+uN6e6VSg12pUSr1jC1R7JLuVAf45H0UKTZ27gYIxJ7tUztf9HDUPc8dgP5dBukx33xQws1yT5Oi1kvsXtfZ8td3IQhRHP0U72qAMi61D+qYS0uM=

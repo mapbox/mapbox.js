@@ -16,7 +16,8 @@
     "sanitize-caja": "0.0.0"
   },
   "scripts": {
-    "test": "jshint src/*.js && mocha-phantomjs test/index.html"
+    "test": "jshint src/*.js && zuul -- test/spec/*.js",
+    "test-local": "jshint src/*.js && mocha-phantomjs test/index.html"
   },
   "devDependencies": {
     "leaflet-hash": "0.2.1",
@@ -31,7 +32,8 @@
     "jshint": "2.4.4",
     "clean-css": "~2.0.7",
     "minimist": "0.0.5",
-    "marked": "~0.3.0"
+    "marked": "~0.3.0",
+    "zuul": "~1.7.0"
   },
   "optionalDependencies": {},
   "engines": {

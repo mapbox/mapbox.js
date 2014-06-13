@@ -23,7 +23,7 @@ describe('L.mapbox.map', function() {
 
     describe('constructor', function() {
         it('loads TileJSON from a URL', function(done) {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
             map.on('ready', function() {
                 expect(this).to.equal(map);
@@ -31,7 +31,7 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json?secure",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
@@ -45,13 +45,13 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json?secure",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
 
         it('emits an error event', function(done) {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
             map.on('error', function(e) {
                 expect(this).to.equal(map);
@@ -59,38 +59,38 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json?secure",
                 [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
             server.respond();
         });
 
         it('aliases featureLayer as markerLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
             expect(map.featureLayer).to.be.ok();
             expect(map.markerLayer).to.be.ok();
         });
 
         it('can deactivate markerLayer as markerLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
                 markerLayer: false
             });
             expect(map.featureLayer).to.eql(undefined);
         });
 
         it('can deactivate markerLayer as featureLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
                 featureLayer: false
             });
             expect(map.featureLayer).to.eql(undefined);
         });
 
         it('preserves manually-set marker layer GeoJSON', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
             map.featureLayer.setGeoJSON(helpers.geoJson);
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json?secure",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/markers.geojson",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/examples.map-8ced9urs/markers.geojson",
                 [200, { "Content-Type": "application/json" }, JSON.stringify({})]);
 
             server.respond();
@@ -241,7 +241,7 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json?secure",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
@@ -270,7 +270,7 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.h8e9h88l.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/examples.h8e9h88l.json?secure",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
             server.respond();
         });

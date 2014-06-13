@@ -1,5 +1,7 @@
 var helpers = {};
 
+L.mapbox.config.FORCE_HTTPS = true;
+
 // permissive test of leaflet-like location objects
 expect.Assertion.prototype.near = function(expected, delta) {
     if (this.obj.lat !== undefined) {
@@ -87,10 +89,11 @@ helpers.tileJSON = {
     "scheme":"xyz",
     "template":"{{#__l0__}}{{#__location__}}{{/__location__}}{{#__teaser__}}<div class='birds-tooltip'>\n  <strong>{{name}}</strong>\n  <strong>{{count}} species</strong>\n  <small>{{species}}</small>\n  <div class='carmen-fields' style='display:none'>\n  {{search}} {{lon}} {{lat}} {{bounds}}\n  </div>\n</div>\n<style type='text/css'>\n.birds-tooltip strong { display:block; font-size:16px; }\n.birds-tooltip small { font-size:10px; display:block; overflow:hidden; max-height:90px; line-height:15px; }\n</style>{{/__teaser__}}{{#__full__}}{{/__full__}}{{/__l0__}}",
     "tilejson":"2.0.0",
-    "tiles":["http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
-        "http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
-        "http://c.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
-        "http://d.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png"],
+    "tiles":[
+        "https://a.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "https://b.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "https://c.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "https://d.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png"],
     "webpage":"http://tiles.mapbox.com/examples/map/map-8ced9urs"
 };
 
@@ -115,10 +118,10 @@ helpers.tileJSON_improvemap = {
 helpers.tileJSON_autoscale = {
   "webpage": "http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/page.html",
   "tiles": [
-    "http://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
-    "http://b.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
-    "http://c.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
-    "http://d.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png"
+    "https://a.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
+    "https://b.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
+    "https://c.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png",
+    "https://d.tiles.mapbox.com/v3/tmcw.map-oitj0si5/{z}/{x}/{y}.png"
   ],
   "tilejson": "2.0.0",
   "scheme": "xyz",
