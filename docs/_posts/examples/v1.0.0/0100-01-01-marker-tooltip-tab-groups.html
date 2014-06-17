@@ -84,7 +84,7 @@ markers.setGeoJSON([{
 
 var info = document.getElementById('info');
 
-// Iterate through each feature layer item, 
+// Iterate through each feature layer item,
 // and create a custom HTML group for each. In this example
 // we create a tabs menu and put each property in a respective tab.
 markers.eachLayer(function(m) {
@@ -95,7 +95,7 @@ markers.eachLayer(function(m) {
     tabs.className = 'tabs-ui';
 
     for (var key in p) {
-        var tab = document.createElement('div'); 
+        var tab = document.createElement('div');
         tab.className = 'tab';
 
         var input = document.createElement('input');
@@ -114,7 +114,7 @@ markers.eachLayer(function(m) {
         tabs.appendChild(tab);
     }
 
-    markers.bindPopup(tabs);
+    m.bindPopup(tabs);
 });
 
 function idify(str) { return str.replace(/\s+/g, '-').toLowerCase(); }
