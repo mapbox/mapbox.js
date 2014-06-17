@@ -5,7 +5,7 @@
 {% highlight html %}
 <script>
 // Create a map in the div #map
-L.mapbox.map('map', '{{site.defaultid}}');
+L.mapbox.map('map', 'username.mapid');
 </script>
 {% endhighlight html %}
     </div>
@@ -14,7 +14,7 @@ L.mapbox.map('map', '{{site.defaultid}}');
 <div class='pad2 prose round-bottom keyline-all fill-white space-bottom contain center'>
   <h2 class='space-bottom1'>
   Build anything with Mapbox.js,<br/>
-  a library for fast & interactive maps.
+  a library for fast &amp; interactive maps.
   </h2>
   <div class='clearfix'>
     <div class='col4 pad1 center'>
@@ -66,11 +66,16 @@ L.mapbox.map('map', '{{site.defaultid}}');
 $(function load() {
     L.mapbox.map('example-map', '{{site.defaultid}}', { scrollWheelZoom: false, center: [40.70, -73.98], zoom: 14 });
 
+    var mapid = App.storage('map.id'),
+        exampleid = 'username.mapid';
+
+    if (mapid && (mapid || '').indexOf(App.user.id) === 0) {
+        exampleid = mapid;
+    }
+
     // Replace username.mapid with the current one.
-    var key = /{{site.defaultid}}/g;
-    var unique = (App && App.user) ? App.user.id + '.' + App.tmpkey : '{{site.defaultid}}';
     $('pre, code').each(function() {
-        $(this).html($(this).html().replace(key, unique));
+        $(this).html($(this).html().replace(/username.mapid/g, unique));
     });
 });
 </script>
