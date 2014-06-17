@@ -425,9 +425,9 @@
   .leaflet-control-layers-toggle                        { background-position:0 -104px; }
   .mapbox-icon.mapbox-icon-share:before, .mapbox-icon.mapbox-icon-share         { background-position:0 -130px; }
   .mapbox-icon.mapbox-icon-geocoder:before, .mapbox-icon.mapbox-icon-geocoder   { background-position:0 -156px; }
-  .mapbox-icon.mapbox-icon-facebook:before, .mapbox-icon.mapbox-icon-facebook   { background-position:0 -182px; }
-  .mapbox-icon.mapbox-icon-twitter:before, .mapbox-icon.mapbox-icon-twitter     { background-position:0 -208px; }
-  .mapbox-icon.mapbox-icon-pinterest:before, .mapbox-icon.mapbox-icon-pinterest { background-position:0 -234px; }
+  .mapbox-icon-facebook:before, .mapbox-icon-facebook   { background-position:0 -182px; }
+  .mapbox-icon-twitter:before, .mapbox-icon-twitter     { background-position:0 -208px; }
+  .mapbox-icon-pinterest:before, .mapbox-icon-pinterest { background-position:0 -234px; }
 
 .leaflet-popup-content-wrapper,
 .map-legends,
