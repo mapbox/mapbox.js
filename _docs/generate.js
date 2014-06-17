@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs'),
     marked = require('marked'),
     argv = require('minimist')(process.argv.slice(2));
@@ -21,8 +23,13 @@ var writes = [];
 
 landOutput.write(header);
 output.write(header);
+
 output.write('version: ' + argv.t + '\n');
 landOutput.write('version: ' + argv.t + '\n');
+
+output.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.');
+landOutput.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.');
+
 output.write('permalink: /api/' + argv.t + '/all/\n');
 
 var BASE_URL = '/mapbox.js/api/' + argv.t + '/';
