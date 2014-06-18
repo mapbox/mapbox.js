@@ -1,0 +1,33 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Creating a popup from UTFGrid data
+description: Using UTFGrid data to populate and initialize a popup
+tags:
+  - layers
+  - tilemill
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio', {
+      attributionControl: false,
+      infoControl: true
+    })
+    .setView([40, -100], 4);
+
+var nprTiles = L.mapbox.tileLayer('examples.npr-stations').addTo(map);
+var nprGrid = L.mapbox.gridLayer('examples.npr-stations').addTo(map);
+
+// you would usually use the gridControl to display a nice box in the corner
+// with your data, since we want a popup instead we won't initialize the gridControl
+
+nprGrid.on('click', function(e) {
+    if (!e.data) return;
+    var popup = L.popup()
+        .setLatLng(e.latLng)
+        .setContent(e.data.name)
+        .openOn(map);
+});
+</script>
