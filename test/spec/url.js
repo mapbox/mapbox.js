@@ -22,6 +22,11 @@ describe("url", function() {
         expect(function() { internals.url('/user.map.json') }).to.throwError('An API access token is required to use Mapbox.js.');
     });
 
+    it('throws an error if a secret access token is provided', function() {
+        L.mapbox.accessToken = 'sk.abc.123';
+        expect(function() { internals.url('/user.map.json') }).to.throwError('Use a public access token (pk.*) with Mapbox.js.');
+    });
+
     describe('.tileJSON', function() {
         it('returns the input when passed a URL', function() {
             expect(internals.url.tileJSON('http://a.tiles.mapbox.com/v3/user.map.json')).to.equal('http://a.tiles.mapbox.com/v3/user.map.json')
