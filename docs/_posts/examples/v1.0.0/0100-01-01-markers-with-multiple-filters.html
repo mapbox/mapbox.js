@@ -119,11 +119,11 @@ var geojson = [
 ];
 
 var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
-  .setView([42.68, -95.63], 4)
+    .setView([42.68, -95.63], 4)
 
 var markers = L.mapbox.featureLayer()
-  .setGeoJSON(geojson)
-  .addTo(map);
+    .setGeoJSON(geojson)
+    .addTo(map);
 
 $('.menu-ui a').on('click', function() {
     var filter = $(this).data('filter');
