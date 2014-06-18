@@ -1,12 +1,24 @@
 'use strict';
 
-var config = require('./config');
+var config = require('./config'),
+    version = require('../package.json').version;
 
 module.exports = function(path, accessToken) {
+    accessToken = accessToken || L.mapbox.accessToken;
+
+    if (!accessToken && config.REQUIRE_ACCESS_TOKEN) {
+        throw new Error('An API access token is required to use Mapbox.js. ' +
+            'See https://www.mapbox.com/mapbox.js/api/v' + version + '/l-mapbox-accessToken/');
+    }
+
     var url = ('https:' === document.location.protocol || config.FORCE_HTTPS) ? config.HTTPS_URL : config.HTTP_URL;
     url += path;
     url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
-    url += accessToken || L.mapbox.accessToken;
+
+    if (config.REQUIRE_ACCESS_TOKEN) {
+        url += accessToken;
+    }
+
     return url;
 };
 

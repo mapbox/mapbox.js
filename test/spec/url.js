@@ -9,28 +9,31 @@ describe("url", function() {
         internals.config.FORCE_HTTPS = FORCE_HTTPS;
     });
 
+    it('returns a v4 URL with access_token parameter', function() {
+        expect(internals.url('/user.map.json')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=key')
+    });
+
+    it('uses provided access token', function() {
+        expect(internals.url('/user.map.json', 'token')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=token')
+    });
+
+    it('throws an error if no access token is provided', function() {
+        L.mapbox.accessToken = null;
+        expect(function() { internals.url('/user.map.json') }).to.throwError('An API access token is required to use Mapbox.js.');
+    });
+
     describe('.tileJSON', function() {
         it('returns the input when passed a URL', function() {
             expect(internals.url.tileJSON('http://a.tiles.mapbox.com/v3/user.map.json')).to.equal('http://a.tiles.mapbox.com/v3/user.map.json')
         });
 
-        describe('when L.mapbox.key is set', function() {
-            beforeEach(function() {
-                L.mapbox.key = 'key';
-            });
+        it('returns a v4 URL with access_token parameter', function() {
+            expect(internals.url.tileJSON('user.map')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=key')
+        });
 
-            afterEach(function() {
-                delete L.mapbox.key;
-            });
-
-            it('returns a v4 URL with access_token parameter', function() {
-                expect(internals.url.tileJSON('user.map')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=key')
-            });
-
-            it('appends &secure and uses https when FORCE_HTTPS is set', function() {
-                internals.config.FORCE_HTTPS = true;
-                expect(internals.url.tileJSON('user.map')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key&secure');
-            });
+        it('appends &secure and uses https when FORCE_HTTPS is set', function() {
+            internals.config.FORCE_HTTPS = true;
+            expect(internals.url.tileJSON('user.map')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key&secure');
         });
     });
 });

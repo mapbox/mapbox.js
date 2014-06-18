@@ -1,6 +1,6 @@
 var helpers = {};
 
-before(function() {
+beforeEach(function() {
     L.mapbox.accessToken = 'key';
 });
 
