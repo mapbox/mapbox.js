@@ -27,8 +27,8 @@ output.write(header);
 output.write('version: ' + argv.t + '\n');
 landOutput.write('version: ' + argv.t + '\n');
 
-output.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.');
-landOutput.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.');
+output.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.\n');
+landOutput.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.\n');
 
 output.write('permalink: /api/' + argv.t + '/all/\n');
 
