@@ -58,6 +58,9 @@ tags:
 <div id='map'></div>
 
 <script>
+// In the propeties object for each marker define key's
+// like `rentals`, `fuel`, `tackleshop` that are set to true for false
+// depending on whether or they exist at a location.
 var geojson = [
     {
       "type": "Feature",
@@ -126,9 +129,13 @@ var markers = L.mapbox.featureLayer()
     .addTo(map);
 
 $('.menu-ui a').on('click', function() {
+    // For each filter link, get the 'data-filter' attribute value.
     var filter = $(this).data('filter');
     $(this).addClass('active').siblings().removeClass('active');
     markers.setFilter(function(f) {
+        // If the data-filter attribute is set to "all", return
+        // all (true). Otherwise, filter on markers that have
+        // a value set to true based on the filter name.
         return (filter === 'all') ? true : f.properties[filter] === true;
     });
     return false;
