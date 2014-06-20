@@ -140,8 +140,8 @@ describe('L.mapbox.geocoderControl', function() {
 
 
         it('emits a "found" event when geocoding succeeds', function(done) {
-            control.on('found', function(result) {
-                expect(result.latlng).to.eql([30.3071816, -97.7559964]);
+            control.on('found', function(e) {
+                expect(e.results).to.eql(helpers.geocoderAustin);
                 done();
             });
 
@@ -154,8 +154,8 @@ describe('L.mapbox.geocoderControl', function() {
         });
 
         it('emits a "autoselect" event when geocoding succeeds', function(done) {
-            control.on('autoselect', function(result) {
-                expect(result.data.latlng).to.eql([30.3071816, -97.7559964]);
+            control.on('autoselect', function(e) {
+                expect(e.feature).to.eql(helpers.geocoderAustin.features[0]);
                 done();
             });
 
@@ -175,12 +175,12 @@ describe('L.mapbox.geocoderControl', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderMulti)]);
             server.respond();
 
-            control.on('select', function(result) {
-                expect(result.data[0].name).to.eql('Chester');
-                expect(result.data[1].name).to.eql('Cheshire');
+            control.on('select', function(e) {
+                expect(e.feature).to.eql(helpers.geocoderMulti.features[0]);
                 done();
             });
 
+            // First link is the toggle button
             happen.click(control._container.getElementsByTagName('a')[1]);
         });
 

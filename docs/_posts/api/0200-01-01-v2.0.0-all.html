@@ -753,26 +753,26 @@ This function is currently in private beta: <a href="https://mapbox.com/contact/
 <table>
 <thead>
 <tr>
-<th>Options</th>
-<th>Value</th>
+<th>Event</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>event</td>
-<td>string</td>
-<td><ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from Mapbox.</li></ul></td>
+<td>found</td>
+<td>Success in finding a location. The event&#39;s <code>results</code> property contains the raw results.</td>
 </tr>
 <tr>
-<td>event</td>
-<td>string</td>
-<td><ul><li><code>select</code>: fired when the user selects a location from a list of options returned from a geocoding request. The geocoding data is attached to the <code>data</code> property of the event.</td>
+<td>error</td>
+<td>Failure to find a location. The event&#39;s <code>error</code> property contains the raw HTTP error.</td>
 </tr>
 <tr>
-<td>event</td>
-<td>string</td>
-<td><ul><li><code>autoselect</code>: fired when the geocoder control automatically chooses the first result of a query that returns only one result, and repositions the map accordingly. The geocoding data is attached to the <code>data</code> property of the event.</td>
+<td>select</td>
+<td>Fired when the user selects a location from a list of options returned from a geocoding request. The event&#39;s <code>feature</code> property contains the selected GeoJSON Feature.</td>
+</tr>
+<tr>
+<td>autoselect</td>
+<td>Fired when the control automatically selects the first result of a query that returns only one result, and repositions the map accordingly. The event&#39;s <code>feature</code> property contains the selected GeoJSON feature.</td>
 </tr>
 </tbody>
 </table>
@@ -981,6 +981,11 @@ instead. For example, replace</p>
 </code></pre><p>with</p>
 <pre><code>map.featureLayer.setFilter(function(f) { ... });
 </code></pre></li>
+<li><p>The format for <code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="#l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> results have changed.
+Results are now provided in GeoJSON format. If your code uses <code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> or
+the <code>found</code>, <code>select</code>, or <code>autoselect</code> events from <code><a href="#l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code>, it may
+need to be updated to expect the format documented in those classes.</p>
+</li>
 <li><p><code><a href="#l-mapbox-config-http_urls">L.mapbox.config.HTTP_URLS</a></code> and <code><a href="#l-mapbox-config-https_urls">L.mapbox.config.HTTPS_URLS</a></code> have been replaced
 with <code><a href="#l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</a></code> and <code><a href="#l-mapbox-config-https_url">L.mapbox.config.HTTPS_URL</a></code>, which expect to
 be assigned a single URL rather than an array of URLs. For example, replace</p>

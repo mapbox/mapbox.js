@@ -39,16 +39,17 @@ module.exports = function(url, options) {
     geocoder.query = function(_, callback) {
         util.strict(callback, 'function');
         request(geocoder.queryURL(_), function(err, json) {
-            if (json && (json.length || json.results)) {
+            if (json && (json.length || json.features)) {
                 var res = {
-                    results: json.length ? json : json.results,
+                    results: json
                 };
-                if (json.results) {
-                    res.latlng = [json.results[0][0].lat,
-                        json.results[0][0].lon];
+                if (json.features) {
+                    res.latlng = [
+                        json.features[0].center[1],
+                        json.features[0].center[0]];
                 }
-                if (json.results && json.results[0][0].bounds !== undefined) {
-                    res.bounds = json.results[0][0].bounds;
+                if (json.features && json.features[0].bbox) {
+                    res.bounds = json.features[0].bbox;
                     res.lbounds = util.lbounds(res.bounds);
                 }
                 callback(null, res);

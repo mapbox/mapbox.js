@@ -522,11 +522,12 @@ _Returns_: the geocoder object
 ### geocoderControl.on(event, callback)
 Bind a listener to an event emitted by the geocoder control. Supported additional events are
 
-| Options | Value | Description |
-| ---- | ---- | ---- |
-| event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from Mapbox.</li></ul> |
-| event | string | <ul><li><code>select</code>: fired when the user selects a location from a list of options returned from a geocoding request. The geocoding data is attached to the `data` property of the event.
-| event | string | <ul><li><code>autoselect</code>: fired when the geocoder control automatically chooses the first result of a query that returns only one result, and repositions the map accordingly. The geocoding data is attached to the `data` property of the event.
+| Event  | Description |
+| ---- | ---- |
+| found | Success in finding a location. The event's `results` property contains the raw results. |
+| error | Failure to find a location. The event's `error` property contains the raw HTTP error. |
+| select | Fired when the user selects a location from a list of options returned from a geocoding request. The event's `feature` property contains the selected GeoJSON Feature. |
+| autoselect | Fired when the control automatically selects the first result of a query that returns only one result, and repositions the map accordingly. The event's `feature` property contains the selected GeoJSON feature. |
 
 ## L.mapbox.shareControl(id|url, options)
 
@@ -716,6 +717,11 @@ instead. For example, replace
  ```
  map.featureLayer.setFilter(function(f) { ... });
  ```
+
+* The format for `L.mapbox.geocoder` and `L.mapbox.geocoderControl` results have changed.
+Results are now provided in GeoJSON format. If your code uses `L.mapbox.geocoder` or
+the `found`, `select`, or `autoselect` events from `L.mapbox.geocoderControl`, it may
+need to be updated to expect the format documented in those classes.
 
 * `L.mapbox.config.HTTP_URLS` and `L.mapbox.config.HTTPS_URLS` have been replaced
 with `L.mapbox.config.HTTP_URL` and `L.mapbox.config.HTTPS_URL`, which expect to

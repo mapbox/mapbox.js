@@ -20,144 +20,155 @@ expect.Assertion.prototype.near = function(expected, delta) {
 };
 
 helpers.geocoderAustin = {
-"query": ["austin"],
-"results": [[{
-    "bounds": [-97.9383829999999, 30.098659, -97.5614889999999, 30.516863],
-    "lat": 30.3071816,
-    "lon": -97.7559964,
-    "name": "Austin",
-    "score": 600000790107194.8,
-    "type": "city",
-    "id": "mapbox-places.4201"
-}]]};
-
-helpers.geocoderWhiteHouse = {
-  "results": [
-    [
-      {
-        "type": "address",
-        "name": "1600 Pennsylvania Ave NW",
-        "lat": 38.898761,
-        "lon": -77.035117,
-        "id": "address.1104748184898"
-      },
-      {
-        "type": "city",
-        "name": "Washington",
-        "id": "mapbox-places.20001"
-      },
-      {
-        "type": "province",
-        "name": "District of Columbia",
-        "id": "province.1190806886"
-      },
-      {
-        "type": "country",
-        "name": "United States",
-        "id": "country.4150104525"
-      }
-    ]
-  ],
-  "attribution": {
-    "mapbox-places": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"
-  },
-  "query": [
-    "1600",
-    "pennsylvania",
-    "ave",
-    "nw",
-    "washington",
-    "dc",
-    "20500"
-  ]
+    "type": "FeatureCollection",
+    "query": ["austin"],
+    "features": [{
+        "id": "city.78701",
+        "type": "Feature",
+        "text": "Austin",
+        "place_name": "Austin, 78746, Texas, United States",
+        "relevance": 1,
+        "center": [-97.804206, 30.278855],
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-97.804206, 30.278855]
+        },
+        "bbox": [-98.0261839514054, 30.067858231996137, -97.54154705019376, 30.489398740397657],
+        "properties": {
+            "title": "Austin"
+        },
+        "context": [
+            {"id": "postcode.2467801073", "text": "78746"},
+            {"id": "province.1000418602", "text": "Texas"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]}
+    ],
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"
 };
 
-helpers.geocoderMulti = {"query": ["chester"], "results": [
-    [
-        {"bounds": [-2.998194, 53.146961, -2.79233999999999, 53.2355309999999], "lat": 53.1891648678537, "lon": -2.88012205997425, "name": "Chester", "score": 200000073770758.4, "type": "place", "id": "mapbox-places.218041"},
-        {"bounds": [-3.09595536924484, 52.9471560733941, -1.97088192386167, 53.3882660996009], "lat": 53.1677110864975, "lon": -2.526958424051, "name": "Cheshire", "score": 2155482431.21742, "type": "province", "id": "province.2594"},
-        {"bounds": [-13.6913559567794, 49.9096161909876, 1.77170536308596, 60.8475532028857], "lat": 54.3177967325959, "lon": -1.91064039912679, "name": "United Kingdom", "population": 61113205, "type": "country", "id": "country.152"}
-    ],
-    [
-        {"bounds": [-64.323967, 44.4881779999999, -64.1653059999999, 44.606724], "lat": 44.5398571332729, "lon": -64.2406178841662, "name": "Chester", "score": 47818432.564384, "type": "place", "id": "mapbox-places.30118"},
-        {"bounds": [-66.3275996571984, 43.422156073544, -59.6886250476078, 47.0349071318587], "lat": 44.7382514511936, "lon": -64.3284164961136, "name": "Nova Scotia", "score": 55090187731.4764, "type": "province", "id": "province.671"},
-        {"bounds": [-141.005548666451, 41.6690855919108, -52.615930948992, 83.1161164353916], "lat": 56.8354595949484, "lon": -110.424643384994, "name": "Canada", "population": 33487208, "type": "country", "id": "country.16"}
-    ],
-    [
-        {"bounds": [-77.4804519999999, 37.307314, -77.3997099999999, 37.390638], "lat": 37.3520452, "lon": -77.4336955, "name": "Chester", "score": 34389516.1200854, "type": "CDP", "id": "mapbox-places.2631"},
-        {"bounds": [-83.6674744083173, 36.539774595821, -75.2339539000524, 39.4508341656643], "lat": 37.9953043807426, "lon": -78.4596117783831, "name": "Virginia", "score": 104078089371.712, "type": "province", "id": "province.570"},
-        {"bounds": [-179.142471477264, 18.9301376341111, 179.781149943574, 71.412179667309], "lat": 37.2453246055115, "lon": -99.693233713229, "name": "United States of America", "population": 307212123, "type": "country", "id": "country.89"}
-    ]
-], "attribution": {"mapbox-places": "<a href='http://mapbox.com/about/maps' target='_blank'>Terms & Feedback</a>"}};
+helpers.geocoderWhiteHouse = {
+    "type":"FeatureCollection",
+    "query":["1600","pennsylvania","ave","nw","washington","dc"],
+    "features":[{
+        "id":"address.1104748184898",
+        "type":"Feature",
+        "text":"Pennsylvania Ave NW",
+        "place_name":"1600 Pennsylvania Ave NW, Washington, 20006, District of Columbia, United States",
+        "relevance":0.8233333333333333,
+        "center":[-77.035117,38.898761],
+        "geometry":{"type":"Point","coordinates":[-77.035117,38.898761]},
+        "address":"1600",
+        "properties":{"title":"Pennsylvania Ave NW"},
+        "context": [
+            {"id": "city.20001", "text": "Washington"},
+            {"id": "postcode.757789931", "text": "20006"},
+            {"id": "province.1190806886", "text": "District of Columbia"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]
+    }],
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"
+};
+
+helpers.geocoderMulti = {"type": "FeatureCollection", "query": ["chester"], "features": [
+    {"id": "city.59522", "type": "Feature", "text": "Chester", "place_name": "Chester, 59522, Montana, United States", "relevance": 1, "center": [-111.066126, 48.567267], "geometry": {"type": "Point", "coordinates": [-111.066126, 48.567267]}, "bbox": [-111.27381098268538, 48.13294600463663, -110.75525903776743, 48.997888893145074], "properties": {"title": "Chester"}, "context": [
+        {"id": "postcode.1103465505", "text": "59522"},
+        {"id": "province.2245263784", "text": "Montana"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "city.29706", "type": "Feature", "text": "Chester", "place_name": "Chester, 29706, South Carolina, United States", "relevance": 1, "center": [-81.204641, 34.696862], "geometry": {"type": "Point", "coordinates": [-81.204641, 34.696862]}, "bbox": [-81.48828398154757, 34.56381461276174, -81.03240707648264, 34.82969600254277], "properties": {"title": "Chester"}, "context": [
+        {"id": "postcode.523763059", "text": "29706"},
+        {"id": "province.1316557862", "text": "South Carolina"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "city.73838", "type": "Feature", "text": "Chester", "place_name": "Chester, 73838, Oklahoma, United States", "relevance": 1, "center": [-98.934343, 36.254612], "geometry": {"type": "Point", "coordinates": [-98.934343, 36.254612]}, "bbox": [-99.05097698315285, 36.161170747365105, -98.72566001698338, 36.34794223399628], "properties": {"title": "Chester"}, "context": [
+        {"id": "postcode.614772849", "text": "73838"},
+        {"id": "province.1788423601", "text": "Oklahoma"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "city.75936", "type": "Feature", "text": "Chester", "place_name": "Chester, 75936, Texas, United States", "relevance": 1, "center": [-94.577634, 30.935564], "geometry": {"type": "Point", "coordinates": [-94.577634, 30.935564]}, "bbox": [-94.68985423880557, 30.811656288141105, -94.4422840876529, 31.05931168738785], "properties": {"title": "Chester"}, "context": [
+        {"id": "postcode.1972121432", "text": "75936"},
+        {"id": "province.1000418602", "text": "Texas"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "city.5143", "type": "Feature", "text": "Chester", "place_name": "Chester, 05143, Vermont, United States", "relevance": 1, "center": [-72.636488, 43.288253], "geometry": {"type": "Point", "coordinates": [-72.636488, 43.288253]}, "bbox": [-72.76410797475299, 43.071092444196545, -72.49650604636136, 43.380981439197015], "properties": {"title": "Chester"}, "context": [
+        {"id": "postcode.3372033110", "text": "05143"},
+        {"id": "province.407302220", "text": "Vermont"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]}
+], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"};
 
 helpers.geocoderBulk = [
-    {"query": ["austin"], "attribution": {"mapbox-places": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"}, "results": [
-        [
-            {"id": "mapbox-places.78701", "bounds": [-98.0261839514054, 30.067858231996137, -97.54154705019376, 30.489398740397657], "lon": -97.804206, "lat": 30.278855, "name": "Austin", "type": "city"},
-            {"id": "province.1000418602", "name": "Texas", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.89310", "bounds": [-117.80679434924265, 38.62246699510231, -116.59003701731739, 39.99871687910863], "lon": -117.227194, "lat": 39.313976, "name": "Austin", "type": "city"},
-            {"id": "province.2975076950", "name": "Nevada", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.16720", "bounds": [-78.36877489826804, 41.3983272617798, -77.82614701689207, 41.73658270221914], "lon": -77.988041, "lat": 41.567676, "name": "Austin", "type": "city"},
-            {"id": "province.2184819983", "name": "Pennsylvania", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.55912", "bounds": [-93.16910498309949, 43.526714505771395, -92.7681080168472, 43.82098238181999], "lon": -92.929212, "lat": 43.674029, "name": "Austin", "type": "city"},
-            {"id": "province.4222030107", "name": "Minnesota", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.72007", "bounds": [-92.12039497936945, 34.90795563316439, -91.83894201687612, 35.07632430322719], "lon": -92.004189, "lat": 35.036604, "name": "Austin", "type": "city"},
-            {"id": "province.3855330187", "name": "Arkansas", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ]
-    ]},
-    {"query": ["houston"], "attribution": {"mapbox-places": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"}, "results": [
-        [
-            {"id": "mapbox-places.77002", "bounds": [-95.72045898294519, 29.52891526120573, -95.06120101856504, 30.04036964534467], "lon": -95.436742, "lat": 29.784969, "name": "Houston", "type": "city"},
-            {"id": "province.1000418602", "name": "Texas", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.38851", "bounds": [-89.13825298311654, 33.79659653948, -88.79161411435722, 34.045110442750946], "lon": -88.976638, "lat": 33.920944, "name": "Houston", "type": "city"},
-            {"id": "province.788686416", "name": "Mississippi", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.55943", "bounds": [-91.73075598293974, 43.630618500142205, -91.39292801812475, 43.93374746914107], "lon": -91.553669, "lat": 43.782375, "name": "Houston", "type": "city"},
-            {"id": "province.4222030107", "name": "Minnesota", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.65483", "bounds": [-92.08846697978329, 37.2050039768753, -91.84117801818292, 37.42995600752302], "lon": -91.92426, "lat": 37.317564, "name": "Houston", "type": "city"},
-            {"id": "province.3294535744", "name": "Missouri", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ],
-        [
-            {"id": "mapbox-places.35572", "bounds": [-87.39912489784082, 34.06685573423012, -87.20429004798204, 34.300837420778116], "lon": -87.264654, "lat": 34.183928, "name": "Houston", "type": "city"},
-            {"id": "province.2667756795", "name": "Alabama", "type": "province"},
-            {"id": "country.4150104525", "name": "United States", "type": "country"}
-        ]
-    ]}
+    {"type": "FeatureCollection", "query": ["austin"], "features": [
+        {"id": "city.78701", "type": "Feature", "text": "Austin", "place_name": "Austin, 78746, Texas, United States", "relevance": 1, "center": [-97.804206, 30.278855], "geometry": {"type": "Point", "coordinates": [-97.804206, 30.278855]}, "bbox": [-98.0261839514054, 30.067858231996137, -97.54154705019376, 30.489398740397657], "properties": {"title": "Austin"}, "context": [
+            {"id": "postcode.2467801073", "text": "78746"},
+            {"id": "province.1000418602", "text": "Texas"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.89310", "type": "Feature", "text": "Austin", "place_name": "Austin, 89310, Nevada, United States", "relevance": 1, "center": [-117.227194, 39.313976], "geometry": {"type": "Point", "coordinates": [-117.227194, 39.313976]}, "bbox": [-117.80679434924265, 38.62246699510231, -116.59003701731739, 39.99871687910863], "properties": {"title": "Austin"}, "context": [
+            {"id": "postcode.766922274", "text": "89310"},
+            {"id": "province.2975076950", "text": "Nevada"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.16720", "type": "Feature", "text": "Austin", "place_name": "Austin, 16720, Pennsylvania, United States", "relevance": 1, "center": [-77.988041, 41.567676], "geometry": {"type": "Point", "coordinates": [-77.988041, 41.567676]}, "bbox": [-78.36877489826804, 41.3983272617798, -77.82614701689207, 41.73658270221914], "properties": {"title": "Austin"}, "context": [
+            {"id": "postcode.3722401805", "text": "16720"},
+            {"id": "province.2184819983", "text": "Pennsylvania"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.55912", "type": "Feature", "text": "Austin", "place_name": "Austin, 55912, Minnesota, United States", "relevance": 1, "center": [-92.929212, 43.674029], "geometry": {"type": "Point", "coordinates": [-92.929212, 43.674029]}, "bbox": [-93.16910498309949, 43.526714505771395, -92.7681080168472, 43.82098238181999], "properties": {"title": "Austin"}, "context": [
+            {"id": "postcode.1761474448", "text": "55912"},
+            {"id": "province.4222030107", "text": "Minnesota"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.72007", "type": "Feature", "text": "Austin", "place_name": "Austin, 72007, Arkansas, United States", "relevance": 1, "center": [-92.004189, 35.036604], "geometry": {"type": "Point", "coordinates": [-92.004189, 35.036604]}, "bbox": [-92.12039497936945, 34.90795563316439, -91.83894201687612, 35.07632430322719], "properties": {"title": "Austin"}, "context": [
+            {"id": "postcode.1093362577", "text": "72007"},
+            {"id": "province.3855330187", "text": "Arkansas"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]}
+    ], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"},
+    {"type": "FeatureCollection", "query": ["houston"], "features": [
+        {"id": "city.77002", "type": "Feature", "text": "Houston", "place_name": "Houston, 77008, Texas, United States", "relevance": 1, "center": [-95.436742, 29.784969], "geometry": {"type": "Point", "coordinates": [-95.436742, 29.784969]}, "bbox": [-95.72045898294519, 29.52891526120573, -95.06120101856504, 30.04036964534467], "properties": {"title": "Houston"}, "context": [
+            {"id": "postcode.2533555017", "text": "77008"},
+            {"id": "province.1000418602", "text": "Texas"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.38851", "type": "Feature", "text": "Houston", "place_name": "Houston, 38851, Mississippi, United States", "relevance": 1, "center": [-88.976638, 33.920944], "geometry": {"type": "Point", "coordinates": [-88.976638, 33.920944]}, "bbox": [-89.13825298311654, 33.79659653948, -88.79161411435722, 34.045110442750946], "properties": {"title": "Houston"}, "context": [
+            {"id": "postcode.534502665", "text": "38851"},
+            {"id": "province.788686416", "text": "Mississippi"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.55943", "type": "Feature", "text": "Houston", "place_name": "Houston, 55943, Minnesota, United States", "relevance": 1, "center": [-91.553669, 43.782375], "geometry": {"type": "Point", "coordinates": [-91.553669, 43.782375]}, "bbox": [-91.73075598293974, 43.630618500142205, -91.39292801812475, 43.93374746914107], "properties": {"title": "Houston"}, "context": [
+            {"id": "postcode.3730302102", "text": "55943"},
+            {"id": "province.4222030107", "text": "Minnesota"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.65483", "type": "Feature", "text": "Houston", "place_name": "Houston, 65483, Missouri, United States", "relevance": 1, "center": [-91.92426, 37.317564], "geometry": {"type": "Point", "coordinates": [-91.92426, 37.317564]}, "bbox": [-92.08846697978329, 37.2050039768753, -91.84117801818292, 37.42995600752302], "properties": {"title": "Houston"}, "context": [
+            {"id": "postcode.610362344", "text": "65483"},
+            {"id": "province.3294535744", "text": "Missouri"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]},
+        {"id": "city.35572", "type": "Feature", "text": "Houston", "place_name": "Houston, 35572, Alabama, United States", "relevance": 1, "center": [-87.264654, 34.183928], "geometry": {"type": "Point", "coordinates": [-87.264654, 34.183928]}, "bbox": [-87.39912489784082, 34.06685573423012, -87.20429004798204, 34.300837420778116], "properties": {"title": "Houston"}, "context": [
+            {"id": "postcode.1726559867", "text": "35572"},
+            {"id": "province.2667756795", "text": "Alabama"},
+            {"id": "country.4150104525", "text": "United States"}
+        ]}
+    ], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"}
 ];
 
-helpers.geocoderReverse = {
-    "query":[-97.7,30.3],
-    "results":[[{
-        "bounds":[-97.9383829999999,30.098659,-97.5614889999999,30.516863],
-        "lat":30.3071816,
-        "lon":-97.7559964,
-        "name":"Austin",
-        "score":600000790107194.8,
-        "type":"city",
-        "id":"mapbox-places.4201"
-    }]],"attribution":{"mapbox-places":"<a href='http://mapbox.com/about/maps' target='_blank'>Terms & Feedback</a>"}};
+helpers.geocoderReverse = {"type": "FeatureCollection", "query": [-97.7, 30.3], "features": [
+    {"id": "city.78701", "type": "Feature", "text": "Austin", "place_name": "Austin, 78723, Texas, United States", "relevance": 1, "center": [-97.804206, 30.278855], "geometry": {"type": "Point", "coordinates": [-97.804206, 30.278855]}, "bbox": [-98.0261839514054, 30.067858231996137, -97.54154705019376, 30.489398740397657], "properties": {"title": "Austin"}, "context": [
+        {"id": "postcode.497942221", "text": "78723"},
+        {"id": "province.1000418602", "text": "Texas"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "postcode.497942221", "type": "Feature", "text": "78723", "place_name": "78723, Texas, United States", "relevance": 1, "center": [-97.685712, 30.304148], "geometry": {"type": "Point", "coordinates": [-97.685712, 30.304148]}, "bbox": [-97.71207800000002, 30.282571999999977, -97.66096600000002, 30.325720000000018], "properties": {"title": "78723"}, "context": [
+        {"id": "province.1000418602", "text": "Texas"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "province.1000418602", "type": "Feature", "text": "Texas", "place_name": "Texas, United States", "relevance": 1, "center": [-99.810431, 31.319656], "geometry": {"type": "Point", "coordinates": [-99.810431, 31.319656]}, "bbox": [-106.645646, 25.83716399999999, -93.508039, 36.50070399999999], "properties": {"title": "Texas"}, "context": [
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "country.4150104525", "type": "Feature", "text": "United States", "place_name": "United States", "relevance": 1, "center": [-99.041505, 37.940711], "geometry": {"type": "Point", "coordinates": [-99.041505, 37.940711]}, "bbox": [-179.23108600000003, 18.865459999999985, 179.85968099999997, 71.441059], "properties": {"title": "United States"}}
+], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"};
 
 helpers.tileJSON = {
     "attribution":"Data provided by NatureServe in collaboration with Robert Ridgely",

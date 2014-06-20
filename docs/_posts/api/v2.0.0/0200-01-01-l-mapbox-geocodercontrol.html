@@ -101,26 +101,26 @@ This function is currently in private beta: <a href="https://mapbox.com/contact/
 <table>
 <thead>
 <tr>
-<th>Options</th>
-<th>Value</th>
+<th>Event</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>event</td>
-<td>string</td>
-<td><ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from Mapbox.</li></ul></td>
+<td>found</td>
+<td>Success in finding a location. The event&#39;s <code>results</code> property contains the raw results.</td>
 </tr>
 <tr>
-<td>event</td>
-<td>string</td>
-<td><ul><li><code>select</code>: fired when the user selects a location from a list of options returned from a geocoding request. The geocoding data is attached to the <code>data</code> property of the event.</td>
+<td>error</td>
+<td>Failure to find a location. The event&#39;s <code>error</code> property contains the raw HTTP error.</td>
 </tr>
 <tr>
-<td>event</td>
-<td>string</td>
-<td><ul><li><code>autoselect</code>: fired when the geocoder control automatically chooses the first result of a query that returns only one result, and repositions the map accordingly. The geocoding data is attached to the <code>data</code> property of the event.</td>
+<td>select</td>
+<td>Fired when the user selects a location from a list of options returned from a geocoding request. The event&#39;s <code>feature</code> property contains the selected GeoJSON Feature.</td>
+</tr>
+<tr>
+<td>autoselect</td>
+<td>Fired when the control automatically selects the first result of a query that returns only one result, and repositions the map accordingly. The event&#39;s <code>feature</code> property contains the selected GeoJSON feature.</td>
 </tr>
 </tbody>
 </table>

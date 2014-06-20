@@ -19,6 +19,11 @@ instead. For example, replace</p>
 </code></pre><p>with</p>
 <pre><code>map.featureLayer.setFilter(function(f) { ... });
 </code></pre></li>
+<li><p>The format for <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> results have changed.
+Results are now provided in GeoJSON format. If your code uses <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> or
+the <code>found</code>, <code>select</code>, or <code>autoselect</code> events from <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code>, it may
+need to be updated to expect the format documented in those classes.</p>
+</li>
 <li><p><code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-http_urls">L.mapbox.config.HTTP_URLS</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-https_urls">L.mapbox.config.HTTPS_URLS</a></code> have been replaced
 with <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-https_url">L.mapbox.config.HTTPS_URL</a></code>, which expect to
 be assigned a single URL rather than an array of URLs. For example, replace</p>

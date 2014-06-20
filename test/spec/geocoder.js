@@ -41,7 +41,8 @@ describe('L.mapbox.geocoder', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
 
             g.query('austin', function(err, res) {
-                expect(res.latlng).to.be.near({ lat: 30.3, lng: -97.7 }, 1e-1);
+                expect(res.latlng).to.be.near({ lat: 30.2, lng: -97.8 }, 1e-1);
+                expect(res.results).to.eql(helpers.geocoderAustin);
                 done();
             });
 
