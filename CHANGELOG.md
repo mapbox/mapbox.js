@@ -1,3 +1,7 @@
+## v2.0.0-beta1
+
+* Adapt to v4 geocoder response format
+
 ## v2.0.0-beta0
 
 * A Mapbox API token is now required
