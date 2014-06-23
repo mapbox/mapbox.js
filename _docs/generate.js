@@ -203,8 +203,8 @@ function readDocumentation(filename) {
                 file: argv.d + '/0200-01-01-' + escapedText + '.html',
                 contents: header.replace('All', main) +
                     'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n{% raw %}' +
-                    html.replace('id="map"', '') + '{% endraw %}'
+                    'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n' +
+                    html.replace('id="map"', '')
             });
         });
 
@@ -219,11 +219,8 @@ landOutput.write('---\n');
 landOutput.write('{% include api.introduction.html %}\n');
 
 output.write("---\n");
-output.write("{% raw %}\n");
 output.write(all + '\n');
-output.write("{% endraw %}");
 
 writes.forEach(function(w) {
     fs.writeFileSync(w.file, w.contents);
 });
-
