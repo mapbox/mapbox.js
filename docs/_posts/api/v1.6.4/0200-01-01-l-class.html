@@ -12,12 +12,12 @@ permalink: /api/v1.6.4/l-class
 
 <pre><code>var MyClass = L.Class.extend({
 	initialize: function (greeter) {
-		this.greeter = greeter;
-		// class constructor
+this.greeter = greeter;
+// class constructor
 	},
 
 	greet: function (name) {
-		alert(this.greeter + ', ' + name)
+alert(this.greeter + ', ' + name)
 	}
 });
 
@@ -62,11 +62,11 @@ a instanceof MyClass; // true
 
 <pre><code>var MyChildClass = MyClass.extend({
 	initialize: function () {
-		MyClass.prototype.initialize.call("Yo");
+MyClass.prototype.initialize.call("Yo");
 	},
 
 	greet: function (name) {
-		MyClass.prototype.greet.call(this, 'bro ' + name + '!');
+MyClass.prototype.greet.call(this, 'bro ' + name + '!');
 	}
 });
 
@@ -79,15 +79,15 @@ a.greet('Jason'); // alerts "Yo, bro Jason!"</code></pre>
 
 <pre><code>var MyClass = L.Class.extend({
 	options: {
-		myOption1: 'foo',
-		myOption2: 'bar'
+myOption1: 'foo',
+myOption2: 'bar'
 	}
 });
 
 var MyChildClass = L.Class.extend({
 	options: {
-		myOption1: 'baz',
-		myOption3: 5
+myOption1: 'baz',
+myOption3: 5
 	}
 });
 
@@ -100,13 +100,13 @@ a.options.myOption3; // 5</code></pre>
 
 <pre><code>var MyClass = L.Class.extend({
 	options: {
-		foo: 'bar',
-		bla: 5
+foo: 'bar',
+bla: 5
 	},
 
 	initialize: function (options) {
-		L.Util.setOptions(this, options);
-		...
+L.Util.setOptions(this, options);
+...
 	}
 });
 
@@ -139,8 +139,8 @@ a.foo();</code></pre>
 
 <pre><code>var MyClass = L.Class.extend({
 	statics: {
-		FOO: 'bar',
-		BLA: 5
+FOO: 'bar',
+BLA: 5
 	}
 });
 

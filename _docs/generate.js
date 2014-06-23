@@ -123,11 +123,14 @@ function readDocumentation(filename) {
                 nav += '    - title: ' + c.name + '\n';
                 nav += '      id: ' + c.id + '\n';
             }
+
+            // remove extra tabs: https://github.com/mapbox/mapbox.js/issues/804
+            c.text = c.text.join('\n').replace(/\t{2,}/g, '');
+
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' +
-                    c.text.join('\n')
+                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' + c.text
             });
         });
     } else {
