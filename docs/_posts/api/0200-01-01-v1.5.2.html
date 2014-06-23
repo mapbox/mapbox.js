@@ -74,7 +74,7 @@ navigation:
     nav:
 
 ---
-{% raw %}
+
 <div></div><h1 id="section-map">Map</h1>
 <div class="space-bottom api-group-content depth-1"></div><h2 id="L.mapbox.map">L.mapbox.map<span class="bracket">(</span><span class="args">element, id|url|tilejson, options</span><span class="bracket">)</span></h2>
 <div class="space-bottom api-group-content depth-2"><p>Create and automatically configure a map with layers, markers, and
@@ -97,7 +97,7 @@ interactivity.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li></ul></td>
+<td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -136,7 +136,7 @@ interface to layers from Mapbox and elsewhere.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -151,7 +151,7 @@ interface to layers from Mapbox and elsewhere.</p>
 var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
 
 // you can also provide a full url to a TileJSON resource
-var layer = L.mapbox.tileLayer(&#39;http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json&#39;);
+var layer = L.mapbox.tileLayer(&#39;{{site.tileapi}}/v3/examples.map-0l53fhk2.json&#39;);
 
 // if provided, you can support retina tiles
 var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
@@ -224,7 +224,7 @@ interactivity into your map, which you can easily access with <code>L.mapbox.gri
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -285,7 +285,7 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -439,7 +439,7 @@ markerLayer.setGeoJSON({
 <tr>
 <td>id <em>or</em> url</td>
 <td>string</td>
-<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li></ul></td>
+<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -693,7 +693,7 @@ This function is currently in private beta: <a href='http://mapbox.com/about/con
 <tr>
 <td>id <em>or</em> url (<em>required</em>)</td>
 <td>string</td>
-<td>Either a <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li></ul></td>
+<td>Either a <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -797,7 +797,7 @@ This function is currently in private beta: <a href='http://mapbox.com/about/con
 <tr>
 <td>id <em>or</em> url <em>optional</em></td>
 <td>string</td>
-<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code><a href="https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json">https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</a></code> If not supplied, the TileJSON from the map is used.</li></ul></td>
+<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code><a href="{{site.tileapi}}/v3/examples.map-0l53fhk2.json">{{site.tileapi}}/v3/examples.map-0l53fhk2.json</a></code> If not supplied, the TileJSON from the map is used.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -909,7 +909,7 @@ features.</p>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var output = L.mapbox.template(&#39;Name: {{name}}&#39;, {name: &#39;John&#39;});
+<pre><code>var output = L.mapbox.template(&#39;Name: {% raw %}{{name}}{% endraw %}&#39;, {name: &#39;John&#39;});
 // output is &quot;Name: John&quot;</code></pre>
 </div><h1 id="section-mobile">Mobile</h1>
 <div class="space-bottom api-group-content depth-1"><p>Mapbox.js is optimized for mobile devices and small screens by default.
@@ -949,4 +949,4 @@ is available by applying <code>class=&quot;dark&quot;</code> to the map div.</p>
 <p><em>Example</em>:</p>
 <pre><code>&lt;div id=&quot;map&quot; class=&quot;dark&quot;&gt;&lt;/div&gt;</code></pre>
 </div>
-{% endraw %}
+

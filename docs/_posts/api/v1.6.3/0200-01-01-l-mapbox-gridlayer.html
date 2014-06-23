@@ -5,7 +5,7 @@ categories: api
 version: v1.6.3
 permalink: /api/v1.6.3/l-mapbox-gridlayer
 ---
-{% raw %}<h2 id="section-l-mapbox-gridlayer">L.mapbox.gridLayer(id|url|tilejson, options)</h2>
+<h2 id="section-l-mapbox-gridlayer">L.mapbox.gridLayer(id|url|tilejson, options)</h2>
 <p>An <code><a href="/mapbox.js/api/v1.6.3/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> loads <a href="http://mapbox.com/developers/utfgrid/">UTFGrid</a> tiles of
 interactivity into your map, which you can easily access with <code><a href="/mapbox.js/api/v1.6.3/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code>.</p>
 <table>
@@ -20,7 +20,7 @@ interactivity into your map, which you can easily access with <code><a href="/ma
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -112,4 +112,4 @@ function with that data, if any.</p>
 </tbody>
 </table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>
-{% endraw %}
+

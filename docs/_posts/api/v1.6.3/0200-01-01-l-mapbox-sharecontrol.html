@@ -5,7 +5,7 @@ categories: api
 version: v1.6.3
 permalink: /api/v1.6.3/l-mapbox-sharecontrol
 ---
-{% raw %}<h2 id="section-l-mapbox-sharecontrol">L.mapbox.shareControl(id|url, options)</h2>
+<h2 id="section-l-mapbox-sharecontrol">L.mapbox.shareControl(id|url, options)</h2>
 <p>Adds a &quot;Share&quot; button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.</p>
 <p><span class='leaflet'><em>Extends</em>: <code><a href="/mapbox.js/api/v1.6.3/l-control">L.Control</a></code></span></p>
 <table>
@@ -20,7 +20,7 @@ permalink: /api/v1.6.3/l-mapbox-sharecontrol
 <tr>
 <td>id <em>or</em> url <em>optional</em></td>
 <td>string</td>
-<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code><a href="https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json">https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</a></code> If not supplied, the TileJSON from the map is used.</li></ul></td>
+<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code><a href="{{site.tileapi}}/v3/examples.map-0l53fhk2.json">{{site.tileapi}}/v3/examples.map-0l53fhk2.json</a></code> If not supplied, the TileJSON from the map is used.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -35,4 +35,4 @@ permalink: /api/v1.6.3/l-mapbox-sharecontrol
     .addControl(L.mapbox.shareControl());
 </code></pre><p><em>Returns</em>:
 Returns a <code><a href="/mapbox.js/api/v1.6.3/l-mapbox-sharecontrol">L.mapbox.shareControl</a></code> object.</p>
-{% endraw %}
+

@@ -5,7 +5,7 @@ categories: api
 version: v1.6.1
 permalink: /api/v1.6.1/l-mapbox-template
 ---
-{% raw %}<h2 id="section-l-mapbox-template">L.mapbox.template(template, data)</h2>
+<h2 id="section-l-mapbox-template">L.mapbox.template(template, data)</h2>
 <p>A <a href="http://mustache.github.io/">mustache</a> template rendering function, as used by the templating feature provided by <code><a href="/mapbox.js/api/v1.6.1/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code>.</p>
 <table>
 <thead>
@@ -29,6 +29,6 @@ permalink: /api/v1.6.1/l-mapbox-template
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var output = L.mapbox.template(&#39;Name: {{name}}&#39;, {name: &#39;John&#39;});
+<pre><code>var output = L.mapbox.template(&#39;Name: {% raw %}{{name}}{% endraw %}&#39;, {name: &#39;John&#39;});
 // output is &quot;Name: John&quot;
-</code></pre>{% endraw %}
+</code></pre>

@@ -10,7 +10,7 @@ interactivity.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | element (_required_) | string | Must be the id of an element, or a DOM element reference. |
-| id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](https://www.mapbox.com/developers/tilejson/) object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](https://www.mapbox.com/developers/tilejson/) object, from your own Javascript code</li></ul> |
 | options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.mapbox.featureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.featureLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `true` to enable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `true` to enable the `L.mapbox.infoControl`.</li> |
 
 _Example_:
@@ -45,7 +45,7 @@ interface to layers from Mapbox and elsewhere.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
 | options | object | The second argument is optional. If provided, it is the same options as provided to `L.TileLayer` with one addition: <ul><li>`retinaVersion`, if provided, is an alternative value for the first argument to `L.mapbox.tileLayer` which, if retina is detected, is used instead.</li></ul>
 
 If `detectRetina` is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don't provide an explicit `retinaVersion` to be used.
@@ -56,7 +56,7 @@ _Example_:
     var layer = L.mapbox.tileLayer('examples.map-20v6611k');
 
     // you can also provide a full url to a TileJSON resource
-    var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json');
+    var layer = L.mapbox.tileLayer('{{site.tileapi}}/v3/examples.map-0l53fhk2.json');
 
     // if provided, you can support retina tiles
     var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
@@ -121,7 +121,7 @@ interactivity into your map, which you can easily access with `L.mapbox.gridCont
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
 
 _Example_:
 
@@ -205,7 +205,7 @@ from Mapbox and elsewhere into your map.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
+| id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
 | options | object | If provided, it is the same options as provided to `L.FeatureGroup`, as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
 
 _Example_:
@@ -333,7 +333,7 @@ A low-level interface to geocoding, useful for more complex uses and reverse-geo
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url | string | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li></ul> |
+| id _or_ url | string | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li></ul> |
 
 _Returns_ a `L.mapbox.geocoder` object.
 
@@ -493,7 +493,7 @@ This function is currently in private beta: [Contact Mapbox](https://mapbox.com/
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url (_required_) | string | Either a <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json`</li></ul> |
+| id _or_ url (_required_) | string | Either a <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li></ul> |
 | options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li></ul> |
 
 _Example_:
@@ -553,7 +553,7 @@ Adds a "Share" button to the map, which can be used to share the map to Twitter 
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _optional_ | string | Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>https://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul> |
+| id _or_ url _optional_ | string | Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul> |
 | options | object | Options for L.Control</span> Also accepts the following options:<ul><li>url: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li></ul> |
 
 _Example_:
@@ -653,7 +653,7 @@ A [mustache](http://mustache.github.io/) template rendering function, as used by
 
 _Example_:
 
-    var output = L.mapbox.template('Name: {{name}}', {name: 'John'});
+    var output = L.mapbox.template('Name: {% raw %}{{name}}{% endraw %}', {name: 'John'});
     // output is "Name: John"
 
 # Configuration
@@ -734,4 +734,3 @@ is available by applying `class="dark"` to the map div.
 _Example_:
 
     <div id="map" class="dark"></div>
-

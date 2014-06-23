@@ -68,11 +68,11 @@ maps and services.</p>
 <div id="content-MapBox.js & Leaflet"class="depth-2"><p>Here&#39;s a simple page that you can set up with MapBox.js:</p>
 <pre><code>&lt;html&gt;
 &lt;head&gt;
-  &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.css&#39; rel=&#39;stylesheet&#39; /&gt;
+  &lt;link href=&#39;{{site.tileapi}}/mapbox.js/v1.0.4/mapbox.css&#39; rel=&#39;stylesheet&#39; /&gt;
   &lt;!--[if lte IE 8]&gt;
-    &lt;link href=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.ie.css&#39; rel=&#39;stylesheet&#39; /&gt;
+    &lt;link href=&#39;{{site.tileapi}}/mapbox.js/v1.0.4/mapbox.ie.css&#39; rel=&#39;stylesheet&#39; /&gt;
   &lt;![endif]--&gt;
-  &lt;script src=&#39;http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.js&#39;&gt;&lt;/script&gt;
+  &lt;script src=&#39;{{site.tileapi}}/mapbox.js/v1.0.4/mapbox.js&#39;&gt;&lt;/script&gt;
   &lt;style&gt;
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -164,7 +164,7 @@ reference.</p>
 <p>The second argument is optional and can be:</p>
 <ul>
 <li>A map <code>id</code> string <code>examples.map-foo</code></li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li>
 </ul>
 <p>The third argument is optional. If provided, it is the same options
@@ -202,7 +202,7 @@ interface to layers from MapBox and elsewhere.</p>
 <p>The first argument is required and must be:</p>
 <ul>
 <li>An <code>id</code> string <code>examples.map-foo</code></li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A TileJSON object, from your own Javascript code</li>
 </ul>
 <p>The second argument is optional. If provided, it is the same options
@@ -217,7 +217,7 @@ to <code>L.mapbox.tileLayer</code> which, if retina is detected, is used instead
 var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
 
 // you can also provide a full url to a tilejson resource
-var layer = L.mapbox.tileLayer(&#39;http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json&#39;);
+var layer = L.mapbox.tileLayer(&#39;{{site.tileapi}}/v3/examples.map-0l53fhk2.json&#39;);
 
 // if provided,you can support retina tiles
 var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
@@ -261,7 +261,7 @@ interactivity into your map, which you can easily access with <code>L.mapbox.gri
 <p>The first argument is required and must be:</p>
 <ul>
 <li>An <code>id</code> string <code>examples.map-foo</code></li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A TileJSON object, from your own Javascript code</li>
 </ul>
 <p><em>Example</em>:</p>
@@ -300,7 +300,7 @@ from MapBox and elsewhere into your map.</p>
 </li>
 <li><p>An <code>id</code> string <code>examples.map-foo</code></p>
 </li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A GeoJSON object, from your own Javascript code</li>
 </ol>
 <p>The second argument is optional. If provided, it is the same options
@@ -409,7 +409,7 @@ reverse geocoding.</p>
 </li>
 <li><p>An <code>id</code> string <code>examples.map-foo</code></p>
 </li>
-<li>A URL <code>string</code> that points to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL <code>string</code> that points to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 </ol>
 <p><em>Returns</em> a <code>L.mapbox.geocoder</code> object.</p>
 </div><h3 id="geocoder.query">geocoder.query<span class="bracket">(</span><span class="args">queryString: string, callback: function</span><span class="bracket">)</span></h3>
@@ -510,7 +510,7 @@ the <a href="http://mapbox.com/developers/api/#geocoding">MapBox Geocoding API</
 </li>
 <li><p>An <code>id</code> string <code>examples.map-foo</code></p>
 </li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 </ol>
 <p><em>Example</em></p>
 <pre><code>var map = L.map(&#39;map&#39;)
