@@ -53,8 +53,8 @@ L.mapbox.map('map', 'username.mapid');
   </div>
   <div class='pad1'>
     <div class='space-bottom1'>{% highlight html %}
-<script src='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />{% endhighlight html %}
+<script src='{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
+<link href='{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />{% endhighlight html %}
     </div>
     <div class='pad1x small quiet'>
     Include mapbox.js and CSS in your HTML header and call <code>L.mapbox.map('map', '{{site.defaultid}}')</code> to load your first map. <a class='truncate rcon next' href='{{site.baseurl}}/example/v1.0.0/'>View simple example</a>
@@ -107,4 +107,3 @@ $(function load() {
 #example-snippet .highlight { width:200%; }
 .highlight pre { background-color:#f8f8f8; }
 </style>
-
