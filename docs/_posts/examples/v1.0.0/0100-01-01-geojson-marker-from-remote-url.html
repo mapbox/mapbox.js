@@ -26,6 +26,9 @@ function load() {
     headers: {
       'Accept': 'application/vnd.github.v3.raw'
     },
+    xhrFields: {
+      withCredentials: false
+    },
     dataType: 'json',
     url: url,
     success: function(geojson) {
