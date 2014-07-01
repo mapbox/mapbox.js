@@ -939,7 +939,7 @@ auto-instantiate many of its features.
 </p>
 <ul>
 <li><code>url</code> can be either be a full URL to a TileJSON file, like
-<code>http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp</code>, or a bare id, like
+<code>{{site.tileapi}}/v3/tmcw.map-hehqnmda.jsonp</code>, or a bare id, like
 <code>tmcw.map-hehqnmda</code>, which will get expanded to the former. This can also
 accept an array of urls in the same format.</li>
 <li><p><code>callback</code> must be a function that receives either a single object with details
@@ -986,7 +986,7 @@ mapbox.load(&#39;tmcw.map-hehqnmda&#39;, function(o) {
 </p>
 <pre><code>&lt;div id=&#39;map&#39; style=&#39;width:500px;height:400px;&#39;&gt;&lt;/div&gt;
 &lt;script&gt;
-mapbox.auto(&#39;map&#39;, &#39;http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp&#39;);
+mapbox.auto(&#39;map&#39;, &#39;{{site.tileapi}}/v3/tmcw.map-hehqnmda.jsonp&#39;);
 &lt;/script&gt;</code></pre>
 </div><h1>Layer</h1>
 <div id="content-mapbox.auto"class="depth-1"><p><code>mapbox.layer</code> is a fast way to add layers to your map without having to deal with complex configuration.
@@ -1055,7 +1055,7 @@ TileJSON information has been asynchronously loaded.</li>
 <p><strong>Example:</strong>
 
 </p>
-<pre><code>var layer = mapbox.layer().url(&#39;http://a.tiles.mapbox.com/v3/tmcw.map-hehqnmda.jsonp&#39;);</code></pre>
+<pre><code>var layer = mapbox.layer().url(&#39;{{site.tileapi}}/v3/tmcw.map-hehqnmda.jsonp&#39;);</code></pre>
 </div><h3 id="layer.tilejson">layer.tilejson<span class="bracket">(</span><span class="args">[tilejson]</span><span class="bracket">)</span></h3>
 <div id="content-layer.tilejson"class="depth-3"><p>Set layer options directly from a <a href="https://github.com/mapbox/tilejson-spec">TileJSON</a> object.
 

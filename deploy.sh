@@ -6,7 +6,7 @@ if [ -z $TAG ]; then
     exit;
 fi
 
-existing=`s3cmd ls s3://mapbox-js/mapbox.js/$TAG/`
+existing=`aws s3 ls s3://mapbox-js/mapbox.js/$TAG/`
 
 if [ "$existing" != "" ]; then
     echo "will not overwrite $TAG"
@@ -19,25 +19,21 @@ echo "--- DEPLOYING mapbox.js $TAG ---"
 echo ""
 echo ""
 
-s3cmd put --acl-public --mime-type "application/javascript" dist/mapbox.js s3://mapbox-js/mapbox.js/$TAG/mapbox.js
-s3cmd put --acl-public --mime-type "application/javascript" dist/mapbox.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.uncompressed.js
-s3cmd put --acl-public --mime-type "application/javascript" dist/mapbox.standalone.js s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.js
-s3cmd put --acl-public --mime-type "application/javascript" dist/mapbox.standalone.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.uncompressed.js
-
-s3cmd put --acl-public --mime-type "text/css" dist/mapbox.css s3://mapbox-js/mapbox.js/$TAG/mapbox.css
-s3cmd put --acl-public --mime-type "text/css" dist/mapbox.standalone.css s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.css
-
-s3cmd put --acl-public --mime-type "image/png" dist/images/layers.png s3://mapbox-js/mapbox.js/$TAG/images/layers.png
-s3cmd put --acl-public --mime-type "image/png" dist/images/layers-2x.png s3://mapbox-js/mapbox.js/$TAG/images/layers-2x.png
-
-s3cmd put --acl-public --mime-type "image/png" dist/images/marker-icon.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon.png
-s3cmd put --acl-public --mime-type "image/png" dist/images/marker-icon-2x.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon-2x.png
-s3cmd put --acl-public --mime-type "image/png" dist/images/marker-shadow.png s3://mapbox-js/mapbox.js/$TAG/images/marker-shadow.png
-
-s3cmd put --acl-public --mime-type "image/png" dist/images/icons-000000.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000.png
-s3cmd put --acl-public --mime-type "image/png" dist/images/icons-000000@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000@2x.png
-s3cmd put --acl-public --mime-type "image/png" dist/images/icons-ffffff.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff.png
-s3cmd put --acl-public --mime-type "image/png" dist/images/icons-ffffff@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff@2x.png
+aws s3 cp --acl=public-read dist/mapbox.js s3://mapbox-js/mapbox.js/$TAG/mapbox.js
+aws s3 cp --acl=public-read dist/mapbox.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.uncompressed.js
+aws s3 cp --acl=public-read dist/mapbox.standalone.js s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.js
+aws s3 cp --acl=public-read dist/mapbox.standalone.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.uncompressed.js
+aws s3 cp --acl=public-read dist/mapbox.css s3://mapbox-js/mapbox.js/$TAG/mapbox.css
+aws s3 cp --acl=public-read dist/mapbox.standalone.css s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.css
+aws s3 cp --acl=public-read dist/images/layers.png s3://mapbox-js/mapbox.js/$TAG/images/layers.png
+aws s3 cp --acl=public-read dist/images/layers-2x.png s3://mapbox-js/mapbox.js/$TAG/images/layers-2x.png
+aws s3 cp --acl=public-read dist/images/marker-icon.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon.png
+aws s3 cp --acl=public-read dist/images/marker-icon-2x.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon-2x.png
+aws s3 cp --acl=public-read dist/images/marker-shadow.png s3://mapbox-js/mapbox.js/$TAG/images/marker-shadow.png
+aws s3 cp --acl=public-read dist/images/icons-000000.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000.png
+aws s3 cp --acl=public-read dist/images/icons-000000@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000@2x.png
+aws s3 cp --acl=public-read dist/images/icons-ffffff.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff.png
+aws s3 cp --acl=public-read dist/images/icons-ffffff@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff@2x.png
 
 echo ""
 echo ""

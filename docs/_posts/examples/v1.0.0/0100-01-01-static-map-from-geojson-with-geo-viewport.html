@@ -9,8 +9,8 @@ tags:
 ---
 <img id='static-map'></div>
 
-<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/geo-viewport/v0.1.1/geo-viewport.js'></script>
-<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/geojson-extent/v0.0.1/geojson-extent.js'></script>
+<script src='{{site.tileapi}}/mapbox.js/plugins/geo-viewport/v0.1.1/geo-viewport.js'></script>
+<script src='{{site.tileapi}}/mapbox.js/plugins/geojson-extent/v0.0.1/geojson-extent.js'></script>
 <script>
 
 // This is an example using geojson-extent. See the full docs for full details
@@ -63,7 +63,7 @@ for (var i = 0; i < sfAndDc.features.length; i++) {
 // Construct a static map url
 // https://www.mapbox.com/developers/api/static/
 document.getElementById('static-map').src =
-    'https://api.tiles.mapbox.com/v3/examples.map-i86nkdio/' +
+    '{{site.tileapi}}/v3/examples.map-i86nkdio/' +
     pins.join(',') + '/' +
     vp.center.join(',') + ',' +
     vp.zoom + '/' +

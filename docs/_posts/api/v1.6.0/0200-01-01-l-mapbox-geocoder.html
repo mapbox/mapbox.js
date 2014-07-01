@@ -5,7 +5,7 @@ categories: api
 version: v1.6.0
 permalink: /api/v1.6.0/l-mapbox-geocoder
 ---
-{% raw %}<h2 id="section-l-mapbox-geocoder">L.mapbox.geocoder(id|url)</h2>
+<h2 id="section-l-mapbox-geocoder">L.mapbox.geocoder(id|url)</h2>
 <p>A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.</p>
 <table>
 <thead>
@@ -19,7 +19,7 @@ permalink: /api/v1.6.0/l-mapbox-geocoder
 <tr>
 <td>id <em>or</em> url</td>
 <td>string</td>
-<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li></ul></td>
+<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -84,4 +84,4 @@ permalink: /api/v1.6.0/l-mapbox-geocoder
 </tbody>
 </table>
 <p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
-{% endraw %}
+

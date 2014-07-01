@@ -5,7 +5,7 @@ categories: api
 version: v1.6.0
 permalink: /api/v1.6.0/l-mapbox-markerlayer
 ---
-{% raw %}<h2 id="section-l-mapbox-markerlayer">L.mapbox.markerLayer(id|url|tilejson, options)</h2>
+<h2 id="section-l-mapbox-markerlayer">L.mapbox.markerLayer(id|url|tilejson, options)</h2>
 <p><code><a href="/mapbox.js/api/v1.6.0/l-mapbox-markerlayer">L.mapbox.markerLayer</a></code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
 from Mapbox and elsewhere into your map.</p>
 <table>
@@ -20,7 +20,7 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -159,4 +159,4 @@ markerLayer.setGeoJSON({
 <h3 id="section-markerlayer-getgeojson">markerLayer.getGeoJSON()</h3>
 <p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>
-{% endraw %}
+

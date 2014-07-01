@@ -13,51 +13,51 @@ permalink: /api/v1.6.4/l-icrs
 
 <table data-id='icrs'>
 	<tr>
-		<th>Method</th>
-		<th>Returns</th>
-		<th>Description</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
 	</tr>
 	<tr>
-		<td><code><b>latLngToPoint</b>(
-			<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-latlng">LatLng</a>&gt; <i>latlng</i></nobr>,
-			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
-		</code></td>
+<td><code><b>latLngToPoint</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-latlng">LatLng</a>&gt; <i>latlng</i></nobr>,
+<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+</code></td>
 
-		<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
-		<td>Projects geographical coordinates on a given zoom into pixel coordinates.</td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
+<td>Projects geographical coordinates on a given zoom into pixel coordinates.</td>
 	</tr>
 	<tr>
-		<td><code><b>pointToLatLng</b>(
-			<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-point">Point</a>&gt; <i>point</i></nobr>,
-			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
-		</code></td>
+<td><code><b>pointToLatLng</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-point">Point</a>&gt; <i>point</i></nobr>,
+<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+</code></td>
 
-		<td><code><a href="/mapbox.js/api/v1.6.4/l-latlng">LatLng</a></code></td>
-		<td>The inverse of <code>latLngToPoint</code>. Projects pixel coordinates on a given zoom into geographical coordinates.</td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-latlng">LatLng</a></code></td>
+<td>The inverse of <code>latLngToPoint</code>. Projects pixel coordinates on a given zoom into geographical coordinates.</td>
 	</tr>
 	<tr>
-		<td><code><b>project</b>(
-			<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
-		</code></td>
+<td><code><b>project</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+</code></td>
 
-		<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
-		<td>Projects geographical coordinates into coordinates in units accepted for this CRS (e.g. meters for <code>EPSG:3857</code>, for passing it to WMS services).</td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
+<td>Projects geographical coordinates into coordinates in units accepted for this CRS (e.g. meters for <code>EPSG:3857</code>, for passing it to WMS services).</td>
 	</tr>
 	<tr>
-		<td><code><b>scale</b>(
-			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
-		</code></td>
+<td><code><b>scale</b>(
+<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+</code></td>
 
-		<td><code>Number</code></td>
-		<td>Returns the scale used when transforming projected coordinates into pixel coordinates for a particular zoom. For example, it returns <code>256 * 2^zoom</code> for Mercator-based CRS.</td>
+<td><code>Number</code></td>
+<td>Returns the scale used when transforming projected coordinates into pixel coordinates for a particular zoom. For example, it returns <code>256 * 2^zoom</code> for Mercator-based CRS.</td>
 	</tr>
 	<tr>
-		<td><code><b>getSize</b>(
-			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
-		</code></td>
+<td><code><b>getSize</b>(
+<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+</code></td>
 
-		<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
-		<td>Returns the size of the world in pixels for a particular zoom.</td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
+<td>Returns the size of the world in pixels for a particular zoom.</td>
 	</tr>
 </table>
 
@@ -65,28 +65,28 @@ permalink: /api/v1.6.4/l-icrs
 
 <table data-id='icrs'>
 	<tr>
-		<th>Property</th>
-		<th>Type</th>
-		<th>Description</th>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
 	</tr>
 	<tr>
-		<td><code><b>projection</b></code></td>
+<td><code><b>projection</b></code></td>
 
-		<td><code><a href="/mapbox.js/api/v1.6.4/l-iprojection">IProjection</a></code></td>
-		<td>Projection that this CRS uses.</td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-iprojection">IProjection</a></code></td>
+<td>Projection that this CRS uses.</td>
 	</tr>
 	<tr>
-		<td><code><b>transformation</b></code></td>
+<td><code><b>transformation</b></code></td>
 
-		<td><code><a href="/mapbox.js/api/v1.6.4/l-transformation">Transformation</a></code></td>
-		<td>Transformation that this CRS uses to turn projected coordinates into screen coordinates for a particular tile service.</td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-transformation">Transformation</a></code></td>
+<td>Transformation that this CRS uses to turn projected coordinates into screen coordinates for a particular tile service.</td>
 	</tr>
 
 	<tr>
-		<td><code><b>code</b></code></td>
+<td><code><b>code</b></code></td>
 
-		<td><code>String</code></td>
-		<td>Standard code name of the CRS passed into WMS services (e.g. <code><span class="string">'EPSG:3857'</span></code>).</td>
+<td><code>String</code></td>
+<td>Standard code name of the CRS passed into WMS services (e.g. <code><span class="string">'EPSG:3857'</span></code>).</td>
 	</tr>
 </table>
 
@@ -96,28 +96,28 @@ permalink: /api/v1.6.4/l-icrs
 
 <table data-id='defined-crs'>
 	<tr>
-		<th>Projection</th>
-		<th>Description</th>
+<th>Projection</th>
+<th>Description</th>
 	</tr>
 	<tr>
-		<td><code><b>L.CRS.EPSG3857</b></code></td>
+<td><code><b>L.CRS.EPSG3857</b></code></td>
 
-		<td>The most common CRS for online maps, used by almost all free and commercial tile providers. Uses Spherical Mercator projection. Set in by default in Map's <code>crs</code> option.</td>
+<td>The most common CRS for online maps, used by almost all free and commercial tile providers. Uses Spherical Mercator projection. Set in by default in Map's <code>crs</code> option.</td>
 	</tr>
 	<tr>
-		<td><code><b>L.CRS.EPSG4326</b></code></td>
+<td><code><b>L.CRS.EPSG4326</b></code></td>
 
-		<td>A common CRS among GIS enthusiasts. Uses simple Equirectangular projection.</td>
+<td>A common CRS among GIS enthusiasts. Uses simple Equirectangular projection.</td>
 	</tr>
 	<tr>
-		<td><code><b>L.CRS.EPSG3395</b></code></td>
+<td><code><b>L.CRS.EPSG3395</b></code></td>
 
-		<td>Rarely used by some commercial tile providers. Uses Elliptical Mercator projection.</td>
+<td>Rarely used by some commercial tile providers. Uses Elliptical Mercator projection.</td>
 	</tr>
 	<tr>
-		<td><code><b>L.CRS.Simple</b></code></td>
+<td><code><b>L.CRS.Simple</b></code></td>
 
-		<td>A simple CRS that maps longitude and latitude into <code>x</code> and <code>y</code> directly. May be used for maps of flat surfaces (e.g. game maps). Note that the <code>y</code> axis should still be inverted (going from bottom to top).</td>
+<td>A simple CRS that maps longitude and latitude into <code>x</code> and <code>y</code> directly. May be used for maps of flat surfaces (e.g. game maps). Note that the <code>y</code> axis should still be inverted (going from bottom to top).</td>
 	</tr>
 </table>
 

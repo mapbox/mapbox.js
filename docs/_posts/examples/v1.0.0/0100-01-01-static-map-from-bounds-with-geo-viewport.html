@@ -12,7 +12,7 @@ tags:
 <img id='static-map'></div>
 
 <!-- include the geo-viewport plugin -->
-<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/geo-viewport/v0.1.1/geo-viewport.js'></script>
+<script src='{{site.tileapi}}/mapbox.js/plugins/geo-viewport/v0.1.1/geo-viewport.js'></script>
 
 <script>
 // This is an example using geo-viewport. See the full docs for full details
@@ -35,7 +35,7 @@ var vp = geoViewport.viewport(bounds, size);
 // Construct a static map url
 // https://www.mapbox.com/developers/api/static/
 document.getElementById('static-map').src =
-    'https://api.tiles.mapbox.com/v3/examples.map-zr0njcqy/' +
+    '{{site.tileapi}}/v3/examples.map-zr0njcqy/' +
     vp.center.join(',') + ',' +
     vp.zoom + '/' +
     size.join('x') + '.png';

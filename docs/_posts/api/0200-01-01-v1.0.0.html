@@ -47,7 +47,7 @@ navigation:
   items:
 
 ---
-{% raw %}
+
 <div></div><h1>Map</h1>
 <div id="content-undefined"class="space-bottom depth-1"></div><h2 id="L.mapbox.map">L.mapbox.map<span class="bracket">(</span><span class="args">element: Element, id: string | url: string | tilejson: object, [options: object]</span><span class="bracket">)</span></h2>
 <div id="content-L.mapbox.map"class="space-bottom depth-2"><p>Create and automatically configure a map with layers, markers, and
@@ -66,7 +66,7 @@ reference.
 </p>
 <ul>
 <li>A map <code>id</code> string <code>examples.map-foo</code></li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A <a href="http://mapbox.com/wax/tilejson.html">TileJSON</a> object, from your own Javascript code</li>
 </ul>
 <p>The third argument is optional. If provided, it is the same options
@@ -122,7 +122,7 @@ interface to layers from MapBox and elsewhere.
 </p>
 <ul>
 <li>An <code>id</code> string <code>examples.map-foo</code></li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A TileJSON object, from your own Javascript code</li>
 </ul>
 <p>The second argument is optional. If provided, it is the same options
@@ -141,7 +141,7 @@ to <code>L.mapbox.tileLayer</code> which, if retina is detected, is used instead
 var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
 
 // you can also provide a full url to a tilejson resource
-var layer = L.mapbox.tileLayer(&#39;http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json&#39;);
+var layer = L.mapbox.tileLayer(&#39;{{site.tileapi}}/v3/examples.map-0l53fhk2.json&#39;);
 
 // if provided,you can support retina tiles
 var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
@@ -209,7 +209,7 @@ interactivity into your map, which you can easily access with <code>L.mapbox.gri
 </p>
 <ul>
 <li>An <code>id</code> string <code>examples.map-foo</code></li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A TileJSON object, from your own Javascript code</li>
 </ul>
 <p><em>Example</em>:
@@ -271,7 +271,7 @@ from MapBox and elsewhere into your map.
 </li>
 <li><p>An <code>id</code> string <code>examples.map-foo</code></p>
 </li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 <li>A GeoJSON object, from your own Javascript code</li>
 </ol>
 <p>The second argument is optional. If provided, it is the same options
@@ -425,7 +425,7 @@ markerLayer.setGeoJSON({
 </li>
 <li><p>An <code>id</code> string <code>examples.map-foo</code></p>
 </li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 </ol>
 <p><em>Returns</em> a <code>L.mapbox.geocoder</code> object.
 
@@ -568,7 +568,7 @@ the <a href="http://mapbox.com/developers/api/#geocoding">MapBox Geocoding API</
 </li>
 <li><p>An <code>id</code> string <code>examples.map-foo</code></p>
 </li>
-<li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li>
+<li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li>
 </ol>
 <p><em>Example</em>
 
@@ -697,4 +697,4 @@ is available by applying <code>class=&quot;dark&quot;</code> to the map div.
 </p>
 <pre><code>&lt;div id=&quot;map&quot; class=&quot;dark&quot;&gt;&lt;/div&gt;</code></pre>
 </div>
-{% endraw %}
+

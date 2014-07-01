@@ -5,7 +5,7 @@ categories: api
 version: v1.6.2
 permalink: /api/v1.6.2/l-mapbox-featurelayer
 ---
-{% raw %}<h2 id="section-l-mapbox-featurelayer">L.mapbox.featureLayer(id|url|geojson, options)</h2>
+<h2 id="section-l-mapbox-featurelayer">L.mapbox.featureLayer(id|url|geojson, options)</h2>
 <p><span class='leaflet'><em>Extends</em>: <code><a href="/mapbox.js/api/v1.6.2/l-featuregroup">L.FeatureGroup</a></code></span></p>
 <p><strong>NOTE: in version 1.6.0, <code><a href="/mapbox.js/api/v1.6.2/l-mapbox-markerlayer">L.mapbox.markerLayer</a></code> was renamed to <code><a href="/mapbox.js/api/v1.6.2/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code>
 to signal the addition of support for lines and polygons. The <code><a href="/mapbox.js/api/v1.6.2/l-mapbox-markerlayer">L.mapbox.markerLayer</a></code>
@@ -24,7 +24,7 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> geojson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>http://a.tiles.mapbox.com/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -163,4 +163,4 @@ featureLayer.setGeoJSON({
 <h3 id="section-featurelayer-getgeojson">featureLayer.getGeoJSON()</h3>
 <p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>
-{% endraw %}
+

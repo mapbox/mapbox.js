@@ -6,12 +6,11 @@ prefix: leaflet-locatecontrol
 description: Adds a button to your map that finds the user's location using the HTML5 Geolocation API.
 tags:
   - mit
-snippet: |
-  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
-  <!--[if lt IE 9]>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
-  <![endif]-->
 code: https://github.com/domoritz/leaflet-locatecontrol
 license: MIT
 ---
+<script src='{{site.tileapi}}/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
+<link href='{{site.tileapi}}/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
+<!--[if lt IE 9]>
+  <link href='{{site.tileapi}}/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+<![endif]-->

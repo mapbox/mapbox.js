@@ -16,7 +16,7 @@ title: Plugins
     </div>
   </div>
   <div class='col12 quiet-scroll fill-light'>
-<pre id='snippet-{{forloop.index}}' class='pad2 prettyprint'>{{ plugin.snippet | replace:'&','&amp;' | replace:'<','&lt;' | replace:'>', '&gt;'}}</pre>
+<pre id='snippet-{{forloop.index}}' class='pad2 prettyprint'>{{ plugin.content | replace:'&','&amp;' | replace:'<','&lt;' | replace:'>', '&gt;'}}</pre>
   </div>
 </div>
 {% endfor %}
