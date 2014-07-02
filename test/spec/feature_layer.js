@@ -113,7 +113,7 @@ describe('L.mapbox.featureLayer', function() {
             var layer = L.mapbox.featureLayer(undefined, {accessToken: 'custom'})
                 .setGeoJSON(helpers.geoJson);
             var marker = layer.getLayers()[0];
-            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/marker/pin-l+f00.png', 'custom'));
+            expect(marker.options.icon.options.iconUrl).to.contain('access_token=custom');
         });
 
         it("removes existing layers", function() {
