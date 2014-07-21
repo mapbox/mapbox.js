@@ -11,6 +11,19 @@ Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 
 ## [Examples](http://mapbox.com/mapbox.js/example/v1.0.0/)
 
+## Usage
+
+Recommended usage is via the Mapbox CDN:
+
+```html
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+```
+
+The `mapbox.js` file includes the Leaflet library. Alternatively, you can use `mapbox.standalone.js`, which does not include Leaflet (you will have to provide it yourself).
+
+See the [API documentation](http://mapbox.com/mapbox.js/api/) and [Examples](http://mapbox.com/mapbox.js/example/v1.0.0/) for further help.
+
 ## Usage with Browserify
 
 Install the mapbox.js module and add it to `dependencies` in package.json:
@@ -32,18 +45,6 @@ Browserify it:
 ```sh
 browserify main.js -o bundle.js
 ```
-
-## Usage from our CDN
-
-Load mapbox.js from our CDN:
-
-```html
-<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
-```
-
-The `mapbox.js` file is includes the Leaflet library. Alternatively, you can use `mapbox.standalone.js`, which does not include Leaflet (you will have to provide it yourself).
-
 
 ## Building
 
