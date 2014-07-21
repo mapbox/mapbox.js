@@ -33,6 +33,18 @@ Browserify it:
 browserify main.js -o bundle.js
 ```
 
+## Usage from our CDN
+
+Load mapbox.js from our CDN:
+
+```html
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+```
+
+The `mapbox.js` file is includes the Leaflet library. Alternatively, you can use `mapbox.standalone.js`, which does not include Leaflet (you will have to provide it yourself).
+
+
 ## Building
 
 Requires [node.js](http://nodejs.org/) installed on your system.
