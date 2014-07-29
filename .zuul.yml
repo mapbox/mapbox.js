@@ -1,0 +1,16 @@
+ui: mocha-bdd
+scripts:
+  - "node_modules/expect.js/index.js"
+  - "node_modules/happen/happen.js"
+  - "node_modules/sinon/pkg/sinon-server-1.10.2.js"
+  - "node_modules/Leaflet/dist/leaflet-src.js"
+  - "dist/mapbox.uncompressed.js"
+  - "dist/mapbox.internals.js"
+  - "test/util.js"
+browsers:
+  - name: chrome
+    version: latest
+  - name: safari
+    version: latest
+  - name: firefox
+    version: 14..latest

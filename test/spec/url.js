@@ -1,9 +1,4 @@
 describe("url", function() {
-    describe('#base', function() {
-        it("returns 'http://a.tiles.mapbox.com/v3/'", function() {
-            expect(internals.url.base()).to.equal('http://a.tiles.mapbox.com/v3/');
-        });
-    });
     describe('#secureFlag', function() {
         it('adds a json flag to urls when the page is secure', function() {
             internals.url.isSSL = function() { return true; };

@@ -87,7 +87,7 @@ describe('L.mapbox.infoControl', function() {
             done();
         });
 
-        server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+        server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json?secure",
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
         server.respond();
     });
