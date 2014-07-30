@@ -5,8 +5,8 @@ permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
 mapboxjs: v2.0.0
-mapboxjsbase: https://api.tiles.mapbox.com/mapbox.js/v2.0.0-beta1
 defaultid: 'examples.map-i86nkdio'
+tileapi: 'https://api.tiles.mapbox.com'
 rdiscount:
   extensions: [smart]
 exclude: [dist]
