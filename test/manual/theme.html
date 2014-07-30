@@ -4,6 +4,7 @@
 <meta charset=utf-8 />
 <title>Theme | mapbox.js</title>
 <script src='../../dist/mapbox.js'></script>
+<script src='access_token.js'></script>
 <link rel='stylesheet' href='../../dist/mapbox.css'/>
 <style>
   body {margin:0; padding:0; }
@@ -57,8 +58,8 @@ var feature = {
 maplight.legendControl.addLegend('hee haw');
 mapdark.legendControl.addLegend('hee haw');
 
-mapdark.markerLayer.setGeoJSON(feature);
-maplight.markerLayer.setGeoJSON(feature);
+mapdark.featureLayer.setGeoJSON(feature);
+maplight.featureLayer.setGeoJSON(feature);
 </script>
 </body>
 </html>

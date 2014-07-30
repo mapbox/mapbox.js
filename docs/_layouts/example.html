@@ -35,7 +35,9 @@ version: latest
 </head>
 <body>{% endhighlight %}
 </div>
-{% highlight html %}{{content}}{% endhighlight %}
+<div class="js-replace-token">
+{% highlight html %}{{content | insert_token}}{% endhighlight %}
+</div>
 <div class='code-footer'>
 {% highlight html %}</body>
 </html>{% endhighlight %}

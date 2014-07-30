@@ -5,6 +5,7 @@
   <link rel='stylesheet' href='../../dist/mapbox.css'/>
   <link rel='stylesheet' href='embed.css'/>
   <script src='../../dist/mapbox.js'></script>
+  <script src='access_token.js'></script>
 </head>
 <body>
 <style>
@@ -74,7 +75,7 @@
         this.className = 'active';
         // The setFilter function takes a GeoJSON feature object
         // and returns true to show it or false to hide it.
-        map.markerLayer.setFilter(function(f) {
+        map.featureLayer.setFilter(function(f) {
             return f.properties['marker-symbol'] === 'fast-food';
         });
         return false;
@@ -83,7 +84,7 @@
     all.onclick = function() {
         food.className = '';
         this.className = 'active';
-        map.markerLayer.setFilter(function(f) {
+        map.featureLayer.setFilter(function(f) {
             // Returning true for all markers shows everything.
             return true;
         });

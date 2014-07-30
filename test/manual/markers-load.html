@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="../../dist/mapbox.css"/>
   <link rel="stylesheet" href="embed.css"/>
   <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
 </head>
 <body>
 <div id='map'></div>
@@ -14,7 +15,7 @@
     // example.geojson is a well-formed GeoJSON document. For this
     // example, the file must be on the same domain name as the map,
     // or loading will not work due to cross-domain request restrictions
-    map.markerLayer.loadURL('example.geojson');
+    map.featureLayer.loadURL('example.geojson');
 </script>
 </body>
 </html>

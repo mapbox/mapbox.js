@@ -11,7 +11,7 @@ interactivity.
 | ---- | ---- | ---- |
 | element (_required_) | string | Must be the id of an element, or a DOM element reference. |
 | id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](https://www.mapbox.com/developers/tilejson/) object, from your own Javascript code</li></ul> |
-| options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.mapbox.featureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.featureLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `true` to enable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `true` to enable the `L.mapbox.infoControl`.</li> |
+| options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.mapbox.featureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.featureLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `true` to enable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `true` to enable the `L.mapbox.infoControl`.</li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this map.</li> |
 
 _Example_:
 
@@ -46,9 +46,7 @@ interface to layers from Mapbox and elsewhere.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
-| options | object | The second argument is optional. If provided, it is the same options as provided to `L.TileLayer` with one addition: <ul><li>`retinaVersion`, if provided, is an alternative value for the first argument to `L.mapbox.tileLayer` which, if retina is detected, is used instead.</li></ul>
-
-If `detectRetina` is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don't provide an explicit `retinaVersion` to be used.
+| options | object | The second argument is optional. If provided, it is the same options as provided to `L.TileLayer`, with the following addition: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this layer.</li></ul> |
 
 _Example_:
 
@@ -57,19 +55,6 @@ _Example_:
 
     // you can also provide a full url to a TileJSON resource
     var layer = L.mapbox.tileLayer('{{site.tileapi}}/v3/examples.map-0l53fhk2.json');
-
-    // if provided, you can support retina tiles
-    var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
-        detectRetina: true,
-        // if retina is detected, this layer is used instead
-        retinaVersion: 'examples.map-zswgei2n'
-    });
-
-    // if this map supports auto-scaling, `detectRetina` will automatically
-    // use scaled tiles when retina is detected.
-    var layer = L.mapbox.tileLayer('examples.map-20v6611k', {
-        detectRetina: true,
-    });
 
 _Returns_ a `L.mapbox.tileLayer` object.
 
@@ -122,6 +107,7 @@ interactivity into your map, which you can easily access with `L.mapbox.gridCont
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
+| options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this layer.</li></ul> |
 
 _Example_:
 
@@ -196,17 +182,13 @@ _Returns_: the L.mapbox.gridLayer object
 
 <span class='leaflet'>_Extends_: `L.FeatureGroup`</span>
 
-**NOTE: in version 1.6.0, `L.mapbox.markerLayer` was renamed to `L.mapbox.featureLayer`
-to signal the addition of support for lines and polygons. The `L.mapbox.markerLayer`
-alias will be removed in Mapbox.js 2.0.0**
-
 `L.mapbox.featureLayer` provides an easy way to integrate [GeoJSON](http://www.geojson.org/)
 from Mapbox and elsewhere into your map.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
-| options | object | If provided, it is the same options as provided to `L.FeatureGroup`, as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul> |
+| options | object | If provided, it is the same options as provided to `L.FeatureGroup`, as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this layer.</li></ul> |
 
 _Example_:
 
@@ -327,13 +309,14 @@ _Returns_ the GeoJSON represented by this layer
 
 # Geocoding
 
-## L.mapbox.geocoder(id|url)
+## L.mapbox.geocoder(id|url, options)
 
 A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url | string | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li></ul> |
+| options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li></ul> |
 
 _Returns_ a `L.mapbox.geocoder` object.
 
@@ -494,7 +477,7 @@ This function is currently in private beta: [Contact Mapbox](https://mapbox.com/
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url (_required_) | string | Either a <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li></ul> |
-| options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li></ul> |
+| options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this control.</li></ul> |
 
 _Example_:
 
@@ -539,11 +522,12 @@ _Returns_: the geocoder object
 ### geocoderControl.on(event, callback)
 Bind a listener to an event emitted by the geocoder control. Supported additional events are
 
-| Options | Value | Description |
-| ---- | ---- | ---- |
-| event | string | <ul><li><code>found</code>: success in finding a location. Called with a single argument, the result.</li><li><code>error</code>: failure to find a location. Called with the raw HTTP error from Mapbox.</li></ul> |
-| event | string | <ul><li><code>select</code>: fired when the user selects a location from a list of options returned from a geocoding request. The geocoding data is attached to the `data` property of the event.
-| event | string | <ul><li><code>autoselect</code>: fired when the geocoder control automatically chooses the first result of a query that returns only one result, and repositions the map accordingly. The geocoding data is attached to the `data` property of the event.
+| Event  | Description |
+| ---- | ---- |
+| found | Success in finding a location. The event's `results` property contains the raw results. |
+| error | Failure to find a location. The event's `error` property contains the raw HTTP error. |
+| select | Fired when the user selects a location from a list of options returned from a geocoding request. The event's `feature` property contains the selected GeoJSON Feature. |
+| autoselect | Fired when the control automatically selects the first result of a query that returns only one result, and repositions the map accordingly. The event's `feature` property contains the selected GeoJSON feature. |
 
 ## L.mapbox.shareControl(id|url, options)
 
@@ -554,7 +538,7 @@ Adds a "Share" button to the map, which can be used to share the map to Twitter 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url _optional_ | string | Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul> |
-| options | object | Options for L.Control</span> Also accepts the following options:<ul><li>url: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li></ul> |
+| options | object | Options for L.Control</span> Also accepts the following options:<ul><li>`url`: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this control.</li></ul> |
 
 _Example_:
 
@@ -658,6 +642,11 @@ _Example_:
 
 # Configuration
 
+## L.mapbox.accessToken
+
+The API access token to be used by Mapbox.js. You must set this value as described
+in [API access tokens](../api-access-tokens).
+
 ## L.mapbox.config.FORCE_HTTPS
 
 By default, this is `false`. Mapbox.js auto-detects whether the page your map
@@ -671,18 +660,89 @@ _Example_:
 
     L.mapbox.config.FORCE_HTTPS = true;
 
-## L.mapbox.config.HTTP_URLS
+## L.mapbox.config.HTTP_URL
 
-An array of base URLs. By default, these point to the [Mapbox Web Services](https://www.mapbox.com/developers/api/).
-When you refer to a tileset, grid, marker, or geocoding endpoint, a URL
-from this array is chosen.
+A base URL from which Mapbox.js will load TileJSON and other resources. By default,
+this points to the [Mapbox Web Services](https://www.mapbox.com/developers/api/).
 
-## L.mapbox.config.HTTPS_URLS
+## L.mapbox.config.HTTPS_URL
 
-The same as `L.mapbox.config.HTTP_URLS`, but used when SSL mode is detected or
+The same as `L.mapbox.config.HTTP_URL`, but used when SSL mode is detected or
 `FORCE_HTTPS` is set to `true`.
 
 # Guides
+
+## API access tokens
+
+Mapbox.js uses the Mapbox web services API, which requires an API access token. You must
+supply an access token to Mapbox.js:
+
+ ```
+ L.mapbox.accessToken = '<your access token>';
+ ```
+
+To obtain an access token, sign in to Mapbox and visit the [Account Apps](https://www.mapbox.com/account/apps/)
+page. For Mapbox.js, a "Public" token (starting with "pk") is required.
+
+You may create multiple tokens and use different ones for different applications. If
+necessary, you can use different tokens on the same page by using the `accessToken`
+option when creating Mapbox.js objects. For example:
+
+ ```
+ var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
+   accessToken: '<your access token>'
+ });
+ ```
+
+For additional help, see ["How do I create an API access token?"](https://www.mapbox.com/help/create-api-access-token/).
+
+## Upgrading from Mapbox.js v1
+
+In a few cases, you may need to make changes to code written for Mapbox.js 1.x
+versions in order to work with Mapbox.js 2.x.
+
+* Mapbox.js 2.x uses version 4 of the Mapbox web services API, which requires API access tokens.
+You must supply an access token to Mapbox.js; see [API access tokens](../api-access-tokens) for
+details.
+
+* The `markerLayer` alias has been removed from `L.mapbox.map`. Use `featureLayer`
+instead. For example, replace
+
+ ```
+ map.markerLayer.setFilter(function(f) { ... });
+ ```
+
+ with
+
+ ```
+ map.featureLayer.setFilter(function(f) { ... });
+ ```
+
+* The format for `L.mapbox.geocoder` and `L.mapbox.geocoderControl` results have changed.
+Results are now provided in GeoJSON format. If your code uses `L.mapbox.geocoder` or
+the `found`, `select`, or `autoselect` events from `L.mapbox.geocoderControl`, it may
+need to be updated to expect the format documented in those classes.
+
+* `L.mapbox.config.HTTP_URLS` and `L.mapbox.config.HTTPS_URLS` have been replaced
+with `L.mapbox.config.HTTP_URL` and `L.mapbox.config.HTTPS_URL`, which expect to
+be assigned a single URL rather than an array of URLs. For example, replace
+
+ ```
+ L.mapbox.config.HTTP_URLS = ["http://example.com/"];
+ ```
+
+ with
+
+ ```
+  L.mapbox.config.HTTP_URL = "http://example.com/";
+ ```
+
+* `L.mapbox.tileLayer` no longer supports `detectRetina`, `retinaVersion`, or `autoscale` options.
+Instead, retina tiles are always automatically used when available.
+
+* `L.mapbox.geocoder` no longer has `setURL`, `setID`, and `setTileJSON` methods. Instead
+of resetting the URL or ID, construct a new instance with the desired URL or ID. Instead of
+setting TileJSON, construct an instance from the geocoding URL in the TileJSON.
 
 ## Mobile
 
@@ -701,28 +761,6 @@ If you&#39;re planning on having a page that has large amounts of scrolling,
 try to avoid a large map height. Having a &#39;tall&#39; map can cause the user
 to get stuck on the map while scrolling. Another way around this is to disable
 `dragging` for mobile devices: `map.dragging.disable();`
-
-### Retina
-Having the ability to use retina tiles when the device supports them is easy.
-When creating the map, use the `detectRetina` to verify if retina is available
-and `retinaVersion` to use a tilelayer which is designed for retina screens.
-
-    var map = L.mapbox.map('map', 'your.mapid', {
-        tileLayer: {
-            detectRetina: true,
-            retinaVersion: 'your.mapid'
-        }
-    }).setView([40, -74.50], 9);
-
-Some Mapbox maps support switching to retina scale automatically: if you're using
-one of these maps, you can simply set `detectRetina` and the higher-scale
-tiles will be used when retina is detected.
-
-    var map = L.mapbox.map('map', 'your.mapid', {
-        tileLayer: {
-            detectRetina: true
-        }
-    }).setView([40, -74.50], 9);
 
 ## Theming
 

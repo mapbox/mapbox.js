@@ -25,11 +25,6 @@ var TileLayer = L.TileLayer.extend({
 
         this._tilejson = {};
 
-        if (options && options.detectRetina &&
-            L.Browser.retina && options.retinaVersion) {
-            _ = options.retinaVersion;
-        }
-
         if (options && options.format) {
             util.strict_oneof(options.format, this.formats);
         }
@@ -44,14 +39,6 @@ var TileLayer = L.TileLayer.extend({
         return this;
     },
 
-    _autoScale: function() {
-        return this.options &&
-            L.Browser.retina &&
-            this.options.detectRetina &&
-            (!this.options.retinaVersion) &&
-            this.options.autoscale;
-    },
-
     // disable the setUrl function, which is not available on mapbox tilelayers
     setUrl: null,
 
@@ -63,34 +50,13 @@ var TileLayer = L.TileLayer.extend({
             attribution: json.attribution,
             minZoom: json.minzoom || 0,
             maxZoom: json.maxzoom || 18,
-            autoscale: json.autoscale || false,
             tms: json.scheme === 'tms',
             bounds: json.bounds && util.lbounds(json.bounds)
         });
 
-        if (this.options &&
-            this.options.detectRetina === undefined &&
-            this.options.autoscale === true &&
-            L.Browser.retina) {
-            this.options.detectRetina = true;
-            this._resetRetina();
-        }
-
         this._tilejson = json;
         this.redraw();
         return this;
-    },
-
-    _resetRetina: function() {
-        // detecting retina displays, adjusting tileSize and zoom levels
-        if (this.options.detectRetina && L.Browser.retina && this.options.maxZoom > 0) {
-
-            this.options.tileSize = Math.floor(this.options.tileSize / 2);
-            this.options.zoomOffset++;
-
-            this.options.minZoom = Math.max(0, this.options.minZoom);
-            this.options.maxZoom--;
-        }
     },
 
     getTileJSON: function() {
@@ -109,7 +75,7 @@ var TileLayer = L.TileLayer.extend({
             return templated;
         } else {
             return templated.replace('.png',
-                (this._autoScale() ? this.scalePrefix : '.') + this.options.format);
+                (L.Browser.retina ? this.scalePrefix : '.') + this.options.format);
         }
     },
 

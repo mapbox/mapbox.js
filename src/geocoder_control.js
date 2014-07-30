@@ -1,6 +1,7 @@
 'use strict';
 
-var geocoder = require('./geocoder');
+var geocoder = require('./geocoder'),
+    util = require('./util');
 
 var GeocoderControl = L.Control.extend({
     includes: L.Mixin.Events,
@@ -13,11 +14,11 @@ var GeocoderControl = L.Control.extend({
 
     initialize: function(_, options) {
         L.Util.setOptions(this, options);
-        this.geocoder = geocoder(_);
+        this.setURL(_);
     },
 
     setURL: function(_) {
-        this.geocoder.setURL(_);
+        this.geocoder = geocoder(_, {accessToken: this.options.accessToken});
         return this;
     },
 
@@ -26,13 +27,11 @@ var GeocoderControl = L.Control.extend({
     },
 
     setID: function(_) {
-        this.geocoder.setID(_);
-        return this;
+        return this.setURL(_);
     },
 
     setTileJSON: function(_) {
-        this.geocoder.setTileJSON(_);
-        return this;
+        return this.setURL(_.geocoder);
     },
 
     _toggle: function(e) {
@@ -97,49 +96,47 @@ var GeocoderControl = L.Control.extend({
         var map = this._map;
         var onload = L.bind(function(err, resp) {
             L.DomUtil.removeClass(this._container, 'searching');
-            if (err || !resp || !resp.results || !resp.results.length) {
+            if (err || !resp || !resp.results || !resp.results.features || !resp.results.features.length) {
                 this.fire('error', {error: err});
             } else {
                 this._results.innerHTML = '';
-                if (resp.results.length === 1) {
-                    this.fire('autoselect', { data: resp });
-                    chooseResult(resp.results[0][0]);
+                var features = resp.results.features;
+                if (features.length === 1) {
+                    this.fire('autoselect', { feature: features[0] });
+                    chooseResult(features[0]);
                     this._closeIfOpen();
                 } else {
-                    for (var i = 0, l = Math.min(resp.results.length, 5); i < l; i++) {
-                        var name = [];
-                        for (var j = 0; j < resp.results[i].length; j++) {
-                            if (resp.results[i][j].name) name.push(resp.results[i][j].name);
-                        }
+                    for (var i = 0, l = Math.min(features.length, 5); i < l; i++) {
+                        var feature = features[i];
+                        var name = feature.place_name;
                         if (!name.length) continue;
 
                         var r = L.DomUtil.create('a', '', this._results);
-                        r.innerHTML = name.join(', ');
+                        r.innerText = name;
                         r.href = '#';
 
-                        (L.bind(function(result) {
+                        (L.bind(function(feature) {
                             L.DomEvent.addListener(r, 'click', function(e) {
-                                chooseResult(result[0]);
+                                chooseResult(feature);
                                 L.DomEvent.stop(e);
-                                this.fire('select', { data: result });
+                                this.fire('select', { feature: feature });
                             }, this);
-                        }, this))(resp.results[i]);
+                        }, this))(feature);
                     }
-                    if (resp.results.length > 5) {
+                    if (features.length > 5) {
                         var outof = L.DomUtil.create('span', '', this._results);
-                        outof.innerHTML = 'Top 5 of ' + resp.results.length + '  results';
+                        outof.innerHTML = 'Top 5 of ' + features.length + '  results';
                     }
                 }
-                this.fire('found', resp);
+                this.fire('found', {results: resp.results});
             }
         }, this);
 
         var chooseResult = L.bind(function(result) {
-            if (result.bounds) {
-                var _ = result.bounds;
-                this._map.fitBounds(L.latLngBounds([[_[1], _[0]], [_[3], _[2]]]));
-            } else if (result.lat !== undefined && result.lon !== undefined) {
-                this._map.setView([result.lat, result.lon], (map.getZoom() === undefined) ?
+            if (result.bbox) {
+                this._map.fitBounds(util.lbounds(result.bbox));
+            } else if (result.center) {
+                this._map.setView([result.center[1], result.center[0]], (map.getZoom() === undefined) ?
                     this.options.pointZoom :
                     Math.max(map.getZoom(), this.options.pointZoom));
             }

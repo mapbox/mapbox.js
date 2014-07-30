@@ -7,7 +7,7 @@ var url = require('./url'),
 // mapbox-related markers functionality
 // provide an icon from mapbox's simple-style spec and hosted markers
 // service
-function icon(fp) {
+function icon(fp, options) {
     fp = fp || {};
 
     var sizes = {
@@ -20,10 +20,10 @@ function icon(fp) {
         color = (fp['marker-color'] || '7e7e7e').replace('#', '');
 
     return L.icon({
-        iconUrl: url.base() + 'marker/' +
+        iconUrl: url('/marker/' +
             'pin-' + size.charAt(0) + symbol + '+' + color +
             // detect and use retina markers, which are x2 resolution
-            ((L.Browser.retina) ? '@2x' : '') + '.png',
+            (L.Browser.retina ? '@2x' : '') + '.png', options && options.accessToken),
         iconSize: sizes[size],
         iconAnchor: [sizes[size][0] / 2, sizes[size][1] / 2],
         popupAnchor: [0, -sizes[size][1] / 2]
@@ -33,9 +33,9 @@ function icon(fp) {
 // a factory that provides markers for Leaflet from Mapbox's
 // [simple-style specification](https://github.com/mapbox/simplestyle-spec)
 // and [Markers API](http://mapbox.com/developers/api/#markers).
-function style(f, latlon) {
+function style(f, latlon, options) {
     return L.marker(latlon, {
-        icon: icon(f.properties),
+        icon: icon(f.properties, options),
         title: util.strip_tags(
             sanitize((f.properties && f.properties.title) || ''))
     });

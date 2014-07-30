@@ -43,7 +43,6 @@ var FeatureLayer = L.FeatureGroup.extend({
 
     loadURL: function(url) {
         if (this._request && 'abort' in this._request) this._request.abort();
-        url = urlhelper.jsonify(url);
         this._request = request(url, L.bind(function(err, json) {
             this._request = null;
             if (err && err.type !== 'abort') {
@@ -58,7 +57,7 @@ var FeatureLayer = L.FeatureGroup.extend({
     },
 
     loadID: function(id) {
-        return this.loadURL(urlhelper.base() + id + '/markers.geojson');
+        return this.loadURL(urlhelper('/' + id + '/features.json', this.options.accessToken));
     },
 
     setFilter: function(_) {
@@ -87,7 +86,10 @@ var FeatureLayer = L.FeatureGroup.extend({
             }
         } else if (this.options.filter(json)) {
 
-            var layer = L.GeoJSON.geometryToLayer(json, marker.style),
+            var opts = {accessToken: this.options.accessToken},
+                layer = L.GeoJSON.geometryToLayer(json, function(feature, latlon) {
+                    return marker.style(feature, latlon, opts);
+                }),
                 popupHtml = marker.createPopup(json, this.options.sanitizer);
 
             if ('setStyle' in layer) {

@@ -4,15 +4,16 @@
   <meta charset='UTF-8'/>
   <link rel="stylesheet" href="../../dist/mapbox.css"/>
   <link rel="stylesheet" href="embed.css"/>
-  <script src="../../dist/mapbox.uncompressed.js"></script>
+  <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
 </head>
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
     L.mapbox.map('map', 'examples.map-i875kd35')
-    .addControl(L.mapbox.geocoderControl('examples.map-i875kd35', {
-        keepOpen: true
-    }));
+        .addControl(L.mapbox.geocoderControl('mapbox.places-v1', {
+            keepOpen: true
+        }));
 </script>
 </body>
 </html>

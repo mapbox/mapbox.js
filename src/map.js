@@ -9,6 +9,12 @@ var util = require('./util'),
     shareControl = require('./share_control').shareControl,
     legendControl = require('./legend_control').legendControl;
 
+function withAccessToken(options, accessToken) {
+    if (!accessToken || options.accessToken)
+        return options;
+    return L.extend({accessToken: accessToken}, options);
+}
+
 var LMap = L.Map.extend({
     includes: [require('./load_tilejson')],
 
@@ -31,24 +37,20 @@ var LMap = L.Map.extend({
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
         if (this.options.tileLayer) {
-            this.tileLayer = tileLayer(undefined, this.options.tileLayer);
+            this.tileLayer = tileLayer(undefined,
+                withAccessToken(this.options.tileLayer, this.options.accessToken));
             this.addLayer(this.tileLayer);
         }
 
-        if (this.options.featureLayer === false || this.options.markerLayer === false) {
-            this.options.featureLayer = this.options.markerLayer = false;
-        } else if (this.options.markerLayer) {
-            this.options.featureLayer = this.options.markerLayer;
-        }
-
         if (this.options.featureLayer) {
-            this.featureLayer = this.markerLayer =
-                featureLayer(undefined, this.options.featureLayer);
+            this.featureLayer = featureLayer(undefined,
+                withAccessToken(this.options.featureLayer, this.options.accessToken));
             this.addLayer(this.featureLayer);
         }
 
         if (this.options.gridLayer) {
-            this.gridLayer = gridLayer(undefined, this.options.gridLayer);
+            this.gridLayer = gridLayer(undefined,
+                withAccessToken(this.options.gridLayer, this.options.accessToken));
             this.addLayer(this.gridLayer);
         }
 
@@ -68,7 +70,8 @@ var LMap = L.Map.extend({
         }
 
         if (this.options.shareControl) {
-            this.shareControl = shareControl(undefined, this.options.shareControl);
+            this.shareControl = shareControl(undefined,
+                withAccessToken(this.options.shareControl, this.options.accessToken));
             this.addControl(this.shareControl);
         }
 
