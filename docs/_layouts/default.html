@@ -82,7 +82,6 @@ footer:
   <link href='{% if site.mapboxjsbase %}{{site.mapboxjsbase}}{% else %}https://api.tiles.mapbox.com/mapbox.js/{% if site.mapboxjs %}{{site.mapboxjs}}{% else %}v1.6.1{% endif %}{% endif %}/mapbox.css' rel='stylesheet' />
 
   <!--[if lt IE 9 ]><script src='{{site.url}}/js/redirect-ie.js'></script><![endif]-->
-  <script src='{{site.api}}/api/session.js'></script>
   <script src='https://js.stripe.com/v2/'></script>
   <script>
   var KM_COOKIE_DOMAIN = 'www.mapbox.com';
@@ -141,11 +140,11 @@ footer:
       </div>
     </div>
     <div class='col6 newsletter'>
-      <form action='https://mapbox.us2.list-manage.com/subscribe/post?u=1b29ad842d113cece02035883&amp;id=6cbe531fd0' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='space-bottom validate' target='_blank'>
+      <form id='newsletter' method='post' class='space-bottom'>
         <fieldset class='clearfix input-pill col12 pill mobile-cols with-icon'>
           <span class='icon mail quiet'></span>
-          <input type='text' value='' placeholder='Subscribe to our newsletter' name='EMAIL' class='col9 required email' id='mce-EMAIL'>
-          <input type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='col3 quiet'>
+          <input type='text' value='' placeholder='Subscribe to our newsletter' name='email' class='col9 required email'>
+          <input type='submit' value='Subscribe' class='col3 quiet'>
         </fieldset>
       </form>
       Follow Mapbox on <a href='https://twitter.com/mapbox' class='strong'>Twitter</a> and <a href='https://www.facebook.com/Mapbox' class='strong'>Facebook</a>
