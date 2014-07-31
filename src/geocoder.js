@@ -43,14 +43,15 @@ module.exports = function(url, options) {
                 var res = {
                     results: json
                 };
-                if (json.features) {
+                if (json.features && json.features.length) {
                     res.latlng = [
                         json.features[0].center[1],
                         json.features[0].center[0]];
-                }
-                if (json.features && json.features[0].bbox) {
-                    res.bounds = json.features[0].bbox;
-                    res.lbounds = util.lbounds(res.bounds);
+
+                    if (json.features[0].bbox) {
+                        res.bounds = json.features[0].bbox;
+                        res.lbounds = util.lbounds(res.bounds);
+                    }
                 }
                 callback(null, res);
             } else callback(err || true);

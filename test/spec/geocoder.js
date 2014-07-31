@@ -48,6 +48,21 @@ describe('L.mapbox.geocoder', function() {
 
             server.respond();
         });
+
+        it('handles no results', function(done) {
+            var g = L.mapbox.geocoder('mapbox.places-v1');
+
+            server.respondWith('GET',
+                'http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/nonesuch.json?access_token=key',
+                [200, { 'Content-Type': 'application/json' }, JSON.stringify({"type":"FeatureCollection","query":["nonesuch"],"features":[]})]);
+
+            g.query('nonesuch', function(err, res) {
+                expect(err).to.eql(null);
+                done();
+            });
+
+            server.respond();
+        });
     });
 
     describe('#reverseQuery', function() {
