@@ -8,7 +8,7 @@ module.exports = function(path, accessToken) {
 
     if (!accessToken && config.REQUIRE_ACCESS_TOKEN) {
         throw new Error('An API access token is required to use Mapbox.js. ' +
-            'See https://www.mapbox.com/mapbox.js/api/v' + version + '/l-mapbox-accessToken/');
+            'See https://www.mapbox.com/mapbox.js/api/v' + version + '/api-access-tokens/');
     }
 
     var url = ('https:' === document.location.protocol || config.FORCE_HTTPS) ? config.HTTPS_URL : config.HTTP_URL;
