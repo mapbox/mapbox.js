@@ -13,25 +13,25 @@ permalink: /api/v2.0.0/l-ilayer
 
 <table data-id='ilayer'>
 	<tr>
-		<th>Method</th>
-		<th>Returns</th>
-		<th>Description</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
 	</tr>
 	<tr>
-		<td><code><b>onAdd</b>(
-			<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
-		</code></td>
+<td><code><b>onAdd</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
 
-		<td>-</td>
-		<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="/mapbox.js/api/v2.0.0/l-map">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
+<td>-</td>
+<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="/mapbox.js/api/v2.0.0/l-map">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
 	</tr>
 	<tr>
-		<td><code><b>onRemove</b>(
-			<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
-		</code></td>
+<td><code><b>onRemove</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
 
-		<td>-</td>
-		<td>Should contain all clean up code that removes the overlay's elements from the DOM and removes listeners previously added in <code>onAdd</code>. Called on <code>map.removeLayer(layer)</code>.</td>
+<td>-</td>
+<td>Should contain all clean up code that removes the overlay's elements from the DOM and removes listeners previously added in <code>onAdd</code>. Called on <code>map.removeLayer(layer)</code>.</td>
 	</tr>
 </table>
 
@@ -50,32 +50,32 @@ permalink: /api/v2.0.0/l-ilayer
 <pre><code>var MyCustomLayer = L.Class.extend({
 
 	initialize: function (latlng) {
-		// save position of the layer or any options from the constructor
-		this._latlng = latlng;
+// save position of the layer or any options from the constructor
+this._latlng = latlng;
 	},
 
 	onAdd: function (map) {
-		this._map = map;
+this._map = map;
 
-		// create a DOM element and put it into one of the map panes
-		this._el = L.DomUtil.create('div', 'my-custom-layer leaflet-zoom-hide');
-		map.getPanes().overlayPane.appendChild(this._el);
+// create a DOM element and put it into one of the map panes
+this._el = L.DomUtil.create('div', 'my-custom-layer leaflet-zoom-hide');
+map.getPanes().overlayPane.appendChild(this._el);
 
-		// add a viewreset event listener for updating layer's position, do the latter
-		map.on('viewreset', this._reset, this);
-		this._reset();
+// add a viewreset event listener for updating layer's position, do the latter
+map.on('viewreset', this._reset, this);
+this._reset();
 	},
 
 	onRemove: function (map) {
-		// remove layer's DOM elements and listeners
-		map.getPanes().overlayPane.removeChild(this._el);
-		map.off('viewreset', this._reset, this);
+// remove layer's DOM elements and listeners
+map.getPanes().overlayPane.removeChild(this._el);
+map.off('viewreset', this._reset, this);
 	},
 
 	_reset: function () {
-		// update layer's position
-		var pos = this._map.latLngToLayerPoint(this._latlng);
-		L.DomUtil.setPosition(this._el, pos);
+// update layer's position
+var pos = this._map.latLngToLayerPoint(this._latlng);
+L.DomUtil.setPosition(this._el, pos);
 	}
 });
 

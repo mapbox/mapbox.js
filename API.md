@@ -315,7 +315,7 @@ A low-level interface to geocoding, useful for more complex uses and reverse-geo
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url | string | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li></ul> |
+| id _or_ url | string | Value must be <ul><li>A [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places-v1`</li><li>A geocoder API URL, like `{{site.tileapi}}/v4/geocode/mapbox.places-v1/{query}.json`</li></ul> |
 | options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li></ul> |
 
 _Returns_ a `L.mapbox.geocoder` object.
@@ -468,22 +468,18 @@ _Returns_: the `L.mapbox.gridControl` object.
 ## L.mapbox.geocoderControl(id|url, options)
 
 Adds geocoder functionality as well as a UI element to a map. This uses
-the [Mapbox Geocoding API](http://mapbox.com/developers/api/#geocoding).
-
-<div class='note warning'>
-This function is currently in private beta: [Contact Mapbox](https://mapbox.com/contact/) before using this functionality.
-</div>
+the [Mapbox Geocoding API](http://mapbox.com/developers/api/geocoding/).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url (_required_) | string | Either a <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li></ul> |
+| id _or_ url (_required_) | string | Either a <ul><li>An [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places-v1`</li><li>A geocoder API URL, like `{{site.tileapi}}/v4/geocode/mapbox.places-v1/{query}.json`</li></ul> |
 | options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this control.</li></ul> |
 
 _Example_:
 
     var map = L.map('map')
         .setView([37, -77], 5)
-        .addControl(L.mapbox.geocoderControl('examples.map-i875kd35'));
+        .addControl(L.mapbox.geocoderControl('mapbox.places-v1'));
 
 _Returns_ a `L.mapbox.geocoderControl` object.
 
@@ -717,6 +713,23 @@ instead. For example, replace
  ```
  map.featureLayer.setFilter(function(f) { ... });
  ```
+
+* `L.mapbox.geocoder` and `L.mapbox.geocoderControl` no longer accept arbitrary map IDs.
+Instead you must provide a predefined geocoder index ID (or the ID of a custom geocoder
+index). For instance, replace
+
+ ```
+ L.mapbox.geocoderControl('examples.map-i86nkdio').addTo(map);
+ ```
+
+ with
+
+ ```
+ L.mapbox.geocoderControl('mapbox.places-v1').addTo(map);
+ ```
+ 
+ See [the geocoding API documentation](https://www.mapbox.com/developers/api/geocoding/)
+ for a complete list of predefined geocoding indexes.
 
 * The format for `L.mapbox.geocoder` and `L.mapbox.geocoderControl` results have changed.
 Results are now provided in GeoJSON format. If your code uses `L.mapbox.geocoder` or

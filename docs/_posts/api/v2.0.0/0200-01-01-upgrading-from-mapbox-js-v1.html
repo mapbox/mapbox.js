@@ -5,7 +5,7 @@ categories: api
 version: v2.0.0
 permalink: /api/v2.0.0/upgrading-from-mapbox-js-v1
 ---
-{% raw %}<h2 id="section-upgrading-from-mapbox-js-v1">Upgrading from Mapbox.js v1</h2>
+<h2 id="section-upgrading-from-mapbox-js-v1">Upgrading from Mapbox.js v1</h2>
 <p>In a few cases, you may need to make changes to code written for Mapbox.js 1.x
 versions in order to work with Mapbox.js 2.x.</p>
 <ul>
@@ -19,6 +19,15 @@ instead. For example, replace</p>
 </code></pre><p>with</p>
 <pre><code>map.featureLayer.setFilter(function(f) { ... });
 </code></pre></li>
+<li><p><code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> no longer accept arbitrary map IDs.
+Instead you must provide a predefined geocoder index ID (or the ID of a custom geocoder
+index). For instance, replace</p>
+<pre><code>L.mapbox.geocoderControl(&#39;examples.map-i86nkdio&#39;).addTo(map);
+</code></pre><p>with</p>
+<pre><code>L.mapbox.geocoderControl(&#39;mapbox.places-v1&#39;).addTo(map);
+</code></pre><p>See <a href="https://www.mapbox.com/developers/api/geocoding/">the geocoding API documentation</a>
+for a complete list of predefined geocoding indexes.</p>
+</li>
 <li><p>The format for <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> results have changed.
 Results are now provided in GeoJSON format. If your code uses <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> or
 the <code>found</code>, <code>select</code>, or <code>autoselect</code> events from <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code>, it may
@@ -39,4 +48,3 @@ of resetting the URL or ID, construct a new instance with the desired URL or ID.
 setting TileJSON, construct an instance from the geocoding URL in the TileJSON.</p>
 </li>
 </ul>
-{% endraw %}

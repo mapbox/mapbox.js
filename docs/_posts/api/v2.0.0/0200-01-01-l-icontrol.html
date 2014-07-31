@@ -15,25 +15,25 @@ permalink: /api/v2.0.0/l-icontrol
 
 <table data-id='icontrol'>
 	<tr>
-		<th>Method</th>
-		<th>Returns</th>
-		<th>Description</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
 	</tr>
 	<tr>
-		<td><code><b>onAdd</b>(
-			<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
-		</code></td>
+<td><code><b>onAdd</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
 
-		<td><code>HTMLElement</code></td>
-		<td>Should contain code that creates all the neccessary DOM elements for the control, adds listeners on relevant map events, and returns the element containing the control. Called on <code>map.addControl(control)</code> or <code>control.addTo(map)</code>.</td>
+<td><code>HTMLElement</code></td>
+<td>Should contain code that creates all the neccessary DOM elements for the control, adds listeners on relevant map events, and returns the element containing the control. Called on <code>map.addControl(control)</code> or <code>control.addTo(map)</code>.</td>
 	</tr>
 	<tr>
-		<td><code><b>onRemove</b>(
-			<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
-		</code></td>
+<td><code><b>onRemove</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
 
-		<td>-</td>
-		<td>Optional, should contain all clean up code (e.g. removes control's event listeners). Called on <code>map.removeControl(control)</code> or <code>control.removeFrom(map)</code>. The control's DOM container is removed automatically.</td>
+<td>-</td>
+<td>Optional, should contain all clean up code (e.g. removes control's event listeners). Called on <code>map.removeControl(control)</code> or <code>control.removeFrom(map)</code>. The control's DOM container is removed automatically.</td>
 	</tr>
 </table>
 
@@ -41,16 +41,16 @@ permalink: /api/v2.0.0/l-icontrol
 
 <pre><code>var MyControl = L.Control.extend({
 	options: {
-		position: 'topright'
+position: 'topright'
 	},
 
 	onAdd: function (map) {
-		// create the control container with a particular class name
-		var container = L.DomUtil.create('div', 'my-custom-control');
+// create the control container with a particular class name
+var container = L.DomUtil.create('div', 'my-custom-control');
 
-		// ... initialize other DOM elements, add listeners, etc.
+// ... initialize other DOM elements, add listeners, etc.
 
-		return container;
+return container;
 	}
 });
 
@@ -61,8 +61,8 @@ map.addControl(new MyControl());
 
 <pre><code>var MyControl = L.Control.extend({
 	initialize: function (foo, options) {
-		// ...
-		L.Util.setOptions(this, options);
+// ...
+L.Util.setOptions(this, options);
 	},
 	// ...
 });</code></pre>
