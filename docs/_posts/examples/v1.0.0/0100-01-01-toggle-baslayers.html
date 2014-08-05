@@ -17,16 +17,16 @@ tags:
 <div id='map'></div>
 
 <script>
-    var map = L.mapbox.map('map', '', {
-        maxZoom: 18
-    }).setView([22.76, -25.84], 3);
+  var map = L.mapbox.map('map', null, {
+      maxZoom: 18
+  }).setView([22.76, -25.84], 3);
 
-    var layers = {
-        'Streets': L.mapbox.tileLayer('examples.map-i87786ca'),
-        'Outdoors': L.mapbox.tileLayer('examples.ik7djhcc'),
-        'Satellite': L.mapbox.tileLayer('examples.map-igb471ik'),
-    };
+  var layers = {
+      Streets: L.mapbox.tileLayer('examples.map-i87786ca'),
+      Outdoors: L.mapbox.tileLayer('examples.ik7djhcc'),
+      Satellite: L.mapbox.tileLayer('examples.map-igb471ik'),
+  };
 
-    layers.Streets.addTo(map);
-    L.control.layers(layers).addTo(map);
+  layers.Streets.addTo(map);
+  L.control.layers(layers).addTo(map);
 </script>
