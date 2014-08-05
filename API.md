@@ -71,10 +71,10 @@ _Example_:
         // since layers load asynchronously through AJAX, use the
         // `.on` function to listen for them to be loaded before
         // calling `getTileJSON()`
-        .on('load', function() {
-        // get TileJSON data from the loaded layer
-        var TileJSON = layer.getTileJSON();
-    });
+        .on('ready', function() {
+            // get TileJSON data from the loaded layer
+            var TileJSON = layer.getTileJSON();
+        });
 
 _Returns_: the TileJSON object
 
@@ -159,10 +159,10 @@ _Example_:
         // since layers load asynchronously through AJAX, use the
         // `.on` function to listen for them to be loaded before
         // calling `getTileJSON()`
-        .on('load', function() {
-        // get TileJSON data from the loaded layer
-        var TileJSON = layer.getTileJSON();
-    });
+        .on('ready', function() {
+            // get TileJSON data from the loaded layer
+            var TileJSON = layer.getTileJSON();
+        });
 
 _Returns_: the TileJSON object
 
