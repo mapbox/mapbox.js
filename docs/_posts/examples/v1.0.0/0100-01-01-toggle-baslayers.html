@@ -1,0 +1,32 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Toggling baselayers
+description: Toggling between three different baselayers.
+tags:
+  - ui
+  - layers
+---
+<style>
+    body { margin: 0; padding: 0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+
+<div id='map'></div>
+
+<script>
+  var map = L.mapbox.map('map', null, {
+      maxZoom: 18
+  }).setView([22.76, -25.84], 3);
+
+  var layers = {
+      Streets: L.mapbox.tileLayer('examples.map-i87786ca'),
+      Outdoors: L.mapbox.tileLayer('examples.ik7djhcc'),
+      Satellite: L.mapbox.tileLayer('examples.map-igb471ik')
+  };
+
+  layers.Streets.addTo(map);
+  L.control.layers(layers).addTo(map);
+</script>
