@@ -18,7 +18,7 @@ module.exports = function(path, accessToken) {
     if (config.REQUIRE_ACCESS_TOKEN) {
         if (accessToken[0] === 's') {
             throw new Error('Use a public access token (pk.*) with Mapbox.js, not a secret access token (sk.*). ' +
-                'See https://www.mapbox.com/mapbox.js/api/v' + version + '/l-mapbox-accessToken/');
+                'See https://www.mapbox.com/mapbox.js/api/v' + version + '/api-access-tokens/');
         }
 
         url += accessToken;
