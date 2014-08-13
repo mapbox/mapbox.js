@@ -1,3 +1,9 @@
+## v2.0.1
+
+* Be very cautious about global access to console (#838)
+* Fix error when geocoder returns 0 results (#817)
+* Fix API token doc URL (#834)
+
 ## v2.0.0
 
 * Adapt to v4 geocoder response format
