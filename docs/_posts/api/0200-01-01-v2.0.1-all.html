@@ -10,7 +10,7 @@ permalink: /api/v2.0.1/all/
 <h2 id="l-mapbox-map">L.mapbox.map(element, id|url|tilejson, options)</h2>
 <p>Create and automatically configure a map with layers, markers, and
 interactivity.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-map-class">L.Map</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-map-class">L.Map</a></code></span></p>
 <table>
 <thead>
 <tr>
@@ -55,7 +55,7 @@ zoom bounds and other metadata.</p>
 <h2 id="l-mapbox-tilelayer">L.mapbox.tileLayer(id|url|tilejson, options)</h2>
 <p>You can add a tiled layer to your map with <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer()</a></code>, a simple
 interface to layers from Mapbox and elsewhere.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-tilelayer">L.TileLayer</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-tilelayer">L.TileLayer</a></code></span></p>
 <table>
 <thead>
 <tr>
@@ -238,7 +238,7 @@ function with that data, if any.</p>
 </table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>
 <h2 id="l-mapbox-featurelayer">L.mapbox.featureLayer(id|url|geojson, options)</h2>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-featuregroup">L.FeatureGroup</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-featuregroup">L.FeatureGroup</a></code></span></p>
 <p><code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
 from Mapbox and elsewhere into your map.</p>
 <table>
@@ -482,7 +482,7 @@ featureLayer.setGeoJSON({
 <p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
 <h1 id="controls">Controls</h1>
 <h2 id="l-mapbox-infocontrol">L.mapbox.infoControl(options)</h2>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
 <p>A map control that shows a toggleable info container. If set, attribution is auto-detected from active layers and added to the info container.</p>
 <table>
 <thead>
@@ -542,7 +542,7 @@ map.addControl(L.mapbox.infoControl().addInfo(&#39;foo&#39;));
 </tbody>
 </table>
 <h2 id="l-mapbox-legendcontrol">L.mapbox.legendControl(options)</h2>
-<p><span class='leaflet'><em>Extends</em>: L.Control</span></p>
+<p><span class='leaflet icon'><em>Extends</em>: L.Control</span></p>
 <p>A map control that shows legends added to maps in Mapbox. Legends are auto-detected from active layers.</p>
 <table>
 <thead>
@@ -602,7 +602,7 @@ map.addControl(L.mapbox.legendControl());
 </tbody>
 </table>
 <h2 id="l-mapbox-gridcontrol">L.mapbox.gridControl(layer, options)</h2>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
 <p>Interaction is what we call interactive parts of maps that are created with the powerful <a href="http://mapbox.com/tilemill/docs/crashcourse/tooltips/">tooltips &amp; regions</a> system in <a href="http://mapbox.com/tilemill/">TileMill</a>. Under the hood, it&#39;s powered by the open <a href="https://github.com/mapbox/utfgrid-spec/">UTFGrid specification</a>.</p>
 <table>
 <thead>
@@ -773,7 +773,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 </table>
 <h2 id="l-mapbox-sharecontrol">L.mapbox.shareControl(id|url, options)</h2>
 <p>Adds a &quot;Share&quot; button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
 <table>
 <thead>
 <tr>

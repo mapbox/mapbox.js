@@ -1,16 +1,7 @@
 /* Base Candidates */
 .button.zeroclipboard-is-hover { background:#3bb2d0!important; }
 .js-clipboard:hover { cursor:pointer; }
-
-.leaflet:before {
-  background:transparent url(../images/sprite.png) no-repeat 0 0;
-  content:'';
-  display:inline-block;
-  width:20px;
-  height:20px;
-  vertical-align:top;
-  margin-right:5px;
-  }
+.doc .leaflet.icon:before { color:#b0dd5a; }
 
 /*Examples*/
 #map {
