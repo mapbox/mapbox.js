@@ -56,8 +56,7 @@ var GridControl = L.Control.extend({
             if (this._map._popup !== this._popup) this._popup.openOn(this._map);
         } else {
             this._container.style.display = 'block';
-            var text = ('innerText' in this._contentWrapper) ? 'innerText' : 'textContent';
-            this._contentWrapper[text] = content;
+            this._contentWrapper.innerHTML = content;
         }
     },
 
