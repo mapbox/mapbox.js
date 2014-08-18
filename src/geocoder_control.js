@@ -112,7 +112,8 @@ var GeocoderControl = L.Control.extend({
                         if (!name.length) continue;
 
                         var r = L.DomUtil.create('a', '', this._results);
-                        r.innerText = name;
+                        var text = ('innerText' in r) ? 'innerText' : 'textContent';
+                        r[text] = name;
                         r.href = '#';
 
                         (L.bind(function(feature) {
