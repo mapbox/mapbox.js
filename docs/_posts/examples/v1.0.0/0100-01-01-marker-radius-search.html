@@ -17,7 +17,6 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
     .setView([40, -95], 4);
 
-var featureLayer = L.mapbox.featureLayer().addTo(map);
 var RADIUS = 500000;
 var filterCircle = L.circle(L.latLng(40, -75), RADIUS, {
     opacity: 1,
