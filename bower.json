@@ -1,11 +1,11 @@
 {
   "name": "mapbox.js",
   "main": "index.js",
-  "version": "1.6.2",
+  "version": "",
   "homepage": "https://github.com/mapbox/mapbox.js",
-  "authors": [ "Mapbox" ],
+  "authors": ["Mapbox"],
   "description": "Mapbox Javascript API",
-  "keywords": [ "mapbox" ],
+  "keywords": ["mapbox", "leaflet", "maps", "map"],
   "license": "See LICENSE.md",
   "ignore": [
     "**/.*",

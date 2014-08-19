@@ -17,7 +17,7 @@ function init {
   BUILD_DIR=$(resolveDir ./dist)
   NEW_VERSION=$(git describe --tags | sed 's/^v//')
   ORG=mapbox
-  REPO=bower-mapboxjs
+  REPO=mapbox.js-bower
 }
 
 
@@ -39,8 +39,8 @@ function prepare {
   #
   # clean up cloned files
   #
-  rm $TMP_DIR/$REPO/*.js
-  rm $TMP_DIR/$REPO/*.css
+  rm -f $TMP_DIR/$REPO/*.js
+  rm -f $TMP_DIR/$REPO/*.css
   rm -rf rm $TMP_DIR/$REPO/images
 
   # move js files from the build
@@ -51,6 +51,8 @@ function prepare {
 
   # move images folder from the build
   cp -R $BUILD_DIR/images $TMP_DIR/$REPO/
+
+  cp -R bower.json $TMP_DIR/$REPO/bower.json
 
   #
   # update bower.json
