@@ -24,7 +24,7 @@ The `mapbox.js` file includes the Leaflet library. Alternatively, you can use `m
 
 See the [API documentation](http://mapbox.com/mapbox.js/api/) and [Examples](http://mapbox.com/mapbox.js/example/v1.0.0/) for further help.
 
-## Usage with Browserify
+## Usage with [Browserify](http://browserify.org/)
 
 Install the mapbox.js module and add it to `dependencies` in package.json:
 
@@ -44,6 +44,14 @@ Browserify it:
 
 ```sh
 browserify main.js -o bundle.js
+```
+
+## Usage with Bower
+
+You can install `mapbox.js` with [bower](http://bower.io/) by running
+
+```sh
+bower install mapbox.js
 ```
 
 ## Building
