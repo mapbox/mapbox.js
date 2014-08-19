@@ -11,7 +11,23 @@ version: latest
       <h3>{{page.title}}</h3>
       <p class='prose'>{{page.description}}</p>
     </div>
-    <div id='demo' class='contain row10 fill-light'>{{content}}</div>
+    <div class='contain row10 fill-light'>
+    <iframe id='demo' class='row10 col12' allowfullscreen='true' mozallowfullscreen='true' webkitallowfullscreen='true'></iframe>
+    <script>
+        var doc = $('#demo')[0].contentWindow.document;
+        doc.open();
+        doc.write("<html><head><meta charset=utf-8 /><title>{{page.title}}</title>");
+        doc.write("<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />");
+        doc.write("<script src='{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.js'><\/script>");
+        doc.write("<link href='{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />");
+        doc.write("<style> body { margin:0; padding:0; } #map { position:absolute; top:0; bottom:0; width:100%; } </style>");
+        doc.write("</head><body>");
+        doc.write("<script>L.mapbox.accessToken = '" + App.accessToken + "';<\/script>");
+        doc.write({{content | jsonify | replace: '</', '<\/'}});
+        doc.write("</body></html>");
+        doc.close();
+    </script>
+    </div>
     <div id='snippet'>
     <div id='code' class='fill-white'>
 

@@ -31,6 +31,8 @@ tags:
 
 <div id='map'></div>
 
+<!-- jQuery is required for this example. -->
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
 <script>
 var map = L.mapbox.map('map', 'examples.map-i86nkdio');
 
@@ -107,8 +109,6 @@ myLayer.on('layeradd', function(e) {
 // Add features to the map
 myLayer.setGeoJSON(geoJson);
 
-// This example uses jQuery to make selecting items in the slideshow easier.
-// Download it from http://jquery.com
 $('#map').on('click', '.popup .cycle a', function() {
     var $slideshow = $('.slideshow'),
         $newSlide;
