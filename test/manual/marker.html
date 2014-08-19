@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="../../dist/mapbox.css"/>
   <link rel="stylesheet" href="embed.css"/>
   <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
 </head>
 <body>
 <div id='map'></div>
@@ -28,7 +29,7 @@
         }]
     };
 
-    map.markerLayer.setGeoJSON(geoJson);
+    map.featureLayer.setGeoJSON(geoJson);
 
 </script>
 </body>

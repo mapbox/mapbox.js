@@ -1,0 +1,34 @@
+---
+layout: api
+title: "v2.0.0 JavaScript Library: L.PolyUtil"
+categories: api
+version: v2.0.0
+permalink: /api/v2.0.0/l-polyutil
+---
+<h2 id="polyutil">PolyUtil</h2>
+
+<p>Various utility functions for polygon geometries.</p>
+
+<h3>Methods</h3>
+
+<table data-id='polylineutil'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>clipPolygon</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-point">Point</a>[]&gt; <i>points</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-bounds">Bounds</a>&gt; <i>bounds</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.0.0/l-point">Point</a>[]</code></td>
+
+<td>Clips the polygon geometry defined by the given points by rectangular bounds. Used by Leaflet to only show polygon points that are on the screen or near, increasing performance. Note that polygon points needs different algorithm for clipping than polyline, so there's a seperate method for it.</td>
+	</tr>
+</table>
+
+
+
+

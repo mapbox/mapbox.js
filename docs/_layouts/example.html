@@ -7,10 +7,6 @@ version: latest
 </style>
 <div class='col12 round keyline-all clearfix contain fill-white'>
   <div class='clearfix'>
-    <div id='logged-out-help' class='center pad2 note round-top'>
-        <a class='icon check js-signup' href='https://www.mapbox.com/plans/'>Get a free Mapbox account</a> to create your own custom map and use it in this example.
-    </div>
-
     <div class='pad2 keyline-bottom' data-swiftype-index=true>
       <h3>{{page.title}}</h3>
       <p class='prose'>{{page.description}}</p>
@@ -35,12 +31,18 @@ version: latest
 </head>
 <body>{% endhighlight %}
 </div>
-{% highlight html %}{{content}}{% endhighlight %}
+<div class="js-replace-token">
+{% highlight html %}{{content | insert_token}}{% endhighlight %}
+</div>
 <div class='code-footer'>
 {% highlight html %}</body>
 </html>{% endhighlight %}
 </div>
   </div><!-- end #code -->
+  <div id='logged-out-help' class='center pad2 keyline-top prose'>
+    <a class='icon check js-signup' href='https://www.mapbox.com/plans/'>Get a free Mapbox account</a> to create your own custom map and use it in this example.
+  </div>
+
   <div id='logged-in-help' class='quiet pad2 keyline-top prose'>
     Use this example by copying its source into your own HTML page and
     replacing the <a href='https://www.mapbox.com/help/define-map-id/'>Map ID</a>
@@ -54,12 +56,14 @@ version: latest
   </div>
   </div>
   <script>
-  var loggedOut = document.getElementById('logged-out-help');
-  var loggedIn = document.getElementById('logged-in-help');
-  if (typeof App !== 'undefined' && App.user) {
-      loggedOut.parentNode.removeChild(loggedOut);
-  } else {
-      loggedIn.parentNode.removeChild(loggedIn);
-  }
+  App.onUserLoad(function() {
+      var loggedOut = document.getElementById('logged-out-help');
+      var loggedIn = document.getElementById('logged-in-help');
+      if (App.user) {
+          loggedOut.parentNode.removeChild(loggedOut);
+      } else {
+          loggedIn.parentNode.removeChild(loggedIn);
+      }
+  });
   </script>
 </div>

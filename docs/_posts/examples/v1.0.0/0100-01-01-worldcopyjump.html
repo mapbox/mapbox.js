@@ -1,0 +1,23 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: worldCopyJump option
+description: Pan the map to see markers copied across world copies
+tags:
+  - ui
+  - markers
+---
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio', {
+        worldCopyJump: true
+    })
+    .setView([0, 0], 3);
+
+for (var i = 0; i < 100; i++) {
+    L.marker([(Math.random() - 0.5) * 180, (Math.random() - 0.5) * 360])
+        .addTo(map);
+}
+</script>

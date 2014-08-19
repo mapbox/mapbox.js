@@ -1,0 +1,166 @@
+---
+layout: api
+title: "v2.0.0 JavaScript Library: L.LatLngBounds"
+categories: api
+version: v2.0.0
+permalink: /api/v2.0.0/l-latlngbounds
+---
+<h2 id="latlngbounds">LatLngBounds</h2>
+
+<p>Represents a rectangular geographical area on a map.</p>
+<pre><code class="javascript">var southWest = L.latLng(40.712, -74.227),
+	northEast = L.latLng(40.774, -74.125),
+	bounds = L.latLngBounds(southWest, northEast);</code></pre>
+
+<p>All Leaflet methods that accept LatLngBounds objects also accept them in a simple Array form (unless noted otherwise), so the bounds example above can be passed like this:</p>
+
+<pre><code class="javascript">map.fitBounds([
+	[40.712, -74.227],
+	[40.774, -74.125]
+]);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='latlngbounds'>
+	<tr>
+<th class="width250">Factory</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td>
+<code><b>L.latLngBounds</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>&gt; <i>southWest</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>&gt; <i>northEast</i></nobr> )</code>
+</td>
+
+
+
+<td>Creates a latLngBounds object by defining south-west and north-east corners of the rectangle.</td>
+	</tr>
+	<tr>
+<td><code><b>L.latLngBounds</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>[]&gt; <i>latlngs</i> )</nobr>
+</code></td>
+
+<td>Creates a LatLngBounds object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with <a href="/mapbox.js/api/v2.0.0/l-map">fitBounds</a>.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='latlngbounds'>
+	<tr>
+<th class="width300">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>extend</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>|<a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a>&gt; <i>latlng</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Extends the bounds to contain the given point or bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getSouthWest</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a></code></td>
+<td>Returns the south-west point of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getNorthEast</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a></code></td>
+<td>Returns the north-east point of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getNorthWest</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a></code></td>
+<td>Returns the north-west point of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getSouthEast</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a></code></td>
+<td>Returns the south-east point of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getWest</b>()</code></td>
+<td><code>Number</code></td>
+<td>Returns the west longitude of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getSouth</b>()</code></td>
+<td><code>Number</code></td>
+<td>Returns the south latitude of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getEast</b>()</code></td>
+<td><code>Number</code></td>
+<td>Returns the east longitude of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getNorth</b>()</code></td>
+<td><code>Number</code></td>
+<td>Returns the north latitude of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>getCenter</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a></code></td>
+<td>Returns the center point of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>contains</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a>&gt; <i>otherBounds</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the rectangle contains the given one.</td>
+	</tr>
+	<tr>
+<td><code><b>contains</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the rectangle contains the given point.</td>
+	</tr>
+	<tr>
+<td><code><b>intersects</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a>&gt; <i>otherBounds</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the rectangle intersects the given bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>equals</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a>&gt; <i>otherBounds</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the rectangle is equivalent (within a small margin of error) to the given bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>toBBoxString</b>()</code></td>
+<td><code>String</code></td>
+<td>Returns a string with bounding box coordinates in a <code><span class="string">'southwest_lng,southwest_lat,northeast_lng,northeast_lat'</span></code> format. Useful for sending requests to web services that return geo data.</td>
+	</tr>
+	<tr>
+<td><code><b>pad</b>(
+<nobr>&lt;Number&gt; <i>bufferRatio</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a></code></td>
+<td>Returns bigger bounds created by extending the current bounds by a given percentage in each direction.</td>
+	</tr>
+	<tr>
+<td><code><b>isValid</b>()</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the bounds are properly initialized.</td>
+	</tr>
+</table>
+
+
+
+

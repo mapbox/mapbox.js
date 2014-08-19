@@ -1,9 +1,11 @@
 <div class='row6 contain z1 hide-mobile'>
   <div id='example-map' class='pin-bottom pin-top round-top'></div>
-  <div id='example-snippet' class='pin-bottom margin3 row3 col6'>
-    <div class='clip row3 fill-light pad2x'>
+  <div id='example-snippet' class='pin-bottom margin2 col8 row4'>
+    <div class='clip row4 fill-light pad2x js-replace-token'>
 {% highlight html %}
 <script>
+// Provide your access token
+L.mapbox.accessToken = '<your access token here>';
 // Create a map in the div #map
 L.mapbox.map('map', 'username.mapid');
 </script>
@@ -64,7 +66,12 @@ L.mapbox.map('map', 'username.mapid');
 
 <script>
 $(function load() {
-    L.mapbox.map('example-map', '{{site.defaultid}}', { scrollWheelZoom: false, center: [40.70, -73.98], zoom: 14 });
+    L.mapbox.map('example-map', '{{site.defaultid}}', {
+      attributionControl: false,
+      scrollWheelZoom: false,
+      center: [40.70, -73.98],
+      zoom: 14
+    });
 
     var mapid = App.storage('map.id'),
         exampleid = 'username.mapid';

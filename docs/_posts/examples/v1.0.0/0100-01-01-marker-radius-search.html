@@ -1,0 +1,38 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Marker radius search
+description: Use the .distanceTo function to only show markers within a range
+tags:
+  - ui
+  - markers
+  - omnivore
+---
+
+<script src='{{site.tileapi}}/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([40, -95], 4);
+
+var RADIUS = 500000;
+var filterCircle = L.circle(L.latLng(40, -75), RADIUS, {
+    opacity: 1,
+    weight: 1,
+    fillOpacity: 0.4
+}).addTo(map);
+
+var csvLayer = omnivore.csv('/mapbox.js/assets/data/airports.csv', null, L.mapbox.featureLayer())
+    .addTo(map);
+
+map.on('mousemove', function(e) {
+    filterCircle.setLatLng(e.latlng);
+    csvLayer.setFilter(function showAirport(feature) {
+        return e.latlng.distanceTo(L.latLng(
+                feature.geometry.coordinates[1],
+                feature.geometry.coordinates[0])) < RADIUS;
+    });
+});
+</script>

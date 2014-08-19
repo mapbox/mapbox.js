@@ -1,32 +1,42 @@
 'use strict';
 
-var config = require('./config');
+var config = require('./config'),
+    version = require('../package.json').version;
 
-// Return the base url of a specific version of Mapbox's API.
-//
-// `hash`, if provided must be a number and is used to distribute requests
-// against multiple `CNAME`s in order to avoid connection limits in browsers
-module.exports = {
-    isSSL: function() {
-        return 'https:' === document.location.protocol || config.FORCE_HTTPS;
-    },
-    base: function() {
-        // By default, use public HTTP urls
-        // Support HTTPS if the user has specified HTTPS urls to use, and this
-        // page is under HTTPS
-        return (this.isSSL() ? config.HTTPS_URLS : config.HTTP_URLS)[0];
-    },
-    // Requests that contain URLs need a secure flag appended
-    // to their URLs so that the server knows to send SSL-ified
-    // resource references.
-    secureFlag: function(url) {
-        if (!this.isSSL()) return url;
-        else if (url.match(/(\?|&)secure/)) return url;
-        else if (url.indexOf('?') !== -1) return url + '&secure';
-        else return url + '?secure';
-    },
-    // Convert a JSONP url to a JSON URL. (Mapbox TileJSON sometimes hardcodes JSONP.)
-    jsonify: function(url) {
-        return url.replace(/\.(geo)?jsonp(?=$|\?)/, '.$1json');
+module.exports = function(path, accessToken) {
+    accessToken = accessToken || L.mapbox.accessToken;
+
+    if (!accessToken && config.REQUIRE_ACCESS_TOKEN) {
+        throw new Error('An API access token is required to use Mapbox.js. ' +
+            'See https://www.mapbox.com/mapbox.js/api/v' + version + '/api-access-tokens/');
     }
+
+    var url = ('https:' === document.location.protocol || config.FORCE_HTTPS) ? config.HTTPS_URL : config.HTTP_URL;
+    url += path;
+    url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
+
+    if (config.REQUIRE_ACCESS_TOKEN) {
+        if (accessToken[0] === 's') {
+            throw new Error('Use a public access token (pk.*) with Mapbox.js, not a secret access token (sk.*). ' +
+                'See https://www.mapbox.com/mapbox.js/api/v' + version + '/api-access-tokens/');
+        }
+
+        url += accessToken;
+    }
+
+    return url;
+};
+
+module.exports.tileJSON = function(urlOrMapID, accessToken) {
+    if (urlOrMapID.indexOf('/') !== -1)
+        return urlOrMapID;
+
+    var url = module.exports('/' + urlOrMapID + '.json', accessToken);
+
+    // TileJSON requests need a secure flag appended to their URLs so
+    // that the server knows to send SSL-ified resource references.
+    if (url.indexOf('https') === 0)
+        url += '&secure';
+
+    return url;
 };

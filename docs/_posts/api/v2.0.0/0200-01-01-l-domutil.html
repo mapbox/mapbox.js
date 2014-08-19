@@ -1,0 +1,173 @@
+---
+layout: api
+title: "v2.0.0 JavaScript Library: L.DomUtil"
+categories: api
+version: v2.0.0
+permalink: /api/v2.0.0/l-domutil
+---
+<h2 id="domutil">DomUtil</h2>
+
+<p>Utility functions to work with the DOM tree, used by Leaflet internally.</p>
+
+<h3>Methods</h3>
+
+<table data-id='domutil'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>get</b>(
+<nobr>&lt;String or HTMLElement&gt; <i>id</i> )</nobr>
+</code></td>
+
+<td><code>HTMLElement</code></td>
+<td>Returns an element with the given id if a string was passed, or just returns the element if it was passed directly.</td>
+	</tr>
+	<tr>
+<td><code><b>getStyle</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+<nobr>&lt;String&gt; <i>style</i> )</nobr>
+</code></td>
+
+<td><code>String</code></td>
+<td>Returns the value for a certain style attribute on an element, including computed values or values set through CSS.</td>
+	</tr>
+	<tr>
+<td><code><b>getViewportOffset</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i> )</nobr>
+</code></td>
+
+<td><a href="/mapbox.js/api/v2.0.0/l-point"><code>Point</code></a></td>
+<td>Returns the offset to the viewport for the requested element.</td>
+	</tr>
+	<tr>
+<td><code><b>create</b>(
+<nobr>&lt;String&gt; <i>tagName</i></nobr>,
+<nobr>&lt;String&gt; <i>className</i></nobr>,
+<nobr>&lt;HTMLElement&gt; <i>container?</i> )</nobr>
+</code></td>
+
+<td><code>HTMLElement</code></td>
+
+<td>Creates an element with <code>tagName</code>, sets the <code>className</code>, and optionally appends it to <code>container</code> element.</td>
+	</tr>
+	<tr>
+<td><code><b>disableTextSelection</b>()</code></td>
+<td>-</td>
+<td>Makes sure text cannot be selected, for example during dragging.</td>
+	</tr>
+	<tr>
+<td><code><b>enableTextSelection</b>()</code></td>
+<td>-</td>
+<td>Makes text selection possible again.</td>
+	</tr>
+	<tr>
+<td><code><b>hasClass</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+<nobr>&lt;String&gt; <i>name</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+
+<td>Returns <code><span class="literal">true</span></code> if the element class attribute contains <code>name</code>.</td>
+	</tr>
+	<tr>
+<td><code><b>addClass</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+<nobr>&lt;String&gt; <i>name</i> )</nobr>
+</code></td>
+
+<td>-</td>
+
+<td>Adds <code>name</code> to the element's class attribute.</td>
+	</tr>
+	<tr>
+<td><code><b>removeClass</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+<nobr>&lt;String&gt; <i>name</i> )</nobr>
+</code></td>
+
+<td>-</td>
+
+<td>Removes <code>name</code> from the element's class attribute.</td>
+	</tr>
+	<tr>
+<td><code><b>setOpacity</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+<nobr>&lt;Number&gt; <i>value</i> )</nobr>
+</code></td>
+
+<td>-</td>
+<td>Set the opacity of an element (including old IE support). Value must be from <code>0</code> to <code>1</code>.</td>
+	</tr>
+	<tr>
+<td><code><b>testProp</b>(
+<nobr>&lt;String[]&gt; <i>props</i> )</nobr>
+</code></td>
+
+<td><code>String</code> or <code><span class="literal">false</span></code></td>
+<td>Goes through the array of style names and returns the first name that is a valid style name for an element. If no such name is found, it returns <code><span class="literal">false</span></code>. Useful for vendor-prefixed styles like <code>transform</code>.</td>
+	</tr>
+	<tr>
+<td><code><b>getTranslateString</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-point">Point</a>&gt; <i>point</i> )</nobr>
+</code></td>
+
+<td><code>String</code></td>
+<td>Returns a CSS transform string to move an element by the offset provided in the given point. Uses 3D translate on WebKit for hardware-accelerated transforms and 2D on other browsers.</td>
+	</tr>
+	<tr>
+<td><code><b>getScaleString</b>(
+<nobr>&lt;Number&gt; <i>scale</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-point">Point</a>&gt; <i>origin</i> )</nobr>
+</code></td>
+
+<td><code>String</code></td>
+<td>Returns a CSS transform string to scale an element (with the given scale origin).</td>
+	</tr>
+	<tr>
+<td><code><b>setPosition</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-point">Point</a>&gt; <i>point</i></nobr>,
+<nobr>&lt;Boolean&gt; <i>disable3D?</i> )</nobr>
+</code></td>
+
+<td>-</td>
+<td>Sets the position of an element to coordinates specified by <code>point</code>, using CSS translate or top/left positioning depending on the browser (used by Leaflet internally to position its layers). Forces top/left positioning if <code>disable3D</code> is <code><span class="literal">true</span></code>.</td>
+	</tr>
+	<tr>
+<td><code><b>getPosition</b>(
+<nobr>&lt;HTMLElement&gt; <i>el</i> )</nobr>
+</code></td>
+
+<td><a href="/mapbox.js/api/v2.0.0/l-point">Point</a></td>
+<td>Returns the coordinates of an element previously positioned with <code>setPosition</code>.</td>
+	</tr>
+</table>
+
+<h3>Properties</h3>
+
+<table data-id='domutil'>
+	<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>TRANSITION</b></nobr>
+</code></td>
+<td><code>String</code></td>
+<td>Vendor-prefixed transition style name (e.g. <code><span class="string">'webkitTransition'</span></code> for WebKit).</td>
+	</tr>
+	<tr>
+<td><code><b>TRANSFORM</b></nobr>
+</code></td>
+<td><code>String</code></td>
+<td>Vendor-prefixed transform style name.</td>
+	</tr>
+</table>
+
+
+

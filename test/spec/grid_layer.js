@@ -45,7 +45,7 @@ describe('L.mapbox.gridLayer', function() {
         });
 
         it('loads TileJSON from a URL', function(done) {
-            var layer = L.mapbox.gridLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json');
+            var layer = L.mapbox.gridLayer('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
             layer.on('ready', function() {
                 expect(this).to.equal(layer);
@@ -53,13 +53,13 @@ describe('L.mapbox.gridLayer', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
 
         it('loads TileJSON from an ID', function(done) {
-            var layer = L.mapbox.gridLayer('L.mapbox.map-0l53fhk2');
+            var layer = L.mapbox.gridLayer('mapbox.map-0l53fhk2');
 
             layer.on('ready', function() {
                 expect(this).to.equal(layer);
@@ -67,13 +67,27 @@ describe('L.mapbox.gridLayer', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", internals.url.tileJSON('mapbox.map-0l53fhk2'),
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+
+        it('supports custom access token', function(done) {
+            var layer = L.mapbox.gridLayer('mapbox.map-0l53fhk2', {accessToken: 'custom'});
+
+            layer.on('ready', function() {
+                expect(this).to.equal(layer);
+                expect(layer.getTileJSON()).to.eql(helpers.tileJSON);
+                done();
+            });
+
+            server.respondWith("GET", internals.url.tileJSON('mapbox.map-0l53fhk2', 'custom'),
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
 
         it('emits an error event', function(done) {
-            var layer = L.mapbox.gridLayer('L.mapbox.map-0l53fhk2');
+            var layer = L.mapbox.gridLayer('mapbox.map-0l53fhk2');
 
             layer.on('error', function(e) {
                 expect(this).to.equal(layer);
@@ -81,7 +95,7 @@ describe('L.mapbox.gridLayer', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", internals.url.tileJSON('mapbox.map-0l53fhk2'),
                 [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'foo'})]);
             server.respond();
         });

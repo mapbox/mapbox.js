@@ -1,0 +1,74 @@
+---
+layout: api
+title: "v2.0.1 JavaScript Library: L.Control.Scale"
+categories: api
+version: v2.0.1
+permalink: /api/v2.0.1/l-control-scale
+---
+<h2 id="control-scale">Control.Scale</h2>
+
+<p>A simple scale control that shows the scale of the current center of screen in metric (m/km) and imperial (mi/ft) systems. Extends <a href="/mapbox.js/api/v2.0.1/l-control">Control</a>.</p>
+
+<pre><code>L.control.scale().addTo(map);</code></pre>
+
+<h3>Creation</h3>
+<table data-id='control-scale'>
+	<tr>
+<th class="width200">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.control.scale</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.1/l-control">Control.Scale options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+
+<td>Creates an scale control with the given options.</td>
+	</tr>
+</table>
+
+<h3 id="control-scale-options">Options</h3>
+
+<table data-id='control-scale'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>position</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'bottomleft'</span></td>
+<td>The position of the control (one of the map corners). See <a href="/mapbox.js/api/v2.0.1/l-control">control positions</a>.</td>
+	</tr>
+	<tr>
+<td><code><b>maxWidth</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">100</span></code></td>
+<td>Maximum width of the control in pixels. The width is set dynamically to show round values (e.g. 100, 200, 500).</td>
+	</tr>
+	<tr>
+<td><code><b>metric</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">true</span></code></td>
+<td>Whether to show the metric scale line (m/km).</td>
+	</tr>
+	<tr>
+<td><code><b>imperial</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">true</span></code></td>
+<td>Whether to show the imperial scale line (mi/ft).</td>
+	</tr>
+	<tr>
+<td><code><b>updateWhenIdle</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If <code><span class="literal">true</span></code>, the control is updated on <code>moveend</code>, otherwise it's always up-to-date (updated on <code>move</code>).</td>
+	</tr>
+</table>
+
+
+

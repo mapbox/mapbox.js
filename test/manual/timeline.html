@@ -5,6 +5,7 @@
   <link rel='stylesheet' href='../../dist/mapbox.css'/>
   <link rel='stylesheet' href='embed.css'/>
   <script src='../../dist/mapbox.js'></script>
+  <script src='access_token.js'></script>
 </head>
 <body>
 <style>
@@ -70,8 +71,8 @@
     // We are using jQuery to get earthquakes.geojson, but you could use alternatives
     $.getJSON('earthquakes.geojson', function(geojson) {
 
-        var markerLayer = L.mapbox.markerLayer(geojson);
-        markerLayer.setFilter(function() { return false; })
+        var featureLayer = L.mapbox.featureLayer(geojson);
+        featureLayer.setFilter(function() { return false; })
             .addTo(map);
 
         // A closure for clicking years. You give it a year, and it returns a function
@@ -82,7 +83,7 @@
                 var active = document.getElementsByClassName('year-active');
                 if (active.length) active[0].className = '';
                 document.getElementById('y' + y).className = 'year-active';
-                markerLayer.setFilter(function(f) {
+                featureLayer.setFilter(function(f) {
                     return f.properties.year == y;
                 });
                 return false;

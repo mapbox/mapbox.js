@@ -37,16 +37,16 @@ dist/images/icons-404040.png: theme/images
 	cp -r node_modules/leaflet/dist/images/ dist/images
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list index.js)
-	$(BROWSERIFY) --debug index.js > $@
+dist/mapbox.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list src/index.js)
+	$(BROWSERIFY) --debug src/index.js > $@
 
 # assemble an uncompressed library without bundled leaflet
-dist/mapbox.standalone.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list mapbox.js)
-	$(BROWSERIFY) --debug mapbox.js > $@
+dist/mapbox.standalone.uncompressed.js: node_modules/.install dist $(shell $(BROWSERIFY) --list src/mapbox.js)
+	$(BROWSERIFY) --debug src/mapbox.js > $@
 
 # assemble an uncompressed but complete library for development
-dist/mapbox.internals.js: node_modules/.install dist $(shell $(BROWSERIFY) --list internals.js)
-	$(BROWSERIFY) --debug internals.js > $@
+dist/mapbox.internals.js: node_modules/.install dist $(shell $(BROWSERIFY) --list src/internals.js)
+	$(BROWSERIFY) --debug src/internals.js > $@
 
 # compress mapbox.js with [uglify-js](https://github.com/mishoo/UglifyJS),
 # with name manging (m) and compression (c) enabled

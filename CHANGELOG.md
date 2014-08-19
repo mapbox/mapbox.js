@@ -1,3 +1,18 @@
+## v2.0.1
+
+* Be very cautious about global access to console (#838)
+* Fix error when geocoder returns 0 results (#817)
+* Fix API token doc URL (#834)
+
+## v2.0.0
+
+* Adapt to v4 geocoder response format
+* A Mapbox API token is now required
+* Move source files into src (#719)
+* Use v4 API
+* Drop jsonp -> json demangling
+* Drop markerLayer -> featureLayer alias
+
 ## v1.6.4
 
 * Fix grid math for negative longitudes (#737)

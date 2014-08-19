@@ -6,7 +6,8 @@ module.exports = {
         else t.loadURL(_);
     },
     log: function(_) {
-        if (console && typeof console.error === 'function') {
+        if (typeof console === 'object' &&
+            typeof console.error === 'function') {
             console.error(_);
         }
     },

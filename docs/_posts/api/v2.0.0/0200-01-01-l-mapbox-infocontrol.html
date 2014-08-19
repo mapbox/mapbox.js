@@ -1,0 +1,67 @@
+---
+layout: api
+title: "v2.0.0 JavaScript Library: L.mapbox.infoControl(options)"
+categories: api
+version: v2.0.0
+permalink: /api/v2.0.0/l-mapbox-infocontrol
+---
+<h2 id="section-l-mapbox-infocontrol">L.mapbox.infoControl(options)</h2>
+<p><span class='leaflet'><em>Extends</em>: <code><a href="/mapbox.js/api/v2.0.0/l-control">L.Control</a></code></span></p>
+<p>A map control that shows a toggleable info container. If set, attribution is auto-detected from active layers and added to the info container.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options <em>optional</em></td>
+<td>object</td>
+<td>An options object. Beyond the default options for map controls, this object has a one additional parameter: <ul><li><code>sanitizer</code>: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
+map.addControl(L.mapbox.infoControl().addInfo(&#39;foo&#39;));
+</code></pre><p><em>Returns</em>: a <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-infocontrol">L.mapbox.infoControl</a></code> object.</p>
+<p><em>Class</em>: <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-infocontrol">L.mapbox.InfoControl</a></code></p>
+<h3 id="section-infocontrol-addinfo">infoControl.addInfo(info)</h3>
+<p>Adds an info string to infoControl.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>info <em>required</em></td>
+<td>string</td>
+<td>A string which may contain HTML. It will be sanitized by the infoControl&#39;s sanitizer option.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-infocontrol-removeinfo">infoControl.removeInfo(info)</h3>
+<p>Removes an info string from infoControl.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>info <em>required</em></td>
+<td>string</td>
+<td>Info to remove.</td>
+</tr>
+</tbody>
+</table>

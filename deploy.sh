@@ -30,9 +30,7 @@ aws s3 cp --acl=public-read dist/images/layers-2x.png s3://mapbox-js/mapbox.js/$
 aws s3 cp --acl=public-read dist/images/marker-icon.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon.png
 aws s3 cp --acl=public-read dist/images/marker-icon-2x.png s3://mapbox-js/mapbox.js/$TAG/images/marker-icon-2x.png
 aws s3 cp --acl=public-read dist/images/marker-shadow.png s3://mapbox-js/mapbox.js/$TAG/images/marker-shadow.png
-aws s3 cp --acl=public-read dist/images/icons-000000.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000.png
 aws s3 cp --acl=public-read dist/images/icons-000000@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-000000@2x.png
-aws s3 cp --acl=public-read dist/images/icons-ffffff.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff.png
 aws s3 cp --acl=public-read dist/images/icons-ffffff@2x.png s3://mapbox-js/mapbox.js/$TAG/images/icons-ffffff@2x.png
 
 echo ""

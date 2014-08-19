@@ -2,18 +2,18 @@
   "author": "Mapbox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "1.6.4",
+  "version": "2.0.1",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
     "leaflet": "0.7.3",
     "mustache": "0.7.3",
     "corslite": "0.0.6",
-    "sanitize-caja": "0.0.0"
+    "sanitize-caja": "0.1.2"
   },
   "scripts": {
     "test": "jshint src/*.js && mocha-phantomjs test/index.html"

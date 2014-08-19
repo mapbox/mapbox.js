@@ -7,12 +7,13 @@
   <link rel='stylesheet' href='embed.css'/>
   <script src='http://cdn.leafletjs.com/leaflet-0.6/leaflet.js'></script>
   <script src='../../dist/mapbox.standalone.js'></script>
+  <script src='access_token.js'></script>
 </head>
 <body>
 <div id='map'></div>
 <script>
   var map = L.mapbox.map('map', 'examples.map-zr0njcqy')
-      .addControl(L.mapbox.geocoderControl('examples.map-20v6611k'))
+      .addControl(L.mapbox.geocoderControl('mapbox.places-v1'))
       .addControl(L.mapbox.shareControl())
 
   map.legendControl.addLegend('hee haw');

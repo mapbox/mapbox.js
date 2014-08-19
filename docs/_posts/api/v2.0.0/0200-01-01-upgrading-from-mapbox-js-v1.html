@@ -1,0 +1,50 @@
+---
+layout: api
+title: "v2.0.0 JavaScript Library: Upgrading from Mapbox.js v1"
+categories: api
+version: v2.0.0
+permalink: /api/v2.0.0/upgrading-from-mapbox-js-v1
+---
+<h2 id="section-upgrading-from-mapbox-js-v1">Upgrading from Mapbox.js v1</h2>
+<p>In a few cases, you may need to make changes to code written for Mapbox.js 1.x
+versions in order to work with Mapbox.js 2.x.</p>
+<ul>
+<li><p>Mapbox.js 2.x uses version 4 of the Mapbox web services API, which requires API access tokens.
+You must supply an access token to Mapbox.js; see <a href="../api-access-tokens">API access tokens</a> for
+details.</p>
+</li>
+<li><p>The <code>markerLayer</code> alias has been removed from <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-map">L.mapbox.map</a></code>. Use <code>featureLayer</code>
+instead. For example, replace</p>
+<pre><code>map.markerLayer.setFilter(function(f) { ... });
+</code></pre><p>with</p>
+<pre><code>map.featureLayer.setFilter(function(f) { ... });
+</code></pre></li>
+<li><p><code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> no longer accept arbitrary map IDs.
+Instead you must provide a predefined geocoder index ID (or the ID of a custom geocoder
+index). For instance, replace</p>
+<pre><code>L.mapbox.geocoderControl(&#39;examples.map-i86nkdio&#39;).addTo(map);
+</code></pre><p>with</p>
+<pre><code>L.mapbox.geocoderControl(&#39;mapbox.places-v1&#39;).addTo(map);
+</code></pre><p>See <a href="https://www.mapbox.com/developers/api/geocoding/">the geocoding API documentation</a>
+for a complete list of predefined geocoding indexes.</p>
+</li>
+<li><p>The format for <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> results have changed.
+Results are now provided in GeoJSON format. If your code uses <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> or
+the <code>found</code>, <code>select</code>, or <code>autoselect</code> events from <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code>, it may
+need to be updated to expect the format documented in those classes.</p>
+</li>
+<li><p><code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-http_urls">L.mapbox.config.HTTP_URLS</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-https_urls">L.mapbox.config.HTTPS_URLS</a></code> have been replaced
+with <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</a></code> and <code><a href="/mapbox.js/api/v2.0.0/l-mapbox-config-https_url">L.mapbox.config.HTTPS_URL</a></code>, which expect to
+be assigned a single URL rather than an array of URLs. For example, replace</p>
+<pre><code>L.mapbox.config.HTTP_URLS = [&quot;http://example.com/&quot;];
+</code></pre><p>with</p>
+<pre><code>L.mapbox.config.HTTP_URL = &quot;http://example.com/&quot;;
+</code></pre></li>
+<li><p><code><a href="/mapbox.js/api/v2.0.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> no longer supports <code>detectRetina</code>, <code>retinaVersion</code>, or <code>autoscale</code> options.
+Instead, retina tiles are always automatically used when available.</p>
+</li>
+<li><p><code><a href="/mapbox.js/api/v2.0.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> no longer has <code>setURL</code>, <code>setID</code>, and <code>setTileJSON</code> methods. Instead
+of resetting the URL or ID, construct a new instance with the desired URL or ID. Instead of
+setting TileJSON, construct an instance from the geocoding URL in the TileJSON.</p>
+</li>
+</ul>

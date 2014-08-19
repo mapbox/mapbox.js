@@ -7,6 +7,7 @@ description: Use setFilter as a fast search to filter out markers based on a use
 tags:
   - ui
   - markers
+  - omnivore
 ---
 <style>
 .search-ui {
@@ -17,8 +18,7 @@ tags:
   }
 </style>
 
-<!-- This example relies on https://github.com/mapbox/csv2geojson -->
-<script src='/mapbox.js/assets/csv2geojson.js'></script>
+<script src='{{site.tileapi}}/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 <div id='map'></div>
 <input id='search' class='search-ui' placeholder='Enter state code' />
 
@@ -30,27 +30,14 @@ var featureLayer = L.mapbox.featureLayer().addTo(map);
 
 $('#search').keyup(search);
 
-// This example requires jQuery or you can modify it to work with a different
-// AJAX library. See the Markers from CSV example for full details of the
-// restrictions of loading CSV files and the requirement of the csv2geojson
-// library.
-$.ajax({
-    // you will need to replace this URL with the URL to your CSV file.
-    url: '/mapbox.js/assets/data/airports.csv',
-    success: csvLoaded
-});
-
-// Though these functions are below the places where they're used in this
-// script, they'll still work due to JavaScript's function hoisting feature.
-function csvLoaded(csv) {
-    featureLayer.setGeoJSON(csv2geojson.csv2geojson(csv));
-}
+var csvLayer = omnivore.csv('/mapbox.js/assets/data/airports.csv', null, L.mapbox.featureLayer())
+    .addTo(map);
 
 function search() {
     // get the value of the search input field
     var searchString = $('#search').val().toLowerCase();
 
-    featureLayer.setFilter(showState);
+    csvLayer.setFilter(showState);
 
     // here we're simply comparing the 'state' property of each marker
     // to the search string, seeing whether the former contains the latter.

@@ -1,0 +1,35 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Markers as text labels
+description: Show the titles of markers as the markers themselves
+tags:
+  - ui
+  - markers
+---
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-2k9d7u0c')
+    .setView([38.89399, -77.03659], 13);
+
+map.tileLayer.setOpacity(0.2);
+
+var gj = L.geoJson(null, {
+    pointToLayer: function(feature, ll) {
+        return L.marker(ll, {
+            icon: L.divIcon({
+                className: 'label',
+                html: feature.properties.title,
+                iconSize: [100, 40]
+            })
+        });
+    }
+}).addTo(map);
+
+L.mapbox.featureLayer('examples.map-zr0njcqy')
+    .on('ready', function(e) {
+        gj.addData(this.getGeoJSON());
+    });
+</script>

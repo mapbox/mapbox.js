@@ -3,8 +3,8 @@ api: https://www.mapbox.com
 url: https://www.mapbox.com
 permalink: /:categories/:title
 baseurl: /mapbox.js
-pygments: true
-mapboxjs: v1.6.4
+highlighter: pygments
+mapboxjs: v2.0.1
 defaultid: 'examples.map-i86nkdio'
 tileapi: 'https://api.tiles.mapbox.com'
 rdiscount:
