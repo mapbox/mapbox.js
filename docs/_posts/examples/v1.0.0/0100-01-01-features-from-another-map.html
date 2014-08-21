@@ -1,0 +1,25 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Features from another map
+description: Display just the .geojson from another Mapbox.com project by requesting its <a href='https://www.mapbox.com/developers/api/maps/#geojson'>features.json</a>
+tags:
+  - markers
+  - layers
+---
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic');
+
+// Here we load the features.json from another project
+// to use with the map initialized above.
+var features = L.mapbox.featureLayer('examples.map-zr0njcqy').addTo(map);
+
+// When the features are loaded, make sure
+// the basemap display's the same geographical coordinates.
+features.on('ready', function() {
+  map.fitBounds(features.getBounds());
+});
+</script>
