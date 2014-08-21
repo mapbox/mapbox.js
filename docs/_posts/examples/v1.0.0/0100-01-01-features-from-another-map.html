@@ -15,9 +15,7 @@ var map = L.mapbox.map('map', 'examples.map-h67hf2ic');
 
 // Here we load the features.json from another project
 // to use with the map initialized above.
-var features = L.mapbox.featureLayer()
-  .loadURL('http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/features.json?access_token=' + L.mapbox.accessToken)
-  .addTo(map);
+var features = L.mapbox.featureLayer('examples.map-zr0njcqy').addTo(map);
 
 // When the features are loaded, make sure
 // the basemap display's the same geographical coordinates.
