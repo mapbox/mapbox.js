@@ -71,6 +71,30 @@ describe('L.mapbox.map', function() {
             expect(map.featureLayer).to.eql(undefined);
         });
 
+        it('preserves manually-set view', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
+                .setView([1, 2], 3);
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 1, lng: 2 });
+            expect(map.getZoom()).to.eql(3);
+        });
+
+        it('preserves manually-set zoom', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
+                .setZoom(3);
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 39.386, lng: -98.976 });
+            expect(map.getZoom()).to.eql(3);
+        });
+
         it('preserves manually-set marker layer GeoJSON', function() {
             var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
             map.featureLayer.setGeoJSON(helpers.geoJson);
