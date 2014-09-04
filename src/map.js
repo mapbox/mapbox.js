@@ -31,7 +31,9 @@ var LMap = L.Map.extend({
     _tilejson: {},
 
     initialize: function(element, _, options) {
-        L.Map.prototype.initialize.call(this, element, options);
+
+        L.Map.prototype.initialize.call(this, element,
+            L.extend({}, L.Map.prototype.options, options));
 
         // disable the default 'Leaflet' text
         if (this.attributionControl) this.attributionControl.setPrefix('');
