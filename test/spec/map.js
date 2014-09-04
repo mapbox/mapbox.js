@@ -21,6 +21,12 @@ describe('L.mapbox.map', function() {
         expect(map.options.zoomControl).to.equal(false);
     });
 
+    it('absorbs options form mergeOptions', function() {
+        L.Map.mergeOptions({ foo: 'bar' });
+        var map = L.mapbox.map(element, tileJSON, {zoomControl: false});
+        expect(map.options.foo).to.equal('bar');
+    });
+
     describe('constructor', function() {
         it('loads TileJSON from a URL', function(done) {
             var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
