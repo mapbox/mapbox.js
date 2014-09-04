@@ -1,10 +1,5 @@
 'use strict';
 
-// Hardcode image path, because Leaflet's autodetection
-// fails, because mapbox.js is not named leaflet.js
-window.L.Icon.Default.imagePath = '//api.tiles.mapbox.com/mapbox.js/' + 'v' +
-    require('../package.json').version + '/images';
-
 var geocoderControl = require('./geocoder_control'),
     gridControl = require('./grid_control'),
     featureLayer = require('./feature_layer'),
@@ -42,3 +37,14 @@ L.mapbox = module.exports = {
     sanitize: require('sanitize-caja'),
     template: require('mustache').to_html
 };
+
+
+// Hardcode image path, because Leaflet's autodetection
+// fails, because mapbox.js is not named leaflet.js
+window.L.Icon.Default.imagePath =
+    // Detect bad-news protocols like file:// and hardcode
+    // to https if they're detected.
+    ((document.location.protocol == 'https:' ||
+    document.location.protocol == 'http:') ? '' : 'https:') +
+    '//api.tiles.mapbox.com/mapbox.js/' + 'v' +
+    require('../package.json').version + '/images';
