@@ -1,6 +1,6 @@
 {
   "name": "mapbox.js",
-  "main": "index.js",
+  "main": "mapbox.js",
   "version": "",
   "homepage": "https://github.com/mapbox/mapbox.js",
   "authors": ["Mapbox"],
