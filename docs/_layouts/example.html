@@ -15,32 +15,49 @@ version: latest
     <iframe id='demo' class='row10 col12' allowfullscreen='true' mozallowfullscreen='true' webkitallowfullscreen='true'></iframe>
     <script>
         var doc = $('#demo')[0].contentWindow.document;
-        var exampleHTML =
-            "<html><head><meta charset=utf-8 /><title>{{page.title}}</title>" +
-            "<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />" +
-            "<script src='{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.js'><\/script>" +
-            "<link href='{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />" +
-            "<style> body { margin:0; padding:0; } #map { position:absolute; top:0; bottom:0; width:100%; } </style>" +
-            "</head><body>" +
-            ("<script>L.mapbox.accessToken = '" + App.accessToken + "';<\/script>" +
-            {{content | jsonify | replace: '</', '<\/'}}) +
-            "</body></html>";
+
+        var jsURL = '{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.js',
+            cssURL = '{{site.tileapi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css';
+
+        var exampleCSS = 'body { margin:0; padding:0; }\n#map { position:absolute; top:0; bottom:0; width:100%; }';
+
+        var examplePREFIX =
+            "<html><head><meta charset=utf-8 /><title>{{page.title}}</title>\n" +
+            "<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />\n" +
+            "<script src='" + jsURL + "'><\/script>\n" +
+            "<link href='" + cssURL + "' rel='stylesheet' />\n" +
+            "<style>" + exampleCSS + "</style>\n" +
+            "</head>\n<body>\n";
+
+        var exampleCONTENT =
+            ("<script>L.mapbox.accessToken = '" + App.accessToken + "';<\/script>\n" +
+            {{content | jsonify | replace: '</', '<\/'}});
+
+        var examplePOSTFIX = "</body>\n</html>";
 
         doc.open();
-        doc.write(exampleHTML);
+        doc.write(examplePREFIX + exampleCONTENT + examplePOSTFIX);
         doc.close();
 
-        // if (!App.user) {
-        //     $('#fiddle-form').remove();
-        // } else {
-        $(function() {
-            $('<input />').attr({
-                type: 'hidden',
-                name: 'html',
-                value: exampleHTML
-            }).appendTo($('#fiddle-form'));
+        // this function needs to execute after the rest of the page
+        // has been built.
+        App.onUserLoad(function() {
+            if (App.user) {
+                addField('html', exampleCONTENT);
+                addField('css', exampleCSS);
+                addField('resources', jsURL + ',' + cssURL);
+                addField('title', '{{page.title}}');
+                function addField(name, value) {
+                    $('<input />').attr({
+                        type: 'hidden',
+                        name: name,
+                        value: value
+                    }).appendTo($('#fiddle-form'));
+                }
+            } else {
+                $('#fiddle-form').remove();
+            }
         });
-        // }
     </script>
     </div>
     <div id='snippet'>
@@ -84,7 +101,7 @@ version: latest
   </div>
 </div>
   <form id='fiddle-form' action='http://jsfiddle.net/api/post/library/pure/' method='POST'>
-    <input type='submit' class='button icon clipboard col12' value='Edit in jsFiddle'  />
+    <input type='submit' class='unround quiet col12' value='Edit in jsFiddle'  />
   </div>
   <a class='button icon clipboard col12 round-bottom js-clipboard' href='#' data-target='code' data-ref-id='code' id='copy'>Copy example</a>
   </div>
