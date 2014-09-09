@@ -163,6 +163,16 @@ describe('L.mapbox.featureLayer', function() {
         expect(layer.getLayers()[0]._popup._content).not.to.match(/<script>/);
     });
 
+    it('supports a popupOptions argument', function() {
+        var layer = L.mapbox.featureLayer(unsanitary, {
+            popupOptions: {
+                closeButton: true
+            }
+        });
+
+        expect(layer.getLayers()[0]._popup.options.closeButton).to.eql(true);
+    });
+
     it('supports a custom sanitizer', function() {
         var layer = L.mapbox.featureLayer(unsanitary, {
             sanitizer: function(_) { return _; }

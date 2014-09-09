@@ -14,7 +14,8 @@ var FeatureLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; },
         sanitizer: require('sanitize-caja'),
-        style: simplestyle.style
+        style: simplestyle.style,
+        popupOptions: { closeButton: false }
     },
 
     initialize: function(_, options) {
@@ -99,9 +100,7 @@ var FeatureLayer = L.FeatureGroup.extend({
             layer.feature = json;
 
             if (popupHtml) {
-                layer.bindPopup(popupHtml, {
-                    closeButton: false
-                });
+                layer.bindPopup(popupHtml, this.options.popupOptions);
             }
 
             this.addLayer(layer);

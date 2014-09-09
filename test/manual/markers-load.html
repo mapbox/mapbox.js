@@ -15,7 +15,9 @@
     // example.geojson is a well-formed GeoJSON document. For this
     // example, the file must be on the same domain name as the map,
     // or loading will not work due to cross-domain request restrictions
-    map.featureLayer.loadURL('example.geojson');
+    L.mapbox.featureLayer(null, {
+        popupOptions: { closeButton: true }
+    }).addTo(map).loadURL('example.geojson');
 </script>
 </body>
 </html>
