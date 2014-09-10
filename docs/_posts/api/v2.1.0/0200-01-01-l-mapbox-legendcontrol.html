@@ -1,0 +1,67 @@
+---
+layout: api
+title: "v2.1.0 JavaScript Library: L.mapbox.legendControl(options)"
+categories: api
+version: v2.1.0
+permalink: /api/v2.1.0/l-mapbox-legendcontrol
+---
+<h2 id="section-l-mapbox-legendcontrol">L.mapbox.legendControl(options)</h2>
+<p><span class='leaflet icon'><em>Extends</em>: L.Control</span></p>
+<p>A map control that shows legends added to maps in Mapbox. Legends are auto-detected from active layers.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options <em>optional</em></td>
+<td>object</td>
+<td>An options object. Beyond the default options for map controls, this object has one special parameter: <code>sanitizer</code>: A function that accepts a string, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
+map.addControl(L.mapbox.legendControl());
+</code></pre><p><em>Returns</em>: a <code><a href="/mapbox.js/api/v2.1.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> object.</p>
+<p><em>Class</em>: <code><a href="/mapbox.js/api/v2.1.0/l-mapbox-legendcontrol">L.mapbox.LegendControl</a></code></p>
+<h3 id="section-legendcontrol-addlegend">legendControl.addLegend(legend)</h3>
+<p>Adds a legend to the legendControl.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>legend <em>required</em></td>
+<td>string</td>
+<td>A string which may contain HTML. It will be sanitized by the legendControl&#39;s sanitizer option.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-legendcontrol-removelegend">legendControl.removeLegend(legend)</h3>
+<p>Removes a legend from the legendControl.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>legend <em>required</em></td>
+<td>string</td>
+<td>legend data to remove.</td>
+</tr>
+</tbody>
+</table>

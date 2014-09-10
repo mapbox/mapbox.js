@@ -1,0 +1,131 @@
+---
+layout: api
+title: "v2.1.0 JavaScript Library: L.FeatureGroup"
+categories: api
+version: v2.1.0
+permalink: /api/v2.1.0/l-featuregroup
+---
+<h2 id="featuregroup">FeatureGroup</h2>
+
+<p>Extended <a href="/mapbox.js/api/v2.1.0/l-layergroup">layerGroup</a> that also has mouse events (propagated from members of the group) and a shared bindPopup method. Implements <a href="/mapbox.js/api/v2.1.0/l-ilayer">ILayer</a> interface.</p>
+
+<pre><code class="javascript">L.featureGroup([marker1, marker2, polyline])
+	.bindPopup('Hello world!')
+	.on('click', function() { alert('Clicked on a group!'); })
+	.addTo(map);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='featuregroup'>
+	<tr>
+<th class="width300">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.featureGroup</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-ilayer">ILayer</a>[]&gt; <i>layers?</i> )</nobr>
+</code></td>
+
+
+
+<td>Create a layer group, optionally given an initial set of layers.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<p>Has all <a href="/mapbox.js/api/v2.1.0/l-layergroup">layerGroup</a> methods and additionally:</p>
+
+<table data-id='featuregroup'>
+	<tr>
+<th class="width250">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>bindPopup</b>(
+<nobr>&lt;String&gt; <i>htmlContent</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-popup">Popup options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Binds a popup with a particular HTML content to a click on any layer from the group that has a <code>bindPopup</code> method.</td>
+	</tr>
+	<tr>
+<td><code><b>getBounds</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-latlngbounds">LatLngBounds</a></code></td>
+<td>Returns the LatLngBounds of the Feature Group (created from bounds and coordinates of its children).</td>
+	</tr>
+	<tr>
+<td><code><b>setStyle</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-path">Path options</a>&gt; <i>style</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Sets the given path options to each layer of the group that has a <code>setStyle</code> method.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToFront</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the layer group to the top of all other layers.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToBack</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the layer group to the bottom of all other layers.</td>
+	</tr>
+</table>
+
+<h3>Events</h3>
+
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v2.1.0/l-events">these methods</a>.</p>
+
+<table data-id='featuregroup'>
+	<tr>
+<th class="width100">Event</th>
+<th class="width100">Data</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>click</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the user clicks (or taps) the group.</td>
+	</tr>
+	<tr>
+<td><code><b>dblclick</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the user double-clicks (or double-taps) the group.</td>
+	</tr>
+	<tr>
+<td><code><b>mouseover</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the mouse enters the group.</td>
+	</tr>
+	<tr>
+<td><code><b>mouseout</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the mouse leaves the group.</td>
+	</tr>
+	<tr>
+<td><code><b>mousemove</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">MouseEvent</a></code></td>
+<td>Fired while the mouse moves over the layers of the group.</td>
+	</tr>
+	<tr>
+<td><code><b>contextmenu</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the user right-clicks on one of the layers.</td>
+	</tr>
+	<tr>
+<td><code><b>layeradd</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">LayerEvent</a></code>
+<td>Fired when a layer is added to the group.</td>
+	</tr>
+	<tr>
+<td><code><b>layerremove</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-event-objects">LayerEvent</a></code>
+<td>Fired when a layer is removed from the map.</td>
+	</tr>
+</table>
+
+
