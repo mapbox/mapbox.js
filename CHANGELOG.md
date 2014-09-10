@@ -1,3 +1,10 @@
+## v2.1.0
+
+* Introduces an `autocomplete` option that dynamically displays results from geocoding (#868)
+* Easier usage for applications on `file://` URLs, like PhoneGap (#866)
+* `L.mapbox.map` will now absorb options for `L.Map` after initialization (#829)
+* Added `popupOptions` to control internal `bindPopup` specifics for `featureLayer` instances (#862)
+
 ## v2.0.1
 
 * Be very cautious about global access to console (#838)
