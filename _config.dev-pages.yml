@@ -4,7 +4,7 @@ url: https://122e4e-mapbox.global.ssl.fastly.net
 permalink: /:categories/:title
 baseurl: /mapbox.js
 pygments: true
-mapboxjs: v2.0.1
+mapboxjs: v2.1.0
 defaultid: 'examples.map-i86nkdio'
 tileapi: 'https://api.tiles.mapbox.com'
 rdiscount:
