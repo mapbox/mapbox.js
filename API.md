@@ -10,7 +10,7 @@ interactivity.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | element (_required_) | string | Must be the id of an element, or a DOM element reference. |
-| id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](https://www.mapbox.com/developers/tilejson/) object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson | __string__ if _id_ or _url_ __object__ if _tilejson_ | url can be <ul><li>a map `id` string `examples.map-foo`</li><li> a URL to TileJSON, like `{{site.tileApi}}/v3/examples.map-0l53fhk2.json`</li><li>a [TileJSON](https://www.mapbox.com/developers/tilejson/) object, from your own Javascript code</li></ul> |
 | options | object | If provided, it is the same options as provided to L.Map with the following additions: <ul><li>`tileLayer` L.TileLayer options. Options passed to a `L.mapbox.tileLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.tileLayer`.</li><li>`featureLayer` `L.mapbox.featureLayer` options. Options passed to a `L.mapbox.featureLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.featureLayer`.</li><li>`gridLayer` `L.mapbox.gridLayer`. Options passed to a `L.mapbox.gridLayer` based on the TileJSON. Set to `false` to disable the `L.mapbox.gridLayer`.</li><li>`legendControl` `L.mapbox.legendControl` options. Options passed to a `L.mapbox.legendControl` based on the TileJSON. Set to `false` to disable the `L.mapbox.legendControl`.</li><li>`shareControl`: Options passed to a `L.mapbox.shareControl`. Set to `true` to enable the `L.mapbox.shareControl`.</li><li>`infoControl`: Options passed to a `L.mapbox.infoControl`. Set to `true` to enable the `L.mapbox.infoControl`.</li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this map.</li> |
 
 _Example_:
@@ -45,7 +45,7 @@ interface to layers from Mapbox and elsewhere.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | Value must be <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileApi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
 | options | object | The second argument is optional. If provided, it is the same options as provided to `L.TileLayer`, with the following addition: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this layer.</li></ul> |
 
 _Example_:
@@ -54,7 +54,7 @@ _Example_:
     var layer = L.mapbox.tileLayer('examples.map-20v6611k');
 
     // you can also provide a full url to a TileJSON resource
-    var layer = L.mapbox.tileLayer('{{site.tileapi}}/v3/examples.map-0l53fhk2.json');
+    var layer = L.mapbox.tileLayer('{{site.tileApi}}/v3/examples.map-0l53fhk2.json');
 
 _Returns_ a `L.mapbox.tileLayer` object.
 
@@ -106,7 +106,7 @@ interactivity into your map, which you can easily access with `L.mapbox.gridCont
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
+| id _or_ url _or_ tilejson (_required_) | __string__ if _id_ or _url_ __object__ if _tilejson_ | <ul><li>An `id` string `examples.map-foo`</li><li>A URL to TileJSON, like `{{site.tileApi}}/v3/examples.map-0l53fhk2.json`</li><li>A TileJSON object, from your own Javascript code</li></ul> |
 | options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this layer.</li></ul> |
 
 _Example_:
@@ -187,7 +187,7 @@ from Mapbox and elsewhere into your map.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `{{site.tileapi}}/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
+| id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `{{site.tileApi}}/v3/examples.map-0l53fhk2.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
 | options | object | If provided, it is the same options as provided to `L.FeatureGroup`, as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this layer.</li><li>`popupOptions`: an object of <a href="http://leafletjs.com/reference.html#popup-maxwidth">options that will be passed to the `bindPopup` method internally</a>.</ul> |
 
 _Example_:
@@ -315,7 +315,7 @@ A low-level interface to geocoding, useful for more complex uses and reverse-geo
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url | string | Value must be <ul><li>A [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places-v1`</li><li>A geocoder API URL, like `{{site.tileapi}}/v4/geocode/mapbox.places-v1/{query}.json`</li></ul> |
+| id _or_ url | string | Value must be <ul><li>A [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places-v1`</li><li>A geocoder API URL, like `{{site.tileApi}}/v4/geocode/mapbox.places-v1/{query}.json`</li></ul> |
 | options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li></ul> |
 
 _Returns_ a `L.mapbox.geocoder` object.
@@ -472,7 +472,7 @@ the [Mapbox Geocoding API](http://mapbox.com/developers/api/geocoding/).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url (_required_) | string | Either a <ul><li>An [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places-v1`</li><li>A geocoder API URL, like `{{site.tileapi}}/v4/geocode/mapbox.places-v1/{query}.json`</li></ul> |
+| id _or_ url (_required_) | string | Either a <ul><li>An [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places-v1`</li><li>A geocoder API URL, like `{{site.tileApi}}/v4/geocode/mapbox.places-v1/{query}.json`</li></ul> |
 | options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this control.</li><li>`autocomplete`: automatically search and show results as you type. Default: `false`.</ul> |
 
 _Example_:
@@ -533,7 +533,7 @@ Adds a "Share" button to the map, which can be used to share the map to Twitter 
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _optional_ | string | Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileapi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul> |
+| id _or_ url _optional_ | string | Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul> |
 | options | object | Options for L.Control</span> Also accepts the following options:<ul><li>`url`: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this control.</li></ul> |
 
 _Example_:

@@ -1,12 +1,12 @@
-source: docs
-api: https://122e4e-mapbox.global.ssl.fastly.net
 url: https://122e4e-mapbox.global.ssl.fastly.net
+api: https://122e4e-mapbox.global.ssl.fastly.net
+tileApi: https://api-maps-staging.tilestream.net
+source: docs
 permalink: /:categories/:title
 baseurl: /mapbox.js
-pygments: true
+highlighter: pygments
 mapboxjs: v2.1.0
 defaultid: 'examples.map-i86nkdio'
-tileapi: 'https://api.tiles.mapbox.com'
 rdiscount:
   extensions: [smart]
 exclude: [dist]
