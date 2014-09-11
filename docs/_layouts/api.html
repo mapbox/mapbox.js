@@ -5,7 +5,16 @@ layout: pages
 {% if page.splash %}{% include site.introduction.html %}{% endif %}
 <div id='api' class='prose pad2 doc round fill-white keyline-all'>
   {% if site.mapboxjs != page.version %}
-  <div class='warning note round space-bottom2'>You are viewing an older version of Mapbox.js. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/{{page.url | split:'/' | last}}/'>{{site.mapboxjs}} for the latest</a>.</div>
+
+{% capture redirect %}
+{% if page.splash %}
+{{site.baseurl}}/api/{{site.mapboxjs}}/
+{% else %}
+{{site.baseurl}}/api/{{site.mapboxjs}}/{{page.url | split:'/' | last}}/
+{% endif %}
+{% endcapture %}
+
+  <div class='warning note round space-bottom2'>You are viewing an older version of Mapbox.js. Check out <a href='{{redirect}}'>{{site.mapboxjs}} for the latest</a>.</div>
   {% endif %}
   <div data-swiftype-index=true>
     {{content}}
