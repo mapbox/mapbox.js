@@ -43,10 +43,6 @@ version: latest
         // has been built.
         App.onUserLoad(function() {
             if (App.user) {
-                addField('html', exampleCONTENT);
-                addField('css', exampleCSS);
-                addField('resources', jsURL + ',' + cssURL);
-                addField('title', '{{page.title}}');
                 function addField(name, value) {
                     $('<input />').attr({
                         type: 'hidden',
@@ -54,6 +50,10 @@ version: latest
                         value: value
                     }).appendTo($('#fiddle-form'));
                 }
+                addField('html', exampleCONTENT);
+                addField('css', exampleCSS);
+                addField('resources', jsURL + ',' + cssURL);
+                addField('title', '{{page.title}}');
             } else {
                 $('#fiddle-form').remove();
             }
