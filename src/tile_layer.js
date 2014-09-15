@@ -1,7 +1,6 @@
 'use strict';
 
-var util = require('./util'),
-    url = require('./url');
+var util = require('./util');
 
 var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],

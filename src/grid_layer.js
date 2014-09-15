@@ -1,7 +1,6 @@
 'use strict';
 
 var util = require('./util'),
-    url = require('./url'),
     request = require('./request'),
     grid = require('./grid');
 
