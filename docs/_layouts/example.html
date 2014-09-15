@@ -27,12 +27,10 @@ version: latest
             "<script src='" + jsURL + "'><\/script>\n" +
             "<link href='" + cssURL + "' rel='stylesheet' />\n" +
             "<style>" + exampleCSS + "</style>\n" +
+            "<script>L.mapbox.accessToken = '" + App.accessToken + "';<\/script>\n" +
             "</head>\n<body>\n";
 
-        var exampleCONTENT =
-            ("<script>L.mapbox.accessToken = '" + App.accessToken + "';<\/script>\n" +
-            {{content | jsonify | replace: '</', '<\/'}});
-
+        var exampleCONTENT = {{content | jsonify | replace: '</', '<\/'}};
         var examplePOSTFIX = "</body>\n</html>";
 
         doc.open();
@@ -50,7 +48,7 @@ version: latest
                         value: value
                     }).appendTo($('#fiddle-form'));
                 }
-                addField('html', exampleCONTENT);
+                addField('html', exampleCONTENT.replace('<script>', '<script>\nL.mapbox.accessToken = \'' + App.user.accessToken + '\';'));
                 addField('css', exampleCSS);
                 addField('resources', jsURL + ',' + cssURL);
                 addField('title', '{{page.title}}');
