@@ -27,7 +27,11 @@ version: latest
             "<script src='" + jsURL + "'><\/script>\n" +
             "<link href='" + cssURL + "' rel='stylesheet' />\n" +
             "<style>" + exampleCSS + "</style>\n" +
-            "<script>L.mapbox.accessToken = '" + App.accessToken + "';<\/script>\n" +
+            "<script>" +
+                "L.mapbox.accessToken = '" + App.accessToken + "';" +
+                "L.mapbox.config.FORCE_HTTPS = true;" +
+                "L.mapbox.config.HTTPS_URL = '{{site.tileApi}}/v4';" +
+            "<\/script>\n" +
             "</head>\n<body>\n";
 
         var exampleCONTENT = {{content | jsonify | replace: '</', '<\/'}};
