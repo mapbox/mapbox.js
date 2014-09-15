@@ -52,9 +52,17 @@ version: latest
                         value: value
                     }).appendTo($('#fiddle-form'));
                 }
-                addField('html', exampleCONTENT.replace('<script>', '<script>\nL.mapbox.accessToken = \'' + App.user.accessToken + '\';'));
+
+                var scriptRegex = /<script>((.|\n)*)<\/script>/,
+                    html = exampleCONTENT.replace(scriptRegex, ''),
+                    match = exampleCONTENT.match(scriptRegex),
+                    js = 'L.mapbox.accessToken = \'' + App.user.accessToken + '\';' + match[1];
+
+                addField('html', html);
+                addField('js', js);
                 addField('css', exampleCSS);
                 addField('resources', jsURL + ',' + cssURL);
+                addField('wrap', 'b');
                 addField('title', '{{page.title}}');
             } else {
                 $('#fiddle-form').remove();
