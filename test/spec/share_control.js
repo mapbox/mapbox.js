@@ -45,6 +45,19 @@ describe('L.mapbox.shareControl', function() {
                 .to.eql(1);
     });
 
+    it('constructs iframe URL', function() {
+        map.setView([0,0],0);
+        var shareControl = L.mapbox.shareControl({id: 'mapid'});
+        expect(shareControl.addTo(map)).to.eql(shareControl);
+
+        happen.click(element
+            .getElementsByClassName('mapbox-share')[0]);
+
+        expect(element
+            .getElementsByClassName('mapbox-embed')[0].value)
+            .to.eql('<iframe width="100%" height="500px" frameBorder="0" src="http://a.tiles.mapbox.com/v4/mapid.html?access_token=key"></iframe>');
+    });
+
     it('can accept a custom url', function() {
         map.setView([0,0],0);
         var shareControl = L.mapbox.shareControl(null, { url: 'foobar' });
