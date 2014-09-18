@@ -16,8 +16,8 @@ version: latest
     <script>
         var doc = $('#demo')[0].contentWindow.document;
 
-        var jsURL = '{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.js',
-            cssURL = '{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css';
+        var jsURL = '{% if site.mapboxjsbase %}{{site.mapboxjsbase}}{% else %}{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}{% endif %}/mapbox.js',
+            cssURL = '{% if site.mapboxjsbase %}{{site.mapboxjsbase}}{% else %}{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}{% endif %}/mapbox.css';
 
         var exampleCSS = 'body { margin:0; padding:0; }\n#map { position:absolute; top:0; bottom:0; width:100%; }';
 
