@@ -1,0 +1,37 @@
+---
+layout: api
+title: "v2.1.1 JavaScript Library: L.TileLayer"
+categories: api
+version: v2.1.1
+permalink: /api/v2.1.1/l-tilelayer
+---
+<h2 id="tilelayer">TileLayer</h2>
+
+<p>Used to load and display tile layers on the map, implements <a href="/mapbox.js/api/v2.1.1/l-ilayer">ILayer</a> interface.</p>
+
+<h3>Usage example</h3>
+
+<pre><code class="javascript">L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+	key: 'API-key',
+	styleId: 997
+}).addTo(map);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='tilelayer'>
+	<tr>
+<th class="width250">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.tileLayer</b>(
+<nobr>&lt;String&gt; <i><a href="/mapbox.js/api/v2.1.1/l-url">urlTemplate</a></i>,</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-tilelayer">TileLayer options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+<td>Instantiates a tile layer object given a <a href="/mapbox.js/api/v2.1.1/l-url">URL template</a> and optionally an options object.</td>
+	</tr>
+</table>
+
