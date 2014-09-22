@@ -106,6 +106,13 @@ describe('L.mapbox.marker', function() {
             });
             expect(icon.options.iconUrl).to.equal(internals.url('/marker/pin-l+7e7e7e.png', 'custom'));
         });
+
+        it("supports integer 'marker-symbol' values", function() {
+            expect(L.mapbox.marker.icon({'marker-symbol': 0}).options.iconUrl)
+                .to.equal(internals.url('/marker/pin-m-0+7e7e7e.png'));
+            expect(L.mapbox.marker.icon({'marker-symbol': 1}).options.iconUrl)
+                .to.equal(internals.url('/marker/pin-m-1+7e7e7e.png'));
+        });
     });
 
     describe('#createPopup', function() {
