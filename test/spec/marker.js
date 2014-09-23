@@ -113,6 +113,11 @@ describe('L.mapbox.marker', function() {
             expect(L.mapbox.marker.icon({'marker-symbol': 1}).options.iconUrl)
                 .to.equal(internals.url('/marker/pin-m-1+7e7e7e.png'));
         });
+
+        it("supports 'marker-symbol' with empty string", function() {
+            expect(L.mapbox.marker.icon({'marker-symbol': ''}).options.iconUrl)
+                .to.equal(internals.url('/marker/pin-m+7e7e7e.png'));
+        });
     });
 
     describe('#createPopup', function() {

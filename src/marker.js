@@ -16,7 +16,7 @@ function icon(fp, options) {
             large: [35, 90]
         },
         size = fp['marker-size'] || 'medium',
-        symbol = 'marker-symbol' in fp ? '-' + fp['marker-symbol'] : '',
+        symbol = ('marker-symbol' in fp && fp['marker-symbol'] !== '') ? '-' + fp['marker-symbol'] : '',
         color = (fp['marker-color'] || '7e7e7e').replace('#', '');
 
     return L.icon({
