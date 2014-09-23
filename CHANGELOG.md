@@ -1,3 +1,7 @@
+## v2.1.2
+
+* Fix empty string marker-symbol value
+
 ## v2.1.1
 
 * Fix integer 0 marker-symbol value (#879)

@@ -1,0 +1,92 @@
+---
+layout: api
+title: "v2.1.2 JavaScript Library: L.mapbox.geocoder(id|url, options)"
+categories: api
+version: v2.1.2
+permalink: /api/v2.1.2/l-mapbox-geocoder
+---
+<h2 id="section-l-mapbox-geocoder">L.mapbox.geocoder(id|url, options)</h2>
+<p>A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url</td>
+<td>string</td>
+<td>Value must be <ul><li>A <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places-v1</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places-v1/{query}.json</code></li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>Object</td>
+<td>The second argument is optional. If provided, it may include: <ul><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v2.1.2/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this geocoder.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Returns</em> a <code><a href="/mapbox.js/api/v2.1.2/l-mapbox-geocoder">L.mapbox.geocoder</a></code> object.</p>
+<h3 id="section-geocoder-query">geocoder.query(queryString, callback)</h3>
+<p>Queries the geocoder with a query string, and returns its result, if any.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>queryString (<em>required</em>)</td>
+<td>string</td>
+<td>a query, expressed as a string, like &#39;Arkansas&#39;</td>
+</tr>
+<tr>
+<td>callback (<em>required</em>)</td>
+<td>function</td>
+<td>a callback</td>
+</tr>
+</tbody>
+</table>
+<p>The callback is called with arguments</p>
+<ol>
+<li>An error, if any</li>
+<li><p>The result. This is an object with the following members:</p>
+<pre><code> {
+     results: // raw results
+     latlng: // a map-friendly latlng array
+     bounds: // geojson-style bounds of the first result
+     lbounds: // leaflet-style bounds of the first result
+ }
+</code></pre></li>
+</ol>
+<p><em>Example</em>: <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/map-center-geocoding/">Live example of geocoder.query centering a map.</a></p>
+<p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
+<h3 id="section-geocoder-reversequery">geocoder.reverseQuery(location, callback)</h3>
+<p>Queries the geocoder with a location, and returns its result, if any.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>location (<em>required</em>)</td>
+<td>object</td>
+<td>A query, expressed as an object:<ul><li><pre>[lon, lat] // an array of lon, lat</pre></li><li><pre>{ lat: 0, lon: 0 } // a lon, lat object</pre></li><li><pre>{ lat: 0, lng: 0 } // a lng, lat object</pre></li></ul> The first argument can also be an array of objects in that form to geocode more than one item.</td>
+</tr>
+<tr>
+<td>callback (<em>required</em>)</td>
+<td>function</td>
+<td>The callback is called with arguments <ul><li>An error, if any</li><li>The result. This is an object of the raw result from Mapbox.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
