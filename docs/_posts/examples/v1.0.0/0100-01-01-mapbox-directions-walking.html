@@ -2,8 +2,8 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Driving directions
-description: Use the mapbox-directions.js plugin to show results from the Mapbox Directions API
+title: Walking directions
+description: Use the mapbox-directions.js plugin to show walking directions from the Mapbox Directions API
 tags:
   - plugins
   - mapbox-directions
@@ -65,7 +65,9 @@ map.attributionControl.setPosition('bottomleft');
 
 // create the initial directions object, from which the layer
 // and inputs will pull data.
-var directions = L.mapbox.directions();
+var directions = L.mapbox.directions({
+    profile: 'mapbox.walking'
+});
 
 var directionsLayer = L.mapbox.directions.layer(directions)
     .addTo(map);
