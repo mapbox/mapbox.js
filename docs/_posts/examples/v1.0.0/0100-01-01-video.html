@@ -14,8 +14,6 @@ tags:
 <div id='map'></div>
 
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
-
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([0,0], 5);
 
@@ -44,11 +42,10 @@ myLayer.on('layeradd', function(e) {
     var marker = e.layer,
         feature = marker.feature;
 
-    // Create custom popup content
-    var popupContent =  feature.properties.video + 
-        '<h2>' + feature.properties.title + '</h2>' + '</a>';
+    // Create custom popup content from the GeoJSON property 'video'
+    var popupContent =  feature.properties.video;
 
-    // http://leafletjs.com/reference.html#popup
+    // bind the popup to the marker http://leafletjs.com/reference.html#popup
     marker.bindPopup(popupContent,{
         closeButton: false,
         minWidth: 320
