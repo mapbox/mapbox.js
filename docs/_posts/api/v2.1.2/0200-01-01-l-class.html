@@ -62,7 +62,7 @@ a instanceof MyClass; // true
 
 <pre><code>var MyChildClass = MyClass.extend({
 	initialize: function () {
-MyClass.prototype.initialize.call("Yo");
+MyClass.prototype.initialize.call(this, "Yo");
 	},
 
 	greet: function (name) {
@@ -84,7 +84,7 @@ myOption2: 'bar'
 	}
 });
 
-var MyChildClass = L.Class.extend({
+var MyChildClass = MyClass.extend({
 	options: {
 myOption1: 'baz',
 myOption3: 5

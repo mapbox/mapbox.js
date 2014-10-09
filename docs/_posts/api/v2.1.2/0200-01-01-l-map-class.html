@@ -35,6 +35,9 @@ var map = L.map('map', {
 	</tr>
 </table>
 
+
+
+
 <h3 id="map-options">Options</h3>
 
 <h4>Map State Options</h4>
@@ -80,8 +83,8 @@ var map = L.map('map', {
 <td><code><b>maxBounds</b></code></td>
 <td><code><a href="/mapbox.js/api/v2.1.2/l-latlngbounds">LatLngBounds</a></code></td>
 <td><code><span class="literal">null</span></code></td>
-<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view, and also not allowing to zoom out to a view that's larger than the given bounds (depending on the map size). To set the restriction dynamically, use <a href="/mapbox.js/api/v2.1.2/l-map">setMaxBounds</a> method</td>
-	</tr>
+<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view. To set the restriction dynamically, use <a href="/mapbox.js/api/v2.1.2/l-map">setMaxBounds</a> method</td>
+    </tr>
 	<tr>
 <td><code><b>crs</b></code></td>
 <td><code><a href="/mapbox.js/api/v2.1.2/l-icrs">CRS</a></code></td>
@@ -653,7 +656,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 <td><code><b>getPixelBounds</b>()</code></td>
-<td><code>Bounds</code></td>
+<td><code><a href="/mapbox.js/api/v2.1.2/l-bounds">Bounds</a></code></td>
 <td>Returns the bounds of the current map view in projected pixel coordinates (sometimes useful in layer and overlay implementations).</td>
 	</tr>
 	<tr>
@@ -695,6 +698,18 @@ var map = L.map('map', {
 
 <td><code>Boolean</code></td>
 <td>Returns <code><span class="literal">true</span></code> if the given layer is currently added to the map.</td>
+	</tr>
+	<tr>
+<td><code><b>eachLayer</b>(
+<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+<nobr>&lt;Object&gt; <i>context?</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Iterates over the layers of the map, optionally specifying context of the iterator function.
+<pre><code>map.eachLayer(function (layer) {
+	layer.bindPopup('Hello');
+});</code></pre>
+</td>
 	</tr>
 
 	<tr id="map-openpopup">

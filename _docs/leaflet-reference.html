@@ -28,6 +28,9 @@ var map = L.map('map', {
 	</tr>
 </table>
 
+
+
+
 <h3 id="map-options">Options</h3>
 
 <h4>Map State Options</h4>
@@ -73,8 +76,8 @@ var map = L.map('map', {
 		<td><code><b>maxBounds</b></code></td>
 		<td><code><a href="#latlngbounds">LatLngBounds</a></code></td>
 		<td><code><span class="literal">null</span></code></td>
-		<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view, and also not allowing to zoom out to a view that's larger than the given bounds (depending on the map size). To set the restriction dynamically, use <a href="#map-setmaxbounds">setMaxBounds</a> method</td>
-	</tr>
+		<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view. To set the restriction dynamically, use <a href="#map-setmaxbounds">setMaxBounds</a> method</td>
+    </tr>
 	<tr>
 		<td><code><b>crs</b></code></td>
 		<td><code><a href="#icrs">CRS</a></code></td>
@@ -646,7 +649,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>getPixelBounds</b>()</code></td>
-		<td><code>Bounds</code></td>
+		<td><code><a href="#bounds">Bounds</a></code></td>
 		<td>Returns the bounds of the current map view in projected pixel coordinates (sometimes useful in layer and overlay implementations).</td>
 	</tr>
 	<tr>
@@ -688,6 +691,18 @@ var map = L.map('map', {
 
 		<td><code>Boolean</code></td>
 		<td>Returns <code><span class="literal">true</span></code> if the given layer is currently added to the map.</td>
+	</tr>
+	<tr>
+		<td><code><b>eachLayer</b>(
+			<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+			<nobr>&lt;Object&gt; <i>context?</i> )</nobr>
+		</code></td>
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Iterates over the layers of the map, optionally specifying context of the iterator function.
+<pre><code>map.eachLayer(function (layer) {
+	layer.bindPopup('Hello');
+});</code></pre>
+		</td>
 	</tr>
 
 	<tr id="map-openpopup">
@@ -1571,6 +1586,12 @@ var map = L.map('map', {
 		<td><code><span class="literal">null</span></code></td>
 		<td>Set it to <code><span class="literal">false</span></code> if you want to override the default behavior of the popup closing when user clicks the map (set globally by the <code>Map</code> <code>closePopupOnClick</code> option).</td>
 	</tr>
+	<tr>
+		<td><code><b>className</b></code></td>
+		<td><code>String</code></td>
+		<td><code class="javascript"><span class="string">''</span></code></td>
+		<td>A custom class name to assign to the popup.</td>
+	</tr>
 </table>
 
 <h3>Methods</h3>
@@ -1639,10 +1660,7 @@ var map = L.map('map', {
 
 <h3>Usage example</h3>
 
-<pre><code class="javascript">L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-	key: 'API-key',
-	styleId: 997
-}).addTo(map);</code></pre>
+<pre><code class="javascript">L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);</code></pre>
 
 <h3>Creation</h3>
 
@@ -1663,7 +1681,7 @@ var map = L.map('map', {
 	</tr>
 </table>
 
-<h2 id="url-template">URL template</h2>
+<h3 id="url-template">URL template</h3>
 
 <p>A string of the following form:</p>
 
@@ -1724,7 +1742,7 @@ var map = L.map('map', {
 		<td><code><b>attribution</b></code></td>
 		<td><code>String</code></td>
 		<td><code><span class="string">''</span></code></td>
-		<td>e.g. "&copy; CloudMade" &mdash; the string used by the attribution control, describes the layer data.</td>
+		<td>e.g. "&copy; Mapbox" &mdash; the string used by the attribution control, describes the layer data.</td>
 	</tr>
 	<tr>
 		<td><code><b>tms</b></code></td>
@@ -1791,6 +1809,12 @@ var map = L.map('map', {
 		<td><code><code>Boolean</code></code></td>
 		<td><code><span class="literal">false</span></code></td>
 		<td>If <code><span class="literal">true</span></code>, all the tiles that are not visible after panning are placed in a reuse queue from which they will be fetched when new tiles become visible (as opposed to dynamically creating new ones). This will in theory keep memory usage low and eliminate the need for reserving new memory whenever a new tile is needed.</td>
+	</tr>
+	<tr>
+		<td><code><b>bounds</b></code></td>
+		<td><code><a href="#latlngbounds">LatLngBounds</a></code></td>
+		<td><code><span class="literal">null</span></code></td>
+		<td>When this option is set, the TileLayer only loads tiles that are in the given geographical bounds.</td>
 	</tr>
 </table>
 
@@ -3243,7 +3267,7 @@ map.fitBounds(bounds);</code></pre>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Resets the the given vector layer's style to the original GeoJSON style, useful for resetting style after hover events.</td>
+		<td>Resets the given vector layer's style to the original GeoJSON style, useful for resetting style after hover events.</td>
 	</tr>
 </table>
 
@@ -3265,7 +3289,7 @@ map.fitBounds(bounds);</code></pre>
 		<td>Creates a layer from a given GeoJSON feature.</td>
 	</tr>
 	<tr>
-		<td><code><b>coordsToLatlng</b>(
+		<td><code><b>coordsToLatLng</b>(
 			<nobr>&lt;Array&gt; <i>coords</i></nobr>,
 			<nobr>&lt;Boolean&gt; <i>reverse?</i> )</nobr>
 		</code></td>
@@ -3274,7 +3298,7 @@ map.fitBounds(bounds);</code></pre>
 		<td>Creates a LatLng object from an array of 2 numbers (latitude, longitude) used in GeoJSON for points. If <code>reverse</code> is set to <code><span class="literal">true</span></code>, the numbers will be interpreted as (longitude, latitude).</td>
 	</tr>
 	<tr>
-		<td><code><b>coordsToLatlngs</b>(
+		<td><code><b>coordsToLatLngs</b>(
 			<nobr>&lt;Array&gt; <i>coords</i></nobr>,
 			<nobr>&lt;Number&gt; <i>levelsDeep?</i></nobr>,
 			<nobr>&lt;Boolean&gt; <i>reverse?</i> )</nobr>
@@ -4156,7 +4180,7 @@ map.addControl(control);</code></pre>
 		<td>The title set on the zoom in button.</td>
 	</tr>
 	<tr>
-		<td><code><b>zoomInTitle</b></code></td>
+		<td><code><b>zoomOutTitle</b></code></td>
 		<td><code>String</code></td>
 		<td><code><span class="string">'Zoom out'</span></td>
 		<td>The title set on the zoom out button.</td>
@@ -4228,7 +4252,7 @@ map.addControl(control);</code></pre>
 			<nobr>&lt;String&gt; <i>text</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Adds an attribution text (e.g. <code><span class="string">'Vector data &amp;copy; CloudMade'</span></code>).</td>
+		<td>Adds an attribution text (e.g. <code><span class="string">'Vector data &amp;copy; Mapbox'</span></code>).</td>
 	</tr>
 	<tr>
 		<td><code><b>removeAttribution</b>(
@@ -4242,10 +4266,10 @@ map.addControl(control);</code></pre>
 
 <h2 id="control-layers">Control.Layers</h2>
 
-<p>The layers control gives users the ability to switch between different base layers and switch overlays on/off (check out the <a href="examples/layers-control.html">detailed example</a>). Extends <a href="#control">Control</a>.</p>
+<p>The layers control gives users the ability to switch between different base layers and switch overlays on/off (check out the <a href="http://leafletjs.com/examples/layers-control.html">detailed example</a>). Extends <a href="#control">Control</a>.</p>
 
 <pre><code>var baseLayers = {
-	"CloudMade": cloudmade,
+	"Mapbox": mapbox,
 	"OpenStreetMap": osm
 };
 
@@ -4505,7 +4529,7 @@ map.off('click', onClick);</code></pre>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Removes a previously added listener function. If no function is specified, it will remove all the listeners of that particular event from the object.</td>
+		<td>Removes a previously added listener function. If no function is specified, it will remove all the listeners of that particular event from the object.  Note that if you passed a custom context to <code>addEventListener</code>, you must pass the same context to <code>removeEventListener</code> in order to remove the listener.</td>
 	</tr>
 	<tr>
 		<td><code><b>removeEventListener</b>(
@@ -4570,7 +4594,7 @@ map.off('click', onClick);</code></pre>
 
 <h2 id="event-objects">Event objects</h2>
 
-<p>Event object is an object that you recieve as an argument in a listener function when some event is fired, containing useful information about that event. For example:</p>
+<p>Event object is an object that you receive as an argument in a listener function when some event is fired, containing useful information about that event. For example:</p>
 
 <pre><code class="javascript">map.on('click', function(e) {
 	alert(e.latlng); // e is an event object (MouseEvent in this case)
@@ -4895,7 +4919,7 @@ a instanceof MyClass; // true
 
 <pre><code>var MyChildClass = MyClass.extend({
 	initialize: function () {
-		MyClass.prototype.initialize.call("Yo");
+		MyClass.prototype.initialize.call(this, "Yo");
 	},
 
 	greet: function (name) {
@@ -4917,7 +4941,7 @@ a.greet('Jason'); // alerts "Yo, bro Jason!"</code></pre>
 	}
 });
 
-var MyChildClass = L.Class.extend({
+var MyChildClass = MyClass.extend({
 	options: {
 		myOption1: 'baz',
 		myOption3: 5
@@ -5121,19 +5145,23 @@ MyClass.FOO; // 'bar'</code></pre>
 		<td><code>String</code></td>
 		<td>Applies a unique key to the object and returns that key. Has an <code>L.stamp</code> shortcut.</td>
 	</tr>
-	<!-- TODO Commented out for the time being:
-	https://github.com/Leaflet/Leaflet/pull/793#discussion_r1134904
 	<tr>
-		<td><code><b>requestAnimFrame</b>()</code></td>
-		<td></td>
-		<td></td>
+		<td><code><b>requestAnimFrame</b>(
+			<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+			<nobr>&lt;Object&gt; <i>context?</i></nobr>,
+			<nobr>&lt;Boolean&gt; <i>immediate?</i></nobr>,
+			<nobr>&lt;HTMLElement&gt; <i>element?</i> )</nobr>
+		</code></td>
+		<td><code>Number</code></td>
+		<td>Schedules <code>fn</code> to be executed when the browser repaints. When <code>immediate</code> is set, <code>fn</code> is called immediately if the browser doesn't have native support for <code>requestAnimationFrame</code>, otherwise it's delayed. Returns an id that can be used to cancel the request</td>
 	</tr>
 	<tr>
-		<td><code><b>cancelAnimFrame</b>()</code></td>
-		<td></td>
-		<td></td>
+		<td><code><b>cancelAnimFrame</b>(
+			<nobr>&lt;Number&gt; <i>id</i> )</nobr>
+		</code></td>
+		<td>-</td>
+		<td>Cancels a previous request to <code>requestAnimFrame</code>.</td>
 	</tr>
-	-->
 	<tr>
 		<td><code><b>limitExecByInterval</b>(
 			<nobr>&lt;Function&gt; <i>fn</i></nobr>,
