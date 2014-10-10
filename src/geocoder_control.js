@@ -127,11 +127,7 @@ var GeocoderControl = L.Control.extend({
             if (resp.results && resp.results.features) {
                 features = resp.results.features;
             }
-            if (features.length === 1) {
-                this.fire('autoselect', { feature: features[0] });
-                this.fire('found', {results: resp.results});
-            }
-            if (features.length > 1) {
+            if (features.length) {
                 this.fire('found', {results: resp.results});
             }
             this._displayResults(features);

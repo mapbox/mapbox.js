@@ -21,10 +21,6 @@ L.mapbox.map('map', 'examples.map-i875kd35')
         console.log('found');
         console.log(e);
     });
-    geocoderControl.on('autoselect', function(e) {
-        console.log('autoselect');
-        console.log(e);
-    });
     geocoderControl.on('select', function(e) {
         console.log('select');
         console.log(e.feature);

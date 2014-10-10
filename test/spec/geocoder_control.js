@@ -130,45 +130,6 @@ describe('L.mapbox.geocoderControl', function() {
         });
     });
 
-    describe('autocomplete events', function() {
-        var map, control;
-
-        beforeEach(function() {
-            map = new L.Map(document.createElement('div'));
-            control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
-                autocomplete: true
-            }).addTo(map);
-        });
-
-        it('emits a "found" event when geocoding with autocomplete succeeds', function(done) {
-            control.on('found', function(e) {
-                expect(e.results).to.eql(helpers.geocoderAustin);
-                done();
-            });
-
-            control._input.value = 'austin';
-            happen.once(control._form, { type: 'submit' });
-
-            server.respondWith('GET', 'http://example.com/austin.json',
-                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
-            server.respond();
-        });
-
-        it('emits a "autoselect" event when geocoding with autocomplete succeeds', function(done) {
-            control.on('autoselect', function(e) {
-                expect(e.feature).to.eql(helpers.geocoderAustin.features[0]);
-                done();
-            });
-
-            control._input.value = 'austin';
-            happen.once(control._form, { type: 'submit' });
-
-            server.respondWith('GET', 'http://example.com/austin.json',
-                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
-            server.respond();
-        });
-    });
-
     describe('events', function() {
         var map, control;
 
@@ -234,6 +195,31 @@ describe('L.mapbox.geocoderControl', function() {
 
             server.respondWith('GET', 'http://example.com/austin.json',
                 [400, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
+            server.respond();
+        });
+    });
+
+    describe('autocomplete events', function() {
+        var map, control;
+
+        beforeEach(function() {
+            map = new L.Map(document.createElement('div'));
+            control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+                autocomplete: true
+            }).addTo(map);
+        });
+
+        it('emits a "found" event when geocoding with autocomplete succeeds', function(done) {
+            control.on('found', function(e) {
+                expect(e.results).to.eql(helpers.geocoderAustin);
+                done();
+            });
+
+            control._input.value = 'austin';
+            happen.once(control._form, { type: 'submit' });
+
+            server.respondWith('GET', 'http://example.com/austin.json',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
             server.respond();
         });
     });
