@@ -1,0 +1,50 @@
+---
+layout: api
+title: "v2.1.3 JavaScript Library: L.Polygon"
+categories: api
+version: v2.1.3
+permalink: /api/v2.1.3/l-polygon
+---
+<h2 id="polygon">Polygon</h2>
+
+<p>A class for drawing polygon overlays on a map. Extends <a href="/mapbox.js/api/v2.1.3/l-polyline">Polyline</a>. Use <a href="/mapbox.js/api/v2.1.3/l-map">Map#addLayer</a> to add it to the map.</p>
+
+<p>Note that points you pass when creating a polygon shouldn't have an additional last point equal to the first one &mdash; it's better to filter out such points.</p>
+
+<h3>Creation</h3>
+
+<table data-id='polygon'>
+	<tr>
+<th>Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.polygon</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.3/l-latlng">LatLng</a>[]&gt; <i>latlngs</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.3/l-polyline">Polyline options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+<td>Instantiates a polygon object given an array of geographical points and optionally an options object (the same as for Polyline). You can also create a polygon with holes by passing an array of arrays of latlngs, with the first latlngs array representing the exterior ring while the remaining represent the holes inside.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<p>Polygon has the same options and methods as Polyline, with the following differences:</p>
+
+<table data-id='polygon'>
+	<tr>
+<th class="width250">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr id="polygon-togeojson">
+<td><code><b>toGeoJSON</b>()</code></td>
+<td><code>Object</code></td>
+<td>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a> representation of the polygon (GeoJSON Polygon Feature).</td>
+	</tr>
+</table>
+
+
