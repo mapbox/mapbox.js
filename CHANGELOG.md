@@ -1,3 +1,8 @@
+## v2.2.0
+
+* Trigger a `found` event when autocomplete is enabled for L.mapbox.geocoderControl.
+* Fix icon rendering in IE8
+
 ## v2.1.2
 
 * Fix empty string marker-symbol value
