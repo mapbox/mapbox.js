@@ -6,7 +6,7 @@ source: docs
 permalink: /:categories/:title
 baseurl: /mapbox.js
 highlighter: pygments
-mapboxjs: v2.1.2
+mapboxjs: v2.2.0
 mapboxjsbase: /mapbox.js/dist
 defaultid: 'examples.map-i86nkdio'
 rdiscount:
