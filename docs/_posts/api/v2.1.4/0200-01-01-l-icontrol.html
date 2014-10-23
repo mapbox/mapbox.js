@@ -1,0 +1,76 @@
+---
+layout: api
+title: "v2.1.4 JavaScript Library: L.IControl"
+categories: api
+version: v2.1.4
+permalink: /api/v2.1.4/l-icontrol
+---
+<h2 id="icontrol">IControl</h2>
+
+<p>Represents a UI element in one of the corners of the map. Implemented by <a href="/mapbox.js/api/v2.1.4/l-control">zoom</a>, <a href="/mapbox.js/api/v2.1.4/l-control">attribution</a>, <a href="/mapbox.js/api/v2.1.4/l-control">scale</a> and <a href="/mapbox.js/api/v2.1.4/l-control">layers</a> controls.</p>
+
+<h3>Methods</h3>
+
+<p>Every control in Leaflet should extend from <a href="/mapbox.js/api/v2.1.4/l-control">Control</a> class and additionally have the following methods:</p>
+
+<table data-id='icontrol'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>onAdd</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.4/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td><code>HTMLElement</code></td>
+<td>Should contain code that creates all the neccessary DOM elements for the control, adds listeners on relevant map events, and returns the element containing the control. Called on <code>map.addControl(control)</code> or <code>control.addTo(map)</code>.</td>
+	</tr>
+	<tr>
+<td><code><b>onRemove</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.4/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td>-</td>
+<td>Optional, should contain all clean up code (e.g. removes control's event listeners). Called on <code>map.removeControl(control)</code> or <code>control.removeFrom(map)</code>. The control's DOM container is removed automatically.</td>
+	</tr>
+</table>
+
+<h3>Custom Control Example</h3>
+
+<pre><code>var MyControl = L.Control.extend({
+	options: {
+position: 'topright'
+	},
+
+	onAdd: function (map) {
+// create the control container with a particular class name
+var container = L.DomUtil.create('div', 'my-custom-control');
+
+// ... initialize other DOM elements, add listeners, etc.
+
+return container;
+	}
+});
+
+map.addControl(new MyControl());
+</code></pre>
+
+<p>If specify your own constructor for the control, you'll also probably want to process options properly:</p>
+
+<pre><code>var MyControl = L.Control.extend({
+	initialize: function (foo, options) {
+// ...
+L.Util.setOptions(this, options);
+	},
+	// ...
+});</code></pre>
+
+<p>This will allow you to pass options like <code>position</code> when creating the control instances:</p>
+
+<pre><code>map.addControl(new MyControl('bar', {position: 'bottomleft'}));</code></pre>
+
+
+
+
