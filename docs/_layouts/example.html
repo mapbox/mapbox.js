@@ -20,25 +20,23 @@ version: latest
             cssURL = '{% if site.mapboxjsbase %}{{site.mapboxjsbase}}{% else %}{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}{% endif %}/mapbox.css';
 
         var exampleCSS = 'body { margin:0; padding:0; }\n#map { position:absolute; top:0; bottom:0; width:100%; }';
-
-        var examplePREFIX =
-            "<html><head><meta charset=utf-8 /><title>{{page.title}}</title>\n" +
-            "<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />\n" +
-            "<script src='" + jsURL + "'><\/script>\n" +
-            "<link href='" + cssURL + "' rel='stylesheet' />\n" +
-            "<style>" + exampleCSS + "</style>\n" +
-            "<script>" +
-                "L.mapbox.accessToken = '" + App.accessToken + "';" +
-                "L.mapbox.config.FORCE_HTTPS = true;" +
-                "L.mapbox.config.HTTPS_URL = '{{site.tileApi}}/v4';" +
-            "<\/script>\n" +
-            "</head>\n<body>\n";
-
         var exampleCONTENT = {{content | jsonify | replace: '</', '<\/'}};
-        var examplePOSTFIX = "</body>\n</html>";
 
+        // Don't combine the writes below, it breaks in IE9.
         doc.open();
-        doc.write(examplePREFIX + exampleCONTENT + examplePOSTFIX);
+        doc.write("<html><head><meta charset=utf-8 /><title>{{page.title}}</title>");
+        doc.write("<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />");
+        doc.write("<script src='" + jsURL + "'><\/script>");
+        doc.write("<link href='" + cssURL + "' rel='stylesheet' />");
+        doc.write("<style>" + exampleCSS + "</style>");
+        doc.write("<script>" +
+                      "L.mapbox.accessToken = '" + App.accessToken + "';" +
+                      "L.mapbox.config.FORCE_HTTPS = true;" +
+                      "L.mapbox.config.HTTPS_URL = '{{site.tileApi}}/v4';" +
+                  "<\/script>");
+        doc.write("</head><body>");
+        doc.write(exampleCONTENT);
+        doc.write("</body></html>");
         doc.close();
 
         // this function needs to execute after the rest of the page
