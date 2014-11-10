@@ -17,23 +17,25 @@ function load() {
         forceHandCursor: true
     });
 
-    $('.js-clipboard').each(function() {
-        var $clip = $(this);
-        if (!$clip.data('zeroclipboard-bound')) {
-            $clip.attr('data-clipboard-text', $('#' + $clip.data('ref-id')).text().trim());
-            $clip.data('zeroclipboard-bound', true);
-            var clip = new ZeroClipboard(this);
-            clip.on('aftercopy', function() {
-                $clip.siblings('input').select();
-                var text = $clip.text();
-                $clip.text('Copied to clipboard! ');
-                setTimeout(function() {
-                    $clip.text(text);
-                }, 1000);
-                var type = (location.pathname.split('plugins').length > 1) ? 'plugin' : 'example';
-                analytics.track('Copied ' + type + ' with clipboard');
-            });
-        }
+    $('.js-replace-token').bind('DOMNodeInserted',function(){
+        $('.js-clipboard').each(function() {
+            var $clip = $(this);
+            if (!$clip.data('zeroclipboard-bound')) {
+                $clip.attr('data-clipboard-text', $('#' + $clip.data('ref-id')).text().trim());
+                $clip.data('zeroclipboard-bound', true);
+                var clip = new ZeroClipboard(this);
+                clip.on('aftercopy', function() {
+                    $clip.siblings('input').select();
+                    var text = $clip.text();
+                    $clip.text('Copied to clipboard! ');
+                    setTimeout(function() {
+                        $clip.text(text);
+                    }, 1000);
+                    var type = (location.pathname.split('plugins').length > 1) ? 'plugin' : 'example';
+                    analytics.track('Copied ' + type + ' with clipboard');
+                });
+            }
+        });
     });
 
     $('.js-clipboard').on('click', function() {
