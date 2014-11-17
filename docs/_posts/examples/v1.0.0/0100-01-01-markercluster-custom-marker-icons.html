@@ -2,8 +2,8 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Markercluster with Mapbox marker data
-description: Cluster markers from a Mapbox featureLayer using MarkerClusterGroup.
+title: Clusters with custom cluster icons
+description: Show the number of markers in a cluster with custom simplestyle markers
 tags:
   - cluster
 ---
@@ -26,7 +26,18 @@ var map = L.mapbox.map('map')
 L.mapbox.featureLayer('examples.map-h61e8o8e').on('ready', function(e) {
     // The clusterGroup gets each marker in the group added to it
     // once loaded, and then is added to the map
-    var clusterGroup = new L.MarkerClusterGroup();
+    var clusterGroup = new L.MarkerClusterGroup({
+      // The iconCreateFunction takes the cluster as an argument and returns
+      // an icon that represents it. We use L.mapbox.marker.icon in this
+      // example, but you could also use L.icon or L.divIcon.
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#422'
+        });
+      }
+    });
     e.target.eachLayer(function(layer) {
         clusterGroup.addLayer(layer);
     });

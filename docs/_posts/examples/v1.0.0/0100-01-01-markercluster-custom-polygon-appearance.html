@@ -2,8 +2,8 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Markercluster with Mapbox marker data
-description: Cluster markers from a Mapbox featureLayer using MarkerClusterGroup.
+title: Clusters with custom polygon appearance
+description: Show a custom styled polygon for the extent of clustered markers
 tags:
   - cluster
 ---
@@ -26,9 +26,21 @@ var map = L.mapbox.map('map')
 L.mapbox.featureLayer('examples.map-h61e8o8e').on('ready', function(e) {
     // The clusterGroup gets each marker in the group added to it
     // once loaded, and then is added to the map
-    var clusterGroup = new L.MarkerClusterGroup();
+    var clusterGroup = new L.MarkerClusterGroup({
+      // This option sets custom options for the L.Polygon that's drawn when
+      // the user hovers over the icon for a marker cluster. The options
+      // given here are taken from the L.Path options:
+      // http://leafletjs.com/reference.html#path
+      polygonOptions: {
+        fillColor: '#3887be',
+        color: '#3887be',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.5
+      }
+    });
     e.target.eachLayer(function(layer) {
-        clusterGroup.addLayer(layer);
+      clusterGroup.addLayer(layer);
     });
     map.addLayer(clusterGroup);
 });
