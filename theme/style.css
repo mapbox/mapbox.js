@@ -779,7 +779,7 @@
 .map-tooltip { width:280px\8; /* < IE9 */ }
 
 /* < IE8 */
-@media \0screen {
+@media screen {
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out,
 .leaflet-popup-close-button,
