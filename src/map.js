@@ -36,8 +36,8 @@ var LMap = L.Map.extend({
             L.extend({}, L.Map.prototype.options, options));
 
         // enable targeting of old IE-verisions
-        if (/MSIE (\d+.\d+);/.test(navigator.userAgent)) {
-            if (new Number(RegExp.$1) <= 8) {
+        if (/MSIE (\d+.\d+);/.test(window.navigator.userAgent)) {
+            if (+(RegExp.$1) <= 8) {
                 // using IE8 and below
                 document.getElementById(element).className += " leaflet-IE8down";
             }
