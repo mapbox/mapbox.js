@@ -35,6 +35,14 @@ var LMap = L.Map.extend({
         L.Map.prototype.initialize.call(this, element,
             L.extend({}, L.Map.prototype.options, options));
 
+        // enable targeting of old IE-verisions
+        if (/MSIE (\d+.\d+);/.test(navigator.userAgent)) {
+            if (new Number(RegExp.$1) <= 8) {
+                // using IE8 and below
+                document.getElementById(element).className += " leaflet-IE8down";
+            }
+        }
+      
         // disable the default 'Leaflet' text
         if (this.attributionControl) this.attributionControl.setPrefix('');
 
