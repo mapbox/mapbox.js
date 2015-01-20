@@ -1,3 +1,13 @@
+## v2.1.5
+
+* Display the Mapbox logo when mapbox_logo is present in tileJSON
+* Update documentation for geocoder
+* Add leaflet-oldie to CSS for IE8
+
+## v2.1.4
+
+* No significant changes
+
 ## v2.1.3
 
 * Trigger a `found` event when autocomplete is enabled for L.mapbox.geocoderControl.

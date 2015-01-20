@@ -1,0 +1,62 @@
+---
+layout: api
+title: "v2.1.5 JavaScript Library: L.mapbox.gridControl(layer, options)"
+categories: api
+version: v2.1.5
+permalink: /api/v2.1.5/l-mapbox-gridcontrol
+---
+<h2 id="section-l-mapbox-gridcontrol">L.mapbox.gridControl(layer, options)</h2>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="/mapbox.js/api/v2.1.5/l-control">L.Control</a></code></span></p>
+<p>Interaction is what we call interactive parts of maps that are created with the powerful <a href="http://mapbox.com/tilemill/docs/crashcourse/tooltips/">tooltips &amp; regions</a> system in <a href="http://mapbox.com/tilemill/">TileMill</a>. Under the hood, it&#39;s powered by the open <a href="https://github.com/mapbox/utfgrid-spec/">UTFGrid specification</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>layer</td>
+<td><code><a href="/mapbox.js/api/v2.1.5/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code></td>
+<td>The first argument must be a layer created with <code><a href="/mapbox.js/api/v2.1.5/l-mapbox-gridlayer">L.mapbox.gridLayer()</a></code></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>Valid options are:<ul><li><code>sanitizer</code>: A function that accepts a string containing interactivity data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>template</code>: A string in the Mustache template language that will be evaluated with data from the grid to produce HTML for the interaction.</li><li><code>follow</code>: Whether the tooltip should follow the mouse in a constant relative position, or should be fixed in the top-right side of the map. By default, this is <code>false</code> and the tooltip is stationary.</li><li><code>pinnable</code>: Whether clicking will &#39;pin&#39; the tooltip open and expose a &#39;close&#39; button for the user to close the tooltip. By default, this is <code>true</code>.</li><li><code>touchTeaser</code>: On touch devices, show the teaser formatter if there is no output from the full formatter. By default, this is <code>true</code>.</li><li><code>location</code>: Evaluate the location formatter on click events, and if it provides output, navigate to that location. By default, this is <code>true</code>.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
+var gridLayer = L.mapbox.gridLayer(&#39;examples.map-8ced9urs&#39;);
+map.addLayer(L.mapbox.tileLayer(&#39;examples.map-8ced9urs&#39;));
+map.addLayer(gridLayer);
+map.addControl(L.mapbox.gridControl(gridLayer));
+</code></pre><p><em>Returns</em>: a <code><a href="/mapbox.js/api/v2.1.5/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code> object.</p>
+<p><em>Class</em>: <code><a href="/mapbox.js/api/v2.1.5/l-mapbox-gridcontrol">L.mapbox.GridControl</a></code></p>
+<h3 id="section-gridcontrol-hide">gridControl.hide()</h3>
+<p>If a tooltip is currently shown by the gridControl, hide and close it.</p>
+<p><em>Returns</em>: the <code><a href="/mapbox.js/api/v2.1.5/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code> object.</p>
+<h3 id="section-gridcontrol-settemplate">gridControl.setTemplate(template)</h3>
+<p>Change the <a href="http://mustache.github.io/">Mustache template</a> used to transform
+the UTFGrid data in the map&#39;s interactivity into HTML for display.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>template</td>
+<td>string</td>
+<td>A string of Mustache template code for popups.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Returns</em>: the <code><a href="/mapbox.js/api/v2.1.5/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code> object.</p>
