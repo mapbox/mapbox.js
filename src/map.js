@@ -7,7 +7,8 @@ var util = require('./util'),
     gridControl = require('./grid_control').gridControl,
     infoControl = require('./info_control').infoControl,
     shareControl = require('./share_control').shareControl,
-    legendControl = require('./legend_control').legendControl;
+    legendControl = require('./legend_control').legendControl,
+    mapboxLogoControl = require('./mapbox_logo').mapboxLogoControl;
 
 function withAccessToken(options, accessToken) {
     if (!accessToken || options.accessToken)
@@ -77,6 +78,9 @@ var LMap = L.Map.extend({
             this.addControl(this.shareControl);
         }
 
+        this._mapboxLogoControl = mapboxLogoControl(this.options.mapboxLogoControl);
+        this.addControl(this._mapboxLogoControl);
+
         this._loadTileJSON(_);
     },
 
@@ -123,6 +127,8 @@ var LMap = L.Map.extend({
         if (this.shareControl) {
             this.shareControl._setTileJSON(json);
         }
+
+        this._mapboxLogoControl._setTileJSON(json);
 
         if (!this._loaded && json.center) {
             var zoom = this.getZoom() !== undefined ? this.getZoom() : json.center[2],
