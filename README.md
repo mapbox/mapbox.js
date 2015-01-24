@@ -54,6 +54,10 @@ You can install `mapbox.js` with [bower](http://bower.io/) by running
 bower install mapbox.js
 ```
 
+## Usage as Download
+
+You can [download a built release at the mapbox.js-bower repository](https://github.com/mapbox/mapbox.js-bower/releases).
+
 ## Building
 
 Requires [node.js](http://nodejs.org/) installed on your system.
