@@ -54,6 +54,8 @@ function prepare {
 
   cp -R bower.json $TMP_DIR/$REPO/bower.json
 
+  cp -R LICENSE.md $TMP_DIR/$REPO/LICENSE.md
+
   #
   # update bower.json
   # tag repo
