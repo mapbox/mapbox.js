@@ -10,7 +10,7 @@
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
-    var geocoderControl = L.mapbox.geocoderControl('mapbox.places-v1');
+    var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
     L.mapbox.map('map', 'examples.map-i875kd35')
         .addControl(geocoderControl);
     geocoderControl.on('select', function(e) {

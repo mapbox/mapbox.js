@@ -12,12 +12,12 @@ describe('L.mapbox.geocoderControl', function() {
 
     it('performs forward geolocation, centering the map on the first result', function() {
         var map = new L.Map(document.createElement('div')),
-            control = L.mapbox.geocoderControl('mapbox.places-v1').addTo(map);
+            control = L.mapbox.geocoderControl('mapbox.places').addTo(map);
 
         expect(control instanceof L.mapbox.GeocoderControl).to.eql(true);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/austin.json?access_token=key',
+            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places/austin.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
 
         control._input.value = 'austin';
@@ -29,10 +29,10 @@ describe('L.mapbox.geocoderControl', function() {
 
     it('performs forward geolocation, centering the map on the first result even if a point', function() {
         var map = new L.Map(document.createElement('div')),
-            control = L.mapbox.geocoderControl('mapbox.places-v1').addTo(map);
+            control = L.mapbox.geocoderControl('mapbox.places').addTo(map);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/white%20house.json?access_token=key',
+            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places/white%20house.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
 
         control._input.value = 'white house';
@@ -45,12 +45,12 @@ describe('L.mapbox.geocoderControl', function() {
 
     it('supports the pointzoom option for preferred zoom for point results', function() {
         var map = new L.Map(document.createElement('div')),
-            control = L.mapbox.geocoderControl('mapbox.places-v1', {
+            control = L.mapbox.geocoderControl('mapbox.places', {
                 pointZoom: 10
             }).addTo(map);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/white%20house.json?access_token=key',
+            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places/white%20house.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
 
         control._input.value = 'white house';
@@ -63,14 +63,14 @@ describe('L.mapbox.geocoderControl', function() {
 
     it('pointzoom does not zoom out zoomed-in maps', function() {
         var map = new L.Map(document.createElement('div')),
-            control = L.mapbox.geocoderControl('mapbox.places-v1', {
+            control = L.mapbox.geocoderControl('mapbox.places', {
                 pointZoom: 10
             }).addTo(map);
 
         map.setView([0, 0], 14);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/white%20house.json?access_token=key',
+            'http://a.tiles.mapbox.com/v4/geocode/mapbox.places/white%20house.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
 
         control._input.value = 'white house';
@@ -82,34 +82,34 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('sets url based on an id', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places-v1');
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/{query}.json?access_token=key');
+        var control = L.mapbox.geocoderControl('mapbox.places');
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=key');
     });
 
     it('supports custom access token', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places-v1', {accessToken: 'custom'});
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/{query}.json?access_token=custom');
+        var control = L.mapbox.geocoderControl('mapbox.places', {accessToken: 'custom'});
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=custom');
     });
 
     it('#setURL', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places-v1');
+        var control = L.mapbox.geocoderControl('mapbox.places');
         control.setURL('foo/{query}.json');
         expect(control.getURL()).to.equal('foo/{query}.json');
     });
 
     it('#setID', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places-v1');
-        expect(control.setID('mapbox.places-v1')).to.eql(control);
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places-v1/{query}.json?access_token=key');
+        var control = L.mapbox.geocoderControl('mapbox.places');
+        expect(control.setID('mapbox.places')).to.eql(control);
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=key');
     });
 
     it('is by default in the top left', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places-v1');
+        var control = L.mapbox.geocoderControl('mapbox.places');
         expect(control.options.position).to.equal('topleft');
     });
 
     it('supports an options object', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places-v1', {
+        var control = L.mapbox.geocoderControl('mapbox.places', {
             position: 'bottomright'
         });
         expect(control.options.position).to.equal('bottomright');

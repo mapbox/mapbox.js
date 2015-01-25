@@ -2,7 +2,7 @@
   "author": "Mapbox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "leaflet-hash": "0.2.1",
-    "leaflet-fullscreen": "0.0.0",
+    "leaflet-fullscreen": "0.0.4",
     "uglify-js": "2.4.8",
     "mocha": "1.17.1",
     "expect.js": "0.3.1",

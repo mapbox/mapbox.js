@@ -36,7 +36,7 @@ var output = document.getElementById('output');
 var map = L.mapbox.map('map', 'examples.map-i875kd35');
 
 // Initialize the geocoder control and add it to the map.
-var geocoderControl = L.mapbox.geocoderControl('mapbox.places-v1');
+var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
 geocoderControl.addTo(map);
 
 // Listen for the `found` result and display the first result

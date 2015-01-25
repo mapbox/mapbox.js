@@ -16,8 +16,8 @@ Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 Recommended usage is via the Mapbox CDN:
 
 ```html
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
 ```
 
 The `mapbox.js` file includes the Leaflet library. Alternatively, you can use `mapbox.standalone.js`, which does not include Leaflet (you will have to provide it yourself).
@@ -53,6 +53,10 @@ You can install `mapbox.js` with [bower](http://bower.io/) by running
 ```sh
 bower install mapbox.js
 ```
+
+## Usage as Download
+
+You can [download a built release at the mapbox.js-bower repository](https://github.com/mapbox/mapbox.js-bower/releases).
 
 ## Building
 

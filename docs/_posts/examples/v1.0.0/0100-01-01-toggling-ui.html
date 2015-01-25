@@ -7,8 +7,8 @@ description: Enable or disable map UI controls.
 tags:
   - ui
 ---
-<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-fullscreen/v0.0.3/leaflet.fullscreen.css' rel='stylesheet' />
-<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-fullscreen/v0.0.3/Leaflet.fullscreen.min.js'></script>
+<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
 <script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
 
 <style>
@@ -141,7 +141,7 @@ map.getContainer().querySelector('#hash').onclick = function() {
     return false;
 };
 
-var geocode = L.mapbox.geocoderControl('mapbox.places-v1');
+var geocode = L.mapbox.geocoderControl('mapbox.places');
 
 map.getContainer().querySelector('#geocoder').onclick = function() {
     if (this.className === 'active') {
