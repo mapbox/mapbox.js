@@ -88,9 +88,10 @@ var FeatureLayer = L.FeatureGroup.extend({
         } else if (this.options.filter(json)) {
 
             var opts = {accessToken: this.options.accessToken},
-                layer = L.GeoJSON.geometryToLayer(json, function(feature, latlon) {
-                    return marker.style(feature, latlon, opts);
-                }),
+                pointToLayer = this.options.pointToLayer || function(feature, latlon) {
+                  return marker.style(feature, latlon, opts);
+                },
+                layer = L.GeoJSON.geometryToLayer(json, pointToLayer),
                 popupHtml = marker.createPopup(json, this.options.sanitizer);
 
             if ('setStyle' in layer) {
