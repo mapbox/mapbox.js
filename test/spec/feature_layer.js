@@ -180,4 +180,15 @@ describe('L.mapbox.featureLayer', function() {
 
         expect(layer.getLayers()[0]._popup._content).to.match(/<script>/);
     });
+
+    it('supports a pointToLayer option', function() {
+      var layer  = L.mapbox.featureLayer(unsanitary, {
+            pointToLayer: function (feature, lonlat) {
+              return L.circleMarker(lonlat);
+            }
+          }),
+          marker = layer.getLayers()[0];
+
+        expect(marker instanceof L.Circle).to.equal(true);
+    });
 });
