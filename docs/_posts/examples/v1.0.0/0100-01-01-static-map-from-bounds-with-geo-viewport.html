@@ -35,8 +35,9 @@ var vp = geoViewport.viewport(bounds, size);
 // Construct a static map url
 // https://www.mapbox.com/developers/api/static/
 document.getElementById('static-map').src =
-    '{{site.tileApi}}/v3/examples.map-zr0njcqy/' +
+    '{{site.tileApi}}/v4/examples.map-zr0njcqy/' +
     vp.center.join(',') + ',' +
     vp.zoom + '/' +
-    size.join('x') + '.png';
+    size.join('x') + '.png' +
+    '?access_token=' + L.mapbox.accessToken;
 </script>
