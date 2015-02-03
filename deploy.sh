@@ -20,8 +20,10 @@ echo ""
 echo ""
 
 aws s3 cp --acl=public-read dist/mapbox.js s3://mapbox-js/mapbox.js/$TAG/mapbox.js
+aws s3 cp --acl=public-read dist/mapbox.js.map s3://mapbox-js/mapbox.js/$TAG/mapbox.js.map
 aws s3 cp --acl=public-read dist/mapbox.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.uncompressed.js
 aws s3 cp --acl=public-read dist/mapbox.standalone.js s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.js
+aws s3 cp --acl=public-read dist/mapbox.standalone.js.map s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.js.map
 aws s3 cp --acl=public-read dist/mapbox.standalone.uncompressed.js s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.uncompressed.js
 aws s3 cp --acl=public-read dist/mapbox.css s3://mapbox-js/mapbox.js/$TAG/mapbox.css
 aws s3 cp --acl=public-read dist/mapbox.standalone.css s3://mapbox-js/mapbox.js/$TAG/mapbox.standalone.css
