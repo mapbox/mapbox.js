@@ -136,6 +136,8 @@ var LMap = L.Map.extend({
 
             this.setView(center, zoom);
         }
+
+        this.on('moveend', this._editLink, this);
     },
 
     _editLink: function() {
@@ -165,8 +167,6 @@ var LMap = L.Map.extend({
         if (this.attributionControl && this._loaded && layer.getAttribution) {
             this.attributionControl.addAttribution(layer.getAttribution());
         }
-
-        this.on('moveend', this._editLink, this);
 
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
                 (layer.options.maxZoom || layer.options.minZoom)) {
