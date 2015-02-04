@@ -82,12 +82,10 @@ var LMap = L.Map.extend({
         this.addControl(this._mapboxLogoControl);
 
         this._loadTileJSON(_);
-    },
 
-    // Update certain properties on 'ready' event
-    addLayer: function(layer) {
-        if ('on' in layer) { layer.on('ready', L.bind(function() { this._updateLayer(layer); }, this)); }
-        return L.Map.prototype.addLayer.call(this, layer);
+        this.on('layeradd', this._onLayerAdd, this)
+            .on('layerremove', this._onLayerRemove, this)
+            .on('moveend', this._editLink, this);
     },
 
     // use a javascript object of tilejson data to configure this layer
@@ -118,6 +116,7 @@ var LMap = L.Map.extend({
 
         if (this.infoControl && json.attribution) {
             this.infoControl.addInfo(json.attribution);
+            this._editLink();
         }
 
         if (this.legendControl && json.legend) {
@@ -136,8 +135,6 @@ var LMap = L.Map.extend({
 
             this.setView(center, zoom);
         }
-
-        this.on('moveend', this._editLink, this);
     },
 
     _editLink: function() {
@@ -155,6 +152,24 @@ var LMap = L.Map.extend({
                     this.getZoom();
             }
         }
+    },
+
+    _onLayerAdd: function(e) {
+        if ('on' in e.layer) {
+            e.layer.on('ready', this._onLayerReady, this);
+        }
+        window.setTimeout(L.bind(this._editLink, this), 0); // Update after attribution control resets the HTML.
+    },
+
+    _onLayerRemove: function(e) {
+        if ('on' in e.layer) {
+            e.layer.off('ready', this._onLayerReady, this);
+        }
+        window.setTimeout(L.bind(this._editLink, this), 0); // Update after attribution control resets the HTML.
+    },
+
+    _onLayerReady: function(e) {
+        this._updateLayer(e.target);
     },
 
     _updateLayer: function(layer) {
