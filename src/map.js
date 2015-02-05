@@ -8,7 +8,8 @@ var util = require('./util'),
     infoControl = require('./info_control').infoControl,
     shareControl = require('./share_control').shareControl,
     legendControl = require('./legend_control').legendControl,
-    mapboxLogoControl = require('./mapbox_logo').mapboxLogoControl;
+    mapboxLogoControl = require('./mapbox_logo').mapboxLogoControl,
+    feedback = require('./feedback');
 
 function withAccessToken(options, accessToken) {
     if (!accessToken || options.accessToken)
@@ -85,7 +86,15 @@ var LMap = L.Map.extend({
 
         this.on('layeradd', this._onLayerAdd, this)
             .on('layerremove', this._onLayerRemove, this)
-            .on('moveend', this._editLink, this);
+            .on('moveend', this._updateMapFeedbackLink, this);
+
+        this.whenReady(function () {
+            feedback.on('change', this._updateMapFeedbackLink, this);
+        });
+
+        this.on('unload', function () {
+            feedback.off('change', this._updateMapFeedbackLink, this);
+        });
     },
 
     // use a javascript object of tilejson data to configure this layer
@@ -116,7 +125,7 @@ var LMap = L.Map.extend({
 
         if (this.infoControl && json.attribution) {
             this.infoControl.addInfo(json.attribution);
-            this._editLink();
+            this._updateMapFeedbackLink();
         }
 
         if (this.legendControl && json.legend) {
@@ -137,7 +146,7 @@ var LMap = L.Map.extend({
         }
     },
 
-    _editLink: function() {
+    _updateMapFeedbackLink: function() {
         if (!this._controlContainer.getElementsByClassName) return;
         var link = this._controlContainer.getElementsByClassName('mapbox-improve-map');
         if (link.length && this._loaded) {
@@ -145,11 +154,17 @@ var LMap = L.Map.extend({
             var tilejson = this._tilejson || {};
             var id = tilejson.id || '';
 
+            var hash = '#' + id + '/' +
+                center.lng.toFixed(3) + '/' +
+                center.lat.toFixed(3) + '/' +
+                this.getZoom();
+
+            for (var key in feedback.data) {
+                hash += '/' + key + '=' + feedback.data[key];
+            }
+
             for (var i = 0; i < link.length; i++) {
-                link[i].href = link[i].href.split('#')[0] + '#' + id + '/' +
-                    center.lng.toFixed(3) + '/' +
-                    center.lat.toFixed(3) + '/' +
-                    this.getZoom();
+                link[i].hash = hash;
             }
         }
     },
@@ -158,14 +173,14 @@ var LMap = L.Map.extend({
         if ('on' in e.layer) {
             e.layer.on('ready', this._onLayerReady, this);
         }
-        window.setTimeout(L.bind(this._editLink, this), 0); // Update after attribution control resets the HTML.
+        window.setTimeout(L.bind(this._updateMapFeedbackLink, this), 0); // Update after attribution control resets the HTML.
     },
 
     _onLayerRemove: function(e) {
         if ('on' in e.layer) {
             e.layer.off('ready', this._onLayerReady, this);
         }
-        window.setTimeout(L.bind(this._editLink, this), 0); // Update after attribution control resets the HTML.
+        window.setTimeout(L.bind(this._updateMapFeedbackLink, this), 0); // Update after attribution control resets the HTML.
     },
 
     _onLayerReady: function(e) {
@@ -188,7 +203,7 @@ var LMap = L.Map.extend({
             this._zoomBoundLayers[L.stamp(layer)] = layer;
         }
 
-        this._editLink();
+        this._updateMapFeedbackLink();
         this._updateZoomLevels();
     }
 });

@@ -2,6 +2,7 @@
 
 var util = require('./util'),
     urlhelper = require('./url'),
+    feedback = require('./feedback'),
     request = require('./request');
 
 // Low-level geocoding interface - wraps specific API calls and their
@@ -21,19 +22,20 @@ module.exports = function(url, options) {
     };
 
     geocoder.queryURL = function(_) {
+        var query;
+
         if (typeof _ !== 'string') {
             var parts = [];
             for (var i = 0; i < _.length; i++) {
                 parts[i] = encodeURIComponent(_[i]);
             }
-            return L.Util.template(geocoder.getURL(), {
-                query: parts.join(';')
-            });
+            query = parts.join(';');
         } else {
-            return L.Util.template(geocoder.getURL(), {
-                query: encodeURIComponent(_)
-            });
+            query = encodeURIComponent(_);
         }
+
+        feedback.record({geocoding: query});
+        return L.Util.template(geocoder.getURL(), {query: query});
     };
 
     geocoder.query = function(_, callback) {

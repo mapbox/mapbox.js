@@ -310,6 +310,15 @@ describe('L.mapbox.map', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
             server.respond();
         });
+
+        it('includes data from other feedback sources', function() {
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
+                .setView([38.902, -77.001], 13);
+
+            L.mapbox.feedback.record({test: '123'});
+
+            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13/test=123');
+        });
     });
 
     describe('corner cases', function() {
