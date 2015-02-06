@@ -267,7 +267,7 @@ describe('L.mapbox.map', function() {
         });
 
         it('adds mapid and coordinates to info link', function() {
-            var map = L.mapbox.map(element, helpers.tileJSON_improvemap, {attributionControl: false, infoControl: true})
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap, {attributionControl: false})
                 .setView([38.902, -77.001], 13);
 
             expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
@@ -334,10 +334,7 @@ describe('L.mapbox.map', function() {
         });
 
         it('attributionControl enabled', function(done) {
-            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {
-                infoControl: false,
-                attributionControl: true
-            });
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2');
 
             map.on('ready', function() {
                 expect(map.attributionControl._container.innerHTML).to.eql('Data provided by NatureServe in collaboration with Robert Ridgely');

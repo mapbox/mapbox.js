@@ -6,7 +6,6 @@ var geocoderControl = require('./geocoder_control'),
     legendControl = require('./legend_control'),
     shareControl = require('./share_control'),
     tileLayer = require('./tile_layer'),
-    infoControl = require('./info_control'),
     map = require('./map'),
     gridLayer = require('./grid_layer');
 
@@ -17,8 +16,6 @@ L.mapbox = module.exports = {
     simplestyle: require('./simplestyle'),
     tileLayer: tileLayer.tileLayer,
     TileLayer: tileLayer.TileLayer,
-    infoControl: infoControl.infoControl,
-    InfoControl: infoControl.InfoControl,
     shareControl: shareControl.shareControl,
     ShareControl: shareControl.ShareControl,
     legendControl: legendControl.legendControl,
