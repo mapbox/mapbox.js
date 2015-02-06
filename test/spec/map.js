@@ -266,13 +266,6 @@ describe('L.mapbox.map', function() {
             server.respond();
         });
 
-        it('adds mapid and coordinates to info link', function() {
-            var map = L.mapbox.map(element, helpers.tileJSON_improvemap, {attributionControl: false})
-                .setView([38.902, -77.001], 13);
-
-            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
-        });
-
         it('updates coordinates after map is moved', function() {
             var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
                 .setView([38.902, -77.001], 13);
