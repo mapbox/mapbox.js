@@ -35,8 +35,27 @@ var LMap = L.Map.extend({
         L.Map.prototype.initialize.call(this, element,
             L.extend({}, L.Map.prototype.options, options));
 
-        // disable the default 'Leaflet' text
-        if (this.attributionControl) this.attributionControl.setPrefix('');
+        // Disable the default 'Leaflet' text
+        if (this.attributionControl) {
+            this.attributionControl.setPrefix('');
+
+            // Set a compact display if screen size is < 640 or
+            // compact is set to `true` in attributionControl options.
+            if (this._container.offsetWidth <= 640 ||
+                this.options.attributionControl.compact) {
+                L.DomUtil.addClass(this.attributionControl._container, 'compact');
+            }
+
+            if (!this.options.attributionControl.compact) {
+                this.on('resize', function() {
+                    if (this._container.offsetWidth > 640) {
+                        L.DomUtil.removeClass(this.attributionControl._container, 'compact');
+                    } else {
+                        L.DomUtil.addClass(this.attributionControl._container, 'compact');
+                    }
+                });
+            }
+        }
 
         if (this.options.tileLayer) {
             this.tileLayer = tileLayer(undefined,

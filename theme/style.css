@@ -290,9 +290,19 @@
   .leaflet-left .leaflet-control-scale    { margin-left:5px; }
   .leaflet-bottom .leaflet-control-scale  { margin-bottom:5px; }
 
-/* Used for smaller screens. Visibility
- * is triggered by a media query below */
-.leaflet-control-attribution:after {
+/* Used for smaller map containers & triggered by container size */
+.leaflet-container .leaflet-control-attribution.compact { margin:10px; }
+.leaflet-container .leaflet-control-attribution.compact {
+  background:#fff;
+  border-radius:3px 13px 13px 3px;
+  padding:3px 31px 3px 3px;
+  visibility:hidden;
+  }
+  .leaflet-control-attribution.compact:hover {
+    visibility:visible;
+    }
+
+.leaflet-control-attribution.compact:after {
   content:'';
   background-color:#fff;
   background-color:rgba(255,255,255,0.5);
@@ -305,13 +315,13 @@
   vertical-align:middle;
   bottom:0;
   z-index:1;
-  visibility:hidden;
+  visibility:visible;
   cursor:pointer;
   }
-  .leaflet-control-attribution:hover:after { background-color:#fff; }
+  .leaflet-control-attribution.compact:hover:after { background-color:#fff; }
 
-.leaflet-right .leaflet-control-attribution:after { right:0; }
-.leaflet-left .leaflet-control-attribution:after { left:0; }
+.leaflet-right .leaflet-control-attribution.compact:after { right:0; }
+.leaflet-left .leaflet-control-attribution.compact:after { left:0; }
 
 .leaflet-control-scale-line {
   background-color:rgba(255,255,255,0.5);
@@ -751,17 +761,6 @@
 /* Smaller Screens
 ------------------------------------------------------- */
 @media only screen and (max-width:640px) {
-.leaflet-container .leaflet-control-attribution { margin:10px; }
-.leaflet-container .leaflet-control-attribution {
-  background:#fff;
-  border-radius:3px 13px 13px 3px;
-  padding:3px 31px 3px 3px;
-  visibility:hidden;
-  }
-.leaflet-control-attribution:hover,
-.leaflet-control-attribution:after {
-  visibility:visible;
-  }
 .mapbox-modal-body {
   width:100%;
   height:100%;
