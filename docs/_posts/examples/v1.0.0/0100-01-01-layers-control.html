@@ -10,7 +10,7 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.map('map').setView([38.8922,-77.0348], 14);
+var map = L.mapbox.map('map').setView([38.8922,-77.0348], 14);
 
 L.control.layers({
     'Base Map': L.mapbox.tileLayer('examples.map-i87786ca').addTo(map),
