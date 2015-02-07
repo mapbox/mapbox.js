@@ -291,18 +291,18 @@
   .leaflet-bottom .leaflet-control-scale  { margin-bottom:5px; }
 
 /* Used for smaller map containers & triggered by container size */
-.leaflet-container .leaflet-control-attribution.compact { margin:10px; }
-.leaflet-container .leaflet-control-attribution.compact {
+.leaflet-container .leaflet-control-attribution.leaflet-compact-attribution { margin:10px; }
+.leaflet-container .leaflet-control-attribution.leaflet-compact-attribution {
   background:#fff;
   border-radius:3px 13px 13px 3px;
   padding:3px 31px 3px 3px;
   visibility:hidden;
   }
-  .leaflet-control-attribution.compact:hover {
+  .leaflet-control-attribution.leaflet-compact-attribution:hover {
     visibility:visible;
     }
 
-.leaflet-control-attribution.compact:after {
+.leaflet-control-attribution.leaflet-compact-attribution:after {
   content:'';
   background-color:#fff;
   background-color:rgba(255,255,255,0.5);
@@ -318,10 +318,10 @@
   visibility:visible;
   cursor:pointer;
   }
-  .leaflet-control-attribution.compact:hover:after { background-color:#fff; }
+  .leaflet-control-attribution.leaflet-compact-attribution:hover:after { background-color:#fff; }
 
-.leaflet-right .leaflet-control-attribution.compact:after { right:0; }
-.leaflet-left .leaflet-control-attribution.compact:after { left:0; }
+.leaflet-right .leaflet-control-attribution.leaflet-compact-attribution:after { right:0; }
+.leaflet-left .leaflet-control-attribution.leaflet-compact-attribution:after { left:0; }
 
 .leaflet-control-scale-line {
   background-color:rgba(255,255,255,0.5);

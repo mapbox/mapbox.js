@@ -39,19 +39,19 @@ var LMap = L.Map.extend({
         if (this.attributionControl) {
             this.attributionControl.setPrefix('');
 
-            // Set a compact display if screen size is < 640 or
+            var compact =  this.options.attributionControl.compact;
+            // Set a compact display if map container width is < 640 or
             // compact is set to `true` in attributionControl options.
-            if (this._container.offsetWidth <= 640 ||
-                this.options.attributionControl.compact) {
-                L.DomUtil.addClass(this.attributionControl._container, 'compact');
+            if (compact || (compact !== false && this._container.offsetWidth <= 640)) {
+                L.DomUtil.addClass(this.attributionControl._container, 'leaflet-compact-attribution');
             }
 
-            if (!this.options.attributionControl.compact) {
+            if (compact === undefined) {
                 this.on('resize', function() {
                     if (this._container.offsetWidth > 640) {
-                        L.DomUtil.removeClass(this.attributionControl._container, 'compact');
+                        L.DomUtil.removeClass(this.attributionControl._container, 'leaflet-compact-attribution');
                     } else {
-                        L.DomUtil.addClass(this.attributionControl._container, 'compact');
+                        L.DomUtil.addClass(this.attributionControl._container, 'leaflet-compact-attribution');
                     }
                 });
             }
