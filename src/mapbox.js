@@ -6,6 +6,7 @@ var geocoderControl = require('./geocoder_control'),
     legendControl = require('./legend_control'),
     shareControl = require('./share_control'),
     tileLayer = require('./tile_layer'),
+    infoControl = require('./info_control'),
     map = require('./map'),
     gridLayer = require('./grid_layer');
 
