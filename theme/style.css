@@ -775,6 +775,10 @@
   }
 }
 
+/* Print
+------------------------------------------------------- */
+@media print { .mapbox-improve-map { display:none; } }
+
 /* Browser Fixes
 ------------------------------------------------------- */
 /* VML support for IE8 */
