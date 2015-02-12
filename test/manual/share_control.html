@@ -12,7 +12,12 @@
 <div id='map'>
 </div>
 <script>
-  var map = L.mapbox.map('map', 'tristen.map-ixqro653')
+  var map = L.mapbox.map('map', 'tristen.map-ixqro653', {
+      infoControl: {
+        position: 'bottomright',
+        editLink: true
+      }
+    })
     .addControl(L.mapbox.shareControl());
 </script>
 </body>
