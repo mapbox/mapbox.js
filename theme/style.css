@@ -292,6 +292,39 @@
   .leaflet-left .leaflet-control-scale    { margin-left:5px; }
   .leaflet-bottom .leaflet-control-scale  { margin-bottom:5px; }
 
+/* Used for smaller map containers & triggered by container size */
+.leaflet-container .leaflet-control-attribution.leaflet-compact-attribution { margin:10px; }
+.leaflet-container .leaflet-control-attribution.leaflet-compact-attribution {
+  background:#fff;
+  border-radius:3px 13px 13px 3px;
+  padding:3px 31px 3px 3px;
+  visibility:hidden;
+  }
+  .leaflet-control-attribution.leaflet-compact-attribution:hover {
+    visibility:visible;
+    }
+
+.leaflet-control-attribution.leaflet-compact-attribution:after {
+  content:'';
+  background-color:#fff;
+  background-color:rgba(255,255,255,0.5);
+  background-position:0 -78px;
+  border-radius:50%;
+  position:absolute;
+  display:inline-block;
+  width:26px;
+  height:26px;
+  vertical-align:middle;
+  bottom:0;
+  z-index:1;
+  visibility:visible;
+  cursor:pointer;
+  }
+  .leaflet-control-attribution.leaflet-compact-attribution:hover:after { background-color:#fff; }
+
+.leaflet-right .leaflet-control-attribution.leaflet-compact-attribution:after { right:0; }
+.leaflet-left .leaflet-control-attribution.leaflet-compact-attribution:after { left:0; }
+
 .leaflet-control-scale-line {
   background-color:rgba(255,255,255,0.5);
   border:1px solid #999;
@@ -391,6 +424,7 @@
   display:block;
   }
 
+.leaflet-control-attribution:after,
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out,
 .leaflet-popup-close-button,
@@ -403,6 +437,7 @@
   background-repeat:no-repeat;
   background-size:26px 260px;
   }
+  .leaflet-container.dark .leaflet-control-attribution:after,
   .mapbox-button-icon:before,
   .leaflet-container.dark .leaflet-control-zoom-in,
   .leaflet-container.dark .leaflet-control-zoom-out,
@@ -719,6 +754,7 @@
     background-color:#505050;
     }
 
+.leaflet-container.dark .leaflet-control-attribution:after,
 .leaflet-container.dark .mapbox-info-toggle,
 .leaflet-container.dark .map-info-container,
 .leaflet-container.dark .leaflet-control-attribution {
@@ -732,6 +768,9 @@
     color:#fff;
     }
 
+.leaflet-container.dark .leaflet-control-attribution:hover:after {
+  background-color:#000;
+  }
 .leaflet-container.dark .leaflet-control-layers-list span {
   color:#f8f8f8;
   }
