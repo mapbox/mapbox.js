@@ -22,7 +22,7 @@ describe('L.control.attribution', function() {
         expect(attributionControl.classList.contains('leaflet-compact-attribution')).to.eql(false);
     });
 
-    it('persists leaflet-compact-attribution', function() {
+    it('always adds the leaflet-compact-attribution class when {compact: true} is specified', function() {
         var map = L.mapbox.map(el, undefined, {
           attributionControl: {
             compact:true
@@ -34,5 +34,24 @@ describe('L.control.attribution', function() {
         map.fire('resize');
 
         expect(attributionControl.classList.contains('leaflet-compact-attribution')).to.eql(true);
+    });
+
+    it('never adds the leaflet-compact-attribution class when {compact: false} is specified', function() {
+        var map = L.mapbox.map(el, undefined, {
+          attributionControl: {
+            compact:false
+          }
+        });
+        var attributionControl = el.querySelector('.leaflet-control-attribution');
+
+        el.style.width = '640px';
+        map.fire('resize');
+
+        expect(attributionControl.classList.contains('leaflet-compact-attribution')).to.eql(false);
+
+        el.style.width = '641px';
+        map.fire('resize');
+
+        expect(attributionControl.classList.contains('leaflet-compact-attribution')).to.eql(false);
     });
 });
