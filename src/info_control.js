@@ -9,6 +9,7 @@ var InfoControl = L.Control.extend({
     initialize: function(options) {
         L.setOptions(this, options);
         this._info = {};
+        console.warn('infoControl has been deprecated and will be removed in mapbox.js v3.0.0. Use the default attribution control instead, which is now responsive.');
     },
 
     onAdd: function(map) {
