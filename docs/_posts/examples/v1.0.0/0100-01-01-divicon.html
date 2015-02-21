@@ -10,16 +10,14 @@ tags:
 <style>
 /*
  * Unlike other icons, you can style `L.divIcon` with CSS.
- * These styles make each marker a circle with a border and centered text.
+ * These styles make each marker a pink triangle.
  */
-.count-icon {
-  background:#ff8888;
-  border:5px solid rgba(255,255,255,0.5);
-  color:#fff;
-  font-weight:bold;
-  text-align:center;
-  border-radius:50%;
-  line-height:30px;
+.css-icon {
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 30px solid #ff8888;
   }
 </style>
 <div id='map'></div>
@@ -27,22 +25,16 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([0, 0], 2);
 
-// For 0 -> 9, create markers in a circle
-for (var i = 0; i < 10; i++) {
-    // Use a little math to position markers.
-    // Replace this with your own code.
-    L.marker([
-        Math.cos(i / 10 * 2 * Math.PI) * 40,
-        Math.sin(i / 10 * 2 * Math.PI) * 40
-    ], {
-        icon: L.divIcon({
-            // Specify a class name we can refer to in CSS.
-            className: 'count-icon',
-            // Define what HTML goes in each marker.
-            html: i,
-            // Set a markers width and height.
-            iconSize: [40, 40]
-        })
-    }).addTo(map);
-}
+// Define an icon called cssIcon
+var cssIcon = L.divIcon({
+  // Specify a class name we can refer to in CSS.
+  className: 'css-icon',
+  // Set marker width and height
+  iconSize: [60, 60]
+});
+
+// Create three markers and set their icons to cssIcon
+L.marker([45, 45], {icon: cssIcon}).addTo(map);
+L.marker([0, 0], {icon: cssIcon}).addTo(map);
+L.marker([-45, -45], {icon: cssIcon}).addTo(map);
 </script>

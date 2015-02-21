@@ -22,6 +22,8 @@ To create a new example, first get jekyll running
 
 ```sh
 git clone git@github.com:mapbox/mapbox.js.git
+cd mapbox.js
+make
 jekyll serve -w -p 4000
 ```
 
