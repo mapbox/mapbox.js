@@ -32,9 +32,7 @@ var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
   .addControl(L.mapbox.shareControl())
   .setView([37.9, -77], 5);
 
-var maplight = L.mapbox.map('map-light', 'examples.map-20v6611k', {
-    infoControl: true
-  })
+var maplight = L.mapbox.map('map-light', 'examples.map-20v6611k')
   .addControl(L.mapbox.geocoderControl('mapbox.places'))
   .addControl(L.mapbox.shareControl())
   .setView([37.9, -77], 5);

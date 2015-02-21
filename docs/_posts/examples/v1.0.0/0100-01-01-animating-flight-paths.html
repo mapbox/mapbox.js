@@ -40,14 +40,12 @@ tags:
 // amount of time regardless of trip length.
 
 // Show the whole world in this first view.
-var map = L.mapbox.map('map', 'examples.map-2k9d7u0c', {
-      attributionControl: false,
-      infoControl: true
-    })
+map = L.mapbox.map('map', 'examples.map-2k9d7u0c')
     .setView([20, 0], 2);
 
-map.infoControl
-    .addInfo('<a href="http://openflights.org/data.html">Flight data from Open Flights, under the ODbL license</a>');
+var credits = L.control.attribution({
+  prefix: '<a href="http://openflights.org/data.html">Flight data from Open Flights, under the ODbL license</a>'
+}).addTo(map);
 
 // Disable drag and zoom handlers.
 // Making this effect work with zooming and panning

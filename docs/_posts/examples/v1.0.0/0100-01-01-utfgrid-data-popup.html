@@ -11,10 +11,7 @@ tags:
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-i86nkdio', {
-      attributionControl: false,
-      infoControl: true
-    })
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([40, -100], 4);
 
 var nprTiles = L.mapbox.tileLayer('examples.npr-stations').addTo(map);

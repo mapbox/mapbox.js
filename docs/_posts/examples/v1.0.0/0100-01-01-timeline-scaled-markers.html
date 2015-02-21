@@ -28,15 +28,12 @@ tags:
 <div id='brush' class='ui-brush'></div>
 
 <script>
-var map = L.mapbox.map('map', 'examples.map-2k9d7u0c', {
-        attributionControl: false,
-        infoControl: true
-    })
+var map = L.mapbox.map('map', 'examples.map-2k9d7u0c')
     .setView([0, 0], 1);
 
-// Credit our friendly open data producers.
-map.infoControl.addInfo (
-    '<a href="http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">Data from USGS</a>');
+var credits = L.control.attribution({
+  prefix: '<a href="http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">Data from USGS</a>'
+}).addTo(map);
 
 // Create a new layer with a special pointToLayer function
 // that'll generate scaled points.

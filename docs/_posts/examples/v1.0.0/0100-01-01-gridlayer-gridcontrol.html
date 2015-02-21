@@ -13,10 +13,7 @@ tags:
 <script>
 // Define a map without a Map ID so we
 // have to add each part of it manually.
-var map = L.mapbox.map('map', undefined, {
-    infoControl: true,
-    attributionControl: false
-});
+var map = L.mapbox.map('map', undefined);
 
 // The visible tile layer
 L.mapbox.tileLayer('examples.map-8ced9urs').addTo(map);
