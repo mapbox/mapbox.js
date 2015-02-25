@@ -50,7 +50,6 @@ var geojson = {
 // Pass features and a custom factory function to the map
 myLayer.setGeoJSON(geojson);
 myLayer.on('click', function(e) {
-    e.layer.unbindPopup();
     window.open(e.layer.feature.properties.url);
 });
 </script>
