@@ -145,6 +145,58 @@ describe('L.mapbox.featureLayer', function() {
         });
     });
 
+    describe("supports a style option", function() {
+        it('styles polygons as a function', function(done) {
+            var layer  = L.mapbox.featureLayer(helpers.geoJsonPoly, {
+                style: function (feature) {
+                    return {fillColor: 'blue'};
+                }
+            });
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('blue');
+                done();
+            });
+        });
+
+        it('styles polygons as an object', function(done) {
+            var layer  = L.mapbox.featureLayer(helpers.geoJsonPoly, {
+                style: {fillColor: 'blue'}
+            });
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('blue');
+                done();
+            });
+        });
+
+        it('also works with pointToLayer as a function', function(done) {
+            var layer  = L.mapbox.featureLayer(helpers.geoJson, {
+                pointToLayer: function (feature, lonlat) {
+                  return L.circleMarker(lonlat);
+                },
+                style: function (feature) {
+                    return {fillColor: 'blue'};
+                }
+            });
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('blue');
+                done();
+            });
+        });
+
+        it('also works with pointToLayer as an object', function(done) {
+            var layer  = L.mapbox.featureLayer(helpers.geoJson, {
+                pointToLayer: function (feature, lonlat) {
+                  return L.circleMarker(lonlat);
+                },
+                style: {fillColor: 'blue'}
+            });
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('blue');
+                done();
+            });
+        });
+    });
+
     var unsanitary = {
         type: 'Feature',
         properties: {
