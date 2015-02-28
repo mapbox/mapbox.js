@@ -95,15 +95,11 @@ var FeatureLayer = L.FeatureGroup.extend({
                 popupHtml = marker.createPopup(json, this.options.sanitizer),
                 style = this.options.style;
 
-            if ('setStyle' in layer) {
+            if (style && 'setStyle' in layer) {
                 if (typeof style === 'function') {
                     style = style(json);
                 }
-                if (style) {
-                    layer.setStyle(style);
-                } else {
-                    layer.setStyle(simplestyle.style(json));
-                }
+                layer.setStyle(style);
             }
 
             layer.feature = json;
