@@ -105,8 +105,8 @@ describe('L.mapbox.featureLayer', function() {
             expect(layer.setGeoJSON(helpers.geoJsonPoly)).to.eql(layer);
             layer.eachLayer(function(l) {
                 expect(l.options.color).to.eql('#f00');
-                done();
             });
+            done();
         });
 
         it('supports custom access token', function() {
@@ -154,8 +154,8 @@ describe('L.mapbox.featureLayer', function() {
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
+            done();
         });
 
         it('styles polygons as an object', function(done) {
@@ -164,8 +164,8 @@ describe('L.mapbox.featureLayer', function() {
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
+            done();
         });
 
         it('also works with pointToLayer as a function', function(done) {
@@ -179,8 +179,8 @@ describe('L.mapbox.featureLayer', function() {
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
+            done();
         });
 
         it('also works with pointToLayer as an object', function(done) {
@@ -192,8 +192,8 @@ describe('L.mapbox.featureLayer', function() {
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
+            done();
         });
     });
 
