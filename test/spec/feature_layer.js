@@ -100,13 +100,12 @@ describe('L.mapbox.featureLayer', function() {
             expect(layer.getGeoJSON()).to.eql(helpers.geoJson);
         });
 
-        it("styles GeoJSON features", function(done) {
+        it("styles GeoJSON features", function() {
             var layer = L.mapbox.featureLayer();
             expect(layer.setGeoJSON(helpers.geoJsonPoly)).to.eql(layer);
             layer.eachLayer(function(l) {
                 expect(l.options.color).to.eql('#f00');
             });
-            done();
         });
 
         it('supports custom access token', function() {
@@ -146,7 +145,7 @@ describe('L.mapbox.featureLayer', function() {
     });
 
     describe("supports a style option", function() {
-        it('styles polygons as a function', function(done) {
+        it('styles polygons as a function', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJsonPoly, {
                 style: function (feature) {
                     return {fillColor: 'blue'};
@@ -155,20 +154,18 @@ describe('L.mapbox.featureLayer', function() {
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
             });
-            done();
         });
 
-        it('styles polygons as an object', function(done) {
+        it('styles polygons as an object', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJsonPoly, {
                 style: {fillColor: 'blue'}
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
             });
-            done();
         });
 
-        it('also works with pointToLayer as a function', function(done) {
+        it('also works with pointToLayer as a function', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJson, {
                 pointToLayer: function (feature, lonlat) {
                   return L.circleMarker(lonlat);
@@ -180,10 +177,9 @@ describe('L.mapbox.featureLayer', function() {
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
             });
-            done();
         });
 
-        it('also works with pointToLayer as an object', function(done) {
+        it('also works with pointToLayer as an object', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJson, {
                 pointToLayer: function (feature, lonlat) {
                   return L.circleMarker(lonlat);
@@ -193,7 +189,6 @@ describe('L.mapbox.featureLayer', function() {
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
             });
-            done();
         });
     });
 
