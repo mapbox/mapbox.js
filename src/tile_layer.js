@@ -1,6 +1,7 @@
 'use strict';
 
 var util = require('./util');
+var formatPattern = /\.((?:png|jpg)\d*)(?=$|\?)/;
 
 var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],
@@ -41,7 +42,7 @@ var TileLayer = L.TileLayer.extend({
         util.strict(json, 'object');
 
         this.options.format = this.options.format ||
-            (json.tiles[0].indexOf('.jpg') >= 0 ? 'jpg' : 'png');
+            json.tiles[0].match(formatPattern)[1];
 
         L.extend(this.options, {
             tiles: json.tiles,
@@ -72,7 +73,7 @@ var TileLayer = L.TileLayer.extend({
         if (!templated) {
             return templated;
         } else {
-            return templated.replace(/\.(png|jpg)/,
+            return templated.replace(formatPattern,
                 (L.Browser.retina ? this.scalePrefix : '.') + this.options.format);
         }
     },
