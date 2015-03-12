@@ -73,7 +73,7 @@ var TileLayer = L.TileLayer.extend({
         if (!templated) {
             return templated;
         } else {
-            return templated.replace('.png',
+            return templated.replace(/\.(png|jpg)/,
                 (L.Browser.retina ? this.scalePrefix : '.') + this.options.format);
         }
     },
