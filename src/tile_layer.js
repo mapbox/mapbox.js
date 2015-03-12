@@ -5,13 +5,9 @@ var util = require('./util');
 var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],
 
-    options: {
-        format: 'png'
-    },
-
     // http://mapbox.com/developers/api/#image_quality
     formats: [
-        'png',
+        'png', 'jpg',
         // PNG
         'png32', 'png64', 'png128', 'png256',
         // JPG
@@ -43,6 +39,9 @@ var TileLayer = L.TileLayer.extend({
 
     _setTileJSON: function(json) {
         util.strict(json, 'object');
+
+        this.options.format = this.options.format ||
+            (json.tiles[0].indexOf('.jpg') >= 0 ? 'jpg' : 'png');
 
         L.extend(this.options, {
             tiles: json.tiles,
