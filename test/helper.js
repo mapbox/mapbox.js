@@ -301,6 +301,20 @@ helpers.tileJSON_mapboxlogo = {
     "mapbox_logo": true
 };
 
+helpers.tileJSON_jpg = {
+    "bounds":[-180,-85.0511,180,85.0511],
+    "center":[-98.976,39.386,4],
+    "description":"Bird species of North America, gridded by species count.",
+    "id":"examples.map-8ced9urs",
+    "maxzoom":17,
+    "minzoom":0,
+    "name":"Bird species",
+    "private":true,
+    "scheme":"xyz",
+    "tilejson":"2.0.0",
+    "tiles":["http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.jpg"]
+};
+
 helpers.geoJson = {
     type: 'FeatureCollection',
     features: [{
