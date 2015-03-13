@@ -2,23 +2,30 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Show Tooltips on Hover
-description: Show the marker tooltip on mouseover instead of on click
+title: Show tooltips on hover
+description: Show a markers tooltip on mouseover instead of on click.
 tags:
   - tooltips
   - markers
 ---
-
 <div id='map'></div>
-<script>
-var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([39.12367, -76.81229], 9);
 
-var geoJson = {
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k')
+  .setView([39.12367, -76.81229], 9);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+var geojson = {
     type: 'FeatureCollection',
     features: [{
         type: 'Feature',
         properties: {
             title: 'Washington, D.C.',
+            'marker-color': '#f86767',
+            'marker-size': 'large',
+            'marker-symbol': 'star',
+            url: 'http://en.wikipedia.org/wiki/Washington,_D.C.'
         },
         geometry: {
             type: 'Point',
@@ -29,6 +36,10 @@ var geoJson = {
         type: 'Feature',
         properties: {
             title: 'Baltimore, MD',
+            'marker-color': '#7ec9b1',
+            'marker-size': 'large',
+            'marker-symbol': 'star',
+            url: 'http://en.wikipedia.org/wiki/Baltimore'
         },
         geometry: {
             type: 'Point',
@@ -37,11 +48,11 @@ var geoJson = {
     }]
 };
 
-map.featureLayer.setGeoJSON(geoJson);
-map.featureLayer.on('mouseover', function(e) {
+myLayer.setGeoJSON(geojson);
+myLayer.on('mouseover', function(e) {
     e.layer.openPopup();
 });
-map.featureLayer.on('mouseout', function(e) {
+myLayer.on('mouseout', function(e) {
     e.layer.closePopup();
 });
 </script>

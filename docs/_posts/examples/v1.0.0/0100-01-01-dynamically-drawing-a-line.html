@@ -2,42 +2,42 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Dynamically Drawing a Line
-description: Adding points to a line in an animation
+title: Draw &amp; animate a line on a map
+description: Create a sine wave by dynamically drawing a polyline on a map.
 tags:
   - animation
   - vector
 ---
-
 <div id='map'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([0, 0], 3);
 
-// add a new line to the map, but one with no points - yet
+// Add a new line to the map with no points.
 var polyline = L.polyline([]).addTo(map);
 
-// keep a tally of how many points we've added to the map
+// Keep a tally of how many points we've added to the map.
 var pointsAdded = 0;
 
-// start adding new points to the map
+// Start drawing the polyline.
 add();
 
 function add() {
 
-    // addLatLng takes a new latLng location and puts it at the end of the
-    // line. You could pull points from your data or generate them - this
-    // example just makes a sine wave with some math.
+    // `addLatLng` takes a new latLng coordinate and puts it at the end of the
+    // line. You optionally pull points from your data or generate them. Here
+    // we make a sine wave with some math.
     polyline.addLatLng(
         L.latLng(
             Math.cos(pointsAdded / 20) * 30,
             pointsAdded));
 
-    // pan the map along with where the line is being added. optional, of course
+    // Pan the map along with where the line is being added.
     map.setView([0, pointsAdded], 3);
 
-    // then, if we haven't already added a lot of points, queue up the page
-    // to call add() in a 100 milliseconds
+    // Continue to draw and pan the map by calling `add()`
+    // until `pointsAdded` reaches 360.
     if (++pointsAdded < 360) window.setTimeout(add, 100);
 }
 </script>

@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs'),
     marked = require('marked'),
     argv = require('minimist')(process.argv.slice(2));
@@ -21,8 +23,13 @@ var writes = [];
 
 landOutput.write(header);
 output.write(header);
+
 output.write('version: ' + argv.t + '\n');
 landOutput.write('version: ' + argv.t + '\n');
+
+output.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.\n');
+landOutput.write('description: Build anything with Mapbox.js, a library for fast & interactive maps.\n');
+
 output.write('permalink: /api/' + argv.t + '/all/\n');
 
 var BASE_URL = '/mapbox.js/api/' + argv.t + '/';
@@ -116,11 +123,14 @@ function readDocumentation(filename) {
                 nav += '    - title: ' + c.name + '\n';
                 nav += '      id: ' + c.id + '\n';
             }
+
+            // remove extra tabs: https://github.com/mapbox/mapbox.js/issues/804
+            c.text = c.text.join('\n').replace(/\t{2,}/g, '');
+
             writes.push({
                 file: argv.d + '/0200-01-01-' + c.id + '.html',
                 contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' +
-                    c.text.join('\n')
+                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' + c.text
             });
         });
     } else {
@@ -196,8 +206,8 @@ function readDocumentation(filename) {
                 file: argv.d + '/0200-01-01-' + escapedText + '.html',
                 contents: header.replace('All', main) +
                     'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n{% raw %}' +
-                    html.replace('id="map"', '') + '{% endraw %}'
+                    'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n' +
+                    html.replace('id="map"', '')
             });
         });
 
@@ -212,11 +222,8 @@ landOutput.write('---\n');
 landOutput.write('{% include api.introduction.html %}\n');
 
 output.write("---\n");
-output.write("{% raw %}\n");
 output.write(all + '\n');
-output.write("{% endraw %}");
 
 writes.forEach(function(w) {
     fs.writeFileSync(w.file, w.contents);
 });
-

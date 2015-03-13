@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mapbox/mapbox.js.png?branch=v1)](https://travis-ci.org/mapbox/mapbox.js)
 
-This is the Mapbox Javascript API, version 1.x. It's built as a [Leaflet](http://leafletjs.com/)
+This is the Mapbox Javascript API, version 2.x. It's built as a [Leaflet](http://leafletjs.com/)
 plugin. You can [read about its launch](http://mapbox.com/blog/mapbox-js-with-leaflet/).
 
 ## [API](http://mapbox.com/mapbox.js/api/)
@@ -11,7 +11,20 @@ Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 
 ## [Examples](http://mapbox.com/mapbox.js/example/v1.0.0/)
 
-## Usage with Browserify
+## Usage
+
+Recommended usage is via the Mapbox CDN:
+
+```html
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+```
+
+The `mapbox.js` file includes the Leaflet library. Alternatively, you can use `mapbox.standalone.js`, which does not include Leaflet (you will have to provide it yourself).
+
+See the [API documentation](http://mapbox.com/mapbox.js/api/) and [Examples](http://mapbox.com/mapbox.js/example/v1.0.0/) for further help.
+
+## Usage with [Browserify](http://browserify.org/)
 
 Install the mapbox.js module and add it to `dependencies` in package.json:
 
@@ -32,6 +45,18 @@ Browserify it:
 ```sh
 browserify main.js -o bundle.js
 ```
+
+## Usage with Bower
+
+You can install `mapbox.js` with [bower](http://bower.io/) by running
+
+```sh
+bower install mapbox.js
+```
+
+## Usage as Download
+
+You can [download a built release at the mapbox.js-bower repository](https://github.com/mapbox/mapbox.js-bower/releases).
 
 ## Building
 

@@ -1,0 +1,20 @@
+---
+layout: api
+title: "v2.1.1 JavaScript Library: API access tokens"
+categories: api
+version: v2.1.1
+permalink: /api/v2.1.1/api-access-tokens
+---
+<h2 id="section-api-access-tokens">API access tokens</h2>
+<p>Mapbox.js uses the Mapbox web services API, which requires an API access token. You must
+supply an access token to Mapbox.js:</p>
+<pre><code> L.mapbox.accessToken = &#39;&lt;your access token&gt;&#39;;
+</code></pre><p>To obtain an access token, sign in to Mapbox and visit the <a href="https://www.mapbox.com/account/apps/">Account Apps</a>
+page. For Mapbox.js, a &quot;Public&quot; token (starting with &quot;pk&quot;) is required.</p>
+<p>You may create multiple tokens and use different ones for different applications. If
+necessary, you can use different tokens on the same page by using the <code>accessToken</code>
+option when creating Mapbox.js objects. For example:</p>
+<pre><code> var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-8ced9urs&#39;, {
+   accessToken: &#39;&lt;your access token&gt;&#39;
+ });
+</code></pre><p>For additional help, see <a href="https://www.mapbox.com/help/create-api-access-token/">&quot;How do I create an API access token?&quot;</a>.</p>

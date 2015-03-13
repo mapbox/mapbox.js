@@ -1,0 +1,47 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Clusters with custom polygon appearance
+description: Show a custom styled polygon for the extent of clustered markers
+tags:
+  - cluster
+---
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+<div id='map'></div>
+
+<script>
+// Here we don't use the second argument to map, since that would automatically
+// load in non-clustered markers from the layer. Instead we add just the
+// backing tileLayer, and then use the featureLayer only for its data.
+var map = L.mapbox.map('map')
+    .setView([40.73, -74.011], 13)
+    .addLayer(L.mapbox.tileLayer('examples.h186knp8'));
+
+// Since featureLayer is an asynchronous method, we use the `.on('ready'`
+// call to only use its marker data once we know it is actually loaded.
+L.mapbox.featureLayer('examples.map-h61e8o8e').on('ready', function(e) {
+    // The clusterGroup gets each marker in the group added to it
+    // once loaded, and then is added to the map
+    var clusterGroup = new L.MarkerClusterGroup({
+      // This option sets custom options for the L.Polygon that's drawn when
+      // the user hovers over the icon for a marker cluster. The options
+      // given here are taken from the L.Path options:
+      // http://leafletjs.com/reference.html#path
+      polygonOptions: {
+        fillColor: '#3887be',
+        color: '#3887be',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.5
+      }
+    });
+    e.target.eachLayer(function(layer) {
+      clusterGroup.addLayer(layer);
+    });
+    map.addLayer(clusterGroup);
+});
+</script>

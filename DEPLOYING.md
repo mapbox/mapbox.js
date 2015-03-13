@@ -20,3 +20,8 @@ Then make the release with `make`
 # deploying to the cdn
 
     ./deploy.sh v1.your.version
+
+# deploying to bower
+
+    ./bower.sh --action=prepare
+    ./bower.sh --action=publish

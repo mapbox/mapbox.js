@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="../../dist/mapbox.css"/>
   <link rel="stylesheet" href="embed.css"/>
   <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
 </head>
 <body>
 <div id='map'></div>
@@ -12,7 +13,7 @@
     var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
     // Open popup when user mouses over a marker
-    map.markerLayer.on('ready', function(e) {
+    map.featureLayer.on('ready', function(e) {
         var markers = [];
         this.eachLayer(function(marker) {
             markers.push(marker);

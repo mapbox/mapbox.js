@@ -2,41 +2,34 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Non-Exclusive Markers
-description: Show and hide different categories of markers
+title: Toggle marker categories
+description: Show and hide different categories of markers.
 tags:
-  - vector
+  - ui
+  - markers
 ---
-
 <style>
-#filters {
-    position: absolute;
-    top: 75px;
-    left: 10px;
-    z-index: 100;
-    padding: 5px;
-    background: #fff;
-}
-
-#filters ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
+.ui-select {
+  background:#fff;
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:100;
+  padding:10px;
+  border-radius:3px;
+  }
 </style>
-<div id='map-ui'>
-    <form id='filters'>
-        <ul id='options'>
-            <li><input type='checkbox' checked=checked class='filter'
-                       name='filter' id='fast-food' value='fast-food'/><label for='fast-food'>fast-food</label></li>
-            <li><input type='checkbox' checked=checked class='filter'
-                       name='filter' id='bicycle' value='bicycle'/><label for='bicycle'>bicycle</label></li>
-            <li><input type='checkbox' checked=checked class='filter'
-                       name='filter' id='bar' value='bar'/><label for='bar'>bar</label></li>
-        </ul>
-    </form>
+
+<div id='filters' class='ui-select'>
+  <div><input type='checkbox' checked=checked class='filter'
+             name='filter' id='fast-food' value='fast-food'/><label for='fast-food'>fast-food</label></div>
+  <div><input type='checkbox' checked=checked class='filter'
+             name='filter' id='bicycle' value='bicycle'/><label for='bicycle'>bicycle</label></div>
+  <div><input type='checkbox' checked=checked class='filter'
+             name='filter' id='bar' value='bar'/><label for='bar'>bar</label></div>
 </div>
 <div id='map'></div>
+
 <script>
 var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 var filters = document.getElementById('filters');

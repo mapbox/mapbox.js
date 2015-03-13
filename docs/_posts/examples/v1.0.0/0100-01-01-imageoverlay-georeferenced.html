@@ -1,0 +1,29 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: ImageOverlay with georeferenced scanned map
+description: Given the latitude and longitude coordinates of the corners of an image, we can show it at the right position and size to match with a baselayer.
+tags:
+  - layers
+---
+
+<div id='map'></div>
+<script>
+var imageUrl = 'https://farm4.staticflickr.com/3731/14101168818_932d707f90_o.jpg',
+    // This is the trickiest part - you'll need accurate coordinates for the
+    // corners of the image. You can find and create appropriate values at
+    // http://maps.nypl.org/warper/ or
+    // http://www.georeferencer.org/
+    imageBounds = L.latLngBounds([
+        [40.712216, -74.22655],
+        [40.773941, -74.12544]]);
+
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+    .fitBounds(imageBounds);
+
+// See full documentation for the ImageOverlay type:
+// http://leafletjs.com/reference.html#imageoverlay
+var overlay = L.imageOverlay(imageUrl, imageBounds)
+    .addTo(map);
+</script>

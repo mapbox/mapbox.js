@@ -7,11 +7,8 @@ var request = require('./request'),
 module.exports = {
     _loadTileJSON: function(_) {
         if (typeof _ === 'string') {
-            if (_.indexOf('/') == -1) {
-                _ = url.base() + _ + '.json';
-            }
-
-            request(url.secureFlag(_), L.bind(function(err, json) {
+            _ = url.tileJSON(_, this.options && this.options.accessToken);
+            request(_, L.bind(function(err, json) {
                 if (err) {
                     util.log('could not load TileJSON at ' + _);
                     this.fire('error', {error: err});

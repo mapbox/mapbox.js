@@ -1,0 +1,34 @@
+---
+layout: api
+title: "v1.6.4 JavaScript Library: L.mapbox.template(template, data)"
+categories: api
+version: v1.6.4
+permalink: /api/v1.6.4/l-mapbox-template
+---
+<h2 id="section-l-mapbox-template">L.mapbox.template(template, data)</h2>
+<p>A <a href="http://mustache.github.io/">mustache</a> template rendering function, as used by the templating feature provided by <code><a href="/mapbox.js/api/v1.6.4/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>template</td>
+<td>string</td>
+<td>The template string</td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>Data you wish to pass into the template string</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var output = L.mapbox.template(&#39;Name: {% raw %}{{name}}{% endraw %}&#39;, {name: &#39;John&#39;});
+// output is &quot;Name: John&quot;
+</code></pre>

@@ -2,44 +2,47 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Custom Popup
-description: Defining custom HTML for popups from marker properties
+title: Custom tooltip
+description: Define custom HTML for popups from marker properties.
 tags:
+  - tooltips
   - layers
 ---
-
 <div id='map'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
-    .setView([0, 0], 9);
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+    .setView([49.16326, -123.89187], 17);
 
 var featureLayer = L.mapbox.featureLayer({
         type: 'FeatureCollection',
         features: [{
             type: 'Feature',
             properties: {
-                size: 5,
-                population: 10
+                'from': 'Duke Point',
+                'to': 'Tsawwassen',
+                'marker-color': '#548cba',
+                'marker-size': 'large',
+                'marker-symbol': 'ferry'
             },
             geometry: {
                 type: 'Point',
-                coordinates: [0, 0]
+                coordinates: [-123.89128804206847, 49.16351524490678]
             }
         }]
     })
     .addTo(map);
 
-// note that calling `.eachLayer` here depends on setting GeoJSON _directly_
+// Note that calling `.eachLayer` here depends on setting GeoJSON _directly_
 // above. If you're loading GeoJSON asynchronously, like from CSV or from a file,
-// you will need to do this within a `featureLayer.on('ready'` event
-
+// you will need to do this within a `featureLayer.on('ready'` event.
 featureLayer.eachLayer(function(layer) {
 
     // here you call `bindPopup` with a string of HTML you create - the feature
     // properties declared above are available under `layer.feature.properties`
-
-    var content = '<h1>size: ' + layer.feature.properties.size + '<\/h1>' +
-        '<h2>population: ' + layer.feature.properties.population + '<\/h2>';
+    var content = '<h2>A ferry ride!<\/h2>' +
+        '<p>From: ' + layer.feature.properties.from + '<br \/>' +
+        'to: ' + layer.feature.properties.to + '<\/p>';
     layer.bindPopup(content);
 });
 </script>

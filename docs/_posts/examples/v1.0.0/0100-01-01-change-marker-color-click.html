@@ -2,56 +2,57 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Change Marker Color on Click
-description: Change a marker's color and then change it back
+title: Toggle marker color on click
+description: Set an active marker color depending on the one selected.
 tags:
   - markers
 ---
-
 <div id='map'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-20v6611k')
+var map = L.mapbox.map('map', 'examples.h186knp8')
     .setView([37.9, -77], 6);
 
 var geoJson = [{
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-77, 37.9]
-    },
-    properties: {
-        title: 'Marker One',
-        // http://mapbox.com/developers/simplestyle/
-        'marker-color': '#CC0033'
-    }
-},
-{
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-78, 36.5]
-    },
-    properties: {
-        title: 'Marker Two',
-        'marker-color': '#0099ff'
-    }
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [-77, 37.9]
+      },
+      properties: {
+          title: 'Marker One',
+          'marker-color': '#bbb'
+      }
+  },
+  {
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [-78, 36.5]
+      },
+      properties: {
+          title: 'Marker Two',
+          'marker-color': '#bbb'
+  }
 }];
 
-map.featureLayer.setGeoJSON(geoJson);
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+myLayer.setGeoJSON(geoJson);
 
 function resetColors() {
     for (var i = 0; i < geoJson.length; i++) {
         geoJson[i].properties['marker-color'] = geoJson[i].properties['old-color'] ||
             geoJson[i].properties['marker-color'];
     }
-    map.featureLayer.setGeoJSON(geoJson);
+    myLayer.setGeoJSON(geoJson);
 }
 
-map.featureLayer.on('click',function(e) {
+myLayer.on('click', function(e) {
     resetColors();
     e.layer.feature.properties['old-color'] = e.layer.feature.properties['marker-color'];
-    e.layer.feature.properties['marker-color'] = '#000';
-    map.featureLayer.setGeoJSON(geoJson);
+    e.layer.feature.properties['marker-color'] = '#ff8888';
+    myLayer.setGeoJSON(geoJson);
 });
 
 map.on('click', resetColors);

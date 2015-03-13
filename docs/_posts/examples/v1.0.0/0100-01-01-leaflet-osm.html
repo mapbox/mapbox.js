@@ -3,22 +3,24 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Leaflet OSM
-description: Using the Leaflet OSM plugin
+description: Query OSM data and add it as a layer to your map using the Leaflet OSM plugin.
 tags:
   - plugins
 ---
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-osm/v0.1.0/leaflet-osm.js'></script>
+<!-- jQuery is required for this example. -->
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-osm/v0.1.0/leaflet-osm.js'></script>
 
 <div id='map'></div>
 <script>
-    var map = L.mapbox.map('map', 'examples.map-vyofok3q');
+var map = L.mapbox.map('map', 'examples.map-i875kd35');
 
-    $.ajax({
-      url: "http://www.openstreetmap.org/api/0.6/way/260501602/full",
-      dataType: "xml",
-      success: function (xml) {
+$.ajax({
+    url: "https://www.openstreetmap.org/api/0.6/way/260501602/full",
+    dataType: "xml",
+    success: function (xml) {
         var layer = new L.OSM.DataLayer(xml).addTo(map);
         map.fitBounds(layer.getBounds());
-      }
-    });
+    }
+});
 </script>

@@ -1,0 +1,88 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Distance between two markers
+description: Calculate the distance between two points in metres using distanceTo.
+tags:
+  - ui
+  - features
+---
+<style>
+pre.ui-distance {
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  padding:5px 10px;
+  background:rgba(0,0,0,0.5);
+  color:#fff;
+  font-size:11px;
+  line-height:18px;
+  border-radius:3px;
+  }
+</style>
+<div id='map'></div>
+<pre id='distance' class='ui-distance'>Click to place a marker</pre>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([38.9, -77], 12);
+
+// Start with a fixed marker.
+var fixedMarker = L.marker(new L.LatLng(38.9131775, -77.032544), {
+    icon: L.mapbox.marker.icon({
+        'marker-color': 'ff8888'
+    })
+}).bindPopup('Mapbox DC').addTo(map);
+
+// Store the fixedMarker coordinates in a variable.
+var fc = fixedMarker.getLatLng();
+
+// Create a featureLayer that will hold a marker and linestring.
+var featureLayer = L.mapbox.featureLayer().addTo(map);
+
+// When a user clicks on the map we want to
+// create a new L.featureGroup that will contain a
+// marker placed where the user selected the map and
+// a linestring that draws itself between the fixedMarkers
+// coordinates and the newly placed marker.
+map.on('click', function(ev) {
+    // ev.latlng gives us the coordinates of
+    // the spot clicked on the map.
+    var c = ev.latlng;
+
+    var geojson = [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [c.lng, c.lat]
+        },
+        "properties": {
+          "marker-color": "#ff8888"
+        }
+      }, {
+        "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [fc.lng, fc.lat],
+            [c.lng, c.lat]
+          ]
+        },
+        "properties": {
+          "stroke": "#000",
+          "stroke-opacity": 0.5,
+          "stroke-width": 4
+        }
+      }
+    ];
+
+    featureLayer.setGeoJSON(geojson);
+
+    // Finally, print the distance between these two points
+    // on the screen using distanceTo().
+    var container = document.getElementById('distance');
+    container.innerHTML = (fc.distanceTo(c)).toFixed(0) + 'm';
+});
+</script>

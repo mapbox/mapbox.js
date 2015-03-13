@@ -9,6 +9,7 @@ describe('L.mapbox.infoControl', function() {
         it('returns the info object', function() {
             var info = L.mapbox.infoControl();
             expect(info.addInfo('foo')).to.eql(info);
+            expect(info instanceof L.mapbox.InfoControl).to.eql(true);
         });
 
         it('adds a map info element to its container', function() {
@@ -75,7 +76,9 @@ describe('L.mapbox.infoControl', function() {
     it('receives attribution from a layer', function(done) {
         var server = sinon.fakeServer.create();
         var element = document.createElement('div');
-        var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2');
+        var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {
+            infoControl: true
+        });
 
         map.on('ready', function() {
             expect(map.infoControl._content.innerHTML).to.eql('Data provided by NatureServe in collaboration with Robert Ridgely');
@@ -84,28 +87,8 @@ describe('L.mapbox.infoControl', function() {
             done();
         });
 
-        server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+        server.respondWith("GET", internals.url.tileJSON("mapbox.map-0l53fhk2"),
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
-        server.respond();
-    });
-
-    it('adds map location to improve link in attribution when .mapbox-improve-map is present', function(done) {
-        var server = sinon.fakeServer.create();
-        var element = document.createElement('div');
-        var map = L.mapbox.map(element, 'examples.h8e9h88l');
-
-        map.on('ready', function() {
-            map.setView([38.902, -77.001], 13);
-            expect(map.infoControl._content.innerHTML).to.eql('<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/38.902/13" target="_blank">Improve this map</a>');
-            map.setView([48.902, -77.001], 13);
-            expect(map.infoControl._content.innerHTML).to.eql('<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/48.902/13" target="_blank">Improve this map</a>');
-            map.setView([48.902, -77.001 - 360], 13);
-            expect(map.infoControl._content.innerHTML).to.eql('<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#examples.h8e9h88l/-77.001/48.902/13" target="_blank">Improve this map</a>');
-            done();
-        });
-
-        server.respondWith("GET", "http://a.tiles.mapbox.com/v3/examples.h8e9h88l.json",
-            [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
         server.respond();
     });
 });

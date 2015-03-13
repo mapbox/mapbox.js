@@ -2,49 +2,39 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Using L.divIcon to create markers with HTML
-description: To define markers that are more custom than basic styles
+title: Create markers from HTML
+description: Use L.divIcon to create custom HTML markers.
 tags:
   - markers
 ---
-
 <style>
 /*
- * Unlike other icons, you can style `L.divIcon` instances with CSS.
- * These styles make each marker a circle with a border and centered
- * text
+ * Unlike other icons, you can style `L.divIcon` with CSS.
+ * These styles make each marker a pink triangle.
  */
-.count-icon {
-    background:#fee;
-    text-align:center;
-    vertical-align:middle;
-    border:1px solid #000;
-    border-radius:20px;
-    line-height:40px;
-}
+.css-icon {
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 30px solid #ff8888;
+  }
 </style>
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([0, 0], 2);
 
-// For 0->9, create markers in a circle
-for (var i = 0; i < 10; i++) {
-    // use a little math to position markers - you will replace this with your
-    // own code for marker positions
-    L.marker([
-        Math.cos(i / 10 * 2 * Math.PI) * 40,
-        Math.sin(i / 10 * 2 * Math.PI) * 40
-    ], {
-        icon: L.divIcon({
-            // specify a class name that we can refer to in styles, as we
-            // do above.
-            className: 'count-icon',
-            // html here defines what goes in the div created for each marker
-            html: i,
-            // and the marker width and height
-            iconSize: [40, 40]
-        })
-    }).addTo(map);
-}
+// Define an icon called cssIcon
+var cssIcon = L.divIcon({
+  // Specify a class name we can refer to in CSS.
+  className: 'css-icon',
+  // Set marker width and height
+  iconSize: [60, 60]
+});
+
+// Create three markers and set their icons to cssIcon
+L.marker([45, 45], {icon: cssIcon}).addTo(map);
+L.marker([0, 0], {icon: cssIcon}).addTo(map);
+L.marker([-45, -45], {icon: cssIcon}).addTo(map);
 </script>

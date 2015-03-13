@@ -1,0 +1,82 @@
+---
+layout: api
+title: "v2.1.0 JavaScript Library: L.Control.Attribution"
+categories: api
+version: v2.1.0
+permalink: /api/v2.1.0/l-control-attribution
+---
+<h2 id="control-attribution">Control.Attribution</h2>
+
+<p>The attribution control allows you to display attribution data in a small text box on a map. It is put on the map by default unless you set its <code>attributionControl</code> option to <code><span class="literal">false</span></code>, and it fetches attribution texts from layers with <code>getAttribution</code> method automatically. Extends <a href="/mapbox.js/api/v2.1.0/l-control">Control</a>.</p>
+
+<h3>Creation</h3>
+<table data-id='control-attribution'>
+	<tr>
+<th class="width200">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.control.attribution</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-control">Control.Attribution options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+
+<td>Creates an attribution control.</td>
+	</tr>
+</table>
+
+<h3 id="control-attribution-options">Options</h3>
+<table data-id='control-attribution'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>position</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'bottomright'</span></td>
+<td>The position of the control (one of the map corners). See <a href="/mapbox.js/api/v2.1.0/l-control">control positions</a>.</td>
+	</tr>
+	<tr>
+<td><code><b>prefix</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'Leaflet'</span></td>
+<td>The HTML text shown before the attributions. Pass <code><span class="literal">false</span></code> to disable.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+<table data-id='control-attribution'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>setPrefix</b>(
+<nobr>&lt;String&gt; <i>prefix</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Sets the text before the attributions.</td>
+	</tr>
+	<tr>
+<td><code><b>addAttribution</b>(
+<nobr>&lt;String&gt; <i>text</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds an attribution text (e.g. <code><span class="string">'Vector data &amp;copy; CloudMade'</span></code>).</td>
+	</tr>
+	<tr>
+<td><code><b>removeAttribution</b>(
+<nobr>&lt;String&gt; <i>text</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Removes an attribution text.</td>
+	</tr>
+</table>
+
+

@@ -1,0 +1,36 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Images from Mapillary
+description: Use Mapillary to load street view images
+tags:
+  - markers
+---
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([38.9, -77.0346], 13);
+
+map.attributionControl
+    .addAttribution('<a href="https://mapillary.com/">Images from Mapillary</a>');
+
+var API_ENDPOINT = 'https://api.mapillary.com/v1/im/search?' +
+    'min-lat=SOUTH&max-lat=NORTH&min-lon=WEST&max-lon=EAST&' +
+    'max-results=100&geojson=true';
+
+var images = L.mapbox.featureLayer()
+    .on('layeradd', function(e) {
+        e.layer.bindPopup('<img src="' + e.layer.feature.properties.image + '" />', {
+            minWidth: 340
+        });
+    })
+    .addTo(map);
+
+images.loadURL(API_ENDPOINT
+    .replace('SOUTH', map.getBounds().getSouth())
+    .replace('NORTH', map.getBounds().getNorth())
+    .replace('WEST', map.getBounds().getWest())
+    .replace('EAST', map.getBounds().getEast()));
+</script>

@@ -1,0 +1,126 @@
+---
+layout: api
+title: "v1.6.3 API: L.ICRS"
+categories: api
+version: v1.6.3
+permalink: /api/v1.6.3/l-icrs
+---
+<h2 id="icrs">ICRS</h2>
+
+<p>Defines coordinate reference systems for projecting geographical points into pixel (screen) coordinates and back (and to coordinates in other units for WMS services). See <a href="http://en.wikipedia.org/wiki/Coordinate_reference_system">Spatial reference system</a>.</p>
+
+<h3>Methods</h3>
+
+<table data-id='icrs'>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>latLngToPoint</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.3/l-latlng">LatLng</a>&gt; <i>latlng</i></nobr>,
+			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.3/l-point">Point</a></code></td>
+		<td>Projects geographical coordinates on a given zoom into pixel coordinates.</td>
+	</tr>
+	<tr>
+		<td><code><b>pointToLatLng</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.3/l-point">Point</a>&gt; <i>point</i></nobr>,
+			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.3/l-latlng">LatLng</a></code></td>
+		<td>The inverse of <code>latLngToPoint</code>. Projects pixel coordinates on a given zoom into geographical coordinates.</td>
+	</tr>
+	<tr>
+		<td><code><b>project</b>(
+			<nobr>&lt;<a href="/mapbox.js/api/v1.6.3/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.3/l-point">Point</a></code></td>
+		<td>Projects geographical coordinates into coordinates in units accepted for this CRS (e.g. meters for <code>EPSG:3857</code>, for passing it to WMS services).</td>
+	</tr>
+	<tr>
+		<td><code><b>scale</b>(
+			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+		</code></td>
+
+		<td><code>Number</code></td>
+		<td>Returns the scale used when transforming projected coordinates into pixel coordinates for a particular zoom. For example, it returns <code>256 * 2^zoom</code> for Mercator-based CRS.</td>
+	</tr>
+	<tr>
+		<td><code><b>getSize</b>(
+			<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+		</code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.3/l-point">Point</a></code></td>
+		<td>Returns the size of the world in pixels for a particular zoom.</td>
+	</tr>
+</table>
+
+<h3>Properties</h3>
+
+<table data-id='icrs'>
+	<tr>
+		<th>Property</th>
+		<th>Type</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>projection</b></code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.3/l-iprojection">IProjection</a></code></td>
+		<td>Projection that this CRS uses.</td>
+	</tr>
+	<tr>
+		<td><code><b>transformation</b></code></td>
+
+		<td><code><a href="/mapbox.js/api/v1.6.3/l-transformation">Transformation</a></code></td>
+		<td>Transformation that this CRS uses to turn projected coordinates into screen coordinates for a particular tile service.</td>
+	</tr>
+
+	<tr>
+		<td><code><b>code</b></code></td>
+
+		<td><code>String</code></td>
+		<td>Standard code name of the CRS passed into WMS services (e.g. <code><span class="string">'EPSG:3857'</span></code>).</td>
+	</tr>
+</table>
+
+<h3>Defined CRS</h3>
+
+<p>Leaflet comes with a set of already defined CRS to use out of the box:</p>
+
+<table data-id='defined-crs'>
+	<tr>
+		<th>Projection</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code><b>L.CRS.EPSG3857</b></code></td>
+
+		<td>The most common CRS for online maps, used by almost all free and commercial tile providers. Uses Spherical Mercator projection. Set in by default in Map's <code>crs</code> option.</td>
+	</tr>
+	<tr>
+		<td><code><b>L.CRS.EPSG4326</b></code></td>
+
+		<td>A common CRS among GIS enthusiasts. Uses simple Equirectangular projection.</td>
+	</tr>
+	<tr>
+		<td><code><b>L.CRS.EPSG3395</b></code></td>
+
+		<td>Rarely used by some commercial tile providers. Uses Elliptical Mercator projection.</td>
+	</tr>
+	<tr>
+		<td><code><b>L.CRS.Simple</b></code></td>
+
+		<td>A simple CRS that maps longitude and latitude into <code>x</code> and <code>y</code> directly. May be used for maps of flat surfaces (e.g. game maps). Note that the <code>y</code> axis should still be inverted (going from bottom to top).</td>
+	</tr>
+</table>
+
+<p>If you want to use some obscure CRS not listed here, take a look at the <a href="https://github.com/kartena/Proj4Leaflet">Proj4Leaflet</a> plugin.</p>
+
+

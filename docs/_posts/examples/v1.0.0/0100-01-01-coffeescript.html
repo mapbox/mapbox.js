@@ -1,0 +1,30 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Using CoffeeScript to make a map
+description: Mapbox.js is just as easy to use from the <a href='http://coffeescript.org/'>CoffeeScript</a> language.
+tags:
+  - features
+---
+<div id='map'></div>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js'></script>
+<script type='text/coffeescript'>
+# Mapbox.js can easily be used in CoffeeScript, and use
+# all fancy CoffeeScript functionality
+map = L.mapbox.map 'map', 'examples.map-i86nkdio'
+geocoder = L.mapbox.geocoder 'mapbox.places'
+
+# for instance, in CoffeeScript we dont need to use
+# parenthesis for functions or semicolons at the end of lines
+map.setView [40, -74.50], 3
+
+# defining a function that uses the geocoder to put a marker
+# on a place, defined by its name
+add = (placename) ->
+  geocoder.query placename, (error, result) ->
+    L.marker(result.latlng).addTo(map)
+
+add place for place in ['Washington, DC', 'San Francisco', 'Detroit, MI']
+</script>

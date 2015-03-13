@@ -1,0 +1,119 @@
+---
+layout: api
+title: "v2.0.1 JavaScript Library: L.mapbox.gridLayer(id|url|tilejson, options)"
+categories: api
+version: v2.0.1
+permalink: /api/v2.0.1/l-mapbox-gridlayer
+---
+<h2 id="section-l-mapbox-gridlayer">L.mapbox.gridLayer(id|url|tilejson, options)</h2>
+<p>An <code><a href="/mapbox.js/api/v2.0.1/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> loads <a href="http://mapbox.com/developers/utfgrid/">UTFGrid</a> tiles of
+interactivity into your map, which you can easily access with <code><a href="/mapbox.js/api/v2.0.1/l-mapbox-gridcontrol">L.mapbox.gridControl</a></code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>Object</td>
+<td>The second argument is optional. If provided, it may include: <ul><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v2.0.1/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this layer.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// the second argument is optional
+var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
+</code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v2.0.1/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
+<p><em>Class</em>: <code><a href="/mapbox.js/api/v2.0.1/l-mapbox-gridlayer">L.mapbox.GridLayer</a></code></p>
+<h3 id="section-gridlayer-on">gridLayer.on(event, handler, context)</h3>
+<p>Bind an event handler to a given event on this <code><a href="/mapbox.js/api/v2.0.1/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> instance.
+GridLayers expose a number of useful events that give you access to UTFGrid
+data as the user interacts with the map.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event (<em>required</em>)</td>
+<td><strong>string</strong></td>
+<td>the event name</td>
+</tr>
+<tr>
+<td>handler (<em>required</em>)</td>
+<td><strong>function</strong></td>
+<td>a callback function run every time that the event is fired</td>
+</tr>
+<tr>
+<td>context (<em>optional</em>)</td>
+<td><strong>object</strong></td>
+<td>the context of the handler function: this is the value of <code>this</code> when that function returns</td>
+</tr>
+</tbody>
+</table>
+<p>After binding an event with <code>.on</code>, you can unbind it with <code>.off</code>, with the
+same argument structure.</p>
+<p>The default events are:</p>
+<ul>
+<li><code>click</code>: mouse has clicked while on a feature in UTFGrid. Event has <code>{ latLng: location, data: featureData }</code> as its data.</li>
+<li><code>mouseover</code>: mouse has moved onto a new feature in UTFGrid. Event has <code>{ latLng: location, data: featureData }</code> as its data.</li>
+<li><code>mousemove</code>: mouse has moved within a feature in UTFGrid. Event has <code>{ latLng: location, data: featureData }</code> as its data.</li>
+<li><code>mouseout</code>: mouse has moved from a feature to an area without any features. Event has <code>{ latLng: location, data: featureData }</code> as its data, in which <code>featureData</code> is the feature data the mouse was previously on.</li>
+</ul>
+<p><em>Example</em>:</p>
+<pre><code>map.gridLayer.on(&#39;click&#39;, function(e) {
+    if (e.data &amp;&amp; e.data.url) {
+        window.open(e.data.url);
+    }
+});
+</code></pre><h3 id="section-gridlayer-gettilejson">gridLayer.getTileJSON()</h3>
+<p>Returns this layer&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Example</em>:</p>
+<pre><code>var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;)
+    // since layers load asynchronously through AJAX, use the
+    // `.on` function to listen for them to be loaded before
+    // calling `getTileJSON()`
+    .on(&#39;ready&#39;, function() {
+        // get TileJSON data from the loaded layer
+        var TileJSON = layer.getTileJSON();
+    });
+</code></pre><p><em>Returns</em>: the TileJSON object</p>
+<h3 id="section-gridlayer-getdata">gridLayer.getData(latlng, callback)</h3>
+<p>Load data for a given latitude, longitude point on the map, and call the callback
+function with that data, if any.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latlng</td>
+<td>object</td>
+<td><code>latlng</code> a L.LatLng object</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>function</td>
+<td><code>callback</code> a function that is called with the grid data as an argument</td>
+</tr>
+</tbody>
+</table>
+<p><em>Returns</em>: the L.mapbox.gridLayer object</p>

@@ -5,6 +5,7 @@
   <link rel='stylesheet' href='../../dist/mapbox.css'/>
   <link rel='stylesheet' href='embed.css'/>
   <script src='../../dist/mapbox.js'></script>
+  <script src='access_token.js'></script>
 </head>
 <body>
 <style>
@@ -45,7 +46,7 @@
         }
     }
 
-    map.markerLayer.setGeoJSON({
+    map.featureLayer.setGeoJSON({
         type: 'FeatureCollection',
         features: features
     });
@@ -58,7 +59,7 @@
 
         // for each marker, consider whether it is currently visible by comparing
         // with the current map bounds
-        map.markerLayer.eachLayer(function(marker) {
+        map.featureLayer.eachLayer(function(marker) {
             if (bounds.contains(marker.getLatLng())) {
                 inBounds.push(marker.options.title);
             }

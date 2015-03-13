@@ -30,8 +30,6 @@ inkscape \
 echo ""
 
 for COLOR in $COLORS; do
-    convert $TMP.png -fill "#$COLOR" -colorize 100,100,100,0 - | pngquant 32 > $BASE/icons-$COLOR.png
-    echo -e "\033[01;33m✔ saved $BASE/icons-$COLOR.png"
     convert $TMP@2x.png -fill "#$COLOR" -colorize 100,100,100,0 - | pngquant 32 > $BASE/icons-$COLOR@2x.png
     echo -e "\033[01;33m✔ saved $BASE/icons-$COLOR@2x.png"
 done

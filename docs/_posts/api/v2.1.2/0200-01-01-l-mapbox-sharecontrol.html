@@ -1,0 +1,37 @@
+---
+layout: api
+title: "v2.1.2 JavaScript Library: L.mapbox.shareControl(id|url, options)"
+categories: api
+version: v2.1.2
+permalink: /api/v2.1.2/l-mapbox-sharecontrol
+---
+<h2 id="section-l-mapbox-sharecontrol">L.mapbox.shareControl(id|url, options)</h2>
+<p>Adds a &quot;Share&quot; button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.</p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="/mapbox.js/api/v2.1.2/l-control">L.Control</a></code></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>optional</em></td>
+<td>string</td>
+<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>Options for L.Control</span> Also accepts the following options:<ul><li><code>url</code>: the <code>URL</code> of a page to which the share control will link instead of the URL of the current page or that specified in TileJSON data.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v2.1.2/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this control.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var map = L.map(&#39;map&#39;, &#39;examples.map-i875kd35&#39;)
+    .setView([37, -77], 5)
+    .addControl(L.mapbox.shareControl());
+</code></pre><p><em>Returns</em>:
+Returns a <code><a href="/mapbox.js/api/v2.1.2/l-mapbox-sharecontrol">L.mapbox.shareControl</a></code> object.</p>

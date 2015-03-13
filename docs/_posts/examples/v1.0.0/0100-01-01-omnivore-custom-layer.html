@@ -1,0 +1,51 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Omnivore with a custom Layer
+description: Pass additional data as a third argument in addition to what's loaded with Omnivore.
+tags:
+  - omnivore
+---
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio');
+
+// Omnivore will AJAX-request this file behind the scenes and parse it:
+// note that there are considerations:
+// - The file must either be on the same domain as the page that requests it,
+//   or both the server it is requested from and the user's browser must
+//   support CORS.
+
+// The omnivore functions take three arguments:
+//
+// - a URL of the file to fetch
+// - options to the parser
+// - a custom layer
+//
+// And they return the custom layer, which is by default an L.geoJson layer.
+//
+// The second two arguments are each optional. In this case we're supplying
+// no arguments to the parser (null), but supplying a custom layer
+// with custom styles. These styles are the same as any styles you would
+// use with the default Leaflet API for L.geoJson, so read the documentation
+// at http://leafletjs.com/reference.html#geojson for the full details.
+var customLayer = L.geoJson(null, {
+    // http://leafletjs.com/reference.html#geojson-style
+    style: function(feature) {
+        return {
+            color: '#f00'
+        };
+    }
+});
+
+var runLayer = omnivore.kml('{{site.baseurl}}/assets/data/line.kml', null, customLayer)
+    .on('ready', function() {
+        // http://leafletjs.com/reference.html#map-fitbounds
+        map.fitBounds(runLayer.getBounds());
+    })
+    .addTo(map);
+</script>

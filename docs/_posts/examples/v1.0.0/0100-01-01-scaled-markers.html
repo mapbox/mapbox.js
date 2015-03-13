@@ -2,15 +2,15 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Scaled Markers
-description: Scaling circles based on GeoJSON properties
+title: Scaled points
+description: Scaling circles based on data contained in GeoJSON.
 tags:
   - vector
 ---
-
 <div id='map'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([24, 122], 7);
 
 // GeoJSON data: see http://geojson.org/ for the full description of this format.
@@ -26,9 +26,9 @@ for (var i = 0; i < 30; i++) {
     geoJsonData.features.push({
         type: 'Feature',
         properties: {
-            // the important part is here: that each feature has some property
+            // The important part is here: that each feature has some property
             // that we refer to later on, in `pointToLayer`, that determines
-            // the size of the scaled circle
+            // the size of the scaled circle.
             count: Math.random() * 20
         },
         geometry: {
@@ -41,7 +41,7 @@ for (var i = 0; i < 30; i++) {
 var geoJson = L.geoJson(geoJsonData, {
     pointToLayer: function(feature, latlng) {
         return L.circleMarker(latlng, {
-            // here we use the `count` property in GeoJSON verbatim: if it's
+            // Here we use the `count` property in GeoJSON verbatim: if it's
             // to small or two large, we can use basic math in Javascript to
             // adjust it so that it fits the map better.
             radius: feature.properties.count

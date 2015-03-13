@@ -1,40 +1,82 @@
 ---
 layout: pages
-section: mapboxjs-examples
+version: latest
 ---
-
+<style>
+.fill-white pre { background-color:transparent; }
+</style>
 <div class='col12 round keyline-all clearfix contain fill-white'>
   <div class='clearfix'>
-    {% if page.v0 %}
-    <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-    <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
-    <div class='clearfix col12 note warn'>
-      You are viewing an older version of Mapbox.js. Check out <a href='{{site.baseurl}}/api/{{site.mapboxjs}}/'>{{site.mapboxjs}} for the latest</a>.
-    </div>
-    {% endif %}
-
-    <div class='pad2' data-swiftype-index=true>
+    <div class='pad2 keyline-bottom' data-swiftype-index=true>
       <h3>{{page.title}}</h3>
-      <p>{{page.description}}</p>
+      <p class='prose'>{{page.description}}</p>
     </div>
-    <div id='demo' class='contain row10'>{{content}}</div>
-    <div id='snippet'>
-    <div id='code' class='fill-white'>
+    <div class='contain row10 fill-light'>
+    <iframe id='demo' class='row10 col12' allowfullscreen='true' mozallowfullscreen='true' webkitallowfullscreen='true'></iframe>
+    <script>
+        var doc = $('#demo')[0].contentWindow.document;
 
-<div class='code-header quiet'>
-{% highlight html %}<!DOCTYPE html>
+        var jsURL = '{% if site.mapboxjsbase %}{{site.mapboxjsbase}}{% else %}{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}{% endif %}/mapbox.js',
+            cssURL = '{% if site.mapboxjsbase %}{{site.mapboxjsbase}}{% else %}{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}{% endif %}/mapbox.css';
+
+        var exampleCSS = 'body { margin:0; padding:0; }\n#map { position:absolute; top:0; bottom:0; width:100%; }';
+        var exampleCONTENT = {{content | jsonify | replace: '</', '<\/'}};
+
+        // Don't combine the writes below, it breaks in IE9.
+        doc.open();
+        doc.write("<html><head><meta charset=utf-8 /><title>{{page.title}}</title>");
+        doc.write("<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />");
+        doc.write("<script src='" + jsURL + "'><\/script>");
+        doc.write("<link href='" + cssURL + "' rel='stylesheet' />");
+        doc.write("<style>" + exampleCSS + "</style>");
+        doc.write("<script>" +
+                      "L.mapbox.accessToken = '" + App.accessToken + "';" +
+                      "L.mapbox.config.FORCE_HTTPS = true;" +
+                      "L.mapbox.config.HTTPS_URL = '{{site.tileApi}}/v4';" +
+                  "<\/script>");
+        doc.write("</head><body>");
+        doc.write(exampleCONTENT);
+        doc.write("</body></html>");
+        doc.close();
+
+        // this function needs to execute after the rest of the page
+        // has been built.
+        App.onUserLoad(function() {
+            if (App.user) {
+                function addField(name, value) {
+                    $('<input />').attr({
+                        type: 'hidden',
+                        name: name,
+                        value: value
+                    }).appendTo($('#fiddle-form'));
+                }
+
+                var scriptRegex = /<script>((.|\n)*)<\/script>/,
+                    html = exampleCONTENT.replace(scriptRegex, ''),
+                    match = exampleCONTENT.match(scriptRegex),
+                    js = 'L.mapbox.accessToken = \'' + App.user.accessToken + '\';' + match[1];
+
+                addField('html', html);
+                addField('js', js);
+                addField('css', exampleCSS);
+                addField('resources', jsURL + ',' + cssURL);
+                addField('wrap', 'b');
+                addField('title', '{{page.title}}');
+            } else {
+                $('#fiddle-form').remove();
+            }
+        });
+    </script>
+    </div>
+    <div id='snippet'>
+    <div id='code' class='fill-white'><div class='code-header keyline-top quiet'>{% highlight html %}<!DOCTYPE html>
 <html>
 <head>
 <meta charset=utf-8 />
 <title>{{page.title}}</title>
-{% if page.v0 -%}
-<script src='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
-{% else %}
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-<script src='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
-{% endif %}
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.js'></script>
+<link href='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
 <style>
   body { margin:0; padding:0; }
   #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -42,13 +84,41 @@ section: mapboxjs-examples
 </head>
 <body>{% endhighlight %}
 </div>
-{% highlight html %}{{content}}{% endhighlight %}
+<div class="js-replace-token">
+{% highlight html %}{{content | insert_token}}{% endhighlight %}
+</div>
 <div class='code-footer'>
 {% highlight html %}</body>
 </html>{% endhighlight %}
-</div>
-  </div><!-- end #code -->
-</div>
-  <a class='button icon clipboard col12 round-bottom js-clipboard' href='#' data-target='code' data-ref-id='code' id='copy'>Copy example</a>
+</div></div><!-- end #code -->
+  <div id='logged-out-help' class='center pad2 keyline-top prose'>
+    <a class='icon check js-signup' href='https://www.mapbox.com/plans/'>Get a free Mapbox account</a> to create your own custom map and use it in this example.
   </div>
+
+  <div id='logged-in-help' class='quiet pad2 keyline-top prose'>
+    Use this example by copying its source into your own HTML page and
+    replacing the <a href='https://www.mapbox.com/help/define-map-id/'>Map ID</a>
+    with
+    <a href='http://mapbox.com/projects/'>one of your own from your projects.</a>
+    Having trouble with JavaScript? Try out <a href='http://www.codecademy.com/tracks/javascript'>Codecademy</a>
+    or <a href='mailto:support@mapbox.com'>contact our support team.</a>
+  </div>
+</div>
+  <form id='fiddle-form' action='http://jsfiddle.net/api/post/library/pure/' method='POST'>
+    <input type='submit' class='unround quiet col12' value='Edit in jsFiddle'  />
+  </div>
+  <a class='button icon clipboard col12 round-bottom js-clipboard' href='#' data-clipboard-target='code' id='copy'>Copy example</a>
+  </div>
+  </div>
+  <script>
+  App.onUserLoad(function() {
+      var loggedOut = document.getElementById('logged-out-help');
+      var loggedIn = document.getElementById('logged-in-help');
+      if (App.user) {
+          loggedOut.parentNode.removeChild(loggedOut);
+      } else {
+          loggedIn.parentNode.removeChild(loggedIn);
+      }
+  });
+  </script>
 </div>

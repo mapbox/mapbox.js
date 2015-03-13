@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel='stylesheet' href='../../dist/mapbox.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../../dist/mapbox.js'></script>
+  <script src='access_token.js'></script>
+</head>
+<body>
+<div id='map'></div>
+<script>
+var geocoderControl = L.mapbox.geocoderControl('mapbox.places', {
+        autocomplete: true
+    });
+
+L.mapbox.map('map', 'examples.map-i875kd35')
+    .addControl(geocoderControl);
+
+    geocoderControl.on('found', function(e) {
+        console.log('found');
+        console.log(e);
+    });
+    geocoderControl.on('select', function(e) {
+        console.log('select');
+        console.log(e.feature);
+    });
+</script>
+</body>
+</html>

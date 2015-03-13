@@ -3,13 +3,13 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Choropleth
-description: Graph population density
+description: Visualize population density on a map.
 tags:
   - vector
   - choropleth
 ---
-
 <div id='map'></div>
+
 <style>
 .map-legend .swatch {
   width:20px;
@@ -26,7 +26,7 @@ tags:
 </style>
 <script src='{{site.baseurl}}/assets/data/us-states.js'></script>
 <script>
-  var mapdataviz = L.mapbox.map('map', 'examples.map-9ijuk24y')
+  var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([37.8, -96], 4);
 
   var popup = new L.Popup({ autoPan: false });
@@ -35,7 +35,7 @@ tags:
   var statesLayer = L.geoJson(statesData,  {
       style: getStyle,
       onEachFeature: onEachFeature
-  }).addTo(mapdataviz);
+  }).addTo(map);
 
   function getStyle(feature) {
       return {
@@ -76,7 +76,7 @@ tags:
       popup.setContent('<div class="marker-title">' + layer.feature.properties.name + '</div>' +
           layer.feature.properties.density + ' people per square mile');
 
-      if (!popup._map) popup.openOn(mapdataviz);
+      if (!popup._map) popup.openOn(map);
       window.clearTimeout(closeTooltip);
 
       // highlight feature
@@ -94,15 +94,15 @@ tags:
   function mouseout(e) {
       statesLayer.resetStyle(e.target);
       closeTooltip = window.setTimeout(function() {
-          mapdataviz.closePopup();
+          map.closePopup();
       }, 100);
   }
 
   function zoomToFeature(e) {
-      mapdataviz.fitBounds(e.target.getBounds());
+      map.fitBounds(e.target.getBounds());
   }
 
-  mapdataviz.legendControl.addLegend(getLegendHTML());
+  map.legendControl.addLegend(getLegendHTML());
 
   function getLegendHTML() {
     var grades = [0, 10, 20, 50, 100, 200, 500, 1000],

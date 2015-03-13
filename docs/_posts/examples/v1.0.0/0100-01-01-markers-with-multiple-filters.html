@@ -1,0 +1,143 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Multiple filters on markers
+description: Apply multiple filters on markers based on characteristics in the data.
+tags:
+  - markers
+  - ui
+---
+<style>
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active,
+    .menu-ui a.active:hover {
+      background:#3887BE;
+      color:#FFF;
+      }
+</style>
+
+<!-- jQuery is required for this example. -->
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+
+<nav class='menu-ui'>
+  <a href='#' class='active' data-filter='all'>Show all</a>
+  <a href='#' data-filter='rentals'>Rentals</a>
+  <a href='#' data-filter='tackleshop'>Tackle shop</a>
+  <a href='#' data-filter='fuel'>Fuel station</a>
+</nav>
+<div id='map'></div>
+
+<script>
+// In the propeties object for each marker define key's
+// like `rentals`, `fuel`, `tackleshop` that are set to true for false
+// depending on whether or they exist at a location.
+var geojson = [
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          -74.435720443726,
+          39.353812390495
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "title": "Marina #1",
+        "rentals": true,
+        "tackleshop": false,
+        "fuel": false,
+        "marker-color": "#1087bf",
+        "marker-size": "large",
+        "marker-symbol": "harbor"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          -123.37030649185,
+          48.4253703539
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "title": "Marina #2",
+        "rentals": true,
+        "tackleshop": false,
+        "fuel": true,
+        "marker-color": "#1087bf",
+        "marker-size": "large",
+        "marker-symbol": "harbor"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          -122.4444937706,
+          37.807478357821
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "title": "Marina #3",
+        "rentals": false,
+        "tackleshop": true,
+        "fuel": true,
+        "marker-color": "#1087bf",
+        "marker-size": "large",
+        "marker-symbol": "harbor"
+      }
+    }
+];
+
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([42.68, -95.63], 4)
+
+var markers = L.mapbox.featureLayer()
+    .setGeoJSON(geojson)
+    .addTo(map);
+
+$('.menu-ui a').on('click', function() {
+    // For each filter link, get the 'data-filter' attribute value.
+    var filter = $(this).data('filter');
+    $(this).addClass('active').siblings().removeClass('active');
+    markers.setFilter(function(f) {
+        // If the data-filter attribute is set to "all", return
+        // all (true). Otherwise, filter on markers that have
+        // a value set to true based on the filter name.
+        return (filter === 'all') ? true : f.properties[filter] === true;
+    });
+    return false;
+});
+</script>

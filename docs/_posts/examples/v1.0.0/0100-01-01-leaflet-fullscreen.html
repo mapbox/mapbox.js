@@ -3,20 +3,18 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Leaflet Fullscreen
-description: Using the Leaflet Fullscreen plugin
+description: Add a control to enable a map to be in full screen mode.
 tags:
   - plugins
 ---
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/Leaflet.fullscreen.min.js'></script>
-<link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/leaflet.fullscreen.css' rel='stylesheet' />
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
+<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
 
 <div id='map'></div>
 
-<script type="text/javascript">
-    var map = L.mapbox.map('map', 'examples.map-vyofok3q', {
-        center: [38.8896, -77.0417],
-        zoom: 15
-    });
+<script>
+var map = L.mapbox.map('map', 'examples.map-i875kd35')
+    .setView([38.8896, -77.0417], 15);
 
-    L.control.fullscreen().addTo(map);
+L.control.fullscreen().addTo(map);
 </script>

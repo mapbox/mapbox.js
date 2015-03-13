@@ -1,0 +1,85 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Show Loading Screen
+description: Use events to show when features are loading and loaded by displaying and hiding a loading message
+tags:
+  - vector
+  - ui
+---
+<style>
+
+/*
+ * This is a very simple version of a 'loading screen': there are much
+ * fancier ones you can use instead, like
+ * http://codepen.io/collection/HtAne/
+ * http://jh3y.github.io/-cs-spinner/
+ */
+#loader {
+    position:absolute; top:0; bottom:0; width:100%;
+    background:rgba(255, 255, 255, 1);
+    transition:background 1s ease-out;
+    -webkit-transition:background 1s ease-out;
+}
+#loader.done {
+    background:rgba(255, 255, 255, 0);
+}
+#loader.hide {
+    display:none;
+}
+#loader .message {
+    position:absolute;
+    left:50%;
+    top:50%;
+}
+#add-markers {
+    position:absolute;
+    top:10px;
+    right:10px;
+}
+</style>
+<div id='map'></div>
+<button id='add-markers'>add markers</button>
+<div id='loader'><span class='message'>loading</span></div>
+<script>
+var loader = document.getElementById('loader');
+var addMarkers = document.getElementById('add-markers');
+
+var map = L.mapbox.map('map')
+    .setView([38.91, -77.03], 13);
+
+// Add a tile layer with a loading animation
+
+// start the loading screen
+startLoading();
+L.mapbox.tileLayer('examples.map-i86nkdio')
+    .addTo(map) // add your tiles to the map
+    .on('load', finishedLoading); // when the tiles load, remove the screen
+
+addMarkers.onclick = function() {
+    // remove the 'add markers' button to eliminate any confusion
+    addMarkers.parentNode.removeChild(addMarkers);
+    // add the loading screen
+    startLoading();
+    L.mapbox.featureLayer('examples.map-zr0njcqy')
+        .addTo(map) // add the markers to the map
+        .on('ready', finishedLoading); // remove the loading screen
+};
+
+function startLoading() {
+    loader.className = '';
+}
+
+function finishedLoading() {
+    // first, toggle the class 'done', which makes the loading screen
+    // fade out
+    loader.className = 'done';
+    setTimeout(function() {
+        // then, after a half-second, add the class 'hide', which hides
+        // it completely and ensures that the user can interact with the
+        // map again.
+        loader.className = 'hide';
+    }, 500);
+}
+</script>

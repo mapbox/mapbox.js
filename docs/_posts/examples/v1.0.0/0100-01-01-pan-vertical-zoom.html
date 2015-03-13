@@ -2,109 +2,94 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Pan and Vertical Zoom
-description: Adding controls for click-movement of the map
+title: Pan and vertical zoom
+description: Add custom controls for pan and zoom movement on a map.
 tags:
   - ui
 ---
-
-<div id='z'>
-    <div id='zoom-bar' class='dragdealer'>
-        <div id='handle' class="handle">0</div>
-    </div>
-</div>
-<div id='pan' class='pan'>
-    <div class='wrapper'>
-        <a id='left' class='panner'>&larr;</a>
-        <a id='right' class='panner'>&rarr;</a>
-        <a id='down' class='panner'>&darr;</a>
-        <a id='up' class='panner'>&uarr;</a>
-    </div>
-</div>
-<div id='map'>
-</div>
-<!-- if you plan to use this example, download drag dealer from
-https://code.google.com/p/dragdealer/ instead of hotlinking it like this -->
-<script
-    src='https://dragdealer.googlecode.com/svn/tags/0.9.5/dragdealer.js'></script>
 <style>
-#z {
-    top: 160px;
-    left: 40px;
-    position: absolute;
-    z-index: 999;
-}
+.ui-control {
+  font:bold 12px/28px Helvetica, sans-serif;
+  text-align:center;
+  position:absolute;
+  top:10px;
+  left:10px;
+  z-index:1000;
+  }
 
-#zoom-bar {
-    width: 30px;
-    position: relative;
-    height: 200px;
-    background: #FFF;
-    border: 1px solid #BBB;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-}
+.ui-pan {
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1000;
+  }
+  .ui-pan .panner {
+    background:#fff;
+    color:#404040;
+    font-size:9px;
+    position:absolute;
+    top:0;
+    left:0;
+    width:28px;
+    height:28px;
+    border:1px solid rgba(0,0,0,0.4);
+    border-radius:3px;
+    }
+    .ui-pan .panner:hover { background-color:#f8f8f8; color:#404040; }
+    .ui-pan .panner.up    { left:28px; }
+    .ui-pan .panner.right { left:58px; top:28px; }
+    .ui-pan .panner.down  { left:28px; top:58px; }
+    .ui-pan .panner.left  { top:28px; }
 
-.dragdealer .handle {
-    position: absolute;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    background: #222;
-    color: #fff;
-    font-weight: bold;
-    line-height: 30px;
-    text-align: center;
-}
+.ui-zoombar {
+  background:#FFF;
+  position:relative;
+  top:93px;
+  left:28px;
+  width:28px;
+  height:200px;
+  border:1px solid rgba(0,0,0,0.4);
+  border-radius:3px;
+  cursor:pointer;
+  }
+  .ui-zoombar:hover { background-color:#f8f8f8; }
+  .ui-zoombar .handle {
+    position:absolute;
+    cursor:pointer;
+    width:26px;
+    height:28px;
+    background:#404040;
+    color:#fff;
+    border-radius:2px;
+    }
+    .ui-zoombar .handle:hover { background:#303030; }
 
-#pan {
-    position: absolute;
-    top: 50px;
-    left: 10px;
-    z-index: 999;
-}
-
-.wrapper {
-    position: relative;
-}
-
-#pan .wrapper .panner {
-    background: #fff;
-    top: 0;
-    position: absolute;
-    left: 0;
-    padding: 5px;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    text-align: center;
-    -webkit-user-select: none;
-}
-
-#pan .panner#left {
-    top: 35px;
-}
-
-#pan .panner#right {
-    top: 35px;
-    left: 60px;
-}
-
-#pan .panner#down {
-    top: 70px;
-    left: 30px;
-}
-
-#pan .panner#up {
-    top: 0px;
-    left: 30px;
-}
 </style>
+
+<div class='ui-control'>
+  <div id='pan' class='ui-pan'>
+    <a href='#' id='up' class='panner up'>&#9650;</a>
+    <a href='#' id='right' class='panner right'>&#9654;</a>
+    <a href='#' id='down' class='panner down'>&#9660;</a>
+    <a href='#' id='left' class='panner left'>&#9664;</a>
+  </div>
+  <div id='zoom-bar' class='ui-zoombar dragdealer'>
+    <div id='handle' class='handle'>0</div>
+  </div>
+</div>
+
+<div id='map'> </div>
+
+<!-- If you plan to use this example, download dragdealer from
+https://code.google.com/p/dragdealer/ instead of hotlinking it like this -->
+<script src='https://dragdealer.googlecode.com/svn/tags/0.9.5/dragdealer.js'></script>
 <script>
-var map = L.mapbox.map('map', 'examples.map-vyofok3q');
-var zooms = 17;
+var zooms = 19;
 var handle = document.getElementById('handle');
+var map = L.mapbox.map('map', 'examples.map-i875kd35', {
+    zoomControl: false
+  })
+  .setView([42.0, -3.5], 2);
 
 // Configure Dragdealer to update the map zoom
 var zoom_bar = new Dragdealer('zoom-bar', {
@@ -119,30 +104,16 @@ var zoom_bar = new Dragdealer('zoom-bar', {
     }
 });
 
-// Round zoom so that numbers in the bar look presentable.
+// Round the zoom value the number looks presentable.
 map.on('zoomend', function() {
     var z = Math.round(map.getZoom());
-    zoom_bar.setValue(0, z / 16);
+    zoom_bar.setValue(0, z / 19);
     handle.innerHTML = z;
 });
 
-document.getElementById('left').onclick = function() {
-    console.log("AS");
-    map.panBy([-100, 0]);
-};
-
-document.getElementById('right').onclick = function() {
-    map.panBy([100, 0]);
-};
-
-document.getElementById('down').onclick = function() {
-    map.panBy([0, 100]);
-};
-
-document.getElementById('up').onclick = function() {
-    map.panBy([0, -100]);
-};
-
-map.setView([34.660322, 132.506103], 9);
+document.getElementById('left').onclick = function(e)  { e.preventDefault(); map.panBy([-100, 0]); };
+document.getElementById('right').onclick = function(e) { e.preventDefault(); map.panBy([100, 0]);  };
+document.getElementById('down').onclick = function(e)  { e.preventDefault(); map.panBy([0, 100]);  };
+document.getElementById('up').onclick = function(e)    { e.preventDefault(); map.panBy([0, -100]); };
 </script>
 

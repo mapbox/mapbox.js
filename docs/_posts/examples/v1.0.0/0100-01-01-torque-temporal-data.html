@@ -1,0 +1,62 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Using Torque and data from CartoDB
+description: Using the <a href='https://github.com/CartoDB/torque'>torque</a> library and data from a <a href='http://cartodb.com/'>CartoDB</a> table to show temporal data of naval journeys.
+tags:
+  - layers
+---
+<div id='map'></div>
+<!-- torque requires underscore as a dependency -->
+<script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
+<!--
+  torque is a library that works with Leaflet & Mapbox.js, and displays
+  temporal data from CartoDB.
+  See the full documentation at https://github.com/CartoDB/torque
+  -->
+<script src='https://cartodb-libs.global.ssl.fastly.net/torque.full.js'></script>
+<script>
+var map = L.mapbox.map('map', 'examples.map-y7l23tes')
+    .setView([10, -10], 2);
+
+// Torque uses CartoCSS styles, similar to those in TileMill,
+// but with a few extra keywords prefixed by -torque and the
+// extra filter, frame-offset.
+var style =
+    'Map {' +
+    '-torque-time-attribute: "date";' +
+    '-torque-aggregation-function: "count(cartodb_id)";' +
+    '-torque-frame-count: 760;' +
+    '-torque-animation-duration: 30;' +
+    '-torque-resolution: 2' +
+    '}' +
+    '#layer {' +
+    '  marker-width: 2;' +
+    '  marker-fill-opacity: 1;' +
+    '  marker-fill: #77B2FF; ' +
+    '  comp-op: "lighten";' +
+    '  [value > 2] { marker-fill: #A0F4FF; }' +
+    '  [value > 7] { marker-fill: #FFFFFF; }' +
+    '  [frame-offset = 1] { marker-width: 10; marker-fill-opacity: 0.05;}' +
+    '  [frame-offset = 2] { marker-width: 20; marker-fill-opacity: 0.02;}' +
+    '}';
+
+// This layer is an example of ship positions: replace the user
+// and table with your own to use this example.
+var torqueLayer = new L.TorqueLayer({
+    user: 'viz2',
+    table: 'ow',
+    cartocss: style,
+    blendmode: 'lighter',
+    // All Mapbox resources use HTTPS when available, so we'll need
+    // to make torque do the same.
+    tiler_protocol: 'https',
+    tiler_port: 443
+});
+
+// This example autoplays: there are other options available:
+// https://github.com/CartoDB/torque/blob/master/doc/API.md
+torqueLayer.addTo(map);
+torqueLayer.play();
+</script>

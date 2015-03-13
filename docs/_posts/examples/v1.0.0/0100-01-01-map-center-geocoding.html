@@ -2,20 +2,27 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Initially Position Map With Geocode
-description: Using the Mapbox Geocoding API to Position a Map
+title: Set a maps position with geocoder.
+description: Using the <a href='https://www.mapbox.com/developers/api/geocoding/'>Mapbox Geocoding API</a> initially set a maps position on Chester, New Jersey.
 tags:
   - geocoding
 ---
 
 <div id='map'></div>
 <script>
-var geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
-    map = L.mapbox.map('map', 'examples.map-vyofok3q')
+var geocoder = L.mapbox.geocoder('mapbox.places'),
+    map = L.mapbox.map('map', 'examples.map-h67hf2ic');
 
 geocoder.query('Chester, NJ', showMap);
 
 function showMap(err, data) {
-     map.fitBounds(data.lbounds);
+    // The geocoder can return an area, like a city, or a
+    // point, like an address. Here we handle both cases,
+    // by fitting the map bounds to an area or zooming to a point.
+    if (data.lbounds) {
+        map.fitBounds(data.lbounds);
+    } else if (data.latlng) {
+        map.setView([data.latlng[0], data.latlng[1]], 13);
+    }
 }
 </script>

@@ -1,0 +1,45 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Cycling through overlays
+description: Hide and show overlays in a cycle
+tags:
+  - layers
+---
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio', {
+        // we disable tile animations for this example so that the
+        // transition from one layer to another is immediate.
+        // you can change this if you want, to show tiles fading in
+        fadeAnimation: false
+    })
+    .setView([40, -96.50], 4);
+
+var layers = [
+    L.mapbox.tileLayer('examples.bird-species'),
+    L.mapbox.tileLayer('examples.npr-stations'),
+    L.mapbox.tileLayer('examples.location-formatter')
+];
+
+// i is the number of the currently-selected layer: this loops through
+// 0, 1, and 2.
+var i = 0;
+
+// we use a layer group to make it simple to remove an existing overlay
+// and add a new one in the same line of code, as below, without juggling
+// temporary variables.
+var layerGroup = L.layerGroup().addTo(map);
+
+// show the first overlay as soon as the map loads
+next();
+
+// and then time the next() function to run every 2 seconds
+setInterval(next, 1000 * 2);
+
+function next() {
+    layerGroup.clearLayers().addLayer(layers[i]);
+    if (++i >= layers.length) i = 0;
+}
+</script>

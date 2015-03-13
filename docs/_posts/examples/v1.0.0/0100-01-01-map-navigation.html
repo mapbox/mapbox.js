@@ -2,35 +2,55 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Map Navigation to Places
-description: Making a simple list of places to move to
+title: Navigate to places on a map
+description: Create a simple menu of places a user can select to move to on a map.
 tags:
   - ui
 ---
-
 <style>
-#navigation {
-    background:#fff;
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    width:100px;
-    padding:20px;
-}
-#navigation a {
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
     display:block;
-}
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
 </style>
+
 <div id='map'></div>
-<div id='navigation'>
-    <a href='#' data-position='42.36,-71'>Boston</a>
-    <a href='#' data-position='40.4,-3.7'>Madrid</a>
-    <a href='#' data-position='31.76,35.2'>Jerusalem</a>
+<div id='navigation' class='menu-ui'>
+  <a href='#' data-position='42.36,-71'>Boston</a>
+  <a href='#' data-position='40.4,-3.7'>Madrid</a>
+  <a href='#' data-position='31.76,35.2'>Jerusalem</a>
 </div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
+var map = L.mapbox.map('map', 'examples.map-i86nkdio');
 document.getElementById('navigation').onclick = function(e) {
+    e.preventDefault();
     var pos = e.target.getAttribute('data-position');
     if (pos) {
         var loc = pos.split(',');

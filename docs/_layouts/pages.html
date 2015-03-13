@@ -1,10 +1,17 @@
 ---
 layout: default
 class: fill-light
-fullwidth: true
+options: full
+section: mapboxjs
 examples:
   - id: animation
     name: Animation
+  - id: features
+    name: Features
+  - id: cluster
+    name: Marker clustering
+  - id: turf
+    name: Turf GIS
   - id: geocoding
     name: Geocoding
   - id: layers
@@ -19,21 +26,22 @@ examples:
     name: Markers
   - id: plugins
     name: Plugins
+  - id: tilemill
+    name: TileMill interactivity
   - id: tooltips
     name: Tooltips
   - id: omnivore
-    name: "Format Support (omnivore plugin)"
+    name: "Format support (omnivore plugin)"
   - id: ui
-    name: User Interface
+    name: User interface
   - id: vector
-    name: Vector Overlays
+    name: Vector overlays
 ---
 
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
 <link href='{{site.url}}/css/docs.css' rel='stylesheet' />
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
-<script src='{{site.url}}/js/docs.js'></script>
 
 <!--Fixed sidebar navigation-->
 <div class='docnav hide-mobile'>
@@ -87,7 +95,7 @@ examples:
       <div id='docs-search' class='col3 pad1 keyline-left'>
         <fieldset class='col12 with-icon dark'>
           <span class='icon search'></span>
-          <input type='text' class='col12 round minimal' />
+          <input type='text' class='col12 round clean' />
         </fieldset>
       </div>
     </nav>

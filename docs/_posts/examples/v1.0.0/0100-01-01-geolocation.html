@@ -7,35 +7,35 @@ description: Finding the user's position
 tags:
   - ui
 ---
-
 <style>
-#geolocate {
-    background: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 158px;
-    margin-left: -80px;
-    z-index: 1000;
-    font: 13px/18px;
-    text-align: center;
-    padding: 10px 0;
-    color: #3C4E5A;
-    display: block;
-    border: 1px solid #BBB;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-}
-
-#geolocate:hover {
-    background: #ECF5FA;
-}
+.ui-button {
+  background:#3887BE;
+  color:#FFF;
+  display:block;
+  position:absolute;
+  top:50%;left:50%;
+  width:160px;
+  margin:-20px 0 0 -80px;
+  z-index:100;
+  text-align:center;
+  padding:10px;
+  border:1px solid rgba(0,0,0,0.4);
+  border-radius:3px;
+  }
+  .ui-button:hover {
+    background:#3074a4;
+    color:#fff;
+    }
 </style>
+
 <div id='map'></div>
-<a href='#' id='geolocate'>Find me</a>
+<a href='#' id='geolocate' class='ui-button'>Find me</a>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
 var geolocate = document.getElementById('geolocate');
+var map = L.mapbox.map('map', 'examples.map-i86nkdio');
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
 
 // This uses the HTML5 geolocation API, which is available on
 // most mobile browsers and modern browsers, but not in Internet Explorer
@@ -43,7 +43,7 @@ var geolocate = document.getElementById('geolocate');
 // See this chart of compatibility for details:
 // http://caniuse.com/#feat=geolocation
 if (!navigator.geolocation) {
-    geolocate.innerHTML = 'geolocation is not available';
+    geolocate.innerHTML = 'Geolocation is not available';
 } else {
     geolocate.onclick = function (e) {
         e.preventDefault();
@@ -57,15 +57,16 @@ if (!navigator.geolocation) {
 map.on('locationfound', function(e) {
     map.fitBounds(e.bounds);
 
-    map.featureLayer.setGeoJSON({
-        type: "Feature",
+    myLayer.setGeoJSON({
+        type: 'Feature',
         geometry: {
-            type: "Point",
+            type: 'Point',
             coordinates: [e.latlng.lng, e.latlng.lat]
         },
         properties: {
-            'marker-color': '#000',
-            'marker-symbol': 'star-stroked'
+            'title': 'Here I am!',
+            'marker-color': '#ff8888',
+            'marker-symbol': 'star'
         }
     });
 
@@ -76,6 +77,6 @@ map.on('locationfound', function(e) {
 // If the user chooses not to allow their location
 // to be shared, display an error message.
 map.on('locationerror', function() {
-    geolocate.innerHTML = 'position could not be found';
+    geolocate.innerHTML = 'Position could not be found';
 });
 </script>

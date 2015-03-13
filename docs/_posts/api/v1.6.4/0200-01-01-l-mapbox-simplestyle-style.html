@@ -1,0 +1,33 @@
+---
+layout: api
+title: "v1.6.4 JavaScript Library: L.mapbox.simplestyle.style(feature)"
+categories: api
+version: v1.6.4
+permalink: /api/v1.6.4/l-mapbox-simplestyle-style
+---
+<h2 id="section-l-mapbox-simplestyle-style">L.mapbox.simplestyle.style(feature)</h2>
+<p>Given a GeoJSON Feature with optional simplestyle-spec properties, return an
+options object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feature</td>
+<td>object</td>
+<td>A GeoJSON feature object</td>
+</tr>
+</tbody>
+</table>
+<p><em>Examples</em>:</p>
+<pre><code>L.geoJson(geoJson, {
+    pointToLayer: L.mapbox.simplestyle.style,
+});
+</code></pre><p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/geojson-simplestyle/">A working example of L.mapbox.simplestyle in use</a></p>
+<p><em>Returns</em>:</p>
+<p>An object formatted to be used as <a href="http://leafletjs.com/reference.html#path">Leaflet Path options</a>.</p>

@@ -1,0 +1,40 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Styled markers from CSV data
+description: Using Leaflet Omnivore and L.mapbox.featureLayer, apply style defined by the <a href='https://www.mapbox.com/guides/glossary/#simplestyle'>Simplestyle spec</a>.
+tags:
+  - omnivore
+---
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+    .setView([38, -95.0], 4);
+
+// omnivore will AJAX-request this file behind the scenes and parse it:
+// note that there are considerations:
+// - The CSV file must contain latitude and longitude values, in column
+//   named roughly latitude and longitude
+// - The file must either be on the same domain as the page that requests it,
+//   or both the server it is requested from and the user's browser must
+//   support CORS.
+
+// The omnivore functions take three arguments:
+//
+// - a URL of the file to fetch
+// - options to the parser
+// - a custom layer
+//
+// And they return the custom layer, which is by default an L.geoJson layer.
+//
+// The second two arguments are each optional. In this case we're supplying
+// no arguments to the parser (null), but supplying a custom layer:
+// an instance of L.mapbox.featureLayer
+// This means that rows with simplestyle properties will be styled as they
+// would be in GeoJSON and elsewhere.
+omnivore.csv('{{site.baseurl}}/assets/data/simplestyle.csv', null, L.mapbox.featureLayer()).addTo(map);
+</script>

@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="../../dist/mapbox.css"/>
   <link rel="stylesheet" href="embed.css"/>
   <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
 </head>
 <body>
 <div id='map'></div>
@@ -43,8 +44,8 @@
     };
 
     // Pass features and a custom factory function to the map
-    map.markerLayer.setGeoJSON(geoJson);
-    map.markerLayer.on('click', function(e) {
+    map.featureLayer.setGeoJSON(geoJson);
+    map.featureLayer.on('click', function(e) {
         e.layer.unbindPopup();
         window.open(e.layer.feature.properties.url);
     });

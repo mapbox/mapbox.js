@@ -2,18 +2,17 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Line from Markers
-description: Adding a line from featureLayer
+title: Draw lines between markers.
+description: Add a polyline that draws its coordinates from a featureLayer.
 tags:
   - vector
 ---
-
 <div id='map'></div>
+
 <script>
 var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
 map.featureLayer.on('ready', function(e) {
-  
   var line = [];
 
   this.eachLayer(function(marker) {
@@ -25,6 +24,5 @@ map.featureLayer.on('ready', function(e) {
   };
 
   var polyline = L.polyline(line, polyline_options).addTo(map);
-
 });
 </script>

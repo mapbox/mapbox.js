@@ -1,0 +1,74 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Listing markers in clusters
+description: Show a list of markers within view by their coordinates on a map.
+tags:
+  - cluster
+---
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+<style>
+pre.ui-coordinates {
+  background:rgba(0,0,0,0.5);
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  padding:5px 10px;
+  color:#fff;
+  font-size:11px;
+  line-height:18px;
+  border-radius:3px;
+  max-height:240px;
+  overflow:auto;
+  width:100px;
+  }
+</style>
+
+<div id='map'></div>
+<pre id='coordinates' class='ui-coordinates'></pre>
+
+<script src="{{site.baseurl}}/assets/data/realworld.388.js"></script>
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k')
+    .setView([-37.82, 175.215], 14);;
+
+var markers = new L.MarkerClusterGroup();
+
+for (var i = 0; i < addressPoints.length; i++) {
+    var a = addressPoints[i];
+    var title = a[2];
+    var marker = L.marker(new L.LatLng(a[0], a[1]), {
+        icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
+        title: title
+    });
+    marker.bindPopup(title);
+    markers.addLayer(marker);
+}
+
+map.addLayer(markers);
+
+function onmove() {
+    // Get the map bounds - the top-left and bottom-right locations.
+    var inBounds = [],
+        bounds = map.getBounds();
+    markers.eachLayer(function(marker) {
+        // For each marker, consider whether it is currently visible by comparing
+        // with the current map bounds.
+        if (bounds.contains(marker.getLatLng())) {
+            inBounds.push(marker.options.title);
+        }
+    });
+    // Display a list of markers.
+    document.getElementById('coordinates').innerHTML = inBounds.join('\n');
+}
+
+map.on('move', onmove);
+
+// call onmove off the bat so that the list is populated.
+// otherwise, there will be no markers listed until the map is moved.
+onmove();
+</script>

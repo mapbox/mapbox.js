@@ -1,0 +1,57 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Leaflet Geodesy
+description: Generate true <a href='http://en.wikipedia.org/wiki/Geodesic'>geodesic circles</a> that exhibit projection distortion using the Geodesy plugin.
+tags:
+  - plugins
+---
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
+
+<style>
+.ui-form {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  padding:10px;
+  border-radius:3px;
+  }
+  .ui-form label {
+    font-size:12px;
+    display:block;
+    margin-bottom:5px;
+    }
+</style>
+
+<div id='map'></div>
+<div class='ui-form'>
+  <label for='radius'>Enter a radius (m)</label>
+  <input id='radius' type='number' step=1000 value=2000000 min=1 max=20000000 />
+</div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+    .setView([0, 20], 2);
+
+var planarCircle = L.circle([0, 0], 2000000, {
+    fillOpacity: 0,
+    color: '#00f'
+}).addTo(map);
+
+var desyCircle = LGeo.circle([0, 0], 2000000, {
+    parts: 60,
+    color: '#f00',
+    fillOpacity: 0
+}).addTo(map);
+
+document.getElementById('radius').onchange = function() {
+    desyCircle.setRadius(+this.value);
+    planarCircle.setRadius(+this.value);
+};
+
+map.on('mousemove', function(e) {
+    desyCircle.setLatLng(e.latlng);
+    planarCircle.setLatLng(e.latlng);
+});
+</script>

@@ -1,10 +1,13 @@
-source: docs
-api: https://122e4e-mapbox.global.ssl.fastly.net
 url: https://122e4e-mapbox.global.ssl.fastly.net
+api: https://122e4e-mapbox.global.ssl.fastly.net/core
+tileApi: https://api-maps-staging.tilestream.net
+accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.xZAqdcP-Qiv0PaMCmw6LoA
+source: docs
 permalink: /:categories/:title
 baseurl: /mapbox.js
-pygments: true
-mapboxjs: v1.6.2
-defaultid: 'examples.map-9ijuk24y'
+highlighter: pygments
+mapboxjs: v2.1.5
+mapboxjsbase: /mapbox.js/dist
+defaultid: 'examples.map-i86nkdio'
 rdiscount:
   extensions: [smart]

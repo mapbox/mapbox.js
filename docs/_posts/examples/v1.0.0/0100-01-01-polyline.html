@@ -3,14 +3,15 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Polylines
-description: Adding lines and polygons to the map
+description: Adding lines and polygons to the map.
 tags:
   - vector
+  - features
 ---
-
 <div id='map'></div>
+
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([38.89399, -77.03659], 17);
 
 // Define circle options
@@ -26,7 +27,7 @@ var circle_options = {
 var circle_one = L.circle([38.89415, -77.03738], 20, circle_options).addTo(map);
 var circle_two = L.circle([38.89415, -77.03578], 20, circle_options).addTo(map);
 
-// Create array of lat,lon points
+// Create array of lat,lon points.
 var line_points = [
     [38.893596444352134, -77.0381498336792],
     [38.89337933372204, -77.03792452812195],

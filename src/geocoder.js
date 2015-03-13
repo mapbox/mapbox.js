@@ -2,66 +2,58 @@
 
 var util = require('./util'),
     urlhelper = require('./url'),
+    feedback = require('./feedback'),
     request = require('./request');
 
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
-module.exports = function(_) {
+module.exports = function(url, options) {
 
-    var geocoder = {}, url;
+    var geocoder = {};
 
-    geocoder.getURL = function(_) {
+    util.strict(url, 'string');
+
+    if (url.indexOf('/') === -1) {
+        url = urlhelper('/geocode/' + url + '/{query}.json', options && options.accessToken);
+    }
+
+    geocoder.getURL = function() {
         return url;
     };
 
-    geocoder.setURL = function(_) {
-        url = urlhelper.jsonify(_);
-        return geocoder;
-    };
-
-    geocoder.setID = function(_) {
-        util.strict(_, 'string');
-        geocoder.setURL(urlhelper.base() + _ + '/geocode/{query}.json');
-        return geocoder;
-    };
-
-    geocoder.setTileJSON = function(_) {
-        util.strict(_, 'object');
-        geocoder.setURL(_.geocoder);
-        return geocoder;
-    };
-
     geocoder.queryURL = function(_) {
-        if (!geocoder.getURL()) throw new Error('Geocoding map ID not set');
+        var query;
+
         if (typeof _ !== 'string') {
             var parts = [];
             for (var i = 0; i < _.length; i++) {
                 parts[i] = encodeURIComponent(_[i]);
             }
-            return L.Util.template(geocoder.getURL(), {
-                query: parts.join(';')
-            });
+            query = parts.join(';');
         } else {
-            return L.Util.template(geocoder.getURL(), {
-                query: encodeURIComponent(_)
-            });
+            query = encodeURIComponent(_);
         }
+
+        feedback.record({geocoding: query});
+        return L.Util.template(geocoder.getURL(), {query: query});
     };
 
     geocoder.query = function(_, callback) {
         util.strict(callback, 'function');
         request(geocoder.queryURL(_), function(err, json) {
-            if (json && (json.length || json.results)) {
+            if (json && (json.length || json.features)) {
                 var res = {
-                    results: json.length ? json : json.results,
+                    results: json
                 };
-                if (json.results) {
-                    res.latlng = [json.results[0][0].lat,
-                        json.results[0][0].lon];
-                }
-                if (json.results && json.results[0][0].bounds !== undefined) {
-                    res.bounds = json.results[0][0].bounds;
-                    res.lbounds = util.lbounds(res.bounds);
+                if (json.features && json.features.length) {
+                    res.latlng = [
+                        json.features[0].center[1],
+                        json.features[0].center[0]];
+
+                    if (json.features[0].bbox) {
+                        res.bounds = json.features[0].bbox;
+                        res.lbounds = util.lbounds(res.bounds);
+                    }
                 }
                 callback(null, res);
             } else callback(err || true);
@@ -102,13 +94,6 @@ module.exports = function(_) {
 
         return geocoder;
     };
-
-    if (typeof _ === 'string') {
-        if (_.indexOf('/') == -1) geocoder.setID(_);
-        else geocoder.setURL(_);
-    } else if (typeof _ === 'object') {
-        geocoder.setTileJSON(_);
-    }
 
     return geocoder;
 };

@@ -1,0 +1,277 @@
+---
+layout: api
+title: "v2.1.1 JavaScript Library: L.Path"
+categories: api
+version: v2.1.1
+permalink: /api/v2.1.1/l-path
+---
+<h2 id="path">Path</h2>
+<p>An abstract class that contains options and constants shared between vector overlays (Polygon, Polyline, Circle). Do not use it directly.
+
+<h3 id="path-options">Options</h3>
+<table data-id='path'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th class="minwidth">Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>stroke</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">true</span></code></td>
+<td>Whether to draw stroke along the path. Set it to <code><span class="literal">false</span></code> to disable borders on polygons or circles.</td>
+	</tr>
+	<tr>
+<td><code><b>color</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'#03f'</span></code></td>
+<td>Stroke color.</td>
+	</tr>
+	<tr>
+<td><code><b>weight</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">5</span></code></td>
+<td>Stroke width in pixels.</td>
+	</tr>
+	<tr>
+<td><code><b>opacity</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">0.5</span></code></td>
+<td>Stroke opacity.</td>
+	</tr>
+	<tr>
+<td><code><b>fill</b></code></td>
+<td><code>Boolean</code></td>
+<td>depends</td>
+<td>Whether to fill the path with color. Set it to <code><span class="literal">false</span></code> to disable filling on polygons or circles.</td>
+	</tr>
+	<tr>
+<td><code><b>fillColor</b></code></td>
+<td><code>String</code></td>
+<td>same as color</td>
+<td>Fill color.</td>
+	</tr>
+	<tr>
+<td><code><b>fillOpacity</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">0.2</span></code></td>
+<td>Fill opacity.</td>
+	</tr>
+	<tr>
+<td><code><b>dashArray</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>A string that defines the stroke <a href="https://developer.mozilla.org/en/SVG/Attribute/stroke-dasharray">dash pattern</a>. Doesn't work on canvas-powered layers (e.g. Android 2).</td>
+	</tr>
+	<tr>
+<td><code><b>lineCap</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>A string that defines <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap">shape to be used at the end</a> of the stroke.</td>
+	</tr>
+	<tr>
+<td><code><b>lineJoin</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>A string that defines <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin">shape to be used at the corners</a> of the stroke.</td>
+	</tr>
+	<tr>
+<td><code><b>clickable</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">true</span></code></td>
+<td>If <code><span class="literal">false</span></code>, the vector will not emit mouse events and will act as a part of the underlying map.</td>
+	</tr>
+	<tr>
+<td><code><b>pointerEvents</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>Sets the <code>pointer-events</code> attribute on the path if SVG backend is used.</td>
+	</tr>
+	<tr>
+<td><code><b>className</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">''</span></code></td>
+<td>Custom class name set on an element.</td>
+	</tr>
+</table>
+
+<h3>Events</h3>
+
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v2.1.1/l-events">these methods</a>.</p>
+
+<table data-id='path'>
+	<tr>
+<th class="width100">Event</th>
+<th class="width100">Data</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>click</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the user clicks (or taps) the object.</td>
+	</tr>
+	<tr>
+<td><code><b>dblclick</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the user double-clicks (or double-taps) the object.</td>
+	</tr>
+	<tr>
+<td><code><b>mousedown</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the user pushes the mouse button on the object.</td>
+	</tr>
+	<tr>
+<td><code><b>mouseover</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the mouse enters the object.</td>
+	</tr>
+	<tr>
+<td><code><b>mouseout</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the mouse leaves the object.</td>
+	</tr>
+	<tr>
+<td><code><b>contextmenu</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">MouseEvent</a></code></td>
+<td>Fired when the user pushes the right mouse button on the object, prevents default browser context menu from showing if there are listeners on this event.</td>
+	</tr>
+	<tr>
+<td><code><b>add</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">Event</a></code>
+<td>Fired when the path is added to the map.</td>
+	</tr>
+	<tr>
+<td><code><b>remove</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">Event</a></code></td>
+<td>Fired when the path is removed from the map.</td>
+	</tr>
+	<tr>
+<td><code><b>popupopen</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">PopupEvent</a></code></td>
+<td>Fired when a popup bound to the path is open.</td>
+	</tr>
+	<tr>
+<td><code><b>popupclose</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-event-objects">PopupEvent</a></code></td>
+<td>Fired when a popup bound to the path is closed.</td>
+	</tr>
+</table>
+
+<h3 id="path-methods">Methods</h3>
+<table data-id='path'>
+	<tr>
+<th class="width250">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>addTo</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds the layer to the map.</td>
+	</tr>
+	<tr id="path-bindpopup">
+<td><code><b>bindPopup</b>(
+<nobr>&lt;String&gt; <i>html</i> |</nobr> <nobr>&lt;HTMLElement&gt; <i>el</i> |</nobr> <nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-popup">Popup</a>&gt; <i>popup</i>,</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-popup">Popup options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Binds a popup with a particular HTML content to a click on this path.</td>
+	</tr>
+	<tr>
+<td><code><b>bindPopup</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-popup">Popup</a>&gt; <i>popup</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-popup">Popup options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Binds a given popup object to the path.</td>
+	</tr>
+	<tr id="path-unbindpopup">
+<td><code><b>unbindPopup</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Unbinds the popup previously bound to the path with <code>bindPopup</code>.</td>
+	</tr>
+	<tr id="path-openpopup">
+<td><code><b>openPopup</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-latlng">LatLng</a>&gt; <i>latlng?</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Opens the popup previously bound by the <a href="/mapbox.js/api/v2.1.1/l-path">bindPopup</a> method in the given point, or in one of the path's points if not specified.</td>
+	</tr>
+	<tr id="path-closepopup">
+<td><code><b>closePopup</b>()</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Closes the path's bound popup if it is opened.</td>
+	</tr>
+	<tr id="path-setstyle">
+<td><code><b>setStyle</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-path">Path options</a>&gt; <i>object</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Changes the appearance of a Path based on the options in the <a href="/mapbox.js/api/v2.1.1/l-path">Path options</a> object.</td>
+	</tr>
+	<tr id="path-getbounds">
+<td><code><b>getBounds</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.1.1/l-latlngbounds">LatLngBounds</a></code></td>
+<td>Returns the LatLngBounds of the path.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToFront</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the layer to the top of all path layers.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToBack</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the layer to the bottom of all path layers.</td>
+	</tr>
+	<tr>
+<td><code><b>redraw</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Redraws the layer. Sometimes useful after you changed the coordinates that the path uses.</td>
+	</tr>
+</table>
+
+<h3>Static properties</h3>
+<table data-id='path'>
+	<tr>
+<th>Constant</th>
+<th>Type</th>
+<th>Value</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code>SVG</code></td>
+<td><code>Boolean</code></td>
+<td>depends</td>
+<td>True if SVG is used for vector rendering (true for most modern browsers).</td>
+	</tr>
+	<tr>
+<td><code>VML</code></td>
+<td><code>Boolean</code></td>
+<td>depends</td>
+<td>True if VML is used for vector rendering (IE 6-8).</td>
+	</tr>
+	<tr>
+<td><code>CANVAS</code></td>
+<td><code>Boolean</code></td>
+<td>depends</td>
+<td>True if Canvas is used for vector rendering (Android 2). You can also force this by setting global variable <code>L_PREFER_CANVAS</code> to <code><span class="literal">true</span></code> <em>before</em> the Leaflet include on your page — sometimes it can increase performance dramatically when rendering thousands of circle markers, but currently suffers from a bug that causes removing such layers to be extremely slow.</td>
+	</tr>
+	<tr>
+<td><code>CLIP_PADDING</code></td>
+<td><code>Number</code></td>
+<td><nobr><code><span class="number">0.5</span></code> for SVG</nobr><br /><nobr><code><span class="number">0.02</span></code> for VML</nobr></td>
+<td>How much to extend the clip area around the map view (relative to its size, e.g. 0.5 is half the screen in each direction). Smaller values mean that you will see clipped ends of paths while you're dragging the map, and bigger values decrease drawing performance.</td>
+	</tr>
+</table>
+
+

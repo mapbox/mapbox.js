@@ -1,0 +1,48 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Query the Geocoder control results in code
+description: Listen to the <code>found</code> event and display the first queried result from <a href='https://www.mapbox.com/developers/api/geocoding/'>Mapbox Geocoding API</a>.
+tags:
+  - geocoding
+  - ui
+---
+
+<style>
+  pre.ui-output {
+    display:block;
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    padding:5px 10px;
+    background:rgba(0,0,0,0.5);
+    color:#fff;
+    font-size:11px;
+    line-height:18px;
+    border-radius:3px;
+    max-height:50%;
+    max-width:25%;
+    overflow:auto;
+    word-wrap: break-word;
+    white-space:pre-wrap;
+    }
+    pre.ui-output:empty { padding:0; }
+</style>
+<div id='map'></div>
+<pre id='output' class='ui-output'></pre>
+<script>
+var output = document.getElementById('output');
+var map = L.mapbox.map('map', 'examples.map-i875kd35');
+
+// Initialize the geocoder control and add it to the map.
+var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
+geocoderControl.addTo(map);
+
+// Listen for the `found` result and display the first result
+// in the output container. For all available events, see
+// https://www.mapbox.com/mapbox.js/api/{{site.mapboxjs}}/l-mapbox-geocodercontrol/#section-geocodercontrol-on
+geocoderControl.on('found', function(res) {
+    output.innerHTML = JSON.stringify(res.results.features[0]);
+});
+</script>

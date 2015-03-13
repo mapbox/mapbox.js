@@ -1,0 +1,121 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Tabs in marker tooltips
+description: Display simple CSS tabs in marker tooltips populated by marker property data.
+tags:
+  - ui
+---
+<style>
+.map .tabs-ui {
+  position:relative;
+  min-height:200px;
+  width:240px;    
+  clear:both;
+  margin:25px 0;
+  }
+.map .tab {
+  float:left;
+  }
+.map .tab label {
+  background:#eee;
+  padding:10px;
+  border:1px solid #ccc;
+  margin-left:-1px;
+  position:relative;
+  left:1px;
+  top:1px;
+  cursor:pointer;
+  }
+.map .tab label:hover {
+  background:#f8f8f8;
+  }
+.map .tab [type=radio] {
+  display:none;
+  }
+.map .tab .content {
+  background:white;
+  position:absolute;
+  top:28px;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:10px;
+  border:1px solid #ccc;
+  }
+.map .tab [type=radio]:checked ~ label {
+  background:white;
+  border-bottom:1px solid white;
+  z-index:2;
+  }
+.map .tab [type=radio]:checked ~ label ~ .content {
+  z-index:1;
+  }
+</style>
+
+<div id='map' class='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([37.9, -77], 7);
+var markers = L.mapbox.featureLayer().addTo(map);
+
+markers.setGeoJSON([{
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        coordinates: [-77, 37.9]
+    },
+    properties: {
+        title: 'Marker one',
+        description: 'This marker has a description about Marker One.'
+    }
+}, {
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        coordinates: [-78, 36.5]
+    },
+    properties: {
+        title: 'Marker two',
+        description: 'This marker has a description about Marker two.'
+    }
+}]);
+
+var info = document.getElementById('info');
+
+// Iterate through each feature layer item,
+// and create a custom HTML group for each. In this example
+// we create a tabs menu and put each property in a respective tab.
+markers.eachLayer(function(m) {
+    // Shorten m.feature.properties to p for convenience.
+    var p = m.feature.properties;
+
+    var tabs = document.createElement('div');
+    tabs.className = 'tabs-ui';
+
+    for (var key in p) {
+        var tab = document.createElement('div');
+        tab.className = 'tab';
+
+        var input = document.createElement('input');
+        input.type = 'radio';
+        input.id = idify(key);
+        input.name = 'tab-group'; // For your own needs, you might want this to be unique.
+        if (key === 'title') input.setAttribute('checked', true);
+
+        tab.appendChild(input);
+
+        tab.innerHTML += '<label for=' + idify(key) + '>' + key + '</label>' +
+        '<div class="content">' +
+            p[key] +
+        '</div>';
+
+        tabs.appendChild(tab);
+    }
+
+    m.bindPopup(tabs);
+});
+
+function idify(str) { return str.replace(/\s+/g, '-').toLowerCase(); }
+</script>

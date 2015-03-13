@@ -1,0 +1,28 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: UTFGrid interactivity from multiple layers
+description: Pulling interactivity from overlapping layers made in TileMill
+tags:
+  - layers
+  - tilemill
+---
+
+<div id='map' class='dark'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+    .setView([40, -100], 4);
+
+// Pulling multiple layers of interactivity isn't too tricky, it
+// just requires that you don't use compositing, and instead add each
+// layer as its components: a tileLayer, a gridLayer, and a gridControl
+var birdTiles = L.mapbox.tileLayer('examples.map-8ced9urs').addTo(map),
+    nprTiles = L.mapbox.tileLayer('examples.npr-stations').addTo(map);
+
+var nprGrid = L.mapbox.gridLayer('examples.npr-stations').addTo(map),
+    birdGrid = L.mapbox.gridLayer('examples.map-8ced9urs').addTo(map);
+
+var nprControl = L.mapbox.gridControl(nprGrid).addTo(map),
+    birdControl = L.mapbox.gridControl(birdGrid).addTo(map);
+</script>

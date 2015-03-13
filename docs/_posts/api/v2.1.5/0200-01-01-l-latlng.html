@@ -1,0 +1,131 @@
+---
+layout: api
+title: "v2.1.5 JavaScript Library: L.LatLng"
+categories: api
+version: v2.1.5
+permalink: /api/v2.1.5/l-latlng
+---
+<h2 id="latlng">LatLng</h2>
+
+<p>Represents a geographical point with a certain latitude and longitude.</p>
+<pre><code class="javascript">var latlng = L.latLng(50.5, 30.5);</code></pre>
+
+<p>All Leaflet methods that accept LatLng objects also accept them in a simple Array form and simple object form (unless noted otherwise), so these lines are equivalent:</p>
+
+<pre><code>map.panTo([50, 30]);
+map.panTo({lon: 30, lat: 50});
+map.panTo({lat: 50, lng: 30});
+map.panTo(L.latLng(50, 30));</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='latlng'>
+	<tr>
+<th class="width200">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.latLng</b>(
+<nobr>&lt;Number&gt; <i>latitude</i></nobr>,
+<nobr>&lt;Number&gt; <i>longitude</i></nobr>,
+<nobr>&lt;Number&gt; <i>altitude?</i> )</nobr>
+</code></td>
+
+
+<td>Creates an object representing a geographical point with the given latitude and longitude (and optionally altitude).</td>
+	</tr>
+</table>
+
+<h3>Properties</h3>
+
+<table data-id='latlng'>
+	<tr>
+<th class="width100">Property</th>
+<th class="width100">Type</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>lat</b></code></td>
+<td><code>Number</code></td>
+<td>Latitude in degrees.</td>
+	</tr>
+	<tr>
+<td><code><b>lng</b></code></td>
+<td><code>Number</code></td>
+<td>Longitude in degrees.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='latlng'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>distanceTo</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.5/l-latlng">LatLng</a>&gt; <i>otherLatlng</i> )</nobr>
+</code></td>
+
+<td><code>Number</code></td>
+<td>Returns the distance (in meters) to the given LatLng calculated using the Haversine formula. See <a href="http://en.wikipedia.org/wiki/Haversine_formula">description on wikipedia</a></td>
+	</tr>
+	<tr>
+<td><code><b>equals</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.5/l-latlng">LatLng</a>&gt; <i>otherLatlng</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the given LatLng point is at the same position (within a small margin of error).</td>
+	</tr>
+	<tr>
+<td><code><b>toString</b>()</code></td>
+<td><code>String</code></td>
+<td>Returns a string representation of the point (for debugging purposes).</td>
+	</tr>
+	<tr>
+<td><code><b>wrap</b>(
+<nobr>&lt;Number&gt; <i>left</i></nobr>,
+<nobr>&lt;Number&gt; <i>right</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.1.5/l-latlng">LatLng</a></code></td>
+<td>Returns a new <code>LatLng</code> object with the longitude wrapped around <code>left</code> and <code>right</code> boundaries (<code><span class="number">-180</span></code> to <code><span class="number">180</span></code> by default).</td>
+	</tr>
+</table>
+
+<h3>Constants</h3>
+
+<table data-id='latlng'>
+	<tr>
+<th class="width100">Constant</th>
+<th class="width100">Type</th>
+<th class="width100">Value</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>DEG_TO_RAD</b></code></td>
+<td><code>Number</code></td>
+<td><code>Math.PI / <span class="number">180</span></code></td>
+<td>A multiplier for converting degrees into radians.</td>
+	</tr>
+	<tr>
+<td><code><b>RAD_TO_DEG</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">180</span> / Math.PI</code></td>
+<td>A multiplier for converting radians into degrees.</td>
+	</tr>
+	<tr>
+<td><code><b>MAX_MARGIN</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">1.0E-9</span></code></td>
+<td>Max margin of error for the equality check.</td>
+	</tr>
+</table>
+
+
+
+

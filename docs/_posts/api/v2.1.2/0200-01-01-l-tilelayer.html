@@ -1,0 +1,272 @@
+---
+layout: api
+title: "v2.1.2 JavaScript Library: L.TileLayer"
+categories: api
+version: v2.1.2
+permalink: /api/v2.1.2/l-tilelayer
+---
+<h2 id="tilelayer">TileLayer</h2>
+
+<p>Used to load and display tile layers on the map, implements <a href="/mapbox.js/api/v2.1.2/l-ilayer">ILayer</a> interface.</p>
+
+<h3>Usage example</h3>
+
+<pre><code class="javascript">L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='tilelayer'>
+	<tr>
+<th class="width250">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.tileLayer</b>(
+<nobr>&lt;String&gt; <i><a href="/mapbox.js/api/v2.1.2/l-url">urlTemplate</a></i>,</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.2/l-tilelayer">TileLayer options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+<td>Instantiates a tile layer object given a <a href="/mapbox.js/api/v2.1.2/l-url">URL template</a> and optionally an options object.</td>
+	</tr>
+</table>
+
+<h3 id="url-template">URL template</h3>
+
+<p>A string of the following form:</p>
+
+<pre><code class="javascript">'http://{s}.somedomain.com/blabla/{z}/{x}/{y}.png'</code></pre>
+
+<p><code>{s}</code> means one of the available subdomains (used sequentially to help with browser parallel requests per domain limitation; subdomain values are specified in options; <code>a</code>, <code>b</code> or <code>c</code> by default, can be omitted), <code>{z}</code> &mdash; zoom level, <code>{x}</code> and <code>{y}</code> &mdash; tile coordinates.</p>
+
+<p>You can use custom keys in the template, which will be <a href="/mapbox.js/api/v2.1.2/l-util">evaluated</a> from TileLayer options, like this:</p>
+
+<pre><code class="javascript">L.tileLayer('http://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png', {foo: 'bar'});</code></pre>
+
+<h3 id="tilelayer-options">Options</h3>
+
+<table data-id='tilelayer'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>minZoom</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">0</span></code></td>
+<td>Minimum zoom number.</td>
+	</tr>
+	<tr>
+<td><code><b>maxZoom</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">18</span></code></td>
+<td>Maximum zoom number.</td>
+	</tr>
+	<tr>
+<td><code><b>maxNativeZoom</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>Maximum zoom number the tiles source has available. If it is specified, the tiles on all zoom levels higher than <code>maxNativeZoom</code> will be loaded from <code>maxZoom</code> level and auto-scaled.</td>
+	</tr>
+	<tr>
+<td><code><b>tileSize</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">256</span></code></td>
+<td>Tile size (width and height in pixels, assuming tiles are square).</td>
+	</tr>
+	<tr>
+<td><code><b>subdomains</b></code></td>
+<td><code>String</code> or <code>String[]</code></td>
+<td><code><span class="string">'abc'</span></code></td>
+<td>Subdomains of the tile service. Can be passed in the form of one string (where each letter is a subdomain name) or an array of strings.</td>
+	</tr>
+	<tr>
+<td><code><b>errorTileUrl</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">''</span></code></td>
+<td>URL to the tile image to show in place of the tile that failed to load.</td>
+	</tr>
+	<tr>
+<td><code><b>attribution</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">''</span></code></td>
+<td>e.g. "&copy; Mapbox" &mdash; the string used by the attribution control, describes the layer data.</td>
+	</tr>
+	<tr>
+<td><code><b>tms</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If <code><span class="literal">true</span></code>, inverses Y axis numbering for tiles (turn this on for TMS services).</td>
+	</tr>
+	<tr>
+<td><code><b>continuousWorld</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If set to <code><span class="literal">true</span></code>, the tile coordinates won't be wrapped by world width (-180 to 180 longitude) or clamped to lie within world height (-90 to 90). Use this if you use Leaflet for maps that don't reflect the real world (e.g. game, indoor or photo maps).</td>
+	</tr>
+	<tr>
+<td><code><b>noWrap</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If set to <code><span class="literal">true</span></code>, the tiles just won't load outside the world width (-180 to 180 longitude) instead of repeating.</td>
+	</tr>
+	<tr>
+<td><code><b>zoomOffset</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">0</span></code></td>
+<td>The zoom number used in tile URLs will be offset with this value.</td>
+	</tr>
+	<tr>
+<td><code><b>zoomReverse</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If set to <code><span class="literal">true</span></code>, the zoom number used in tile URLs will be reversed (<code>maxZoom - zoom</code> instead of <code>zoom</code>)</td>
+	</tr>
+	<tr>
+<td><code><b>opacity</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">1.0</span></code></td>
+<td>The opacity of the tile layer.</td>
+	</tr>
+	<tr>
+<td><code><b>zIndex</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>The explicit zIndex of the tile layer. Not set by default.</td>
+	</tr>
+	<tr>
+<td><code><b>unloadInvisibleTiles</b></code></td>
+<td><code>Boolean</code></td>
+<td>depends</td>
+<td>If <code><span class="literal">true</span></code>, all the tiles that are not visible after panning are removed (for better performance). <code><span class="literal">true</span></code> by default on mobile WebKit, otherwise <code><span class="literal">false</span></code>.</td>
+	</tr>
+	<tr>
+<td><code><b>updateWhenIdle</b></code></td>
+<td><code>Boolean</code></td>
+<td>depends</td>
+<td>If <code><span class="literal">false</span></code>, new tiles are loaded during panning, otherwise only after it (for better performance). <code><span class="literal">true</span></code> by default on mobile WebKit, otherwise <code><span class="literal">false</span></code>.</td>
+	</tr>
+	<tr>
+<td><code><b>detectRetina</b></code></td>
+<td><code><code>Boolean</code></code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If <code><span class="literal">true</span></code> and user is on a retina display, it will request four tiles of half the specified size and a bigger zoom level in place of one to utilize the high resolution.</td>
+	</tr>
+	<tr>
+<td><code><b>reuseTiles</b></code></td>
+<td><code><code>Boolean</code></code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If <code><span class="literal">true</span></code>, all the tiles that are not visible after panning are placed in a reuse queue from which they will be fetched when new tiles become visible (as opposed to dynamically creating new ones). This will in theory keep memory usage low and eliminate the need for reserving new memory whenever a new tile is needed.</td>
+	</tr>
+	<tr>
+<td><code><b>bounds</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.2/l-latlngbounds">LatLngBounds</a></code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>When this option is set, the TileLayer only loads tiles that are in the given geographical bounds.</td>
+	</tr>
+</table>
+
+<h3>Events</h3>
+
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v2.1.2/l-events">these methods</a>.</p>
+
+<table data-id='tilelayer'>
+	<tr>
+<th class="width100">Event</th>
+<th class="width100">Data</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>loading</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.2/l-event-objects">Event</a></code></td>
+<td>Fired when the tile layer starts loading tiles.</td>
+	</tr>
+	<tr>
+<td><code><b>load</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.2/l-event-objects">Event</a></code></td>
+<td>Fired when the tile layer loaded all visible tiles.</td>
+	</tr>
+    <tr>
+<td><code><b>tileloadstart</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.2/l-event-objects">TileEvent</a></code></td>
+<td>Fired when a tile is requested and starts loading.</td>
+	</tr>
+	<tr>
+<td><code><b>tileload</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.2/l-event-objects">TileEvent</a></code></td>
+<td>Fired when a tile loads.</td>
+	</tr>
+	<tr>
+<td><code><b>tileunload</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.2/l-event-objects">TileEvent</a></code></td>
+<td>Fired when a tile is removed (e.g. when you have <code>unloadInvisibleTiles</code> on).</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='tilelayer'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>addTo</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.2/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds the layer to the map.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToFront</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the tile layer to the top of all tile layers.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToBack</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the tile layer to the bottom of all tile layers.</td>
+	</tr>
+	<tr>
+<td><code><b>setOpacity</b>(
+<nobr>&lt;Number&gt; <i>opacity</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Changes the opacity of the tile layer.</td>
+	</tr>
+	<tr>
+<td><code><b>setZIndex</b>(
+<nobr>&lt;Number&gt; <i>zIndex</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Sets the zIndex of the tile layer.</td>
+	</tr>
+	<tr>
+<td><code><b>redraw</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Causes the layer to clear all the tiles and request them again.</td>
+	</tr>
+	<tr>
+<td><code><b>setUrl</b>(
+<nobr>&lt;String&gt; <i><a href="/mapbox.js/api/v2.1.2/l-url">urlTemplate</a></i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Updates the layer's URL template and redraws it.</td>
+	</tr>
+	<tr>
+<td><code><b>getContainer</b>()</nobr>
+</code></td>
+<td><code>HTMLElement</code></td>
+<td>Returns the HTML element that contains the tiles for this layer.</td>
+	</tr>
+</table>
+
+
+

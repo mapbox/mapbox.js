@@ -1,0 +1,20 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Turf Convex Hull
+description: Generate a convex hull from a set of points
+tags:
+  - turf
+---
+
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.4.0/turf.min.js'></script>
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+
+map.featureLayer.on('ready', function() {
+    var hull = turf.convex(map.featureLayer.getGeoJSON());
+    L.mapbox.featureLayer(hull).addTo(map);
+});
+</script>

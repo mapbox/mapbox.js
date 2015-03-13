@@ -2,28 +2,34 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Listing Markers
-description: Showing a list of markers on screen
+title: Listing markers in view
+description: Show a list of markers within view by their coordinates on a map.
 tags:
   - ui
 ---
-
 <style>
-#onscreen {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 300px;
-    height: 100px;
-    background: #fff;
-    z-index: 100;
-    overflow-y: scroll;
-}
+pre.ui-coordinates {
+  background:rgba(0,0,0,0.5);
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  padding:5px 10px;
+  color:#fff;
+  font-size:11px;
+  line-height:18px;
+  border-radius:3px;
+  max-height:240px;
+  overflow:auto;
+  width:100px;
+  }
 </style>
+
 <div id='map'></div>
-<pre id='onscreen'></pre>
+<pre id='coordinates' class='ui-coordinates'></pre>
+
 <script>
 var map = L.mapbox.map('map', 'examples.map-20v6611k');
+var myLayer = L.mapbox.featureLayer().addTo(map);
 var features = [];
 
 for (var x = -120; x < 120; x += 20) {
@@ -43,27 +49,27 @@ for (var x = -120; x < 120; x += 20) {
     }
 }
 
-map.featureLayer.setGeoJSON({
+myLayer.setGeoJSON({
     type: 'FeatureCollection',
     features: features
 });
 
 map.on('move', function() {
-    // construct an empty list to fill with onscreen markers
+    // Construct an empty list to fill with onscreen markers.
     var inBounds = [],
-    // get the map bounds - the top-left and bottom-right locations
+    // Get the map bounds - the top-left and bottom-right locations.
         bounds = map.getBounds();
 
-    // for each marker, consider whether it is currently visible by comparing
-    // with the current map bounds
-    map.featureLayer.eachLayer(function(marker) {
+    // For each marker, consider whether it is currently visible by comparing
+    // with the current map bounds.
+    myLayer.eachLayer(function(marker) {
         if (bounds.contains(marker.getLatLng())) {
             inBounds.push(marker.options.title);
         }
     });
 
-    // display a list of markers.
-    document.getElementById('onscreen').innerHTML = inBounds.join('\n');
+    // Display a list of markers.
+    document.getElementById('coordinates').innerHTML = inBounds.join('\n');
 });
 
 map.setView([37, -77], 5);

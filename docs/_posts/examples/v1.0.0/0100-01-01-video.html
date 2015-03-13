@@ -1,0 +1,57 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Video embeds in tooltips
+description: Embedding iframe videos in feature tooltips
+tags:
+  - ui
+---
+<style>
+    .leaflet-popup-content-wrapper { width: 400px;}
+</style>
+
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+    .setView([0,0], 5);
+
+// The GeoJSON representing a point feature with a property of 'video' for the Vimeo iframe
+var geoJson = {
+    features: [{
+        type: 'Feature',
+        properties: {
+            'marker-color': '#f00',
+            'marker-size': 'large',
+            'marker-symbol': 'rocket',
+            video: '<iframe src="//player.vimeo.com/video/106112939" width="380" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/106112939"><h2>How Simplicity Will Save GIS</h2><p>Vladimir Agafonkin</a> from <a href="http://vimeo.com/foss4g">FOSS4G</a> on <a href="https://vimeo.com">Vimeo</a>.</p>',
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [0,0]
+        }
+    }]
+};
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+// Add the iframe in a marker tooltip using the custom feature properties
+myLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    // Create custom popup content from the GeoJSON property 'video'
+    var popupContent =  feature.properties.video;
+
+    // bind the popup to the marker http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+        closeButton: false,
+        minWidth: 320
+    });
+});
+
+// Add features to the map
+myLayer.setGeoJSON(geoJson);
+
+</script>

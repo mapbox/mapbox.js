@@ -1,9 +1,69 @@
+## v2.1.5
+
+* Display the Mapbox logo when mapbox_logo is present in tileJSON
+* Update documentation for geocoder
+* Add leaflet-oldie to CSS for IE8
+
+## v2.1.4
+
+* No significant changes
+
+## v2.1.3
+
+* Trigger a `found` event when autocomplete is enabled for L.mapbox.geocoderControl.
+* Fix icon rendering in IE8
+
+## v2.1.2
+
+* Fix empty string marker-symbol value
+
+## v2.1.1
+
+* Fix integer 0 marker-symbol value (#879)
+* Fix share URLs (#877)
+
+## v2.1.0
+
+* Introduces an `autocomplete` option that dynamically displays results from geocoding (#868)
+* Easier usage for applications on `file://` URLs, like PhoneGap (#866)
+* `L.mapbox.map` will now absorb options for `L.Map` after initialization (#829)
+* Added `popupOptions` to control internal `bindPopup` specifics for `featureLayer` instances (#862)
+
+## v2.0.1
+
+* Be very cautious about global access to console (#838)
+* Fix error when geocoder returns 0 results (#817)
+* Fix API token doc URL (#834)
+
+## v2.0.0
+
+* Adapt to v4 geocoder response format
+* A Mapbox API token is now required
+* Move source files into src (#719)
+* Use v4 API
+* Drop jsonp -> json demangling
+* Drop markerLayer -> featureLayer alias
+
+## v1.6.4
+
+* Fix grid math for negative longitudes (#737)
+* Hard-force request protocol in certain situations (#795)
+* Use XMLHttpRequest rather than XDomainRequest on IE10
+* Replace JSON3 with native JSON.parse (#345)
+* Use retina tiles when available by default (#766)
+* Update to [Leaflet 0.7.3](https://github.com/Leaflet/Leaflet/blob/master/CHANGELOG.md#073-may-23-2014)
+
 ## v1.6.3
 
 * Adds support for bulk geocoding in the L.mapbox.geocoder API
 * Adds IE8 vector layer support with VML
 * No longer uses `._createPane` internally
 * CSS improvements
+* Exposes non-magic constructors like `L.mapbox.TileLayer`
+* No longer requires `embed` property from TileJSON
+* Fix Geocoder results position when controls are positioned to the right or bottom of a map.
+* AttributionControl is now default on the map. infoControl may be added as an option.
+* Improve this map link now updates it's coordinates on the AttributionControl.
 
 ## v1.6.2
 

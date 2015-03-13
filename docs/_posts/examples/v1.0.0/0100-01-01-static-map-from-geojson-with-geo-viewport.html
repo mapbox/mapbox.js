@@ -1,0 +1,72 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Static map from GeoJSON with geo-viewport and geojson-extent
+description: Use <a href='https://github.com/mapbox/geo-viewport'>geo-viewport</a> and <a href='https://github.com/mapbox/geojson-extent'>geojson-extent</a> to find a static map that shows two markers.
+tags:
+  - plugins
+---
+<img id='static-map'></div>
+
+<script src='{{site.tileApi}}/mapbox.js/plugins/geo-viewport/v0.1.1/geo-viewport.js'></script>
+<script src='{{site.tileApi}}/mapbox.js/plugins/geojson-extent/v0.0.1/geojson-extent.js'></script>
+<script>
+
+// This is an example using geojson-extent. See the full docs for full details
+// https://github.com/mapbox/geojson-extent
+
+// Declare a GeoJSON file with the two places we're interested in.
+var sfAndDc = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41722106933594,
+          37.78672476186115
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.03201293945312,
+          38.91133881927709
+        ]
+      }
+    }
+  ]
+};
+
+// Calculate a bounding box in west, south, east, north order.
+var bounds = geojsonExtent(sfAndDc);
+
+// The size of the desired map.
+var size = [600, 300];
+
+// Calculate a zoom level and centerpoint for this map.
+var vp = geoViewport.viewport(bounds, size);
+
+// Create pins at places in the geojson file.
+var pins = [];
+for (var i = 0; i < sfAndDc.features.length; i++) {
+    pins.push('pin-s(' + sfAndDc.features[i].geometry.coordinates.join(',') + ')');
+}
+
+// Construct a static map url
+// https://www.mapbox.com/developers/api/static/
+document.getElementById('static-map').src =
+    '{{site.tileApi}}/v4/examples.map-i86nkdio/' +
+    pins.join(',') + '/' +
+    vp.center.join(',') + ',' +
+    vp.zoom + '/' +
+    size.join('x') + '.png' +
+    '?access_token=' + L.mapbox.accessToken;
+</script>

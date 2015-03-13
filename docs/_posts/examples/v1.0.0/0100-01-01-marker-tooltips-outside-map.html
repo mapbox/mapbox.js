@@ -3,37 +3,32 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Marker tooltips outside the map
-description: Display tooltip data outside of the map
+description: Display tooltip content from a container outside of a map.
 tags:
   - markers
 ---
-
 <style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
-</style>
-</head>
-<body>
-
-<style>
-  #info {
-    background:rgba(255,255,255,0.75);
-    border:1px solid #fff;
-    position:absolute;
-    width:260px;
-    top:10px;
-    right:10px;
+.info {
+  position:absolute;
+  top:10px;
+  right:10px;
+  }
+  .info div {
+    background:#fff;
     padding:10px;
     border-radius:3px;
     }
 </style>
 
 <div id='map'></div>
-<div id='info'></div>
+<div id='info' class='info'></div>
 
 <script>
+var info = document.getElementById('info');
 var map = L.mapbox.map('map', 'examples.h186knp8')
     .setView([37.9, -77], 6);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
 
 var geoJson = [
     {
@@ -44,7 +39,7 @@ var geoJson = [
         },
         properties: {
             title: 'Marker one',
-            description: '<strong>Wow</strong>, this tooltip is breaking all the rules.',
+            description: '<em>Wow</em>, this tooltip is breaking all the rules.',
             'marker-color': '#548cba'
         }
     },
@@ -62,24 +57,29 @@ var geoJson = [
     }
 ];
 
-map.featureLayer.setGeoJSON(geoJson);
+myLayer.setGeoJSON(geoJson);
 
-// Listen for individual marker clicks
-map.featureLayer.on('click',function(e) {
+// Listen for individual marker clicks.
+myLayer.on('click',function(e) {
     // Force the popup closed.
     e.layer.closePopup();
 
     var feature = e.layer.feature;
-    var info = '<h2>' + feature.properties.title + '</h2>' +
-               '<p>' + feature.properties.description + '</p>';
+    var content = '<div><strong>' + feature.properties.title + '</strong>' +
+                  '<p>' + feature.properties.description + '</p></div>';
 
-    document.getElementById('info').innerHTML = info;
+    info.innerHTML = content;
 });
 
+// Clear the tooltip when map is clicked.
+map.on('move', empty);
 
-// Clear the tooltip when map is clicked
-map.on('move',function(e){
-    document.getElementById('info').innerHTML = '<h2>Click a marker</h2>';
-});
+// Trigger empty contents when the script
+// has loaded on the page.
+empty();
+
+function empty() {
+  info.innerHTML = '<div><strong>Click a marker</strong></div>';
+  }
 
 </script>

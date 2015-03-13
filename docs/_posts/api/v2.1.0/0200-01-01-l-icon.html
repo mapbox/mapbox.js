@@ -1,0 +1,106 @@
+---
+layout: api
+title: "v2.1.0 JavaScript Library: L.Icon"
+categories: api
+version: v2.1.0
+permalink: /api/v2.1.0/l-icon
+---
+<h2 id="icon">Icon</h2>
+
+<p>Represents an icon to provide when creating a marker.</p>
+
+<pre><code class="javascript">var myIcon = L.icon({
+	iconUrl: 'my-icon.png',
+	iconRetinaUrl: 'my-icon@2x.png',
+	iconSize: [38, 95],
+	iconAnchor: [22, 94],
+	popupAnchor: [-3, -76],
+	shadowUrl: 'my-icon-shadow.png',
+	shadowRetinaUrl: 'my-icon-shadow@2x.png',
+	shadowSize: [68, 95],
+	shadowAnchor: [22, 94]
+});
+
+L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);</code></pre>
+
+<p><code>L.Icon.Default</code> extends <code>L.Icon</code> and is the blue icon Leaflet uses for markers by default.</p>
+
+<h3>Creation</h3>
+
+<table data-id='icon'>
+	<tr>
+<th class="width250">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.icon</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-icon">Icon options</a>&gt; <i>options</i> )</nobr>
+</code></td>
+
+
+<td>Creates an icon instance with the given options.</td>
+	</tr>
+</table>
+
+<h3 id="icon-options">Options</h3>
+
+<table data-id='icon'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>iconUrl</b></code></td>
+<td><code>String</code>
+<td>(required) The URL to the icon image (absolute or relative to your script path).</td>
+	</tr>
+	<tr>
+<td><code><b>iconRetinaUrl</b></code></td>
+<td><code>String</code>
+<td>The URL to a retina sized version of the icon image (absolute or relative to your script path). Used for Retina screen devices.</td>
+	</tr>
+	<tr>
+<td><code><b>iconSize</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-point">Point</a></code></td>
+<td>Size of the icon image in pixels.</td>
+	</tr>
+	<tr>
+<td><code><b>iconAnchor</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-point">Point</a></code></td>
+<td>The coordinates of the "tip" of the icon (relative to its top left corner). The icon will be aligned so that this point is at the marker's geographical location. Centered by default if size is specified, also can be set in CSS with negative margins.</td>
+	</tr>
+	<tr>
+<td><code><b>shadowUrl</b></code></td>
+<td><code>String</code>
+<td>The URL to the icon shadow image. If not specified, no shadow image will be created.</td>
+	</tr>
+	<tr>
+<td><code><b>shadowRetinaUrl</b></code></td>
+<td><code>String</code>
+<td>The URL to the retina sized version of the icon shadow image. If not specified, no shadow image will be created. Used for Retina screen devices.</td>
+	</tr>
+	<tr>
+<td><code><b>shadowSize</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-point">Point</a></code></td>
+<td>Size of the shadow image in pixels.</td>
+	</tr>
+	<tr>
+<td><code><b>shadowAnchor</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-point">Point</a></code></td>
+<td>The coordinates of the "tip" of the shadow (relative to its top left corner) (the same as <code>iconAnchor</code> if not specified).</td>
+	</tr>
+	<tr>
+<td><code><b>popupAnchor</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-point">Point</a></code></td>
+<td>The coordinates of the point from which popups will "open", relative to the icon anchor.</td>
+	</tr>
+	<tr>
+<td><code><b>className</b></code></td>
+<td><code>String</code>
+<td>A custom class name to assign to both icon and shadow images. Empty by default.</td>
+	</tr>
+</table>
+
+

@@ -1,22 +1,10 @@
 /* Base Candidates */
-.fill-white pre { background-color:transparent; }
-
 .button.zeroclipboard-is-hover { background:#3bb2d0!important; }
 .js-clipboard:hover { cursor:pointer; }
-
-.leaflet:before {
-  background:transparent url(../images/sprite.png) no-repeat 0 0;
-  content:'';
-  display:inline-block;
-  width:20px;
-  height:20px;
-  vertical-align:top;
-  margin-right:5px;
-  }
+.doc .leaflet.icon:before { color:#b0dd5a; }
 
 /*Examples*/
-#demo #map {
-  background:#eee;
+#map {
   position:absolute;
   top:0;left:0;
   width:100%;

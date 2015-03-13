@@ -1,0 +1,94 @@
+---
+layout: api
+title: "v1.6.4 JavaScript Library: L.mapbox.tileLayer(id|url|tilejson, options)"
+categories: api
+version: v1.6.4
+permalink: /api/v1.6.4/l-mapbox-tilelayer
+---
+<h2 id="section-l-mapbox-tilelayer">L.mapbox.tileLayer(id|url|tilejson, options)</h2>
+<p>You can add a tiled layer to your map with <code><a href="/mapbox.js/api/v1.6.4/l-mapbox-tilelayer">L.mapbox.tileLayer()</a></code>, a simple
+interface to layers from Mapbox and elsewhere.</p>
+<p><span class='leaflet'><em>Extends</em>: <code><a href="/mapbox.js/api/v1.6.4/l-tilelayer">L.TileLayer</a></code></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>The second argument is optional. If provided, it is the same options as provided to <code><a href="/mapbox.js/api/v1.6.4/l-tilelayer">L.TileLayer</a></code> with one addition: <ul><li><code>retinaVersion</code>, if provided, is an alternative value for the first argument to <code><a href="/mapbox.js/api/v1.6.4/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> which, if retina is detected, is used instead.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p>If <code>detectRetina</code> is set to true and the map in question supports auto-scaling, then a scaled version will automatically be useful if retina is detected and you don&#39;t provide an explicit <code>retinaVersion</code> to be used.</p>
+<p><em>Example</em>:</p>
+<pre><code>// the second argument is optional
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
+
+// you can also provide a full url to a TileJSON resource
+var layer = L.mapbox.tileLayer(&#39;{{site.tileApi}}/v3/examples.map-0l53fhk2.json&#39;);
+
+// if provided, you can support retina tiles
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
+    detectRetina: true,
+    // if retina is detected, this layer is used instead
+    retinaVersion: &#39;examples.map-zswgei2n&#39;
+});
+
+// if this map supports auto-scaling, `detectRetina` will automatically
+// use scaled tiles when retina is detected.
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
+    detectRetina: true,
+});
+</code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v1.6.4/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> object.</p>
+<p><em>Class</em>: <code><a href="/mapbox.js/api/v1.6.4/l-mapbox-tilelayer">L.mapbox.TileLayer</a></code></p>
+<h3 id="section-tilelayer-gettilejson">tileLayer.getTileJSON()</h3>
+<p>Returns this layer&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Example</em>:</p>
+<pre><code>var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;)
+    // since layers load asynchronously through AJAX, use the
+    // `.on` function to listen for them to be loaded before
+    // calling `getTileJSON()`
+    .on(&#39;load&#39;, function() {
+    // get TileJSON data from the loaded layer
+    var TileJSON = layer.getTileJSON();
+});
+</code></pre><p><em>Returns</em>: the TileJSON object</p>
+<h3 id="section-tilelayer-setformat">tileLayer.setFormat(format)</h3>
+<p>Set the image format of tiles in this layer. You can use lower-quality tiles
+in order to load maps faster</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>format</td>
+<td>string</td>
+<td><code>string</code> an image format. valid options are: &#39;png&#39;, &#39;png32&#39;, &#39;png64&#39;, &#39;png128&#39;, &#39;png256&#39;, &#39;jpg70&#39;, &#39;jpg80&#39;, &#39;jpg90&#39;</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// Downsample tiles for faster loading times on slow
+// internet connections
+var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
+    format: &#39;jpg70&#39;
+});
+</code></pre><p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/tilelayer-setformat/">Live example of .setFormat in use</a></p>
+<p><em>Returns</em>: the layer object</p>

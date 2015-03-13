@@ -2,53 +2,47 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Selecting a latitude and longitude value for a form
-description: Using Mapbox for user inputs
+title: Display latitude longitude on marker movement
+description: Drag the marker to a new location on a map to view it's coordinates.
 tags:
   - layers
 ---
-
 <style>
-.map-overlay {
-    position:absolute;
-    top:5px;
-    right:5px;
-    padding:5px;
-    background:#fff;
-    font-size:11px;
-}
-.map-overlay input {
-    font:inherit;
-}
+pre.ui-coordinates {
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  padding:5px 10px;
+  background:rgba(0,0,0,0.5);
+  color:#fff;
+  font-size:11px;
+  line-height:18px;
+  border-radius:3px;
+  }
 </style>
 <div id='map'></div>
-<div class='map-overlay'>
-    <label for='latitude'>latitude</label><br />
-    <input type='text' size='5' id='latitude' /><br />
-    <label for='longitude'>longitude</label><br />
-    <input type='text' size='5' id='longitude' />
-</div>
+<pre id='coordinates' class='ui-coordinates'></pre>
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
     .setView([0, 0], 2);
 
-// get the form inputs we want to update
-var latitude = document.getElementById('latitude');
-var longitude = document.getElementById('longitude');
+var coordinates = document.getElementById('coordinates');
 
 var marker = L.marker([0, 0], {
+    icon: L.mapbox.marker.icon({
+      'marker-color': '#f86767'
+    }),
     draggable: true
 }).addTo(map);
 
-// every time the marker is dragged, update the form
+// every time the marker is dragged, update the coordinates container
 marker.on('dragend', ondragend);
 
-// set the initial values in the form
+// Set the initial marker coordinate on load.
 ondragend();
 
 function ondragend() {
-    var ll = marker.getLatLng();
-    latitude.value = ll.lat;
-    longitude.value = ll.lng;
+    var m = marker.getLatLng();
+    coordinates.innerHTML = 'Latitude: ' + m.lat + '<br />Longitude: ' + m.lng;
 }
 </script>

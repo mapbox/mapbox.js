@@ -1,0 +1,44 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Mask a feature
+description: Show only a certain feature by inverting a shape
+tags:
+  - vector
+---
+<div id='map'></div>
+
+<script src='{{site.baseurl}}/assets/data/us-states.js'></script>
+<script>
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+  .setView([32.7872, -86.6381], 6);
+
+// First: choose our state. You could also load your own data.
+// The important part is that what you get out is a GeoJSON Feature
+// object, or something you turn into one.
+var state = statesData.features[0];
+
+// coordinate rings in geojson fit inside of each other: the donut
+// and then the hole, let's make the outer donut everything and the
+// inner donut the state.
+state.geometry.coordinates = [
+    // the world
+    [
+        [-180, -90],
+        [-180, 90],
+        [180, 90],
+        [180, -90],
+        [-180, -90]
+    ],
+    // the state
+    state.geometry.coordinates[0]
+];
+
+// statesData comes from the 'us-states.js' script included above
+var statesLayer = L.geoJson(state, {
+  fillOpacity: 1,
+  fillColor: '#fff',
+  weight: 0
+}).addTo(map);
+</script>

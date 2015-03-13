@@ -1,0 +1,66 @@
+---
+layout: api
+title: "v2.1.1 JavaScript Library: L.IProjection"
+categories: api
+version: v2.1.1
+permalink: /api/v2.1.1/l-iprojection
+---
+<h2 id="iprojection">IProjection</h2>
+
+<p>An object with methods for projecting geographical coordinates of the world onto a flat surface (and back). See <a href="http://en.wikipedia.org/wiki/Map_projection">Map projection</a>.</p>
+
+<h3>Methods</h3>
+
+<table data-id='iprojection'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>project</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.1.1/l-point">Point</a></code></td>
+<td>Projects geographical coordinates into a 2D point.</td>
+	</tr>
+	<tr>
+<td><code><b>unproject</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.1/l-point">Point</a>&gt; <i>point</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.1.1/l-latlng">LatLng</a></code></td>
+<td>The inverse of <code>project</code>. Projects a 2D point into geographical location.</td>
+	</tr>
+</table>
+
+<h3>Defined Projections</h3>
+
+<p>Leaflet comes with a set of already defined projections out of the box:</p>
+
+<table data-id='projections'>
+	<tr>
+<th>Projection</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.Projection.SphericalMercator</b></code></td>
+
+<td>Spherical Mercator projection &mdash; the most common projection for online maps, used by almost all free and commercial tile providers. Assumes that Earth is a sphere. Used by the <code>EPSG:3857</code> CRS.</td>
+	</tr>
+	<tr>
+<td><code><b>L.Projection.Mercator</b></code></td>
+
+<td>Elliptical Mercator projection &mdash; more complex than Spherical Mercator. Takes into account that Earth is a geoid, not a perfect sphere. Used by the <code>EPSG:3395</code> CRS.</td>
+	</tr>
+	<tr>
+<td><code><b>L.Projection.LonLat</b></code></td>
+
+<td>Equirectangular, or Plate Carree projection &mdash; the most simple projection, mostly used by GIS enthusiasts. Directly maps <code>x</code> as longitude, and <code>y</code> as latitude. Also suitable for flat worlds, e.g. game maps. Used by the <code>EPSG:3395</code> and <code>Simple</code> CRS.</td>
+	</tr>
+</table>
+
+
+
+

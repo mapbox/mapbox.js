@@ -1,0 +1,124 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Reorder a marker listing based on their proximity to a dragged one
+description: Drag the primary marker on the map to re-order the menu listing based on proximity.
+tags:
+  - ui
+---
+<style>
+  .info {
+    background:#fff;
+    position:absolute;
+    width:260px;
+    top:10px;
+    right:10px;
+    border-radius:2px;
+    max-height:340px;
+    overflow:auto;
+    }
+    .info .item {
+      display:block;
+      border-bottom:1px solid #eee;
+      padding:10px;
+      text-decoration:none;
+      }
+      .info .item small { color:#888; }
+      .info .item:hover,
+      .info .item.active { background:#f8f8f8; }
+      .info .item:last-child { border-bottom:none; }
+</style>
+
+<div id='map' class='map'></div>
+<div id='info' class='info'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-20v6611k')
+    .setView([38.895, -77.036], 13);
+var info = document.getElementById('info');
+
+// Creates a single, draggable marker on the page.
+var m = L.marker(new L.LatLng(38.895, -77.036), {
+    icon: L.mapbox.marker.icon({
+        'marker-color': '1087bf'
+    }),
+    draggable: true
+}).bindPopup('Drag me around!').addTo(map);
+
+m.on('dragend', function() {
+    // Repopulate the features layer in
+    // the menu listing based on the
+    // dragged markers proximity to them.
+    // console.log(marker.getLatLng());
+    populateListing();
+});
+
+// Here we load the features.json from another project
+// to use with the map initialized above.
+var features = L.mapbox.featureLayer('examples.map-zr0njcqy').addTo(map);
+
+map.on('ready', function() {
+    // Display the tooltip after the
+    // marker has been added to the map.
+    m.openPopup();
+});
+
+// When the features layer is ready,
+// ie. added to the map, run populateListing.
+features.on('ready', populateListing);
+
+function populateListing() {
+    // Clear out the listing container first.
+    info.innerHTML = '';
+    var listings = [];
+
+    // Build a listing of markers
+    features.eachLayer(function(marker) {
+        // Draggable marker coordinates.
+        var home = m.getLatLng();
+        var metresToMiles = 0.000621371192;
+        var distance = (metresToMiles * home.distanceTo(marker.getLatLng())).toFixed(1);
+
+        var link = document.createElement('a');
+        link.className = 'item';
+        link.href = '#';
+        link.setAttribute('data-distance', distance);
+
+        // Populate content from each markers object.
+        link.innerHTML = marker.feature.properties.title +
+            '<br /><small>' + distance + ' mi. away</small>';
+
+        link.onclick = function() {
+            if (/active/.test(this.className)) {
+                this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
+            } else {
+                var siblings = info.getElementsByTagName('a');
+                for (var i = 0; i < siblings.length; i++) {
+                    siblings[i].className = siblings[i].className
+                    .replace(/active/, '').replace(/\s\s*$/, '');
+                };
+                this.className += ' active';
+
+                // When a menu item is clicked, animate the map to center
+                // its associated marker and open its popup.
+                map.panTo(marker.getLatLng());
+                marker.openPopup();
+            }
+            return false;
+        };
+
+        listings.push(link);
+    });
+
+    // Sort the listing based on the
+    // assigned attribute, 'data-listing'
+    listings.sort(function(a, b) {
+        return a.getAttribute('data-distance') - b.getAttribute('data-distance');
+    });
+
+    listings.forEach(function(listing) {
+        info.appendChild(listing);
+    });
+}
+</script>

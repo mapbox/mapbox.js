@@ -2,23 +2,25 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Draggable Marker
-description: Make a marker draggable
+title: Draggable marker
+description: Create a marker a user can drag to a new location.
 tags:
+  - ui
   - markers
 ---
-
 <div id='map'></div>
-<script>
 
-var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([37.9, -77],4);
+<script>
+var map = L.mapbox.map('map', 'examples.h186knp8')
+    .setView([37.9, -77],4);
 
 var marker = L.marker(new L.LatLng(37.9, -77), {
-                icon: L.mapbox.marker.icon({'marker-color': 'CC0033'}),
-                draggable: true
-            });
+    icon: L.mapbox.marker.icon({
+        'marker-color': 'ff8888'
+    }),
+    draggable: true
+});
 
 marker.bindPopup('This marker is draggable! Move it around.');
 marker.addTo(map);
-
 </script>

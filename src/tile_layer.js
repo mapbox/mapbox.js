@@ -1,7 +1,6 @@
 'use strict';
 
-var util = require('./util'),
-    url = require('./url');
+var util = require('./util');
 
 var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],
@@ -25,11 +24,6 @@ var TileLayer = L.TileLayer.extend({
 
         this._tilejson = {};
 
-        if (options && options.detectRetina &&
-            L.Browser.retina && options.retinaVersion) {
-            _ = options.retinaVersion;
-        }
-
         if (options && options.format) {
             util.strict_oneof(options.format, this.formats);
         }
@@ -44,14 +38,6 @@ var TileLayer = L.TileLayer.extend({
         return this;
     },
 
-    _autoScale: function() {
-        return this.options &&
-            L.Browser.retina &&
-            this.options.detectRetina &&
-            (!this.options.retinaVersion) &&
-            this.options.autoscale;
-    },
-
     // disable the setUrl function, which is not available on mapbox tilelayers
     setUrl: null,
 
@@ -61,9 +47,8 @@ var TileLayer = L.TileLayer.extend({
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: json.attribution,
-            minZoom: json.minzoom,
-            maxZoom: json.maxzoom,
-            autoscale: json.autoscale || false,
+            minZoom: json.minzoom || 0,
+            maxZoom: json.maxzoom || 18,
             tms: json.scheme === 'tms',
             bounds: json.bounds && util.lbounds(json.bounds)
         });
@@ -89,7 +74,7 @@ var TileLayer = L.TileLayer.extend({
             return templated;
         } else {
             return templated.replace('.png',
-                (this._autoScale() ? this.scalePrefix : '.') + this.options.format);
+                (L.Browser.retina ? this.scalePrefix : '.') + this.options.format);
         }
     },
 
@@ -102,6 +87,8 @@ var TileLayer = L.TileLayer.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.TileLayer = TileLayer;
+
+module.exports.tileLayer = function(_, options) {
     return new TileLayer(_, options);
 };

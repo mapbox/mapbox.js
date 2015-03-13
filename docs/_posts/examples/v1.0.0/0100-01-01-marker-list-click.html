@@ -1,0 +1,47 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: List markers and pan to clicked items
+description: Shows marker titles in an HTML list and pans to clicked markers when necessary. This example could be modified to support just panning, just opening tooltips, or a different HTML layout for marker contents.
+tags:
+  - markers
+---
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #marker-list {
+      position:absolute;
+      top:0; right:0; width:200px;
+      bottom:0;
+      overflow-x:auto;
+      background:#fff;
+      margin:0;
+      padding:5px;
+  }
+  #marker-list li {
+      padding:5px;
+      margin:0;
+      list-style-type:none;
+  }
+  #marker-list li:hover {
+      background:#eee;
+  }
+</style>
+<div id='map'></div>
+<ul id='marker-list'></ul>
+<script>
+  var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+  var markerList = document.getElementById('marker-list');
+
+  map.featureLayer.on('ready', function(e) {
+      map.featureLayer.eachLayer(function(layer) {
+          var item = markerList.appendChild(document.createElement('li'));
+          item.innerHTML = layer.toGeoJSON().properties.title;
+          item.onclick = function() {
+             map.setView(layer.getLatLng(), 14);
+             layer.openPopup();
+          };
+      });
+  });
+</script>

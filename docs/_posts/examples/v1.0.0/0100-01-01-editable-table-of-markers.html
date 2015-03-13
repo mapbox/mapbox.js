@@ -1,0 +1,111 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Editable table controlling marker data
+description: Use the <a href='http://handsontable.com/'>handsontable jQuery plugin</a> to control a L.mapbox.featureLayer.
+tags:
+  - ui
+  - markers
+---
+<style>
+.ui-table.handsontable {
+  background:#fff;
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:100
+  }
+</style>
+
+<div id='table' class='ui-table'></div>
+<div id='map'></div>
+
+<!-- jQuery is required for this example. -->
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+<script src='https://code.jquery.com/jquery-migrate-1.2.1.min.js'></script>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.full.min.css' rel='stylesheet' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-handsontable/0.10.2/jquery.handsontable.full.min.js'></script>
+
+<script>
+var map = L.mapbox.map('map', 'examples.h186knp8')
+    .setView([43.945, 19.380], 5);
+
+// Handsontable changes this data by reference, so when it is edited,
+// this copy will be modified in-place.
+// http://handsontable.com/demo/understanding_reference.html
+var data = [{
+    lon: 12.493515014648438,
+    lat: 41.89409955811395,
+    name: 'Rome',
+    size: 'large',
+    color: '#c091e6'
+}, {
+    lon: 28.939361572265625,
+    lat: 41.01099329360268,
+    size: 'small',
+    name: 'Istanbul',
+    color: '#fa946e'
+}];
+
+// Create the layer that will contain these markers: this is used in the
+// dataToMarkers function below with .setGeoJSON to update marker data.
+var dataLayer = L.mapbox.featureLayer().addTo(map);
+
+// Create the table: see full documentation for this call at
+// http://handsontable.com/index.html
+$("#table").handsontable({
+  data: data,
+  startRows: 7,
+  startCols: 4,
+  colHeaders: ['Lon', 'Lat', 'Name', 'Size', 'Color'],
+  columnSorting: true,
+  columns: [
+    {
+      data: 'lon',
+      type: 'numeric'
+    },
+    {
+      data: 'lat',
+      type: 'numeric'
+    },
+    {
+      data: 'name'
+    },
+    {
+      data: 'size',
+      editor: 'select',
+      selectOptions: ['small', 'medium', 'large']
+    },
+    {
+      data: 'color'
+    }
+  ],
+  minSpareRows: 1,
+  // Everytime the table is changed, update the markers on the map.
+  afterChange: dataToMarkers
+});
+
+function dataToMarkers() {
+  // Create a new geojson object that'll represent the table values.
+  var geojson = { type: 'FeatureCollection', features: [] };
+  // For each table row, create a marker.
+  for (var i = 0; i < data.length; i++) {
+    // Blank rows shouldn't be included - they're easy to detect and skip.
+    if (data[i].lon === null || data[i].lat === null) continue;
+    geojson.features.push({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [ data[i].lon, data[i].lat]
+      },
+      properties: {
+        'marker-size': data[i].size,
+        'marker-color': data[i].color,
+        'title': data[i].name
+      }
+    });
+  }
+  dataLayer.setGeoJSON(geojson);
+}
+</script>

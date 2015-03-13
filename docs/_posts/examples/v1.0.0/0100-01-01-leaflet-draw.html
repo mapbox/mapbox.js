@@ -3,18 +3,17 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Leaflet Draw
-description: Using the Leaflet Draw plugin
+description: Add drawing tools for users to author shapes using the Leaflet Draw plugin.
 tags:
   - plugins
 ---
-
-<link rel='stylesheet' href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' />
-<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
+<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' rel='stylesheet' />
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
 
 <div id='map'></div>
 
 <script>
-  var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+  var map = L.mapbox.map('map', 'examples.map-i86nkdio')
       .setView([38.89399, -77.03659], 17);
 
   var featureGroup = L.featureGroup().addTo(map);

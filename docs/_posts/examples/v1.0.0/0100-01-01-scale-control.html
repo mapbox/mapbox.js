@@ -2,14 +2,17 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Scale Control
-description: Using the Scale Control included in Leaflet
+title: Scale control
+description: Add scale information as a UI control to a map.
 tags:
   - ui
 ---
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
+var map = L.mapbox.map('map', 'examples.map-i86nkdio');
+
+// L.control.scale() is included in Leaflet see
+// https://www.mapbox.com/mapbox.js/api/{{site.mapboxjs}}/l-control-scale/
 L.control.scale().addTo(map);
 </script>

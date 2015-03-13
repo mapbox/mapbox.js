@@ -2,25 +2,28 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Markers As Links
-description: Clicking on markers to go to web pages
+title: Markers as links
+description: Click on a marker to go to a web page.
 tags:
-  - layers
+  - markers
 ---
-
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([39.12367, -76.81229], 9);
+var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+  .setView([39.12367, -76.81229], 9);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
 
 // The GeoJSON representing the two point features
-var geoJson = {
+var geojson = {
     type: 'FeatureCollection',
     features: [{
         type: 'Feature',
         properties: {
             title: 'Washington, D.C.',
-            'marker-color': '#f00',
+            'marker-color': '#f86767',
             'marker-size': 'large',
+            'marker-symbol': 'star',
             url: 'http://en.wikipedia.org/wiki/Washington,_D.C.'
         },
         geometry: {
@@ -32,8 +35,9 @@ var geoJson = {
         type: 'Feature',
         properties: {
             title: 'Baltimore, MD',
-            'marker-color': '#f00',
+            'marker-color': '#7ec9b1',
             'marker-size': 'large',
+            'marker-symbol': 'star',
             url: 'http://en.wikipedia.org/wiki/Baltimore'
         },
         geometry: {
@@ -44,9 +48,8 @@ var geoJson = {
 };
 
 // Pass features and a custom factory function to the map
-map.featureLayer.setGeoJSON(geoJson);
-map.featureLayer.on('click', function(e) {
-    e.layer.unbindPopup();
+myLayer.setGeoJSON(geojson);
+myLayer.on('click', function(e) {
     window.open(e.layer.feature.properties.url);
 });
 </script>

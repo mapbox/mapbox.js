@@ -14,7 +14,8 @@ var FeatureLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; },
         sanitizer: require('sanitize-caja'),
-        style: simplestyle.style
+        style: simplestyle.style,
+        popupOptions: { closeButton: false }
     },
 
     initialize: function(_, options) {
@@ -43,7 +44,6 @@ var FeatureLayer = L.FeatureGroup.extend({
 
     loadURL: function(url) {
         if (this._request && 'abort' in this._request) this._request.abort();
-        url = urlhelper.jsonify(url);
         this._request = request(url, L.bind(function(err, json) {
             this._request = null;
             if (err && err.type !== 'abort') {
@@ -58,7 +58,7 @@ var FeatureLayer = L.FeatureGroup.extend({
     },
 
     loadID: function(id) {
-        return this.loadURL(urlhelper.base() + id + '/markers.geojson');
+        return this.loadURL(urlhelper('/' + id + '/features.json', this.options.accessToken));
     },
 
     setFilter: function(_) {
@@ -87,19 +87,25 @@ var FeatureLayer = L.FeatureGroup.extend({
             }
         } else if (this.options.filter(json)) {
 
-            var layer = L.GeoJSON.geometryToLayer(json, marker.style),
-                popupHtml = marker.createPopup(json, this.options.sanitizer);
+            var opts = {accessToken: this.options.accessToken},
+                pointToLayer = this.options.pointToLayer || function(feature, latlon) {
+                  return marker.style(feature, latlon, opts);
+                },
+                layer = L.GeoJSON.geometryToLayer(json, pointToLayer),
+                popupHtml = marker.createPopup(json, this.options.sanitizer),
+                style = this.options.style;
 
-            if ('setStyle' in layer) {
-                layer.setStyle(simplestyle.style(json));
+            if (style && 'setStyle' in layer) {
+                if (typeof style === 'function') {
+                    style = style(json);
+                }
+                layer.setStyle(style);
             }
 
             layer.feature = json;
 
             if (popupHtml) {
-                layer.bindPopup(popupHtml, {
-                    closeButton: false
-                });
+                layer.bindPopup(popupHtml, this.options.popupOptions);
             }
 
             this.addLayer(layer);
@@ -107,6 +113,8 @@ var FeatureLayer = L.FeatureGroup.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.FeatureLayer = FeatureLayer;
+
+module.exports.featureLayer = function(_, options) {
     return new FeatureLayer(_, options);
 };

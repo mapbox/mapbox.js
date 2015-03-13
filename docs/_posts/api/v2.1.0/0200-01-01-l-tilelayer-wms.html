@@ -1,0 +1,106 @@
+---
+layout: api
+title: "v2.1.0 JavaScript Library: L.TileLayer.WMS"
+categories: api
+version: v2.1.0
+permalink: /api/v2.1.0/l-tilelayer-wms
+---
+<h2 id="tilelayer-wms">TileLayer.WMS</h2>
+
+<p>Used to display WMS services as tile layers on the map. Extends <a href="/mapbox.js/api/v2.1.0/l-tilelayer">TileLayer</a>.</p>
+
+<h3>Usage example</h3>
+
+<pre><code class="javascript">var nexrad = L.tileLayer.wms("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
+	layers: 'nexrad-n0r-900913',
+	format: 'image/png',
+	transparent: true,
+	attribution: "Weather data &copy; 2012 IEM Nexrad"
+});</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='tilelayer-wms'>
+	<tr>
+<th class="width250">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.tileLayer.wms</b>(
+<nobr>&lt;String&gt; <i>baseUrl</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-tilelayer">TileLayer.WMS options</a>&gt; <i>options</i> )</nobr>
+
+
+<td>Instantiates a WMS tile layer object given a base URL of the WMS service and a WMS parameters/options object.</td>
+	</tr>
+</table>
+
+<h3 id="tilelayer-wms-options">Options</h3>
+
+<p>Includes all <a href="/mapbox.js/api/v2.1.0/l-tilelayer">TileLayer options</a> and additionally:</p>
+
+<table data-id='tilelayer-wms'>
+	<tr>
+<th class="width100">Option</th>
+<th class="width100">Type</th>
+<th class="width100">Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>layers</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">''</span></code></td>
+<td><b>(required)</b> Comma-separated list of WMS layers to show.</td>
+	</tr>
+	<tr>
+<td><code><b>styles</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">''</span></code></td>
+<td>Comma-separated list of WMS styles.</td>
+	</tr>
+	<tr>
+<td><code><b>format</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'image/jpeg'</span></code></td>
+<td>WMS image format (use <code><span class="string">'image/png'</span></code> for layers with transparency).</td>
+	</tr>
+	<tr>
+<td><code><b>transparent</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>If <code><span class="literal">true</span></code>, the WMS service will return images with transparency.</td>
+	</tr>
+	<tr>
+<td><code><b>version</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'1.1.1'</span></code></td>
+<td>Version of the WMS service to use.</td>
+	</tr>
+	<tr>
+<td><code><b>crs</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.0/l-icrs">CRS</a></code></td>
+<td><code><span class="literal">null</span></code></td>
+<td>Coordinate Reference System to use for the WMS requests, defaults to map CRS. Don't change this if you're not sure what it means.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='tilelayer-wms'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>setParams</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-tilelayer">WMS parameters</a>&gt; <i>params</i></nobr>,
+<nobr>&lt;Boolean&gt; <i>noRedraw?</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Merges an object with the new parameters and re-requests tiles on the current screen (unless <code>noRedraw</code> was set to <code><span class="literal">true</span></code>).</td>
+	</tr>
+</table>
+
+

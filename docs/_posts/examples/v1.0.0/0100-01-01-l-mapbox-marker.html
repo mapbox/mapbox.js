@@ -1,0 +1,24 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Marker without GeoJSON
+description: Use L.mapbox.marker.icon to create a simple marker without GeoJSON.
+tags:
+  - markers
+---
+<div id='map'></div>
+
+<script>
+var map = L.mapbox.map('map', 'examples.map-i87786ca')
+    .setView([37.9, -77], 6);
+
+// L.marker is a low-level marker constructor in Leaflet.
+L.marker([37.9, -77], {
+    icon: L.mapbox.marker.icon({
+        'marker-size': 'large',
+        'marker-symbol': 'bus',
+        'marker-color': '#fa0'
+    })
+}).addTo(map);
+</script>

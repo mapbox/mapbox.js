@@ -4,6 +4,7 @@
 <meta charset=utf-8 />
 <title>Theme | mapbox.js</title>
 <script src='../../dist/mapbox.js'></script>
+<script src='access_token.js'></script>
 <link rel='stylesheet' href='../../dist/mapbox.css'/>
 <style>
   body {margin:0; padding:0; }
@@ -24,33 +25,39 @@
 <div id='map-dark' class='dark map'></div>
 
 <script>
-  var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
-      .addControl(L.mapbox.geocoderControl('examples.map-y7l23tes'))
-      .addControl(L.mapbox.shareControl())
-      .setView([37.9, -77], 5);
+var mapdark = L.mapbox.map('map-dark', 'examples.map-y7l23tes')
+  .addControl(L.mapbox.geocoderControl('mapbox.places', {
+    position: 'topright'
+  }))
+  .addControl(L.mapbox.shareControl())
+  .setView([37.9, -77], 5);
 
-  var maplight = L.mapbox.map('map-light', 'examples.map-20v6611k')
-      .addControl(L.mapbox.geocoderControl('examples.map-20v6611k'))
-      .addControl(L.mapbox.shareControl())
-      .setView([37.9, -77], 5);
+var maplight = L.mapbox.map('map-light', 'examples.map-20v6611k')
+  .addControl(L.mapbox.geocoderControl('mapbox.places'))
+  .addControl(L.mapbox.shareControl())
+  .setView([37.9, -77], 5);
 
-  var feature = {
-      type: 'Feature',
-      geometry: {
-          type: 'Point',
-          coordinates: [-77, 37.9]
-      },
-      properties: {
-          title: 'Example Marker',
-          description: 'This is a single marker.'
-      }
-  };
+var info = L.mapbox.infoControl({
+  position: 'bottomleft'
+}).addInfo('foo').addTo(mapdark);
 
-  maplight.legendControl.addLegend('hee haw');
-  mapdark.legendControl.addLegend('hee haw');
+var feature = {
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        coordinates: [-77, 37.9]
+    },
+    properties: {
+        title: 'Example Marker',
+        description: 'This is a single marker.'
+    }
+};
 
-  mapdark.markerLayer.setGeoJSON(feature);
-  maplight.markerLayer.setGeoJSON(feature);
+maplight.legendControl.addLegend('hee haw');
+mapdark.legendControl.addLegend('hee haw');
+
+mapdark.featureLayer.setGeoJSON(feature);
+maplight.featureLayer.setGeoJSON(feature);
 </script>
 </body>
 </html>

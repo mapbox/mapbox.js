@@ -1,0 +1,49 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Hawaii and Alaska Overlays
+description: Showing the full united states with inset maps
+tags:
+  - layers
+---
+<div id='map'></div>
+<div id='map-overlay-hawaii'></div>
+<div id='map-overlay-alaska'></div>
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #map-overlay-hawaii {
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      width:200px;
+      height:150px;
+      border:1px solid #fff;
+  }
+  #map-overlay-alaska {
+      position:absolute;
+      left:10px;
+      bottom:175px;
+      width:200px;
+      height:150px;
+      border:1px solid #fff;
+  }
+</style>
+<script>
+var mapid = 'examples.map-i86nkdio';
+var overlayOptions = {
+    zoomControl: false,
+    attributionControl: false
+};
+
+var map = L.mapbox.map('map', mapid)
+    .fitBounds([[22.917922936146045,-127.265625],[50.28933925329178,-64.3359375]]);
+
+var mapOverlayHawaii = L.mapbox.map('map-overlay-hawaii', mapid, overlayOptions)
+    .fitBounds([[18.542116654448996,-161.03759765625],[22.573438264572406,-154.22607421875]]);
+
+var mapOverlayAlaska = L.mapbox.map('map-overlay-alaska', 'examples.map-i86nkdio', overlayOptions)
+    .fitBounds([[51.72702815704774,-170.15625],[71.85622888185527,-127.61718749999999]]);
+</script>

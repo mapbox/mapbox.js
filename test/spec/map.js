@@ -13,11 +13,18 @@ describe('L.mapbox.map', function() {
     it('allows access to the tilejson object after assignment', function() {
         var map = L.mapbox.map(element, tileJSON);
         expect(map.getTileJSON()).to.equal(tileJSON);
+        expect(map instanceof L.mapbox.Map).to.eql(true);
     });
 
     it('passes options to constructor when called without new', function() {
         var map = L.mapbox.map(element, tileJSON, {zoomControl: false});
         expect(map.options.zoomControl).to.equal(false);
+    });
+
+    it('absorbs options form mergeOptions', function() {
+        L.Map.mergeOptions({ foo: 'bar' });
+        var map = L.mapbox.map(element, tileJSON, {zoomControl: false});
+        expect(map.options.foo).to.equal('bar');
     });
 
     describe('constructor', function() {
@@ -44,7 +51,7 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
@@ -63,24 +70,35 @@ describe('L.mapbox.map', function() {
             server.respond();
         });
 
-        it('aliases featureLayer as markerLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
-            expect(map.featureLayer).to.be.ok();
-            expect(map.markerLayer).to.be.ok();
-        });
-
-        it('can deactivate markerLayer as markerLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
-                markerLayer: false
-            });
-            expect(map.featureLayer).to.eql(undefined);
-        });
-
-        it('can deactivate markerLayer as featureLayer', function() {
+        it('can deactivate featureLayer', function() {
             var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
                 featureLayer: false
             });
             expect(map.featureLayer).to.eql(undefined);
+        });
+
+        it('preserves manually-set view', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
+                .setView([1, 2], 3);
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 1, lng: 2 });
+            expect(map.getZoom()).to.eql(3);
+        });
+
+        it('preserves manually-set zoom', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
+                .setZoom(3);
+
+            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 39.386, lng: -98.976 });
+            expect(map.getZoom()).to.eql(3);
         });
 
         it('preserves manually-set marker layer GeoJSON', function() {
@@ -102,7 +120,7 @@ describe('L.mapbox.map', function() {
             expect(map.tileLayer.options.detectRetina).to.equal(true);
         });
 
-        it('passes featureLayer options to marker layer', function() {
+        it('passes featureLayer options to feature layer', function() {
             var filter = function() { return true; },
                 map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {featureLayer: {filter: filter}});
             expect(map.featureLayer.options.filter).to.equal(filter);
@@ -129,10 +147,17 @@ describe('L.mapbox.map', function() {
             expect(map.shareControl.options.position).to.equal('bottomleft');
         });
 
+        it('passes custom access token option to sub-layers', function() {
+            var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {accessToken: 'custom', shareControl: true});
+            expect(map.tileLayer.options.accessToken).to.equal('custom');
+            expect(map.featureLayer.options.accessToken).to.equal('custom');
+            expect(map.gridLayer.options.accessToken).to.equal('custom');
+            expect(map.shareControl.options.accessToken).to.equal('custom');
+        });
+
         it('supports tilejson without a center property', function(){
             var map = L.mapbox.map(element, helpers.tileJSON_nocenter);
             expect(map._loaded).not.to.be.ok();
-
         });
     });
 
@@ -215,6 +240,87 @@ describe('L.mapbox.map', function() {
         });
     });
 
+    describe('map feedback support', function() {
+        function improveMapHash(map) {
+            return map.getContainer().getElementsByClassName('mapbox-improve-map')[0].hash;
+        }
+
+        it('adds mapid and coordinates to attribution link', function() {
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
+                .setView([38.902, -77.001], 13);
+
+            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
+        });
+
+        it('adds mapid and coordinates to attribution link (async)', function(done) {
+            var map = L.mapbox.map(element, 'examples.h8e9h88l')
+                .setView([38.902, -77.001], 13);
+
+            map.on('ready', function() {
+                expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
+                done();
+            });
+
+            server.respondWith("GET", internals.url.tileJSON("examples.h8e9h88l"),
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
+            server.respond();
+        });
+
+        it('adds mapid and coordinates to info link', function() {
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
+                .setView([38.902, -77.001], 13);
+
+            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
+        });
+
+        it('updates coordinates after map is moved', function() {
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
+                .setView([38.902, -77.001], 13);
+
+            map.setView([48.902, -77.001], 13);
+            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/48.902/13');
+        });
+
+        it('wraps coordinates', function() {
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
+                .setView([38.902, -77.001 - 360], 13);
+
+            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
+        });
+
+        it('updates coordinates across layer adds/removes', function(done) {
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
+                .setView([38.902, -77.001 - 360], 13);
+
+            var layer = L.mapbox.tileLayer('examples.h8e9h88l')
+                .addTo(map)
+                .on('ready', function() {
+                    expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
+
+                    setTimeout(function() {
+                        map.removeLayer(layer);
+                        setTimeout(function() {
+                            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13');
+                            done();
+                        }, 5);
+                    }, 5);
+                });
+
+            server.respondWith("GET", internals.url.tileJSON("examples.h8e9h88l"),
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_improvemap)]);
+            server.respond();
+        });
+
+        it('includes data from other feedback sources', function() {
+            var map = L.mapbox.map(element, helpers.tileJSON_improvemap)
+                .setView([38.902, -77.001], 13);
+
+            L.mapbox.feedback.record({test: '123'});
+
+            expect(improveMapHash(map)).to.eql('#examples.h8e9h88l/-77.001/38.902/13/test=123');
+        });
+    });
+
     describe('corner cases', function() {
         it('re-initialization throws', function() {
             var map = L.mapbox.map(element, tileJSON);
@@ -240,7 +346,7 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", internals.url.tileJSON("mapbox.map-0l53fhk2"),
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });

@@ -1,0 +1,70 @@
+---
+layout: api
+title: "v1.6.4 JavaScript Library: L.DivIcon"
+categories: api
+version: v1.6.4
+permalink: /api/v1.6.4/l-divicon
+---
+<h2 id="divicon">DivIcon</h2>
+
+<p>Represents a lightweight icon for markers that uses a simple <code>div</code> element instead of an image.</p>
+
+<pre><code class="javascript">var myIcon = L.divIcon({className: 'my-div-icon'});
+// you can set .my-div-icon styles in CSS
+
+L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);</code></pre>
+
+<p>By default, it has a <code><span class="string">'leaflet-div-icon'</span></code> class and is styled as a little white square with a shadow.</p>
+
+<h3>Creation</h3>
+
+<table data-id='divicon'>
+	<tr>
+<th class="width250">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.divIcon</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-divicon">DivIcon options</a>&gt; <i>options</i> )</nobr>
+</code></td>
+
+
+
+<td>Creates a div icon instance with the given options.</td>
+	</tr>
+</table>
+
+<h3 id="divicon-options">Options</h3>
+
+<table data-id='divicon'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>iconSize</b></code></td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
+<td>Size of the icon in pixels. Can be also set through CSS.</td>
+	</tr>
+	<tr>
+<td><code><b>iconAnchor</b></code></td>
+<td><code><a href="/mapbox.js/api/v1.6.4/l-point">Point</a></code></td>
+<td>The coordinates of the "tip" of the icon (relative to its top left corner). The icon will be aligned so that this point is at the marker's geographical location. Centered by default if size is specified, also can be set in CSS with negative margins.</td>
+	</tr>
+	<tr>
+<td><code><b>className</b></code></td>
+<td><code>String</code>
+<td>A custom class name to assign to the icon. <code><span class="string">'leaflet-div-icon'</span></code> by default.</td>
+	</tr>
+	<tr>
+<td><code><b>html</b></code></td>
+<td><code>String</code>
+<td>A custom HTML code to put inside the div element, empty by default.</td>
+	</tr>
+</table>
+
+
+
+

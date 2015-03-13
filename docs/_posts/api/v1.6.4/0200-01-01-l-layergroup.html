@@ -1,0 +1,119 @@
+---
+layout: api
+title: "v1.6.4 JavaScript Library: L.LayerGroup"
+categories: api
+version: v1.6.4
+permalink: /api/v1.6.4/l-layergroup
+---
+<h2 id="layergroup">LayerGroup</h2>
+
+<p>Used to group several layers and handle them as one. If you add it to the map, any layers added or removed from the group will be added/removed on the map as well. Implements <a href="/mapbox.js/api/v1.6.4/l-ilayer">ILayer</a> interface.</p>
+
+<pre><code class="javascript">L.layerGroup([marker1, marker2])
+	.addLayer(polyline)
+	.addTo(map);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='layergroup'>
+	<tr>
+<th class="width250">Factory</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.LayerGroup</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-ilayer">ILayer</a>[]&gt; <i>layers?</i> )</nobr>
+</code></td>
+
+
+<td>Create a layer group, optionally given an initial set of layers.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='layergroup'>
+	<tr>
+<th class="width200">Method</th>
+<th class="minwidth">Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>addTo</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-map">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds the group of layers to the map.</td>
+	</tr>
+	<tr>
+<td><code><b>addLayer</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds a given layer to the group.</td>
+	</tr>
+	<tr>
+<td><code><b>removeLayer</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Removes a given layer from the group.</td>
+	</tr>
+	<tr>
+<td><code><b>removeLayer</b>(
+<nobr>&lt;String&gt; <i>id</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Removes a given layer of the given id from the group.</td>
+	</tr>
+	<tr>
+<td><code><b>hasLayer</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v1.6.4/l-ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the given layer is currently added to the group.</td>
+	</tr>
+	<tr>
+<td><code><b>getLayer</b>(
+<nobr>&lt;String&gt; <i>id</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v1.6.4/l-ilayer">ILayer</a></code></td>
+<td>Returns the layer with the given id.</td>
+	</tr>
+	<tr>
+<td><code><b>getLayers</b>()</code></td>
+<td><code>Array</code></td>
+<td>Returns an array of all the layers added to the group.</td>
+	</tr>
+	<tr>
+<td><code><b>clearLayers</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Removes all the layers from the group.</td>
+	</tr>
+	<tr>
+<td><code><b>eachLayer</b>(
+<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+<nobr>&lt;Object&gt; <i>context?</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Iterates over the layers of the group, optionally specifying context of the iterator function.
+<pre><code>group.eachLayer(function (layer) {
+	layer.bindPopup('Hello');
+});</code></pre>
+</td>
+	</tr>
+	<tr id="layergroup-togeojson">
+<td><code><b>toGeoJSON</b>()</code></td>
+<td><code>Object</code></td>
+<td>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a> representation of the layer group (GeoJSON FeatureCollection).</td>
+	</tr>
+</table>
+
+
+

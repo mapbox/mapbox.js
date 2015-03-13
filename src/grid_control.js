@@ -191,6 +191,8 @@ var GridControl = L.Control.extend({
     }
 });
 
-module.exports = function(_, options) {
+module.exports.GridControl = GridControl;
+
+module.exports.gridControl = function(_, options) {
     return new GridControl(_, options);
 };

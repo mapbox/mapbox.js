@@ -16,6 +16,7 @@ describe('L.mapbox.shareControl', function() {
 
     it('can be constructed', function() {
         expect(L.mapbox.shareControl()).to.be.ok();
+        expect(L.mapbox.shareControl() instanceof L.mapbox.ShareControl).to.be.ok();
     });
 
     it('can be added to a map', function() {
@@ -42,6 +43,19 @@ describe('L.mapbox.shareControl', function() {
         expect(element
             .getElementsByClassName('mapbox-modal-body').length)
                 .to.eql(1);
+    });
+
+    it('constructs iframe URL', function() {
+        map.setView([0,0],0);
+        var shareControl = L.mapbox.shareControl({id: 'mapid'});
+        expect(shareControl.addTo(map)).to.eql(shareControl);
+
+        happen.click(element
+            .getElementsByClassName('mapbox-share')[0]);
+
+        expect(element
+            .getElementsByClassName('mapbox-embed')[0].value)
+            .to.eql('<iframe width="100%" height="500px" frameBorder="0" src="http://a.tiles.mapbox.com/v4/mapid.html?access_token=key"></iframe>');
     });
 
     it('can accept a custom url', function() {
