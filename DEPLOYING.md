@@ -1,8 +1,8 @@
 # Deploying Mapbox.js
 
-You need `s3cmd`
+You need `aws`
 
-    brew install s3cmd
+    pip install awscli
 
 Then make the release with `make`
 
