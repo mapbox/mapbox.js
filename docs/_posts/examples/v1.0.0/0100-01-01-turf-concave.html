@@ -14,7 +14,7 @@ tags:
 var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
 
 map.featureLayer.on('ready', function() {
-    var hull = turf.concave(map.featureLayer.getGeoJSON(), 3);
+    var hull = turf.concave(map.featureLayer.getGeoJSON(), 3, 'miles');
     L.mapbox.featureLayer(hull).addTo(map);
 });
 </script>
