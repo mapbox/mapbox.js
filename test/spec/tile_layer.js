@@ -131,5 +131,17 @@ describe("L.mapbox.tileLayer", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0@2x.png');
         });
+
+        it("requests @2x tiles on retina (jpg format)", function() {
+            L.Browser.retina = true;
+            var layer = L.mapbox.tileLayer(helpers.tileJSON_jpg);
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0@2x.jpg');
+        });
+
+        it("requests @2x tiles on retina (custom format)", function() {
+            L.Browser.retina = true;
+            var layer = L.mapbox.tileLayer(helpers.tileJSON).setFormat('jpg70');
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0@2x.jpg70');
+        });
     });
 });

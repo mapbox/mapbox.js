@@ -1,17 +1,14 @@
 'use strict';
 
 var util = require('./util');
+var formatPattern = /\.((?:png|jpg)\d*)(?=$|\?)/;
 
 var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],
 
-    options: {
-        format: 'png'
-    },
-
     // http://mapbox.com/developers/api/#image_quality
     formats: [
-        'png',
+        'png', 'jpg',
         // PNG
         'png32', 'png64', 'png128', 'png256',
         // JPG
@@ -44,6 +41,9 @@ var TileLayer = L.TileLayer.extend({
     _setTileJSON: function(json) {
         util.strict(json, 'object');
 
+        this.options.format = this.options.format ||
+            json.tiles[0].match(formatPattern)[1];
+
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: json.attribution,
@@ -73,7 +73,7 @@ var TileLayer = L.TileLayer.extend({
         if (!templated) {
             return templated;
         } else {
-            return templated.replace('.png',
+            return templated.replace(formatPattern,
                 (L.Browser.retina ? this.scalePrefix : '.') + this.options.format);
         }
     },
