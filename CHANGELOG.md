@@ -1,3 +1,7 @@
+## v2.1.6
+
+* Fix @2x suffix replacement when tiles array contains `.jpg` extension
+
 ## v2.1.5
 
 * Display the Mapbox logo when mapbox_logo is present in tileJSON
