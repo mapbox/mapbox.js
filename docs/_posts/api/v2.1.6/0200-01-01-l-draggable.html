@@ -1,0 +1,111 @@
+---
+layout: api
+title: "v2.1.6 JavaScript Library: L.Draggable"
+categories: api
+version: v2.1.6
+permalink: /api/v2.1.6/l-draggable
+---
+<h2 id="draggable">Draggable</h2>
+
+<p>A class for making DOM elements draggable (including touch support). Used internally for map and marker dragging. Only works for elements that were positioned with <a href="/mapbox.js/api/v2.1.6/l-domutil">DomUtil#setPosition</a></p>
+
+<pre><code class="javascript">var draggable = new L.Draggable(elementToDrag);
+draggable.enable();
+</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='draggable'>
+	<tr>
+<th class="width200">Creation</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b><span class='keyword'>new</span> L.Draggable</b>(
+<nobr>&lt;HTMLElement&gt; <i>element</i>,</nobr>
+<nobr>&lt;HTMLElement&gt; <i>dragHandle?</i> )</nobr>
+</code></td>
+
+<td>Creates a Draggable object for moving the given element when you start dragging the <code>dragHandle</code> element (equals the element itself by default).</td>
+	</tr>
+</table>
+
+<h3>Events</h3>
+
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v2.1.6/l-events">these methods</a>.</p>
+
+<table data-id='draggable'>
+	<tr>
+<th class="width100">Event</th>
+<th class="width100">Data</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>dragstart</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.6/l-event-objects">Event</a></code></td>
+<td>Fired when the dragging starts.</td>
+	</tr>
+	<tr>
+<td><code><b>predrag</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.6/l-event-objects">Event</a></code></td>
+<td>Fired continuously during dragging <em>before</em> each corresponding update of the element position.</td>
+	</tr>
+	<tr>
+<td><code><b>drag</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.6/l-event-objects">Event</a></code></td>
+<td>Fired continuously during dragging.</td>
+	</tr>
+	<tr>
+<td><code><b>dragend</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.6/l-event-objects">Event</a></code></td>
+<td>Fired when the dragging ends.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='draggable'>
+	<tr>
+<th class="width100">Method</th>
+<th class="width100">Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>enable</b>()</code></td>
+<td><code>-</code></td>
+<td>Enables the dragging ability.</td>
+	</tr>
+	<tr>
+<td><code><b>disable</b>()</code></td>
+<td><code>-</code></td>
+<td>Disables the dragging ability.</td>
+	</tr>
+</table>
+
+<!--<h3>Static Properties</h3>
+
+<table>
+	<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>START</b></code></td>
+<td><code>String</code></td>
+<td>Name of the DOM event that initiates dragging. <code><span class="string">'mousedown'</span></code> for desktop browsers, <code><span class="string">'touchstart'</span></code> for mobile devices.</td>
+	</tr>
+	<tr>
+<td><code><b>MOVE</b></code></td>
+<td><code>String</code></td>
+<td>Name of the DOM event for drag moving. <code><span class="string">'mousemove'</span></code> for desktop browsers, <code><span class="string">'touchmove'</span></code> for mobile devices.</td>
+	</tr>
+	<tr>
+<td><code><b>END</b></code></td>
+<td><code>String</code></td>
+<td>Name of the DOM event that ends dragging. <code><span class="string">'mouseup'</span></code> for desktop browsers, <code><span class="string">'touchend'</span></code> for mobile devices.</td>
+	</tr>
+</table>-->
+
+
+

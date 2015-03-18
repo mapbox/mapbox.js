@@ -1,0 +1,66 @@
+---
+layout: api
+title: "v2.1.6 JavaScript Library: L.LineUtil"
+categories: api
+version: v2.1.6
+permalink: /api/v2.1.6/l-lineutil
+---
+<h2 id="lineutil">LineUtil</h2>
+
+<p>Various utility functions for polyine points processing, used by Leaflet internally to make polylines lightning-fast.</p>
+
+<h3>Methods</h3>
+
+<table data-id='lineutil'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>simplify</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>[]&gt; <i>points</i></nobr>,
+<nobr>&lt;Number&gt; <i>tolerance</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.1.6/l-point">Point</a>[]</code></td>
+
+<td>Dramatically reduces the number of points in a polyline while retaining its shape and returns a new array of simplified points. Used for a huge performance boost when processing/displaying Leaflet polylines for each zoom level and also reducing visual noise. <code>tolerance</code> affects the amount of simplification (lesser value means higher quality but slower and with more points). Also released as a separated micro-library <a href="http://mourner.github.com/simplify-js/">Simplify.js</a>.</td>
+	</tr>
+	<tr>
+<td><code><b>pointToSegmentDistance</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>p</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>p1</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>p2</i> )</nobr>
+</code></td>
+
+<td><code>Number</code></td>
+
+<td>Returns the distance between point <code>p</code> and segment <code>p1</code> to <code>p2</code>.</td>
+	</tr>
+	<tr>
+<td><code><b>closestPointOnSegment</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>p</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>p1</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>p2</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.1.6/l-point">Point</a></code></td>
+
+<td>Returns the closest point from a point <code>p</code> on a segment <code>p1</code> to <code>p2</code>.</td>
+	</tr>
+	<tr>
+<td><code><b>clipSegment</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>a</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>b</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-bounds">Bounds</a>&gt; <i>bounds</i> )</nobr>
+</code></td>
+
+<td><code>-</code></td>
+
+<td>Clips the segment <code>a</code> to <code>b</code> by rectangular bounds (modifying the segment points directly!). Used by Leaflet to only show polyline points that are on the screen or near, increasing performance.</td>
+	</tr>
+</table>
+
+
+

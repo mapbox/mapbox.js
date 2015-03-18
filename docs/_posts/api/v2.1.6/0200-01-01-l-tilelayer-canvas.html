@@ -1,0 +1,78 @@
+---
+layout: api
+title: "v2.1.6 JavaScript Library: L.TileLayer.Canvas"
+categories: api
+version: v2.1.6
+permalink: /api/v2.1.6/l-tilelayer-canvas
+---
+<h2 id="tilelayer-canvas">TileLayer.Canvas</h2>
+
+<p>Used to create Canvas-based tile layers where tiles get drawn on the browser side. Extends <a href="/mapbox.js/api/v2.1.6/l-tilelayer">TileLayer</a>.</p>
+
+<h3>Usage example</h3>
+
+<pre><code class="javascript">var canvasTiles = L.tileLayer.canvas();
+
+canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
+	var ctx = canvas.getContext('2d');
+	// draw something on the tile canvas
+}</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='tilelayer-canvas'>
+	<tr>
+<th class="width200">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.tileLayer.canvas</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-tilelayer">TileLayer options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+<td>Instantiates a Canvas tile layer object given an options object (optionally).</td>
+	</tr>
+</table>
+
+<h3>Options</h3>
+<table data-id='tilelayer-canvas'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>async</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">false</span></code></td>
+<td>Indicates that tiles will be drawn asynchronously. <a href="/mapbox.js/api/v2.1.6/l-tilelayer">tileDrawn</a> method should be called for each tile after drawing completion.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='tilelayer-canvas'>
+	<tr>
+<th class="width200">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr id = "tilelayer-canvas-drawtile">
+<td><code><b>drawTile</b>(
+<nobr>&lt;HTMLCanvasElement&gt; <i>canvas</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.6/l-point">Point</a>&gt; <i>tilePoint</i></nobr>,
+<nobr>&lt;Number&gt; <i>zoom</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>You need to define this method after creating the instance to draw tiles; <code>canvas</code> is the actual canvas tile on which you can draw, <code>tilePoint</code> represents the tile numbers, and <code>zoom</code> is the current zoom.</td>
+	</tr>
+	<tr id="tilelayer-canvas-tiledrawn">
+<td><code><b>tileDrawn</b>( <nobr>&lt;HTMLCanvasElement&gt; <i>canvas</i></nobr> )</code></td>
+<td>-</td>
+<td>If <code>async</code> option is defined, this function should be called for each tile after drawing completion. <code>canvas</code> is the same canvas element, that was passed to <a href="/mapbox.js/api/v2.1.6/l-tilelayer">drawTile</a>.</td>
+	</tr>
+</table>
+
+
