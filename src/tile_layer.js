@@ -7,7 +7,8 @@ var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],
 
     options: {
-        format: 'png'
+        format: 'png',
+        sanitizer: require('sanitize-caja')
     },
 
     // http://mapbox.com/developers/api/#image_quality
@@ -60,7 +61,7 @@ var TileLayer = L.TileLayer.extend({
 
         L.extend(this.options, {
             tiles: json.tiles,
-            attribution: json.attribution,
+            attribution: this.options.sanitizer(json.attribution),
             minZoom: json.minzoom || 0,
             maxZoom: json.maxzoom || 18,
             autoscale: json.autoscale || false,

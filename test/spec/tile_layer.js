@@ -32,6 +32,11 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.options.bounds).to.eql(L.latLngBounds([[-85.0511, -180], [85.0511, 180]]));
         });
 
+        it("sanitizes attribution", function() {
+            var layer = L.mapbox.tileLayer(L.extend({}, helpers.tileJSON, {attribution: '<script>alert("test")</script>'}));
+            expect(layer.options.attribution).to.equal('');
+        });
+
         it('loads TileJSON from a URL', function(done) {
             var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/L.mapbox.map-0l53fhk2.json');
 
