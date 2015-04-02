@@ -1,3 +1,7 @@
+## v1.6.5
+
+* Sanitize TileJSON-provided attribution
+
 ## v1.6.4
 
 * Fix grid math for negative longitudes (#737)
