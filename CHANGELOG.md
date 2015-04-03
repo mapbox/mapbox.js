@@ -1,3 +1,7 @@
+## v2.1.7
+
+* Sanitize TileJSON-provided attribution
+
 ## v2.1.6
 
 * Fix @2x suffix replacement when tiles array contains `.jpg` extension
