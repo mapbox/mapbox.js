@@ -6,6 +6,10 @@ var formatPattern = /\.((?:png|jpg)\d*)(?=$|\?)/;
 var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],
 
+    options: {
+        sanitizer: require('sanitize-caja')
+    },
+
     // http://mapbox.com/developers/api/#image_quality
     formats: [
         'png', 'jpg',
@@ -46,7 +50,7 @@ var TileLayer = L.TileLayer.extend({
 
         L.extend(this.options, {
             tiles: json.tiles,
-            attribution: json.attribution,
+            attribution: this.options.sanitizer(json.attribution),
             minZoom: json.minzoom || 0,
             maxZoom: json.maxzoom || 18,
             tms: json.scheme === 'tms',

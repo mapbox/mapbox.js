@@ -27,7 +27,8 @@ var LMap = L.Map.extend({
         legendControl: {},
         gridControl: {},
         infoControl: false,
-        shareControl: false
+        shareControl: false,
+        sanitizer: require('sanitize-caja')
     },
 
     _tilejson: {},
@@ -143,7 +144,7 @@ var LMap = L.Map.extend({
         }
 
         if (this.infoControl && json.attribution) {
-            this.infoControl.addInfo(json.attribution);
+            this.infoControl.addInfo(this.options.sanitizer(json.attribution));
             this._updateMapFeedbackLink();
         }
 
