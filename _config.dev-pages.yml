@@ -6,7 +6,7 @@ permalink: /:categories/:title
 baseurl: /mapbox.js
 highlighter: pygments
 mapboxjs: v2.1.7
-defaultid: 'examples.map-i86nkdio'
+defaultid: 'mapbox.streets'
 rdiscount:
   extensions: [smart]
 exclude: [dist]
