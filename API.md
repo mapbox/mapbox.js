@@ -790,8 +790,9 @@ _Example_:
 
 By default, Mapbox.js includes a bundled version of Leaflet that Mapbox has ensured
 is compatible. A standalone version of Mapbox.js is also available which you can use if you would like to supply your own version of
-Leaflet.
+Leaflet. When using this technique, you will use the newest version of Mapbox.css.
 
 
     <script src='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.js'></script>
-    <link href='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.css' rel='stylesheet' />
+    <link href='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
+    <script src='your version of Leaflet.js'></script>
