@@ -785,3 +785,13 @@ is available by applying `class="dark"` to the map div.
 _Example_:
 
     <div id="map" class="dark"></div>
+
+## Standalone
+
+By default, Mapbox.js includes a bundled version of Leaflet that Mapbox has ensured
+is compatible. A standalone version of Mapbox.js is also available which you can use if you would like to supply your own version of
+Leaflet.
+
+
+    <script src='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.js'></script>
+    <link href='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.css' rel='stylesheet' />
