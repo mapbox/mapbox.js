@@ -1,0 +1,51 @@
+---
+layout: api
+title: "v2.1.8 JavaScript Library: L.mapbox.map(element, id|url|tilejson, options)"
+categories: api
+version: v2.1.8
+permalink: /api/v2.1.8/l-mapbox-map
+---
+<h2 id="section-l-mapbox-map">L.mapbox.map(element, id|url|tilejson, options)</h2>
+<p>Create and automatically configure a map with layers, markers, and
+interactivity.</p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="/mapbox.js/api/v2.1.8/l-map-class">L.Map</a></code></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element (<em>required</em>)</td>
+<td>string</td>
+<td>Must be the id of an element, or a DOM element reference.</td>
+</tr>
+<tr>
+<td>id <em>or</em> url <em>or</em> tilejson</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>url can be <ul><li>A map <code>id</code> string <code>examples.map-foo</code></li><li>A comma separated list of map <code>id</code> strings <code>examples.map-foo,examples.map-bar</code> <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/compositing/">example</a></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A <a href="https://www.mapbox.com/developers/tilejson/">TileJSON</a> object, from your own Javascript code</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> L.TileLayer options. Options passed to a <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> options. Options passed to a <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>. Options passed to a <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> options. Options passed to a <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>.</li><li><code>shareControl</code>: Options passed to a <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>. Set to <code>true</code> to enable the <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>.</li><li><code>infoControl</code>: Options passed to a <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-infocontrol">L.mapbox.infoControl</a></code>. Set to <code>true</code> to enable the <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-infocontrol">L.mapbox.infoControl</a></code>.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this map.</li><li><code>attributionControl</code>: value can be <code>{compact: true}</code> to force a compact attribution icon that shows the full attribution on click, or <code>{compact: false}</code> to force the full attribution control. The default is a responsive attribution that collapses when the map is less than 640 pixels wide.</li></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// map refers to a &lt;div&gt; element with the ID map
+// examples.map-4l7djmvo is the ID of a map on Mapbox.com
+var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-4l7djmvo&#39;);
+
+// map refers to a &lt;div&gt; element with the ID map
+// This map will have no layers initially
+var map = L.mapbox.map(&#39;map&#39;);
+</code></pre><p><em>Returns</em>: a map object</p>
+<p><em>Class</em>: <code><a href="/mapbox.js/api/v2.1.8/l-mapbox-map">L.mapbox.Map</a></code></p>
+<h3 id="section-map-gettilejson">map.getTileJSON()</h3>
+<p>Returns this map&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Returns</em>: the TileJSON object</p>

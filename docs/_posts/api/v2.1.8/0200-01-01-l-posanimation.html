@@ -1,0 +1,78 @@
+---
+layout: api
+title: "v2.1.8 JavaScript Library: L.PosAnimation"
+categories: api
+version: v2.1.8
+permalink: /api/v2.1.8/l-posanimation
+---
+<h2 id="posanimation">PosAnimation</h2>
+
+<p>Used internally for panning animations, utilizing CSS3 Transitions for modern browsers and a timer fallback for IE6-9.</p>
+
+<pre><code class="javascript">var fx = new L.PosAnimation();
+fx.run(el, [300, 500], 0.5);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='posanimation'>
+	<tr>
+<th class="width200">Creation</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><span class='keyword'>new</span> <b>L.PosAnimation</b>()</code></td>
+
+<td>Creates a PosAnimation object.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='posanimation'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>run</b>(
+<nobr>&lt;HTMLElement&gt; <i>element</i>,</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.8/l-point">Point</a>&gt; <i>newPos</i></nobr>,
+<nobr>&lt;Number&gt; <i>duration?</i></nobr>,
+<nobr>&lt;Number&gt; <i>easeLinearity?</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Run an animation of a given element to a new position, optionally setting duration in seconds (<code><span class="number">0.25</span></code> by default) and easing linearity factor (3rd argument of the <a href="http://cubic-bezier.com/#0,0,.5,1">cubic bezier curve</a>, <code><span class="number">0.5</span></code> by default)</td>
+	</tr>
+</table>
+
+<h3>Events</h3>
+
+<p>You can subscribe to the following events using <a href="/mapbox.js/api/v2.1.8/l-events">these methods</a>.</p>
+
+<table data-id='posanimation'>
+	<tr>
+<th class="width100">Event</th>
+<th class="width100">Data</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>start</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.8/l-event-objects">Event</a></code></td>
+<td>Fired when the animation starts.</td>
+	</tr>
+	<tr>
+<td><code><b>step</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.8/l-event-objects">Event</a></code></td>
+<td>Fired continuously during the animation.</td>
+	</tr>
+	<tr>
+<td><code><b>end</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.1.8/l-event-objects">Event</a></code></td>
+<td>Fired when the animation ends.</td>
+	</tr>
+</table>
+
+
+

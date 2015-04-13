@@ -25,3 +25,12 @@ Then make the release with `make`
 
     ./bower.sh --action=prepare
     ./bower.sh --action=publish
+
+# deploying to the web
+
+```sh
+$ ./_docs/build.sh v1.your.version
+```
+
+Then update the version number in `_config.yml` and its variants,
+and then in the relevant server software.
