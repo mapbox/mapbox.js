@@ -23,7 +23,6 @@ describe('L.control.attribution', function() {
         el.style.width = '641px';
         map.fire('resize');
 
-        console.log(attributionControl.classList);
         expect(attributionControl.classList.contains('leaflet-compact-attribution')).to.eql(false);
     });
 
