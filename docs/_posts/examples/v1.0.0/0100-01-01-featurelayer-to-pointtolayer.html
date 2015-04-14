@@ -1,0 +1,62 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: FeatureLayer to PointToLayer for styling
+description: Set marker style in a featureLayer with pointToLayer.
+tags:
+  - markers
+  - featureLayer
+  - style
+---
+
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'examples.h186knp8')
+    .setView([45.52245801087795, -122.67773866653444], 3);
+    
+var geojson = {
+  "type": "FeatureCollection",
+  "features" : [{
+  "type": "Feature",
+    "geometry": { 
+        "type": "Point", 
+        "coordinates": [-120.086,37.857]
+     }, 
+    "properties": {
+      "title" : "AREA 10",
+      "radius" : 10
+     }
+},{
+  "type": "Feature",
+    "geometry": { 
+        "type": "Point", 
+        "coordinates": [-117.609,34.317]
+     }, 
+    "properties": {
+      "title" : "GOBBLERS",
+      "radius" : 50
+     }
+},{
+  "type": "Feature",
+    "geometry": { 
+        "type": "Point", 
+        "coordinates": [-122.67773866653444,45.52245801087795]
+     }, 
+    "properties": {
+      "title" : "FRENCH GULCH",
+      "radius" : 10
+     }
+}
+  ]
+};
+
+L.mapbox.featureLayer(geojson, {
+  pointToLayer: function(feature, latlon) {
+    return L.circleMarker(latlon, {radius: feature.properties.radius});
+  }
+}).addTo(map);
+</script>
+
+</body>
+</html>
