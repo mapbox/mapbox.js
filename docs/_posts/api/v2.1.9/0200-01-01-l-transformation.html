@@ -1,0 +1,67 @@
+---
+layout: api
+title: "v2.1.9 JavaScript Library: L.Transformation"
+categories: api
+version: v2.1.9
+permalink: /api/v2.1.9/l-transformation
+---
+<h2 id="transformation">Transformation</h2>
+
+<p>Represents an affine transformation: a set of coefficients <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> for transforming a point of a form <code>(x, y)</code> into <code>(a*x + b, c*y + d)</code> and doing the reverse. Used by Leaflet in its projections code.</p>
+
+<pre><code>var transformation = new L.Transformation(2, 5, -1, 10),
+	p = L.point(1, 2),
+	p2 = transformation.transform(p), //  L.point(7, 8)
+	p3 = transformation.untransform(p2); //  L.point(1, 2)
+</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='transformation'>
+	<tr>
+<th class="width250">Creation</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><nobr><span class='keyword'>new</span> <b>L.Transformation</b>(</nobr>
+<nobr>&lt;Number&gt; <i>a</i></nobr>,
+<nobr>&lt;Number&gt; <i>b</i></nobr>,
+<nobr>&lt;Number&gt; <i>c</i></nobr>,
+<nobr>&lt;Number&gt; <i>d</i> )</nobr>
+</code></td>
+
+<td>Creates a transformation object with the given coefficients.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='transformation'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>transform</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.9/l-point">Point</a>&gt; <i>point</i></nobr>,
+<nobr>&lt;Number&gt; <i>scale?</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.1.9/l-point">Point</a></code></td>
+<td>Returns a transformed point, optionally multiplied by the given scale. Only accepts real <code>L.Point</code> instances, not arrays.</td>
+	</tr>
+	<tr>
+<td><code><b>untransform</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.9/l-point">Point</a>&gt; <i>point</i></nobr>,
+<nobr>&lt;Number&gt; <i>scale?</i> )</nobr>
+</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.1.9/l-point">Point</a></code></td>
+<td>Returns the reverse transformation of the given point, optionally divided by the given scale. Only accepts real <code>L.Point</code> instances, not arrays.</td>
+	</tr>
+</table>
+
+
+
+
