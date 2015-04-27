@@ -1,3 +1,8 @@
+## v2.1.9
+
+* Prevent `L.circle` and `L.circleMarker` from being errantly
+  restyled by simplestyle properties in L.mapbox.featureLayer.
+
 ## v2.1.8
 
 * `L.mapbox.sanitize` completely removes `<iframe>` elements instead of
