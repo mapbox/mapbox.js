@@ -93,9 +93,16 @@ var FeatureLayer = L.FeatureGroup.extend({
                 },
                 layer = L.GeoJSON.geometryToLayer(json, pointToLayer),
                 popupHtml = marker.createPopup(json, this.options.sanitizer),
-                style = this.options.style;
+                style = this.options.style,
+                defaultStyle = style === simplestyle.style;
 
-            if (style && 'setStyle' in layer) {
+            if (style && 'setStyle' in layer &&
+                // if the style method is the simplestyle default, then
+                // never style L.Circle or L.CircleMarker because
+                // simplestyle has no rules over them, only over geometry
+                // primitives directly from GeoJSON
+                (!(defaultStyle && (layer instanceof L.Circle ||
+                  layer instanceof L.CircleMarker)))) {
                 if (typeof style === 'function') {
                     style = style(json);
                 }
