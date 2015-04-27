@@ -39,5 +39,7 @@ rebuild it.
 $ ./_docs/build.sh v1.your.version
 ```
 
+Then `git add` the new generated files in the docs directory.
+
 Then update the version number in `_config.yml` and its variants,
 and then in the relevant server software.
