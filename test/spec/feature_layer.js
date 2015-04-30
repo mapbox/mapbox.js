@@ -168,6 +168,18 @@ describe('L.mapbox.featureLayer', function() {
             });
         });
 
+        it('circleMarker styles are not overriden', function(done) {
+            var layer  = L.mapbox.featureLayer(helpers.geoJson, {
+                pointToLayer: function (feature, lonlat) {
+                  return L.circleMarker(lonlat, { fillColor: 'yellow' });
+                }
+            });
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('yellow');
+                done();
+            });
+        });
+
         it('also works with pointToLayer as a function', function(done) {
             var layer  = L.mapbox.featureLayer(helpers.geoJson, {
                 pointToLayer: function (feature, lonlat) {
