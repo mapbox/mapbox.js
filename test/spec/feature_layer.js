@@ -100,12 +100,11 @@ describe('L.mapbox.featureLayer', function() {
             expect(layer.getGeoJSON()).to.eql(helpers.geoJson);
         });
 
-        it("styles GeoJSON features", function(done) {
+        it("styles GeoJSON features", function() {
             var layer = L.mapbox.featureLayer();
             expect(layer.setGeoJSON(helpers.geoJsonPoly)).to.eql(layer);
             layer.eachLayer(function(l) {
                 expect(l.options.color).to.eql('#f00');
-                done();
             });
         });
 
@@ -145,8 +144,50 @@ describe('L.mapbox.featureLayer', function() {
         });
     });
 
+    describe("#getStyle", function() {
+        it("returns the style option", function() {
+            var style = {fillColor: 'blue'},
+                layer = L.mapbox.featureLayer(null, {style: style});
+            expect(layer.getStyle()).to.equal(style);
+        });
+    });
+
+    describe("#setStyle", function() {
+        it('resets the style of the polygon feature layer', function() {
+            var layer  = L.mapbox.featureLayer(helpers.geoJsonPoly, {
+                style: {fillColor: 'blue'}
+            });
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('blue');
+            });
+            layer.setFilter(function (f) {return false;});
+            layer.setStyle({fillColor:'yellow'});
+            layer.setFilter(function (f) {return true;});
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('yellow');
+            });
+        });
+        it('resets the style of Points using pointToLayer', function() {
+            var layer  = L.mapbox.featureLayer(helpers.geoJson, {
+                pointToLayer: function (feature, lonlat) {
+                  return L.circleMarker(lonlat);
+                },
+                style: {fillColor: 'blue'}
+            });
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('blue');
+            });
+            layer.setFilter(function (f) {return false;});
+            layer.setStyle({fillColor:'yellow'});
+            layer.setFilter(function (f) {return true;});
+            layer.eachLayer(function(l) {
+                expect(l.options.fillColor).to.eql('yellow');
+            });
+        });
+    });
+
     describe("supports a style option", function() {
-        it('styles polygons as a function', function(done) {
+        it('styles polygons as a function', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJsonPoly, {
                 style: function (feature) {
                     return {fillColor: 'blue'};
@@ -154,21 +195,19 @@ describe('L.mapbox.featureLayer', function() {
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
         });
 
-        it('styles polygons as an object', function(done) {
+        it('styles polygons as an object', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJsonPoly, {
                 style: {fillColor: 'blue'}
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
         });
 
-        it('also works with pointToLayer as a function', function(done) {
+        it('also works with pointToLayer as a function', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJson, {
                 pointToLayer: function (feature, lonlat) {
                   return L.circleMarker(lonlat);
@@ -179,11 +218,10 @@ describe('L.mapbox.featureLayer', function() {
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
         });
 
-        it('also works with pointToLayer as an object', function(done) {
+        it('also works with pointToLayer as an object', function() {
             var layer  = L.mapbox.featureLayer(helpers.geoJson, {
                 pointToLayer: function (feature, lonlat) {
                   return L.circleMarker(lonlat);
@@ -192,7 +230,6 @@ describe('L.mapbox.featureLayer', function() {
             });
             layer.eachLayer(function(l) {
                 expect(l.options.fillColor).to.eql('blue');
-                done();
             });
         });
     });

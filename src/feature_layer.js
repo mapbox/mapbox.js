@@ -61,6 +61,19 @@ var FeatureLayer = L.FeatureGroup.extend({
         return this.loadURL(urlhelper('/' + id + '/features.json', this.options.accessToken));
     },
 
+    setStyle: function(_) {
+        this.options.style = _;
+        if (this._geojson) {
+            this.clearLayers();
+            this._initialize(this._geojson);
+        }
+        return this;
+    },
+
+    getStyle: function() {
+        return this.options.style;
+    },
+
     setFilter: function(_) {
         this.options.filter = _;
         if (this._geojson) {
