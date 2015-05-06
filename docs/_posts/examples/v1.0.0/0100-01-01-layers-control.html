@@ -13,8 +13,8 @@ tags:
 var map = L.mapbox.map('map').setView([38.8922,-77.0348], 14);
 
 L.control.layers({
-    'Base Map': L.mapbox.tileLayer('examples.map-i87786ca').addTo(map),
-    'Grey Map': L.mapbox.tileLayer('examples.map-20v6611k')
+    'Mapbox Streets': L.mapbox.tileLayer('mapbox.streets').addTo(map),
+    'Mapbox Light': L.mapbox.tileLayer('mapbox.light')
 }, {
     'Bike Stations': L.mapbox.tileLayer('examples.bike-locations'),
     'Bike Lanes': L.mapbox.tileLayer('examples.bike-lanes')

@@ -29,7 +29,7 @@ var base = new Firebase('https://mapboxexample.firebaseio.com/'),
         (~~(Math.random() * 16)).toString(16),
         (~~(Math.random() * 16)).toString(16),
         (~~(Math.random() * 16)).toString(16)].join('');
-    map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([0, 0], 5);
+    map = L.mapbox.map('map', 'mapbox.streets').setView([0, 0], 5);
 
 // Create the marker that the user drags to add their message to the map
 var marker = L.marker([0, 0], {

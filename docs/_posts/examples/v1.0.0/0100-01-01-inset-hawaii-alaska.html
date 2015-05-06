@@ -32,7 +32,7 @@ tags:
   }
 </style>
 <script>
-var mapid = 'examples.map-i86nkdio';
+var mapid = 'mapbox.streets';
 var overlayOptions = {
     zoomControl: false,
     attributionControl: false
@@ -44,6 +44,6 @@ var map = L.mapbox.map('map', mapid)
 var mapOverlayHawaii = L.mapbox.map('map-overlay-hawaii', mapid, overlayOptions)
     .fitBounds([[18.542116654448996,-161.03759765625],[22.573438264572406,-154.22607421875]]);
 
-var mapOverlayAlaska = L.mapbox.map('map-overlay-alaska', 'examples.map-i86nkdio', overlayOptions)
+var mapOverlayAlaska = L.mapbox.map('map-overlay-alaska', mapid, overlayOptions)
     .fitBounds([[51.72702815704774,-170.15625],[71.85622888185527,-127.61718749999999]]);
 </script>
