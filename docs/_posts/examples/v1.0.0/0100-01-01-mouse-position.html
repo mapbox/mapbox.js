@@ -29,7 +29,7 @@ tags:
 var click = document.getElementById('click'),
     mousemove = document.getElementById('mousemove');
 
-var map = L.mapbox.map('map', 'examples.h186knp8');
+var map = L.mapbox.map('map', 'mapbox.streets');
 
 map.on('mousemove click', function(e) {
     window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();

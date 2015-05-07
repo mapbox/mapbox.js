@@ -57,7 +57,7 @@ tags:
 <div id='map' class='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([37.9, -77], 7);
+var map = L.mapbox.map('map', 'mapbox.streets').setView([37.9, -77], 7);
 var markers = L.mapbox.featureLayer().addTo(map);
 
 markers.setGeoJSON([{
@@ -78,7 +78,7 @@ markers.setGeoJSON([{
     },
     properties: {
         title: 'Marker two',
-        description: 'This marker has a description about Marker two.'
+        description: 'This marker has a description about Marker Two.'
     }
 }]);
 

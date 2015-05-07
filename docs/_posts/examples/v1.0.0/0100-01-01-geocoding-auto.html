@@ -2,7 +2,7 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Geocoding with Autocomplete
+title: Geocoding with autocomplete
 description: Using the <a href='https://www.mapbox.com/developers/api/geocoding/'>Mapbox Geocoding API</a> to show real-time search suggestions.
 tags:
   - geocoding
@@ -11,7 +11,7 @@ tags:
 
 <div id='map'></div>
 <script>
-L.mapbox.map('map', 'examples.map-i875kd35')
+L.mapbox.map('map', 'mapbox.streets')
     .addControl(L.mapbox.geocoderControl('mapbox.places', {
         autocomplete: true
     }));

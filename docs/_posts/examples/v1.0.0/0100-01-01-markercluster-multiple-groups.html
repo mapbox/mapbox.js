@@ -19,7 +19,7 @@ tags:
 // backing tileLayer, and then use the featureLayer only for its data.
 var map = L.mapbox.map('map')
     .setView([38.9, -77], 13)
-    .addLayer(L.mapbox.tileLayer('examples.h186knp8'));
+    .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
 // Since featureLayer is an asynchronous method, we use the `.on('ready'`
 // call to only use its marker data once we know it is actually loaded.

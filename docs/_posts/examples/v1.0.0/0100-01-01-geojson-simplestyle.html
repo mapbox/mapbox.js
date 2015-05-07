@@ -27,7 +27,7 @@ var geojson = [
   }
 ];
 
-var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+var map = L.mapbox.map('map', 'mapbox.streets')
   .setView([37.8, -96], 4);
 
 L.geoJson(geojson, { style: L.mapbox.simplestyle.style }).addTo(map);
