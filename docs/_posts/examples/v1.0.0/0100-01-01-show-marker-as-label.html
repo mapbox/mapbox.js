@@ -11,7 +11,7 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'examples.map-2k9d7u0c')
+var map = L.mapbox.map('map', 'mapbox.satellite')
     .setView([38.89399, -77.03659], 13);
 
 map.tileLayer.setOpacity(0.2);
@@ -28,7 +28,7 @@ var gj = L.geoJson(null, {
     }
 }).addTo(map);
 
-L.mapbox.featureLayer('examples.map-zr0njcqy')
+L.mapbox.featureLayer('mapbox.dc-markers')
     .on('ready', function(e) {
         gj.addData(this.getGeoJSON());
     });
