@@ -1,4 +1,3 @@
 require('./leaflet');
 require('./mapbox');
-var module = module || {};
-module.exports = window.L;
+module && module.exports = window.L;
