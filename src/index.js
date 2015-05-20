@@ -1,3 +1,5 @@
+"use strict";
+
 var leaflet = require('./leaflet');
 require('./mapbox');
 
