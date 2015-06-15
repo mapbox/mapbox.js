@@ -51,9 +51,9 @@ module.exports = function(url, options) {
         util.strict(callback, 'function');
 
         var args = {};
-        if (typeof _ === 'object') {
+        if (typeof _ === 'object' && !_ instanceof Array) {
             args = _;
-            _ = args.query;
+            _ = args.query ? args.query : '';
         }
 
         request(geocoder.queryURL(_, args), function(err, json) {
