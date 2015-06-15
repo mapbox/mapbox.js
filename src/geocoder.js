@@ -47,8 +47,15 @@ module.exports = function(url, options) {
         });
     };
 
-    geocoder.query = function(_, args, callback) {
+    geocoder.query = function(_, callback) {
         util.strict(callback, 'function');
+
+        var args = {};
+        if (typeof _ === 'object') {
+            args = _;
+            _ = args.query;
+        }
+
         request(geocoder.queryURL(_, args), function(err, json) {
             if (json && (json.length || json.features)) {
                 var res = {
