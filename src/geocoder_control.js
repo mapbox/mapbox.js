@@ -7,7 +7,7 @@ var GeocoderControl = L.Control.extend({
     includes: L.Mixin.Events,
 
     options: {
-        proximity: false,
+        proximity: true,
         position: 'topleft',
         pointZoom: 16,
         keepOpen: false,
