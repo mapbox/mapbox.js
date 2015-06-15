@@ -7,6 +7,7 @@ var GeocoderControl = L.Control.extend({
     includes: L.Mixin.Events,
 
     options: {
+        proximity: false,
         position: 'topleft',
         pointZoom: 16,
         keepOpen: false,
@@ -173,13 +174,13 @@ var GeocoderControl = L.Control.extend({
         L.DomEvent.preventDefault(e);
         if (this._input.value === '') return this._updateSubmit();
         L.DomUtil.addClass(this._container, 'searching');
-        this.geocoder.query(this._input.value, this._updateSubmit);
+        this.geocoder.query(this._input.value, null, this._updateSubmit);
     },
 
     _autocomplete: function(e) {
         if (!this.options.autocomplete) return;
         if (this._input.value === '') return this._updateAutocomplete();
-        this.geocoder.query(this._input.value, this._updateAutocomplete);
+        this.geocoder.query(this._input.value, null, this._updateAutocomplete);
     }
 });
 

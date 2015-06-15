@@ -8,20 +8,25 @@ var util = require('./util'),
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
 module.exports = function(url, options) {
-
+    if (!options) options = {};
     var geocoder = {};
 
     util.strict(url, 'string');
 
     if (url.indexOf('/') === -1) {
-        url = urlhelper('/geocode/' + url + '/{query}.json', options && options.accessToken);
+        if (options.proximity) {
+            url = urlhelper('/geocode/' + url + '/{query}.json?proximity={proximity}', options.accessToken);
+        } else {
+            url = urlhelper('/geocode/' + url + '/{query}.json', options.accessToken);
+        }
     }
 
     geocoder.getURL = function() {
         return url;
     };
 
-    geocoder.queryURL = function(_) {
+    geocoder.queryURL = function(_, args) {
+        if (!args) args = {};
         var query;
 
         if (typeof _ !== 'string') {
@@ -35,12 +40,16 @@ module.exports = function(url, options) {
         }
 
         feedback.record({geocoding: query});
-        return L.Util.template(geocoder.getURL(), {query: query});
+
+        return L.Util.template(geocoder.getURL(), {
+            proximity: args.proximity ? encodeURIComponent(args.proximity[0]+','+args.proximity[1]) : false,
+            query: query 
+        });
     };
 
-    geocoder.query = function(_, callback) {
+    geocoder.query = function(_, args, callback) {
         util.strict(callback, 'function');
-        request(geocoder.queryURL(_), function(err, json) {
+        request(geocoder.queryURL(_, args), function(err, json) {
             if (json && (json.length || json.features)) {
                 var res = {
                     results: json
