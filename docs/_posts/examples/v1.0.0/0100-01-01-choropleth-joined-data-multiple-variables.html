@@ -89,7 +89,7 @@ function loadData() {
 
 function joinData(data, layer) {
     // First, get the US state GeoJSON data for reference.
-    var usGeoJSON = usLayer.toGeoJSON(),
+    var usGeoJSON = usLayer.getGeoJSON(),
         byState = {};
 
     // Rearrange it so that instead of being a big array,
