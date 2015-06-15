@@ -1,3 +1,12 @@
+## v2.2.0
+
+* Added `proximity` option to `L.mapbox.geocoderControl` with a default
+  value of **true**. This changes the default behavior of the geocoder control,
+  yielding better results by prioritizing matches closer to the current viewport.
+* Added `proximity` capability to `L.mapbox.geocoder.query`, by replacing
+  the first string/array parameter with an object parameter with members
+  `query` and `proximity`, with `proximity` being a `L.LatLng` instance.
+
 ## v2.1.9
 
 * Prevent `L.circle` and `L.circleMarker` from being errantly
