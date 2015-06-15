@@ -174,16 +174,18 @@ var GeocoderControl = L.Control.extend({
         L.DomEvent.preventDefault(e);
         if (this._input.value === '') return this._updateSubmit();
         L.DomUtil.addClass(this._container, 'searching');
-        this.geocoder.query(this._input.value, {
-            proximity: this._map.getcenter()
+        this.geocoder.query({
+            query: this._input.value,
+            proximity: this._map.getCenter()
         }, this._updateSubmit);
     },
 
     _autocomplete: function(e) {
         if (!this.options.autocomplete) return;
         if (this._input.value === '') return this._updateAutocomplete();
-        this.geocoder.query(this._input.value, {
-            proximity: this._map.getcenter()
+        this.geocoder.query({
+            query: this._input.value,
+            proximity: this._map.getCenter()
         }, this._updateAutocomplete);
     }
 });
