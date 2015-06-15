@@ -11,7 +11,7 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('performs forward geolocation, centering the map on the first result', function() {
-        var map = new L.Map(document.createElement('div')),
+        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
             control = L.mapbox.geocoderControl('mapbox.places').addTo(map);
 
         expect(control instanceof L.mapbox.GeocoderControl).to.eql(true);
@@ -28,7 +28,7 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('performs forward geolocation, centering the map on the first result even if a point', function() {
-        var map = new L.Map(document.createElement('div')),
+        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
             control = L.mapbox.geocoderControl('mapbox.places').addTo(map);
 
         server.respondWith('GET',
@@ -46,6 +46,7 @@ describe('L.mapbox.geocoderControl', function() {
     it('supports the pointzoom option for preferred zoom for point results', function() {
         var map = new L.Map(document.createElement('div')),
             control = L.mapbox.geocoderControl('mapbox.places', {
+                center: [0,0],
                 pointZoom: 10
             }).addTo(map);
 
@@ -64,6 +65,7 @@ describe('L.mapbox.geocoderControl', function() {
     it('pointzoom does not zoom out zoomed-in maps', function() {
         var map = new L.Map(document.createElement('div')),
             control = L.mapbox.geocoderControl('mapbox.places', {
+                center: [0,0],
                 pointZoom: 10
             }).addTo(map);
 
