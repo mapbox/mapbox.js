@@ -1,6 +1,7 @@
 'use strict';
 
-var util = require('./util'),
+var isArray = require('isarray'),
+    util = require('./util'),
     urlhelper = require('./url'),
     feedback = require('./feedback'),
     request = require('./request');
@@ -8,13 +9,17 @@ var util = require('./util'),
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
 module.exports = function(url, options) {
-
+    if (!options) options = {};
     var geocoder = {};
 
     util.strict(url, 'string');
 
     if (url.indexOf('/') === -1) {
-        url = urlhelper('/geocode/' + url + '/{query}.json', options && options.accessToken);
+        if (options.proximity) {
+            url = urlhelper('/geocode/' + url + '/{query}.json?proximity={proximity}', options.accessToken);
+        } else {
+            url = urlhelper('/geocode/' + url + '/{query}.json', options.accessToken);
+        }
     }
 
     geocoder.getURL = function() {
@@ -22,24 +27,32 @@ module.exports = function(url, options) {
     };
 
     geocoder.queryURL = function(_) {
-        var query;
+        var isObject = !(isArray(_) || typeof _ === 'string'),
+            query = isObject ? _.query : _,
+            proximity = isObject ? _.proximity : false;
 
-        if (typeof _ !== 'string') {
+        if (isArray(query)) {
             var parts = [];
-            for (var i = 0; i < _.length; i++) {
-                parts[i] = encodeURIComponent(_[i]);
+            for (var i = 0; i < query.length; i++) {
+                parts[i] = encodeURIComponent(query[i]);
             }
             query = parts.join(';');
         } else {
-            query = encodeURIComponent(_);
+            query = encodeURIComponent(query);
         }
 
-        feedback.record({geocoding: query});
-        return L.Util.template(geocoder.getURL(), {query: query});
+        feedback.record({ geocoding: query });
+
+        return L.Util.template(geocoder.getURL(), {
+            proximity: proximity ?
+                encodeURIComponent(proximity.lng + ',' + proximity.lat) : '',
+            query: query
+        });
     };
 
     geocoder.query = function(_, callback) {
         util.strict(callback, 'function');
+
         request(geocoder.queryURL(_), function(err, json) {
             if (json && (json.length || json.features)) {
                 var res = {
