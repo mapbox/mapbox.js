@@ -327,7 +327,7 @@ Queries the geocoder with a query string, and returns its result, if any.
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | queryString (_required_) | string | a query, expressed as a string, like 'Arkansas' |
-| options | object | an object containing the query and options parameters like `{ query: 'Austin', proximity: [lng, lat] }`
+| options | object | an object containing the query and options parameters like `{ query: 'Austin', proximity: L.latlng(lat, lng) }`
 | callback (_required_) | function | a callback |
 
 The callback is called with arguments
