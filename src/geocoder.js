@@ -26,21 +26,20 @@ module.exports = function(url, options) {
         return url;
     };
 
-    function encodeQuery(query) {
+    geocoder.queryURL = function(_) {
+        var isObject = !(isArray(_) || typeof _ === 'string'),
+            query = isObject ? _.query : _,
+            proximity = isObject ? _.proximity : false;
+
         if (isArray(query)) {
             var parts = [];
             for (var i = 0; i < query.length; i++) {
                 parts[i] = encodeURIComponent(query[i]);
             }
-            return parts.join(';');
+            query = parts.join(';');
+        } else {
+            query = encodeURIComponent(query);
         }
-        return encodeURIComponent(query);
-    }
-
-    geocoder.queryURL = function(_) {
-        var isObject = !(isArray(_) || typeof _ === 'string'),
-            query = encodeQuery(isObject ? _.query : _),
-            proximity = isObject ? _.proximity : false;
 
         feedback.record({ geocoding: query });
 
