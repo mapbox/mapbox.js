@@ -10,9 +10,10 @@
   },
   "main": "src/index.js",
   "dependencies": {
+    "corslite": "0.0.6",
+    "isarray": "0.0.1",
     "leaflet": "0.7.3",
     "mustache": "0.7.3",
-    "corslite": "0.0.6",
     "sanitize-caja": "0.1.3"
   },
   "scripts": {
