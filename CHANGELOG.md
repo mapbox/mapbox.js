@@ -7,6 +7,8 @@
   the first string/array parameter with an object parameter with members
   `query` and `proximity`, with `proximity` being a `L.LatLng` instance.
 * Switched from jshint to eslint for code style checking
+* Now exports `L` object for module loaders like browserify, webpack, jspm,
+  and others.
 
 ## v2.1.9
 
