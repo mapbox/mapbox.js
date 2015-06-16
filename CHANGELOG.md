@@ -6,6 +6,7 @@
 * Added `proximity` capability to `L.mapbox.geocoder.query`, by replacing
   the first string/array parameter with an object parameter with members
   `query` and `proximity`, with `proximity` being a `L.LatLng` instance.
+* Switched from jshint to eslint for code style checking
 
 ## v2.1.9
 
