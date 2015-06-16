@@ -60,10 +60,10 @@ var ShareControl = L.Control.extend({
             twitter = '//twitter.com/intent/tweet?status=' + name + ' ' + url,
             facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
             pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,
-            share = ("<h3>Share this map</h3>" +
-                    "<div class='mapbox-share-buttons'><a class='mapbox-button mapbox-button-icon mapbox-icon-facebook' target='_blank' href='{{facebook}}'>Facebook</a>" +
-                    "<a class='mapbox-button mapbox-button-icon mapbox-icon-twitter' target='_blank' href='{{twitter}}'>Twitter</a>" +
-                    "<a class='mapbox-button mapbox-button-icon mapbox-icon-pinterest' target='_blank' href='{{pinterest}}'>Pinterest</a></div>")
+            share = ('<h3>Share this map</h3>' +
+                    '<div class="mapbox-share-buttons"><a class="mapbox-button mapbox-button-icon mapbox-icon-facebook" target="_blank" href="{{facebook}}">Facebook</a>' +
+                    '<a class="mapbox-button mapbox-button-icon mapbox-icon-twitter" target="_blank" href="{{twitter}}">Twitter</a>' +
+                    '<a class="mapbox-button mapbox-button-icon mapbox-icon-pinterest" target="_blank" href="{{pinterest}}">Pinterest</a></div>')
                     .replace('{{twitter}}', twitter)
                     .replace('{{facebook}}', facebook)
                     .replace('{{pinterest}}', pinterest),

@@ -12,7 +12,7 @@ var LegendControl = L.Control.extend({
         this._legends = {};
     },
 
-    onAdd: function(map) {
+    onAdd: function() {
         this._container = L.DomUtil.create('div', 'map-legends wax-legends');
         L.DomEvent.disableClickPropagation(this._container);
 

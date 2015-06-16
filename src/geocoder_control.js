@@ -55,7 +55,7 @@ var GeocoderControl = L.Control.extend({
         }
     },
 
-    _closeIfOpen: function(e) {
+    _closeIfOpen: function() {
         if (L.DomUtil.hasClass(this._container, 'active') &&
             !this.options.keepOpen) {
             L.DomUtil.removeClass(this._container, 'active');
@@ -71,7 +71,7 @@ var GeocoderControl = L.Control.extend({
             results = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-results', container),
             wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container),
             form = L.DomUtil.create('form', 'leaflet-control-mapbox-geocoder-form', wrap),
-            input  = L.DomUtil.create('input', '', form);
+            input = L.DomUtil.create('input', '', form);
 
         link.href = '#';
         link.innerHTML = '&nbsp;';
@@ -183,7 +183,7 @@ var GeocoderControl = L.Control.extend({
         }, this._updateSubmit);
     },
 
-    _autocomplete: function(e) {
+    _autocomplete: function() {
         if (!this.options.autocomplete) return;
         if (this._input.value === '') return this._updateAutocomplete();
         this.geocoder.query({

@@ -2,8 +2,9 @@
 
 var corslite = require('corslite'),
     strict = require('./util').strict,
-    config = require('./config'),
-    protocol = /^(https?:)?(?=\/\/(.|api)\.tiles\.mapbox\.com\/)/;
+    config = require('./config');
+
+var protocol = /^(https?:)?(?=\/\/(.|api)\.tiles\.mapbox\.com\/)/;
 
 module.exports = function(url, callback) {
     strict(url, 'string');
@@ -13,18 +14,19 @@ module.exports = function(url, callback) {
         if (!('withCredentials' in new window.XMLHttpRequest())) {
             // XDomainRequest in use; doesn't support cross-protocol requests
             return document.location.protocol;
-        } else if ('https:' === protocol || 'https:' === document.location.protocol || config.FORCE_HTTPS) {
+        } else if (protocol === 'https:' || document.location.protocol === 'https:' || config.FORCE_HTTPS) {
             return 'https:';
         } else {
             return 'http:';
         }
     });
 
-    return corslite(url, onload);
     function onload(err, resp) {
         if (!err && resp) {
             resp = JSON.parse(resp.responseText);
         }
         callback(err, resp);
     }
+
+    return corslite(url, onload);
 };
