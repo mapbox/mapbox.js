@@ -51,7 +51,7 @@ module.exports = function(url, options) {
         util.strict(callback, 'function');
 
         var args = {};
-        if (typeof _ === 'object' && !Array.isArray(_)) {
+        if (typeof _ === 'object' && Object.prototype.toString.call(_) !== '[object Array]') {
             args = _;
             _ = args.query ? args.query : '';
         }
