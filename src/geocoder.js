@@ -42,7 +42,7 @@ module.exports = function(url, options) {
         feedback.record({geocoding: query});
 
         return L.Util.template(geocoder.getURL(), {
-            proximity: args.proximity ? encodeURIComponent(args.proximity[0]+','+args.proximity[1]) : false,
+            proximity: args.proximity ? encodeURIComponent(args.proximity[0]+','+args.proximity[1]) : '',
             query: query 
         });
     };
@@ -51,7 +51,7 @@ module.exports = function(url, options) {
         util.strict(callback, 'function');
 
         var args = {};
-        if (typeof _ === 'object' && !_ instanceof Array) {
+        if (typeof _ === 'object' && !Array.isArray(_)) {
             args = _;
             _ = args.query ? args.query : '';
         }

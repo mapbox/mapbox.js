@@ -176,7 +176,7 @@ var GeocoderControl = L.Control.extend({
         L.DomUtil.addClass(this._container, 'searching');
         this.geocoder.query({
             query: this._input.value,
-            proximity: this._map.getCenter()
+            proximity: this.options.proximity ? [this._map.getCenter().lng, this._map.getCenter().lat] : false
         }, this._updateSubmit);
     },
 
@@ -185,7 +185,7 @@ var GeocoderControl = L.Control.extend({
         if (this._input.value === '') return this._updateAutocomplete();
         this.geocoder.query({
             query: this._input.value,
-            proximity: this._map.getCenter()
+            proximity: this.options.proximity ? [this._map.getCenter().lng, this._map.getCenter().lat] : false
         }, this._updateAutocomplete);
     }
 });

@@ -44,7 +44,7 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('supports the pointzoom option for preferred zoom for point results', function() {
-        var map = new L.Map(document.createElement('div')),
+        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
             control = L.mapbox.geocoderControl('mapbox.places', {
                 center: [0,0],
                 pointZoom: 10
@@ -63,7 +63,7 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('pointzoom does not zoom out zoomed-in maps', function() {
-        var map = new L.Map(document.createElement('div')),
+        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
             control = L.mapbox.geocoderControl('mapbox.places', {
                 center: [0,0],
                 pointZoom: 10
@@ -137,7 +137,9 @@ describe('L.mapbox.geocoderControl', function() {
 
         beforeEach(function() {
             map = new L.Map(document.createElement('div'));
-            control = L.mapbox.geocoderControl('http://example.com/{query}.json').addTo(map);
+            control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+                proximity: false
+            }).addTo(map);
         });
 
 
@@ -207,7 +209,34 @@ describe('L.mapbox.geocoderControl', function() {
         beforeEach(function() {
             map = new L.Map(document.createElement('div'));
             control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
-                autocomplete: true
+                autocomplete: true,
+                proximity: false
+            }).addTo(map);
+        });
+
+        it('emits a "found" event when geocoding with autocomplete succeeds', function(done) {
+            control.on('found', function(e) {
+                expect(e.results).to.eql(helpers.geocoderAustin);
+                done();
+            });
+
+            control._input.value = 'austin';
+            happen.once(control._form, { type: 'submit' });
+
+            server.respondWith('GET', 'http://example.com/austin.json',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
+            server.respond();
+        });
+    });
+    
+    describe('autocomplete+proximity events', function() {
+        var map, control;
+
+        beforeEach(function() {
+            map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0});
+            control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+                autocomplete: true,
+                proximity: true
             }).addTo(map);
         });
 
