@@ -11,8 +11,8 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('performs forward geolocation, centering the map on the first result', function() {
-        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
-            control = L.mapbox.geocoderControl('mapbox.places').addTo(map);
+        var map = new L.Map(document.createElement('div')),
+            control = L.mapbox.geocoderControl('mapbox.places', { proximity: false }).addTo(map);
 
         expect(control instanceof L.mapbox.GeocoderControl).to.eql(true);
 
@@ -28,8 +28,8 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('performs forward geolocation, centering the map on the first result even if a point', function() {
-        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
-            control = L.mapbox.geocoderControl('mapbox.places').addTo(map);
+        var map = new L.Map(document.createElement('div')),
+            control = L.mapbox.geocoderControl('mapbox.places', { proximity: false }).addTo(map);
 
         server.respondWith('GET',
             'http://a.tiles.mapbox.com/v4/geocode/mapbox.places/white%20house.json?access_token=key',
@@ -44,9 +44,9 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('supports the pointzoom option for preferred zoom for point results', function() {
-        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
+        var map = new L.Map(document.createElement('div')),
             control = L.mapbox.geocoderControl('mapbox.places', {
-                center: [0,0],
+                proximity: false,
                 pointZoom: 10
             }).addTo(map);
 
@@ -63,9 +63,9 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('pointzoom does not zoom out zoomed-in maps', function() {
-        var map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0 }),
+        var map = new L.Map(document.createElement('div')),
             control = L.mapbox.geocoderControl('mapbox.places', {
-                center: [0,0],
+                proximity: false,
                 pointZoom: 10
             }).addTo(map);
 
@@ -84,12 +84,17 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('sets url based on an id', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places');
+        var control = L.mapbox.geocoderControl('mapbox.places', { proximity: false});
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=key');
     });
 
+    it('sets url based on an id (proximity)', function() {
+        var control = L.mapbox.geocoderControl('mapbox.places');
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?proximity={proximity}&access_token=key');
+    });
+    
     it('supports custom access token', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places', {accessToken: 'custom'});
+        var control = L.mapbox.geocoderControl('mapbox.places', {accessToken: 'custom', proximity: false});
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=custom');
     });
 
@@ -102,9 +107,15 @@ describe('L.mapbox.geocoderControl', function() {
     it('#setID', function() {
         var control = L.mapbox.geocoderControl('mapbox.places');
         expect(control.setID('mapbox.places')).to.eql(control);
+        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?proximity={proximity}&access_token=key');
+    });
+    
+    it('#setID - proximity off', function() {
+        var control = L.mapbox.geocoderControl('mapbox.places', { proximity: false });
+        expect(control.setID('mapbox.places')).to.eql(control);
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=key');
     });
-
+    
     it('is by default in the top left', function() {
         var control = L.mapbox.geocoderControl('mapbox.places');
         expect(control.options.position).to.equal('topleft');
