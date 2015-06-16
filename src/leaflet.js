@@ -1,1 +1,1 @@
-window.L = require('leaflet/dist/leaflet-src');
+module.exports = window.L = require('leaflet/dist/leaflet-src');
