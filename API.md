@@ -316,7 +316,7 @@ A low-level interface to geocoding, useful for more complex uses and reverse-geo
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url | string | Value must be <ul><li>A [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places`</li><li>A geocoder API URL, like `{{site.tileApi}}/v4/geocode/mapbox.places/{query}.json`</li></ul> |
-| options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li><li>`proximity`: boolean which enables viewport based proximity search</li></ul> |
+| options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li><li>`proximity`: boolean which enables viewport based proximity search</li><li>`autocomplete`: boolean which enables autocomplete behavior</li></ul> |
 
 _Returns_ a `L.mapbox.geocoder` object.
 
