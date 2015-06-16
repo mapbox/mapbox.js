@@ -1,6 +1,7 @@
 'use strict';
 
-var util = require('./util'),
+var isArray = require('isarray'),
+    util = require('./util'),
     urlhelper = require('./url'),
     feedback = require('./feedback'),
     request = require('./request');
@@ -25,43 +26,35 @@ module.exports = function(url, options) {
         return url;
     };
 
-    geocoder.queryURL = function(_) {
-        var args = {};
-        var query;
-
-        if (typeof _ === 'object' && Object.prototype.toString.call(_) !== '[object Array]') { 
-            args = _;
-            _ = args.query; 
-        }
-
-        if (typeof _ !== 'string') {
+    function encodeQuery(query) {
+        if (isArray(query)) {
             var parts = [];
-            for (var i = 0; i < _.length; i++) {
-                parts[i] = encodeURIComponent(_[i]);
+            for (var i = 0; i < query.length; i++) {
+                parts[i] = encodeURIComponent(query[i]);
             }
-            query = parts.join(';');
-        } else {
-            query = encodeURIComponent(_);
+            return parts.join(';');
         }
+        return encodeURIComponent(query);
+    }
 
-        feedback.record({geocoding: query});
+    geocoder.queryURL = function(_) {
+        var isObject = !(isArray(_) || typeof _ === 'string'),
+            query = encodeQuery(isObject ? _.query : _),
+            proximity = isObject ? _.proximity : false;
+
+        feedback.record({ geocoding: query });
 
         return L.Util.template(geocoder.getURL(), {
-            proximity: args.proximity ? encodeURIComponent([args.proximity.lng + ',' + args.proximity.lat]) : '',
-            query: query 
+            proximity: proximity ?
+                encodeURIComponent(proximity.lng + ',' + proximity.lat) : '',
+            query: query
         });
     };
 
     geocoder.query = function(_, callback) {
         util.strict(callback, 'function');
 
-        var args = {};
-        if (typeof _ === 'object' && Object.prototype.toString.call(_) !== '[object Array]') {
-            args = _;
-            _ = args.query ? args.query : '';
-        }
-
-        request(geocoder.queryURL({ query: _, proximity: args.proximity }), function(err, json) {
+        request(geocoder.queryURL(_), function(err, json) {
             if (json && (json.length || json.features)) {
                 var res = {
                     results: json
