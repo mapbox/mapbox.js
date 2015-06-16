@@ -11,6 +11,8 @@ module.exports = function(url, options) {
     if (!options) options = {};
     var geocoder = {};
 
+    console.log("OPTIONS:", JSON.stringify(options));
+
     util.strict(url, 'string');
 
     if (url.indexOf('/') === -1) {
@@ -20,6 +22,7 @@ module.exports = function(url, options) {
             url = urlhelper('/geocode/' + url + '/{query}.json', options.accessToken);
         }
     }
+    console.log(url);
 
     geocoder.getURL = function() {
         return url;

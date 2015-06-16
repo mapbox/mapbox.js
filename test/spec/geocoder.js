@@ -65,6 +65,28 @@ describe('L.mapbox.geocoder', function() {
         });
     });
 
+
+    describe('#query proximity', function() {
+        it('performs forward geolocation', function(done) {
+            var g = L.mapbox.geocoder('mapbox.places', { proximity: true });
+
+            server.respondWith('GET',
+                'http://a.tiles.mapbox.com/v4/geocode/mapbox.places/austin.json?proximity=0,0&access_token=key',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
+
+            g.query({
+                    proximity: [0,0],
+                    query: 'austin'
+                }, function(err, res) {
+                expect(res.latlng).to.be.near({ lat: 30.2, lng: -97.8 }, 1e-1);
+                expect(res.results).to.eql(helpers.geocoderAustin);
+                done();
+            });
+
+            server.respond();
+        });
+    });
+
     describe('#reverseQuery', function() {
         it('performs reverse geolocation', function() {
             var g = L.mapbox.geocoder('mapbox.places');
