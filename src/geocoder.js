@@ -25,9 +25,14 @@ module.exports = function(url, options) {
         return url;
     };
 
-    geocoder.queryURL = function(_, args) {
-        if (!args) args = {};
+    geocoder.queryURL = function(_) {
+        var args = {};
         var query;
+
+        if (typeof _ === 'object' && Object.prototype.toString.call(_) !== '[object Array]') { 
+            args = _;
+            _ = args.query; 
+        }
 
         if (typeof _ !== 'string') {
             var parts = [];
@@ -42,7 +47,7 @@ module.exports = function(url, options) {
         feedback.record({geocoding: query});
 
         return L.Util.template(geocoder.getURL(), {
-            proximity: args.proximity ? encodeURIComponent([args.proximity.lng, args.proximity.lat]) : '',
+            proximity: args.proximity ? encodeURIComponent([args.proximity.lng + ',' + args.proximity.lat]) : '',
             query: query 
         });
     };
@@ -56,7 +61,7 @@ module.exports = function(url, options) {
             _ = args.query ? args.query : '';
         }
 
-        request(geocoder.queryURL(_, args), function(err, json) {
+        request(geocoder.queryURL({ query: _, proximity: args.proximity }), function(err, json) {
             if (json && (json.length || json.features)) {
                 var res = {
                     results: json
