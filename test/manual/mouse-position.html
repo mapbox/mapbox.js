@@ -30,7 +30,7 @@
     var click = document.getElementById('click'),
         mousemove = document.getElementById('mousemove');
 
-    var map = L.mapbox.map('map', 'examples.map-20v6611k');
+    var map = L.mapbox.map('map', 'mapbox.light');
 
     map.on('mousemove click', function(e) {
         window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();

@@ -28,7 +28,7 @@ interactivity.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>url can be <ul><li>A map <code>id</code> string <code>examples.map-foo</code></li><li>A comma separated list of map <code>id</code> strings <code>examples.map-foo,examples.map-bar</code> <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/compositing/">example</a></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A <a href="https://www.mapbox.com/developers/tilejson/">TileJSON</a> object, from your own Javascript code</li></ul></td>
+<td>url can be <ul><li>A map <code>id</code> string <code>examples.map-foo</code></li><li>A comma separated list of map <code>id</code> strings <code>examples.map-foo,examples.map-bar</code> <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/compositing/">example</a></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A <a href="https://www.mapbox.com/developers/tilejson/">TileJSON</a> object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -39,8 +39,8 @@ interactivity.</p>
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// map refers to a &lt;div&gt; element with the ID map
-// examples.map-4l7djmvo is the ID of a map on Mapbox.com
-var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-4l7djmvo&#39;);
+// mapbox.streets is the ID of a map on Mapbox.com
+var map = L.mapbox.map(&#39;map&#39;, &#39;mapbox.streets&#39;);
 
 // map refers to a &lt;div&gt; element with the ID map
 // This map will have no layers initially
@@ -68,7 +68,7 @@ interface to layers from Mapbox and elsewhere.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -79,17 +79,17 @@ interface to layers from Mapbox and elsewhere.</p>
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
+var layer = L.mapbox.tileLayer(&#39;mapbox.streets&#39;);
 
 // you can also provide a full url to a TileJSON resource
-var layer = L.mapbox.tileLayer(&#39;{{site.tileApi}}/v3/examples.map-0l53fhk2.json&#39;);
+var layer = L.mapbox.tileLayer(&#39;{{site.tileApi}}/v3/mapbox.dark.json&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="#l-mapbox-tilelayer">L.mapbox.TileLayer</a></code></p>
 <h3 id="tilelayer-gettilejson">tileLayer.getTileJSON()</h3>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;)
+<pre><code>var layer = L.mapbox.tileLayer(&#39;mapbox.streets&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
@@ -120,7 +120,7 @@ in order to load maps faster</p>
 <p><em>Example</em>:</p>
 <pre><code>// Downsample tiles for faster loading times on slow
 // internet connections
-var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
+var layer = L.mapbox.tileLayer(&#39;mapbox.streets&#39;, {
     format: &#39;jpg70&#39;
 });
 </code></pre><p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/tilelayer-setformat/">Live example of .setFormat in use</a></p>
@@ -140,7 +140,7 @@ interactivity into your map, which you can easily access with <code><a href="#l-
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -151,7 +151,7 @@ interactivity into your map, which you can easily access with <code><a href="#l-
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
+var layer = L.mapbox.gridLayer(&#39;mapbox.streets&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="#l-mapbox-gridlayer">L.mapbox.GridLayer</a></code></p>
 <h3 id="gridlayer-on">gridLayer.on(event, handler, context)</h3>
@@ -203,7 +203,7 @@ same argument structure.</p>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;)
+<pre><code>var layer = L.mapbox.gridLayer(&#39;mapbox.streets&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
@@ -253,7 +253,7 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> geojson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -313,9 +313,9 @@ featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);
 <pre><code>var featureLayer = L.mapbox.featureLayer()
     .addTo(map);
 
-// loads markers from the map `examples.map-0l53fhk2` on Mapbox,
+// loads markers from the map `mapbox.dark` on Mapbox,
 // if that map has markers
-featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);
+featureLayer.loadID(&#39;mapbox.dark&#39;);
 </code></pre><p><em>Returns</em>: the layer object</p>
 <h3 id="featurelayer-setfilter">featureLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>
@@ -791,7 +791,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tr>
 <td>id <em>or</em> url <em>optional</em></td>
 <td>string</td>
-<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul></td>
+<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code> If not supplied, the TileJSON from the map is used.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -801,7 +801,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.map(&#39;map&#39;, &#39;examples.map-i875kd35&#39;)
+<pre><code>var map = L.map(&#39;map&#39;, &#39;mapbox.streets&#39;)
     .setView([37, -77], 5)
     .addControl(L.mapbox.shareControl());
 </code></pre><p><em>Returns</em>:
@@ -984,7 +984,7 @@ instead. For example, replace</p>
 <li><p><code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="#l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> no longer accept arbitrary map IDs.
 Instead you must provide a predefined geocoder index ID (or the ID of a custom geocoder
 index). For instance, replace</p>
-<pre><code>L.mapbox.geocoderControl(&#39;examples.map-i86nkdio&#39;).addTo(map);
+<pre><code>L.mapbox.geocoderControl(&#39;mapbox.outdoors&#39;).addTo(map);
 </code></pre><p>with</p>
 <pre><code>L.mapbox.geocoderControl(&#39;mapbox.places&#39;).addTo(map);
 </code></pre><p>See <a href="https://www.mapbox.com/developers/api/geocoding/">the geocoding API documentation</a>

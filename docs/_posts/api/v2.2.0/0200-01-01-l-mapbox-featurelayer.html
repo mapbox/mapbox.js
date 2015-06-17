@@ -21,7 +21,7 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> geojson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -81,9 +81,9 @@ featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);
 <pre><code>var featureLayer = L.mapbox.featureLayer()
     .addTo(map);
 
-// loads markers from the map `examples.map-0l53fhk2` on Mapbox,
+// loads markers from the map `mapbox.dark` on Mapbox,
 // if that map has markers
-featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);
+featureLayer.loadID(&#39;mapbox.dark&#39;);
 </code></pre><p><em>Returns</em>: the layer object</p>
 <h3 id="section-featurelayer-setfilter">featureLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>
