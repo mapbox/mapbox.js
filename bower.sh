@@ -45,8 +45,9 @@ function prepare {
 
   # move js files from the build
   cp $BUILD_DIR/*.js $TMP_DIR/$REPO/
+  cp $BUILD_DIR/*.js.map $TMP_DIR/$REPO/
 
-  # move js files from the build
+  # move css files from the build
   cp $BUILD_DIR/*.css $TMP_DIR/$REPO/
 
   # move images folder from the build

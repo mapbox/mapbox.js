@@ -5,8 +5,8 @@ source: docs
 permalink: /:categories/:title
 baseurl: /mapbox.js
 highlighter: pygments
-mapboxjs: v2.1.6
-defaultid: 'examples.map-i86nkdio'
+mapboxjs: v2.2.0
+defaultid: 'mapbox.streets'
 rdiscount:
   extensions: [smart]
 exclude: [dist]

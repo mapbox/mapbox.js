@@ -1,7 +1,6 @@
 'use strict';
 
-var util = require('./util'),
-    tileLayer = require('./tile_layer').tileLayer,
+var tileLayer = require('./tile_layer').tileLayer,
     featureLayer = require('./feature_layer').featureLayer,
     gridLayer = require('./grid_layer').gridLayer,
     gridControl = require('./grid_control').gridControl,
@@ -27,7 +26,8 @@ var LMap = L.Map.extend({
         legendControl: {},
         gridControl: {},
         infoControl: false,
-        shareControl: false
+        shareControl: false,
+        sanitizer: require('sanitize-caja')
     },
 
     _tilejson: {},
@@ -41,7 +41,7 @@ var LMap = L.Map.extend({
         if (this.attributionControl) {
             this.attributionControl.setPrefix('');
 
-            var compact =  this.options.attributionControl.compact;
+            var compact = this.options.attributionControl.compact;
             // Set a compact display if map container width is < 640 or
             // compact is set to `true` in attributionControl options.
             if (compact || (compact !== false && this._container.offsetWidth <= 640)) {
@@ -143,7 +143,7 @@ var LMap = L.Map.extend({
         }
 
         if (this.infoControl && json.attribution) {
-            this.infoControl.addInfo(json.attribution);
+            this.infoControl.addInfo(this.options.sanitizer(json.attribution));
             this._updateMapFeedbackLink();
         }
 

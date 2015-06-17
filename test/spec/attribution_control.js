@@ -13,6 +13,10 @@ describe('L.control.attribution', function() {
 
     it('toggles leaflet-compact-attribution class', function() {
         var map = L.mapbox.map(el);
+
+        el.style.width = '200px';
+        map.fire('resize');
+
         var attributionControl = el.querySelector('.leaflet-control-attribution');
         expect(attributionControl.classList.contains('leaflet-compact-attribution')).to.eql(true);
 

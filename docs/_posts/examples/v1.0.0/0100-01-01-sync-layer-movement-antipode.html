@@ -2,7 +2,7 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Sync Maps With Antipodes
+title: Sync maps with antipodes
 description: Create maps that show each others antipodes. Inspired by <a href='http://www.freemaptools.com/tunnel-to-other-side-of-the-earth.htm'>tunnel to the other side of the earth</a>.
 tags:
   - ui
@@ -17,9 +17,9 @@ tags:
 <script>
 // Instead of our usual one map, we will create two in this example to make
 // things interesting.
-var map1 = L.mapbox.map('map1', 'examples.map-i86nkdio')
+var map1 = L.mapbox.map('map1', 'mapbox.streets')
     .setView([40, -74.50], 9);
-var map2 = L.mapbox.map('map2', 'examples.map-h68a1pf7')
+var map2 = L.mapbox.map('map2', 'mapbox.emerald')
     .setView([-40, -74.50 - 180], 9);
 
 // when either map finishes moving, trigger an update on the other one.

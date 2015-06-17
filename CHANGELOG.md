@@ -1,3 +1,30 @@
+## v2.2.0
+
+* Added `proximity` option to `L.mapbox.geocoderControl` with a default
+  value of **true**. This changes the default behavior of the geocoder control,
+  yielding better results by prioritizing matches closer to the current viewport.
+* Added `proximity` capability to `L.mapbox.geocoder.query`, by replacing
+  the first string/array parameter with an object parameter with members
+  `query` and `proximity`, with `proximity` being a `L.LatLng` instance.
+* Switched from jshint to eslint for code style checking
+* Now exports `L` object for module loaders like browserify, webpack, jspm,
+  and others.
+
+## v2.1.9
+
+* Prevent `L.circle` and `L.circleMarker` from being errantly
+  restyled by simplestyle properties in L.mapbox.featureLayer.
+
+## v2.1.8
+
+* `L.mapbox.sanitize` completely removes `<iframe>` elements instead of
+  treating them like CDATA-containing tags. Updates sanitize-caja dependency
+  to 0.1.3.
+
+## v2.1.7
+
+* Sanitize TileJSON-provided attribution
+
 ## v2.1.6
 
 * Fix @2x suffix replacement when tiles array contains `.jpg` extension

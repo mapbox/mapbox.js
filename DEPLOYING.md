@@ -11,6 +11,13 @@ Then make the release with `make`
 
 * Bump `package.json` version
 
+# rebuild
+
+Mapbox.js uses a version number pulled from `package.json`, so _after_ updating package.json,
+rebuild it.
+
+    make
+
 # git tag & npm package
 
     git tag v1.your.version -s -m "Version v1.your.version, with xxx changes"
@@ -25,3 +32,14 @@ Then make the release with `make`
 
     ./bower.sh --action=prepare
     ./bower.sh --action=publish
+
+# deploying to the web
+
+```sh
+$ ./_docs/build.sh v1.your.version
+```
+
+Then `git add` the new generated files in the docs directory.
+
+Then update the version number in `_config.yml` and its variants,
+and then in the relevant server software.

@@ -13,9 +13,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'examples.map-i875kd35')
+var map = L.mapbox.map('map', 'mapbox.streets')
     .on('ready', function() {
-        new L.Control.MiniMap(L.mapbox.tileLayer('examples.map-i86nkdio'))
+        new L.Control.MiniMap(L.mapbox.tileLayer('mapbox.streets'))
             .addTo(map);
     });
 </script>

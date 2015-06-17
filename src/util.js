@@ -1,8 +1,16 @@
 'use strict';
 
+function contains(item, list) {
+    if (!list || !list.length) return false;
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] === item) return true;
+    }
+    return false;
+}
+
 module.exports = {
     idUrl: function(_, t) {
-        if (_.indexOf('/') == -1) t.loadID(_);
+        if (_.indexOf('/') === -1) t.loadID(_);
         else t.loadURL(_);
     },
     log: function(_) {
@@ -35,11 +43,3 @@ module.exports = {
         return new L.LatLngBounds([[_[1], _[0]], [_[3], _[2]]]);
     }
 };
-
-function contains(item, list) {
-    if (!list || !list.length) return false;
-    for (var i = 0; i < list.length; i++) {
-        if (list[i] == item) return true;
-    }
-    return false;
-}

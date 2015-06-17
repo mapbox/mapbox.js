@@ -1,0 +1,63 @@
+---
+layout: api
+title: "v2.1.8 JavaScript Library: L.CircleMarker"
+categories: api
+version: v2.1.8
+permalink: /api/v2.1.8/l-circlemarker
+---
+<h2 id="circlemarker">CircleMarker</h2>
+
+<p>A circle of a fixed size with radius specified in pixels. Extends <a href="/mapbox.js/api/v2.1.8/l-circle">Circle</a>. Use <a href="/mapbox.js/api/v2.1.8/l-map">Map#addLayer</a> to add it to the map.</p>
+
+<h3>Creation</h3>
+
+<table data-id='circlemarker'>
+	<tr>
+<th class="width200">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.circleMarker</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.8/l-latlng">LatLng</a>&gt; <i>latlng</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.8/l-path">Path options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+<td>Instantiates a circle marker given a geographical point and optionally an options object. The default radius is 10 and can be altered by passing a "radius" member in the path options object.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='circlemarker'>
+	<tr>
+<th class="width200">Method</th>
+<th class="minwidth">Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>setLatLng</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.8/l-latlng">LatLng</a>&gt; <i>latlng</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Sets the position of a circle marker to a new location.</td>
+	</tr>
+	<tr>
+<td><code><b>setRadius</b>(
+<nobr>&lt;Number&gt; <i>radius</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Sets the radius of a circle marker. Units are in pixels.</td>
+	</tr>
+	<tr id="circlemarker-togeojson">
+<td><code><b>toGeoJSON</b>()</code></td>
+<td><code>Object</code></td>
+<td>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a> representation of the circle marker (GeoJSON Point Feature).</td>
+	</tr>
+</table>
+
+
+

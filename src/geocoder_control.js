@@ -7,6 +7,7 @@ var GeocoderControl = L.Control.extend({
     includes: L.Mixin.Events,
 
     options: {
+        proximity: true,
         position: 'topleft',
         pointZoom: 16,
         keepOpen: false,
@@ -22,7 +23,10 @@ var GeocoderControl = L.Control.extend({
     },
 
     setURL: function(_) {
-        this.geocoder = geocoder(_, {accessToken: this.options.accessToken});
+        this.geocoder = geocoder(_, {
+            accessToken: this.options.accessToken,
+            proximity: this.options.proximity
+        });
         return this;
     },
 
@@ -51,7 +55,7 @@ var GeocoderControl = L.Control.extend({
         }
     },
 
-    _closeIfOpen: function(e) {
+    _closeIfOpen: function() {
         if (L.DomUtil.hasClass(this._container, 'active') &&
             !this.options.keepOpen) {
             L.DomUtil.removeClass(this._container, 'active');
@@ -67,7 +71,7 @@ var GeocoderControl = L.Control.extend({
             results = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-results', container),
             wrap = L.DomUtil.create('div', 'leaflet-control-mapbox-geocoder-wrap', container),
             form = L.DomUtil.create('form', 'leaflet-control-mapbox-geocoder-form', wrap),
-            input  = L.DomUtil.create('input', '', form);
+            input = L.DomUtil.create('input', '', form);
 
         link.href = '#';
         link.innerHTML = '&nbsp;';
@@ -173,13 +177,19 @@ var GeocoderControl = L.Control.extend({
         L.DomEvent.preventDefault(e);
         if (this._input.value === '') return this._updateSubmit();
         L.DomUtil.addClass(this._container, 'searching');
-        this.geocoder.query(this._input.value, this._updateSubmit);
+        this.geocoder.query({
+            query: this._input.value,
+            proximity: this.options.proximity ? [this._map.getCenter().lng, this._map.getCenter().lat] : false
+        }, this._updateSubmit);
     },
 
-    _autocomplete: function(e) {
+    _autocomplete: function() {
         if (!this.options.autocomplete) return;
         if (this._input.value === '') return this._updateAutocomplete();
-        this.geocoder.query(this._input.value, this._updateAutocomplete);
+        this.geocoder.query({
+            query: this._input.value,
+            proximity: this.options.proximity ? this._map.getCenter() : false
+        }, this._updateAutocomplete);
     }
 });
 

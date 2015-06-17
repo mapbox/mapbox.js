@@ -3,14 +3,14 @@
 var MapboxLogoControl = L.Control.extend({
 
     options: {
-        position: 'bottomleft',
+        position: 'bottomleft'
     },
 
     initialize: function(options) {
         L.setOptions(this, options);
     },
 
-    onAdd: function(map) {
+    onAdd: function() {
         this._container = L.DomUtil.create('div', 'mapbox-logo');
         return this._container;
     },

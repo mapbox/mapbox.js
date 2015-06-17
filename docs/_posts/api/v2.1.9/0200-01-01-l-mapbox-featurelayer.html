@@ -1,0 +1,164 @@
+---
+layout: api
+title: "v2.1.9 JavaScript Library: L.mapbox.featureLayer(id|url|geojson, options)"
+categories: api
+version: v2.1.9
+permalink: /api/v2.1.9/l-mapbox-featurelayer
+---
+<h2 id="section-l-mapbox-featurelayer">L.mapbox.featureLayer(id|url|geojson, options)</h2>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="/mapbox.js/api/v2.1.9/l-featuregroup">L.FeatureGroup</a></code></span></p>
+<p><code><a href="/mapbox.js/api/v2.1.9/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
+from Mapbox and elsewhere into your map.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id <em>or</em> url <em>or</em> geojson</td>
+<td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to <code><a href="/mapbox.js/api/v2.1.9/l-featuregroup">L.FeatureGroup</a></code>, as well as: <ul><li><code>filter</code>: A function that accepts a feature object and returns <code>true</code> or <code>false</code> to indicate whether it should be displayed on the map. This can be changed later using <code>setFilter</code>.</li><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v2.1.9/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this layer.</li><li><code>popupOptions</code>: an object of <a href="http://leafletjs.com/reference.html#popup-maxwidth">options that will be passed to the <code>bindPopup</code> method internally</a>.<li><code>pointToLayer</code>: A function that accepts a feature object and a <code><a href="/mapbox.js/api/v2.1.9/l-latlng">L.LatLng</a></code> and returns a layer to be added. Defaults to <code><a href="/mapbox.js/api/v2.1.9/l-mapbox-marker-style">L.mapbox.marker.style</a></code>.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    .addTo(map);
+</code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v2.1.9/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> object.</p>
+<p><em>Class</em>: <code><a href="/mapbox.js/api/v2.1.9/l-mapbox-featurelayer">L.mapbox.FeatureLayer</a></code></p>
+<h3 id="section-featurelayer-loadurl">featureLayer.loadURL(url)</h3>
+<p>Load GeoJSON data for this layer from the URL given by <code>url</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>A map id</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer()
+    .addTo(map);
+
+featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);
+</code></pre><p><em>Returns</em>: the layer object</p>
+<h3 id="section-featurelayer-loadid">featureLayer.loadID(id)</h3>
+<p>Load marker GeoJSON data from a map with the given <code>id</code> on Mapbox.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url (<em>required</em>)</td>
+<td>string</td>
+<td>A map id</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer()
+    .addTo(map);
+
+// loads markers from the map `examples.map-0l53fhk2` on Mapbox,
+// if that map has markers
+featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);
+</code></pre><p><em>Returns</em>: the layer object</p>
+<h3 id="section-featurelayer-setfilter">featureLayer.setFilter(filter)</h3>
+<p>Sets the filter function for this data layer.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter (<em>required</em>)</td>
+<td>function</td>
+<td>a function that takes GeoJSON features and returns true to show and false to hide features.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    // hide all markers
+    .setFilter(function() { return false; })
+    .addTo(map);
+</code></pre><p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/multiple-marker-filters/">See a live example of .setFilter</a></p>
+<p><em>Returns</em> the featureLayer object.</p>
+<h3 id="section-featurelayer-getfilter">featureLayer.getFilter()</h3>
+<p>Gets the filter function for this data layer.</p>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    // hide all markers
+    .setFilter(function() { return false; })
+    .addTo(map);
+
+// get the filter function
+var fn = featureLayer.getFilter()
+</code></pre><p><em>Returns</em> the filter function.</p>
+<h3 id="section-featurelayer-setgeojson">featureLayer.setGeoJSON(geojson)</h3>
+<p>Set the contents of a markers layer: run the provided
+features through the filter function and then through the factory function to create elements
+for the map. If the layer already has features, they are replaced with the new features.
+An empty array will clear the layer of all features.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>geojson (<em>required</em>)</td>
+<td>object</td>
+<td><code>features</code>, an array of <a href="http://geojson.org/geojson-spec.html#feature-objects">GeoJSON feature objects</a>, or omitted to get the current value.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var featureLayer = L.mapbox.featureLayer(geojson)
+    .addTo(map);
+// a simple GeoJSON featureset with a single point
+// with no properties
+featureLayer.setGeoJSON({
+    type: &quot;FeatureCollection&quot;,
+    features: [{
+        type: &quot;Feature&quot;,
+        geometry: {
+            type: &quot;Point&quot;,
+            coordinates: [102.0, 0.5]
+        },
+        properties: { }
+    }]
+});
+</code></pre><p><em>Returns</em> the featureLayer object</p>
+<h3 id="section-featurelayer-getgeojson">featureLayer.getGeoJSON()</h3>
+<p>Get the contents of this layer as GeoJSON data.</p>
+<p><em>Returns</em> the GeoJSON represented by this layer</p>

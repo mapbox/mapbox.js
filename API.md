@@ -316,17 +316,18 @@ A low-level interface to geocoding, useful for more complex uses and reverse-geo
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | id _or_ url | string | Value must be <ul><li>A [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places`</li><li>A geocoder API URL, like `{{site.tileApi}}/v4/geocode/mapbox.places/{query}.json`</li></ul> |
-| options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li></ul> |
+| options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li><li>`proximity`: boolean which enables viewport based proximity search</li><li>`autocomplete`: boolean which enables autocomplete behavior</li></ul> |
 
 _Returns_ a `L.mapbox.geocoder` object.
 
-### geocoder.query(queryString, callback)
+### geocoder.query(queryString|options, callback)
 
 Queries the geocoder with a query string, and returns its result, if any.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | queryString (_required_) | string | a query, expressed as a string, like 'Arkansas' |
+| options | object | an object containing the query and options parameters like `{ query: 'Austin', proximity: L.latlng(lat, lng) }`
 | callback (_required_) | function | a callback |
 
 The callback is called with arguments
@@ -785,3 +786,14 @@ is available by applying `class="dark"` to the map div.
 _Example_:
 
     <div id="map" class="dark"></div>
+
+## Standalone
+
+By default, Mapbox.js includes a bundled version of Leaflet that Mapbox has ensured
+is compatible. A standalone version of Mapbox.js is also available which you can use if you would like to supply your own version of
+Leaflet. When using this technique, you will use the newest version of Mapbox.css.
+
+
+    <script src='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.js'></script>
+    <link href='{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css' rel='stylesheet' />
+    <script src='your version of Leaflet.js'></script>

@@ -1,0 +1,82 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Filtering marker cluster groups
+description: Show only filtered markers in marker clusters
+tags:
+  - cluster
+---
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+<style>
+#colors {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    width: 150px;
+    padding:5px;
+}
+</style>
+<div id='map'></div>
+<form id='colors'>
+  <div><input type='checkbox' name='filters' onclick='showStations();' value='red' checked> red</div>
+  <div><input type='checkbox' name='filters' onclick='showStations();' value='green' checked> green</div>
+  <div><input type='checkbox' name='filters' onclick='showStations();' value='orange' checked> orange</div>
+  <div><input type='checkbox' name='filters' onclick='showStations();' value='yellow' checked> yellow</div>
+  <div><input type='checkbox' name='filters' onclick='showStations();' value='blue' checked> blue</div>
+</form>
+
+<script>
+// Here we don't use the second argument to map, since that would automatically
+// load in non-clustered markers from the layer. Instead we add just the
+// backing tileLayer, and then use the featureLayer only for its data.
+var map = L.mapbox.map('map')
+    .setView([38.9, -77], 13)
+    .addLayer(L.mapbox.tileLayer('mapbox.streets'));
+
+var overlays = L.layerGroup().addTo(map);
+
+// we create the 'layers' variable outside of the on('ready' callback
+// so that it can be accessible in the showStations function. Otherwise,
+// JavaScript scope would prevent you from accessing it.
+var layers;
+
+// Since featureLayer is an asynchronous method, we use the `.on('ready'`
+// call to only use its marker data once we know it is actually loaded.
+L.mapbox.featureLayer()
+    .loadURL('{{site.baseurl}}/assets/data/stations.geojson')
+    .on('ready', function(e) {
+        layers = e.target;
+        showStations();
+    });
+
+var filters = document.getElementById('colors').filters;
+
+// There are many ways to filter data. Mapbox.js has the .setFilter method,
+// but it only applies to L.mapbox.featureLayer layers, and that isn't what
+// we're creating - we're making marker groups in a MarkerClusterGroup layer.
+// Thus we distill filtering down to its essential part: an 'if' statement
+// in a loop.
+function showStations() {
+    // first collect all of the checked boxes and create an array of strings
+    // like ['green', 'blue']
+    var list = [];
+    for (var i = 0; i < filters.length; i++) {
+        if (filters[i].checked) list.push(filters[i].value);
+    }
+    // then remove any previously-displayed marker groups
+    overlays.clearLayers();
+    // create a new marker group
+    var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
+    // and add any markers that fit the filtered criteria to that group.
+    layers.eachLayer(function(layer) {
+        if (list.indexOf(layer.feature.properties.line) !== -1) {
+            clusterGroup.addLayer(layer);
+        }
+    });
+}
+</script>
