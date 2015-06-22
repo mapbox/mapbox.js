@@ -179,7 +179,7 @@ var GeocoderControl = L.Control.extend({
         L.DomUtil.addClass(this._container, 'searching');
         this.geocoder.query({
             query: this._input.value,
-            proximity: this.options.proximity ? [this._map.getCenter().lng, this._map.getCenter().lat] : false
+            proximity: this.options.proximity ? this._map.getCenter() : false
         }, this._updateSubmit);
     },
 
