@@ -24,8 +24,7 @@ var GeocoderControl = L.Control.extend({
 
     setURL: function(_) {
         this.geocoder = geocoder(_, {
-            accessToken: this.options.accessToken,
-            proximity: this.options.proximity
+            accessToken: this.options.accessToken
         });
         return this;
     },
