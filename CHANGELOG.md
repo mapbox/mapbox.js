@@ -1,3 +1,9 @@
+## v2.2.1
+
+* Fix regression in `L.mapbox.geocoderControl` (#1031)
+* Passing `{proximity: true}` to `L.mapbox.geocoder` constructor is no longer
+  required to use the proximity feature (#1032)
+
 ## v2.2.0
 
 * Added `proximity` option to `L.mapbox.geocoderControl` with a default
