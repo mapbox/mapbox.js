@@ -1,11 +1,15 @@
-describe("util", function() {
-    describe('#lbounds', function() {
-        it('generates a L.LLatLngBounds object', function() {
-            expect(internals.util.lbounds([0, 1, 2, 3])).to.be.a(L.LatLngBounds);
-        });
-    });
+var test = require('tape'),
+    L = require('leaflet'),
+    util = require('../../src/util.js');
 
-    describe('#strict', function() {
+test("util", function(t) {
+    t.test('#lbounds', function(t) {
+        t.ok(util.lbounds([0, 1, 2, 3]) instanceof L.LatLngBounds);
+        t.end();
+    });
+    /*
+
+    t.test('#strict', function(t) {
         it('throws an error on object/string', function() {
             expect(function() {
                 internals.util.strict({}, 'string');
@@ -32,7 +36,7 @@ describe("util", function() {
         });
     });
 
-    describe('#strict_oneof', function() {
+    t.test('#strict_oneof', function(t) {
         it('does not throw an error when in list', function() {
             expect(function() {
                 internals.util.strict_oneof('a', ['a']);
@@ -47,7 +51,7 @@ describe("util", function() {
         });
     });
 
-    describe('#strip_tags', function() {
+    t.test('#strip_tags', function(t) {
         it('strips a basic tag', function() {
             expect(internals.util.strip_tags('<div>foo</div>')).to.eql('foo');
         });
@@ -58,4 +62,6 @@ describe("util", function() {
             expect(internals.util.strip_tags('rabbit')).to.eql('rabbit');
         });
     });
+    t.end();
+    */
 });
