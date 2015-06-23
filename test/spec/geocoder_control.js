@@ -84,17 +84,12 @@ describe('L.mapbox.geocoderControl', function() {
     });
 
     it('sets url based on an id', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places', { proximity: false});
+        var control = L.mapbox.geocoderControl('mapbox.places');
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=key');
     });
 
-    it('sets url based on an id (proximity)', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places');
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?proximity={proximity}&access_token=key');
-    });
-    
     it('supports custom access token', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places', {accessToken: 'custom', proximity: false});
+        var control = L.mapbox.geocoderControl('mapbox.places', {accessToken: 'custom'});
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=custom');
     });
 
@@ -106,12 +101,6 @@ describe('L.mapbox.geocoderControl', function() {
 
     it('#setID', function() {
         var control = L.mapbox.geocoderControl('mapbox.places');
-        expect(control.setID('mapbox.places')).to.eql(control);
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?proximity={proximity}&access_token=key');
-    });
-    
-    it('#setID - proximity off', function() {
-        var control = L.mapbox.geocoderControl('mapbox.places', { proximity: false });
         expect(control.setID('mapbox.places')).to.eql(control);
         expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/{query}.json?access_token=key');
     });
@@ -260,7 +249,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'austin';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/austin.json',
+            server.respondWith('GET', 'http://example.com/austin.json&proximity=0,0',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
             server.respond();
         });

@@ -15,11 +15,7 @@ module.exports = function(url, options) {
     util.strict(url, 'string');
 
     if (url.indexOf('/') === -1) {
-        if (options.proximity) {
-            url = urlhelper('/geocode/' + url + '/{query}.json?proximity={proximity}', options.accessToken);
-        } else {
-            url = urlhelper('/geocode/' + url + '/{query}.json', options.accessToken);
-        }
+        url = urlhelper('/geocode/' + url + '/{query}.json', options.accessToken);
     }
 
     geocoder.getURL = function() {
@@ -28,8 +24,7 @@ module.exports = function(url, options) {
 
     geocoder.queryURL = function(_) {
         var isObject = !(isArray(_) || typeof _ === 'string'),
-            query = isObject ? _.query : _,
-            proximity = isObject ? _.proximity : false;
+            query = isObject ? _.query : _;
 
         if (isArray(query)) {
             var parts = [];
@@ -43,11 +38,14 @@ module.exports = function(url, options) {
 
         feedback.record({ geocoding: query });
 
-        return L.Util.template(geocoder.getURL(), {
-            proximity: proximity ?
-                encodeURIComponent(proximity.lng + ',' + proximity.lat) : '',
-            query: query
-        });
+        var url = L.Util.template(geocoder.getURL(), {query: query});
+
+        if (isObject && _.proximity) {
+            var proximity = L.latLng(_.proximity);
+            url += '&proximity=' + proximity.lng + ',' + proximity.lat;
+        }
+
+        return url;
     };
 
     geocoder.query = function(_, callback) {
