@@ -11,7 +11,7 @@ tags:
 
 <script>
 // Replace 'mapbox.streets' with your map id.
-var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
+var mapboxTiles = L.tileLayer('{{site.tileApi}}/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
     attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
 });
 
