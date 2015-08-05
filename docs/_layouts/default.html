@@ -98,7 +98,7 @@ footer:
   <meta class='swiftype' name='category' data-type='string' content='{{page.category}}' />{% endif %}{% if page.author %}
   <meta class='swiftype' name='author' data-type='string' content='{{page.author}}' />{% endif %}{% if page.excerpt %}
   <meta class='swiftype' name='excerpt' data-type='string' content='{{ page.excerpt | strip_html | strip_newlines | replace:"'","&lsquo;" | replace:"'","&lsquo;" | truncatewords: 30 }}' />{% endif %}
-  {% if site.baseurl == '/mapbox.js' %}{% assign version = page.version | replace:'.','', | replace:'v','' | plus: 0 %}{% if version < 200 %}<meta http-equiv='refresh' content='0;url={{site.url}}{{site.baseurl}}/api/{{site.mapboxjs}}/' />{% endif %}{% if site.mapboxjs != page.version and page.version != 'latest' %}<meta name='robots' content='noindex'>{% endif %}{% endif %}
+  {% if site.baseurl == '/mapbox.js' %}{% if site.mapboxjs != page.version and page.version != 'latest' %}<meta name='robots' content='noindex'>{% endif %}{% endif %}
 
   {% if page.card %}
   <meta name='twitter:site' content='@Mapbox' />
