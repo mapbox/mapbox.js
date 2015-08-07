@@ -440,7 +440,7 @@ Interaction is what we call interactive parts of maps that are created with the 
 _Example_:
 
     var map = L.mapbox.map('map').setView([38, -77], 5);
-    var gridLayer = L.mapbox.gridLayer('mapbox.outdoors');
+    var gridLayer = L.mapbox.gridLayer('examples.map-20v6611k');
     map.addLayer(L.mapbox.tileLayer('mapbox.outdoors'));
     map.addLayer(gridLayer);
     map.addControl(L.mapbox.gridControl(gridLayer));
