@@ -112,7 +112,7 @@ interactivity into your map, which you can easily access with `L.mapbox.gridCont
 _Example_:
 
     // the second argument is optional
-    var layer = L.mapbox.gridLayer('mapbox.streets');
+    var layer = L.mapbox.gridLayer('examples.map-20v6611k');
 
 _Returns_ a `L.mapbox.gridLayer` object.
 
@@ -155,7 +155,7 @@ zoom bounds and other metadata.
 
 _Example_:
 
-    var layer = L.mapbox.gridLayer('mapbox.streets')
+    var layer = L.mapbox.gridLayer('examples.map-20v6611k')
         // since layers load asynchronously through AJAX, use the
         // `.on` function to listen for them to be loaded before
         // calling `getTileJSON()`
@@ -440,8 +440,8 @@ Interaction is what we call interactive parts of maps that are created with the 
 _Example_:
 
     var map = L.mapbox.map('map').setView([38, -77], 5);
-    var gridLayer = L.mapbox.gridLayer('examples.map-8ced9urs');
-    map.addLayer(L.mapbox.tileLayer('examples.map-8ced9urs'));
+    var gridLayer = L.mapbox.gridLayer('examples.map-20v6611k');
+    map.addLayer(L.mapbox.tileLayer('mapbox.outdoors'));
     map.addLayer(gridLayer);
     map.addControl(L.mapbox.gridControl(gridLayer));
 
@@ -686,7 +686,7 @@ necessary, you can use different tokens on the same page by using the `accessTok
 option when creating Mapbox.js objects. For example:
 
  ```
- var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
+ var map = L.mapbox.map('map', 'mapbox.outdoors', {
    accessToken: '<your access token>'
  });
  ```
