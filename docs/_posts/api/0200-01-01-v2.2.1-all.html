@@ -151,7 +151,7 @@ interactivity into your map, which you can easily access with <code><a href="#l-
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.gridLayer(&#39;mapbox.streets&#39;);
+var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="#l-mapbox-gridlayer">L.mapbox.GridLayer</a></code></p>
 <h3 id="gridlayer-on">gridLayer.on(event, handler, context)</h3>
@@ -203,7 +203,7 @@ same argument structure.</p>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.gridLayer(&#39;mapbox.streets&#39;)
+<pre><code>var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
@@ -632,8 +632,8 @@ map.addControl(L.mapbox.legendControl());
 </table>
 <p><em>Example</em>:</p>
 <pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
-var gridLayer = L.mapbox.gridLayer(&#39;examples.map-8ced9urs&#39;);
-map.addLayer(L.mapbox.tileLayer(&#39;examples.map-8ced9urs&#39;));
+var gridLayer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
+map.addLayer(L.mapbox.tileLayer(&#39;mapbox.outdoors&#39;));
 map.addLayer(gridLayer);
 map.addControl(L.mapbox.gridControl(gridLayer));
 </code></pre><p><em>Returns</em>: a <code><a href="#l-mapbox-gridcontrol">L.mapbox.gridControl</a></code> object.</p>
@@ -963,7 +963,7 @@ page. For Mapbox.js, a &quot;Public&quot; token (starting with &quot;pk&quot;) i
 <p>You may create multiple tokens and use different ones for different applications. If
 necessary, you can use different tokens on the same page by using the <code>accessToken</code>
 option when creating Mapbox.js objects. For example:</p>
-<pre><code> var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-8ced9urs&#39;, {
+<pre><code> var map = L.mapbox.map(&#39;map&#39;, &#39;mapbox.outdoors&#39;, {
    accessToken: &#39;&lt;your access token&gt;&#39;
  });
 </code></pre><p>For additional help, see <a href="https://www.mapbox.com/help/create-api-access-token/">&quot;How do I create an API access token?&quot;</a>.</p>
@@ -1114,7 +1114,7 @@ var map = L.map('map', {
 		<td><code><b>maxBounds</b></code></td>
 		<td><code><a href="#l-latlngbounds">LatLngBounds</a></code></td>
 		<td><code><span class="literal">null</span></code></td>
-		<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view. To set the restriction dynamically, use <a href="#l-map">setMaxBounds</a> method</td>
+		<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view. To set the restriction dynamically, use <a href="#l-map-class">setMaxBounds</a> method</td>
     </tr>
 	<tr>
 		<td><code><b>crs</b></code></td>
@@ -1397,7 +1397,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>unload</b></code></td>
 		<td><code><a href="#l-event-objects">Event</a></code></td>
-		<td>Fired when the map is destroyed with <a href="#l-map">remove</a> method.</td>
+		<td>Fired when the map is destroyed with <a href="#l-map-class">remove</a> method.</td>
 	</tr>
 	<tr id="map-viewreset">
 		<td><code><b>viewreset</b></code></td>
@@ -1487,7 +1487,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>locationfound</b></code></td>
 		<td><code><a href="#l-event-objects">LocationEvent</a></code>
-		<td>Fired when geolocation (using the <a href="#l-map">locate</a> method) went successfully.</td>
+		<td>Fired when geolocation (using the <a href="#l-map-class">locate</a> method) went successfully.</td>
 	</tr>
 	<tr>
 		<td><code><b>locationerror</b></code></td>
@@ -1519,7 +1519,7 @@ var map = L.map('map', {
 		<td><code><b>setView</b>(
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>&gt; <i>center</i>,</nobr>
 			<nobr>&lt;Number&gt; <i>zoom?</i>,</nobr>
-			<nobr>&lt;<a href="#l-map">zoom/pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom/pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets the view of the map (geographical center and zoom) with the given animation options.</td>
@@ -1527,7 +1527,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>setZoom</b>(
 			<nobr>&lt;Number&gt; <i>zoom</i></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets the zoom of the map.</td>
@@ -1535,7 +1535,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>zoomIn</b>(
 			<nobr>&lt;Number&gt; <em>delta?</em></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Increases the zoom of the map by <code>delta</code> (<code><span class="number">1</span></code> by default).</td>
@@ -1543,7 +1543,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>zoomOut</b>(
 			<nobr>&lt;Number&gt; <em>delta?</em></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Decreases the zoom of the map by <code>delta</code> (<code><span class="number">1</span></code> by default).</td>
@@ -1552,7 +1552,7 @@ var map = L.map('map', {
 		<td><code><b>setZoomAround</b>(
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>&gt; <i>latlng</i>, </nobr>
 			<nobr>&lt;Number&gt; <i>zoom</i></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Zooms the map while keeping a specified point on the map stationary (e.g. used internally for scroll zoom and double-click zoom).</td>
@@ -1560,14 +1560,14 @@ var map = L.map('map', {
 	<tr id="map-fitbounds">
 		<td><code><b>fitBounds</b>(
 			<nobr>&lt;<a href="#l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
-			<nobr>&lt;<a href="#l-map">fitBounds options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">fitBounds options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets a map view that contains the given geographical bounds with the maximum zoom level possible.</td>
 	</tr>
 	<tr id="map-fitworld">
 		<td><code><b>fitWorld</b>(
-			<nobr>&lt;<a href="#l-map">fitBounds options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">fitBounds options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets a map view that mostly contains the whole world with the maximum zoom level possible.</td>
@@ -1575,7 +1575,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>panTo</b>(
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>&gt; <i>latlng</i></nobr>,
-			<nobr>&lt;<a href="#l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Pans the map to a given center. Makes an animated pan if new center is not more than one screen away from the current one.</td>
@@ -1583,7 +1583,7 @@ var map = L.map('map', {
 	<tr id="map-paninsidebounds">
 		<td><code><b>panInsideBounds</b>(
 			<nobr>&lt;<a href="#l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
-			<nobr>&lt;<a href="#l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Pans the map to the closest view that would lie inside the given bounds (if it's not already), controlling the animation using the options specific, if any.</td>
@@ -1591,7 +1591,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>panBy</b>(
 			<nobr>&lt;<a href="#l-point">Point</a>&gt; <i>point</i></nobr>,
-			<nobr>&lt;<a href="#l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Pans the map by a given number of pixels (animated).</td>
@@ -1605,7 +1605,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>invalidateSize</b>(
-			<nobr>&lt;<a href="#l-map">zoom/pan options</a>&gt; <i>options</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom/pan options</a>&gt; <i>options</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Checks if the map container size changed and updates the map if so &mdash; call it after you've changed the map size dynamically, also animating pan by default. If <code>options.pan</code> is <code><span class="literal">false</span></code>, panning will not occur. If <code>options.debounceMoveend</code> is <code><span class="literal">true</span></code>, it will delay <code>moveend</code> event so that it doesn't happen often even if the method is called many times in a row.</td>
@@ -1613,17 +1613,17 @@ var map = L.map('map', {
 	<tr id="map-setmaxbounds">
 		<td><code><b>setMaxBounds</b>(
 			<nobr>&lt;<a href="#l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr><!--,
-			<nobr>&lt;<a href="#l-map">zoom/pan options</a>&gt; <i>options?</i> )</nobr>-->
+			<nobr>&lt;<a href="#l-map-class">zoom/pan options</a>&gt; <i>options?</i> )</nobr>-->
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Restricts the map view to the given bounds (see <a href="#l-map">map maxBounds</a> option)<!--, animating the map view if bounds are changed.  The given animation options are passed through to `setView` or `panInsideBounds`, depending on map zoom level, and can be used to control how the map animates during this change-->.</td>
+		<td>Restricts the map view to the given bounds (see <a href="#l-map-class">map maxBounds</a> option)<!--, animating the map view if bounds are changed.  The given animation options are passed through to `setView` or `panInsideBounds`, depending on map zoom level, and can be used to control how the map animates during this change-->.</td>
 	</tr>
 	<tr id="map-locate">
 		<td><code><b>locate</b>(
-			<nobr>&lt;<a href="#l-map">Locate options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Locate options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Tries to locate the user using the <a href="https://en.wikipedia.org/wiki/W3C_Geolocation_API">Geolocation API</a>, firing a <code>locationfound</code> event with location data on success or a <code>locationerror</code> event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). See <a href="#l-map">Locate options</a> for more details.</td>
+		<td>Tries to locate the user using the <a href="https://en.wikipedia.org/wiki/W3C_Geolocation_API">Geolocation API</a>, firing a <code>locationfound</code> event with location data on success or a <code>locationerror</code> event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). See <a href="#l-map-class">Locate options</a> for more details.</td>
 	</tr>
 	<tr>
 		<td><code><b>stopLocate</b>()</code></td>
@@ -1766,7 +1766,7 @@ var map = L.map('map', {
 			<nobr>&lt;<a href="#l-popup">Popup</a>&gt; <i>popup?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Closes the popup previously opened with <a href="#l-map">openPopup</a> (or the given one).</td>
+		<td>Closes the popup previously opened with <a href="#l-map-class">openPopup</a> (or the given one).</td>
 	</tr>
 	<tr id="map-addcontrol">
 		<td><code><b>addControl</b>(
@@ -1902,7 +1902,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>getPanes</b>()</code></td>
-		<td><code><a href="#l-map">MapPanes</a></code></td>
+		<td><code><a href="#l-map-class">MapPanes</a></code></td>
 		<td>Returns an object with different map panes (to render overlays in).</td>
 	</tr>
 	<tr>
@@ -1979,13 +1979,13 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>pan</b></code></td>
-		<td><code><a href="#l-map">pan options</a></code></td>
+		<td><code><a href="#l-map-class">pan options</a></code></td>
 		<td><code>-</code></td>
 		<td>Sets the options for the panning (without the zoom change) if it occurs.</td>
 	</tr>
 	<tr>
 		<td><code><b>zoom</b></code></td>
-		<td><code><a href="#l-map">zoom options</a></code></td>
+		<td><code><a href="#l-map-class">zoom options</a></code></td>
 		<td><code>-</code></td>
 		<td>Sets the options for the zoom change if it occurs.</td>
 	</tr>
@@ -2051,7 +2051,7 @@ var map = L.map('map', {
 
 <h3 id="map-fitboundsoptions">fitBounds options</h3>
 
-<p>The same as <a href="#l-map">zoom/pan options</a> and additionally:</p>
+<p>The same as <a href="#l-map-class">zoom/pan options</a> and additionally:</p>
 
 <table data-id='map'>
 	<tr>
@@ -2153,7 +2153,7 @@ var map = L.map('map', {
 
 <h3 id="map-panes">Map Panes</h3>
 
-<p>An object literal (returned by <a href="#l-map">map.getPanes</a></code>) that contains different map panes that you can use to put your custom overlays in. The difference is mostly in zIndex order that such overlays get.</p>
+<p>An object literal (returned by <a href="#l-map-class">map.getPanes</a></code>) that contains different map panes that you can use to put your custom overlays in. The difference is mostly in zIndex order that such overlays get.</p>
 
 <table data-id='map'>
 	<tr>
@@ -2386,7 +2386,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -2508,7 +2508,7 @@ var map = L.map('map', {
 
 <h2 id="l-popup">Popup</h2>
 
-<p>Used to open popups in certain places of the map. Use <a href="#l-map">Map#openPopup</a> to open popups while making sure that only one popup is open at one time (recommended for usability), or use <a href="#l-map">Map#addLayer</a> to open as many as you want.</p>
+<p>Used to open popups in certain places of the map. Use <a href="#l-map-class">Map#openPopup</a> to open popups while making sure that only one popup is open at one time (recommended for usability), or use <a href="#l-map-class">Map#addLayer</a> to open as many as you want.</p>
 
 <h3>Usage example</h3>
 <p>If you want to just bind a popup to marker click and then open it, it's really easy:</p>
@@ -2642,7 +2642,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -2650,7 +2650,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>openOn</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -2903,7 +2903,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -3189,7 +3189,7 @@ L.imageOverlay(imageUrl, imageBounds).addTo(map);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -3386,7 +3386,7 @@ L.imageOverlay(imageUrl, imageBounds).addTo(map);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -3496,7 +3496,7 @@ L.imageOverlay(imageUrl, imageBounds).addTo(map);</code></pre>
 
 <h2 id="l-polyline">Polyline</h2>
 
-<p>A class for drawing polyline overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing polyline overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <h3>Usage example</h3>
 <pre><code class="javascript">// create a red polyline from an arrays of LatLng points
@@ -3674,7 +3674,7 @@ multiple line features:</p>
 
 <h2 id="l-polygon">Polygon</h2>
 
-<p>A class for drawing polygon overlays on a map. Extends <a href="#l-polyline">Polyline</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing polygon overlays on a map. Extends <a href="#l-polyline">Polyline</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <p>Note that points you pass when creating a polygon shouldn't have an additional last point equal to the first one &mdash; it's better to filter out such points.</p>
 
@@ -3781,7 +3781,7 @@ multiple polygon features:</p>
 
 <h2 id="l-rectangle">Rectangle</h2>
 
-<p>A class for drawing rectangle overlays on a map. Extends <a href="#l-polygon">Polygon</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing rectangle overlays on a map. Extends <a href="#l-polygon">Polygon</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <h3>Usage example</h3>
 <pre><code class="javascript">// define rectangle geographical bounds
@@ -3835,7 +3835,7 @@ map.fitBounds(bounds);</code></pre>
 
 <h2 id="l-circle">Circle</h2>
 
-<p>A class for drawing circle overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing circle overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <pre><code class="javascript">L.circle([50.5, 30.5], 200).addTo(map);</pre></code>
 
@@ -3904,7 +3904,7 @@ map.fitBounds(bounds);</code></pre>
 
 <h2 id="l-circlemarker">CircleMarker</h2>
 
-<p>A circle of a fixed size with radius specified in pixels. Extends <a href="#l-circle">Circle</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A circle of a fixed size with radius specified in pixels. Extends <a href="#l-circle">Circle</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <h3>Creation</h3>
 
@@ -3993,7 +3993,7 @@ map.fitBounds(bounds);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -4511,7 +4511,7 @@ map.panTo(L.latLng(50, 30));</code></pre>
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>[]&gt; <i>latlngs</i> )</nobr>
 		</code></td>
 
-		<td>Creates a LatLngBounds object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with <a href="#l-map">fitBounds</a>.</td>
+		<td>Creates a LatLngBounds object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with <a href="#l-map-class">fitBounds</a>.</td>
 	</tr>
 </table>
 
@@ -5115,7 +5115,7 @@ map.addControl(control);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -5123,7 +5123,7 @@ map.addControl(control);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>removeFrom</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -5413,7 +5413,7 @@ L.control.layers(baseLayers, overlays).addTo(map);</code></pre>
 
 <h3>Events</h3>
 
-<p>You can subscribe to the following events on the <a href="#l-map">Map</a> object using <a href="#l-events">these methods</a>.</p>
+<p>You can subscribe to the following events on the <a href="#l-map-class">Map</a> object using <a href="#l-events">these methods</a>.</p>
 
 <table data-id='control-layers'>
 	<tr>
@@ -6873,7 +6873,7 @@ draggable.enable();
 
 
 <h2 id="l-ihandler">IHandler</h2>
-<p>An interface implemented by <a href="#l-map">interaction handlers</a>.</p>
+<p>An interface implemented by <a href="#l-map-class">interaction handlers</a>.</p>
 
 <table data-id='ihandler'>
 	<tr>
@@ -6913,15 +6913,15 @@ draggable.enable();
 	</tr>
 	<tr>
 		<td><code><b>onAdd</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td>-</td>
-		<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="#l-map">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
+		<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="#l-map-class">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
 	</tr>
 	<tr>
 		<td><code><b>onRemove</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td>-</td>
@@ -6931,9 +6931,9 @@ draggable.enable();
 
 <h3>Implementing Custom Layers</h3>
 
-<p>The most important things know about when implementing custom layers are Map <a href="#l-map">viewreset</a> event and <a href="#l-map">latLngToLayerPoint</a> method. <code>viewreset</code> is fired when the map needs to reposition its layers (e.g. on zoom), and <code>latLngToLayerPoint</code> is used to get coordinates for the layer's new position.</p>
+<p>The most important things know about when implementing custom layers are Map <a href="#l-map-class">viewreset</a> event and <a href="#l-map-class">latLngToLayerPoint</a> method. <code>viewreset</code> is fired when the map needs to reposition its layers (e.g. on zoom), and <code>latLngToLayerPoint</code> is used to get coordinates for the layer's new position.</p>
 
-<p>Another event often used in layer implementations is <a href="#l-map">moveend</a> which fires after any movement of the map (panning, zooming, etc.).</p>
+<p>Another event often used in layer implementations is <a href="#l-map-class">moveend</a> which fires after any movement of the map (panning, zooming, etc.).</p>
 
 <p>Another thing to note is that you'll usually need to add <code>leaflet-zoom-hide</code> class to the DOM elements you create for the layer so that it hides during zoom animation. Implementing zoom animation for custom layers is a complex topic and will be documented separately in future, but meanwhile you can take a look at how it's done for Leaflet layers (e.g. <code>ImageOverlay</code>) in the source.</p>
 
@@ -6994,7 +6994,7 @@ map.addLayer(new MyCustomLayer(latlng));
 	</tr>
 	<tr>
 		<td><code><b>onAdd</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code>HTMLElement</code></td>
@@ -7002,7 +7002,7 @@ map.addLayer(new MyCustomLayer(latlng));
 	</tr>
 	<tr>
 		<td><code><b>onRemove</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td>-</td>
