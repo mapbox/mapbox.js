@@ -151,7 +151,7 @@ interactivity into your map, which you can easily access with <code><a href="#l-
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
+var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="#l-mapbox-gridlayer">L.mapbox.GridLayer</a></code></p>
 <h3 id="gridlayer-on">gridLayer.on(event, handler, context)</h3>
@@ -203,7 +203,7 @@ same argument structure.</p>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;)
+<pre><code>var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
@@ -253,7 +253,7 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> geojson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string mapbox.streets</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -632,7 +632,7 @@ map.addControl(L.mapbox.legendControl());
 </table>
 <p><em>Example</em>:</p>
 <pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
-var gridLayer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
+var gridLayer = L.mapbox.gridLayer(&#39;mapbox.light&#39;);
 map.addLayer(L.mapbox.tileLayer(&#39;mapbox.outdoors&#39;));
 map.addLayer(gridLayer);
 map.addControl(L.mapbox.gridControl(gridLayer));
