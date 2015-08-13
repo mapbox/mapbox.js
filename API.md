@@ -112,7 +112,7 @@ interactivity into your map, which you can easily access with `L.mapbox.gridCont
 _Example_:
 
     // the second argument is optional
-    var layer = L.mapbox.gridLayer('examples.map-20v6611k');
+    var layer = L.mapbox.gridLayer('mapbox.light');
 
 _Returns_ a `L.mapbox.gridLayer` object.
 
@@ -155,7 +155,7 @@ zoom bounds and other metadata.
 
 _Example_:
 
-    var layer = L.mapbox.gridLayer('examples.map-20v6611k')
+    var layer = L.mapbox.gridLayer('mapbox.light')
         // since layers load asynchronously through AJAX, use the
         // `.on` function to listen for them to be loaded before
         // calling `getTileJSON()`
@@ -440,7 +440,7 @@ Interaction is what we call interactive parts of maps that are created with the 
 _Example_:
 
     var map = L.mapbox.map('map').setView([38, -77], 5);
-    var gridLayer = L.mapbox.gridLayer('examples.map-20v6611k');
+    var gridLayer = L.mapbox.gridLayer('mapbox.light');
     map.addLayer(L.mapbox.tileLayer('mapbox.outdoors'));
     map.addLayer(gridLayer);
     map.addControl(L.mapbox.gridControl(gridLayer));
