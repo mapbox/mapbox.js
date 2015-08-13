@@ -112,7 +112,7 @@ interactivity into your map, which you can easily access with `L.mapbox.gridCont
 _Example_:
 
     // the second argument is optional
-    var layer = L.mapbox.gridLayer('examples.map-20v6611k');
+    var layer = L.mapbox.gridLayer('mapbox.light');
 
 _Returns_ a `L.mapbox.gridLayer` object.
 
@@ -155,7 +155,7 @@ zoom bounds and other metadata.
 
 _Example_:
 
-    var layer = L.mapbox.gridLayer('examples.map-20v6611k')
+    var layer = L.mapbox.gridLayer('mapbox.light')
         // since layers load asynchronously through AJAX, use the
         // `.on` function to listen for them to be loaded before
         // calling `getTileJSON()`
@@ -187,7 +187,7 @@ from Mapbox and elsewhere into your map.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like `{{site.tileApi}}/v3/mapbox.dark.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
+| id _or_ url _or_ geojson | __string__ if _id_ or _url_ __object__ if _tilejson_ | Must be either <ul><li>An id string mapbox.streets</li><li>A URL to TileJSON, like `{{site.tileApi}}/v3/mapbox.dark.json`</li><li>A GeoJSON object, from your own Javascript code</li><li>`null`, if you wish to only provide `options` and not initial data.</li></ul> |
 | options | object | If provided, it is the same options as provided to `L.FeatureGroup`, as well as: <ul><li>`filter`: A function that accepts a feature object and returns `true` or `false` to indicate whether it should be displayed on the map. This can be changed later using `setFilter`.</li><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this layer.</li><li>`popupOptions`: an object of <a href="http://leafletjs.com/reference.html#popup-maxwidth">options that will be passed to the `bindPopup` method internally</a>.<li>`pointToLayer`: A function that accepts a feature object and a `L.LatLng` and returns a layer to be added. Defaults to `L.mapbox.marker.style`.</li></ul> |
 
 _Example_:
@@ -440,7 +440,7 @@ Interaction is what we call interactive parts of maps that are created with the 
 _Example_:
 
     var map = L.mapbox.map('map').setView([38, -77], 5);
-    var gridLayer = L.mapbox.gridLayer('examples.map-20v6611k');
+    var gridLayer = L.mapbox.gridLayer('mapbox.light');
     map.addLayer(L.mapbox.tileLayer('mapbox.outdoors'));
     map.addLayer(gridLayer);
     map.addControl(L.mapbox.gridControl(gridLayer));

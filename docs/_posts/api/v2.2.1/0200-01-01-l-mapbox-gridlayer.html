@@ -31,7 +31,7 @@ interactivity into your map, which you can easily access with <code><a href="/ma
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.gridLayer(&#39;mapbox.streets&#39;);
+var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v2.2.1/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="/mapbox.js/api/v2.2.1/l-mapbox-gridlayer">L.mapbox.GridLayer</a></code></p>
 <h3 id="section-gridlayer-on">gridLayer.on(event, handler, context)</h3>
@@ -83,7 +83,7 @@ same argument structure.</p>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.gridLayer(&#39;mapbox.streets&#39;)
+<pre><code>var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`

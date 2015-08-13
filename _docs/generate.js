@@ -68,8 +68,8 @@ function transformLinks(line, relative) {
             var replacement;
             if (content.match(/event$/)) {
                 replacement = 'l-event-objects';
-            } else if (content.match(/map-options$/)) {
-                replacement='l-map-class'
+            } else if (content.match(/^#map/)) {
+                replacement='l-map-class';
             } else {
                 replacement = 'l-' + content.replace(/\-.*/g, '').replace('#', '');
             }
