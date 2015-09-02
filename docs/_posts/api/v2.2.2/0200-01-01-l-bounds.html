@@ -1,0 +1,126 @@
+---
+layout: api
+title: "v2.2.2 JavaScript Library: L.Bounds"
+categories: api
+version: v2.2.2
+permalink: /api/v2.2.2/l-bounds
+---
+<h2 id="bounds">Bounds</h2>
+
+<p>Represents a rectangular area in pixel coordinates.</p>
+<pre><code class="javascript">var p1 = L.point(10, 10),
+	p2 = L.point(40, 60),
+	bounds = L.bounds(p1, p2);</code></pre>
+
+<p>All Leaflet methods that accept Bounds objects also accept them in a simple Array form (unless noted otherwise), so the bounds example above can be passed like this:</p>
+
+<pre><code class="javascript">otherBounds.intersects([[10, 10], [40, 60]]);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='bounds'>
+	<tr>
+<th class="width250">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.bounds</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-point">Point</a>&gt; <i>topLeft</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-point">Point</a>&gt; <i>bottomRight</i> )</nobr>
+</code></td>
+
+
+<td>Creates a Bounds object from two coordinates (usually top-left and bottom-right corners).</td>
+	</tr>
+	<tr>
+<td><code><b>L.bounds</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-point">Point</a>[]&gt; <i>points</i> )</nobr>
+</code></td>
+
+
+
+<td>Creates a Bounds object defined by the points it contains.</td>
+	</tr>
+</table>
+
+<h3>Properties</h3>
+
+<table data-id='bounds'>
+	<tr>
+<th class="width100">Property</th>
+<th class="width100">Type</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>min</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.2.2/l-point">Point</a></code></td>
+<td>The top left corner of the rectangle.</td>
+	</tr>
+	<tr>
+<td><code><b>max</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.2.2/l-point">Point</a></code></td>
+<td>The bottom right corner of the rectangle.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<table data-id='bounds'>
+	<tr>
+<th class="width250">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>extend</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-point">Point</a>&gt; <i>point</i> )</nobr>
+</code></td>
+
+<td>-</td>
+<td>Extends the bounds to contain the given point.</td>
+	</tr>
+	<tr>
+<td><code><b>getCenter</b>()</code></td>
+<td><code><a href="/mapbox.js/api/v2.2.2/l-point">Point</a></code></td>
+<td>Returns the center point of the bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>contains</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-bounds">Bounds</a>&gt; <i>otherBounds</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the rectangle contains the given one.</td>
+	</tr>
+	<tr>
+<td><code><b>contains</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-point">Point</a>&gt; <i>point</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the rectangle contains the given point.</td>
+	</tr>
+	<tr>
+<td><code><b>intersects</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-bounds">Bounds</a>&gt; <i>otherBounds</i> )</nobr>
+</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the rectangle intersects the given bounds.</td>
+	</tr>
+	<tr>
+<td><code><b>isValid</b>()</code></td>
+
+<td><code>Boolean</code></td>
+<td>Returns <code><span class="literal">true</span></code> if the bounds are properly initialized.</td>
+	</tr>
+	<tr>
+<td><code><b>getSize</b>()</code></td>
+
+<td><code><a href="/mapbox.js/api/v2.2.2/l-point">Point</a></code></td>
+<td>Returns the size of the given bounds.</td>
+	</tr>
+</table>
+
+
