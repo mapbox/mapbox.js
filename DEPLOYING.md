@@ -21,7 +21,7 @@ rebuild it.
 # git tag & npm package
 
     git tag v1.your.version -s -m "Version v1.your.version, with xxx changes"
-    git push origin master --tags
+    git push origin mb-pages --tags
     npm publish
 
 # deploying to the cdn
