@@ -2,7 +2,7 @@
   "author": "Mapbox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   "dependencies": {
     "corslite": "0.0.6",
     "isarray": "0.0.1",
-    "leaflet": "0.7.3",
+    "leaflet": "0.7.5",
     "mustache": "0.7.3",
     "sanitize-caja": "0.1.3"
   },

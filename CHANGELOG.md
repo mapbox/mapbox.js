@@ -1,3 +1,9 @@
+## v2.2.2
+
+* Updates to Leaflet 0.7.5, fixing a performance regression in tile loading
+  rooted in an upstream bug in Google Chrome's handling of `transitionend`
+  events.
+
 ## v2.2.1
 
 * Fix regression in `L.mapbox.geocoderControl` (#1031)
