@@ -23,6 +23,14 @@ describe('L.mapbox.geocoder', function() {
             expect(g.queryURL({query: ['austin', 'houston'], proximity: L.latLng(10, 15)}))
                 .to.eql('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/austin;houston.json?access_token=key&proximity=15,10');
         });
+
+        it('supports types', function() {
+            var g = L.mapbox.geocoder('mapbox.places');
+            expect(g.queryURL({query: ['austin', 'houston'], types: 'place'}))
+                .to.eql('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/austin;houston.json?access_token=key&types=place');
+            expect(g.queryURL({query: ['austin', 'houston'], types: ['place', 'address']}))
+                .to.eql('http://a.tiles.mapbox.com/v4/geocode/mapbox.places/austin;houston.json?access_token=key&types=place,address');
+        });
     });
 
     describe('#query', function() {
