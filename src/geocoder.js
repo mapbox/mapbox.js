@@ -42,12 +42,7 @@ module.exports = function(url, options) {
 
         if (isObject && _.types) {
             if (isArray(_.types)) {
-                var typesString = '';
-                _.types.forEach(function (type, i) {
-                    typesString += type;
-                    if (i !== _.types.length - 1) typesString += ',';
-                });
-                url += '&types=' + typesString;
+                url += '&types=' + _.types.join();
             } else {
                 url += '&types=' + _.types;
             }
