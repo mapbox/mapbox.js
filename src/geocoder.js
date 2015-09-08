@@ -40,6 +40,19 @@ module.exports = function(url, options) {
 
         var url = L.Util.template(geocoder.getURL(), {query: query});
 
+        if (isObject && _.types) {
+            if (isArray(_.types)) {
+                var typesString = '';
+                _.types.forEach(function (type, i) {
+                    typesString += type;
+                    if (i !== _.types.length - 1) typesString += ',';
+                });
+                url += '&types=' + typesString;
+            } else {
+                url += '&types=' + _.types;
+            }
+        }
+
         if (isObject && _.proximity) {
             var proximity = L.latLng(_.proximity);
             url += '&proximity=' + proximity.lng + ',' + proximity.lat;
