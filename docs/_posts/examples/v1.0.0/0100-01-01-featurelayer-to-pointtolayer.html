@@ -54,6 +54,8 @@ var geojson = {
 // to pass in the features properties and geometry
 L.mapbox.featureLayer(geojson, {
     pointToLayer: function(feature, latlon) {
+        // L.circleMarker() draws a circle with fixed radius in pixels. 
+        // To draw a circle overlay with a radius in meters, use L.circle()
         return L.circleMarker(latlon, {radius: feature.properties.radius});
     }
 }).addTo(map);
