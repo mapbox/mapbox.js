@@ -31,7 +31,7 @@ module.exports.tileJSON = function(urlOrMapID, accessToken) {
     if (urlOrMapID.indexOf('/') !== -1)
         return urlOrMapID;
 
-    var url = module.exports('/' + urlOrMapID + '.json', accessToken);
+    var url = module.exports('/v4/' + urlOrMapID + '.json', accessToken);
 
     // TileJSON requests need a secure flag appended to their URLs so
     // that the server knows to send SSL-ified resource references.

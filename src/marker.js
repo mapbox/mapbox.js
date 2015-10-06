@@ -1,6 +1,6 @@
 'use strict';
 
-var url = require('./url'),
+var urlhelper = require('./url'),
     util = require('./util'),
     sanitize = require('sanitize-caja');
 
@@ -20,7 +20,7 @@ function icon(fp, options) {
         color = (fp['marker-color'] || '7e7e7e').replace('#', '');
 
     return L.icon({
-        iconUrl: url('/marker/' +
+        iconUrl: urlhelper('/v4/marker/' +
             'pin-' + size.charAt(0) + symbol + '+' + color +
             // detect and use retina markers, which are x2 resolution
             (L.Browser.retina ? '@2x' : '') + '.png', options && options.accessToken),

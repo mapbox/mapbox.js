@@ -15,7 +15,7 @@ module.exports = function(url, options) {
     util.strict(url, 'string');
 
     if (url.indexOf('/') === -1) {
-        url = urlhelper('/geocode/' + url + '/{query}.json', options.accessToken);
+        url = urlhelper('/geocoding/v5/' + url + '/{query}.json', options.accessToken, 5);
     }
 
     geocoder.getURL = function() {
