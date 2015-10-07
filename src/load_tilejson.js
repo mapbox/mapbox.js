@@ -1,13 +1,13 @@
 'use strict';
 
 var request = require('./request'),
-    urlhelper = require('./url'),
+    formatUrl = require('./formatUrl'),
     util = require('./util');
 
 module.exports = {
     _loadTileJSON: function(_) {
         if (typeof _ === 'string') {
-            _ = urlhelper.tileJSON(_, this.options && this.options.accessToken);
+            _ = formatUrl.tileJSON(_, this.options && this.options.accessToken);
             request(_, L.bind(function(err, json) {
                 if (err) {
                     util.log('could not load TileJSON at ' + _);

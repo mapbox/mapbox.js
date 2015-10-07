@@ -1,6 +1,6 @@
 'use strict';
 
-var urlhelper = require('./url');
+var formatUrl = require('./formatUrl');
 
 var ShareControl = L.Control.extend({
     includes: [require('./load_tilejson')],
@@ -55,8 +55,8 @@ var ShareControl = L.Control.extend({
         var tilejson = this._tilejson || this._map._tilejson || {},
             url = encodeURIComponent(this.options.url || tilejson.webpage || window.location),
             name = encodeURIComponent(tilejson.name),
-            image = urlhelper('/v4/' + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png', this.options.accessToken),
-            embed = urlhelper('/v4/' + tilejson.id + '.html', this.options.accessToken),
+            image = formatUrl('/v4/' + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png', this.options.accessToken),
+            embed = formatUrl('/v4/' + tilejson.id + '.html', this.options.accessToken),
             twitter = '//twitter.com/intent/tweet?status=' + name + ' ' + url,
             facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
             pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,
