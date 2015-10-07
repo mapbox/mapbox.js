@@ -1,5 +1,5 @@
 window.internals = {
-    url: require('./formatUrl'),
+    url: require('./format_url'),
     config: require('./config'),
     util: require('./util'),
     grid: require('./grid'),

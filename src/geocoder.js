@@ -2,7 +2,7 @@
 
 var isArray = require('isarray'),
     util = require('./util'),
-    formatUrl = require('./formatUrl'),
+    format_url = require('./format_url'),
     feedback = require('./feedback'),
     request = require('./request');
 
@@ -15,7 +15,7 @@ module.exports = function(url, options) {
     util.strict(url, 'string');
 
     if (url.indexOf('/') === -1) {
-        url = formatUrl('/geocoding/v5/' + url + '/{query}.json', options.accessToken, 5);
+        url = format_url('/geocoding/v5/' + url + '/{query}.json', options.accessToken, 5);
     }
 
     geocoder.getURL = function() {
