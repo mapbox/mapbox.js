@@ -18,6 +18,13 @@ module.exports = function(url, options) {
         url = format_url('/geocoding/v5/' + url + '/{query}.json', options.accessToken, 5);
     }
 
+    function roundTo(latLng, precision) {
+        var mult = Math.pow(10, precision);
+        latLng.lat = Math.round(latLng.lat * mult) / mult;
+        latLng.lng = Math.round(latLng.lng * mult) / mult;
+        return latLng;
+    }
+
     geocoder.getURL = function() {
         return url;
     };
@@ -41,7 +48,7 @@ module.exports = function(url, options) {
         var url = L.Util.template(geocoder.getURL(), {query: query});
 
         if (isObject && _.proximity) {
-            var proximity = L.latLng(_.proximity);
+            var proximity = roundTo(L.latLng(_.proximity), 3);
             url += '&proximity=' + proximity.lng + ',' + proximity.lat;
         }
 
@@ -81,13 +88,16 @@ module.exports = function(url, options) {
 
         // sort through different ways people represent lat and lon pairs
         function normalize(x) {
+            var latLng;
             if (x.lat !== undefined && x.lng !== undefined) {
-                return x.lng + ',' + x.lat;
+                latLng = L.latLng(x.lat, x.lng);
             } else if (x.lat !== undefined && x.lon !== undefined) {
-                return x.lon + ',' + x.lat;
+                latLng = L.latLng(x.lat, x.lon);
             } else {
-                return x[0] + ',' + x[1];
+                latLng = L.latLng(x[1], x[0]);
             }
+            latLng = roundTo(latLng, 5);
+            return latLng.lng + ',' + latLng.lat;
         }
 
         if (_.length && _[0].length) {

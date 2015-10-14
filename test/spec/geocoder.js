@@ -22,6 +22,8 @@ describe('L.mapbox.geocoder', function() {
                 .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15,10');
             expect(g.queryURL({query: ['austin', 'houston'], proximity: L.latLng(10, 15)}))
                 .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15,10');
+            expect(g.queryURL({query: ['austin', 'houston'], proximity: L.latLng(-10.12345, 15.67890)}))
+                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15.679,-10.123');
         });
     });
 
@@ -83,6 +85,20 @@ describe('L.mapbox.geocoder', function() {
 
             g.reverseQuery({ lat: 30.3, lng: -97.7 }, function(err, res) {
                 expect(res).to.eql(helpers.geocoderReverse);
+            });
+
+            server.respond();
+        });
+
+        it('rounds reverse coordinates correctly', function() {
+            var g = L.mapbox.geocoder('mapbox.places');
+
+            server.respondWith('GET',
+                'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/-97.7%2C30.3.json?access_token=key',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderReverse)]);
+
+            g.reverseQuery({ lat: 30.1234567890, lng: -97.0987654321 }, function(err, res) {
+                expect(res).to.eql(helpers.geocoderReverseRounded);
             });
 
             server.respond();
