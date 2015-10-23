@@ -53,7 +53,7 @@ tags:
   </nav>
 </div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets').setView([37, -99], 4);
+var map = L.mapbox.map('map', 'mapbox.streets').setView([37, -99], 3);
 
 // Add each wms layer using L.tileLayer.wms
 var temperature = L.tileLayer.wms('http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer', {
@@ -62,10 +62,10 @@ var temperature = L.tileLayer.wms('http://gis.srh.noaa.gov/arcgis/services/NDFDT
     layers: 16
 }).addTo(map);
 
-var precipitation = L.tileLayer.wms('http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs', {
+var precipitation = L.tileLayer.wms('http://nowcoast.noaa.gov/arcgis/services/nowcoast/analysis_meteohydro_sfc_qpe_time/MapServer/WmsServer', {
     format: 'image/png',
     transparent: true,
-    layers: 'RAS_RIDGE_NEXRAD'
+    layers: '5'
 }).addTo(map);
 
 // Layer switcher

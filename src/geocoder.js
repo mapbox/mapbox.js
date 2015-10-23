@@ -47,6 +47,14 @@ module.exports = function(url, options) {
 
         var url = L.Util.template(geocoder.getURL(), {query: query});
 
+        if (isObject && _.types) {
+            if (isArray(_.types)) {
+                url += '&types=' + _.types.join();
+            } else {
+                url += '&types=' + _.types;
+            }
+        }
+
         if (isObject && _.proximity) {
             var proximity = roundTo(L.latLng(_.proximity), 3);
             url += '&proximity=' + proximity.lng + ',' + proximity.lat;

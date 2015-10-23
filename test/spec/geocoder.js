@@ -29,6 +29,14 @@ describe('L.mapbox.geocoder', function() {
         });
 
         it('rounds reverse ')
+
+        it('supports types', function() {
+            var g = L.mapbox.geocoder('mapbox.places');
+            expect(g.queryURL({query: ['austin', 'houston'], types: 'place'}))
+                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&types=place');
+            expect(g.queryURL({query: ['austin', 'houston'], types: ['place', 'address']}))
+                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&types=place,address');
+        });
     });
 
     describe('#query', function() {
