@@ -170,6 +170,22 @@ helpers.geocoderReverse = {"type": "FeatureCollection", "query": [-97.7, 30.3], 
     {"id": "country.4150104525", "type": "Feature", "text": "United States", "place_name": "United States", "relevance": 1, "center": [-99.041505, 37.940711], "geometry": {"type": "Point", "coordinates": [-99.041505, 37.940711]}, "bbox": [-179.23108600000003, 18.865459999999985, 179.85968099999997, 71.441059], "properties": {"title": "United States"}}
 ], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"};
 
+helpers.geocoderReverseRounded = {"type": "FeatureCollection", "query": [-97.09877, 30.12346], "features": [
+    {"id": "city.78701", "type": "Feature", "text": "Austin", "place_name": "Austin, 78723, Texas, United States", "relevance": 1, "center": [-97.804206, 30.278855], "geometry": {"type": "Point", "coordinates": [-97.804206, 30.278855]}, "bbox": [-98.0261839514054, 30.067858231996137, -97.54154705019376, 30.489398740397657], "properties": {"title": "Austin"}, "context": [
+        {"id": "postcode.497942221", "text": "78723"},
+        {"id": "province.1000418602", "text": "Texas"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "postcode.497942221", "type": "Feature", "text": "78723", "place_name": "78723, Texas, United States", "relevance": 1, "center": [-97.685712, 30.304148], "geometry": {"type": "Point", "coordinates": [-97.685712, 30.304148]}, "bbox": [-97.71207800000002, 30.282571999999977, -97.66096600000002, 30.325720000000018], "properties": {"title": "78723"}, "context": [
+        {"id": "province.1000418602", "text": "Texas"},
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "province.1000418602", "type": "Feature", "text": "Texas", "place_name": "Texas, United States", "relevance": 1, "center": [-99.810431, 31.319656], "geometry": {"type": "Point", "coordinates": [-99.810431, 31.319656]}, "bbox": [-106.645646, 25.83716399999999, -93.508039, 36.50070399999999], "properties": {"title": "Texas"}, "context": [
+        {"id": "country.4150104525", "text": "United States"}
+    ]},
+    {"id": "country.4150104525", "type": "Feature", "text": "United States", "place_name": "United States", "relevance": 1, "center": [-99.041505, 37.940711], "geometry": {"type": "Point", "coordinates": [-99.041505, 37.940711]}, "bbox": [-179.23108600000003, 18.865459999999985, 179.85968099999997, 71.441059], "properties": {"title": "United States"}}
+], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"};
+
 helpers.tileJSON = {
     "attribution":"Data provided by NatureServe in collaboration with Robert Ridgely",
     "bounds":[-180,-85.0511,180,85.0511],

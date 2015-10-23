@@ -35,7 +35,7 @@ describe('L.mapbox.featureLayer', function() {
     it('loads data for a map ID', function() {
         var layer = L.mapbox.featureLayer('mapbox.map-0l53fhk2');
 
-        server.respondWith("GET", internals.url('/mapbox.map-0l53fhk2/features.json'),
+        server.respondWith("GET", internals.url('/v4/mapbox.map-0l53fhk2/features.json'),
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
         server.respond();
 
@@ -47,7 +47,7 @@ describe('L.mapbox.featureLayer', function() {
     it('supports custom access token', function() {
         var layer = L.mapbox.featureLayer('mapbox.map-0l53fhk2', {accessToken: 'custom'});
 
-        server.respondWith("GET", internals.url('/mapbox.map-0l53fhk2/features.json', 'custom'),
+        server.respondWith("GET", internals.url('/v4/mapbox.map-0l53fhk2/features.json', 'custom'),
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
         server.respond();
 
