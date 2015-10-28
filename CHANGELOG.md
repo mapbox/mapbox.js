@@ -1,3 +1,8 @@
+## v2.2.3
+
+* Updates to Leaflet 0.7.7.
+* Upgrades Mapbox Geocoding to v5
+
 ## v2.2.2
 
 * Updates to Leaflet 0.7.5, fixing a performance regression in tile loading
