@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel="stylesheet" href="../../dist/mapbox.css"/>
+  <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
+  <link rel="stylesheet" href="embed.css"/>
+  <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+    var map = L.mapbox.map('map')
+        .setView([40, -74.50], 9);
+
+    L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v8').addTo(map);
+</script>
+</body>
+</html>
