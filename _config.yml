@@ -1,12 +1,12 @@
 url: https://122e4e-mapbox.global.ssl.fastly.net
 api: https://122e4e-mapbox.global.ssl.fastly.net/core
 tileApi: https://api-maps-staging.tilestream.net
-accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.xZAqdcP-Qiv0PaMCmw6LoA
+accessToken: pk.eyJ1Ijoia3ppbGxhIiwiYSI6ImNpZ2k2aTVjbDAwMjhzemtwYXF1aHp5OXQifQ.PWraxV5gKPndqm_Cf-R8Zg
 source: docs
 permalink: /:categories/:title
 baseurl: /mapbox.js
 highlighter: pygments
-mapboxjs: v2.2.2
+mapboxjs: v2.2.3
 mapboxjsbase: /mapbox.js/dist
 defaultid: 'mapbox.streets'
 rdiscount:
