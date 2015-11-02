@@ -27,6 +27,11 @@ describe("format_url", function() {
         expect(function() { internals.format_url('/v4/user.map.json') }).to.throwError('Use a public access token (pk.*) with Mapbox.js.');
     });
 
+    it('dedupes version out of custom set url', function() {
+        L.mapbox.config.HTTPS_URL = 'https://api-maps-staging.tilestream.net/v4';
+        expect(internals.format_url('/v4/ludacris.map.json')).to.equal('https://api-maps-staging.tilestream.net/v4/ludacris.map.json?access_token=key');
+    });
+
     describe('.tileJSON', function() {
         it('returns the input when passed a URL', function() {
             expect(internals.format_url.tileJSON('http://a.tiles.mapbox.com/v3/user.map.json')).to.equal('http://a.tiles.mapbox.com/v3/user.map.json')

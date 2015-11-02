@@ -12,7 +12,8 @@ module.exports = function(path, accessToken) {
     }
 
     var url = (document.location.protocol === 'https:' || config.FORCE_HTTPS) ? config.HTTPS_URL : config.HTTP_URL;
-    url = (url.indexOf('/v4')) ? url.split('/v4')[0] : url;
+    var vDupe = url.match('\/v[0-9]');
+    url = (vDupe !== null) ? url.split(vDupe[0])[0] : url;
     url += path;
     url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
 
