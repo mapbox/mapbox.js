@@ -1,3 +1,7 @@
+## v2.2.4
+
+* Sanitize TileJSON for `L.mapbox.shareControl`
+
 ## v2.2.3
 
 * Updates to Leaflet 0.7.7.
