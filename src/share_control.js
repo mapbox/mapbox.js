@@ -57,23 +57,43 @@ var ShareControl = L.Control.extend({
             name = encodeURIComponent(tilejson.name),
             image = format_url('/v4/' + tilejson.id + '/' + this._map.getCenter().lng + ',' + this._map.getCenter().lat + ',' + this._map.getZoom() + '/600x600.png', this.options.accessToken),
             embed = format_url('/v4/' + tilejson.id + '.html', this.options.accessToken),
-            twitter = '//twitter.com/intent/tweet?status=' + name + ' ' + url,
-            facebook = '//www.facebook.com/sharer.php?u=' + url + '&t=' + encodeURIComponent(tilejson.name),
-            pinterest = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + tilejson.name,
-            share = ('<h3>Share this map</h3>' +
-                    '<div class="mapbox-share-buttons"><a class="mapbox-button mapbox-button-icon mapbox-icon-facebook" target="_blank" href="{{facebook}}">Facebook</a>' +
-                    '<a class="mapbox-button mapbox-button-icon mapbox-icon-twitter" target="_blank" href="{{twitter}}">Twitter</a>' +
-                    '<a class="mapbox-button mapbox-button-icon mapbox-icon-pinterest" target="_blank" href="{{pinterest}}">Pinterest</a></div>')
-                    .replace('{{twitter}}', twitter)
-                    .replace('{{facebook}}', facebook)
-                    .replace('{{pinterest}}', pinterest),
-            embedValue = '<iframe width="100%" height="500px" frameBorder="0" src="{{embed}}"></iframe>'.replace('{{embed}}', embed),
+            twitterURL = '//twitter.com/intent/tweet?status=' + name + ' ' + url,
+            facebookURL = '//www.facebook.com/sharer.php?u=' + url + '&t=' + name,
+            pinterestURL = '//www.pinterest.com/pin/create/button/?url=' + url + '&media=' + image + '&description=' + name,
+            embedValue = '<iframe width="100%" height="500px" frameBorder="0" src="' + embed + '"></iframe>',
             embedLabel = 'Copy and paste this <strong>HTML code</strong> into documents to embed this map on web pages.';
+
+        function createShareButton(buttonClass, href, socialMediaName) {
+            var elem = document.createElement('a');
+            elem.setAttribute('class', buttonClass);
+            elem.setAttribute('href', href);
+            elem.setAttribute('target', '_blank');
+            socialMediaName = document.createTextNode(socialMediaName);
+            elem.appendChild(socialMediaName);
+
+            return elem;
+        }
 
         L.DomUtil.addClass(this._modal, 'active');
 
         this._sharing = L.DomUtil.create('div', 'mapbox-modal-body', this._content);
-        this._sharing.innerHTML = share;
+
+        var twitterButton = createShareButton('mapbox-button mapbox-button-icon mapbox-icon-twitter', twitterURL, 'Twitter');
+        var facebookButton = createShareButton('mapbox-button mapbox-button-icon mapbox-icon-facebook', facebookURL, 'Facebook');
+        var pinterestButton = createShareButton('mapbox-button mapbox-button-icon mapbox-icon-pinterest', pinterestURL, 'Pinterest');
+
+        var shareHeader = document.createElement('h3');
+        var shareText = document.createTextNode('Share this map');
+        shareHeader.appendChild(shareText);
+
+        var shareButtons = document.createElement('div');
+        shareButtons.setAttribute('class', 'mapbox-share-buttons');
+        shareButtons.appendChild(facebookButton);
+        shareButtons.appendChild(twitterButton);
+        shareButtons.appendChild(pinterestButton);
+
+        this._sharing.appendChild(shareHeader);
+        this._sharing.appendChild(shareButtons);
 
         var input = L.DomUtil.create('input', 'mapbox-embed', this._sharing);
         input.type = 'text';
