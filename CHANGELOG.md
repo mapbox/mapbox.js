@@ -1,3 +1,7 @@
+## v1.6.6
+
+* Sanitize TileJSON for `L.mapbox.shareControl`
+
 ## v1.6.5
 
 * Sanitize TileJSON-provided attribution
