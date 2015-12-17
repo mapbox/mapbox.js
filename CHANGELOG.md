@@ -1,6 +1,9 @@
 ## v1.6.6
 
 * Sanitize TileJSON for `L.mapbox.shareControl`
+* `L.mapbox.sanitize` completely removes `<iframe>` elements instead of
+  treating them like CDATA-containing tags. Updates sanitize-caja dependency
+  to 0.1.3.
 
 ## v1.6.5
 
