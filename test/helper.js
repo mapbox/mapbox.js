@@ -281,6 +281,26 @@ helpers.tileJSON_nocenter = {
     "webpage": "http://a.tiles.mapbox.com/v3/examples.h8e9h88l/page.html"
 };
 
+helpers.tileJSON_malicious = {
+    "attribution":"Data provided by NatureServe in collaboration with Robert Ridgely",
+    "bounds":[-180,-85.0511,180,85.0511],
+    "center":[-98.976,39.386,4],
+    "description":"Bird species of North America, gridded by species count.",
+    "geocoder":"http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/geocode/{query}.jsonp",
+    "id":"examples.map-8ced9urs",
+    "maxzoom":17,
+    "minzoom":0,
+    "name":"<img src=a >\"><iframe onload=launchAttack()>",
+    "private":true,
+    "scheme":"xyz",
+    "tilejson":"2.0.0",
+    "tiles":["http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "http://c.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png",
+        "http://d.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.png"],
+    "webpage":"http://tiles.mapbox.com/examples/map/map-8ced9urs"
+}
+
 helpers.tileJSON_mapboxlogoFalse = {
     "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>",
     "autoscale": true,
