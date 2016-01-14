@@ -187,7 +187,7 @@ var GeocoderControl = L.Control.extend({
     },
 
     _autocomplete: function(e) {
-        if (this.specialKeyCodes.indexOf(e.keyCode) != -1) return;
+        if (this.specialKeyCodes.indexOf(e.keyCode) !== -1) return;
         if (!this.options.autocomplete) return;
         if (this._input.value === '') return this._updateAutocomplete();
         this.geocoder.query({
