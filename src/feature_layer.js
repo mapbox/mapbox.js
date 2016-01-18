@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('./util'),
-    urlhelper = require('./url'),
+    format_url = require('./format_url'),
     request = require('./request'),
     marker = require('./marker'),
     simplestyle = require('./simplestyle');
@@ -58,7 +58,7 @@ var FeatureLayer = L.FeatureGroup.extend({
     },
 
     loadID: function(id) {
-        return this.loadURL(urlhelper('/' + id + '/features.json', this.options.accessToken));
+        return this.loadURL(format_url('/v4/' + id + '/features.json', this.options.accessToken));
     },
 
     setFilter: function(_) {

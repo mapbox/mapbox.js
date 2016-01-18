@@ -1,0 +1,41 @@
+---
+layout: api
+title: "v2.2.3 JavaScript Library: L.mapbox.marker.style(feature, latlng)"
+categories: api
+version: v2.2.3
+permalink: /api/v2.2.3/l-mapbox-marker-style
+---
+<h2 id="section-l-mapbox-marker-style">L.mapbox.marker.style(feature, latlng)</h2>
+<p>An icon generator for use in conjunction with <code>pointToLayer</code> to generate
+markers from the <a href="http://mapbox.com/developers/api/#markers">Mapbox Markers API</a>
+and support the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> for
+features.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feature</td>
+<td>object</td>
+<td>A GeoJSON feature object</td>
+</tr>
+<tr>
+<td>latlng</td>
+<td>object</td>
+<td>The latitude, longitude position of the marker</td>
+</tr>
+</tbody>
+</table>
+<p><em>Examples</em>:</p>
+<pre><code>L.geoJson(geoJson, {
+    pointToLayer: L.mapbox.marker.style,
+});
+</code></pre><p><em>Returns</em>:</p>
+<p>A <code><a href="/mapbox.js/api/v2.2.3/l-marker">L.Marker</a></code> object with the latitude, longitude position and a styled marker</p>
+<p>The other sections of the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> are implemented
+by <code><a href="/mapbox.js/api/v2.2.3/l-mapbox-simplestyle-style">L.mapbox.simplestyle.style</a></code></p>

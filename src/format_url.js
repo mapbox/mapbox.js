@@ -12,6 +12,7 @@ module.exports = function(path, accessToken) {
     }
 
     var url = (document.location.protocol === 'https:' || config.FORCE_HTTPS) ? config.HTTPS_URL : config.HTTP_URL;
+    url = url.replace(/\/v4$/, '');
     url += path;
     url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
 
@@ -31,7 +32,7 @@ module.exports.tileJSON = function(urlOrMapID, accessToken) {
     if (urlOrMapID.indexOf('/') !== -1)
         return urlOrMapID;
 
-    var url = module.exports('/' + urlOrMapID + '.json', accessToken);
+    var url = module.exports('/v4/' + urlOrMapID + '.json', accessToken);
 
     // TileJSON requests need a secure flag appended to their URLs so
     // that the server knows to send SSL-ified resource references.

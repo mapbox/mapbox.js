@@ -71,3 +71,9 @@ jekyll serve
 * The version tag is updated in the `_config.yml` file under `version:`.
 * Rebuild the docs: `./_docs/build.sh VERSION`
 * Each example should be tested against the version change.
+
+## To update www.mapbox.com to use the latest version
+Bump the `mapboxjs` version field in
+* `_config.yml`
+* `_config.master.yml`
+* `_config.test.yml`

@@ -2,7 +2,7 @@
   "author": "Mapbox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "2.2.2",
+  "version": "2.2.4",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
@@ -12,13 +12,14 @@
   "dependencies": {
     "corslite": "0.0.6",
     "isarray": "0.0.1",
-    "leaflet": "0.7.5",
+    "leaflet": "0.7.7",
     "mustache": "0.7.3",
     "sanitize-caja": "0.1.3"
   },
   "scripts": {
     "test": "eslint --no-eslintrc -c .eslintrc src && mocha-phantomjs test/index.html"
   },
+  "license": "BSD-3-Clause",
   "devDependencies": {
     "browserify": "^6.3.2",
     "clean-css": "~2.0.7",

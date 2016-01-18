@@ -1,0 +1,71 @@
+---
+layout: api
+title: "v2.2.2 JavaScript Library: L.MultiPolygon"
+categories: api
+version: v2.2.2
+permalink: /api/v2.2.2/l-multipolygon
+---
+<h2 id="multipolygon">MultiPolygon</h2>
+
+<p>Extends <a href="/mapbox.js/api/v2.2.2/l-featuregroup">FeatureGroup</a> to allow creating multi-polygons (single layer that consists of several polygons that share styling/popup).</p>
+
+<h3>Creation</h3>
+
+<table data-id='multipolygon'>
+	<tr>
+<th>Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.multiPolygon</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-latlng">LatLng</a>[][]&gt; <i>latlngs</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-polyline">Polyline options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+<td>Instantiates a multi-polygon object given an array of latlngs arrays (one for each individual polygon) and optionally an options object (the same as for MultiPolyline).</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+
+<p>MultiPolygons accept all <a href="/mapbox.js/api/v2.2.2/l-polyline">Polyline methods</a> but
+have different behavior around their coordinate contents since they can contain
+multiple polygon features:</p>
+
+<table data-id='multipolygon'>
+	<tr>
+<th class="width250">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>setLatLngs</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-latlng">LatLng</a>[][]&gt; <i>latlngs</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Replace all polygons and their paths with the given array of arrays of
+        geographical points.</td>
+    </tr>
+	<tr>
+<td><code><b>getLatLngs</b>()</td>
+
+<td><code><nobr>&lt;<a href="/mapbox.js/api/v2.2.2/l-latlng">LatLng</a>[][]&gt; <i>latlngs</i></nobr>
+</code></td>
+<td>Returns an array of arrays of geographical points in each polygon.</td>
+    </tr>
+	<tr>
+<td><code><b>openPopup</b>()</td>
+
+<td><code>this</code></td>
+<td>Opens the popup previously bound by <a href="/mapbox.js/api/v2.2.2/l-path">bindPopup</a>.</td>
+    </tr>
+	<tr id="multipolygon-togeojson">
+<td><code><b>toGeoJSON</b>()</code></td>
+<td><code>Object</code></td>
+<td>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON">GeoJSON</a> representation of the multipolygon (GeoJSON MultiPolygon Feature).</td>
+	</tr>
+</table>
+

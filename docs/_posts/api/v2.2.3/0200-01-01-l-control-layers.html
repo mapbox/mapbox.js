@@ -1,0 +1,144 @@
+---
+layout: api
+title: "v2.2.3 JavaScript Library: L.Control.Layers"
+categories: api
+version: v2.2.3
+permalink: /api/v2.2.3/l-control-layers
+---
+<h2 id="control-layers">Control.Layers</h2>
+
+<p>The layers control gives users the ability to switch between different base layers and switch overlays on/off (check out the <a href="http://leafletjs.com/examples/layers-control.html">detailed example</a>). Extends <a href="/mapbox.js/api/v2.2.3/l-control">Control</a>.</p>
+
+<pre><code>var baseLayers = {
+	"Mapbox": mapbox,
+	"OpenStreetMap": osm
+};
+
+var overlays = {
+	"Marker": marker,
+	"Roads": roadsLayer
+};
+
+L.control.layers(baseLayers, overlays).addTo(map);</code></pre>
+
+<h3>Creation</h3>
+<table data-id='control-layers'>
+	<tr>
+<th>Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.control.layers</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.3/l-control">Layer Config</a>&gt; <i>baseLayers?</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.3/l-control">Layer Config</a>&gt; <i>overlays?</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.3/l-control">Control.Layers options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+<td>Creates an attribution control with the given layers. Base layers will be switched with radio buttons, while overlays will be switched with checkboxes. Note that all base layers should be passed in the base layers object, but only one should be added to the map during map instantiation.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+<table data-id='control-layers'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>addBaseLayer</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.3/l-ilayer">ILayer</a>&gt; <i>layer</i></nobr>,
+<nobr>&lt;String&gt; <i>name</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds a base layer (radio button entry) with the given name to the control.</td>
+	</tr>
+	<tr>
+<td><code><b>addOverlay</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.3/l-ilayer">ILayer</a>&gt; <i>layer</i></nobr>,
+<nobr>&lt;String&gt; <i>name</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds an overlay (checkbox entry) with the given name to the control.</td>
+	</tr>
+	<tr>
+<td><code><b>removeLayer</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.2.3/l-ilayer">ILayer</a>&gt; <i>layer</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Remove the given layer from the control.</td>
+	</tr>
+</table>
+
+<h3 id="control-layers-options">Options</h3>
+
+<table data-id='control-layers'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>position</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'topright'</span></td>
+<td>The position of the control (one of the map corners). See <a href="/mapbox.js/api/v2.2.3/l-control">control positions</a>.</td>
+	</tr>
+	<tr>
+<td><code><b>collapsed</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">true</span></code></td>
+<td>If <code><span class="literal">true</span></code>, the control will be collapsed into an icon and expanded on mouse hover or touch.</td>
+	</tr>
+	<tr>
+<td><code><b>autoZIndex</b></code></td>
+<td><code>Boolean</code></td>
+<td><code><span class="literal">true</span></code></td>
+<td>If <code><span class="literal">true</span></code>, the control will assign zIndexes in increasing order to all of its layers so that the order is preserved when switching them on/off.</td>
+	</tr>
+</table>
+
+
+<h3 id="control-layers-config">Layer Config</h3>
+
+<p>An object literal with layer names as keys and layer objects as values:</p>
+
+<pre><code>{
+	"&lt;someName1&gt;": layer1,
+	"&lt;someName2&gt;": layer2
+}</code></pre>
+
+<p>The layer names can contain HTML, which allows you to add additional styling to the items:</p>
+
+<pre><code>{"&lt;img src='my-layer-icon' /&gt; &lt;span class='my-layer-item'&gt;My Layer&lt;/span&gt;": myLayer}</code></pre>
+
+
+<h3>Events</h3>
+
+<p>You can subscribe to the following events on the <a href="/mapbox.js/api/v2.2.3/l-map-class">Map</a> object using <a href="/mapbox.js/api/v2.2.3/l-events">these methods</a>.</p>
+
+<table data-id='control-layers'>
+	<tr>
+<th class="width100">Event</th>
+<th class="width100">Data</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>baselayerchange</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.2.3/l-event-objects">LayersControlEvent</a></code>
+<td>Fired when the base layer is changed through the control.</td>
+	</tr>
+	<tr>
+<td><code><b>overlayadd</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.2.3/l-event-objects">LayersControlEvent</a></code>
+<td>Fired when an overlay is selected through the control.</td>
+	</tr>
+	<tr>
+<td><code><b>overlayremove</b></code></td>
+<td><code><a href="/mapbox.js/api/v2.2.3/l-event-objects">LayersControlEvent</a></code>
+<td>Fired when an overlay is deselected through the control.</td>
+	</tr>
+</table>
+
+
