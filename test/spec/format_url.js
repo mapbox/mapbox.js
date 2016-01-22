@@ -48,4 +48,10 @@ describe("format_url", function() {
             expect(internals.url.tileJSON('user.map')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key&secure');
         });
     });
+
+    describe('.style', function() {
+        it('returns a style url with access_token parameter', function() {
+            expect(internals.url.style('mapbox://styles/bobbysud/cifr15emd00007zlzxjew2rar')).to.equal('https://a.tiles.mapbox.com/styles/v1/bobbysud/cifr15emd00007zlzxjew2rar?access_token=key')
+        });
+    });
 });

@@ -8,7 +8,8 @@ var geocoderControl = require('./geocoder_control'),
     tileLayer = require('./tile_layer'),
     infoControl = require('./info_control'),
     map = require('./map'),
-    gridLayer = require('./grid_layer');
+    gridLayer = require('./grid_layer'),
+    styleLayer = require('./style_layer');
 
 L.mapbox = module.exports = {
     VERSION: require('../package.json').version,
@@ -17,6 +18,8 @@ L.mapbox = module.exports = {
     simplestyle: require('./simplestyle'),
     tileLayer: tileLayer.tileLayer,
     TileLayer: tileLayer.TileLayer,
+    styleLayer: styleLayer.styleLayer,
+    StyleLayer: styleLayer.StyleLayer,
     infoControl: infoControl.infoControl,
     InfoControl: infoControl.InfoControl,
     shareControl: shareControl.shareControl,
