@@ -1,0 +1,18 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Add styles made with Mapbox Studio using styleLayer
+description: Display a style created in Mapbox Studio
+tags:
+  - layers
+---
+<div id='map' class='dark'></div>
+
+<script>
+var map = L.mapbox.map('map')
+    .setView([38.97416, -95.23252], 15);
+
+// Use styleLayer to a Mapbox style created in Mapbox Studio
+L.mapbox.styleLayer('mapbox://styles/mapbox/emerald-v8').addTo(map);
+</script>
