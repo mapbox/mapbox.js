@@ -1,3 +1,10 @@
+## v2.3.0
+
+* Add `L.mapbox.styleLayer` with support for loading tiles from a style.
+* No longer set invalid `access_token` querystring argument when
+  `config.REQUIRE_ACCESS_TOKEN` is false.
+* Upgrade to mustache@2.2.1.
+
 ## v2.2.4
 
 * Sanitize TileJSON for `L.mapbox.shareControl`
