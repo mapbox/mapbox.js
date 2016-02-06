@@ -5,7 +5,7 @@ source: docs
 permalink: /:categories/:title
 baseurl: /mapbox.js
 highlighter: pygments
-mapboxjs: v2.2.4
+mapboxjs: v2.3.0
 defaultid: 'mapbox.streets'
 rdiscount:
   extensions: [smart]
