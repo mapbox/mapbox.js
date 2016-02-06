@@ -1,0 +1,120 @@
+---
+layout: api
+title: "v2.3.0 JavaScript Library: L.Control"
+categories: api
+version: v2.3.0
+permalink: /api/v2.3.0/l-control
+---
+<h2 id="control">Control</h2>
+
+<p>The base class for all Leaflet controls. Implements <a href="/mapbox.js/api/v2.3.0/l-icontrol">IControl</a> interface. You can add controls to the map like this:</p>
+
+<pre><code>control.addTo(map);
+// the same as
+map.addControl(control);</code></pre>
+
+<h3>Creation</h3>
+<table data-id='control'>
+	<tr>
+<th class="width300">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.control</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.3.0/l-control">Control options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+
+<td>Creates a control with the given options.</td>
+	</tr>
+</table>
+
+<h3>Options</h3>
+<table data-id='control'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>position</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">'topright'</span></td>
+<td>The initial position of the control (one of the map corners). See <a href="/mapbox.js/api/v2.3.0/l-control">control positions</a>.</td>
+	</tr>
+</table>
+
+<h3>Methods</h3>
+<table data-id='control'>
+	<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>setPosition</b>(
+<nobr>&lt;String&gt; <i>position</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Sets the position of the control. See <a href="/mapbox.js/api/v2.3.0/l-control">control positions</a>.</td>
+	</tr>
+	<tr>
+<td><code><b>getPosition</b>()</code></td>
+<td><code>String</code></td>
+<td>Returns the current position of the control.</td>
+	</tr>
+	<tr>
+<td><code><b>addTo</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.3.0/l-map-class">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds the control to the map.</td>
+	</tr>
+	<tr>
+<td><code><b>removeFrom</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.3.0/l-map-class">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Removes the control from the map.</td>
+	</tr>
+	<tr>
+<td><code><b>getContainer</b>()</code></td>
+<td><code>HTMLElement</code></td>
+<td>Returns the HTML container of the control.</td>
+	</tr>
+</table>
+
+<h3 id="control-positions">Control Positions</h3>
+
+<p>Control positions (map corner to put a control to) are set using strings. Margins between controls and the map border are set with CSS, so that you can easily override them.</p>
+
+<table data-id='control'>
+	<tr>
+<th class="minwidth">Position</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><span class="string">'topleft'</span></code></td>
+<td>Top left of the map.</td>
+	</tr>
+	<tr>
+<td><code><span class="string">'topright'</span></code></td>
+<td>Top right of the map.</td>
+	</tr>
+	<tr>
+<td><code><span class="string">'bottomleft'</span></code></td>
+<td>Bottom left of the map.</td>
+	</tr>
+	<tr>
+<td><code><span class="string">'bottomright'</span></code></td>
+<td>Bottom right of the map.</td>
+	</tr>
+</table>
+
+

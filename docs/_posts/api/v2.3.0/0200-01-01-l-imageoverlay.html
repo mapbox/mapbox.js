@@ -1,0 +1,104 @@
+---
+layout: api
+title: "v2.3.0 JavaScript Library: L.ImageOverlay"
+categories: api
+version: v2.3.0
+permalink: /api/v2.3.0/l-imageoverlay
+---
+<h2 id="imageoverlay">ImageOverlay</h2>
+
+<p>Used to load and display a single image over specific bounds of the map, implements <a href="/mapbox.js/api/v2.3.0/l-ilayer">ILayer</a> interface.</p>
+
+<h3>Usage example</h3>
+
+<pre><code class="javascript">var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+	imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
+
+L.imageOverlay(imageUrl, imageBounds).addTo(map);</code></pre>
+
+<h3>Creation</h3>
+
+<table data-id='imageoverlay'>
+	<tr>
+<th class="width250">Factory</th>
+
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>L.ImageOverlay</b>(
+<nobr>&lt;String&gt; <i>imageUrl</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.3.0/l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
+<nobr>&lt;<a href="/mapbox.js/api/v2.3.0/l-imageoverlay">ImageOverlay options</a>&gt; <i>options?</i> )</nobr>
+</code></td>
+
+
+<td>Instantiates an image overlay object given the URL of the image and the geographical bounds it is tied to.</td>
+	</tr>
+</table>
+
+<h3 id="imageoverlay-options">Options</h3>
+<table data-id='imageoverlay'>
+	<tr>
+<th>Option</th>
+<th>Type</th>
+<th class="minwidth">Default</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>opacity</b></code></td>
+<td><code>Number</code></td>
+<td><code><span class="number">1.0</span></code></td>
+<td>The opacity of the image overlay.</td>
+	</tr>
+	<tr>
+<td><code><b>attribution</b></code></td>
+<td><code>String</code></td>
+<td><code><span class="string">''</span></code></td>
+<td>The attribution text of the image overlay.</td>
+	</tr>
+</table>
+
+<h3 id="imageoverlay-methods">Methods</h3>
+<table data-id='imageoverlay'>
+	<tr>
+<th class="width250">Method</th>
+<th>Returns</th>
+<th>Description</th>
+	</tr>
+	<tr>
+<td><code><b>addTo</b>(
+<nobr>&lt;<a href="/mapbox.js/api/v2.3.0/l-map-class">Map</a>&gt; <i>map</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Adds the overlay to the map.</td>
+	</tr>
+	<tr>
+<td><code><b>setOpacity</b>(
+<nobr>&lt;Number&gt; <i>opacity</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Sets the opacity of the overlay.</td>
+	</tr>
+	<tr>
+<td><code><b>setUrl</b>(
+<nobr>&lt;String&gt; <i>imageUrl</i> )</nobr>
+</code></td>
+
+<td><code><span class="keyword">this</span></code></td>
+<td>Changes the URL of the image.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToFront</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the layer to the top of all overlays.</td>
+	</tr>
+	<tr>
+<td><code><b>bringToBack</b>()</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Brings the layer to the bottom of all overlays.</td>
+	</tr>
+</table>
+
+
