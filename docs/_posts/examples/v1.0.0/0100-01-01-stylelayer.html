@@ -3,7 +3,7 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: styleLayer
-description: Display a Mapbox-hosted style created in Mapbox Studio
+description: Display a Mapbox style created in Mapbox Studio
 tags:
   - studio
   - style
@@ -15,6 +15,6 @@ tags:
 var map = L.mapbox.map('map')
     .setView([38.97416, -95.23252], 15);
 
-// Use styleLayer to a Mapbox-hosted style created in Mapbox Studio
+// Use styleLayer to a Mapbox style created in Mapbox Studio
 L.mapbox.styleLayer('mapbox://styles/mapbox/emerald-v8').addTo(map);
 </script>
