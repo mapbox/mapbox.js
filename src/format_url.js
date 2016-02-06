@@ -14,7 +14,6 @@ module.exports = function(path, accessToken) {
     var url = (document.location.protocol === 'https:' || config.FORCE_HTTPS) ? config.HTTPS_URL : config.HTTP_URL;
     url = url.replace(/\/v4$/, '');
     url += path;
-    url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
 
     if (config.REQUIRE_ACCESS_TOKEN) {
         if (accessToken[0] === 's') {
@@ -22,6 +21,7 @@ module.exports = function(path, accessToken) {
                 'See https://www.mapbox.com/mapbox.js/api/v' + version + '/api-access-tokens/');
         }
 
+        url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
         url += accessToken;
     }
 
