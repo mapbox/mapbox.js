@@ -1,0 +1,23 @@
+---
+layout: example
+categories: example/v1.0.0
+version: v1.0.0
+title: Add styles made with Mapbox Studio to a Leaflet map
+description: Display a style created in Mapbox Studio
+tags:
+  - leaflet
+---
+<div id='map'></div>
+
+<script>
+var map = L.map('map').setView([38.97416, -95.23252], 15);
+
+// Add tiles from Mapbox Style API (https://www.mapbox.com/developers/api/styles/)
+// Tiles are 512x512 pixels and are offset by 1 zoom level
+L.tileLayer(
+    'https://api.mapbox.com/styles/v1/mapbox/emerald-v8/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+</script>
