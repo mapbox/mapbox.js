@@ -12,7 +12,7 @@ tags:
 <script>
 // Replace 'mapbox.streets' with your map id.
 var mapboxTiles = L.tileLayer('{{site.tileApi}}/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
-    attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+    attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
 var map = L.map('map')
