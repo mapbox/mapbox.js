@@ -22,6 +22,18 @@ describe('L.mapbox.geocoder', function() {
                 .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15,10');
         });
 
+        it('supports country option', function() {
+            var g = L.mapbox.geocoder('mapbox.places');
+            expect(g.queryURL({query: ['austin', 'houston'], country: 'us'}))
+                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&country=us');
+        });
+
+        it('supports autocomplete option', function() {
+            var g = L.mapbox.geocoder('mapbox.places');
+            expect(g.queryURL({query: ['austin', 'houston'], country: 'us', autocomplete: false}))
+                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&country=us&autocomplete=false');
+        });
+
         it('rounds proximity params correctly', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], proximity: L.latLng(-10.12345, 15.67890)}))

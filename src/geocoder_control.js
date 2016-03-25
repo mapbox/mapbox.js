@@ -11,7 +11,8 @@ var GeocoderControl = L.Control.extend({
         position: 'topleft',
         pointZoom: 16,
         keepOpen: false,
-        autocomplete: false
+        autocomplete: false,
+        queryOptions: {}
     },
 
     initialize: function(_, options) {
@@ -177,19 +178,19 @@ var GeocoderControl = L.Control.extend({
         L.DomEvent.preventDefault(e);
         if (this._input.value === '') return this._updateSubmit();
         L.DomUtil.addClass(this._container, 'searching');
-        this.geocoder.query({
+        this.geocoder.query(L.Util.extend({
             query: this._input.value,
             proximity: this.options.proximity ? this._map.getCenter() : false
-        }, this._updateSubmit);
+        }, this.options.queryOptions), this._updateSubmit);
     },
 
     _autocomplete: function() {
         if (!this.options.autocomplete) return;
         if (this._input.value === '') return this._updateAutocomplete();
-        this.geocoder.query({
+        this.geocoder.query(L.Util.extend({
             query: this._input.value,
             proximity: this.options.proximity ? this._map.getCenter() : false
-        }, this._updateAutocomplete);
+        }, this.options.queryOptions), this._updateAutocomplete);
     }
 });
 

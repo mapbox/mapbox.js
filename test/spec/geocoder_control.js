@@ -62,6 +62,29 @@ describe('L.mapbox.geocoderControl', function() {
         expect(map.getZoom()).to.eql(10);
     });
 
+    it('supports queryOptions including autocomplete and country', function() {
+        var map = new L.Map(document.createElement('div')),
+            control = L.mapbox.geocoderControl('mapbox.places', {
+                proximity: false,
+                pointZoom: 10,
+                queryOptions: {
+                    autocomplete: false,
+                    country: 'us'
+                }
+            }).addTo(map);
+
+        server.respondWith('GET',
+            'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key&country=us&autocomplete=false',
+            [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
+
+        control._input.value = 'white house';
+        happen.once(control._form, { type: 'submit' });
+        server.respond();
+
+        expect(map.getCenter()).to.be.near({lat:  38.898761, lng: -77.035117}, 1e-1);
+        expect(map.getZoom()).to.eql(10);
+    });
+
     it('pointzoom does not zoom out zoomed-in maps', function() {
         var map = new L.Map(document.createElement('div')),
             control = L.mapbox.geocoderControl('mapbox.places', {

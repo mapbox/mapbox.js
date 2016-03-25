@@ -47,17 +47,31 @@ module.exports = function(url, options) {
 
         var url = L.Util.template(geocoder.getURL(), {query: query});
 
-        if (isObject && _.types) {
-            if (isArray(_.types)) {
-                url += '&types=' + _.types.join();
-            } else {
-                url += '&types=' + _.types;
+        if (isObject) {
+            if (_.types) {
+                if (isArray(_.types)) {
+                    url += '&types=' + _.types.join();
+                } else {
+                    url += '&types=' + _.types;
+                }
             }
-        }
 
-        if (isObject && _.proximity) {
-            var proximity = roundTo(L.latLng(_.proximity), 3);
-            url += '&proximity=' + proximity.lng + ',' + proximity.lat;
+            if (_.country) {
+                if (isArray(_.country)) {
+                    url += '&country=' + _.country.join();
+                } else {
+                    url += '&country=' + _.country;
+                }
+            }
+
+            if (_.proximity) {
+                var proximity = roundTo(L.latLng(_.proximity), 3);
+                url += '&proximity=' + proximity.lng + ',' + proximity.lat;
+            }
+
+            if (typeof _.autocomplete === 'boolean') {
+                url += '&autocomplete=' + _.autocomplete;
+            }
         }
 
         return url;

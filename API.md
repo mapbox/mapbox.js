@@ -311,7 +311,8 @@ _Returns_ the GeoJSON represented by this layer
 
 ## L.mapbox.geocoder(id|url, options)
 
-A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.
+A low-level interface to [the Mapbox Geocoding API](https://www.mapbox.com/api-documentation/#geocoding),
+useful for complex uses and reverse-geocoding.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -323,12 +324,24 @@ _Returns_ a `L.mapbox.geocoder` object.
 ### geocoder.query(queryString|options, callback)
 
 Queries the geocoder with a query string, and returns its result, if any.
+This performs [forward geocoding](https://www.mapbox.com/api-documentation/#search-for-places).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
 | queryString (_required_) | string | a query, expressed as a string, like 'Arkansas' |
 | options | object | an object containing the query and options parameters like `{ query: 'Austin', proximity: L.latlng(lat, lng) }`
 | callback (_required_) | function | a callback |
+
+Valid options are:
+
+* proximity: a `L.LatLng` object or `[latitude, longitude]` array that will
+  bias the search results toward a geographical point
+* country: a string or array of strings of ISO country codes likes `us`
+  or `ca` which will be included in the search. Ommitting this parameter
+  (the default) includes all countries.
+* autocomplete: whether to include results that only contain the prefix
+  of the search terms rather than the full terms. If you have precise input,
+  set this to `false`. Otherwise, by default it is `true`.
 
 The callback is called with arguments
 
@@ -349,6 +362,7 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 ### geocoder.reverseQuery(location, callback)
 
 Queries the geocoder with a location, and returns its result, if any.
+This performs [reverse geocoding](https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -475,6 +489,9 @@ the [Mapbox Geocoding API](http://mapbox.com/developers/api/geocoding/).
 | ---- | ---- | ---- |
 | id _or_ url (_required_) | string | Either a <ul><li>An [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places`</li><li>A geocoder API URL, like `{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json`</li></ul> |
 | options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this control.</li><li>`autocomplete`: automatically search and show results as you type. Default: `false`.</ul> |
+
+The `options` object can also include `queryOptions` which are passed to the
+`geocoder.query` method: see that method for full documentation of those options.
 
 _Example_:
 
