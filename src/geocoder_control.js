@@ -117,6 +117,7 @@ var GeocoderControl = L.Control.extend({
                 this.fire('found', {results: resp.results});
                 this._displayResults(features);
             } else {
+                this.fire('notfound');
                 this._displayResults(features);
             }
         }
@@ -133,6 +134,8 @@ var GeocoderControl = L.Control.extend({
             }
             if (features.length) {
                 this.fire('found', {results: resp.results});
+            } else {
+                this.fire('notfound');
             }
             this._displayResults(features);
         }

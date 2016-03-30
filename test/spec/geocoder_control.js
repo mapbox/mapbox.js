@@ -180,6 +180,19 @@ describe('L.mapbox.geocoderControl', function() {
             server.respond();
         });
 
+        it('emits a "notfound" event when geocoding succeeds', function(done) {
+            control.on('notfound', function(e) {
+                done();
+            });
+
+            control._input.value = 'unfindable';
+            happen.once(control._form, { type: 'submit' });
+
+            server.respondWith('GET', 'http://example.com/unfindable.json',
+                [200, { "Content-Type": "application/json" }, JSON.stringify({features:[]})]);
+            server.respond();
+        });
+
         it('emits a "autoselect" event when geocoding succeeds', function(done) {
             control.on('autoselect', function(e) {
                 expect(e.feature).to.eql(helpers.geocoderAustin.features[0]);

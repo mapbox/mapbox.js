@@ -538,8 +538,9 @@ Bind a listener to an event emitted by the geocoder control. Supported additiona
 
 | Event  | Description |
 | ---- | ---- |
-| found | Success in finding a location. The event's `results` property contains the raw results. |
-| error | Failure to find a location. The event's `error` property contains the raw HTTP error. |
+| found | A successful search. The event's `results` property contains the raw results. |
+| notfound | A search request succeeded but didn't find any results. |
+| error | A network error. The event's `error` property contains the raw HTTP error. |
 | select | Fired when the user selects a location from a list of options returned from a geocoding request. The event's `feature` property contains the selected GeoJSON Feature. |
 | autoselect | Fired when the control automatically selects the first result of a query that returns only one result, and repositions the map accordingly. The event's `feature` property contains the selected GeoJSON feature. |
 
