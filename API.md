@@ -584,7 +584,7 @@ and `popupAnchor`.
 ## L.mapbox.marker.style(feature, latlng)
 
 An icon generator for use in conjunction with `pointToLayer` to generate
-markers from the [Mapbox Markers API](http://mapbox.com/developers/api/#markers)
+markers from the [Mapbox Markers API](https://www.mapbox.com/api-documentation/#retrieve-a-standalone-marker)
 and support the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) for
 features.
 
