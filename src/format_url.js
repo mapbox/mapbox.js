@@ -29,6 +29,12 @@ module.exports = function(path, accessToken) {
 };
 
 module.exports.tileJSON = function(urlOrMapID, accessToken) {
+
+    if (urlOrMapID.indexOf('mapbox://styles') === 0) {
+        throw new Error('Styles created with Mapbox Studio need to be used with ' +
+            'L.mapbox.styleLayer, not L.mapbox.tileLayer');
+    }
+
     if (urlOrMapID.indexOf('/') !== -1)
         return urlOrMapID;
 

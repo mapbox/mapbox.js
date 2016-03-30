@@ -22,6 +22,14 @@ describe("format_url", function() {
         expect(function() { internals.url('/v4/user.map.json') }).to.throwError('An API access token is required to use Mapbox.js.');
     });
 
+    it('throws an error if a Studio style id is provided', function() {
+        L.mapbox.accessToken = null;
+        expect(function() {
+            internals.url('mapbox://styles/username/foo')
+        }).to.throwError('Styles created with Mapbox Studio need to be used with ' +
+            'L.mapbox.styleLayer, not L.mapbox.tileLayer');
+    });
+
     it('throws an error if a secret access token is provided', function() {
         L.mapbox.accessToken = 'sk.abc.123';
         expect(function() { internals.url('/v4/user.map.json') }).to.throwError('Use a public access token (pk.*) with Mapbox.js.');
