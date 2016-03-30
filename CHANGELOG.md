@@ -1,3 +1,15 @@
+## v2.4.0
+
+* Adds `autocomplete` and `country` options to the `L.mapbox.geocoder`
+  and `L.mapbox.geocoderControl` interfaces. These let you narrow down searched
+  countries and enable more precise searches if you have precise input.
+* Adds an informative error if you try to use `L.mapbox.tileLayer` with
+  a new style URL which will tell you to use `L.mapbox.styleLayer` instead.
+* Adds a `notfound` event to the `geocoderControl` interface to allow
+  applications to listen for unsuccessful searches.
+* Re-compressed control PNGs for smaller size
+* Documentation improvements
+
 ## v2.3.0
 
 * Add `L.mapbox.styleLayer` with support for loading tiles from a style.
