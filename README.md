@@ -13,12 +13,7 @@ Managed as Markdown in `API.md`, following the standards in `DOCUMENTING.md`
 
 ## Usage
 
-Recommended usage is via the Mapbox CDN:
-
-```html
-<script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
-```
+Recommended usage is via the Mapbox CDN, with [code snippets available on the official documentation page](https://www.mapbox.com/mapbox.js/)
 
 The `mapbox.js` file includes the Leaflet library. Alternatively, you can use `mapbox.standalone.js`, which does not include Leaflet (you will have to provide it yourself).
 
