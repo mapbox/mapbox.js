@@ -16,12 +16,7 @@ done
 BASE="$(dirname $0)"
 TMP="$(mktemp /tmp/tmp.XXXXXXXX)"
 
-# Render icons.svg variations.
-inkscape \
-    --export-dpi=90 \
-    --export-png=$TMP.png \
-    $BASE/icons.svg > /dev/null
-
+# Render PNG
 inkscape \
     --export-dpi=180 \
     --export-png=$TMP@2x.png \
@@ -34,6 +29,6 @@ for COLOR in $COLORS; do
     echo -e "\033[01;33m✔ saved $BASE/icons-$COLOR@2x.png"
 done
 
-rm -f $TMP $TMP.png $TMP@2x.png
+rm -f $TMP $TMP@2x.png
 
 echo -e "\n\033[00;33mCOMPLETE! Don't forget to update the \`background-size\` property if the sprite size changed\033[0m"
