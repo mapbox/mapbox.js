@@ -178,6 +178,8 @@ function with that data, if any.
 
 _Returns_: the L.mapbox.gridLayer object
 
+_Class_: `L.mapbox.FeatureLayer`
+
 ## L.mapbox.featureLayer(id|url|geojson, options)
 
 <span class='leaflet icon'>_Extends_: `L.FeatureGroup`</span>
@@ -306,6 +308,24 @@ _Returns_ the featureLayer object
 Get the contents of this layer as GeoJSON data.
 
 _Returns_ the GeoJSON represented by this layer
+
+## L.mapbox.styleLayer(url, options)
+
+<span class='leaflet icon'>_Extends_: `L.tileLayer`</span>
+
+`L.mapbox.styleLayer` provides a way to integrate [styles](https://www.mapbox.com/help/define-style/) created with Mapbox Studio into your map.
+
+| Options | Value | Description |
+| ---- | ---- | ---- |
+| url | string | Must be a string like `mapbox://styles/mapbox/cin286r4x006safncofpcb71v`|
+| options | object | If provided, it is the same options as provided to `L.tileLayer`, as well as: <ul><li>`sanitizer`: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li>|
+
+_Example_:
+
+    var styleLayer = L.mapbox.styleLayer(url)
+        .addTo(map);
+
+_Returns_ a `L.mapbox.styleLayer` object.
 
 # Geocoding
 

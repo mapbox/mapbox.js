@@ -237,6 +237,7 @@ function with that data, if any.</p>
 </tbody>
 </table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>
+<p><em>Class</em>: <code><a href="#l-mapbox-featurelayer">L.mapbox.FeatureLayer</a></code></p>
 <h2 id="l-mapbox-featurelayer">L.mapbox.featureLayer(id|url|geojson, options)</h2>
 <p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-featuregroup">L.FeatureGroup</a></code></span></p>
 <p><code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
@@ -394,6 +395,34 @@ featureLayer.setGeoJSON({
 <h3 id="featurelayer-getgeojson">featureLayer.getGeoJSON()</h3>
 <p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>
+<h2 id="l-mapbox-stylelayer">L.mapbox.styleLayer(url, options)</h2>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-tilelayer">L.tileLayer</a></code></span></p>
+<p><code><a href="#l-mapbox-stylelayer">L.mapbox.styleLayer</a></code> provides a way to integrate <a href="https://www.mapbox.com/help/define-style/">styles</a> created with Mapbox Studio into your map.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Must be a string like <code>mapbox://styles/mapbox/cin286r4x006safncofpcb71v</code></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to <code><a href="#l-tilelayer">L.tileLayer</a></code>, as well as: <ul><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var styleLayer = L.mapbox.styleLayer(url)
+    .addTo(map);
+</code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-stylelayer">L.mapbox.styleLayer</a></code> object.</p>
 <h1 id="geocoding">Geocoding</h1>
 <h2 id="l-mapbox-geocoder">L.mapbox.geocoder(id|url, options)</h2>
 <p>A low-level interface to <a href="https://www.mapbox.com/api-documentation/#geocoding">the Mapbox Geocoding API</a>,
