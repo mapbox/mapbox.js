@@ -178,8 +178,6 @@ function with that data, if any.
 
 _Returns_: the L.mapbox.gridLayer object
 
-_Class_: `L.mapbox.FeatureLayer`
-
 ## L.mapbox.featureLayer(id|url|geojson, options)
 
 <span class='leaflet icon'>_Extends_: `L.FeatureGroup`</span>
