@@ -56,7 +56,7 @@ examples:
       <div class='space-bottom'>
         <a class='block quiet active strong small truncate' href='{{site.baseurl}}/examples/'>Examples</a>
       </div>
-      {% for example in page.examples %}
+      {% for example in layout.examples %}
       <div class='space-bottom1'>
         <strong class='block quiet small'>{{example.name}}</strong>
         {% for listing in site.tags[example.id] order:ascending %}
