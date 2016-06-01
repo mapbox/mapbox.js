@@ -21,12 +21,12 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> geojson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string mapbox.streets</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
 <td>object</td>
-<td>If provided, it is the same options as provided to <code><a href="/mapbox.js/api/v2.1.0/l-featuregroup">L.FeatureGroup</a></code>, as well as: <ul><li><code>filter</code>: A function that accepts a feature object and returns <code>true</code> or <code>false</code> to indicate whether it should be displayed on the map. This can be changed later using <code>setFilter</code>.</li><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v2.1.0/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this layer.</li><li><code>popupOptions</code>: an object of <a href="http://leafletjs.com/reference.html#popup-maxwidth">options that will be passed to the <code>bindPopup</code> method internally</a>.</ul></td>
+<td>If provided, it is the same options as provided to <code><a href="/mapbox.js/api/v2.1.0/l-featuregroup">L.FeatureGroup</a></code>, as well as: <ul><li><code>filter</code>: A function that accepts a feature object and returns <code>true</code> or <code>false</code> to indicate whether it should be displayed on the map. This can be changed later using <code>setFilter</code>.</li><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v2.1.0/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this layer.</li><li><code>popupOptions</code>: an object of <a href="http://leafletjs.com/reference.html#popup-maxwidth">options that will be passed to the <code>bindPopup</code> method internally</a>.<li><code>pointToLayer</code>: A function that accepts a feature object and a <code><a href="/mapbox.js/api/v2.1.0/l-latlng">L.LatLng</a></code> and returns a layer to be added. Defaults to <code><a href="/mapbox.js/api/v2.1.0/l-mapbox-marker-style">L.mapbox.marker.style</a></code>.</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -81,9 +81,9 @@ featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);
 <pre><code>var featureLayer = L.mapbox.featureLayer()
     .addTo(map);
 
-// loads markers from the map `examples.map-0l53fhk2` on Mapbox,
+// loads markers from the map `mapbox.dark` on Mapbox,
 // if that map has markers
-featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);
+featureLayer.loadID(&#39;mapbox.dark&#39;);
 </code></pre><p><em>Returns</em>: the layer object</p>
 <h3 id="section-featurelayer-setfilter">featureLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>

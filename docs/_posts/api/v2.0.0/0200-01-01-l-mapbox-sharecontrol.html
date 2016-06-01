@@ -7,7 +7,7 @@ permalink: /api/v2.0.0/l-mapbox-sharecontrol
 ---
 <h2 id="section-l-mapbox-sharecontrol">L.mapbox.shareControl(id|url, options)</h2>
 <p>Adds a &quot;Share&quot; button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="/mapbox.js/api/v2.0.0/l-control">L.Control</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="/mapbox.js/api/v2.0.0/l-control">L.Control</a></code></span></p>
 <table>
 <thead>
 <tr>
@@ -20,7 +20,7 @@ permalink: /api/v2.0.0/l-mapbox-sharecontrol
 <tr>
 <td>id <em>or</em> url <em>optional</em></td>
 <td>string</td>
-<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul></td>
+<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code> If not supplied, the TileJSON from the map is used.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -30,7 +30,7 @@ permalink: /api/v2.0.0/l-mapbox-sharecontrol
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.map(&#39;map&#39;, &#39;examples.map-i875kd35&#39;)
+<pre><code>var map = L.map(&#39;map&#39;, &#39;mapbox.streets&#39;)
     .setView([37, -77], 5)
     .addControl(L.mapbox.shareControl());
 </code></pre><p><em>Returns</em>:

@@ -27,13 +27,16 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>L.map</b>(
 <nobr>&lt;HTMLElement|String&gt; <i>id</i>,</nobr>
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Map options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">Map options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 
 
 <td>Instantiates a map object given a div element (or its id) and optionally an object literal with map options described below.</td>
 	</tr>
 </table>
+
+
+
 
 <h3 id="map-options">Options</h3>
 
@@ -80,8 +83,8 @@ var map = L.map('map', {
 <td><code><b>maxBounds</b></code></td>
 <td><code><a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a></code></td>
 <td><code><span class="literal">null</span></code></td>
-<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view, and also not allowing to zoom out to a view that's larger than the given bounds (depending on the map size). To set the restriction dynamically, use <a href="/mapbox.js/api/v2.0.0/l-map">setMaxBounds</a> method</td>
-	</tr>
+<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view. To set the restriction dynamically, use <a href="/mapbox.js/api/v2.0.0/l-map-class">setMaxBounds</a> method</td>
+    </tr>
 	<tr>
 <td><code><b>crs</b></code></td>
 <td><code><a href="/mapbox.js/api/v2.0.0/l-icrs">CRS</a></code></td>
@@ -363,7 +366,7 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>unload</b></code></td>
 <td><code><a href="/mapbox.js/api/v2.0.0/l-event-objects">Event</a></code></td>
-<td>Fired when the map is destroyed with <a href="/mapbox.js/api/v2.0.0/l-map">remove</a> method.</td>
+<td>Fired when the map is destroyed with <a href="/mapbox.js/api/v2.0.0/l-map-class">remove</a> method.</td>
 	</tr>
 	<tr id="map-viewreset">
 <td><code><b>viewreset</b></code></td>
@@ -453,7 +456,7 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>locationfound</b></code></td>
 <td><code><a href="/mapbox.js/api/v2.0.0/l-event-objects">LocationEvent</a></code>
-<td>Fired when geolocation (using the <a href="/mapbox.js/api/v2.0.0/l-map">locate</a> method) went successfully.</td>
+<td>Fired when geolocation (using the <a href="/mapbox.js/api/v2.0.0/l-map-class">locate</a> method) went successfully.</td>
 	</tr>
 	<tr>
 <td><code><b>locationerror</b></code></td>
@@ -485,7 +488,7 @@ var map = L.map('map', {
 <td><code><b>setView</b>(
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>&gt; <i>center</i>,</nobr>
 <nobr>&lt;Number&gt; <i>zoom?</i>,</nobr>
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">zoom/pan options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">zoom/pan options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Sets the view of the map (geographical center and zoom) with the given animation options.</td>
@@ -493,7 +496,7 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>setZoom</b>(
 <nobr>&lt;Number&gt; <i>zoom</i></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Sets the zoom of the map.</td>
@@ -501,7 +504,7 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>zoomIn</b>(
 <nobr>&lt;Number&gt; <em>delta?</em></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Increases the zoom of the map by <code>delta</code> (<code><span class="number">1</span></code> by default).</td>
@@ -509,7 +512,7 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>zoomOut</b>(
 <nobr>&lt;Number&gt; <em>delta?</em></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Decreases the zoom of the map by <code>delta</code> (<code><span class="number">1</span></code> by default).</td>
@@ -518,7 +521,7 @@ var map = L.map('map', {
 <td><code><b>setZoomAround</b>(
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>&gt; <i>latlng</i>, </nobr>
 <nobr>&lt;Number&gt; <i>zoom</i></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Zooms the map while keeping a specified point on the map stationary (e.g. used internally for scroll zoom and double-click zoom).</td>
@@ -526,14 +529,14 @@ var map = L.map('map', {
 	<tr id="map-fitbounds">
 <td><code><b>fitBounds</b>(
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">fitBounds options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">fitBounds options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Sets a map view that contains the given geographical bounds with the maximum zoom level possible.</td>
 	</tr>
 	<tr id="map-fitworld">
 <td><code><b>fitWorld</b>(
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">fitBounds options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">fitBounds options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Sets a map view that mostly contains the whole world with the maximum zoom level possible.</td>
@@ -541,7 +544,7 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>panTo</b>(
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlng">LatLng</a>&gt; <i>latlng</i></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Pans the map to a given center. Makes an animated pan if new center is not more than one screen away from the current one.</td>
@@ -549,7 +552,7 @@ var map = L.map('map', {
 	<tr id="map-paninsidebounds">
 <td><code><b>panInsideBounds</b>(
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Pans the map to the closest view that would lie inside the given bounds (if it's not already), controlling the animation using the options specific, if any.</td>
@@ -557,7 +560,7 @@ var map = L.map('map', {
 	<tr>
 <td><code><b>panBy</b>(
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-point">Point</a>&gt; <i>point</i></nobr>,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Pans the map by a given number of pixels (animated).</td>
@@ -571,7 +574,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 <td><code><b>invalidateSize</b>(
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">zoom/pan options</a>&gt; <i>options</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">zoom/pan options</a>&gt; <i>options</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
 <td>Checks if the map container size changed and updates the map if so &mdash; call it after you've changed the map size dynamically, also animating pan by default. If <code>options.pan</code> is <code><span class="literal">false</span></code>, panning will not occur. If <code>options.debounceMoveend</code> is <code><span class="literal">true</span></code>, it will delay <code>moveend</code> event so that it doesn't happen often even if the method is called many times in a row.</td>
@@ -579,17 +582,17 @@ var map = L.map('map', {
 	<tr id="map-setmaxbounds">
 <td><code><b>setMaxBounds</b>(
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr><!--,
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">zoom/pan options</a>&gt; <i>options?</i> )</nobr>-->
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">zoom/pan options</a>&gt; <i>options?</i> )</nobr>-->
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
-<td>Restricts the map view to the given bounds (see <a href="/mapbox.js/api/v2.0.0/l-map">map maxBounds</a> option)<!--, animating the map view if bounds are changed.  The given animation options are passed through to `setView` or `panInsideBounds`, depending on map zoom level, and can be used to control how the map animates during this change-->.</td>
+<td>Restricts the map view to the given bounds (see <a href="/mapbox.js/api/v2.0.0/l-map-class">map maxBounds</a> option)<!--, animating the map view if bounds are changed.  The given animation options are passed through to `setView` or `panInsideBounds`, depending on map zoom level, and can be used to control how the map animates during this change-->.</td>
 	</tr>
 	<tr id="map-locate">
 <td><code><b>locate</b>(
-<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map">Locate options</a>&gt; <i>options?</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-map-class">Locate options</a>&gt; <i>options?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
-<td>Tries to locate the user using the <a href="https://en.wikipedia.org/wiki/W3C_Geolocation_API">Geolocation API</a>, firing a <code>locationfound</code> event with location data on success or a <code>locationerror</code> event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). See <a href="/mapbox.js/api/v2.0.0/l-map">Locate options</a> for more details.</td>
+<td>Tries to locate the user using the <a href="https://en.wikipedia.org/wiki/W3C_Geolocation_API">Geolocation API</a>, firing a <code>locationfound</code> event with location data on success or a <code>locationerror</code> event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). See <a href="/mapbox.js/api/v2.0.0/l-map-class">Locate options</a> for more details.</td>
 	</tr>
 	<tr>
 <td><code><b>stopLocate</b>()</code></td>
@@ -653,7 +656,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 <td><code><b>getPixelBounds</b>()</code></td>
-<td><code>Bounds</code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-bounds">Bounds</a></code></td>
 <td>Returns the bounds of the current map view in projected pixel coordinates (sometimes useful in layer and overlay implementations).</td>
 	</tr>
 	<tr>
@@ -696,6 +699,18 @@ var map = L.map('map', {
 <td><code>Boolean</code></td>
 <td>Returns <code><span class="literal">true</span></code> if the given layer is currently added to the map.</td>
 	</tr>
+	<tr>
+<td><code><b>eachLayer</b>(
+<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+<nobr>&lt;Object&gt; <i>context?</i> )</nobr>
+</code></td>
+<td><code><span class="keyword">this</span></code></td>
+<td>Iterates over the layers of the map, optionally specifying context of the iterator function.
+<pre><code>map.eachLayer(function (layer) {
+	layer.bindPopup('Hello');
+});</code></pre>
+</td>
+	</tr>
 
 	<tr id="map-openpopup">
 <td><code><b>openPopup</b>(
@@ -720,7 +735,7 @@ var map = L.map('map', {
 <nobr>&lt;<a href="/mapbox.js/api/v2.0.0/l-popup">Popup</a>&gt; <i>popup?</i> )</nobr>
 </code></td>
 <td><code><span class="keyword">this</span></code></td>
-<td>Closes the popup previously opened with <a href="/mapbox.js/api/v2.0.0/l-map">openPopup</a> (or the given one).</td>
+<td>Closes the popup previously opened with <a href="/mapbox.js/api/v2.0.0/l-map-class">openPopup</a> (or the given one).</td>
 	</tr>
 	<tr id="map-addcontrol">
 <td><code><b>addControl</b>(
@@ -856,7 +871,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 <td><code><b>getPanes</b>()</code></td>
-<td><code><a href="/mapbox.js/api/v2.0.0/l-map">MapPanes</a></code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-map-class">MapPanes</a></code></td>
 <td>Returns an object with different map panes (to render overlays in).</td>
 	</tr>
 	<tr>
@@ -933,13 +948,13 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 <td><code><b>pan</b></code></td>
-<td><code><a href="/mapbox.js/api/v2.0.0/l-map">pan options</a></code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-map-class">pan options</a></code></td>
 <td><code>-</code></td>
 <td>Sets the options for the panning (without the zoom change) if it occurs.</td>
 	</tr>
 	<tr>
 <td><code><b>zoom</b></code></td>
-<td><code><a href="/mapbox.js/api/v2.0.0/l-map">zoom options</a></code></td>
+<td><code><a href="/mapbox.js/api/v2.0.0/l-map-class">zoom options</a></code></td>
 <td><code>-</code></td>
 <td>Sets the options for the zoom change if it occurs.</td>
 	</tr>
@@ -1005,7 +1020,7 @@ var map = L.map('map', {
 
 <h3 id="map-fitboundsoptions">fitBounds options</h3>
 
-<p>The same as <a href="/mapbox.js/api/v2.0.0/l-map">zoom/pan options</a> and additionally:</p>
+<p>The same as <a href="/mapbox.js/api/v2.0.0/l-map-class">zoom/pan options</a> and additionally:</p>
 
 <table data-id='map'>
 	<tr>
@@ -1107,7 +1122,7 @@ var map = L.map('map', {
 
 <h3 id="map-panes">Map Panes</h3>
 
-<p>An object literal (returned by <a href="/mapbox.js/api/v2.0.0/l-map">map.getPanes</a></code>) that contains different map panes that you can use to put your custom overlays in. The difference is mostly in zIndex order that such overlays get.</p>
+<p>An object literal (returned by <a href="/mapbox.js/api/v2.0.0/l-map-class">map.getPanes</a></code>) that contains different map panes that you can use to put your custom overlays in. The difference is mostly in zIndex order that such overlays get.</p>
 
 <table data-id='map'>
 	<tr>
