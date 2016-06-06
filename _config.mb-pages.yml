@@ -2,11 +2,10 @@ url: https://www.mapbox.com
 api: https://www.mapbox.com/core
 tileApi: https://api.mapbox.com
 source: docs
-permalink: /:categories/:title
+permalink: /:categories/:title/
 baseurl: /mapbox.js
 highlighter: pygments
 mapboxjs: v2.4.0
 defaultid: 'mapbox.streets'
-rdiscount:
-  extensions: [smart]
 exclude: [dist]
+future: true

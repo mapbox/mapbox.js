@@ -19,15 +19,15 @@ permalink: /api/v2.1.0/l-ilayer
 	</tr>
 	<tr>
 <td><code><b>onAdd</b>(
-<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 </code></td>
 
 <td>-</td>
-<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="/mapbox.js/api/v2.1.0/l-map">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
+<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="/mapbox.js/api/v2.1.0/l-map-class">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
 	</tr>
 	<tr>
 <td><code><b>onRemove</b>(
-<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-map">Map</a>&gt; <i>map</i> )</nobr>
+<nobr>&lt;<a href="/mapbox.js/api/v2.1.0/l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 </code></td>
 
 <td>-</td>
@@ -37,9 +37,9 @@ permalink: /api/v2.1.0/l-ilayer
 
 <h3>Implementing Custom Layers</h3>
 
-<p>The most important things know about when implementing custom layers are Map <a href="/mapbox.js/api/v2.1.0/l-map">viewreset</a> event and <a href="/mapbox.js/api/v2.1.0/l-map">latLngToLayerPoint</a> method. <code>viewreset</code> is fired when the map needs to reposition its layers (e.g. on zoom), and <code>latLngToLayerPoint</code> is used to get coordinates for the layer's new position.</p>
+<p>The most important things know about when implementing custom layers are Map <a href="/mapbox.js/api/v2.1.0/l-map-class">viewreset</a> event and <a href="/mapbox.js/api/v2.1.0/l-map-class">latLngToLayerPoint</a> method. <code>viewreset</code> is fired when the map needs to reposition its layers (e.g. on zoom), and <code>latLngToLayerPoint</code> is used to get coordinates for the layer's new position.</p>
 
-<p>Another event often used in layer implementations is <a href="/mapbox.js/api/v2.1.0/l-map">moveend</a> which fires after any movement of the map (panning, zooming, etc.).</p>
+<p>Another event often used in layer implementations is <a href="/mapbox.js/api/v2.1.0/l-map-class">moveend</a> which fires after any movement of the map (panning, zooming, etc.).</p>
 
 <p>Another thing to note is that you'll usually need to add <code>leaflet-zoom-hide</code> class to the DOM elements you create for the layer so that it hides during zoom animation. Implementing zoom animation for custom layers is a complex topic and will be documented separately in future, but meanwhile you can take a look at how it's done for Leaflet layers (e.g. <code>ImageOverlay</code>) in the source.</p>
 

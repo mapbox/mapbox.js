@@ -31,6 +31,7 @@ output.write('description: Build anything with Mapbox.js ' + argv.t + ', a libra
 landOutput.write('description: Build anything with Mapbox.js ' + argv.t + ', a library for fast & interactive maps.\n');
 
 output.write('permalink: /api/' + argv.t + '/all/\n');
+landOutput.write('permalink: /api/' + argv.t + '/\n');
 
 var BASE_URL = '/mapbox.js/api/' + argv.t + '/';
 
@@ -129,11 +130,15 @@ function readDocumentation(filename) {
             // remove extra tabs: https://github.com/mapbox/mapbox.js/issues/804
             c.text = c.text.join('\n').replace(/\t{2,}/g, '');
 
-            writes.push({
-                file: argv.d + '/0200-01-01-' + c.id + '.html',
-                contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' + c.text
-            });
+            //console.log('HEY', !!escapedText);
+            
+            if (c.id) {
+              writes.push({
+                  file: argv.d + '/0200-01-01-' + c.id + '.html',
+                  contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
+                      'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' + c.text
+              });
+            }
         });
     } else {
 
@@ -204,13 +209,16 @@ function readDocumentation(filename) {
 
             var html = marked(c, { renderer: renderer });
             var escapedText = escapeFn(main);
-            writes.push({
-                file: argv.d + '/0200-01-01-' + escapedText + '.html',
-                contents: header.replace('All', main) +
-                    'version: ' + argv.t + '\n' +
-                    'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n' +
-                    html.replace('id="map"', '')
-            });
+
+            if (!!escapedText) {
+              writes.push({
+                  file: argv.d + '/0200-01-01-' + escapedText + '.html',
+                  contents: header.replace('All', main) +
+                      'version: ' + argv.t + '\n' +
+                      'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n' +
+                      html.replace('id="map"', '')
+              });
+            }
         });
 
         all += html;

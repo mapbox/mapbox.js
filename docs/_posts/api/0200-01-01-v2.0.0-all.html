@@ -3,14 +3,14 @@ layout: api
 title: "v2.0.0 JavaScript Library: All"
 categories: api
 version: v2.0.0
-description: Build anything with Mapbox.js, a library for fast & interactive maps.
+description: Build anything with Mapbox.js v2.0.0, a library for fast & interactive maps.
 permalink: /api/v2.0.0/all/
 ---
 <h1 id="map-object">Map Object</h1>
 <h2 id="l-mapbox-map">L.mapbox.map(element, id|url|tilejson, options)</h2>
 <p>Create and automatically configure a map with layers, markers, and
 interactivity.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-map-class">L.Map</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-map-class">L.Map</a></code></span></p>
 <table>
 <thead>
 <tr>
@@ -28,19 +28,19 @@ interactivity.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>url can be <ul><li>a map <code>id</code> string <code>examples.map-foo</code></li><li> a URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>a <a href="https://www.mapbox.com/developers/tilejson/">TileJSON</a> object, from your own Javascript code</li></ul></td>
+<td>url can be <ul><li>A map <code>id</code> string <code>examples.map-foo</code></li><li>A comma separated list of map <code>id</code> strings <code>examples.map-foo,examples.map-bar</code> <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/compositing/">example</a></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A <a href="https://www.mapbox.com/developers/tilejson/">TileJSON</a> object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
 <td>object</td>
-<td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> L.TileLayer options. Options passed to a <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> options. Options passed to a <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>. Options passed to a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> options. Options passed to a <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>.</li><li><code>shareControl</code>: Options passed to a <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>. Set to <code>true</code> to enable the <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>.</li><li><code>infoControl</code>: Options passed to a <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>. Set to <code>true</code> to enable the <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="#l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this map.</li></td>
+<td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> L.TileLayer options. Options passed to a <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> options. Options passed to a <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>. Options passed to a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> options. Options passed to a <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="#l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>.</li><li><code>shareControl</code>: Options passed to a <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>. Set to <code>true</code> to enable the <code><a href="#l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>.</li><li><code>infoControl</code>: Options passed to a <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>. Set to <code>true</code> to enable the <code><a href="#l-mapbox-infocontrol">L.mapbox.infoControl</a></code>.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="#l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this map.</li><li><code>attributionControl</code>: value can be <code>{compact: true}</code> to force a compact attribution icon that shows the full attribution on click, or <code>{compact: false}</code> to force the full attribution control. The default is a responsive attribution that collapses when the map is less than 640 pixels wide.</li></td>
 </tr>
 </tbody>
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// map refers to a &lt;div&gt; element with the ID map
-// examples.map-4l7djmvo is the ID of a map on Mapbox.com
-var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-4l7djmvo&#39;);
+// mapbox.streets is the ID of a map on Mapbox.com
+var map = L.mapbox.map(&#39;map&#39;, &#39;mapbox.streets&#39;);
 
 // map refers to a &lt;div&gt; element with the ID map
 // This map will have no layers initially
@@ -55,7 +55,7 @@ zoom bounds and other metadata.</p>
 <h2 id="l-mapbox-tilelayer">L.mapbox.tileLayer(id|url|tilejson, options)</h2>
 <p>You can add a tiled layer to your map with <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer()</a></code>, a simple
 interface to layers from Mapbox and elsewhere.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-tilelayer">L.TileLayer</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-tilelayer">L.TileLayer</a></code></span></p>
 <table>
 <thead>
 <tr>
@@ -68,7 +68,7 @@ interface to layers from Mapbox and elsewhere.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+<td>Value must be <ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -79,24 +79,24 @@ interface to layers from Mapbox and elsewhere.</p>
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;);
+var layer = L.mapbox.tileLayer(&#39;mapbox.streets&#39;);
 
 // you can also provide a full url to a TileJSON resource
-var layer = L.mapbox.tileLayer(&#39;{{site.tileApi}}/v3/examples.map-0l53fhk2.json&#39;);
+var layer = L.mapbox.tileLayer(&#39;{{site.tileApi}}/v3/mapbox.dark.json&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="#l-mapbox-tilelayer">L.mapbox.TileLayer</a></code></p>
 <h3 id="tilelayer-gettilejson">tileLayer.getTileJSON()</h3>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;)
+<pre><code>var layer = L.mapbox.tileLayer(&#39;mapbox.streets&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
-    .on(&#39;load&#39;, function() {
-    // get TileJSON data from the loaded layer
-    var TileJSON = layer.getTileJSON();
-});
+    .on(&#39;ready&#39;, function() {
+        // get TileJSON data from the loaded layer
+        var TileJSON = layer.getTileJSON();
+    });
 </code></pre><p><em>Returns</em>: the TileJSON object</p>
 <h3 id="tilelayer-setformat">tileLayer.setFormat(format)</h3>
 <p>Set the image format of tiles in this layer. You can use lower-quality tiles
@@ -120,7 +120,7 @@ in order to load maps faster</p>
 <p><em>Example</em>:</p>
 <pre><code>// Downsample tiles for faster loading times on slow
 // internet connections
-var layer = L.mapbox.tileLayer(&#39;examples.map-20v6611k&#39;, {
+var layer = L.mapbox.tileLayer(&#39;mapbox.streets&#39;, {
     format: &#39;jpg70&#39;
 });
 </code></pre><p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/tilelayer-setformat/">Live example of .setFormat in use</a></p>
@@ -140,7 +140,7 @@ interactivity into your map, which you can easily access with <code><a href="#l-
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
+<td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -151,7 +151,7 @@ interactivity into your map, which you can easily access with <code><a href="#l-
 </table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;);
+var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;);
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="#l-mapbox-gridlayer">L.mapbox.GridLayer</a></code></p>
 <h3 id="gridlayer-on">gridLayer.on(event, handler, context)</h3>
@@ -203,14 +203,14 @@ same argument structure.</p>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
-<pre><code>var layer = L.mapbox.gridLayer(&#39;examples.map-20v6611k&#39;)
+<pre><code>var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;)
     // since layers load asynchronously through AJAX, use the
     // `.on` function to listen for them to be loaded before
     // calling `getTileJSON()`
-    .on(&#39;load&#39;, function() {
-    // get TileJSON data from the loaded layer
-    var TileJSON = layer.getTileJSON();
-});
+    .on(&#39;ready&#39;, function() {
+        // get TileJSON data from the loaded layer
+        var TileJSON = layer.getTileJSON();
+    });
 </code></pre><p><em>Returns</em>: the TileJSON object</p>
 <h3 id="gridlayer-getdata">gridLayer.getData(latlng, callback)</h3>
 <p>Load data for a given latitude, longitude point on the map, and call the callback
@@ -238,7 +238,7 @@ function with that data, if any.</p>
 </table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>
 <h2 id="l-mapbox-featurelayer">L.mapbox.featureLayer(id|url|geojson, options)</h2>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-featuregroup">L.FeatureGroup</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-featuregroup">L.FeatureGroup</a></code></span></p>
 <p><code><a href="#l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> provides an easy way to integrate <a href="http://www.geojson.org/">GeoJSON</a>
 from Mapbox and elsewhere into your map.</p>
 <table>
@@ -253,12 +253,12 @@ from Mapbox and elsewhere into your map.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> geojson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string examples.map-foo</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>An id string mapbox.streets</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
 <td>object</td>
-<td>If provided, it is the same options as provided to <code><a href="#l-featuregroup">L.FeatureGroup</a></code>, as well as: <ul><li><code>filter</code>: A function that accepts a feature object and returns <code>true</code> or <code>false</code> to indicate whether it should be displayed on the map. This can be changed later using <code>setFilter</code>.</li><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="#l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this layer.</li></ul></td>
+<td>If provided, it is the same options as provided to <code><a href="#l-featuregroup">L.FeatureGroup</a></code>, as well as: <ul><li><code>filter</code>: A function that accepts a feature object and returns <code>true</code> or <code>false</code> to indicate whether it should be displayed on the map. This can be changed later using <code>setFilter</code>.</li><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="#l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this layer.</li><li><code>popupOptions</code>: an object of <a href="http://leafletjs.com/reference.html#popup-maxwidth">options that will be passed to the <code>bindPopup</code> method internally</a>.<li><code>pointToLayer</code>: A function that accepts a feature object and a <code><a href="#l-latlng">L.LatLng</a></code> and returns a layer to be added. Defaults to <code><a href="#l-mapbox-marker-style">L.mapbox.marker.style</a></code>.</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -313,9 +313,9 @@ featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);
 <pre><code>var featureLayer = L.mapbox.featureLayer()
     .addTo(map);
 
-// loads markers from the map `examples.map-0l53fhk2` on Mapbox,
+// loads markers from the map `mapbox.dark` on Mapbox,
 // if that map has markers
-featureLayer.loadID(&#39;examples.map-0l53fhk2&#39;);
+featureLayer.loadID(&#39;mapbox.dark&#39;);
 </code></pre><p><em>Returns</em>: the layer object</p>
 <h3 id="featurelayer-setfilter">featureLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>
@@ -394,9 +394,38 @@ featureLayer.setGeoJSON({
 <h3 id="featurelayer-getgeojson">featureLayer.getGeoJSON()</h3>
 <p>Get the contents of this layer as GeoJSON data.</p>
 <p><em>Returns</em> the GeoJSON represented by this layer</p>
+<h2 id="l-mapbox-stylelayer">L.mapbox.styleLayer(url, options)</h2>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-tilelayer">L.tileLayer</a></code></span></p>
+<p><code><a href="#l-mapbox-stylelayer">L.mapbox.styleLayer</a></code> provides a way to integrate <a href="https://www.mapbox.com/help/define-style/">styles</a> created with Mapbox Studio into your map.</p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Must be a string like <code>mapbox://styles/mapbox/cin286r4x006safncofpcb71v</code></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to <code><a href="#l-tilelayer">L.tileLayer</a></code>, as well as: <ul><li><code>sanitizer</code>: A function that accepts a string containing tooltip data, and returns a sanitized result for HTML display. The default will remove dangerous script content, and is recommended.</li></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>var styleLayer = L.mapbox.styleLayer(url)
+    .addTo(map);
+</code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-stylelayer">L.mapbox.styleLayer</a></code> object.</p>
 <h1 id="geocoding">Geocoding</h1>
 <h2 id="l-mapbox-geocoder">L.mapbox.geocoder(id|url, options)</h2>
-<p>A low-level interface to geocoding, useful for more complex uses and reverse-geocoding.</p>
+<p>A low-level interface to <a href="https://www.mapbox.com/api-documentation/#geocoding">the Mapbox Geocoding API</a>,
+useful for complex uses and reverse-geocoding.</p>
 <table>
 <thead>
 <tr>
@@ -409,7 +438,7 @@ featureLayer.setGeoJSON({
 <tr>
 <td>id <em>or</em> url</td>
 <td>string</td>
-<td>Value must be <ul><li>A <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places-v1</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places-v1/{query}.json</code></li></ul></td>
+<td>Value must be <ul><li>A <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -419,8 +448,9 @@ featureLayer.setGeoJSON({
 </tbody>
 </table>
 <p><em>Returns</em> a <code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> object.</p>
-<h3 id="geocoder-query">geocoder.query(queryString, callback)</h3>
-<p>Queries the geocoder with a query string, and returns its result, if any.</p>
+<h3 id="geocoder-query">geocoder.query(queryString|options, callback)</h3>
+<p>Queries the geocoder with a query string, and returns its result, if any.
+This performs <a href="https://www.mapbox.com/api-documentation/#search-for-places">forward geocoding</a>.</p>
 <table>
 <thead>
 <tr>
@@ -436,12 +466,28 @@ featureLayer.setGeoJSON({
 <td>a query, expressed as a string, like &#39;Arkansas&#39;</td>
 </tr>
 <tr>
+<td>options</td>
+<td>object</td>
+<td>an object containing the query and options parameters like <code>{ query: &#39;Austin&#39;, proximity: L.latlng(lat, lng) }</code></td>
+</tr>
+<tr>
 <td>callback (<em>required</em>)</td>
 <td>function</td>
 <td>a callback</td>
 </tr>
 </tbody>
 </table>
+<p>Valid options are:</p>
+<ul>
+<li>proximity: a <code><a href="#l-latlng">L.LatLng</a></code> object or <code>[latitude, longitude]</code> array that will
+bias the search results toward a geographical point</li>
+<li>country: a string or array of strings of ISO country codes likes <code>us</code>
+or <code>ca</code> which will be included in the search. Ommitting this parameter
+(the default) includes all countries.</li>
+<li>autocomplete: whether to include results that only contain the prefix
+of the search terms rather than the full terms. If you have precise input,
+set this to <code>false</code>. Otherwise, by default it is <code>true</code>.</li>
+</ul>
 <p>The callback is called with arguments</p>
 <ol>
 <li>An error, if any</li>
@@ -457,7 +503,8 @@ featureLayer.setGeoJSON({
 <p><em>Example</em>: <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/map-center-geocoding/">Live example of geocoder.query centering a map.</a></p>
 <p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
 <h3 id="geocoder-reversequery">geocoder.reverseQuery(location, callback)</h3>
-<p>Queries the geocoder with a location, and returns its result, if any.</p>
+<p>Queries the geocoder with a location, and returns its result, if any.
+This performs <a href="https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location">reverse geocoding</a>.</p>
 <table>
 <thead>
 <tr>
@@ -482,7 +529,7 @@ featureLayer.setGeoJSON({
 <p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
 <h1 id="controls">Controls</h1>
 <h2 id="l-mapbox-infocontrol">L.mapbox.infoControl(options)</h2>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
 <p>A map control that shows a toggleable info container. If set, attribution is auto-detected from active layers and added to the info container.</p>
 <table>
 <thead>
@@ -542,7 +589,7 @@ map.addControl(L.mapbox.infoControl().addInfo(&#39;foo&#39;));
 </tbody>
 </table>
 <h2 id="l-mapbox-legendcontrol">L.mapbox.legendControl(options)</h2>
-<p><span class='leaflet'><em>Extends</em>: L.Control</span></p>
+<p><span class='leaflet icon'><em>Extends</em>: L.Control</span></p>
 <p>A map control that shows legends added to maps in Mapbox. Legends are auto-detected from active layers.</p>
 <table>
 <thead>
@@ -602,7 +649,7 @@ map.addControl(L.mapbox.legendControl());
 </tbody>
 </table>
 <h2 id="l-mapbox-gridcontrol">L.mapbox.gridControl(layer, options)</h2>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
 <p>Interaction is what we call interactive parts of maps that are created with the powerful <a href="http://mapbox.com/tilemill/docs/crashcourse/tooltips/">tooltips &amp; regions</a> system in <a href="http://mapbox.com/tilemill/">TileMill</a>. Under the hood, it&#39;s powered by the open <a href="https://github.com/mapbox/utfgrid-spec/">UTFGrid specification</a>.</p>
 <table>
 <thead>
@@ -627,8 +674,8 @@ map.addControl(L.mapbox.legendControl());
 </table>
 <p><em>Example</em>:</p>
 <pre><code>var map = L.mapbox.map(&#39;map&#39;).setView([38, -77], 5);
-var gridLayer = L.mapbox.gridLayer(&#39;examples.map-8ced9urs&#39;);
-map.addLayer(L.mapbox.tileLayer(&#39;examples.map-8ced9urs&#39;));
+var gridLayer = L.mapbox.gridLayer(&#39;mapbox.light&#39;);
+map.addLayer(L.mapbox.tileLayer(&#39;mapbox.outdoors&#39;));
 map.addLayer(gridLayer);
 map.addControl(L.mapbox.gridControl(gridLayer));
 </code></pre><p><em>Returns</em>: a <code><a href="#l-mapbox-gridcontrol">L.mapbox.gridControl</a></code> object.</p>
@@ -671,19 +718,21 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tr>
 <td>id <em>or</em> url (<em>required</em>)</td>
 <td>string</td>
-<td>Either a <ul><li>An <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places-v1</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places-v1/{query}.json</code></li></ul></td>
+<td>Either a <ul><li>An <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
 <td>object</td>
-<td>An options argument with the same options as the <code><a href="#l-control">L.Control</a></code> class, as well as: <ul><li><code>keepOpen</code>: a boolean for whether the control will stay open always rather than being toggled. Default <code>false</code>. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="#l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this control.</li></ul></td>
+<td>An options argument with the same options as the <code><a href="#l-control">L.Control</a></code> class, as well as: <ul><li><code>keepOpen</code>: a boolean for whether the control will stay open always rather than being toggled. Default <code>false</code>. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="#l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this control.</li><li><code>autocomplete</code>: automatically search and show results as you type. Default: <code>false</code>.</ul></td>
 </tr>
 </tbody>
 </table>
+<p>The <code>options</code> object can also include <code>queryOptions</code> which are passed to the
+<code>geocoder.query</code> method: see that method for full documentation of those options.</p>
 <p><em>Example</em>:</p>
 <pre><code>var map = L.map(&#39;map&#39;)
     .setView([37, -77], 5)
-    .addControl(L.mapbox.geocoderControl(&#39;mapbox.places-v1&#39;));
+    .addControl(L.mapbox.geocoderControl(&#39;mapbox.places&#39;));
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> object.</p>
 <p><em>Class</em>: <code><a href="#l-mapbox-geocodercontrol">L.mapbox.GeocoderControl</a></code></p>
 <h3 id="geocodercontrol-seturl">geocoderControl.setURL(url)</h3>
@@ -755,11 +804,15 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tbody>
 <tr>
 <td>found</td>
-<td>Success in finding a location. The event&#39;s <code>results</code> property contains the raw results.</td>
+<td>A successful search. The event&#39;s <code>results</code> property contains the raw results.</td>
+</tr>
+<tr>
+<td>notfound</td>
+<td>A search request succeeded but didn&#39;t find any results.</td>
 </tr>
 <tr>
 <td>error</td>
-<td>Failure to find a location. The event&#39;s <code>error</code> property contains the raw HTTP error.</td>
+<td>A network error. The event&#39;s <code>error</code> property contains the raw HTTP error.</td>
 </tr>
 <tr>
 <td>select</td>
@@ -773,7 +826,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 </table>
 <h2 id="l-mapbox-sharecontrol">L.mapbox.shareControl(id|url, options)</h2>
 <p>Adds a &quot;Share&quot; button to the map, which can be used to share the map to Twitter or Facebook, or generate HTML for a map embed.</p>
-<p><span class='leaflet'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="#l-control">L.Control</a></code></span></p>
 <table>
 <thead>
 <tr>
@@ -786,7 +839,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tr>
 <td>id <em>or</em> url <em>optional</em></td>
 <td>string</td>
-<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/examples.map-0l53fhk2.json</code> If not supplied, the TileJSON from the map is used.</li></ul></td>
+<td>Either a <ul><li><code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code> If not supplied, the TileJSON from the map is used.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -796,7 +849,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 </tbody>
 </table>
 <p><em>Example</em>:</p>
-<pre><code>var map = L.map(&#39;map&#39;, &#39;examples.map-i875kd35&#39;)
+<pre><code>var map = L.map(&#39;map&#39;, &#39;mapbox.streets&#39;)
     .setView([37, -77], 5)
     .addControl(L.mapbox.shareControl());
 </code></pre><p><em>Returns</em>:
@@ -826,7 +879,7 @@ and <code>popupAnchor</code>.</p>
 <p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/l-mapbox-marker/">A working example of L.mapbox.marker.icon in use</a></p>
 <h2 id="l-mapbox-marker-style">L.mapbox.marker.style(feature, latlng)</h2>
 <p>An icon generator for use in conjunction with <code>pointToLayer</code> to generate
-markers from the <a href="http://mapbox.com/developers/api/#markers">Mapbox Markers API</a>
+markers from the <a href="https://www.mapbox.com/api-documentation/#retrieve-a-standalone-marker">Mapbox Markers API</a>
 and support the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> for
 features.</p>
 <table>
@@ -958,7 +1011,7 @@ page. For Mapbox.js, a &quot;Public&quot; token (starting with &quot;pk&quot;) i
 <p>You may create multiple tokens and use different ones for different applications. If
 necessary, you can use different tokens on the same page by using the <code>accessToken</code>
 option when creating Mapbox.js objects. For example:</p>
-<pre><code> var map = L.mapbox.map(&#39;map&#39;, &#39;examples.map-8ced9urs&#39;, {
+<pre><code> var map = L.mapbox.map(&#39;map&#39;, &#39;mapbox.outdoors&#39;, {
    accessToken: &#39;&lt;your access token&gt;&#39;
  });
 </code></pre><p>For additional help, see <a href="https://www.mapbox.com/help/create-api-access-token/">&quot;How do I create an API access token?&quot;</a>.</p>
@@ -979,9 +1032,9 @@ instead. For example, replace</p>
 <li><p><code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="#l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> no longer accept arbitrary map IDs.
 Instead you must provide a predefined geocoder index ID (or the ID of a custom geocoder
 index). For instance, replace</p>
-<pre><code>L.mapbox.geocoderControl(&#39;examples.map-i86nkdio&#39;).addTo(map);
+<pre><code>L.mapbox.geocoderControl(&#39;mapbox.outdoors&#39;).addTo(map);
 </code></pre><p>with</p>
-<pre><code>L.mapbox.geocoderControl(&#39;mapbox.places-v1&#39;).addTo(map);
+<pre><code>L.mapbox.geocoderControl(&#39;mapbox.places&#39;).addTo(map);
 </code></pre><p>See <a href="https://www.mapbox.com/developers/api/geocoding/">the geocoding API documentation</a>
 for a complete list of predefined geocoding indexes.</p>
 </li>
@@ -1024,6 +1077,13 @@ to get stuck on the map while scrolling. Another way around this is to disable
 is available by applying <code>class=&quot;dark&quot;</code> to the map div.</p>
 <p><em>Example</em>:</p>
 <pre><code>&lt;div id=&quot;map&quot; class=&quot;dark&quot;&gt;&lt;/div&gt;
+</code></pre><h2 id="standalone">Standalone</h2>
+<p>By default, Mapbox.js includes a bundled version of Leaflet that Mapbox has ensured
+is compatible. A standalone version of Mapbox.js is also available which you can use if you would like to supply your own version of
+Leaflet. When using this technique, you will use the newest version of Mapbox.css.</p>
+<pre><code>&lt;script src=&#39;{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.standalone.js&#39;&gt;&lt;/script&gt;
+&lt;link href=&#39;{{site.tileApi}}/mapbox.js/{{site.mapboxjs}}/mapbox.css&#39; rel=&#39;stylesheet&#39; /&gt;
+&lt;script src=&#39;your version of Leaflet.js&#39;&gt;&lt;/script&gt;
 </code></pre><h2 id="l-map-class">Map</h2>
 
 <p>The central class of the API &mdash; it is used to create a map on a page and manipulate it.</p>
@@ -1046,13 +1106,16 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>L.map</b>(
 			<nobr>&lt;HTMLElement|String&gt; <i>id</i>,</nobr>
-			<nobr>&lt;<a href="#l-map">Map options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 
 
 		<td>Instantiates a map object given a div element (or its id) and optionally an object literal with map options described below.</td>
 	</tr>
 </table>
+
+
+
 
 <h3 id="map-options">Options</h3>
 
@@ -1099,8 +1162,8 @@ var map = L.map('map', {
 		<td><code><b>maxBounds</b></code></td>
 		<td><code><a href="#l-latlngbounds">LatLngBounds</a></code></td>
 		<td><code><span class="literal">null</span></code></td>
-		<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view, and also not allowing to zoom out to a view that's larger than the given bounds (depending on the map size). To set the restriction dynamically, use <a href="#l-map">setMaxBounds</a> method</td>
-	</tr>
+		<td>When this option is set, the map restricts the view to the given geographical bounds, bouncing the user back when he tries to pan outside the view. To set the restriction dynamically, use <a href="#l-map-class">setMaxBounds</a> method</td>
+    </tr>
 	<tr>
 		<td><code><b>crs</b></code></td>
 		<td><code><a href="#l-icrs">CRS</a></code></td>
@@ -1382,7 +1445,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>unload</b></code></td>
 		<td><code><a href="#l-event-objects">Event</a></code></td>
-		<td>Fired when the map is destroyed with <a href="#l-map">remove</a> method.</td>
+		<td>Fired when the map is destroyed with <a href="#l-map-class">remove</a> method.</td>
 	</tr>
 	<tr id="map-viewreset">
 		<td><code><b>viewreset</b></code></td>
@@ -1472,7 +1535,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>locationfound</b></code></td>
 		<td><code><a href="#l-event-objects">LocationEvent</a></code>
-		<td>Fired when geolocation (using the <a href="#l-map">locate</a> method) went successfully.</td>
+		<td>Fired when geolocation (using the <a href="#l-map-class">locate</a> method) went successfully.</td>
 	</tr>
 	<tr>
 		<td><code><b>locationerror</b></code></td>
@@ -1504,7 +1567,7 @@ var map = L.map('map', {
 		<td><code><b>setView</b>(
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>&gt; <i>center</i>,</nobr>
 			<nobr>&lt;Number&gt; <i>zoom?</i>,</nobr>
-			<nobr>&lt;<a href="#l-map">zoom/pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom/pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets the view of the map (geographical center and zoom) with the given animation options.</td>
@@ -1512,7 +1575,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>setZoom</b>(
 			<nobr>&lt;Number&gt; <i>zoom</i></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets the zoom of the map.</td>
@@ -1520,7 +1583,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>zoomIn</b>(
 			<nobr>&lt;Number&gt; <em>delta?</em></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Increases the zoom of the map by <code>delta</code> (<code><span class="number">1</span></code> by default).</td>
@@ -1528,7 +1591,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>zoomOut</b>(
 			<nobr>&lt;Number&gt; <em>delta?</em></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Decreases the zoom of the map by <code>delta</code> (<code><span class="number">1</span></code> by default).</td>
@@ -1537,7 +1600,7 @@ var map = L.map('map', {
 		<td><code><b>setZoomAround</b>(
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>&gt; <i>latlng</i>, </nobr>
 			<nobr>&lt;Number&gt; <i>zoom</i></nobr>,
-			<nobr>&lt;<a href="#l-map">zoom options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Zooms the map while keeping a specified point on the map stationary (e.g. used internally for scroll zoom and double-click zoom).</td>
@@ -1545,14 +1608,14 @@ var map = L.map('map', {
 	<tr id="map-fitbounds">
 		<td><code><b>fitBounds</b>(
 			<nobr>&lt;<a href="#l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
-			<nobr>&lt;<a href="#l-map">fitBounds options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">fitBounds options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets a map view that contains the given geographical bounds with the maximum zoom level possible.</td>
 	</tr>
 	<tr id="map-fitworld">
 		<td><code><b>fitWorld</b>(
-			<nobr>&lt;<a href="#l-map">fitBounds options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">fitBounds options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Sets a map view that mostly contains the whole world with the maximum zoom level possible.</td>
@@ -1560,7 +1623,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>panTo</b>(
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>&gt; <i>latlng</i></nobr>,
-			<nobr>&lt;<a href="#l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Pans the map to a given center. Makes an animated pan if new center is not more than one screen away from the current one.</td>
@@ -1568,7 +1631,7 @@ var map = L.map('map', {
 	<tr id="map-paninsidebounds">
 		<td><code><b>panInsideBounds</b>(
 			<nobr>&lt;<a href="#l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr>,
-			<nobr>&lt;<a href="#l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Pans the map to the closest view that would lie inside the given bounds (if it's not already), controlling the animation using the options specific, if any.</td>
@@ -1576,7 +1639,7 @@ var map = L.map('map', {
 	<tr>
 		<td><code><b>panBy</b>(
 			<nobr>&lt;<a href="#l-point">Point</a>&gt; <i>point</i></nobr>,
-			<nobr>&lt;<a href="#l-map">pan options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">pan options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Pans the map by a given number of pixels (animated).</td>
@@ -1590,7 +1653,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>invalidateSize</b>(
-			<nobr>&lt;<a href="#l-map">zoom/pan options</a>&gt; <i>options</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">zoom/pan options</a>&gt; <i>options</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
 		<td>Checks if the map container size changed and updates the map if so &mdash; call it after you've changed the map size dynamically, also animating pan by default. If <code>options.pan</code> is <code><span class="literal">false</span></code>, panning will not occur. If <code>options.debounceMoveend</code> is <code><span class="literal">true</span></code>, it will delay <code>moveend</code> event so that it doesn't happen often even if the method is called many times in a row.</td>
@@ -1598,17 +1661,17 @@ var map = L.map('map', {
 	<tr id="map-setmaxbounds">
 		<td><code><b>setMaxBounds</b>(
 			<nobr>&lt;<a href="#l-latlngbounds">LatLngBounds</a>&gt; <i>bounds</i></nobr><!--,
-			<nobr>&lt;<a href="#l-map">zoom/pan options</a>&gt; <i>options?</i> )</nobr>-->
+			<nobr>&lt;<a href="#l-map-class">zoom/pan options</a>&gt; <i>options?</i> )</nobr>-->
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Restricts the map view to the given bounds (see <a href="#l-map">map maxBounds</a> option)<!--, animating the map view if bounds are changed.  The given animation options are passed through to `setView` or `panInsideBounds`, depending on map zoom level, and can be used to control how the map animates during this change-->.</td>
+		<td>Restricts the map view to the given bounds (see <a href="#l-map-class">map maxBounds</a> option)<!--, animating the map view if bounds are changed.  The given animation options are passed through to `setView` or `panInsideBounds`, depending on map zoom level, and can be used to control how the map animates during this change-->.</td>
 	</tr>
 	<tr id="map-locate">
 		<td><code><b>locate</b>(
-			<nobr>&lt;<a href="#l-map">Locate options</a>&gt; <i>options?</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Locate options</a>&gt; <i>options?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Tries to locate the user using the <a href="https://en.wikipedia.org/wiki/W3C_Geolocation_API">Geolocation API</a>, firing a <code>locationfound</code> event with location data on success or a <code>locationerror</code> event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). See <a href="#l-map">Locate options</a> for more details.</td>
+		<td>Tries to locate the user using the <a href="https://en.wikipedia.org/wiki/W3C_Geolocation_API">Geolocation API</a>, firing a <code>locationfound</code> event with location data on success or a <code>locationerror</code> event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). See <a href="#l-map-class">Locate options</a> for more details.</td>
 	</tr>
 	<tr>
 		<td><code><b>stopLocate</b>()</code></td>
@@ -1672,7 +1735,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>getPixelBounds</b>()</code></td>
-		<td><code>Bounds</code></td>
+		<td><code><a href="#l-bounds">Bounds</a></code></td>
 		<td>Returns the bounds of the current map view in projected pixel coordinates (sometimes useful in layer and overlay implementations).</td>
 	</tr>
 	<tr>
@@ -1715,6 +1778,18 @@ var map = L.map('map', {
 		<td><code>Boolean</code></td>
 		<td>Returns <code><span class="literal">true</span></code> if the given layer is currently added to the map.</td>
 	</tr>
+	<tr>
+		<td><code><b>eachLayer</b>(
+			<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+			<nobr>&lt;Object&gt; <i>context?</i> )</nobr>
+		</code></td>
+		<td><code><span class="keyword">this</span></code></td>
+		<td>Iterates over the layers of the map, optionally specifying context of the iterator function.
+<pre><code>map.eachLayer(function (layer) {
+	layer.bindPopup('Hello');
+});</code></pre>
+		</td>
+	</tr>
 
 	<tr id="map-openpopup">
 		<td><code><b>openPopup</b>(
@@ -1739,7 +1814,7 @@ var map = L.map('map', {
 			<nobr>&lt;<a href="#l-popup">Popup</a>&gt; <i>popup?</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Closes the popup previously opened with <a href="#l-map">openPopup</a> (or the given one).</td>
+		<td>Closes the popup previously opened with <a href="#l-map-class">openPopup</a> (or the given one).</td>
 	</tr>
 	<tr id="map-addcontrol">
 		<td><code><b>addControl</b>(
@@ -1875,7 +1950,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>getPanes</b>()</code></td>
-		<td><code><a href="#l-map">MapPanes</a></code></td>
+		<td><code><a href="#l-map-class">MapPanes</a></code></td>
 		<td>Returns an object with different map panes (to render overlays in).</td>
 	</tr>
 	<tr>
@@ -1952,13 +2027,13 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>pan</b></code></td>
-		<td><code><a href="#l-map">pan options</a></code></td>
+		<td><code><a href="#l-map-class">pan options</a></code></td>
 		<td><code>-</code></td>
 		<td>Sets the options for the panning (without the zoom change) if it occurs.</td>
 	</tr>
 	<tr>
 		<td><code><b>zoom</b></code></td>
-		<td><code><a href="#l-map">zoom options</a></code></td>
+		<td><code><a href="#l-map-class">zoom options</a></code></td>
 		<td><code>-</code></td>
 		<td>Sets the options for the zoom change if it occurs.</td>
 	</tr>
@@ -2024,7 +2099,7 @@ var map = L.map('map', {
 
 <h3 id="map-fitboundsoptions">fitBounds options</h3>
 
-<p>The same as <a href="#l-map">zoom/pan options</a> and additionally:</p>
+<p>The same as <a href="#l-map-class">zoom/pan options</a> and additionally:</p>
 
 <table data-id='map'>
 	<tr>
@@ -2126,7 +2201,7 @@ var map = L.map('map', {
 
 <h3 id="map-panes">Map Panes</h3>
 
-<p>An object literal (returned by <a href="#l-map">map.getPanes</a></code>) that contains different map panes that you can use to put your custom overlays in. The difference is mostly in zIndex order that such overlays get.</p>
+<p>An object literal (returned by <a href="#l-map-class">map.getPanes</a></code>) that contains different map panes that you can use to put your custom overlays in. The difference is mostly in zIndex order that such overlays get.</p>
 
 <table data-id='map'>
 	<tr>
@@ -2359,7 +2434,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -2481,7 +2556,7 @@ var map = L.map('map', {
 
 <h2 id="l-popup">Popup</h2>
 
-<p>Used to open popups in certain places of the map. Use <a href="#l-map">Map#openPopup</a> to open popups while making sure that only one popup is open at one time (recommended for usability), or use <a href="#l-map">Map#addLayer</a> to open as many as you want.</p>
+<p>Used to open popups in certain places of the map. Use <a href="#l-map-class">Map#openPopup</a> to open popups while making sure that only one popup is open at one time (recommended for usability), or use <a href="#l-map-class">Map#addLayer</a> to open as many as you want.</p>
 
 <h3>Usage example</h3>
 <p>If you want to just bind a popup to marker click and then open it, it's really easy:</p>
@@ -2597,6 +2672,12 @@ var map = L.map('map', {
 		<td><code><span class="literal">null</span></code></td>
 		<td>Set it to <code><span class="literal">false</span></code> if you want to override the default behavior of the popup closing when user clicks the map (set globally by the <code>Map</code> <code>closePopupOnClick</code> option).</td>
 	</tr>
+	<tr>
+		<td><code><b>className</b></code></td>
+		<td><code>String</code></td>
+		<td><code class="javascript"><span class="string">''</span></code></td>
+		<td>A custom class name to assign to the popup.</td>
+	</tr>
 </table>
 
 <h3>Methods</h3>
@@ -2609,7 +2690,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -2617,7 +2698,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>openOn</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -2665,10 +2746,7 @@ var map = L.map('map', {
 
 <h3>Usage example</h3>
 
-<pre><code class="javascript">L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-	key: 'API-key',
-	styleId: 997
-}).addTo(map);</code></pre>
+<pre><code class="javascript">L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);</code></pre>
 
 <h3>Creation</h3>
 
@@ -2689,7 +2767,7 @@ var map = L.map('map', {
 	</tr>
 </table>
 
-<h2 id="l-url-template">URL template</h2>
+<h3 id="url-template">URL template</h3>
 
 <p>A string of the following form:</p>
 
@@ -2750,7 +2828,7 @@ var map = L.map('map', {
 		<td><code><b>attribution</b></code></td>
 		<td><code>String</code></td>
 		<td><code><span class="string">''</span></code></td>
-		<td>e.g. "&copy; CloudMade" &mdash; the string used by the attribution control, describes the layer data.</td>
+		<td>e.g. "&copy; Mapbox" &mdash; the string used by the attribution control, describes the layer data.</td>
 	</tr>
 	<tr>
 		<td><code><b>tms</b></code></td>
@@ -2818,6 +2896,12 @@ var map = L.map('map', {
 		<td><code><span class="literal">false</span></code></td>
 		<td>If <code><span class="literal">true</span></code>, all the tiles that are not visible after panning are placed in a reuse queue from which they will be fetched when new tiles become visible (as opposed to dynamically creating new ones). This will in theory keep memory usage low and eliminate the need for reserving new memory whenever a new tile is needed.</td>
 	</tr>
+	<tr>
+		<td><code><b>bounds</b></code></td>
+		<td><code><a href="#l-latlngbounds">LatLngBounds</a></code></td>
+		<td><code><span class="literal">null</span></code></td>
+		<td>When this option is set, the TileLayer only loads tiles that are in the given geographical bounds.</td>
+	</tr>
 </table>
 
 <h3>Events</h3>
@@ -2867,7 +2951,7 @@ var map = L.map('map', {
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -3153,7 +3237,7 @@ L.imageOverlay(imageUrl, imageBounds).addTo(map);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -3350,7 +3434,7 @@ L.imageOverlay(imageUrl, imageBounds).addTo(map);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -3460,7 +3544,7 @@ L.imageOverlay(imageUrl, imageBounds).addTo(map);</code></pre>
 
 <h2 id="l-polyline">Polyline</h2>
 
-<p>A class for drawing polyline overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing polyline overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <h3>Usage example</h3>
 <pre><code class="javascript">// create a red polyline from an arrays of LatLng points
@@ -3638,7 +3722,7 @@ multiple line features:</p>
 
 <h2 id="l-polygon">Polygon</h2>
 
-<p>A class for drawing polygon overlays on a map. Extends <a href="#l-polyline">Polyline</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing polygon overlays on a map. Extends <a href="#l-polyline">Polyline</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <p>Note that points you pass when creating a polygon shouldn't have an additional last point equal to the first one &mdash; it's better to filter out such points.</p>
 
@@ -3745,7 +3829,7 @@ multiple polygon features:</p>
 
 <h2 id="l-rectangle">Rectangle</h2>
 
-<p>A class for drawing rectangle overlays on a map. Extends <a href="#l-polygon">Polygon</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing rectangle overlays on a map. Extends <a href="#l-polygon">Polygon</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <h3>Usage example</h3>
 <pre><code class="javascript">// define rectangle geographical bounds
@@ -3799,7 +3883,7 @@ map.fitBounds(bounds);</code></pre>
 
 <h2 id="l-circle">Circle</h2>
 
-<p>A class for drawing circle overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A class for drawing circle overlays on a map. Extends <a href="#l-path">Path</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <pre><code class="javascript">L.circle([50.5, 30.5], 200).addTo(map);</pre></code>
 
@@ -3868,7 +3952,7 @@ map.fitBounds(bounds);</code></pre>
 
 <h2 id="l-circlemarker">CircleMarker</h2>
 
-<p>A circle of a fixed size with radius specified in pixels. Extends <a href="#l-circle">Circle</a>. Use <a href="#l-map">Map#addLayer</a> to add it to the map.</p>
+<p>A circle of a fixed size with radius specified in pixels. Extends <a href="#l-circle">Circle</a>. Use <a href="#l-map-class">Map#addLayer</a> to add it to the map.</p>
 
 <h3>Creation</h3>
 
@@ -3957,7 +4041,7 @@ map.fitBounds(bounds);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -4269,7 +4353,7 @@ map.fitBounds(bounds);</code></pre>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Resets the the given vector layer's style to the original GeoJSON style, useful for resetting style after hover events.</td>
+		<td>Resets the given vector layer's style to the original GeoJSON style, useful for resetting style after hover events.</td>
 	</tr>
 </table>
 
@@ -4291,7 +4375,7 @@ map.fitBounds(bounds);</code></pre>
 		<td>Creates a layer from a given GeoJSON feature.</td>
 	</tr>
 	<tr>
-		<td><code><b>coordsToLatlng</b>(
+		<td><code><b>coordsToLatLng</b>(
 			<nobr>&lt;Array&gt; <i>coords</i></nobr>,
 			<nobr>&lt;Boolean&gt; <i>reverse?</i> )</nobr>
 		</code></td>
@@ -4300,7 +4384,7 @@ map.fitBounds(bounds);</code></pre>
 		<td>Creates a LatLng object from an array of 2 numbers (latitude, longitude) used in GeoJSON for points. If <code>reverse</code> is set to <code><span class="literal">true</span></code>, the numbers will be interpreted as (longitude, latitude).</td>
 	</tr>
 	<tr>
-		<td><code><b>coordsToLatlngs</b>(
+		<td><code><b>coordsToLatLngs</b>(
 			<nobr>&lt;Array&gt; <i>coords</i></nobr>,
 			<nobr>&lt;Number&gt; <i>levelsDeep?</i></nobr>,
 			<nobr>&lt;Boolean&gt; <i>reverse?</i> )</nobr>
@@ -4475,7 +4559,7 @@ map.panTo(L.latLng(50, 30));</code></pre>
 			<nobr>&lt;<a href="#l-latlng">LatLng</a>[]&gt; <i>latlngs</i> )</nobr>
 		</code></td>
 
-		<td>Creates a LatLngBounds object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with <a href="#l-map">fitBounds</a>.</td>
+		<td>Creates a LatLngBounds object defined by the geographical points it contains. Very useful for zooming the map to fit a particular set of locations with <a href="#l-map-class">fitBounds</a>.</td>
 	</tr>
 </table>
 
@@ -5079,7 +5163,7 @@ map.addControl(control);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>addTo</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -5087,7 +5171,7 @@ map.addControl(control);</code></pre>
 	</tr>
 	<tr>
 		<td><code><b>removeFrom</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
@@ -5182,7 +5266,7 @@ map.addControl(control);</code></pre>
 		<td>The title set on the zoom in button.</td>
 	</tr>
 	<tr>
-		<td><code><b>zoomInTitle</b></code></td>
+		<td><code><b>zoomOutTitle</b></code></td>
 		<td><code>String</code></td>
 		<td><code><span class="string">'Zoom out'</span></td>
 		<td>The title set on the zoom out button.</td>
@@ -5254,7 +5338,7 @@ map.addControl(control);</code></pre>
 			<nobr>&lt;String&gt; <i>text</i> )</nobr>
 		</code></td>
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Adds an attribution text (e.g. <code><span class="string">'Vector data &amp;copy; CloudMade'</span></code>).</td>
+		<td>Adds an attribution text (e.g. <code><span class="string">'Vector data &amp;copy; Mapbox'</span></code>).</td>
 	</tr>
 	<tr>
 		<td><code><b>removeAttribution</b>(
@@ -5268,10 +5352,10 @@ map.addControl(control);</code></pre>
 
 <h2 id="l-control-layers">Control.Layers</h2>
 
-<p>The layers control gives users the ability to switch between different base layers and switch overlays on/off (check out the <a href="examples/layers-control.html">detailed example</a>). Extends <a href="#l-control">Control</a>.</p>
+<p>The layers control gives users the ability to switch between different base layers and switch overlays on/off (check out the <a href="http://leafletjs.com/examples/layers-control.html">detailed example</a>). Extends <a href="#l-control">Control</a>.</p>
 
 <pre><code>var baseLayers = {
-	"CloudMade": cloudmade,
+	"Mapbox": mapbox,
 	"OpenStreetMap": osm
 };
 
@@ -5377,7 +5461,7 @@ L.control.layers(baseLayers, overlays).addTo(map);</code></pre>
 
 <h3>Events</h3>
 
-<p>You can subscribe to the following events on the <a href="#l-map">Map</a> object using <a href="#l-events">these methods</a>.</p>
+<p>You can subscribe to the following events on the <a href="#l-map-class">Map</a> object using <a href="#l-events">these methods</a>.</p>
 
 <table data-id='control-layers'>
 	<tr>
@@ -5531,7 +5615,7 @@ map.off('click', onClick);</code></pre>
 		</code></td>
 
 		<td><code><span class="keyword">this</span></code></td>
-		<td>Removes a previously added listener function. If no function is specified, it will remove all the listeners of that particular event from the object.</td>
+		<td>Removes a previously added listener function. If no function is specified, it will remove all the listeners of that particular event from the object.  Note that if you passed a custom context to <code>addEventListener</code>, you must pass the same context to <code>removeEventListener</code> in order to remove the listener.</td>
 	</tr>
 	<tr>
 		<td><code><b>removeEventListener</b>(
@@ -5596,7 +5680,7 @@ map.off('click', onClick);</code></pre>
 
 <h2 id="l-event-objects">Event objects</h2>
 
-<p>Event object is an object that you recieve as an argument in a listener function when some event is fired, containing useful information about that event. For example:</p>
+<p>Event object is an object that you receive as an argument in a listener function when some event is fired, containing useful information about that event. For example:</p>
 
 <pre><code class="javascript">map.on('click', function(e) {
 	alert(e.latlng); // e is an event object (MouseEvent in this case)
@@ -5921,7 +6005,7 @@ a instanceof MyClass; // true
 
 <pre><code>var MyChildClass = MyClass.extend({
 	initialize: function () {
-		MyClass.prototype.initialize.call("Yo");
+		MyClass.prototype.initialize.call(this, "Yo");
 	},
 
 	greet: function (name) {
@@ -5943,7 +6027,7 @@ a.greet('Jason'); // alerts "Yo, bro Jason!"</code></pre>
 	}
 });
 
-var MyChildClass = L.Class.extend({
+var MyChildClass = MyClass.extend({
 	options: {
 		myOption1: 'baz',
 		myOption3: 5
@@ -6147,19 +6231,23 @@ MyClass.FOO; // 'bar'</code></pre>
 		<td><code>String</code></td>
 		<td>Applies a unique key to the object and returns that key. Has an <code>L.stamp</code> shortcut.</td>
 	</tr>
-	<!-- TODO Commented out for the time being:
-	https://github.com/Leaflet/Leaflet/pull/793#discussion_r1134904
 	<tr>
-		<td><code><b>requestAnimFrame</b>()</code></td>
-		<td></td>
-		<td></td>
+		<td><code><b>requestAnimFrame</b>(
+			<nobr>&lt;Function&gt; <i>fn</i></nobr>,
+			<nobr>&lt;Object&gt; <i>context?</i></nobr>,
+			<nobr>&lt;Boolean&gt; <i>immediate?</i></nobr>,
+			<nobr>&lt;HTMLElement&gt; <i>element?</i> )</nobr>
+		</code></td>
+		<td><code>Number</code></td>
+		<td>Schedules <code>fn</code> to be executed when the browser repaints. When <code>immediate</code> is set, <code>fn</code> is called immediately if the browser doesn't have native support for <code>requestAnimationFrame</code>, otherwise it's delayed. Returns an id that can be used to cancel the request</td>
 	</tr>
 	<tr>
-		<td><code><b>cancelAnimFrame</b>()</code></td>
-		<td></td>
-		<td></td>
+		<td><code><b>cancelAnimFrame</b>(
+			<nobr>&lt;Number&gt; <i>id</i> )</nobr>
+		</code></td>
+		<td>-</td>
+		<td>Cancels a previous request to <code>requestAnimFrame</code>.</td>
 	</tr>
-	-->
 	<tr>
 		<td><code><b>limitExecByInterval</b>(
 			<nobr>&lt;Function&gt; <i>fn</i></nobr>,
@@ -6833,7 +6921,7 @@ draggable.enable();
 
 
 <h2 id="l-ihandler">IHandler</h2>
-<p>An interface implemented by <a href="#l-map">interaction handlers</a>.</p>
+<p>An interface implemented by <a href="#l-map-class">interaction handlers</a>.</p>
 
 <table data-id='ihandler'>
 	<tr>
@@ -6873,15 +6961,15 @@ draggable.enable();
 	</tr>
 	<tr>
 		<td><code><b>onAdd</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td>-</td>
-		<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="#l-map">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
+		<td>Should contain code that creates DOM elements for the overlay, adds them to <a href="#l-map-class">map panes</a> where they should belong and puts listeners on relevant map events. Called on <code>map.addLayer(layer)</code>.</td>
 	</tr>
 	<tr>
 		<td><code><b>onRemove</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td>-</td>
@@ -6891,9 +6979,9 @@ draggable.enable();
 
 <h3>Implementing Custom Layers</h3>
 
-<p>The most important things know about when implementing custom layers are Map <a href="#l-map">viewreset</a> event and <a href="#l-map">latLngToLayerPoint</a> method. <code>viewreset</code> is fired when the map needs to reposition its layers (e.g. on zoom), and <code>latLngToLayerPoint</code> is used to get coordinates for the layer's new position.</p>
+<p>The most important things know about when implementing custom layers are Map <a href="#l-map-class">viewreset</a> event and <a href="#l-map-class">latLngToLayerPoint</a> method. <code>viewreset</code> is fired when the map needs to reposition its layers (e.g. on zoom), and <code>latLngToLayerPoint</code> is used to get coordinates for the layer's new position.</p>
 
-<p>Another event often used in layer implementations is <a href="#l-map">moveend</a> which fires after any movement of the map (panning, zooming, etc.).</p>
+<p>Another event often used in layer implementations is <a href="#l-map-class">moveend</a> which fires after any movement of the map (panning, zooming, etc.).</p>
 
 <p>Another thing to note is that you'll usually need to add <code>leaflet-zoom-hide</code> class to the DOM elements you create for the layer so that it hides during zoom animation. Implementing zoom animation for custom layers is a complex topic and will be documented separately in future, but meanwhile you can take a look at how it's done for Leaflet layers (e.g. <code>ImageOverlay</code>) in the source.</p>
 
@@ -6954,7 +7042,7 @@ map.addLayer(new MyCustomLayer(latlng));
 	</tr>
 	<tr>
 		<td><code><b>onAdd</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td><code>HTMLElement</code></td>
@@ -6962,7 +7050,7 @@ map.addLayer(new MyCustomLayer(latlng));
 	</tr>
 	<tr>
 		<td><code><b>onRemove</b>(
-			<nobr>&lt;<a href="#l-map">Map</a>&gt; <i>map</i> )</nobr>
+			<nobr>&lt;<a href="#l-map-class">Map</a>&gt; <i>map</i> )</nobr>
 		</code></td>
 
 		<td>-</td>

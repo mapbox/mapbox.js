@@ -20,7 +20,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tr>
 <td>id <em>or</em> url (<em>required</em>)</td>
 <td>string</td>
-<td>Either a <ul><li>An <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places-v1</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places-v1/{query}.json</code></li></ul></td>
+<td>Either a <ul><li>An <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -29,10 +29,12 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 </tr>
 </tbody>
 </table>
+<p>The <code>options</code> object can also include <code>queryOptions</code> which are passed to the
+<code>geocoder.query</code> method: see that method for full documentation of those options.</p>
 <p><em>Example</em>:</p>
 <pre><code>var map = L.map(&#39;map&#39;)
     .setView([37, -77], 5)
-    .addControl(L.mapbox.geocoderControl(&#39;mapbox.places-v1&#39;));
+    .addControl(L.mapbox.geocoderControl(&#39;mapbox.places&#39;));
 </code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v2.1.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> object.</p>
 <p><em>Class</em>: <code><a href="/mapbox.js/api/v2.1.0/l-mapbox-geocodercontrol">L.mapbox.GeocoderControl</a></code></p>
 <h3 id="section-geocodercontrol-seturl">geocoderControl.setURL(url)</h3>
@@ -104,11 +106,15 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tbody>
 <tr>
 <td>found</td>
-<td>Success in finding a location. The event&#39;s <code>results</code> property contains the raw results.</td>
+<td>A successful search. The event&#39;s <code>results</code> property contains the raw results.</td>
+</tr>
+<tr>
+<td>notfound</td>
+<td>A search request succeeded but didn&#39;t find any results.</td>
 </tr>
 <tr>
 <td>error</td>
-<td>Failure to find a location. The event&#39;s <code>error</code> property contains the raw HTTP error.</td>
+<td>A network error. The event&#39;s <code>error</code> property contains the raw HTTP error.</td>
 </tr>
 <tr>
 <td>select</td>
