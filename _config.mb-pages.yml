@@ -4,7 +4,6 @@ tileApi: https://api.mapbox.com
 source: docs
 permalink: /:categories/:title/
 baseurl: /mapbox.js
-highlighter: pygments
 mapboxjs: v2.4.0
 defaultid: 'mapbox.streets'
 exclude: [dist]
