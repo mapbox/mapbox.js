@@ -88,13 +88,14 @@ var FeatureLayer = L.FeatureGroup.extend({
         } else if (this.options.filter(json)) {
 
             var opts = {accessToken: this.options.accessToken},
-                pointToLayer = this.options.pointToLayer || function(feature, latlon) {
-                  return marker.style(feature, latlon, opts);
-                },
-                layer = L.GeoJSON.geometryToLayer(json, pointToLayer),
                 popupHtml = marker.createPopup(json, this.options.sanitizer),
                 style = this.options.style,
                 defaultStyle = style === simplestyle.style;
+
+            opts.pointToLayer = this.options.pointToLayer || function(feature, latlon) {
+                return marker.style(feature, latlon, opts);
+            };
+            layer = L.GeoJSON.geometryToLayer(json, opts),
 
             if (style && 'setStyle' in layer &&
                 // if the style method is the simplestyle default, then
