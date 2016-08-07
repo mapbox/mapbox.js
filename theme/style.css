@@ -433,7 +433,7 @@
 .map-tooltip .close,
 .mapbox-icon {
   opacity: .75;
-  background-image:url(./images/icons-000000@2x.png);
+  background-image:url(https://api.tiles.mapbox.com/mapbox.js/v2.1.4/images/icons-000000@2x.png);
   background-repeat:no-repeat;
   background-size:26px 260px;
   }
