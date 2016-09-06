@@ -26,9 +26,15 @@ describe('L.mapbox.styleLayer', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_street_terrain)]);
             server.respond();
 
-            server.respondWith('GET', 'https://a.tiles.mapbox.com/styles/v1/mapbox/empty-v8?access_token=key',
-                [200, { "Content-Type": "application/json" }, JSON.stringify({"sources":{"composite":{"url":"mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6","type":"vector"}}})]);
-            server.respond();
+            var layer = L.mapbox.styleLayer('mapbox://styles/mapbox/empty-v8');
+            layer.on('error', function(e) {
+                expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>');
+                done();
+            });
+            layer.on('ready', function(e) {
+                expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>');
+                done();
+            });
         });
 
         it('sets attribution', function(done) {
