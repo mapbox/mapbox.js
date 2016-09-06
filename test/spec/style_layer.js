@@ -25,6 +25,10 @@ describe('L.mapbox.styleLayer', function() {
             server.respondWith('GET', 'http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6.json?access_token=key',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_street_terrain)]);
             server.respond();
+
+            server.respondWith('GET', 'https://a.tiles.mapbox.com/styles/v1/mapbox/empty-v8?access_token=key',
+                [200, { "Content-Type": "application/json" }, JSON.stringify({"sources":{"composite":{"url":"mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6","type":"vector"}}})]);
+            server.respond();
         });
 
         it('sets attribution', function(done) {
