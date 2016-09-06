@@ -27,14 +27,25 @@ describe('L.mapbox.styleLayer', function() {
             server.respond();
 
             var layer = L.mapbox.styleLayer('mapbox://styles/mapbox/empty-v8');
-            layer.on('error', function(e) {
-                expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>');
-                done();
-            });
             layer.on('ready', function(e) {
                 expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>');
                 done();
             });
+        });
+
+        it('emits an error event when no sources', function(done) {
+            var layer = L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v8');
+
+            layer.on('error', function(e) {
+                console.log(e);
+                expect(this).to.equal(layer);
+                expect(e.error.status).to.equal(400);
+                done();
+            });
+
+            server.respondWith("GET", internals.url.tileJSON('mapbox.map-0l53fhk2'),
+                [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
+            server.respond();
         });
 
         it('sets attribution', function(done) {
