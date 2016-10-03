@@ -12,7 +12,7 @@
   "dependencies": {
     "corslite": "0.0.6",
     "isarray": "0.0.1",
-    "leaflet": "0.7.7",
+    "leaflet": "1.0.1",
     "mustache": "2.2.1",
     "sanitize-caja": "0.1.4"
   },
@@ -32,7 +32,7 @@
     "minifyify": "^6.1.0",
     "minimist": "0.0.5",
     "mocha": "2.4.5",
-    "mocha-phantomjs": "4.0.2",
+    "mocha-phantomjs": "4.1.0",
     "sinon": "1.10.2"
   },
   "optionalDependencies": {},
