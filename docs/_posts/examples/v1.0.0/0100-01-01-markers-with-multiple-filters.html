@@ -61,7 +61,9 @@ tags:
 // In the propeties object for each marker define key's
 // like `rentals`, `fuel`, `tackleshop` that are set to true for false
 // depending on whether or they exist at a location.
-var geojson = [
+var geojson = {
+  type: 'FeatureCollection',
+  features: [
     {
       "type": "Feature",
       "geometry": {
@@ -119,7 +121,8 @@ var geojson = [
         "marker-symbol": "harbor"
       }
     }
-];
+  ]
+};
 
 var map = L.mapbox.map('map', 'mapbox.streets')
     .setView([42.68, -95.63], 4)

@@ -36,33 +36,37 @@ var map = L.mapbox.map('map', 'mapbox.streets').setView([37.9, -77], 6);
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
-myLayer.setGeoJSON([{
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [-77, 37.9]
-        },
-        properties: {
-            title: 'Marker one',
-            description: 'This marker has a description',
-            'marker-id': 'marker-1',
-            'marker-color': '#f86767'
-        }
+myLayer.setGeoJSON({
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [-77, 37.9]
+      },
+      properties: {
+          title: 'Marker one',
+          description: 'This marker has a description',
+          'marker-id': 'marker-1',
+          'marker-color': '#f86767'
+      }
     },
     {
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [-78, 36.5]
-        },
-        properties: {
-            title: 'Marker two',
-            description: 'So does this one!',
-            'marker-id': 'marker-2',
-            'marker-color': '#f86767'
-        }
-    }
-]);
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              coordinates: [-78, 36.5]
+          },
+          properties: {
+              title: 'Marker two',
+              description: 'So does this one!',
+              'marker-id': 'marker-2',
+              'marker-color': '#f86767'
+          }
+      }
+  ]
+});
 
 var info = document.getElementById('info');
 

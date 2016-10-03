@@ -13,28 +13,31 @@ tags:
 var map = L.mapbox.map('map', 'mapbox.streets')
     .setView([37.9, -77], 6);
 
-var geoJson = [{
-      type: 'Feature',
-      geometry: {
-          type: 'Point',
-          coordinates: [-77, 37.9]
-      },
-      properties: {
-          title: 'Marker One',
-          'marker-color': '#bbb'
-      }
+var geoJson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77, 37.9]
+    },
+    properties: {
+      title: 'Marker One',
+      'marker-color': '#bbb'
+    }
   },
-  {
+    {
       type: 'Feature',
       geometry: {
-          type: 'Point',
-          coordinates: [-78, 36.5]
+        type: 'Point',
+        coordinates: [-78, 36.5]
       },
       properties: {
-          title: 'Marker Two',
-          'marker-color': '#bbb'
-  }
-}];
+        title: 'Marker Two',
+        'marker-color': '#bbb'
+      }
+    }]
+};
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
