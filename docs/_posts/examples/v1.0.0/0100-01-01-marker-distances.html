@@ -51,32 +51,35 @@ map.on('click', function(ev) {
     // the spot clicked on the map.
     var c = ev.latlng;
 
-    var geojson = [
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [c.lng, c.lat]
-        },
-        "properties": {
-          "marker-color": "#ff8888"
+    var geojson = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [c.lng, c.lat]
+          },
+          "properties": {
+            "marker-color": "#ff8888"
+          }
+        }, {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [fc.lng, fc.lat],
+              [c.lng, c.lat]
+            ]
+          },
+          "properties": {
+            "stroke": "#000",
+            "stroke-opacity": 0.5,
+            "stroke-width": 4
+          }
         }
-      }, {
-        "type": "Feature",
-        "geometry": {
-          "type": "LineString",
-          "coordinates": [
-            [fc.lng, fc.lat],
-            [c.lng, c.lat]
-          ]
-        },
-        "properties": {
-          "stroke": "#000",
-          "stroke-opacity": 0.5,
-          "stroke-width": 4
-        }
-      }
-    ];
+      ]
+    };
 
     featureLayer.setGeoJSON(geojson);
 

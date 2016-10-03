@@ -60,27 +60,30 @@ tags:
 var map = L.mapbox.map('map', 'mapbox.streets').setView([37.9, -77], 7);
 var markers = L.mapbox.featureLayer().addTo(map);
 
-markers.setGeoJSON([{
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-77, 37.9]
-    },
-    properties: {
-        title: 'Marker one',
-        description: 'This marker has a description about Marker One.'
-    }
-}, {
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-78, 36.5]
-    },
-    properties: {
-        title: 'Marker two',
-        description: 'This marker has a description about Marker Two.'
-    }
-}]);
+markers.setGeoJSON({
+  type: 'FeatureCollection',
+  features: [{
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [-77, 37.9]
+      },
+      properties: {
+          title: 'Marker one',
+          description: 'This marker has a description about Marker One.'
+      }
+  }, {
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [-78, 36.5]
+      },
+      properties: {
+          title: 'Marker two',
+          description: 'This marker has a description about Marker Two.'
+      }
+  }]
+});
 
 var info = document.getElementById('info');
 

@@ -30,7 +30,9 @@ var map = L.mapbox.map('map', 'mapbox.streets')
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
-var geoJson = [
+var geoJson = {
+  type: 'FeatureCollection',
+  features: [
     {
         type: 'Feature',
         geometry: {
@@ -55,7 +57,8 @@ var geoJson = [
             'marker-color': '#548cba'
         }
     }
-];
+  ]
+};
 
 myLayer.setGeoJSON(geoJson);
 
