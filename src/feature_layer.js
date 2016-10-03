@@ -91,7 +91,9 @@ var FeatureLayer = L.FeatureGroup.extend({
                 pointToLayer = this.options.pointToLayer || function(feature, latlon) {
                   return marker.style(feature, latlon, opts);
                 },
-                layer = L.GeoJSON.geometryToLayer(json, pointToLayer),
+                layer = L.GeoJSON.geometryToLayer(json, {
+                    pointToLayer: pointToLayer
+                }),
                 popupHtml = marker.createPopup(json, this.options.sanitizer),
                 style = this.options.style,
                 defaultStyle = style === simplestyle.style;

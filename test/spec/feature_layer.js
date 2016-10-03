@@ -253,6 +253,6 @@ describe('L.mapbox.featureLayer', function() {
           }),
           marker = layer.getLayers()[0];
 
-        expect(marker instanceof L.Circle).to.equal(true);
+        expect(marker instanceof L.CircleMarker).to.equal(true);
     });
 });
