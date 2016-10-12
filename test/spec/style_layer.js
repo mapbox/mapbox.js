@@ -76,6 +76,21 @@ describe('L.mapbox.styleLayer', function() {
                 expect(layer.options.attribution).to.equal('');
             });
         });
+
+        it('should error if no style', function(done) {
+            var layer = L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v8');
+            layer.on('error', function() {
+                done();
+            });
+
+            server.respondWith('GET', 'https://a.tiles.mapbox.com/styles/v1/mapbox/streets-v8?access_token=key',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(null)]);
+            server.respond();
+
+            server.respondWith('GET', 'http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6.json?access_token=key',
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_street_terrain)]);
+            server.respond();
+        });
     });
 
     describe('#getTileUrl', function() {

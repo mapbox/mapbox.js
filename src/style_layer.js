@@ -24,28 +24,29 @@ var StyleLayer = L.TileLayer.extend({
     _getAttribution: function(_) {
         var styleURL = format_url.style(_, this.options && this.options.accessToken);
         request(styleURL, L.bind(function(err, style) {
-            if (err) {
+            if (err || !style) {
                 util.log('could not load Mapbox style at ' + styleURL);
                 this.fire('error', {error: err});
-            }
-            var sources = [];
-            for (var id in style.sources) {
-                var source = style.sources[id].url.split('mapbox://')[1];
-                sources.push(source);
-            }
-            request(format_url.tileJSON(sources.join(), this.options.accessToken), L.bind(function(err, json) {
-                if (err) {
-                    util.log('could not load TileJSON at ' + _);
-                    this.fire('error', {error: err});
-                } else if (json) {
-                    util.strict(json, 'object');
-
-                    this.options.attribution = this.options.sanitizer(json.attribution);
-
-                    this._tilejson = json;
-                    this.fire('ready');
+            } else {
+                var sources = [];
+                for (var id in style.sources) {
+                    var source = style.sources[id].url.split('mapbox://')[1];
+                    sources.push(source);
                 }
-            }, this));
+                request(format_url.tileJSON(sources.join(), this.options.accessToken), L.bind(function(err, json) {
+                    if (err) {
+                        util.log('could not load TileJSON at ' + _);
+                        this.fire('error', {error: err});
+                    } else if (json) {
+                        util.strict(json, 'object');
+
+                        this.options.attribution = this.options.sanitizer(json.attribution);
+
+                        this._tilejson = json;
+                        this.fire('ready');
+                    }
+                }, this));
+            }
         }, this));
     },
 
