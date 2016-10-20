@@ -313,6 +313,9 @@
   border-bottom:1px solid #ddd;
   border-bottom-color:rgba(0,0,0,0.10);
   }
+  .leaflet-bar a:last-child {
+    border-bottom:none;
+    }
   .leaflet-bar a:hover,
   .leaflet-bar a:active {
     background-color:#f8f8f8;
@@ -322,7 +325,6 @@
     border-radius:3px 3px 0 0;
     }
   .leaflet-bar a:hover:last-child {
-    border-bottom:none;
     border-radius:0 0 3px 3px;
     }
   .leaflet-bar a:hover:only-of-type {
