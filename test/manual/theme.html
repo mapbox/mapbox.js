@@ -37,10 +37,6 @@ var maplight = L.mapbox.map('map-light', 'mapbox.light')
   .addControl(L.mapbox.shareControl())
   .setView([37.9, -77], 5);
 
-var info = L.mapbox.infoControl({
-  position: 'bottomleft'
-}).addInfo('foo').addTo(mapdark);
-
 var feature = {
     type: 'Feature',
     geometry: {

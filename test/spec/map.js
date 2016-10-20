@@ -335,7 +335,6 @@ describe('L.mapbox.map', function() {
 
         it('attributionControl enabled', function(done) {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2', {
-                infoControl: false,
                 attributionControl: true
             });
 
