@@ -403,6 +403,8 @@
   .leaflet-left .leaflet-control-scale    { margin-left:5px; }
   .leaflet-bottom .leaflet-control-scale  { margin-bottom:5px; }
 
+.leaflet-container .mapbox-improve-map { font-weight:bold; }
+
 /* Scale control */
 .leaflet-control-scale-line {
   background-color:rgba(255,255,255,0.5);
@@ -779,45 +781,6 @@
   display:block;
   margin-top:5px;
   }
-
-/* Info Control
-------------------------------------------------------- */
-.leaflet-control.mapbox-control-info {
-  margin:5px 30px 10px 10px;
-  min-height:26px;
-  }
-  .leaflet-right .leaflet-control.mapbox-control-info {
-    margin:5px 10px 10px 30px;
-    }
-
-.mapbox-info-toggle {
-  background-color:#fff;
-  background-color:rgba(255,255,255,0.5);
-  border-radius:50%;
-  position:absolute;
-  bottom:0;left:0;
-  z-index:1;
-  }
-  .leaflet-right .mapbox-control-info .mapbox-info-toggle  { left:auto; right:0; }
-  .mapbox-info-toggle:hover { background-color:#fff; }
-
-.map-info-container {
-  background:#fff;
-  padding:3px 5px 3px 27px;
-  display:none;
-  position:relative;
-  bottom:0;left:0;
-  border-radius:13px 3px 3px 13px;
-  }
-  .leaflet-right .map-info-container {
-    left:auto;
-    right:0;
-    padding:3px 27px 3px 5px;
-    border-radius:3px 13px 13px 3px;
-    }
-
-.mapbox-control-info.active .map-info-container { display:inline-block; }
-.leaflet-container .mapbox-improve-map { font-weight:bold; }
 
 /* Geocoder
 ------------------------------------------------------- */
