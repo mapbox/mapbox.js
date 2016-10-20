@@ -403,6 +403,23 @@
   .leaflet-left .leaflet-control-scale    { margin-left:5px; }
   .leaflet-bottom .leaflet-control-scale  { margin-bottom:5px; }
 
+/* Scale control */
+.leaflet-control-scale-line {
+  background-color:rgba(255,255,255,0.5);
+  border:1px solid #999;
+  border-color:rgba(0,0,0,0.4);
+  border-top:none;
+  padding:2px 5px 1px;
+  white-space:nowrap;
+  overflow:hidden;
+  }
+  .leaflet-control-scale-line:last-child) {
+    border-top:2px solid #ddd;
+    border-top-color:rgba(0,0,0,0.10);
+    border-bottom:none;
+    margin-top:-2px;
+    }
+
 /* Used for smaller map containers & triggered by container size */
 .leaflet-container .leaflet-control-attribution.leaflet-compact-attribution { margin:10px; }
 .leaflet-container .leaflet-control-attribution.leaflet-compact-attribution {
