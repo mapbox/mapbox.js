@@ -2,7 +2,7 @@
   "author": "Mapbox",
   "name": "mapbox.js",
   "description": "mapbox javascript api",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
