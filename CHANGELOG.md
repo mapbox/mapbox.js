@@ -1,3 +1,7 @@
+## v1.6.7
+
+* Update browserify dependency to make Mapbox.js installable with npm again.
+
 ## v1.6.6
 
 * Sanitize TileJSON for `L.mapbox.shareControl`
