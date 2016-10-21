@@ -1,3 +1,8 @@
+## v3.0.0
+
+* Upgrades Leaflet dependency to v1.0.1
+* Removes the deprecated `InfoControl` class.
+
 ## v2.4.0
 
 * Adds `autocomplete` and `country` options to the `L.mapbox.geocoder`

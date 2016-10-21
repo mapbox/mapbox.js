@@ -4,7 +4,6 @@ var tileLayer = require('./tile_layer').tileLayer,
     featureLayer = require('./feature_layer').featureLayer,
     gridLayer = require('./grid_layer').gridLayer,
     gridControl = require('./grid_control').gridControl,
-    infoControl = require('./info_control').infoControl,
     shareControl = require('./share_control').shareControl,
     legendControl = require('./legend_control').legendControl,
     mapboxLogoControl = require('./mapbox_logo').mapboxLogoControl,
@@ -25,7 +24,6 @@ var LMap = L.Map.extend({
         gridLayer: {},
         legendControl: {},
         gridControl: {},
-        infoControl: false,
         shareControl: false,
         sanitizer: require('sanitize-caja')
     },
@@ -82,11 +80,6 @@ var LMap = L.Map.extend({
             this.addControl(this.gridControl);
         }
 
-        if (this.options.infoControl) {
-            this.infoControl = infoControl(this.options.infoControl);
-            this.addControl(this.infoControl);
-        }
-
         if (this.options.legendControl) {
             this.legendControl = legendControl(this.options.legendControl);
             this.addControl(this.legendControl);
@@ -140,11 +133,6 @@ var LMap = L.Map.extend({
         if (this.gridLayer) {
             this.gridLayer._setTileJSON(json);
             this._updateLayer(this.gridLayer);
-        }
-
-        if (this.infoControl && json.attribution) {
-            this.infoControl.addInfo(this.options.sanitizer(json.attribution));
-            this._updateMapFeedbackLink();
         }
 
         if (this.legendControl && json.legend) {
@@ -208,10 +196,6 @@ var LMap = L.Map.extend({
 
     _updateLayer: function(layer) {
         if (!layer.options) return;
-
-        if (this.infoControl && this._loaded) {
-            this.infoControl.addInfo(layer.options.infoControl);
-        }
 
         if (this.attributionControl && this._loaded && layer.getAttribution) {
             this.attributionControl.addAttribution(layer.getAttribution());
