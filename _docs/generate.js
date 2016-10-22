@@ -215,7 +215,7 @@ function readDocumentation(filename) {
                   file: argv.d + '/0200-01-01-' + escapedText + '.html',
                   contents: header.replace('All', main) +
                       'version: ' + argv.t + '\n' +
-                      'permalink: /api/' + argv.t + '/' + escapedText + '\n---\n' +
+                  'permalink: /api/' + argv.t + '/' + escapedText + '/\n---\n' +
                       html.replace('id="map"', '')
               });
             }
