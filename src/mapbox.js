@@ -48,4 +48,4 @@ window.L.Icon.Default.imagePath =
     ((document.location.protocol === 'https:' ||
     document.location.protocol === 'http:') ? '' : 'https:') +
     '//api.tiles.mapbox.com/mapbox.js/' + 'v' +
-    require('../package.json').version + '/images';
+    require('../package.json').version + '/images/';
