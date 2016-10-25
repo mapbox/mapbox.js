@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel="stylesheet" href="../../dist/mapbox.css"/>
+  <link rel="stylesheet" href="embed.css"/>
+  <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
+  <script src='http://leafletjs.com/examples/map-panes/eu-countries.js'></script>
+</head>
+<body>
+<div id='map'></div>
+<script>
+  var map = L.mapbox.map('map').setView([0, -0], 3);
+
+	map.createPane('labels');
+	map.getPane('labels').style.zIndex = 650;
+	map.getPane('labels').style.pointerEvents = 'none';
+
+	var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+	var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+		attribution: cartodbAttribution
+	}).addTo(map);
+
+	var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+		attribution: cartodbAttribution,
+		pane: 'labels'
+	}).addTo(map);
+
+	geojson = L.geoJson(euCountries).addTo(map);
+
+	geojson.eachLayer(function (layer) {
+		layer.bindPopup(layer.feature.properties.name);
+	});
+</script>
+</body>
+</html>
