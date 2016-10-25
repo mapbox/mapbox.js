@@ -140,7 +140,6 @@
 .leaflet-map-pane canvas { z-index: 1; }
 .leaflet-map-pane svg    { z-index: 2; }
 
-.leaflet-pane         { z-index:4; }
 .leaflet-tile-pane    { z-index:2; }
 .leaflet-overlay-pane { z-index:4; }
 .leaflet-shadow-pane  { z-index:5; }
