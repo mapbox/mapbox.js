@@ -8,5 +8,4 @@ baseurl: /mapbox.js
 mapboxjs: v3.0.0
 mapboxjsbase: /mapbox.js/dist
 defaultid: 'mapbox.streets'
-exclude: [dist]
 future: true
