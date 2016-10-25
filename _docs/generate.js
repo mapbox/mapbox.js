@@ -136,7 +136,7 @@ function readDocumentation(filename) {
               writes.push({
                   file: argv.d + '/0200-01-01-' + c.id + '.html',
                   contents: header.replace('All', c.name) + 'version: ' + argv.t + '\n' +
-                      'permalink: /api/' + argv.t + '/' + c.id + '\n---\n' + c.text
+                      'permalink: /api/' + argv.t + '/' + c.id + '/\n---\n' + c.text
               });
             }
         });
