@@ -5,7 +5,7 @@ accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpZ3BqeDZlcDAwMDBzcmt1YnQ1OTM4cTEifQ.5
 source: docs
 permalink: /:categories/:title/
 baseurl: /mapbox.js
-mapboxjs: v3.0.0
+mapboxjs: v2.4.0
 mapboxjsbase: /mapbox.js/dist
 defaultid: 'mapbox.streets'
 exclude: [dist]
