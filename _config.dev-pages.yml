@@ -4,7 +4,7 @@ tileApi: https://api-maps-staging.tilestream.net
 source: docs
 permalink: /:categories/:title/
 baseurl: /mapbox.js
-mapboxjs: v3.0.0
+mapboxjs: v2.4.0
 defaultid: 'mapbox.streets'
 exclude: [dist]
 future: true
