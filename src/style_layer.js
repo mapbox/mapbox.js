@@ -11,12 +11,14 @@ var StyleLayer = L.TileLayer.extend({
     },
 
     initialize: function(_, options) {
-        L.TileLayer.prototype.initialize.call(this, undefined, options);
 
-        this.options.tiles = this._formatTileURL(_);
-        this.options.tileSize = 512;
-        this.options.zoomOffset = -1;
-        this.options.tms = false;
+        options = options || {};
+        options.tiles = this._formatTileURL(_);
+        options.tileSize = 512;
+        options.zoomOffset = -1;
+        options.tms = false;
+
+        L.TileLayer.prototype.initialize.call(this, undefined, options);
 
         this._getAttribution(_);
     },
@@ -44,9 +46,7 @@ var StyleLayer = L.TileLayer.extend({
 
                     this._tilejson = json;
                     this.fire('ready');
-                }
-            }, this));
-        }, this));
+                } }, this)); }, this));
     },
 
     // disable the setUrl function, which is not available on mapbox tilelayers
@@ -68,9 +68,12 @@ var StyleLayer = L.TileLayer.extend({
 
     // this is an exception to mapbox.js naming rules because it's called
     // by `L.map`
-    getTileUrl: function(tilePoint) {
-        var templated = L.Util.template(this.options.tiles, tilePoint);
-        return templated;
+    getTileUrl: function(coords) {
+        return L.Util.template(this.options.tiles, {
+            x: coords.x,
+            y: coords.y,
+            z: this._getZoomForUrl()
+        });
     }
 });
 
