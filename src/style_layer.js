@@ -46,7 +46,9 @@ var StyleLayer = L.TileLayer.extend({
 
                     this._tilejson = json;
                     this.fire('ready');
-                } }, this)); }, this));
+                }
+            }, this));
+        }, this));
     },
 
     // disable the setUrl function, which is not available on mapbox tilelayers
