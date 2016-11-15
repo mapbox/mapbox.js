@@ -36,6 +36,7 @@ theme/images: theme/images/icons.svg
 dist/images/icons-404040.png: theme/images
 	cp -r theme/images/ dist/images
 	cp -r node_modules/leaflet/dist/images/ dist/images
+	rm -f dist/images/render.sh
 
 # assemble a complete library for development
 dist/mapbox.js: node_modules/.install dist $(shell $(BROWSERIFY) --list src/index.js)
