@@ -12,7 +12,7 @@
   "dependencies": {
     "corslite": "0.0.6",
     "isarray": "0.0.1",
-    "leaflet": "1.0.1",
+    "leaflet": "https://github.com/bb-juliogarcia/Leaflet/archive/minNativeZoom.tar.gz",
     "mustache": "2.2.1",
     "sanitize-caja": "0.1.4"
   },
