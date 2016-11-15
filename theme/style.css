@@ -625,6 +625,7 @@
 .mapbox-icon {
   opacity: .75;
   background-image:url(./images/icons-000000@2x.png);
+  background-image:linear-gradient(transparent, transparent), url(./images/icons.svg);
   background-repeat:no-repeat;
   background-size:26px 260px;
   }
@@ -636,6 +637,7 @@
   .leaflet-container.dark .mapbox-icon {
     opacity: 1;
     background-image:url(./images/icons-ffffff@2x.png);
+    background-image:linear-gradient(transparent, transparent), url(./images/icons-ffffff.svg);
     background-size:26px 260px;
     }
   .leaflet-bar .leaflet-control-zoom-in                 { background-position:0 0; }

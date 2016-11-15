@@ -89,7 +89,6 @@ Requirements:
 
     inkscape
     pngquant
-    convert (part of imagemagick)
 
 1. Make edits to `theme/images/icons.svg`.
 2. Run `./theme/images/render.sh` to update sprites from your edits.
