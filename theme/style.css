@@ -414,7 +414,7 @@
   white-space:nowrap;
   overflow:hidden;
   }
-  .leaflet-control-scale-line:last-child) {
+  .leaflet-control-scale-line:last-child {
     border-top:2px solid #ddd;
     border-top-color:rgba(0,0,0,0.10);
     border-bottom:none;
