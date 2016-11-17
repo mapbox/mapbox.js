@@ -11,11 +11,13 @@ var StyleLayer = L.TileLayer.extend({
     },
 
     initialize: function(_, options) {
+        options = options || {};
+        options.minNativeZoom = 0;
+        options.zoomOffset = -1;
+        options.tileSize = 512;
         L.TileLayer.prototype.initialize.call(this, undefined, options);
 
         this.options.tiles = this._formatTileURL(_);
-        this.options.tileSize = 512;
-        this.options.zoomOffset = -1;
         this.options.tms = false;
 
         this._getAttribution(_);
