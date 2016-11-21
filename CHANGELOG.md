@@ -1,4 +1,10 @@
+## v3.0.1
+
+* Upgrades Leaflet dependency to v1.0.2
+
 ## v3.0.0
+
+**This release is not recommended: please use v3.0.1 or newer instead**
 
 * Upgrades Leaflet dependency to v1.0.1
 * Removes the deprecated `InfoControl` class.
