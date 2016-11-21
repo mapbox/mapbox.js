@@ -14,7 +14,7 @@ var StyleLayer = L.TileLayer.extend({
         L.TileLayer.prototype.initialize.call(this, undefined, L.extend({}, options, {
             tileSize: 512,
             zoomOffset: -1,
-            minNativeZoom: 1,
+            minNativeZoom: 0,
             tms: false
         }));
         this._url = this._formatTileURL(_);
