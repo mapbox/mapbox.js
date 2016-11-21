@@ -4,7 +4,7 @@ tileApi: https://api.mapbox.com
 source: docs
 permalink: /:categories/:title/
 baseurl: /mapbox.js
-mapboxjs: v2.4.0
+mapboxjs: v3.0.1
 defaultid: 'mapbox.streets'
 exclude: [dist]
 future: true
