@@ -11,13 +11,13 @@ var StyleLayer = L.TileLayer.extend({
     },
 
     initialize: function(_, options) {
-        L.TileLayer.prototype.initialize.call(this, undefined, options);
-
-        this.options.tiles = this._formatTileURL(_);
-        this.options.tileSize = 512;
-        this.options.zoomOffset = -1;
-        this.options.tms = false;
-
+        L.TileLayer.prototype.initialize.call(this, undefined, L.extend({}, options, {
+            tileSize: 512,
+            zoomOffset: -1,
+            minNativeZoom: 0,
+            tms: false
+        }));
+        this._url = this._formatTileURL(_);
         this._getAttribution(_);
     },
 
@@ -53,24 +53,16 @@ var StyleLayer = L.TileLayer.extend({
     setUrl: null,
 
     _formatTileURL: function(style) {
-        var retina = L.Browser.retina ? '@2x' : '';
         if (typeof style === 'string') {
             if (style.indexOf('mapbox://styles/') === -1) {
                 util.log('Incorrectly formatted Mapbox style at ' + style);
                 this.fire('error');
             }
             var ownerIDStyle = style.split('mapbox://styles/')[1];
-            return format_url('/styles/v1/' + ownerIDStyle + '/tiles/{z}/{x}/{y}' + retina, this.options.accessToken);
+            return format_url('/styles/v1/' + ownerIDStyle + '/tiles/{z}/{x}/{y}{r}', this.options.accessToken);
         } else if (typeof style === 'object') {
-            return format_url('/styles/v1/' + style.owner + '/' + style.id + '/tiles/{z}/{x}/{y}' + retina, this.options.accessToken);
+            return format_url('/styles/v1/' + style.owner + '/' + style.id + '/tiles/{z}/{x}/{y}{r}', this.options.accessToken);
         }
-    },
-
-    // this is an exception to mapbox.js naming rules because it's called
-    // by `L.map`
-    getTileUrl: function(tilePoint) {
-        var templated = L.Util.template(this.options.tiles, tilePoint);
-        return templated;
     }
 });
 
