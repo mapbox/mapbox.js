@@ -148,5 +148,10 @@ describe("L.mapbox.tileLayer", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON).setFormat('jpg70');
             expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/0/0@2x.jpg70');
         });
+        it("requests tiles with no format", function() {
+            L.Browser.retina = true;
+            var layer = L.mapbox.tileLayer(helpers.tileJSON_noformat);
+            expect(layer.getTileUrl({x: 0, y: 0, z: 0})).to.equal('http://domain.example/path/0/0/0');
+        });
     });
 });
