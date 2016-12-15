@@ -64,6 +64,14 @@ module.exports = function(url, options) {
                 }
             }
 
+            if (_.bbox) {
+                if (isArray(_.bbox)) {
+                    url += '&bbox=' + _.bbox.join();
+                } else {
+                    url += '&bbox=' + _.bbox;
+                }
+            }
+
             if (_.proximity) {
                 var proximity = roundTo(L.latLng(_.proximity), 3);
                 url += '&proximity=' + proximity.lng + ',' + proximity.lat;

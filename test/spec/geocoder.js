@@ -28,6 +28,13 @@ describe('L.mapbox.geocoder', function() {
                 .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&country=us');
         });
 
+        it('supports bbox option', function() {
+            var g = L.mapbox.geocoder('mapbox.places');
+            expect(g.queryURL({query: ['austin', 'houston'], bbox: [ -104.0458814, 26.0696823, -93.7347459, 36.4813628 ]}))
+                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/
+                    austin;houston.json?access_token=key&bbox='-104.0458814,26.0696823,-93.7347459,36.4813628');
+        });
+
         it('supports autocomplete option', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], country: 'us', autocomplete: false}))
