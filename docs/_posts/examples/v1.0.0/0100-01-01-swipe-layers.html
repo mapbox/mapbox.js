@@ -22,10 +22,11 @@ tags:
 <input id='range' class='range' type='range' min='0' max='1.0' step='any' />
 
 <script>
-var map = L.mapbox.map('map');
-L.mapbox.tileLayer('mapbox.outdoors').addTo(map);
+var map = L.mapbox.map('map').setView([49.434,-123.272], 7);
 
+L.mapbox.tileLayer('mapbox.outdoors').addTo(map);
 var overlay = L.mapbox.tileLayer('mapbox.comic').addTo(map);
+
 var range = document.getElementById('range');
 
 function clip() {
@@ -38,7 +39,5 @@ function clip() {
 
 range['oninput' in range ? 'oninput' : 'onchange'] = clip;
 map.on('move', clip);
-map.setView([49.434,-123.272], 7);
-
 clip();
 </script>
