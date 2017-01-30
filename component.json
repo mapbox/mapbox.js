@@ -1,0 +1,24 @@
+{
+  "name": "mapbox",
+  "repository": "treetopllc/mapbox.js",
+  "version": "3.0.1",
+  "dependencies": {
+    "treetopllc/leaflet": "master",
+    "treetopllc/sanitize-caja": "master",
+    "treetopllc/mustache.js": "master",
+    "treetopllc/corslite": "master",
+    "bestiejs/json3": "gh-pages"
+  },
+  "main": "src/index.js",
+  "scripts": [
+    "src/*"
+  ],
+  "styles": [
+    "theme/style.css"
+  ],
+  "images": [
+    "theme/images/*"
+  ]
+}
+
+
