@@ -3,7 +3,6 @@
   "repository": "treetopllc/mapbox.js",
   "version": "3.0.1",
   "dependencies": {
-    "treetopllc/leaflet": "master",
     "treetopllc/sanitize-caja": "master",
     "treetopllc/mustache.js": "master",
     "treetopllc/corslite": "master",

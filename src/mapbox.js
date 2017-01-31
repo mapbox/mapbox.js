@@ -8,10 +8,11 @@ var geocoderControl = require('./geocoder_control'),
     tileLayer = require('./tile_layer'),
     map = require('./map'),
     gridLayer = require('./grid_layer'),
-    styleLayer = require('./style_layer');
+    styleLayer = require('./style_layer'),
+    config = require('./config');
 
 L.mapbox = module.exports = {
-    VERSION: require('../package.json').version,
+    VERSION: config.VERSION,
     geocoder: require('./geocoder'),
     marker: require('./marker'),
     simplestyle: require('./simplestyle'),
@@ -48,4 +49,4 @@ window.L.Icon.Default.imagePath =
     ((document.location.protocol === 'https:' ||
     document.location.protocol === 'http:') ? '' : 'https:') +
     '//api.tiles.mapbox.com/mapbox.js/' + 'v' +
-    require('../package.json').version + '/images/';
+    config.version + '/images/';

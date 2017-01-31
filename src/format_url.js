@@ -1,7 +1,7 @@
 'use strict';
 
 var config = require('./config'),
-    version = require('../package.json').version;
+    version = config.version;
 
 module.exports = function(path, accessToken) {
     accessToken = accessToken || L.mapbox.accessToken;

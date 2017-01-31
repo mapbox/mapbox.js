@@ -1,7 +1,5 @@
 'use strict';
 
-var leaflet = require('./leaflet');
+module.exports = window.L = require('./leaflet');
 
 require('./mapbox');
-
-module.exports = leaflet;
