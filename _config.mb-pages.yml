@@ -1,6 +1,7 @@
 url: https://www.mapbox.com
 api: https://www.mapbox.com/core
 tileApi: https://api.mapbox.com
+env: production
 source: docs
 permalink: /:categories/:title/
 baseurl: /mapbox.js
