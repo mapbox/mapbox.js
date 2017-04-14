@@ -1,3 +1,7 @@
+## v3.1.0
+
+* replaces Mapbox watermark with new Mapbox logo
+
 ## v3.0.1
 
 * Upgrades Leaflet dependency to v1.0.2
