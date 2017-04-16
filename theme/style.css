@@ -970,6 +970,15 @@
   height:100%;
   margin:0;
   }
+.leaflet-control-zoom.leaflet-bar a {
+  height: 52px;
+  width: 52px;
+  }
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background-size:52px 520px;
+  }
+.leaflet-bar .leaflet-control-zoom-out                { background-position:0 -52px; }
 }
 
 /* Print
