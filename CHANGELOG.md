@@ -1,3 +1,7 @@
+## v3.1.1
+
+* Revises feedback link from mapbox.com/map-feedback/ to mapbox.com/feedback/
+
 ## v3.1.0
 
 * replaces Mapbox watermark with new Mapbox logo
