@@ -14,7 +14,7 @@ describe('L.mapbox.styleLayer', function() {
         it('sets attribution', function(done) {
             var layer = L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v8');
             layer.on('ready', function(e) {
-                expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>');
+                expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/feedback/" target="_blank">Improve this map</a>');
                 done();
             });
 
@@ -30,7 +30,7 @@ describe('L.mapbox.styleLayer', function() {
         it('sets attribution', function(done) {
             var layer = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-hybrid-v8');
             layer.on('ready', function(e) {
-                expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a> <a href="https://www.digitalglobe.com/" target="_blank">&copy; DigitalGlobe</a>');
+                expect(layer.options.attribution).to.equal('<a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/feedback/" target="_blank">Improve this map</a> <a href="https://www.digitalglobe.com/" target="_blank">&copy; DigitalGlobe</a>');
                 done();
             });
 
