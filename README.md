@@ -1,6 +1,7 @@
 # mapbox.js
 
 [![Build Status](https://travis-ci.org/mapbox/mapbox.js.svg?branch=v1)](https://travis-ci.org/mapbox/mapbox.js) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mapbox/mapbox.js.svg)](http://isitmaintained.com/project/mapbox/mapbox.js "Average time to resolve an issue")
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fmapbox%2Fmapbox.js.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fmapbox%2Fmapbox.js?ref=badge_shield)
 
 This is the Mapbox Javascript API, version 2.x. It's built as a [Leaflet](http://leafletjs.com/)
 plugin. You can [read about its launch](http://mapbox.com/blog/mapbox-js-with-leaflet/).
@@ -103,3 +104,6 @@ following command:
 ``` sh
 ./jekyll.sh
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fmapbox%2Fmapbox.js.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fmapbox%2Fmapbox.js?ref=badge_large)
