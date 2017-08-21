@@ -311,7 +311,7 @@ _Returns_ the GeoJSON represented by this layer
 
 <span class='leaflet icon'>_Extends_: `L.tileLayer`</span>
 
-`L.mapbox.styleLayer` renders Mapbox Studio [styles](https://www.mapbox.com/help/define-style/) as raster tiles using the [Mapbox Static API](https://www.mapbox.com/api-documentation/#static)'s [retrieve raster tiles from styles](https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles) endpoint.
+`L.mapbox.styleLayer` renders Mapbox Studio [styles](https://www.mapbox.com/help/define-style/) as raster tiles using the [Mapbox Static API tiles endpoint](https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
