@@ -311,7 +311,7 @@ _Returns_ the GeoJSON represented by this layer
 
 <span class='leaflet icon'>_Extends_: `L.tileLayer`</span>
 
-`L.mapbox.styleLayer` provides a way to integrate [styles](https://www.mapbox.com/help/define-style/) created with Mapbox Studio into your map.
+`L.mapbox.styleLayer` renders Mapbox Studio [styles](https://www.mapbox.com/help/define-style/) as raster tiles using the [Mapbox Static API tiles endpoint](https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -731,7 +731,7 @@ index). For instance, replace
  ```
  L.mapbox.geocoderControl('mapbox.places').addTo(map);
  ```
- 
+
  See [the geocoding API documentation](https://www.mapbox.com/developers/api/geocoding/)
  for a complete list of predefined geocoding indexes.
 

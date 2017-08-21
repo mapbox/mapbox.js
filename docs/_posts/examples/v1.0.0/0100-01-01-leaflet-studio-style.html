@@ -12,7 +12,8 @@ tags:
 <script>
 var map = L.map('map').setView([38.97416, -95.23252], 15);
 
-// Add tiles from Mapbox Style API (https://www.mapbox.com/developers/api/styles/)
+// Add tiles from the Mapbox Static API tiles endpoint
+// (https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles)
 // Tiles are 512x512 pixels and are offset by 1 zoom level
 L.tileLayer(
     'https://api.mapbox.com/styles/v1/mapbox/emerald-v8/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
