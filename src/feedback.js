@@ -1,7 +1,7 @@
 'use strict';
 
 var Feedback = L.Class.extend({
-    includes: L.Mixin.Events,
+    includes: L.Evented.prototype || L.Mixin.Events,
     data: {},
     record: function(data) {
         L.extend(this.data, data);
