@@ -52,11 +52,14 @@ var TileLayer = L.TileLayer.extend({
           }
         }
 
+        var minZoom = this.options.minZoom || json.minzoom || 0;
+		var maxZoom = this.options.maxZoom || json.maxzoom || 18;
+
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: this.options.sanitizer(json.attribution),
-            minZoom: json.minzoom || 0,
-            maxZoom: json.maxzoom || 18,
+            minZoom: minZoom,
+            maxZoom: maxZoom,
             tms: json.scheme === 'tms',
             bounds: json.bounds && util.lbounds(json.bounds)
         });
@@ -76,6 +79,7 @@ var TileLayer = L.TileLayer.extend({
         var tiles = this.options.tiles,
             index = Math.floor(Math.abs(tilePoint.x + tilePoint.y) % tiles.length),
             url = tiles[index];
+        tilePoint.z = this._getZoomForUrl();
 
         var templated = L.Util.template(url, tilePoint);
         if (!templated || !this.options.format) {
