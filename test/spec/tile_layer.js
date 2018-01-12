@@ -10,10 +10,24 @@ describe("L.mapbox.tileLayer", function() {
     });
 
     describe("constructor", function() {
-        it("sets min and max zoom", function() {
+        it("sets min and max zoom based on tileJSON", function() {
             var layer = L.mapbox.tileLayer(helpers.tileJSON);
             expect(layer.options.minZoom).to.equal(0);
             expect(layer.options.maxZoom).to.equal(17);
+            expect(layer instanceof L.mapbox.TileLayer).to.eql(true);
+        });
+
+        it("sets min and max zoom based on default", function() {
+            var layer = L.mapbox.tileLayer(helpers.tileJSONNoMinMax);
+            expect(layer.options.minZoom).to.equal(0);
+            expect(layer.options.maxZoom).to.equal(18);
+            expect(layer instanceof L.mapbox.TileLayer).to.eql(true);
+        });
+
+        it("sets min and max zoom based on user input", function() {
+            var layer = L.mapbox.tileLayer(helpers.tileJSON, { minZoom: 5, maxZoom: 15});
+            expect(layer.options.minZoom).to.equal(5);
+            expect(layer.options.maxZoom).to.equal(15);
             expect(layer instanceof L.mapbox.TileLayer).to.eql(true);
         });
 

@@ -52,8 +52,8 @@ var TileLayer = L.TileLayer.extend({
           }
         }
 
-        var minZoom = this.options.minZoom || json.minzoom || 0;
-		var maxZoom = this.options.maxZoom || json.maxzoom || 18;
+        var minZoom = this.options.minZoom !== 0 ? this.options.minZoom : json.minzoom || 0;
+		var maxZoom = this.options.maxZoom !== 18 ? this.options.maxZoom : json.maxzoom || 18;
 
         L.extend(this.options, {
             tiles: json.tiles,
@@ -79,7 +79,7 @@ var TileLayer = L.TileLayer.extend({
         var tiles = this.options.tiles,
             index = Math.floor(Math.abs(tilePoint.x + tilePoint.y) % tiles.length),
             url = tiles[index];
-        tilePoint.z = this._getZoomForUrl();
+        tilePoint.z = this._getZoomForUrl() || 0;
 
         var templated = L.Util.template(url, tilePoint);
         if (!templated || !this.options.format) {
