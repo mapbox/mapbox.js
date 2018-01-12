@@ -1,7 +1,7 @@
 var helpers = {};
 
 beforeEach(function() {
-    L.mapbox.accessToken = 'pk.eyJ1IjoidHZibG9tYmVyZyIsImEiOiJjaXZsZmpsMWwwNXBuMnRudmJqNGQyMjJwIn0.842ovgKydac51tg6b9qKbg';
+    L.mapbox.accessToken = 'key';
 });
 
 // permissive test of leaflet-like location objects
