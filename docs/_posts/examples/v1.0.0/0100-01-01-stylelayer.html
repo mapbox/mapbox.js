@@ -13,6 +13,8 @@ tags:
 var map = L.mapbox.map('map')
     .setView([38.97416, -95.23252], 15);
 
-// Use styleLayer to add a Mapbox style created in Mapbox Studio
+// Add tiles from the Mapbox Static API tiles endpoint
+// (https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles)
+// Tiles are 512x512 pixels and are offset by 1 zoom level
 L.mapbox.styleLayer('mapbox://styles/mapbox/emerald-v8').addTo(map);
 </script>

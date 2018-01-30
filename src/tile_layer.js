@@ -45,8 +45,12 @@ var TileLayer = L.TileLayer.extend({
     _setTileJSON: function(json) {
         util.strict(json, 'object');
 
-        this.options.format = this.options.format ||
-            json.tiles[0].match(formatPattern)[1];
+        if (!this.options.format) {
+          var match = json.tiles[0].match(formatPattern);
+          if (match) {
+              this.options.format = match[1];
+          }
+        }
 
         L.extend(this.options, {
             tiles: json.tiles,
@@ -74,7 +78,7 @@ var TileLayer = L.TileLayer.extend({
             url = tiles[index];
 
         var templated = L.Util.template(url, tilePoint);
-        if (!templated) {
+        if (!templated || !this.options.format) {
             return templated;
         } else {
             return templated.replace(formatPattern,
