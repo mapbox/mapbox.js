@@ -43,7 +43,7 @@ helpers.geocoderAustin = {
             {"id": "country.4150104525", "text": "United States"}
         ]}
     ],
-    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>"
 };
 
 helpers.geocoderWhiteHouse = {
@@ -66,7 +66,7 @@ helpers.geocoderWhiteHouse = {
             {"id": "country.4150104525", "text": "United States"}
         ]
     }],
-    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>"
 };
 
 helpers.geocoderMulti = {"type": "FeatureCollection", "query": ["chester"], "features": [
@@ -95,7 +95,7 @@ helpers.geocoderMulti = {"type": "FeatureCollection", "query": ["chester"], "fea
         {"id": "province.407302220", "text": "Vermont"},
         {"id": "country.4150104525", "text": "United States"}
     ]}
-], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"};
+], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>"};
 
 helpers.geocoderBulk = [
     {"type": "FeatureCollection", "query": ["austin"], "features": [
@@ -124,7 +124,7 @@ helpers.geocoderBulk = [
             {"id": "province.3855330187", "text": "Arkansas"},
             {"id": "country.4150104525", "text": "United States"}
         ]}
-    ], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"},
+    ], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>"},
     {"type": "FeatureCollection", "query": ["houston"], "features": [
         {"id": "city.77002", "type": "Feature", "text": "Houston", "place_name": "Houston, 77008, Texas, United States", "relevance": 1, "center": [-95.436742, 29.784969], "geometry": {"type": "Point", "coordinates": [-95.436742, 29.784969]}, "bbox": [-95.72045898294519, 29.52891526120573, -95.06120101856504, 30.04036964534467], "properties": {"title": "Houston"}, "context": [
             {"id": "postcode.2533555017", "text": "77008"},
@@ -151,7 +151,7 @@ helpers.geocoderBulk = [
             {"id": "province.2667756795", "text": "Alabama"},
             {"id": "country.4150104525", "text": "United States"}
         ]}
-    ], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"}
+    ], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>"}
 ];
 
 helpers.geocoderReverse = {"type": "FeatureCollection", "query": [-97.7, 30.3], "features": [
@@ -168,7 +168,7 @@ helpers.geocoderReverse = {"type": "FeatureCollection", "query": [-97.7, 30.3], 
         {"id": "country.4150104525", "text": "United States"}
     ]},
     {"id": "country.4150104525", "type": "Feature", "text": "United States", "place_name": "United States", "relevance": 1, "center": [-99.041505, 37.940711], "geometry": {"type": "Point", "coordinates": [-99.041505, 37.940711]}, "bbox": [-179.23108600000003, 18.865459999999985, 179.85968099999997, 71.441059], "properties": {"title": "United States"}}
-], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"};
+], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>"};
 
 helpers.geocoderReverseRounded = {"type": "FeatureCollection", "query": [-97.09877, 30.12346], "features": [
     {"id": "city.78701", "type": "Feature", "text": "Austin", "place_name": "Austin, 78723, Texas, United States", "relevance": 1, "center": [-97.804206, 30.278855], "geometry": {"type": "Point", "coordinates": [-97.804206, 30.278855]}, "bbox": [-98.0261839514054, 30.067858231996137, -97.54154705019376, 30.489398740397657], "properties": {"title": "Austin"}, "context": [
@@ -184,7 +184,7 @@ helpers.geocoderReverseRounded = {"type": "FeatureCollection", "query": [-97.098
         {"id": "country.4150104525", "text": "United States"}
     ]},
     {"id": "country.4150104525", "type": "Feature", "text": "United States", "place_name": "United States", "relevance": 1, "center": [-99.041505, 37.940711], "geometry": {"type": "Point", "coordinates": [-99.041505, 37.940711]}, "bbox": [-179.23108600000003, 18.865459999999985, 179.85968099999997, 71.441059], "properties": {"title": "United States"}}
-], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"};
+], "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>"};
 
 helpers.tileJSON = {
     "attribution":"Data provided by NatureServe in collaboration with Robert Ridgely",
@@ -213,7 +213,7 @@ helpers.tileJSON = {
 };
 
 helpers.tileJSON_improvemap = {
-    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>",
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
     "autoscale": true,
     "bounds": [-180, -85.0511, 180, 85.0511],
     "center": [0, 0, 3],
@@ -231,7 +231,7 @@ helpers.tileJSON_improvemap = {
 };
 
 helpers.tileJSON_street_terrain = {
-    "attribution": "<a href=\"https://www.mapbox.com/about/maps/\" target=\"_blank\">&copy; Mapbox</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap</a> <a class=\"mapbox-improve-map\" href=\"https://www.mapbox.com/map-feedback/\" target=\"_blank\">Improve this map</a>",
+    "attribution": "<a href=\"https://www.mapbox.com/about/maps/\" target=\"_blank\">&copy; Mapbox</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap</a> <a class=\"mapbox-improve-map\" href=\"https://www.mapbox.com/feedback/\" target=\"_blank\">Improve this map</a>",
     "bounds": [-180, -85.0511, 180, 85.0511],
     "center": [0, 0, 0],
     "format": "pbf",
@@ -240,7 +240,7 @@ helpers.tileJSON_street_terrain = {
     "name": "Mapbox Streets V6 + Vector Terrain V2",
     "scheme": "xyz",
     "tilejson": "2.0.0",
-    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYm9iYnlzdWQiLCJhIjoiTi16MElIUSJ9.Clrqck--7WmHeqqvtFdYig", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYm9iYnlzdWQiLCJhIjoiTi16MElIUSJ9.Clrqck--7WmHeqqvtFdYig"],
+    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg"],
     "vector_layers": [{
         "description": "Generalized landcover classification",
         "fields": {
@@ -520,7 +520,7 @@ helpers.tileJSON_street_terrain = {
 };
 
 helpers.tileJSON_satellite_streets = {
-    "attribution": "<a href=\"https://www.mapbox.com/about/maps/\" target=\"_blank\">&copy; Mapbox</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap</a> <a class=\"mapbox-improve-map\" href=\"https://www.mapbox.com/map-feedback/\" target=\"_blank\">Improve this map</a> <a href=\"https://www.digitalglobe.com/\" target=\"_blank\">&copy; DigitalGlobe</a>",
+    "attribution": "<a href=\"https://www.mapbox.com/about/maps/\" target=\"_blank\">&copy; Mapbox</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap</a> <a class=\"mapbox-improve-map\" href=\"https://www.mapbox.com/feedback/\" target=\"_blank\">Improve this map</a> <a href=\"https://www.digitalglobe.com/\" target=\"_blank\">&copy; DigitalGlobe</a>",
     "autoscale": true,
     "bounds": [-180, -85, 180, 85],
     "center": [0, 0, 0],
@@ -530,7 +530,7 @@ helpers.tileJSON_satellite_streets = {
     "name": "Watermask + Satellite (open) + Satellite + Mapbox Streets V6",
     "scheme": "xyz",
     "tilejson": "2.0.0",
-    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYm9iYnlzdWQiLCJhIjoiTi16MElIUSJ9.Clrqck--7WmHeqqvtFdYig", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoiYm9iYnlzdWQiLCJhIjoiTi16MElIUSJ9.Clrqck--7WmHeqqvtFdYig"],
+    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg"],
     "vector_layers": [{
         "description": "",
         "fields": {
@@ -833,7 +833,7 @@ helpers.tileJSON_autoscale = {
 };
 
 helpers.tileJSON_nocenter = {
-    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>",
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
     "autoscale": true,
     "bounds": [-180, -85.0511, 180, 85.0511],
     "data": ["http://a.tiles.mapbox.com/v3/examples.h8e9h88l/markers.geojsonp"],
@@ -870,7 +870,7 @@ helpers.tileJSON_malicious = {
 }
 
 helpers.tileJSON_mapboxlogoFalse = {
-    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>",
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
     "autoscale": true,
     "bounds": [-180, -85.0511, 180, 85.0511],
     "data": ["http://a.tiles.mapbox.com/v3/examples.h8e9h88l/markers.geojsonp"],
@@ -888,7 +888,7 @@ helpers.tileJSON_mapboxlogoFalse = {
 };
 
 helpers.tileJSON_mapboxlogo = {
-    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>",
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
     "autoscale": true,
     "bounds": [-180, -85.0511, 180, 85.0511],
     "data": ["http://a.tiles.mapbox.com/v3/examples.h8e9h88l/markers.geojsonp"],
@@ -917,6 +917,20 @@ helpers.tileJSON_jpg = {
     "scheme":"xyz",
     "tilejson":"2.0.0",
     "tiles":["http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/{z}/{x}/{y}.jpg"]
+};
+
+helpers.tileJSON_noformat = {
+    "bounds":[-180,-85.0511,180,85.0511],
+    "center":[-98.976,39.386,4],
+    "description":"Bird species of North America, gridded by species count.",
+    "id":"examples.map-8ced9urs",
+    "maxzoom":17,
+    "minzoom":0,
+    "name":"Bird species",
+    "private":true,
+    "scheme":"xyz",
+    "tilejson":"2.0.0",
+    "tiles":["http://domain.example/path/{z}/{x}/{y}"]
 };
 
 helpers.geoJson = {
