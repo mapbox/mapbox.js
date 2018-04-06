@@ -64,6 +64,10 @@ module.exports = function(url, options) {
                 }
             }
 
+            if (_.limit) {
+                url += '&limit=' + _.limit;
+            }
+
             if (_.bbox) {
                 if (isArray(_.bbox)) {
                     url += '&bbox=' + _.bbox.join();
