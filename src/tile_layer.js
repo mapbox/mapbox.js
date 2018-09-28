@@ -61,6 +61,10 @@ var TileLayer = L.TileLayer.extend({
             bounds: json.bounds && util.lbounds(json.bounds)
         });
 
+        if (map._mapboxLogoControl && json.mapbox_logo) {
+            L.DomUtil.addClass(map._mapboxLogoControl._container, 'mapbox-logo-true');
+        }
+
         this._tilejson = json;
         this.redraw();
         return this;
