@@ -28,8 +28,9 @@ tags:
 <div id='brush' class='ui-brush'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.satellite')
-    .setView([0, 0], 1);
+var map = L.mapbox.map('map')
+    .setView([0, 0], 1)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9'));
 
 var credits = L.control.attribution({
   prefix: '<a href="http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">Data from USGS</a>'

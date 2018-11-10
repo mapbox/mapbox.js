@@ -12,10 +12,9 @@ tags:
 <div id='map'></div>
 
 <script>
-    var map = L.mapbox.map('map', 'mapbox.streets', {
-        center: [38.91557, -77.03198],
-        zoom: 16
-    });
+    var map = L.mapbox.map('map')
+      .setView([38.91557, -77.03198], 16)
+      .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v10'));
 
     L.marker([38.9206, -77.0357]).bindLabel('Meridian Hill Park').addTo(map);
     L.marker([38.909776, -77.034097]).bindLabel('Sweetgreen').addTo(map);
