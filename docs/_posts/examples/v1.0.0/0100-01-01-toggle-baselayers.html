@@ -17,9 +17,9 @@ tags:
   }).setView([22.76, -25.84], 3);
 
   var layers = {
-      Streets: L.mapbox.tileLayer('mapbox.streets'),
-      Outdoors: L.mapbox.tileLayer('mapbox.outdoors'),
-      Satellite: L.mapbox.tileLayer('mapbox.satellite')
+      Streets: L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v10'),
+      Light: L.mapbox.styleLayer('mapbox://styles/mapbox/light-v9'),
+      Satellite: L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9')
   };
 
   layers.Streets.addTo(map);
