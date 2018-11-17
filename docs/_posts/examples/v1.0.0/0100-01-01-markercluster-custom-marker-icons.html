@@ -14,9 +14,7 @@ tags:
 <div id='map'></div>
 
 <script>
-// Here we don't use the second argument to map, since that would automatically
-// load in non-clustered markers from the layer. Instead we add just the
-// backing styleLayer, and then use the featureLayer only for its data.
+// We add the backing styleLayer and use the featureLayer for its data.
 var map = L.mapbox.map('map')
     .setView([40.73, -74.011], 13)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v10'));

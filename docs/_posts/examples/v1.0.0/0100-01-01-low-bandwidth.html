@@ -11,14 +11,12 @@ tags:
 
 <script>
 // Downsample tiles for faster load times on slow internet connections by
-// adjusting the format property in tileLayer. See
-// https://www.mapbox.com/developers/api/static/#format for all options.
-var map = L.mapbox.map('map', 'mapbox.streets', {
-    tileLayer: {format: 'jpg70'}
-}).setView([37.7762, -122.4299], 13);
+// adjusting the format property in styleLayer. See
+// https://www.mapbox.com/api-documentation/#retrieve-tiles for all format options.
+var map = L.mapbox.map('map')
+  .setView([37.7762, -122.4299], 13);
 
-// If you wanted to add tileLayer after L.mapbox.map, use:
-// L.mapbox.tileLayer('examples.map-8ced9urs')
-//    .setFormat('jpg70')
-//    .addTo(map);
+L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v10', {
+    tileLayer: {format: 'jpg70'}
+}).addTo(map);
 </script>
