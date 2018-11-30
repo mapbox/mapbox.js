@@ -33,7 +33,9 @@ tags:
 <pre id='output' class='ui-output'></pre>
 <script>
 var output = document.getElementById('output');
-var map = L.mapbox.map('map', 'mapbox.streets');
+var map = L.mapbox.map('map')
+    .setView([43.945, 19.380], 5)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v10'));
 
 // Initialize the geocoder control and add it to the map.
 var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
