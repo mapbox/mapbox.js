@@ -424,7 +424,7 @@ featureLayer.setGeoJSON({
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-stylelayer">L.mapbox.styleLayer</a></code> object.</p>
 <h1 id="geocoding">Geocoding</h1>
 <h2 id="l-mapbox-geocoder">L.mapbox.geocoder(id|url, options)</h2>
-<p>A low-level interface to <a href="https://www.mapbox.com/api-documentation/#geocoding">the Mapbox Geocoding API</a>,
+<p>A low-level interface to <a href="https://www.mapbox.com/api-documentation/search/#geocoding">the Mapbox Geocoding API</a>,
 useful for complex uses and reverse-geocoding.</p>
 <table>
 <thead>
@@ -450,7 +450,7 @@ useful for complex uses and reverse-geocoding.</p>
 <p><em>Returns</em> a <code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> object.</p>
 <h3 id="geocoder-query">geocoder.query(queryString|options, callback)</h3>
 <p>Queries the geocoder with a query string, and returns its result, if any.
-This performs <a href="https://www.mapbox.com/api-documentation/#search-for-places">forward geocoding</a>.</p>
+This performs <a href="https://www.mapbox.com/api-documentation/search/#forward-geocoding">forward geocoding</a>.</p>
 <table>
 <thead>
 <tr>
@@ -504,7 +504,7 @@ set this to <code>false</code>. Otherwise, by default it is <code>true</code>.</
 <p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
 <h3 id="geocoder-reversequery">geocoder.reverseQuery(location, callback)</h3>
 <p>Queries the geocoder with a location, and returns its result, if any.
-This performs <a href="https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location">reverse geocoding</a>.</p>
+This performs <a href="https://www.mapbox.com/api-documentation/search/#reverse-geocoding">reverse geocoding</a>.</p>
 <table>
 <thead>
 <tr>
@@ -819,7 +819,7 @@ and <code>popupAnchor</code>.</p>
 <p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/l-mapbox-marker/">A working example of L.mapbox.marker.icon in use</a></p>
 <h2 id="l-mapbox-marker-style">L.mapbox.marker.style(feature, latlng)</h2>
 <p>An icon generator for use in conjunction with <code>pointToLayer</code> to generate
-markers from the <a href="https://www.mapbox.com/api-documentation/#retrieve-a-standalone-marker">Mapbox Markers API</a>
+markers from the <a href="https://www.mapbox.com/api-documentation/maps/#retrieve-a-standalone-marker">Mapbox Markers API</a>
 and support the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> for
 features.</p>
 <table>

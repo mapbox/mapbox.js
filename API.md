@@ -311,7 +311,7 @@ _Returns_ the GeoJSON represented by this layer
 
 <span class='leaflet icon'>_Extends_: `L.tileLayer`</span>
 
-`L.mapbox.styleLayer` renders Mapbox Studio [styles](https://www.mapbox.com/help/define-style/) as raster tiles using the [Mapbox Static API tiles endpoint](https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles).
+`L.mapbox.styleLayer` renders Mapbox Studio [styles](https://www.mapbox.com/help/define-style/) as raster tiles using the [Mapbox Static API tiles endpoint](https://www.mapbox.com/api-documentation/maps/#retrieve-raster-tiles-from-styles).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -329,7 +329,7 @@ _Returns_ a `L.mapbox.styleLayer` object.
 
 ## L.mapbox.geocoder(id|url, options)
 
-A low-level interface to [the Mapbox Geocoding API](https://www.mapbox.com/api-documentation/#geocoding),
+A low-level interface to [the Mapbox Geocoding API](https://www.mapbox.com/api-documentation/search/#geocoding),
 useful for complex uses and reverse-geocoding.
 
 | Options | Value | Description |
@@ -342,7 +342,7 @@ _Returns_ a `L.mapbox.geocoder` object.
 ### geocoder.query(queryString|options, callback)
 
 Queries the geocoder with a query string, and returns its result, if any.
-This performs [forward geocoding](https://www.mapbox.com/api-documentation/#search-for-places).
+This performs [forward geocoding](https://www.mapbox.com/api-documentation/search/#forward-geocoding).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -380,7 +380,7 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 ### geocoder.reverseQuery(location, callback)
 
 Queries the geocoder with a location, and returns its result, if any.
-This performs [reverse geocoding](https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location).
+This performs [reverse geocoding](https://www.mapbox.com/api-documentation/search/#reverse-geocoding).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -569,7 +569,7 @@ and `popupAnchor`.
 ## L.mapbox.marker.style(feature, latlng)
 
 An icon generator for use in conjunction with `pointToLayer` to generate
-markers from the [Mapbox Markers API](https://www.mapbox.com/api-documentation/#retrieve-a-standalone-marker)
+markers from the [Mapbox Markers API](https://www.mapbox.com/api-documentation/maps/#retrieve-a-standalone-marker)
 and support the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) for
 features.
 
