@@ -5,7 +5,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "La Taqueria"
+        "title": "La Taqueria",
+        "marker-symbol": "bar"
       },
       "geometry": {
         "type": "Point",
@@ -19,7 +20,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "El Farolito"
+        "title": "El Farolito",
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -33,7 +35,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "Pancho Villa Taqueria"
+        "title": "Pancho Villa Taqueria",
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -47,7 +50,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "Taqueria Cancun"
+        "title": "Taqueria Cancun",
+        "marker-symbol": "bar"
       },
       "geometry": {
         "type": "Point",
@@ -61,7 +65,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "Taqueria el Buen Sabor"
+        "title": "Taqueria el Buen Sabor",
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -75,7 +80,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "Mateo’s Taqueria"
+        "title": "Mateo’s Taqueria",
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -89,7 +95,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "Taqueria Los Mayas"
+        "title": "Taqueria Los Mayas",
+        "marker-symbol": "bar"
       },
       "geometry": {
         "type": "Point",
@@ -103,7 +110,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "El Rancho Grande"
+        "title": "El Rancho Grande",
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -117,7 +125,8 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "Tropisueño"
+        "title": "Tropisueño",
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -131,13 +140,44 @@
       "type": "Feature",
       "properties": {
         "marker-color": "#f76565",
-        "title": "Taqueria Los Coyotes"
+        "title": "Taqueria Los Coyotes",
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
           -122.4204444296567,
           37.764964180648406
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Box Dog Bicycles",
+        "marker-symbol": "bicycle"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4240983,
+          37.7681295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Pedal Revolution",
+        "marker-symbol": "bicycle"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4184398,
+          37.7570445
         ]
       }
     }

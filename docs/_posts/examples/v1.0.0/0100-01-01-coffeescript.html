@@ -13,12 +13,13 @@ tags:
 <script type='text/coffeescript'>
 # Mapbox.js can easily be used in CoffeeScript, and use
 # all fancy CoffeeScript functionality
-map = L.mapbox.map 'map', 'mapbox.streets'
+map = L.mapbox.map 'map'
 geocoder = L.mapbox.geocoder 'mapbox.places'
 
 # for instance, in CoffeeScript we dont need to use
 # parenthesis for functions or semicolons at the end of lines
 map.setView [40, -74.50], 3
+map.addLayer L.mapbox.styleLayer 'mapbox://styles/mapbox/streets-v11'
 
 # defining a function that uses the geocoder to put a marker
 # on a place, defined by its name
