@@ -15,7 +15,7 @@ var map = L.mapbox.map('map', null, {
     doubleClickZoom: false
 })
     .setView([46.695, 11.470], 4)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v10'))
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
     .on('dblclick', function(e) {
         // Zoom exactly to each double-clicked point
         map.setView(e.latlng, map.getZoom() + 1);

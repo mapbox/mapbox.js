@@ -19,10 +19,10 @@ tags:
 // things interesting.
 var map1 = L.mapbox.map('map1')
     .setView([40, -74.50], 9)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9'));
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
 var map2 = L.mapbox.map('map2')
     .setView([-40, -74.50 - 180], 9)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v9'));
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
 // when either map finishes moving, trigger an update on the other one.
 map1.on('moveend', follow).on('zoomend', follow);

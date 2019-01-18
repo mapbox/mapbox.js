@@ -42,7 +42,7 @@ tags:
 var state = document.getElementById('state');
 var map = L.mapbox.map('map')
     .setView([38, -95], 4)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v9'));
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
 $.ajax({
     url: '{{site.baseurl}}/assets/data/us-states.geojson',

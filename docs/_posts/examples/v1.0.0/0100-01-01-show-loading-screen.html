@@ -42,11 +42,11 @@ var loader = document.getElementById('loader');
 var map = L.mapbox.map('map')
     .setView([38.91, -77.03], 13);
 
-// Add a tile layer with a loading animation
-
 // start the loading screen
 startLoading();
-L.mapbox.tileLayer('mapbox.streets')
+
+// Add a tile layer with a loading animation
+L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11')
     .addTo(map) // add your tiles to the map
     .on('load', finishedLoading); // when the tiles load, remove the screen
 

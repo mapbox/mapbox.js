@@ -17,7 +17,7 @@ tags:
 // We add the backing styleLayer and use the featureLayer for its data.
 var map = L.mapbox.map('map')
     .setView([40.73, -74.011], 13)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v10'));
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Since featureLayer is an asynchronous method, we use the `.on('ready'`
 // call to only use its marker data once we know it is actually loaded.
