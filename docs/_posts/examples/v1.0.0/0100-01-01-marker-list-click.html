@@ -35,7 +35,7 @@ tags:
     .setView([37.77396, -122.4366], 12)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
-  var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/taquerias.geojson')
+  var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
       .addTo(map);
 
   var markerList = document.getElementById('marker-list');

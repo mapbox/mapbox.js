@@ -28,7 +28,7 @@ var gj = L.geoJson(null, {
     }
 }).addTo(map);
 
-L.mapbox.featureLayer('/mapbox.js/assets/data/taquerias.geojson')
+L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
     .on('ready', function(e) {
         gj.addData(this.getGeoJSON());
     });

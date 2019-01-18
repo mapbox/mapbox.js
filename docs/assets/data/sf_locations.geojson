@@ -6,7 +6,7 @@
       "properties": {
         "marker-color": "#f76565",
         "title": "La Taqueria",
-        "marker-symbol": "bar"
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -51,7 +51,7 @@
       "properties": {
         "marker-color": "#f76565",
         "title": "Taqueria Cancun",
-        "marker-symbol": "bar"
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -96,7 +96,7 @@
       "properties": {
         "marker-color": "#f76565",
         "title": "Taqueria Los Mayas",
-        "marker-symbol": "bar"
+        "marker-symbol": "restaurant"
       },
       "geometry": {
         "type": "Point",
@@ -178,6 +178,66 @@
         "coordinates": [
           -122.4184398,
           37.7570445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Lone Palm",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4229688,
+          37.7552896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "The Peaks",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4369163,
+          37.7486383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Holy Water",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4182559,
+          37.739413
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Social Kitchen and Brewery",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4567632,
+          37.7541982
         ]
       }
     }
