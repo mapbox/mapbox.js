@@ -94,7 +94,7 @@ Requirements:
 2. Run `./theme/images/render.sh` to update sprites from your edits.
 3. Add a CSS reference with the appropriate pixel coordinate if adding a new icon.
 
-### Running docuemntation locally
+### Running documentation locally
 
 Documentation is powered by [Jekyll](http://jekyllrb.com/). Running using the
 following command:
