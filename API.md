@@ -311,7 +311,7 @@ _Returns_ the GeoJSON represented by this layer
 
 <span class='leaflet icon'>_Extends_: `L.tileLayer`</span>
 
-`L.mapbox.styleLayer` renders Mapbox Studio [styles](https://www.mapbox.com/help/define-style/) as raster tiles using the [Mapbox Static API tiles endpoint](https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles).
+`L.mapbox.styleLayer` renders Mapbox Studio [styles](https://www.mapbox.com/help/define-style/) as raster tiles using the [Mapbox Static API tiles endpoint](https://docs.mapbox.com/api/maps/#retrieve-raster-tiles-from-styles).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -329,12 +329,12 @@ _Returns_ a `L.mapbox.styleLayer` object.
 
 ## L.mapbox.geocoder(id|url, options)
 
-A low-level interface to [the Mapbox Geocoding API](https://www.mapbox.com/api-documentation/#geocoding),
+A low-level interface to [the Mapbox Geocoding API](https://docs.mapbox.com/api/search/#geocoding),
 useful for complex uses and reverse-geocoding.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url | string | Value must be <ul><li>A [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places`</li><li>A geocoder API URL, like `{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json`</li></ul> |
+| id _or_ url | string | Value must be <ul><li>A [geocoder index ID](https://docs.mapbox.com/api/search/#geocoding), e.g. `mapbox.places`</li><li>A geocoder API URL, like `{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json`</li></ul> |
 | options | Object | The second argument is optional. If provided, it may include: <ul><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this geocoder.</li></ul> |
 
 _Returns_ a `L.mapbox.geocoder` object.
@@ -342,7 +342,7 @@ _Returns_ a `L.mapbox.geocoder` object.
 ### geocoder.query(queryString|options, callback)
 
 Queries the geocoder with a query string, and returns its result, if any.
-This performs [forward geocoding](https://www.mapbox.com/api-documentation/#search-for-places).
+This performs [forward geocoding](https://docs.mapbox.com/api/search/#forward-geocoding).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -380,7 +380,7 @@ _Returns_: the geocoder object. The return value of this function is not useful 
 ### geocoder.reverseQuery(location, callback)
 
 Queries the geocoder with a location, and returns its result, if any.
-This performs [reverse geocoding](https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location).
+This performs [reverse geocoding](https://docs.mapbox.com/api/search/#reverse-geocoding).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
@@ -472,7 +472,7 @@ the [Mapbox Geocoding API](http://mapbox.com/developers/api/geocoding/).
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id _or_ url (_required_) | string | Either a <ul><li>An [geocoder index ID](https://www.mapbox.com/developers/api/geocoding/), e.g. `mapbox.places`</li><li>A geocoder API URL, like `{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json`</li></ul> |
+| id _or_ url (_required_) | string | Either a <ul><li>An [geocoder index ID](https://docs.mapbox.com/api/search/#geocoding), e.g. `mapbox.places`</li><li>A geocoder API URL, like `{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json`</li></ul> |
 | options | object | An options argument with the same options as the `L.Control` class, as well as: <ul><li>`keepOpen`: a boolean for whether the control will stay open always rather than being toggled. Default `false`. See <a href='https://www.mapbox.com/mapbox.js/example/v1.0.0/geocoder-keep-open/'>live example</a>.<li><li>`accessToken`: Mapbox API access token. Overrides `L.mapbox.accessToken` for this control.</li><li>`autocomplete`: automatically search and show results as you type. Default: `false`.</ul> |
 
 The `options` object can also include `queryOptions` which are passed to the
@@ -569,7 +569,7 @@ and `popupAnchor`.
 ## L.mapbox.marker.style(feature, latlng)
 
 An icon generator for use in conjunction with `pointToLayer` to generate
-markers from the [Mapbox Markers API](https://www.mapbox.com/api-documentation/#retrieve-a-standalone-marker)
+markers from the [Mapbox Markers API](https://docs.mapbox.com/api/maps/#retrieve-a-standalone-marker)
 and support the [simplestyle-spec](https://github.com/mapbox/simplestyle-spec) for
 features.
 
@@ -663,7 +663,7 @@ _Example_:
 ## L.mapbox.config.HTTP_URL
 
 A base URL from which Mapbox.js will load TileJSON and other resources. By default,
-this points to the [Mapbox Web Services](https://www.mapbox.com/developers/api/).
+this points to the [Mapbox Web Services](https://docs.mapbox.com/api/).
 
 ## L.mapbox.config.HTTPS_URL
 
@@ -732,7 +732,7 @@ index). For instance, replace
  L.mapbox.geocoderControl('mapbox.places').addTo(map);
  ```
 
- See [the geocoding API documentation](https://www.mapbox.com/developers/api/geocoding/)
+ See [the geocoding API documentation](https://docs.mapbox.com/api/search/#geocoding)
  for a complete list of predefined geocoding indexes.
 
 * The format for `L.mapbox.geocoder` and `L.mapbox.geocoderControl` results have changed.

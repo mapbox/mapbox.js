@@ -409,7 +409,7 @@ featureLayer.setGeoJSON({
 <tr>
 <td>id <em>or</em> url</td>
 <td>string</td>
-<td>Value must be <ul><li>A <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places/{query}.json</code></li></ul></td>
+<td>Value must be <ul><li>A <a href="https://docs.mapbox.com/api/search/#geocoding">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -671,7 +671,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tr>
 <td>id <em>or</em> url (<em>required</em>)</td>
 <td>string</td>
-<td>Either a <ul><li>An <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places/{query}.json</code></li></ul></td>
+<td>Either a <ul><li>An <a href="https://docs.mapbox.com/api/search/#geocoding">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/v4/geocode/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -944,7 +944,7 @@ regardless of the host page&#39;s scheme.</p>
 <pre><code>L.mapbox.config.FORCE_HTTPS = true;
 </code></pre><h2 id="l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</h2>
 <p>A base URL from which Mapbox.js will load TileJSON and other resources. By default,
-this points to the <a href="https://www.mapbox.com/developers/api/">Mapbox Web Services</a>.</p>
+this points to the <a href="https://docs.mapbox.com/api/">Mapbox Web Services</a>.</p>
 <h2 id="l-mapbox-config-https_url">L.mapbox.config.HTTPS_URL</h2>
 <p>The same as <code><a href="#l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</a></code>, but used when SSL mode is detected or
 <code>FORCE_HTTPS</code> is set to <code>true</code>.</p>
@@ -982,7 +982,7 @@ index). For instance, replace</p>
 <pre><code>L.mapbox.geocoderControl(&#39;examples.map-i86nkdio&#39;).addTo(map);
 </code></pre><p>with</p>
 <pre><code>L.mapbox.geocoderControl(&#39;mapbox.places&#39;).addTo(map);
-</code></pre><p>See <a href="https://www.mapbox.com/developers/api/geocoding/">the geocoding API documentation</a>
+</code></pre><p>See <a href="https://docs.mapbox.com/api/search/#geocoding">the geocoding API documentation</a>
 for a complete list of predefined geocoding indexes.</p>
 </li>
 <li><p>The format for <code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="#l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> results have changed.

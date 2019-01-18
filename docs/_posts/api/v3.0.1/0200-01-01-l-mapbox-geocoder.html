@@ -6,7 +6,7 @@ version: v3.0.1
 permalink: /api/v3.0.1/l-mapbox-geocoder/
 ---
 <h2 id="section-l-mapbox-geocoder">L.mapbox.geocoder(id|url, options)</h2>
-<p>A low-level interface to <a href="https://www.mapbox.com/api-documentation/#geocoding">the Mapbox Geocoding API</a>,
+<p>A low-level interface to <a href="https://docs.mapbox.com/api/search/#geocoding">the Mapbox Geocoding API</a>,
 useful for complex uses and reverse-geocoding.</p>
 <table>
 <thead>
@@ -20,7 +20,7 @@ useful for complex uses and reverse-geocoding.</p>
 <tr>
 <td>id <em>or</em> url</td>
 <td>string</td>
-<td>Value must be <ul><li>A <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
+<td>Value must be <ul><li>A <a href="https://docs.mapbox.com/api/search/#geocoding">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -32,7 +32,7 @@ useful for complex uses and reverse-geocoding.</p>
 <p><em>Returns</em> a <code><a href="/mapbox.js/api/v3.0.1/l-mapbox-geocoder">L.mapbox.geocoder</a></code> object.</p>
 <h3 id="section-geocoder-query">geocoder.query(queryString|options, callback)</h3>
 <p>Queries the geocoder with a query string, and returns its result, if any.
-This performs <a href="https://www.mapbox.com/api-documentation/#search-for-places">forward geocoding</a>.</p>
+This performs <a href="https://docs.mapbox.com/api/search/#forward-geocoding">forward geocoding</a>.</p>
 <table>
 <thead>
 <tr>
@@ -86,7 +86,7 @@ set this to <code>false</code>. Otherwise, by default it is <code>true</code>.</
 <p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
 <h3 id="section-geocoder-reversequery">geocoder.reverseQuery(location, callback)</h3>
 <p>Queries the geocoder with a location, and returns its result, if any.
-This performs <a href="https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location">reverse geocoding</a>.</p>
+This performs <a href="https://docs.mapbox.com/api/search/#reverse-geocoding">reverse geocoding</a>.</p>
 <table>
 <thead>
 <tr>
