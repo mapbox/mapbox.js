@@ -10,3 +10,5 @@ mapboxjs: v3.1.1
 mapboxjsbase: /mapbox.js/dist
 defaultid: 'mapbox.streets'
 future: true
+gems:
+- jekyll-sitemap
