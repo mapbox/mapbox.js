@@ -2,4 +2,3 @@ dist
 node_modules
 _site
 tmp
-Gemfile.lock
