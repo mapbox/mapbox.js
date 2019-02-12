@@ -9,3 +9,5 @@ mapboxjs: v3.1.1
 defaultid: 'mapbox.streets'
 exclude: [dist]
 future: true
+gems:
+- jekyll-sitemap
