@@ -28,11 +28,6 @@ rebuild it.
 
     ./deploy.sh v1.your.version
 
-# deploying to bower
-
-    ./bower.sh --action=prepare
-    ./bower.sh --action=publish
-
 # deploying to the web
 
 ```sh
