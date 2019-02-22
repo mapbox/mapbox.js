@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/mapbox/mapbox.js.svg?branch=v1)](https://travis-ci.org/mapbox/mapbox.js) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mapbox/mapbox.js.svg)](http://isitmaintained.com/project/mapbox/mapbox.js "Average time to resolve an issue")
 
-This is the Mapbox Javascript API, version 2.x. It's built as a [Leaflet](http://leafletjs.com/)
-plugin. You can [read about its launch](http://mapbox.com/blog/mapbox-js-with-leaflet/).
+A Mapbox plugin for [Leaflet](http://leafletjs.com/), a lightweight JavaScript library for traditional raster maps.
+
+For the state-of-the-art Mapbox vector maps library, see [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js).
 
 ## [API](http://mapbox.com/mapbox.js/api/)
 

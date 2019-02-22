@@ -1,7 +1,7 @@
 {
   "author": "Mapbox",
   "name": "mapbox.js",
-  "description": "mapbox javascript api",
+  "description": "Mapbox plugin for Leaflet",
   "version": "3.1.1",
   "homepage": "http://mapbox.com/",
   "repository": {
