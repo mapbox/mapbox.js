@@ -4,7 +4,7 @@ var geocoder = require('./geocoder'),
     util = require('./util');
 
 var GeocoderControl = L.Control.extend({
-    includes: L.Mixin.Events,
+    includes: L.Evented.prototype || L.Mixin.Events,
 
     options: {
         proximity: true,
