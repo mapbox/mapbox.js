@@ -649,16 +649,16 @@ in [API access tokens](../api-access-tokens).
 
 ## L.mapbox.config.FORCE_HTTPS
 
-By default, this is `false`. Mapbox.js auto-detects whether the page your map
+By default, this is `true`. Mapbox.js always requires HTTPS resources,
+regardless of the host page's scheme.
+
+Setting `FORCE_HTTPS` to `false` makes Mapbox.js auto-detect whether the page your map
 is embedded in is using HTTPS or SSL, and matches: if you use HTTPS on your site,
 it uses HTTPS resources.
 
-Setting `FORCE_HTTPS` to `true` makes Mapbox.js always require HTTPS resources,
-regardless of the host page's scheme.
-
 _Example_:
 
-    L.mapbox.config.FORCE_HTTPS = true;
+    L.mapbox.config.FORCE_HTTPS = false;
 
 ## L.mapbox.config.HTTP_URL
 

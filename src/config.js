@@ -3,6 +3,6 @@
 module.exports = {
     HTTP_URL: 'http://a.tiles.mapbox.com/v4',
     HTTPS_URL: 'https://a.tiles.mapbox.com/v4',
-    FORCE_HTTPS: false,
+    FORCE_HTTPS: true,
     REQUIRE_ACCESS_TOKEN: true
 };
