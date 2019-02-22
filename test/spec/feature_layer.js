@@ -20,7 +20,7 @@ describe('L.mapbox.featureLayer', function() {
     });
 
     it('loads data from a GeoJSON URL', function() {
-        var url = 'http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/features.json',
+        var url = 'https://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/features.json',
             layer = L.mapbox.featureLayer(url);
 
         server.respondWith("GET", url,
@@ -57,11 +57,6 @@ describe('L.mapbox.featureLayer', function() {
     });
 
     describe("#loadURL", function() {
-        it('returns self', function() {
-            var layer = L.mapbox.featureLayer();
-            expect(layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json')).to.eql(layer);
-        });
-
         it('emits a ready event', function(done) {
             var layer = L.mapbox.featureLayer();
 
@@ -69,9 +64,9 @@ describe('L.mapbox.featureLayer', function() {
                 done();
             });
 
-            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            layer.loadURL('https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geoJson)]);
             server.respond();
         });
@@ -85,9 +80,9 @@ describe('L.mapbox.featureLayer', function() {
                 done();
             });
 
-            layer.loadURL('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            layer.loadURL('https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
             server.respond();
         });

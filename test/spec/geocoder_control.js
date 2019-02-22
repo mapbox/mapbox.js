@@ -17,7 +17,7 @@ describe('L.mapbox.geocoderControl', function() {
         expect(control instanceof L.mapbox.GeocoderControl).to.eql(true);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin.json?access_token=key',
+            'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
 
         control._input.value = 'austin';
@@ -32,7 +32,7 @@ describe('L.mapbox.geocoderControl', function() {
             control = L.mapbox.geocoderControl('mapbox.places', { proximity: false }).addTo(map);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key',
+            'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
 
         control._input.value = 'white house';
@@ -51,7 +51,7 @@ describe('L.mapbox.geocoderControl', function() {
             }).addTo(map);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key',
+            'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
 
         control._input.value = 'white house';
@@ -74,7 +74,7 @@ describe('L.mapbox.geocoderControl', function() {
             }).addTo(map);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key&country=us&autocomplete=false',
+            'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key&country=us&autocomplete=false',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
 
         control._input.value = 'white house';
@@ -95,7 +95,7 @@ describe('L.mapbox.geocoderControl', function() {
         map.setView([0, 0], 14);
 
         server.respondWith('GET',
-            'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key',
+            'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/white%20house.json?access_token=key',
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderWhiteHouse)]);
 
         control._input.value = 'white house';
@@ -108,12 +108,12 @@ describe('L.mapbox.geocoderControl', function() {
 
     it('sets url based on an id', function() {
         var control = L.mapbox.geocoderControl('mapbox.places');
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/{query}.json?access_token=key');
+        expect(control.getURL()).to.equal('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/{query}.json?access_token=key');
     });
 
     it('supports custom access token', function() {
         var control = L.mapbox.geocoderControl('mapbox.places', {accessToken: 'custom'});
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/{query}.json?access_token=custom');
+        expect(control.getURL()).to.equal('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/{query}.json?access_token=custom');
     });
 
     it('#setURL', function() {
@@ -125,7 +125,7 @@ describe('L.mapbox.geocoderControl', function() {
     it('#setID', function() {
         var control = L.mapbox.geocoderControl('mapbox.places');
         expect(control.setID('mapbox.places')).to.eql(control);
-        expect(control.getURL()).to.equal('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/{query}.json?access_token=key');
+        expect(control.getURL()).to.equal('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/{query}.json?access_token=key');
     });
 
     it('is by default in the top left', function() {
@@ -143,14 +143,14 @@ describe('L.mapbox.geocoderControl', function() {
     describe('#keepOpen', function(done) {
         it('true', function() {
             var map = new L.Map(document.createElement('div'));
-            var control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+            var control = L.mapbox.geocoderControl('https://example.com/{query}.json', {
                 keepOpen: true
             }).addTo(map);
             expect(control._container.className).to.eql('leaflet-control-mapbox-geocoder leaflet-bar leaflet-control active');
         });
         it('false', function() {
             var map = new L.Map(document.createElement('div'));
-            var control = L.mapbox.geocoderControl('http://example.com/{query}.json').addTo(map);
+            var control = L.mapbox.geocoderControl('https://example.com/{query}.json').addTo(map);
             expect(control._container.className).to.eql('leaflet-control-mapbox-geocoder leaflet-bar leaflet-control');
         });
     });
@@ -160,7 +160,7 @@ describe('L.mapbox.geocoderControl', function() {
 
         beforeEach(function() {
             map = new L.Map(document.createElement('div'));
-            control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+            control = L.mapbox.geocoderControl('https://example.com/{query}.json', {
                 proximity: false
             }).addTo(map);
         });
@@ -175,7 +175,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'austin';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/austin.json',
+            server.respondWith('GET', 'https://example.com/austin.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
             server.respond();
         });
@@ -188,7 +188,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'unfindable';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/unfindable.json',
+            server.respondWith('GET', 'https://example.com/unfindable.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify({features:[]})]);
             server.respond();
         });
@@ -202,7 +202,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'austin';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/austin.json',
+            server.respondWith('GET', 'https://example.com/austin.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
             server.respond();
         });
@@ -211,7 +211,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'chester';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/chester.json',
+            server.respondWith('GET', 'https://example.com/chester.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderMulti)]);
             server.respond();
 
@@ -233,7 +233,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'austin';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/austin.json',
+            server.respondWith('GET', 'https://example.com/austin.json',
                 [400, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
             server.respond();
         });
@@ -244,7 +244,7 @@ describe('L.mapbox.geocoderControl', function() {
 
         beforeEach(function() {
             map = new L.Map(document.createElement('div'));
-            control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+            control = L.mapbox.geocoderControl('https://example.com/{query}.json', {
                 autocomplete: true,
                 proximity: false
             }).addTo(map);
@@ -259,7 +259,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'austin';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/austin.json',
+            server.respondWith('GET', 'https://example.com/austin.json',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
             server.respond();
         });
@@ -270,7 +270,7 @@ describe('L.mapbox.geocoderControl', function() {
 
         beforeEach(function() {
             map = new L.Map(document.createElement('div'), { center: [0,0], zoom: 0});
-            control = L.mapbox.geocoderControl('http://example.com/{query}.json', {
+            control = L.mapbox.geocoderControl('https://example.com/{query}.json', {
                 autocomplete: true,
                 proximity: true
             }).addTo(map);
@@ -285,7 +285,7 @@ describe('L.mapbox.geocoderControl', function() {
             control._input.value = 'austin';
             happen.once(control._form, { type: 'submit' });
 
-            server.respondWith('GET', 'http://example.com/austin.json&proximity=0,0',
+            server.respondWith('GET', 'https://example.com/austin.json&proximity=0,0',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
             server.respond();
         });

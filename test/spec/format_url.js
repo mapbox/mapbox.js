@@ -10,11 +10,11 @@ describe("format_url", function() {
     });
 
     it('returns a v4 URL with access_token parameter', function() {
-        expect(internals.url('/v4/user.map.json')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=key')
+        expect(internals.url('/v4/user.map.json')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key')
     });
 
     it('uses provided access token', function() {
-        expect(internals.url('/v4/user.map.json', 'token')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=token')
+        expect(internals.url('/v4/user.map.json', 'token')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=token')
     });
 
     it('throws an error if no access token is provided', function() {
@@ -47,13 +47,13 @@ describe("format_url", function() {
             expect(internals.url.tileJSON('http://a.tiles.mapbox.com/v3/user.map.json')).to.equal('http://a.tiles.mapbox.com/v3/user.map.json')
         });
 
-        it('returns a v4 URL with access_token parameter', function() {
-            expect(internals.url.tileJSON('user.map')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=key')
+        it('returns a v4 URL with access_token parameter, uses https and appends &secure', function() {
+            expect(internals.url.tileJSON('user.map')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key&secure');
         });
 
-        it('appends &secure and uses https when FORCE_HTTPS is set', function() {
-            internals.config.FORCE_HTTPS = true;
-            expect(internals.url.tileJSON('user.map')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key&secure');
+        it('does not append &secure and uses http when FORCE_HTTPS is set to false', function() {
+            internals.config.FORCE_HTTPS = false;
+            expect(internals.url.tileJSON('user.map')).to.equal('http://a.tiles.mapbox.com/v4/user.map.json?access_token=key');
         });
     });
 

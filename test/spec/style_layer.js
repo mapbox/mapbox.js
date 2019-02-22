@@ -22,7 +22,7 @@ describe('L.mapbox.styleLayer', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify({"sources":{"composite":{"url":"mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6","type":"vector"}}})]);
             server.respond();
 
-            server.respondWith('GET', 'http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6.json?access_token=key',
+            server.respondWith('GET', 'https://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6.json?access_token=key&secure',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_street_terrain)]);
             server.respond();
         });
@@ -38,7 +38,7 @@ describe('L.mapbox.styleLayer', function() {
                 [200, { "Content-Type": "application/json" }, JSON.stringify({"sources":{"mapbox":{"url":"mapbox://mapbox.mapbox-streets-v6","type":"vector"},"satellite":{"url":"mapbox://mapbox.satellite","type":"raster","tileSize":256}}})]);
             server.respond();
 
-            server.respondWith('GET', 'http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite.json?access_token=key',
+            server.respondWith('GET', 'https://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite.json?access_token=key&secure',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_satellite_streets)]);
             server.respond();
         });
