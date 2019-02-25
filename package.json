@@ -9,6 +9,11 @@
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
   "main": "src/index.js",
+  "files": [
+    "dist",
+    "src",
+    "*.md"
+  ],
   "dependencies": {
     "corslite": "0.0.6",
     "isarray": "0.0.1",
