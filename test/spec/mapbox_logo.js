@@ -43,7 +43,7 @@ describe('mapbox_logo', function() {
             done();
         });
 
-        server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+        server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_mapboxlogo)]);
         server.respond();
     });
@@ -56,7 +56,7 @@ describe('mapbox_logo', function() {
             done();
         });
 
-        server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+        server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_mapboxlogoFalse)]);
         server.respond();
     });

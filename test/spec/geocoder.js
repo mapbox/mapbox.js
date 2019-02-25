@@ -13,38 +13,37 @@ describe('L.mapbox.geocoder', function() {
         it('supports multiple arguments', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL(['austin', 'houston']))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key');
         });
 
         it('supports proximity', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], proximity: [10, 15]}))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15,10');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15,10');
         });
 
         it('supports country option', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], country: 'us'}))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&country=us');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&country=us');
         });
 
         it('supports bbox option', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], bbox: [ -104.0458814, 26.0696823, -93.7347459, 36.4813628 ]}))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/
-                    austin;houston.json?access_token=key&bbox='-104.0458814,26.0696823,-93.7347459,36.4813628');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&bbox=-104.0458814,26.0696823,-93.7347459,36.4813628');
         });
 
         it('supports autocomplete option', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], country: 'us', autocomplete: false}))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&country=us&autocomplete=false');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&country=us&autocomplete=false');
         });
 
         it('rounds proximity params correctly', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], proximity: L.latLng(-10.12345, 15.67890)}))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15.679,-10.123');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&proximity=15.679,-10.123');
         });
 
         it('rounds reverse ')
@@ -52,9 +51,9 @@ describe('L.mapbox.geocoder', function() {
         it('supports types', function() {
             var g = L.mapbox.geocoder('mapbox.places');
             expect(g.queryURL({query: ['austin', 'houston'], types: 'place'}))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&types=place');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&types=place');
             expect(g.queryURL({query: ['austin', 'houston'], types: ['place', 'address']}))
-                .to.eql('http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&types=place,address');
+                .to.eql('https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key&types=place,address');
         });
     });
 
@@ -63,7 +62,7 @@ describe('L.mapbox.geocoder', function() {
             var g = L.mapbox.geocoder('mapbox.places');
 
             server.respondWith('GET',
-                'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key',
+                'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin;houston.json?access_token=key',
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(helpers.geocoderBulk)]);
 
             g.query(['austin', 'houston'], function(err, res) {
@@ -78,7 +77,7 @@ describe('L.mapbox.geocoder', function() {
             var g = L.mapbox.geocoder('mapbox.places');
 
             server.respondWith('GET',
-                'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin.json?access_token=key',
+                'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/austin.json?access_token=key',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderAustin)]);
 
             g.query('austin', function(err, res) {
@@ -94,7 +93,7 @@ describe('L.mapbox.geocoder', function() {
             var g = L.mapbox.geocoder('mapbox.places');
 
             server.respondWith('GET',
-                'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/nonesuch.json?access_token=key',
+                'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/nonesuch.json?access_token=key',
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify({"type":"FeatureCollection","query":["nonesuch"],"features":[]})]);
 
             g.query('nonesuch', function(err, res) {
@@ -111,7 +110,7 @@ describe('L.mapbox.geocoder', function() {
             var g = L.mapbox.geocoder('mapbox.places');
 
             server.respondWith('GET',
-                'http://a.tiles.mapbox.com/geocoding/v5/mapbox.places/-97.7%2C30.3.json?access_token=key',
+                'https://a.tiles.mapbox.com/geocoding/v5/mapbox.places/-97.7%2C30.3.json?access_token=key',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderReverse)]);
 
             g.reverseQuery({ lat: 30.3, lng: -97.7 }, function(err, res) {
@@ -126,7 +125,7 @@ describe('L.mapbox.geocoder', function() {
             var g = L.mapbox.geocoder('mapbox.places');
 
             server.respondWith('GET',
-                /http:\/\/a\.tiles\.mapbox\.com\/geocoding\/v5\/mapbox.places\/[\-\d\.]+(%2C|,)[\-\d\.]+\.json\?access_token=key/,
+                /https:\/\/a\.tiles\.mapbox\.com\/geocoding\/v5\/mapbox.places\/[\-\d\.]+(%2C|,)[\-\d\.]+\.json\?access_token=key/,
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.geocoderReverseRounded)]);
 
             g.reverseQuery({ lat: 30.1234567890, lng: -97.0987654321 }, function(err, res) {

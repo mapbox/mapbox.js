@@ -45,7 +45,7 @@ describe('L.mapbox.gridLayer', function() {
         });
 
         it('loads TileJSON from a URL', function(done) {
-            var layer = L.mapbox.gridLayer('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var layer = L.mapbox.gridLayer('https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
             layer.on('ready', function() {
                 expect(this).to.equal(layer);
@@ -53,7 +53,7 @@ describe('L.mapbox.gridLayer', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
