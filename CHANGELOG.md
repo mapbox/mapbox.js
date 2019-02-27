@@ -1,3 +1,12 @@
+## v3.2.0
+
+* Changes `FORCE_HTTPS` option to `true` by default.
+* Updates the Mapbox logo.
+* Upgrades Leaflet to v1.4.0.
+* Removes deprecation warnings in the console about `L.Mixin.Events`.
+* Removes Bower support.
+* Adds the built files to the NPM package.
+
 ## v3.1.1
 
 * Revises feedback link from mapbox.com/map-feedback/ to mapbox.com/feedback/
