@@ -14,8 +14,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([0,0], 5);
+var map = L.mapbox.map('map')
+    .setView([0,0], 5)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // The GeoJSON representing a point feature with a property of 'video' for the Vimeo iframe
 var geoJson = {

@@ -25,8 +25,9 @@ tags:
 <input id='search' class='search-ui' placeholder='Enter state code' />
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([40, -95], 4);
+var map = L.mapbox.map('map')
+    .setView([40, -95], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var featureLayer = L.mapbox.featureLayer().addTo(map);
 

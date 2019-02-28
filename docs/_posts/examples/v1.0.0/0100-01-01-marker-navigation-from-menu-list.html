@@ -32,7 +32,9 @@ tags:
 <div id='info' class='info'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets').setView([37.9, -77], 6);
+var map = L.mapbox.map('map')
+  .setView([37.9, -77], 6)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 

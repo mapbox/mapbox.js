@@ -10,12 +10,12 @@ tags:
 <div id='map'></div>
 
 <script>
-// Replace 'mapbox.streets' with your map id.
-var mapboxTiles = L.tileLayer('{{site.tileApi}}/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
-    attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    
+var mapboxTiles = L.tileLayer('{{site.tileApi}}/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+       attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
 var map = L.map('map')
-    .addLayer(mapboxTiles)
-    .setView([42.3610, -71.0587], 15);
+  .addLayer(mapboxTiles)
+  .setView([42.3610, -71.0587], 15);
 </script>

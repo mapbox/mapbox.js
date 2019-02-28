@@ -10,13 +10,14 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets', {
+var map = L.mapbox.map('map', null, {
     // Disable default double-click behavior.
     doubleClickZoom: false
 })
-.setView([46.695, 11.470], 4)
-.on('dblclick', function(e) {
-    // Zoom exactly to each double-clicked point
-    map.setView(e.latlng, map.getZoom() + 1);
-});
+    .setView([46.695, 11.470], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
+    .on('dblclick', function(e) {
+        // Zoom exactly to each double-clicked point
+        map.setView(e.latlng, map.getZoom() + 1);
+    });
 </script>

@@ -13,8 +13,9 @@ tags:
 <!-- jQuery is required for this example. -->
 <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([43.6475, -79.3838], 14);
+var map = L.mapbox.map('map')
+    .setView([43.6475, -79.3838], 14)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var marker = L.marker([43.6475, -79.3838], {
       icon: L.mapbox.marker.icon({

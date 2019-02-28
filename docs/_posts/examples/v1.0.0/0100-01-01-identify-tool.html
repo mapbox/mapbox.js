@@ -7,7 +7,7 @@ description: Use leaflet-pip to identify overlapping polygons and highlight them
 tags:
   - plugins
 ---
-<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
+<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-pip/v0.1.0/leaflet-pip.js'></script>
 
 <style>
 .leaflet-popup { width:240px; }
@@ -19,8 +19,9 @@ tags:
 </style>
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([38, -95], 4);
+var map = L.mapbox.map('map')
+    .setView([38, -95], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var statesLayer = L.mapbox.featureLayer()
     .loadURL('{{site.baseurl}}/assets/data/states.geojson')

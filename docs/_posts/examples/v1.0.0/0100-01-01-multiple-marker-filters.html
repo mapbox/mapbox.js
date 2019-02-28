@@ -22,7 +22,12 @@ tags:
 <nav id='filters' class='filter-ui'></nav>
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.dc-markers');
+var map = L.mapbox.map('map')
+  .setView([37.77396, -122.4366], 12)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+    .addTo(map);
 
 // Find and store a variable reference to the list of filters.
 var filters = document.getElementById('filters');
@@ -30,12 +35,12 @@ var filters = document.getElementById('filters');
 // Wait until the marker layer is loaded in order to build a list of possible
 // types. If you are doing this with another featureLayer, you should change
 // map.featureLayer to the variable you have assigned to your featureLayer.
-map.featureLayer.on('ready', function() {
+myFeatureLayer.on('ready', function() {
   // Collect the types of symbols in this layer. you can also just
   // hardcode an array of types if you know what you want to filter on,
   // like var types = ['foo', 'bar'];
   var typesObj = {}, types = [];
-  var features = map.featureLayer.getGeoJSON().features;
+  var features = myFeatureLayer.getGeoJSON().features;
   for (var i = 0; i < features.length; i++) {
     typesObj[features[i].properties['marker-symbol']] = true;
   }
@@ -68,7 +73,7 @@ map.featureLayer.on('ready', function() {
     for (var i = 0; i < checkboxes.length; i++) {
       if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
     }
-    map.featureLayer.setFilter(function(feature) {
+    myFeatureLayer.setFilter(function(feature) {
       // If this symbol is in the list, return true. if not, return false.
       // The 'in' operator in javascript does exactly that: given a string
       // or number, it says if that is in a object.

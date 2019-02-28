@@ -37,9 +37,12 @@ tags:
     <label>100%</label>
     <small>Source: <a href="#link to source">Name of source</a></small>
 </div>
-<div id='map' class='dark'></div>
+<div id='map'></div>
 
 <script>
-  var map = L.mapbox.map('map', 'mapbox.dark');
+  var map = L.mapbox.map('map')
+    .setView([52.5049, 13.3937], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+
   map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 </script>

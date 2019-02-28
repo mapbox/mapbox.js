@@ -11,10 +11,15 @@ tags:
 <script src='{{site.tileApi}}/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+var map = L.mapbox.map('map')
+  .setView([37.77396, -122.4366], 13)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
-map.featureLayer.on('ready', function() {
-    var hull = turf.concave(map.featureLayer.getGeoJSON(), 3, 'miles');
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+    .addTo(map);
+
+myFeatureLayer.on('ready', function() {
+    var hull = turf.concave(myFeatureLayer.getGeoJSON(), 3, 'miles');
     L.mapbox.featureLayer(hull).addTo(map);
 });
 </script>

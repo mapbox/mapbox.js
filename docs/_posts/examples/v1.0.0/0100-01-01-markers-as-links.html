@@ -9,8 +9,9 @@ tags:
 ---
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-  .setView([39.12367, -76.81229], 9);
+var map = L.mapbox.map('map')
+  .setView([39.12367, -76.81229], 9)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 

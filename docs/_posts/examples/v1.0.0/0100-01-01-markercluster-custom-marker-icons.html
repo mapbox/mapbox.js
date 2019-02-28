@@ -14,12 +14,10 @@ tags:
 <div id='map'></div>
 
 <script>
-// Here we don't use the second argument to map, since that would automatically
-// load in non-clustered markers from the layer. Instead we add just the
-// backing tileLayer, and then use the featureLayer only for its data.
+// We add the backing styleLayer and use the featureLayer for its data.
 var map = L.mapbox.map('map')
     .setView([40.73, -74.011], 13)
-    .addLayer(L.mapbox.tileLayer('mapbox.streets'));
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Since featureLayer is an asynchronous method, we use the `.on('ready'`
 // call to only use its marker data once we know it is actually loaded.

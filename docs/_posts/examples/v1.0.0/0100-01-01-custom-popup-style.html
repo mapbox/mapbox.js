@@ -36,5 +36,10 @@ tags:
 <body>
 <div class='custom-popup' id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'examples.map-zr0njcqy');
+var map = L.mapbox.map('map')
+  .setView([37.77396, -122.4366], 12)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+  .addTo(map);
 </script>

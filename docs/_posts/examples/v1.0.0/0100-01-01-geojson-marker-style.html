@@ -10,8 +10,9 @@ tags:
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([23.68477, 120.89355], 7);
+var map = L.mapbox.map('map')
+    .setView([23.68477, 120.89355], 7)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // GeoJSON data: see http://geojson.org/ for the full description of this format.
 //

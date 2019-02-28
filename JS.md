@@ -351,5 +351,5 @@ as demonstrated above, and load your custom data into it.
 
 `L.mapbox.featureLayer` instances have the special feature that they will style
 markers with [simplestyle](https://www.mapbox.com/developers/simplestyle/) and
-will use the fancy [markers api](https://www.mapbox.com/developers/api/#Stand-alone.markers)
-for marker icons.
+will use the [Maps API](https://docs.mapbox.com/api/maps/#retrieve-a-standalone-marker)
+to retrieve marker icons.

@@ -12,7 +12,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets').setView([0, -80], 8);
+var map = L.mapbox.map('map')
+    .setView([0, -80], 8)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 // The Well Known Text format is commonly used in database systems,
 // and can represent geometries. Unlike other formats, it cannot
 // represent properties.

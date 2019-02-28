@@ -1,0 +1,245 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "La Taqueria",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.418157211908,
+          37.75091740997017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "El Farolito",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41842438937726,
+          37.75264158453105
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Pancho Villa Taqueria",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4210960994555,
+          37.76490556521159
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Taqueria Cancun",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41024758358378,
+          37.78179593848969
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Taqueria el Buen Sabor",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40551868222059,
+          37.71191866211896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Mateo’s Taqueria",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41886318432273,
+          37.757474154505445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Taqueria Los Mayas",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.46287609314624,
+          37.78301040048497
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "El Rancho Grande",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.43830558176774,
+          37.77750525373608
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Tropisueño",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40396528599007,
+          37.78554139614016
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Taqueria Los Coyotes",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4204444296567,
+          37.764964180648406
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Box Dog Bicycles",
+        "marker-symbol": "bicycle"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4240983,
+          37.7681295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Pedal Revolution",
+        "marker-symbol": "bicycle"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4184398,
+          37.7570445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Lone Palm",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4229688,
+          37.7552896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "The Peaks",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4369163,
+          37.7486383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Holy Water",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4182559,
+          37.739413
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f76565",
+        "title": "Social Kitchen and Brewery",
+        "marker-symbol": "bar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4567632,
+          37.7541982
+        ]
+      }
+    }
+  ]
+}

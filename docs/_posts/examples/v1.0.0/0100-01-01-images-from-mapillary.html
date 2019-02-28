@@ -10,8 +10,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([38.9, -77.0346], 13);
+var map = L.mapbox.map('map')
+    .setView([38.9, -77.0346], 13)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 map.attributionControl
     .addAttribution('<a href="https://mapillary.com/">Images from Mapillary</a>');

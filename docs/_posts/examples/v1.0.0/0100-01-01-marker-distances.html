@@ -25,8 +25,9 @@ pre.ui-distance {
 <pre id='distance' class='ui-distance'>Click to place a marker</pre>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([38.9, -77], 12);
+var map = L.mapbox.map('map')
+    .setView([38.9, -77], 12)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Start with a fixed marker.
 var fixedMarker = L.marker(new L.LatLng(38.9131775, -77.032544), {

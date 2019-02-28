@@ -53,7 +53,9 @@ tags:
   </nav>
 </div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets').setView([37, -99], 3);
+var map = L.mapbox.map('map')
+    .setView([37, -99], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Add each wms layer using L.tileLayer.wms
 var temperature = L.tileLayer.wms('http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer', {

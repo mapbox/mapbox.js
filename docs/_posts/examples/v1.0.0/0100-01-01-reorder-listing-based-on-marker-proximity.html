@@ -34,8 +34,9 @@ tags:
 <div id='info' class='info'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.light')
-    .setView([38.895, -77.036], 13);
+var map = L.mapbox.map('map')
+    .setView([38.895, -77.036], 13)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 var info = document.getElementById('info');
 
 // Creates a single, draggable marker on the page.

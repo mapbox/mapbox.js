@@ -19,7 +19,8 @@ var imageUrl = 'https://farm4.staticflickr.com/3731/14101168818_932d707f90_o.jpg
         [40.712216, -74.22655],
         [40.773941, -74.12544]]);
 
-var map = L.mapbox.map('map', 'mapbox.streets')
+var map = L.mapbox.map('map')
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
     .fitBounds(imageBounds);
 
 // See full documentation for the ImageOverlay type:

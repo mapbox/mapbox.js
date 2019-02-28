@@ -8,11 +8,11 @@ tags:
   - layers
 ---
 <style>
-#currency {
-  position:absolute;
-  bottom:10px;
-  left:10px;
-  z-index:1000;
+  #currency {
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    z-index:1000;
   }
   #currency p {
     font-size:36px;
@@ -20,15 +20,21 @@ tags:
     background:#fff;
     display:block;
     padding:20px;
-    }
+  }
 </style>
 <div id='map'>
   <div id='currency'></div>
 </div>
 
 <script>
-var map = L.mapbox.map('map', 'examples.map-zmy97flj')
+var map = L.mapbox.map('map', null)
   .setView([40.21, -97.47], 4);
+
+  // The visible tile layer
+  L.mapbox.tileLayer('examples.1fjyxmhi').addTo(map);
+
+  // Load interactivity data into the map with a gridLayer
+  var myGridLayer = L.mapbox.gridLayer('examples.1fjyxmhi').addTo(map);
 
 // This is example 'external data'. It's obviously very much an example,
 // and in practice you'll want to use jQuery's .ajax to pull in data or
@@ -43,19 +49,7 @@ var currencies = {
 
 var currency = document.getElementById('currency');
 
-// This tileset, Geography Class, has interactivity defined in TileMill
-// and displayed in its tooltips. If you're creating a new tileset to use
-// with this technique, see the documentation on defining tooltips:
-// > http://mapbox.com/tilemill/docs/crashcourse/tooltips/
-// and you'll need to use fields for them to be available here -
-// to hide them in tooltips but use them here, you can use something like
-//
-//   <span style='display:none'>}</span>
-//
-// in the tooltip content to get TileMill to detect that the field }
-// should be available in interaction.
-map.gridLayer
-    .on('mousemove',function(o) {
+myGridLayer.on('mousemove',function(o) {
         if (o.data && currencies[o.data.admin]) {
           currency.innerHTML = '<p>' + currencies[o.data.admin] + '</p>';
         } else {

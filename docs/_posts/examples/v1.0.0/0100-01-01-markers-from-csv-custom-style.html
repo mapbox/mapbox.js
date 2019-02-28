@@ -12,8 +12,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-  .setView([38, -95], 4);
+var map = L.mapbox.map('map')
+  .setView([38, -95], 4)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Omnivore will AJAX-request this file behind the scenes and parse it:
 // note that there are considerations:

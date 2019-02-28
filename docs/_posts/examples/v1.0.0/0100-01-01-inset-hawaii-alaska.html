@@ -32,18 +32,21 @@ tags:
   }
 </style>
 <script>
-var mapid = 'mapbox.streets';
+var mapStyle = 'mapbox://styles/mapbox/streets-v11';
 var overlayOptions = {
     zoomControl: false,
     attributionControl: false
 };
 
-var map = L.mapbox.map('map', mapid)
-    .fitBounds([[22.917922936146045,-127.265625],[50.28933925329178,-64.3359375]]);
+var map = L.mapbox.map('map', null)
+    .fitBounds([[22.917922936146045,-127.265625],[50.28933925329178,-64.3359375]])
+    .addLayer(L.mapbox.styleLayer(mapStyle));
 
-var mapOverlayHawaii = L.mapbox.map('map-overlay-hawaii', mapid, overlayOptions)
-    .fitBounds([[18.542116654448996,-161.03759765625],[22.573438264572406,-154.22607421875]]);
+var mapOverlayHawaii = L.mapbox.map('map-overlay-hawaii', null, overlayOptions)
+    .fitBounds([[18.542116654448996,-161.03759765625],[22.573438264572406,-154.22607421875]])
+    .addLayer(L.mapbox.styleLayer(mapStyle));
 
-var mapOverlayAlaska = L.mapbox.map('map-overlay-alaska', mapid, overlayOptions)
-    .fitBounds([[51.72702815704774,-170.15625],[71.85622888185527,-127.61718749999999]]);
+var mapOverlayAlaska = L.mapbox.map('map-overlay-alaska', null, overlayOptions)
+    .fitBounds([[51.72702815704774,-170.15625],[71.85622888185527,-127.61718749999999]])
+    .addLayer(L.mapbox.styleLayer(mapStyle));
 </script>

@@ -11,8 +11,9 @@ tags:
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets', { zoomControl: false })
-    .setView([40, -74.50], 9);
+var map = L.mapbox.map('map', null, { zoomControl: false })
+    .setView([40, -74.50], 9)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 new L.Control.Zoom({ position: 'topright' }).addTo(map);
 </script>

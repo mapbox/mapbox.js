@@ -22,7 +22,7 @@ tags:
 
 <div id='filters' class='ui-select'>
   <div><input type='checkbox' checked=checked class='filter'
-             name='filter' id='fast-food' value='fast-food'/><label for='fast-food'>fast-food</label></div>
+             name='filter' id='restaurant' value='restaurant'/><label for='restaurant'>restaurant</label></div>
   <div><input type='checkbox' checked=checked class='filter'
              name='filter' id='bicycle' value='bicycle'/><label for='bicycle'>bicycle</label></div>
   <div><input type='checkbox' checked=checked class='filter'
@@ -31,7 +31,13 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.dc-markers');
+var map = L.mapbox.map('map')
+  .setView([37.77396, -122.4366], 12)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+    .addTo(map);
+    
 var filters = document.getElementById('filters');
 var checkboxes = document.getElementsByClassName('filter');
 
@@ -43,7 +49,7 @@ function change() {
     }
     // The filter function takes a GeoJSON feature object
     // and returns true to show it or false to hide it.
-    map.featureLayer.setFilter(function (f) {
+    myFeatureLayer.setFilter(function (f) {
         // check each marker's symbol to see if its value is in the list
         // of symbols that should be on, stored in the 'on' array
         return on.indexOf(f.properties['marker-symbol']) !== -1;
