@@ -33,7 +33,11 @@ Require mapbox in your script:
 ```js
 // main.js
 
-require('mapbox.js'); // <-- auto-attaches to window.L
+// node.js
+let L = require('mapbox.js') // <-- auto-attaches to window.L
+
+// es6
+import L from 'matchbox.js';
 ```
 
 Browserify it:
