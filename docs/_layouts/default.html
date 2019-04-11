@@ -4,8 +4,7 @@
 
 {% if page.prehead %}{{page.prehead}}{% endif %}
 {% if page.description %}<meta name='description' content='{{page.description | strip_html}}'/>{% endif %}
-<title>{% if page.title == 'Mapbox' %}{{page.title}} | Design and publish beautiful maps{% else %}{{page.title}} | Mapbox{% endif %}</title>
-
+<title>{% if page.title == 'Mapbox' %}{{page.title}} | Design and publish beautiful maps{% else %}{% if page.title == site.title %}{{page.title}}{% else %}{{page.title %}} | {{site.title}}{% endif %} | Mapbox{% endif %}</title>
 <meta name='robots' content='{% if page.hidden or page.noindex or site.env != 'production' %}noindex{% else %}index{% endif %}'/>
 <meta class='swiftype' name='title' data-type='string' content='{{page.title | escape | replace:"| Mapbox",""}}' />
 <meta class='swiftype' name='type' data-type='enum' content='{% if layout.section %}{{layout.section}}{% elsif page.section %}{{page.section}}{% elsif page.category %}{{page.category}}{% else %}site{% endif %}' />
