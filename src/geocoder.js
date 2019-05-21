@@ -7,8 +7,7 @@ var util = require('./util'),
 
 // Low-level geocoding interface - wraps specific API calls and their
 // return values.
-module.exports = function(url, options) {
-    if (!options) options = {};
+module.exports = function(url, options={}) {
     var geocoder = {};
 
     util.strict(url, 'string');
