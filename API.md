@@ -205,7 +205,7 @@ Load GeoJSON data for this layer from the URL given by `url`.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| url | string | A map id |
+| url | string | A tileset ID |
 
 _Example_:
 
@@ -222,7 +222,7 @@ Load marker GeoJSON data from a map with the given `id` on Mapbox.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| url (_required_) | string | A map id |
+| url (_required_) | string | A tileset ID |
 
 _Example_:
 
@@ -500,11 +500,11 @@ _Returns_: the geocoder control object
 
 ### geocoderControl.setID(id)
 
-Set the map id used for geocoding.
+Set the tileset ID used for geocoding.
 
 | Options | Value | Description |
 | ---- | ---- | ---- |
-| id | string | A map id to geocode from |
+| id | string | A tileset ID to geocode from |
 
 _Returns_: the geocoder control object
 
@@ -718,7 +718,7 @@ instead. For example, replace
  map.featureLayer.setFilter(function(f) { ... });
  ```
 
-* `L.mapbox.geocoder` and `L.mapbox.geocoderControl` no longer accept arbitrary map IDs.
+* `L.mapbox.geocoder` and `L.mapbox.geocoderControl` no longer accept arbitrary tileset IDs.
 Instead you must provide a predefined geocoder index ID (or the ID of a custom geocoder
 index). For instance, replace
 

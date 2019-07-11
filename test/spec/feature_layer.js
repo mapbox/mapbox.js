@@ -32,7 +32,7 @@ describe('L.mapbox.featureLayer', function() {
         expect(marker.getLatLng()).to.be.near({lng: -77.0203, lat: 38.8995}, 0);
     });
 
-    it('loads data for a map ID', function() {
+    it('loads data for a tileset ID', function() {
         var layer = L.mapbox.featureLayer('mapbox.map-0l53fhk2');
 
         server.respondWith("GET", internals.url('/v4/mapbox.map-0l53fhk2/features.json'),
