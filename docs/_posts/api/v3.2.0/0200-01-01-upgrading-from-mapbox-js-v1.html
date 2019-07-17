@@ -15,13 +15,17 @@ details.</p>
 </li>
 <li><p>The <code>markerLayer</code> alias has been removed from <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-map">L.mapbox.map</a></code>. Use <code>featureLayer</code>
 instead. For example, replace</p>
-<pre><code>map.markerLayer.setFilter(function(f) { ... });</code></pre><p>with</p>
-<pre><code>map.featureLayer.setFilter(function(f) { ... });</code></pre></li>
-<li><p><code><a href="/mapbox.js/api/v3.2.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> no longer accept arbitrary map IDs.
+<pre><code>map.markerLayer.setFilter(function(f) { ... });
+</code></pre><p>with</p>
+<pre><code>map.featureLayer.setFilter(function(f) { ... });
+</code></pre></li>
+<li><p><code><a href="/mapbox.js/api/v3.2.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> no longer accept arbitrary tileset IDs.
 Instead you must provide a predefined geocoder index ID (or the ID of a custom geocoder
 index). For instance, replace</p>
-<pre><code>L.mapbox.geocoderControl(&#39;mapbox.outdoors&#39;).addTo(map);</code></pre><p>with</p>
-<pre><code>L.mapbox.geocoderControl(&#39;mapbox.places&#39;).addTo(map);</code></pre><p>See <a href="https://www.mapbox.com/developers/api/geocoding/">the geocoding API documentation</a>
+<pre><code>L.mapbox.geocoderControl(&#39;mapbox.outdoors&#39;).addTo(map);
+</code></pre><p>with</p>
+<pre><code>L.mapbox.geocoderControl(&#39;mapbox.places&#39;).addTo(map);
+</code></pre><p>See <a href="https://docs.mapbox.com/api/search/#geocoding">the geocoding API documentation</a>
 for a complete list of predefined geocoding indexes.</p>
 </li>
 <li><p>The format for <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> results have changed.
@@ -32,8 +36,10 @@ need to be updated to expect the format documented in those classes.</p>
 <li><p><code><a href="/mapbox.js/api/v3.2.0/l-mapbox-config-http_urls">L.mapbox.config.HTTP_URLS</a></code> and <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-config-https_urls">L.mapbox.config.HTTPS_URLS</a></code> have been replaced
 with <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</a></code> and <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-config-https_url">L.mapbox.config.HTTPS_URL</a></code>, which expect to
 be assigned a single URL rather than an array of URLs. For example, replace</p>
-<pre><code>L.mapbox.config.HTTP_URLS = [&quot;http://example.com/&quot;];</code></pre><p>with</p>
-<pre><code>L.mapbox.config.HTTP_URL = &quot;http://example.com/&quot;;</code></pre></li>
+<pre><code>L.mapbox.config.HTTP_URLS = [&quot;http://example.com/&quot;];
+</code></pre><p>with</p>
+<pre><code>L.mapbox.config.HTTP_URL = &quot;http://example.com/&quot;;
+</code></pre></li>
 <li><p><code><a href="/mapbox.js/api/v3.2.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> no longer supports <code>detectRetina</code>, <code>retinaVersion</code>, or <code>autoscale</code> options.
 Instead, retina tiles are always automatically used when available.</p>
 </li>

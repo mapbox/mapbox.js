@@ -15,7 +15,8 @@ permalink: /api/v3.2.0/l-mapbox-template/
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>template</td>
 <td>string</td>
 <td>The template string</td>
@@ -25,7 +26,9 @@ permalink: /api/v3.2.0/l-mapbox-template/
 <td>object</td>
 <td>Data you wish to pass into the template string</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><em>Example</em>:</p>
 <pre><code>var output = L.mapbox.template(&#39;Name: {% raw %}{{name}}{% endraw %}&#39;, {name: &#39;John&#39;});
-// output is &quot;Name: John&quot;</code></pre>
+// output is &quot;Name: John&quot;
+</code></pre>
