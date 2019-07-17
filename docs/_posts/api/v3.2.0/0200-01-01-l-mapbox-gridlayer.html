@@ -16,7 +16,8 @@ interactivity into your map, which you can easily access with <code><a href="/ma
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>id <em>or</em> url <em>or</em> tilejson (<em>required</em>)</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
 <td><ul><li>An <code>id</code> string <code>examples.map-foo</code></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A TileJSON object, from your own Javascript code</li></ul></td>
@@ -26,10 +27,12 @@ interactivity into your map, which you can easily access with <code><a href="/ma
 <td>Object</td>
 <td>The second argument is optional. If provided, it may include: <ul><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this layer.</li></ul></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><em>Example</em>:</p>
 <pre><code>// the second argument is optional
-var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;);</code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
+var layer = L.mapbox.gridLayer(&#39;mapbox.light&#39;);
+</code></pre><p><em>Returns</em> a <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> object.</p>
 <p><em>Class</em>: <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-gridlayer">L.mapbox.GridLayer</a></code></p>
 <h3 id="section-gridlayer-on">gridLayer.on(event, handler, context)</h3>
 <p>Bind an event handler to a given event on this <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> instance.
@@ -43,7 +46,8 @@ data as the user interacts with the map.</p>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>event (<em>required</em>)</td>
 <td><strong>string</strong></td>
 <td>the event name</td>
@@ -58,7 +62,8 @@ data as the user interacts with the map.</p>
 <td><strong>object</strong></td>
 <td>the context of the handler function: this is the value of <code>this</code> when that function returns</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>After binding an event with <code>.on</code>, you can unbind it with <code>.off</code>, with the
 same argument structure.</p>
 <p>The default events are:</p>
@@ -73,7 +78,8 @@ same argument structure.</p>
     if (e.data &amp;&amp; e.data.url) {
         window.open(e.data.url);
     }
-});</code></pre><h3 id="section-gridlayer-gettilejson">gridLayer.getTileJSON()</h3>
+});
+</code></pre><h3 id="section-gridlayer-gettilejson">gridLayer.getTileJSON()</h3>
 <p>Returns this layer&#39;s TileJSON object which determines its tile source,
 zoom bounds and other metadata.</p>
 <p><em>Example</em>:</p>
@@ -84,7 +90,8 @@ zoom bounds and other metadata.</p>
     .on(&#39;ready&#39;, function() {
         // get TileJSON data from the loaded layer
         var TileJSON = layer.getTileJSON();
-    });</code></pre><p><em>Returns</em>: the TileJSON object</p>
+    });
+</code></pre><p><em>Returns</em>: the TileJSON object</p>
 <h3 id="section-gridlayer-getdata">gridLayer.getData(latlng, callback)</h3>
 <p>Load data for a given latitude, longitude point on the map, and call the callback
 function with that data, if any.</p>
@@ -96,7 +103,8 @@ function with that data, if any.</p>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>latlng</td>
 <td>object</td>
 <td><code>latlng</code> a L.LatLng object</td>
@@ -106,5 +114,6 @@ function with that data, if any.</p>
 <td>function</td>
 <td><code>callback</code> a function that is called with the grid data as an argument</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><em>Returns</em>: the L.mapbox.gridLayer object</p>

@@ -17,7 +17,8 @@ interactivity.</p>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>element (<em>required</em>)</td>
 <td>string</td>
 <td>Must be the id of an element, or a DOM element reference.</td>
@@ -32,7 +33,8 @@ interactivity.</p>
 <td>object</td>
 <td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> L.TileLayer options. Options passed to a <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-tilelayer">L.mapbox.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> options. Options passed to a <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-featurelayer">L.mapbox.featureLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>. Options passed to a <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-gridlayer">L.mapbox.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> options. Options passed to a <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-legendcontrol">L.mapbox.legendControl</a></code>.</li><li><code>shareControl</code>: Options passed to a <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>. Set to <code>true</code> to enable the <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-sharecontrol">L.mapbox.shareControl</a></code>.</li><li><code>accessToken</code>: Mapbox API access token. Overrides <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-accesstoken">L.mapbox.accessToken</a></code> for this map.</li><li><code>attributionControl</code>: value can be <code>{compact: true}</code> to force a compact attribution icon that shows the full attribution on click, or <code>{compact: false}</code> to force the full attribution control. The default is a responsive attribution that collapses when the map is less than 640 pixels wide.</li></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><em>Example</em>:</p>
 <pre><code>// map refers to a &lt;div&gt; element with the ID map
 // mapbox.streets is the ID of a map on Mapbox.com
@@ -40,7 +42,8 @@ var map = L.mapbox.map(&#39;map&#39;, &#39;mapbox.streets&#39;);
 
 // map refers to a &lt;div&gt; element with the ID map
 // This map will have no layers initially
-var map = L.mapbox.map(&#39;map&#39;);</code></pre><p><em>Returns</em>: a map object</p>
+var map = L.mapbox.map(&#39;map&#39;);
+</code></pre><p><em>Returns</em>: a map object</p>
 <p><em>Class</em>: <code><a href="/mapbox.js/api/v3.2.0/l-mapbox-map">L.mapbox.Map</a></code></p>
 <h3 id="section-map-gettilejson">map.getTileJSON()</h3>
 <p>Returns this map&#39;s TileJSON object which determines its tile source,
