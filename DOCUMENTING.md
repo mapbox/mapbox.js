@@ -44,7 +44,7 @@ git push origin mb-pages
 API documentation is fed by `API.md`. To rebuild the docs and serve the Jekyll site:
 
 ```sh
-./_docs/build.sh v1.6.0
+./_docs/build.sh v3.2.0
 jekyll serve
 ```
 

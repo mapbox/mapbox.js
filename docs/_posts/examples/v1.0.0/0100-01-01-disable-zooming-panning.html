@@ -10,9 +10,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets', {
-  zoomControl: false
-}).setView([41.0252, 28.9950], 11);
+var map = L.mapbox.map('map', null, { zoomControl: false })
+  .setView([41.0252, 28.9950], 11)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Disable drag and zoom handlers.
 map.dragging.disable();

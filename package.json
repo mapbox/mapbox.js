@@ -1,49 +1,44 @@
 {
   "author": "Mapbox",
   "name": "mapbox.js",
-  "description": "mapbox javascript api",
-  "version": "3.1.1",
+  "description": "Mapbox plugin for Leaflet",
+  "version": "3.2.0",
   "homepage": "http://mapbox.com/",
   "repository": {
     "type": "git",
     "url": "git://github.com/mapbox/mapbox.js.git"
   },
   "main": "src/index.js",
+  "files": [
+    "dist",
+    "src",
+    "*.md"
+  ],
   "dependencies": {
-    "corslite": "0.0.6",
-    "isarray": "0.0.1",
-    "leaflet": "1.0.2",
-    "mustache": "2.2.1",
+    "corslite": "0.0.7",
+    "leaflet": "1.4.0",
+    "mustache": "3.0.1",
     "sanitize-caja": "0.1.4"
   },
   "scripts": {
-    "test": "eslint --no-eslintrc -c .eslintrc src && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html"
+    "test": "eslint src && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html",
+    "prepublishOnly": "npm run build",
+    "build": "make"
   },
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "browserify": "^13.0.0",
-    "clean-css": "~2.0.7",
-    "cz-conventional-changelog": "1.2.0",
-    "eslint": "^0.23.0",
+    "browserify": "^16.2.3",
+    "clean-css-cli": "^4.2.1",
+    "eslint": "^5.14.1",
     "expect.js": "0.3.1",
-    "happen": "0.1.3",
-    "leaflet-fullscreen": "0.0.4",
-    "leaflet-hash": "0.2.1",
-    "marked": "~0.3.0",
-    "minifyify": "^6.1.0",
-    "minimist": "0.0.5",
-    "mocha": "2.4.5",
-    "mocha-phantomjs-core": "2.0.1",
-    "phantomjs-prebuilt": "2.1.12",
-    "sinon": "1.10.2"
+    "happen": "0.3.2",
+    "marked": "~0.6.1",
+    "minifyify": "^7.3.5",
+    "minimist": "1.2.0",
+    "mocha": "6.0.1",
+    "mocha-phantomjs-core": "2.1.2",
+    "phantomjs-prebuilt": "2.1.16",
+    "sinon": "7.2.4"
   },
-  "optionalDependencies": {},
-  "engines": {
-    "node": "*"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  "optionalDependencies": {}
 }

@@ -31,8 +31,9 @@ tags:
 </div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([0, 20], 2);
+var map = L.mapbox.map('map')
+    .setView([0, 20], 2)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var planarCircle = L.circle([0, 0], 2000000, {
     fillOpacity: 0,

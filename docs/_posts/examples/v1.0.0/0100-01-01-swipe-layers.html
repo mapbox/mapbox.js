@@ -22,10 +22,12 @@ tags:
 <input id='range' class='range' type='range' min='0' max='1.0' step='any' />
 
 <script>
-var map = L.mapbox.map('map').setView([49.434,-123.272], 7);
+var map = L.mapbox.map('map')
+  .setView([49.434,-123.272], 7)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
-L.mapbox.tileLayer('mapbox.outdoors').addTo(map);
-var overlay = L.mapbox.tileLayer('mapbox.comic').addTo(map);
+var overlay = L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10')
+  .addTo(map);
 
 var range = document.getElementById('range');
 

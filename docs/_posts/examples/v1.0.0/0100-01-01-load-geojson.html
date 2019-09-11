@@ -45,7 +45,8 @@ var geojson = {
   ]
 };
 
-L.mapbox.map('map', 'mapbox.streets')
+L.mapbox.map('map')
   .setView([37.8, -96], 4)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
   .featureLayer.setGeoJSON(geojson);
 </script>

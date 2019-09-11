@@ -39,18 +39,24 @@ tags:
 
 <script>
 var count = document.getElementById('count');
-var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
-    gridControl: false // Disable default gridControl interactivity.
-}).setView([40.85, -75.94], 3);
 
-map.gridLayer
-    .on('mousemove',function(o) {
-        if (o.data && o.data.count) {
-          count.innerHTML = '<label>Number of bird species</label><strong>' + o.data.count + '</strong>';
-        } else {
-          count.innerHTML = '';
-        }
-    }).on('mouseout', function(o) {
-        count.innerHTML = '';
-    });
+var map = L.mapbox.map('map')
+	.setView([40.85, -75.94], 3)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+
+// The visible tile layer
+L.mapbox.tileLayer('examples.bird-species').addTo(map);
+
+// Load interactivity data into the map with a gridLayer
+var myGridLayer = L.mapbox.gridLayer('examples.bird-species').addTo(map);
+
+myGridLayer.on('mousemove',function(o) {
+    if (o.data && o.data.count) {
+      count.innerHTML = '<label>Number of bird species</label><strong>' + o.data.count + '</strong>';
+    } else {
+      count.innerHTML = '';
+    }
+}).on('mouseout', function(o) {
+    count.innerHTML = '';
+});
 </script>

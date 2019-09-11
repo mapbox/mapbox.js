@@ -33,39 +33,22 @@ tags:
     left:50%;
     top:50%;
 }
-#add-markers {
-    position:absolute;
-    top:10px;
-    right:10px;
-}
 </style>
 <div id='map'></div>
-<button id='add-markers'>add markers</button>
 <div id='loader'><span class='message'>loading</span></div>
 <script>
 var loader = document.getElementById('loader');
-var addMarkers = document.getElementById('add-markers');
 
 var map = L.mapbox.map('map')
     .setView([38.91, -77.03], 13);
 
-// Add a tile layer with a loading animation
-
 // start the loading screen
 startLoading();
-L.mapbox.tileLayer('mapbox.streets')
+
+// Add a tile layer with a loading animation
+L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11')
     .addTo(map) // add your tiles to the map
     .on('load', finishedLoading); // when the tiles load, remove the screen
-
-addMarkers.onclick = function() {
-    // remove the 'add markers' button to eliminate any confusion
-    addMarkers.parentNode.removeChild(addMarkers);
-    // add the loading screen
-    startLoading();
-    L.mapbox.featureLayer('examples.map-zr0njcqy')
-        .addTo(map) // add the markers to the map
-        .on('ready', finishedLoading); // remove the loading screen
-};
 
 function startLoading() {
     loader.className = '';

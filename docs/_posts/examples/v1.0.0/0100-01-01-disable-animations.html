@@ -10,7 +10,7 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets', {
+var map = L.mapbox.map('map', null, {
     // You can specify any combination of these options to
     // change the behavior of your map.
 
@@ -24,5 +24,6 @@ var map = L.mapbox.map('map', 'mapbox.streets', {
     // when you drag it quickly.
     inertia: false
 })
-.setView([35.6666, 139.7674], 10);
+    .setView([35.6666, 139.7674], 10)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 </script>

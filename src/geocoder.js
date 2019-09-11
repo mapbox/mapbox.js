@@ -1,7 +1,6 @@
 'use strict';
 
-var isArray = require('isarray'),
-    util = require('./util'),
+var util = require('./util'),
     format_url = require('./format_url'),
     feedback = require('./feedback'),
     request = require('./request');
@@ -30,6 +29,7 @@ module.exports = function(url, options) {
     };
 
     geocoder.queryURL = function(_) {
+        var isArray = L.Util.isArray;
         var isObject = !(isArray(_) || typeof _ === 'string'),
             query = isObject ? _.query : _;
 

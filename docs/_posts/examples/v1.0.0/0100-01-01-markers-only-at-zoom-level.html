@@ -10,8 +10,12 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'examples.map-zr0njcqy')
-    .setView([38.90, -77], 13);
+var map = L.mapbox.map('map')
+  .setView([37.77396, -122.4366], 13)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+  .addTo(map);
 
 // the function given to this callback will be called every time the map
 // completes a zoom animation.
@@ -28,9 +32,9 @@ map.on('zoomend', function() {
         // If you want to hide or show a different kind of layer, you can use
         // similar methods like .setOpacity(0) and .setOpacity(1)
         // to hide or show it.
-        map.featureLayer.setFilter(function() { return true; });
+        myFeatureLayer.setFilter(function() { return true; });
     } else {
-        map.featureLayer.setFilter(function() { return false; });
+        myFeatureLayer.setFilter(function() { return false; });
     }
 });
 </script>

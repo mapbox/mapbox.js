@@ -1,4 +1,5 @@
-url: https://122e4e-mapbox.global.ssl.fastly.net
+title: Mapbox.js
+url: https://docs.tilestream.net
 api: https://122e4e-mapbox.global.ssl.fastly.net/core
 tileApi: https://api-maps-staging.tilestream.net
 accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpZ3BqeDZlcDAwMDBzcmt1YnQ1OTM4cTEifQ.54XwgUSkvlmB7gHW4vWJ3w
@@ -6,7 +7,9 @@ env: staging
 source: docs
 permalink: /:categories/:title/
 baseurl: /mapbox.js
-mapboxjs: v3.1.1
+mapboxjs: v3.2.0
 mapboxjsbase: /mapbox.js/dist
 defaultid: 'mapbox.streets'
 future: true
+gems:
+- jekyll-sitemap

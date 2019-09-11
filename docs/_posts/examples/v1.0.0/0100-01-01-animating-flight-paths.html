@@ -40,8 +40,9 @@ tags:
 // amount of time regardless of trip length.
 
 // Show the whole world in this first view.
-map = L.mapbox.map('map', 'mapbox.satellite')
-    .setView([20, 0], 2);
+map = L.mapbox.map('map')
+    .setView([20, 0], 2)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9'));
 
 var credits = L.control.attribution({
   prefix: '<a href="http://openflights.org/data.html">Flight data from Open Flights, under the ODbL license</a>'

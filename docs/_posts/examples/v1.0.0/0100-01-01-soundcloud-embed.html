@@ -11,7 +11,8 @@ tags:
 
 <script>
 
-var map = L.mapbox.map('map', 'mapbox.streets');
+var map = L.mapbox.map('map')
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // The GeoJSON representing a point feature with a property of 'sounds'
 var geoJson = {
@@ -41,9 +42,9 @@ myLayer.on('layeradd', function(e) {
         feature = marker.feature;
 
     // Create custom popup content
-    var popupContent =  '<a target="_blank" class="popup" href="' + 
+    var popupContent =  '<a target="_blank" class="popup" href="' +
         feature.properties.url + '">' +
-        feature.properties.sounds + 
+        feature.properties.sounds +
         '<h2>' + feature.properties.title + '</h2>' + '</a>';
 
     // http://leafletjs.com/reference.html#popup

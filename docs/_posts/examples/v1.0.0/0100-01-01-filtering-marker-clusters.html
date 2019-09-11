@@ -33,10 +33,10 @@ tags:
 <script>
 // Here we don't use the second argument to map, since that would automatically
 // load in non-clustered markers from the layer. Instead we add just the
-// backing tileLayer, and then use the featureLayer only for its data.
+// backing styleLayer, and then use the featureLayer only for its data.
 var map = L.mapbox.map('map')
     .setView([38.9, -77], 13)
-    .addLayer(L.mapbox.tileLayer('mapbox.streets'));
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var overlays = L.layerGroup().addTo(map);
 

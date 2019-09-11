@@ -11,8 +11,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([49.16326, -123.89187], 17);
+var map = L.mapbox.map('map')
+    .setView([49.16326, -123.89187], 17)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var featureLayer = L.mapbox.featureLayer({
         type: 'FeatureCollection',

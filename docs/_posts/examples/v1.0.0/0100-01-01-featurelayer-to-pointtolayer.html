@@ -12,37 +12,38 @@ tags:
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-.setView([45.522, -122.677], 3);
+var map = L.mapbox.map('map')
+  .setView([45.522, -122.677], 3)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));;
 
 var geojson = {
     "type": "FeatureCollection",
     "features" : [{
         "type": "Feature",
-        "geometry": { 
-        "type": "Point", 
+        "geometry": {
+        "type": "Point",
         "coordinates": [-120.086,37.857]
-        }, 
+        },
         "properties": {
             "title" : "AREA 10",
             "radius" : 10
         }
     },{
         "type": "Feature",
-        "geometry": { 
-            "type": "Point", 
+        "geometry": {
+            "type": "Point",
             "coordinates": [-117.609,34.317]
-        }, 
+        },
         "properties": {
             "title" : "GOBBLERS",
             "radius" : 50
         }
     },{
           "type": "Feature",
-          "geometry": { 
-            "type": "Point", 
+          "geometry": {
+            "type": "Point",
             "coordinates": [-122.677,45.522]
-        }, 
+        },
         "properties": {
           "title" : "FRENCH GULCH",
           "radius" : 10
@@ -54,7 +55,7 @@ var geojson = {
 // to pass in the features properties and geometry
 L.mapbox.featureLayer(geojson, {
     pointToLayer: function(feature, latlon) {
-        // L.circleMarker() draws a circle with fixed radius in pixels. 
+        // L.circleMarker() draws a circle with fixed radius in pixels.
         // To draw a circle overlay with a radius in meters, use L.circle()
         return L.circleMarker(latlon, {radius: feature.properties.radius});
     }

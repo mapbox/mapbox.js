@@ -29,7 +29,7 @@ describe('L.mapbox.map', function() {
 
     describe('constructor', function() {
         it('loads TileJSON from a URL', function(done) {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
             map.on('ready', function() {
                 expect(this).to.equal(map);
@@ -37,8 +37,10 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respondWith("GET", "http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/4/3/6.png",
+                [200, { "Content-Type": "image/png" }, null);
             server.respond();
         });
 
@@ -51,13 +53,13 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
 
         it('emits an error event', function(done) {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
             map.on('error', function(e) {
                 expect(this).to.equal(map);
@@ -65,13 +67,13 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [400, { "Content-Type": "application/json" }, JSON.stringify({error: 'error'})]);
             server.respond();
         });
 
         it('can deactivate featureLayer', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json', {
                 featureLayer: false
             });
             expect(map.featureLayer).to.eql(undefined);
@@ -81,7 +83,7 @@ describe('L.mapbox.map', function() {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
                 .setView([1, 2], 3);
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
 
@@ -93,7 +95,7 @@ describe('L.mapbox.map', function() {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
                 .setZoom(3);
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
 
@@ -102,8 +104,10 @@ describe('L.mapbox.map', function() {
         });
 
         it('preserves manually-set marker layer GeoJSON', function() {
-            var map = L.mapbox.map(element, 'http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
             map.featureLayer.setGeoJSON(helpers.geoJson);
+
+            console.log(server.requests);
 
             server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);

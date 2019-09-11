@@ -10,8 +10,9 @@ tags:
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([42.3619, -71.0606], 15);
+var map = L.mapbox.map('map')
+    .setView([42.3619, -71.0606], 15)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Since it's using the HTML5 Canvas API, it is not
 // compatible with IE8 and below. See full documentation:

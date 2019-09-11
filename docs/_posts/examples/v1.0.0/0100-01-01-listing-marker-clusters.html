@@ -33,8 +33,9 @@ pre.ui-coordinates {
 
 <script src="{{site.baseurl}}/assets/data/realworld.388.js"></script>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([-37.82, 175.215], 14);;
+var map = L.mapbox.map('map')
+    .setView([-37.82, 175.215], 14)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var markers = new L.MarkerClusterGroup();
 

@@ -424,7 +424,7 @@ featureLayer.setGeoJSON({
 </code></pre><p><em>Returns</em> a <code><a href="#l-mapbox-stylelayer">L.mapbox.styleLayer</a></code> object.</p>
 <h1 id="geocoding">Geocoding</h1>
 <h2 id="l-mapbox-geocoder">L.mapbox.geocoder(id|url, options)</h2>
-<p>A low-level interface to <a href="https://www.mapbox.com/api-documentation/#geocoding">the Mapbox Geocoding API</a>,
+<p>A low-level interface to <a href="https://docs.mapbox.com/api/search/#geocoding">the Mapbox Geocoding API</a>,
 useful for complex uses and reverse-geocoding.</p>
 <table>
 <thead>
@@ -438,7 +438,7 @@ useful for complex uses and reverse-geocoding.</p>
 <tr>
 <td>id <em>or</em> url</td>
 <td>string</td>
-<td>Value must be <ul><li>A <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
+<td>Value must be <ul><li>A <a href="https://docs.mapbox.com/api/search/#geocoding">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -450,7 +450,7 @@ useful for complex uses and reverse-geocoding.</p>
 <p><em>Returns</em> a <code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> object.</p>
 <h3 id="geocoder-query">geocoder.query(queryString|options, callback)</h3>
 <p>Queries the geocoder with a query string, and returns its result, if any.
-This performs <a href="https://www.mapbox.com/api-documentation/#search-for-places">forward geocoding</a>.</p>
+This performs <a href="https://docs.mapbox.com/api/search/#forward-geocoding">forward geocoding</a>.</p>
 <table>
 <thead>
 <tr>
@@ -504,7 +504,7 @@ set this to <code>false</code>. Otherwise, by default it is <code>true</code>.</
 <p><em>Returns</em>: the geocoder object. The return value of this function is not useful - you must use a callback to get results.</p>
 <h3 id="geocoder-reversequery">geocoder.reverseQuery(location, callback)</h3>
 <p>Queries the geocoder with a location, and returns its result, if any.
-This performs <a href="https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location">reverse geocoding</a>.</p>
+This performs <a href="https://docs.mapbox.com/api/search/#reverse-geocoding">reverse geocoding</a>.</p>
 <table>
 <thead>
 <tr>
@@ -718,7 +718,7 @@ the <a href="http://mapbox.com/developers/api/geocoding/">Mapbox Geocoding API</
 <tr>
 <td>id <em>or</em> url (<em>required</em>)</td>
 <td>string</td>
-<td>Either a <ul><li>An <a href="https://www.mapbox.com/developers/api/geocoding/">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
+<td>Either a <ul><li>An <a href="https://docs.mapbox.com/api/search/#geocoding">geocoder index ID</a>, e.g. <code>mapbox.places</code></li><li>A geocoder API URL, like <code>{{site.tileApi}}/geocoding/v5/mapbox.places/{query}.json</code></li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -879,7 +879,7 @@ and <code>popupAnchor</code>.</p>
 <p><a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/l-mapbox-marker/">A working example of L.mapbox.marker.icon in use</a></p>
 <h2 id="l-mapbox-marker-style">L.mapbox.marker.style(feature, latlng)</h2>
 <p>An icon generator for use in conjunction with <code>pointToLayer</code> to generate
-markers from the <a href="https://www.mapbox.com/api-documentation/#retrieve-a-standalone-marker">Mapbox Markers API</a>
+markers from the <a href="https://docs.mapbox.com/api/maps/#retrieve-a-standalone-marker">Mapbox Markers API</a>
 and support the <a href="https://github.com/mapbox/simplestyle-spec">simplestyle-spec</a> for
 features.</p>
 <table>
@@ -997,7 +997,7 @@ regardless of the host page&#39;s scheme.</p>
 <pre><code>L.mapbox.config.FORCE_HTTPS = true;
 </code></pre><h2 id="l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</h2>
 <p>A base URL from which Mapbox.js will load TileJSON and other resources. By default,
-this points to the <a href="https://www.mapbox.com/developers/api/">Mapbox Web Services</a>.</p>
+this points to the <a href="https://docs.mapbox.com/api/">Mapbox Web Services</a>.</p>
 <h2 id="l-mapbox-config-https_url">L.mapbox.config.HTTPS_URL</h2>
 <p>The same as <code><a href="#l-mapbox-config-http_url">L.mapbox.config.HTTP_URL</a></code>, but used when SSL mode is detected or
 <code>FORCE_HTTPS</code> is set to <code>true</code>.</p>
@@ -1035,7 +1035,7 @@ index). For instance, replace</p>
 <pre><code>L.mapbox.geocoderControl(&#39;mapbox.outdoors&#39;).addTo(map);
 </code></pre><p>with</p>
 <pre><code>L.mapbox.geocoderControl(&#39;mapbox.places&#39;).addTo(map);
-</code></pre><p>See <a href="https://www.mapbox.com/developers/api/geocoding/">the geocoding API documentation</a>
+</code></pre><p>See <a href="https://docs.mapbox.com/api/search/#geocoding">the geocoding API documentation</a>
 for a complete list of predefined geocoding indexes.</p>
 </li>
 <li><p>The format for <code><a href="#l-mapbox-geocoder">L.mapbox.geocoder</a></code> and <code><a href="#l-mapbox-geocodercontrol">L.mapbox.geocoderControl</a></code> results have changed.
@@ -7316,4 +7316,3 @@ var Leaflet = L.noConflict();
 <p>A constant that represents the Leaflet version in use.<p>
 
 <pre><code>L.version // returns "0.5" (or whatever version is currently in use)</code></pre>
-

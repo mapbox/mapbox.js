@@ -14,10 +14,12 @@ module.exports = {
         else t.loadURL(_);
     },
     log: function(_) {
+        /* eslint-disable no-console */
         if (typeof console === 'object' &&
             typeof console.error === 'function') {
             console.error(_);
         }
+        /* eslint-enable no-console */
     },
     strict: function(_, type) {
         if (typeof _ !== type) {

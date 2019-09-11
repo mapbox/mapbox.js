@@ -11,14 +11,15 @@ tags:
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([40, -100], 4);
+var map = L.mapbox.map('map')
+    .setView([40, -100], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var nprTiles = L.mapbox.tileLayer('examples.npr-stations').addTo(map);
 var nprGrid = L.mapbox.gridLayer('examples.npr-stations').addTo(map);
 
-// you would usually use the gridControl to display a nice box in the corner
-// with your data, since we want a popup instead we won't initialize the gridControl
+// You would usually use gridControl to display a box in the corner with your data,
+// but since you want a popup you won't initialize the gridControl.
 
 nprGrid.on('click', function(e) {
     if (!e.data) return;

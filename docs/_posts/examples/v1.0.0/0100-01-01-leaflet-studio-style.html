@@ -12,13 +12,13 @@ tags:
 <script>
 var map = L.map('map').setView([38.97416, -95.23252], 15);
 
-// Add tiles from the Mapbox Static API tiles endpoint
-// (https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles)
+// Add tiles from the Mapbox Static Tiles API
+// (https://docs.mapbox.com/api/maps/#static-tiles)
 // Tiles are 512x512 pixels and are offset by 1 zoom level
 L.tileLayer(
-    'https://api.mapbox.com/styles/v1/mapbox/emerald-v8/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+    'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
         tileSize: 512,
         zoomOffset: -1,
-        attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '© <a href="https://apps.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 </script>

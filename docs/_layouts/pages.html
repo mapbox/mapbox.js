@@ -42,7 +42,7 @@ examples:
 <div class='static-header-page'>
 
 <link href='{{site.baseurl}}/assets/css/site.css' rel='stylesheet' />
-<link href='{{site.url}}/css/docs.css' rel='stylesheet' />
+<link href='https://www.mapbox.com/css/docs.css' rel='stylesheet' />
 <script src='{{site.baseurl}}/assets/js/prettify.js'></script>
 <script src='{{site.baseurl}}/assets/js/site.js'></script>
 
@@ -91,16 +91,10 @@ examples:
       <div class='col3 dark round-left keyline-right pad2y pad1x center truncate'>
         <strong class='icon brackets'>Mapbox.js</strong>
       </div>
-      <div class='col6 dark tabs mobile-cols pad1'><!--
+      <div class='col9 dark tabs mobile-cols pad1'><!--
         --><a href='{{site.baseurl}}/api' class='col4 {% if page.categories contains "api" %}active{% endif %}'>API</a><!--
         --><a href='{{site.baseurl}}/examples' class='col4 {% if page.url contains "example" %}active{% endif %}'>Examples</a><!--
         --><a href='{{site.baseurl}}/plugins' class='col4 {% if page.url contains "plugins" %}active{% endif %}'>Plugins</a>
-      </div>
-      <div id='docs-search' class='col3 pad1 keyline-left'>
-        <fieldset class='col12 with-icon dark'>
-          <span class='icon search'></span>
-          <input type='text' class='col12 round clean' />
-        </fieldset>
       </div>
     </nav>
   </div>

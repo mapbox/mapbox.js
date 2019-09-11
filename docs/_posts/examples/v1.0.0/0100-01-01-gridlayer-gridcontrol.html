@@ -11,19 +11,17 @@ tags:
 <div id='map' class='dark'></div>
 
 <script>
-// Define a map without a Map ID so we
-// have to add each part of it manually.
-var map = L.mapbox.map('map', undefined);
+// Define the base map
+var map = L.mapbox.map('map')
+	.setView([37, -80], 3)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
 
 // The visible tile layer
-L.mapbox.tileLayer('examples.map-8ced9urs').addTo(map);
+L.mapbox.tileLayer('examples.bird-species').addTo(map);
 
 // Load interactivity data into the map with a gridLayer
-var myGridLayer = L.mapbox.gridLayer('examples.map-8ced9urs').addTo(map);
+var myGridLayer = L.mapbox.gridLayer('examples.bird-species').addTo(map);
 
 // And use that interactivity to drive a control the user can see.
 var myGridControl = L.mapbox.gridControl(myGridLayer).addTo(map);
-
-// Finally, center the map.
-map.setView([37, -80], 3);
 </script>

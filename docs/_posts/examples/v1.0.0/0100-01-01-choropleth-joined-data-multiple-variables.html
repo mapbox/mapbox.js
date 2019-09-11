@@ -27,8 +27,9 @@ path {
 <!-- jQuery is required for this example. -->
 <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
 <script>
-var map = L.mapbox.map('map', 'mapbox.light')
-    .setView([40, -96], 4);
+var map = L.mapbox.map('map')
+    .setView([40, -96], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));;
 
 // Be nice and credit our data source, Census Reporter.
 map.attributionControl.addAttribution('Data from ' +

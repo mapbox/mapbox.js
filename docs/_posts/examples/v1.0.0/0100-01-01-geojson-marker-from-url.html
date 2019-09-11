@@ -10,8 +10,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([38.1089, 13.3545], 15);
+var map = L.mapbox.map('map')
+    .setView([38.1089, 13.3545], 15)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // As with any other AJAX request, this technique is subject to the Same Origin Policy:
 // http://en.wikipedia.org/wiki/Same_origin_policy

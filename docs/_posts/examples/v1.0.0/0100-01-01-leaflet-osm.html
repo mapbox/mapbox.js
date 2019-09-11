@@ -13,7 +13,8 @@ tags:
 
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets');
+var map = L.mapbox.map('map')
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 $.ajax({
     url: "https://www.openstreetmap.org/api/0.6/way/260501602/full",

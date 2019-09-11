@@ -11,10 +11,11 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.light'),
+var map = L.mapbox.map('map')
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
     // The maxZoom states which zoom the markers are fully opaque at -
     // in this case, there are few markers far apart, so we set it low.
-    heat = L.heatLayer([], { maxZoom: 12 }).addTo(map);
+var heat = L.heatLayer([], { maxZoom: 12 }).addTo(map);
 
 // We're just using a featureLayer to pull marker data from Mapbox -
 // this is not added to the map.
