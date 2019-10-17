@@ -9,7 +9,7 @@ Checklist:
 - [ ] Merge release branch into `publisher-production`
 - [ ] Finalize the release (part 2)
 
-## Part 1: from release branch (version bump, cdn publish, npm publish, docs generation)
+## Part 1: [release branch] (version bump, cdn publish, npm publish, docs generation)
 
 Update <MAJOR.MINOR.PATCH> to your version. i.e. 3.2.1
 
@@ -45,7 +45,7 @@ $ git add _config*.yml docs/*
 $ git commit -m "Update docs/*: <MAJOR.MINOR.PATCH>"
 ```
 
-### Part 2: from publisher-production branch (tag and release)
+### Part 2: [publisher-production branch] (tag and release)
 
 ```terminal
 $ git checkout publisher-production
