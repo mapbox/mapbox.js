@@ -48,5 +48,6 @@ echo "Do you want to publish NPM? (y/n)"
 read -r should_publish_npm
 
 if [[ "$should_publish_npm" == "y" ]]; then
-  mbx npm publish
+  npm login
+  npm publish
 fi

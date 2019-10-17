@@ -19,4 +19,4 @@
 * Push to Github. `git push origin publisher-production --tags`
 * Build `mapbox.js` `make`
 * Publish to CDN. `./deploy.sh v<major.minor.patch>`
-* Publish to NPM. `mbx npm publish`
+* Publish to NPM. `npm publish`
