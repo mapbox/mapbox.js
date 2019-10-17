@@ -22,9 +22,14 @@ if [[ "$changelog_updated" != "y" ]]; then
   exit 1
 fi
 
+echo "Creating release branch ${tag}."
+git checkout -b "$tag"
+
 echo "Bumping version in package.json and package-lock.json, tagging, comiting and pushing to remote"
-npm version "$version"
-git push origin publisher-production --tags
+npm version --no-git-tag-version "$version"
+$ git add package*.json
+$ git commit -m "Update package*.json: <MAJOR.MINOR.PATCH>"
+git push origin "$tag"
 
 echo "Do you want to publish NPM? (y/n)"
 read -r should_publish_npm
@@ -58,5 +63,5 @@ if [[ "$should_update_documentation" == "y" ]]; then
 
   echo "Bumping version in package.json and package-lock.json, commiting and tagging"
   npm version "$version"
-  git push origin publisher-production
+  git push origin "$tag"
 fi

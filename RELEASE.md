@@ -1,21 +1,57 @@
 # Creating a release of mapbox.js
 
-### Before Deploying
+The majority of the release process is done on a release branch. Once all the artifacts are built and published, you will need to get your release reviewed and approved. Once approved the release branch is ready to be merged into the default `publisher-production` branch. After being merged the release can be tagged and Github release created.
 
-* You need to have the AWS CLI installed. `pip install awscli`
-* Write a `CHANGELOG.md` entry that describes your changes and links to
-  issues in question
+Checklist:
+- [ ] Make sure the changelog has been updated
+- [ ] Do the release (part 1) in a release branch (using manual or automated process below)
+- [ ] Create release PR and get it reviewed and approved
+- [ ] Merge release branch into `publisher-production`
+- [ ] Finalize the release (part 2)
 
-### Automated Deployement
+## Release part 1: from release branch (version bump, cdn publish, npm publish, docs generation)
 
-`npm run release <major.minor.patch>`
+### Option 1: Automated release
+Update <MAJOR.MINOR.PATCH> to your version. i.e. 3.2.1
 
-### Manual Deployement
+```terminal
+$ npm run release <MAJOR.MINOR.PATCH>
+```
 
-* Bump version and tag. `npm version <major.minor.patch>`
-* Push to Github. `git push origin publisher-production --tags`
-* Publish to NPM. `npm publish`
-* Publish to CDN. `./deploy.sh v<major.minor.patch>`
-* Update `_config.yaml`, `_config.publisher-production.yml`, `_config.publisher-staging.yml`
-* Build docs. `./deploy.sh v<major.minor.patch>`
-* Commit docs.
+### Option 2: Manual release
+
+Update <MAJOR.MINOR.PATCH> to your version. i.e. 3.2.1
+
+```terminal
+# Bump version
+$ npm version --no-git-tag-version <MAJOR.MINOR.PATCH>
+$ git add package*.json
+$ git commit -m "Update package*.json: <MAJOR.MINOR.PATCH>"
+
+# Publish to NPM
+$ npm login
+$ npm publish
+
+# Publish to Mapbox CDN
+$ ./deploy.sh v<MAJOR.MINOR.PATCH>
+
+# Generate docs pages
+$ ./deploy.sh v<MAJOR.MINOR.PATCH>
+
+# Update mapboxjs version in `_config.yaml`, `_config.publisher-production.yml`, `_config.publisher-staging.yml`
+$ find . -name '_config*.yml' -exec sed -i '' "s/^\\(\\s*mapboxjs\\s*:\\s*\\).*/\\1 <MAJOR.MINOR.PATCH>/" {} \;
+
+# Commit configs and docs.
+$ git add _config*.yml docs/*
+$ git commit -m "Update docs/*: <MAJOR.MINOR.PATCH>"
+```
+
+### Release part 2: from publisher-production branch (tag and release)
+
+```terminal
+$ git checkout publisher-production
+$ git pull origin publisher-production
+$ git tag -a v<MAJOR.MINOR.PATCH> -m <MAJOR.MINOR.PATCH> release
+$ git push origin "$tag" --tags
+# login to Github and create release
+```
