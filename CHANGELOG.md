@@ -1,3 +1,7 @@
+## v3.2.1
+
+* Fix HTTP mode for styleLayer
+
 ## v3.2.0
 
 * Changes `FORCE_HTTPS` option to `true` by default.
