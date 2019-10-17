@@ -12,11 +12,10 @@
 
 ### Manual Deployement
 
+* Bump version and tag. `npm version <major.minor.patch>`
+* Push to Github. `git push origin publisher-production --tags`
+* Publish to NPM. `npm publish`
+* Publish to CDN. `./deploy.sh v<major.minor.patch>`
 * Update `_config.yaml`, `_config.publisher-production.yml`, `_config.publisher-staging.yml`
 * Build docs. `./deploy.sh v<major.minor.patch>`
 * Commit docs.
-* Bump version and tag. `npm version <major.minor.patch>`
-* Push to Github. `git push origin publisher-production --tags`
-* Build `mapbox.js` `make`
-* Publish to CDN. `./deploy.sh v<major.minor.patch>`
-* Publish to NPM. `npm publish`
