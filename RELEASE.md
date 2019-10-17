@@ -19,13 +19,13 @@ Checklist:
   - npm publish
   - generate docs pages
 
-### Option 1: Automated release
+### Option A: Automated release
 
 ```terminal
 $ npm run release <MAJOR.MINOR.PATCH>
 ```
 
-### Option 2: Manual release
+### Option B: Manual release
 
 ```terminal
 # Bump version
