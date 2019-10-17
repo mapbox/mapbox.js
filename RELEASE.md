@@ -9,9 +9,15 @@ Checklist:
 - [ ] Merge release branch into `publisher-production`
 - [ ] Finalize the release (part 2)
 
-## Part 1: [branch=release-branch] (version bump, cdn publish, npm publish, docs generation)
+> Replace any instance of <MAJOR.MINOR.PATCH> with your version
 
-Update <MAJOR.MINOR.PATCH> to your version. i.e. 3.2.1
+## Part 1:
+- This part of the release is done on a release branch
+- This part of the relase will: 
+  - version bump
+  - cdn publish
+  - npm publish
+  - generate docs pages
 
 ### Option 1: Automated release
 
@@ -45,7 +51,11 @@ $ git add _config*.yml docs/*
 $ git commit -m "Update docs/*: <MAJOR.MINOR.PATCH>"
 ```
 
-## Part 2: [branch=publisher-production] (tag and release)
+## Part 2:
+- This part of the release is done on the publisher-production
+- This part of the release will:
+  - git tag
+  - create Github release
 
 ```terminal
 $ git checkout publisher-production
