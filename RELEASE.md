@@ -11,16 +11,15 @@ Checklist:
 
 ## Release part 1: from release branch (version bump, cdn publish, npm publish, docs generation)
 
-### Option 1: Automated release
 Update <MAJOR.MINOR.PATCH> to your version. i.e. 3.2.1
+
+### Option 1: Automated release
 
 ```terminal
 $ npm run release <MAJOR.MINOR.PATCH>
 ```
 
 ### Option 2: Manual release
-
-Update <MAJOR.MINOR.PATCH> to your version. i.e. 3.2.1
 
 ```terminal
 # Bump version
