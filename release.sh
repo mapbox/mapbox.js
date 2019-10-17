@@ -22,16 +22,14 @@ if [[ "$changelog_updated" != "y" ]]; then
   exit 1
 fi
 
+echo "Commiting publishers _config files"
 echo "Bumping version in publishers _config files"
 find . -name '_config*.yml' -exec sed -i '' "s/^\\(\\s*mapboxjs\\s*:\\s*\\).*/\\1 ${version}/" {} \;
 
-echo "Commiting publishers _config files"
-git add _config*.yml
-git commit -m "Update _config*.yml: ${tag}"
-
 echo "Building docs"
 ./_docs/build.sh "$tag"
-git add docs/*
+
+git add _config*.yml docs/*
 git commit -m "Update docs: ${tag}"
 
 echo "Bumping version in package.json and package-lock.json, commiting and tagging"
