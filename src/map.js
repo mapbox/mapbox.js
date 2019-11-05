@@ -154,7 +154,7 @@ var LMap = L.Map.extend({
     },
 
     _updateMapFeedbackLink: function() {
-        if (!this._controlContainer.getElementsByClassName) return;
+        if (!this._controlContainer || !this._controlContainer.getElementsByClassName) return;
         var link = this._controlContainer.getElementsByClassName('mapbox-improve-map');
         if (link.length && this._loaded) {
             var center = this.getCenter().wrap();
