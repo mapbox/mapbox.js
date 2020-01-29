@@ -12,6 +12,7 @@ module.exports = {
         'mapbox.outdoors': 'mapbox/outdoors-v11', 
         'mapbox.satellite': 'mapbox/satellite-v9',
         'mapbox.streets': 'mapbox/streets-v11', 
-        'mapbox.streets-basic': 'mapbox/basic-v9'
+        'mapbox.streets-basic': 'mapbox/basic-v9',
+        'mapbox.streets-satellite': 'mapbox/satellite-streets-v11'
     }
 };
