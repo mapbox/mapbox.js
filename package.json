@@ -15,10 +15,10 @@
     "*.md"
   ],
   "dependencies": {
-    "corslite": "0.0.7",
+    "@mapbox/corslite": "0.0.7",
+    "@mapbox/sanitize-caja": "^0.1.4",
     "leaflet": "1.4.0",
-    "mustache": "3.0.1",
-    "sanitize-caja": "0.1.4"
+    "mustache": "3.0.1"
   },
   "scripts": {
     "test": "eslint src && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html && mocha test/docs.js",
