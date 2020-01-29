@@ -1,6 +1,6 @@
 'use strict';
 
-var corslite = require('corslite'),
+var corslite = require('@mapbox/corslite'),
     strict = require('./util').strict,
     config = require('./config');
 

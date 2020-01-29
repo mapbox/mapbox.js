@@ -8,7 +8,7 @@ var GridControl = L.Control.extend({
     options: {
         pinnable: true,
         follow: false,
-        sanitizer: require('sanitize-caja'),
+        sanitizer: require('@mapbox/sanitize-caja'),
         touchTeaser: true,
         location: true
     },

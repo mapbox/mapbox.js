@@ -7,7 +7,7 @@ var TileLayer = L.TileLayer.extend({
     includes: [require('./load_tilejson')],
 
     options: {
-        sanitizer: require('sanitize-caja')
+        sanitizer: require('@mapbox/sanitize-caja')
     },
 
     // http://mapbox.com/developers/api/#image_quality
