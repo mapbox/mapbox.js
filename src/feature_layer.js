@@ -13,7 +13,7 @@ var util = require('./util'),
 var FeatureLayer = L.FeatureGroup.extend({
     options: {
         filter: function() { return true; },
-        sanitizer: require('sanitize-caja'),
+        sanitizer: require('@mapbox/sanitize-caja'),
         style: simplestyle.style,
         popupOptions: { closeButton: false }
     },

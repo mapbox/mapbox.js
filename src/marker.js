@@ -2,7 +2,7 @@
 
 var format_url = require('./format_url'),
     util = require('./util'),
-    sanitize = require('sanitize-caja');
+    sanitize = require('@mapbox/sanitize-caja');
 
 // mapbox-related markers functionality
 // provide an icon from mapbox's simple-style spec and hosted markers

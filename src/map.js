@@ -25,7 +25,7 @@ var LMap = L.Map.extend({
         legendControl: {},
         gridControl: {},
         shareControl: false,
-        sanitizer: require('sanitize-caja')
+        sanitizer: require('@mapbox/sanitize-caja')
     },
 
     _tilejson: {},
