@@ -62,7 +62,7 @@ examples:
       {% for example in layout.examples %}
       <div class='space-bottom1'>
         <strong class='block quiet small'>{{example.name}}</strong>
-        {% assign sorted = (site.tags[example.id]) | reverse %}
+        {% assign sorted = site.tags[example.id] | reverse %}
         {% for listing in sorted %}
           <a href='{{site.baseurl}}{{listing.url}}' class='block small truncate {% if listing.title == page.title %} active{% endif %}'>{{listing.title}}</a>
         {% endfor %}
