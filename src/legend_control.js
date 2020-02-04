@@ -45,7 +45,7 @@ var LegendControl = L.Control.extend({
         var hide = 'none';
 
         for (var i in this._legends) {
-            if (this._legends.hasOwnProperty(i) && this._legends[i]) {
+            if (this._legends.hasOwnProperty(i) && this._legends[i]) { // eslint-disable-line no-prototype-builtins
                 var div = L.DomUtil.create('div', 'map-legend wax-legend', this._container);
                 div.innerHTML = this.options.sanitizer(i);
                 hide = 'block';
