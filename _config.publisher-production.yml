@@ -11,5 +11,5 @@ defaultid: 'mapbox.streets'
 exclude: [dist]
 future: true
 accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg
-gems:
+plugins:
 - jekyll-sitemap
