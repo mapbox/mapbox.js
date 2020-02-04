@@ -4,6 +4,9 @@
   "description": "Mapbox plugin for Leaflet",
   "version": "3.2.1",
   "homepage": "http://mapbox.com/",
+  "engines": {
+    "node": ">=10"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/mapbox/mapbox.js.git"
