@@ -4,6 +4,9 @@
   "description": "Mapbox plugin for Leaflet",
   "version": "3.2.1",
   "homepage": "http://mapbox.com/",
+  "engines": {
+    "node": ">=10"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/mapbox/mapbox.js.git"
@@ -27,15 +30,15 @@
   },
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "browserify": "^16.2.3",
-    "clean-css-cli": "^4.2.1",
-    "eslint": "^5.14.1",
+    "browserify": "^16.5.0",
+    "clean-css-cli": "^4.3.0",
+    "eslint": "^6.8.0",
     "expect.js": "0.3.1",
     "happen": "0.3.2",
-    "marked": "~0.6.1",
+    "marked": "^0.8.0",
     "minifyify": "^7.3.5",
     "minimist": "1.2.0",
-    "mocha": "6.0.1",
+    "mocha": "^7.0.1",
     "mocha-phantomjs-core": "2.1.2",
     "phantomjs-prebuilt": "2.1.16",
     "sinon": "7.2.4"
