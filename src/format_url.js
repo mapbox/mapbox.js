@@ -1,6 +1,7 @@
 'use strict';
 
 var config = require('./config'),
+    warn = require('./util').warn,
     version = require('../package.json').version;
 
 module.exports = function(path, accessToken) {
@@ -42,7 +43,8 @@ module.exports.tileJSON = function(urlOrMapID, accessToken) {
     if (urlOrMapID in config.TEMPLATE_STYLES) {
         url = module.exports('/styles/v1/' + config.TEMPLATE_STYLES[urlOrMapID], accessToken); 
     } else {
-        // TODO: remove this and throw error around classic style usage instead
+        warn('Warning: this implementation is loading a Mapbox Studio Classic style (' + urlOrMapID + '). ' +
+            'Studio Classic styles are scheduled for deprecation: https://blog.mapbox.com/deprecating-studio-classic-styles-c65a744140a6');
         url = module.exports('/v4/' + urlOrMapID + '.json', accessToken);
     }
 
