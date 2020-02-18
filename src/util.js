@@ -19,6 +19,12 @@ module.exports = {
             typeof console.error === 'function') {
             console.error(_);
         }
+    },
+    warn: function(_) {
+        if (typeof console === 'object' && 
+            typeof console.warn === 'function') {
+            console.warn(_);
+        }
         /* eslint-enable no-console */
     },
     strict: function(_, type) {
