@@ -51,6 +51,10 @@ describe("format_url", function() {
             expect(internals.url.tileJSON('user.map')).to.equal('https://api.mapbox.com/v4/user.map.json?access_token=key&secure');
         });
 
+        it('returns a styles/v1 URL for default mapbox style ids', function() {
+            expect(internals.url.tileJSON('mapbox.streets')).to.equal('https://api.mapbox.com/styles/v1/mapbox/streets-v11?access_token=key&secure')
+        });
+
         it('does not append &secure and uses http when FORCE_HTTPS is set to false', function() {
             internals.config.FORCE_HTTPS = false;
             expect(internals.url.tileJSON('user.map')).to.equal('http://api.mapbox.com/v4/user.map.json?access_token=key');

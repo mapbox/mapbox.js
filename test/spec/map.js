@@ -105,6 +105,18 @@ describe('L.mapbox.map', function() {
             expect(map.getZoom()).to.eql(3);
         });
 
+        it('preserves manually-set view for default style ids', function() {
+            var map = L.mapbox.map(element, 'mapbox.osm-bright')
+                .setView([39, -89], 6);
+
+            server.respondWith("GET", "https://api.mapbox.com/styles/v1/mapbox/bright-v9?access_token=key",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.styleJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 39, lng: -89});
+            expect(map.getZoom()).to.eql(6);
+        })
+
         it('preserves manually-set zoom', function() {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
                 .setZoom(3);
@@ -116,6 +128,18 @@ describe('L.mapbox.map', function() {
             expect(map.getCenter()).to.eql({ lat: 39.386, lng: -98.976 });
             expect(map.getZoom()).to.eql(3);
         });
+
+        it('preserves manually-set zoom for default style ids', function () {
+            var map = L.mapbox.map(element, 'mapbox.osm-bright')
+                .setZoom(3);
+
+            server.respondWith("GET", "https://api.mapbox.com/styles/v1/mapbox/bright-v9?access_token=key&secure",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.styleJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 34.0442, lng: -118.2518 });
+            expect(map.getZoom()).to.eql(3);
+        })
 
         it('preserves manually-set marker layer GeoJSON', function() {
             var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
