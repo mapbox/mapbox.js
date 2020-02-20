@@ -933,6 +933,31 @@ helpers.tileJSON_noformat = {
     "tiles":["http://domain.example/path/{z}/{x}/{y}"]
 };
 
+helpers.styleJSON = {
+    "version": 8,
+    "name": "Bright",
+    "tiles": ['https://api.mapbox.com/styles/v1/mapbox/bright-v9/tiles/256/{z}/{x}/{y}?access_token=key'],
+    "sources": {
+        "mapbox": {
+            "url": "mapbox://mapbox.mapbox-streets-v7",
+            "type": "vector"
+        }
+    },
+    "center": [
+        -118.2518,
+        34.0442
+    ],
+    "zoom": 15,
+    "sprite": "mapbox://sprites/mapbox/bright-v9",
+    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+    "created": "1970-01-01T00:00:00.000Z",
+    "modified": "1970-01-01T00:00:00.000Z",
+    "owner": "mapbox",
+    "id": "bright-v9",
+    "draft": false,
+    "visibility": "public"
+};
+
 helpers.geoJson = {
     type: 'FeatureCollection',
     features: [{
