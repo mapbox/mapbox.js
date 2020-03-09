@@ -8,6 +8,8 @@ function contains(item, list) {
     return false;
 }
 
+var warnOnceHistory = {};
+
 module.exports = {
     idUrl: function(_, t) {
         if (_.indexOf('/') === -1) t.loadID(_);
@@ -21,8 +23,11 @@ module.exports = {
         }
     },
     warn: function(_) {
+        // avoid cluttering the console with duplicative warnings
+        if (warnOnceHistory[_]) return;
         if (typeof console === 'object' && 
             typeof console.warn === 'function') {
+            warnOnceHistory[_] = true;
             console.warn(_);
         }
         /* eslint-enable no-console */
