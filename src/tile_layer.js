@@ -79,7 +79,14 @@ var TileLayer = L.TileLayer.extend({
 
         var templated = L.Util.template(url, tilePoint);
         if (!templated || !this.options.format) {
-            return templated;
+            var tileURL;
+            if (L.Browser.retina && url.indexOf('/styles/v1') !== -1) {
+                tileURL = templated.replace('?', '@2x?');
+            } else {
+                tileURL = templated;
+            }
+
+            return tileURL
         } else {
             return templated.replace(formatPattern,
                 (L.Browser.retina ? this.scalePrefix : '.') + this.options.format);

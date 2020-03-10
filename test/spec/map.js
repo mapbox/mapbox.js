@@ -40,7 +40,7 @@ describe('L.mapbox.map', function() {
             server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respondWith("GET", "http://b.tiles.mapbox.com/v3/examples.map-8ced9urs/4/3/6.png",
-                [200, { "Content-Type": "image/png" }, null);
+                [200, { "Content-Type": "image/png" }, '']);
             server.respond();
         });
 
@@ -53,8 +53,22 @@ describe('L.mapbox.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "https://api.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
+            server.respond();
+        });
+
+        it('loads styleJSON from a default mapbox ID', function(done) {
+            var map = L.mapbox.map(element, 'mapbox.osm-bright');
+
+            map.on('ready', function() {
+                expect(this).to.equal(map);
+                expect(map.getTileJSON()).to.eql(helpers.styleJSON);
+                done();
+            });
+
+            server.respondWith("GET", "https://api.mapbox.com/styles/v1/mapbox/bright-v9?access_token=key&secure",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.styleJSON)]);
             server.respond();
         });
 
@@ -83,7 +97,7 @@ describe('L.mapbox.map', function() {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
                 .setView([1, 2], 3);
 
-            server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "https://api.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
 
@@ -91,17 +105,41 @@ describe('L.mapbox.map', function() {
             expect(map.getZoom()).to.eql(3);
         });
 
+        it('preserves manually-set view for default style ids', function() {
+            var map = L.mapbox.map(element, 'mapbox.osm-bright')
+                .setView([39, -89], 6);
+
+            server.respondWith("GET", "https://api.mapbox.com/styles/v1/mapbox/bright-v9?access_token=key",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.styleJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 39, lng: -89});
+            expect(map.getZoom()).to.eql(6);
+        })
+
         it('preserves manually-set zoom', function() {
             var map = L.mapbox.map(element, 'mapbox.map-0l53fhk2')
                 .setZoom(3);
 
-            server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "https://api.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
 
             expect(map.getCenter()).to.eql({ lat: 39.386, lng: -98.976 });
             expect(map.getZoom()).to.eql(3);
         });
+
+        it('preserves manually-set zoom for default style ids', function () {
+            var map = L.mapbox.map(element, 'mapbox.osm-bright')
+                .setZoom(3);
+
+            server.respondWith("GET", "https://api.mapbox.com/styles/v1/mapbox/bright-v9?access_token=key&secure",
+                [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.styleJSON)]);
+            server.respond();
+
+            expect(map.getCenter()).to.eql({ lat: 34.0442, lng: -118.2518 });
+            expect(map.getZoom()).to.eql(3);
+        })
 
         it('preserves manually-set marker layer GeoJSON', function() {
             var map = L.mapbox.map(element, 'https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
