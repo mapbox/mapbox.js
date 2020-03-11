@@ -209,8 +209,15 @@ var LMap = L.Map.extend({
 
         // ensure logo appears even when mapbox layer added after map is initialized
         var mapboxLogoControl = this._mapboxLogoControl.getContainer();
-        if ((layer._tilejson.attribution.indexOf('mapbox') !== -1) && !(L.DomUtil.hasClass(mapboxLogoControl))) {
-            this._mapboxLogoControl._setTileJSON({ mapbox_logo : true });
+        if (
+            (layer.options.tiles) &&
+            (layer.options.tiles[0].indexOf('mapbox.com') !== -1) &&
+            !(L.DomUtil.hasClass(mapboxLogoControl))
+        ) {
+            var tileJSON = layer.getTileJSON();
+            if (!(tileJSON.mapbox_logo) || (tileJSON.mapbox_logo === true)) {
+                this._mapboxLogoControl._setTileJSON(tileJSON);
+            }
         }
 
         this._updateMapFeedbackLink();

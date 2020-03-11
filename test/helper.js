@@ -869,6 +869,23 @@ helpers.tileJSON_malicious = {
     "webpage":"http://tiles.mapbox.com/examples/map/map-8ced9urs"
 }
 
+helpers.tileJSON_mapboxlogoMissing = {
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
+    "autoscale": true,
+    "bounds": [-180, -85.0511, 180, 85.0511],
+    "data": ["http://a.tiles.mapbox.com/v3/examples.h8e9h88l/markers.geojsonp"],
+    "geocoder": "http://a.tiles.mapbox.com/v3/examples.h8e9h88l/geocode/{query}.jsonp",
+    "id": "examples.h8e9h88l",
+    "maxzoom": 22,
+    "minzoom": 0,
+    "name": "My Mapbox Streets Map",
+    "private": true,
+    "scheme": "xyz",
+    "tilejson": "2.0.0",
+    "tiles": ["http://some.external.source.com/v3/examples.h8e9h88l/{z}/{x}/{y}.png"],
+    "webpage": "http://a.tiles.mapbox.com/v3/examples.h8e9h88l/page.html",
+};
+
 helpers.tileJSON_mapboxlogoFalse = {
     "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
     "autoscale": true,
@@ -955,7 +972,8 @@ helpers.styleJSON = {
     "owner": "mapbox",
     "id": "bright-v9",
     "draft": false,
-    "visibility": "public"
+    "visibility": "public",
+    "mapbox_logo": true
 };
 
 helpers.geoJson = {

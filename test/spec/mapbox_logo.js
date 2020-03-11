@@ -17,7 +17,7 @@ describe('mapbox_logo', function() {
     });
 
     it('is not on tilejson map without mapbox_logo flag', function() {
-        var map = L.mapbox.map(element, tileJSON);
+        var map = L.mapbox.map(element, helpers.tileJSON_mapboxlogoMissing);
         var mapboxLogoControl = map._mapboxLogoControl.getContainer();
         expect(L.DomUtil.hasClass(mapboxLogoControl, 'mapbox-logo-true')).to.be(false);
     });
