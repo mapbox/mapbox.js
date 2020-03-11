@@ -207,6 +207,12 @@ var LMap = L.Map.extend({
             this._zoomBoundLayers[L.stamp(layer)] = layer;
         }
 
+        // ensure logo appears even when mapbox layer added after map is initialized
+        var mapboxLogoControl = this._mapboxLogoControl.getContainer();
+        if ((layer._tilejson.attribution.indexOf('mapbox') !== -1) && !(L.DomUtil.hasClass(mapboxLogoControl))) {
+            this._mapboxLogoControl._setTileJSON({ mapbox_logo : true });
+        }
+
         this._updateMapFeedbackLink();
         this._updateZoomLevels();
     }
