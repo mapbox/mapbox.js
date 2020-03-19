@@ -95,7 +95,7 @@ _Example_:
         format: 'jpg70'
     });
 
-[Live example of .setFormat in use](https://www.mapbox.com/mapbox.js/example/v1.0.0/tilelayer-setformat/)
+[Live example of .setFormat in use](https://www.mapbox.com/mapbox.js/example/tilelayer-setformat/)
 
 _Returns_: the layer object
 
