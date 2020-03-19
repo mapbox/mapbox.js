@@ -972,8 +972,7 @@ helpers.styleJSON = {
     "owner": "mapbox",
     "id": "bright-v9",
     "draft": false,
-    "visibility": "public",
-    "mapbox_logo": true
+    "visibility": "public"
 };
 
 helpers.geoJson = {

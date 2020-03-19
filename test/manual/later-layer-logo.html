@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8' />
+  <link rel="stylesheet" href="../../dist/mapbox.css" />
+  <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
+  <link rel="stylesheet" href="embed.css" />
+  <script src="../../dist/mapbox.js"></script>
+  <script src="access_token.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id='map'></div>
+
+  <script>
+    var map = L.mapbox.map('map', null, {
+      maxZoom: 18
+    }).setView([22.76, -25.84], 3);
+
+    L.mapbox.tileLayer('mapbox.streets').addTo(map);
+  </script>
+
+</body>
+
+</html>
