@@ -24,7 +24,7 @@ var MapboxLogoControl = L.Control.extend({
         }
 
         // account for usage of styleJSON as functional tileJSON for defaults
-        if (!json.tilejson && (json.owner && json.owner === 'mapbox')) {
+        if (!json.tilejson && json.owner === 'mapbox') {
             L.DomUtil.addClass(this._container, 'mapbox-logo-true');
         }
     }
