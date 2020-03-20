@@ -2,7 +2,7 @@
   "author": "Mapbox",
   "name": "mapbox.js",
   "description": "Mapbox plugin for Leaflet",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "homepage": "http://mapbox.com/",
   "engines": {
     "node": ">=10"
