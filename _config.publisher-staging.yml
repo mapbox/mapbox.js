@@ -6,7 +6,7 @@ env: staging
 source: docs
 permalink: /:categories/:title/
 baseurl: /mapbox.js
-mapboxjs: v3.2.1
+mapboxjs: v3.3.0
 defaultid: 'mapbox.streets'
 exclude: [dist]
 future: true
