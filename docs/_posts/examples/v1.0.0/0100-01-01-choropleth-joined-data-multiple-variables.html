@@ -83,21 +83,25 @@ var usLayer = L.mapbox.featureLayer()
 function loadData() {
     $.getJSON('{{site.baseurl}}/assets/data/censusdata.json')
         .done(function(data) {
-            joinData(data, usLayer);
+            retrieveGeoJSON(data, usLayer);
         });
 }
 
-function joinData(data, layer) {
-    // First, get the US state GeoJSON data for reference.
-    var usGeoJSON = usLayer.getGeoJSON(),
-        byState = {};
+function retrieveGeoJSON(data, layer) {
+    setTimeout(function () {
+        joinData(data, layer, usLayer.getGeoJSON())
+    }, 1000);
+}
+
+function joinData(data, layer, geojson) {
+    var byState = {};
 
     // Rearrange it so that instead of being a big array,
     // it's an object that is indexed by the state name,
     // that we'll use to join on.
-    for (var i = 0; i < usGeoJSON.features.length; i++) {
-        byState[usGeoJSON.features[i].properties.name] =
-            usGeoJSON.features[i];
+    for (var i = 0; i < geojson.features.length; i++) {
+        byState[geojson.features[i].properties.name] =
+            geojson.features[i];
     }
     for (i = 0; i < data.length; i++) {
         // Match the GeoJSON data (byState) with the tabular data
