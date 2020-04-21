@@ -76,7 +76,7 @@ for (var i = 0; i < variables.length; i++) {
 var usLayer = L.mapbox.featureLayer()
     .loadURL('{{site.baseurl}}/assets/data/us.geojson')
     .addTo(map)
-    .on('ready', loadData);
+    .on('ready', loadData());
 
 // Grab the spreadsheet of data as JSON. If you have CSV
 // data, you should convert it to JSON with
