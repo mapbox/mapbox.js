@@ -25,7 +25,7 @@ var LMap = L.Map.extend({
         legendControl: {},
         gridControl: {},
         shareControl: false,
-        sanitizer: require('sanitize-caja')
+        sanitizer: require('@mapbox/sanitize-caja')
     },
 
     _tilejson: {},
@@ -146,7 +146,8 @@ var LMap = L.Map.extend({
         this._mapboxLogoControl._setTileJSON(json);
 
         if (!this._loaded && json.center) {
-            var zoom = this.getZoom() !== undefined ? this.getZoom() : json.center[2],
+            var defaultZoom = (json.zoom) ? json.zoom : json.center[2];
+            var zoom = this.getZoom() !== undefined ? this.getZoom() : defaultZoom,
                 center = L.latLng(json.center[1], json.center[0]);
 
             this.setView(center, zoom);
@@ -154,7 +155,7 @@ var LMap = L.Map.extend({
     },
 
     _updateMapFeedbackLink: function() {
-        if (!this._controlContainer.getElementsByClassName) return;
+        if (!this._controlContainer || !this._controlContainer.getElementsByClassName) return;
         var link = this._controlContainer.getElementsByClassName('mapbox-improve-map');
         if (link.length && this._loaded) {
             var center = this.getCenter().wrap();
@@ -204,6 +205,13 @@ var LMap = L.Map.extend({
         if (!(L.stamp(layer) in this._zoomBoundLayers) &&
                 (layer.options.maxZoom || layer.options.minZoom)) {
             this._zoomBoundLayers[L.stamp(layer)] = layer;
+        }
+
+        // ensure logo appears even when mapbox layer added after map is initialized
+        var mapboxLogoControl = this._mapboxLogoControl.getContainer();
+        if (!L.DomUtil.hasClass(mapboxLogoControl, 'mapbox-logo-true')) {
+            var tileJSON = layer.getTileJSON();
+            this._mapboxLogoControl._setTileJSON(tileJSON);
         }
 
         this._updateMapFeedbackLink();

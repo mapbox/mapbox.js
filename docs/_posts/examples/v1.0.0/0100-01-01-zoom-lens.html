@@ -63,12 +63,16 @@ tags:
     <div id='border' class='overlay'></div>
 </div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.light');
-var zoommap = L.mapbox.map('zoommap', 'mapbox.streets', {
+var map = L.mapbox.map('map')
+    .setView([52.5049, 13.3937], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
+
+var zoommap = L.mapbox.map('zoommap', null, {
     fadeAnimation: false,
     zoomControl: false,
     attributionControl: false
-});
+})
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var zl = document.getElementById('zoomlens');
 

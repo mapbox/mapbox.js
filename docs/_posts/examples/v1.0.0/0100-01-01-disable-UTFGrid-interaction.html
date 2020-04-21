@@ -10,21 +10,16 @@ tags:
 <div id='map' class='dark'></div>
 
 <script>
-  var map = L.mapbox.map('map', undefined).setView([35, -82], 3);
+  var map = L.mapbox.map('map')
+    .setView([35, -82], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
 
-  var gridLayer = L.mapbox.gridLayer('examples.map-8ced9urs');
-  map.addLayer(L.mapbox.tileLayer('examples.map-8ced9urs'));
+  var gridLayer = L.mapbox.gridLayer('examples.bird-species');
+  map.addLayer(L.mapbox.tileLayer('examples.bird-species'));
   map.addLayer(gridLayer);
 
   // By not adding the gridControl line below you can control the
   // default interaction in a different way.
   //
   // map.addControl(L.mapbox.gridControl(gridLayer));
-
-  // If you just want to display the map and not worry about managing the
-  // interaction in a different way, you could write it like this:
-  //
-  // var map = L.mapbox.map('map', 'examples.map-8ced9urs', {
-  //    gridControl: false
-  // });
 </script>

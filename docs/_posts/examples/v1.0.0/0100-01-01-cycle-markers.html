@@ -10,10 +10,15 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.dc-markers');
+var map = L.mapbox.map('map')
+  .setView([37.77396, -122.4366], 12)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+  .addTo(map);
 
 // Open popup when user mouses over a marker
-map.featureLayer.on('ready', function(e) {
+myFeatureLayer.on('ready', function(e) {
     var markers = [];
     this.eachLayer(function(marker) { markers.push(marker); });
     cycle(markers);

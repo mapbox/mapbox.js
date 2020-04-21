@@ -1,6 +1,7 @@
 'use strict';
 
 var config = require('./config'),
+    warn = require('./util').warn,
     version = require('../package.json').version;
 
 module.exports = function(path, accessToken) {
@@ -38,7 +39,14 @@ module.exports.tileJSON = function(urlOrMapID, accessToken) {
     if (urlOrMapID.indexOf('/') !== -1)
         return urlOrMapID;
 
-    var url = module.exports('/v4/' + urlOrMapID + '.json', accessToken);
+    var url;
+    if (urlOrMapID in config.TEMPLATE_STYLES) {
+        url = module.exports('/styles/v1/' + config.TEMPLATE_STYLES[urlOrMapID], accessToken); 
+    } else {
+        warn('Warning: this implementation is loading a Mapbox Studio Classic style (' + urlOrMapID + '). ' +
+            'Studio Classic styles are scheduled for deprecation: https://blog.mapbox.com/deprecating-studio-classic-styles-c65a744140a6');
+        url = module.exports('/v4/' + urlOrMapID + '.json', accessToken);
+    }
 
     // TileJSON requests need a secure flag appended to their URLs so
     // that the server knows to send SSL-ified resource references.
@@ -53,8 +61,7 @@ module.exports.style = function(styleURL, accessToken) {
     if (styleURL.indexOf('mapbox://styles/') === -1) throw new Error('Incorrectly formatted Mapbox style at ' + styleURL);
 
     var ownerIDStyle = styleURL.split('mapbox://styles/')[1];
-    var url = module.exports('/styles/v1/' + ownerIDStyle, accessToken)
-        .replace('http://', 'https://');
+    var url = module.exports('/styles/v1/' + ownerIDStyle, accessToken);
 
     return url;
 };

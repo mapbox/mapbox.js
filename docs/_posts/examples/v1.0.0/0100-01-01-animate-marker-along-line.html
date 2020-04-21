@@ -12,7 +12,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets').setView([0, 0], 1);
+var map = L.mapbox.map('map')
+  .setView([0, 0], 1)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Generate a GeoJSON line. You could also load GeoJSON via AJAX
 // or generate it some other way.

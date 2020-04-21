@@ -11,8 +11,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.light')
-  .setView([29, -26], 2);
+var map = L.mapbox.map('map')
+  .setView([29, -26], 2)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
 var marker = L.marker([-73, 40], {
     icon: L.mapbox.marker.icon({

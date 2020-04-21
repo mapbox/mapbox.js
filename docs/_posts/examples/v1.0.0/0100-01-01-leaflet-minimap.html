@@ -13,9 +13,21 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .on('ready', function() {
-        new L.Control.MiniMap(L.mapbox.tileLayer('mapbox.streets'))
-            .addTo(map);
-    });
+  var mapboxTiles = L.tileLayer('{{site.tileApi}}/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+         attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  });
+
+  var mapboxTiles2 = L.tileLayer('{{site.tileApi}}/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+         attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  });
+
+  var bigMap = mapboxTiles;
+    
+  var map = L.map('map')
+    .addLayer(bigMap)
+    .setView([0, 0], 2);
+    
+  var littleMap = mapboxTiles2;
+
+  var miniMap = new L.Control.MiniMap(littleMap).addTo(map);
 </script>

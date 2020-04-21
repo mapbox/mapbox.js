@@ -11,10 +11,10 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.satellite')
-    .setView([38.89399, -77.03659], 13);
+var map = L.mapbox.map('map')
+    .setView([37.77396, -122.4366], 13);
 
-map.tileLayer.setOpacity(0.2);
+L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9', {opacity: 0.2}).addTo(map);    
 
 var gj = L.geoJson(null, {
     pointToLayer: function(feature, ll) {
@@ -28,7 +28,7 @@ var gj = L.geoJson(null, {
     }
 }).addTo(map);
 
-L.mapbox.featureLayer('mapbox.dc-markers')
+L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
     .on('ready', function(e) {
         gj.addData(this.getGeoJSON());
     });

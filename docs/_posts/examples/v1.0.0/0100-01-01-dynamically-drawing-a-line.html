@@ -11,8 +11,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([0, 0], 3);
+var map = L.mapbox.map('map')
+    .setView([0, 0], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));;
 
 // Add a new line to the map with no points.
 var polyline = L.polyline([]).addTo(map);

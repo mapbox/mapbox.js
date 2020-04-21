@@ -24,7 +24,7 @@
     // Hide popup when user's cursor leaves marker.
     // We add a timeout to make it a little more visually graceful
     // in case of rapid cursor movement.
-    mapfeatureLayerr.on('mouseout', function(e) {
+    map.featureLayer.on('mouseout', function(e) {
         e.layer._closeTimeout = window.setTimeout(function() {
             e.layer.closePopup();
         }, 300);

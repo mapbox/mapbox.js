@@ -54,7 +54,7 @@ tags:
 var map = L.mapbox.map('map').setView([38.8922,-77.0348], 14);
 var layers = document.getElementById('menu-ui');
 
-addLayer(L.mapbox.tileLayer('mapbox.streets'), 'Base Map', 1);
+addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'), 'Base Map', 1);
 addLayer(L.mapbox.tileLayer('examples.bike-lanes'), 'Bike Lanes', 2);
 addLayer(L.mapbox.tileLayer('examples.bike-locations'), 'Bike Stations', 3);
 

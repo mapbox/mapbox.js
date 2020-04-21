@@ -9,19 +9,20 @@ tags:
   - tilemill
 ---
 
-<div id='map' class='dark'></div>
+<div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.outdoors')
-    .setView([40, -100], 4);
+var map = L.mapbox.map('map')
+    .setView([40, -100], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
 
 // Pulling multiple layers of interactivity isn't too tricky, it
 // just requires that you don't use compositing, and instead add each
 // layer as its components: a tileLayer, a gridLayer, and a gridControl
-var birdTiles = L.mapbox.tileLayer('examples.map-8ced9urs').addTo(map),
+var birdTiles = L.mapbox.tileLayer('examples.bird-species').addTo(map),
     nprTiles = L.mapbox.tileLayer('examples.npr-stations').addTo(map);
 
 var nprGrid = L.mapbox.gridLayer('examples.npr-stations').addTo(map),
-    birdGrid = L.mapbox.gridLayer('examples.map-8ced9urs').addTo(map);
+    birdGrid = L.mapbox.gridLayer('examples.bird-species').addTo(map);
 
 var nprControl = L.mapbox.gridControl(nprGrid).addTo(map),
     birdControl = L.mapbox.gridControl(birdGrid).addTo(map);

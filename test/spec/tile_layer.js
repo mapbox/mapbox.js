@@ -38,7 +38,7 @@ describe("L.mapbox.tileLayer", function() {
         });
 
         it('loads TileJSON from a URL', function(done) {
-            var layer = L.mapbox.tileLayer('http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
+            var layer = L.mapbox.tileLayer('https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json');
 
             layer.on('ready', function() {
                 expect(this).to.equal(layer);
@@ -46,7 +46,7 @@ describe("L.mapbox.tileLayer", function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
+            server.respondWith("GET", "https://a.tiles.mapbox.com/v3/mapbox.map-0l53fhk2.json",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
@@ -129,6 +129,21 @@ describe("L.mapbox.tileLayer", function() {
             expect(layer.getTileUrl({x: 2, y: 0, z: 0})).to.equal('http://c.tiles.mapbox.com/v3/examples.map-8ced9urs/0/2/0.jpg70');
             expect(layer.getTileUrl({x: 3, y: 0, z: 0})).to.equal('http://d.tiles.mapbox.com/v3/examples.map-8ced9urs/0/3/0.jpg70');
             expect(layer.getTileUrl({x: 4, y: 0, z: 0})).to.equal('http://a.tiles.mapbox.com/v3/examples.map-8ced9urs/0/4/0.jpg70');
+        });
+
+        it("does not change format of styleJSON tilelayers", function () {
+            var layer = L.mapbox.tileLayer(helpers.styleJSON).setFormat('jpg70');
+            expect(layer.getTileUrl({ x: 0, y: 0, z: 0 })).to.equal('https://api.mapbox.com/styles/v1/mapbox/bright-v9/tiles/256/0/0/0?access_token=key');
+            expect(layer.getTileUrl({ x: 1, y: 0, z: 0 })).to.equal('https://api.mapbox.com/styles/v1/mapbox/bright-v9/tiles/256/0/1/0?access_token=key');
+            expect(layer.getTileUrl({ x: 2, y: 0, z: 0 })).to.equal('https://api.mapbox.com/styles/v1/mapbox/bright-v9/tiles/256/0/2/0?access_token=key');
+            expect(layer.getTileUrl({ x: 4, y: 0, z: 0 })).to.equal('https://api.mapbox.com/styles/v1/mapbox/bright-v9/tiles/256/0/4/0?access_token=key');
+            expect(layer.getTileUrl({ x: 3, y: 0, z: 0 })).to.equal('https://api.mapbox.com/styles/v1/mapbox/bright-v9/tiles/256/0/3/0?access_token=key');
+        });
+
+        it("requests @2x tiles on retina (default id)", function () {
+            L.Browser.retina = true;
+            var layer = L.mapbox.tileLayer(helpers.styleJSON);
+            expect(layer.getTileUrl({ x: 0, y: 0, z: 0 })).to.equal('https://api.mapbox.com/styles/v1/mapbox/bright-v9/tiles/256/0/0/0@2x?access_token=key');
         });
 
         it("requests @2x tiles on retina", function() {

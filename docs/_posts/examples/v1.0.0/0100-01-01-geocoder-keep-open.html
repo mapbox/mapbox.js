@@ -10,8 +10,11 @@ tags:
 
 <div id='map'></div>
 <script>
-L.mapbox.map('map', 'mapbox.streets')
-    .addControl(L.mapbox.geocoderControl('mapbox.places', {
+var map = L.mapbox.map('map')
+  .setView([43.945, 19.380], 5)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
+  .addControl(L.mapbox.geocoderControl('mapbox.places', {
         keepOpen: true
     }));
+
 </script>

@@ -11,8 +11,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([37.9, -77],4);
+var map = L.mapbox.map('map')
+    .setView([37.9, -77],4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));;
 
 var marker = L.marker(new L.LatLng(37.9, -77), {
     icon: L.mapbox.marker.icon({

@@ -11,10 +11,11 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets', {
+var map = L.mapbox.map('map', null, {
         worldCopyJump: true
     })
-    .setView([0, 0], 3);
+    .setView([0, 0], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 for (var i = 0; i < 100; i++) {
     L.marker([(Math.random() - 0.5) * 180, (Math.random() - 0.5) * 360])

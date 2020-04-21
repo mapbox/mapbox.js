@@ -22,12 +22,14 @@ tags:
 <div id='zoom-level'>Zoom Level: 15</div>
 <script>
 
-// The native maximum zoom level for this tile layer is 19
-var map = L.mapbox.map('map', 'mapbox.streets-satellite', {
-    tileLayer: {
-        maxNativeZoom: 19 // The map will use zoom level 19 tiles for all zoom levels past 19
+// The native maximum zoom level for this style layer is 18
+var map = L.mapbox.map('map', null, {
+    styleLayer: {
+        maxNativeZoom: 18 // The map will use zoom level 18 tiles for all zoom levels past 18
     }
-}).setView([40.7275, -73.9948], 15);
+})
+  .setView([40.7275, -73.9948], 15)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9'));
 
 map.on('zoomend', function(){
     document.getElementById('zoom-level').innerHTML = 'Zoom Level: ' + map.getZoom();

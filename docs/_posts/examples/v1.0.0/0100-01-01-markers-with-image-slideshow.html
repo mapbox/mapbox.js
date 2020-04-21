@@ -2,7 +2,7 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Slideshow gallery in a marker tooltip 
+title: Slideshow gallery in a marker tooltip
 description: Add a custom slideshow to a marker's tooltip.
 tags:
   - markers
@@ -34,7 +34,8 @@ tags:
 <!-- jQuery is required for this example. -->
 <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets');
+var map = L.mapbox.map('map')
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 

@@ -27,7 +27,7 @@ make
 jekyll serve -w -p 4000
 ```
 
-Edit the site. Existing examples [are located here](https://github.com/mapbox/mapbox.js/tree/mb-pages/docs/_posts/examples/v1.0.0) -
+Edit the site. Existing examples [are located here](https://github.com/mapbox/mapbox.js/tree/publisher-production/docs/_posts/examples/v1.0.0) -
 copy one to a new file with the same naming convention to start a new example. Test your new example
 by going to http://localhost:4000/mapbox.js/ and finding and using it.
 
@@ -36,7 +36,7 @@ When you're done,
 ```sh
 git add _posts/...newexample
 git commit -m "Added a new example, showing off XYZ"
-git push origin mb-pages
+git push origin publisher-production
 ```
 
 ## API Documentation
@@ -44,7 +44,7 @@ git push origin mb-pages
 API documentation is fed by `API.md`. To rebuild the docs and serve the Jekyll site:
 
 ```sh
-./_docs/build.sh v1.6.0
+./_docs/build.sh v3.2.0
 jekyll serve
 ```
 

@@ -10,17 +10,22 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.dc-markers');
+var map = L.mapbox.map('map')
+  .setView([37.77396, -122.4366], 12)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+    .addTo(map);
 
 // Wait until the marker layer is loaded in order to build a list of possible
 // types. If you are doing this with another featureLayer, you should change
 // map.featureLayer to the variable you have assigned to your featureLayer.
-map.featureLayer.on('ready', function() {
+myFeatureLayer.on('ready', function() {
   // Create a new line with no segments yet and add it to the map.
   var polyline = L.polyline([]).addTo(map);
   // For each point in the map.featureLayer, grab its latitude and longitude
   // values and add them to the line.
-  map.featureLayer.eachLayer(function(l) {
+  myFeatureLayer.eachLayer(function(l) {
     polyline.addLatLng(l.getLatLng());
   });
 });

@@ -14,8 +14,9 @@ tags:
 <script src='{{site.baseurl}}/assets/data/realworld.388.js'></script>
 
 <script>
-    var map = L.mapbox.map('map', 'mapbox.dark')
-        .setView([-37.821, 175.219], 16);
+    var map = L.mapbox.map('map')
+        .setView([-37.821, 175.219], 16)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
 
     var heat = L.heatLayer(addressPoints, {maxZoom: 18}).addTo(map);
     var draw = true;

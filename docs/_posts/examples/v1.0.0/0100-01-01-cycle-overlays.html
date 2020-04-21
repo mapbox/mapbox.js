@@ -9,13 +9,14 @@ tags:
 ---
 <div id='map'></div>
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets', {
+var map = L.mapbox.map('map', null, {
         // we disable tile animations for this example so that the
         // transition from one layer to another is immediate.
         // you can change this if you want, to show tiles fading in
         fadeAnimation: false
     })
-    .setView([40, -96.50], 4);
+    .setView([40, -96.50], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var layers = [
     L.mapbox.tileLayer('examples.bird-species'),

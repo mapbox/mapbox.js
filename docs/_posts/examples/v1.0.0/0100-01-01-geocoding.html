@@ -3,7 +3,7 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Add geocoding
-description: Click the <span class='icon search inline' style='vertical-align:middle;'></span> icon to enable search using the <a href='https://www.mapbox.com/developers/api/geocoding/'>Mapbox Geocoding API</a>.
+description: Click the <span class='icon search inline' style='vertical-align:middle;'></span> icon to enable search using the <a href='https://docs.mapbox.com/api/search/#geocoding'>Mapbox Geocoding API</a>.
 tags:
   - geocoding
   - ui
@@ -11,6 +11,8 @@ tags:
 
 <div id='map'></div>
 <script>
-L.mapbox.map('map', 'mapbox.streets')
+L.mapbox.map('map')
+    .setView([43.945, 19.380], 5)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
     .addControl(L.mapbox.geocoderControl('mapbox.places'));
 </script>

@@ -12,7 +12,8 @@ tags:
 
 <script>
 var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([42.87596410238254, -100.546875], 4);
+    .setView([42.87596410238254, -100.546875], 4)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // Start and end points, in x = longitude, y = latitude values
 var start = { x: -122, y: 48 };

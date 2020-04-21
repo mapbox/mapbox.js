@@ -33,7 +33,7 @@ var size = [600, 300];
 var vp = geoViewport.viewport(bounds, size);
 
 // Construct a static map url
-// https://www.mapbox.com/developers/api/static/
+// https://docs.mapbox.com/api/maps/#static
 document.getElementById('static-map').src =
     '{{site.tileApi}}/v4/examples.map-zr0njcqy/' +
     vp.center.join(',') + ',' +

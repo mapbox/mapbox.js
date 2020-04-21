@@ -17,10 +17,12 @@ tags:
 <script>
 // Instead of our usual one map, we will create two in this example to make
 // things interesting.
-var map1 = L.mapbox.map('map1', 'mapbox.streets')
-    .setView([40, -74.50], 9);
-var map2 = L.mapbox.map('map2', 'mapbox.emerald')
-    .setView([-40, -74.50 - 180], 9);
+var map1 = L.mapbox.map('map1')
+    .setView([40, -74.50], 9)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+var map2 = L.mapbox.map('map2')
+    .setView([-40, -74.50 - 180], 9)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
 // when either map finishes moving, trigger an update on the other one.
 map1.on('moveend', follow).on('zoomend', follow);
@@ -28,7 +30,7 @@ map2.on('moveend', follow).on('zoomend', follow);
 
 // quiet is a cheap and dirty way of avoiding a problem in which one map
 // syncing to another leads to the other map syncing to it, and so on
-// ad infinitum. this says that while we are calling sync, do not try to 
+// ad infinitum. this says that while we are calling sync, do not try to
 // loop again and sync other maps
 var quiet = false;
 function follow(e) {

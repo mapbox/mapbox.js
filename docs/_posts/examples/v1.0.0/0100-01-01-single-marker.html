@@ -10,8 +10,9 @@ tags:
 <div id='map'></div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([38.91338, -77.03236], 16);
+var map = L.mapbox.map('map')
+    .setView([38.91338, -77.03236], 16)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 L.mapbox.featureLayer({
     // this feature is in the GeoJSON format: see geojson.org
@@ -23,7 +24,7 @@ L.mapbox.featureLayer({
         // x, y is the standard for GeoJSON and many formats
         coordinates: [
           -77.03221142292,
-          38.913371603574 
+          38.913371603574
         ]
     },
     properties: {

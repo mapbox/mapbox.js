@@ -29,7 +29,9 @@ tags:
 var click = document.getElementById('click'),
     mousemove = document.getElementById('mousemove');
 
-var map = L.mapbox.map('map', 'mapbox.streets');
+var map = L.mapbox.map('map')
+    .setView([0, 0], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 map.on('mousemove click', function(e) {
     window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();

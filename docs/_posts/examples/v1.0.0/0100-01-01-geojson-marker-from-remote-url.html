@@ -14,8 +14,9 @@ tags:
 <script>
 var url = 'https://api.github.com/repos/mapbox/mapbox.js/contents/test/manual/example.geojson';
 
-var map = L.mapbox.map('map', 'mapbox.streets')
-  .setView([0.3941, -78.2227], 7);
+var map = L.mapbox.map('map')
+  .setView([0.3941, -78.2227], 7)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 function load() {
   // Fetch just the contents of a .geojson file from GitHub by passing

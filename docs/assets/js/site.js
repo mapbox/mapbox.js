@@ -39,16 +39,6 @@ function load() {
         return false;
     });
 
-    $('#docs-search input').swiftype({
-        autocompleteContainingElement: $('#docs-search'),
-        filters: {
-          page: {
-            type: ['mapboxjs'],
-            info: ['{{site.mapboxjs}}', 'latest']
-          }
-        }
-    });
-
     $('.js-signup').on('click',function() {
         $('a.action.signup').trigger('click');
         return false;

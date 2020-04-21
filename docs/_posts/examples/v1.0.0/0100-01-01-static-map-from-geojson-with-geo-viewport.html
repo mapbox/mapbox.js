@@ -49,7 +49,7 @@ var sfAndDc = {
 var bounds = geojsonExtent(sfAndDc);
 
 // The size of the desired map.
-var size = [600, 300];
+var size = [512, 300];
 
 // Calculate a zoom level and centerpoint for this map.
 var vp = geoViewport.viewport(bounds, size);
@@ -60,13 +60,11 @@ for (var i = 0; i < sfAndDc.features.length; i++) {
     pins.push('pin-s(' + sfAndDc.features[i].geometry.coordinates.join(',') + ')');
 }
 
-// Construct a static map url
-// https://www.mapbox.com/developers/api/static/
 document.getElementById('static-map').src =
-    '{{site.tileApi}}/v4/mapbox.outdoors/' +
+    '{{site.tileApi}}/styles/v1/mapbox/streets-v11/static/' +
     pins.join(',') + '/' +
     vp.center.join(',') + ',' +
     vp.zoom + '/' +
-    size.join('x') + '.png' +
+    size.join('x') +
     '?access_token=' + L.mapbox.accessToken;
 </script>

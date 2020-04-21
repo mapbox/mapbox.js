@@ -34,9 +34,11 @@ L.rotatedMarker = function(pos, options) {
     return new L.RotatedMarker(pos, options);
 };
 
-var map = L.mapbox.map('map', 'mapbox.emerald', {
+var map = L.mapbox.map('map', null, {
     keyboard: false
-}).setView([37.9, -77],4);
+})
+  .setView([37.9, -77],4)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
 var marker = L.rotatedMarker(new L.LatLng(37.9, -77), {
   icon: L.divIcon({

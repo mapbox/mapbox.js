@@ -33,7 +33,8 @@ tags:
 
 <script>
 var geolocate = document.getElementById('geolocate');
-var map = L.mapbox.map('map', 'mapbox.streets');
+var map = L.mapbox.map('map')
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 

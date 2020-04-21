@@ -3,15 +3,17 @@ layout: example
 categories: example/v1.0.0
 version: v1.0.0
 title: Use geocoder to set map position
-description: Using the <a href='https://www.mapbox.com/developers/api/geocoding/'>Mapbox Geocoding API</a> initially set map position on Chester, New Jersey.
+description: Using the <a href='https://docs.mapbox.com/api/search/#geocoding'>Mapbox Geocoding API</a> initially set map position on Chester, New Jersey.
 tags:
   - geocoding
 ---
 
 <div id='map'></div>
 <script>
-var geocoder = L.mapbox.geocoder('mapbox.places'),
-    map = L.mapbox.map('map', 'examples.map-h67hf2ic');
+var geocoder = L.mapbox.geocoder('mapbox.places');
+
+var map = L.mapbox.map('map')
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 geocoder.query('Chester, NJ', showMap);
 

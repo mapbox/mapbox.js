@@ -111,9 +111,11 @@ var places = { type: 'FeatureCollection', features: [
   properties: { id: "charing-cross" }, type: 'Feature' }
 ]};
 
-var map = L.mapbox.map('map', 'mapbox.streets', {
+var map = L.mapbox.map('map', null, {
     zoomControl: false
-});
+})
+  .setView([51.507, -0.1282], 8)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var placesLayer = L.mapbox.featureLayer(places)
     .addTo(map);

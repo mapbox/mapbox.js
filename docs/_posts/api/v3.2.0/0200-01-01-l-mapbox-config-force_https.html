@@ -1,0 +1,16 @@
+---
+layout: api
+title: "v3.2.0 JavaScript Library: L.mapbox.config.FORCE_HTTPS"
+categories: api
+version: v3.2.0
+permalink: /api/v3.2.0/l-mapbox-config-force_https/
+---
+<h2 id="section-l-mapbox-config-force_https">L.mapbox.config.FORCE_HTTPS</h2>
+<p>By default, this is <code>true</code>. Mapbox.js always requires HTTPS resources,
+regardless of the host page&#39;s scheme.</p>
+<p>Setting <code>FORCE_HTTPS</code> to <code>false</code> makes Mapbox.js auto-detect whether the page your map
+is embedded in is using HTTPS or SSL, and matches: if you use HTTPS on your site,
+it uses HTTPS resources.</p>
+<p><em>Example</em>:</p>
+<pre><code>L.mapbox.config.FORCE_HTTPS = false;
+</code></pre>

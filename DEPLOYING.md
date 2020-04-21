@@ -21,17 +21,12 @@ rebuild it.
 # git tag & npm package
 
     git tag v1.your.version -s -m "Version v1.your.version, with xxx changes"
-    git push origin mb-pages --tags
+    git push origin publisher-production --tags
     npm publish
 
 # deploying to the cdn
 
     ./deploy.sh v1.your.version
-
-# deploying to bower
-
-    ./bower.sh --action=prepare
-    ./bower.sh --action=publish
 
 # deploying to the web
 

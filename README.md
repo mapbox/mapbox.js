@@ -1,9 +1,10 @@
 # mapbox.js
 
-[![Build Status](https://travis-ci.org/mapbox/mapbox.js.svg?branch=v1)](https://travis-ci.org/mapbox/mapbox.js) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mapbox/mapbox.js.svg)](http://isitmaintained.com/project/mapbox/mapbox.js "Average time to resolve an issue")
+[![Build Status](https://travis-ci.org/mapbox/mapbox.js.svg?branch=publisher-production)](https://travis-ci.org/mapbox/mapbox.js)
 
-This is the Mapbox Javascript API, version 2.x. It's built as a [Leaflet](http://leafletjs.com/)
-plugin. You can [read about its launch](http://mapbox.com/blog/mapbox-js-with-leaflet/).
+A Mapbox plugin for [Leaflet](http://leafletjs.com/), a lightweight JavaScript library for traditional raster maps.
+
+For the state-of-the-art Mapbox vector maps library, see [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js).
 
 ## [API](http://mapbox.com/mapbox.js/api/)
 
@@ -39,14 +40,6 @@ Browserify it:
 
 ```sh
 browserify main.js -o bundle.js
-```
-
-## Usage with Bower
-
-You can install `mapbox.js` with [bower](http://bower.io/) by running
-
-```sh
-bower install mapbox.js
 ```
 
 ## Usage as Download
@@ -94,7 +87,7 @@ Requirements:
 2. Run `./theme/images/render.sh` to update sprites from your edits.
 3. Add a CSS reference with the appropriate pixel coordinate if adding a new icon.
 
-### Running docuemntation locally
+### Running documentation locally
 
 Documentation is powered by [Jekyll](http://jekyllrb.com/). Running using the
 following command:

@@ -21,20 +21,25 @@ tags:
 <button id='open-popup' class='ui-control'>open popup</button>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.dc-markers');
+var map = L.mapbox.map('map')
+    .setView([37.77396, -122.4366], 12)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var myFeatureLayer = L.mapbox.featureLayer('/mapbox.js/assets/data/sf_locations.geojson')
+    .addTo(map);
 
 // Wait until the markers are loaded, so we know that `map.featureLayer.eachLayer`
 // will actually go over each marker.
-map.featureLayer.on('ready', function(e) {
+myFeatureLayer.on('ready', function(e) {
     document.getElementById('open-popup').onclick = clickButton;
 });
 
 function clickButton() {
-    map.featureLayer.eachLayer(function(marker) {
+    myFeatureLayer.eachLayer(function(marker) {
         // You can replace this test for anything else, to choose the right
         // marker on which to open a popup. by default, popups are exclusive
         // so opening a new one will close all of the others.
-        if (marker.feature.properties.title === 'Capital Pride Parade') {
+        if (marker.feature.properties.title === 'La Taqueria') {
             marker.openPopup();
         }
     });

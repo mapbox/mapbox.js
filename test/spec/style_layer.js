@@ -18,11 +18,11 @@ describe('L.mapbox.styleLayer', function() {
                 done();
             });
 
-            server.respondWith('GET', 'https://a.tiles.mapbox.com/styles/v1/mapbox/streets-v8?access_token=key',
+            server.respondWith('GET', 'https://api.mapbox.com/styles/v1/mapbox/streets-v8?access_token=key',
                 [200, { "Content-Type": "application/json" }, JSON.stringify({"sources":{"composite":{"url":"mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6","type":"vector"}}})]);
             server.respond();
 
-            server.respondWith('GET', 'http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6.json?access_token=key',
+            server.respondWith('GET', 'https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6.json?access_token=key&secure',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_street_terrain)]);
             server.respond();
         });
@@ -34,11 +34,11 @@ describe('L.mapbox.styleLayer', function() {
                 done();
             });
 
-            server.respondWith('GET', 'https://a.tiles.mapbox.com/styles/v1/mapbox/satellite-hybrid-v8?access_token=key',
+            server.respondWith('GET', 'https://api.mapbox.com/styles/v1/mapbox/satellite-hybrid-v8?access_token=key',
                 [200, { "Content-Type": "application/json" }, JSON.stringify({"sources":{"mapbox":{"url":"mapbox://mapbox.mapbox-streets-v6","type":"vector"},"satellite":{"url":"mapbox://mapbox.satellite","type":"raster","tileSize":256}}})]);
             server.respond();
 
-            server.respondWith('GET', 'http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite.json?access_token=key',
+            server.respondWith('GET', 'https://api.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite.json?access_token=key&secure',
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_satellite_streets)]);
             server.respond();
         });

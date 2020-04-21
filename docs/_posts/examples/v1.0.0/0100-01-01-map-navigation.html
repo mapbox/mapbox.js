@@ -48,7 +48,10 @@ tags:
 </div>
 
 <script>
-var map = L.mapbox.map('map', 'mapbox.streets');
+var map = L.mapbox.map('map')
+    .setView([0, 0], 2)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
 document.getElementById('navigation').onclick = function(e) {
     e.preventDefault();
     var pos = e.target.getAttribute('data-position');

@@ -1,3 +1,22 @@
+## v3.3.0
+
+* Changes default map styles (e.g. `mapbox.streets`) to no-longer load from Legacy Maps API by default [#1317](https://github.com/mapbox/mapbox.js/pull/1317)
+* Updated relevant dependencies to `@mapbox` namespace [#1318](https://github.com/mapbox/mapbox.js/pull/1318)
+* Fix issue where logo would not appear for Mapbox layers added after map init [#1324](https://github.com/mapbox/mapbox.js/pull/1324)
+
+## v3.2.1
+
+* Fix HTTP mode for styleLayer
+
+## v3.2.0
+
+* Changes `FORCE_HTTPS` option to `true` by default.
+* Updates the Mapbox logo.
+* Upgrades Leaflet to v1.4.0.
+* Removes deprecation warnings in the console about `L.Mixin.Events`.
+* Removes Bower support.
+* Adds the built files to the NPM package.
+
 ## v3.1.1
 
 * Revises feedback link from mapbox.com/map-feedback/ to mapbox.com/feedback/

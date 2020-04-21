@@ -7,23 +7,20 @@ description: Custom tooltips on hover with the Leaflet Label plugin.
 tags:
   - plugins
 ---
-<script src='{{site.tileApi}}/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
-<link href='{{site.tileApi}}/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
 <div id='map'></div>
 
 <script>
-    var map = L.mapbox.map('map', 'mapbox.streets', {
-        center: [38.91557, -77.03198],
-        zoom: 16
-    });
+    var map = L.mapbox.map('map')
+      .setView([38.91557, -77.03198], 16)
+      .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
-    L.marker([38.9206, -77.0357]).bindLabel('Meridian Hill Park').addTo(map);
-    L.marker([38.909776, -77.034097]).bindLabel('Sweetgreen').addTo(map);
-    L.marker([38.917139, -77.031745]).bindLabel('Subway').addTo(map);
-    L.marker([38.915300, -77.031724]).bindLabel('Manny & Olga\'s Pizza').addTo(map);
-    L.marker([38.913388, -77.032351]).bindLabel('Crossfit DC').addTo(map);
-    L.marker([38.91371, -77.03590]).bindLabel('House of the Temple').addTo(map);
-    L.marker([38.914722, -77.034414]).bindLabel('St James Church').addTo(map);
-    L.marker([38.91680, -77.02889]).bindLabel('U Street Metro').addTo(map);
-    L.marker([38.914271, -77.028293]).bindLabel('The Coffee Bar').addTo(map);
+    L.marker([38.9206, -77.0357]).bindTooltip('Meridian Hill Park').addTo(map);
+    L.marker([38.909776, -77.034097]).bindTooltip('Sweetgreen').addTo(map);
+    L.marker([38.917139, -77.031745]).bindTooltip('Subway').addTo(map);
+    L.marker([38.915300, -77.031724]).bindTooltip('Manny & Olga\'s Pizza').addTo(map);
+    L.marker([38.913388, -77.032351]).bindTooltip('Crossfit DC').addTo(map);
+    L.marker([38.91371, -77.03590]).bindTooltip('House of the Temple').addTo(map);
+    L.marker([38.914722, -77.034414]).bindTooltip('St James Church').addTo(map);
+    L.marker([38.91680, -77.02889]).bindTooltip('U Street Metro').addTo(map);
+    L.marker([38.914271, -77.028293]).bindTooltip('The Coffee Bar').addTo(map);
 </script>
