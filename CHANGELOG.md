@@ -1,3 +1,7 @@
+## v3.3.1
+* Fixes deprecation warnings for maps used with Mapbox Studio Classic styles [#1329](https://github.com/mapbox/mapbox.js/pull/1329)
+* Fixes TypeError `t.getTileJSON is not a function` [#1329](https://github.com/mapbox/mapbox.js/pull/1329)
+
 ## v3.3.0
 
 * Changes default map styles (e.g. `mapbox.streets`) to no-longer load from Legacy Maps API by default [#1317](https://github.com/mapbox/mapbox.js/pull/1317)
