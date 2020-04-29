@@ -73,36 +73,32 @@ for (var i = 0; i < variables.length; i++) {
 
 // Create a layer of state features, and when it's done
 // loading, run loadData
-var usLayer = L.mapbox.featureLayer()
-    .loadURL('{{site.baseurl}}/assets/data/us.geojson')
-    .addTo(map)
-    .on('ready', loadData());
+var usLayer = L.mapbox.featureLayer('{{site.baseurl}}/assets/data/us.geojson')
+    .on('ready', function () {
+        loadData(this.getGeoJSON())
+    }).addTo(map);
 
 // Grab the spreadsheet of data as JSON. If you have CSV
 // data, you should convert it to JSON with
 // http://shancarter.github.io/mr-data-converter/
-function loadData() {
+function loadData(geojson) {
     $.getJSON('{{site.baseurl}}/assets/data/censusdata.json')
-        .done(function(data) {
-            retrieveGeoJSON(data, usLayer);
+        .done(function (data) {
+            joinData(data, geojson);
         });
 }
 
-function retrieveGeoJSON(data, layer) {
-    setTimeout(function () {
-        joinData(data, layer, usLayer.getGeoJSON())
-    }, 1000);
-}
-
-function joinData(data, layer, geojson) {
-    var byState = {};
+function joinData(data, layer) {
+    // First, get the US state GeoJSON data for reference.
+    var usGeoJSON = usLayer.getGeoJSON(),
+        byState = {};
 
     // Rearrange it so that instead of being a big array,
     // it's an object that is indexed by the state name,
     // that we'll use to join on.
-    for (var i = 0; i < geojson.features.length; i++) {
-        byState[geojson.features[i].properties.name] =
-            geojson.features[i];
+    for (var i = 0; i < usGeoJSON.features.length; i++) {
+        byState[usGeoJSON.features[i].properties.name] =
+            usGeoJSON.features[i];
     }
     for (i = 0; i < data.length; i++) {
         // Match the GeoJSON data (byState) with the tabular data
