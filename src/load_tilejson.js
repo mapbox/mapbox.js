@@ -7,9 +7,13 @@ var request = require('./request'),
 module.exports = {
     _loadTileJSON: function(_) {
         if (typeof _ === 'string') {
+            var style = _;
             _ = format_url.tileJSON(_, this.options && this.options.accessToken);
             var isGLStyle = _.indexOf('/styles/v1/') !== -1;
-            
+            if (!isGLStyle) {
+                util.warn('Warning: this implementation is loading a Mapbox Studio Classic style (' + style + '). ' +
+                    'Studio Classic styles are scheduled for deprecation: https://blog.mapbox.com/deprecating-studio-classic-styles-c65a744140a6')
+            }
             request(_, L.bind(function(err, json) {
                 if (err) {
                     util.log('could not load TileJSON at ' + _);
