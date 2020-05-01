@@ -88,12 +88,11 @@ function loadData(geojson) {
         });
 }
 
-function joinData(data, layer) {
-    // First, get the US state GeoJSON data for reference.
-    var usGeoJSON = usLayer.getGeoJSON(),
-        byState = {};
+function joinData(data, usGeoJSON) {
 
-    // Rearrange it so that instead of being a big array,
+    var byState = {};
+
+    // Rearrange the US GeoJSON so that instead of being a big array,
     // it's an object that is indexed by the state name,
     // that we'll use to join on.
     for (var i = 0; i < usGeoJSON.features.length; i++) {
