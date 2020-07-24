@@ -12,3 +12,14 @@ exclude: [dist]
 future: true
 plugins:
 - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      products:
+        - Mapbox.js
+      services:
+        - maps
+      platforms:
+        - web
