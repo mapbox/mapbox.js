@@ -13,6 +13,7 @@ future: true
 plugins:
 - jekyll-sitemap
 
+# This metadata is required on all pages
 defaults:
   - scope:
       path: ""

@@ -14,6 +14,7 @@ accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.j
 plugins:
 - jekyll-sitemap
 
+# This metadata is required on all pages
 defaults:
   - scope:
       path: ""
