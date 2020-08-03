@@ -15,6 +15,7 @@ plugins:
 
 # This metadata is required on all pages
 defaults:
+  # Set products/services/platforms for every page
   - scope:
       path: ""
     values:
@@ -24,3 +25,16 @@ defaults:
         - maps
       platforms:
         - web
+  # Set contentType conditionally
+  - scope:
+      path: "_posts/examples"
+    values:
+      content_type: "example"
+  - scope:
+      path: "_posts/api"
+    values:
+      content_type: "API"
+  - scope:
+      path: "plugins"
+    values:
+      content_type: "example"
