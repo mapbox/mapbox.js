@@ -141,9 +141,9 @@ if (typeof L !== 'undefined' &&
 
 <script>
   window.mbxMetadata = {
-    product: {{page.products | jsonify}},
-    service: {{page.services | jsonify}},
-    platform: {{page.platforms | jsonify}},
+    product: "{{page.products | join: ','}}",
+    service: "{{page.services | join: ','}}",
+    platform: "{{page.platforms | join: ','}}",
     content_type: "{{page.content_type}}"
   };
   window.initializeMapboxAnalytics({
