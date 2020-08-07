@@ -13,3 +13,25 @@ future: true
 accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg
 plugins:
 - jekyll-sitemap
+
+# This metadata is required on all pages
+defaults:
+  # Set products/services/platforms for every page
+  - scope:
+      path: ""
+    values:
+      products:
+        - Mapbox.js
+      services:
+        - maps
+      platforms:
+        - web
+  # Set contentType conditionally
+  - scope:
+      path: "_posts/examples"
+    values:
+      content_type: "example"
+  - scope:
+      path: "_posts/api"
+    values:
+      content_type: "API"

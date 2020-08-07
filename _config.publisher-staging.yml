@@ -12,3 +12,25 @@ exclude: [dist]
 future: true
 plugins:
 - jekyll-sitemap
+
+# This metadata is required on all pages
+defaults:
+  # Set products/services/platforms for every page
+  - scope:
+      path: ""
+    values:
+      products:
+        - Mapbox.js
+      services:
+        - maps
+      platforms:
+        - web
+  # Set contentType conditionally
+  - scope:
+      path: "_posts/examples"
+    values:
+      content_type: "example"
+  - scope:
+      path: "_posts/api"
+    values:
+      content_type: "API"
