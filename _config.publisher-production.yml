@@ -35,7 +35,3 @@ defaults:
       path: "_posts/api"
     values:
       content_type: "API"
-  - scope:
-      path: "plugins"
-    values:
-      content_type: "example"
