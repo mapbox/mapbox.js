@@ -27,7 +27,7 @@ var bounds = [
 ];
 
 // The size of the desired map.
-var size = [600, 300];
+var size = [750, 400];
 
 // Calculate a zoom level and centerpoint for this map.
 var vp = geoViewport.viewport(bounds, size);
@@ -35,9 +35,9 @@ var vp = geoViewport.viewport(bounds, size);
 // Construct a static map url
 // https://docs.mapbox.com/api/maps/#static
 document.getElementById('static-map').src =
-    '{{site.tileApi}}/v4/examples.map-zr0njcqy/' +
+    '{{site.tileApi}}/styles/v1/mapbox/streets-v11/static/' +
     vp.center.join(',') + ',' +
     vp.zoom + '/' +
-    size.join('x') + '.png' +
+    size.join('x') +
     '?access_token=' + L.mapbox.accessToken;
 </script>

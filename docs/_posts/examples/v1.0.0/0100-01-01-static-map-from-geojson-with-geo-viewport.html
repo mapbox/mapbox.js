@@ -9,8 +9,8 @@ tags:
 ---
 <img id='static-map'></div>
 
-<script src='{{site.tileApi}}/mapbox.js/plugins/geo-viewport/v0.1.1/geo-viewport.js'></script>
-<script src='{{site.tileApi}}/mapbox.js/plugins/geojson-extent/v0.0.1/geojson-extent.js'></script>
+<script src='{{site.tileApi}}/mapbox.js/plugins/geo-viewport/v0.4.1/geo-viewport.js'></script>
+<script src='{{site.tileApi}}/mapbox.js/plugins/geojson-extent/v1.0.0/geojson-extent.js'></script>
 <script>
 
 // This is an example using geojson-extent. See the full docs for full details
@@ -49,10 +49,10 @@ var sfAndDc = {
 var bounds = geojsonExtent(sfAndDc);
 
 // The size of the desired map.
-var size = [512, 300];
+var size = [750, 400];
 
 // Calculate a zoom level and centerpoint for this map.
-var vp = geoViewport.viewport(bounds, size);
+var vp = geoViewport.viewport(bounds, size, 0, 19, 512);
 
 // Create pins at places in the geojson file.
 var pins = [];
@@ -64,7 +64,7 @@ document.getElementById('static-map').src =
     '{{site.tileApi}}/styles/v1/mapbox/streets-v11/static/' +
     pins.join(',') + '/' +
     vp.center.join(',') + ',' +
-    vp.zoom + '/' +
+    vp.zoom-- + '/' +
     size.join('x') +
     '?access_token=' + L.mapbox.accessToken;
 </script>
