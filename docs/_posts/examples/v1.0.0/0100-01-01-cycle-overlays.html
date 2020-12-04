@@ -2,8 +2,8 @@
 layout: example
 categories: example/v1.0.0
 version: v1.0.0
-title: Cycling through overlays
-description: Hide and show overlays in a cycle
+title: Cycling through layers
+description: Hide and show style layers in a cycle
 tags:
   - layers
 ---
@@ -15,13 +15,14 @@ var map = L.mapbox.map('map', null, {
         // you can change this if you want, to show tiles fading in
         fadeAnimation: false
     })
-    .setView([40, -96.50], 4)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+    .setView([40, -96.50], 4);
 
 var layers = [
-    L.mapbox.tileLayer('examples.bird-species'),
-    L.mapbox.tileLayer('examples.npr-stations'),
-    L.mapbox.tileLayer('examples.location-formatter')
+    L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'),
+    L.mapbox.styleLayer('mapbox://styles/mapbox/bright-v9'),
+    L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'),
+    L.mapbox.styleLayer('mapbox://styles/mapbox/emerald-v8'),
+    L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10')
 ];
 
 // i is the number of the currently-selected layer: this loops through

@@ -14,9 +14,8 @@ var map = L.mapbox.map('map').setView([38.8922,-77.0348], 14);
 
 L.control.layers({
     'Mapbox Streets': L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11').addTo(map),
-    'Mapbox Light': L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10')
-}, {
-    'Bike Stations': L.mapbox.tileLayer('examples.bike-locations'),
-    'Bike Lanes': L.mapbox.tileLayer('examples.bike-lanes')
+    'Mapbox Light': L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'),
+    'Mapbox Outdoors': L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v11'),
+    'Mapbox Satellite': L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9')
 }).addTo(map);
 </script>
