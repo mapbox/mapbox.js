@@ -25,7 +25,7 @@ interactivity.</p>
 <tr>
 <td>id <em>or</em> url <em>or</em> tilejson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>url can be <ul><li>A map <code>id</code> string <code>examples.map-foo</code></li><li>A comma separated list of map <code>id</code> strings <code>examples.map-foo,examples.map-bar</code> <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/compositing/">example</a></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A <a href="https://docs.mapbox.com/api/maps/#retrieve-tilejson-metadata">TileJSON</a> object, from your own Javascript code</li></ul></td>
+<td>url can be <ul><li>A map <code>id</code> string <code>examples.map-foo</code></li><li>A comma separated list of map <code>id</code> strings <code>examples.map-foo,examples.map-bar</code> <a href="https://www.mapbox.com/mapbox.js/example/v1.0.0/compositing/">example</a></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.satellite.json</code></li><li>A <a href="https://docs.mapbox.com/api/maps/#retrieve-tilejson-metadata">TileJSON</a> object, from your own Javascript code</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -35,8 +35,8 @@ interactivity.</p>
 </tbody></table>
 <p><em>Example</em>:</p>
 <pre><code>// map refers to a &lt;div&gt; element with the ID map
-// mapbox.streets is the ID of a map on Mapbox.com
-var map = L.mapbox.map(&#39;map&#39;, &#39;mapbox.streets&#39;);
+// mapbox.satellite is the ID of a raster tileset on mapbox.com
+var map = L.mapbox.map(&#39;map&#39;, &#39;mapbox.satellite&#39;);
 
 // map refers to a &lt;div&gt; element with the ID map
 // This map will have no layers initially
