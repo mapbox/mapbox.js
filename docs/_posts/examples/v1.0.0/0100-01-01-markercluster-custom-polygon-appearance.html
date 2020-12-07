@@ -23,7 +23,7 @@ var map = L.mapbox.map('map')
 
 // Since featureLayer is an asynchronous method, we use the `.on('ready'`
 // call to only use its marker data once we know it is actually loaded.
-L.mapbox.featureLayer('https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson').on('ready', function(e) {
+L.mapbox.featureLayer('{{site.baseurl}}/mapbox.js/assets/data/earthquakes.geojson').on('ready', function(e) {
     // The clusterGroup gets each marker in the group added to it
     // once loaded, and then is added to the map
     var clusterGroup = new L.MarkerClusterGroup({
