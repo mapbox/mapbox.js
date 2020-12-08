@@ -57,7 +57,81 @@ m.on('dragend', function() {
 
 // Here we load the features.json from another project
 // to use with the map initialized above.
-var features = L.mapbox.featureLayer('examples.map-zr0njcqy').addTo(map);
+var geojson = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      'type': 'Feature',
+      'properties': {
+        'title': 'Mad Men Season Five Finale Watch Party',
+        'marker-color': '#AA0000',
+        'marker-size': 'medium',
+        'marker-symbol': 'cinema',
+        'marker-zoom': '17'
+      },
+      'geometry': {
+        'coordinates': [
+          -77.003168,
+          38.894651
+        ],
+        'type': 'Point'
+      }
+    },
+    {
+      'type': 'Feature',
+      'properties': {
+        'id': 'ckk8ugea',
+        'title': 'Seersucker Bike Ride and Social',
+        'marker-color': '#AA0000',
+        'marker-size': 'medium',
+        'marker-symbol': 'bicycle',
+        'marker-zoom': '17'
+      },
+      'geometry': {
+        'coordinates': [
+          -77.052477,
+          38.943951
+        ],
+        'type': 'Point'
+      }
+    },
+    {
+      'type': 'Feature',
+      'properties': {
+        'title': 'Capital Pride Parade',
+        'marker-color': '#AA0000',
+        'marker-size': 'medium',
+        'marker-symbol': 'star',
+        'marker-zoom': '17'
+      },
+      'geometry': {
+        'coordinates': [
+          -77.043444,
+          38.909664
+        ],
+        'type': 'Point'
+      }
+    },
+    {
+      'type': 'Feature',
+      'properties': {
+        'title': 'A Little Night Music',
+        'marker-color': '#AA0000',
+        'marker-size': 'medium',
+        'marker-symbol': 'theatre',
+        'marker-zoom': '17'
+      },
+      'geometry': {
+        'coordinates': [
+          -77.020945,
+          38.878241
+        ],
+        'type': 'Point'
+      }
+    }
+  ]
+}
+var features = L.mapbox.featureLayer(geojson).addTo(map);
 
 map.on('ready', function() {
     // Display the tooltip after the
