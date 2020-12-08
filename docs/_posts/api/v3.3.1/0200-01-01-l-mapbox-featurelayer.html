@@ -20,7 +20,7 @@ from Mapbox and elsewhere into your map.</p>
 <tbody><tr>
 <td>id <em>or</em> url <em>or</em> geojson</td>
 <td><strong>string</strong> if <em>id</em> or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
-<td>Must be either <ul><li>An id string mapbox.streets</li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/mapbox.dark.json</code></li><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
+<td>Must be either <ul><li>A GeoJSON object, from your own Javascript code</li><li><code>null</code>, if you wish to only provide <code>options</code> and not initial data.</li></ul></td>
 </tr>
 <tr>
 <td>options</td>
@@ -53,29 +53,7 @@ from Mapbox and elsewhere into your map.</p>
     .addTo(map);
 
 featureLayer.loadURL(&#39;my_local_markers.geojson&#39;);</code></pre><p><em>Returns</em>: the layer object</p>
-<h3 id="section-featurelayer-loadid">featureLayer.loadID(id)</h3>
-<p>Load marker GeoJSON data from a map with the given <code>id</code> on Mapbox.</p>
-<table>
-<thead>
-<tr>
-<th>Options</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>url (<em>required</em>)</td>
-<td>string</td>
-<td>A tileset ID</td>
-</tr>
-</tbody></table>
-<p><em>Example</em>:</p>
-<pre><code>var featureLayer = L.mapbox.featureLayer()
-    .addTo(map);
 
-// loads markers from the map `mapbox.dark` on Mapbox,
-// if that map has markers
-featureLayer.loadID(&#39;mapbox.dark&#39;);</code></pre><p><em>Returns</em>: the layer object</p>
 <h3 id="section-featurelayer-setfilter">featureLayer.setFilter(filter)</h3>
 <p>Sets the filter function for this data layer.</p>
 <table>
