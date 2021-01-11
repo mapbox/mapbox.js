@@ -787,11 +787,6 @@ helpers.tileJSON_satellite_streets = {
         "id": "mapbox_satellite_plus",
         "source": "mapbox.satellite-plus"
     }, {
-        "description": "",
-        "fields": {},
-        "id": "mapbox_satellite_open",
-        "source": "mapbox.satellite-open"
-    }, {
         "fields": {},
         "id": "mapbox_satellite_watermask",
         "source": "mapbox.satellite-watermask"
