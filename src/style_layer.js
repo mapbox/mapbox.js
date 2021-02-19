@@ -7,7 +7,7 @@ var request = require('./request');
 var StyleLayer = L.TileLayer.extend({
 
     options: {
-        sanitizer: require('sanitize-caja')
+        sanitizer: require('@mapbox/sanitize-caja')
     },
 
     initialize: function(_, options) {

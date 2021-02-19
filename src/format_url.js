@@ -35,10 +35,14 @@ module.exports.tileJSON = function(urlOrMapID, accessToken) {
             'L.mapbox.styleLayer, not L.mapbox.tileLayer');
     }
 
-    if (urlOrMapID.indexOf('/') !== -1)
-        return urlOrMapID;
+    if (urlOrMapID.indexOf('/') !== -1) return urlOrMapID;
 
-    var url = module.exports('/v4/' + urlOrMapID + '.json', accessToken);
+    var url;
+    if (urlOrMapID in config.TEMPLATE_STYLES) {
+        url = module.exports('/styles/v1/' + config.TEMPLATE_STYLES[urlOrMapID], accessToken);
+    } else {
+        url = module.exports('/v4/' + urlOrMapID + '.json', accessToken);
+    }
 
     // TileJSON requests need a secure flag appended to their URLs so
     // that the server knows to send SSL-ified resource references.
@@ -53,8 +57,7 @@ module.exports.style = function(styleURL, accessToken) {
     if (styleURL.indexOf('mapbox://styles/') === -1) throw new Error('Incorrectly formatted Mapbox style at ' + styleURL);
 
     var ownerIDStyle = styleURL.split('mapbox://styles/')[1];
-    var url = module.exports('/styles/v1/' + ownerIDStyle, accessToken)
-        .replace('http://', 'https://');
+    var url = module.exports('/styles/v1/' + ownerIDStyle, accessToken);
 
     return url;
 };

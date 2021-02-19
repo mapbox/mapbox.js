@@ -1,3 +1,17 @@
+## v3.3.1
+* Fixes deprecation warnings for maps used with Mapbox Studio Classic styles [#1329](https://github.com/mapbox/mapbox.js/pull/1329)
+* Fixes TypeError `t.getTileJSON is not a function` [#1329](https://github.com/mapbox/mapbox.js/pull/1329)
+
+## v3.3.0
+
+* Changes default map styles (e.g. `mapbox.streets`) to no-longer load from Legacy Maps API by default [#1317](https://github.com/mapbox/mapbox.js/pull/1317)
+* Updated relevant dependencies to `@mapbox` namespace [#1318](https://github.com/mapbox/mapbox.js/pull/1318)
+* Fix issue where logo would not appear for Mapbox layers added after map init [#1324](https://github.com/mapbox/mapbox.js/pull/1324)
+
+## v3.2.1
+
+* Fix HTTP mode for styleLayer
+
 ## v3.2.0
 
 * Changes `FORCE_HTTPS` option to `true` by default.

@@ -9,7 +9,7 @@ title: Plugins
     <div class='col9'>
       <a class='doc-section' id='{{plugin.prefix}}'></a>
       <h3>{{plugin.title | markdownify | strip_html }} <a href='{{plugin.code}}' title='Project page' class='icon github'></a></h3>
-      <p class='prose'>{{plugin.description}} {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed. </em>{% endif %}<a href='{{site.baseurl}}/example/v1.0.0/{% if plugin.example %}{{plugin.example}}{% else %}{{plugin.prefix}}{% endif %}' class='rcon next'>View example</a></p>
+      <p class='prose'>{{plugin.description}} {% if plugin.license %}<em class='quiet'>&#8211; {{plugin.license}} licensed. </em>{% endif %}{% if plugin.example != false %}<a href='{{site.baseurl}}/example/v1.0.0/{% if plugin.example %}{{plugin.example}}{% else %}{{plugin.prefix}}{% endif %}' class='rcon next'>View example</a>{% endif %}</p>
     </div>
     <div class='pin-right pad2'>
       <a href='#' title='Copy plugin to clipboard' data-clipboard-target='snippet-{{forloop.index}}' class='button icon clipboard js-clipboard'>Copy</a>

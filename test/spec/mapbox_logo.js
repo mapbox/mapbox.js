@@ -17,9 +17,15 @@ describe('mapbox_logo', function() {
     });
 
     it('is not on tilejson map without mapbox_logo flag', function() {
-        var map = L.mapbox.map(element, tileJSON);
+        var map = L.mapbox.map(element, helpers.tileJSON_mapboxlogoMissing);
         var mapboxLogoControl = map._mapboxLogoControl.getContainer();
         expect(L.DomUtil.hasClass(mapboxLogoControl, 'mapbox-logo-true')).to.be(false);
+    });
+
+    it('is on map when tilejson is mapbox styleJSON without mapbox_logo flag', function() {
+        var map = L.mapbox.map(element, helpers.styleJSON);
+        var mapboxLogoControl = map._mapboxLogoControl.getContainer();
+        expect(L.DomUtil.hasClass(mapboxLogoControl, 'mapbox-logo-true')).to.be(true);
     });
 
     it('is on tilejson map with mapbox_logo === true', function() {
@@ -43,7 +49,7 @@ describe('mapbox_logo', function() {
             done();
         });
 
-        server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
+        server.respondWith("GET", "https://api.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_mapboxlogo)]);
         server.respond();
     });
@@ -56,8 +62,25 @@ describe('mapbox_logo', function() {
             done();
         });
 
-        server.respondWith("GET", "https://a.tiles.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
+        server.respondWith("GET", "https://api.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
             [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_mapboxlogoFalse)]);
+        server.respond();
+    });
+
+    it('is on mapid map when layer added after map initialization', function (done) {
+        var layer = L.mapbox.tileLayer('mapbox.map-0l53fhk2');
+        var map = L.mapbox.map(element)
+            .setView([0, 0], 3)
+            .addLayer(layer);
+
+        layer.on('ready', function() {
+            var mapboxLogoControl = map._mapboxLogoControl.getContainer();
+            expect(L.DomUtil.hasClass(mapboxLogoControl, 'mapbox-logo-true')).to.be(true);
+            done();
+        });
+
+        server.respondWith("GET", "https://api.mapbox.com/v4/mapbox.map-0l53fhk2.json?access_token=key&secure",
+            [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON_mapboxlogo)]);
         server.respond();
     });
 });

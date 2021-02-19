@@ -34,7 +34,7 @@ L.mapbox = module.exports = {
     map: map.map,
     Map: map.Map,
     config: require('./config'),
-    sanitize: require('sanitize-caja'),
+    sanitize: require('@mapbox/sanitize-caja'),
     template: require('mustache').to_html,
     feedback: require('./feedback')
 };

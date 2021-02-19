@@ -1,6 +1,6 @@
 # mapbox.js
 
-[![Build Status](https://travis-ci.org/mapbox/mapbox.js.svg?branch=publisher-production)](https://travis-ci.org/mapbox/mapbox.js)
+[![Build Status](https://travis-ci.com/mapbox/mapbox.js.svg?branch=publisher-production)](https://travis-ci.com/mapbox/mapbox.js)
 
 A Mapbox plugin for [Leaflet](http://leafletjs.com/), a lightweight JavaScript library for traditional raster maps.
 
