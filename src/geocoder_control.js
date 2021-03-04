@@ -6,6 +6,9 @@ var geocoder = require('./geocoder'),
 var GeocoderControl = L.Control.extend({
     includes: L.Evented.prototype || L.Mixin.Events,
 
+    //tab, esc, left, right, enter, up, down
+    specialKeyCodes: [9, 27, 37, 39, 13, 38, 40],
+
     options: {
         proximity: true,
         position: 'topleft',
@@ -187,7 +190,8 @@ var GeocoderControl = L.Control.extend({
         }, this.options.queryOptions), this._updateSubmit);
     },
 
-    _autocomplete: function() {
+    _autocomplete: function(e) {
+        if (this.specialKeyCodes.indexOf(e.keyCode) !== -1) return;
         if (!this.options.autocomplete) return;
         if (this._input.value === '') return this._updateAutocomplete();
         this.geocoder.query(L.Util.extend({
