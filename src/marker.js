@@ -1,8 +1,8 @@
 'use strict';
 
-var format_url = require('./format_url'),
-    util = require('./util'),
-    sanitize = require('@mapbox/sanitize-caja');
+//var format_url = require('./format_url');
+   var util = require('./util');
+   var sanitize = require('@mapbox/sanitize-caja');
 
 // mapbox-related markers functionality
 // provide an icon from mapbox's simple-style spec and hosted markers
@@ -20,14 +20,15 @@ function icon(fp, options) {
         color = (fp['marker-color'] || '7e7e7e').replace('#', '');
 
     return L.icon({
-        iconUrl: format_url('/v4/marker/' +
+        iconUrl: 'http://localhost:8887/v3/marker/' +
             'pin-' + size.charAt(0) + symbol + '+' + color +
             // detect and use retina markers, which are x2 resolution
-            (L.Browser.retina ? '@2x' : '') + '.png', options && options.accessToken),
+            (L.Browser.retina ? '@2x' : '') + '.png',
         iconSize: sizes[size],
         iconAnchor: [sizes[size][0] / 2, sizes[size][1] / 2],
         popupAnchor: [0, -sizes[size][1] / 2]
     });
+
 }
 
 // a factory that provides markers for Leaflet from Mapbox's
