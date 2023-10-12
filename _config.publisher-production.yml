@@ -10,7 +10,7 @@ mapboxjs: v3.3.1
 defaultid: 'mapbox.streets'
 exclude: [dist]
 future: true
-accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg
+accessToken: pk.eyJ1Ijoic3ZjLW9rdGEtbWFwYm94LXN0YWZmLWFjY2VzcyIsImEiOiJjbG5sMnBoMm0xeWZzMmtyaWl0b2wyN2FuIn0.-zx1KP3Oy-7YzWcvhbv22Q
 plugins:
 - jekyll-sitemap
 

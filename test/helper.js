@@ -240,7 +240,7 @@ helpers.tileJSON_street_terrain = {
     "name": "Mapbox Streets V6 + Vector Terrain V2",
     "scheme": "xyz",
     "tilejson": "2.0.0",
-    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg"],
+    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1Ijoic3ZjLW9rdGEtbWFwYm94LXN0YWZmLWFjY2VzcyIsImEiOiJjbG5sMnBoMm0xeWZzMmtyaWl0b2wyN2FuIn0.-zx1KP3Oy-7YzWcvhbv22Q", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1Ijoic3ZjLW9rdGEtbWFwYm94LXN0YWZmLWFjY2VzcyIsImEiOiJjbG5sMnBoMm0xeWZzMmtyaWl0b2wyN2FuIn0.-zx1KP3Oy-7YzWcvhbv22Q"],
     "vector_layers": [{
         "description": "Generalized landcover classification",
         "fields": {
@@ -530,7 +530,7 @@ helpers.tileJSON_satellite_streets = {
     "name": "Watermask + Satellite (open) + Satellite + Mapbox Streets V6",
     "scheme": "xyz",
     "tilejson": "2.0.0",
-    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejh2N21nMzAxMmQzMnA5emRyN2lucW0ifQ.jSE-g2vsn48Ry928pqylcg"],
+    "tiles": ["http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1Ijoic3ZjLW9rdGEtbWFwYm94LXN0YWZmLWFjY2VzcyIsImEiOiJjbG5sMnBoMm0xeWZzMmtyaWl0b2wyN2FuIn0.-zx1KP3Oy-7YzWcvhbv22Q", "http://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6,mapbox.satellite/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1Ijoic3ZjLW9rdGEtbWFwYm94LXN0YWZmLWFjY2VzcyIsImEiOiJjbG5sMnBoMm0xeWZzMmtyaWl0b2wyN2FuIn0.-zx1KP3Oy-7YzWcvhbv22Q"],
     "vector_layers": [{
         "description": "",
         "fields": {
